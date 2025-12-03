@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomCompositions\RoomComposition;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams;
+use Telnyx\RoomCompositions\RoomCompositionListResponse;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 use Telnyx\RoomCompositions\VideoRegion;
 use Telnyx\ServiceContracts\RoomCompositionsContract;
@@ -106,14 +105,12 @@ final class RoomCompositionsService implements RoomCompositionsContract
      *   page?: array{number?: int, size?: int},
      * }|RoomCompositionListParams $params
      *
-     * @return DefaultPagination<RoomComposition>
-     *
      * @throws APIException
      */
     public function list(
         array|RoomCompositionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): RoomCompositionListResponse {
         [$parsed, $options] = RoomCompositionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -125,8 +122,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
             path: 'room_compositions',
             query: $parsed,
             options: $options,
-            convert: RoomComposition::class,
-            page: DefaultPagination::class,
+            convert: RoomCompositionListResponse::class,
         );
     }
 

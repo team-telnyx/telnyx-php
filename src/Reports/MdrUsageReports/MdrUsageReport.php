@@ -6,9 +6,7 @@ namespace Telnyx\Reports\MdrUsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Result;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
@@ -29,12 +27,10 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class MdrUsageReport implements BaseModel, ResponseConverter
+final class MdrUsageReport implements BaseModel
 {
     /** @use SdkModel<MdrUsageReportShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

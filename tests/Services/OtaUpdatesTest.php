@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
+use Telnyx\OtaUpdates\OtaUpdateListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -53,6 +53,6 @@ final class OtaUpdatesTest extends TestCase
         $result = $this->client->otaUpdates->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(OtaUpdateListResponse::class, $result);
     }
 }

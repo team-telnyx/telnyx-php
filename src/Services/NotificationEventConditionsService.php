@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
 use Telnyx\RequestOptions;
@@ -38,14 +37,12 @@ final class NotificationEventConditionsService implements NotificationEventCondi
      *   page?: array{number?: int, size?: int},
      * }|NotificationEventConditionListParams $params
      *
-     * @return DefaultPagination<NotificationEventConditionListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|NotificationEventConditionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): NotificationEventConditionListResponse {
         [$parsed, $options] = NotificationEventConditionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -58,7 +55,6 @@ final class NotificationEventConditionsService implements NotificationEventCondi
             query: $parsed,
             options: $options,
             convert: NotificationEventConditionListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

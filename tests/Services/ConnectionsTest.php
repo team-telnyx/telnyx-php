@@ -7,7 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Connections\ConnectionGetResponse;
-use Telnyx\DefaultPagination;
+use Telnyx\Connections\ConnectionListActiveCallsResponse;
+use Telnyx\Connections\ConnectionListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -51,7 +52,7 @@ final class ConnectionsTest extends TestCase
         $result = $this->client->connections->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(ConnectionListResponse::class, $result);
     }
 
     #[Test]
@@ -67,6 +68,6 @@ final class ConnectionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(ConnectionListActiveCallsResponse::class, $result);
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Queues;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListResponse;
@@ -47,15 +46,13 @@ interface CallsContract
      *
      * @param array<mixed>|CallListParams $params
      *
-     * @return DefaultPagination<CallListResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $queueName,
         array|CallListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): CallListResponse;
 
     /**
      * @api

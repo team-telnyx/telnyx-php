@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Reports\ReportListWdrsParams\Page;
 
 /**
  * Fetch all Wdr records.
@@ -20,8 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   imsi?: string,
  *   mcc?: string,
  *   mnc?: string,
- *   page_number_?: int,
- *   page_size_?: int,
+ *   page?: Page,
  *   phone_number?: string,
  *   sim_card_id?: string,
  *   sim_group_id?: string,
@@ -66,11 +66,11 @@ final class ReportListWdrsParams implements BaseModel
     #[Api(optional: true)]
     public ?string $mnc;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Api(optional: true)]
-    public ?int $page_number_;
-
-    #[Api(optional: true)]
-    public ?int $page_size_;
+    public ?Page $page;
 
     /**
      * Phone number.
@@ -128,8 +128,7 @@ final class ReportListWdrsParams implements BaseModel
         ?string $imsi = null,
         ?string $mcc = null,
         ?string $mnc = null,
-        ?int $page_number_ = null,
-        ?int $page_size_ = null,
+        ?Page $page = null,
         ?string $phone_number = null,
         ?string $sim_card_id = null,
         ?string $sim_group_id = null,
@@ -144,8 +143,7 @@ final class ReportListWdrsParams implements BaseModel
         null !== $imsi && $obj->imsi = $imsi;
         null !== $mcc && $obj->mcc = $mcc;
         null !== $mnc && $obj->mnc = $mnc;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $page && $obj->page = $page;
         null !== $phone_number && $obj->phone_number = $phone_number;
         null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
         null !== $sim_group_id && $obj->sim_group_id = $sim_group_id;
@@ -211,18 +209,13 @@ final class ReportListWdrsParams implements BaseModel
         return $obj;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
+    public function withPage(Page $page): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
-
-        return $obj;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj->page = $page;
 
         return $obj;
     }

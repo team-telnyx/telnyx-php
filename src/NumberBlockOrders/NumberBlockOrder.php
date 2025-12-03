@@ -6,9 +6,7 @@ namespace Telnyx\NumberBlockOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
 
 /**
@@ -27,12 +25,10 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class NumberBlockOrder implements BaseModel, ResponseConverter
+final class NumberBlockOrder implements BaseModel
 {
     /** @use SdkModel<NumberBlockOrderShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;

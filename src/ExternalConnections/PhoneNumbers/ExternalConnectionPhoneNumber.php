@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\AcquiredCapability;
 
 /**
@@ -22,12 +20,10 @@ use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\Acquir
  *   ticket_id?: string|null,
  * }
  */
-final class ExternalConnectionPhoneNumber implements BaseModel, ResponseConverter
+final class ExternalConnectionPhoneNumber implements BaseModel
 {
     /** @use SdkModel<ExternalConnectionPhoneNumberShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<value-of<AcquiredCapability>>|null $acquired_capabilities */
     #[Api(list: AcquiredCapability::class, optional: true)]

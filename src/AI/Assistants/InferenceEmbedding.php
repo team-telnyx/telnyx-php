@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantTool\Handoff;
-use Telnyx\AI\Assistants\AssistantTool\Refer;
-use Telnyx\AI\Assistants\AssistantTool\SendDtmf;
+use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -31,7 +31,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   messaging_settings?: MessagingSettings|null,
  *   privacy_settings?: PrivacySettings|null,
  *   telephony_settings?: TelephonySettings|null,
- *   tools?: list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null,
+ *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
  *   transcription?: TranscriptionSettings|null,
  *   voice_settings?: VoiceSettings|null,
  * }
@@ -115,7 +115,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @var list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null $tools
+     * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
      */
     #[Api(list: AssistantTool::class, optional: true)]
     public ?array $tools;
@@ -159,7 +159,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
      *
      * @param array<string,mixed> $dynamic_variables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabled_features
-     * @param list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf> $tools
+     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
      */
     public static function with(
         string $id,
@@ -365,7 +365,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @param list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf> $tools
+     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
      */
     public function withTools(array $tools): self
     {

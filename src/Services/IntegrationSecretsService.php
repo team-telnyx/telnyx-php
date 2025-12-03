@@ -6,10 +6,9 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
+use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IntegrationSecretsContract;
@@ -61,17 +60,16 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * Retrieve a list of all integration secrets configured by the user.
      *
      * @param array{
-     *   filter?: array{type?: 'bearer'|'basic'}, page_number_?: int, page_size_?: int
+     *   filter?: array{type?: 'bearer'|'basic'},
+     *   page?: array{number?: int, size?: int},
      * }|IntegrationSecretListParams $params
-     *
-     * @return DefaultFlatPagination<IntegrationSecret>
      *
      * @throws APIException
      */
     public function list(
         array|IntegrationSecretListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): IntegrationSecretListResponse {
         [$parsed, $options] = IntegrationSecretListParams::parseRequest(
             $params,
             $requestOptions,
@@ -83,8 +81,7 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
             path: 'integration_secrets',
             query: $parsed,
             options: $options,
-            convert: IntegrationSecret::class,
-            page: DefaultFlatPagination::class,
+            convert: IntegrationSecretListResponse::class,
         );
     }
 

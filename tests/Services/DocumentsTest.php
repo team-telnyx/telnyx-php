@@ -6,10 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
+use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonResponse;
 use Telnyx\Documents\DocumentUploadResponse;
@@ -74,7 +74,7 @@ final class DocumentsTest extends TestCase
         $result = $this->client->documents->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DocumentListResponse::class, $result);
     }
 
     #[Test]
@@ -96,7 +96,7 @@ final class DocumentsTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/octet-stream responses');
+            $this->markTestSkipped('Prism doesn\'t support * responses');
         }
 
         $result = $this->client->documents->download(

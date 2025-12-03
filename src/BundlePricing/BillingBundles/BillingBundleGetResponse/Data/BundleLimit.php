@@ -50,7 +50,7 @@ final class BundleLimit implements BaseModel
     public ?string $billing_service;
 
     /**
-     * @deprecated Use country_iso instead
+     * @deprecated
      *
      * Use country_iso instead
      */

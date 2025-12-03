@@ -6,14 +6,13 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TelephonyCredentialsContract;
-use Telnyx\TelephonyCredentials\TelephonyCredential;
 use Telnyx\TelephonyCredentials\TelephonyCredentialCreateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
+use Telnyx\TelephonyCredentials\TelephonyCredentialListResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
@@ -122,14 +121,12 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      *   page?: array{number?: int, size?: int},
      * }|TelephonyCredentialListParams $params
      *
-     * @return DefaultPagination<TelephonyCredential>
-     *
      * @throws APIException
      */
     public function list(
         array|TelephonyCredentialListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): TelephonyCredentialListResponse {
         [$parsed, $options] = TelephonyCredentialListParams::parseRequest(
             $params,
             $requestOptions,
@@ -141,8 +138,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
             path: 'telephony_credentials',
             query: $parsed,
             options: $options,
-            convert: TelephonyCredential::class,
-            page: DefaultPagination::class,
+            convert: TelephonyCredentialListResponse::class,
         );
     }
 

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
@@ -47,13 +46,11 @@ interface PhoneNumbersContract
      *
      * @param array<mixed>|PhoneNumberListParams $params
      *
-     * @return DefaultPagination<ExternalConnectionPhoneNumber>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|PhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): PhoneNumberListResponse;
 }

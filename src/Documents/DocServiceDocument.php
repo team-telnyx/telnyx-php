@@ -6,9 +6,7 @@ namespace Telnyx\Documents;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Documents\DocServiceDocument\AvScanStatus;
 use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
@@ -28,12 +26,10 @@ use Telnyx\Documents\DocServiceDocument\Status;
  *   updated_at?: string|null,
  * }
  */
-final class DocServiceDocument implements BaseModel, ResponseConverter
+final class DocServiceDocument implements BaseModel
 {
     /** @use SdkModel<DocServiceDocumentShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

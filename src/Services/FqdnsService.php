@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\Fqdns\Fqdn;
 use Telnyx\Fqdns\FqdnCreateParams;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
 use Telnyx\Fqdns\FqdnListParams;
+use Telnyx\Fqdns\FqdnListResponse;
 use Telnyx\Fqdns\FqdnNewResponse;
 use Telnyx\Fqdns\FqdnUpdateParams;
 use Telnyx\Fqdns\FqdnUpdateResponse;
@@ -121,14 +120,12 @@ final class FqdnsService implements FqdnsContract
      *   page?: array{number?: int, size?: int},
      * }|FqdnListParams $params
      *
-     * @return DefaultPagination<Fqdn>
-     *
      * @throws APIException
      */
     public function list(
         array|FqdnListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): FqdnListResponse {
         [$parsed, $options] = FqdnListParams::parseRequest(
             $params,
             $requestOptions,
@@ -140,8 +137,7 @@ final class FqdnsService implements FqdnsContract
             path: 'fqdns',
             query: $parsed,
             options: $options,
-            convert: Fqdn::class,
-            page: DefaultPagination::class,
+            convert: FqdnListResponse::class,
         );
     }
 

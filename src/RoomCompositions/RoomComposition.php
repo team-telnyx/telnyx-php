@@ -6,9 +6,7 @@ namespace Telnyx\RoomCompositions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomCompositions\RoomComposition\Format;
 use Telnyx\RoomCompositions\RoomComposition\Status;
 
@@ -35,12 +33,10 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class RoomComposition implements BaseModel, ResponseConverter
+final class RoomComposition implements BaseModel
 {
     /** @use SdkModel<RoomCompositionShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A unique identifier for the room composition.

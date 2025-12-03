@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
+use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateResponse;
@@ -102,7 +102,7 @@ final class ManagedAccountsTest extends TestCase
         $result = $this->client->managedAccounts->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(ManagedAccountListResponse::class, $result);
     }
 
     #[Test]

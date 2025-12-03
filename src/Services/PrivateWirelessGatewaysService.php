@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListParams;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PrivateWirelessGatewaysContract;
@@ -88,14 +87,12 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      *   page_size_?: int,
      * }|PrivateWirelessGatewayListParams $params
      *
-     * @return DefaultFlatPagination<PrivateWirelessGateway>
-     *
      * @throws APIException
      */
     public function list(
         array|PrivateWirelessGatewayListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): PrivateWirelessGatewayListResponse {
         [$parsed, $options] = PrivateWirelessGatewayListParams::parseRequest(
             $params,
             $requestOptions,
@@ -107,8 +104,7 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
             path: 'private_wireless_gateways',
             query: $parsed,
             options: $options,
-            convert: PrivateWirelessGateway::class,
-            page: DefaultFlatPagination::class,
+            convert: PrivateWirelessGatewayListResponse::class,
         );
     }
 

@@ -6,9 +6,7 @@ namespace Telnyx\IPConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
@@ -42,12 +40,10 @@ use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class IPConnection implements BaseModel, ResponseConverter
+final class IPConnection implements BaseModel
 {
     /** @use SdkModel<IPConnectionShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the type of resource.

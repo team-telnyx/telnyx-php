@@ -7,9 +7,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
-use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -98,7 +98,7 @@ final class CustomerServiceRecordsTest extends TestCase
         $result = $this->client->customerServiceRecords->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(CustomerServiceRecordListResponse::class, $result);
     }
 
     #[Test]

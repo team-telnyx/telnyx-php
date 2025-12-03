@@ -6,11 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxCreateParams;
 use Telnyx\Faxes\FaxGetResponse;
 use Telnyx\Faxes\FaxListParams;
+use Telnyx\Faxes\FaxListResponse;
 use Telnyx\Faxes\FaxNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxesContract;
@@ -119,18 +118,15 @@ final class FaxesService implements FaxesContract
      *     from?: array{eq?: string},
      *     to?: array{eq?: string},
      *   },
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   page?: array{number?: int, size?: int},
      * }|FaxListParams $params
-     *
-     * @return DefaultFlatPagination<Fax>
      *
      * @throws APIException
      */
     public function list(
         array|FaxListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultFlatPagination {
+    ): FaxListResponse {
         [$parsed, $options] = FaxListParams::parseRequest(
             $params,
             $requestOptions,
@@ -142,8 +138,7 @@ final class FaxesService implements FaxesContract
             path: 'faxes',
             query: $parsed,
             options: $options,
-            convert: Fax::class,
-            page: DefaultFlatPagination::class,
+            convert: FaxListResponse::class,
         );
     }
 

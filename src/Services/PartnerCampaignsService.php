@@ -10,11 +10,11 @@ use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
+use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignUpdateParams;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
-use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PartnerCampaignsContract;
 
@@ -87,14 +87,12 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *   page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|PartnerCampaignListParams $params
      *
-     * @return PerPagePaginationV2<TelnyxDownstreamCampaign>
-     *
      * @throws APIException
      */
     public function list(
         array|PartnerCampaignListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PerPagePaginationV2 {
+    ): PartnerCampaignListResponse {
         [$parsed, $options] = PartnerCampaignListParams::parseRequest(
             $params,
             $requestOptions,
@@ -106,8 +104,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             path: 'partner_campaigns',
             query: $parsed,
             options: $options,
-            convert: TelnyxDownstreamCampaign::class,
-            page: PerPagePaginationV2::class,
+            convert: PartnerCampaignListResponse::class,
         );
     }
 
@@ -124,14 +121,12 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *   page?: int, recordsPerPage?: int
      * }|PartnerCampaignListSharedByMeParams $params
      *
-     * @return PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>
-     *
      * @throws APIException
      */
     public function listSharedByMe(
         array|PartnerCampaignListSharedByMeParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PerPagePaginationV2 {
+    ): PartnerCampaignListSharedByMeResponse {
         [$parsed, $options] = PartnerCampaignListSharedByMeParams::parseRequest(
             $params,
             $requestOptions,
@@ -144,7 +139,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             query: $parsed,
             options: $options,
             convert: PartnerCampaignListSharedByMeResponse::class,
-            page: PerPagePaginationV2::class,
         );
     }
 

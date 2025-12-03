@@ -6,9 +6,7 @@ namespace Telnyx\VerifiedNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 
 /**
@@ -18,12 +16,10 @@ use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
  *   verified_at?: string|null,
  * }
  */
-final class VerifiedNumber implements BaseModel, ResponseConverter
+final class VerifiedNumber implements BaseModel
 {
     /** @use SdkModel<VerifiedNumberShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $phone_number;

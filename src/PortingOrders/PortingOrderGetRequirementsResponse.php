@@ -4,21 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\FieldType;
-use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\RequirementType;
+use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data;
 
 /**
  * @phpstan-type PortingOrderGetRequirementsResponseShape = array{
- *   field_type?: value-of<FieldType>|null,
- *   field_value?: string|null,
- *   record_type?: string|null,
- *   requirement_status?: string|null,
- *   requirement_type?: RequirementType|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PortingOrderGetRequirementsResponse implements BaseModel, ResponseConverter
@@ -28,37 +24,12 @@ final class PortingOrderGetRequirementsResponse implements BaseModel, ResponseCo
 
     use SdkResponse;
 
-    /**
-     * Type of value expected on field_value field.
-     *
-     * @var value-of<FieldType>|null $field_type
-     */
-    #[Api(enum: FieldType::class, optional: true)]
-    public ?string $field_type;
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
 
-    /**
-     * Identifies the document that satisfies this requirement.
-     */
     #[Api(optional: true)]
-    public ?string $field_value;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Api(optional: true)]
-    public ?string $record_type;
-
-    /**
-     * Status of the requirement.
-     */
-    #[Api(optional: true)]
-    public ?string $requirement_status;
-
-    /**
-     * Identifies the requirement type that meets this requirement.
-     */
-    #[Api(optional: true)]
-    public ?RequirementType $requirement_type;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -70,79 +41,35 @@ final class PortingOrderGetRequirementsResponse implements BaseModel, ResponseCo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $field_type
+     * @param list<Data> $data
      */
     public static function with(
-        FieldType|string|null $field_type = null,
-        ?string $field_value = null,
-        ?string $record_type = null,
-        ?string $requirement_status = null,
-        ?RequirementType $requirement_type = null,
+        ?array $data = null,
+        ?PaginationMeta $meta = null
     ): self {
         $obj = new self;
 
-        null !== $field_type && $obj['field_type'] = $field_type;
-        null !== $field_value && $obj->field_value = $field_value;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $requirement_status && $obj->requirement_status = $requirement_status;
-        null !== $requirement_type && $obj->requirement_type = $requirement_type;
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
 
         return $obj;
     }
 
     /**
-     * Type of value expected on field_value field.
-     *
-     * @param FieldType|value-of<FieldType> $fieldType
+     * @param list<Data> $data
      */
-    public function withFieldType(FieldType|string $fieldType): self
+    public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj['field_type'] = $fieldType;
+        $obj->data = $data;
 
         return $obj;
     }
 
-    /**
-     * Identifies the document that satisfies this requirement.
-     */
-    public function withFieldValue(string $fieldValue): self
+    public function withMeta(PaginationMeta $meta): self
     {
         $obj = clone $this;
-        $obj->field_value = $fieldValue;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $obj = clone $this;
-        $obj->record_type = $recordType;
-
-        return $obj;
-    }
-
-    /**
-     * Status of the requirement.
-     */
-    public function withRequirementStatus(string $requirementStatus): self
-    {
-        $obj = clone $this;
-        $obj->requirement_status = $requirementStatus;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the requirement type that meets this requirement.
-     */
-    public function withRequirementType(RequirementType $requirementType): self
-    {
-        $obj = clone $this;
-        $obj->requirement_type = $requirementType;
+        $obj->meta = $meta;
 
         return $obj;
     }

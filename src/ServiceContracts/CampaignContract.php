@@ -14,7 +14,6 @@ use Telnyx\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Campaign\CampaignUpdateParams;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface CampaignContract
@@ -47,14 +46,12 @@ interface CampaignContract
      *
      * @param array<mixed>|CampaignListParams $params
      *
-     * @return PerPagePaginationV2<CampaignListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|CampaignListParams $params,
         ?RequestOptions $requestOptions = null
-    ): PerPagePaginationV2;
+    ): CampaignListResponse;
 
     /**
      * @api

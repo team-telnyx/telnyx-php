@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
@@ -43,14 +42,12 @@ interface GlobalIPHealthChecksContract
      *
      * @param array<mixed>|GlobalIPHealthCheckListParams $params
      *
-     * @return DefaultPagination<GlobalIPHealthCheckListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|GlobalIPHealthCheckListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): GlobalIPHealthCheckListResponse;
 
     /**
      * @api

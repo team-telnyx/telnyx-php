@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyAddressesContract;
@@ -95,14 +94,12 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyAddressListParams $params
      *
-     * @return DefaultPagination<DynamicEmergencyAddress>
-     *
      * @throws APIException
      */
     public function list(
         array|DynamicEmergencyAddressListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): DynamicEmergencyAddressListResponse {
         [$parsed, $options] = DynamicEmergencyAddressListParams::parseRequest(
             $params,
             $requestOptions,
@@ -114,8 +111,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
             path: 'dynamic_emergency_addresses',
             query: $parsed,
             options: $options,
-            convert: DynamicEmergencyAddress::class,
-            page: DefaultPagination::class,
+            convert: DynamicEmergencyAddressListResponse::class,
         );
     }
 

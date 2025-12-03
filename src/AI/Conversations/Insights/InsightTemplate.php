@@ -8,9 +8,7 @@ use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InsightTemplateShape = array{
@@ -18,17 +16,15 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   created_at: \DateTimeInterface,
  *   instructions: string,
  *   insight_type?: value-of<InsightType>|null,
- *   json_schema?: string|null|array<string,mixed>,
+ *   json_schema?: mixed|string|null,
  *   name?: string|null,
  *   webhook?: string|null,
  * }
  */
-final class InsightTemplate implements BaseModel, ResponseConverter
+final class InsightTemplate implements BaseModel
 {
     /** @use SdkModel<InsightTemplateShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;
@@ -46,10 +42,10 @@ final class InsightTemplate implements BaseModel, ResponseConverter
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @var string|array<string,mixed>|null $json_schema
+     * @var mixed|string|null $json_schema
      */
     #[Api(union: JsonSchema::class, optional: true)]
-    public string|array|null $json_schema;
+    public mixed $json_schema;
 
     #[Api(optional: true)]
     public ?string $name;
@@ -82,14 +78,14 @@ final class InsightTemplate implements BaseModel, ResponseConverter
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param InsightType|value-of<InsightType> $insight_type
-     * @param string|array<string,mixed> $json_schema
+     * @param mixed|string $json_schema
      */
     public static function with(
         string $id,
         \DateTimeInterface $created_at,
         string $instructions,
         InsightType|string|null $insight_type = null,
-        string|array|null $json_schema = null,
+        mixed $json_schema = null,
         ?string $name = null,
         ?string $webhook = null,
     ): self {
@@ -145,9 +141,9 @@ final class InsightTemplate implements BaseModel, ResponseConverter
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @param string|array<string,mixed> $jsonSchema
+     * @param mixed|string $jsonSchema
      */
-    public function withJsonSchema(string|array $jsonSchema): self
+    public function withJsonSchema(mixed $jsonSchema): self
     {
         $obj = clone $this;
         $obj->json_schema = $jsonSchema;

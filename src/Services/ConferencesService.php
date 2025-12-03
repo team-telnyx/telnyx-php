@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
+use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Conferences\ConferenceRetrieveParams;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
 use Telnyx\Services\Conferences\ActionsService;
@@ -144,14 +143,12 @@ final class ConferencesService implements ConferencesContract
      *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ConferenceListParams $params
      *
-     * @return DefaultPagination<Conference>
-     *
      * @throws APIException
      */
     public function list(
         array|ConferenceListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): ConferenceListResponse {
         [$parsed, $options] = ConferenceListParams::parseRequest(
             $params,
             $requestOptions,
@@ -163,8 +160,7 @@ final class ConferencesService implements ConferencesContract
             path: 'conferences',
             query: $parsed,
             options: $options,
-            convert: Conference::class,
-            page: DefaultPagination::class,
+            convert: ConferenceListResponse::class,
         );
     }
 
@@ -181,15 +177,13 @@ final class ConferencesService implements ConferencesContract
      *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ConferenceListParticipantsParams $params
      *
-     * @return DefaultPagination<ConferenceListParticipantsResponse>
-     *
      * @throws APIException
      */
     public function listParticipants(
         string $conferenceID,
         array|ConferenceListParticipantsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): ConferenceListParticipantsResponse {
         [$parsed, $options] = ConferenceListParticipantsParams::parseRequest(
             $params,
             $requestOptions,
@@ -202,7 +196,6 @@ final class ConferencesService implements ConferencesContract
             query: $parsed,
             options: $options,
             convert: ConferenceListParticipantsResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

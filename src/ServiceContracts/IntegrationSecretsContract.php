@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
+use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 
@@ -31,14 +30,12 @@ interface IntegrationSecretsContract
      *
      * @param array<mixed>|IntegrationSecretListParams $params
      *
-     * @return DefaultFlatPagination<IntegrationSecret>
-     *
      * @throws APIException
      */
     public function list(
         array|IntegrationSecretListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): IntegrationSecretListResponse;
 
     /**
      * @api

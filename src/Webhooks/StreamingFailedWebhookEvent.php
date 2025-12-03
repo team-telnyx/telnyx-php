@@ -7,11 +7,10 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Webhooks\StreamingFailedWebhookEvent\Data;
 
 /**
- * @phpstan-type StreamingFailedWebhookEventShape = array{
- *   data?: CallStreamingFailed|null
- * }
+ * @phpstan-type StreamingFailedWebhookEventShape = array{data?: Data|null}
  */
 final class StreamingFailedWebhookEvent implements BaseModel
 {
@@ -19,7 +18,7 @@ final class StreamingFailedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Api(optional: true)]
-    public ?CallStreamingFailed $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -31,7 +30,7 @@ final class StreamingFailedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?CallStreamingFailed $data = null): self
+    public static function with(?Data $data = null): self
     {
         $obj = new self;
 
@@ -40,7 +39,7 @@ final class StreamingFailedWebhookEvent implements BaseModel
         return $obj;
     }
 
-    public function withData(CallStreamingFailed $data): self
+    public function withData(Data $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

@@ -9,7 +9,6 @@ use Telnyx\AI\McpServers\McpServerGetResponse;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -100,7 +99,7 @@ final class McpServersTest extends TestCase
         $result = $this->client->ai->mcpServers->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPaginationTopLevelArray::class, $result);
+        $this->assertIsList($result);
     }
 
     #[Test]

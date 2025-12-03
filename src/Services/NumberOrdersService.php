@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
 use Telnyx\NumberOrders\NumberOrderListParams;
@@ -130,14 +129,12 @@ final class NumberOrdersService implements NumberOrdersContract
      *   page?: array{number?: int, size?: int},
      * }|NumberOrderListParams $params
      *
-     * @return DefaultPagination<NumberOrderListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|NumberOrderListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): NumberOrderListResponse {
         [$parsed, $options] = NumberOrderListParams::parseRequest(
             $params,
             $requestOptions,
@@ -150,7 +147,6 @@ final class NumberOrdersService implements NumberOrdersContract
             query: $parsed,
             options: $options,
             convert: NumberOrderListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

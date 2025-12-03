@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
+use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonResponse;
@@ -37,7 +36,7 @@ interface DocumentsContract
      * @throws APIException
      */
     public function update(
-        string $documentID,
+        string $id,
         array|DocumentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): DocumentUpdateResponse;
@@ -47,14 +46,12 @@ interface DocumentsContract
      *
      * @param array<mixed>|DocumentListParams $params
      *
-     * @return DefaultPagination<DocServiceDocument>
-     *
      * @throws APIException
      */
     public function list(
         array|DocumentListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): DocumentListResponse;
 
     /**
      * @api

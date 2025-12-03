@@ -6,9 +6,7 @@ namespace Telnyx\BundlePricing\BillingBundles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BillingBundleSummaryShape = array{
@@ -23,12 +21,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   specs?: list<string>|null,
  * }
  */
-final class BillingBundleSummary implements BaseModel, ResponseConverter
+final class BillingBundleSummary implements BaseModel
 {
     /** @use SdkModel<BillingBundleSummaryShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Bundle's ID, this is used to identify the bundle in the API.

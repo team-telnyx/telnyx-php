@@ -6,14 +6,13 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
 use Telnyx\PhoneNumbers\Voice\CnamListing;
 use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 use Telnyx\PhoneNumbers\Voice\VoiceGetResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams;
+use Telnyx\PhoneNumbers\Voice\VoiceListResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateResponse;
 use Telnyx\RequestOptions;
@@ -115,14 +114,12 @@ final class VoiceService implements VoiceContract
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
      * }|VoiceListParams $params
      *
-     * @return DefaultPagination<PhoneNumberWithVoiceSettings>
-     *
      * @throws APIException
      */
     public function list(
         array|VoiceListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): VoiceListResponse {
         [$parsed, $options] = VoiceListParams::parseRequest(
             $params,
             $requestOptions,
@@ -134,8 +131,7 @@ final class VoiceService implements VoiceContract
             path: 'phone_numbers/voice',
             query: $parsed,
             options: $options,
-            convert: PhoneNumberWithVoiceSettings::class,
-            page: DefaultPagination::class,
+            convert: VoiceListResponse::class,
         );
     }
 }

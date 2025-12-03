@@ -6,9 +6,7 @@ namespace Telnyx\OutboundVoiceProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
 
 /**
@@ -34,12 +32,10 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
  *   whitelisted_destinations?: list<string>|null,
  * }
  */
-final class OutboundVoiceProfile implements BaseModel, ResponseConverter
+final class OutboundVoiceProfile implements BaseModel
 {
     /** @use SdkModel<OutboundVoiceProfileShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A user-supplied name to help with organization.

@@ -6,11 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
+use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\NumberReservations\ReservedPhoneNumber;
 use Telnyx\RequestOptions;
@@ -106,14 +105,12 @@ final class NumberReservationsService implements NumberReservationsContract
      *   page?: array{number?: int, size?: int},
      * }|NumberReservationListParams $params
      *
-     * @return DefaultPagination<NumberReservation>
-     *
      * @throws APIException
      */
     public function list(
         array|NumberReservationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): NumberReservationListResponse {
         [$parsed, $options] = NumberReservationListParams::parseRequest(
             $params,
             $requestOptions,
@@ -125,8 +122,7 @@ final class NumberReservationsService implements NumberReservationsContract
             path: 'number_reservations',
             query: $parsed,
             options: $options,
-            convert: NumberReservation::class,
-            page: DefaultPagination::class,
+            convert: NumberReservationListResponse::class,
         );
     }
 }

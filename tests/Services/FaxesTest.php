@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\Faxes\FaxGetResponse;
+use Telnyx\Faxes\FaxListResponse;
 use Telnyx\Faxes\FaxNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -99,7 +99,7 @@ final class FaxesTest extends TestCase
         $result = $this->client->faxes->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(FaxListResponse::class, $result);
     }
 
     #[Test]

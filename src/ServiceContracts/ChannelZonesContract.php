@@ -9,7 +9,6 @@ use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface ChannelZonesContract
@@ -32,12 +31,10 @@ interface ChannelZonesContract
      *
      * @param array<mixed>|ChannelZoneListParams $params
      *
-     * @return DefaultPagination<ChannelZoneListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|ChannelZoneListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ChannelZoneListResponse;
 }

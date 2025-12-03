@@ -201,7 +201,7 @@ final class ConversationsService implements ConversationsContract
      *   sent_at?: string|\DateTimeInterface,
      *   tool_call_id?: string,
      *   tool_calls?: list<array<string,mixed>>,
-     *   tool_choice?: string|array<string,mixed>,
+     *   tool_choice?: mixed|string,
      * }|ConversationAddMessageParams $params
      *
      * @throws APIException

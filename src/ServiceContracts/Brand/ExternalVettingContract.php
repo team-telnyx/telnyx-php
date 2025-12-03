@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Brand;
 
-use Telnyx\Brand\ExternalVetting\ExternalVettingImportsParams;
-use Telnyx\Brand\ExternalVetting\ExternalVettingImportsResponse;
+use Telnyx\Brand\ExternalVetting\ExternalVettingImportParams;
+use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
 use Telnyx\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
@@ -29,15 +29,15 @@ interface ExternalVettingContract
     /**
      * @api
      *
-     * @param array<mixed>|ExternalVettingImportsParams $params
+     * @param array<mixed>|ExternalVettingImportParams $params
      *
      * @throws APIException
      */
-    public function imports(
+    public function import(
         string $brandID,
-        array|ExternalVettingImportsParams $params,
+        array|ExternalVettingImportParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ExternalVettingImportsResponse;
+    ): ExternalVettingImportResponse;
 
     /**
      * @api

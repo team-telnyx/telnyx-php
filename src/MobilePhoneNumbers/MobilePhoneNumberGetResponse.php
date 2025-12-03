@@ -9,11 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse\Data;
 
 /**
- * @phpstan-type MobilePhoneNumberGetResponseShape = array{
- *   data?: MobilePhoneNumber|null
- * }
+ * @phpstan-type MobilePhoneNumberGetResponseShape = array{data?: Data|null}
  */
 final class MobilePhoneNumberGetResponse implements BaseModel, ResponseConverter
 {
@@ -23,7 +22,7 @@ final class MobilePhoneNumberGetResponse implements BaseModel, ResponseConverter
     use SdkResponse;
 
     #[Api(optional: true)]
-    public ?MobilePhoneNumber $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -35,7 +34,7 @@ final class MobilePhoneNumberGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?MobilePhoneNumber $data = null): self
+    public static function with(?Data $data = null): self
     {
         $obj = new self;
 
@@ -44,7 +43,7 @@ final class MobilePhoneNumberGetResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withData(MobilePhoneNumber $data): self
+    public function withData(Data $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

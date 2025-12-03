@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsContract;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams;
@@ -31,15 +30,15 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * Create a new Virtual Cross Connect.<br /><br />For AWS and GCE, you have the option of creating the primary connection first and the secondary connection later. You also have the option of disabling the primary and/or secondary connections at any time and later re-enabling them. With Azure, you do not have this option. Azure requires both the primary and secondary connections to be created at the same time and they can not be independantly disabled.
      *
      * @param array{
+     *   bgp_asn: float,
+     *   cloud_provider: 'aws'|'azure'|'gce',
+     *   cloud_provider_region: string,
+     *   network_id: string,
+     *   primary_cloud_account_id: string,
      *   region_code: string,
      *   bandwidth_mbps?: float,
-     *   bgp_asn?: float,
-     *   cloud_provider?: 'aws'|'azure'|'gce',
-     *   cloud_provider_region?: string,
      *   name?: string,
-     *   network_id?: string,
      *   primary_bgp_key?: string,
-     *   primary_cloud_account_id?: string,
      *   primary_cloud_ip?: string,
      *   primary_telnyx_ip?: string,
      *   secondary_bgp_key?: string,
@@ -134,14 +133,12 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
      * }|VirtualCrossConnectListParams $params
      *
-     * @return DefaultPagination<VirtualCrossConnectListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|VirtualCrossConnectListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): VirtualCrossConnectListResponse {
         [$parsed, $options] = VirtualCrossConnectListParams::parseRequest(
             $params,
             $requestOptions,
@@ -154,7 +151,6 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
             query: $parsed,
             options: $options,
             convert: VirtualCrossConnectListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 

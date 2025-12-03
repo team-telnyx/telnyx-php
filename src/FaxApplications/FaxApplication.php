@@ -6,9 +6,7 @@ namespace Telnyx\FaxApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplication\Inbound;
 use Telnyx\FaxApplications\FaxApplication\Outbound;
@@ -30,12 +28,10 @@ use Telnyx\FaxApplications\FaxApplication\Outbound;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class FaxApplication implements BaseModel, ResponseConverter
+final class FaxApplication implements BaseModel
 {
     /** @use SdkModel<FaxApplicationShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Uniquely identifies the resource.

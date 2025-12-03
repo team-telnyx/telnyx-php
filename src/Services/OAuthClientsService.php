@@ -6,11 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\OAuthClients\OAuthClient;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
 use Telnyx\OAuthClients\OAuthClientListParams;
+use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
 use Telnyx\OAuthClients\OAuthClientUpdateParams;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
@@ -136,14 +135,12 @@ final class OAuthClientsService implements OAuthClientsContract
      *   page_size_?: int,
      * }|OAuthClientListParams $params
      *
-     * @return DefaultFlatPagination<OAuthClient>
-     *
      * @throws APIException
      */
     public function list(
         array|OAuthClientListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultFlatPagination {
+    ): OAuthClientListResponse {
         [$parsed, $options] = OAuthClientListParams::parseRequest(
             $params,
             $requestOptions,
@@ -155,8 +152,7 @@ final class OAuthClientsService implements OAuthClientsContract
             path: 'oauth_clients',
             query: $parsed,
             options: $options,
-            convert: OAuthClient::class,
-            page: DefaultFlatPagination::class,
+            convert: OAuthClientListResponse::class,
         );
     }
 

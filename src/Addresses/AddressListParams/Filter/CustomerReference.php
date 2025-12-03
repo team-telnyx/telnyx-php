@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses\AddressListParams\Filter;
 
-use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\CustomerReferenceMatcher;
+use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\UnionMember1;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -21,6 +21,6 @@ final class CustomerReference implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['string', CustomerReferenceMatcher::class];
+        return ['string', UnionMember1::class];
     }
 }

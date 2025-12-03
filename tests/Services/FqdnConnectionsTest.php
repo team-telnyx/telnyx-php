@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
+use Telnyx\FqdnConnections\FqdnConnectionListResponse;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -156,7 +156,7 @@ final class FqdnConnectionsTest extends TestCase
         $result = $this->client->fqdnConnections->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(FqdnConnectionListResponse::class, $result);
     }
 
     #[Test]

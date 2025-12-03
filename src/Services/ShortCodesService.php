@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ShortCodesContract;
-use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams;
+use Telnyx\ShortCodes\ShortCodeListResponse;
 use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
@@ -82,14 +81,12 @@ final class ShortCodesService implements ShortCodesContract
      *   page?: array{number?: int, size?: int},
      * }|ShortCodeListParams $params
      *
-     * @return DefaultPagination<ShortCode>
-     *
      * @throws APIException
      */
     public function list(
         array|ShortCodeListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): ShortCodeListResponse {
         [$parsed, $options] = ShortCodeListParams::parseRequest(
             $params,
             $requestOptions,
@@ -101,8 +98,7 @@ final class ShortCodesService implements ShortCodesContract
             path: 'short_codes',
             query: $parsed,
             options: $options,
-            convert: ShortCode::class,
-            page: DefaultPagination::class,
+            convert: ShortCodeListResponse::class,
         );
     }
 }

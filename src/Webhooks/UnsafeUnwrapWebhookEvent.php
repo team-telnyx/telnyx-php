@@ -7,6 +7,8 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Webhooks\UnsafeUnwrapWebhookEvent\CampaignStatusUpdateEvent;
+use Telnyx\Webhooks\UnsafeUnwrapWebhookEvent\CampaignSuspendedEvent;
 
 final class UnsafeUnwrapWebhookEvent implements ConverterSource
 {

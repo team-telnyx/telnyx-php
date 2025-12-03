@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\Assistant\Tool;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
+use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   instructions?: string|null,
  *   model?: string|null,
  *   openai_api_key_ref?: string|null,
- *   tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+ *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
  * }
  */
 final class Assistant implements BaseModel
@@ -47,7 +47,7 @@ final class Assistant implements BaseModel
     /**
      * The tools that the voice assistant can use.
      *
-     * @var list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null $tools
+     * @var list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null $tools
      */
     #[Api(list: Tool::class, optional: true)]
     public ?array $tools;
@@ -62,7 +62,7 @@ final class Assistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
+     * @param list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
      */
     public static function with(
         ?string $instructions = null,
@@ -116,7 +116,7 @@ final class Assistant implements BaseModel
     /**
      * The tools that the voice assistant can use.
      *
-     * @param list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
+     * @param list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
      */
     public function withTools(array $tools): self
     {

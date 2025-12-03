@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\R
 
 /**
  * @phpstan-type Result1Shape = array{
- *   insight_id?: string|null, result?: string|null|array<string,mixed>
+ *   insight_id?: string|null, result?: mixed|string|null
  * }
  */
 final class Result1 implements BaseModel
@@ -28,10 +28,10 @@ final class Result1 implements BaseModel
     /**
      * The result of the insight.
      *
-     * @var string|array<string,mixed>|null $result
+     * @var mixed|string|null $result
      */
     #[Api(union: Result::class, optional: true)]
-    public string|array|null $result;
+    public mixed $result;
 
     public function __construct()
     {
@@ -43,11 +43,11 @@ final class Result1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|array<string,mixed> $result
+     * @param mixed|string $result
      */
     public static function with(
         ?string $insight_id = null,
-        string|array|null $result = null
+        mixed $result = null
     ): self {
         $obj = new self;
 
@@ -71,9 +71,9 @@ final class Result1 implements BaseModel
     /**
      * The result of the insight.
      *
-     * @param string|array<string,mixed> $result
+     * @param mixed|string $result
      */
-    public function withResult(string|array $result): self
+    public function withResult(mixed $result): self
     {
         $obj = clone $this;
         $obj->result = $result;

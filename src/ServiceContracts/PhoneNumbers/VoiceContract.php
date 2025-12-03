@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\VoiceGetResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams;
+use Telnyx\PhoneNumbers\Voice\VoiceListResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateResponse;
 use Telnyx\RequestOptions;
@@ -43,12 +42,10 @@ interface VoiceContract
      *
      * @param array<mixed>|VoiceListParams $params
      *
-     * @return DefaultPagination<PhoneNumberWithVoiceSettings>
-     *
      * @throws APIException
      */
     public function list(
         array|VoiceListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): VoiceListResponse;
 }

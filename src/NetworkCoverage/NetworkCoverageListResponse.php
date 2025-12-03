@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location;
+use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data;
 
 /**
  * @phpstan-type NetworkCoverageListResponseShape = array{
- *   available_services?: list<value-of<AvailableService>>|null,
- *   location?: Location|null,
- *   record_type?: string|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class NetworkCoverageListResponse implements BaseModel, ResponseConverter
@@ -25,22 +24,12 @@ final class NetworkCoverageListResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /**
-     * List of interface types supported in this region.
-     *
-     * @var list<value-of<AvailableService>>|null $available_services
-     */
-    #[Api(list: AvailableService::class, optional: true)]
-    public ?array $available_services;
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
 
     #[Api(optional: true)]
-    public ?Location $location;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Api(optional: true)]
-    public ?string $record_type;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -52,50 +41,35 @@ final class NetworkCoverageListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableService|value-of<AvailableService>> $available_services
+     * @param list<Data> $data
      */
     public static function with(
-        ?array $available_services = null,
-        ?Location $location = null,
-        ?string $record_type = null,
+        ?array $data = null,
+        ?PaginationMeta $meta = null
     ): self {
         $obj = new self;
 
-        null !== $available_services && $obj['available_services'] = $available_services;
-        null !== $location && $obj->location = $location;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
 
         return $obj;
     }
 
     /**
-     * List of interface types supported in this region.
-     *
-     * @param list<AvailableService|value-of<AvailableService>> $availableServices
+     * @param list<Data> $data
      */
-    public function withAvailableServices(array $availableServices): self
+    public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj['available_services'] = $availableServices;
+        $obj->data = $data;
 
         return $obj;
     }
 
-    public function withLocation(Location $location): self
+    public function withMeta(PaginationMeta $meta): self
     {
         $obj = clone $this;
-        $obj->location = $location;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj->meta = $meta;
 
         return $obj;
     }

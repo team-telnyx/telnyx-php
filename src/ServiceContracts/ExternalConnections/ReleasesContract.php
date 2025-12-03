@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
@@ -32,13 +31,11 @@ interface ReleasesContract
      *
      * @param array<mixed>|ReleaseListParams $params
      *
-     * @return DefaultPagination<ReleaseListResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|ReleaseListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ReleaseListResponse;
 }

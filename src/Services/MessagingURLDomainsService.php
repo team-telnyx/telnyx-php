@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
@@ -28,14 +27,12 @@ final class MessagingURLDomainsService implements MessagingURLDomainsContract
      *   page?: array{number?: int, size?: int}
      * }|MessagingURLDomainListParams $params
      *
-     * @return DefaultPagination<MessagingURLDomainListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|MessagingURLDomainListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): MessagingURLDomainListResponse {
         [$parsed, $options] = MessagingURLDomainListParams::parseRequest(
             $params,
             $requestOptions,
@@ -48,7 +45,6 @@ final class MessagingURLDomainsService implements MessagingURLDomainsContract
             query: $parsed,
             options: $options,
             convert: MessagingURLDomainListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

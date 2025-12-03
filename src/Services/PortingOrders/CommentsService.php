@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
@@ -57,15 +56,13 @@ final class CommentsService implements CommentsContract
      *
      * @param array{page?: array{number?: int, size?: int}}|CommentListParams $params
      *
-     * @return DefaultPagination<CommentListResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|CommentListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): CommentListResponse {
         [$parsed, $options] = CommentListParams::parseRequest(
             $params,
             $requestOptions,
@@ -78,7 +75,6 @@ final class CommentsService implements CommentsContract
             query: $parsed,
             options: $options,
             convert: CommentListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

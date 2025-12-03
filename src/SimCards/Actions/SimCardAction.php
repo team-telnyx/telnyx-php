@@ -6,9 +6,7 @@ namespace Telnyx\SimCards\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\SimCardAction\ActionType;
 use Telnyx\SimCards\Actions\SimCardAction\Status;
 
@@ -26,12 +24,10 @@ use Telnyx\SimCards\Actions\SimCardAction\Status;
  *   updated_at?: string|null,
  * }
  */
-final class SimCardAction implements BaseModel, ResponseConverter
+final class SimCardAction implements BaseModel
 {
     /** @use SdkModel<SimCardActionShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

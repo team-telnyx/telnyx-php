@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
@@ -29,14 +28,12 @@ interface LogMessagesContract
      *
      * @param array<mixed>|LogMessageListParams $params
      *
-     * @return DefaultPaginationForLogMessages<LogMessageListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|LogMessageListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPaginationForLogMessages;
+    ): LogMessageListResponse;
 
     /**
      * @api

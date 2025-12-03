@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AuthenticationProviders\AuthenticationProvider;
 use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
+use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
 
@@ -131,17 +130,15 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * Returns a list of your SSO authentication providers.
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int, sort?: value-of<Sort>
+     *   page?: array{number?: int, size?: int}, sort?: value-of<Sort>
      * }|AuthenticationProviderListParams $params
-     *
-     * @return DefaultFlatPagination<AuthenticationProvider>
      *
      * @throws APIException
      */
     public function list(
         array|AuthenticationProviderListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): AuthenticationProviderListResponse {
         [$parsed, $options] = AuthenticationProviderListParams::parseRequest(
             $params,
             $requestOptions,
@@ -153,8 +150,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
             path: 'authentication_providers',
             query: $parsed,
             options: $options,
-            convert: AuthenticationProvider::class,
-            page: DefaultFlatPagination::class,
+            convert: AuthenticationProviderListResponse::class,
         );
     }
 

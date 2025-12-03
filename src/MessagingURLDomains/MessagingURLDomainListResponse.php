@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingURLDomains;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse\Data;
 
 /**
  * @phpstan-type MessagingURLDomainListResponseShape = array{
- *   id?: string|null,
- *   record_type?: string|null,
- *   url_domain?: string|null,
- *   use_case?: string|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class MessagingURLDomainListResponse implements BaseModel, ResponseConverter
@@ -25,17 +24,12 @@ final class MessagingURLDomainListResponse implements BaseModel, ResponseConvert
 
     use SdkResponse;
 
-    #[Api(optional: true)]
-    public ?string $id;
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
 
     #[Api(optional: true)]
-    public ?string $record_type;
-
-    #[Api(optional: true)]
-    public ?string $url_domain;
-
-    #[Api(optional: true)]
-    public ?string $use_case;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -46,51 +40,36 @@ final class MessagingURLDomainListResponse implements BaseModel, ResponseConvert
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data> $data
      */
     public static function with(
-        ?string $id = null,
-        ?string $record_type = null,
-        ?string $url_domain = null,
-        ?string $use_case = null,
+        ?array $data = null,
+        ?PaginationMeta $meta = null
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $url_domain && $obj->url_domain = $url_domain;
-        null !== $use_case && $obj->use_case = $use_case;
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
 
         return $obj;
     }
 
-    public function withID(string $id): self
+    /**
+     * @param list<Data> $data
+     */
+    public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj->data = $data;
 
         return $obj;
     }
 
-    public function withRecordType(string $recordType): self
+    public function withMeta(PaginationMeta $meta): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
-
-        return $obj;
-    }
-
-    public function withURLDomain(string $urlDomain): self
-    {
-        $obj = clone $this;
-        $obj->url_domain = $urlDomain;
-
-        return $obj;
-    }
-
-    public function withUseCase(string $useCase): self
-    {
-        $obj = clone $this;
-        $obj->use_case = $useCase;
+        $obj->meta = $meta;
 
         return $obj;
     }

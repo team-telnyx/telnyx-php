@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AuthenticationProviders\AuthenticationProvider;
 use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
+use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface AuthenticationProvidersContract
@@ -58,14 +57,12 @@ interface AuthenticationProvidersContract
      *
      * @param array<mixed>|AuthenticationProviderListParams $params
      *
-     * @return DefaultFlatPagination<AuthenticationProvider>
-     *
      * @throws APIException
      */
     public function list(
         array|AuthenticationProviderListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): AuthenticationProviderListResponse;
 
     /**
      * @api

@@ -14,7 +14,7 @@ use Telnyx\Messages\MessagingError\Source;
  *   code: string,
  *   title: string,
  *   detail?: string|null,
- *   meta?: array<string,mixed>|null,
+ *   meta?: mixed,
  *   source?: Source|null,
  * }
  */
@@ -32,9 +32,8 @@ final class MessagingError implements BaseModel
     #[Api(optional: true)]
     public ?string $detail;
 
-    /** @var array<string,mixed>|null $meta */
-    #[Api(map: 'mixed', optional: true)]
-    public ?array $meta;
+    #[Api(optional: true)]
+    public mixed $meta;
 
     #[Api(optional: true)]
     public ?Source $source;
@@ -62,14 +61,12 @@ final class MessagingError implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param array<string,mixed> $meta
      */
     public static function with(
         string $code,
         string $title,
         ?string $detail = null,
-        ?array $meta = null,
+        mixed $meta = null,
         ?Source $source = null,
     ): self {
         $obj = new self;
@@ -108,10 +105,7 @@ final class MessagingError implements BaseModel
         return $obj;
     }
 
-    /**
-     * @param array<string,mixed> $meta
-     */
-    public function withMeta(array $meta): self
+    public function withMeta(mixed $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

@@ -6,7 +6,6 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
@@ -54,14 +53,12 @@ final class LogMessagesService implements LogMessagesContract
      *   page?: array{number?: int, size?: int},
      * }|LogMessageListParams $params
      *
-     * @return DefaultPaginationForLogMessages<LogMessageListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|LogMessageListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPaginationForLogMessages {
+    ): LogMessageListResponse {
         [$parsed, $options] = LogMessageListParams::parseRequest(
             $params,
             $requestOptions,
@@ -74,7 +71,6 @@ final class LogMessagesService implements LogMessagesContract
             query: $parsed,
             options: $options,
             convert: LogMessageListResponse::class,
-            page: DefaultPaginationForLogMessages::class,
         );
     }
 

@@ -7,9 +7,7 @@ namespace Telnyx\BundlePricing\UserBundles;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UserBundleShape = array{
@@ -22,12 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class UserBundle implements BaseModel, ResponseConverter
+final class UserBundle implements BaseModel
 {
     /** @use SdkModel<UserBundleShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * User bundle's ID, this is used to identify the user bundle in the API.

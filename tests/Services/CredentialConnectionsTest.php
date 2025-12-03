@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
+use Telnyx\CredentialConnections\CredentialConnectionListResponse;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
-use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -146,7 +146,7 @@ final class CredentialConnectionsTest extends TestCase
         $result = $this->client->credentialConnections->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(CredentialConnectionListResponse::class, $result);
     }
 
     #[Test]

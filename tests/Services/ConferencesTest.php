@@ -7,8 +7,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Conferences\ConferenceGetResponse;
+use Telnyx\Conferences\ConferenceListParticipantsResponse;
+use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
-use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -94,7 +95,7 @@ final class ConferencesTest extends TestCase
         $result = $this->client->conferences->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(ConferenceListResponse::class, $result);
     }
 
     #[Test]
@@ -107,6 +108,6 @@ final class ConferencesTest extends TestCase
         $result = $this->client->conferences->listParticipants('conference_id', []);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(ConferenceListParticipantsResponse::class, $result);
     }
 }

@@ -6,9 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
+use Telnyx\Networks\NetworkListInterfacesResponse;
+use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -114,7 +115,7 @@ final class NetworksTest extends TestCase
         $result = $this->client->networks->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(NetworkListResponse::class, $result);
     }
 
     #[Test]
@@ -145,6 +146,6 @@ final class NetworksTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(NetworkListInterfacesResponse::class, $result);
     }
 }

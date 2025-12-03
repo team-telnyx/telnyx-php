@@ -8,7 +8,6 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface BulkSimCardActionsContract
@@ -28,12 +27,10 @@ interface BulkSimCardActionsContract
      *
      * @param array<mixed>|BulkSimCardActionListParams $params
      *
-     * @return DefaultFlatPagination<BulkSimCardActionListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|BulkSimCardActionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): BulkSimCardActionListResponse;
 }

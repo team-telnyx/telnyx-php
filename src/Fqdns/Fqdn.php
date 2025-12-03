@@ -6,9 +6,7 @@ namespace Telnyx\Fqdns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type FqdnShape = array{
@@ -22,12 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: string|null,
  * }
  */
-final class Fqdn implements BaseModel, ResponseConverter
+final class Fqdn implements BaseModel
 {
     /** @use SdkModel<FqdnShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

@@ -8,8 +8,8 @@ use Telnyx\AI\Assistants\Tests\Runs\RunListParams;
 use Telnyx\AI\Assistants\Tests\Runs\RunRetrieveParams;
 use Telnyx\AI\Assistants\Tests\Runs\RunTriggerParams;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
+use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface RunsContract
@@ -32,15 +32,13 @@ interface RunsContract
      *
      * @param array<mixed>|RunListParams $params
      *
-     * @return DefaultFlatPagination<TestRunResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $testID,
         array|RunListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): PaginatedTestRunList;
 
     /**
      * @api

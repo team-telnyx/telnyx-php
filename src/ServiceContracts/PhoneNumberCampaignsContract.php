@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PerPagePaginationV2;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\RequestOptions;
 
@@ -44,7 +44,7 @@ interface PhoneNumberCampaignsContract
      * @throws APIException
      */
     public function update(
-        string $campaignPhoneNumber,
+        string $phoneNumber,
         array|PhoneNumberCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign;
@@ -54,14 +54,12 @@ interface PhoneNumberCampaignsContract
      *
      * @param array<mixed>|PhoneNumberCampaignListParams $params
      *
-     * @return PerPagePaginationV2<PhoneNumberCampaign>
-     *
      * @throws APIException
      */
     public function list(
         array|PhoneNumberCampaignListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PerPagePaginationV2;
+    ): PhoneNumberCampaignListResponse;
 
     /**
      * @api

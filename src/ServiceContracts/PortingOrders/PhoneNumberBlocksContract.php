@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 use Telnyx\RequestOptions;
 
 interface PhoneNumberBlocksContract
@@ -34,15 +33,13 @@ interface PhoneNumberBlocksContract
      *
      * @param array<mixed>|PhoneNumberBlockListParams $params
      *
-     * @return DefaultPagination<PortingPhoneNumberBlock>
-     *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
         array|PhoneNumberBlockListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): PhoneNumberBlockListResponse;
 
     /**
      * @api

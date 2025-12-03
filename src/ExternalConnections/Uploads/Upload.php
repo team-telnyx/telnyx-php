@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
 use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
@@ -24,12 +22,10 @@ use Telnyx\ExternalConnections\Uploads\Upload\Status;
  *   tn_upload_entries?: list<TnUploadEntry>|null,
  * }
  */
-final class Upload implements BaseModel, ResponseConverter
+final class Upload implements BaseModel
 {
     /** @use SdkModel<UploadShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<value-of<AvailableUsage>>|null $available_usages */
     #[Api(list: AvailableUsage::class, optional: true)]

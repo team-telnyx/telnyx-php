@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
+use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,6 +37,6 @@ final class NotificationEventsTest extends TestCase
         $result = $this->client->notificationEvents->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(NotificationEventListResponse::class, $result);
     }
 }

@@ -6,10 +6,9 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
-use Telnyx\MobilePushCredentials\PushCredential;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsContract;
@@ -41,7 +40,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
         return $this->client->request(
             method: 'post',
             path: 'mobile_push_credentials',
-            body: (object) $parsed['createMobilePushCredentialRequest'],
+            body: (object) $parsed,
             options: $options,
             convert: PushCredentialResponse::class,
         );
@@ -77,14 +76,12 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *   page?: array{number?: int, size?: int},
      * }|MobilePushCredentialListParams $params
      *
-     * @return DefaultPagination<PushCredential>
-     *
      * @throws APIException
      */
     public function list(
         array|MobilePushCredentialListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): MobilePushCredentialListResponse {
         [$parsed, $options] = MobilePushCredentialListParams::parseRequest(
             $params,
             $requestOptions,
@@ -96,8 +93,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
             path: 'mobile_push_credentials',
             query: $parsed,
             options: $options,
-            convert: PushCredential::class,
-            page: DefaultPagination::class,
+            convert: MobilePushCredentialListResponse::class,
         );
     }
 

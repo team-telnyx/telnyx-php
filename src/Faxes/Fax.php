@@ -6,9 +6,7 @@ namespace Telnyx\Faxes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Faxes\Fax\Direction;
 use Telnyx\Faxes\Fax\Quality;
 use Telnyx\Faxes\Fax\RecordType;
@@ -37,12 +35,10 @@ use Telnyx\Faxes\Fax\Status;
  *   webhook_url?: string|null,
  * }
  */
-final class Fax implements BaseModel, ResponseConverter
+final class Fax implements BaseModel
 {
     /** @use SdkModel<FaxShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the type of resource.

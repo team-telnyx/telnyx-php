@@ -6,9 +6,7 @@ namespace Telnyx\Portouts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\PortoutDetails\Status;
 
 /**
@@ -42,12 +40,10 @@ use Telnyx\Portouts\PortoutDetails\Status;
  *   zip?: string|null,
  * }
  */
-final class PortoutDetails implements BaseModel, ResponseConverter
+final class PortoutDetails implements BaseModel
 {
     /** @use SdkModel<PortoutDetailsShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;

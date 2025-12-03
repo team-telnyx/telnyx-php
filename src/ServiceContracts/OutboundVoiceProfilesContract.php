@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
@@ -58,14 +57,12 @@ interface OutboundVoiceProfilesContract
      *
      * @param array<mixed>|OutboundVoiceProfileListParams $params
      *
-     * @return DefaultPagination<OutboundVoiceProfile>
-     *
      * @throws APIException
      */
     public function list(
         array|OutboundVoiceProfileListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): OutboundVoiceProfileListResponse;
 
     /**
      * @api

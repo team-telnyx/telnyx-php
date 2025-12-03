@@ -21,7 +21,7 @@ interface DefaultGatewayContract
      * @throws APIException
      */
     public function create(
-        string $networkIdentifier,
+        string $id,
         array|DefaultGatewayCreateParams $params,
         ?RequestOptions $requestOptions = null,
     ): DefaultGatewayNewResponse;

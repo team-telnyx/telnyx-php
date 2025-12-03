@@ -7,13 +7,13 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\McpServers\McpServerCreateParams;
 use Telnyx\AI\McpServers\McpServerGetResponse;
 use Telnyx\AI\McpServers\McpServerListParams;
-use Telnyx\AI\McpServers\McpServerListResponse;
+use Telnyx\AI\McpServers\McpServerListResponseItem;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateParams;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersContract;
 
@@ -124,14 +124,14 @@ final class McpServersService implements McpServersContract
      *   page_number_?: int, page_size_?: int, type?: string, url?: string
      * }|McpServerListParams $params
      *
-     * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
+     * @return list<McpServerListResponseItem>
      *
      * @throws APIException
      */
     public function list(
         array|McpServerListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultFlatPaginationTopLevelArray {
+    ): array {
         [$parsed, $options] = McpServerListParams::parseRequest(
             $params,
             $requestOptions,
@@ -143,8 +143,7 @@ final class McpServersService implements McpServersContract
             path: 'ai/mcp_servers',
             query: $parsed,
             options: $options,
-            convert: McpServerListResponse::class,
-            page: DefaultFlatPaginationTopLevelArray::class,
+            convert: new ListOf(McpServerListResponseItem::class),
         );
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
 use Telnyx\RequestOptions;
@@ -17,12 +16,10 @@ interface DocumentLinksContract
      *
      * @param array<mixed>|DocumentLinkListParams $params
      *
-     * @return DefaultPagination<DocumentLinkListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|DocumentLinkListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): DocumentLinkListResponse;
 }

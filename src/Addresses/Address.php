@@ -6,9 +6,7 @@ namespace Telnyx\Addresses;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AddressShape = array{
@@ -33,12 +31,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   validate_address?: bool|null,
  * }
  */
-final class Address implements BaseModel, ResponseConverter
+final class Address implements BaseModel
 {
     /** @use SdkModel<AddressShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Uniquely identifies the address.

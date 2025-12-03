@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\Rooms\RoomGetResponse;
+use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -85,7 +85,7 @@ final class RoomsTest extends TestCase
         $result = $this->client->rooms->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(RoomListResponse::class, $result);
     }
 
     #[Test]

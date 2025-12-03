@@ -30,7 +30,7 @@ final class DefaultGatewayService implements DefaultGatewayContract
      * @throws APIException
      */
     public function create(
-        string $networkIdentifier,
+        string $id,
         array|DefaultGatewayCreateParams $params,
         ?RequestOptions $requestOptions = null,
     ): DefaultGatewayNewResponse {
@@ -42,7 +42,7 @@ final class DefaultGatewayService implements DefaultGatewayContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
-            path: ['networks/%1$s/default_gateway', $networkIdentifier],
+            path: ['networks/%1$s/default_gateway', $id],
             body: (object) $parsed,
             options: $options,
             convert: DefaultGatewayNewResponse::class,

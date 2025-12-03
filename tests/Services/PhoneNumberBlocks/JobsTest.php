@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -52,7 +52,7 @@ final class JobsTest extends TestCase
         $result = $this->client->phoneNumberBlocks->jobs->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(JobListResponse::class, $result);
     }
 
     #[Test]

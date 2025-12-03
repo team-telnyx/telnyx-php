@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -38,6 +38,7 @@ final class WireguardInterfacesTest extends TestCase
         }
 
         $result = $this->client->wireguardInterfaces->create([
+            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'region_code' => 'ashburn-va',
         ]);
 
@@ -53,10 +54,10 @@ final class WireguardInterfacesTest extends TestCase
         }
 
         $result = $this->client->wireguardInterfaces->create([
+            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'region_code' => 'ashburn-va',
             'enable_sip_trunking' => false,
             'name' => 'test interface',
-            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -88,7 +89,7 @@ final class WireguardInterfacesTest extends TestCase
         $result = $this->client->wireguardInterfaces->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(WireguardInterfaceListResponse::class, $result);
     }
 
     #[Test]

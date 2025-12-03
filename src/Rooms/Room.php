@@ -6,9 +6,7 @@ namespace Telnyx\Rooms;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RoomShape = array{
@@ -26,12 +24,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class Room implements BaseModel, ResponseConverter
+final class Room implements BaseModel
 {
     /** @use SdkModel<RoomShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A unique identifier for the room.

@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::bridge()
  *
  * @phpstan-type ActionBridgeParamsShape = array{
- *   call_control_id_to_bridge_with: string,
+ *   call_control_id: string,
  *   client_state?: string,
  *   command_id?: string,
  *   mute_dtmf?: MuteDtmf|value-of<MuteDtmf>,
@@ -57,7 +57,7 @@ final class ActionBridgeParams implements BaseModel
      * The Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter.
      */
     #[Api]
-    public string $call_control_id_to_bridge_with;
+    public string $call_control_id;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -180,13 +180,13 @@ final class ActionBridgeParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ActionBridgeParams::with(call_control_id_to_bridge_with: ...)
+     * ActionBridgeParams::with(call_control_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ActionBridgeParams)->withCallControlIDToBridgeWith(...)
+     * (new ActionBridgeParams)->withCallControlID(...)
      * ```
      */
     public function __construct()
@@ -208,7 +208,7 @@ final class ActionBridgeParams implements BaseModel
      * @param Ringtone|value-of<Ringtone> $ringtone
      */
     public static function with(
-        string $call_control_id_to_bridge_with,
+        string $call_control_id,
         ?string $client_state = null,
         ?string $command_id = null,
         MuteDtmf|string|null $mute_dtmf = null,
@@ -229,7 +229,7 @@ final class ActionBridgeParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id_to_bridge_with = $call_control_id_to_bridge_with;
+        $obj->call_control_id = $call_control_id;
 
         null !== $client_state && $obj->client_state = $client_state;
         null !== $command_id && $obj->command_id = $command_id;
@@ -255,11 +255,10 @@ final class ActionBridgeParams implements BaseModel
     /**
      * The Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter.
      */
-    public function withCallControlIDToBridgeWith(
-        string $callControlIDToBridgeWith
-    ): self {
+    public function withCallControlID(string $callControlID): self
+    {
         $obj = clone $this;
-        $obj->call_control_id_to_bridge_with = $callControlIDToBridgeWith;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
