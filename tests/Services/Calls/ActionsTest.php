@@ -85,7 +85,7 @@ final class ActionsTest extends TestCase
         $result = $this->client->calls->actions->bridge(
             'call_control_id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'call_control_id_to_bridge_with' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             ],
         );
 
@@ -103,7 +103,7 @@ final class ActionsTest extends TestCase
         $result = $this->client->calls->actions->bridge(
             'call_control_id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'call_control_id_to_bridge_with' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
                 'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
                 'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'mute_dtmf' => 'opposite',
@@ -191,17 +191,7 @@ final class ActionsTest extends TestCase
             'call_control_id',
             [
                 'parameters' => [
-                    'properties' => [
-                        'age' => [
-                            'description' => 'The age of the customer.', 'type' => 'integer',
-                        ],
-                        'location' => [
-                            'description' => 'The location of the customer.',
-                            'type' => 'string',
-                        ],
-                    ],
-                    'required' => ['age', 'location'],
-                    'type' => 'object',
+                    'properties' => 'bar', 'required' => 'bar', 'type' => 'bar',
                 ],
             ],
         );
@@ -221,17 +211,7 @@ final class ActionsTest extends TestCase
             'call_control_id',
             [
                 'parameters' => [
-                    'properties' => [
-                        'age' => [
-                            'description' => 'The age of the customer.', 'type' => 'integer',
-                        ],
-                        'location' => [
-                            'description' => 'The location of the customer.',
-                            'type' => 'string',
-                        ],
-                    ],
-                    'required' => ['age', 'location'],
-                    'type' => 'object',
+                    'properties' => 'bar', 'required' => 'bar', 'type' => 'bar',
                 ],
                 'assistant' => [
                     'instructions' => 'You are a friendly voice assistant.',

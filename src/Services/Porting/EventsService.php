@@ -6,6 +6,7 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
 use Telnyx\Porting\Events\EventListResponse;
@@ -55,12 +56,14 @@ final class EventsService implements EventsContract
      *   page?: array{number?: int, size?: int},
      * }|EventListParams $params
      *
+     * @return DefaultPagination<EventListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|EventListParams $params,
         ?RequestOptions $requestOptions = null
-    ): EventListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = EventListParams::parseRequest(
             $params,
             $requestOptions,
@@ -73,6 +76,7 @@ final class EventsService implements EventsContract
             query: $parsed,
             options: $options,
             convert: EventListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

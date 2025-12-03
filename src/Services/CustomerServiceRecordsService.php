@@ -6,13 +6,14 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomerServiceRecordsContract;
 
@@ -106,12 +107,14 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *   sort?: array{value?: 'created_at'|'-created_at'},
      * }|CustomerServiceRecordListParams $params
      *
+     * @return DefaultPagination<CustomerServiceRecord>
+     *
      * @throws APIException
      */
     public function list(
         array|CustomerServiceRecordListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CustomerServiceRecordListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = CustomerServiceRecordListParams::parseRequest(
             $params,
             $requestOptions,
@@ -123,7 +126,8 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
             path: 'customer_service_records',
             query: $parsed,
             options: $options,
-            convert: CustomerServiceRecordListResponse::class,
+            convert: CustomerServiceRecord::class,
+            page: DefaultPagination::class,
         );
     }
 

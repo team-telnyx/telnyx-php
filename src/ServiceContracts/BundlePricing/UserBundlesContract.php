@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\BundlePricing;
 
+use Telnyx\BundlePricing\UserBundles\UserBundle;
 use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
@@ -11,12 +12,12 @@ use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
-use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface UserBundlesContract
@@ -51,12 +52,14 @@ interface UserBundlesContract
      *
      * @param array<mixed>|UserBundleListParams $params
      *
+     * @return DefaultPagination<UserBundle>
+     *
      * @throws APIException
      */
     public function list(
         array|UserBundleListParams $params,
         ?RequestOptions $requestOptions = null
-    ): UserBundleListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

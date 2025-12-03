@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Addresses\AddressListParams;
 
 use Telnyx\Addresses\AddressListParams\Filter\AddressBook;
-use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\UnionMember1;
+use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\CustomerReferenceMatcher;
 use Telnyx\Addresses\AddressListParams\Filter\StreetAddress;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type FilterShape = array{
  *   address_book?: AddressBook|null,
- *   customer_reference?: string|null|UnionMember1,
+ *   customer_reference?: string|null|CustomerReferenceMatcher,
  *   street_address?: StreetAddress|null,
  *   used_as_emergency?: string|null,
  * }
@@ -33,7 +33,7 @@ final class Filter implements BaseModel
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      */
     #[Api(optional: true)]
-    public string|UnionMember1|null $customer_reference;
+    public string|CustomerReferenceMatcher|null $customer_reference;
 
     #[Api(optional: true)]
     public ?StreetAddress $street_address;
@@ -56,7 +56,7 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?AddressBook $address_book = null,
-        string|UnionMember1|null $customer_reference = null,
+        string|CustomerReferenceMatcher|null $customer_reference = null,
         ?StreetAddress $street_address = null,
         ?string $used_as_emergency = null,
     ): self {
@@ -82,7 +82,7 @@ final class Filter implements BaseModel
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      */
     public function withCustomerReference(
-        string|UnionMember1 $customerReference
+        string|CustomerReferenceMatcher $customerReference
     ): self {
         $obj = clone $this;
         $obj->customer_reference = $customerReference;

@@ -6,6 +6,8 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
@@ -17,7 +19,6 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
-use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderMisc;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration;
@@ -267,12 +268,14 @@ final class PortingOrdersService implements PortingOrdersContract
      *   },
      * }|PortingOrderListParams $params
      *
+     * @return DefaultPagination<PortingOrder>
+     *
      * @throws APIException
      */
     public function list(
         array|PortingOrderListParams $params,
         ?RequestOptions $requestOptions = null
-    ): PortingOrderListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = PortingOrderListParams::parseRequest(
             $params,
             $requestOptions,
@@ -284,7 +287,8 @@ final class PortingOrdersService implements PortingOrdersContract
             path: 'porting_orders',
             query: $parsed,
             options: $options,
-            convert: PortingOrderListResponse::class,
+            convert: PortingOrder::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -388,13 +392,15 @@ final class PortingOrdersService implements PortingOrdersContract
      *   page?: array{number?: int, size?: int}
      * }|PortingOrderRetrieveRequirementsParams $params
      *
+     * @return DefaultPagination<PortingOrderGetRequirementsResponse>
+     *
      * @throws APIException
      */
     public function retrieveRequirements(
         string $id,
         array|PortingOrderRetrieveRequirementsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PortingOrderGetRequirementsResponse {
+    ): DefaultPagination {
         [$parsed, $options] = PortingOrderRetrieveRequirementsParams::parseRequest(
             $params,
             $requestOptions,
@@ -407,6 +413,7 @@ final class PortingOrdersService implements PortingOrdersContract
             query: $parsed,
             options: $options,
             convert: PortingOrderGetRequirementsResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

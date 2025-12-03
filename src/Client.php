@@ -43,7 +43,7 @@ use Telnyx\Services\DocumentLinksService;
 use Telnyx\Services\DocumentsService;
 use Telnyx\Services\DynamicEmergencyAddressesService;
 use Telnyx\Services\DynamicEmergencyEndpointsService;
-use Telnyx\Services\EnumService;
+use Telnyx\Services\EnumerationService;
 use Telnyx\Services\ExternalConnectionsService;
 use Telnyx\Services\FaxApplicationsService;
 use Telnyx\Services\FaxesService;
@@ -167,6 +167,10 @@ use Telnyx\Services\WirelessService;
 class Client extends BaseClient
 {
     public string $apiKey;
+
+    public string $clientID;
+
+    public string $clientSecret;
 
     public string $publicKey;
 
@@ -380,7 +384,7 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public EnumService $enum;
+    public EnumerationService $enumeration;
 
     /**
      * @api
@@ -954,10 +958,14 @@ class Client extends BaseClient
 
     public function __construct(
         ?string $apiKey = null,
+        ?string $clientID = null,
+        ?string $clientSecret = null,
         ?string $publicKey = null,
-        ?string $baseUrl = null
+        ?string $baseUrl = null,
     ) {
         $this->apiKey = (string) ($apiKey ?? getenv('TELNYX_API_KEY'));
+        $this->clientID = (string) ($clientID ?? getenv('TELNYX_CLIENT_ID'));
+        $this->clientSecret = (string) ($clientSecret ?? getenv('TELNYX_CLIENT_SECRET'));
         $this->publicKey = (string) ($publicKey ?? getenv('TELNYX_PUBLIC_KEY'));
 
         $this->baseUrlOverridden = !is_null($baseUrl);
@@ -1030,7 +1038,7 @@ class Client extends BaseClient
         $this->documents = new DocumentsService($this);
         $this->dynamicEmergencyAddresses = new DynamicEmergencyAddressesService($this);
         $this->dynamicEmergencyEndpoints = new DynamicEmergencyEndpointsService($this);
-        $this->enum = new EnumService($this);
+        $this->enumeration = new EnumerationService($this);
         $this->externalConnections = new ExternalConnectionsService($this);
         $this->faxApplications = new FaxApplicationsService($this);
         $this->faxes = new FaxesService($this);
@@ -1148,8 +1156,14 @@ class Client extends BaseClient
     }
 
     /** @return array<string,string> */
-    protected function authHeaders(): array
+    protected function bearerAuth(): array
     {
         return $this->apiKey ? ['Authorization' => "Bearer {$this->apiKey}"] : [];
+    }
+
+    /** @return array<string,string> */
+    protected function oauthClientAuth(): array
+    {
+        throw new \BadMethodCallException;
     }
 }

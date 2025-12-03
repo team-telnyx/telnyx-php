@@ -9,10 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data;
 
 /**
- * @phpstan-type MobileVoiceConnectionGetResponseShape = array{data?: Data|null}
+ * @phpstan-type MobileVoiceConnectionGetResponseShape = array{
+ *   data?: MobileVoiceConnection|null
+ * }
  */
 final class MobileVoiceConnectionGetResponse implements BaseModel, ResponseConverter
 {
@@ -22,7 +23,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel, ResponseConve
     use SdkResponse;
 
     #[Api(optional: true)]
-    public ?Data $data;
+    public ?MobileVoiceConnection $data;
 
     public function __construct()
     {
@@ -34,7 +35,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel, ResponseConve
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Data $data = null): self
+    public static function with(?MobileVoiceConnection $data = null): self
     {
         $obj = new self;
 
@@ -43,7 +44,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel, ResponseConve
         return $obj;
     }
 
-    public function withData(Data $data): self
+    public function withData(MobileVoiceConnection $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

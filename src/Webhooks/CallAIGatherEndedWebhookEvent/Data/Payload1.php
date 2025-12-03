@@ -19,7 +19,7 @@ use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\Status;
  *   connection_id?: string|null,
  *   from?: string|null,
  *   message_history?: list<MessageHistory>|null,
- *   result?: mixed,
+ *   result?: array<string,mixed>|null,
  *   status?: value-of<Status>|null,
  *   to?: string|null,
  * }
@@ -75,9 +75,11 @@ final class Payload implements BaseModel
 
     /**
      * The result of the AI gather, its type depends of the `parameters` provided in the command.
+     *
+     * @var array<string,mixed>|null $result
      */
-    #[Api(optional: true)]
-    public mixed $result;
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $result;
 
     /**
      * Reflects how command ended.
@@ -104,6 +106,7 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MessageHistory> $message_history
+     * @param array<string,mixed> $result
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -114,7 +117,7 @@ final class Payload implements BaseModel
         ?string $connection_id = null,
         ?string $from = null,
         ?array $message_history = null,
-        mixed $result = null,
+        ?array $result = null,
         Status|string|null $status = null,
         ?string $to = null,
     ): self {
@@ -215,8 +218,10 @@ final class Payload implements BaseModel
 
     /**
      * The result of the AI gather, its type depends of the `parameters` provided in the command.
+     *
+     * @param array<string,mixed> $result
      */
-    public function withResult(mixed $result): self
+    public function withResult(array $result): self
     {
         $obj = clone $this;
         $obj->result = $result;

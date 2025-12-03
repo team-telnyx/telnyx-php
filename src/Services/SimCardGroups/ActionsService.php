@@ -6,18 +6,19 @@ namespace Telnyx\Services\SimCardGroups;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
 use Telnyx\SimCardGroups\Actions\ActionGetResponse;
 use Telnyx\SimCardGroups\Actions\ActionListParams;
 use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
-use Telnyx\SimCardGroups\Actions\ActionListResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemovePrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemoveWirelessBlocklistResponse;
 use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayParams;
 use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistParams;
 use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistResponse;
+use Telnyx\SimCardGroups\Actions\SimCardGroupAction;
 
 final class ActionsService implements ActionsContract
 {
@@ -59,12 +60,14 @@ final class ActionsService implements ActionsContract
      *   page_size_?: int,
      * }|ActionListParams $params
      *
+     * @return DefaultFlatPagination<SimCardGroupAction>
+     *
      * @throws APIException
      */
     public function list(
         array|ActionListParams $params,
         ?RequestOptions $requestOptions = null
-    ): ActionListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = ActionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -76,7 +79,8 @@ final class ActionsService implements ActionsContract
             path: 'sim_card_group_actions',
             query: $parsed,
             options: $options,
-            convert: ActionListResponse::class,
+            convert: SimCardGroupAction::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

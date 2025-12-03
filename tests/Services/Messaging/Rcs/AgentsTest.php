@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
+use Telnyx\DefaultPagination;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Tests\UnsupportedMockTests;
 
@@ -64,6 +64,6 @@ final class AgentsTest extends TestCase
         $result = $this->client->messaging->rcs->agents->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AgentListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 }

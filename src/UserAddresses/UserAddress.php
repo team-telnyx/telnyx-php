@@ -6,7 +6,9 @@ namespace Telnyx\UserAddresses;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UserAddressShape = array{
@@ -29,10 +31,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   updated_at?: string|null,
  * }
  */
-final class UserAddress implements BaseModel
+final class UserAddress implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<UserAddressShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies the user address.

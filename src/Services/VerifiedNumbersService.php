@@ -6,13 +6,14 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
 use Telnyx\Services\VerifiedNumbers\ActionsService;
+use Telnyx\VerifiedNumbers\VerifiedNumber;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
-use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 final class VerifiedNumbersService implements VerifiedNumbersContract
@@ -88,15 +89,17 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Gets a paginated list of Verified Numbers.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
+     *   page_number_?: int, page_size_?: int
      * }|VerifiedNumberListParams $params
+     *
+     * @return DefaultFlatPagination<VerifiedNumber>
      *
      * @throws APIException
      */
     public function list(
         array|VerifiedNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerifiedNumberListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = VerifiedNumberListParams::parseRequest(
             $params,
             $requestOptions,
@@ -108,7 +111,8 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
             path: 'verified_numbers',
             query: $parsed,
             options: $options,
-            convert: VerifiedNumberListResponse::class,
+            convert: VerifiedNumber::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

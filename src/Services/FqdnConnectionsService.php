@@ -10,11 +10,12 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
+use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams;
-use Telnyx\FqdnConnections\FqdnConnectionListResponse;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateParams;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
@@ -245,12 +246,14 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *   sort?: 'created_at'|'connection_name'|'active',
      * }|FqdnConnectionListParams $params
      *
+     * @return DefaultPagination<FqdnConnection>
+     *
      * @throws APIException
      */
     public function list(
         array|FqdnConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FqdnConnectionListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = FqdnConnectionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -262,7 +265,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
             path: 'fqdn_connections',
             query: $parsed,
             options: $options,
-            convert: FqdnConnectionListResponse::class,
+            convert: FqdnConnection::class,
+            page: DefaultPagination::class,
         );
     }
 

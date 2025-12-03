@@ -7,7 +7,9 @@ namespace Telnyx\AI\Conversations\InsightGroups;
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InsightTemplateGroupShape = array{
@@ -19,10 +21,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   webhook?: string|null,
  * }
  */
-final class InsightTemplateGroup implements BaseModel
+final class InsightTemplateGroup implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<InsightTemplateGroupShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public string $id;

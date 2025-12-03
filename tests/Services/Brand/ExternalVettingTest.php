@@ -5,7 +5,7 @@ namespace Tests\Services\Brand;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
+use Telnyx\Brand\ExternalVetting\ExternalVettingImportsResponse;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
@@ -42,29 +42,29 @@ final class ExternalVettingTest extends TestCase
     }
 
     #[Test]
-    public function testImport(): void
+    public function testImports(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->externalVetting->import(
+        $result = $this->client->brand->externalVetting->imports(
             'brandId',
             ['evpId' => 'evpId', 'vettingId' => 'vettingId']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingImportResponse::class, $result);
+        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
     }
 
     #[Test]
-    public function testImportWithOptionalParams(): void
+    public function testImportsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->externalVetting->import(
+        $result = $this->client->brand->externalVetting->imports(
             'brandId',
             [
                 'evpId' => 'evpId',
@@ -74,7 +74,7 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingImportResponse::class, $result);
+        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
     }
 
     #[Test]

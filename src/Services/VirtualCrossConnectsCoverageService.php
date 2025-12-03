@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageContract;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
@@ -36,12 +37,14 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
      *   page?: array{number?: int, size?: int},
      * }|VirtualCrossConnectsCoverageListParams $params
      *
+     * @return DefaultPagination<VirtualCrossConnectsCoverageListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|VirtualCrossConnectsCoverageListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VirtualCrossConnectsCoverageListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = VirtualCrossConnectsCoverageListParams::parseRequest(
             $params,
             $requestOptions,
@@ -54,6 +57,7 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
             query: $parsed,
             options: $options,
             convert: VirtualCrossConnectsCoverageListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

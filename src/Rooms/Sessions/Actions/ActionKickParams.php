@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants;
-use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
+use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
 
 /**
  * Kick participants from a room session.
@@ -18,7 +18,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
  *
  * @phpstan-type ActionKickParamsShape = array{
  *   exclude?: list<string>,
- *   participants?: UnionMember0|list<string>|value-of<UnionMember0>,
+ *   participants?: AllParticipants|list<string>|value-of<AllParticipants>,
  * }
  */
 final class ActionKickParams implements BaseModel
@@ -38,7 +38,7 @@ final class ActionKickParams implements BaseModel
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @var list<string>|value-of<UnionMember0>|null $participants
+     * @var list<string>|value-of<AllParticipants>|null $participants
      */
     #[Api(union: Participants::class, optional: true)]
     public array|string|null $participants;
@@ -54,11 +54,11 @@ final class ActionKickParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $exclude
-     * @param UnionMember0|list<string>|value-of<UnionMember0> $participants
+     * @param AllParticipants|list<string>|value-of<AllParticipants> $participants
      */
     public static function with(
         ?array $exclude = null,
-        UnionMember0|array|string|null $participants = null
+        AllParticipants|array|string|null $participants = null
     ): self {
         $obj = new self;
 
@@ -84,10 +84,10 @@ final class ActionKickParams implements BaseModel
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @param UnionMember0|list<string>|value-of<UnionMember0> $participants
+     * @param AllParticipants|list<string>|value-of<AllParticipants> $participants
      */
     public function withParticipants(
-        UnionMember0|array|string $participants
+        AllParticipants|array|string $participants
     ): self {
         $obj = clone $this;
         $obj['participants'] = $participants;

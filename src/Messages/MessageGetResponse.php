@@ -9,7 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
+use Telnyx\InboundMessagePayload;
+use Telnyx\Messages\MessageGetResponse\Data;
 
 /**
  * @phpstan-type MessageGetResponseShape = array{
@@ -23,7 +24,7 @@ final class MessageGetResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    #[Api(optional: true)]
+    #[Api(union: Data::class, optional: true)]
     public OutboundMessagePayload|InboundMessagePayload|null $data;
 
     public function __construct()

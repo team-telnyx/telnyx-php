@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
@@ -19,13 +20,15 @@ interface VerificationCodesContract
      *
      * @param array<mixed>|VerificationCodeListParams $params
      *
+     * @return DefaultPagination<VerificationCodeListResponse>
+     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|VerificationCodeListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerificationCodeListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

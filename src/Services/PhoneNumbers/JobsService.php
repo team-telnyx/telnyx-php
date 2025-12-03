@@ -6,15 +6,16 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
 use Telnyx\PhoneNumbers\Jobs\JobListParams;
-use Telnyx\PhoneNumbers\Jobs\JobListResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
+use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
 use Telnyx\PhoneNumbers\Voice\CnamListing;
@@ -62,12 +63,14 @@ final class JobsService implements JobsContract
      *   sort?: 'created_at',
      * }|JobListParams $params
      *
+     * @return DefaultPagination<PhoneNumbersJob>
+     *
      * @throws APIException
      */
     public function list(
         array|JobListParams $params,
         ?RequestOptions $requestOptions = null
-    ): JobListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = JobListParams::parseRequest(
             $params,
             $requestOptions,
@@ -79,7 +82,8 @@ final class JobsService implements JobsContract
             path: 'phone_numbers/jobs',
             query: $parsed,
             options: $options,
-            convert: JobListResponse::class,
+            convert: PhoneNumbersJob::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListParams;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
@@ -42,10 +43,12 @@ interface MobilePhoneNumbersContract
      *
      * @param array<mixed>|MobilePhoneNumberListParams $params
      *
+     * @return DefaultFlatPagination<MobilePhoneNumber>
+     *
      * @throws APIException
      */
     public function list(
         array|MobilePhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MobilePhoneNumberListResponse;
+    ): DefaultFlatPagination;
 }

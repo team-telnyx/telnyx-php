@@ -6,7 +6,9 @@ namespace Telnyx\MessagingProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
 use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
 
@@ -33,10 +35,12 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *   whitelisted_destinations?: list<string>|null,
  * }
  */
-final class MessagingProfile implements BaseModel
+final class MessagingProfile implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<MessagingProfileShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the type of resource.

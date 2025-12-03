@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams;
-use Telnyx\ShortCodes\ShortCodeListResponse;
 use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
@@ -42,10 +43,12 @@ interface ShortCodesContract
      *
      * @param array<mixed>|ShortCodeListParams $params
      *
+     * @return DefaultPagination<ShortCode>
+     *
      * @throws APIException
      */
     public function list(
         array|ShortCodeListParams $params,
         ?RequestOptions $requestOptions = null
-    ): ShortCodeListResponse;
+    ): DefaultPagination;
 }

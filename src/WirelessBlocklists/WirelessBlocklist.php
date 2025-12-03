@@ -6,7 +6,9 @@ namespace Telnyx\WirelessBlocklists;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
 
 /**
@@ -20,10 +22,12 @@ use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
  *   values?: list<string>|null,
  * }
  */
-final class WirelessBlocklist implements BaseModel
+final class WirelessBlocklist implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<WirelessBlocklistShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the resource.

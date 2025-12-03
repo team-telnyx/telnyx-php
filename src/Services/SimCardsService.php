@@ -6,6 +6,8 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsContract;
 use Telnyx\Services\SimCards\ActionsService;
@@ -16,13 +18,13 @@ use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams;
-use Telnyx\SimCards\SimCardListResponse;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsParams;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardRetrieveParams;
 use Telnyx\SimCards\SimCardUpdateParams;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Telnyx\SimCardStatus;
+use Telnyx\SimpleSimCard;
 
 final class SimCardsService implements SimCardsContract
 {
@@ -89,7 +91,7 @@ final class SimCardsService implements SimCardsContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $simCardID,
         array|SimCardUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): SimCardUpdateResponse {
@@ -101,7 +103,7 @@ final class SimCardsService implements SimCardsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['sim_cards/%1$s', $id],
+            path: ['sim_cards/%1$s', $simCardID],
             body: (object) $parsed,
             options: $options,
             convert: SimCardUpdateResponse::class,
@@ -125,12 +127,14 @@ final class SimCardsService implements SimCardsContract
      *   sort?: 'current_billing_period_consumed_data.amount',
      * }|SimCardListParams $params
      *
+     * @return DefaultPagination<SimpleSimCard>
+     *
      * @throws APIException
      */
     public function list(
         array|SimCardListParams $params,
         ?RequestOptions $requestOptions = null
-    ): SimCardListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = SimCardListParams::parseRequest(
             $params,
             $requestOptions,
@@ -142,7 +146,8 @@ final class SimCardsService implements SimCardsContract
             path: 'sim_cards',
             query: $parsed,
             options: $options,
-            convert: SimCardListResponse::class,
+            convert: SimpleSimCard::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -247,13 +252,15 @@ final class SimCardsService implements SimCardsContract
      *   page_number_?: int, page_size_?: int
      * }|SimCardListWirelessConnectivityLogsParams $params
      *
+     * @return DefaultFlatPagination<SimCardListWirelessConnectivityLogsResponse>
+     *
      * @throws APIException
      */
     public function listWirelessConnectivityLogs(
         string $id,
         array|SimCardListWirelessConnectivityLogsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SimCardListWirelessConnectivityLogsResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = SimCardListWirelessConnectivityLogsParams::parseRequest(
             $params,
             $requestOptions,
@@ -266,6 +273,7 @@ final class SimCardsService implements SimCardsContract
             query: $parsed,
             options: $options,
             convert: SimCardListWirelessConnectivityLogsResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

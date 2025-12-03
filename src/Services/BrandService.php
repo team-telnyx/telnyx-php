@@ -19,6 +19,7 @@ use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BrandContract;
 use Telnyx\Services\Brand\ExternalVettingService;
@@ -183,12 +184,14 @@ final class BrandService implements BrandContract
      *   tcrBrandId?: string,
      * }|BrandListParams $params
      *
+     * @return PerPagePaginationV2<BrandListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|BrandListParams $params,
         ?RequestOptions $requestOptions = null
-    ): BrandListResponse {
+    ): PerPagePaginationV2 {
         [$parsed, $options] = BrandListParams::parseRequest(
             $params,
             $requestOptions,
@@ -201,6 +204,7 @@ final class BrandService implements BrandContract
             query: $parsed,
             options: $options,
             convert: BrandListResponse::class,
+            page: PerPagePaginationV2::class,
         );
     }
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AuthenticationProviders;
 
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Page;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -17,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AuthenticationProvidersService::list()
  *
  * @phpstan-type AuthenticationProviderListParamsShape = array{
- *   page?: Page, sort?: Sort|value-of<Sort>
+ *   page_number_?: int, page_size_?: int, sort?: Sort|value-of<Sort>
  * }
  */
 final class AuthenticationProviderListParams implements BaseModel
@@ -26,11 +25,11 @@ final class AuthenticationProviderListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Api(optional: true)]
-    public ?Page $page;
+    public ?int $page_number_;
+
+    #[Api(optional: true)]
+    public ?int $page_size_;
 
     /**
      * Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
@@ -63,24 +62,31 @@ final class AuthenticationProviderListParams implements BaseModel
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Page $page = null,
+        ?int $page_number_ = null,
+        ?int $page_size_ = null,
         Sort|string|null $sort = null
     ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page_number_ && $obj->page_number_ = $page_number_;
+        null !== $page_size_ && $obj->page_size_ = $page_size_;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj->page_number_ = $pageNumber;
+
+        return $obj;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $obj = clone $this;
+        $obj->page_size_ = $pageSize;
 
         return $obj;
     }

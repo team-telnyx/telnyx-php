@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
-use Telnyx\Recordings\RecordingListResponse;
+use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 
 interface RecordingsContract
@@ -28,12 +29,14 @@ interface RecordingsContract
      *
      * @param array<mixed>|RecordingListParams $params
      *
+     * @return DefaultPagination<RecordingResponseData>
+     *
      * @throws APIException
      */
     public function list(
         array|RecordingListParams $params,
         ?RequestOptions $requestOptions = null
-    ): RecordingListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

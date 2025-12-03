@@ -6,10 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
-use Telnyx\Recordings\RecordingListResponse;
+use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsContract;
 use Telnyx\Services\Recordings\ActionsService;
@@ -68,12 +69,14 @@ final class RecordingsService implements RecordingsContract
      *   page?: array{number?: int, size?: int},
      * }|RecordingListParams $params
      *
+     * @return DefaultPagination<RecordingResponseData>
+     *
      * @throws APIException
      */
     public function list(
         array|RecordingListParams $params,
         ?RequestOptions $requestOptions = null
-    ): RecordingListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = RecordingListParams::parseRequest(
             $params,
             $requestOptions,
@@ -85,7 +88,8 @@ final class RecordingsService implements RecordingsContract
             path: 'recordings',
             query: $parsed,
             options: $options,
-            convert: RecordingListResponse::class,
+            convert: RecordingResponseData::class,
+            page: DefaultPagination::class,
         );
     }
 

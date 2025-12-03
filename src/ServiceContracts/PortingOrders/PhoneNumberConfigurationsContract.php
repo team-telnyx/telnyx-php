@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
@@ -30,10 +31,12 @@ interface PhoneNumberConfigurationsContract
      *
      * @param array<mixed>|PhoneNumberConfigurationListParams $params
      *
+     * @return DefaultPagination<PhoneNumberConfigurationListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|PhoneNumberConfigurationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberConfigurationListResponse;
+    ): DefaultPagination;
 }

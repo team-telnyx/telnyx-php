@@ -13,6 +13,7 @@ use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\AI\Clusters\ClusterRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
 
@@ -59,14 +60,16 @@ final class ClustersService implements ClustersContract
      *
      * List all clusters
      *
-     * @param array{page?: array{number?: int, size?: int}}|ClusterListParams $params
+     * @param array{page_number_?: int, page_size_?: int}|ClusterListParams $params
+     *
+     * @return DefaultFlatPagination<ClusterListResponse>
      *
      * @throws APIException
      */
     public function list(
         array|ClusterListParams $params,
         ?RequestOptions $requestOptions = null
-    ): ClusterListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = ClusterListParams::parseRequest(
             $params,
             $requestOptions,
@@ -79,6 +82,7 @@ final class ClustersService implements ClustersContract
             query: $parsed,
             options: $options,
             convert: ClusterListResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -7,11 +7,11 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
-use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignUpdateParams;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface PartnerCampaignsContract
@@ -44,24 +44,28 @@ interface PartnerCampaignsContract
      *
      * @param array<mixed>|PartnerCampaignListParams $params
      *
+     * @return PerPagePaginationV2<TelnyxDownstreamCampaign>
+     *
      * @throws APIException
      */
     public function list(
         array|PartnerCampaignListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PartnerCampaignListResponse;
+    ): PerPagePaginationV2;
 
     /**
      * @api
      *
      * @param array<mixed>|PartnerCampaignListSharedByMeParams $params
      *
+     * @return PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>
+     *
      * @throws APIException
      */
     public function listSharedByMe(
         array|PartnerCampaignListSharedByMeParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PartnerCampaignListSharedByMeResponse;
+    ): PerPagePaginationV2;
 
     /**
      * @api

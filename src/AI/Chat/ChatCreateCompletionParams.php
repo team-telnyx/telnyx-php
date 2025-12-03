@@ -7,7 +7,7 @@ namespace Telnyx\AI\Chat;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Function1;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Attributes\Api;
@@ -40,7 +40,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   stream?: bool,
  *   temperature?: float,
  *   tool_choice?: ToolChoice|value-of<ToolChoice>,
- *   tools?: list<ChatCompletionToolParam|Retrieval>,
+ *   tools?: list<Function1|Retrieval>,
  *   top_logprobs?: int,
  *   top_p?: float,
  *   use_beam_search?: bool,
@@ -173,7 +173,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) for retrieval-augmented generation.
      *
-     * @var list<ChatCompletionToolParam|Retrieval>|null $tools
+     * @var list<Function1|Retrieval>|null $tools
      */
     #[Api(list: Tool::class, optional: true)]
     public ?array $tools;
@@ -224,7 +224,7 @@ final class ChatCreateCompletionParams implements BaseModel
      * @param list<string> $guided_choice
      * @param array<string,mixed> $guided_json
      * @param ToolChoice|value-of<ToolChoice> $tool_choice
-     * @param list<ChatCompletionToolParam|Retrieval> $tools
+     * @param list<Function1|Retrieval> $tools
      */
     public static function with(
         array $messages,
@@ -499,7 +499,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) for retrieval-augmented generation.
      *
-     * @param list<ChatCompletionToolParam|Retrieval> $tools
+     * @param list<Function1|Retrieval> $tools
      */
     public function withTools(array $tools): self
     {

@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsResponse;
-use Telnyx\Reports\ReportListWdrsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -51,6 +51,6 @@ final class ReportsTest extends TestCase
         $result = $this->client->reports->listWdrs([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReportListWdrsResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 }

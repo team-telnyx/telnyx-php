@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsResponse;
 use Telnyx\Reports\ReportListWdrsParams;
@@ -30,10 +31,12 @@ interface ReportsContract
      *
      * @param array<mixed>|ReportListWdrsParams $params
      *
+     * @return DefaultFlatPagination<ReportListWdrsResponse>
+     *
      * @throws APIException
      */
     public function listWdrs(
         array|ReportListWdrsParams $params,
         ?RequestOptions $requestOptions = null
-    ): ReportListWdrsResponse;
+    ): DefaultFlatPagination;
 }

@@ -6,7 +6,9 @@ namespace Telnyx\PortingOrders\PhoneNumberExtensions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange;
 
@@ -21,10 +23,12 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\Exten
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class PortingPhoneNumberExtension implements BaseModel
+final class PortingPhoneNumberExtension implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<PortingPhoneNumberExtensionShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies this porting phone number extension.

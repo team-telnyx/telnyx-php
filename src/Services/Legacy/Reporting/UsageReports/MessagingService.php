@@ -6,12 +6,13 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListParams;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\MessagingContract;
 
@@ -85,12 +86,14 @@ final class MessagingService implements MessagingContract
      *
      * @param array{page?: int, per_page?: int}|MessagingListParams $params
      *
+     * @return PerPagePagination<MdrUsageReportResponseLegacy>
+     *
      * @throws APIException
      */
     public function list(
         array|MessagingListParams $params,
         ?RequestOptions $requestOptions = null
-    ): MessagingListResponse {
+    ): PerPagePagination {
         [$parsed, $options] = MessagingListParams::parseRequest(
             $params,
             $requestOptions,
@@ -102,7 +105,8 @@ final class MessagingService implements MessagingContract
             path: 'legacy/reporting/usage_reports/messaging',
             query: $parsed,
             options: $options,
-            convert: MessagingListResponse::class,
+            convert: MdrUsageReportResponseLegacy::class,
+            page: PerPagePagination::class,
         );
     }
 

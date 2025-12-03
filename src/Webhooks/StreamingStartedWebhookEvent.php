@@ -7,10 +7,11 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\StreamingStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type StreamingStartedWebhookEventShape = array{data?: Data|null}
+ * @phpstan-type StreamingStartedWebhookEventShape = array{
+ *   data?: CallStreamingStarted|null
+ * }
  */
 final class StreamingStartedWebhookEvent implements BaseModel
 {
@@ -18,7 +19,7 @@ final class StreamingStartedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Api(optional: true)]
-    public ?Data $data;
+    public ?CallStreamingStarted $data;
 
     public function __construct()
     {
@@ -30,7 +31,7 @@ final class StreamingStartedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Data $data = null): self
+    public static function with(?CallStreamingStarted $data = null): self
     {
         $obj = new self;
 
@@ -39,7 +40,7 @@ final class StreamingStartedWebhookEvent implements BaseModel
         return $obj;
     }
 
-    public function withData(Data $data): self
+    public function withData(CallStreamingStarted $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

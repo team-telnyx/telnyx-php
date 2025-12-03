@@ -7,9 +7,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Brand\BrandGetFeedbackResponse;
 use Telnyx\Brand\BrandGetResponse;
-use Telnyx\Brand\BrandListResponse;
 use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Client;
+use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -174,7 +174,7 @@ final class BrandTest extends TestCase
         $result = $this->client->brand->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BrandListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
     }
 
     #[Test]

@@ -6,9 +6,9 @@ namespace Telnyx\Services\MessagingTollfree\Verification;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
-use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
@@ -185,12 +185,14 @@ final class RequestsService implements RequestsContract
      *   status?: value-of<TfVerificationStatus>,
      * }|RequestListParams $params
      *
+     * @return DefaultPaginationForMessagingTollfree<VerificationRequestStatus>
+     *
      * @throws APIException
      */
     public function list(
         array|RequestListParams $params,
         ?RequestOptions $requestOptions = null
-    ): RequestListResponse {
+    ): DefaultPaginationForMessagingTollfree {
         [$parsed, $options] = RequestListParams::parseRequest(
             $params,
             $requestOptions,
@@ -202,7 +204,8 @@ final class RequestsService implements RequestsContract
             path: 'messaging_tollfree/verification/requests',
             query: $parsed,
             options: $options,
-            convert: RequestListResponse::class,
+            convert: VerificationRequestStatus::class,
+            page: DefaultPaginationForMessagingTollfree::class,
         );
     }
 

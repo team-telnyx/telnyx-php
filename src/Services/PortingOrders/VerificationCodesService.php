@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
@@ -32,13 +33,15 @@ final class VerificationCodesService implements VerificationCodesContract
      *   sort?: array{value?: 'created_at'|'-created_at'},
      * }|VerificationCodeListParams $params
      *
+     * @return DefaultPagination<VerificationCodeListResponse>
+     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|VerificationCodeListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerificationCodeListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = VerificationCodeListParams::parseRequest(
             $params,
             $requestOptions,
@@ -51,6 +54,7 @@ final class VerificationCodesService implements VerificationCodesContract
             query: $parsed,
             options: $options,
             convert: VerificationCodeListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

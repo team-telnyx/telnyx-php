@@ -9,13 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Meta;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Source;
 
 /**
  * @phpstan-type LogMessageListResponseShape = array{
- *   log_messages?: list<LogMessage>|null,
- *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
+ *   code: string,
+ *   title: string,
+ *   detail?: string|null,
+ *   meta?: Meta|null,
+ *   source?: Source|null,
  * }
  */
 final class LogMessageListResponse implements BaseModel, ResponseConverter
@@ -25,13 +28,35 @@ final class LogMessageListResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /** @var list<LogMessage>|null $log_messages */
-    #[Api(list: LogMessage::class, optional: true)]
-    public ?array $log_messages;
+    #[Api]
+    public string $code;
+
+    #[Api]
+    public string $title;
 
     #[Api(optional: true)]
-    public ?ExternalVoiceIntegrationsPaginationMeta $meta;
+    public ?string $detail;
 
+    #[Api(optional: true)]
+    public ?Meta $meta;
+
+    #[Api(optional: true)]
+    public ?Source $source;
+
+    /**
+     * `new LogMessageListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * LogMessageListResponse::with(code: ..., title: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new LogMessageListResponse)->withCode(...)->withTitle(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,37 +66,62 @@ final class LogMessageListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<LogMessage> $log_messages
      */
     public static function with(
-        ?array $log_messages = null,
-        ?ExternalVoiceIntegrationsPaginationMeta $meta = null,
+        string $code,
+        string $title,
+        ?string $detail = null,
+        ?Meta $meta = null,
+        ?Source $source = null,
     ): self {
         $obj = new self;
 
-        null !== $log_messages && $obj->log_messages = $log_messages;
+        $obj->code = $code;
+        $obj->title = $title;
+
+        null !== $detail && $obj->detail = $detail;
         null !== $meta && $obj->meta = $meta;
+        null !== $source && $obj->source = $source;
 
         return $obj;
     }
 
-    /**
-     * @param list<LogMessage> $logMessages
-     */
-    public function withLogMessages(array $logMessages): self
+    public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->log_messages = $logMessages;
+        $obj->code = $code;
 
         return $obj;
     }
 
-    public function withMeta(
-        ExternalVoiceIntegrationsPaginationMeta $meta
-    ): self {
+    public function withTitle(string $title): self
+    {
+        $obj = clone $this;
+        $obj->title = $title;
+
+        return $obj;
+    }
+
+    public function withDetail(string $detail): self
+    {
+        $obj = clone $this;
+        $obj->detail = $detail;
+
+        return $obj;
+    }
+
+    public function withMeta(Meta $meta): self
+    {
         $obj = clone $this;
         $obj->meta = $meta;
+
+        return $obj;
+    }
+
+    public function withSource(Source $source): self
+    {
+        $obj = clone $this;
+        $obj->source = $source;
 
         return $obj;
     }

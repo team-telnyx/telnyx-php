@@ -6,11 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams;
-use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomRetrieveParams;
 use Telnyx\Rooms\RoomUpdateParams;
@@ -163,12 +164,14 @@ final class RoomsService implements RoomsContract
      *   page?: array{number?: int, size?: int},
      * }|RoomListParams $params
      *
+     * @return DefaultPagination<Room>
+     *
      * @throws APIException
      */
     public function list(
         array|RoomListParams $params,
         ?RequestOptions $requestOptions = null
-    ): RoomListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = RoomListParams::parseRequest(
             $params,
             $requestOptions,
@@ -180,7 +183,8 @@ final class RoomsService implements RoomsContract
             path: 'rooms',
             query: $parsed,
             options: $options,
-            convert: RoomListResponse::class,
+            convert: Room::class,
+            page: DefaultPagination::class,
         );
     }
 

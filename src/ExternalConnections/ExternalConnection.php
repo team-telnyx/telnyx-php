@@ -6,7 +6,9 @@ namespace Telnyx\ExternalConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalConnection\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnection\Inbound;
 use Telnyx\ExternalConnections\ExternalConnection\Outbound;
@@ -30,10 +32,12 @@ use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class ExternalConnection implements BaseModel
+final class ExternalConnection implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<ExternalConnectionShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies the resource.

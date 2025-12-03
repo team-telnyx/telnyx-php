@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
+use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateParams;
@@ -35,7 +36,7 @@ interface PhoneNumbersContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $phoneNumberID,
         array|PhoneNumberUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberUpdateResponse;
@@ -45,12 +46,14 @@ interface PhoneNumbersContract
      *
      * @param array<mixed>|PhoneNumberListParams $params
      *
+     * @return DefaultPagination<PhoneNumberDetailed>
+     *
      * @throws APIException
      */
     public function list(
         array|PhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse;
+    ): DefaultPagination;
 
     /**
      * @api
@@ -67,10 +70,12 @@ interface PhoneNumbersContract
      *
      * @param array<mixed>|PhoneNumberSlimListParams $params
      *
+     * @return DefaultPagination<PhoneNumberSlimListResponse>
+     *
      * @throws APIException
      */
     public function slimList(
         array|PhoneNumberSlimListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberSlimListResponse;
+    ): DefaultPagination;
 }

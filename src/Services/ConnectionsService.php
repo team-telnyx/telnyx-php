@@ -11,6 +11,7 @@ use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
 
@@ -56,12 +57,14 @@ final class ConnectionsService implements ConnectionsContract
      *   sort?: 'created_at'|'connection_name'|'active',
      * }|ConnectionListParams $params
      *
+     * @return DefaultPagination<ConnectionListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|ConnectionListParams $params,
         ?RequestOptions $requestOptions = null
-    ): ConnectionListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = ConnectionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -74,6 +77,7 @@ final class ConnectionsService implements ConnectionsContract
             query: $parsed,
             options: $options,
             convert: ConnectionListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -88,13 +92,15 @@ final class ConnectionsService implements ConnectionsContract
      *   },
      * }|ConnectionListActiveCallsParams $params
      *
+     * @return DefaultPagination<ConnectionListActiveCallsResponse>
+     *
      * @throws APIException
      */
     public function listActiveCalls(
         string $connectionID,
         array|ConnectionListActiveCallsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ConnectionListActiveCallsResponse {
+    ): DefaultPagination {
         [$parsed, $options] = ConnectionListActiveCallsParams::parseRequest(
             $params,
             $requestOptions,
@@ -107,6 +113,7 @@ final class ConnectionsService implements ConnectionsContract
             query: $parsed,
             options: $options,
             convert: ConnectionListActiveCallsResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

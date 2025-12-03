@@ -8,9 +8,9 @@ use Telnyx\AI\Assistants\Tests\Runs\RunListParams;
 use Telnyx\AI\Assistants\Tests\Runs\RunRetrieveParams;
 use Telnyx\AI\Assistants\Tests\Runs\RunTriggerParams;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsContract;
 
@@ -57,8 +57,10 @@ final class RunsService implements RunsContract
      * Retrieves paginated execution history for a specific assistant test with filtering options
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}, status?: string
+     *   page_number_?: int, page_size_?: int, status?: string
      * }|RunListParams $params
+     *
+     * @return DefaultFlatPagination<TestRunResponse>
      *
      * @throws APIException
      */
@@ -66,7 +68,7 @@ final class RunsService implements RunsContract
         string $testID,
         array|RunListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PaginatedTestRunList {
+    ): DefaultFlatPagination {
         [$parsed, $options] = RunListParams::parseRequest(
             $params,
             $requestOptions,
@@ -78,7 +80,8 @@ final class RunsService implements RunsContract
             path: ['ai/assistants/tests/%1$s/runs', $testID],
             query: $parsed,
             options: $options,
-            convert: PaginatedTestRunList::class,
+            convert: TestRunResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

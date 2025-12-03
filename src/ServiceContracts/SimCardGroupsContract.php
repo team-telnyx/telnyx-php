@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
@@ -61,12 +62,14 @@ interface SimCardGroupsContract
      *
      * @param array<mixed>|SimCardGroupListParams $params
      *
+     * @return DefaultFlatPagination<SimCardGroupListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|SimCardGroupListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SimCardGroupListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

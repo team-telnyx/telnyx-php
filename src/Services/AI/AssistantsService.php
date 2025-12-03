@@ -8,7 +8,7 @@ use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantImportParams;
+use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
 use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -22,6 +22,7 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -100,12 +101,7 @@ final class AssistantsService implements AssistantsContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
      *     region?: string,
-     *     settings?: array{
-     *       eot_threshold?: float,
-     *       eot_timeout_ms?: int,
-     *       numerals?: bool,
-     *       smart_format?: bool,
-     *     },
+     *     settings?: array<mixed>|TranscriptionSettingsConfig,
      *   }|TranscriptionSettings,
      *   voice_settings?: array{
      *     voice: string,
@@ -199,12 +195,7 @@ final class AssistantsService implements AssistantsContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
      *     region?: string,
-     *     settings?: array{
-     *       eot_threshold?: float,
-     *       eot_timeout_ms?: int,
-     *       numerals?: bool,
-     *       smart_format?: bool,
-     *     },
+     *     settings?: array<mixed>|TranscriptionSettingsConfig,
      *   }|TranscriptionSettings,
      *   voice_settings?: array{
      *     voice: string,
@@ -352,15 +343,15 @@ final class AssistantsService implements AssistantsContract
      *
      * @param array{
      *   api_key_ref: string, provider: 'elevenlabs'|'vapi'|'retell'
-     * }|AssistantImportParams $params
+     * }|AssistantImportsParams $params
      *
      * @throws APIException
      */
-    public function import(
-        array|AssistantImportParams $params,
+    public function imports(
+        array|AssistantImportsParams $params,
         ?RequestOptions $requestOptions = null
     ): AssistantsList {
-        [$parsed, $options] = AssistantImportParams::parseRequest(
+        [$parsed, $options] = AssistantImportsParams::parseRequest(
             $params,
             $requestOptions,
         );

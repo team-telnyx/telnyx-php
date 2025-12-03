@@ -6,7 +6,9 @@ namespace Telnyx\IntegrationSecrets;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IntegrationSecretShape = array{
@@ -17,10 +19,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class IntegrationSecret implements BaseModel
+final class IntegrationSecret implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<IntegrationSecretShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public string $id;

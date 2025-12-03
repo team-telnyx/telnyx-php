@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
@@ -42,12 +43,14 @@ interface PublicInternetGatewaysContract
      *
      * @param array<mixed>|PublicInternetGatewayListParams $params
      *
+     * @return DefaultPagination<PublicInternetGatewayListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|PublicInternetGatewayListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PublicInternetGatewayListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

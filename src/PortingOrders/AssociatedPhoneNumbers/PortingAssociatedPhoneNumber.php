@@ -6,7 +6,9 @@ namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberRange;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberType;
@@ -24,10 +26,12 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class PortingAssociatedPhoneNumber implements BaseModel
+final class PortingAssociatedPhoneNumber implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<PortingAssociatedPhoneNumberShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies this associated phone number.

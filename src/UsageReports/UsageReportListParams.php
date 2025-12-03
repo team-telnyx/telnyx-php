@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UsageReports\UsageReportListParams\Format;
-use Telnyx\UsageReports\UsageReportListParams\Page;
 
 /**
  * Get Telnyx usage data by product, broken out by the specified dimensions.
@@ -25,7 +24,8 @@ use Telnyx\UsageReports\UsageReportListParams\Page;
  *   filter?: string,
  *   format?: Format|value-of<Format>,
  *   managed_accounts?: bool,
- *   page?: Page,
+ *   page_number_?: int,
+ *   page_size_?: int,
  *   sort?: list<string>,
  *   start_date?: string,
  *   authorization_bearer?: string,
@@ -91,11 +91,11 @@ final class UsageReportListParams implements BaseModel
     #[Api(optional: true)]
     public ?bool $managed_accounts;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Api(optional: true)]
-    public ?Page $page;
+    public ?int $page_number_;
+
+    #[Api(optional: true)]
+    public ?int $page_size_;
 
     /**
      * Specifies the sort order for results.
@@ -158,7 +158,8 @@ final class UsageReportListParams implements BaseModel
         ?string $filter = null,
         Format|string|null $format = null,
         ?bool $managed_accounts = null,
-        ?Page $page = null,
+        ?int $page_number_ = null,
+        ?int $page_size_ = null,
         ?array $sort = null,
         ?string $start_date = null,
         ?string $authorization_bearer = null,
@@ -174,7 +175,8 @@ final class UsageReportListParams implements BaseModel
         null !== $filter && $obj->filter = $filter;
         null !== $format && $obj['format'] = $format;
         null !== $managed_accounts && $obj->managed_accounts = $managed_accounts;
-        null !== $page && $obj->page = $page;
+        null !== $page_number_ && $obj->page_number_ = $page_number_;
+        null !== $page_size_ && $obj->page_size_ = $page_size_;
         null !== $sort && $obj->sort = $sort;
         null !== $start_date && $obj->start_date = $start_date;
         null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
@@ -276,13 +278,18 @@ final class UsageReportListParams implements BaseModel
         return $obj;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj->page_number_ = $pageNumber;
+
+        return $obj;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $obj = clone $this;
+        $obj->page_size_ = $pageSize;
 
         return $obj;
     }

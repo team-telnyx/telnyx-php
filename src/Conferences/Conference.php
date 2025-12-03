@@ -10,7 +10,9 @@ use Telnyx\Conferences\Conference\RecordType;
 use Telnyx\Conferences\Conference\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConferenceShape = array{
@@ -27,10 +29,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   updated_at?: string|null,
  * }
  */
-final class Conference implements BaseModel
+final class Conference implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<ConferenceShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies the conference.

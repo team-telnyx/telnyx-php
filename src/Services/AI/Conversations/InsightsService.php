@@ -6,11 +6,12 @@ namespace Telnyx\Services\AI\Conversations;
 
 use Telnyx\AI\Conversations\Insights\InsightCreateParams;
 use Telnyx\AI\Conversations\Insights\InsightListParams;
-use Telnyx\AI\Conversations\Insights\InsightListResponse;
+use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\AI\Conversations\Insights\InsightUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsContract;
 
@@ -29,7 +30,7 @@ final class InsightsService implements InsightsContract
      * @param array{
      *   instructions: string,
      *   name: string,
-     *   json_schema?: mixed|string,
+     *   json_schema?: string|array<string,mixed>,
      *   webhook?: string,
      * }|InsightCreateParams $params
      *
@@ -81,7 +82,7 @@ final class InsightsService implements InsightsContract
      *
      * @param array{
      *   instructions?: string,
-     *   json_schema?: mixed|string,
+     *   json_schema?: string|array<string,mixed>,
      *   name?: string,
      *   webhook?: string,
      * }|InsightUpdateParams $params
@@ -113,14 +114,16 @@ final class InsightsService implements InsightsContract
      *
      * Get all insights
      *
-     * @param array{page?: array{number?: int, size?: int}}|InsightListParams $params
+     * @param array{page_number_?: int, page_size_?: int}|InsightListParams $params
+     *
+     * @return DefaultFlatPagination<InsightTemplate>
      *
      * @throws APIException
      */
     public function list(
         array|InsightListParams $params,
         ?RequestOptions $requestOptions = null
-    ): InsightListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = InsightListParams::parseRequest(
             $params,
             $requestOptions,
@@ -132,7 +135,8 @@ final class InsightsService implements InsightsContract
             path: 'ai/conversations/insights',
             query: $parsed,
             options: $options,
-            convert: InsightListResponse::class,
+            convert: InsightTemplate::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

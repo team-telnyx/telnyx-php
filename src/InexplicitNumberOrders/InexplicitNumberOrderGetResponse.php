@@ -9,10 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data;
 
 /**
- * @phpstan-type InexplicitNumberOrderGetResponseShape = array{data?: Data|null}
+ * @phpstan-type InexplicitNumberOrderGetResponseShape = array{
+ *   data?: InexplicitNumberOrderResponse|null
+ * }
  */
 final class InexplicitNumberOrderGetResponse implements BaseModel, ResponseConverter
 {
@@ -22,7 +23,7 @@ final class InexplicitNumberOrderGetResponse implements BaseModel, ResponseConve
     use SdkResponse;
 
     #[Api(optional: true)]
-    public ?Data $data;
+    public ?InexplicitNumberOrderResponse $data;
 
     public function __construct()
     {
@@ -34,8 +35,9 @@ final class InexplicitNumberOrderGetResponse implements BaseModel, ResponseConve
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Data $data = null): self
-    {
+    public static function with(
+        ?InexplicitNumberOrderResponse $data = null
+    ): self {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
@@ -43,7 +45,7 @@ final class InexplicitNumberOrderGetResponse implements BaseModel, ResponseConve
         return $obj;
     }
 
-    public function withData(Data $data): self
+    public function withData(InexplicitNumberOrderResponse $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

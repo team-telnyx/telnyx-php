@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
-use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersResponse;
-use Telnyx\MessagingProfiles\MessagingProfileListResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
-use Telnyx\MessagingProfiles\MessagingProfileListShortCodesResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
+use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
+use Telnyx\ShortCode;
 
 interface MessagingProfilesContract
 {
@@ -39,7 +40,7 @@ interface MessagingProfilesContract
      * @throws APIException
      */
     public function retrieve(
-        string $id,
+        string $messagingProfileID,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse;
 
@@ -51,7 +52,7 @@ interface MessagingProfilesContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $messagingProfileID,
         array|MessagingProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): MessagingProfileUpdateResponse;
@@ -61,12 +62,14 @@ interface MessagingProfilesContract
      *
      * @param array<mixed>|MessagingProfileListParams $params
      *
+     * @return DefaultPagination<MessagingProfile>
+     *
      * @throws APIException
      */
     public function list(
         array|MessagingProfileListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingProfileListResponse;
+    ): DefaultPagination;
 
     /**
      * @api
@@ -74,7 +77,7 @@ interface MessagingProfilesContract
      * @throws APIException
      */
     public function delete(
-        string $id,
+        string $messagingProfileID,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileDeleteResponse;
 
@@ -83,24 +86,28 @@ interface MessagingProfilesContract
      *
      * @param array<mixed>|MessagingProfileListPhoneNumbersParams $params
      *
+     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
+     *
      * @throws APIException
      */
     public function listPhoneNumbers(
-        string $id,
+        string $messagingProfileID,
         array|MessagingProfileListPhoneNumbersParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingProfileListPhoneNumbersResponse;
+    ): DefaultPagination;
 
     /**
      * @api
      *
      * @param array<mixed>|MessagingProfileListShortCodesParams $params
      *
+     * @return DefaultPagination<ShortCode>
+     *
      * @throws APIException
      */
     public function listShortCodes(
-        string $id,
+        string $messagingProfileID,
         array|MessagingProfileListShortCodesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingProfileListShortCodesResponse;
+    ): DefaultPagination;
 }

@@ -15,6 +15,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
 
@@ -101,9 +102,12 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @param array{
      *   conversation_channel?: 'phone_call'|'sms_chat'|ConversationChannelType,
      *   from_date?: string|\DateTimeInterface,
-     *   page?: array{number?: int, size?: int},
+     *   page_number_?: int,
+     *   page_size_?: int,
      *   to_date?: string|\DateTimeInterface,
      * }|ScheduledEventListParams $params
+     *
+     * @return DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>
      *
      * @throws APIException
      */
@@ -111,7 +115,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         string $assistantID,
         array|ScheduledEventListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ScheduledEventListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = ScheduledEventListParams::parseRequest(
             $params,
             $requestOptions,
@@ -124,6 +128,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
             query: $parsed,
             options: $options,
             convert: ScheduledEventListResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

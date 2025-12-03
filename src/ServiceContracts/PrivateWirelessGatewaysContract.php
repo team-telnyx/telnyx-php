@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListParams;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 
@@ -42,12 +43,14 @@ interface PrivateWirelessGatewaysContract
      *
      * @param array<mixed>|PrivateWirelessGatewayListParams $params
      *
+     * @return DefaultFlatPagination<PrivateWirelessGateway>
+     *
      * @throws APIException
      */
     public function list(
         array|PrivateWirelessGatewayListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PrivateWirelessGatewayListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

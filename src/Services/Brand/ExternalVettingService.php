@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Brand;
 
-use Telnyx\Brand\ExternalVetting\ExternalVettingImportParams;
-use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
+use Telnyx\Brand\ExternalVetting\ExternalVettingImportsParams;
+use Telnyx\Brand\ExternalVetting\ExternalVettingImportsResponse;
 use Telnyx\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
@@ -53,16 +53,16 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * @param array{
      *   evpId: string, vettingId: string, vettingToken?: string
-     * }|ExternalVettingImportParams $params
+     * }|ExternalVettingImportsParams $params
      *
      * @throws APIException
      */
-    public function import(
+    public function imports(
         string $brandID,
-        array|ExternalVettingImportParams $params,
+        array|ExternalVettingImportsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ExternalVettingImportResponse {
-        [$parsed, $options] = ExternalVettingImportParams::parseRequest(
+    ): ExternalVettingImportsResponse {
+        [$parsed, $options] = ExternalVettingImportsParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -73,7 +73,7 @@ final class ExternalVettingService implements ExternalVettingContract
             path: ['brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
-            convert: ExternalVettingImportResponse::class,
+            convert: ExternalVettingImportsResponse::class,
         );
     }
 

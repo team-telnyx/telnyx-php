@@ -8,14 +8,15 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VerifiedNumbers\VerifiedNumberListParams\Page;
 
 /**
  * Gets a paginated list of Verified Numbers.
  *
  * @see Telnyx\Services\VerifiedNumbersService::list()
  *
- * @phpstan-type VerifiedNumberListParamsShape = array{page?: Page}
+ * @phpstan-type VerifiedNumberListParamsShape = array{
+ *   page_number_?: int, page_size_?: int
+ * }
  */
 final class VerifiedNumberListParams implements BaseModel
 {
@@ -23,11 +24,11 @@ final class VerifiedNumberListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number].
-     */
     #[Api(optional: true)]
-    public ?Page $page;
+    public ?int $page_number_;
+
+    #[Api(optional: true)]
+    public ?int $page_size_;
 
     public function __construct()
     {
@@ -39,22 +40,30 @@ final class VerifiedNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Page $page = null): self
-    {
+    public static function with(
+        ?int $page_number_ = null,
+        ?int $page_size_ = null
+    ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page_number_ && $obj->page_number_ = $page_number_;
+        null !== $page_size_ && $obj->page_size_ = $page_size_;
 
         return $obj;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj->page_number_ = $pageNumber;
+
+        return $obj;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $obj = clone $this;
+        $obj->page_size_ = $pageSize;
 
         return $obj;
     }

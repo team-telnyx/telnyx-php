@@ -7,9 +7,9 @@ namespace Telnyx\ServiceContracts\AI\Assistants;
 use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TestCreateParams;
 use Telnyx\AI\Assistants\Tests\TestListParams;
-use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface TestsContract
@@ -54,12 +54,14 @@ interface TestsContract
      *
      * @param array<mixed>|TestListParams $params
      *
+     * @return DefaultFlatPagination<AssistantTest>
+     *
      * @throws APIException
      */
     public function list(
         array|TestListParams $params,
         ?RequestOptions $requestOptions = null
-    ): TestListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

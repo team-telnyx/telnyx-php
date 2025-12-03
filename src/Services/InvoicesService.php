@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
 use Telnyx\Invoices\InvoiceListResponse;
@@ -55,15 +56,17 @@ final class InvoicesService implements InvoicesContract
      * Retrieve a paginated list of invoices.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}, sort?: 'period_start'|'-period_start'
+     *   page_number_?: int, page_size_?: int, sort?: 'period_start'|'-period_start'
      * }|InvoiceListParams $params
+     *
+     * @return DefaultFlatPagination<InvoiceListResponse>
      *
      * @throws APIException
      */
     public function list(
         array|InvoiceListParams $params,
         ?RequestOptions $requestOptions = null
-    ): InvoiceListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = InvoiceListParams::parseRequest(
             $params,
             $requestOptions,
@@ -76,6 +79,7 @@ final class InvoicesService implements InvoicesContract
             query: $parsed,
             options: $options,
             convert: InvoiceListResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

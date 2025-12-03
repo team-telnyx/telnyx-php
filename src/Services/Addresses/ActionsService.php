@@ -30,7 +30,7 @@ final class ActionsService implements ActionsContract
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $id,
+        string $addressUuid,
         array|ActionAcceptSuggestionsParams $params,
         ?RequestOptions $requestOptions = null,
     ): ActionAcceptSuggestionsResponse {
@@ -42,7 +42,7 @@ final class ActionsService implements ActionsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
-            path: ['addresses/%1$s/actions/accept_suggestions', $id],
+            path: ['addresses/%1$s/actions/accept_suggestions', $addressUuid],
             body: (object) $parsed,
             options: $options,
             convert: ActionAcceptSuggestionsResponse::class,

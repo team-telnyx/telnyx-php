@@ -6,9 +6,10 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
@@ -101,13 +102,15 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *   page?: array{number?: int, size?: int},
      * }|PhoneNumberListParams $params
      *
+     * @return DefaultPagination<ExternalConnectionPhoneNumber>
+     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|PhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = PhoneNumberListParams::parseRequest(
             $params,
             $requestOptions,
@@ -119,7 +122,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
             path: ['external_connections/%1$s/phone_numbers', $id],
             query: $parsed,
             options: $options,
-            convert: PhoneNumberListResponse::class,
+            convert: ExternalConnectionPhoneNumber::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -6,7 +6,9 @@ namespace Telnyx\TexmlApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\TexmlApplications\TexmlApplication\Inbound;
@@ -37,10 +39,12 @@ use Telnyx\TexmlApplications\TexmlApplication\VoiceMethod;
  *   voice_url?: string|null,
  * }
  */
-final class TexmlApplication implements BaseModel
+final class TexmlApplication implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<TexmlApplicationShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies the resource.

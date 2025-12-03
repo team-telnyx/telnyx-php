@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\BundlePricing;
 
+use Telnyx\BundlePricing\UserBundles\UserBundle;
 use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
@@ -11,13 +12,13 @@ use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
-use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
 
@@ -102,12 +103,14 @@ final class UserBundlesService implements UserBundlesContract
      *   authorization_bearer?: string,
      * }|UserBundleListParams $params
      *
+     * @return DefaultPagination<UserBundle>
+     *
      * @throws APIException
      */
     public function list(
         array|UserBundleListParams $params,
         ?RequestOptions $requestOptions = null
-    ): UserBundleListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = UserBundleListParams::parseRequest(
             $params,
             $requestOptions,
@@ -124,7 +127,8 @@ final class UserBundlesService implements UserBundlesContract
             query: array_intersect_key($parsed, $query_params),
             headers: $header_params,
             options: $options,
-            convert: UserBundleListResponse::class,
+            convert: UserBundle::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -7,11 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\DefaultPagination;
+use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
-use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
@@ -145,12 +146,14 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *   sort?: 'created_at'|'application_name'|'active',
      * }|FaxApplicationListParams $params
      *
+     * @return DefaultPagination<FaxApplication>
+     *
      * @throws APIException
      */
     public function list(
         array|FaxApplicationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FaxApplicationListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = FaxApplicationListParams::parseRequest(
             $params,
             $requestOptions,
@@ -162,7 +165,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
             path: 'fax_applications',
             query: $parsed,
             options: $options,
-            convert: FaxApplicationListResponse::class,
+            convert: FaxApplication::class,
+            page: DefaultPagination::class,
         );
     }
 
