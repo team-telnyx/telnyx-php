@@ -13,8 +13,8 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
+use Telnyx\Networks\InterfaceStatus;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsContract;
 
@@ -80,11 +80,24 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Update a Global IP assignment.
      *
+     * @param array{
+     *   id?: string,
+     *   created_at?: string,
+     *   record_type?: string,
+     *   updated_at?: string,
+     *   global_ip_id?: string,
+     *   is_announced?: bool,
+     *   is_connected?: bool,
+     *   is_in_maintenance?: bool,
+     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
+     *   wireguard_peer_id?: string,
+     * } $params
+     *
      * @throws APIException
      */
     public function update(
         string $id,
-        Body $params,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentUpdateResponse {
         [$parsed, $options] = GlobalIPAssignmentUpdateParams::parseRequest(
