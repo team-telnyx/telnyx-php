@@ -50,7 +50,7 @@ final class PortingService implements PortingContract
     public function listUkCarriers(
         ?RequestOptions $requestOptions = null
     ): PortingListUkCarriersResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting/uk_carriers',

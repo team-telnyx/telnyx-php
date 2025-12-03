@@ -59,7 +59,7 @@ final class MesssagesService implements MesssagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messsages/rcs',

@@ -41,7 +41,7 @@ final class ReleasesService implements ReleasesContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/releases/%2$s', $id, $releaseID],
@@ -79,7 +79,7 @@ final class ReleasesService implements ReleasesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/releases', $id],

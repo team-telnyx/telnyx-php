@@ -43,7 +43,7 @@ final class CallsService implements CallsContract
         $queueName = $parsed['queue_name'];
         unset($parsed['queue_name']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
@@ -75,7 +75,7 @@ final class CallsService implements CallsContract
         $queueName = $parsed['queue_name'];
         unset($parsed['queue_name']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
@@ -108,7 +108,7 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['queues/%1$s/calls', $queueName],
@@ -139,7 +139,7 @@ final class CallsService implements CallsContract
         $queueName = $parsed['queue_name'];
         unset($parsed['queue_name']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],

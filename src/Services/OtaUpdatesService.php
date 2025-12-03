@@ -30,7 +30,7 @@ final class OtaUpdatesService implements OtaUpdatesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OtaUpdateGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ota_updates/%1$s', $id],
@@ -64,7 +64,7 @@ final class OtaUpdatesService implements OtaUpdatesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ota_updates',

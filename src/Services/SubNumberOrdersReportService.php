@@ -44,7 +44,7 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'sub_number_orders_report',
@@ -65,7 +65,7 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
         string $reportID,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrdersReportGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sub_number_orders_report/%1$s', $reportID],
@@ -85,7 +85,7 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
         string $reportID,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sub_number_orders_report/%1$s/download', $reportID],

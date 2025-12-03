@@ -43,7 +43,7 @@ final class ToolsService implements ToolsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],

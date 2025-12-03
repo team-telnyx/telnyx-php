@@ -34,7 +34,7 @@ final class ActionsService implements ActionsContract
         string $roomSessionID,
         ?RequestOptions $requestOptions = null
     ): ActionEndResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/end', $roomSessionID],
@@ -64,7 +64,7 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/kick', $roomSessionID],
@@ -95,7 +95,7 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/mute', $roomSessionID],
@@ -126,7 +126,7 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/unmute', $roomSessionID],

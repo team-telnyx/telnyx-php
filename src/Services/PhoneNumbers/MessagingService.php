@@ -32,7 +32,7 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phone_numbers/%1$s/messaging', $id],
@@ -62,7 +62,7 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s/messaging', $id],
@@ -90,7 +90,7 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/messaging',

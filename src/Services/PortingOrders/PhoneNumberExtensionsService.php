@@ -45,7 +45,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/phone_number_extensions', $portingOrderID],
@@ -78,7 +78,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/phone_number_extensions', $portingOrderID],
@@ -109,7 +109,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         $portingOrderID = $parsed['porting_order_id'];
         unset($parsed['porting_order_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [

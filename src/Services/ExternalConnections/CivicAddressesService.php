@@ -41,7 +41,7 @@ final class CivicAddressesService implements CivicAddressesContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/civic_addresses/%2$s', $id, $addressID],
@@ -71,7 +71,7 @@ final class CivicAddressesService implements CivicAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/civic_addresses', $id],

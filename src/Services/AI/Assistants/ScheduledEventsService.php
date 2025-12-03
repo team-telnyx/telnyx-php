@@ -51,7 +51,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/scheduled_events', $assistantID],
@@ -82,7 +82,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [
@@ -117,7 +117,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/scheduled_events', $assistantID],
@@ -148,7 +148,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [

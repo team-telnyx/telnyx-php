@@ -51,7 +51,7 @@ final class OAuthClientsService implements OAuthClientsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'oauth_clients',
@@ -72,7 +72,7 @@ final class OAuthClientsService implements OAuthClientsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthClientGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['oauth_clients/%1$s', $id],
@@ -109,7 +109,7 @@ final class OAuthClientsService implements OAuthClientsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['oauth_clients/%1$s', $id],
@@ -146,7 +146,7 @@ final class OAuthClientsService implements OAuthClientsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'oauth_clients',
@@ -167,7 +167,7 @@ final class OAuthClientsService implements OAuthClientsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['oauth_clients/%1$s', $id],

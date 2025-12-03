@@ -7,12 +7,12 @@ namespace Telnyx\Webhooks\FaxFailedWebhookEvent;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Direction;
-use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\FailureReason;
-use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Status;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload1\Direction;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload1\FailureReason;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload1\Status;
 
 /**
- * @phpstan-type PayloadShape = array{
+ * @phpstan-type Payload1Shape = array{
  *   client_state?: string|null,
  *   connection_id?: string|null,
  *   direction?: value-of<Direction>|null,
@@ -26,9 +26,9 @@ use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Status;
  *   user_id?: string|null,
  * }
  */
-final class Payload implements BaseModel
+final class Payload1 implements BaseModel
 {
-    /** @use SdkModel<PayloadShape> */
+    /** @use SdkModel<Payload1Shape> */
     use SdkModel;
 
     /**

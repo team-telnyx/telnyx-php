@@ -7,7 +7,7 @@ namespace Telnyx\Webhooks\FaxQueuedWebhookEvent;
 /**
  * The type of event being delivered.
  */
-enum EventType: string
+enum EventType1: string
 {
     case FAX_QUEUED = 'fax.queued';
 }

@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   soft_end_conference_on_exit?: bool|null,
  *   start_conference_on_create?: bool|null,
  *   start_conference_on_enter?: bool|null,
- *   supervisor_role?: value-of<SupervisorRole>|null,
+ *   supervisor_role?: value-of<\Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole>|null,
  *   whisper_call_control_ids?: list<string>|null,
  * }
  */
@@ -114,7 +114,10 @@ final class ConferenceConfig implements BaseModel
      *
      * @var value-of<SupervisorRole>|null $supervisor_role
      */
-    #[Api(enum: SupervisorRole::class, optional: true)]
+    #[Api(
+        enum: SupervisorRole::class,
+        optional: true,
+    )]
     public ?string $supervisor_role;
 
     /**
@@ -318,7 +321,7 @@ final class ConferenceConfig implements BaseModel
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
      */
     public function withSupervisorRole(
-        SupervisorRole|string $supervisorRole
+        SupervisorRole|string $supervisorRole,
     ): self {
         $obj = clone $this;
         $obj['supervisor_role'] = $supervisorRole;

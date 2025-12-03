@@ -38,7 +38,7 @@ final class SetiService implements SetiContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'seti/black_box_test_results',

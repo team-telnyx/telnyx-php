@@ -39,7 +39,7 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messaging_numbers_bulk_updates',
@@ -60,7 +60,7 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
         string $orderID,
         ?RequestOptions $requestOptions = null
     ): MessagingNumbersBulkUpdateGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging_numbers_bulk_updates/%1$s', $orderID],

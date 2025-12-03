@@ -50,7 +50,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [
@@ -86,7 +86,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [

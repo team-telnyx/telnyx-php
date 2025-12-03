@@ -41,7 +41,7 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'global_ip_assignments_usage',

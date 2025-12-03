@@ -32,7 +32,7 @@ final class ConnectionsService implements ConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['connections/%1$s', $id],
@@ -67,7 +67,7 @@ final class ConnectionsService implements ConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'connections',
@@ -100,7 +100,7 @@ final class ConnectionsService implements ConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['connections/%1$s/active_calls', $connectionID],

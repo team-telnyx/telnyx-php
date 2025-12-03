@@ -54,7 +54,7 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): TelnyxCampaignCsp {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['campaign/%1$s', $campaignID],
@@ -94,7 +94,7 @@ final class CampaignService implements CampaignContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['campaign/%1$s', $campaignID],
@@ -124,7 +124,7 @@ final class CampaignService implements CampaignContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'campaign',
@@ -147,7 +147,7 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['campaign/acceptSharing/%1$s', $campaignID],
@@ -167,7 +167,7 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignDeactivateResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['campaign/%1$s', $campaignID],
@@ -187,7 +187,7 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignGetMnoMetadataResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/mnoMetadata', $campaignID],
@@ -209,7 +209,7 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/operationStatus', $campaignID],
@@ -229,7 +229,7 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignGetSharingStatusResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/sharing', $campaignID],
@@ -257,7 +257,7 @@ final class CampaignService implements CampaignContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['campaign/%1$s/appeal', $campaignID],

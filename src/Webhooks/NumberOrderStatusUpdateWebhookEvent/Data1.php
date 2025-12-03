@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type Data1Shape = array{
  *   id: string,
  *   event_type: string,
  *   occurred_at: \DateTimeInterface,
@@ -18,9 +18,9 @@ use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
  *   record_type: string,
  * }
  */
-final class Data implements BaseModel
+final class Data1 implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<Data1Shape> */
     use SdkModel;
 
     /**
@@ -51,11 +51,11 @@ final class Data implements BaseModel
     public string $record_type;
 
     /**
-     * `new Data()` is missing required properties by the API.
+     * `new Data1()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(
+     * Data1::with(
      *   id: ..., event_type: ..., occurred_at: ..., payload: ..., record_type: ...
      * )
      * ```
@@ -63,7 +63,7 @@ final class Data implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Data)
+     * (new Data1)
      *   ->withID(...)
      *   ->withEventType(...)
      *   ->withOccurredAt(...)

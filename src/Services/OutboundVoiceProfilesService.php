@@ -69,7 +69,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'outbound_voice_profiles',
@@ -90,7 +90,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['outbound_voice_profiles/%1$s', $id],
@@ -140,7 +140,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['outbound_voice_profiles/%1$s', $id],
@@ -172,7 +172,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'outbound_voice_profiles',
@@ -193,7 +193,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['outbound_voice_profiles/%1$s', $id],

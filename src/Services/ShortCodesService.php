@@ -32,7 +32,7 @@ final class ShortCodesService implements ShortCodesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ShortCodeGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['short_codes/%1$s', $id],
@@ -61,7 +61,7 @@ final class ShortCodesService implements ShortCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['short_codes/%1$s', $id],
@@ -92,7 +92,7 @@ final class ShortCodesService implements ShortCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'short_codes',

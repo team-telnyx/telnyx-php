@@ -30,7 +30,7 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionDisableResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['managed_accounts/%1$s/actions/disable', $id],
@@ -58,7 +58,7 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['managed_accounts/%1$s/actions/enable', $id],

@@ -42,7 +42,7 @@ final class JsonService implements JsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [
@@ -78,7 +78,7 @@ final class JsonService implements JsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [

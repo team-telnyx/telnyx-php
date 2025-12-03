@@ -39,7 +39,7 @@ final class DefaultGatewayService implements DefaultGatewayContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['networks/%1$s/default_gateway', $id],
@@ -60,7 +60,7 @@ final class DefaultGatewayService implements DefaultGatewayContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DefaultGatewayGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['networks/%1$s/default_gateway', $id],
@@ -80,7 +80,7 @@ final class DefaultGatewayService implements DefaultGatewayContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DefaultGatewayDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['networks/%1$s/default_gateway', $id],

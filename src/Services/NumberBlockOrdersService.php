@@ -45,7 +45,7 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'number_block_orders',
@@ -66,7 +66,7 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
         string $numberBlockOrderID,
         ?RequestOptions $requestOptions = null
     ): NumberBlockOrderGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['number_block_orders/%1$s', $numberBlockOrderID],
@@ -100,7 +100,7 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'number_block_orders',

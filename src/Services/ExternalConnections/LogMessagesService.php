@@ -31,7 +31,7 @@ final class LogMessagesService implements LogMessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): LogMessageGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/log_messages/%1$s', $id],
@@ -64,7 +64,7 @@ final class LogMessagesService implements LogMessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'external_connections/log_messages',
@@ -85,7 +85,7 @@ final class LogMessagesService implements LogMessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): LogMessageDismissResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['external_connections/log_messages/%1$s', $id],

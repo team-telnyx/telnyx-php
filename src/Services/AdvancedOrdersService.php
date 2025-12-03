@@ -45,7 +45,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'advanced_orders',
@@ -66,7 +66,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         string $orderID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['advanced_orders/%1$s', $orderID],
@@ -84,7 +84,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      */
     public function list(?RequestOptions $requestOptions = null): mixed
     {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'advanced_orders',
@@ -121,7 +121,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['advanced_orders/%1$s/requirement_group', $advancedOrderID],

@@ -31,7 +31,7 @@ final class AgentsService implements AgentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RcsAgentResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging/rcs/agents/%1$s', $id],
@@ -63,7 +63,7 @@ final class AgentsService implements AgentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['messaging/rcs/agents/%1$s', $id],
@@ -91,7 +91,7 @@ final class AgentsService implements AgentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'messaging/rcs/agents',

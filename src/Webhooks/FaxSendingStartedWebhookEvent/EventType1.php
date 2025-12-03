@@ -7,7 +7,7 @@ namespace Telnyx\Webhooks\FaxSendingStartedWebhookEvent;
 /**
  * The type of event being delivered.
  */
-enum EventType: string
+enum EventType1: string
 {
     case FAX_SENDING_STARTED = 'fax.sending.started';
 }

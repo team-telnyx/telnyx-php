@@ -52,7 +52,7 @@ final class TexmlService implements TexmlContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'texml/secrets',

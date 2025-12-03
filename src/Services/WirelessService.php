@@ -45,7 +45,7 @@ final class WirelessService implements WirelessContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'wireless/regions',

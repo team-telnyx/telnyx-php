@@ -42,7 +42,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['custom_storage_credentials/%1$s', $connectionID],
@@ -63,7 +63,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): CustomStorageCredentialGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['custom_storage_credentials/%1$s', $connectionID],
@@ -93,7 +93,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['custom_storage_credentials/%1$s', $connectionID],
@@ -114,7 +114,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['custom_storage_credentials/%1$s', $connectionID],

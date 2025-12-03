@@ -52,7 +52,7 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['room_sessions/%1$s', $roomSessionID],
@@ -102,7 +102,7 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'room_sessions',
@@ -152,7 +152,7 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['rooms/%1$s/sessions', $roomID],
@@ -201,7 +201,7 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['room_sessions/%1$s/participants', $roomSessionID],

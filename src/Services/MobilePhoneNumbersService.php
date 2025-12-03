@@ -32,7 +32,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobilePhoneNumberGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['v2/mobile_phone_numbers/%1$s', $id],
@@ -82,7 +82,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['v2/mobile_phone_numbers/%1$s', $id],
@@ -112,7 +112,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'v2/mobile_phone_numbers',

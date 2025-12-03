@@ -30,7 +30,7 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WebhookDeliveryGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['webhook_deliveries/%1$s', $id],
@@ -67,7 +67,7 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'webhook_deliveries',

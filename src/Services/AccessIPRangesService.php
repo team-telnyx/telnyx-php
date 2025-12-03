@@ -40,7 +40,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'access_ip_ranges',
@@ -81,7 +81,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'access_ip_ranges',
@@ -102,7 +102,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
         string $accessIPRangeID,
         ?RequestOptions $requestOptions = null
     ): AccessIPRange {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['access_ip_ranges/%1$s', $accessIPRangeID],

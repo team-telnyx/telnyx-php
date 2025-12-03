@@ -38,7 +38,7 @@ final class OAuthService implements OAuthContract
         string $consentToken,
         ?RequestOptions $requestOptions = null
     ): OAuthGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['oauth/consent/%1$s', $consentToken],
@@ -65,7 +65,7 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'oauth/grants',
@@ -93,7 +93,7 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'oauth/introspect',
@@ -132,7 +132,7 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'oauth/register',
@@ -168,7 +168,7 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'oauth/authorize',
@@ -188,7 +188,7 @@ final class OAuthService implements OAuthContract
     public function retrieveJwks(
         ?RequestOptions $requestOptions = null
     ): OAuthGetJwksResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'oauth/jwks',
@@ -224,7 +224,7 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'oauth/token',

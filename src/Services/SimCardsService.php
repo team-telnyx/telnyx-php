@@ -60,7 +60,7 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s', $id],
@@ -98,7 +98,7 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['sim_cards/%1$s', $id],
@@ -136,7 +136,7 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'sim_cards',
@@ -167,7 +167,7 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['sim_cards/%1$s', $id],
@@ -189,7 +189,7 @@ final class SimCardsService implements SimCardsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGetActivationCodeResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/activation_code', $id],
@@ -209,7 +209,7 @@ final class SimCardsService implements SimCardsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGetDeviceDetailsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/device_details', $id],
@@ -229,7 +229,7 @@ final class SimCardsService implements SimCardsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGetPublicIPResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/public_ip', $id],
@@ -259,7 +259,7 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/wireless_connectivity_logs', $id],

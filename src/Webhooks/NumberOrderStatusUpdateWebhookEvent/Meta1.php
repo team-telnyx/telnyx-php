@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MetaShape = array{attempt: int, delivered_to: string}
+ * @phpstan-type Meta1Shape = array{attempt: int, delivered_to: string}
  */
-final class Meta implements BaseModel
+final class Meta1 implements BaseModel
 {
-    /** @use SdkModel<MetaShape> */
+    /** @use SdkModel<Meta1Shape> */
     use SdkModel;
 
     /**
@@ -29,17 +29,17 @@ final class Meta implements BaseModel
     public string $delivered_to;
 
     /**
-     * `new Meta()` is missing required properties by the API.
+     * `new Meta1()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Meta::with(attempt: ..., delivered_to: ...)
+     * Meta1::with(attempt: ..., delivered_to: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Meta)->withAttempt(...)->withDeliveredTo(...)
+     * (new Meta1)->withAttempt(...)->withDeliveredTo(...)
      * ```
      */
     public function __construct()

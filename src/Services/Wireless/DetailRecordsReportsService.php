@@ -42,7 +42,7 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'wireless/detail_records_reports',
@@ -63,7 +63,7 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['wireless/detail_records_reports/%1$s', $id],
@@ -92,7 +92,7 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'wireless/detail_records_reports',
@@ -113,7 +113,7 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['wireless/detail_records_reports/%1$s', $id],

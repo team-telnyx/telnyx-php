@@ -36,7 +36,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): TelnyxDownstreamCampaign {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['partner_campaigns/%1$s', $campaignID],
@@ -66,7 +66,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['partner_campaigns/%1$s', $campaignID],
@@ -98,7 +98,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'partner_campaigns',
@@ -132,7 +132,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'partnerCampaign/sharedByMe',
@@ -155,7 +155,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['partnerCampaign/%1$s/sharing', $campaignID],

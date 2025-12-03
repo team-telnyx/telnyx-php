@@ -54,7 +54,7 @@ final class UserAddressesService implements UserAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'user_addresses',
@@ -75,7 +75,7 @@ final class UserAddressesService implements UserAddressesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UserAddressGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['user_addresses/%1$s', $id],
@@ -109,7 +109,7 @@ final class UserAddressesService implements UserAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'user_addresses',

@@ -44,7 +44,7 @@ final class FqdnsService implements FqdnsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'fqdns',
@@ -65,7 +65,7 @@ final class FqdnsService implements FqdnsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['fqdns/%1$s', $id],
@@ -98,7 +98,7 @@ final class FqdnsService implements FqdnsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['fqdns/%1$s', $id],
@@ -131,7 +131,7 @@ final class FqdnsService implements FqdnsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'fqdns',
@@ -152,7 +152,7 @@ final class FqdnsService implements FqdnsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['fqdns/%1$s', $id],

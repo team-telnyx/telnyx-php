@@ -44,7 +44,7 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
@@ -75,7 +75,7 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],

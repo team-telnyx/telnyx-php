@@ -37,7 +37,7 @@ final class QueuesService implements QueuesContract
         string $queueName,
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['queues/%1$s', $queueName],

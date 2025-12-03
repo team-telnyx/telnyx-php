@@ -54,7 +54,7 @@ final class NetworksService implements NetworksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'networks',
@@ -75,7 +75,7 @@ final class NetworksService implements NetworksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NetworkGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['networks/%1$s', $id],
@@ -103,7 +103,7 @@ final class NetworksService implements NetworksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['networks/%1$s', $id],
@@ -133,7 +133,7 @@ final class NetworksService implements NetworksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'networks',
@@ -154,7 +154,7 @@ final class NetworksService implements NetworksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NetworkDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['networks/%1$s', $id],
@@ -189,7 +189,7 @@ final class NetworksService implements NetworksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['networks/%1$s/network_interfaces', $id],

@@ -30,7 +30,7 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): BulkSimCardActionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['bulk_sim_card_actions/%1$s', $id],
@@ -61,7 +61,7 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'bulk_sim_card_actions',

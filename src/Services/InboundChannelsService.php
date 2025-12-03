@@ -37,7 +37,7 @@ final class InboundChannelsService implements InboundChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: 'inbound_channels',
@@ -57,7 +57,7 @@ final class InboundChannelsService implements InboundChannelsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): InboundChannelListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'inbound_channels',

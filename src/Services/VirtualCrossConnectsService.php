@@ -58,7 +58,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'virtual_cross_connects',
@@ -79,7 +79,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['virtual_cross_connects/%1$s', $id],
@@ -114,7 +114,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['virtual_cross_connects/%1$s', $id],
@@ -144,7 +144,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'virtual_cross_connects',
@@ -165,7 +165,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['virtual_cross_connects/%1$s', $id],

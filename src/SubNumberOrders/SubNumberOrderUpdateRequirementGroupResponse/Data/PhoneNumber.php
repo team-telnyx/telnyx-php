@@ -17,7 +17,7 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Pho
  *   phone_number?: string|null,
  *   phone_number_type?: string|null,
  *   record_type?: string|null,
- *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+ *   regulatory_requirements?: list<\Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\PhoneNumber\RegulatoryRequirement>|null,
  *   requirements_met?: bool|null,
  *   requirements_status?: string|null,
  *   status?: string|null,
@@ -46,8 +46,13 @@ final class PhoneNumber implements BaseModel
     #[Api(optional: true)]
     public ?string $record_type;
 
-    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    /**
+     * @var list<RegulatoryRequirement>|null $regulatory_requirements
+     */
+    #[Api(
+        list: RegulatoryRequirement::class,
+        optional: true,
+    )]
     public ?array $regulatory_requirements;
 
     #[Api(optional: true)]

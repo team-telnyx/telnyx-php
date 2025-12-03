@@ -50,7 +50,7 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'porting/reports',
@@ -71,7 +71,7 @@ final class ReportsService implements ReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ReportGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting/reports/%1$s', $id],
@@ -103,7 +103,7 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting/reports',

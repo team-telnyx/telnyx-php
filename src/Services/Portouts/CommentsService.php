@@ -38,7 +38,7 @@ final class CommentsService implements CommentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['portouts/%1$s/comments', $id],
@@ -59,7 +59,7 @@ final class CommentsService implements CommentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['portouts/%1$s/comments', $id],

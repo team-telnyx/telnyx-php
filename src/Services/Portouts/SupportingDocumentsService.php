@@ -40,7 +40,7 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['portouts/%1$s/supporting_documents', $id],
@@ -61,7 +61,7 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SupportingDocumentListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['portouts/%1$s/supporting_documents', $id],

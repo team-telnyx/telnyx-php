@@ -28,7 +28,7 @@ final class ListService implements ListContract
     public function retrieveAll(
         ?RequestOptions $requestOptions = null
     ): ListGetAllResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'list',
@@ -48,7 +48,7 @@ final class ListService implements ListContract
         string $channelZoneID,
         ?RequestOptions $requestOptions = null
     ): ListGetByZoneResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['list/%1$s', $channelZoneID],

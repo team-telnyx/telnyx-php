@@ -63,7 +63,7 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'legacy/reporting/batch_detail_records/voice',
@@ -84,7 +84,7 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['legacy/reporting/batch_detail_records/voice/%1$s', $id],
@@ -103,7 +103,7 @@ final class VoiceService implements VoiceContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): VoiceListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/batch_detail_records/voice',
@@ -123,7 +123,7 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/batch_detail_records/voice/%1$s', $id],
@@ -142,7 +142,7 @@ final class VoiceService implements VoiceContract
     public function retrieveFields(
         ?RequestOptions $requestOptions = null
     ): VoiceGetFieldsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/batch_detail_records/voice/fields',

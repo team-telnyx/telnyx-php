@@ -44,7 +44,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'wireless_blocklists',
@@ -65,7 +65,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['wireless_blocklists/%1$s', $id],
@@ -94,7 +94,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: 'wireless_blocklists',
@@ -128,7 +128,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'wireless_blocklists',
@@ -149,7 +149,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['wireless_blocklists/%1$s', $id],

@@ -41,7 +41,7 @@ final class SslCertificateService implements SslCertificateContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
@@ -63,7 +63,7 @@ final class SslCertificateService implements SslCertificateContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): SslCertificateGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
@@ -83,7 +83,7 @@ final class SslCertificateService implements SslCertificateContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): SslCertificateDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],

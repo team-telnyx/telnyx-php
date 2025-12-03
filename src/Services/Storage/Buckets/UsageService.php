@@ -42,7 +42,7 @@ final class UsageService implements UsageContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['storage/buckets/%1$s/usage/api', $bucketName],
@@ -63,7 +63,7 @@ final class UsageService implements UsageContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): UsageGetBucketUsageResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['storage/buckets/%1$s/usage/storage', $bucketName],

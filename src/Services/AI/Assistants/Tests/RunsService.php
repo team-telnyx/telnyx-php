@@ -42,7 +42,7 @@ final class RunsService implements RunsContract
         $testID = $parsed['test_id'];
         unset($parsed['test_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/%1$s/runs/%2$s', $testID, $runID],
@@ -72,7 +72,7 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/%1$s/runs', $testID],
@@ -101,7 +101,7 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/tests/%1$s/runs', $testID],

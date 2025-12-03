@@ -36,7 +36,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'mobile_push_credentials',
@@ -57,7 +57,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
     ): PushCredentialResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['mobile_push_credentials/%1$s', $pushCredentialID],
@@ -87,7 +87,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'mobile_push_credentials',
@@ -108,7 +108,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['mobile_push_credentials/%1$s', $pushCredentialID],

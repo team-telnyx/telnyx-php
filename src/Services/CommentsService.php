@@ -44,7 +44,7 @@ final class CommentsService implements CommentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'comments',
@@ -65,7 +65,7 @@ final class CommentsService implements CommentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['comments/%1$s', $id],
@@ -97,7 +97,7 @@ final class CommentsService implements CommentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'comments',
@@ -118,7 +118,7 @@ final class CommentsService implements CommentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentMarkAsReadResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['comments/%1$s/read', $id],

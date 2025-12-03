@@ -57,7 +57,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'room_compositions',
@@ -78,7 +78,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
     ): RoomCompositionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['room_compositions/%1$s', $roomCompositionID],
@@ -116,7 +116,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'room_compositions',
@@ -137,7 +137,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['room_compositions/%1$s', $roomCompositionID],

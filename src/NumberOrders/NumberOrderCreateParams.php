@@ -20,7 +20,7 @@ use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
  *   connection_id?: string,
  *   customer_reference?: string,
  *   messaging_profile_id?: string,
- *   phone_numbers?: list<PhoneNumber>,
+ *   phone_numbers?: list<\Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber>,
  * }
  */
 final class NumberOrderCreateParams implements BaseModel
@@ -53,8 +53,13 @@ final class NumberOrderCreateParams implements BaseModel
     #[Api(optional: true)]
     public ?string $messaging_profile_id;
 
-    /** @var list<PhoneNumber>|null $phone_numbers */
-    #[Api(list: PhoneNumber::class, optional: true)]
+    /**
+     * @var list<PhoneNumber>|null $phone_numbers
+     */
+    #[Api(
+        list: PhoneNumber::class,
+        optional: true,
+    )]
     public ?array $phone_numbers;
 
     public function __construct()

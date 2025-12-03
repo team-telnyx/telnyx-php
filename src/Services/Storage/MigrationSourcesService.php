@@ -44,7 +44,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'storage/migration_sources',
@@ -65,7 +65,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MigrationSourceGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['storage/migration_sources/%1$s', $id],
@@ -84,7 +84,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): MigrationSourceListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'storage/migration_sources',
@@ -104,7 +104,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MigrationSourceDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['storage/migration_sources/%1$s', $id],

@@ -42,7 +42,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'public_internet_gateways',
@@ -63,7 +63,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['public_internet_gateways/%1$s', $id],
@@ -92,7 +92,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'public_internet_gateways',
@@ -113,7 +113,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['public_internet_gateways/%1$s', $id],

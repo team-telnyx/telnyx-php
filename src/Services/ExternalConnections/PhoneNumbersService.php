@@ -43,7 +43,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [
@@ -75,7 +75,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: [
@@ -113,7 +113,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/phone_numbers', $id],

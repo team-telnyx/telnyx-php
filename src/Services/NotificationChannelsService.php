@@ -46,7 +46,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'notification_channels',
@@ -67,7 +67,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['notification_channels/%1$s', $id],
@@ -99,7 +99,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['notification_channels/%1$s', $id],
@@ -139,7 +139,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'notification_channels',
@@ -160,7 +160,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['notification_channels/%1$s', $id],

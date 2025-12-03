@@ -16,7 +16,7 @@ use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status;
  *   field_type?: string|null,
  *   field_value?: string|null,
  *   requirement_id?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: value-of<\Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status>|null,
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
@@ -40,8 +40,13 @@ final class RegulatoryRequirement implements BaseModel
     #[Api(optional: true)]
     public ?string $requirement_id;
 
-    /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    /**
+     * @var value-of<Status>|null $status
+     */
+    #[Api(
+        enum: Status::class,
+        optional: true,
+    )]
     public ?string $status;
 
     #[Api(optional: true)]
@@ -124,8 +129,9 @@ final class RegulatoryRequirement implements BaseModel
     /**
      * @param Status|value-of<Status> $status
      */
-    public function withStatus(Status|string $status): self
-    {
+    public function withStatus(
+        Status|string $status,
+    ): self {
         $obj = clone $this;
         $obj['status'] = $status;
 

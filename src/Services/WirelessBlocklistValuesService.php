@@ -38,7 +38,7 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'wireless_blocklist_values',

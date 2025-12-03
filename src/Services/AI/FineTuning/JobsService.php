@@ -42,7 +42,7 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/fine_tuning/jobs',
@@ -63,7 +63,7 @@ final class JobsService implements JobsContract
         string $jobID,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/fine_tuning/jobs/%1$s', $jobID],
@@ -82,7 +82,7 @@ final class JobsService implements JobsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): JobListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/fine_tuning/jobs',
@@ -102,7 +102,7 @@ final class JobsService implements JobsContract
         string $jobID,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/fine_tuning/jobs/%1$s/cancel', $jobID],

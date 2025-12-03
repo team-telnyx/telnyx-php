@@ -48,7 +48,7 @@ final class VerificationsService implements VerificationsContract
         string $verificationID,
         ?RequestOptions $requestOptions = null
     ): VerificationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['verifications/%1$s', $verificationID],
@@ -81,7 +81,7 @@ final class VerificationsService implements VerificationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'verifications/call',
@@ -111,7 +111,7 @@ final class VerificationsService implements VerificationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'verifications/flashcall',
@@ -144,7 +144,7 @@ final class VerificationsService implements VerificationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'verifications/sms',

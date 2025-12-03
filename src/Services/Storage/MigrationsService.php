@@ -52,7 +52,7 @@ final class MigrationsService implements MigrationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'storage/migrations',
@@ -73,7 +73,7 @@ final class MigrationsService implements MigrationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MigrationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['storage/migrations/%1$s', $id],
@@ -92,7 +92,7 @@ final class MigrationsService implements MigrationsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): MigrationListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'storage/migrations',

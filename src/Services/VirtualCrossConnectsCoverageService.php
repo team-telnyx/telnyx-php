@@ -47,7 +47,7 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'virtual_cross_connects_coverage',

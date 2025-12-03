@@ -43,7 +43,7 @@ final class ActivationJobsService implements ActivationJobsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
@@ -75,7 +75,7 @@ final class ActivationJobsService implements ActivationJobsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
@@ -106,7 +106,7 @@ final class ActivationJobsService implements ActivationJobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/activation_jobs', $id],

@@ -71,7 +71,7 @@ final class FaxesService implements FaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'faxes',
@@ -92,7 +92,7 @@ final class FaxesService implements FaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FaxGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['faxes/%1$s', $id],
@@ -132,7 +132,7 @@ final class FaxesService implements FaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'faxes',
@@ -153,7 +153,7 @@ final class FaxesService implements FaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['faxes/%1$s', $id],

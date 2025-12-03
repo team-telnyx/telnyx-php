@@ -44,7 +44,7 @@ final class InsightsService implements InsightsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/conversations/insights',
@@ -65,7 +65,7 @@ final class InsightsService implements InsightsContract
         string $insightID,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateDetail {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/conversations/insights/%1$s', $insightID],
@@ -98,7 +98,7 @@ final class InsightsService implements InsightsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['ai/conversations/insights/%1$s', $insightID],
@@ -126,7 +126,7 @@ final class InsightsService implements InsightsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/conversations/insights',
@@ -147,7 +147,7 @@ final class InsightsService implements InsightsContract
         string $insightID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/conversations/insights/%1$s', $insightID],

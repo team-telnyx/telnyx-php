@@ -39,7 +39,7 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ledger_billing_group_reports',
@@ -60,7 +60,7 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
         string $id,
         ?RequestOptions $requestOptions = null
     ): LedgerBillingGroupReportGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ledger_billing_group_reports/%1$s', $id],

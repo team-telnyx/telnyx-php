@@ -40,7 +40,7 @@ final class JobsService implements JobsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): JobGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phone_numbers/jobs/%1$s', $id],
@@ -73,7 +73,7 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/jobs',
@@ -101,7 +101,7 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'phone_numbers/jobs/delete_phone_numbers',
@@ -178,7 +178,7 @@ final class JobsService implements JobsContract
         );
         $query_params = ['filter'];
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'phone_numbers/jobs/update_phone_numbers',
@@ -211,7 +211,7 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'phone_numbers/jobs/update_emergency_settings',

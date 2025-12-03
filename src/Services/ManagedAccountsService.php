@@ -59,7 +59,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'managed_accounts',
@@ -80,7 +80,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['managed_accounts/%1$s', $id],
@@ -110,7 +110,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['managed_accounts/%1$s', $id],
@@ -146,7 +146,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'managed_accounts',
@@ -166,7 +166,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
     public function getAllocatableGlobalOutboundChannels(
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'managed_accounts/allocatable_global_outbound_channels',
@@ -196,7 +196,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['managed_accounts/%1$s/update_global_channel_limit', $id],

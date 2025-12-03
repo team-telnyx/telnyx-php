@@ -28,7 +28,7 @@ final class MessagesService implements MessagesContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): MessageListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/conversations/%1$s/messages', $conversationID],

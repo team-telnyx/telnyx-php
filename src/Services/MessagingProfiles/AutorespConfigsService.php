@@ -47,7 +47,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['messaging_profiles/%1$s/autoresp_configs', $profileID],
@@ -78,7 +78,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $profileID = $parsed['profile_id'];
         unset($parsed['profile_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [
@@ -118,7 +118,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $profileID = $parsed['profile_id'];
         unset($parsed['profile_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: [
@@ -155,7 +155,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/autoresp_configs', $profileID],
@@ -186,7 +186,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $profileID = $parsed['profile_id'];
         unset($parsed['profile_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [

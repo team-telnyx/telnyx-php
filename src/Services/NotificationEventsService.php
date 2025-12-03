@@ -38,7 +38,7 @@ final class NotificationEventsService implements NotificationEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'notification_events',

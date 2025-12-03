@@ -40,7 +40,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'access_ip_address',
@@ -61,7 +61,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
     ): AccessIPAddressResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['access_ip_address/%1$s', $accessIPAddressID],
@@ -100,7 +100,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'access_ip_address',
@@ -121,7 +121,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
     ): AccessIPAddressResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['access_ip_address/%1$s', $accessIPAddressID],

@@ -45,7 +45,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'wireguard_interfaces',
@@ -66,7 +66,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['wireguard_interfaces/%1$s', $id],
@@ -95,7 +95,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'wireguard_interfaces',
@@ -116,7 +116,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['wireguard_interfaces/%1$s', $id],

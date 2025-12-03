@@ -41,7 +41,7 @@ final class SpeechToTextService implements SpeechToTextContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'legacy/reporting/batch_detail_records/speech_to_text',
@@ -62,7 +62,7 @@ final class SpeechToTextService implements SpeechToTextContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['legacy/reporting/batch_detail_records/speech_to_text/%1$s', $id],
@@ -81,7 +81,7 @@ final class SpeechToTextService implements SpeechToTextContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): SpeechToTextListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/batch_detail_records/speech_to_text',
@@ -101,7 +101,7 @@ final class SpeechToTextService implements SpeechToTextContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/batch_detail_records/speech_to_text/%1$s', $id],

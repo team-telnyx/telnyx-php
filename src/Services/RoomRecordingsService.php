@@ -32,7 +32,7 @@ final class RoomRecordingsService implements RoomRecordingsContract
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
     ): RoomRecordingGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['room_recordings/%1$s', $roomRecordingID],
@@ -79,7 +79,7 @@ final class RoomRecordingsService implements RoomRecordingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'room_recordings',
@@ -100,7 +100,7 @@ final class RoomRecordingsService implements RoomRecordingsContract
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['room_recordings/%1$s', $roomRecordingID],
@@ -147,7 +147,7 @@ final class RoomRecordingsService implements RoomRecordingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: 'room_recordings',

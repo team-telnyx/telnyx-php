@@ -30,7 +30,7 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
         string $recordingTranscriptionID,
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['recording_transcriptions/%1$s', $recordingTranscriptionID],
@@ -49,7 +49,7 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
     public function list(
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'recording_transcriptions',
@@ -69,7 +69,7 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
         string $recordingTranscriptionID,
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['recording_transcriptions/%1$s', $recordingTranscriptionID],

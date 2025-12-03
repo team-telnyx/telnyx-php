@@ -44,7 +44,7 @@ final class IPsService implements IPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ips',
@@ -65,7 +65,7 @@ final class IPsService implements IPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ips/%1$s', $id],
@@ -95,7 +95,7 @@ final class IPsService implements IPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['ips/%1$s', $id],
@@ -126,7 +126,7 @@ final class IPsService implements IPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ips',
@@ -147,7 +147,7 @@ final class IPsService implements IPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ips/%1$s', $id],

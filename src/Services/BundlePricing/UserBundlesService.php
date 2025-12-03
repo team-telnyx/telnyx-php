@@ -51,7 +51,7 @@ final class UserBundlesService implements UserBundlesContract
         );
         $header_params = ['authorization_bearer' => 'authorization_bearer'];
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'bundle_pricing/user_bundles/bulk',
@@ -81,7 +81,7 @@ final class UserBundlesService implements UserBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
@@ -117,7 +117,7 @@ final class UserBundlesService implements UserBundlesContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'bundle_pricing/user_bundles',
@@ -147,7 +147,7 @@ final class UserBundlesService implements UserBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
@@ -178,7 +178,7 @@ final class UserBundlesService implements UserBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['bundle_pricing/user_bundles/%1$s/resources', $userBundleID],
@@ -213,7 +213,7 @@ final class UserBundlesService implements UserBundlesContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'bundle_pricing/user_bundles/unused',

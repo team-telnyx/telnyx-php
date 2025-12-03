@@ -44,7 +44,7 @@ final class RegulatoryRequirementsService implements RegulatoryRequirementsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'regulatory_requirements',

@@ -81,7 +81,7 @@ final class BrandService implements BrandContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'brand',
@@ -102,7 +102,7 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): BrandGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['brand/%1$s', $brandID],
@@ -156,7 +156,7 @@ final class BrandService implements BrandContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['brand/%1$s', $brandID],
@@ -194,7 +194,7 @@ final class BrandService implements BrandContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'brand',
@@ -215,7 +215,7 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['brand/%1$s', $brandID],
@@ -247,7 +247,7 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): BrandGetFeedbackResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['brand/feedback/%1$s', $brandID],
@@ -267,7 +267,7 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['brand/%1$s/2faEmail', $brandID],
@@ -287,7 +287,7 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): TelnyxBrand {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['brand/%1$s/revet', $brandID],

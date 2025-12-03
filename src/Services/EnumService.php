@@ -33,7 +33,7 @@ final class EnumService implements EnumContract
         Endpoint|string $endpoint,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['enum/%1$s', $endpoint],

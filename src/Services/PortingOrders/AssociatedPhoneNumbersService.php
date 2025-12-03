@@ -44,7 +44,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/associated_phone_numbers', $portingOrderID],
@@ -77,7 +77,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/associated_phone_numbers', $portingOrderID],
@@ -108,7 +108,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         $portingOrderID = $parsed['porting_order_id'];
         unset($parsed['porting_order_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [

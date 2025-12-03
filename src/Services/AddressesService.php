@@ -65,7 +65,7 @@ final class AddressesService implements AddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'addresses',
@@ -86,7 +86,7 @@ final class AddressesService implements AddressesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AddressGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['addresses/%1$s', $id],
@@ -122,7 +122,7 @@ final class AddressesService implements AddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'addresses',
@@ -143,7 +143,7 @@ final class AddressesService implements AddressesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AddressDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['addresses/%1$s', $id],

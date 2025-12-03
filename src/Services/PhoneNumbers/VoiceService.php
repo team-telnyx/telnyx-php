@@ -36,7 +36,7 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phone_numbers/%1$s/voice', $id],
@@ -88,7 +88,7 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s/voice', $id],
@@ -125,7 +125,7 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/voice',

@@ -56,7 +56,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'customer_service_records',
@@ -77,7 +77,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
         string $customerServiceRecordID,
         ?RequestOptions $requestOptions = null
     ): CustomerServiceRecordGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['customer_service_records/%1$s', $customerServiceRecordID],
@@ -117,7 +117,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'customer_service_records',
@@ -147,7 +147,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'customer_service_records/phone_number_coverages',

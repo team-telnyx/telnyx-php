@@ -126,7 +126,7 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/assistants',
@@ -160,7 +160,7 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s', $assistantID],
@@ -226,7 +226,7 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s', $assistantID],
@@ -245,7 +245,7 @@ final class AssistantsService implements AssistantsContract
      */
     public function list(?RequestOptions $requestOptions = null): AssistantsList
     {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/assistants',
@@ -265,7 +265,7 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): AssistantDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/assistants/%1$s', $assistantID],
@@ -295,7 +295,7 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/chat', $assistantID],
@@ -316,7 +316,7 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): InferenceEmbedding {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/clone', $assistantID],
@@ -336,7 +336,7 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/texml', $assistantID],
@@ -365,7 +365,7 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/assistants/import',
@@ -405,7 +405,7 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/chat/sms', $assistantID],

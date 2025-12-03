@@ -33,7 +33,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Type;
  *   messaging_profile_id?: string|null,
  *   parts?: int|null,
  *   received_at?: \DateTimeInterface|null,
- *   record_type?: value-of<RecordType>|null,
+ *   record_type?: value-of<\Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\RecordType>|null,
  *   sent_at?: \DateTimeInterface|null,
  *   tags?: list<string>|null,
  *   tcr_campaign_billable?: bool|null,
@@ -129,7 +129,10 @@ final class Payload implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Api(
+        enum: RecordType::class,
+        optional: true,
+    )]
     public ?string $record_type;
 
     /**
@@ -425,8 +428,9 @@ final class Payload implements BaseModel
      *
      * @param RecordType|value-of<RecordType> $recordType
      */
-    public function withRecordType(RecordType|string $recordType): self
-    {
+    public function withRecordType(
+        RecordType|string $recordType,
+    ): self {
         $obj = clone $this;
         $obj['record_type'] = $recordType;
 

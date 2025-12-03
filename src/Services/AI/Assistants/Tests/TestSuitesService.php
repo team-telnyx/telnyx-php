@@ -36,7 +36,7 @@ final class TestSuitesService implements TestSuitesContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): TestSuiteListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/assistants/tests/test-suites',

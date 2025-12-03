@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name?: string|null,
  *   organization_id?: string|null,
  *   record_type?: string|null,
- *   settings?: Settings|null,
+ *   settings?: \Telnyx\AuthenticationProviders\AuthenticationProvider\Settings|null,
  *   short_name?: string|null,
  *   updated_at?: \DateTimeInterface|null,
  * }
@@ -186,8 +186,9 @@ final class AuthenticationProvider implements BaseModel
     /**
      * The settings associated with the authentication provider.
      */
-    public function withSettings(Settings $settings): self
-    {
+    public function withSettings(
+        Settings $settings
+    ): self {
         $obj = clone $this;
         $obj->settings = $settings;
 

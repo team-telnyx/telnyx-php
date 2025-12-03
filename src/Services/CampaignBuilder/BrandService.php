@@ -39,7 +39,7 @@ final class BrandService implements BrandContract
         $brandID = $parsed['brandId'];
         unset($parsed['brandId']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['campaignBuilder/brand/%1$s/usecase/%2$s', $brandID, $usecase],

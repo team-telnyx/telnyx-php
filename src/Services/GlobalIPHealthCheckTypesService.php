@@ -27,7 +27,7 @@ final class GlobalIPHealthCheckTypesService implements GlobalIPHealthCheckTypesC
     public function list(
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckTypeListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'global_ip_health_check_types',

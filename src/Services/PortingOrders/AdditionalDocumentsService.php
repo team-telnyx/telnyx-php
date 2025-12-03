@@ -44,7 +44,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/additional_documents', $id],
@@ -77,7 +77,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/additional_documents', $id],
@@ -108,7 +108,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [

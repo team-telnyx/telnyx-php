@@ -39,7 +39,7 @@ final class TextToSpeechService implements TextToSpeechContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'text-to-speech/speech',
@@ -71,7 +71,7 @@ final class TextToSpeechService implements TextToSpeechContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'text-to-speech/voices',

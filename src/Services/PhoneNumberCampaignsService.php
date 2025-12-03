@@ -42,7 +42,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'phone_number_campaigns',
@@ -63,7 +63,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phone_number_campaigns/%1$s', $phoneNumber],
@@ -93,7 +93,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['phone_number_campaigns/%1$s', $phoneNumber],
@@ -131,7 +131,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_number_campaigns',
@@ -152,7 +152,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['phone_number_campaigns/%1$s', $phoneNumber],

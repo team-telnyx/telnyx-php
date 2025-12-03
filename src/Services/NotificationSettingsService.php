@@ -45,7 +45,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'notification_settings',
@@ -66,7 +66,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['notification_settings/%1$s', $id],
@@ -105,7 +105,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'notification_settings',
@@ -126,7 +126,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['notification_settings/%1$s', $id],

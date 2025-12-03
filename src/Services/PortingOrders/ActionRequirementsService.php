@@ -48,7 +48,7 @@ final class ActionRequirementsService implements ActionRequirementsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/action_requirements', $portingOrderID],
@@ -81,7 +81,7 @@ final class ActionRequirementsService implements ActionRequirementsContract
         $portingOrderID = $parsed['porting_order_id'];
         unset($parsed['porting_order_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [

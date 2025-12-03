@@ -44,7 +44,7 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'global_ip_health_checks',
@@ -65,7 +65,7 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['global_ip_health_checks/%1$s', $id],
@@ -94,7 +94,7 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'global_ip_health_checks',
@@ -115,7 +115,7 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['global_ip_health_checks/%1$s', $id],

@@ -28,7 +28,7 @@ final class CountryCoverageService implements CountryCoverageContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): CountryCoverageGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'country_coverage',
@@ -48,7 +48,7 @@ final class CountryCoverageService implements CountryCoverageContract
         string $countryCode,
         ?RequestOptions $requestOptions = null
     ): CountryCoverageGetCountryResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['country_coverage/countries/%1$s', $countryCode],
