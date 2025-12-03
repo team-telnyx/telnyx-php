@@ -9,12 +9,12 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Meta;
 
 /**
  * @phpstan-type WebhookDeliveryListResponseShape = array{
- *   data?: list<Data>|null, meta?: Meta|null
+ *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
  * }
  */
 final class WebhookDeliveryListResponse implements BaseModel, ResponseConverter
@@ -29,7 +29,7 @@ final class WebhookDeliveryListResponse implements BaseModel, ResponseConverter
     public ?array $data;
 
     #[Api(optional: true)]
-    public ?Meta $meta;
+    public ?PaginationMetaSimple $meta;
 
     public function __construct()
     {
@@ -43,8 +43,10 @@ final class WebhookDeliveryListResponse implements BaseModel, ResponseConverter
      *
      * @param list<Data> $data
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        ?PaginationMetaSimple $meta = null
+    ): self {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
@@ -64,7 +66,7 @@ final class WebhookDeliveryListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(PaginationMetaSimple $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;
