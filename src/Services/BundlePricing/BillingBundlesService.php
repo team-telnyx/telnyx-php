@@ -39,7 +39,7 @@ final class BillingBundlesService implements BillingBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['bundle_pricing/billing_bundles/%1$s', $bundleID],
@@ -75,7 +75,7 @@ final class BillingBundlesService implements BillingBundlesContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'bundle_pricing/billing_bundles',

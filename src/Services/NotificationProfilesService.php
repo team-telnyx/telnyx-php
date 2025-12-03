@@ -42,7 +42,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'notification_profiles',
@@ -63,7 +63,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['notification_profiles/%1$s', $id],
@@ -91,7 +91,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['notification_profiles/%1$s', $id],
@@ -121,7 +121,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'notification_profiles',
@@ -142,7 +142,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['notification_profiles/%1$s', $id],

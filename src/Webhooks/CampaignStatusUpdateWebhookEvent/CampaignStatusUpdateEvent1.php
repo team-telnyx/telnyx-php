@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CampaignStatusUpdateEventShape = array{
+ * @phpstan-type CampaignStatusUpdateEvent1Shape = array{
  *   brandId?: string|null,
  *   campaignId?: string|null,
  *   createDate?: string|null,
@@ -17,9 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   isTMobileRegistered?: bool|null,
  * }
  */
-final class CampaignStatusUpdateEvent implements BaseModel
+final class CampaignStatusUpdateEvent1 implements BaseModel
 {
-    /** @use SdkModel<CampaignStatusUpdateEventShape> */
+    /** @use SdkModel<CampaignStatusUpdateEvent1Shape> */
     use SdkModel;
 
     /**

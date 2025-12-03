@@ -65,7 +65,7 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'reports/mdrs',
@@ -106,7 +106,7 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'reports/wdrs',

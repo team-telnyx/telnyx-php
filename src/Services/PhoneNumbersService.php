@@ -79,7 +79,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phone_numbers/%1$s', $id],
@@ -114,7 +114,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s', $id],
@@ -164,7 +164,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers',
@@ -185,7 +185,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['phone_numbers/%1$s', $id],
@@ -235,7 +235,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/slim',

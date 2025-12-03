@@ -38,7 +38,7 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['documents/%1$s', $id],
@@ -68,7 +68,7 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['documents/%1$s', $id],
@@ -106,7 +106,7 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'documents',
@@ -127,7 +127,7 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['documents/%1$s', $id],
@@ -147,7 +147,7 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['documents/%1$s/download', $id],
@@ -168,7 +168,7 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentGenerateDownloadLinkResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['documents/%1$s/download_link', $id],
@@ -193,7 +193,7 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'documents?content-type=multipart',
@@ -219,7 +219,7 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'documents',

@@ -46,7 +46,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['dialogflow_connections/%1$s', $connectionID],
@@ -67,7 +67,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): DialogflowConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['dialogflow_connections/%1$s', $connectionID],
@@ -101,7 +101,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['dialogflow_connections/%1$s', $connectionID],
@@ -122,7 +122,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['dialogflow_connections/%1$s', $connectionID],

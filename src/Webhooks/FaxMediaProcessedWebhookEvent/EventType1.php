@@ -7,7 +7,7 @@ namespace Telnyx\Webhooks\FaxMediaProcessedWebhookEvent;
 /**
  * The type of event being delivered.
  */
-enum EventType: string
+enum EventType1: string
 {
     case FAX_MEDIA_PROCESSED = 'fax.media.processed';
 }

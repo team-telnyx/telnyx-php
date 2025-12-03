@@ -18,7 +18,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status;
  *   finished_at?: \DateTimeInterface|null,
  *   http?: HTTP|null,
  *   started_at?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   status?: value-of<\Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status>|null,
  * }
  */
 final class Attempt implements BaseModel
@@ -52,8 +52,13 @@ final class Attempt implements BaseModel
     #[Api(optional: true)]
     public ?\DateTimeInterface $started_at;
 
-    /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    /**
+     * @var value-of<Status>|null $status
+     */
+    #[Api(
+        enum: Status::class,
+        optional: true,
+    )]
     public ?string $status;
 
     public function __construct()
@@ -136,8 +141,9 @@ final class Attempt implements BaseModel
     /**
      * @param Status|value-of<Status> $status
      */
-    public function withStatus(Status|string $status): self
-    {
+    public function withStatus(
+        Status|string $status,
+    ): self {
         $obj = clone $this;
         $obj['status'] = $status;
 

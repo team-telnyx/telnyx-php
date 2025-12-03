@@ -29,7 +29,7 @@ final class ConnectionsService implements ConnectionsContract
         string $userConnectionID,
         ?RequestOptions $requestOptions = null
     ): ConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/integrations/connections/%1$s', $userConnectionID],
@@ -48,7 +48,7 @@ final class ConnectionsService implements ConnectionsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): ConnectionListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/integrations/connections',
@@ -68,7 +68,7 @@ final class ConnectionsService implements ConnectionsContract
         string $userConnectionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/integrations/connections/%1$s', $userConnectionID],

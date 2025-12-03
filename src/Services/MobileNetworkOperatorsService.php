@@ -46,7 +46,7 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'mobile_network_operators',

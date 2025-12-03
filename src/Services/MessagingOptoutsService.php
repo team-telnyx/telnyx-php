@@ -43,7 +43,7 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'messaging_optouts',

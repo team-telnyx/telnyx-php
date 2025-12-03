@@ -67,7 +67,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'call_control_applications',
@@ -88,7 +88,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['call_control_applications/%1$s', $id],
@@ -139,7 +139,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['call_control_applications/%1$s', $id],
@@ -189,7 +189,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'call_control_applications',
@@ -210,7 +210,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['call_control_applications/%1$s', $id],

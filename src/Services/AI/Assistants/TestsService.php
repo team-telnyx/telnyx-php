@@ -65,7 +65,7 @@ final class TestsService implements TestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/assistants/tests',
@@ -86,7 +86,7 @@ final class TestsService implements TestsContract
         string $testID,
         ?RequestOptions $requestOptions = null
     ): AssistantTest {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/%1$s', $testID],
@@ -123,7 +123,7 @@ final class TestsService implements TestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['ai/assistants/tests/%1$s', $testID],
@@ -156,7 +156,7 @@ final class TestsService implements TestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/assistants/tests',
@@ -177,7 +177,7 @@ final class TestsService implements TestsContract
         string $testID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/assistants/tests/%1$s', $testID],

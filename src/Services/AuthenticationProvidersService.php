@@ -54,7 +54,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'authentication_providers',
@@ -75,7 +75,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['authentication_providers/%1$s', $id],
@@ -114,7 +114,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['authentication_providers/%1$s', $id],
@@ -144,7 +144,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'authentication_providers',
@@ -165,7 +165,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['authentication_providers/%1$s', $id],

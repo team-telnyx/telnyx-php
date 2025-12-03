@@ -47,7 +47,7 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'legacy/reporting/usage_reports/messaging',
@@ -69,7 +69,7 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['legacy/reporting/usage_reports/messaging/%1$s', $id],
@@ -96,7 +96,7 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/messaging',
@@ -117,7 +117,7 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/usage_reports/messaging/%1$s', $id],

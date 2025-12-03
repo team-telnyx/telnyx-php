@@ -79,7 +79,7 @@ final class RequestsService implements RequestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messaging_tollfree/verification/requests',
@@ -100,7 +100,7 @@ final class RequestsService implements RequestsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VerificationRequestStatus {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
@@ -161,7 +161,7 @@ final class RequestsService implements RequestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
@@ -196,7 +196,7 @@ final class RequestsService implements RequestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'messaging_tollfree/verification/requests',
@@ -223,7 +223,7 @@ final class RequestsService implements RequestsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],

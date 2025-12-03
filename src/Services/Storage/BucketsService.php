@@ -59,7 +59,7 @@ final class BucketsService implements BucketsContract
         $bucketName = $parsed['bucketName'];
         unset($parsed['bucketName']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [

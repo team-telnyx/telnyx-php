@@ -43,7 +43,7 @@ final class AuditEventsService implements AuditEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'audit_events',

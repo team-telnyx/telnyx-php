@@ -50,7 +50,7 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid = $parsed['conference_sid'];
         unset($parsed['conference_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [
@@ -101,7 +101,7 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid = $parsed['conference_sid'];
         unset($parsed['conference_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [
@@ -145,7 +145,7 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid = $parsed['conference_sid'];
         unset($parsed['conference_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [
@@ -228,7 +228,7 @@ final class ParticipantsService implements ParticipantsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [
@@ -264,7 +264,7 @@ final class ParticipantsService implements ParticipantsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [

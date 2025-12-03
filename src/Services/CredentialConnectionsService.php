@@ -106,7 +106,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'credential_connections',
@@ -127,7 +127,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['credential_connections/%1$s', $id],
@@ -204,7 +204,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['credential_connections/%1$s', $id],
@@ -240,7 +240,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'credential_connections',
@@ -261,7 +261,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['credential_connections/%1$s', $id],

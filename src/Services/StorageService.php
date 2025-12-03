@@ -50,7 +50,7 @@ final class StorageService implements StorageContract
     public function listMigrationSourceCoverage(
         ?RequestOptions $requestOptions = null
     ): StorageListMigrationSourceCoverageResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'storage/migration_source_coverage',

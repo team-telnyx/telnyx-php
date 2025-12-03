@@ -59,7 +59,7 @@ final class CallEventsService implements CallEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'call_events',

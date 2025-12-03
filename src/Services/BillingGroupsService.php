@@ -42,7 +42,7 @@ final class BillingGroupsService implements BillingGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'billing_groups',
@@ -63,7 +63,7 @@ final class BillingGroupsService implements BillingGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): BillingGroupGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['billing_groups/%1$s', $id],
@@ -91,7 +91,7 @@ final class BillingGroupsService implements BillingGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['billing_groups/%1$s', $id],
@@ -121,7 +121,7 @@ final class BillingGroupsService implements BillingGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'billing_groups',
@@ -142,7 +142,7 @@ final class BillingGroupsService implements BillingGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): BillingGroupDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['billing_groups/%1$s', $id],

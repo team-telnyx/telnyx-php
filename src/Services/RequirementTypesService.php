@@ -30,7 +30,7 @@ final class RequirementTypesService implements RequirementTypesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementTypeGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['requirement_types/%1$s', $id],
@@ -60,7 +60,7 @@ final class RequirementTypesService implements RequirementTypesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'requirement_types',

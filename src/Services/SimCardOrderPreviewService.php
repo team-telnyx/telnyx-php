@@ -38,7 +38,7 @@ final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'sim_card_order_preview',

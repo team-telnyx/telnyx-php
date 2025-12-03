@@ -41,7 +41,7 @@ final class InsightGroupsService implements InsightGroupsContract
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateGroupDetail {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/conversations/insight-groups/%1$s', $groupID],
@@ -71,7 +71,7 @@ final class InsightGroupsService implements InsightGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['ai/conversations/insight-groups/%1$s', $groupID],
@@ -92,7 +92,7 @@ final class InsightGroupsService implements InsightGroupsContract
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/conversations/insight-groups/%1$s', $groupID],
@@ -121,7 +121,7 @@ final class InsightGroupsService implements InsightGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/conversations/insight-groups',
@@ -151,7 +151,7 @@ final class InsightGroupsService implements InsightGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/conversations/insight-groups',

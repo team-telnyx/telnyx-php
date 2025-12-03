@@ -132,7 +132,7 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'porting_orders',
@@ -161,7 +161,7 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s', $id],
@@ -226,7 +226,7 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['porting_orders/%1$s', $id],
@@ -278,7 +278,7 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting_orders',
@@ -299,7 +299,7 @@ final class PortingOrdersService implements PortingOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['porting_orders/%1$s', $id],
@@ -319,7 +319,7 @@ final class PortingOrdersService implements PortingOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetAllowedFocWindowsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/allowed_foc_windows', $id],
@@ -338,7 +338,7 @@ final class PortingOrdersService implements PortingOrdersContract
     public function retrieveExceptionTypes(
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetExceptionTypesResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting_orders/exception_types',
@@ -368,7 +368,7 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/loa_template', $id],
@@ -400,7 +400,7 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/requirements', $id],
@@ -421,7 +421,7 @@ final class PortingOrdersService implements PortingOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetSubRequestResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/sub_request', $id],

@@ -38,7 +38,7 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers_regulatory_requirements',

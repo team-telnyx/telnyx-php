@@ -49,7 +49,7 @@ final class NumberOrdersService implements NumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'number_orders',
@@ -70,7 +70,7 @@ final class NumberOrdersService implements NumberOrdersContract
         string $numberOrderID,
         ?RequestOptions $requestOptions = null
     ): NumberOrderGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['number_orders/%1$s', $numberOrderID],
@@ -103,7 +103,7 @@ final class NumberOrdersService implements NumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['number_orders/%1$s', $numberOrderID],
@@ -140,7 +140,7 @@ final class NumberOrdersService implements NumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'number_orders',

@@ -48,7 +48,7 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'legacy/reporting/usage_reports/voice',
@@ -70,7 +70,7 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['legacy/reporting/usage_reports/voice/%1$s', $id],
@@ -97,7 +97,7 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/voice',
@@ -118,7 +118,7 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/usage_reports/voice/%1$s', $id],

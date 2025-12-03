@@ -39,7 +39,7 @@ final class ChannelZonesService implements ChannelZonesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['channel_zones/%1$s', $channelZoneID],
@@ -69,7 +69,7 @@ final class ChannelZonesService implements ChannelZonesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'channel_zones',

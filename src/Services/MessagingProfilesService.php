@@ -83,7 +83,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messaging_profiles',
@@ -104,7 +104,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s', $id],
@@ -159,7 +159,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['messaging_profiles/%1$s', $id],
@@ -189,7 +189,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'messaging_profiles',
@@ -210,7 +210,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['messaging_profiles/%1$s', $id],
@@ -240,7 +240,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/phone_numbers', $id],
@@ -271,7 +271,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/short_codes', $id],

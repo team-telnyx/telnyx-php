@@ -44,7 +44,7 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/clusters/%1$s', $taskID],
@@ -72,7 +72,7 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/clusters',
@@ -93,7 +93,7 @@ final class ClustersService implements ClustersContract
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/clusters/%1$s', $taskID],
@@ -126,7 +126,7 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/clusters',
@@ -155,7 +155,7 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/clusters/%1$s/graph', $taskID],

@@ -34,7 +34,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         string $numberOrderPhoneNumberID,
         ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['number_order_phone_numbers/%1$s', $numberOrderPhoneNumberID],
@@ -63,7 +63,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'number_order_phone_numbers',
@@ -94,7 +94,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['number_order_phone_numbers/%1$s/requirement_group', $id],
@@ -127,7 +127,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['number_order_phone_numbers/%1$s', $numberOrderPhoneNumberID],

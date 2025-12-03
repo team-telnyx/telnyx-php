@@ -43,7 +43,7 @@ final class NumberLookupService implements NumberLookupContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'legacy/reporting/usage_reports/number_lookup',
@@ -65,7 +65,7 @@ final class NumberLookupService implements NumberLookupContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NumberLookupGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
@@ -84,7 +84,7 @@ final class NumberLookupService implements NumberLookupContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): NumberLookupListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/number_lookup',
@@ -104,7 +104,7 @@ final class NumberLookupService implements NumberLookupContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],

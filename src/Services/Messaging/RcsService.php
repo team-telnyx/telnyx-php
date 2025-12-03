@@ -52,7 +52,7 @@ final class RcsService implements RcsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['messaging/rcs/test_number_invite/%1$s/%2$s', $id, $phoneNumber],
@@ -81,7 +81,7 @@ final class RcsService implements RcsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messaging/rcs/bulk_capabilities',
@@ -112,7 +112,7 @@ final class RcsService implements RcsContract
         $agentID = $parsed['agent_id'];
         unset($parsed['agent_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging/rcs/capabilities/%1$s/%2$s', $agentID, $phoneNumber],

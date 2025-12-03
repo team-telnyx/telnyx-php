@@ -7,11 +7,11 @@ namespace Telnyx\Webhooks\FaxDeliveredWebhookEvent;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Direction;
-use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
+use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload1\Direction;
+use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload1\Status;
 
 /**
- * @phpstan-type PayloadShape = array{
+ * @phpstan-type Payload1Shape = array{
  *   call_duration_secs?: int|null,
  *   client_state?: string|null,
  *   connection_id?: string|null,
@@ -26,9 +26,9 @@ use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
  *   user_id?: string|null,
  * }
  */
-final class Payload implements BaseModel
+final class Payload1 implements BaseModel
 {
-    /** @use SdkModel<PayloadShape> */
+    /** @use SdkModel<Payload1Shape> */
     use SdkModel;
 
     /**

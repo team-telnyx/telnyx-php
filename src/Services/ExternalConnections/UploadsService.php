@@ -51,7 +51,7 @@ final class UploadsService implements UploadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['external_connections/%1$s/uploads', $id],
@@ -82,7 +82,7 @@ final class UploadsService implements UploadsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/uploads/%2$s', $id, $ticketID],
@@ -120,7 +120,7 @@ final class UploadsService implements UploadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/uploads', $id],
@@ -141,7 +141,7 @@ final class UploadsService implements UploadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UploadPendingCountResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/uploads/status', $id],
@@ -161,7 +161,7 @@ final class UploadsService implements UploadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UploadRefreshStatusResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['external_connections/%1$s/uploads/refresh', $id],
@@ -191,7 +191,7 @@ final class UploadsService implements UploadsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['external_connections/%1$s/uploads/%2$s/retry', $id, $ticketID],

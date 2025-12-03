@@ -55,7 +55,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'phone_numbers/csv_downloads',
@@ -76,7 +76,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phone_numbers/csv_downloads/%1$s', $id],
@@ -105,7 +105,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/csv_downloads',

@@ -39,7 +39,7 @@ final class InvoicesService implements InvoicesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['invoices/%1$s', $id],
@@ -69,7 +69,7 @@ final class InvoicesService implements InvoicesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'invoices',

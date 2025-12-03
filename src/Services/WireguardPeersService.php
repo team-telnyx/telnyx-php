@@ -44,7 +44,7 @@ final class WireguardPeersService implements WireguardPeersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'wireguard_peers',
@@ -65,7 +65,7 @@ final class WireguardPeersService implements WireguardPeersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardPeerGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['wireguard_peers/%1$s', $id],
@@ -93,7 +93,7 @@ final class WireguardPeersService implements WireguardPeersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['wireguard_peers/%1$s', $id],
@@ -124,7 +124,7 @@ final class WireguardPeersService implements WireguardPeersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'wireguard_peers',
@@ -145,7 +145,7 @@ final class WireguardPeersService implements WireguardPeersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardPeerDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['wireguard_peers/%1$s', $id],
@@ -165,7 +165,7 @@ final class WireguardPeersService implements WireguardPeersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['wireguard_peers/%1$s/config', $id],

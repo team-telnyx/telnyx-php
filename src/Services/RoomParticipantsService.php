@@ -30,7 +30,7 @@ final class RoomParticipantsService implements RoomParticipantsContract
         string $roomParticipantID,
         ?RequestOptions $requestOptions = null
     ): RoomParticipantGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['room_participants/%1$s', $roomParticipantID],
@@ -78,7 +78,7 @@ final class RoomParticipantsService implements RoomParticipantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'room_participants',

@@ -27,7 +27,7 @@ final class BalanceService implements BalanceContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): BalanceGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'balance',

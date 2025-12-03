@@ -52,7 +52,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'verified_numbers',
@@ -73,7 +73,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['verified_numbers/%1$s', $phoneNumber],
@@ -102,7 +102,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'verified_numbers',
@@ -123,7 +123,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['verified_numbers/%1$s', $phoneNumber],

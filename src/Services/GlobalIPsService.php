@@ -42,7 +42,7 @@ final class GlobalIPsService implements GlobalIPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'global_ips',
@@ -63,7 +63,7 @@ final class GlobalIPsService implements GlobalIPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['global_ips/%1$s', $id],
@@ -90,7 +90,7 @@ final class GlobalIPsService implements GlobalIPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'global_ips',
@@ -111,7 +111,7 @@ final class GlobalIPsService implements GlobalIPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['global_ips/%1$s', $id],

@@ -39,7 +39,7 @@ final class RcsService implements RcsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messages/rcs/deeplinks/%1$s', $agentID],

@@ -50,7 +50,7 @@ final class MessagesService implements MessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessageGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messages/%1$s', $id],
@@ -70,7 +70,7 @@ final class MessagesService implements MessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessageCancelScheduledResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['messages/%1$s', $id],
@@ -114,7 +114,7 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/schedule',
@@ -159,7 +159,7 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages',
@@ -196,7 +196,7 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/group_mms',
@@ -235,7 +235,7 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/long_code',
@@ -274,7 +274,7 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/number_pool',
@@ -313,7 +313,7 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/short_code',

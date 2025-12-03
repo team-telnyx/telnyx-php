@@ -43,7 +43,7 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: 'payment/auto_recharge_prefs',
@@ -63,7 +63,7 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): AutoRechargePrefListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'payment/auto_recharge_prefs',

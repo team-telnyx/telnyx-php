@@ -44,7 +44,7 @@ final class VerificationCodesService implements VerificationCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/verification_codes', $id],
@@ -75,7 +75,7 @@ final class VerificationCodesService implements VerificationCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/verification_codes/send', $id],
@@ -106,7 +106,7 @@ final class VerificationCodesService implements VerificationCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/verification_codes/verify', $id],

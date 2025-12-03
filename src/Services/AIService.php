@@ -94,7 +94,7 @@ final class AIService implements AIContract
     public function retrieveModels(
         ?RequestOptions $requestOptions = null
     ): AIGetModelsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/models',
@@ -130,7 +130,7 @@ final class AIService implements AIContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/summarize',

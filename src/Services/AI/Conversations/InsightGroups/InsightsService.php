@@ -39,7 +39,7 @@ final class InsightsService implements InsightsContract
         $groupID = $parsed['group_id'];
         unset($parsed['group_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [
@@ -73,7 +73,7 @@ final class InsightsService implements InsightsContract
         $groupID = $parsed['group_id'];
         unset($parsed['group_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: [

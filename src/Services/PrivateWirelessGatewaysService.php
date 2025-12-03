@@ -42,7 +42,7 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'private_wireless_gateways',
@@ -63,7 +63,7 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['private_wireless_gateways/%1$s', $id],
@@ -98,7 +98,7 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'private_wireless_gateways',
@@ -119,7 +119,7 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['private_wireless_gateways/%1$s', $id],

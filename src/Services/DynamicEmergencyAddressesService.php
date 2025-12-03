@@ -52,7 +52,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'dynamic_emergency_addresses',
@@ -73,7 +73,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['dynamic_emergency_addresses/%1$s', $id],
@@ -105,7 +105,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'dynamic_emergency_addresses',
@@ -126,7 +126,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['dynamic_emergency_addresses/%1$s', $id],

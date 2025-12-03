@@ -149,7 +149,7 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'calls',
@@ -170,7 +170,7 @@ final class CallsService implements CallsContract
         string $callControlID,
         ?RequestOptions $requestOptions = null
     ): CallGetStatusResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['calls/%1$s', $callControlID],

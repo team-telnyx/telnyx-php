@@ -28,7 +28,7 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['messaging_hosted_numbers/%1$s', $id],

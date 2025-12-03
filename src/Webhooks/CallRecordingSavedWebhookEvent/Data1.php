@@ -7,12 +7,12 @@ namespace Telnyx\Webhooks\CallRecordingSavedWebhookEvent;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\RecordType;
+use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data1\EventType;
+use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data1\Payload;
+use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data1\RecordType;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type Data1Shape = array{
  *   id?: string|null,
  *   event_type?: value-of<EventType>|null,
  *   occurred_at?: \DateTimeInterface|null,
@@ -20,9 +20,9 @@ use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\RecordType;
  *   record_type?: value-of<RecordType>|null,
  * }
  */
-final class Data implements BaseModel
+final class Data1 implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<Data1Shape> */
     use SdkModel;
 
     /**

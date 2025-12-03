@@ -67,7 +67,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'verify_profiles',
@@ -88,7 +88,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileData {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['verify_profiles/%1$s', $verifyProfileID],
@@ -140,7 +140,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['verify_profiles/%1$s', $verifyProfileID],
@@ -170,7 +170,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'verify_profiles',
@@ -191,7 +191,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileData {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['verify_profiles/%1$s', $verifyProfileID],
@@ -218,7 +218,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'verify_profiles/templates',
@@ -238,7 +238,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
     public function retrieveTemplates(
         ?RequestOptions $requestOptions = null
     ): VerifyProfileGetTemplatesResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'verify_profiles/templates',
@@ -266,7 +266,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['verify_profiles/templates/%1$s', $templateID],

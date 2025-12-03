@@ -52,7 +52,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'v2/mobile_voice_connections',
@@ -73,7 +73,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobileVoiceConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['v2/mobile_voice_connections/%1$s', $id],
@@ -111,7 +111,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['v2/mobile_voice_connections/%1$s', $id],
@@ -144,7 +144,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'v2/mobile_voice_connections',
@@ -165,7 +165,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobileVoiceConnectionDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['v2/mobile_voice_connections/%1$s', $id],

@@ -57,7 +57,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'fax_applications',
@@ -78,7 +78,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['fax_applications/%1$s', $id],
@@ -121,7 +121,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['fax_applications/%1$s', $id],
@@ -156,7 +156,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'fax_applications',
@@ -177,7 +177,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['fax_applications/%1$s', $id],

@@ -38,7 +38,7 @@ final class MessagingURLDomainsService implements MessagingURLDomainsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'messaging_url_domains',

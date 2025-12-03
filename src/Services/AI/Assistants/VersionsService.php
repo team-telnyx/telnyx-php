@@ -53,7 +53,7 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
@@ -121,7 +121,7 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
@@ -142,7 +142,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): AssistantsList {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/versions', $assistantID],
@@ -172,7 +172,7 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
@@ -202,7 +202,7 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [

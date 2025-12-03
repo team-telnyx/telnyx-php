@@ -43,7 +43,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'phoneNumberAssignmentByProfile',
@@ -74,7 +74,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phoneNumberAssignmentByProfile/%1$s/phoneNumbers', $taskID],
@@ -95,7 +95,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberAssignmentByProfileGetStatusResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phoneNumberAssignmentByProfile/%1$s', $taskID],

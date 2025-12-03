@@ -42,7 +42,7 @@ final class RegisterService implements RegisterContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'actions/register/sim_cards',

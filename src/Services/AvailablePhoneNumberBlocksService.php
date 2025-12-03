@@ -43,7 +43,7 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'available_phone_number_blocks',

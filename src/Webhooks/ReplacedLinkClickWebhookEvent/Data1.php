@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type Data1Shape = array{
  *   message_id?: string|null,
  *   record_type?: string|null,
  *   time_clicked?: \DateTimeInterface|null,
@@ -17,9 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   url?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class Data1 implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<Data1Shape> */
     use SdkModel;
 
     /**

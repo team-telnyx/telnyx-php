@@ -7,20 +7,20 @@ namespace Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent\CampaignSuspendedEvent\Status;
-use Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent\CampaignSuspendedEvent\Type;
+use Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent\CampaignSuspendedEvent1\Status;
+use Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent\CampaignSuspendedEvent1\Type;
 
 /**
- * @phpstan-type CampaignSuspendedEventShape = array{
+ * @phpstan-type CampaignSuspendedEvent1Shape = array{
  *   campaignId?: string|null,
  *   description?: string|null,
  *   status?: value-of<Status>|null,
  *   type?: value-of<Type>|null,
  * }
  */
-final class CampaignSuspendedEvent implements BaseModel
+final class CampaignSuspendedEvent1 implements BaseModel
 {
-    /** @use SdkModel<CampaignSuspendedEventShape> */
+    /** @use SdkModel<CampaignSuspendedEvent1Shape> */
     use SdkModel;
 
     /**

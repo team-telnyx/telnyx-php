@@ -61,7 +61,7 @@ final class UsageReportsService implements UsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/speech_to_text',

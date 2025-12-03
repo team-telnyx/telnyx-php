@@ -41,7 +41,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'siprec_connectors',
@@ -62,7 +62,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         string $connectorName,
         ?RequestOptions $requestOptions = null
     ): SiprecConnectorGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['siprec_connectors/%1$s', $connectorName],
@@ -92,7 +92,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['siprec_connectors/%1$s', $connectorName],
@@ -113,7 +113,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         string $connectorName,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['siprec_connectors/%1$s', $connectorName],

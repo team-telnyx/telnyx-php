@@ -35,7 +35,7 @@ final class ExternalVettingService implements ExternalVettingContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['brand/%1$s/externalVetting', $brandID],
@@ -67,7 +67,7 @@ final class ExternalVettingService implements ExternalVettingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['brand/%1$s/externalVetting', $brandID],
@@ -98,7 +98,7 @@ final class ExternalVettingService implements ExternalVettingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['brand/%1$s/externalVetting', $brandID],

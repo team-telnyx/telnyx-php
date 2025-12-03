@@ -81,7 +81,7 @@ final class CampaignBuilderService implements CampaignBuilderContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'campaignBuilder',

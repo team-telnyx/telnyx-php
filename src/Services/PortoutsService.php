@@ -65,7 +65,7 @@ final class PortoutsService implements PortoutsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PortoutGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['portouts/%1$s', $id],
@@ -112,7 +112,7 @@ final class PortoutsService implements PortoutsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'portouts',
@@ -143,7 +143,7 @@ final class PortoutsService implements PortoutsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['portouts/rejections/%1$s', $portoutID],
@@ -177,7 +177,7 @@ final class PortoutsService implements PortoutsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['portouts/%1$s/%2$s', $id, $status],

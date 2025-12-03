@@ -76,7 +76,7 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/embeddings',
@@ -102,7 +102,7 @@ final class EmbeddingsService implements EmbeddingsContract
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): EmbeddingGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/embeddings/%1$s', $taskID],
@@ -129,7 +129,7 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/embeddings',
@@ -167,7 +167,7 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/embeddings/similarity-search',
@@ -195,7 +195,7 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/embeddings/url',

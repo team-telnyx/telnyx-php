@@ -29,7 +29,7 @@ final class BucketsService implements BucketsContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): BucketGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/embeddings/buckets/%1$s', $bucketName],
@@ -48,7 +48,7 @@ final class BucketsService implements BucketsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): BucketListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/embeddings/buckets',
@@ -68,7 +68,7 @@ final class BucketsService implements BucketsContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/embeddings/buckets/%1$s', $bucketName],

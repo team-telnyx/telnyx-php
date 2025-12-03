@@ -38,7 +38,7 @@ final class IntegrationsService implements IntegrationsContract
         string $integrationID,
         ?RequestOptions $requestOptions = null
     ): IntegrationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/integrations/%1$s', $integrationID],
@@ -57,7 +57,7 @@ final class IntegrationsService implements IntegrationsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): IntegrationListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/integrations',

@@ -111,7 +111,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'fqdn_connections',
@@ -132,7 +132,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['fqdn_connections/%1$s', $id],
@@ -220,7 +220,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['fqdn_connections/%1$s', $id],
@@ -256,7 +256,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'fqdn_connections',
@@ -277,7 +277,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['fqdn_connections/%1$s', $id],

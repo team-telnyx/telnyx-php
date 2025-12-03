@@ -61,7 +61,7 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'legacy/reporting/batch_detail_records/messaging',
@@ -82,7 +82,7 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['legacy/reporting/batch_detail_records/messaging/%1$s', $id],
@@ -101,7 +101,7 @@ final class MessagingService implements MessagingContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/batch_detail_records/messaging',
@@ -121,7 +121,7 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/batch_detail_records/messaging/%1$s', $id],

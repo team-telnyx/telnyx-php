@@ -27,7 +27,7 @@ final class ActionsService implements ActionsContract
     public function refresh(
         ?RequestOptions $requestOptions = null
     ): ActionRefreshResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'operator_connect/actions/refresh',

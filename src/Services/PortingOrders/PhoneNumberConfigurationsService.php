@@ -42,7 +42,7 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'porting_orders/phone_number_configurations',
@@ -80,7 +80,7 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting_orders/phone_number_configurations',

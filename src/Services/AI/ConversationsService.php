@@ -68,7 +68,7 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/conversations',
@@ -89,7 +89,7 @@ final class ConversationsService implements ConversationsContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): ConversationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/conversations/%1$s', $conversationID],
@@ -117,7 +117,7 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['ai/conversations/%1$s', $conversationID],
@@ -158,7 +158,7 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ai/conversations',
@@ -179,7 +179,7 @@ final class ConversationsService implements ConversationsContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/conversations/%1$s', $conversationID],
@@ -216,7 +216,7 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/conversations/%1$s/message', $conversationID],
@@ -237,7 +237,7 @@ final class ConversationsService implements ConversationsContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): ConversationGetConversationsInsightsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/conversations/%1$s/conversations-insights', $conversationID],

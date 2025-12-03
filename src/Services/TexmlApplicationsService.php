@@ -65,7 +65,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'texml_applications',
@@ -86,7 +86,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['texml_applications/%1$s', $id],
@@ -135,7 +135,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['texml_applications/%1$s', $id],
@@ -167,7 +167,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'texml_applications',
@@ -188,7 +188,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['texml_applications/%1$s', $id],

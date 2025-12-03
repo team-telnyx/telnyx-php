@@ -30,7 +30,7 @@ final class EventsService implements EventsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): EventGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting/events/%1$s', $id],
@@ -66,7 +66,7 @@ final class EventsService implements EventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting/events',
@@ -87,7 +87,7 @@ final class EventsService implements EventsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['porting/events/%1$s/republish', $id],

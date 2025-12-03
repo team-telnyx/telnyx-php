@@ -47,7 +47,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'requirement_groups',
@@ -68,7 +68,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['requirement_groups/%1$s', $id],
@@ -101,7 +101,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['requirement_groups/%1$s', $id],
@@ -139,7 +139,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'requirement_groups',
@@ -160,7 +160,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['requirement_groups/%1$s', $id],
@@ -180,7 +180,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['requirement_groups/%1$s/submit_for_approval', $id],

@@ -41,7 +41,7 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting_phone_numbers',

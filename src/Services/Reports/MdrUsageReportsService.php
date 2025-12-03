@@ -47,7 +47,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'reports/mdr_usage_reports',
@@ -69,7 +69,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['reports/mdr_usage_reports/%1$s', $id],
@@ -98,7 +98,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'reports/mdr_usage_reports',
@@ -119,7 +119,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['reports/mdr_usage_reports/%1$s', $id],
@@ -151,7 +151,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'reports/mdr_usage_reports/sync',

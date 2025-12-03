@@ -7,7 +7,7 @@ namespace Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent;
 /**
  * The type of event being delivered.
  */
-enum EventType: string
+enum EventType1: string
 {
     case CONFERENCE_FLOOR_CHANGED = 'conference.floor.changed';
 }

@@ -45,7 +45,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'global_ip_assignments',
@@ -66,7 +66,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['global_ip_assignments/%1$s', $id],
@@ -92,7 +92,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['global_ip_assignments/%1$s', $id],
@@ -122,7 +122,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'global_ip_assignments',
@@ -143,7 +143,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['global_ip_assignments/%1$s', $id],

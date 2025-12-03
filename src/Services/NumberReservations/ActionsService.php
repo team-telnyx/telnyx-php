@@ -28,7 +28,7 @@ final class ActionsService implements ActionsContract
         string $numberReservationID,
         ?RequestOptions $requestOptions = null
     ): ActionExtendResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['number_reservations/%1$s/actions/extend', $numberReservationID],

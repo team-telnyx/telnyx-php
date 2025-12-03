@@ -7,7 +7,7 @@ namespace Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent;
 /**
  * Identifies the type of the resource.
  */
-enum RecordType: string
+enum RecordType1: string
 {
     case EVENT = 'event';
 }

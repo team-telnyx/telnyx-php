@@ -44,7 +44,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
@@ -68,7 +68,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
@@ -101,7 +101,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
@@ -124,7 +124,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],

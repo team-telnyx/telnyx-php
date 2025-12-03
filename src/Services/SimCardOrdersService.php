@@ -39,7 +39,7 @@ final class SimCardOrdersService implements SimCardOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'sim_card_orders',
@@ -60,7 +60,7 @@ final class SimCardOrdersService implements SimCardOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sim_card_orders/%1$s', $id],
@@ -104,7 +104,7 @@ final class SimCardOrdersService implements SimCardOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'sim_card_orders',

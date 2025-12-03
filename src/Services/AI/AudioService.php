@@ -42,7 +42,7 @@ final class AudioService implements AudioContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/audio/transcriptions',

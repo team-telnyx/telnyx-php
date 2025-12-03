@@ -44,7 +44,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'telephony_credentials',
@@ -65,7 +65,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['telephony_credentials/%1$s', $id],
@@ -95,7 +95,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['telephony_credentials/%1$s', $id],
@@ -132,7 +132,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'telephony_credentials',
@@ -153,7 +153,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['telephony_credentials/%1$s', $id],
@@ -173,7 +173,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['telephony_credentials/%1$s/token', $id],

@@ -45,7 +45,7 @@ final class RecordingsService implements RecordingsContract
         $callSid = $parsed['call_sid'];
         unset($parsed['call_sid']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [

@@ -40,7 +40,7 @@ final class VoicemailService implements VoicemailContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
@@ -61,7 +61,7 @@ final class VoicemailService implements VoicemailContract
         string $phoneNumberID,
         ?RequestOptions $requestOptions = null
     ): VoicemailGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
@@ -89,7 +89,7 @@ final class VoicemailService implements VoicemailContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],

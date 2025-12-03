@@ -90,7 +90,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'external_connections',
@@ -111,7 +111,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s', $id],
@@ -147,7 +147,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['external_connections/%1$s', $id],
@@ -184,7 +184,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'external_connections',
@@ -205,7 +205,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['external_connections/%1$s', $id],
@@ -237,7 +237,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['external_connections/%1$s/locations/%2$s', $id, $locationID],

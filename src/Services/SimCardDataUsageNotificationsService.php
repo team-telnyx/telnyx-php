@@ -44,7 +44,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'sim_card_data_usage_notifications',
@@ -65,7 +65,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sim_card_data_usage_notifications/%1$s', $id],
@@ -95,7 +95,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['sim_card_data_usage_notifications/%1$s', $id],
@@ -125,7 +125,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'sim_card_data_usage_notifications',
@@ -146,7 +146,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['sim_card_data_usage_notifications/%1$s', $id],

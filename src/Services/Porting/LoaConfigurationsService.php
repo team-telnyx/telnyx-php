@@ -55,7 +55,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'porting/loa_configurations',
@@ -76,7 +76,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): LoaConfigurationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting/loa_configurations/%1$s', $id],
@@ -117,7 +117,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['porting/loa_configurations/%1$s', $id],
@@ -147,7 +147,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'porting/loa_configurations',
@@ -168,7 +168,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['porting/loa_configurations/%1$s', $id],
@@ -208,7 +208,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'porting/loa_configuration/preview',
@@ -230,7 +230,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['porting/loa_configurations/%1$s/preview', $id],

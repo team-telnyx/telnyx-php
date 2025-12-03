@@ -44,7 +44,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'dynamic_emergency_endpoints',
@@ -65,7 +65,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['dynamic_emergency_endpoints/%1$s', $id],
@@ -97,7 +97,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'dynamic_emergency_endpoints',
@@ -118,7 +118,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['dynamic_emergency_endpoints/%1$s', $id],

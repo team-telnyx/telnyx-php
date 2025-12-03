@@ -65,7 +65,7 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'rooms',
@@ -94,7 +94,7 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['rooms/%1$s', $roomID],
@@ -130,7 +130,7 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['rooms/%1$s', $roomID],
@@ -174,7 +174,7 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'rooms',
@@ -195,7 +195,7 @@ final class RoomsService implements RoomsContract
         string $roomID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['rooms/%1$s', $roomID],

@@ -37,7 +37,7 @@ final class NumberLookupService implements NumberLookupContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['number_lookup/%1$s', $phoneNumber],

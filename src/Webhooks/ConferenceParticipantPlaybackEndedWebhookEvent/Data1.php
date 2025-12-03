@@ -7,21 +7,21 @@ namespace Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data\RecordType;
+use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data1\EventType;
+use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data1\Payload;
+use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data1\RecordType;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type Data1Shape = array{
  *   id?: string|null,
  *   event_type?: value-of<EventType>|null,
  *   payload?: Payload|null,
  *   record_type?: value-of<RecordType>|null,
  * }
  */
-final class Data implements BaseModel
+final class Data1 implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<Data1Shape> */
     use SdkModel;
 
     /**

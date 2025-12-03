@@ -60,7 +60,7 @@ final class NumberReservationsService implements NumberReservationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'number_reservations',
@@ -81,7 +81,7 @@ final class NumberReservationsService implements NumberReservationsContract
         string $numberReservationID,
         ?RequestOptions $requestOptions = null
     ): NumberReservationGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['number_reservations/%1$s', $numberReservationID],
@@ -116,7 +116,7 @@ final class NumberReservationsService implements NumberReservationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'number_reservations',

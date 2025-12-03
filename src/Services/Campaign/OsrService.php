@@ -30,7 +30,7 @@ final class OsrService implements OsrContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/osr/attributes', $campaignID],

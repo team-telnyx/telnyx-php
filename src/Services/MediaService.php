@@ -34,7 +34,7 @@ final class MediaService implements MediaContract
         string $mediaName,
         ?RequestOptions $requestOptions = null
     ): MediaGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['media/%1$s', $mediaName],
@@ -62,7 +62,7 @@ final class MediaService implements MediaContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['media/%1$s', $mediaName],
@@ -92,7 +92,7 @@ final class MediaService implements MediaContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'media',
@@ -113,7 +113,7 @@ final class MediaService implements MediaContract
         string $mediaName,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['media/%1$s', $mediaName],
@@ -133,7 +133,7 @@ final class MediaService implements MediaContract
         string $mediaName,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['media/%1$s/download', $mediaName],
@@ -163,7 +163,7 @@ final class MediaService implements MediaContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'media',

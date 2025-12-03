@@ -57,7 +57,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messaging_hosted_number_orders',
@@ -78,7 +78,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['messaging_hosted_number_orders/%1$s', $id],
@@ -107,7 +107,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'messaging_hosted_number_orders',
@@ -128,7 +128,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['messaging_hosted_number_orders/%1$s', $id],
@@ -157,7 +157,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messaging_hosted_number_orders/eligibility_numbers_check',
@@ -188,7 +188,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['messaging_hosted_number_orders/%1$s/verification_codes', $id],
@@ -219,7 +219,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['messaging_hosted_number_orders/%1$s/validation_codes', $id],

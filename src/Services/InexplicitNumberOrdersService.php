@@ -59,7 +59,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'inexplicit_number_orders',
@@ -80,7 +80,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): InexplicitNumberOrderGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['inexplicit_number_orders/%1$s', $id],
@@ -109,7 +109,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'inexplicit_number_orders',

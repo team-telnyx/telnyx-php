@@ -102,7 +102,7 @@ final class IPConnectionsService implements IPConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ip_connections',
@@ -123,7 +123,7 @@ final class IPConnectionsService implements IPConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPConnectionGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ip_connections/%1$s', $id],
@@ -208,7 +208,7 @@ final class IPConnectionsService implements IPConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['ip_connections/%1$s', $id],
@@ -244,7 +244,7 @@ final class IPConnectionsService implements IPConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ip_connections',
@@ -265,7 +265,7 @@ final class IPConnectionsService implements IPConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPConnectionDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ip_connections/%1$s', $id],

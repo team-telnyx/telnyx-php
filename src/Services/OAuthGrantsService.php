@@ -31,7 +31,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['oauth_grants/%1$s', $id],
@@ -58,7 +58,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'oauth_grants',
@@ -79,7 +79,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['oauth_grants/%1$s', $id],

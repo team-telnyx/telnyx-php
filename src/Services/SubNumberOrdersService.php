@@ -46,7 +46,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['sub_number_orders/%1$s', $subNumberOrderID],
@@ -79,7 +79,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['sub_number_orders/%1$s', $subNumberOrderID],
@@ -115,7 +115,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'sub_number_orders',
@@ -136,7 +136,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         string $subNumberOrderID,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrderCancelResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['sub_number_orders/%1$s/cancel', $subNumberOrderID],
@@ -166,7 +166,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['sub_number_orders/%1$s/requirement_group', $id],

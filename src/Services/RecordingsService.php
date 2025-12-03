@@ -40,7 +40,7 @@ final class RecordingsService implements RecordingsContract
         string $recordingID,
         ?RequestOptions $requestOptions = null
     ): RecordingGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['recordings/%1$s', $recordingID],
@@ -79,7 +79,7 @@ final class RecordingsService implements RecordingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'recordings',
@@ -100,7 +100,7 @@ final class RecordingsService implements RecordingsContract
         string $recordingID,
         ?RequestOptions $requestOptions = null
     ): RecordingDeleteResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['recordings/%1$s', $recordingID],
