@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Uploads an SSL certificate and its matching secret so that you can use Telnyx’s storage as your CDN.
+ * Uploads an SSL certificate and its matching secret so that you can use Telnyx's storage as your CDN.
  *
  * @see Telnyx\Services\Storage\Buckets\SslCertificateService::create()
  *
