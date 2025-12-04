@@ -47,7 +47,9 @@ final class ShortCodesService implements ShortCodesContract
      * Update the settings for a specific short code. To unbind a short code from a profile, set the `messaging_profile_id` to `null` or an empty string.
      * To add or update tags, include the tags field as an array of strings.
      *
-     * @param array{messaging_profile_id: string}|ShortCodeUpdateParams $params
+     * @param array{
+     *   messaging_profile_id: string, tags?: list<string>
+     * }|ShortCodeUpdateParams $params
      *
      * @throws APIException
      */

@@ -31,10 +31,12 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Type;
  *   from?: From|null,
  *   media?: list<Media>|null,
  *   messaging_profile_id?: string|null,
+ *   organization_id?: string|null,
  *   parts?: int|null,
  *   received_at?: \DateTimeInterface|null,
  *   record_type?: value-of<\Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\RecordType>|null,
  *   sent_at?: \DateTimeInterface|null,
+ *   subject?: string|null,
  *   tags?: list<string>|null,
  *   tcr_campaign_billable?: bool|null,
  *   tcr_campaign_id?: string|null,
@@ -113,6 +115,12 @@ final class Payload implements BaseModel
     public ?string $messaging_profile_id;
 
     /**
+     * Unique identifier for a messaging profile.
+     */
+    #[Api(optional: true)]
+    public ?string $organization_id;
+
+    /**
      * Number of parts into which the message's body must be split.
      */
     #[Api(optional: true)]
@@ -140,6 +148,12 @@ final class Payload implements BaseModel
      */
     #[Api(nullable: true, optional: true)]
     public ?\DateTimeInterface $sent_at;
+
+    /**
+     * Message subject.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $subject;
 
     /**
      * Tags associated with the resource.
@@ -236,10 +250,12 @@ final class Payload implements BaseModel
         ?From $from = null,
         ?array $media = null,
         ?string $messaging_profile_id = null,
+        ?string $organization_id = null,
         ?int $parts = null,
         ?\DateTimeInterface $received_at = null,
         RecordType|string|null $record_type = null,
         ?\DateTimeInterface $sent_at = null,
+        ?string $subject = null,
         ?array $tags = null,
         ?bool $tcr_campaign_billable = null,
         ?string $tcr_campaign_id = null,
@@ -264,10 +280,12 @@ final class Payload implements BaseModel
         null !== $from && $obj->from = $from;
         null !== $media && $obj->media = $media;
         null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
+        null !== $organization_id && $obj->organization_id = $organization_id;
         null !== $parts && $obj->parts = $parts;
         null !== $received_at && $obj->received_at = $received_at;
         null !== $record_type && $obj['record_type'] = $record_type;
         null !== $sent_at && $obj->sent_at = $sent_at;
+        null !== $subject && $obj->subject = $subject;
         null !== $tags && $obj->tags = $tags;
         null !== $tcr_campaign_billable && $obj->tcr_campaign_billable = $tcr_campaign_billable;
         null !== $tcr_campaign_id && $obj->tcr_campaign_id = $tcr_campaign_id;
@@ -402,6 +420,17 @@ final class Payload implements BaseModel
     }
 
     /**
+     * Unique identifier for a messaging profile.
+     */
+    public function withOrganizationID(string $organizationID): self
+    {
+        $obj = clone $this;
+        $obj->organization_id = $organizationID;
+
+        return $obj;
+    }
+
+    /**
      * Number of parts into which the message's body must be split.
      */
     public function withParts(int $parts): self
@@ -444,6 +473,17 @@ final class Payload implements BaseModel
     {
         $obj = clone $this;
         $obj->sent_at = $sentAt;
+
+        return $obj;
+    }
+
+    /**
+     * Message subject.
+     */
+    public function withSubject(?string $subject): self
+    {
+        $obj = clone $this;
+        $obj->subject = $subject;
 
         return $obj;
     }

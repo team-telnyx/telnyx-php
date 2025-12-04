@@ -15,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\ShortCodesService::update()
  *
- * @phpstan-type ShortCodeUpdateParamsShape = array{messaging_profile_id: string}
+ * @phpstan-type ShortCodeUpdateParamsShape = array{
+ *   messaging_profile_id: string, tags?: list<string>
+ * }
  */
 final class ShortCodeUpdateParams implements BaseModel
 {
@@ -28,6 +30,10 @@ final class ShortCodeUpdateParams implements BaseModel
      */
     #[Api]
     public string $messaging_profile_id;
+
+    /** @var list<string>|null $tags */
+    #[Api(list: 'string', optional: true)]
+    public ?array $tags;
 
     /**
      * `new ShortCodeUpdateParams()` is missing required properties by the API.
@@ -52,12 +58,18 @@ final class ShortCodeUpdateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<string> $tags
      */
-    public static function with(string $messaging_profile_id): self
-    {
+    public static function with(
+        string $messaging_profile_id,
+        ?array $tags = null
+    ): self {
         $obj = new self;
 
         $obj->messaging_profile_id = $messaging_profile_id;
+
+        null !== $tags && $obj->tags = $tags;
 
         return $obj;
     }
@@ -69,6 +81,17 @@ final class ShortCodeUpdateParams implements BaseModel
     {
         $obj = clone $this;
         $obj->messaging_profile_id = $messagingProfileID;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $obj = clone $this;
+        $obj->tags = $tags;
 
         return $obj;
     }
