@@ -17,6 +17,7 @@ use Telnyx\ShortCode\RecordType;
  *   created_at?: \DateTimeInterface|null,
  *   record_type?: value-of<RecordType>|null,
  *   short_code?: string|null,
+ *   tags?: list<string>|null,
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
@@ -63,6 +64,10 @@ final class ShortCode implements BaseModel
     #[Api(optional: true)]
     public ?string $short_code;
 
+    /** @var list<string>|null $tags */
+    #[Api(list: 'string', optional: true)]
+    public ?array $tags;
+
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
@@ -94,6 +99,7 @@ final class ShortCode implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $record_type
+     * @param list<string> $tags
      */
     public static function with(
         ?string $messaging_profile_id,
@@ -102,6 +108,7 @@ final class ShortCode implements BaseModel
         ?\DateTimeInterface $created_at = null,
         RecordType|string|null $record_type = null,
         ?string $short_code = null,
+        ?array $tags = null,
         ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
@@ -113,6 +120,7 @@ final class ShortCode implements BaseModel
         null !== $created_at && $obj->created_at = $created_at;
         null !== $record_type && $obj['record_type'] = $record_type;
         null !== $short_code && $obj->short_code = $short_code;
+        null !== $tags && $obj->tags = $tags;
         null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
@@ -182,6 +190,17 @@ final class ShortCode implements BaseModel
     {
         $obj = clone $this;
         $obj->short_code = $shortCode;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $obj = clone $this;
+        $obj->tags = $tags;
 
         return $obj;
     }

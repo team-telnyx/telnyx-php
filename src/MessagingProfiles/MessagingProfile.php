@@ -18,12 +18,15 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *   daily_spend_limit?: string|null,
  *   daily_spend_limit_enabled?: bool|null,
  *   enabled?: bool|null,
+ *   health_webhook_url?: string|null,
  *   mms_fall_back_to_sms?: bool|null,
  *   mms_transcoding?: bool|null,
  *   mobile_only?: bool|null,
  *   name?: string|null,
  *   number_pool_settings?: NumberPoolSettings|null,
  *   record_type?: value-of<RecordType>|null,
+ *   redaction_enabled?: bool|null,
+ *   redaction_level?: int|null,
  *   updated_at?: \DateTimeInterface|null,
  *   url_shortener_settings?: URLShortenerSettings|null,
  *   v1_secret?: string|null,
@@ -75,6 +78,12 @@ final class MessagingProfile implements BaseModel
     public ?bool $enabled;
 
     /**
+     * DEPRECATED: health check url service checking.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $health_webhook_url;
+
+    /**
      * enables SMS fallback for MMS messages.
      */
     #[Api(optional: true)]
@@ -115,6 +124,18 @@ final class MessagingProfile implements BaseModel
      */
     #[Api(enum: RecordType::class, optional: true)]
     public ?string $record_type;
+
+    /**
+     * Indicates whether message content redaction is enabled for this profile.
+     */
+    #[Api(optional: true)]
+    public ?bool $redaction_enabled;
+
+    /**
+     * Determines how much information is redacted in messages for privacy or compliance purposes.
+     */
+    #[Api(optional: true)]
+    public ?int $redaction_level;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
@@ -189,12 +210,15 @@ final class MessagingProfile implements BaseModel
         ?string $daily_spend_limit = null,
         ?bool $daily_spend_limit_enabled = null,
         ?bool $enabled = null,
+        ?string $health_webhook_url = null,
         ?bool $mms_fall_back_to_sms = null,
         ?bool $mms_transcoding = null,
         ?bool $mobile_only = null,
         ?string $name = null,
         ?NumberPoolSettings $number_pool_settings = null,
         RecordType|string|null $record_type = null,
+        ?bool $redaction_enabled = null,
+        ?int $redaction_level = null,
         ?\DateTimeInterface $updated_at = null,
         ?URLShortenerSettings $url_shortener_settings = null,
         ?string $v1_secret = null,
@@ -211,12 +235,15 @@ final class MessagingProfile implements BaseModel
         null !== $daily_spend_limit && $obj->daily_spend_limit = $daily_spend_limit;
         null !== $daily_spend_limit_enabled && $obj->daily_spend_limit_enabled = $daily_spend_limit_enabled;
         null !== $enabled && $obj->enabled = $enabled;
+        null !== $health_webhook_url && $obj->health_webhook_url = $health_webhook_url;
         null !== $mms_fall_back_to_sms && $obj->mms_fall_back_to_sms = $mms_fall_back_to_sms;
         null !== $mms_transcoding && $obj->mms_transcoding = $mms_transcoding;
         null !== $mobile_only && $obj->mobile_only = $mobile_only;
         null !== $name && $obj->name = $name;
         null !== $number_pool_settings && $obj->number_pool_settings = $number_pool_settings;
         null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $redaction_enabled && $obj->redaction_enabled = $redaction_enabled;
+        null !== $redaction_level && $obj->redaction_level = $redaction_level;
         null !== $updated_at && $obj->updated_at = $updated_at;
         null !== $url_shortener_settings && $obj->url_shortener_settings = $url_shortener_settings;
         null !== $v1_secret && $obj->v1_secret = $v1_secret;
@@ -296,6 +323,17 @@ final class MessagingProfile implements BaseModel
     }
 
     /**
+     * DEPRECATED: health check url service checking.
+     */
+    public function withHealthWebhookURL(?string $healthWebhookURL): self
+    {
+        $obj = clone $this;
+        $obj->health_webhook_url = $healthWebhookURL;
+
+        return $obj;
+    }
+
+    /**
      * enables SMS fallback for MMS messages.
      */
     public function withMmsFallBackToSMS(bool $mmsFallBackToSMS): self
@@ -364,6 +402,28 @@ final class MessagingProfile implements BaseModel
     {
         $obj = clone $this;
         $obj['record_type'] = $recordType;
+
+        return $obj;
+    }
+
+    /**
+     * Indicates whether message content redaction is enabled for this profile.
+     */
+    public function withRedactionEnabled(bool $redactionEnabled): self
+    {
+        $obj = clone $this;
+        $obj->redaction_enabled = $redactionEnabled;
+
+        return $obj;
+    }
+
+    /**
+     * Determines how much information is redacted in messages for privacy or compliance purposes.
+     */
+    public function withRedactionLevel(int $redactionLevel): self
+    {
+        $obj = clone $this;
+        $obj->redaction_level = $redactionLevel;
 
         return $obj;
     }

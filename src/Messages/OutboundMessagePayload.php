@@ -7,6 +7,7 @@ namespace Telnyx\Messages;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Messages\OutboundMessagePayload\Cc;
 use Telnyx\Messages\OutboundMessagePayload\Cost;
 use Telnyx\Messages\OutboundMessagePayload\CostBreakdown;
 use Telnyx\Messages\OutboundMessagePayload\Direction;
@@ -19,6 +20,7 @@ use Telnyx\Messages\OutboundMessagePayload\Type;
 /**
  * @phpstan-type OutboundMessagePayloadShape = array{
  *   id?: string|null,
+ *   cc?: list<Cc>|null,
  *   completed_at?: \DateTimeInterface|null,
  *   cost?: Cost|null,
  *   cost_breakdown?: CostBreakdown|null,
@@ -57,10 +59,14 @@ final class OutboundMessagePayload implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
+    /** @var list<Cc>|null $cc */
+    #[Api(list: Cc::class, optional: true)]
+    public ?array $cc;
+
     /**
      * ISO 8601 formatted date indicating when the message was finalized.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?\DateTimeInterface $completed_at;
 
     #[Api(nullable: true, optional: true)]
@@ -136,7 +142,7 @@ final class OutboundMessagePayload implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the message was sent.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?\DateTimeInterface $sent_at;
 
     /**
@@ -219,6 +225,7 @@ final class OutboundMessagePayload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<Cc> $cc
      * @param Direction|value-of<Direction> $direction
      * @param list<MessagingError> $errors
      * @param list<Media> $media
@@ -229,6 +236,7 @@ final class OutboundMessagePayload implements BaseModel
      */
     public static function with(
         ?string $id = null,
+        ?array $cc = null,
         ?\DateTimeInterface $completed_at = null,
         ?Cost $cost = null,
         ?CostBreakdown $cost_breakdown = null,
@@ -258,6 +266,7 @@ final class OutboundMessagePayload implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
+        null !== $cc && $obj->cc = $cc;
         null !== $completed_at && $obj->completed_at = $completed_at;
         null !== $cost && $obj->cost = $cost;
         null !== $cost_breakdown && $obj->cost_breakdown = $cost_breakdown;
@@ -299,9 +308,20 @@ final class OutboundMessagePayload implements BaseModel
     }
 
     /**
+     * @param list<Cc> $cc
+     */
+    public function withCc(array $cc): self
+    {
+        $obj = clone $this;
+        $obj->cc = $cc;
+
+        return $obj;
+    }
+
+    /**
      * ISO 8601 formatted date indicating when the message was finalized.
      */
-    public function withCompletedAt(\DateTimeInterface $completedAt): self
+    public function withCompletedAt(?\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
         $obj->completed_at = $completedAt;
@@ -444,7 +464,7 @@ final class OutboundMessagePayload implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the message was sent.
      */
-    public function withSentAt(\DateTimeInterface $sentAt): self
+    public function withSentAt(?\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
         $obj->sent_at = $sentAt;

@@ -227,7 +227,7 @@ final class MessagesTest extends TestCase
 
         $result = $this->client->messages->sendNumberPool([
             'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'to' => 'to',
+            'to' => '+13125550002',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -243,7 +243,7 @@ final class MessagesTest extends TestCase
 
         $result = $this->client->messages->sendNumberPool([
             'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'to' => 'to',
+            'to' => '+13125550002',
             'auto_detect' => true,
             'media_urls' => ['http://example.com'],
             'subject' => 'From Telnyx!',
