@@ -54,9 +54,9 @@ final class VerifiedNumber implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $verified_at && $obj->verified_at = $verified_at;
+        null !== $verified_at && $obj['verified_at'] = $verified_at;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class VerifiedNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class VerifiedNumber implements BaseModel
     public function withVerifiedAt(string $verifiedAt): self
     {
         $obj = clone $this;
-        $obj->verified_at = $verifiedAt;
+        $obj['verified_at'] = $verifiedAt;
 
         return $obj;
     }

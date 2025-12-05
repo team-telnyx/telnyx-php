@@ -66,7 +66,7 @@ final class DetailStatus implements BaseModel
     {
         $obj = new self;
 
-        $obj->name = $name;
+        $obj['name'] = $name;
         $obj['status'] = $status;
 
         return $obj;
@@ -75,7 +75,7 @@ final class DetailStatus implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

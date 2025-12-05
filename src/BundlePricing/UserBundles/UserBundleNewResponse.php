@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
+use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -48,24 +49,40 @@ final class UserBundleNewResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserBundle> $data
+     * @param list<UserBundle|array{
+     *   id: string,
+     *   active: bool,
+     *   billing_bundle: BillingBundleSummary,
+     *   created_at: \DateTimeInterface,
+     *   resources: list<UserBundleResource>,
+     *   user_id: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<UserBundle> $data
+     * @param list<UserBundle|array{
+     *   id: string,
+     *   active: bool,
+     *   billing_bundle: BillingBundleSummary,
+     *   created_at: \DateTimeInterface,
+     *   resources: list<UserBundleResource>,
+     *   user_id: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

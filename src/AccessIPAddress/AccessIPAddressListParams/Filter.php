@@ -50,29 +50,43 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param \DateTimeInterface|DateRangeFilter|array{
+     *   gt?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lt?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $created_at
      */
     public static function with(
-        \DateTimeInterface|DateRangeFilter|null $created_at = null,
+        \DateTimeInterface|DateRangeFilter|array|null $created_at = null,
         ?string $ip_address = null,
         ?string $ip_source = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $ip_address && $obj->ip_address = $ip_address;
-        null !== $ip_source && $obj->ip_source = $ip_source;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $ip_address && $obj['ip_address'] = $ip_address;
+        null !== $ip_source && $obj['ip_source'] = $ip_source;
 
         return $obj;
     }
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @param \DateTimeInterface|DateRangeFilter|array{
+     *   gt?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lt?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $createdAt
      */
     public function withCreatedAt(
-        \DateTimeInterface|DateRangeFilter $createdAt
+        \DateTimeInterface|DateRangeFilter|array $createdAt
     ): self {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -83,7 +97,7 @@ final class Filter implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ip_address = $ipAddress;
+        $obj['ip_address'] = $ipAddress;
 
         return $obj;
     }
@@ -94,7 +108,7 @@ final class Filter implements BaseModel
     public function withIPSource(string $ipSource): self
     {
         $obj = clone $this;
-        $obj->ip_source = $ipSource;
+        $obj['ip_source'] = $ipSource;
 
         return $obj;
     }

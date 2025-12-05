@@ -85,6 +85,7 @@ final class SimCardGroupAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Settings|array{private_wireless_gateway_id?: string|null} $settings
      * @param Status|value-of<Status> $status
      * @param Type|value-of<Type> $type
      */
@@ -92,7 +93,7 @@ final class SimCardGroupAction implements BaseModel
         ?string $id = null,
         ?string $created_at = null,
         ?string $record_type = null,
-        ?Settings $settings = null,
+        Settings|array|null $settings = null,
         ?string $sim_card_group_id = null,
         Status|string|null $status = null,
         Type|string|null $type = null,
@@ -100,14 +101,14 @@ final class SimCardGroupAction implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $settings && $obj->settings = $settings;
-        null !== $sim_card_group_id && $obj->sim_card_group_id = $sim_card_group_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $settings && $obj['settings'] = $settings;
+        null !== $sim_card_group_id && $obj['sim_card_group_id'] = $sim_card_group_id;
         null !== $status && $obj['status'] = $status;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -118,7 +119,7 @@ final class SimCardGroupAction implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -129,7 +130,7 @@ final class SimCardGroupAction implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -137,18 +138,20 @@ final class SimCardGroupAction implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
      * A JSON object representation of the action params.
+     *
+     * @param Settings|array{private_wireless_gateway_id?: string|null} $settings
      */
-    public function withSettings(Settings $settings): self
+    public function withSettings(Settings|array $settings): self
     {
         $obj = clone $this;
-        $obj->settings = $settings;
+        $obj['settings'] = $settings;
 
         return $obj;
     }
@@ -159,7 +162,7 @@ final class SimCardGroupAction implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj->sim_card_group_id = $simCardGroupID;
+        $obj['sim_card_group_id'] = $simCardGroupID;
 
         return $obj;
     }
@@ -194,7 +197,7 @@ final class SimCardGroupAction implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

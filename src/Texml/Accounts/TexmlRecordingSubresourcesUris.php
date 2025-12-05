@@ -37,7 +37,7 @@ final class TexmlRecordingSubresourcesUris implements BaseModel
     {
         $obj = new self;
 
-        null !== $transcriptions && $obj->transcriptions = $transcriptions;
+        null !== $transcriptions && $obj['transcriptions'] = $transcriptions;
 
         return $obj;
     }
@@ -45,7 +45,7 @@ final class TexmlRecordingSubresourcesUris implements BaseModel
     public function withTranscriptions(?string $transcriptions): self
     {
         $obj = clone $this;
-        $obj->transcriptions = $transcriptions;
+        $obj['transcriptions'] = $transcriptions;
 
         return $obj;
     }

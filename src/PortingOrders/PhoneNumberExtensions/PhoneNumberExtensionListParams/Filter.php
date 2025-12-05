@@ -38,7 +38,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $porting_phone_number_id && $obj->porting_phone_number_id = $porting_phone_number_id;
+        null !== $porting_phone_number_id && $obj['porting_phone_number_id'] = $porting_phone_number_id;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
         $obj = clone $this;
-        $obj->porting_phone_number_id = $portingPhoneNumberID;
+        $obj['porting_phone_number_id'] = $portingPhoneNumberID;
 
         return $obj;
     }

@@ -8,8 +8,10 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt;
+use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Status;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook;
+use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook\RecordType;
 
 /**
  * Record of all attempts to deliver a webhook.
@@ -92,8 +94,21 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Attempt> $attempts
+     * @param list<Attempt|array{
+     *   errors?: list<int>|null,
+     *   finished_at?: \DateTimeInterface|null,
+     *   http?: HTTP|null,
+     *   started_at?: \DateTimeInterface|null,
+     *   status?: value-of<Attempt\Status>|null,
+     * }> $attempts
      * @param Status|value-of<Status> $status
+     * @param Webhook|array{
+     *   id?: string|null,
+     *   event_type?: string|null,
+     *   occurred_at?: \DateTimeInterface|null,
+     *   payload?: mixed,
+     *   record_type?: value-of<RecordType>|null,
+     * } $webhook
      */
     public static function with(
         ?string $id = null,
@@ -103,18 +118,18 @@ final class Data implements BaseModel
         ?\DateTimeInterface $started_at = null,
         Status|string|null $status = null,
         ?string $user_id = null,
-        ?Webhook $webhook = null,
+        Webhook|array|null $webhook = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $attempts && $obj->attempts = $attempts;
-        null !== $finished_at && $obj->finished_at = $finished_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $started_at && $obj->started_at = $started_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $attempts && $obj['attempts'] = $attempts;
+        null !== $finished_at && $obj['finished_at'] = $finished_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $started_at && $obj['started_at'] = $started_at;
         null !== $status && $obj['status'] = $status;
-        null !== $user_id && $obj->user_id = $user_id;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $webhook && $obj['webhook'] = $webhook;
 
         return $obj;
     }
@@ -125,7 +140,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -133,12 +148,18 @@ final class Data implements BaseModel
     /**
      * Detailed delivery attempts, ordered by most recent.
      *
-     * @param list<Attempt> $attempts
+     * @param list<Attempt|array{
+     *   errors?: list<int>|null,
+     *   finished_at?: \DateTimeInterface|null,
+     *   http?: HTTP|null,
+     *   started_at?: \DateTimeInterface|null,
+     *   status?: value-of<Attempt\Status>|null,
+     * }> $attempts
      */
     public function withAttempts(array $attempts): self
     {
         $obj = clone $this;
-        $obj->attempts = $attempts;
+        $obj['attempts'] = $attempts;
 
         return $obj;
     }
@@ -149,7 +170,7 @@ final class Data implements BaseModel
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finished_at = $finishedAt;
+        $obj['finished_at'] = $finishedAt;
 
         return $obj;
     }
@@ -160,7 +181,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -171,7 +192,7 @@ final class Data implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj->started_at = $startedAt;
+        $obj['started_at'] = $startedAt;
 
         return $obj;
     }
@@ -195,18 +216,26 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
 
     /**
      * Original webhook JSON data. Payload fields vary according to event type.
+     *
+     * @param Webhook|array{
+     *   id?: string|null,
+     *   event_type?: string|null,
+     *   occurred_at?: \DateTimeInterface|null,
+     *   payload?: mixed,
+     *   record_type?: value-of<RecordType>|null,
+     * } $webhook
      */
-    public function withWebhook(Webhook $webhook): self
+    public function withWebhook(Webhook|array $webhook): self
     {
         $obj = clone $this;
-        $obj->webhook = $webhook;
+        $obj['webhook'] = $webhook;
 
         return $obj;
     }

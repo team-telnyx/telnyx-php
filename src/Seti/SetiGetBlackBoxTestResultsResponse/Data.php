@@ -44,7 +44,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BlackBoxTest> $black_box_tests
+     * @param list<BlackBoxTest|array{
+     *   id?: string|null, record_type?: string|null, result?: float|null
+     * }> $black_box_tests
      */
     public static function with(
         ?array $black_box_tests = null,
@@ -53,20 +55,22 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $black_box_tests && $obj->black_box_tests = $black_box_tests;
-        null !== $product && $obj->product = $product;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $black_box_tests && $obj['black_box_tests'] = $black_box_tests;
+        null !== $product && $obj['product'] = $product;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
 
     /**
-     * @param list<BlackBoxTest> $blackBoxTests
+     * @param list<BlackBoxTest|array{
+     *   id?: string|null, record_type?: string|null, result?: float|null
+     * }> $blackBoxTests
      */
     public function withBlackBoxTests(array $blackBoxTests): self
     {
         $obj = clone $this;
-        $obj->black_box_tests = $blackBoxTests;
+        $obj['black_box_tests'] = $blackBoxTests;
 
         return $obj;
     }
@@ -77,7 +81,7 @@ final class Data implements BaseModel
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -85,7 +89,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

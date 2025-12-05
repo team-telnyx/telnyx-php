@@ -32,20 +32,37 @@ final class ConversationUpdateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Conversation|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   last_message_at: \DateTimeInterface,
+     *   metadata: array<string,string>,
+     *   name?: string|null,
+     * } $data
      */
-    public static function with(?Conversation $data = null): self
+    public static function with(Conversation|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Conversation $data): self
+    /**
+     * @param Conversation|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   last_message_at: \DateTimeInterface,
+     *   metadata: array<string,string>,
+     *   name?: string|null,
+     * } $data
+     */
+    public function withData(Conversation|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

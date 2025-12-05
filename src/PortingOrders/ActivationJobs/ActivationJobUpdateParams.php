@@ -63,9 +63,9 @@ final class ActivationJobUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
+        $obj['id'] = $id;
 
-        null !== $activate_at && $obj->activate_at = $activate_at;
+        null !== $activate_at && $obj['activate_at'] = $activate_at;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class ActivationJobUpdateParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class ActivationJobUpdateParams implements BaseModel
     public function withActivateAt(\DateTimeInterface $activateAt): self
     {
         $obj = clone $this;
-        $obj->activate_at = $activateAt;
+        $obj['activate_at'] = $activateAt;
 
         return $obj;
     }

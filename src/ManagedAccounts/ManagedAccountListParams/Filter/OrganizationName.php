@@ -46,8 +46,8 @@ final class OrganizationName implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $eq && $obj->eq = $eq;
+        null !== $contains && $obj['contains'] = $contains;
+        null !== $eq && $obj['eq'] = $eq;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class OrganizationName implements BaseModel
     public function withContains(string $contains): self
     {
         $obj = clone $this;
-        $obj->contains = $contains;
+        $obj['contains'] = $contains;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class OrganizationName implements BaseModel
     public function withEq(string $eq): self
     {
         $obj = clone $this;
-        $obj->eq = $eq;
+        $obj['eq'] = $eq;
 
         return $obj;
     }

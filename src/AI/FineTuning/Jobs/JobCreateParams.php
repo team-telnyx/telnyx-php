@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type JobCreateParamsShape = array{
  *   model: string,
  *   training_file: string,
- *   hyperparameters?: Hyperparameters,
+ *   hyperparameters?: Hyperparameters|array{n_epochs?: int|null},
  *   suffix?: string,
  * }
  */
@@ -75,20 +75,22 @@ final class JobCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Hyperparameters|array{n_epochs?: int|null} $hyperparameters
      */
     public static function with(
         string $model,
         string $training_file,
-        ?Hyperparameters $hyperparameters = null,
+        Hyperparameters|array|null $hyperparameters = null,
         ?string $suffix = null,
     ): self {
         $obj = new self;
 
-        $obj->model = $model;
-        $obj->training_file = $training_file;
+        $obj['model'] = $model;
+        $obj['training_file'] = $training_file;
 
-        null !== $hyperparameters && $obj->hyperparameters = $hyperparameters;
-        null !== $suffix && $obj->suffix = $suffix;
+        null !== $hyperparameters && $obj['hyperparameters'] = $hyperparameters;
+        null !== $suffix && $obj['suffix'] = $suffix;
 
         return $obj;
     }
@@ -99,7 +101,7 @@ final class JobCreateParams implements BaseModel
     public function withModel(string $model): self
     {
         $obj = clone $this;
-        $obj->model = $model;
+        $obj['model'] = $model;
 
         return $obj;
     }
@@ -110,18 +112,21 @@ final class JobCreateParams implements BaseModel
     public function withTrainingFile(string $trainingFile): self
     {
         $obj = clone $this;
-        $obj->training_file = $trainingFile;
+        $obj['training_file'] = $trainingFile;
 
         return $obj;
     }
 
     /**
      * The hyperparameters used for the fine-tuning job.
+     *
+     * @param Hyperparameters|array{n_epochs?: int|null} $hyperparameters
      */
-    public function withHyperparameters(Hyperparameters $hyperparameters): self
-    {
+    public function withHyperparameters(
+        Hyperparameters|array $hyperparameters
+    ): self {
         $obj = clone $this;
-        $obj->hyperparameters = $hyperparameters;
+        $obj['hyperparameters'] = $hyperparameters;
 
         return $obj;
     }
@@ -132,7 +137,7 @@ final class JobCreateParams implements BaseModel
     public function withSuffix(string $suffix): self
     {
         $obj = clone $this;
-        $obj->suffix = $suffix;
+        $obj['suffix'] = $suffix;
 
         return $obj;
     }

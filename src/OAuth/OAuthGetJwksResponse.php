@@ -35,24 +35,28 @@ final class OAuthGetJwksResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Key> $keys
+     * @param list<Key|array{
+     *   alg?: string|null, kid?: string|null, kty?: string|null, use?: string|null
+     * }> $keys
      */
     public static function with(?array $keys = null): self
     {
         $obj = new self;
 
-        null !== $keys && $obj->keys = $keys;
+        null !== $keys && $obj['keys'] = $keys;
 
         return $obj;
     }
 
     /**
-     * @param list<Key> $keys
+     * @param list<Key|array{
+     *   alg?: string|null, kid?: string|null, kty?: string|null, use?: string|null
+     * }> $keys
      */
     public function withKeys(array $keys): self
     {
         $obj = clone $this;
-        $obj->keys = $keys;
+        $obj['keys'] = $keys;
 
         return $obj;
     }

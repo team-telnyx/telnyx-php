@@ -59,9 +59,9 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $network_id && $obj->network_id = $network_id;
-        null !== $region_code && $obj->region_code = $region_code;
+        null !== $name && $obj['name'] = $name;
+        null !== $network_id && $obj['network_id'] = $network_id;
+        null !== $region_code && $obj['region_code'] = $region_code;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->network_id = $networkID;
+        $obj['network_id'] = $networkID;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->region_code = $regionCode;
+        $obj['region_code'] = $regionCode;
 
         return $obj;
     }

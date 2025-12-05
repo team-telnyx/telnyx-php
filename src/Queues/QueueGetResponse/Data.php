@@ -127,14 +127,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->average_wait_time_secs = $average_wait_time_secs;
-        $obj->created_at = $created_at;
-        $obj->current_size = $current_size;
-        $obj->max_size = $max_size;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['average_wait_time_secs'] = $average_wait_time_secs;
+        $obj['created_at'] = $created_at;
+        $obj['current_size'] = $current_size;
+        $obj['max_size'] = $max_size;
+        $obj['name'] = $name;
         $obj['record_type'] = $record_type;
-        $obj->updated_at = $updated_at;
+        $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withAverageWaitTimeSecs(int $averageWaitTimeSecs): self
     {
         $obj = clone $this;
-        $obj->average_wait_time_secs = $averageWaitTimeSecs;
+        $obj['average_wait_time_secs'] = $averageWaitTimeSecs;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withCurrentSize(int $currentSize): self
     {
         $obj = clone $this;
-        $obj->current_size = $currentSize;
+        $obj['current_size'] = $currentSize;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withMaxSize(int $maxSize): self
     {
         $obj = clone $this;
-        $obj->max_size = $maxSize;
+        $obj['max_size'] = $maxSize;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

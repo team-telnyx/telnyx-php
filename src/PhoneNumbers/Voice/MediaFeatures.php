@@ -57,9 +57,9 @@ final class MediaFeatures implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $accept_any_rtp_packets_enabled && $obj->accept_any_rtp_packets_enabled = $accept_any_rtp_packets_enabled;
-        null !== $rtp_auto_adjust_enabled && $obj->rtp_auto_adjust_enabled = $rtp_auto_adjust_enabled;
-        null !== $t38_fax_gateway_enabled && $obj->t38_fax_gateway_enabled = $t38_fax_gateway_enabled;
+        null !== $accept_any_rtp_packets_enabled && $obj['accept_any_rtp_packets_enabled'] = $accept_any_rtp_packets_enabled;
+        null !== $rtp_auto_adjust_enabled && $obj['rtp_auto_adjust_enabled'] = $rtp_auto_adjust_enabled;
+        null !== $t38_fax_gateway_enabled && $obj['t38_fax_gateway_enabled'] = $t38_fax_gateway_enabled;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class MediaFeatures implements BaseModel
         bool $acceptAnyRtpPacketsEnabled
     ): self {
         $obj = clone $this;
-        $obj->accept_any_rtp_packets_enabled = $acceptAnyRtpPacketsEnabled;
+        $obj['accept_any_rtp_packets_enabled'] = $acceptAnyRtpPacketsEnabled;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class MediaFeatures implements BaseModel
     public function withRtpAutoAdjustEnabled(bool $rtpAutoAdjustEnabled): self
     {
         $obj = clone $this;
-        $obj->rtp_auto_adjust_enabled = $rtpAutoAdjustEnabled;
+        $obj['rtp_auto_adjust_enabled'] = $rtpAutoAdjustEnabled;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class MediaFeatures implements BaseModel
     public function withT38FaxGatewayEnabled(bool $t38FaxGatewayEnabled): self
     {
         $obj = clone $this;
-        $obj->t38_fax_gateway_enabled = $t38FaxGatewayEnabled;
+        $obj['t38_fax_gateway_enabled'] = $t38FaxGatewayEnabled;
 
         return $obj;
     }

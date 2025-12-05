@@ -55,9 +55,9 @@ final class IssuedBy implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $common_name && $obj->common_name = $common_name;
-        null !== $organization && $obj->organization = $organization;
-        null !== $organization_unit && $obj->organization_unit = $organization_unit;
+        null !== $common_name && $obj['common_name'] = $common_name;
+        null !== $organization && $obj['organization'] = $organization;
+        null !== $organization_unit && $obj['organization_unit'] = $organization_unit;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class IssuedBy implements BaseModel
     public function withCommonName(string $commonName): self
     {
         $obj = clone $this;
-        $obj->common_name = $commonName;
+        $obj['common_name'] = $commonName;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class IssuedBy implements BaseModel
     public function withOrganization(string $organization): self
     {
         $obj = clone $this;
-        $obj->organization = $organization;
+        $obj['organization'] = $organization;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class IssuedBy implements BaseModel
     public function withOrganizationUnit(string $organizationUnit): self
     {
         $obj = clone $this;
-        $obj->organization_unit = $organizationUnit;
+        $obj['organization_unit'] = $organizationUnit;
 
         return $obj;
     }

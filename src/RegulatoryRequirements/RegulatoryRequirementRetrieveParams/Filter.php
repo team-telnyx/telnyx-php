@@ -83,10 +83,10 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $action && $obj['action'] = $action;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $requirement_group_id && $obj->requirement_group_id = $requirement_group_id;
+        null !== $requirement_group_id && $obj['requirement_group_id'] = $requirement_group_id;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Filter implements BaseModel
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj->requirement_group_id = $requirementGroupID;
+        $obj['requirement_group_id'] = $requirementGroupID;
 
         return $obj;
     }

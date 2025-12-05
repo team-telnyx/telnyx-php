@@ -60,9 +60,9 @@ final class ConnectionRtcpSettings implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $capture_enabled && $obj->capture_enabled = $capture_enabled;
+        null !== $capture_enabled && $obj['capture_enabled'] = $capture_enabled;
         null !== $port && $obj['port'] = $port;
-        null !== $report_frequency_secs && $obj->report_frequency_secs = $report_frequency_secs;
+        null !== $report_frequency_secs && $obj['report_frequency_secs'] = $report_frequency_secs;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class ConnectionRtcpSettings implements BaseModel
     public function withCaptureEnabled(bool $captureEnabled): self
     {
         $obj = clone $this;
-        $obj->capture_enabled = $captureEnabled;
+        $obj['capture_enabled'] = $captureEnabled;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class ConnectionRtcpSettings implements BaseModel
     public function withReportFrequencySecs(int $reportFrequencySecs): self
     {
         $obj = clone $this;
-        $obj->report_frequency_secs = $reportFrequencySecs;
+        $obj['report_frequency_secs'] = $reportFrequencySecs;
 
         return $obj;
     }

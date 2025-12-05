@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumberBlocks;
 
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\CostInformation;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\Feature;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RecordType;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RegionInformation;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -41,33 +45,57 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel, Response
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   cost_information?: CostInformation|null,
+     *   features?: list<Feature>|null,
+     *   range?: int|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   region_information?: list<RegionInformation>|null,
+     *   starting_number?: string|null,
+     * }> $data
+     * @param Meta|array{
+     *   best_effort_results?: int|null, total_results?: int|null
+     * } $meta
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        Meta|array|null $meta = null
+    ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   cost_information?: CostInformation|null,
+     *   features?: list<Feature>|null,
+     *   range?: int|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   region_information?: list<RegionInformation>|null,
+     *   starting_number?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{
+     *   best_effort_results?: int|null, total_results?: int|null
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

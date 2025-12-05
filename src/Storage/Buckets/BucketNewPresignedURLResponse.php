@@ -33,20 +33,33 @@ final class BucketNewPresignedURLResponse implements BaseModel, ResponseConverte
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Content|array{
+     *   token?: string|null,
+     *   expires_at?: \DateTimeInterface|null,
+     *   presigned_url?: string|null,
+     * } $content
      */
-    public static function with(?Content $content = null): self
+    public static function with(Content|array|null $content = null): self
     {
         $obj = new self;
 
-        null !== $content && $obj->content = $content;
+        null !== $content && $obj['content'] = $content;
 
         return $obj;
     }
 
-    public function withContent(Content $content): self
+    /**
+     * @param Content|array{
+     *   token?: string|null,
+     *   expires_at?: \DateTimeInterface|null,
+     *   presigned_url?: string|null,
+     * } $content
+     */
+    public function withContent(Content|array $content): self
     {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }

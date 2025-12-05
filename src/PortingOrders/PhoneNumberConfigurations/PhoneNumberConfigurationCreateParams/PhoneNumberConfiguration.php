@@ -64,8 +64,8 @@ final class PhoneNumberConfiguration implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->porting_phone_number_id = $porting_phone_number_id;
-        $obj->user_bundle_id = $user_bundle_id;
+        $obj['porting_phone_number_id'] = $porting_phone_number_id;
+        $obj['user_bundle_id'] = $user_bundle_id;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class PhoneNumberConfiguration implements BaseModel
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
         $obj = clone $this;
-        $obj->porting_phone_number_id = $portingPhoneNumberID;
+        $obj['porting_phone_number_id'] = $portingPhoneNumberID;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class PhoneNumberConfiguration implements BaseModel
     public function withUserBundleID(string $userBundleID): self
     {
         $obj = clone $this;
-        $obj->user_bundle_id = $userBundleID;
+        $obj['user_bundle_id'] = $userBundleID;
 
         return $obj;
     }

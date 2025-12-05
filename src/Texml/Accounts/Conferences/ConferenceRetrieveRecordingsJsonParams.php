@@ -55,7 +55,7 @@ final class ConferenceRetrieveRecordingsJsonParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
+        $obj['account_sid'] = $account_sid;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class ConferenceRetrieveRecordingsJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }

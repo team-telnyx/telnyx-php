@@ -63,9 +63,9 @@ final class ActionRefreshClientTokenParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->refresh_token = $refresh_token;
+        $obj['refresh_token'] = $refresh_token;
 
-        null !== $token_ttl_secs && $obj->token_ttl_secs = $token_ttl_secs;
+        null !== $token_ttl_secs && $obj['token_ttl_secs'] = $token_ttl_secs;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class ActionRefreshClientTokenParams implements BaseModel
     public function withRefreshToken(string $refreshToken): self
     {
         $obj = clone $this;
-        $obj->refresh_token = $refreshToken;
+        $obj['refresh_token'] = $refreshToken;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class ActionRefreshClientTokenParams implements BaseModel
     public function withTokenTtlSecs(int $tokenTtlSecs): self
     {
         $obj = clone $this;
-        $obj->token_ttl_secs = $tokenTtlSecs;
+        $obj['token_ttl_secs'] = $tokenTtlSecs;
 
         return $obj;
     }

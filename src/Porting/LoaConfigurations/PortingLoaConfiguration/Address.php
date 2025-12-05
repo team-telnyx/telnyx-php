@@ -81,12 +81,12 @@ final class Address implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $city && $obj->city = $city;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $extended_address && $obj->extended_address = $extended_address;
-        null !== $state && $obj->state = $state;
-        null !== $street_address && $obj->street_address = $street_address;
-        null !== $zip_code && $obj->zip_code = $zip_code;
+        null !== $city && $obj['city'] = $city;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $extended_address && $obj['extended_address'] = $extended_address;
+        null !== $state && $obj['state'] = $state;
+        null !== $street_address && $obj['street_address'] = $street_address;
+        null !== $zip_code && $obj['zip_code'] = $zip_code;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Address implements BaseModel
     public function withCity(string $city): self
     {
         $obj = clone $this;
-        $obj->city = $city;
+        $obj['city'] = $city;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Address implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Address implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj->extended_address = $extendedAddress;
+        $obj['extended_address'] = $extendedAddress;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Address implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Address implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Address implements BaseModel
     public function withZipCode(string $zipCode): self
     {
         $obj = clone $this;
-        $obj->zip_code = $zipCode;
+        $obj['zip_code'] = $zipCode;
 
         return $obj;
     }

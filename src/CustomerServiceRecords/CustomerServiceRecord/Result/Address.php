@@ -73,11 +73,11 @@ final class Address implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj->administrative_area = $administrative_area;
-        null !== $full_address && $obj->full_address = $full_address;
-        null !== $locality && $obj->locality = $locality;
-        null !== $postal_code && $obj->postal_code = $postal_code;
-        null !== $street_address && $obj->street_address = $street_address;
+        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $full_address && $obj['full_address'] = $full_address;
+        null !== $locality && $obj['locality'] = $locality;
+        null !== $postal_code && $obj['postal_code'] = $postal_code;
+        null !== $street_address && $obj['street_address'] = $street_address;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Address implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrative_area = $administrativeArea;
+        $obj['administrative_area'] = $administrativeArea;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Address implements BaseModel
     public function withFullAddress(string $fullAddress): self
     {
         $obj = clone $this;
-        $obj->full_address = $fullAddress;
+        $obj['full_address'] = $fullAddress;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Address implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Address implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postal_code = $postalCode;
+        $obj['postal_code'] = $postalCode;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Address implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }

@@ -79,10 +79,10 @@ final class RcsCapabilities implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $agent_id && $obj->agent_id = $agent_id;
-        null !== $agent_name && $obj->agent_name = $agent_name;
-        null !== $features && $obj->features = $features;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $agent_id && $obj['agent_id'] = $agent_id;
+        null !== $agent_name && $obj['agent_name'] = $agent_name;
+        null !== $features && $obj['features'] = $features;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -94,7 +94,7 @@ final class RcsCapabilities implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agent_id = $agentID;
+        $obj['agent_id'] = $agentID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class RcsCapabilities implements BaseModel
     public function withAgentName(string $agentName): self
     {
         $obj = clone $this;
-        $obj->agent_name = $agentName;
+        $obj['agent_name'] = $agentName;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class RcsCapabilities implements BaseModel
     public function withFeatures(array $features): self
     {
         $obj = clone $this;
-        $obj->features = $features;
+        $obj['features'] = $features;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class RcsCapabilities implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

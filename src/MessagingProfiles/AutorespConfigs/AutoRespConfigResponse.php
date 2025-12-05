@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 
 /**
  * @phpstan-type AutoRespConfigResponseShape = array{data: AutoRespConfig}
@@ -46,20 +47,41 @@ final class AutoRespConfigResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AutoRespConfig|array{
+     *   id: string,
+     *   country_code: string,
+     *   created_at: \DateTimeInterface,
+     *   keywords: list<string>,
+     *   op: value-of<Op>,
+     *   updated_at: \DateTimeInterface,
+     *   resp_text?: string|null,
+     * } $data
      */
-    public static function with(AutoRespConfig $data): self
+    public static function with(AutoRespConfig|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(AutoRespConfig $data): self
+    /**
+     * @param AutoRespConfig|array{
+     *   id: string,
+     *   country_code: string,
+     *   created_at: \DateTimeInterface,
+     *   keywords: list<string>,
+     *   op: value-of<Op>,
+     *   updated_at: \DateTimeInterface,
+     *   resp_text?: string|null,
+     * } $data
+     */
+    public function withData(AutoRespConfig|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

@@ -43,7 +43,13 @@ final class PartnerCampaignListSharedByMeResponse implements BaseModel, Response
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Record> $records
+     * @param list<Record|array{
+     *   brandId: string,
+     *   campaignId: string,
+     *   usecase: string,
+     *   createDate?: string|null,
+     *   status?: string|null,
+     * }> $records
      */
     public static function with(
         ?int $page = null,
@@ -52,9 +58,9 @@ final class PartnerCampaignListSharedByMeResponse implements BaseModel, Response
     ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $records && $obj->records = $records;
-        null !== $totalRecords && $obj->totalRecords = $totalRecords;
+        null !== $page && $obj['page'] = $page;
+        null !== $records && $obj['records'] = $records;
+        null !== $totalRecords && $obj['totalRecords'] = $totalRecords;
 
         return $obj;
     }
@@ -62,18 +68,24 @@ final class PartnerCampaignListSharedByMeResponse implements BaseModel, Response
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
-     * @param list<Record> $records
+     * @param list<Record|array{
+     *   brandId: string,
+     *   campaignId: string,
+     *   usecase: string,
+     *   createDate?: string|null,
+     *   status?: string|null,
+     * }> $records
      */
     public function withRecords(array $records): self
     {
         $obj = clone $this;
-        $obj->records = $records;
+        $obj['records'] = $records;
 
         return $obj;
     }
@@ -81,7 +93,7 @@ final class PartnerCampaignListSharedByMeResponse implements BaseModel, Response
     public function withTotalRecords(int $totalRecords): self
     {
         $obj = clone $this;
-        $obj->totalRecords = $totalRecords;
+        $obj['totalRecords'] = $totalRecords;
 
         return $obj;
     }

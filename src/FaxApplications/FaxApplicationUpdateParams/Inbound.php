@@ -60,8 +60,8 @@ final class Inbound implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $channel_limit && $obj->channel_limit = $channel_limit;
-        null !== $sip_subdomain && $obj->sip_subdomain = $sip_subdomain;
+        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $sip_subdomain && $obj['sip_subdomain'] = $sip_subdomain;
         null !== $sip_subdomain_receive_settings && $obj['sip_subdomain_receive_settings'] = $sip_subdomain_receive_settings;
 
         return $obj;
@@ -73,7 +73,7 @@ final class Inbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channel_limit = $channelLimit;
+        $obj['channel_limit'] = $channelLimit;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Inbound implements BaseModel
     public function withSipSubdomain(string $sipSubdomain): self
     {
         $obj = clone $this;
-        $obj->sip_subdomain = $sipSubdomain;
+        $obj['sip_subdomain'] = $sipSubdomain;
 
         return $obj;
     }

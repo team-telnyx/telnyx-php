@@ -44,8 +44,8 @@ final class GlobalIP implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $ip_address && $obj->ip_address = $ip_address;
+        null !== $id && $obj['id'] = $id;
+        null !== $ip_address && $obj['ip_address'] = $ip_address;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class GlobalIP implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class GlobalIP implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ip_address = $ipAddress;
+        $obj['ip_address'] = $ipAddress;
 
         return $obj;
     }

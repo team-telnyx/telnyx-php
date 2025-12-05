@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold\Unit;
 
 /**
  * The SIM card individual data usage notification information.
@@ -68,23 +69,27 @@ final class SimCardDataUsageNotification implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Threshold|array{
+     *   amount?: string|null, unit?: value-of<Unit>|null
+     * } $threshold
      */
     public static function with(
         ?string $id = null,
         ?string $created_at = null,
         ?string $record_type = null,
         ?string $sim_card_id = null,
-        ?Threshold $threshold = null,
+        Threshold|array|null $threshold = null,
         ?string $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
-        null !== $threshold && $obj->threshold = $threshold;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $threshold && $obj['threshold'] = $threshold;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -95,7 +100,7 @@ final class SimCardDataUsageNotification implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -106,7 +111,7 @@ final class SimCardDataUsageNotification implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -114,7 +119,7 @@ final class SimCardDataUsageNotification implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -125,18 +130,22 @@ final class SimCardDataUsageNotification implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }
 
     /**
      * Data usage threshold that will trigger the notification.
+     *
+     * @param Threshold|array{
+     *   amount?: string|null, unit?: value-of<Unit>|null
+     * } $threshold
      */
-    public function withThreshold(Threshold $threshold): self
+    public function withThreshold(Threshold|array $threshold): self
     {
         $obj = clone $this;
-        $obj->threshold = $threshold;
+        $obj['threshold'] = $threshold;
 
         return $obj;
     }
@@ -147,7 +156,7 @@ final class SimCardDataUsageNotification implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

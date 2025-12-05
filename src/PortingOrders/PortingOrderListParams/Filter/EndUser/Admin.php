@@ -46,8 +46,8 @@ final class Admin implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $auth_person_name && $obj->auth_person_name = $auth_person_name;
-        null !== $entity_name && $obj->entity_name = $entity_name;
+        null !== $auth_person_name && $obj['auth_person_name'] = $auth_person_name;
+        null !== $entity_name && $obj['entity_name'] = $entity_name;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Admin implements BaseModel
     public function withAuthPersonName(string $authPersonName): self
     {
         $obj = clone $this;
-        $obj->auth_person_name = $authPersonName;
+        $obj['auth_person_name'] = $authPersonName;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Admin implements BaseModel
     public function withEntityName(string $entityName): self
     {
         $obj = clone $this;
-        $obj->entity_name = $entityName;
+        $obj['entity_name'] = $entityName;
 
         return $obj;
     }

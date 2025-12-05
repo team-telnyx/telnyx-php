@@ -33,7 +33,7 @@ final class CallControlCommandResult implements BaseModel
     {
         $obj = new self;
 
-        null !== $result && $obj->result = $result;
+        null !== $result && $obj['result'] = $result;
 
         return $obj;
     }
@@ -41,7 +41,7 @@ final class CallControlCommandResult implements BaseModel
     public function withResult(string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

@@ -139,18 +139,18 @@ final class Conference implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
-        null !== $api_version && $obj->api_version = $api_version;
-        null !== $call_sid_ending_conference && $obj->call_sid_ending_conference = $call_sid_ending_conference;
-        null !== $date_created && $obj->date_created = $date_created;
-        null !== $date_updated && $obj->date_updated = $date_updated;
-        null !== $friendly_name && $obj->friendly_name = $friendly_name;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
+        null !== $api_version && $obj['api_version'] = $api_version;
+        null !== $call_sid_ending_conference && $obj['call_sid_ending_conference'] = $call_sid_ending_conference;
+        null !== $date_created && $obj['date_created'] = $date_created;
+        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $friendly_name && $obj['friendly_name'] = $friendly_name;
         null !== $reason_conference_ended && $obj['reason_conference_ended'] = $reason_conference_ended;
-        null !== $region && $obj->region = $region;
-        null !== $sid && $obj->sid = $sid;
+        null !== $region && $obj['region'] = $region;
+        null !== $sid && $obj['sid'] = $sid;
         null !== $status && $obj['status'] = $status;
-        null !== $subresource_uris && $obj->subresource_uris = $subresource_uris;
-        null !== $uri && $obj->uri = $uri;
+        null !== $subresource_uris && $obj['subresource_uris'] = $subresource_uris;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class Conference implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class Conference implements BaseModel
     public function withAPIVersion(string $apiVersion): self
     {
         $obj = clone $this;
-        $obj->api_version = $apiVersion;
+        $obj['api_version'] = $apiVersion;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Conference implements BaseModel
         string $callSidEndingConference
     ): self {
         $obj = clone $this;
-        $obj->call_sid_ending_conference = $callSidEndingConference;
+        $obj['call_sid_ending_conference'] = $callSidEndingConference;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Conference implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->date_created = $dateCreated;
+        $obj['date_created'] = $dateCreated;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class Conference implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->date_updated = $dateUpdated;
+        $obj['date_updated'] = $dateUpdated;
 
         return $obj;
     }
@@ -217,7 +217,7 @@ final class Conference implements BaseModel
     public function withFriendlyName(string $friendlyName): self
     {
         $obj = clone $this;
-        $obj->friendly_name = $friendlyName;
+        $obj['friendly_name'] = $friendlyName;
 
         return $obj;
     }
@@ -242,7 +242,7 @@ final class Conference implements BaseModel
     public function withRegion(string $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }
@@ -253,7 +253,7 @@ final class Conference implements BaseModel
     public function withSid(string $sid): self
     {
         $obj = clone $this;
-        $obj->sid = $sid;
+        $obj['sid'] = $sid;
 
         return $obj;
     }
@@ -279,7 +279,7 @@ final class Conference implements BaseModel
     public function withSubresourceUris(array $subresourceUris): self
     {
         $obj = clone $this;
-        $obj->subresource_uris = $subresourceUris;
+        $obj['subresource_uris'] = $subresourceUris;
 
         return $obj;
     }
@@ -290,7 +290,7 @@ final class Conference implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

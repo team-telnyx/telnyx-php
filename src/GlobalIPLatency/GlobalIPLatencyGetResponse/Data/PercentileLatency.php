@@ -61,81 +61,110 @@ final class PercentileLatency implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param _0|array{amount?: float|null, unit?: string|null} $p0
+     * @param _100|array{amount?: float|null, unit?: string|null} $p100
+     * @param _25|array{amount?: float|null, unit?: string|null} $p25
+     * @param _50|array{amount?: float|null, unit?: string|null} $p50
+     * @param _75|array{amount?: float|null, unit?: string|null} $p75
+     * @param _90|array{amount?: float|null, unit?: string|null} $p90
+     * @param _99|array{amount?: float|null, unit?: string|null} $p99
      */
     public static function with(
-        ?_0 $p0 = null,
-        ?_100 $p100 = null,
-        ?_25 $p25 = null,
-        ?_50 $p50 = null,
-        ?_75 $p75 = null,
-        ?_90 $p90 = null,
-        ?_99 $p99 = null,
+        _0|array|null $p0 = null,
+        _100|array|null $p100 = null,
+        _25|array|null $p25 = null,
+        _50|array|null $p50 = null,
+        _75|array|null $p75 = null,
+        _90|array|null $p90 = null,
+        _99|array|null $p99 = null,
     ): self {
         $obj = new self;
 
-        null !== $p0 && $obj->p0 = $p0;
-        null !== $p100 && $obj->p100 = $p100;
-        null !== $p25 && $obj->p25 = $p25;
-        null !== $p50 && $obj->p50 = $p50;
-        null !== $p75 && $obj->p75 = $p75;
-        null !== $p90 && $obj->p90 = $p90;
-        null !== $p99 && $obj->p99 = $p99;
+        null !== $p0 && $obj['p0'] = $p0;
+        null !== $p100 && $obj['p100'] = $p100;
+        null !== $p25 && $obj['p25'] = $p25;
+        null !== $p50 && $obj['p50'] = $p50;
+        null !== $p75 && $obj['p75'] = $p75;
+        null !== $p90 && $obj['p90'] = $p90;
+        null !== $p99 && $obj['p99'] = $p99;
 
         return $obj;
     }
 
-    public function withP0(_0 $p0): self
+    /**
+     * @param _0|array{amount?: float|null, unit?: string|null} $p0
+     */
+    public function withP0(_0|array $p0): self
     {
         $obj = clone $this;
-        $obj->p0 = $p0;
+        $obj['p0'] = $p0;
 
         return $obj;
     }
 
-    public function withP100(_100 $p100): self
+    /**
+     * @param _100|array{amount?: float|null, unit?: string|null} $p100
+     */
+    public function withP100(_100|array $p100): self
     {
         $obj = clone $this;
-        $obj->p100 = $p100;
+        $obj['p100'] = $p100;
 
         return $obj;
     }
 
-    public function withP25(_25 $p25): self
+    /**
+     * @param _25|array{amount?: float|null, unit?: string|null} $p25
+     */
+    public function withP25(_25|array $p25): self
     {
         $obj = clone $this;
-        $obj->p25 = $p25;
+        $obj['p25'] = $p25;
 
         return $obj;
     }
 
-    public function withP50(_50 $p50): self
+    /**
+     * @param _50|array{amount?: float|null, unit?: string|null} $p50
+     */
+    public function withP50(_50|array $p50): self
     {
         $obj = clone $this;
-        $obj->p50 = $p50;
+        $obj['p50'] = $p50;
 
         return $obj;
     }
 
-    public function withP75(_75 $p75): self
+    /**
+     * @param _75|array{amount?: float|null, unit?: string|null} $p75
+     */
+    public function withP75(_75|array $p75): self
     {
         $obj = clone $this;
-        $obj->p75 = $p75;
+        $obj['p75'] = $p75;
 
         return $obj;
     }
 
-    public function withP90(_90 $p90): self
+    /**
+     * @param _90|array{amount?: float|null, unit?: string|null} $p90
+     */
+    public function withP90(_90|array $p90): self
     {
         $obj = clone $this;
-        $obj->p90 = $p90;
+        $obj['p90'] = $p90;
 
         return $obj;
     }
 
-    public function withP99(_99 $p99): self
+    /**
+     * @param _99|array{amount?: float|null, unit?: string|null} $p99
+     */
+    public function withP99(_99|array $p99): self
     {
         $obj = clone $this;
-        $obj->p99 = $p99;
+        $obj['p99'] = $p99;
 
         return $obj;
     }

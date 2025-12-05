@@ -43,37 +43,52 @@ final class HTTP implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Request|array{
+     *   headers?: list<list<string>>|null, url?: string|null
+     * } $request
+     * @param Response|array{
+     *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
+     * }|null $response
      */
     public static function with(
-        ?Request $request = null,
-        ?Response $response = null
+        Request|array|null $request = null,
+        Response|array|null $response = null
     ): self {
         $obj = new self;
 
-        null !== $request && $obj->request = $request;
-        null !== $response && $obj->response = $response;
+        null !== $request && $obj['request'] = $request;
+        null !== $response && $obj['response'] = $response;
 
         return $obj;
     }
 
     /**
      * Request details.
+     *
+     * @param Request|array{
+     *   headers?: list<list<string>>|null, url?: string|null
+     * } $request
      */
-    public function withRequest(Request $request): self
+    public function withRequest(Request|array $request): self
     {
         $obj = clone $this;
-        $obj->request = $request;
+        $obj['request'] = $request;
 
         return $obj;
     }
 
     /**
      * Response details, optional.
+     *
+     * @param Response|array{
+     *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
+     * }|null $response
      */
-    public function withResponse(?Response $response): self
+    public function withResponse(Response|array|null $response): self
     {
         $obj = clone $this;
-        $obj->response = $response;
+        $obj['response'] = $response;
 
         return $obj;
     }

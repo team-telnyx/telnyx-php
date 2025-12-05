@@ -63,9 +63,9 @@ final class ActionStopStreamingParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $stream_id && $obj->stream_id = $stream_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $stream_id && $obj['stream_id'] = $stream_id;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class ActionStopStreamingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class ActionStopStreamingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class ActionStopStreamingParams implements BaseModel
     public function withStreamID(string $streamID): self
     {
         $obj = clone $this;
-        $obj->stream_id = $streamID;
+        $obj['stream_id'] = $streamID;
 
         return $obj;
     }

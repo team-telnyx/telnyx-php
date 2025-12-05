@@ -94,11 +94,19 @@ final class DocReqsRequirementType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param AcceptanceCriteria|array{
+     *   acceptable_characters?: string|null,
+     *   acceptable_values?: list<string>|null,
+     *   locality_limit?: string|null,
+     *   max_length?: int|null,
+     *   min_length?: int|null,
+     *   time_limit?: string|null,
+     * } $acceptance_criteria
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ?AcceptanceCriteria $acceptance_criteria = null,
+        AcceptanceCriteria|array|null $acceptance_criteria = null,
         ?string $created_at = null,
         ?string $description = null,
         ?string $example = null,
@@ -109,15 +117,15 @@ final class DocReqsRequirementType implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $acceptance_criteria && $obj->acceptance_criteria = $acceptance_criteria;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $description && $obj->description = $description;
-        null !== $example && $obj->example = $example;
-        null !== $name && $obj->name = $name;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $acceptance_criteria && $obj['acceptance_criteria'] = $acceptance_criteria;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $description && $obj['description'] = $description;
+        null !== $example && $obj['example'] = $example;
+        null !== $name && $obj['name'] = $name;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -128,19 +136,28 @@ final class DocReqsRequirementType implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * Specifies objective criteria for acceptance.
+     *
+     * @param AcceptanceCriteria|array{
+     *   acceptable_characters?: string|null,
+     *   acceptable_values?: list<string>|null,
+     *   locality_limit?: string|null,
+     *   max_length?: int|null,
+     *   min_length?: int|null,
+     *   time_limit?: string|null,
+     * } $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
-        AcceptanceCriteria $acceptanceCriteria
+        AcceptanceCriteria|array $acceptanceCriteria
     ): self {
         $obj = clone $this;
-        $obj->acceptance_criteria = $acceptanceCriteria;
+        $obj['acceptance_criteria'] = $acceptanceCriteria;
 
         return $obj;
     }
@@ -151,7 +168,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -162,7 +179,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -173,7 +190,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withExample(string $example): self
     {
         $obj = clone $this;
-        $obj->example = $example;
+        $obj['example'] = $example;
 
         return $obj;
     }
@@ -184,7 +201,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -195,7 +212,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -219,7 +236,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

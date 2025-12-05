@@ -59,7 +59,7 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->sim_card_ids = $sim_card_ids;
+        $obj['sim_card_ids'] = $sim_card_ids;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
     public function withSimCardIDs(array $simCardIDs): self
     {
         $obj = clone $this;
-        $obj->sim_card_ids = $simCardIDs;
+        $obj['sim_card_ids'] = $simCardIDs;
 
         return $obj;
     }

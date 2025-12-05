@@ -50,9 +50,9 @@ final class BlackBoxTest implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $result && $obj->result = $result;
+        null !== $id && $obj['id'] = $id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $result && $obj['result'] = $result;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class BlackBoxTest implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class BlackBoxTest implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class BlackBoxTest implements BaseModel
     public function withResult(float $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

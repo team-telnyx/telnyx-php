@@ -31,20 +31,25 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Name|array{contains?: string|null} $name
      */
-    public static function with(?Name $name = null): self
+    public static function with(Name|array|null $name = null): self
     {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
 
-    public function withName(Name $name): self
+    /**
+     * @param Name|array{contains?: string|null} $name
+     */
+    public function withName(Name|array $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

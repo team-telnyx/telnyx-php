@@ -46,7 +46,7 @@ final class EmbeddingListParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $status && $obj->status = $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -59,7 +59,7 @@ final class EmbeddingListParams implements BaseModel
     public function withStatus(array $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

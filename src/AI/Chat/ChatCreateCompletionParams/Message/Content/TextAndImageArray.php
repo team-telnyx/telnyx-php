@@ -64,8 +64,8 @@ final class TextAndImageArray implements BaseModel
 
         $obj['type'] = $type;
 
-        null !== $image_url && $obj->image_url = $image_url;
-        null !== $text && $obj->text = $text;
+        null !== $image_url && $obj['image_url'] = $image_url;
+        null !== $text && $obj['text'] = $text;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class TextAndImageArray implements BaseModel
     public function withImageURL(string $imageURL): self
     {
         $obj = clone $this;
-        $obj->image_url = $imageURL;
+        $obj['image_url'] = $imageURL;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class TextAndImageArray implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

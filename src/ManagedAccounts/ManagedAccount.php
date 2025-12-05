@@ -152,6 +152,13 @@ final class ManagedAccount implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $record_type
+     * @param ManagedAccountBalance|array{
+     *   available_credit?: string|null,
+     *   balance?: string|null,
+     *   credit_limit?: string|null,
+     *   currency?: string|null,
+     *   record_type?: value-of<ManagedAccountBalance\RecordType>|null,
+     * } $balance
      */
     public static function with(
         string $id,
@@ -163,27 +170,27 @@ final class ManagedAccount implements BaseModel
         string $manager_account_id,
         RecordType|string $record_type,
         string $updated_at,
-        ?ManagedAccountBalance $balance = null,
+        ManagedAccountBalance|array|null $balance = null,
         ?bool $managed_account_allow_custom_pricing = null,
         ?string $organization_name = null,
         ?bool $rollup_billing = null,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->api_key = $api_key;
-        $obj->api_token = $api_token;
-        $obj->api_user = $api_user;
-        $obj->created_at = $created_at;
-        $obj->email = $email;
-        $obj->manager_account_id = $manager_account_id;
+        $obj['id'] = $id;
+        $obj['api_key'] = $api_key;
+        $obj['api_token'] = $api_token;
+        $obj['api_user'] = $api_user;
+        $obj['created_at'] = $created_at;
+        $obj['email'] = $email;
+        $obj['manager_account_id'] = $manager_account_id;
         $obj['record_type'] = $record_type;
-        $obj->updated_at = $updated_at;
+        $obj['updated_at'] = $updated_at;
 
-        null !== $balance && $obj->balance = $balance;
-        null !== $managed_account_allow_custom_pricing && $obj->managed_account_allow_custom_pricing = $managed_account_allow_custom_pricing;
-        null !== $organization_name && $obj->organization_name = $organization_name;
-        null !== $rollup_billing && $obj->rollup_billing = $rollup_billing;
+        null !== $balance && $obj['balance'] = $balance;
+        null !== $managed_account_allow_custom_pricing && $obj['managed_account_allow_custom_pricing'] = $managed_account_allow_custom_pricing;
+        null !== $organization_name && $obj['organization_name'] = $organization_name;
+        null !== $rollup_billing && $obj['rollup_billing'] = $rollup_billing;
 
         return $obj;
     }
@@ -194,7 +201,7 @@ final class ManagedAccount implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -205,7 +212,7 @@ final class ManagedAccount implements BaseModel
     public function withAPIKey(string $apiKey): self
     {
         $obj = clone $this;
-        $obj->api_key = $apiKey;
+        $obj['api_key'] = $apiKey;
 
         return $obj;
     }
@@ -216,7 +223,7 @@ final class ManagedAccount implements BaseModel
     public function withAPIToken(string $apiToken): self
     {
         $obj = clone $this;
-        $obj->api_token = $apiToken;
+        $obj['api_token'] = $apiToken;
 
         return $obj;
     }
@@ -227,7 +234,7 @@ final class ManagedAccount implements BaseModel
     public function withAPIUser(string $apiUser): self
     {
         $obj = clone $this;
-        $obj->api_user = $apiUser;
+        $obj['api_user'] = $apiUser;
 
         return $obj;
     }
@@ -238,7 +245,7 @@ final class ManagedAccount implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -249,7 +256,7 @@ final class ManagedAccount implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -260,7 +267,7 @@ final class ManagedAccount implements BaseModel
     public function withManagerAccountID(string $managerAccountID): self
     {
         $obj = clone $this;
-        $obj->manager_account_id = $managerAccountID;
+        $obj['manager_account_id'] = $managerAccountID;
 
         return $obj;
     }
@@ -284,15 +291,24 @@ final class ManagedAccount implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
 
-    public function withBalance(ManagedAccountBalance $balance): self
+    /**
+     * @param ManagedAccountBalance|array{
+     *   available_credit?: string|null,
+     *   balance?: string|null,
+     *   credit_limit?: string|null,
+     *   currency?: string|null,
+     *   record_type?: value-of<ManagedAccountBalance\RecordType>|null,
+     * } $balance
+     */
+    public function withBalance(ManagedAccountBalance|array $balance): self
     {
         $obj = clone $this;
-        $obj->balance = $balance;
+        $obj['balance'] = $balance;
 
         return $obj;
     }
@@ -304,7 +320,7 @@ final class ManagedAccount implements BaseModel
         bool $managedAccountAllowCustomPricing
     ): self {
         $obj = clone $this;
-        $obj->managed_account_allow_custom_pricing = $managedAccountAllowCustomPricing;
+        $obj['managed_account_allow_custom_pricing'] = $managedAccountAllowCustomPricing;
 
         return $obj;
     }
@@ -315,7 +331,7 @@ final class ManagedAccount implements BaseModel
     public function withOrganizationName(string $organizationName): self
     {
         $obj = clone $this;
-        $obj->organization_name = $organizationName;
+        $obj['organization_name'] = $organizationName;
 
         return $obj;
     }
@@ -326,7 +342,7 @@ final class ManagedAccount implements BaseModel
     public function withRollupBilling(bool $rollupBilling): self
     {
         $obj = clone $this;
-        $obj->rollup_billing = $rollupBilling;
+        $obj['rollup_billing'] = $rollupBilling;
 
         return $obj;
     }

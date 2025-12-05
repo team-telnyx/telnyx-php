@@ -165,22 +165,22 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $codec && $obj->codec = $codec;
-        null !== $completed_at && $obj->completed_at = $completed_at;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $download_url && $obj->download_url = $download_url;
-        null !== $duration_secs && $obj->duration_secs = $duration_secs;
-        null !== $ended_at && $obj->ended_at = $ended_at;
-        null !== $participant_id && $obj->participant_id = $participant_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $room_id && $obj->room_id = $room_id;
-        null !== $session_id && $obj->session_id = $session_id;
-        null !== $size_mb && $obj->size_mb = $size_mb;
-        null !== $started_at && $obj->started_at = $started_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $codec && $obj['codec'] = $codec;
+        null !== $completed_at && $obj['completed_at'] = $completed_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $download_url && $obj['download_url'] = $download_url;
+        null !== $duration_secs && $obj['duration_secs'] = $duration_secs;
+        null !== $ended_at && $obj['ended_at'] = $ended_at;
+        null !== $participant_id && $obj['participant_id'] = $participant_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $room_id && $obj['room_id'] = $room_id;
+        null !== $session_id && $obj['session_id'] = $session_id;
+        null !== $size_mb && $obj['size_mb'] = $size_mb;
+        null !== $started_at && $obj['started_at'] = $started_at;
         null !== $status && $obj['status'] = $status;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class Data implements BaseModel
     public function withCodec(string $codec): self
     {
         $obj = clone $this;
-        $obj->codec = $codec;
+        $obj['codec'] = $codec;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class Data implements BaseModel
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
-        $obj->completed_at = $completedAt;
+        $obj['completed_at'] = $completedAt;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class Data implements BaseModel
     public function withDownloadURL(string $downloadURL): self
     {
         $obj = clone $this;
-        $obj->download_url = $downloadURL;
+        $obj['download_url'] = $downloadURL;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class Data implements BaseModel
     public function withDurationSecs(int $durationSecs): self
     {
         $obj = clone $this;
-        $obj->duration_secs = $durationSecs;
+        $obj['duration_secs'] = $durationSecs;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class Data implements BaseModel
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
         $obj = clone $this;
-        $obj->ended_at = $endedAt;
+        $obj['ended_at'] = $endedAt;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class Data implements BaseModel
     public function withParticipantID(string $participantID): self
     {
         $obj = clone $this;
-        $obj->participant_id = $participantID;
+        $obj['participant_id'] = $participantID;
 
         return $obj;
     }
@@ -276,7 +276,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class Data implements BaseModel
     public function withRoomID(string $roomID): self
     {
         $obj = clone $this;
-        $obj->room_id = $roomID;
+        $obj['room_id'] = $roomID;
 
         return $obj;
     }
@@ -298,7 +298,7 @@ final class Data implements BaseModel
     public function withSessionID(string $sessionID): self
     {
         $obj = clone $this;
-        $obj->session_id = $sessionID;
+        $obj['session_id'] = $sessionID;
 
         return $obj;
     }
@@ -309,7 +309,7 @@ final class Data implements BaseModel
     public function withSizeMB(float $sizeMB): self
     {
         $obj = clone $this;
-        $obj->size_mb = $sizeMB;
+        $obj['size_mb'] = $sizeMB;
 
         return $obj;
     }
@@ -320,7 +320,7 @@ final class Data implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj->started_at = $startedAt;
+        $obj['started_at'] = $startedAt;
 
         return $obj;
     }
@@ -357,7 +357,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

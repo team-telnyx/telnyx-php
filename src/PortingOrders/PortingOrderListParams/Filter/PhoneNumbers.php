@@ -48,17 +48,19 @@ final class PhoneNumbers implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PhoneNumber|array{contains?: string|null} $phone_number
      */
     public static function with(
         ?string $carrier_name = null,
         ?string $country_code = null,
-        ?PhoneNumber $phone_number = null,
+        PhoneNumber|array|null $phone_number = null,
     ): self {
         $obj = new self;
 
-        null !== $carrier_name && $obj->carrier_name = $carrier_name;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $carrier_name && $obj['carrier_name'] = $carrier_name;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -69,7 +71,7 @@ final class PhoneNumbers implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj->carrier_name = $carrierName;
+        $obj['carrier_name'] = $carrierName;
 
         return $obj;
     }
@@ -80,18 +82,20 @@ final class PhoneNumbers implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
 
     /**
      * Phone number pattern filtering operations.
+     *
+     * @param PhoneNumber|array{contains?: string|null} $phoneNumber
      */
-    public function withPhoneNumber(PhoneNumber $phoneNumber): self
+    public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

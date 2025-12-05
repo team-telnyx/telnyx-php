@@ -108,16 +108,16 @@ final class TelephonyCredential implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $expired && $obj->expired = $expired;
-        null !== $expires_at && $obj->expires_at = $expires_at;
-        null !== $name && $obj->name = $name;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $resource_id && $obj->resource_id = $resource_id;
-        null !== $sip_password && $obj->sip_password = $sip_password;
-        null !== $sip_username && $obj->sip_username = $sip_username;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $expired && $obj['expired'] = $expired;
+        null !== $expires_at && $obj['expires_at'] = $expires_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $resource_id && $obj['resource_id'] = $resource_id;
+        null !== $sip_password && $obj['sip_password'] = $sip_password;
+        null !== $sip_username && $obj['sip_username'] = $sip_username;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class TelephonyCredential implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class TelephonyCredential implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class TelephonyCredential implements BaseModel
     public function withExpired(bool $expired): self
     {
         $obj = clone $this;
-        $obj->expired = $expired;
+        $obj['expired'] = $expired;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class TelephonyCredential implements BaseModel
     public function withExpiresAt(string $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expires_at = $expiresAt;
+        $obj['expires_at'] = $expiresAt;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class TelephonyCredential implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class TelephonyCredential implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class TelephonyCredential implements BaseModel
     public function withResourceID(string $resourceID): self
     {
         $obj = clone $this;
-        $obj->resource_id = $resourceID;
+        $obj['resource_id'] = $resourceID;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class TelephonyCredential implements BaseModel
     public function withSipPassword(string $sipPassword): self
     {
         $obj = clone $this;
-        $obj->sip_password = $sipPassword;
+        $obj['sip_password'] = $sipPassword;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class TelephonyCredential implements BaseModel
     public function withSipUsername(string $sipUsername): self
     {
         $obj = clone $this;
-        $obj->sip_username = $sipUsername;
+        $obj['sip_username'] = $sipUsername;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class TelephonyCredential implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -67,7 +67,7 @@ final class TelnyxVoiceSettings implements BaseModel
 
         $obj['type'] = $type;
 
-        null !== $voice_speed && $obj->voice_speed = $voice_speed;
+        null !== $voice_speed && $obj['voice_speed'] = $voice_speed;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class TelnyxVoiceSettings implements BaseModel
     public function withVoiceSpeed(float $voiceSpeed): self
     {
         $obj = clone $this;
-        $obj->voice_speed = $voiceSpeed;
+        $obj['voice_speed'] = $voiceSpeed;
 
         return $obj;
     }

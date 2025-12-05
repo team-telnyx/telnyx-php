@@ -16,7 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\UserBundlesService::create()
  *
  * @phpstan-type UserBundleCreateParamsShape = array{
- *   idempotency_key?: string, items?: list<Item>, authorization_bearer?: string
+ *   idempotency_key?: string,
+ *   items?: list<Item|array{billing_bundle_id: string, quantity: int}>,
+ *   authorization_bearer?: string,
  * }
  */
 final class UserBundleCreateParams implements BaseModel
@@ -51,7 +53,7 @@ final class UserBundleCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item> $items
+     * @param list<Item|array{billing_bundle_id: string, quantity: int}> $items
      */
     public static function with(
         ?string $idempotency_key = null,
@@ -60,9 +62,9 @@ final class UserBundleCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $idempotency_key && $obj->idempotency_key = $idempotency_key;
-        null !== $items && $obj->items = $items;
-        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
+        null !== $idempotency_key && $obj['idempotency_key'] = $idempotency_key;
+        null !== $items && $obj['items'] = $items;
+        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
 
         return $obj;
     }
@@ -73,18 +75,18 @@ final class UserBundleCreateParams implements BaseModel
     public function withIdempotencyKey(string $idempotencyKey): self
     {
         $obj = clone $this;
-        $obj->idempotency_key = $idempotencyKey;
+        $obj['idempotency_key'] = $idempotencyKey;
 
         return $obj;
     }
 
     /**
-     * @param list<Item> $items
+     * @param list<Item|array{billing_bundle_id: string, quantity: int}> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }
@@ -95,7 +97,7 @@ final class UserBundleCreateParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorization_bearer = $authorizationBearer;
+        $obj['authorization_bearer'] = $authorizationBearer;
 
         return $obj;
     }

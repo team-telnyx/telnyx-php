@@ -60,19 +60,25 @@ final class TranscriptionSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Model|value-of<Model> $model
+     * @param Settings|array{
+     *   eot_threshold?: float|null,
+     *   eot_timeout_ms?: int|null,
+     *   numerals?: bool|null,
+     *   smart_format?: bool|null,
+     * } $settings
      */
     public static function with(
         ?string $language = null,
         Model|string|null $model = null,
         ?string $region = null,
-        ?Settings $settings = null,
+        Settings|array|null $settings = null,
     ): self {
         $obj = new self;
 
-        null !== $language && $obj->language = $language;
+        null !== $language && $obj['language'] = $language;
         null !== $model && $obj['model'] = $model;
-        null !== $region && $obj->region = $region;
-        null !== $settings && $obj->settings = $settings;
+        null !== $region && $obj['region'] = $region;
+        null !== $settings && $obj['settings'] = $settings;
 
         return $obj;
     }
@@ -83,7 +89,7 @@ final class TranscriptionSettings implements BaseModel
     public function withLanguage(string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -110,15 +116,23 @@ final class TranscriptionSettings implements BaseModel
     public function withRegion(string $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }
 
-    public function withSettings(Settings $settings): self
+    /**
+     * @param Settings|array{
+     *   eot_threshold?: float|null,
+     *   eot_timeout_ms?: int|null,
+     *   numerals?: bool|null,
+     *   smart_format?: bool|null,
+     * } $settings
+     */
+    public function withSettings(Settings|array $settings): self
     {
         $obj = clone $this;
-        $obj->settings = $settings;
+        $obj['settings'] = $settings;
 
         return $obj;
     }

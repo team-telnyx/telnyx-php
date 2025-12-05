@@ -71,11 +71,11 @@ final class AutoRespConfigCreate implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->country_code = $country_code;
-        $obj->keywords = $keywords;
+        $obj['country_code'] = $country_code;
+        $obj['keywords'] = $keywords;
         $obj['op'] = $op;
 
-        null !== $resp_text && $obj->resp_text = $resp_text;
+        null !== $resp_text && $obj['resp_text'] = $resp_text;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class AutoRespConfigCreate implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class AutoRespConfigCreate implements BaseModel
     public function withKeywords(array $keywords): self
     {
         $obj = clone $this;
-        $obj->keywords = $keywords;
+        $obj['keywords'] = $keywords;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class AutoRespConfigCreate implements BaseModel
     public function withRespText(string $respText): self
     {
         $obj = clone $this;
-        $obj->resp_text = $respText;
+        $obj['resp_text'] = $respText;
 
         return $obj;
     }

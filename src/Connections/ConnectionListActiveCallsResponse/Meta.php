@@ -49,27 +49,32 @@ final class Meta implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
      */
     public static function with(
-        ?Cursors $cursors = null,
+        Cursors|array|null $cursors = null,
         ?string $next = null,
         ?string $previous = null,
         ?int $total_items = null,
     ): self {
         $obj = new self;
 
-        null !== $cursors && $obj->cursors = $cursors;
-        null !== $next && $obj->next = $next;
-        null !== $previous && $obj->previous = $previous;
-        null !== $total_items && $obj->total_items = $total_items;
+        null !== $cursors && $obj['cursors'] = $cursors;
+        null !== $next && $obj['next'] = $next;
+        null !== $previous && $obj['previous'] = $previous;
+        null !== $total_items && $obj['total_items'] = $total_items;
 
         return $obj;
     }
 
-    public function withCursors(Cursors $cursors): self
+    /**
+     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
+     */
+    public function withCursors(Cursors|array $cursors): self
     {
         $obj = clone $this;
-        $obj->cursors = $cursors;
+        $obj['cursors'] = $cursors;
 
         return $obj;
     }
@@ -80,7 +85,7 @@ final class Meta implements BaseModel
     public function withNext(string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -91,7 +96,7 @@ final class Meta implements BaseModel
     public function withPrevious(string $previous): self
     {
         $obj = clone $this;
-        $obj->previous = $previous;
+        $obj['previous'] = $previous;
 
         return $obj;
     }
@@ -99,7 +104,7 @@ final class Meta implements BaseModel
     public function withTotalItems(int $totalItems): self
     {
         $obj = clone $this;
-        $obj->total_items = $totalItems;
+        $obj['total_items'] = $totalItems;
 
         return $obj;
     }

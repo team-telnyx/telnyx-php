@@ -60,9 +60,9 @@ final class AccessIPAddressCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->ip_address = $ip_address;
+        $obj['ip_address'] = $ip_address;
 
-        null !== $description && $obj->description = $description;
+        null !== $description && $obj['description'] = $description;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class AccessIPAddressCreateParams implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ip_address = $ipAddress;
+        $obj['ip_address'] = $ipAddress;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class AccessIPAddressCreateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }

@@ -64,10 +64,10 @@ final class InsightGroupInsightGroupsParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
+        $obj['name'] = $name;
 
-        null !== $description && $obj->description = $description;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $description && $obj['description'] = $description;
+        null !== $webhook && $obj['webhook'] = $webhook;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class InsightGroupInsightGroupsParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class InsightGroupInsightGroupsParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class InsightGroupInsightGroupsParams implements BaseModel
     public function withWebhook(string $webhook): self
     {
         $obj = clone $this;
-        $obj->webhook = $webhook;
+        $obj['webhook'] = $webhook;
 
         return $obj;
     }

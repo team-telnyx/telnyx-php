@@ -6,6 +6,7 @@ namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
+use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
@@ -29,7 +30,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   language?: Language|value-of<Language>,
  *   payload_type?: PayloadType|value-of<PayloadType>,
  *   region?: Region|value-of<Region>,
- *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings,
+ *   voice_settings?: ElevenLabsVoiceSettings|array{
+ *     type: value-of<Type>, api_key_ref?: string|null
+ *   }|TelnyxVoiceSettings|array{
+ *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
+ *     voice_speed?: float|null,
+ *   }|AwsVoiceSettings|array{
+ *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
+ *   },
  * }
  */
 final class ActionSpeakParams implements BaseModel
@@ -132,6 +140,14 @@ final class ActionSpeakParams implements BaseModel
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payload_type
      * @param Region|value-of<Region> $region
+     * @param ElevenLabsVoiceSettings|array{
+     *   type: value-of<Type>, api_key_ref?: string|null
+     * }|TelnyxVoiceSettings|array{
+     *   type: value-of<TelnyxVoiceSettings\Type>,
+     *   voice_speed?: float|null,
+     * }|AwsVoiceSettings|array{
+     *   type: value-of<AwsVoiceSettings\Type>
+     * } $voice_settings
      */
     public static function with(
         string $payload,
@@ -141,19 +157,19 @@ final class ActionSpeakParams implements BaseModel
         Language|string|null $language = null,
         PayloadType|string|null $payload_type = null,
         Region|string|null $region = null,
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
     ): self {
         $obj = new self;
 
-        $obj->payload = $payload;
-        $obj->voice = $voice;
+        $obj['payload'] = $payload;
+        $obj['voice'] = $voice;
 
-        null !== $call_control_ids && $obj->call_control_ids = $call_control_ids;
-        null !== $command_id && $obj->command_id = $command_id;
+        null !== $call_control_ids && $obj['call_control_ids'] = $call_control_ids;
+        null !== $command_id && $obj['command_id'] = $command_id;
         null !== $language && $obj['language'] = $language;
         null !== $payload_type && $obj['payload_type'] = $payload_type;
         null !== $region && $obj['region'] = $region;
-        null !== $voice_settings && $obj->voice_settings = $voice_settings;
+        null !== $voice_settings && $obj['voice_settings'] = $voice_settings;
 
         return $obj;
     }
@@ -164,7 +180,7 @@ final class ActionSpeakParams implements BaseModel
     public function withPayload(string $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }
@@ -185,7 +201,7 @@ final class ActionSpeakParams implements BaseModel
     public function withVoice(string $voice): self
     {
         $obj = clone $this;
-        $obj->voice = $voice;
+        $obj['voice'] = $voice;
 
         return $obj;
     }
@@ -198,7 +214,7 @@ final class ActionSpeakParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj->call_control_ids = $callControlIDs;
+        $obj['call_control_ids'] = $callControlIDs;
 
         return $obj;
     }
@@ -209,7 +225,7 @@ final class ActionSpeakParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -255,12 +271,21 @@ final class ActionSpeakParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
+     *
+     * @param ElevenLabsVoiceSettings|array{
+     *   type: value-of<Type>, api_key_ref?: string|null
+     * }|TelnyxVoiceSettings|array{
+     *   type: value-of<TelnyxVoiceSettings\Type>,
+     *   voice_speed?: float|null,
+     * }|AwsVoiceSettings|array{
+     *   type: value-of<AwsVoiceSettings\Type>
+     * } $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
         $obj = clone $this;
-        $obj->voice_settings = $voiceSettings;
+        $obj['voice_settings'] = $voiceSettings;
 
         return $obj;
     }

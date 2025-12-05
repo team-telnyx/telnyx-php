@@ -89,12 +89,12 @@ final class PhoneNumberUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $external_pin && $obj->external_pin = $external_pin;
-        null !== $hd_voice_enabled && $obj->hd_voice_enabled = $hd_voice_enabled;
-        null !== $tags && $obj->tags = $tags;
+        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $external_pin && $obj['external_pin'] = $external_pin;
+        null !== $hd_voice_enabled && $obj['hd_voice_enabled'] = $hd_voice_enabled;
+        null !== $tags && $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billing_group_id = $billingGroupID;
+        $obj['billing_group_id'] = $billingGroupID;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withExternalPin(string $externalPin): self
     {
         $obj = clone $this;
-        $obj->external_pin = $externalPin;
+        $obj['external_pin'] = $externalPin;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
     {
         $obj = clone $this;
-        $obj->hd_voice_enabled = $hdVoiceEnabled;
+        $obj['hd_voice_enabled'] = $hdVoiceEnabled;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }

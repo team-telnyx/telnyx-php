@@ -39,7 +39,7 @@ final class Flashcall implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $default_verification_timeout_secs && $obj->default_verification_timeout_secs = $default_verification_timeout_secs;
+        null !== $default_verification_timeout_secs && $obj['default_verification_timeout_secs'] = $default_verification_timeout_secs;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class Flashcall implements BaseModel
         int $defaultVerificationTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj->default_verification_timeout_secs = $defaultVerificationTimeoutSecs;
+        $obj['default_verification_timeout_secs'] = $defaultVerificationTimeoutSecs;
 
         return $obj;
     }

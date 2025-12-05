@@ -61,9 +61,9 @@ final class AgentUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $profile_id && $obj->profile_id = $profile_id;
-        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
-        null !== $webhook_url && $obj->webhook_url = $webhook_url;
+        null !== $profile_id && $obj['profile_id'] = $profile_id;
+        null !== $webhook_failover_url && $obj['webhook_failover_url'] = $webhook_failover_url;
+        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class AgentUpdateParams implements BaseModel
     public function withProfileID(?string $profileID): self
     {
         $obj = clone $this;
-        $obj->profile_id = $profileID;
+        $obj['profile_id'] = $profileID;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class AgentUpdateParams implements BaseModel
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhook_failover_url = $webhookFailoverURL;
+        $obj['webhook_failover_url'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class AgentUpdateParams implements BaseModel
     public function withWebhookURL(?string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhook_url = $webhookURL;
+        $obj['webhook_url'] = $webhookURL;
 
         return $obj;
     }

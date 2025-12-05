@@ -77,11 +77,11 @@ final class WirelessBlocklistListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $filter_name_ && $obj->filter_name_ = $filter_name_;
-        null !== $filter_type_ && $obj->filter_type_ = $filter_type_;
-        null !== $filter_values_ && $obj->filter_values_ = $filter_values_;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $filter_name_ && $obj['filter_name_'] = $filter_name_;
+        null !== $filter_type_ && $obj['filter_type_'] = $filter_type_;
+        null !== $filter_values_ && $obj['filter_values_'] = $filter_values_;
+        null !== $page_number_ && $obj['page_number_'] = $page_number_;
+        null !== $page_size_ && $obj['page_size_'] = $page_size_;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class WirelessBlocklistListParams implements BaseModel
     public function withFilterName(string $filterName): self
     {
         $obj = clone $this;
-        $obj->filter_name_ = $filterName;
+        $obj['filter_name_'] = $filterName;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class WirelessBlocklistListParams implements BaseModel
     public function withFilterType(string $filterType): self
     {
         $obj = clone $this;
-        $obj->filter_type_ = $filterType;
+        $obj['filter_type_'] = $filterType;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class WirelessBlocklistListParams implements BaseModel
     public function withFilterValues(string $filterValues): self
     {
         $obj = clone $this;
-        $obj->filter_values_ = $filterValues;
+        $obj['filter_values_'] = $filterValues;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class WirelessBlocklistListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
+        $obj['page_number_'] = $pageNumber;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class WirelessBlocklistListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj['page_size_'] = $pageSize;
 
         return $obj;
     }

@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber\EligibleStatus;
 
 /**
  * @phpstan-type MessagingHostedNumberOrderCheckEligibilityResponseShape = array{
@@ -41,13 +42,18 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber> $phone_numbers
+     * @param list<PhoneNumber|array{
+     *   detail?: string|null,
+     *   eligible?: bool|null,
+     *   eligible_status?: value-of<EligibleStatus>|null,
+     *   phone_number?: string|null,
+     * }> $phone_numbers
      */
     public static function with(?array $phone_numbers = null): self
     {
         $obj = new self;
 
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
 
         return $obj;
     }
@@ -55,12 +61,17 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
     /**
      * List of phone numbers with their eligibility status.
      *
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber|array{
+     *   detail?: string|null,
+     *   eligible?: bool|null,
+     *   eligible_status?: value-of<EligibleStatus>|null,
+     *   phone_number?: string|null,
+     * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }

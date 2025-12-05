@@ -8,6 +8,7 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings;
+use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -41,7 +42,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   terminating_digit?: string,
  *   timeout_millis?: int,
  *   valid_digits?: string,
- *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings,
+ *   voice_settings?: ElevenLabsVoiceSettings|array{
+ *     type: value-of<Type>, api_key_ref?: string|null
+ *   }|TelnyxVoiceSettings|array{
+ *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
+ *     voice_speed?: float|null,
+ *   }|AwsVoiceSettings|array{
+ *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
+ *   },
  * }
  */
 final class ActionGatherUsingSpeakParams implements BaseModel
@@ -189,6 +197,14 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payload_type
      * @param ServiceLevel|value-of<ServiceLevel> $service_level
+     * @param ElevenLabsVoiceSettings|array{
+     *   type: value-of<Type>, api_key_ref?: string|null
+     * }|TelnyxVoiceSettings|array{
+     *   type: value-of<TelnyxVoiceSettings\Type>,
+     *   voice_speed?: float|null,
+     * }|AwsVoiceSettings|array{
+     *   type: value-of<AwsVoiceSettings\Type>
+     * } $voice_settings
      */
     public static function with(
         string $payload,
@@ -206,27 +222,27 @@ final class ActionGatherUsingSpeakParams implements BaseModel
         ?string $terminating_digit = null,
         ?int $timeout_millis = null,
         ?string $valid_digits = null,
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
     ): self {
         $obj = new self;
 
-        $obj->payload = $payload;
-        $obj->voice = $voice;
+        $obj['payload'] = $payload;
+        $obj['voice'] = $voice;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $inter_digit_timeout_millis && $obj->inter_digit_timeout_millis = $inter_digit_timeout_millis;
-        null !== $invalid_payload && $obj->invalid_payload = $invalid_payload;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $inter_digit_timeout_millis && $obj['inter_digit_timeout_millis'] = $inter_digit_timeout_millis;
+        null !== $invalid_payload && $obj['invalid_payload'] = $invalid_payload;
         null !== $language && $obj['language'] = $language;
-        null !== $maximum_digits && $obj->maximum_digits = $maximum_digits;
-        null !== $maximum_tries && $obj->maximum_tries = $maximum_tries;
-        null !== $minimum_digits && $obj->minimum_digits = $minimum_digits;
+        null !== $maximum_digits && $obj['maximum_digits'] = $maximum_digits;
+        null !== $maximum_tries && $obj['maximum_tries'] = $maximum_tries;
+        null !== $minimum_digits && $obj['minimum_digits'] = $minimum_digits;
         null !== $payload_type && $obj['payload_type'] = $payload_type;
         null !== $service_level && $obj['service_level'] = $service_level;
-        null !== $terminating_digit && $obj->terminating_digit = $terminating_digit;
-        null !== $timeout_millis && $obj->timeout_millis = $timeout_millis;
-        null !== $valid_digits && $obj->valid_digits = $valid_digits;
-        null !== $voice_settings && $obj->voice_settings = $voice_settings;
+        null !== $terminating_digit && $obj['terminating_digit'] = $terminating_digit;
+        null !== $timeout_millis && $obj['timeout_millis'] = $timeout_millis;
+        null !== $valid_digits && $obj['valid_digits'] = $valid_digits;
+        null !== $voice_settings && $obj['voice_settings'] = $voice_settings;
 
         return $obj;
     }
@@ -237,7 +253,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withPayload(string $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }
@@ -258,7 +274,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withVoice(string $voice): self
     {
         $obj = clone $this;
-        $obj->voice = $voice;
+        $obj['voice'] = $voice;
 
         return $obj;
     }
@@ -269,7 +285,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -280,7 +296,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -292,7 +308,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
         int $interDigitTimeoutMillis
     ): self {
         $obj = clone $this;
-        $obj->inter_digit_timeout_millis = $interDigitTimeoutMillis;
+        $obj['inter_digit_timeout_millis'] = $interDigitTimeoutMillis;
 
         return $obj;
     }
@@ -303,7 +319,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withInvalidPayload(string $invalidPayload): self
     {
         $obj = clone $this;
-        $obj->invalid_payload = $invalidPayload;
+        $obj['invalid_payload'] = $invalidPayload;
 
         return $obj;
     }
@@ -327,7 +343,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withMaximumDigits(int $maximumDigits): self
     {
         $obj = clone $this;
-        $obj->maximum_digits = $maximumDigits;
+        $obj['maximum_digits'] = $maximumDigits;
 
         return $obj;
     }
@@ -338,7 +354,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withMaximumTries(int $maximumTries): self
     {
         $obj = clone $this;
-        $obj->maximum_tries = $maximumTries;
+        $obj['maximum_tries'] = $maximumTries;
 
         return $obj;
     }
@@ -349,7 +365,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withMinimumDigits(int $minimumDigits): self
     {
         $obj = clone $this;
-        $obj->minimum_digits = $minimumDigits;
+        $obj['minimum_digits'] = $minimumDigits;
 
         return $obj;
     }
@@ -386,7 +402,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withTerminatingDigit(string $terminatingDigit): self
     {
         $obj = clone $this;
-        $obj->terminating_digit = $terminatingDigit;
+        $obj['terminating_digit'] = $terminatingDigit;
 
         return $obj;
     }
@@ -397,7 +413,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withTimeoutMillis(int $timeoutMillis): self
     {
         $obj = clone $this;
-        $obj->timeout_millis = $timeoutMillis;
+        $obj['timeout_millis'] = $timeoutMillis;
 
         return $obj;
     }
@@ -408,19 +424,28 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withValidDigits(string $validDigits): self
     {
         $obj = clone $this;
-        $obj->valid_digits = $validDigits;
+        $obj['valid_digits'] = $validDigits;
 
         return $obj;
     }
 
     /**
      * The settings associated with the voice selected.
+     *
+     * @param ElevenLabsVoiceSettings|array{
+     *   type: value-of<Type>, api_key_ref?: string|null
+     * }|TelnyxVoiceSettings|array{
+     *   type: value-of<TelnyxVoiceSettings\Type>,
+     *   voice_speed?: float|null,
+     * }|AwsVoiceSettings|array{
+     *   type: value-of<AwsVoiceSettings\Type>
+     * } $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
         $obj = clone $this;
-        $obj->voice_settings = $voiceSettings;
+        $obj['voice_settings'] = $voiceSettings;
 
         return $obj;
     }

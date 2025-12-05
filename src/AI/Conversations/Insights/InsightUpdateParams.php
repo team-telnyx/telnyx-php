@@ -61,10 +61,10 @@ final class InsightUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $json_schema && $obj->json_schema = $json_schema;
-        null !== $name && $obj->name = $name;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $instructions && $obj['instructions'] = $instructions;
+        null !== $json_schema && $obj['json_schema'] = $json_schema;
+        null !== $name && $obj['name'] = $name;
+        null !== $webhook && $obj['webhook'] = $webhook;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class InsightUpdateParams implements BaseModel
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class InsightUpdateParams implements BaseModel
     public function withJsonSchema(mixed $jsonSchema): self
     {
         $obj = clone $this;
-        $obj->json_schema = $jsonSchema;
+        $obj['json_schema'] = $jsonSchema;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class InsightUpdateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class InsightUpdateParams implements BaseModel
     public function withWebhook(string $webhook): self
     {
         $obj = clone $this;
-        $obj->webhook = $webhook;
+        $obj['webhook'] = $webhook;
 
         return $obj;
     }

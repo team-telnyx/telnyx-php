@@ -49,7 +49,7 @@ final class TfPhoneNumber implements BaseModel
     {
         $obj = new self;
 
-        $obj->phoneNumber = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class TfPhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

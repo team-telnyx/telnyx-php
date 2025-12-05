@@ -60,8 +60,8 @@ final class Interface1 implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $network_id && $obj->network_id = $network_id;
+        null !== $name && $obj['name'] = $name;
+        null !== $network_id && $obj['network_id'] = $network_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -73,7 +73,7 @@ final class Interface1 implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Interface1 implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->network_id = $networkID;
+        $obj['network_id'] = $networkID;
 
         return $obj;
     }

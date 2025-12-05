@@ -79,10 +79,10 @@ final class ToolTestParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->assistant_id = $assistant_id;
+        $obj['assistant_id'] = $assistant_id;
 
-        null !== $arguments && $obj->arguments = $arguments;
-        null !== $dynamic_variables && $obj->dynamic_variables = $dynamic_variables;
+        null !== $arguments && $obj['arguments'] = $arguments;
+        null !== $dynamic_variables && $obj['dynamic_variables'] = $dynamic_variables;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class ToolTestParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistant_id = $assistantID;
+        $obj['assistant_id'] = $assistantID;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class ToolTestParams implements BaseModel
     public function withArguments(array $arguments): self
     {
         $obj = clone $this;
-        $obj->arguments = $arguments;
+        $obj['arguments'] = $arguments;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class ToolTestParams implements BaseModel
     public function withDynamicVariables(array $dynamicVariables): self
     {
         $obj = clone $this;
-        $obj->dynamic_variables = $dynamicVariables;
+        $obj['dynamic_variables'] = $dynamicVariables;
 
         return $obj;
     }

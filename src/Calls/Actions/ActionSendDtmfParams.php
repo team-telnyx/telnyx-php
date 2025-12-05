@@ -87,11 +87,11 @@ final class ActionSendDtmfParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->digits = $digits;
+        $obj['digits'] = $digits;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $duration_millis && $obj->duration_millis = $duration_millis;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $duration_millis && $obj['duration_millis'] = $duration_millis;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class ActionSendDtmfParams implements BaseModel
     public function withDigits(string $digits): self
     {
         $obj = clone $this;
-        $obj->digits = $digits;
+        $obj['digits'] = $digits;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class ActionSendDtmfParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class ActionSendDtmfParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ActionSendDtmfParams implements BaseModel
     public function withDurationMillis(int $durationMillis): self
     {
         $obj = clone $this;
-        $obj->duration_millis = $durationMillis;
+        $obj['duration_millis'] = $durationMillis;
 
         return $obj;
     }

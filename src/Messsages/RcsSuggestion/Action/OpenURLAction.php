@@ -85,10 +85,10 @@ final class OpenURLAction implements BaseModel
         $obj = new self;
 
         $obj['application'] = $application;
-        $obj->url = $url;
+        $obj['url'] = $url;
         $obj['webview_view_mode'] = $webview_view_mode;
 
-        null !== $description && $obj->description = $description;
+        null !== $description && $obj['description'] = $description;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class OpenURLAction implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class OpenURLAction implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }

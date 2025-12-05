@@ -71,11 +71,11 @@ final class Location implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $name && $obj->name = $name;
-        null !== $pop && $obj->pop = $pop;
-        null !== $region && $obj->region = $region;
-        null !== $site && $obj->site = $site;
+        null !== $code && $obj['code'] = $code;
+        null !== $name && $obj['name'] = $name;
+        null !== $pop && $obj['pop'] = $pop;
+        null !== $region && $obj['region'] = $region;
+        null !== $site && $obj['site'] = $site;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Location implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Location implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Location implements BaseModel
     public function withPop(string $pop): self
     {
         $obj = clone $this;
-        $obj->pop = $pop;
+        $obj['pop'] = $pop;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Location implements BaseModel
     public function withRegion(string $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Location implements BaseModel
     public function withSite(string $site): self
     {
         $obj = clone $this;
-        $obj->site = $site;
+        $obj['site'] = $site;
 
         return $obj;
     }

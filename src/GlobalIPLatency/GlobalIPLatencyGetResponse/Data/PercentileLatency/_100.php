@@ -42,8 +42,8 @@ final class _100 implements BaseModel
     {
         $obj = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $unit && $obj->unit = $unit;
+        null !== $amount && $obj['amount'] = $amount;
+        null !== $unit && $obj['unit'] = $unit;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class _100 implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class _100 implements BaseModel
     public function withUnit(string $unit): self
     {
         $obj = clone $this;
-        $obj->unit = $unit;
+        $obj['unit'] = $unit;
 
         return $obj;
     }

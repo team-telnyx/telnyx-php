@@ -60,10 +60,10 @@ final class Key implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $alg && $obj->alg = $alg;
-        null !== $kid && $obj->kid = $kid;
-        null !== $kty && $obj->kty = $kty;
-        null !== $use && $obj->use = $use;
+        null !== $alg && $obj['alg'] = $alg;
+        null !== $kid && $obj['kid'] = $kid;
+        null !== $kty && $obj['kty'] = $kty;
+        null !== $use && $obj['use'] = $use;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Key implements BaseModel
     public function withAlg(string $alg): self
     {
         $obj = clone $this;
-        $obj->alg = $alg;
+        $obj['alg'] = $alg;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Key implements BaseModel
     public function withKid(string $kid): self
     {
         $obj = clone $this;
-        $obj->kid = $kid;
+        $obj['kid'] = $kid;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class Key implements BaseModel
     public function withKty(string $kty): self
     {
         $obj = clone $this;
-        $obj->kty = $kty;
+        $obj['kty'] = $kty;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class Key implements BaseModel
     public function withUse(string $use): self
     {
         $obj = clone $this;
-        $obj->use = $use;
+        $obj['use'] = $use;
 
         return $obj;
     }

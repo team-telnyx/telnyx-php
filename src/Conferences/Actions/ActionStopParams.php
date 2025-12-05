@@ -60,7 +60,7 @@ final class ActionStopParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_control_ids && $obj->call_control_ids = $call_control_ids;
+        null !== $call_control_ids && $obj['call_control_ids'] = $call_control_ids;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -74,7 +74,7 @@ final class ActionStopParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj->call_control_ids = $callControlIDs;
+        $obj['call_control_ids'] = $callControlIDs;
 
         return $obj;
     }

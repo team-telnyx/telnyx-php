@@ -36,7 +36,7 @@ final class WireguardPeerPatch implements BaseModel
     {
         $obj = new self;
 
-        null !== $public_key && $obj->public_key = $public_key;
+        null !== $public_key && $obj['public_key'] = $public_key;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class WireguardPeerPatch implements BaseModel
     public function withPublicKey(string $publicKey): self
     {
         $obj = clone $this;
-        $obj->public_key = $publicKey;
+        $obj['public_key'] = $publicKey;
 
         return $obj;
     }

@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
 /**
  * @phpstan-type CustomerServiceRecordNewResponseShape = array{
@@ -34,20 +36,43 @@ final class CustomerServiceRecordNewResponse implements BaseModel, ResponseConve
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CustomerServiceRecord|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   error_message?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: string|null,
+     *   result?: Result|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?CustomerServiceRecord $data = null): self
+    public static function with(CustomerServiceRecord|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(CustomerServiceRecord $data): self
+    /**
+     * @param CustomerServiceRecord|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   error_message?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: string|null,
+     *   result?: Result|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
+     */
+    public function withData(CustomerServiceRecord|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

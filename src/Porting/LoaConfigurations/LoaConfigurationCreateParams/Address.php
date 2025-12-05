@@ -102,13 +102,13 @@ final class Address implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->city = $city;
-        $obj->country_code = $country_code;
-        $obj->state = $state;
-        $obj->street_address = $street_address;
-        $obj->zip_code = $zip_code;
+        $obj['city'] = $city;
+        $obj['country_code'] = $country_code;
+        $obj['state'] = $state;
+        $obj['street_address'] = $street_address;
+        $obj['zip_code'] = $zip_code;
 
-        null !== $extended_address && $obj->extended_address = $extended_address;
+        null !== $extended_address && $obj['extended_address'] = $extended_address;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Address implements BaseModel
     public function withCity(string $city): self
     {
         $obj = clone $this;
-        $obj->city = $city;
+        $obj['city'] = $city;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Address implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Address implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Address implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class Address implements BaseModel
     public function withZipCode(string $zipCode): self
     {
         $obj = clone $this;
-        $obj->zip_code = $zipCode;
+        $obj['zip_code'] = $zipCode;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class Address implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj->extended_address = $extendedAddress;
+        $obj['extended_address'] = $extendedAddress;
 
         return $obj;
     }

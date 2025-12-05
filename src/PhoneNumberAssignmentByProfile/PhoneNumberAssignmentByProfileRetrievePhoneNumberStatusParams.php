@@ -48,8 +48,8 @@ final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implem
     ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $recordsPerPage && $obj->recordsPerPage = $recordsPerPage;
+        null !== $page && $obj['page'] = $page;
+        null !== $recordsPerPage && $obj['recordsPerPage'] = $recordsPerPage;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implem
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implem
     public function withRecordsPerPage(int $recordsPerPage): self
     {
         $obj = clone $this;
-        $obj->recordsPerPage = $recordsPerPage;
+        $obj['recordsPerPage'] = $recordsPerPage;
 
         return $obj;
     }

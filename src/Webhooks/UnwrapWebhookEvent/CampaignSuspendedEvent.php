@@ -68,8 +68,8 @@ final class CampaignSuspendedEvent implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $campaignId && $obj->campaignId = $campaignId;
-        null !== $description && $obj->description = $description;
+        null !== $campaignId && $obj['campaignId'] = $campaignId;
+        null !== $description && $obj['description'] = $description;
         null !== $status && $obj['status'] = $status;
         null !== $type && $obj['type'] = $type;
 
@@ -82,7 +82,7 @@ final class CampaignSuspendedEvent implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignId = $campaignID;
+        $obj['campaignId'] = $campaignID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class CampaignSuspendedEvent implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }

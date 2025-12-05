@@ -39,7 +39,7 @@ final class CommentCreateParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $body && $obj->body = $body;
+        null !== $body && $obj['body'] = $body;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class CommentCreateParams implements BaseModel
     public function withBody(string $body): self
     {
         $obj = clone $this;
-        $obj->body = $body;
+        $obj['body'] = $body;
 
         return $obj;
     }

@@ -82,7 +82,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RequestedScope> $requested_scopes
+     * @param list<RequestedScope|array{
+     *   id?: string|null, description?: string|null, name?: string|null
+     * }> $requested_scopes
      */
     public static function with(
         ?string $client_id = null,
@@ -96,14 +98,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $client_id && $obj->client_id = $client_id;
-        null !== $logo_uri && $obj->logo_uri = $logo_uri;
-        null !== $name && $obj->name = $name;
-        null !== $policy_uri && $obj->policy_uri = $policy_uri;
-        null !== $redirect_uri && $obj->redirect_uri = $redirect_uri;
-        null !== $requested_scopes && $obj->requested_scopes = $requested_scopes;
-        null !== $tos_uri && $obj->tos_uri = $tos_uri;
-        null !== $verified && $obj->verified = $verified;
+        null !== $client_id && $obj['client_id'] = $client_id;
+        null !== $logo_uri && $obj['logo_uri'] = $logo_uri;
+        null !== $name && $obj['name'] = $name;
+        null !== $policy_uri && $obj['policy_uri'] = $policy_uri;
+        null !== $redirect_uri && $obj['redirect_uri'] = $redirect_uri;
+        null !== $requested_scopes && $obj['requested_scopes'] = $requested_scopes;
+        null !== $tos_uri && $obj['tos_uri'] = $tos_uri;
+        null !== $verified && $obj['verified'] = $verified;
 
         return $obj;
     }
@@ -114,7 +116,7 @@ final class Data implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->client_id = $clientID;
+        $obj['client_id'] = $clientID;
 
         return $obj;
     }
@@ -125,7 +127,7 @@ final class Data implements BaseModel
     public function withLogoUri(?string $logoUri): self
     {
         $obj = clone $this;
-        $obj->logo_uri = $logoUri;
+        $obj['logo_uri'] = $logoUri;
 
         return $obj;
     }
@@ -136,7 +138,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -147,7 +149,7 @@ final class Data implements BaseModel
     public function withPolicyUri(?string $policyUri): self
     {
         $obj = clone $this;
-        $obj->policy_uri = $policyUri;
+        $obj['policy_uri'] = $policyUri;
 
         return $obj;
     }
@@ -158,18 +160,20 @@ final class Data implements BaseModel
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj->redirect_uri = $redirectUri;
+        $obj['redirect_uri'] = $redirectUri;
 
         return $obj;
     }
 
     /**
-     * @param list<RequestedScope> $requestedScopes
+     * @param list<RequestedScope|array{
+     *   id?: string|null, description?: string|null, name?: string|null
+     * }> $requestedScopes
      */
     public function withRequestedScopes(array $requestedScopes): self
     {
         $obj = clone $this;
-        $obj->requested_scopes = $requestedScopes;
+        $obj['requested_scopes'] = $requestedScopes;
 
         return $obj;
     }
@@ -180,7 +184,7 @@ final class Data implements BaseModel
     public function withTosUri(?string $tosUri): self
     {
         $obj = clone $this;
-        $obj->tos_uri = $tosUri;
+        $obj['tos_uri'] = $tosUri;
 
         return $obj;
     }
@@ -191,7 +195,7 @@ final class Data implements BaseModel
     public function withVerified(bool $verified): self
     {
         $obj = clone $this;
-        $obj->verified = $verified;
+        $obj['verified'] = $verified;
 
         return $obj;
     }

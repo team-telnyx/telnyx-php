@@ -15,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\NumberOrderPhoneNumbersService::updateRequirements()
  *
  * @phpstan-type NumberOrderPhoneNumberUpdateRequirementsParamsShape = array{
- *   regulatory_requirements?: list<UpdateRegulatoryRequirement>
+ *   regulatory_requirements?: list<UpdateRegulatoryRequirement|array{
+ *     field_value?: string|null, requirement_id?: string|null
+ *   }>,
  * }
  */
 final class NumberOrderPhoneNumberUpdateRequirementsParams implements BaseModel
@@ -38,25 +40,29 @@ final class NumberOrderPhoneNumberUpdateRequirementsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UpdateRegulatoryRequirement> $regulatory_requirements
+     * @param list<UpdateRegulatoryRequirement|array{
+     *   field_value?: string|null, requirement_id?: string|null
+     * }> $regulatory_requirements
      */
     public static function with(?array $regulatory_requirements = null): self
     {
         $obj = new self;
 
-        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
+        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
 
         return $obj;
     }
 
     /**
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|array{
+     *   field_value?: string|null, requirement_id?: string|null
+     * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatory_requirements = $regulatoryRequirements;
+        $obj['regulatory_requirements'] = $regulatoryRequirements;
 
         return $obj;
     }

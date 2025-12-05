@@ -38,7 +38,7 @@ final class In implements BaseModel
     {
         $obj = new self;
 
-        null !== $in && $obj->in = $in;
+        null !== $in && $obj['in'] = $in;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class In implements BaseModel
     public function withIn(string $in): self
     {
         $obj = clone $this;
-        $obj->in = $in;
+        $obj['in'] = $in;
 
         return $obj;
     }

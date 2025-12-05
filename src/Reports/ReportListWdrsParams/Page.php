@@ -44,8 +44,8 @@ final class Page implements BaseModel
     {
         $obj = new self;
 
-        null !== $number && $obj->number = $number;
-        null !== $size && $obj->size = $size;
+        null !== $number && $obj['number'] = $number;
+        null !== $size && $obj['size'] = $size;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Page implements BaseModel
     public function withNumber(int $number): self
     {
         $obj = clone $this;
-        $obj->number = $number;
+        $obj['number'] = $number;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Page implements BaseModel
     public function withSize(int $size): self
     {
         $obj = clone $this;
-        $obj->size = $size;
+        $obj['size'] = $size;
 
         return $obj;
     }

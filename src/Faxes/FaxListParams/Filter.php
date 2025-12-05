@@ -60,63 +60,86 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|array{
+     *   gt?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lt?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $created_at
+     * @param Direction|array{eq?: string|null} $direction
+     * @param From|array{eq?: string|null} $from
+     * @param To|array{eq?: string|null} $to
      */
     public static function with(
-        ?CreatedAt $created_at = null,
-        ?Direction $direction = null,
-        ?From $from = null,
-        ?To $to = null,
+        CreatedAt|array|null $created_at = null,
+        Direction|array|null $direction = null,
+        From|array|null $from = null,
+        To|array|null $to = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $direction && $obj->direction = $direction;
-        null !== $from && $obj->from = $from;
-        null !== $to && $obj->to = $to;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $direction && $obj['direction'] = $direction;
+        null !== $from && $obj['from'] = $from;
+        null !== $to && $obj['to'] = $to;
 
         return $obj;
     }
 
     /**
      * Date range filtering operations for fax creation timestamp.
+     *
+     * @param CreatedAt|array{
+     *   gt?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lt?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
     /**
      * Direction filtering operations.
+     *
+     * @param Direction|array{eq?: string|null} $direction
      */
-    public function withDirection(Direction $direction): self
+    public function withDirection(Direction|array $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
 
     /**
      * From number filtering operations.
+     *
+     * @param From|array{eq?: string|null} $from
      */
-    public function withFrom(From $from): self
+    public function withFrom(From|array $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
 
     /**
      * To number filtering operations.
+     *
+     * @param To|array{eq?: string|null} $to
      */
-    public function withTo(To $to): self
+    public function withTo(To|array $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

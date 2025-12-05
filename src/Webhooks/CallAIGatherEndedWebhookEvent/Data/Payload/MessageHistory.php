@@ -51,7 +51,7 @@ final class MessageHistory implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $content && $obj->content = $content;
+        null !== $content && $obj['content'] = $content;
         null !== $role && $obj['role'] = $role;
 
         return $obj;
@@ -63,7 +63,7 @@ final class MessageHistory implements BaseModel
     public function withContent(string $content): self
     {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }

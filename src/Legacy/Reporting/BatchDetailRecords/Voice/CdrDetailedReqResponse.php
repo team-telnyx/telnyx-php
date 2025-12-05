@@ -8,6 +8,9 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 
 /**
  * Response object for CDR detailed report.
@@ -158,7 +161,15 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @param list<int> $call_types
      * @param list<int> $connections
-     * @param list<Filter> $filters
+     * @param list<Filter|array{
+     *   billing_group?: string|null,
+     *   cld?: string|null,
+     *   cld_filter?: value-of<CldFilter>|null,
+     *   cli?: string|null,
+     *   cli_filter?: value-of<CliFilter>|null,
+     *   filter_type?: value-of<FilterType>|null,
+     *   tags_list?: string|null,
+     * }> $filters
      * @param list<string> $managed_accounts
      * @param list<int> $record_types
      */
@@ -183,23 +194,23 @@ final class CdrDetailedReqResponse implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $call_types && $obj->call_types = $call_types;
-        null !== $connections && $obj->connections = $connections;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $end_time && $obj->end_time = $end_time;
-        null !== $filters && $obj->filters = $filters;
-        null !== $managed_accounts && $obj->managed_accounts = $managed_accounts;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $record_types && $obj->record_types = $record_types;
-        null !== $report_name && $obj->report_name = $report_name;
-        null !== $report_url && $obj->report_url = $report_url;
-        null !== $retry && $obj->retry = $retry;
-        null !== $source && $obj->source = $source;
-        null !== $start_time && $obj->start_time = $start_time;
-        null !== $status && $obj->status = $status;
-        null !== $timezone && $obj->timezone = $timezone;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $call_types && $obj['call_types'] = $call_types;
+        null !== $connections && $obj['connections'] = $connections;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $filters && $obj['filters'] = $filters;
+        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $record_types && $obj['record_types'] = $record_types;
+        null !== $report_name && $obj['report_name'] = $report_name;
+        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $retry && $obj['retry'] = $retry;
+        null !== $source && $obj['source'] = $source;
+        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $status && $obj['status'] = $status;
+        null !== $timezone && $obj['timezone'] = $timezone;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -210,7 +221,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -223,7 +234,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withCallTypes(array $callTypes): self
     {
         $obj = clone $this;
-        $obj->call_types = $callTypes;
+        $obj['call_types'] = $callTypes;
 
         return $obj;
     }
@@ -236,7 +247,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withConnections(array $connections): self
     {
         $obj = clone $this;
-        $obj->connections = $connections;
+        $obj['connections'] = $connections;
 
         return $obj;
     }
@@ -247,7 +258,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -258,7 +269,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -266,12 +277,20 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * List of filters.
      *
-     * @param list<Filter> $filters
+     * @param list<Filter|array{
+     *   billing_group?: string|null,
+     *   cld?: string|null,
+     *   cld_filter?: value-of<CldFilter>|null,
+     *   cli?: string|null,
+     *   cli_filter?: value-of<CliFilter>|null,
+     *   filter_type?: value-of<FilterType>|null,
+     *   tags_list?: string|null,
+     * }> $filters
      */
     public function withFilters(array $filters): self
     {
         $obj = clone $this;
-        $obj->filters = $filters;
+        $obj['filters'] = $filters;
 
         return $obj;
     }
@@ -284,7 +303,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj->managed_accounts = $managedAccounts;
+        $obj['managed_accounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -292,7 +311,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -305,7 +324,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj->record_types = $recordTypes;
+        $obj['record_types'] = $recordTypes;
 
         return $obj;
     }
@@ -316,7 +335,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withReportName(string $reportName): self
     {
         $obj = clone $this;
-        $obj->report_name = $reportName;
+        $obj['report_name'] = $reportName;
 
         return $obj;
     }
@@ -327,7 +346,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj->report_url = $reportURL;
+        $obj['report_url'] = $reportURL;
 
         return $obj;
     }
@@ -338,7 +357,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withRetry(int $retry): self
     {
         $obj = clone $this;
-        $obj->retry = $retry;
+        $obj['retry'] = $retry;
 
         return $obj;
     }
@@ -349,7 +368,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withSource(string $source): self
     {
         $obj = clone $this;
-        $obj->source = $source;
+        $obj['source'] = $source;
 
         return $obj;
     }
@@ -360,7 +379,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -371,7 +390,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withStatus(int $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -382,7 +401,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withTimezone(string $timezone): self
     {
         $obj = clone $this;
-        $obj->timezone = $timezone;
+        $obj['timezone'] = $timezone;
 
         return $obj;
     }
@@ -393,7 +412,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

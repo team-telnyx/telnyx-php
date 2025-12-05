@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CallControlApplications;
 
+use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion;
@@ -26,8 +27,15 @@ use Telnyx\Core\Contracts\BaseModel;
  *   dtmf_type?: DtmfType|value-of<DtmfType>,
  *   first_command_timeout?: bool,
  *   first_command_timeout_secs?: int,
- *   inbound?: CallControlApplicationInbound,
- *   outbound?: CallControlApplicationOutbound,
+ *   inbound?: CallControlApplicationInbound|array{
+ *     channel_limit?: int|null,
+ *     shaken_stir_enabled?: bool|null,
+ *     sip_subdomain?: string|null,
+ *     sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   },
+ *   outbound?: CallControlApplicationOutbound|array{
+ *     channel_limit?: int|null, outbound_voice_profile_id?: string|null
+ *   },
  *   redact_dtmf_debug_logging?: bool,
  *   tags?: list<string>,
  *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -163,6 +171,15 @@ final class CallControlApplicationUpdateParams implements BaseModel
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
      * @param DtmfType|value-of<DtmfType> $dtmf_type
+     * @param CallControlApplicationInbound|array{
+     *   channel_limit?: int|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     * } $inbound
+     * @param CallControlApplicationOutbound|array{
+     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     * } $outbound
      * @param list<string> $tags
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
      */
@@ -175,8 +192,8 @@ final class CallControlApplicationUpdateParams implements BaseModel
         DtmfType|string|null $dtmf_type = null,
         ?bool $first_command_timeout = null,
         ?int $first_command_timeout_secs = null,
-        ?CallControlApplicationInbound $inbound = null,
-        ?CallControlApplicationOutbound $outbound = null,
+        CallControlApplicationInbound|array|null $inbound = null,
+        CallControlApplicationOutbound|array|null $outbound = null,
         ?bool $redact_dtmf_debug_logging = null,
         ?array $tags = null,
         WebhookAPIVersion|string|null $webhook_api_version = null,
@@ -185,22 +202,22 @@ final class CallControlApplicationUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->application_name = $application_name;
-        $obj->webhook_event_url = $webhook_event_url;
+        $obj['application_name'] = $application_name;
+        $obj['webhook_event_url'] = $webhook_event_url;
 
-        null !== $active && $obj->active = $active;
+        null !== $active && $obj['active'] = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
+        null !== $call_cost_in_webhooks && $obj['call_cost_in_webhooks'] = $call_cost_in_webhooks;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
-        null !== $first_command_timeout && $obj->first_command_timeout = $first_command_timeout;
-        null !== $first_command_timeout_secs && $obj->first_command_timeout_secs = $first_command_timeout_secs;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $redact_dtmf_debug_logging && $obj->redact_dtmf_debug_logging = $redact_dtmf_debug_logging;
-        null !== $tags && $obj->tags = $tags;
+        null !== $first_command_timeout && $obj['first_command_timeout'] = $first_command_timeout;
+        null !== $first_command_timeout_secs && $obj['first_command_timeout_secs'] = $first_command_timeout_secs;
+        null !== $inbound && $obj['inbound'] = $inbound;
+        null !== $outbound && $obj['outbound'] = $outbound;
+        null !== $redact_dtmf_debug_logging && $obj['redact_dtmf_debug_logging'] = $redact_dtmf_debug_logging;
+        null !== $tags && $obj['tags'] = $tags;
         null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
-        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
+        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
+        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -211,7 +228,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public function withApplicationName(string $applicationName): self
     {
         $obj = clone $this;
-        $obj->application_name = $applicationName;
+        $obj['application_name'] = $applicationName;
 
         return $obj;
     }
@@ -222,7 +239,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhook_event_url = $webhookEventURL;
+        $obj['webhook_event_url'] = $webhookEventURL;
 
         return $obj;
     }
@@ -233,7 +250,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -258,7 +275,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
         $obj = clone $this;
-        $obj->call_cost_in_webhooks = $callCostInWebhooks;
+        $obj['call_cost_in_webhooks'] = $callCostInWebhooks;
 
         return $obj;
     }
@@ -282,7 +299,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public function withFirstCommandTimeout(bool $firstCommandTimeout): self
     {
         $obj = clone $this;
-        $obj->first_command_timeout = $firstCommandTimeout;
+        $obj['first_command_timeout'] = $firstCommandTimeout;
 
         return $obj;
     }
@@ -294,23 +311,38 @@ final class CallControlApplicationUpdateParams implements BaseModel
         int $firstCommandTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj->first_command_timeout_secs = $firstCommandTimeoutSecs;
+        $obj['first_command_timeout_secs'] = $firstCommandTimeoutSecs;
 
         return $obj;
     }
 
-    public function withInbound(CallControlApplicationInbound $inbound): self
-    {
+    /**
+     * @param CallControlApplicationInbound|array{
+     *   channel_limit?: int|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     * } $inbound
+     */
+    public function withInbound(
+        CallControlApplicationInbound|array $inbound
+    ): self {
         $obj = clone $this;
-        $obj->inbound = $inbound;
+        $obj['inbound'] = $inbound;
 
         return $obj;
     }
 
-    public function withOutbound(CallControlApplicationOutbound $outbound): self
-    {
+    /**
+     * @param CallControlApplicationOutbound|array{
+     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     * } $outbound
+     */
+    public function withOutbound(
+        CallControlApplicationOutbound|array $outbound
+    ): self {
         $obj = clone $this;
-        $obj->outbound = $outbound;
+        $obj['outbound'] = $outbound;
 
         return $obj;
     }
@@ -322,7 +354,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
         bool $redactDtmfDebugLogging
     ): self {
         $obj = clone $this;
-        $obj->redact_dtmf_debug_logging = $redactDtmfDebugLogging;
+        $obj['redact_dtmf_debug_logging'] = $redactDtmfDebugLogging;
 
         return $obj;
     }
@@ -335,7 +367,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -361,7 +393,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
+        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -372,7 +404,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
+        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

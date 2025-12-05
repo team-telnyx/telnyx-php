@@ -63,10 +63,10 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $num_objects && $obj->num_objects = $num_objects;
-        null !== $size && $obj->size = $size;
-        null !== $size_kb && $obj->size_kb = $size_kb;
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $num_objects && $obj['num_objects'] = $num_objects;
+        null !== $size && $obj['size'] = $size;
+        null !== $size_kb && $obj['size_kb'] = $size_kb;
+        null !== $timestamp && $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Data implements BaseModel
     public function withNumObjects(int $numObjects): self
     {
         $obj = clone $this;
-        $obj->num_objects = $numObjects;
+        $obj['num_objects'] = $numObjects;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Data implements BaseModel
     public function withSize(int $size): self
     {
         $obj = clone $this;
-        $obj->size = $size;
+        $obj['size'] = $size;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Data implements BaseModel
     public function withSizeKB(int $sizeKB): self
     {
         $obj = clone $this;
-        $obj->size_kb = $sizeKB;
+        $obj['size_kb'] = $sizeKB;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }

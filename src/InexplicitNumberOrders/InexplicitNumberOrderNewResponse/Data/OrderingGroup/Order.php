@@ -64,8 +64,8 @@ final class Order implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->number_order_id = $number_order_id;
-        $obj->sub_number_order_ids = $sub_number_order_ids;
+        $obj['number_order_id'] = $number_order_id;
+        $obj['sub_number_order_ids'] = $sub_number_order_ids;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Order implements BaseModel
     public function withNumberOrderID(string $numberOrderID): self
     {
         $obj = clone $this;
-        $obj->number_order_id = $numberOrderID;
+        $obj['number_order_id'] = $numberOrderID;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Order implements BaseModel
     public function withSubNumberOrderIDs(array $subNumberOrderIDs): self
     {
         $obj = clone $this;
-        $obj->sub_number_order_ids = $subNumberOrderIDs;
+        $obj['sub_number_order_ids'] = $subNumberOrderIDs;
 
         return $obj;
     }

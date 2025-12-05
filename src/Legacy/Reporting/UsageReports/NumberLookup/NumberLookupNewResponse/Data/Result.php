@@ -51,7 +51,12 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Aggregation> $aggregations
+     * @param list<Aggregation|array{
+     *   currency?: string|null,
+     *   total_cost?: float|null,
+     *   total_dips?: int|null,
+     *   type?: string|null,
+     * }> $aggregations
      */
     public static function with(
         ?array $aggregations = null,
@@ -60,9 +65,9 @@ final class Result implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $aggregations && $obj->aggregations = $aggregations;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $aggregations && $obj['aggregations'] = $aggregations;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -70,12 +75,17 @@ final class Result implements BaseModel
     /**
      * List of aggregations by lookup type.
      *
-     * @param list<Aggregation> $aggregations
+     * @param list<Aggregation|array{
+     *   currency?: string|null,
+     *   total_cost?: float|null,
+     *   total_dips?: int|null,
+     *   type?: string|null,
+     * }> $aggregations
      */
     public function withAggregations(array $aggregations): self
     {
         $obj = clone $this;
-        $obj->aggregations = $aggregations;
+        $obj['aggregations'] = $aggregations;
 
         return $obj;
     }
@@ -86,7 +96,7 @@ final class Result implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -97,7 +107,7 @@ final class Result implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

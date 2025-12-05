@@ -57,9 +57,9 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $deleted_at && $obj->deleted_at = $deleted_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $deleted_at && $obj['deleted_at'] = $deleted_at;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     public function withDeletedAt(\DateTimeInterface $deletedAt): self
     {
         $obj = clone $this;
-        $obj->deleted_at = $deletedAt;
+        $obj['deleted_at'] = $deletedAt;
 
         return $obj;
     }

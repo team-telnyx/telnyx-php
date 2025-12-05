@@ -16,7 +16,9 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\Verifica
  * @see Telnyx\Services\PortingOrders\VerificationCodesService::verify()
  *
  * @phpstan-type VerificationCodeVerifyParamsShape = array{
- *   verification_codes?: list<VerificationCode>
+ *   verification_codes?: list<VerificationCode|array{
+ *     code?: string|null, phone_number?: string|null
+ *   }>,
  * }
  */
 final class VerificationCodeVerifyParams implements BaseModel
@@ -39,24 +41,28 @@ final class VerificationCodeVerifyParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCode> $verification_codes
+     * @param list<VerificationCode|array{
+     *   code?: string|null, phone_number?: string|null
+     * }> $verification_codes
      */
     public static function with(?array $verification_codes = null): self
     {
         $obj = new self;
 
-        null !== $verification_codes && $obj->verification_codes = $verification_codes;
+        null !== $verification_codes && $obj['verification_codes'] = $verification_codes;
 
         return $obj;
     }
 
     /**
-     * @param list<VerificationCode> $verificationCodes
+     * @param list<VerificationCode|array{
+     *   code?: string|null, phone_number?: string|null
+     * }> $verificationCodes
      */
     public function withVerificationCodes(array $verificationCodes): self
     {
         $obj = clone $this;
-        $obj->verification_codes = $verificationCodes;
+        $obj['verification_codes'] = $verificationCodes;
 
         return $obj;
     }

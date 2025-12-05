@@ -42,8 +42,8 @@ final class SMSFallback implements BaseModel
     {
         $obj = new self;
 
-        null !== $from && $obj->from = $from;
-        null !== $text && $obj->text = $text;
+        null !== $from && $obj['from'] = $from;
+        null !== $text && $obj['text'] = $text;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class SMSFallback implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class SMSFallback implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

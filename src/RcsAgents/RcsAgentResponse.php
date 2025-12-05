@@ -28,20 +28,45 @@ final class RcsAgentResponse implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param RcsAgent|array{
+     *   agent_id?: string|null,
+     *   agent_name?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   enabled?: bool|null,
+     *   profile_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     *   user_id?: string|null,
+     *   webhook_failover_url?: string|null,
+     *   webhook_url?: string|null,
+     * } $data
      */
-    public static function with(?RcsAgent $data = null): self
+    public static function with(RcsAgent|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(RcsAgent $data): self
+    /**
+     * @param RcsAgent|array{
+     *   agent_id?: string|null,
+     *   agent_name?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   enabled?: bool|null,
+     *   profile_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     *   user_id?: string|null,
+     *   webhook_failover_url?: string|null,
+     *   webhook_url?: string|null,
+     * } $data
+     */
+    public function withData(RcsAgent|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

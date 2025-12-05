@@ -48,8 +48,8 @@ final class CustomerReference implements BaseModel
     {
         $obj = new self;
 
-        null !== $eq && $obj->eq = $eq;
-        null !== $in && $obj->in = $in;
+        null !== $eq && $obj['eq'] = $eq;
+        null !== $in && $obj['in'] = $in;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class CustomerReference implements BaseModel
     public function withEq(string $eq): self
     {
         $obj = clone $this;
-        $obj->eq = $eq;
+        $obj['eq'] = $eq;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class CustomerReference implements BaseModel
     public function withIn(array $in): self
     {
         $obj = clone $this;
-        $obj->in = $in;
+        $obj['in'] = $in;
 
         return $obj;
     }

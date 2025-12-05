@@ -48,8 +48,8 @@ final class VoicemailUpdateParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $pin && $obj->pin = $pin;
+        null !== $enabled && $obj['enabled'] = $enabled;
+        null !== $pin && $obj['pin'] = $pin;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class VoicemailUpdateParams implements BaseModel
     public function withEnabled(bool $enabled): self
     {
         $obj = clone $this;
-        $obj->enabled = $enabled;
+        $obj['enabled'] = $enabled;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class VoicemailUpdateParams implements BaseModel
     public function withPin(string $pin): self
     {
         $obj = clone $this;
-        $obj->pin = $pin;
+        $obj['pin'] = $pin;
 
         return $obj;
     }

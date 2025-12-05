@@ -108,18 +108,18 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $aggregation_type && $obj->aggregation_type = $aggregation_type;
-        null !== $connections && $obj->connections = $connections;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $end_time && $obj->end_time = $end_time;
-        null !== $product_breakdown && $obj->product_breakdown = $product_breakdown;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $report_url && $obj->report_url = $report_url;
-        null !== $result && $obj->result = $result;
-        null !== $start_time && $obj->start_time = $start_time;
-        null !== $status && $obj->status = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $aggregation_type && $obj['aggregation_type'] = $aggregation_type;
+        null !== $connections && $obj['connections'] = $connections;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $product_breakdown && $obj['product_breakdown'] = $product_breakdown;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $result && $obj['result'] = $result;
+        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $status && $obj['status'] = $status;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withAggregationType(int $aggregationType): self
     {
         $obj = clone $this;
-        $obj->aggregation_type = $aggregationType;
+        $obj['aggregation_type'] = $aggregationType;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withConnections(array $connections): self
     {
         $obj = clone $this;
-        $obj->connections = $connections;
+        $obj['connections'] = $connections;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withProductBreakdown(int $productBreakdown): self
     {
         $obj = clone $this;
-        $obj->product_breakdown = $productBreakdown;
+        $obj['product_breakdown'] = $productBreakdown;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj->report_url = $reportURL;
+        $obj['report_url'] = $reportURL;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withResult(mixed $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withStatus(int $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

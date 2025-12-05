@@ -71,23 +71,27 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Name|array{
+     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+     * } $name
      */
     public static function with(
         ?string $country_code = null,
         ?string $mcc = null,
         ?string $mnc = null,
-        ?Name $name = null,
+        Name|array|null $name = null,
         ?bool $network_preferences_enabled = null,
         ?string $tadig = null,
     ): self {
         $obj = new self;
 
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $mcc && $obj->mcc = $mcc;
-        null !== $mnc && $obj->mnc = $mnc;
-        null !== $name && $obj->name = $name;
-        null !== $network_preferences_enabled && $obj->network_preferences_enabled = $network_preferences_enabled;
-        null !== $tadig && $obj->tadig = $tadig;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $mcc && $obj['mcc'] = $mcc;
+        null !== $mnc && $obj['mnc'] = $mnc;
+        null !== $name && $obj['name'] = $name;
+        null !== $network_preferences_enabled && $obj['network_preferences_enabled'] = $network_preferences_enabled;
+        null !== $tadig && $obj['tadig'] = $tadig;
 
         return $obj;
     }
@@ -98,7 +102,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -109,7 +113,7 @@ final class Filter implements BaseModel
     public function withMcc(string $mcc): self
     {
         $obj = clone $this;
-        $obj->mcc = $mcc;
+        $obj['mcc'] = $mcc;
 
         return $obj;
     }
@@ -120,18 +124,22 @@ final class Filter implements BaseModel
     public function withMnc(string $mnc): self
     {
         $obj = clone $this;
-        $obj->mnc = $mnc;
+        $obj['mnc'] = $mnc;
 
         return $obj;
     }
 
     /**
      * Advanced name filtering operations.
+     *
+     * @param Name|array{
+     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+     * } $name
      */
-    public function withName(Name $name): self
+    public function withName(Name|array $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -143,7 +151,7 @@ final class Filter implements BaseModel
         bool $networkPreferencesEnabled
     ): self {
         $obj = clone $this;
-        $obj->network_preferences_enabled = $networkPreferencesEnabled;
+        $obj['network_preferences_enabled'] = $networkPreferencesEnabled;
 
         return $obj;
     }
@@ -154,7 +162,7 @@ final class Filter implements BaseModel
     public function withTadig(string $tadig): self
     {
         $obj = clone $this;
-        $obj->tadig = $tadig;
+        $obj['tadig'] = $tadig;
 
         return $obj;
     }

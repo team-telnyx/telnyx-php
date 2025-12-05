@@ -41,15 +41,19 @@ final class ActivationSettings implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param FocDatetimeRequested|array{
+     *   gt?: string|null, lt?: string|null
+     * } $foc_datetime_requested
      */
     public static function with(
         ?bool $fast_port_eligible = null,
-        ?FocDatetimeRequested $foc_datetime_requested = null,
+        FocDatetimeRequested|array|null $foc_datetime_requested = null,
     ): self {
         $obj = new self;
 
-        null !== $fast_port_eligible && $obj->fast_port_eligible = $fast_port_eligible;
-        null !== $foc_datetime_requested && $obj->foc_datetime_requested = $foc_datetime_requested;
+        null !== $fast_port_eligible && $obj['fast_port_eligible'] = $fast_port_eligible;
+        null !== $foc_datetime_requested && $obj['foc_datetime_requested'] = $foc_datetime_requested;
 
         return $obj;
     }
@@ -60,19 +64,23 @@ final class ActivationSettings implements BaseModel
     public function withFastPortEligible(bool $fastPortEligible): self
     {
         $obj = clone $this;
-        $obj->fast_port_eligible = $fastPortEligible;
+        $obj['fast_port_eligible'] = $fastPortEligible;
 
         return $obj;
     }
 
     /**
      * FOC datetime range filtering operations.
+     *
+     * @param FocDatetimeRequested|array{
+     *   gt?: string|null, lt?: string|null
+     * } $focDatetimeRequested
      */
     public function withFocDatetimeRequested(
-        FocDatetimeRequested $focDatetimeRequested
+        FocDatetimeRequested|array $focDatetimeRequested
     ): self {
         $obj = clone $this;
-        $obj->foc_datetime_requested = $focDatetimeRequested;
+        $obj['foc_datetime_requested'] = $focDatetimeRequested;
 
         return $obj;
     }

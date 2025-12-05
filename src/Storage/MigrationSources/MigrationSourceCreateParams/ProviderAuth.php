@@ -46,8 +46,8 @@ final class ProviderAuth implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $access_key && $obj->access_key = $access_key;
-        null !== $secret_access_key && $obj->secret_access_key = $secret_access_key;
+        null !== $access_key && $obj['access_key'] = $access_key;
+        null !== $secret_access_key && $obj['secret_access_key'] = $secret_access_key;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class ProviderAuth implements BaseModel
     public function withAccessKey(string $accessKey): self
     {
         $obj = clone $this;
-        $obj->access_key = $accessKey;
+        $obj['access_key'] = $accessKey;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ProviderAuth implements BaseModel
     public function withSecretAccessKey(string $secretAccessKey): self
     {
         $obj = clone $this;
-        $obj->secret_access_key = $secretAccessKey;
+        $obj['secret_access_key'] = $secretAccessKey;
 
         return $obj;
     }

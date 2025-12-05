@@ -18,7 +18,17 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ConferencesService::listParticipants()
  *
  * @phpstan-type ConferenceListParticipantsParamsShape = array{
- *   filter?: Filter, page?: Page, region?: Region|value-of<Region>
+ *   filter?: Filter|array{
+ *     muted?: bool|null, on_hold?: bool|null, whispering?: bool|null
+ *   },
+ *   page?: Page|array{
+ *     after?: string|null,
+ *     before?: string|null,
+ *     limit?: int|null,
+ *     number?: int|null,
+ *     size?: int|null,
+ *   },
+ *   region?: Region|value-of<Region>,
  * }
  */
 final class ConferenceListParticipantsParams implements BaseModel
@@ -57,17 +67,27 @@ final class ConferenceListParticipantsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   muted?: bool|null, on_hold?: bool|null, whispering?: bool|null
+     * } $filter
+     * @param Page|array{
+     *   after?: string|null,
+     *   before?: string|null,
+     *   limit?: int|null,
+     *   number?: int|null,
+     *   size?: int|null,
+     * } $page
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Region|string|null $region = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Region|string|null $region = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -75,22 +95,34 @@ final class ConferenceListParticipantsParams implements BaseModel
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
+     *
+     * @param Filter|array{
+     *   muted?: bool|null, on_hold?: bool|null, whispering?: bool|null
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
+     *
+     * @param Page|array{
+     *   after?: string|null,
+     *   before?: string|null,
+     *   limit?: int|null,
+     *   number?: int|null,
+     *   size?: int|null,
+     * } $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

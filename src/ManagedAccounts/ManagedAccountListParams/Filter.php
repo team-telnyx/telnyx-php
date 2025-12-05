@@ -37,32 +37,45 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Email|array{contains?: string|null, eq?: string|null} $email
+     * @param OrganizationName|array{
+     *   contains?: string|null, eq?: string|null
+     * } $organization_name
      */
     public static function with(
-        ?Email $email = null,
-        ?OrganizationName $organization_name = null
+        Email|array|null $email = null,
+        OrganizationName|array|null $organization_name = null
     ): self {
         $obj = new self;
 
-        null !== $email && $obj->email = $email;
-        null !== $organization_name && $obj->organization_name = $organization_name;
+        null !== $email && $obj['email'] = $email;
+        null !== $organization_name && $obj['organization_name'] = $organization_name;
 
         return $obj;
     }
 
-    public function withEmail(Email $email): self
+    /**
+     * @param Email|array{contains?: string|null, eq?: string|null} $email
+     */
+    public function withEmail(Email|array $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
 
+    /**
+     * @param OrganizationName|array{
+     *   contains?: string|null, eq?: string|null
+     * } $organizationName
+     */
     public function withOrganizationName(
-        OrganizationName $organizationName
+        OrganizationName|array $organizationName
     ): self {
         $obj = clone $this;
-        $obj->organization_name = $organizationName;
+        $obj['organization_name'] = $organizationName;
 
         return $obj;
     }

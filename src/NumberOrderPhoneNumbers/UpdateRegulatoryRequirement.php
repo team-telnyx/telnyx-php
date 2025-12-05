@@ -46,8 +46,8 @@ final class UpdateRegulatoryRequirement implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $field_value && $obj->field_value = $field_value;
-        null !== $requirement_id && $obj->requirement_id = $requirement_id;
+        null !== $field_value && $obj['field_value'] = $field_value;
+        null !== $requirement_id && $obj['requirement_id'] = $requirement_id;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class UpdateRegulatoryRequirement implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj->field_value = $fieldValue;
+        $obj['field_value'] = $fieldValue;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class UpdateRegulatoryRequirement implements BaseModel
     public function withRequirementID(string $requirementID): self
     {
         $obj = clone $this;
-        $obj->requirement_id = $requirementID;
+        $obj['requirement_id'] = $requirementID;
 
         return $obj;
     }

@@ -16,7 +16,9 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesPa
  * @see Telnyx\Services\MessagingHostedNumberOrdersService::validateCodes()
  *
  * @phpstan-type MessagingHostedNumberOrderValidateCodesParamsShape = array{
- *   verification_codes: list<VerificationCode>
+ *   verification_codes: list<VerificationCode|array{
+ *     code: string, phone_number: string
+ *   }>,
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
@@ -53,24 +55,28 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCode> $verification_codes
+     * @param list<VerificationCode|array{
+     *   code: string, phone_number: string
+     * }> $verification_codes
      */
     public static function with(array $verification_codes): self
     {
         $obj = new self;
 
-        $obj->verification_codes = $verification_codes;
+        $obj['verification_codes'] = $verification_codes;
 
         return $obj;
     }
 
     /**
-     * @param list<VerificationCode> $verificationCodes
+     * @param list<VerificationCode|array{
+     *   code: string, phone_number: string
+     * }> $verificationCodes
      */
     public function withVerificationCodes(array $verificationCodes): self
     {
         $obj = clone $this;
-        $obj->verification_codes = $verificationCodes;
+        $obj['verification_codes'] = $verificationCodes;
 
         return $obj;
     }

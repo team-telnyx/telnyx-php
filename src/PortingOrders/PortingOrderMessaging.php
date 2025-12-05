@@ -70,9 +70,9 @@ final class PortingOrderMessaging implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $enable_messaging && $obj->enable_messaging = $enable_messaging;
-        null !== $messaging_capable && $obj->messaging_capable = $messaging_capable;
-        null !== $messaging_port_completed && $obj->messaging_port_completed = $messaging_port_completed;
+        null !== $enable_messaging && $obj['enable_messaging'] = $enable_messaging;
+        null !== $messaging_capable && $obj['messaging_capable'] = $messaging_capable;
+        null !== $messaging_port_completed && $obj['messaging_port_completed'] = $messaging_port_completed;
         null !== $messaging_port_status && $obj['messaging_port_status'] = $messaging_port_status;
 
         return $obj;
@@ -84,7 +84,7 @@ final class PortingOrderMessaging implements BaseModel
     public function withEnableMessaging(bool $enableMessaging): self
     {
         $obj = clone $this;
-        $obj->enable_messaging = $enableMessaging;
+        $obj['enable_messaging'] = $enableMessaging;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class PortingOrderMessaging implements BaseModel
     public function withMessagingCapable(bool $messagingCapable): self
     {
         $obj = clone $this;
-        $obj->messaging_capable = $messagingCapable;
+        $obj['messaging_capable'] = $messagingCapable;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class PortingOrderMessaging implements BaseModel
         bool $messagingPortCompleted
     ): self {
         $obj = clone $this;
-        $obj->messaging_port_completed = $messagingPortCompleted;
+        $obj['messaging_port_completed'] = $messagingPortCompleted;
 
         return $obj;
     }

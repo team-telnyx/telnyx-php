@@ -44,7 +44,7 @@ final class ActionSetPublicIPParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $region_code && $obj->region_code = $region_code;
+        null !== $region_code && $obj['region_code'] = $region_code;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class ActionSetPublicIPParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->region_code = $regionCode;
+        $obj['region_code'] = $regionCode;
 
         return $obj;
     }

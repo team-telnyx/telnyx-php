@@ -55,9 +55,9 @@ final class DateEndedAt implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $eq && $obj->eq = $eq;
-        null !== $gte && $obj->gte = $gte;
-        null !== $lte && $obj->lte = $lte;
+        null !== $eq && $obj['eq'] = $eq;
+        null !== $gte && $obj['gte'] = $gte;
+        null !== $lte && $obj['lte'] = $lte;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class DateEndedAt implements BaseModel
     public function withEq(\DateTimeInterface $eq): self
     {
         $obj = clone $this;
-        $obj->eq = $eq;
+        $obj['eq'] = $eq;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class DateEndedAt implements BaseModel
     public function withGte(\DateTimeInterface $gte): self
     {
         $obj = clone $this;
-        $obj->gte = $gte;
+        $obj['gte'] = $gte;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class DateEndedAt implements BaseModel
     public function withLte(\DateTimeInterface $lte): self
     {
         $obj = clone $this;
-        $obj->lte = $lte;
+        $obj['lte'] = $lte;
 
         return $obj;
     }

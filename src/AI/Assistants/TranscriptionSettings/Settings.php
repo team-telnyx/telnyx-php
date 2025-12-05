@@ -57,10 +57,10 @@ final class Settings implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $eot_threshold && $obj->eot_threshold = $eot_threshold;
-        null !== $eot_timeout_ms && $obj->eot_timeout_ms = $eot_timeout_ms;
-        null !== $numerals && $obj->numerals = $numerals;
-        null !== $smart_format && $obj->smart_format = $smart_format;
+        null !== $eot_threshold && $obj['eot_threshold'] = $eot_threshold;
+        null !== $eot_timeout_ms && $obj['eot_timeout_ms'] = $eot_timeout_ms;
+        null !== $numerals && $obj['numerals'] = $numerals;
+        null !== $smart_format && $obj['smart_format'] = $smart_format;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Settings implements BaseModel
     public function withEotThreshold(float $eotThreshold): self
     {
         $obj = clone $this;
-        $obj->eot_threshold = $eotThreshold;
+        $obj['eot_threshold'] = $eotThreshold;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Settings implements BaseModel
     public function withEotTimeoutMs(int $eotTimeoutMs): self
     {
         $obj = clone $this;
-        $obj->eot_timeout_ms = $eotTimeoutMs;
+        $obj['eot_timeout_ms'] = $eotTimeoutMs;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Settings implements BaseModel
     public function withNumerals(bool $numerals): self
     {
         $obj = clone $this;
-        $obj->numerals = $numerals;
+        $obj['numerals'] = $numerals;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Settings implements BaseModel
     public function withSmartFormat(bool $smartFormat): self
     {
         $obj = clone $this;
-        $obj->smart_format = $smartFormat;
+        $obj['smart_format'] = $smartFormat;
 
         return $obj;
     }

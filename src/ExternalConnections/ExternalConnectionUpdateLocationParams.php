@@ -67,8 +67,8 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->static_emergency_address_id = $static_emergency_address_id;
+        $obj['id'] = $id;
+        $obj['static_emergency_address_id'] = $static_emergency_address_id;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
         string $staticEmergencyAddressID
     ): self {
         $obj = clone $this;
-        $obj->static_emergency_address_id = $staticEmergencyAddressID;
+        $obj['static_emergency_address_id'] = $staticEmergencyAddressID;
 
         return $obj;
     }

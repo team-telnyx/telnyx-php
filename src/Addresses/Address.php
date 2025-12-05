@@ -183,25 +183,25 @@ final class Address implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $address_book && $obj->address_book = $address_book;
-        null !== $administrative_area && $obj->administrative_area = $administrative_area;
-        null !== $borough && $obj->borough = $borough;
-        null !== $business_name && $obj->business_name = $business_name;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $extended_address && $obj->extended_address = $extended_address;
-        null !== $first_name && $obj->first_name = $first_name;
-        null !== $last_name && $obj->last_name = $last_name;
-        null !== $locality && $obj->locality = $locality;
-        null !== $neighborhood && $obj->neighborhood = $neighborhood;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $postal_code && $obj->postal_code = $postal_code;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $street_address && $obj->street_address = $street_address;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $validate_address && $obj->validate_address = $validate_address;
+        null !== $id && $obj['id'] = $id;
+        null !== $address_book && $obj['address_book'] = $address_book;
+        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $borough && $obj['borough'] = $borough;
+        null !== $business_name && $obj['business_name'] = $business_name;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $extended_address && $obj['extended_address'] = $extended_address;
+        null !== $first_name && $obj['first_name'] = $first_name;
+        null !== $last_name && $obj['last_name'] = $last_name;
+        null !== $locality && $obj['locality'] = $locality;
+        null !== $neighborhood && $obj['neighborhood'] = $neighborhood;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $postal_code && $obj['postal_code'] = $postal_code;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $street_address && $obj['street_address'] = $street_address;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $validate_address && $obj['validate_address'] = $validate_address;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class Address implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class Address implements BaseModel
     public function withAddressBook(bool $addressBook): self
     {
         $obj = clone $this;
-        $obj->address_book = $addressBook;
+        $obj['address_book'] = $addressBook;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class Address implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrative_area = $administrativeArea;
+        $obj['administrative_area'] = $administrativeArea;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class Address implements BaseModel
     public function withBorough(string $borough): self
     {
         $obj = clone $this;
-        $obj->borough = $borough;
+        $obj['borough'] = $borough;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class Address implements BaseModel
     public function withBusinessName(string $businessName): self
     {
         $obj = clone $this;
-        $obj->business_name = $businessName;
+        $obj['business_name'] = $businessName;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class Address implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class Address implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class Address implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class Address implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj->extended_address = $extendedAddress;
+        $obj['extended_address'] = $extendedAddress;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class Address implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->first_name = $firstName;
+        $obj['first_name'] = $firstName;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class Address implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->last_name = $lastName;
+        $obj['last_name'] = $lastName;
 
         return $obj;
     }
@@ -333,7 +333,7 @@ final class Address implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -344,7 +344,7 @@ final class Address implements BaseModel
     public function withNeighborhood(string $neighborhood): self
     {
         $obj = clone $this;
-        $obj->neighborhood = $neighborhood;
+        $obj['neighborhood'] = $neighborhood;
 
         return $obj;
     }
@@ -355,7 +355,7 @@ final class Address implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -366,7 +366,7 @@ final class Address implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postal_code = $postalCode;
+        $obj['postal_code'] = $postalCode;
 
         return $obj;
     }
@@ -377,7 +377,7 @@ final class Address implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -388,7 +388,7 @@ final class Address implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }
@@ -399,7 +399,7 @@ final class Address implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -410,7 +410,7 @@ final class Address implements BaseModel
     public function withValidateAddress(bool $validateAddress): self
     {
         $obj = clone $this;
-        $obj->validate_address = $validateAddress;
+        $obj['validate_address'] = $validateAddress;
 
         return $obj;
     }

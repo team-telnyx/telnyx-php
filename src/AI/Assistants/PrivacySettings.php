@@ -36,7 +36,7 @@ final class PrivacySettings implements BaseModel
     {
         $obj = new self;
 
-        null !== $data_retention && $obj->data_retention = $data_retention;
+        null !== $data_retention && $obj['data_retention'] = $data_retention;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class PrivacySettings implements BaseModel
     public function withDataRetention(bool $dataRetention): self
     {
         $obj = clone $this;
-        $obj->data_retention = $dataRetention;
+        $obj['data_retention'] = $dataRetention;
 
         return $obj;
     }

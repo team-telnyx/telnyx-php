@@ -112,6 +112,7 @@ final class DocServiceDocument implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AvScanStatus|value-of<AvScanStatus> $av_scan_status
+     * @param Size|array{amount?: int|null, unit?: string|null} $size
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -123,23 +124,23 @@ final class DocServiceDocument implements BaseModel
         ?string $filename = null,
         ?string $record_type = null,
         ?string $sha256 = null,
-        ?Size $size = null,
+        Size|array|null $size = null,
         Status|string|null $status = null,
         ?string $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $av_scan_status && $obj['av_scan_status'] = $av_scan_status;
-        null !== $content_type && $obj->content_type = $content_type;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $filename && $obj->filename = $filename;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $sha256 && $obj->sha256 = $sha256;
-        null !== $size && $obj->size = $size;
+        null !== $content_type && $obj['content_type'] = $content_type;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $filename && $obj['filename'] = $filename;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $sha256 && $obj['sha256'] = $sha256;
+        null !== $size && $obj['size'] = $size;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -150,7 +151,7 @@ final class DocServiceDocument implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -174,7 +175,7 @@ final class DocServiceDocument implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj->content_type = $contentType;
+        $obj['content_type'] = $contentType;
 
         return $obj;
     }
@@ -185,7 +186,7 @@ final class DocServiceDocument implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -196,7 +197,7 @@ final class DocServiceDocument implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -207,7 +208,7 @@ final class DocServiceDocument implements BaseModel
     public function withFilename(string $filename): self
     {
         $obj = clone $this;
-        $obj->filename = $filename;
+        $obj['filename'] = $filename;
 
         return $obj;
     }
@@ -218,7 +219,7 @@ final class DocServiceDocument implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -229,18 +230,20 @@ final class DocServiceDocument implements BaseModel
     public function withSha256(string $sha256): self
     {
         $obj = clone $this;
-        $obj->sha256 = $sha256;
+        $obj['sha256'] = $sha256;
 
         return $obj;
     }
 
     /**
      * Indicates the document's filesize.
+     *
+     * @param Size|array{amount?: int|null, unit?: string|null} $size
      */
-    public function withSize(Size $size): self
+    public function withSize(Size|array $size): self
     {
         $obj = clone $this;
-        $obj->size = $size;
+        $obj['size'] = $size;
 
         return $obj;
     }
@@ -264,7 +267,7 @@ final class DocServiceDocument implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -56,7 +56,7 @@ final class WirelessRetrieveRegionsParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class WirelessRetrieveRegionsParams implements BaseModel
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }

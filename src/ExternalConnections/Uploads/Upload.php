@@ -7,6 +7,8 @@ namespace Telnyx\ExternalConnections\Uploads;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\ExternalConnections\Uploads\TnUploadEntry\ErrorCode;
+use Telnyx\ExternalConnections\Uploads\TnUploadEntry\InternalStatus;
 use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
 use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
@@ -79,7 +81,16 @@ final class Upload implements BaseModel
      *
      * @param list<AvailableUsage|value-of<AvailableUsage>> $available_usages
      * @param Status|value-of<Status> $status
-     * @param list<TnUploadEntry> $tn_upload_entries
+     * @param list<TnUploadEntry|array{
+     *   civic_address_id?: string|null,
+     *   error_code?: value-of<ErrorCode>|null,
+     *   error_message?: string|null,
+     *   internal_status?: value-of<InternalStatus>|null,
+     *   location_id?: string|null,
+     *   number_id?: string|null,
+     *   phone_number?: string|null,
+     *   status?: value-of<TnUploadEntry\Status>|null,
+     * }> $tn_upload_entries
      */
     public static function with(
         ?array $available_usages = null,
@@ -94,13 +105,13 @@ final class Upload implements BaseModel
         $obj = new self;
 
         null !== $available_usages && $obj['available_usages'] = $available_usages;
-        null !== $error_code && $obj->error_code = $error_code;
-        null !== $error_message && $obj->error_message = $error_message;
-        null !== $location_id && $obj->location_id = $location_id;
+        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $error_message && $obj['error_message'] = $error_message;
+        null !== $location_id && $obj['location_id'] = $location_id;
         null !== $status && $obj['status'] = $status;
-        null !== $tenant_id && $obj->tenant_id = $tenant_id;
-        null !== $ticket_id && $obj->ticket_id = $ticket_id;
-        null !== $tn_upload_entries && $obj->tn_upload_entries = $tn_upload_entries;
+        null !== $tenant_id && $obj['tenant_id'] = $tenant_id;
+        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
+        null !== $tn_upload_entries && $obj['tn_upload_entries'] = $tn_upload_entries;
 
         return $obj;
     }
@@ -122,7 +133,7 @@ final class Upload implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->error_code = $errorCode;
+        $obj['error_code'] = $errorCode;
 
         return $obj;
     }
@@ -133,7 +144,7 @@ final class Upload implements BaseModel
     public function withErrorMessage(string $errorMessage): self
     {
         $obj = clone $this;
-        $obj->error_message = $errorMessage;
+        $obj['error_message'] = $errorMessage;
 
         return $obj;
     }
@@ -141,7 +152,7 @@ final class Upload implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->location_id = $locationID;
+        $obj['location_id'] = $locationID;
 
         return $obj;
     }
@@ -162,7 +173,7 @@ final class Upload implements BaseModel
     public function withTenantID(string $tenantID): self
     {
         $obj = clone $this;
-        $obj->tenant_id = $tenantID;
+        $obj['tenant_id'] = $tenantID;
 
         return $obj;
     }
@@ -173,18 +184,27 @@ final class Upload implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj->ticket_id = $ticketID;
+        $obj['ticket_id'] = $ticketID;
 
         return $obj;
     }
 
     /**
-     * @param list<TnUploadEntry> $tnUploadEntries
+     * @param list<TnUploadEntry|array{
+     *   civic_address_id?: string|null,
+     *   error_code?: value-of<ErrorCode>|null,
+     *   error_message?: string|null,
+     *   internal_status?: value-of<InternalStatus>|null,
+     *   location_id?: string|null,
+     *   number_id?: string|null,
+     *   phone_number?: string|null,
+     *   status?: value-of<TnUploadEntry\Status>|null,
+     * }> $tnUploadEntries
      */
     public function withTnUploadEntries(array $tnUploadEntries): self
     {
         $obj = clone $this;
-        $obj->tn_upload_entries = $tnUploadEntries;
+        $obj['tn_upload_entries'] = $tnUploadEntries;
 
         return $obj;
     }

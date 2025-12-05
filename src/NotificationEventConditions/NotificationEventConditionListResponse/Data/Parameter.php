@@ -44,9 +44,9 @@ final class Parameter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $data_type && $obj->data_type = $data_type;
-        null !== $name && $obj->name = $name;
-        null !== $optional && $obj->optional = $optional;
+        null !== $data_type && $obj['data_type'] = $data_type;
+        null !== $name && $obj['name'] = $name;
+        null !== $optional && $obj['optional'] = $optional;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class Parameter implements BaseModel
     public function withDataType(string $dataType): self
     {
         $obj = clone $this;
-        $obj->data_type = $dataType;
+        $obj['data_type'] = $dataType;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class Parameter implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Parameter implements BaseModel
     public function withOptional(bool $optional): self
     {
         $obj = clone $this;
-        $obj->optional = $optional;
+        $obj['optional'] = $optional;
 
         return $obj;
     }

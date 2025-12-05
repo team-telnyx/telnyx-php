@@ -53,9 +53,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $name && $obj->name = $name;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $code && $obj['code'] = $code;
+        null !== $name && $obj['name'] = $name;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -66,7 +66,7 @@ final class Data implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

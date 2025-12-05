@@ -60,9 +60,9 @@ final class VersionRetrieveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->assistant_id = $assistant_id;
+        $obj['assistant_id'] = $assistant_id;
 
-        null !== $include_mcp_servers && $obj->include_mcp_servers = $include_mcp_servers;
+        null !== $include_mcp_servers && $obj['include_mcp_servers'] = $include_mcp_servers;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class VersionRetrieveParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistant_id = $assistantID;
+        $obj['assistant_id'] = $assistantID;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class VersionRetrieveParams implements BaseModel
     public function withIncludeMcpServers(bool $includeMcpServers): self
     {
         $obj = clone $this;
-        $obj->include_mcp_servers = $includeMcpServers;
+        $obj['include_mcp_servers'] = $includeMcpServers;
 
         return $obj;
     }

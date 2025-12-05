@@ -110,10 +110,10 @@ final class EmbeddingCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bucket_name = $bucket_name;
+        $obj['bucket_name'] = $bucket_name;
 
-        null !== $document_chunk_overlap_size && $obj->document_chunk_overlap_size = $document_chunk_overlap_size;
-        null !== $document_chunk_size && $obj->document_chunk_size = $document_chunk_size;
+        null !== $document_chunk_overlap_size && $obj['document_chunk_overlap_size'] = $document_chunk_overlap_size;
+        null !== $document_chunk_size && $obj['document_chunk_size'] = $document_chunk_size;
         null !== $embedding_model && $obj['embedding_model'] = $embedding_model;
         null !== $loader && $obj['loader'] = $loader;
 
@@ -123,7 +123,7 @@ final class EmbeddingCreateParams implements BaseModel
     public function withBucketName(string $bucketName): self
     {
         $obj = clone $this;
-        $obj->bucket_name = $bucketName;
+        $obj['bucket_name'] = $bucketName;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class EmbeddingCreateParams implements BaseModel
         int $documentChunkOverlapSize
     ): self {
         $obj = clone $this;
-        $obj->document_chunk_overlap_size = $documentChunkOverlapSize;
+        $obj['document_chunk_overlap_size'] = $documentChunkOverlapSize;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class EmbeddingCreateParams implements BaseModel
     public function withDocumentChunkSize(int $documentChunkSize): self
     {
         $obj = clone $this;
-        $obj->document_chunk_size = $documentChunkSize;
+        $obj['document_chunk_size'] = $documentChunkSize;
 
         return $obj;
     }

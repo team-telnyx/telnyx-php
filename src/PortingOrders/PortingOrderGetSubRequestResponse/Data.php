@@ -46,8 +46,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $port_request_id && $obj->port_request_id = $port_request_id;
-        null !== $sub_request_id && $obj->sub_request_id = $sub_request_id;
+        null !== $port_request_id && $obj['port_request_id'] = $port_request_id;
+        null !== $sub_request_id && $obj['sub_request_id'] = $sub_request_id;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Data implements BaseModel
     public function withPortRequestID(string $portRequestID): self
     {
         $obj = clone $this;
-        $obj->port_request_id = $portRequestID;
+        $obj['port_request_id'] = $portRequestID;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Data implements BaseModel
     public function withSubRequestID(string $subRequestID): self
     {
         $obj = clone $this;
-        $obj->sub_request_id = $subRequestID;
+        $obj['sub_request_id'] = $subRequestID;
 
         return $obj;
     }

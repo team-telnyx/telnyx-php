@@ -65,8 +65,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bucket = $bucket;
-        $obj->clusters = $clusters;
+        $obj['bucket'] = $bucket;
+        $obj['clusters'] = $clusters;
         $obj['status'] = $status;
 
         return $obj;
@@ -75,7 +75,7 @@ final class Data implements BaseModel
     public function withBucket(string $bucket): self
     {
         $obj = clone $this;
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withClusters(array $clusters): self
     {
         $obj = clone $this;
-        $obj->clusters = $clusters;
+        $obj['clusters'] = $clusters;
 
         return $obj;
     }

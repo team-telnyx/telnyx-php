@@ -62,7 +62,7 @@ final class ActionVerifyOwnershipParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->phone_numbers = $phone_numbers;
+        $obj['phone_numbers'] = $phone_numbers;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ActionVerifyOwnershipParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }

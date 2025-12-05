@@ -137,7 +137,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rubric> $rubric
+     * @param list<Rubric|array{criteria: string, name: string}> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyx_conversation_channel
      */
     public static function with(
@@ -154,17 +154,17 @@ final class AssistantTest implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->created_at = $created_at;
-        $obj->name = $name;
-        $obj->rubric = $rubric;
+        $obj['created_at'] = $created_at;
+        $obj['name'] = $name;
+        $obj['rubric'] = $rubric;
         $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
-        $obj->test_id = $test_id;
+        $obj['test_id'] = $test_id;
 
-        null !== $description && $obj->description = $description;
-        null !== $destination && $obj->destination = $destination;
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $max_duration_seconds && $obj->max_duration_seconds = $max_duration_seconds;
-        null !== $test_suite && $obj->test_suite = $test_suite;
+        null !== $description && $obj['description'] = $description;
+        null !== $destination && $obj['destination'] = $destination;
+        null !== $instructions && $obj['instructions'] = $instructions;
+        null !== $max_duration_seconds && $obj['max_duration_seconds'] = $max_duration_seconds;
+        null !== $test_suite && $obj['test_suite'] = $test_suite;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -194,12 +194,12 @@ final class AssistantTest implements BaseModel, ResponseConverter
     /**
      * Evaluation criteria used to assess test performance.
      *
-     * @param list<Rubric> $rubric
+     * @param list<Rubric|array{criteria: string, name: string}> $rubric
      */
     public function withRubric(array $rubric): self
     {
         $obj = clone $this;
-        $obj->rubric = $rubric;
+        $obj['rubric'] = $rubric;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withTestID(string $testID): self
     {
         $obj = clone $this;
-        $obj->test_id = $testID;
+        $obj['test_id'] = $testID;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withDestination(string $destination): self
     {
         $obj = clone $this;
-        $obj->destination = $destination;
+        $obj['destination'] = $destination;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
         $obj = clone $this;
-        $obj->max_duration_seconds = $maxDurationSeconds;
+        $obj['max_duration_seconds'] = $maxDurationSeconds;
 
         return $obj;
     }
@@ -279,7 +279,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withTestSuite(string $testSuite): self
     {
         $obj = clone $this;
-        $obj->test_suite = $testSuite;
+        $obj['test_suite'] = $testSuite;
 
         return $obj;
     }

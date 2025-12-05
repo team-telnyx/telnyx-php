@@ -7,6 +7,7 @@ namespace Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Result;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
 use Telnyx\APIError;
+use Telnyx\APIError\Source;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -73,21 +74,35 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Result|value-of<Result> $result
-     * @param list<APIError> $errors
+     * @param Suggested|array{
+     *   administrative_area?: string|null,
+     *   country_code?: string|null,
+     *   extended_address?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $suggested
+     * @param list<APIError|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: array<string,mixed>|null,
+     *   source?: Source|null,
+     * }> $errors
      */
     public static function with(
         Result|string $result,
-        Suggested $suggested,
+        Suggested|array $suggested,
         ?array $errors = null,
         ?string $record_type = null,
     ): self {
         $obj = new self;
 
         $obj['result'] = $result;
-        $obj->suggested = $suggested;
+        $obj['suggested'] = $suggested;
 
-        null !== $errors && $obj->errors = $errors;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $errors && $obj['errors'] = $errors;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -107,22 +122,37 @@ final class Data implements BaseModel
 
     /**
      * Provides normalized address when available.
+     *
+     * @param Suggested|array{
+     *   administrative_area?: string|null,
+     *   country_code?: string|null,
+     *   extended_address?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $suggested
      */
-    public function withSuggested(Suggested $suggested): self
+    public function withSuggested(Suggested|array $suggested): self
     {
         $obj = clone $this;
-        $obj->suggested = $suggested;
+        $obj['suggested'] = $suggested;
 
         return $obj;
     }
 
     /**
-     * @param list<APIError> $errors
+     * @param list<APIError|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: array<string,mixed>|null,
+     *   source?: Source|null,
+     * }> $errors
      */
     public function withErrors(array $errors): self
     {
         $obj = clone $this;
-        $obj->errors = $errors;
+        $obj['errors'] = $errors;
 
         return $obj;
     }
@@ -133,7 +163,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

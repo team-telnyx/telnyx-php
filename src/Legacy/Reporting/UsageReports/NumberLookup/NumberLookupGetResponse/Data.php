@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse\Data\Result;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse\Data\Result\Aggregation;
 
 /**
  * Telco data usage report response.
@@ -112,7 +113,11 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $managed_accounts
-     * @param list<Result> $result
+     * @param list<Result|array{
+     *   aggregations?: list<Aggregation>|null,
+     *   record_type?: string|null,
+     *   user_id?: string|null,
+     * }> $result
      */
     public static function with(
         ?string $id = null,
@@ -129,17 +134,17 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $aggregation_type && $obj->aggregation_type = $aggregation_type;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $end_date && $obj->end_date = $end_date;
-        null !== $managed_accounts && $obj->managed_accounts = $managed_accounts;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $report_url && $obj->report_url = $report_url;
-        null !== $result && $obj->result = $result;
-        null !== $start_date && $obj->start_date = $start_date;
-        null !== $status && $obj->status = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $aggregation_type && $obj['aggregation_type'] = $aggregation_type;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $result && $obj['result'] = $result;
+        null !== $start_date && $obj['start_date'] = $start_date;
+        null !== $status && $obj['status'] = $status;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -150,7 +155,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -161,7 +166,7 @@ final class Data implements BaseModel
     public function withAggregationType(string $aggregationType): self
     {
         $obj = clone $this;
-        $obj->aggregation_type = $aggregationType;
+        $obj['aggregation_type'] = $aggregationType;
 
         return $obj;
     }
@@ -172,7 +177,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -183,7 +188,7 @@ final class Data implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->end_date = $endDate;
+        $obj['end_date'] = $endDate;
 
         return $obj;
     }
@@ -196,7 +201,7 @@ final class Data implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj->managed_accounts = $managedAccounts;
+        $obj['managed_accounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -207,7 +212,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -218,7 +223,7 @@ final class Data implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj->report_url = $reportURL;
+        $obj['report_url'] = $reportURL;
 
         return $obj;
     }
@@ -226,12 +231,16 @@ final class Data implements BaseModel
     /**
      * Array of usage records.
      *
-     * @param list<Result> $result
+     * @param list<Result|array{
+     *   aggregations?: list<Aggregation>|null,
+     *   record_type?: string|null,
+     *   user_id?: string|null,
+     * }> $result
      */
     public function withResult(array $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }
@@ -242,7 +251,7 @@ final class Data implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->start_date = $startDate;
+        $obj['start_date'] = $startDate;
 
         return $obj;
     }
@@ -253,7 +262,7 @@ final class Data implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -264,7 +273,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

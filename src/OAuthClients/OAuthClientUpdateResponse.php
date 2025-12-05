@@ -9,6 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
+use Telnyx\OAuthClients\OAuthClient\ClientType;
+use Telnyx\OAuthClients\OAuthClient\RecordType;
 
 /**
  * @phpstan-type OAuthClientUpdateResponseShape = array{data?: OAuthClient|null}
@@ -32,20 +35,59 @@ final class OAuthClientUpdateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param OAuthClient|array{
+     *   client_id: string,
+     *   client_type: value-of<ClientType>,
+     *   created_at: \DateTimeInterface,
+     *   name: string,
+     *   org_id: string,
+     *   record_type: value-of<RecordType>,
+     *   require_pkce: bool,
+     *   updated_at: \DateTimeInterface,
+     *   user_id: string,
+     *   allowed_grant_types?: list<value-of<AllowedGrantType>>|null,
+     *   allowed_scopes?: list<string>|null,
+     *   client_secret?: string|null,
+     *   logo_uri?: string|null,
+     *   policy_uri?: string|null,
+     *   redirect_uris?: list<string>|null,
+     *   tos_uri?: string|null,
+     * } $data
      */
-    public static function with(?OAuthClient $data = null): self
+    public static function with(OAuthClient|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(OAuthClient $data): self
+    /**
+     * @param OAuthClient|array{
+     *   client_id: string,
+     *   client_type: value-of<ClientType>,
+     *   created_at: \DateTimeInterface,
+     *   name: string,
+     *   org_id: string,
+     *   record_type: value-of<RecordType>,
+     *   require_pkce: bool,
+     *   updated_at: \DateTimeInterface,
+     *   user_id: string,
+     *   allowed_grant_types?: list<value-of<AllowedGrantType>>|null,
+     *   allowed_scopes?: list<string>|null,
+     *   client_secret?: string|null,
+     *   logo_uri?: string|null,
+     *   policy_uri?: string|null,
+     *   redirect_uris?: list<string>|null,
+     *   tos_uri?: string|null,
+     * } $data
+     */
+    public function withData(OAuthClient|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

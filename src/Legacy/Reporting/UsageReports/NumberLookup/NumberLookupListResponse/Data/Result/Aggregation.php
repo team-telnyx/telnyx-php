@@ -63,10 +63,10 @@ final class Aggregation implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $currency && $obj->currency = $currency;
-        null !== $total_cost && $obj->total_cost = $total_cost;
-        null !== $total_dips && $obj->total_dips = $total_dips;
-        null !== $type && $obj->type = $type;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $total_cost && $obj['total_cost'] = $total_cost;
+        null !== $total_dips && $obj['total_dips'] = $total_dips;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Aggregation implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Aggregation implements BaseModel
     public function withTotalCost(float $totalCost): self
     {
         $obj = clone $this;
-        $obj->total_cost = $totalCost;
+        $obj['total_cost'] = $totalCost;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Aggregation implements BaseModel
     public function withTotalDips(int $totalDips): self
     {
         $obj = clone $this;
-        $obj->total_dips = $totalDips;
+        $obj['total_dips'] = $totalDips;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Aggregation implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

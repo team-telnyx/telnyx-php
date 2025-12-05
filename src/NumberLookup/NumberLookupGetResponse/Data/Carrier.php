@@ -84,11 +84,11 @@ final class Carrier implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $error_code && $obj->error_code = $error_code;
-        null !== $mobile_country_code && $obj->mobile_country_code = $mobile_country_code;
-        null !== $mobile_network_code && $obj->mobile_network_code = $mobile_network_code;
-        null !== $name && $obj->name = $name;
-        null !== $normalized_carrier && $obj->normalized_carrier = $normalized_carrier;
+        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $mobile_country_code && $obj['mobile_country_code'] = $mobile_country_code;
+        null !== $mobile_network_code && $obj['mobile_network_code'] = $mobile_network_code;
+        null !== $name && $obj['name'] = $name;
+        null !== $normalized_carrier && $obj['normalized_carrier'] = $normalized_carrier;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -100,7 +100,7 @@ final class Carrier implements BaseModel
     public function withErrorCode(?string $errorCode): self
     {
         $obj = clone $this;
-        $obj->error_code = $errorCode;
+        $obj['error_code'] = $errorCode;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Carrier implements BaseModel
     public function withMobileCountryCode(string $mobileCountryCode): self
     {
         $obj = clone $this;
-        $obj->mobile_country_code = $mobileCountryCode;
+        $obj['mobile_country_code'] = $mobileCountryCode;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Carrier implements BaseModel
     public function withMobileNetworkCode(string $mobileNetworkCode): self
     {
         $obj = clone $this;
-        $obj->mobile_network_code = $mobileNetworkCode;
+        $obj['mobile_network_code'] = $mobileNetworkCode;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Carrier implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Carrier implements BaseModel
     public function withNormalizedCarrier(string $normalizedCarrier): self
     {
         $obj = clone $this;
-        $obj->normalized_carrier = $normalizedCarrier;
+        $obj['normalized_carrier'] = $normalizedCarrier;
 
         return $obj;
     }

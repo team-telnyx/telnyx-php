@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\Insights;
 
+use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -46,20 +47,41 @@ final class InsightTemplateDetail implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param InsightTemplate|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   instructions: string,
+     *   insight_type?: value-of<InsightType>|null,
+     *   json_schema?: mixed|string|null,
+     *   name?: string|null,
+     *   webhook?: string|null,
+     * } $data
      */
-    public static function with(InsightTemplate $data): self
+    public static function with(InsightTemplate|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(InsightTemplate $data): self
+    /**
+     * @param InsightTemplate|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   instructions: string,
+     *   insight_type?: value-of<InsightType>|null,
+     *   json_schema?: mixed|string|null,
+     *   name?: string|null,
+     *   webhook?: string|null,
+     * } $data
+     */
+    public function withData(InsightTemplate|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

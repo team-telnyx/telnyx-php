@@ -55,9 +55,9 @@ final class Assistant implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $openai_api_key_ref && $obj->openai_api_key_ref = $openai_api_key_ref;
+        null !== $id && $obj['id'] = $id;
+        null !== $instructions && $obj['instructions'] = $instructions;
+        null !== $openai_api_key_ref && $obj['openai_api_key_ref'] = $openai_api_key_ref;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Assistant implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Assistant implements BaseModel
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Assistant implements BaseModel
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj->openai_api_key_ref = $openaiAPIKeyRef;
+        $obj['openai_api_key_ref'] = $openaiAPIKeyRef;
 
         return $obj;
     }

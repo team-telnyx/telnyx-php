@@ -33,7 +33,7 @@ final class Meta implements BaseModel
     {
         $obj = new self;
 
-        null !== $total_results && $obj->total_results = $total_results;
+        null !== $total_results && $obj['total_results'] = $total_results;
 
         return $obj;
     }
@@ -41,7 +41,7 @@ final class Meta implements BaseModel
     public function withTotalResults(int $totalResults): self
     {
         $obj = clone $this;
-        $obj->total_results = $totalResults;
+        $obj['total_results'] = $totalResults;
 
         return $obj;
     }

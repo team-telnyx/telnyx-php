@@ -97,12 +97,12 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->access_token = $access_token;
-        $obj->expires_in = $expires_in;
+        $obj['access_token'] = $access_token;
+        $obj['expires_in'] = $expires_in;
         $obj['token_type'] = $token_type;
 
-        null !== $refresh_token && $obj->refresh_token = $refresh_token;
-        null !== $scope && $obj->scope = $scope;
+        null !== $refresh_token && $obj['refresh_token'] = $refresh_token;
+        null !== $scope && $obj['scope'] = $scope;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
     public function withAccessToken(string $accessToken): self
     {
         $obj = clone $this;
-        $obj->access_token = $accessToken;
+        $obj['access_token'] = $accessToken;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
     public function withExpiresIn(int $expiresIn): self
     {
         $obj = clone $this;
-        $obj->expires_in = $expiresIn;
+        $obj['expires_in'] = $expiresIn;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
     public function withRefreshToken(string $refreshToken): self
     {
         $obj = clone $this;
-        $obj->refresh_token = $refreshToken;
+        $obj['refresh_token'] = $refreshToken;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
     public function withScope(string $scope): self
     {
         $obj = clone $this;
-        $obj->scope = $scope;
+        $obj['scope'] = $scope;
 
         return $obj;
     }

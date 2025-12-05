@@ -93,7 +93,9 @@ final class NotificationSetting implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Parameter> $parameters
+     * @param list<Parameter|array{
+     *   name?: string|null, value?: string|null
+     * }> $parameters
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -110,16 +112,16 @@ final class NotificationSetting implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $associated_record_type && $obj->associated_record_type = $associated_record_type;
-        null !== $associated_record_type_value && $obj->associated_record_type_value = $associated_record_type_value;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $notification_channel_id && $obj->notification_channel_id = $notification_channel_id;
-        null !== $notification_event_condition_id && $obj->notification_event_condition_id = $notification_event_condition_id;
-        null !== $notification_profile_id && $obj->notification_profile_id = $notification_profile_id;
-        null !== $parameters && $obj->parameters = $parameters;
+        null !== $id && $obj['id'] = $id;
+        null !== $associated_record_type && $obj['associated_record_type'] = $associated_record_type;
+        null !== $associated_record_type_value && $obj['associated_record_type_value'] = $associated_record_type_value;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $notification_channel_id && $obj['notification_channel_id'] = $notification_channel_id;
+        null !== $notification_event_condition_id && $obj['notification_event_condition_id'] = $notification_event_condition_id;
+        null !== $notification_profile_id && $obj['notification_profile_id'] = $notification_profile_id;
+        null !== $parameters && $obj['parameters'] = $parameters;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -130,7 +132,7 @@ final class NotificationSetting implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -138,7 +140,7 @@ final class NotificationSetting implements BaseModel
     public function withAssociatedRecordType(string $associatedRecordType): self
     {
         $obj = clone $this;
-        $obj->associated_record_type = $associatedRecordType;
+        $obj['associated_record_type'] = $associatedRecordType;
 
         return $obj;
     }
@@ -147,7 +149,7 @@ final class NotificationSetting implements BaseModel
         string $associatedRecordTypeValue
     ): self {
         $obj = clone $this;
-        $obj->associated_record_type_value = $associatedRecordTypeValue;
+        $obj['associated_record_type_value'] = $associatedRecordTypeValue;
 
         return $obj;
     }
@@ -158,7 +160,7 @@ final class NotificationSetting implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -170,7 +172,7 @@ final class NotificationSetting implements BaseModel
         string $notificationChannelID
     ): self {
         $obj = clone $this;
-        $obj->notification_channel_id = $notificationChannelID;
+        $obj['notification_channel_id'] = $notificationChannelID;
 
         return $obj;
     }
@@ -182,7 +184,7 @@ final class NotificationSetting implements BaseModel
         string $notificationEventConditionID
     ): self {
         $obj = clone $this;
-        $obj->notification_event_condition_id = $notificationEventConditionID;
+        $obj['notification_event_condition_id'] = $notificationEventConditionID;
 
         return $obj;
     }
@@ -194,18 +196,20 @@ final class NotificationSetting implements BaseModel
         string $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj->notification_profile_id = $notificationProfileID;
+        $obj['notification_profile_id'] = $notificationProfileID;
 
         return $obj;
     }
 
     /**
-     * @param list<Parameter> $parameters
+     * @param list<Parameter|array{
+     *   name?: string|null, value?: string|null
+     * }> $parameters
      */
     public function withParameters(array $parameters): self
     {
         $obj = clone $this;
-        $obj->parameters = $parameters;
+        $obj['parameters'] = $parameters;
 
         return $obj;
     }
@@ -229,7 +233,7 @@ final class NotificationSetting implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

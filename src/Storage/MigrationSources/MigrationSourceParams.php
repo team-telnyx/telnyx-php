@@ -81,22 +81,25 @@ final class MigrationSourceParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Provider|value-of<Provider> $provider
+     * @param ProviderAuth|array{
+     *   access_key?: string|null, secret_access_key?: string|null
+     * } $provider_auth
      */
     public static function with(
         string $bucket_name,
         Provider|string $provider,
-        ProviderAuth $provider_auth,
+        ProviderAuth|array $provider_auth,
         ?string $id = null,
         ?string $source_region = null,
     ): self {
         $obj = new self;
 
-        $obj->bucket_name = $bucket_name;
+        $obj['bucket_name'] = $bucket_name;
         $obj['provider'] = $provider;
-        $obj->provider_auth = $provider_auth;
+        $obj['provider_auth'] = $provider_auth;
 
-        null !== $id && $obj->id = $id;
-        null !== $source_region && $obj->source_region = $source_region;
+        null !== $id && $obj['id'] = $id;
+        null !== $source_region && $obj['source_region'] = $source_region;
 
         return $obj;
     }
@@ -107,7 +110,7 @@ final class MigrationSourceParams implements BaseModel
     public function withBucketName(string $bucketName): self
     {
         $obj = clone $this;
-        $obj->bucket_name = $bucketName;
+        $obj['bucket_name'] = $bucketName;
 
         return $obj;
     }
@@ -125,10 +128,15 @@ final class MigrationSourceParams implements BaseModel
         return $obj;
     }
 
-    public function withProviderAuth(ProviderAuth $providerAuth): self
+    /**
+     * @param ProviderAuth|array{
+     *   access_key?: string|null, secret_access_key?: string|null
+     * } $providerAuth
+     */
+    public function withProviderAuth(ProviderAuth|array $providerAuth): self
     {
         $obj = clone $this;
-        $obj->provider_auth = $providerAuth;
+        $obj['provider_auth'] = $providerAuth;
 
         return $obj;
     }
@@ -139,7 +147,7 @@ final class MigrationSourceParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -150,7 +158,7 @@ final class MigrationSourceParams implements BaseModel
     public function withSourceRegion(string $sourceRegion): self
     {
         $obj = clone $this;
-        $obj->source_region = $sourceRegion;
+        $obj['source_region'] = $sourceRegion;
 
         return $obj;
     }

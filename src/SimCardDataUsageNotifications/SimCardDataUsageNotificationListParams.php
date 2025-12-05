@@ -59,9 +59,9 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $filter_sim_card_id_ && $obj->filter_sim_card_id_ = $filter_sim_card_id_;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $filter_sim_card_id_ && $obj['filter_sim_card_id_'] = $filter_sim_card_id_;
+        null !== $page_number_ && $obj['page_number_'] = $page_number_;
+        null !== $page_size_ && $obj['page_size_'] = $page_size_;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     public function withFilterSimCardID(string $filterSimCardID): self
     {
         $obj = clone $this;
-        $obj->filter_sim_card_id_ = $filterSimCardID;
+        $obj['filter_sim_card_id_'] = $filterSimCardID;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
+        $obj['page_number_'] = $pageNumber;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj['page_size_'] = $pageSize;
 
         return $obj;
     }

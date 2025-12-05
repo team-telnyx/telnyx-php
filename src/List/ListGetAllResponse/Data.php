@@ -45,7 +45,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Number> $numbers
+     * @param list<Number|array{country?: string|null, number?: string|null}> $numbers
      */
     public static function with(
         ?int $number_of_channels = null,
@@ -55,10 +55,10 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $number_of_channels && $obj->number_of_channels = $number_of_channels;
-        null !== $numbers && $obj->numbers = $numbers;
-        null !== $zone_id && $obj->zone_id = $zone_id;
-        null !== $zone_name && $obj->zone_name = $zone_name;
+        null !== $number_of_channels && $obj['number_of_channels'] = $number_of_channels;
+        null !== $numbers && $obj['numbers'] = $numbers;
+        null !== $zone_id && $obj['zone_id'] = $zone_id;
+        null !== $zone_name && $obj['zone_name'] = $zone_name;
 
         return $obj;
     }
@@ -66,18 +66,18 @@ final class Data implements BaseModel
     public function withNumberOfChannels(int $numberOfChannels): self
     {
         $obj = clone $this;
-        $obj->number_of_channels = $numberOfChannels;
+        $obj['number_of_channels'] = $numberOfChannels;
 
         return $obj;
     }
 
     /**
-     * @param list<Number> $numbers
+     * @param list<Number|array{country?: string|null, number?: string|null}> $numbers
      */
     public function withNumbers(array $numbers): self
     {
         $obj = clone $this;
-        $obj->numbers = $numbers;
+        $obj['numbers'] = $numbers;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Data implements BaseModel
     public function withZoneID(string $zoneID): self
     {
         $obj = clone $this;
-        $obj->zone_id = $zoneID;
+        $obj['zone_id'] = $zoneID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Data implements BaseModel
     public function withZoneName(string $zoneName): self
     {
         $obj = clone $this;
-        $obj->zone_name = $zoneName;
+        $obj['zone_name'] = $zoneName;
 
         return $obj;
     }

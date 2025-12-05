@@ -50,8 +50,8 @@ final class MediaUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $media_url && $obj->media_url = $media_url;
-        null !== $ttl_secs && $obj->ttl_secs = $ttl_secs;
+        null !== $media_url && $obj['media_url'] = $media_url;
+        null !== $ttl_secs && $obj['ttl_secs'] = $ttl_secs;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class MediaUpdateParams implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj->media_url = $mediaURL;
+        $obj['media_url'] = $mediaURL;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class MediaUpdateParams implements BaseModel
     public function withTtlSecs(int $ttlSecs): self
     {
         $obj = clone $this;
-        $obj->ttl_secs = $ttlSecs;
+        $obj['ttl_secs'] = $ttlSecs;
 
         return $obj;
     }

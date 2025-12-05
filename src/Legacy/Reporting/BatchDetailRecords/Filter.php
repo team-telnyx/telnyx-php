@@ -102,13 +102,13 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $billing_group && $obj->billing_group = $billing_group;
-        null !== $cld && $obj->cld = $cld;
+        null !== $billing_group && $obj['billing_group'] = $billing_group;
+        null !== $cld && $obj['cld'] = $cld;
         null !== $cld_filter && $obj['cld_filter'] = $cld_filter;
-        null !== $cli && $obj->cli = $cli;
+        null !== $cli && $obj['cli'] = $cli;
         null !== $cli_filter && $obj['cli_filter'] = $cli_filter;
         null !== $filter_type && $obj['filter_type'] = $filter_type;
-        null !== $tags_list && $obj->tags_list = $tags_list;
+        null !== $tags_list && $obj['tags_list'] = $tags_list;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Filter implements BaseModel
     public function withBillingGroup(string $billingGroup): self
     {
         $obj = clone $this;
-        $obj->billing_group = $billingGroup;
+        $obj['billing_group'] = $billingGroup;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Filter implements BaseModel
     public function withCld(string $cld): self
     {
         $obj = clone $this;
-        $obj->cld = $cld;
+        $obj['cld'] = $cld;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Filter implements BaseModel
     public function withCli(string $cli): self
     {
         $obj = clone $this;
-        $obj->cli = $cli;
+        $obj['cli'] = $cli;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Filter implements BaseModel
     public function withTagsList(string $tagsList): self
     {
         $obj = clone $this;
-        $obj->tags_list = $tagsList;
+        $obj['tags_list'] = $tagsList;
 
         return $obj;
     }

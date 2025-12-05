@@ -56,8 +56,8 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }

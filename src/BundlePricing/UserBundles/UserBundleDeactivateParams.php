@@ -44,7 +44,7 @@ final class UserBundleDeactivateParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
+        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class UserBundleDeactivateParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorization_bearer = $authorizationBearer;
+        $obj['authorization_bearer'] = $authorizationBearer;
 
         return $obj;
     }

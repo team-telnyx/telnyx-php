@@ -194,26 +194,26 @@ final class SimCardUsageDetailRecord implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->record_type = $record_type;
+        $obj['record_type'] = $record_type;
 
-        null !== $id && $obj->id = $id;
-        null !== $closed_at && $obj->closed_at = $closed_at;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $currency && $obj->currency = $currency;
-        null !== $data_cost && $obj->data_cost = $data_cost;
-        null !== $data_rate && $obj->data_rate = $data_rate;
-        null !== $data_unit && $obj->data_unit = $data_unit;
-        null !== $downlink_data && $obj->downlink_data = $downlink_data;
-        null !== $imsi && $obj->imsi = $imsi;
-        null !== $ip_address && $obj->ip_address = $ip_address;
-        null !== $mcc && $obj->mcc = $mcc;
-        null !== $mnc && $obj->mnc = $mnc;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
-        null !== $sim_card_tags && $obj->sim_card_tags = $sim_card_tags;
-        null !== $sim_group_id && $obj->sim_group_id = $sim_group_id;
-        null !== $sim_group_name && $obj->sim_group_name = $sim_group_name;
-        null !== $uplink_data && $obj->uplink_data = $uplink_data;
+        null !== $id && $obj['id'] = $id;
+        null !== $closed_at && $obj['closed_at'] = $closed_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $data_cost && $obj['data_cost'] = $data_cost;
+        null !== $data_rate && $obj['data_rate'] = $data_rate;
+        null !== $data_unit && $obj['data_unit'] = $data_unit;
+        null !== $downlink_data && $obj['downlink_data'] = $downlink_data;
+        null !== $imsi && $obj['imsi'] = $imsi;
+        null !== $ip_address && $obj['ip_address'] = $ip_address;
+        null !== $mcc && $obj['mcc'] = $mcc;
+        null !== $mnc && $obj['mnc'] = $mnc;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $sim_card_tags && $obj['sim_card_tags'] = $sim_card_tags;
+        null !== $sim_group_id && $obj['sim_group_id'] = $sim_group_id;
+        null !== $sim_group_name && $obj['sim_group_name'] = $sim_group_name;
+        null !== $uplink_data && $obj['uplink_data'] = $uplink_data;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withClosedAt(\DateTimeInterface $closedAt): self
     {
         $obj = clone $this;
-        $obj->closed_at = $closedAt;
+        $obj['closed_at'] = $closedAt;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -276,7 +276,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withDataCost(float $dataCost): self
     {
         $obj = clone $this;
-        $obj->data_cost = $dataCost;
+        $obj['data_cost'] = $dataCost;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withDataRate(string $dataRate): self
     {
         $obj = clone $this;
-        $obj->data_rate = $dataRate;
+        $obj['data_rate'] = $dataRate;
 
         return $obj;
     }
@@ -298,7 +298,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withDataUnit(string $dataUnit): self
     {
         $obj = clone $this;
-        $obj->data_unit = $dataUnit;
+        $obj['data_unit'] = $dataUnit;
 
         return $obj;
     }
@@ -309,7 +309,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withDownlinkData(float $downlinkData): self
     {
         $obj = clone $this;
-        $obj->downlink_data = $downlinkData;
+        $obj['downlink_data'] = $downlinkData;
 
         return $obj;
     }
@@ -320,7 +320,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withImsi(string $imsi): self
     {
         $obj = clone $this;
-        $obj->imsi = $imsi;
+        $obj['imsi'] = $imsi;
 
         return $obj;
     }
@@ -331,7 +331,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ip_address = $ipAddress;
+        $obj['ip_address'] = $ipAddress;
 
         return $obj;
     }
@@ -342,7 +342,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withMcc(string $mcc): self
     {
         $obj = clone $this;
-        $obj->mcc = $mcc;
+        $obj['mcc'] = $mcc;
 
         return $obj;
     }
@@ -353,7 +353,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withMnc(string $mnc): self
     {
         $obj = clone $this;
-        $obj->mnc = $mnc;
+        $obj['mnc'] = $mnc;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -375,7 +375,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }
@@ -386,7 +386,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withSimCardTags(string $simCardTags): self
     {
         $obj = clone $this;
-        $obj->sim_card_tags = $simCardTags;
+        $obj['sim_card_tags'] = $simCardTags;
 
         return $obj;
     }
@@ -397,7 +397,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withSimGroupID(string $simGroupID): self
     {
         $obj = clone $this;
-        $obj->sim_group_id = $simGroupID;
+        $obj['sim_group_id'] = $simGroupID;
 
         return $obj;
     }
@@ -408,7 +408,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withSimGroupName(string $simGroupName): self
     {
         $obj = clone $this;
-        $obj->sim_group_name = $simGroupName;
+        $obj['sim_group_name'] = $simGroupName;
 
         return $obj;
     }
@@ -419,7 +419,7 @@ final class SimCardUsageDetailRecord implements BaseModel
     public function withUplinkData(float $uplinkData): self
     {
         $obj = clone $this;
-        $obj->uplink_data = $uplinkData;
+        $obj['uplink_data'] = $uplinkData;
 
         return $obj;
     }

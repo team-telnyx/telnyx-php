@@ -44,15 +44,26 @@ final class Features implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MessagingFeatureSet|array{
+     *   domestic_two_way: bool,
+     *   international_inbound: bool,
+     *   international_outbound: bool,
+     * }|null $mms
+     * @param MessagingFeatureSet|array{
+     *   domestic_two_way: bool,
+     *   international_inbound: bool,
+     *   international_outbound: bool,
+     * }|null $sms
      */
     public static function with(
-        ?MessagingFeatureSet $mms = null,
-        ?MessagingFeatureSet $sms = null
+        MessagingFeatureSet|array|null $mms = null,
+        MessagingFeatureSet|array|null $sms = null,
     ): self {
         $obj = new self;
 
-        null !== $mms && $obj->mms = $mms;
-        null !== $sms && $obj->sms = $sms;
+        null !== $mms && $obj['mms'] = $mms;
+        null !== $sms && $obj['sms'] = $sms;
 
         return $obj;
     }
@@ -61,11 +72,17 @@ final class Features implements BaseModel
      * The set of features available for a specific messaging use case (SMS or MMS). Features
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
+     *
+     * @param MessagingFeatureSet|array{
+     *   domestic_two_way: bool,
+     *   international_inbound: bool,
+     *   international_outbound: bool,
+     * }|null $mms
      */
-    public function withMms(?MessagingFeatureSet $mms): self
+    public function withMms(MessagingFeatureSet|array|null $mms): self
     {
         $obj = clone $this;
-        $obj->mms = $mms;
+        $obj['mms'] = $mms;
 
         return $obj;
     }
@@ -74,11 +91,17 @@ final class Features implements BaseModel
      * The set of features available for a specific messaging use case (SMS or MMS). Features
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
+     *
+     * @param MessagingFeatureSet|array{
+     *   domestic_two_way: bool,
+     *   international_inbound: bool,
+     *   international_outbound: bool,
+     * }|null $sms
      */
-    public function withSMS(?MessagingFeatureSet $sms): self
+    public function withSMS(MessagingFeatureSet|array|null $sms): self
     {
         $obj = clone $this;
-        $obj->sms = $sms;
+        $obj['sms'] = $sms;
 
         return $obj;
     }

@@ -40,35 +40,85 @@ final class UserAddressListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserAddress> $data
+     * @param list<UserAddress|array{
+     *   id?: string|null,
+     *   administrative_area?: string|null,
+     *   borough?: string|null,
+     *   business_name?: string|null,
+     *   country_code?: string|null,
+     *   created_at?: string|null,
+     *   customer_reference?: string|null,
+     *   extended_address?: string|null,
+     *   first_name?: string|null,
+     *   last_name?: string|null,
+     *   locality?: string|null,
+     *   neighborhood?: string|null,
+     *   phone_number?: string|null,
+     *   postal_code?: string|null,
+     *   record_type?: string|null,
+     *   street_address?: string|null,
+     *   updated_at?: string|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<UserAddress> $data
+     * @param list<UserAddress|array{
+     *   id?: string|null,
+     *   administrative_area?: string|null,
+     *   borough?: string|null,
+     *   business_name?: string|null,
+     *   country_code?: string|null,
+     *   created_at?: string|null,
+     *   customer_reference?: string|null,
+     *   extended_address?: string|null,
+     *   first_name?: string|null,
+     *   last_name?: string|null,
+     *   locality?: string|null,
+     *   neighborhood?: string|null,
+     *   phone_number?: string|null,
+     *   postal_code?: string|null,
+     *   record_type?: string|null,
+     *   street_address?: string|null,
+     *   updated_at?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

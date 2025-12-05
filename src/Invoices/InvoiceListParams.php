@@ -17,7 +17,8 @@ use Telnyx\Invoices\InvoiceListParams\Sort;
  * @see Telnyx\Services\InvoicesService::list()
  *
  * @phpstan-type InvoiceListParamsShape = array{
- *   page?: Page, sort?: Sort|value-of<Sort>
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: Sort|value-of<Sort>,
  * }
  */
 final class InvoiceListParams implements BaseModel
@@ -50,15 +51,16 @@ final class InvoiceListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Page $page = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null
     ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -66,11 +68,13 @@ final class InvoiceListParams implements BaseModel
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

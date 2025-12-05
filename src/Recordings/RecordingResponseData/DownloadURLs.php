@@ -44,8 +44,8 @@ final class DownloadURLs implements BaseModel
     {
         $obj = new self;
 
-        null !== $mp3 && $obj->mp3 = $mp3;
-        null !== $wav && $obj->wav = $wav;
+        null !== $mp3 && $obj['mp3'] = $mp3;
+        null !== $wav && $obj['wav'] = $wav;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class DownloadURLs implements BaseModel
     public function withMP3(string $mp3): self
     {
         $obj = clone $this;
-        $obj->mp3 = $mp3;
+        $obj['mp3'] = $mp3;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class DownloadURLs implements BaseModel
     public function withWav(string $wav): self
     {
         $obj = clone $this;
-        $obj->wav = $wav;
+        $obj['wav'] = $wav;
 
         return $obj;
     }

@@ -9,6 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 
 /**
  * Creates a new CDR report request with the specified filters.
@@ -21,7 +24,15 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *   call_types?: list<int>,
  *   connections?: list<int>,
  *   fields?: list<string>,
- *   filters?: list<Filter>,
+ *   filters?: list<Filter|array{
+ *     billing_group?: string|null,
+ *     cld?: string|null,
+ *     cld_filter?: value-of<CldFilter>|null,
+ *     cli?: string|null,
+ *     cli_filter?: value-of<CliFilter>|null,
+ *     filter_type?: value-of<FilterType>|null,
+ *     tags_list?: string|null,
+ *   }>,
  *   include_all_metadata?: bool,
  *   managed_accounts?: list<string>,
  *   record_types?: list<int>,
@@ -154,7 +165,15 @@ final class VoiceCreateParams implements BaseModel
      * @param list<int> $call_types
      * @param list<int> $connections
      * @param list<string> $fields
-     * @param list<Filter> $filters
+     * @param list<Filter|array{
+     *   billing_group?: string|null,
+     *   cld?: string|null,
+     *   cld_filter?: value-of<CldFilter>|null,
+     *   cli?: string|null,
+     *   cli_filter?: value-of<CliFilter>|null,
+     *   filter_type?: value-of<FilterType>|null,
+     *   tags_list?: string|null,
+     * }> $filters
      * @param list<string> $managed_accounts
      * @param list<int> $record_types
      */
@@ -175,20 +194,20 @@ final class VoiceCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->end_time = $end_time;
-        $obj->start_time = $start_time;
+        $obj['end_time'] = $end_time;
+        $obj['start_time'] = $start_time;
 
-        null !== $call_types && $obj->call_types = $call_types;
-        null !== $connections && $obj->connections = $connections;
-        null !== $fields && $obj->fields = $fields;
-        null !== $filters && $obj->filters = $filters;
-        null !== $include_all_metadata && $obj->include_all_metadata = $include_all_metadata;
-        null !== $managed_accounts && $obj->managed_accounts = $managed_accounts;
-        null !== $record_types && $obj->record_types = $record_types;
-        null !== $report_name && $obj->report_name = $report_name;
-        null !== $select_all_managed_accounts && $obj->select_all_managed_accounts = $select_all_managed_accounts;
-        null !== $source && $obj->source = $source;
-        null !== $timezone && $obj->timezone = $timezone;
+        null !== $call_types && $obj['call_types'] = $call_types;
+        null !== $connections && $obj['connections'] = $connections;
+        null !== $fields && $obj['fields'] = $fields;
+        null !== $filters && $obj['filters'] = $filters;
+        null !== $include_all_metadata && $obj['include_all_metadata'] = $include_all_metadata;
+        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
+        null !== $record_types && $obj['record_types'] = $record_types;
+        null !== $report_name && $obj['report_name'] = $report_name;
+        null !== $select_all_managed_accounts && $obj['select_all_managed_accounts'] = $select_all_managed_accounts;
+        null !== $source && $obj['source'] = $source;
+        null !== $timezone && $obj['timezone'] = $timezone;
 
         return $obj;
     }
@@ -199,7 +218,7 @@ final class VoiceCreateParams implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -210,7 +229,7 @@ final class VoiceCreateParams implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -223,7 +242,7 @@ final class VoiceCreateParams implements BaseModel
     public function withCallTypes(array $callTypes): self
     {
         $obj = clone $this;
-        $obj->call_types = $callTypes;
+        $obj['call_types'] = $callTypes;
 
         return $obj;
     }
@@ -236,7 +255,7 @@ final class VoiceCreateParams implements BaseModel
     public function withConnections(array $connections): self
     {
         $obj = clone $this;
-        $obj->connections = $connections;
+        $obj['connections'] = $connections;
 
         return $obj;
     }
@@ -249,7 +268,7 @@ final class VoiceCreateParams implements BaseModel
     public function withFields(array $fields): self
     {
         $obj = clone $this;
-        $obj->fields = $fields;
+        $obj['fields'] = $fields;
 
         return $obj;
     }
@@ -257,12 +276,20 @@ final class VoiceCreateParams implements BaseModel
     /**
      * List of filters to apply.
      *
-     * @param list<Filter> $filters
+     * @param list<Filter|array{
+     *   billing_group?: string|null,
+     *   cld?: string|null,
+     *   cld_filter?: value-of<CldFilter>|null,
+     *   cli?: string|null,
+     *   cli_filter?: value-of<CliFilter>|null,
+     *   filter_type?: value-of<FilterType>|null,
+     *   tags_list?: string|null,
+     * }> $filters
      */
     public function withFilters(array $filters): self
     {
         $obj = clone $this;
-        $obj->filters = $filters;
+        $obj['filters'] = $filters;
 
         return $obj;
     }
@@ -273,7 +300,7 @@ final class VoiceCreateParams implements BaseModel
     public function withIncludeAllMetadata(bool $includeAllMetadata): self
     {
         $obj = clone $this;
-        $obj->include_all_metadata = $includeAllMetadata;
+        $obj['include_all_metadata'] = $includeAllMetadata;
 
         return $obj;
     }
@@ -286,7 +313,7 @@ final class VoiceCreateParams implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj->managed_accounts = $managedAccounts;
+        $obj['managed_accounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -299,7 +326,7 @@ final class VoiceCreateParams implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj->record_types = $recordTypes;
+        $obj['record_types'] = $recordTypes;
 
         return $obj;
     }
@@ -310,7 +337,7 @@ final class VoiceCreateParams implements BaseModel
     public function withReportName(string $reportName): self
     {
         $obj = clone $this;
-        $obj->report_name = $reportName;
+        $obj['report_name'] = $reportName;
 
         return $obj;
     }
@@ -322,7 +349,7 @@ final class VoiceCreateParams implements BaseModel
         bool $selectAllManagedAccounts
     ): self {
         $obj = clone $this;
-        $obj->select_all_managed_accounts = $selectAllManagedAccounts;
+        $obj['select_all_managed_accounts'] = $selectAllManagedAccounts;
 
         return $obj;
     }
@@ -333,7 +360,7 @@ final class VoiceCreateParams implements BaseModel
     public function withSource(string $source): self
     {
         $obj = clone $this;
-        $obj->source = $source;
+        $obj['source'] = $source;
 
         return $obj;
     }
@@ -344,7 +371,7 @@ final class VoiceCreateParams implements BaseModel
     public function withTimezone(string $timezone): self
     {
         $obj = clone $this;
-        $obj->timezone = $timezone;
+        $obj['timezone'] = $timezone;
 
         return $obj;
     }

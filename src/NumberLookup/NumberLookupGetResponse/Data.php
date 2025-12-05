@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
+use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
+use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
 
 /**
  * @phpstan-type DataShape = array{
@@ -76,43 +78,85 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CallerName|array{
+     *   caller_name?: string|null, error_code?: string|null
+     * } $caller_name
+     * @param Carrier|array{
+     *   error_code?: string|null,
+     *   mobile_country_code?: string|null,
+     *   mobile_network_code?: string|null,
+     *   name?: string|null,
+     *   normalized_carrier?: string|null,
+     *   type?: value-of<Type>|null,
+     * } $carrier
+     * @param Portability|array{
+     *   altspid?: string|null,
+     *   altspid_carrier_name?: string|null,
+     *   altspid_carrier_type?: string|null,
+     *   city?: string|null,
+     *   line_type?: string|null,
+     *   lrn?: string|null,
+     *   ocn?: string|null,
+     *   ported_date?: string|null,
+     *   ported_status?: value-of<PortedStatus>|null,
+     *   spid?: string|null,
+     *   spid_carrier_name?: string|null,
+     *   spid_carrier_type?: string|null,
+     *   state?: string|null,
+     * } $portability
      */
     public static function with(
-        ?CallerName $caller_name = null,
-        ?Carrier $carrier = null,
+        CallerName|array|null $caller_name = null,
+        Carrier|array|null $carrier = null,
         ?string $country_code = null,
         ?string $fraud = null,
         ?string $national_format = null,
         ?string $phone_number = null,
-        ?Portability $portability = null,
+        Portability|array|null $portability = null,
         ?string $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $caller_name && $obj->caller_name = $caller_name;
-        null !== $carrier && $obj->carrier = $carrier;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $fraud && $obj->fraud = $fraud;
-        null !== $national_format && $obj->national_format = $national_format;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $portability && $obj->portability = $portability;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $caller_name && $obj['caller_name'] = $caller_name;
+        null !== $carrier && $obj['carrier'] = $carrier;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $fraud && $obj['fraud'] = $fraud;
+        null !== $national_format && $obj['national_format'] = $national_format;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $portability && $obj['portability'] = $portability;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
 
-    public function withCallerName(CallerName $callerName): self
+    /**
+     * @param CallerName|array{
+     *   caller_name?: string|null, error_code?: string|null
+     * } $callerName
+     */
+    public function withCallerName(CallerName|array $callerName): self
     {
         $obj = clone $this;
-        $obj->caller_name = $callerName;
+        $obj['caller_name'] = $callerName;
 
         return $obj;
     }
 
-    public function withCarrier(Carrier $carrier): self
+    /**
+     * @param Carrier|array{
+     *   error_code?: string|null,
+     *   mobile_country_code?: string|null,
+     *   mobile_network_code?: string|null,
+     *   name?: string|null,
+     *   normalized_carrier?: string|null,
+     *   type?: value-of<Type>|null,
+     * } $carrier
+     */
+    public function withCarrier(Carrier|array $carrier): self
     {
         $obj = clone $this;
-        $obj->carrier = $carrier;
+        $obj['carrier'] = $carrier;
 
         return $obj;
     }
@@ -123,7 +167,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -134,7 +178,7 @@ final class Data implements BaseModel
     public function withFraud(?string $fraud): self
     {
         $obj = clone $this;
-        $obj->fraud = $fraud;
+        $obj['fraud'] = $fraud;
 
         return $obj;
     }
@@ -145,7 +189,7 @@ final class Data implements BaseModel
     public function withNationalFormat(string $nationalFormat): self
     {
         $obj = clone $this;
-        $obj->national_format = $nationalFormat;
+        $obj['national_format'] = $nationalFormat;
 
         return $obj;
     }
@@ -156,15 +200,32 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
 
-    public function withPortability(Portability $portability): self
+    /**
+     * @param Portability|array{
+     *   altspid?: string|null,
+     *   altspid_carrier_name?: string|null,
+     *   altspid_carrier_type?: string|null,
+     *   city?: string|null,
+     *   line_type?: string|null,
+     *   lrn?: string|null,
+     *   ocn?: string|null,
+     *   ported_date?: string|null,
+     *   ported_status?: value-of<PortedStatus>|null,
+     *   spid?: string|null,
+     *   spid_carrier_name?: string|null,
+     *   spid_carrier_type?: string|null,
+     *   state?: string|null,
+     * } $portability
+     */
+    public function withPortability(Portability|array $portability): self
     {
         $obj = clone $this;
-        $obj->portability = $portability;
+        $obj['portability'] = $portability;
 
         return $obj;
     }
@@ -175,7 +236,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

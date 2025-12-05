@@ -40,35 +40,59 @@ final class NotificationProfileListResponse implements BaseModel, ResponseConver
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<NotificationProfile> $data
+     * @param list<NotificationProfile|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   name?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<NotificationProfile> $data
+     * @param list<NotificationProfile|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   name?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

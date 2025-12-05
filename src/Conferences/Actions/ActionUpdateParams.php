@@ -103,12 +103,12 @@ final class ActionUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
+        $obj['call_control_id'] = $call_control_id;
         $obj['supervisor_role'] = $supervisor_role;
 
-        null !== $command_id && $obj->command_id = $command_id;
+        null !== $command_id && $obj['command_id'] = $command_id;
         null !== $region && $obj['region'] = $region;
-        null !== $whisper_call_control_ids && $obj->whisper_call_control_ids = $whisper_call_control_ids;
+        null !== $whisper_call_control_ids && $obj['whisper_call_control_ids'] = $whisper_call_control_ids;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class ActionUpdateParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class ActionUpdateParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class ActionUpdateParams implements BaseModel
         array $whisperCallControlIDs
     ): self {
         $obj = clone $this;
-        $obj->whisper_call_control_ids = $whisperCallControlIDs;
+        $obj['whisper_call_control_ids'] = $whisperCallControlIDs;
 
         return $obj;
     }

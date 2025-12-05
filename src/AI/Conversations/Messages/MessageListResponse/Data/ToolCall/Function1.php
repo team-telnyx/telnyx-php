@@ -56,8 +56,8 @@ final class Function1 implements BaseModel
     {
         $obj = new self;
 
-        $obj->arguments = $arguments;
-        $obj->name = $name;
+        $obj['arguments'] = $arguments;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Function1 implements BaseModel
     public function withArguments(string $arguments): self
     {
         $obj = clone $this;
-        $obj->arguments = $arguments;
+        $obj['arguments'] = $arguments;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Function1 implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

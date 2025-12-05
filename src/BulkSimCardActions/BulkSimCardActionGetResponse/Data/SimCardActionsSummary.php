@@ -44,7 +44,7 @@ final class SimCardActionsSummary implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $count && $obj->count = $count;
+        null !== $count && $obj['count'] = $count;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -53,7 +53,7 @@ final class SimCardActionsSummary implements BaseModel
     public function withCount(int $count): self
     {
         $obj = clone $this;
-        $obj->count = $count;
+        $obj['count'] = $count;
 
         return $obj;
     }

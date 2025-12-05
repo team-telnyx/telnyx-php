@@ -80,10 +80,10 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
         $obj = new self;
 
         $obj['status'] = $status;
-        $obj->taskId = $taskId;
+        $obj['taskId'] = $taskId;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->taskId = $taskID;
+        $obj['taskId'] = $taskID;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

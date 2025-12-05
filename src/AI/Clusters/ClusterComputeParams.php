@@ -95,12 +95,12 @@ final class ClusterComputeParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
-        null !== $files && $obj->files = $files;
-        null !== $min_cluster_size && $obj->min_cluster_size = $min_cluster_size;
-        null !== $min_subcluster_size && $obj->min_subcluster_size = $min_subcluster_size;
-        null !== $prefix && $obj->prefix = $prefix;
+        null !== $files && $obj['files'] = $files;
+        null !== $min_cluster_size && $obj['min_cluster_size'] = $min_cluster_size;
+        null !== $min_subcluster_size && $obj['min_subcluster_size'] = $min_subcluster_size;
+        null !== $prefix && $obj['prefix'] = $prefix;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class ClusterComputeParams implements BaseModel
     public function withBucket(string $bucket): self
     {
         $obj = clone $this;
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class ClusterComputeParams implements BaseModel
     public function withFiles(array $files): self
     {
         $obj = clone $this;
-        $obj->files = $files;
+        $obj['files'] = $files;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ClusterComputeParams implements BaseModel
     public function withMinClusterSize(int $minClusterSize): self
     {
         $obj = clone $this;
-        $obj->min_cluster_size = $minClusterSize;
+        $obj['min_cluster_size'] = $minClusterSize;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class ClusterComputeParams implements BaseModel
     public function withMinSubclusterSize(int $minSubclusterSize): self
     {
         $obj = clone $this;
-        $obj->min_subcluster_size = $minSubclusterSize;
+        $obj['min_subcluster_size'] = $minSubclusterSize;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class ClusterComputeParams implements BaseModel
     public function withPrefix(string $prefix): self
     {
         $obj = clone $this;
-        $obj->prefix = $prefix;
+        $obj['prefix'] = $prefix;
 
         return $obj;
     }

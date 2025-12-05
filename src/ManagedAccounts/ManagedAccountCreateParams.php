@@ -91,12 +91,12 @@ final class ManagedAccountCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->business_name = $business_name;
+        $obj['business_name'] = $business_name;
 
-        null !== $email && $obj->email = $email;
-        null !== $managed_account_allow_custom_pricing && $obj->managed_account_allow_custom_pricing = $managed_account_allow_custom_pricing;
-        null !== $password && $obj->password = $password;
-        null !== $rollup_billing && $obj->rollup_billing = $rollup_billing;
+        null !== $email && $obj['email'] = $email;
+        null !== $managed_account_allow_custom_pricing && $obj['managed_account_allow_custom_pricing'] = $managed_account_allow_custom_pricing;
+        null !== $password && $obj['password'] = $password;
+        null !== $rollup_billing && $obj['rollup_billing'] = $rollup_billing;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class ManagedAccountCreateParams implements BaseModel
     public function withBusinessName(string $businessName): self
     {
         $obj = clone $this;
-        $obj->business_name = $businessName;
+        $obj['business_name'] = $businessName;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class ManagedAccountCreateParams implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class ManagedAccountCreateParams implements BaseModel
         bool $managedAccountAllowCustomPricing
     ): self {
         $obj = clone $this;
-        $obj->managed_account_allow_custom_pricing = $managedAccountAllowCustomPricing;
+        $obj['managed_account_allow_custom_pricing'] = $managedAccountAllowCustomPricing;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class ManagedAccountCreateParams implements BaseModel
     public function withPassword(string $password): self
     {
         $obj = clone $this;
-        $obj->password = $password;
+        $obj['password'] = $password;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class ManagedAccountCreateParams implements BaseModel
     public function withRollupBilling(bool $rollupBilling): self
     {
         $obj = clone $this;
-        $obj->rollup_billing = $rollupBilling;
+        $obj['rollup_billing'] = $rollupBilling;
 
         return $obj;
     }

@@ -79,10 +79,10 @@ final class VerifiedNumberCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->phone_number = $phone_number;
+        $obj['phone_number'] = $phone_number;
         $obj['verification_method'] = $verification_method;
 
-        null !== $extension && $obj->extension = $extension;
+        null !== $extension && $obj['extension'] = $extension;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class VerifiedNumberCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class VerifiedNumberCreateParams implements BaseModel
     public function withExtension(?string $extension): self
     {
         $obj = clone $this;
-        $obj->extension = $extension;
+        $obj['extension'] = $extension;
 
         return $obj;
     }

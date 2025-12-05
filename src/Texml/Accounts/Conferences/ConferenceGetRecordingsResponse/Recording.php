@@ -163,21 +163,21 @@ final class Recording implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
-        null !== $call_sid && $obj->call_sid = $call_sid;
-        null !== $channels && $obj->channels = $channels;
-        null !== $conference_sid && $obj->conference_sid = $conference_sid;
-        null !== $date_created && $obj->date_created = $date_created;
-        null !== $date_updated && $obj->date_updated = $date_updated;
-        null !== $duration && $obj->duration = $duration;
-        null !== $error_code && $obj->error_code = $error_code;
-        null !== $media_url && $obj->media_url = $media_url;
-        null !== $sid && $obj->sid = $sid;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
+        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $channels && $obj['channels'] = $channels;
+        null !== $conference_sid && $obj['conference_sid'] = $conference_sid;
+        null !== $date_created && $obj['date_created'] = $date_created;
+        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $duration && $obj['duration'] = $duration;
+        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $media_url && $obj['media_url'] = $media_url;
+        null !== $sid && $obj['sid'] = $sid;
         null !== $source && $obj['source'] = $source;
-        null !== $start_time && $obj->start_time = $start_time;
+        null !== $start_time && $obj['start_time'] = $start_time;
         null !== $status && $obj['status'] = $status;
-        null !== $subresource_uris && $obj->subresource_uris = $subresource_uris;
-        null !== $uri && $obj->uri = $uri;
+        null !== $subresource_uris && $obj['subresource_uris'] = $subresource_uris;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Recording implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Recording implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->call_sid = $callSid;
+        $obj['call_sid'] = $callSid;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Recording implements BaseModel
     public function withChannels(int $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels;
+        $obj['channels'] = $channels;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Recording implements BaseModel
     public function withConferenceSid(string $conferenceSid): self
     {
         $obj = clone $this;
-        $obj->conference_sid = $conferenceSid;
+        $obj['conference_sid'] = $conferenceSid;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class Recording implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->date_created = $dateCreated;
+        $obj['date_created'] = $dateCreated;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Recording implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->date_updated = $dateUpdated;
+        $obj['date_updated'] = $dateUpdated;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class Recording implements BaseModel
     public function withDuration(int $duration): self
     {
         $obj = clone $this;
-        $obj->duration = $duration;
+        $obj['duration'] = $duration;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class Recording implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->error_code = $errorCode;
+        $obj['error_code'] = $errorCode;
 
         return $obj;
     }
@@ -276,7 +276,7 @@ final class Recording implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj->media_url = $mediaURL;
+        $obj['media_url'] = $mediaURL;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class Recording implements BaseModel
     public function withSid(string $sid): self
     {
         $obj = clone $this;
-        $obj->sid = $sid;
+        $obj['sid'] = $sid;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class Recording implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -337,7 +337,7 @@ final class Recording implements BaseModel
     public function withSubresourceUris(array $subresourceUris): self
     {
         $obj = clone $this;
-        $obj->subresource_uris = $subresourceUris;
+        $obj['subresource_uris'] = $subresourceUris;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class Recording implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

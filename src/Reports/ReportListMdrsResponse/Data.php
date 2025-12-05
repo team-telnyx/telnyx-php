@@ -145,18 +145,18 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $cld && $obj->cld = $cld;
-        null !== $cli && $obj->cli = $cli;
-        null !== $cost && $obj->cost = $cost;
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $cld && $obj['cld'] = $cld;
+        null !== $cli && $obj['cli'] = $cli;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $created_at && $obj['created_at'] = $created_at;
         null !== $currency && $obj['currency'] = $currency;
-        null !== $direction && $obj->direction = $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $message_type && $obj['message_type'] = $message_type;
-        null !== $parts && $obj->parts = $parts;
-        null !== $profile_name && $obj->profile_name = $profile_name;
-        null !== $rate && $obj->rate = $rate;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $parts && $obj['parts'] = $parts;
+        null !== $profile_name && $obj['profile_name'] = $profile_name;
+        null !== $rate && $obj['rate'] = $rate;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -168,7 +168,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class Data implements BaseModel
     public function withCld(string $cld): self
     {
         $obj = clone $this;
-        $obj->cld = $cld;
+        $obj['cld'] = $cld;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Data implements BaseModel
     public function withCli(string $cli): self
     {
         $obj = clone $this;
-        $obj->cli = $cli;
+        $obj['cli'] = $cli;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class Data implements BaseModel
     public function withCost(string $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class Data implements BaseModel
     public function withDirection(string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -260,7 +260,7 @@ final class Data implements BaseModel
     public function withParts(float $parts): self
     {
         $obj = clone $this;
-        $obj->parts = $parts;
+        $obj['parts'] = $parts;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class Data implements BaseModel
     public function withProfileName(string $profileName): self
     {
         $obj = clone $this;
-        $obj->profile_name = $profileName;
+        $obj['profile_name'] = $profileName;
 
         return $obj;
     }
@@ -282,7 +282,7 @@ final class Data implements BaseModel
     public function withRate(string $rate): self
     {
         $obj = clone $this;
-        $obj->rate = $rate;
+        $obj['rate'] = $rate;
 
         return $obj;
     }
@@ -290,7 +290,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

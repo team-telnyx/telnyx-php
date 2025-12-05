@@ -43,42 +43,63 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|array{
+     *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
+     * } $created_at
+     * @param CustomerReference|array{
+     *   eq?: string|null, in?: list<string>|null
+     * } $customer_reference
+     * @param Filename|array{contains?: string|null} $filename
      */
     public static function with(
-        ?CreatedAt $created_at = null,
-        ?CustomerReference $customer_reference = null,
-        ?Filename $filename = null,
+        CreatedAt|array|null $created_at = null,
+        CustomerReference|array|null $customer_reference = null,
+        Filename|array|null $filename = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $filename && $obj->filename = $filename;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $filename && $obj['filename'] = $filename;
 
         return $obj;
     }
 
-    public function withCreatedAt(CreatedAt $createdAt): self
+    /**
+     * @param CreatedAt|array{
+     *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
+     * } $createdAt
+     */
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
+    /**
+     * @param CustomerReference|array{
+     *   eq?: string|null, in?: list<string>|null
+     * } $customerReference
+     */
     public function withCustomerReference(
-        CustomerReference $customerReference
+        CustomerReference|array $customerReference
     ): self {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
-    public function withFilename(Filename $filename): self
+    /**
+     * @param Filename|array{contains?: string|null} $filename
+     */
+    public function withFilename(Filename|array $filename): self
     {
         $obj = clone $this;
-        $obj->filename = $filename;
+        $obj['filename'] = $filename;
 
         return $obj;
     }

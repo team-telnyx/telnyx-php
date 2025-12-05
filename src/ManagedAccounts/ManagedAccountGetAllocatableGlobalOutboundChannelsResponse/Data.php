@@ -63,10 +63,10 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $allocatable_global_outbound_channels && $obj->allocatable_global_outbound_channels = $allocatable_global_outbound_channels;
-        null !== $managed_account_allow_custom_pricing && $obj->managed_account_allow_custom_pricing = $managed_account_allow_custom_pricing;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $total_global_channels_allocated && $obj->total_global_channels_allocated = $total_global_channels_allocated;
+        null !== $allocatable_global_outbound_channels && $obj['allocatable_global_outbound_channels'] = $allocatable_global_outbound_channels;
+        null !== $managed_account_allow_custom_pricing && $obj['managed_account_allow_custom_pricing'] = $managed_account_allow_custom_pricing;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $total_global_channels_allocated && $obj['total_global_channels_allocated'] = $total_global_channels_allocated;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class Data implements BaseModel
         int $allocatableGlobalOutboundChannels
     ): self {
         $obj = clone $this;
-        $obj->allocatable_global_outbound_channels = $allocatableGlobalOutboundChannels;
+        $obj['allocatable_global_outbound_channels'] = $allocatableGlobalOutboundChannels;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
         bool $managedAccountAllowCustomPricing
     ): self {
         $obj = clone $this;
-        $obj->managed_account_allow_custom_pricing = $managedAccountAllowCustomPricing;
+        $obj['managed_account_allow_custom_pricing'] = $managedAccountAllowCustomPricing;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
         int $totalGlobalChannelsAllocated
     ): self {
         $obj = clone $this;
-        $obj->total_global_channels_allocated = $totalGlobalChannelsAllocated;
+        $obj['total_global_channels_allocated'] = $totalGlobalChannelsAllocated;
 
         return $obj;
     }

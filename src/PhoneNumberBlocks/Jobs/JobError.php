@@ -62,22 +62,25 @@ final class JobError implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Meta|array{url?: string|null} $meta
+     * @param Source|array{parameter?: string|null, pointer?: string|null} $source
      */
     public static function with(
         string $code,
         string $title,
         ?string $detail = null,
-        ?Meta $meta = null,
-        ?Source $source = null,
+        Meta|array|null $meta = null,
+        Source|array|null $source = null,
     ): self {
         $obj = new self;
 
-        $obj->code = $code;
-        $obj->title = $title;
+        $obj['code'] = $code;
+        $obj['title'] = $title;
 
-        null !== $detail && $obj->detail = $detail;
-        null !== $meta && $obj->meta = $meta;
-        null !== $source && $obj->source = $source;
+        null !== $detail && $obj['detail'] = $detail;
+        null !== $meta && $obj['meta'] = $meta;
+        null !== $source && $obj['source'] = $source;
 
         return $obj;
     }
@@ -85,7 +88,7 @@ final class JobError implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -93,7 +96,7 @@ final class JobError implements BaseModel
     public function withTitle(string $title): self
     {
         $obj = clone $this;
-        $obj->title = $title;
+        $obj['title'] = $title;
 
         return $obj;
     }
@@ -101,23 +104,29 @@ final class JobError implements BaseModel
     public function withDetail(string $detail): self
     {
         $obj = clone $this;
-        $obj->detail = $detail;
+        $obj['detail'] = $detail;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{url?: string|null} $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
-    public function withSource(Source $source): self
+    /**
+     * @param Source|array{parameter?: string|null, pointer?: string|null} $source
+     */
+    public function withSource(Source|array $source): self
     {
         $obj = clone $this;
-        $obj->source = $source;
+        $obj['source'] = $source;
 
         return $obj;
     }

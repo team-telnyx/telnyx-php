@@ -38,7 +38,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $include_phone_numbers && $obj->include_phone_numbers = $include_phone_numbers;
+        null !== $include_phone_numbers && $obj['include_phone_numbers'] = $include_phone_numbers;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
         $obj = clone $this;
-        $obj->include_phone_numbers = $includePhoneNumbers;
+        $obj['include_phone_numbers'] = $includePhoneNumbers;
 
         return $obj;
     }

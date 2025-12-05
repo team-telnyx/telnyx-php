@@ -51,26 +51,38 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param DateCreatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_created_at
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?DateCreatedAt $date_created_at = null,
+        DateCreatedAt|array|null $date_created_at = null,
         ?string $session_id = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $date_created_at && $obj->date_created_at = $date_created_at;
-        null !== $session_id && $obj->session_id = $session_id;
+        null !== $date_created_at && $obj['date_created_at'] = $date_created_at;
+        null !== $session_id && $obj['session_id'] = $session_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
 
-    public function withDateCreatedAt(DateCreatedAt $dateCreatedAt): self
+    /**
+     * @param DateCreatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateCreatedAt
+     */
+    public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
         $obj = clone $this;
-        $obj->date_created_at = $dateCreatedAt;
+        $obj['date_created_at'] = $dateCreatedAt;
 
         return $obj;
     }
@@ -81,7 +93,7 @@ final class Filter implements BaseModel
     public function withSessionID(string $sessionID): self
     {
         $obj = clone $this;
-        $obj->session_id = $sessionID;
+        $obj['session_id'] = $sessionID;
 
         return $obj;
     }

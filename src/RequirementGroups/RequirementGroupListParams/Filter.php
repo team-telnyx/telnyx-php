@@ -87,8 +87,8 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $action && $obj['action'] = $action;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
         null !== $status && $obj['status'] = $status;
 
@@ -114,7 +114,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }

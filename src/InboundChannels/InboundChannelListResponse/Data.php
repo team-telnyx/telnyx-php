@@ -44,8 +44,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $channels && $obj->channels = $channels;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $channels && $obj['channels'] = $channels;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Data implements BaseModel
     public function withChannels(int $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels;
+        $obj['channels'] = $channels;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

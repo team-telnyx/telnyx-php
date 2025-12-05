@@ -64,8 +64,8 @@ final class ExternalVettingOrderParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->evpId = $evpId;
-        $obj->vettingClass = $vettingClass;
+        $obj['evpId'] = $evpId;
+        $obj['vettingClass'] = $vettingClass;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class ExternalVettingOrderParams implements BaseModel
     public function withEvpID(string $evpID): self
     {
         $obj = clone $this;
-        $obj->evpId = $evpID;
+        $obj['evpId'] = $evpID;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class ExternalVettingOrderParams implements BaseModel
     public function withVettingClass(string $vettingClass): self
     {
         $obj = clone $this;
-        $obj->vettingClass = $vettingClass;
+        $obj['vettingClass'] = $vettingClass;
 
         return $obj;
     }

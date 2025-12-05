@@ -34,20 +34,25 @@ final class VoicemailNewResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param VoicemailPrefResponse|array{enabled?: bool|null, pin?: string|null} $data
      */
-    public static function with(?VoicemailPrefResponse $data = null): self
+    public static function with(VoicemailPrefResponse|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(VoicemailPrefResponse $data): self
+    /**
+     * @param VoicemailPrefResponse|array{enabled?: bool|null, pin?: string|null} $data
+     */
+    public function withData(VoicemailPrefResponse|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

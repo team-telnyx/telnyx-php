@@ -37,7 +37,7 @@ final class ActionCancelResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        null !== $result && $obj->result = $result;
+        null !== $result && $obj['result'] = $result;
 
         return $obj;
     }
@@ -45,7 +45,7 @@ final class ActionCancelResponse implements BaseModel, ResponseConverter
     public function withResult(string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

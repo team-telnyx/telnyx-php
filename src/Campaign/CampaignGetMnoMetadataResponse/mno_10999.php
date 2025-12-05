@@ -116,16 +116,16 @@ final class mno_10999 implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->minMsgSamples = $minMsgSamples;
-        $obj->mno = $mno;
-        $obj->mnoReview = $mnoReview;
-        $obj->mnoSupport = $mnoSupport;
-        $obj->noEmbeddedLink = $noEmbeddedLink;
-        $obj->noEmbeddedPhone = $noEmbeddedPhone;
-        $obj->qualify = $qualify;
-        $obj->reqSubscriberHelp = $reqSubscriberHelp;
-        $obj->reqSubscriberOptin = $reqSubscriberOptin;
-        $obj->reqSubscriberOptout = $reqSubscriberOptout;
+        $obj['minMsgSamples'] = $minMsgSamples;
+        $obj['mno'] = $mno;
+        $obj['mnoReview'] = $mnoReview;
+        $obj['mnoSupport'] = $mnoSupport;
+        $obj['noEmbeddedLink'] = $noEmbeddedLink;
+        $obj['noEmbeddedPhone'] = $noEmbeddedPhone;
+        $obj['qualify'] = $qualify;
+        $obj['reqSubscriberHelp'] = $reqSubscriberHelp;
+        $obj['reqSubscriberOptin'] = $reqSubscriberOptin;
+        $obj['reqSubscriberOptout'] = $reqSubscriberOptout;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class mno_10999 implements BaseModel
     public function withMinMsgSamples(int $minMsgSamples): self
     {
         $obj = clone $this;
-        $obj->minMsgSamples = $minMsgSamples;
+        $obj['minMsgSamples'] = $minMsgSamples;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class mno_10999 implements BaseModel
     public function withMno(string $mno): self
     {
         $obj = clone $this;
-        $obj->mno = $mno;
+        $obj['mno'] = $mno;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class mno_10999 implements BaseModel
     public function withMnoReview(bool $mnoReview): self
     {
         $obj = clone $this;
-        $obj->mnoReview = $mnoReview;
+        $obj['mnoReview'] = $mnoReview;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class mno_10999 implements BaseModel
     public function withMnoSupport(bool $mnoSupport): self
     {
         $obj = clone $this;
-        $obj->mnoSupport = $mnoSupport;
+        $obj['mnoSupport'] = $mnoSupport;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class mno_10999 implements BaseModel
     public function withNoEmbeddedLink(bool $noEmbeddedLink): self
     {
         $obj = clone $this;
-        $obj->noEmbeddedLink = $noEmbeddedLink;
+        $obj['noEmbeddedLink'] = $noEmbeddedLink;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class mno_10999 implements BaseModel
     public function withNoEmbeddedPhone(bool $noEmbeddedPhone): self
     {
         $obj = clone $this;
-        $obj->noEmbeddedPhone = $noEmbeddedPhone;
+        $obj['noEmbeddedPhone'] = $noEmbeddedPhone;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class mno_10999 implements BaseModel
     public function withQualify(bool $qualify): self
     {
         $obj = clone $this;
-        $obj->qualify = $qualify;
+        $obj['qualify'] = $qualify;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class mno_10999 implements BaseModel
     public function withReqSubscriberHelp(bool $reqSubscriberHelp): self
     {
         $obj = clone $this;
-        $obj->reqSubscriberHelp = $reqSubscriberHelp;
+        $obj['reqSubscriberHelp'] = $reqSubscriberHelp;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class mno_10999 implements BaseModel
     public function withReqSubscriberOptin(bool $reqSubscriberOptin): self
     {
         $obj = clone $this;
-        $obj->reqSubscriberOptin = $reqSubscriberOptin;
+        $obj['reqSubscriberOptin'] = $reqSubscriberOptin;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class mno_10999 implements BaseModel
     public function withReqSubscriberOptout(bool $reqSubscriberOptout): self
     {
         $obj = clone $this;
-        $obj->reqSubscriberOptout = $reqSubscriberOptout;
+        $obj['reqSubscriberOptout'] = $reqSubscriberOptout;
 
         return $obj;
     }

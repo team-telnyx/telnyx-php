@@ -102,7 +102,12 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Location> $locations
+     * @param list<Location|array{
+     *   id?: string|null,
+     *   additional_info?: string|null,
+     *   description?: string|null,
+     *   is_default?: bool|null,
+     * }> $locations
      */
     public static function with(
         ?string $id = null,
@@ -124,22 +129,22 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $city_or_town && $obj->city_or_town = $city_or_town;
-        null !== $city_or_town_alias && $obj->city_or_town_alias = $city_or_town_alias;
-        null !== $company_name && $obj->company_name = $company_name;
-        null !== $country && $obj->country = $country;
-        null !== $country_or_district && $obj->country_or_district = $country_or_district;
-        null !== $default_location_id && $obj->default_location_id = $default_location_id;
-        null !== $description && $obj->description = $description;
-        null !== $house_number && $obj->house_number = $house_number;
-        null !== $house_number_suffix && $obj->house_number_suffix = $house_number_suffix;
-        null !== $locations && $obj->locations = $locations;
-        null !== $postal_or_zip_code && $obj->postal_or_zip_code = $postal_or_zip_code;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $state_or_province && $obj->state_or_province = $state_or_province;
-        null !== $street_name && $obj->street_name = $street_name;
-        null !== $street_suffix && $obj->street_suffix = $street_suffix;
+        null !== $id && $obj['id'] = $id;
+        null !== $city_or_town && $obj['city_or_town'] = $city_or_town;
+        null !== $city_or_town_alias && $obj['city_or_town_alias'] = $city_or_town_alias;
+        null !== $company_name && $obj['company_name'] = $company_name;
+        null !== $country && $obj['country'] = $country;
+        null !== $country_or_district && $obj['country_or_district'] = $country_or_district;
+        null !== $default_location_id && $obj['default_location_id'] = $default_location_id;
+        null !== $description && $obj['description'] = $description;
+        null !== $house_number && $obj['house_number'] = $house_number;
+        null !== $house_number_suffix && $obj['house_number_suffix'] = $house_number_suffix;
+        null !== $locations && $obj['locations'] = $locations;
+        null !== $postal_or_zip_code && $obj['postal_or_zip_code'] = $postal_or_zip_code;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $state_or_province && $obj['state_or_province'] = $state_or_province;
+        null !== $street_name && $obj['street_name'] = $street_name;
+        null !== $street_suffix && $obj['street_suffix'] = $street_suffix;
 
         return $obj;
     }
@@ -150,7 +155,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -158,7 +163,7 @@ final class Data implements BaseModel
     public function withCityOrTown(string $cityOrTown): self
     {
         $obj = clone $this;
-        $obj->city_or_town = $cityOrTown;
+        $obj['city_or_town'] = $cityOrTown;
 
         return $obj;
     }
@@ -166,7 +171,7 @@ final class Data implements BaseModel
     public function withCityOrTownAlias(string $cityOrTownAlias): self
     {
         $obj = clone $this;
-        $obj->city_or_town_alias = $cityOrTownAlias;
+        $obj['city_or_town_alias'] = $cityOrTownAlias;
 
         return $obj;
     }
@@ -174,7 +179,7 @@ final class Data implements BaseModel
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj->company_name = $companyName;
+        $obj['company_name'] = $companyName;
 
         return $obj;
     }
@@ -182,7 +187,7 @@ final class Data implements BaseModel
     public function withCountry(string $country): self
     {
         $obj = clone $this;
-        $obj->country = $country;
+        $obj['country'] = $country;
 
         return $obj;
     }
@@ -190,7 +195,7 @@ final class Data implements BaseModel
     public function withCountryOrDistrict(string $countryOrDistrict): self
     {
         $obj = clone $this;
-        $obj->country_or_district = $countryOrDistrict;
+        $obj['country_or_district'] = $countryOrDistrict;
 
         return $obj;
     }
@@ -201,7 +206,7 @@ final class Data implements BaseModel
     public function withDefaultLocationID(string $defaultLocationID): self
     {
         $obj = clone $this;
-        $obj->default_location_id = $defaultLocationID;
+        $obj['default_location_id'] = $defaultLocationID;
 
         return $obj;
     }
@@ -209,7 +214,7 @@ final class Data implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -217,7 +222,7 @@ final class Data implements BaseModel
     public function withHouseNumber(string $houseNumber): self
     {
         $obj = clone $this;
-        $obj->house_number = $houseNumber;
+        $obj['house_number'] = $houseNumber;
 
         return $obj;
     }
@@ -225,18 +230,23 @@ final class Data implements BaseModel
     public function withHouseNumberSuffix(string $houseNumberSuffix): self
     {
         $obj = clone $this;
-        $obj->house_number_suffix = $houseNumberSuffix;
+        $obj['house_number_suffix'] = $houseNumberSuffix;
 
         return $obj;
     }
 
     /**
-     * @param list<Location> $locations
+     * @param list<Location|array{
+     *   id?: string|null,
+     *   additional_info?: string|null,
+     *   description?: string|null,
+     *   is_default?: bool|null,
+     * }> $locations
      */
     public function withLocations(array $locations): self
     {
         $obj = clone $this;
-        $obj->locations = $locations;
+        $obj['locations'] = $locations;
 
         return $obj;
     }
@@ -244,7 +254,7 @@ final class Data implements BaseModel
     public function withPostalOrZipCode(string $postalOrZipCode): self
     {
         $obj = clone $this;
-        $obj->postal_or_zip_code = $postalOrZipCode;
+        $obj['postal_or_zip_code'] = $postalOrZipCode;
 
         return $obj;
     }
@@ -255,7 +265,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -263,7 +273,7 @@ final class Data implements BaseModel
     public function withStateOrProvince(string $stateOrProvince): self
     {
         $obj = clone $this;
-        $obj->state_or_province = $stateOrProvince;
+        $obj['state_or_province'] = $stateOrProvince;
 
         return $obj;
     }
@@ -271,7 +281,7 @@ final class Data implements BaseModel
     public function withStreetName(string $streetName): self
     {
         $obj = clone $this;
-        $obj->street_name = $streetName;
+        $obj['street_name'] = $streetName;
 
         return $obj;
     }
@@ -279,7 +289,7 @@ final class Data implements BaseModel
     public function withStreetSuffix(string $streetSuffix): self
     {
         $obj = clone $this;
-        $obj->street_suffix = $streetSuffix;
+        $obj['street_suffix'] = $streetSuffix;
 
         return $obj;
     }

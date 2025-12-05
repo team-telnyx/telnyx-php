@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrdersExceptionType;
+use Telnyx\PortingOrdersExceptionType\Code;
 
 /**
  * @phpstan-type PortingOrderGetExceptionTypesResponseShape = array{
@@ -37,24 +38,28 @@ final class PortingOrderGetExceptionTypesResponse implements BaseModel, Response
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionType> $data
+     * @param list<PortingOrdersExceptionType|array{
+     *   code?: value-of<Code>|null, description?: string|null
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<PortingOrdersExceptionType> $data
+     * @param list<PortingOrdersExceptionType|array{
+     *   code?: value-of<Code>|null, description?: string|null
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

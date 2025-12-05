@@ -36,7 +36,7 @@ final class Outbound implements BaseModel
     {
         $obj = new self;
 
-        null !== $interception_app_id && $obj->interception_app_id = $interception_app_id;
+        null !== $interception_app_id && $obj['interception_app_id'] = $interception_app_id;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Outbound implements BaseModel
     public function withInterceptionAppID(?string $interceptionAppID): self
     {
         $obj = clone $this;
-        $obj->interception_app_id = $interceptionAppID;
+        $obj['interception_app_id'] = $interceptionAppID;
 
         return $obj;
     }

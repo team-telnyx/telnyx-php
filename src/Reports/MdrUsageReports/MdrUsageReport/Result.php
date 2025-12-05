@@ -101,20 +101,20 @@ final class Result implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $carrier_passthrough_fee && $obj->carrier_passthrough_fee = $carrier_passthrough_fee;
-        null !== $connection && $obj->connection = $connection;
-        null !== $cost && $obj->cost = $cost;
-        null !== $currency && $obj->currency = $currency;
-        null !== $delivered && $obj->delivered = $delivered;
-        null !== $direction && $obj->direction = $direction;
-        null !== $message_type && $obj->message_type = $message_type;
-        null !== $parts && $obj->parts = $parts;
-        null !== $product && $obj->product = $product;
-        null !== $profile_id && $obj->profile_id = $profile_id;
-        null !== $received && $obj->received = $received;
-        null !== $sent && $obj->sent = $sent;
-        null !== $tags && $obj->tags = $tags;
-        null !== $tn_type && $obj->tn_type = $tn_type;
+        null !== $carrier_passthrough_fee && $obj['carrier_passthrough_fee'] = $carrier_passthrough_fee;
+        null !== $connection && $obj['connection'] = $connection;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $delivered && $obj['delivered'] = $delivered;
+        null !== $direction && $obj['direction'] = $direction;
+        null !== $message_type && $obj['message_type'] = $message_type;
+        null !== $parts && $obj['parts'] = $parts;
+        null !== $product && $obj['product'] = $product;
+        null !== $profile_id && $obj['profile_id'] = $profile_id;
+        null !== $received && $obj['received'] = $received;
+        null !== $sent && $obj['sent'] = $sent;
+        null !== $tags && $obj['tags'] = $tags;
+        null !== $tn_type && $obj['tn_type'] = $tn_type;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Result implements BaseModel
         string $carrierPassthroughFee
     ): self {
         $obj = clone $this;
-        $obj->carrier_passthrough_fee = $carrierPassthroughFee;
+        $obj['carrier_passthrough_fee'] = $carrierPassthroughFee;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Result implements BaseModel
     public function withConnection(string $connection): self
     {
         $obj = clone $this;
-        $obj->connection = $connection;
+        $obj['connection'] = $connection;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Result implements BaseModel
     public function withCost(string $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class Result implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Result implements BaseModel
     public function withDelivered(string $delivered): self
     {
         $obj = clone $this;
-        $obj->delivered = $delivered;
+        $obj['delivered'] = $delivered;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class Result implements BaseModel
     public function withDirection(string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Result implements BaseModel
     public function withMessageType(string $messageType): self
     {
         $obj = clone $this;
-        $obj->message_type = $messageType;
+        $obj['message_type'] = $messageType;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class Result implements BaseModel
     public function withParts(string $parts): self
     {
         $obj = clone $this;
-        $obj->parts = $parts;
+        $obj['parts'] = $parts;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class Result implements BaseModel
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Result implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj->profile_id = $profileID;
+        $obj['profile_id'] = $profileID;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class Result implements BaseModel
     public function withReceived(string $received): self
     {
         $obj = clone $this;
-        $obj->received = $received;
+        $obj['received'] = $received;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class Result implements BaseModel
     public function withSent(string $sent): self
     {
         $obj = clone $this;
-        $obj->sent = $sent;
+        $obj['sent'] = $sent;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class Result implements BaseModel
     public function withTags(string $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class Result implements BaseModel
     public function withTnType(string $tnType): self
     {
         $obj = clone $this;
-        $obj->tn_type = $tnType;
+        $obj['tn_type'] = $tnType;
 
         return $obj;
     }

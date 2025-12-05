@@ -64,12 +64,12 @@ final class Local implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $features && $obj->features = $features;
-        null !== $full_pstn_replacement && $obj->full_pstn_replacement = $full_pstn_replacement;
-        null !== $international_sms && $obj->international_sms = $international_sms;
-        null !== $p2p && $obj->p2p = $p2p;
-        null !== $quickship && $obj->quickship = $quickship;
-        null !== $reservable && $obj->reservable = $reservable;
+        null !== $features && $obj['features'] = $features;
+        null !== $full_pstn_replacement && $obj['full_pstn_replacement'] = $full_pstn_replacement;
+        null !== $international_sms && $obj['international_sms'] = $international_sms;
+        null !== $p2p && $obj['p2p'] = $p2p;
+        null !== $quickship && $obj['quickship'] = $quickship;
+        null !== $reservable && $obj['reservable'] = $reservable;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Local implements BaseModel
     public function withFeatures(array $features): self
     {
         $obj = clone $this;
-        $obj->features = $features;
+        $obj['features'] = $features;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Local implements BaseModel
     public function withFullPstnReplacement(bool $fullPstnReplacement): self
     {
         $obj = clone $this;
-        $obj->full_pstn_replacement = $fullPstnReplacement;
+        $obj['full_pstn_replacement'] = $fullPstnReplacement;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class Local implements BaseModel
     public function withInternationalSMS(bool $internationalSMS): self
     {
         $obj = clone $this;
-        $obj->international_sms = $internationalSMS;
+        $obj['international_sms'] = $internationalSMS;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Local implements BaseModel
     public function withP2p(bool $p2p): self
     {
         $obj = clone $this;
-        $obj->p2p = $p2p;
+        $obj['p2p'] = $p2p;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Local implements BaseModel
     public function withQuickship(bool $quickship): self
     {
         $obj = clone $this;
-        $obj->quickship = $quickship;
+        $obj['quickship'] = $quickship;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Local implements BaseModel
     public function withReservable(bool $reservable): self
     {
         $obj = clone $this;
-        $obj->reservable = $reservable;
+        $obj['reservable'] = $reservable;
 
         return $obj;
     }

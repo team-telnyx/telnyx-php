@@ -92,13 +92,13 @@ final class BillingGroup implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $deleted_at && $obj->deleted_at = $deleted_at;
-        null !== $name && $obj->name = $name;
-        null !== $organization_id && $obj->organization_id = $organization_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $deleted_at && $obj['deleted_at'] = $deleted_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $organization_id && $obj['organization_id'] = $organization_id;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class BillingGroup implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class BillingGroup implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class BillingGroup implements BaseModel
     public function withDeletedAt(?\DateTimeInterface $deletedAt): self
     {
         $obj = clone $this;
-        $obj->deleted_at = $deletedAt;
+        $obj['deleted_at'] = $deletedAt;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class BillingGroup implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class BillingGroup implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organization_id = $organizationID;
+        $obj['organization_id'] = $organizationID;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class BillingGroup implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

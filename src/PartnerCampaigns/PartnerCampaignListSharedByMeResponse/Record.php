@@ -87,12 +87,12 @@ final class Record implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->brandId = $brandId;
-        $obj->campaignId = $campaignId;
-        $obj->usecase = $usecase;
+        $obj['brandId'] = $brandId;
+        $obj['campaignId'] = $campaignId;
+        $obj['usecase'] = $usecase;
 
-        null !== $createDate && $obj->createDate = $createDate;
-        null !== $status && $obj->status = $status;
+        null !== $createDate && $obj['createDate'] = $createDate;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Record implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Record implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignId = $campaignID;
+        $obj['campaignId'] = $campaignID;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Record implements BaseModel
     public function withUsecase(string $usecase): self
     {
         $obj = clone $this;
-        $obj->usecase = $usecase;
+        $obj['usecase'] = $usecase;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class Record implements BaseModel
     public function withCreateDate(string $createDate): self
     {
         $obj = clone $this;
-        $obj->createDate = $createDate;
+        $obj['createDate'] = $createDate;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class Record implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

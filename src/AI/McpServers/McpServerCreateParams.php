@@ -79,12 +79,12 @@ final class McpServerCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
-        $obj->type = $type;
-        $obj->url = $url;
+        $obj['name'] = $name;
+        $obj['type'] = $type;
+        $obj['url'] = $url;
 
-        null !== $allowed_tools && $obj->allowed_tools = $allowed_tools;
-        null !== $api_key_ref && $obj->api_key_ref = $api_key_ref;
+        null !== $allowed_tools && $obj['allowed_tools'] = $allowed_tools;
+        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class McpServerCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class McpServerCreateParams implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class McpServerCreateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class McpServerCreateParams implements BaseModel
     public function withAllowedTools(?array $allowedTools): self
     {
         $obj = clone $this;
-        $obj->allowed_tools = $allowedTools;
+        $obj['allowed_tools'] = $allowedTools;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class McpServerCreateParams implements BaseModel
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->api_key_ref = $apiKeyRef;
+        $obj['api_key_ref'] = $apiKeyRef;
 
         return $obj;
     }

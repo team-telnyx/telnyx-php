@@ -54,24 +54,49 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param BillingBundleSummary|array{
+     *   id: string,
+     *   cost_code: string,
+     *   created_at: \DateTimeInterface,
+     *   is_public: bool,
+     *   name: string,
+     *   currency?: string|null,
+     *   mrc_price?: float|null,
+     *   slug?: string|null,
+     *   specs?: list<string>|null,
+     * } $billing_bundle
      * @param list<string> $user_bundle_ids
      */
     public static function with(
-        BillingBundleSummary $billing_bundle,
+        BillingBundleSummary|array $billing_bundle,
         array $user_bundle_ids
     ): self {
         $obj = new self;
 
-        $obj->billing_bundle = $billing_bundle;
-        $obj->user_bundle_ids = $user_bundle_ids;
+        $obj['billing_bundle'] = $billing_bundle;
+        $obj['user_bundle_ids'] = $user_bundle_ids;
 
         return $obj;
     }
 
-    public function withBillingBundle(BillingBundleSummary $billingBundle): self
-    {
+    /**
+     * @param BillingBundleSummary|array{
+     *   id: string,
+     *   cost_code: string,
+     *   created_at: \DateTimeInterface,
+     *   is_public: bool,
+     *   name: string,
+     *   currency?: string|null,
+     *   mrc_price?: float|null,
+     *   slug?: string|null,
+     *   specs?: list<string>|null,
+     * } $billingBundle
+     */
+    public function withBillingBundle(
+        BillingBundleSummary|array $billingBundle
+    ): self {
         $obj = clone $this;
-        $obj->billing_bundle = $billingBundle;
+        $obj['billing_bundle'] = $billingBundle;
 
         return $obj;
     }
@@ -84,7 +109,7 @@ final class Data implements BaseModel
     public function withUserBundleIDs(array $userBundleIDs): self
     {
         $obj = clone $this;
-        $obj->user_bundle_ids = $userBundleIDs;
+        $obj['user_bundle_ids'] = $userBundleIDs;
 
         return $obj;
     }

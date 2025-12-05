@@ -65,9 +65,9 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $global_ip_id && $obj->global_ip_id = $global_ip_id;
-        null !== $health_check_params && $obj->health_check_params = $health_check_params;
-        null !== $health_check_type && $obj->health_check_type = $health_check_type;
+        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
+        null !== $health_check_params && $obj['health_check_params'] = $health_check_params;
+        null !== $health_check_type && $obj['health_check_type'] = $health_check_type;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     public function withGlobalIPID(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj->global_ip_id = $globalIPID;
+        $obj['global_ip_id'] = $globalIPID;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     public function withHealthCheckParams(array $healthCheckParams): self
     {
         $obj = clone $this;
-        $obj->health_check_params = $healthCheckParams;
+        $obj['health_check_params'] = $healthCheckParams;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     public function withHealthCheckType(string $healthCheckType): self
     {
         $obj = clone $this;
-        $obj->health_check_type = $healthCheckType;
+        $obj['health_check_type'] = $healthCheckType;
 
         return $obj;
     }

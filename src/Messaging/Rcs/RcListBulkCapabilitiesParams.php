@@ -68,8 +68,8 @@ final class RcListBulkCapabilitiesParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->agent_id = $agent_id;
-        $obj->phone_numbers = $phone_numbers;
+        $obj['agent_id'] = $agent_id;
+        $obj['phone_numbers'] = $phone_numbers;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class RcListBulkCapabilitiesParams implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agent_id = $agentID;
+        $obj['agent_id'] = $agentID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class RcListBulkCapabilitiesParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }

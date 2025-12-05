@@ -73,11 +73,11 @@ final class Page implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $after && $obj->after = $after;
-        null !== $before && $obj->before = $before;
-        null !== $limit && $obj->limit = $limit;
-        null !== $number && $obj->number = $number;
-        null !== $size && $obj->size = $size;
+        null !== $after && $obj['after'] = $after;
+        null !== $before && $obj['before'] = $before;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $number && $obj['number'] = $number;
+        null !== $size && $obj['size'] = $size;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Page implements BaseModel
     public function withAfter(string $after): self
     {
         $obj = clone $this;
-        $obj->after = $after;
+        $obj['after'] = $after;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Page implements BaseModel
     public function withBefore(string $before): self
     {
         $obj = clone $this;
-        $obj->before = $before;
+        $obj['before'] = $before;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Page implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Page implements BaseModel
     public function withNumber(int $number): self
     {
         $obj = clone $this;
-        $obj->number = $number;
+        $obj['number'] = $number;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Page implements BaseModel
     public function withSize(int $size): self
     {
         $obj = clone $this;
-        $obj->size = $size;
+        $obj['size'] = $size;
 
         return $obj;
     }

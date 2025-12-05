@@ -46,7 +46,7 @@ final class DataLimit implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $amount && $obj->amount = $amount;
+        null !== $amount && $obj['amount'] = $amount;
         null !== $unit && $obj['unit'] = $unit;
 
         return $obj;
@@ -55,7 +55,7 @@ final class DataLimit implements BaseModel
     public function withAmount(string $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }

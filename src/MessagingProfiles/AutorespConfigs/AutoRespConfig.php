@@ -99,14 +99,14 @@ final class AutoRespConfig implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->country_code = $country_code;
-        $obj->created_at = $created_at;
-        $obj->keywords = $keywords;
+        $obj['id'] = $id;
+        $obj['country_code'] = $country_code;
+        $obj['created_at'] = $created_at;
+        $obj['keywords'] = $keywords;
         $obj['op'] = $op;
-        $obj->updated_at = $updated_at;
+        $obj['updated_at'] = $updated_at;
 
-        null !== $resp_text && $obj->resp_text = $resp_text;
+        null !== $resp_text && $obj['resp_text'] = $resp_text;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class AutoRespConfig implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class AutoRespConfig implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class AutoRespConfig implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class AutoRespConfig implements BaseModel
     public function withKeywords(array $keywords): self
     {
         $obj = clone $this;
-        $obj->keywords = $keywords;
+        $obj['keywords'] = $keywords;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class AutoRespConfig implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class AutoRespConfig implements BaseModel
     public function withRespText(string $respText): self
     {
         $obj = clone $this;
-        $obj->resp_text = $respText;
+        $obj['resp_text'] = $respText;
 
         return $obj;
     }

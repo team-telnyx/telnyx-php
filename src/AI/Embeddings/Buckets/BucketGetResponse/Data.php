@@ -75,13 +75,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->created_at = $created_at;
-        $obj->filename = $filename;
-        $obj->status = $status;
+        $obj['created_at'] = $created_at;
+        $obj['filename'] = $filename;
+        $obj['status'] = $status;
 
-        null !== $error_reason && $obj->error_reason = $error_reason;
-        null !== $last_embedded_at && $obj->last_embedded_at = $last_embedded_at;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $error_reason && $obj['error_reason'] = $error_reason;
+        null !== $last_embedded_at && $obj['last_embedded_at'] = $last_embedded_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withFilename(string $filename): self
     {
         $obj = clone $this;
-        $obj->filename = $filename;
+        $obj['filename'] = $filename;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class Data implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withErrorReason(string $errorReason): self
     {
         $obj = clone $this;
-        $obj->error_reason = $errorReason;
+        $obj['error_reason'] = $errorReason;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withLastEmbeddedAt(\DateTimeInterface $lastEmbeddedAt): self
     {
         $obj = clone $this;
-        $obj->last_embedded_at = $lastEmbeddedAt;
+        $obj['last_embedded_at'] = $lastEmbeddedAt;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

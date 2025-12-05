@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload;
+use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload\CallingPartyType;
 use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\RecordType;
 
 /**
@@ -74,6 +75,24 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $event_type
+     * @param Payload|array{
+     *   assistant_id?: string|null,
+     *   call_control_id?: string|null,
+     *   call_leg_id?: string|null,
+     *   call_session_id?: string|null,
+     *   calling_party_type?: value-of<CallingPartyType>|null,
+     *   client_state?: string|null,
+     *   connection_id?: string|null,
+     *   conversation_id?: string|null,
+     *   duration_sec?: int|null,
+     *   from?: string|null,
+     *   llm_model?: string|null,
+     *   stt_model?: string|null,
+     *   to?: string|null,
+     *   tts_model_id?: string|null,
+     *   tts_provider?: string|null,
+     *   tts_voice_id?: string|null,
+     * } $payload
      * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
@@ -81,16 +100,16 @@ final class Data implements BaseModel
         ?\DateTimeInterface $created_at = null,
         EventType|string|null $event_type = null,
         ?\DateTimeInterface $occurred_at = null,
-        ?Payload $payload = null,
+        Payload|array|null $payload = null,
         RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $occurred_at && $obj->occurred_at = $occurred_at;
-        null !== $payload && $obj->payload = $payload;
+        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -102,7 +121,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -113,7 +132,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -137,15 +156,35 @@ final class Data implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }
 
-    public function withPayload(Payload $payload): self
+    /**
+     * @param Payload|array{
+     *   assistant_id?: string|null,
+     *   call_control_id?: string|null,
+     *   call_leg_id?: string|null,
+     *   call_session_id?: string|null,
+     *   calling_party_type?: value-of<CallingPartyType>|null,
+     *   client_state?: string|null,
+     *   connection_id?: string|null,
+     *   conversation_id?: string|null,
+     *   duration_sec?: int|null,
+     *   from?: string|null,
+     *   llm_model?: string|null,
+     *   stt_model?: string|null,
+     *   to?: string|null,
+     *   tts_model_id?: string|null,
+     *   tts_provider?: string|null,
+     *   tts_voice_id?: string|null,
+     * } $payload
+     */
+    public function withPayload(Payload|array $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }

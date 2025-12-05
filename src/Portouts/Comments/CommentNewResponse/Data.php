@@ -90,13 +90,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->body = $body;
-        $obj->created_at = $created_at;
-        $obj->user_id = $user_id;
+        $obj['id'] = $id;
+        $obj['body'] = $body;
+        $obj['created_at'] = $created_at;
+        $obj['user_id'] = $user_id;
 
-        null !== $portout_id && $obj->portout_id = $portout_id;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $portout_id && $obj['portout_id'] = $portout_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withBody(string $body): self
     {
         $obj = clone $this;
-        $obj->body = $body;
+        $obj['body'] = $body;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Data implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj->portout_id = $portoutID;
+        $obj['portout_id'] = $portoutID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

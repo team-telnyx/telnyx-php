@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\CallControlApplications;
 
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\ApplicationName;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\OccurredAt;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Product;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Status;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Type;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Page;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
 use Telnyx\Core\Attributes\Api;
@@ -18,7 +23,29 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\CallControlApplicationsService::list()
  *
  * @phpstan-type CallControlApplicationListParamsShape = array{
- *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
+ *   filter?: Filter|array{
+ *     application_name?: ApplicationName|null,
+ *     application_session_id?: string|null,
+ *     connection_id?: string|null,
+ *     failed?: bool|null,
+ *     from?: string|null,
+ *     leg_id?: string|null,
+ *     name?: string|null,
+ *     occurred_at?: OccurredAt|null,
+ *     outbound_outbound_voice_profile_id?: string|null,
+ *     product?: value-of<Product>|null,
+ *     status?: value-of<Status>|null,
+ *     to?: string|null,
+ *     type?: value-of<Type>|null,
+ *   },
+ *   page?: Page|array{
+ *     after?: string|null,
+ *     before?: string|null,
+ *     limit?: int|null,
+ *     number?: int|null,
+ *     size?: int|null,
+ *   },
+ *   sort?: Sort|value-of<Sort>,
  * }
  */
 final class CallControlApplicationListParams implements BaseModel
@@ -68,17 +95,39 @@ final class CallControlApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   application_name?: ApplicationName|null,
+     *   application_session_id?: string|null,
+     *   connection_id?: string|null,
+     *   failed?: bool|null,
+     *   from?: string|null,
+     *   leg_id?: string|null,
+     *   name?: string|null,
+     *   occurred_at?: OccurredAt|null,
+     *   outbound_outbound_voice_profile_id?: string|null,
+     *   product?: value-of<Product>|null,
+     *   status?: value-of<Status>|null,
+     *   to?: string|null,
+     *   type?: value-of<Type>|null,
+     * } $filter
+     * @param Page|array{
+     *   after?: string|null,
+     *   before?: string|null,
+     *   limit?: int|null,
+     *   number?: int|null,
+     *   size?: int|null,
+     * } $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Sort|string|null $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -86,22 +135,46 @@ final class CallControlApplicationListParams implements BaseModel
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
+     *
+     * @param Filter|array{
+     *   application_name?: ApplicationName|null,
+     *   application_session_id?: string|null,
+     *   connection_id?: string|null,
+     *   failed?: bool|null,
+     *   from?: string|null,
+     *   leg_id?: string|null,
+     *   name?: string|null,
+     *   occurred_at?: OccurredAt|null,
+     *   outbound_outbound_voice_profile_id?: string|null,
+     *   product?: value-of<Product>|null,
+     *   status?: value-of<Status>|null,
+     *   to?: string|null,
+     *   type?: value-of<Type>|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
+     *
+     * @param Page|array{
+     *   after?: string|null,
+     *   before?: string|null,
+     *   limit?: int|null,
+     *   number?: int|null,
+     *   size?: int|null,
+     * } $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

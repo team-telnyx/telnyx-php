@@ -43,24 +43,32 @@ final class Media implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param RcsContentInfo|array{
+     *   file_url: string, force_refresh?: bool|null, thumbnail_url?: string|null
+     * } $content_info
      * @param Height|value-of<Height> $height
      */
     public static function with(
-        ?RcsContentInfo $content_info = null,
+        RcsContentInfo|array|null $content_info = null,
         Height|string|null $height = null
     ): self {
         $obj = new self;
 
-        null !== $content_info && $obj->content_info = $content_info;
+        null !== $content_info && $obj['content_info'] = $content_info;
         null !== $height && $obj['height'] = $height;
 
         return $obj;
     }
 
-    public function withContentInfo(RcsContentInfo $contentInfo): self
+    /**
+     * @param RcsContentInfo|array{
+     *   file_url: string, force_refresh?: bool|null, thumbnail_url?: string|null
+     * } $contentInfo
+     */
+    public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {
         $obj = clone $this;
-        $obj->content_info = $contentInfo;
+        $obj['content_info'] = $contentInfo;
 
         return $obj;
     }

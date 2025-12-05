@@ -145,15 +145,15 @@ final class OAuthClientCreateParams implements BaseModel
         $obj = new self;
 
         $obj['allowed_grant_types'] = $allowed_grant_types;
-        $obj->allowed_scopes = $allowed_scopes;
+        $obj['allowed_scopes'] = $allowed_scopes;
         $obj['client_type'] = $client_type;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
-        null !== $logo_uri && $obj->logo_uri = $logo_uri;
-        null !== $policy_uri && $obj->policy_uri = $policy_uri;
-        null !== $redirect_uris && $obj->redirect_uris = $redirect_uris;
-        null !== $require_pkce && $obj->require_pkce = $require_pkce;
-        null !== $tos_uri && $obj->tos_uri = $tos_uri;
+        null !== $logo_uri && $obj['logo_uri'] = $logo_uri;
+        null !== $policy_uri && $obj['policy_uri'] = $policy_uri;
+        null !== $redirect_uris && $obj['redirect_uris'] = $redirect_uris;
+        null !== $require_pkce && $obj['require_pkce'] = $require_pkce;
+        null !== $tos_uri && $obj['tos_uri'] = $tos_uri;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withAllowedScopes(array $allowedScopes): self
     {
         $obj = clone $this;
-        $obj->allowed_scopes = $allowedScopes;
+        $obj['allowed_scopes'] = $allowedScopes;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withLogoUri(string $logoUri): self
     {
         $obj = clone $this;
-        $obj->logo_uri = $logoUri;
+        $obj['logo_uri'] = $logoUri;
 
         return $obj;
     }
@@ -225,7 +225,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withPolicyUri(string $policyUri): self
     {
         $obj = clone $this;
-        $obj->policy_uri = $policyUri;
+        $obj['policy_uri'] = $policyUri;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withRedirectUris(array $redirectUris): self
     {
         $obj = clone $this;
-        $obj->redirect_uris = $redirectUris;
+        $obj['redirect_uris'] = $redirectUris;
 
         return $obj;
     }
@@ -249,7 +249,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withRequirePkce(bool $requirePkce): self
     {
         $obj = clone $this;
-        $obj->require_pkce = $requirePkce;
+        $obj['require_pkce'] = $requirePkce;
 
         return $obj;
     }
@@ -260,7 +260,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withTosUri(string $tosUri): self
     {
         $obj = clone $this;
-        $obj->tos_uri = $tosUri;
+        $obj['tos_uri'] = $tosUri;
 
         return $obj;
     }

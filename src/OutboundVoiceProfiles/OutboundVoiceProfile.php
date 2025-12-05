@@ -7,6 +7,9 @@ namespace Telnyx\OutboundVoiceProfiles;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
+use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
+use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
 
 /**
@@ -178,6 +181,15 @@ final class OutboundVoiceProfile implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param OutboundCallRecording|array{
+     *   call_recording_caller_phone_numbers?: list<string>|null,
+     *   call_recording_channels?: value-of<CallRecordingChannels>|null,
+     *   call_recording_format?: value-of<CallRecordingFormat>|null,
+     *   call_recording_type?: value-of<CallRecordingType>|null,
+     * } $call_recording
+     * @param CallingWindow|array{
+     *   calls_per_cld?: int|null, end_time?: string|null, start_time?: string|null
+     * } $calling_window
      * @param ServicePlan|value-of<ServicePlan> $service_plan
      * @param list<string> $tags
      * @param TrafficType|value-of<TrafficType> $traffic_type
@@ -188,8 +200,8 @@ final class OutboundVoiceProfile implements BaseModel
         string $name,
         ?string $id = null,
         ?string $billing_group_id = null,
-        ?OutboundCallRecording $call_recording = null,
-        ?CallingWindow $calling_window = null,
+        OutboundCallRecording|array|null $call_recording = null,
+        CallingWindow|array|null $calling_window = null,
         ?int $concurrent_call_limit = null,
         ?int $connections_count = null,
         ?string $created_at = null,
@@ -207,26 +219,26 @@ final class OutboundVoiceProfile implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
+        $obj['name'] = $name;
 
-        null !== $id && $obj->id = $id;
-        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
-        null !== $call_recording && $obj->call_recording = $call_recording;
-        null !== $calling_window && $obj->calling_window = $calling_window;
-        null !== $concurrent_call_limit && $obj->concurrent_call_limit = $concurrent_call_limit;
-        null !== $connections_count && $obj->connections_count = $connections_count;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $daily_spend_limit && $obj->daily_spend_limit = $daily_spend_limit;
-        null !== $daily_spend_limit_enabled && $obj->daily_spend_limit_enabled = $daily_spend_limit_enabled;
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $max_destination_rate && $obj->max_destination_rate = $max_destination_rate;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
+        null !== $call_recording && $obj['call_recording'] = $call_recording;
+        null !== $calling_window && $obj['calling_window'] = $calling_window;
+        null !== $concurrent_call_limit && $obj['concurrent_call_limit'] = $concurrent_call_limit;
+        null !== $connections_count && $obj['connections_count'] = $connections_count;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $daily_spend_limit && $obj['daily_spend_limit'] = $daily_spend_limit;
+        null !== $daily_spend_limit_enabled && $obj['daily_spend_limit_enabled'] = $daily_spend_limit_enabled;
+        null !== $enabled && $obj['enabled'] = $enabled;
+        null !== $max_destination_rate && $obj['max_destination_rate'] = $max_destination_rate;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $service_plan && $obj['service_plan'] = $service_plan;
-        null !== $tags && $obj->tags = $tags;
+        null !== $tags && $obj['tags'] = $tags;
         null !== $traffic_type && $obj['traffic_type'] = $traffic_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
         null !== $usage_payment_method && $obj['usage_payment_method'] = $usage_payment_method;
-        null !== $whitelisted_destinations && $obj->whitelisted_destinations = $whitelisted_destinations;
+        null !== $whitelisted_destinations && $obj['whitelisted_destinations'] = $whitelisted_destinations;
 
         return $obj;
     }
@@ -237,7 +249,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -248,7 +260,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -259,27 +271,39 @@ final class OutboundVoiceProfile implements BaseModel
     public function withBillingGroupID(?string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billing_group_id = $billingGroupID;
+        $obj['billing_group_id'] = $billingGroupID;
 
         return $obj;
     }
 
+    /**
+     * @param OutboundCallRecording|array{
+     *   call_recording_caller_phone_numbers?: list<string>|null,
+     *   call_recording_channels?: value-of<CallRecordingChannels>|null,
+     *   call_recording_format?: value-of<CallRecordingFormat>|null,
+     *   call_recording_type?: value-of<CallRecordingType>|null,
+     * } $callRecording
+     */
     public function withCallRecording(
-        OutboundCallRecording $callRecording
+        OutboundCallRecording|array $callRecording
     ): self {
         $obj = clone $this;
-        $obj->call_recording = $callRecording;
+        $obj['call_recording'] = $callRecording;
 
         return $obj;
     }
 
     /**
      * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+     *
+     * @param CallingWindow|array{
+     *   calls_per_cld?: int|null, end_time?: string|null, start_time?: string|null
+     * } $callingWindow
      */
-    public function withCallingWindow(CallingWindow $callingWindow): self
+    public function withCallingWindow(CallingWindow|array $callingWindow): self
     {
         $obj = clone $this;
-        $obj->calling_window = $callingWindow;
+        $obj['calling_window'] = $callingWindow;
 
         return $obj;
     }
@@ -290,7 +314,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withConcurrentCallLimit(?int $concurrentCallLimit): self
     {
         $obj = clone $this;
-        $obj->concurrent_call_limit = $concurrentCallLimit;
+        $obj['concurrent_call_limit'] = $concurrentCallLimit;
 
         return $obj;
     }
@@ -301,7 +325,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withConnectionsCount(int $connectionsCount): self
     {
         $obj = clone $this;
-        $obj->connections_count = $connectionsCount;
+        $obj['connections_count'] = $connectionsCount;
 
         return $obj;
     }
@@ -312,7 +336,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -323,7 +347,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withDailySpendLimit(string $dailySpendLimit): self
     {
         $obj = clone $this;
-        $obj->daily_spend_limit = $dailySpendLimit;
+        $obj['daily_spend_limit'] = $dailySpendLimit;
 
         return $obj;
     }
@@ -335,7 +359,7 @@ final class OutboundVoiceProfile implements BaseModel
         bool $dailySpendLimitEnabled
     ): self {
         $obj = clone $this;
-        $obj->daily_spend_limit_enabled = $dailySpendLimitEnabled;
+        $obj['daily_spend_limit_enabled'] = $dailySpendLimitEnabled;
 
         return $obj;
     }
@@ -346,7 +370,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withEnabled(bool $enabled): self
     {
         $obj = clone $this;
-        $obj->enabled = $enabled;
+        $obj['enabled'] = $enabled;
 
         return $obj;
     }
@@ -357,7 +381,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withMaxDestinationRate(float $maxDestinationRate): self
     {
         $obj = clone $this;
-        $obj->max_destination_rate = $maxDestinationRate;
+        $obj['max_destination_rate'] = $maxDestinationRate;
 
         return $obj;
     }
@@ -368,7 +392,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -392,7 +416,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -416,7 +440,7 @@ final class OutboundVoiceProfile implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -444,7 +468,7 @@ final class OutboundVoiceProfile implements BaseModel
         array $whitelistedDestinations
     ): self {
         $obj = clone $this;
-        $obj->whitelisted_destinations = $whitelistedDestinations;
+        $obj['whitelisted_destinations'] = $whitelistedDestinations;
 
         return $obj;
     }

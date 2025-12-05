@@ -45,33 +45,58 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DateCreatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_created_at
+     * @param DateUpdatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_updated_at
      */
     public static function with(
-        ?DateCreatedAt $date_created_at = null,
-        ?DateUpdatedAt $date_updated_at = null,
+        DateCreatedAt|array|null $date_created_at = null,
+        DateUpdatedAt|array|null $date_updated_at = null,
         ?string $unique_name = null,
     ): self {
         $obj = new self;
 
-        null !== $date_created_at && $obj->date_created_at = $date_created_at;
-        null !== $date_updated_at && $obj->date_updated_at = $date_updated_at;
-        null !== $unique_name && $obj->unique_name = $unique_name;
+        null !== $date_created_at && $obj['date_created_at'] = $date_created_at;
+        null !== $date_updated_at && $obj['date_updated_at'] = $date_updated_at;
+        null !== $unique_name && $obj['unique_name'] = $unique_name;
 
         return $obj;
     }
 
-    public function withDateCreatedAt(DateCreatedAt $dateCreatedAt): self
+    /**
+     * @param DateCreatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateCreatedAt
+     */
+    public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
         $obj = clone $this;
-        $obj->date_created_at = $dateCreatedAt;
+        $obj['date_created_at'] = $dateCreatedAt;
 
         return $obj;
     }
 
-    public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
+    /**
+     * @param DateUpdatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateUpdatedAt
+     */
+    public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj->date_updated_at = $dateUpdatedAt;
+        $obj['date_updated_at'] = $dateUpdatedAt;
 
         return $obj;
     }
@@ -82,7 +107,7 @@ final class Filter implements BaseModel
     public function withUniqueName(string $uniqueName): self
     {
         $obj = clone $this;
-        $obj->unique_name = $uniqueName;
+        $obj['unique_name'] = $uniqueName;
 
         return $obj;
     }

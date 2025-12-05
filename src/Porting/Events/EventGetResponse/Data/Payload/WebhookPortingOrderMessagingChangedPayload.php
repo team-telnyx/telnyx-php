@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderMessagingChangedPayload\Messaging;
+use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderMessagingChangedPayload\Messaging\MessagingPortStatus;
 
 /**
  * The webhook payload for the porting_order.messaging_changed event.
@@ -57,19 +58,26 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Messaging|array{
+     *   enable_messaging?: bool|null,
+     *   messaging_capable?: bool|null,
+     *   messaging_port_completed?: bool|null,
+     *   messaging_port_status?: value-of<MessagingPortStatus>|null,
+     * } $messaging
      */
     public static function with(
         ?string $id = null,
         ?string $customer_reference = null,
-        ?Messaging $messaging = null,
+        Messaging|array|null $messaging = null,
         ?string $support_key = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $messaging && $obj->messaging = $messaging;
-        null !== $support_key && $obj->support_key = $support_key;
+        null !== $id && $obj['id'] = $id;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $messaging && $obj['messaging'] = $messaging;
+        null !== $support_key && $obj['support_key'] = $support_key;
 
         return $obj;
     }
@@ -80,7 +88,7 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -91,18 +99,25 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * The messaging portability status of the porting order.
+     *
+     * @param Messaging|array{
+     *   enable_messaging?: bool|null,
+     *   messaging_capable?: bool|null,
+     *   messaging_port_completed?: bool|null,
+     *   messaging_port_status?: value-of<MessagingPortStatus>|null,
+     * } $messaging
      */
-    public function withMessaging(Messaging $messaging): self
+    public function withMessaging(Messaging|array $messaging): self
     {
         $obj = clone $this;
-        $obj->messaging = $messaging;
+        $obj['messaging'] = $messaging;
 
         return $obj;
     }
@@ -113,7 +128,7 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj->support_key = $supportKey;
+        $obj['support_key'] = $supportKey;
 
         return $obj;
     }

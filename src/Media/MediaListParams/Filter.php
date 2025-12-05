@@ -42,7 +42,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $content_type && $obj->content_type = $content_type;
+        null !== $content_type && $obj['content_type'] = $content_type;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Filter implements BaseModel
     public function withContentType(array $contentType): self
     {
         $obj = clone $this;
-        $obj->content_type = $contentType;
+        $obj['content_type'] = $contentType;
 
         return $obj;
     }

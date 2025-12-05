@@ -68,8 +68,8 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $error_code && $obj->error_code = $error_code;
-        null !== $error_description && $obj->error_description = $error_description;
+        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $error_description && $obj['error_description'] = $error_description;
         null !== $value && $obj['value'] = $value;
 
         return $obj;
@@ -81,7 +81,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->error_code = $errorCode;
+        $obj['error_code'] = $errorCode;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     public function withErrorDescription(string $errorDescription): self
     {
         $obj = clone $this;
-        $obj->error_description = $errorDescription;
+        $obj['error_description'] = $errorDescription;
 
         return $obj;
     }

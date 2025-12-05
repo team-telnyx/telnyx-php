@@ -73,10 +73,10 @@ final class MediaUploadParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->media_url = $media_url;
+        $obj['media_url'] = $media_url;
 
-        null !== $media_name && $obj->media_name = $media_name;
-        null !== $ttl_secs && $obj->ttl_secs = $ttl_secs;
+        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $ttl_secs && $obj['ttl_secs'] = $ttl_secs;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class MediaUploadParams implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj->media_url = $mediaURL;
+        $obj['media_url'] = $mediaURL;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class MediaUploadParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class MediaUploadParams implements BaseModel
     public function withTtlSecs(int $ttlSecs): self
     {
         $obj = clone $this;
-        $obj->ttl_secs = $ttlSecs;
+        $obj['ttl_secs'] = $ttlSecs;
 
         return $obj;
     }

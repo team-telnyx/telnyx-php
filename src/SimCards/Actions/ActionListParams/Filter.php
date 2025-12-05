@@ -75,8 +75,8 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $action_type && $obj['action_type'] = $action_type;
-        null !== $bulk_sim_card_action_id && $obj->bulk_sim_card_action_id = $bulk_sim_card_action_id;
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
+        null !== $bulk_sim_card_action_id && $obj['bulk_sim_card_action_id'] = $bulk_sim_card_action_id;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -101,7 +101,7 @@ final class Filter implements BaseModel
     public function withBulkSimCardActionID(string $bulkSimCardActionID): self
     {
         $obj = clone $this;
-        $obj->bulk_sim_card_action_id = $bulkSimCardActionID;
+        $obj['bulk_sim_card_action_id'] = $bulkSimCardActionID;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Filter implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }

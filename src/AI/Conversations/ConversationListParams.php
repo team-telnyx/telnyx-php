@@ -133,18 +133,18 @@ final class ConversationListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $last_message_at && $obj->last_message_at = $last_message_at;
-        null !== $limit && $obj->limit = $limit;
-        null !== $metadata__assistant_id && $obj->metadata__assistant_id = $metadata__assistant_id;
-        null !== $metadata__call_control_id && $obj->metadata__call_control_id = $metadata__call_control_id;
-        null !== $metadata__telnyx_agent_target && $obj->metadata__telnyx_agent_target = $metadata__telnyx_agent_target;
-        null !== $metadata__telnyx_conversation_channel && $obj->metadata__telnyx_conversation_channel = $metadata__telnyx_conversation_channel;
-        null !== $metadata__telnyx_end_user_target && $obj->metadata__telnyx_end_user_target = $metadata__telnyx_end_user_target;
-        null !== $name && $obj->name = $name;
-        null !== $or && $obj->or = $or;
-        null !== $order && $obj->order = $order;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $last_message_at && $obj['last_message_at'] = $last_message_at;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $metadata__assistant_id && $obj['metadata__assistant_id'] = $metadata__assistant_id;
+        null !== $metadata__call_control_id && $obj['metadata__call_control_id'] = $metadata__call_control_id;
+        null !== $metadata__telnyx_agent_target && $obj['metadata__telnyx_agent_target'] = $metadata__telnyx_agent_target;
+        null !== $metadata__telnyx_conversation_channel && $obj['metadata__telnyx_conversation_channel'] = $metadata__telnyx_conversation_channel;
+        null !== $metadata__telnyx_end_user_target && $obj['metadata__telnyx_end_user_target'] = $metadata__telnyx_end_user_target;
+        null !== $name && $obj['name'] = $name;
+        null !== $or && $obj['or'] = $or;
+        null !== $order && $obj['order'] = $order;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class ConversationListParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class ConversationListParams implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class ConversationListParams implements BaseModel
     public function withLastMessageAt(string $lastMessageAt): self
     {
         $obj = clone $this;
-        $obj->last_message_at = $lastMessageAt;
+        $obj['last_message_at'] = $lastMessageAt;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class ConversationListParams implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class ConversationListParams implements BaseModel
     public function withMetadataAssistantID(string $metadataAssistantID): self
     {
         $obj = clone $this;
-        $obj->metadata__assistant_id = $metadataAssistantID;
+        $obj['metadata__assistant_id'] = $metadataAssistantID;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class ConversationListParams implements BaseModel
         string $metadataCallControlID
     ): self {
         $obj = clone $this;
-        $obj->metadata__call_control_id = $metadataCallControlID;
+        $obj['metadata__call_control_id'] = $metadataCallControlID;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class ConversationListParams implements BaseModel
         string $metadataTelnyxAgentTarget
     ): self {
         $obj = clone $this;
-        $obj->metadata__telnyx_agent_target = $metadataTelnyxAgentTarget;
+        $obj['metadata__telnyx_agent_target'] = $metadataTelnyxAgentTarget;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class ConversationListParams implements BaseModel
         string $metadataTelnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj->metadata__telnyx_conversation_channel = $metadataTelnyxConversationChannel;
+        $obj['metadata__telnyx_conversation_channel'] = $metadataTelnyxConversationChannel;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class ConversationListParams implements BaseModel
         string $metadataTelnyxEndUserTarget
     ): self {
         $obj = clone $this;
-        $obj->metadata__telnyx_end_user_target = $metadataTelnyxEndUserTarget;
+        $obj['metadata__telnyx_end_user_target'] = $metadataTelnyxEndUserTarget;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class ConversationListParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class ConversationListParams implements BaseModel
     public function withOr(string $or): self
     {
         $obj = clone $this;
-        $obj->or = $or;
+        $obj['or'] = $or;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class ConversationListParams implements BaseModel
     public function withOrder(string $order): self
     {
         $obj = clone $this;
-        $obj->order = $order;
+        $obj['order'] = $order;
 
         return $obj;
     }

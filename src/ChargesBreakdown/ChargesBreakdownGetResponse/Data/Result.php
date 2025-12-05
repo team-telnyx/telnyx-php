@@ -90,7 +90,9 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Service> $services
+     * @param list<Service|array{
+     *   cost: string, cost_type: string, name: string
+     * }> $services
      */
     public static function with(
         string $charge_type,
@@ -101,11 +103,11 @@ final class Result implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->charge_type = $charge_type;
-        $obj->service_owner_email = $service_owner_email;
-        $obj->service_owner_user_id = $service_owner_user_id;
-        $obj->services = $services;
-        $obj->tn = $tn;
+        $obj['charge_type'] = $charge_type;
+        $obj['service_owner_email'] = $service_owner_email;
+        $obj['service_owner_user_id'] = $service_owner_user_id;
+        $obj['services'] = $services;
+        $obj['tn'] = $tn;
 
         return $obj;
     }
@@ -116,7 +118,7 @@ final class Result implements BaseModel
     public function withChargeType(string $chargeType): self
     {
         $obj = clone $this;
-        $obj->charge_type = $chargeType;
+        $obj['charge_type'] = $chargeType;
 
         return $obj;
     }
@@ -127,7 +129,7 @@ final class Result implements BaseModel
     public function withServiceOwnerEmail(string $serviceOwnerEmail): self
     {
         $obj = clone $this;
-        $obj->service_owner_email = $serviceOwnerEmail;
+        $obj['service_owner_email'] = $serviceOwnerEmail;
 
         return $obj;
     }
@@ -138,7 +140,7 @@ final class Result implements BaseModel
     public function withServiceOwnerUserID(string $serviceOwnerUserID): self
     {
         $obj = clone $this;
-        $obj->service_owner_user_id = $serviceOwnerUserID;
+        $obj['service_owner_user_id'] = $serviceOwnerUserID;
 
         return $obj;
     }
@@ -146,12 +148,14 @@ final class Result implements BaseModel
     /**
      * List of services associated with this number.
      *
-     * @param list<Service> $services
+     * @param list<Service|array{
+     *   cost: string, cost_type: string, name: string
+     * }> $services
      */
     public function withServices(array $services): self
     {
         $obj = clone $this;
-        $obj->services = $services;
+        $obj['services'] = $services;
 
         return $obj;
     }
@@ -162,7 +166,7 @@ final class Result implements BaseModel
     public function withTn(string $tn): self
     {
         $obj = clone $this;
-        $obj->tn = $tn;
+        $obj['tn'] = $tn;
 
         return $obj;
     }

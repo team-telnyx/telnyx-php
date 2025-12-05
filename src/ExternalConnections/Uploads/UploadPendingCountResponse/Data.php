@@ -46,8 +46,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $pending_numbers_count && $obj->pending_numbers_count = $pending_numbers_count;
-        null !== $pending_orders_count && $obj->pending_orders_count = $pending_orders_count;
+        null !== $pending_numbers_count && $obj['pending_numbers_count'] = $pending_numbers_count;
+        null !== $pending_orders_count && $obj['pending_orders_count'] = $pending_orders_count;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Data implements BaseModel
     public function withPendingNumbersCount(int $pendingNumbersCount): self
     {
         $obj = clone $this;
-        $obj->pending_numbers_count = $pendingNumbersCount;
+        $obj['pending_numbers_count'] = $pendingNumbersCount;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Data implements BaseModel
     public function withPendingOrdersCount(int $pendingOrdersCount): self
     {
         $obj = clone $this;
-        $obj->pending_orders_count = $pendingOrdersCount;
+        $obj['pending_orders_count'] = $pendingOrdersCount;
 
         return $obj;
     }

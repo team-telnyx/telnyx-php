@@ -73,10 +73,10 @@ final class AssistantChatParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->content = $content;
-        $obj->conversation_id = $conversation_id;
+        $obj['content'] = $content;
+        $obj['conversation_id'] = $conversation_id;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class AssistantChatParams implements BaseModel
     public function withContent(string $content): self
     {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class AssistantChatParams implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversation_id = $conversationID;
+        $obj['conversation_id'] = $conversationID;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class AssistantChatParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

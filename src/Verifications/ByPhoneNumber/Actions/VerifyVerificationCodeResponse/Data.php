@@ -65,7 +65,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->phone_number = $phone_number;
+        $obj['phone_number'] = $phone_number;
         $obj['response_code'] = $response_code;
 
         return $obj;
@@ -77,7 +77,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

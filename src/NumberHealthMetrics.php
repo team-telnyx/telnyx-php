@@ -88,10 +88,10 @@ final class NumberHealthMetrics implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->inbound_outbound_ratio = $inbound_outbound_ratio;
-        $obj->message_count = $message_count;
-        $obj->spam_ratio = $spam_ratio;
-        $obj->success_ratio = $success_ratio;
+        $obj['inbound_outbound_ratio'] = $inbound_outbound_ratio;
+        $obj['message_count'] = $message_count;
+        $obj['spam_ratio'] = $spam_ratio;
+        $obj['success_ratio'] = $success_ratio;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withInboundOutboundRatio(float $inboundOutboundRatio): self
     {
         $obj = clone $this;
-        $obj->inbound_outbound_ratio = $inboundOutboundRatio;
+        $obj['inbound_outbound_ratio'] = $inboundOutboundRatio;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withMessageCount(int $messageCount): self
     {
         $obj = clone $this;
-        $obj->message_count = $messageCount;
+        $obj['message_count'] = $messageCount;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withSpamRatio(float $spamRatio): self
     {
         $obj = clone $this;
-        $obj->spam_ratio = $spamRatio;
+        $obj['spam_ratio'] = $spamRatio;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withSuccessRatio(float $successRatio): self
     {
         $obj = clone $this;
-        $obj->success_ratio = $successRatio;
+        $obj['success_ratio'] = $successRatio;
 
         return $obj;
     }

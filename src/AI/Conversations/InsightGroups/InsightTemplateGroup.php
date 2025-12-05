@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\InsightGroups;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
+use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -67,7 +68,15 @@ final class InsightTemplateGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InsightTemplate> $insights
+     * @param list<InsightTemplate|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   instructions: string,
+     *   insight_type?: value-of<InsightType>|null,
+     *   json_schema?: mixed|string|null,
+     *   name?: string|null,
+     *   webhook?: string|null,
+     * }> $insights
      */
     public static function with(
         string $id,
@@ -79,13 +88,13 @@ final class InsightTemplateGroup implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['name'] = $name;
 
-        null !== $description && $obj->description = $description;
-        null !== $insights && $obj->insights = $insights;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $description && $obj['description'] = $description;
+        null !== $insights && $obj['insights'] = $insights;
+        null !== $webhook && $obj['webhook'] = $webhook;
 
         return $obj;
     }
@@ -93,7 +102,7 @@ final class InsightTemplateGroup implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -101,7 +110,7 @@ final class InsightTemplateGroup implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -109,7 +118,7 @@ final class InsightTemplateGroup implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -117,18 +126,26 @@ final class InsightTemplateGroup implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
 
     /**
-     * @param list<InsightTemplate> $insights
+     * @param list<InsightTemplate|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   instructions: string,
+     *   insight_type?: value-of<InsightType>|null,
+     *   json_schema?: mixed|string|null,
+     *   name?: string|null,
+     *   webhook?: string|null,
+     * }> $insights
      */
     public function withInsights(array $insights): self
     {
         $obj = clone $this;
-        $obj->insights = $insights;
+        $obj['insights'] = $insights;
 
         return $obj;
     }
@@ -136,7 +153,7 @@ final class InsightTemplateGroup implements BaseModel
     public function withWebhook(string $webhook): self
     {
         $obj = clone $this;
-        $obj->webhook = $webhook;
+        $obj['webhook'] = $webhook;
 
         return $obj;
     }

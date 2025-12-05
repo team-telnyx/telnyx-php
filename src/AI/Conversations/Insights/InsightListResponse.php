@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\Insights;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
+use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -54,33 +55,57 @@ final class InsightListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InsightTemplate> $data
+     * @param list<InsightTemplate|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   instructions: string,
+     *   insight_type?: value-of<InsightType>|null,
+     *   json_schema?: mixed|string|null,
+     *   name?: string|null,
+     *   webhook?: string|null,
+     * }> $data
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<InsightTemplate> $data
+     * @param list<InsightTemplate|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   instructions: string,
+     *   insight_type?: value-of<InsightType>|null,
+     *   json_schema?: mixed|string|null,
+     *   name?: string|null,
+     *   webhook?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

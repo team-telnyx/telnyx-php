@@ -95,14 +95,14 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $current_position && $obj->current_position = $current_position;
-        null !== $queue && $obj->queue = $queue;
-        null !== $queue_avg_wait_time_secs && $obj->queue_avg_wait_time_secs = $queue_avg_wait_time_secs;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $current_position && $obj['current_position'] = $current_position;
+        null !== $queue && $obj['queue'] = $queue;
+        null !== $queue_avg_wait_time_secs && $obj['queue_avg_wait_time_secs'] = $queue_avg_wait_time_secs;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class Payload implements BaseModel
     public function withCurrentPosition(int $currentPosition): self
     {
         $obj = clone $this;
-        $obj->current_position = $currentPosition;
+        $obj['current_position'] = $currentPosition;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class Payload implements BaseModel
     public function withQueue(string $queue): self
     {
         $obj = clone $this;
-        $obj->queue = $queue;
+        $obj['queue'] = $queue;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Payload implements BaseModel
     public function withQueueAvgWaitTimeSecs(int $queueAvgWaitTimeSecs): self
     {
         $obj = clone $this;
-        $obj->queue_avg_wait_time_secs = $queueAvgWaitTimeSecs;
+        $obj['queue_avg_wait_time_secs'] = $queueAvgWaitTimeSecs;
 
         return $obj;
     }

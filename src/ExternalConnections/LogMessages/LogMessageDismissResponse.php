@@ -40,7 +40,7 @@ final class LogMessageDismissResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        null !== $success && $obj->success = $success;
+        null !== $success && $obj['success'] = $success;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class LogMessageDismissResponse implements BaseModel, ResponseConverter
     public function withSuccess(bool $success): self
     {
         $obj = clone $this;
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }

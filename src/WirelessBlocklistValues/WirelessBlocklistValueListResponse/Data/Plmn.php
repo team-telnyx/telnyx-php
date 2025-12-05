@@ -56,8 +56,8 @@ final class Plmn implements BaseModel
     {
         $obj = new self;
 
-        $obj->code = $code;
-        $obj->name = $name;
+        $obj['code'] = $code;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Plmn implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Plmn implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

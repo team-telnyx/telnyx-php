@@ -80,34 +80,50 @@ final class VerifyProfile implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Call|array{
+     *   app_name?: string|null,
+     *   code_length?: int|null,
+     *   default_verification_timeout_secs?: int|null,
+     *   messaging_template_id?: string|null,
+     *   whitelisted_destinations?: list<string>|null,
+     * } $call
+     * @param Flashcall|array{default_verification_timeout_secs?: int|null} $flashcall
      * @param RecordType|value-of<RecordType> $record_type
+     * @param SMS|array{
+     *   alpha_sender?: string|null,
+     *   app_name?: string|null,
+     *   code_length?: int|null,
+     *   default_verification_timeout_secs?: int|null,
+     *   messaging_template_id?: string|null,
+     *   whitelisted_destinations?: list<string>|null,
+     * } $sms
      */
     public static function with(
         ?string $id = null,
-        ?Call $call = null,
+        Call|array|null $call = null,
         ?string $created_at = null,
-        ?Flashcall $flashcall = null,
+        Flashcall|array|null $flashcall = null,
         ?string $language = null,
         ?string $name = null,
         RecordType|string|null $record_type = null,
-        ?SMS $sms = null,
+        SMS|array|null $sms = null,
         ?string $updated_at = null,
         ?string $webhook_failover_url = null,
         ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $call && $obj->call = $call;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $flashcall && $obj->flashcall = $flashcall;
-        null !== $language && $obj->language = $language;
-        null !== $name && $obj->name = $name;
+        null !== $id && $obj['id'] = $id;
+        null !== $call && $obj['call'] = $call;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $flashcall && $obj['flashcall'] = $flashcall;
+        null !== $language && $obj['language'] = $language;
+        null !== $name && $obj['name'] = $name;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $sms && $obj->sms = $sms;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
-        null !== $webhook_url && $obj->webhook_url = $webhook_url;
+        null !== $sms && $obj['sms'] = $sms;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $webhook_failover_url && $obj['webhook_failover_url'] = $webhook_failover_url;
+        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
 
         return $obj;
     }
@@ -115,15 +131,24 @@ final class VerifyProfile implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
-    public function withCall(Call $call): self
+    /**
+     * @param Call|array{
+     *   app_name?: string|null,
+     *   code_length?: int|null,
+     *   default_verification_timeout_secs?: int|null,
+     *   messaging_template_id?: string|null,
+     *   whitelisted_destinations?: list<string>|null,
+     * } $call
+     */
+    public function withCall(Call|array $call): self
     {
         $obj = clone $this;
-        $obj->call = $call;
+        $obj['call'] = $call;
 
         return $obj;
     }
@@ -131,15 +156,18 @@ final class VerifyProfile implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
-    public function withFlashcall(Flashcall $flashcall): self
+    /**
+     * @param Flashcall|array{default_verification_timeout_secs?: int|null} $flashcall
+     */
+    public function withFlashcall(Flashcall|array $flashcall): self
     {
         $obj = clone $this;
-        $obj->flashcall = $flashcall;
+        $obj['flashcall'] = $flashcall;
 
         return $obj;
     }
@@ -147,7 +175,7 @@ final class VerifyProfile implements BaseModel
     public function withLanguage(string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -155,7 +183,7 @@ final class VerifyProfile implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -173,10 +201,20 @@ final class VerifyProfile implements BaseModel
         return $obj;
     }
 
-    public function withSMS(SMS $sms): self
+    /**
+     * @param SMS|array{
+     *   alpha_sender?: string|null,
+     *   app_name?: string|null,
+     *   code_length?: int|null,
+     *   default_verification_timeout_secs?: int|null,
+     *   messaging_template_id?: string|null,
+     *   whitelisted_destinations?: list<string>|null,
+     * } $sms
+     */
+    public function withSMS(SMS|array $sms): self
     {
         $obj = clone $this;
-        $obj->sms = $sms;
+        $obj['sms'] = $sms;
 
         return $obj;
     }
@@ -184,7 +222,7 @@ final class VerifyProfile implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -192,7 +230,7 @@ final class VerifyProfile implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhook_failover_url = $webhookFailoverURL;
+        $obj['webhook_failover_url'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -200,7 +238,7 @@ final class VerifyProfile implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhook_url = $webhookURL;
+        $obj['webhook_url'] = $webhookURL;
 
         return $obj;
     }

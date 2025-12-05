@@ -6,6 +6,7 @@ namespace Telnyx\Webhooks\CallInitiatedWebhookEvent\Data;
 
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
+use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -174,9 +175,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader> $custom_headers
+     * @param list<CustomSipHeader|array{name: string, value: string}> $custom_headers
      * @param Direction|value-of<Direction> $direction
-     * @param list<SipHeader> $sip_headers
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sip_headers
      * @param State|value-of<State> $state
      * @param list<string> $tags
      */
@@ -203,25 +204,25 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_screening_result && $obj->call_screening_result = $call_screening_result;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
-        null !== $caller_id_name && $obj->caller_id_name = $caller_id_name;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_codecs && $obj->connection_codecs = $connection_codecs;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $custom_headers && $obj->custom_headers = $custom_headers;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_screening_result && $obj['call_screening_result'] = $call_screening_result;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
+        null !== $caller_id_name && $obj['caller_id_name'] = $caller_id_name;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_codecs && $obj['connection_codecs'] = $connection_codecs;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $from && $obj->from = $from;
-        null !== $offered_codecs && $obj->offered_codecs = $offered_codecs;
-        null !== $shaken_stir_attestation && $obj->shaken_stir_attestation = $shaken_stir_attestation;
-        null !== $shaken_stir_validated && $obj->shaken_stir_validated = $shaken_stir_validated;
-        null !== $sip_headers && $obj->sip_headers = $sip_headers;
-        null !== $start_time && $obj->start_time = $start_time;
+        null !== $from && $obj['from'] = $from;
+        null !== $offered_codecs && $obj['offered_codecs'] = $offered_codecs;
+        null !== $shaken_stir_attestation && $obj['shaken_stir_attestation'] = $shaken_stir_attestation;
+        null !== $shaken_stir_validated && $obj['shaken_stir_validated'] = $shaken_stir_validated;
+        null !== $sip_headers && $obj['sip_headers'] = $sip_headers;
+        null !== $start_time && $obj['start_time'] = $start_time;
         null !== $state && $obj['state'] = $state;
-        null !== $tags && $obj->tags = $tags;
-        null !== $to && $obj->to = $to;
+        null !== $tags && $obj['tags'] = $tags;
+        null !== $to && $obj['to'] = $to;
 
         return $obj;
     }
@@ -232,7 +233,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -243,7 +244,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -254,7 +255,7 @@ final class Payload implements BaseModel
     public function withCallScreeningResult(string $callScreeningResult): self
     {
         $obj = clone $this;
-        $obj->call_screening_result = $callScreeningResult;
+        $obj['call_screening_result'] = $callScreeningResult;
 
         return $obj;
     }
@@ -265,7 +266,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -276,7 +277,7 @@ final class Payload implements BaseModel
     public function withCallerIDName(string $callerIDName): self
     {
         $obj = clone $this;
-        $obj->caller_id_name = $callerIDName;
+        $obj['caller_id_name'] = $callerIDName;
 
         return $obj;
     }
@@ -287,7 +288,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -298,7 +299,7 @@ final class Payload implements BaseModel
     public function withConnectionCodecs(string $connectionCodecs): self
     {
         $obj = clone $this;
-        $obj->connection_codecs = $connectionCodecs;
+        $obj['connection_codecs'] = $connectionCodecs;
 
         return $obj;
     }
@@ -309,7 +310,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -317,12 +318,12 @@ final class Payload implements BaseModel
     /**
      * Custom headers from sip invite.
      *
-     * @param list<CustomSipHeader> $customHeaders
+     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj->custom_headers = $customHeaders;
+        $obj['custom_headers'] = $customHeaders;
 
         return $obj;
     }
@@ -346,7 +347,7 @@ final class Payload implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -357,7 +358,7 @@ final class Payload implements BaseModel
     public function withOfferedCodecs(string $offeredCodecs): self
     {
         $obj = clone $this;
-        $obj->offered_codecs = $offeredCodecs;
+        $obj['offered_codecs'] = $offeredCodecs;
 
         return $obj;
     }
@@ -369,7 +370,7 @@ final class Payload implements BaseModel
         string $shakenStirAttestation
     ): self {
         $obj = clone $this;
-        $obj->shaken_stir_attestation = $shakenStirAttestation;
+        $obj['shaken_stir_attestation'] = $shakenStirAttestation;
 
         return $obj;
     }
@@ -380,7 +381,7 @@ final class Payload implements BaseModel
     public function withShakenStirValidated(bool $shakenStirValidated): self
     {
         $obj = clone $this;
-        $obj->shaken_stir_validated = $shakenStirValidated;
+        $obj['shaken_stir_validated'] = $shakenStirValidated;
 
         return $obj;
     }
@@ -388,12 +389,12 @@ final class Payload implements BaseModel
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @param list<SipHeader> $sipHeaders
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
         $obj = clone $this;
-        $obj->sip_headers = $sipHeaders;
+        $obj['sip_headers'] = $sipHeaders;
 
         return $obj;
     }
@@ -404,7 +405,7 @@ final class Payload implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -430,7 +431,7 @@ final class Payload implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -441,7 +442,7 @@ final class Payload implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

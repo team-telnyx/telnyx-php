@@ -64,8 +64,8 @@ final class PhoneNumberCampaignUpdateParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->campaignId = $campaignId;
-        $obj->phoneNumber = $phoneNumber;
+        $obj['campaignId'] = $campaignId;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class PhoneNumberCampaignUpdateParams implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignId = $campaignID;
+        $obj['campaignId'] = $campaignID;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class PhoneNumberCampaignUpdateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

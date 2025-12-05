@@ -74,14 +74,14 @@ final class AcceptanceCriteria implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $acceptable_characters && $obj->acceptable_characters = $acceptable_characters;
-        null !== $acceptable_values && $obj->acceptable_values = $acceptable_values;
-        null !== $case_sensitive && $obj->case_sensitive = $case_sensitive;
-        null !== $locality_limit && $obj->locality_limit = $locality_limit;
-        null !== $max_length && $obj->max_length = $max_length;
-        null !== $min_length && $obj->min_length = $min_length;
-        null !== $regex && $obj->regex = $regex;
-        null !== $time_limit && $obj->time_limit = $time_limit;
+        null !== $acceptable_characters && $obj['acceptable_characters'] = $acceptable_characters;
+        null !== $acceptable_values && $obj['acceptable_values'] = $acceptable_values;
+        null !== $case_sensitive && $obj['case_sensitive'] = $case_sensitive;
+        null !== $locality_limit && $obj['locality_limit'] = $locality_limit;
+        null !== $max_length && $obj['max_length'] = $max_length;
+        null !== $min_length && $obj['min_length'] = $min_length;
+        null !== $regex && $obj['regex'] = $regex;
+        null !== $time_limit && $obj['time_limit'] = $time_limit;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withAcceptableCharacters(string $acceptableCharacters): self
     {
         $obj = clone $this;
-        $obj->acceptable_characters = $acceptableCharacters;
+        $obj['acceptable_characters'] = $acceptableCharacters;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withAcceptableValues(array $acceptableValues): self
     {
         $obj = clone $this;
-        $obj->acceptable_values = $acceptableValues;
+        $obj['acceptable_values'] = $acceptableValues;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withCaseSensitive(string $caseSensitive): self
     {
         $obj = clone $this;
-        $obj->case_sensitive = $caseSensitive;
+        $obj['case_sensitive'] = $caseSensitive;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withLocalityLimit(string $localityLimit): self
     {
         $obj = clone $this;
-        $obj->locality_limit = $localityLimit;
+        $obj['locality_limit'] = $localityLimit;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withMaxLength(string $maxLength): self
     {
         $obj = clone $this;
-        $obj->max_length = $maxLength;
+        $obj['max_length'] = $maxLength;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withMinLength(string $minLength): self
     {
         $obj = clone $this;
-        $obj->min_length = $minLength;
+        $obj['min_length'] = $minLength;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withRegex(string $regex): self
     {
         $obj = clone $this;
-        $obj->regex = $regex;
+        $obj['regex'] = $regex;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withTimeLimit(string $timeLimit): self
     {
         $obj = clone $this;
-        $obj->time_limit = $timeLimit;
+        $obj['time_limit'] = $timeLimit;
 
         return $obj;
     }

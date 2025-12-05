@@ -64,8 +64,8 @@ final class ActionVerifyParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->code = $code;
-        $obj->verify_profile_id = $verify_profile_id;
+        $obj['code'] = $code;
+        $obj['verify_profile_id'] = $verify_profile_id;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class ActionVerifyParams implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class ActionVerifyParams implements BaseModel
     public function withVerifyProfileID(string $verifyProfileID): self
     {
         $obj = clone $this;
-        $obj->verify_profile_id = $verifyProfileID;
+        $obj['verify_profile_id'] = $verifyProfileID;
 
         return $obj;
     }

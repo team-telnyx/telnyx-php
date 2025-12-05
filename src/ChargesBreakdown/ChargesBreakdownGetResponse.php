@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data;
+use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -47,20 +48,39 @@ final class ChargesBreakdownGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   currency: string,
+     *   end_date: \DateTimeInterface,
+     *   results: list<Result>,
+     *   start_date: \DateTimeInterface,
+     *   user_email: string,
+     *   user_id: string,
+     * } $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   currency: string,
+     *   end_date: \DateTimeInterface,
+     *   results: list<Result>,
+     *   start_date: \DateTimeInterface,
+     *   user_email: string,
+     *   user_id: string,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

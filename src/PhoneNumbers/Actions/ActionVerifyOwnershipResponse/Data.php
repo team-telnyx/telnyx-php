@@ -53,7 +53,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Found> $found
+     * @param list<Found|array{id?: string|null, number_val_e164?: string|null}> $found
      * @param list<string> $not_found
      */
     public static function with(
@@ -63,9 +63,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $found && $obj->found = $found;
-        null !== $not_found && $obj->not_found = $not_found;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $found && $obj['found'] = $found;
+        null !== $not_found && $obj['not_found'] = $not_found;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -73,12 +73,12 @@ final class Data implements BaseModel
     /**
      * The list of phone numbers which you own and are in an editable state.
      *
-     * @param list<Found> $found
+     * @param list<Found|array{id?: string|null, number_val_e164?: string|null}> $found
      */
     public function withFound(array $found): self
     {
         $obj = clone $this;
-        $obj->found = $found;
+        $obj['found'] = $found;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Data implements BaseModel
     public function withNotFound(array $notFound): self
     {
         $obj = clone $this;
-        $obj->not_found = $notFound;
+        $obj['not_found'] = $notFound;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

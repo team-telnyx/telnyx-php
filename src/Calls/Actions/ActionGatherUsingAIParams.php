@@ -5,8 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\AI\Assistants\Assistant;
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
+use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
+use Telnyx\AI\Assistants\HangupTool;
+use Telnyx\AI\Assistants\RetrievalTool;
+use Telnyx\AI\Assistants\TransferTool;
+use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory\Role;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings;
+use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -28,19 +36,33 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionGatherUsingAIParamsShape = array{
  *   parameters: mixed,
- *   assistant?: Assistant,
+ *   assistant?: Assistant|array{
+ *     instructions?: string|null,
+ *     model?: string|null,
+ *     openai_api_key_ref?: string|null,
+ *     tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+ *   },
  *   client_state?: string,
  *   command_id?: string,
  *   greeting?: string,
- *   interruption_settings?: InterruptionSettings,
+ *   interruption_settings?: InterruptionSettings|array{enable?: bool|null},
  *   language?: GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
- *   message_history?: list<MessageHistory>,
+ *   message_history?: list<MessageHistory|array{
+ *     content?: string|null, role?: value-of<Role>|null
+ *   }>,
  *   send_message_history_updates?: bool,
  *   send_partial_results?: bool,
- *   transcription?: TranscriptionConfig,
+ *   transcription?: TranscriptionConfig|array{model?: string|null},
  *   user_response_timeout_ms?: int,
  *   voice?: string,
- *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings,
+ *   voice_settings?: ElevenLabsVoiceSettings|array{
+ *     type: value-of<Type>, api_key_ref?: string|null
+ *   }|TelnyxVoiceSettings|array{
+ *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
+ *     voice_speed?: float|null,
+ *   }|AwsVoiceSettings|array{
+ *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
+ *   },
  * }
  */
 final class ActionGatherUsingAIParams implements BaseModel
@@ -167,42 +189,60 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Assistant|array{
+     *   instructions?: string|null,
+     *   model?: string|null,
+     *   openai_api_key_ref?: string|null,
+     *   tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+     * } $assistant
+     * @param InterruptionSettings|array{enable?: bool|null} $interruption_settings
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
-     * @param list<MessageHistory> $message_history
+     * @param list<MessageHistory|array{
+     *   content?: string|null, role?: value-of<Role>|null
+     * }> $message_history
+     * @param TranscriptionConfig|array{model?: string|null} $transcription
+     * @param ElevenLabsVoiceSettings|array{
+     *   type: value-of<Type>, api_key_ref?: string|null
+     * }|TelnyxVoiceSettings|array{
+     *   type: value-of<TelnyxVoiceSettings\Type>,
+     *   voice_speed?: float|null,
+     * }|AwsVoiceSettings|array{
+     *   type: value-of<AwsVoiceSettings\Type>
+     * } $voice_settings
      */
     public static function with(
         mixed $parameters,
-        ?Assistant $assistant = null,
+        Assistant|array|null $assistant = null,
         ?string $client_state = null,
         ?string $command_id = null,
         ?string $greeting = null,
-        ?InterruptionSettings $interruption_settings = null,
+        InterruptionSettings|array|null $interruption_settings = null,
         GoogleTranscriptionLanguage|string|null $language = null,
         ?array $message_history = null,
         ?bool $send_message_history_updates = null,
         ?bool $send_partial_results = null,
-        ?TranscriptionConfig $transcription = null,
+        TranscriptionConfig|array|null $transcription = null,
         ?int $user_response_timeout_ms = null,
         ?string $voice = null,
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
     ): self {
         $obj = new self;
 
-        $obj->parameters = $parameters;
+        $obj['parameters'] = $parameters;
 
-        null !== $assistant && $obj->assistant = $assistant;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $greeting && $obj->greeting = $greeting;
-        null !== $interruption_settings && $obj->interruption_settings = $interruption_settings;
+        null !== $assistant && $obj['assistant'] = $assistant;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $greeting && $obj['greeting'] = $greeting;
+        null !== $interruption_settings && $obj['interruption_settings'] = $interruption_settings;
         null !== $language && $obj['language'] = $language;
-        null !== $message_history && $obj->message_history = $message_history;
-        null !== $send_message_history_updates && $obj->send_message_history_updates = $send_message_history_updates;
-        null !== $send_partial_results && $obj->send_partial_results = $send_partial_results;
-        null !== $transcription && $obj->transcription = $transcription;
-        null !== $user_response_timeout_ms && $obj->user_response_timeout_ms = $user_response_timeout_ms;
-        null !== $voice && $obj->voice = $voice;
-        null !== $voice_settings && $obj->voice_settings = $voice_settings;
+        null !== $message_history && $obj['message_history'] = $message_history;
+        null !== $send_message_history_updates && $obj['send_message_history_updates'] = $send_message_history_updates;
+        null !== $send_partial_results && $obj['send_partial_results'] = $send_partial_results;
+        null !== $transcription && $obj['transcription'] = $transcription;
+        null !== $user_response_timeout_ms && $obj['user_response_timeout_ms'] = $user_response_timeout_ms;
+        null !== $voice && $obj['voice'] = $voice;
+        null !== $voice_settings && $obj['voice_settings'] = $voice_settings;
 
         return $obj;
     }
@@ -213,18 +253,25 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withParameters(mixed $parameters): self
     {
         $obj = clone $this;
-        $obj->parameters = $parameters;
+        $obj['parameters'] = $parameters;
 
         return $obj;
     }
 
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
+     *
+     * @param Assistant|array{
+     *   instructions?: string|null,
+     *   model?: string|null,
+     *   openai_api_key_ref?: string|null,
+     *   tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+     * } $assistant
      */
-    public function withAssistant(Assistant $assistant): self
+    public function withAssistant(Assistant|array $assistant): self
     {
         $obj = clone $this;
-        $obj->assistant = $assistant;
+        $obj['assistant'] = $assistant;
 
         return $obj;
     }
@@ -235,7 +282,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -246,7 +293,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -257,19 +304,21 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withGreeting(string $greeting): self
     {
         $obj = clone $this;
-        $obj->greeting = $greeting;
+        $obj['greeting'] = $greeting;
 
         return $obj;
     }
 
     /**
      * Settings for handling user interruptions during assistant speech.
+     *
+     * @param InterruptionSettings|array{enable?: bool|null} $interruptionSettings
      */
     public function withInterruptionSettings(
-        InterruptionSettings $interruptionSettings
+        InterruptionSettings|array $interruptionSettings
     ): self {
         $obj = clone $this;
-        $obj->interruption_settings = $interruptionSettings;
+        $obj['interruption_settings'] = $interruptionSettings;
 
         return $obj;
     }
@@ -291,12 +340,14 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant.
      *
-     * @param list<MessageHistory> $messageHistory
+     * @param list<MessageHistory|array{
+     *   content?: string|null, role?: value-of<Role>|null
+     * }> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {
         $obj = clone $this;
-        $obj->message_history = $messageHistory;
+        $obj['message_history'] = $messageHistory;
 
         return $obj;
     }
@@ -308,7 +359,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         bool $sendMessageHistoryUpdates
     ): self {
         $obj = clone $this;
-        $obj->send_message_history_updates = $sendMessageHistoryUpdates;
+        $obj['send_message_history_updates'] = $sendMessageHistoryUpdates;
 
         return $obj;
     }
@@ -319,18 +370,21 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withSendPartialResults(bool $sendPartialResults): self
     {
         $obj = clone $this;
-        $obj->send_partial_results = $sendPartialResults;
+        $obj['send_partial_results'] = $sendPartialResults;
 
         return $obj;
     }
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
+     *
+     * @param TranscriptionConfig|array{model?: string|null} $transcription
      */
-    public function withTranscription(TranscriptionConfig $transcription): self
-    {
+    public function withTranscription(
+        TranscriptionConfig|array $transcription
+    ): self {
         $obj = clone $this;
-        $obj->transcription = $transcription;
+        $obj['transcription'] = $transcription;
 
         return $obj;
     }
@@ -341,7 +395,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withUserResponseTimeoutMs(int $userResponseTimeoutMs): self
     {
         $obj = clone $this;
-        $obj->user_response_timeout_ms = $userResponseTimeoutMs;
+        $obj['user_response_timeout_ms'] = $userResponseTimeoutMs;
 
         return $obj;
     }
@@ -358,19 +412,28 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withVoice(string $voice): self
     {
         $obj = clone $this;
-        $obj->voice = $voice;
+        $obj['voice'] = $voice;
 
         return $obj;
     }
 
     /**
      * The settings associated with the voice selected.
+     *
+     * @param ElevenLabsVoiceSettings|array{
+     *   type: value-of<Type>, api_key_ref?: string|null
+     * }|TelnyxVoiceSettings|array{
+     *   type: value-of<TelnyxVoiceSettings\Type>,
+     *   voice_speed?: float|null,
+     * }|AwsVoiceSettings|array{
+     *   type: value-of<AwsVoiceSettings\Type>
+     * } $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
         $obj = clone $this;
-        $obj->voice_settings = $voiceSettings;
+        $obj['voice_settings'] = $voiceSettings;
 
         return $obj;
     }

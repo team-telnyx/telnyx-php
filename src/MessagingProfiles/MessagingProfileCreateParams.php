@@ -25,8 +25,19 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
  *   mms_fall_back_to_sms?: bool,
  *   mms_transcoding?: bool,
  *   mobile_only?: bool,
- *   number_pool_settings?: NumberPoolSettings|null,
- *   url_shortener_settings?: URLShortenerSettings|null,
+ *   number_pool_settings?: null|NumberPoolSettings|array{
+ *     long_code_weight: float,
+ *     skip_unhealthy: bool,
+ *     toll_free_weight: float,
+ *     geomatch?: bool|null,
+ *     sticky_sender?: bool|null,
+ *   },
+ *   url_shortener_settings?: null|URLShortenerSettings|array{
+ *     domain: string,
+ *     prefix?: string|null,
+ *     replace_blacklist_only?: bool|null,
+ *     send_webhooks?: bool|null,
+ *   },
  *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhook_failover_url?: string|null,
  *   webhook_url?: string|null,
@@ -163,6 +174,19 @@ final class MessagingProfileCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $whitelisted_destinations
+     * @param NumberPoolSettings|array{
+     *   long_code_weight: float,
+     *   skip_unhealthy: bool,
+     *   toll_free_weight: float,
+     *   geomatch?: bool|null,
+     *   sticky_sender?: bool|null,
+     * }|null $number_pool_settings
+     * @param URLShortenerSettings|array{
+     *   domain: string,
+     *   prefix?: string|null,
+     *   replace_blacklist_only?: bool|null,
+     *   send_webhooks?: bool|null,
+     * }|null $url_shortener_settings
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
      */
     public static function with(
@@ -175,29 +199,29 @@ final class MessagingProfileCreateParams implements BaseModel
         ?bool $mms_fall_back_to_sms = null,
         ?bool $mms_transcoding = null,
         ?bool $mobile_only = null,
-        ?NumberPoolSettings $number_pool_settings = null,
-        ?URLShortenerSettings $url_shortener_settings = null,
+        NumberPoolSettings|array|null $number_pool_settings = null,
+        URLShortenerSettings|array|null $url_shortener_settings = null,
         WebhookAPIVersion|string|null $webhook_api_version = null,
         ?string $webhook_failover_url = null,
         ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
-        $obj->whitelisted_destinations = $whitelisted_destinations;
+        $obj['name'] = $name;
+        $obj['whitelisted_destinations'] = $whitelisted_destinations;
 
-        null !== $alpha_sender && $obj->alpha_sender = $alpha_sender;
-        null !== $daily_spend_limit && $obj->daily_spend_limit = $daily_spend_limit;
-        null !== $daily_spend_limit_enabled && $obj->daily_spend_limit_enabled = $daily_spend_limit_enabled;
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $mms_fall_back_to_sms && $obj->mms_fall_back_to_sms = $mms_fall_back_to_sms;
-        null !== $mms_transcoding && $obj->mms_transcoding = $mms_transcoding;
-        null !== $mobile_only && $obj->mobile_only = $mobile_only;
-        null !== $number_pool_settings && $obj->number_pool_settings = $number_pool_settings;
-        null !== $url_shortener_settings && $obj->url_shortener_settings = $url_shortener_settings;
+        null !== $alpha_sender && $obj['alpha_sender'] = $alpha_sender;
+        null !== $daily_spend_limit && $obj['daily_spend_limit'] = $daily_spend_limit;
+        null !== $daily_spend_limit_enabled && $obj['daily_spend_limit_enabled'] = $daily_spend_limit_enabled;
+        null !== $enabled && $obj['enabled'] = $enabled;
+        null !== $mms_fall_back_to_sms && $obj['mms_fall_back_to_sms'] = $mms_fall_back_to_sms;
+        null !== $mms_transcoding && $obj['mms_transcoding'] = $mms_transcoding;
+        null !== $mobile_only && $obj['mobile_only'] = $mobile_only;
+        null !== $number_pool_settings && $obj['number_pool_settings'] = $number_pool_settings;
+        null !== $url_shortener_settings && $obj['url_shortener_settings'] = $url_shortener_settings;
         null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
-        null !== $webhook_url && $obj->webhook_url = $webhook_url;
+        null !== $webhook_failover_url && $obj['webhook_failover_url'] = $webhook_failover_url;
+        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
 
         return $obj;
     }
@@ -208,7 +232,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -222,7 +246,7 @@ final class MessagingProfileCreateParams implements BaseModel
         array $whitelistedDestinations
     ): self {
         $obj = clone $this;
-        $obj->whitelisted_destinations = $whitelistedDestinations;
+        $obj['whitelisted_destinations'] = $whitelistedDestinations;
 
         return $obj;
     }
@@ -233,7 +257,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withAlphaSender(?string $alphaSender): self
     {
         $obj = clone $this;
-        $obj->alpha_sender = $alphaSender;
+        $obj['alpha_sender'] = $alphaSender;
 
         return $obj;
     }
@@ -244,7 +268,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withDailySpendLimit(string $dailySpendLimit): self
     {
         $obj = clone $this;
-        $obj->daily_spend_limit = $dailySpendLimit;
+        $obj['daily_spend_limit'] = $dailySpendLimit;
 
         return $obj;
     }
@@ -256,7 +280,7 @@ final class MessagingProfileCreateParams implements BaseModel
         bool $dailySpendLimitEnabled
     ): self {
         $obj = clone $this;
-        $obj->daily_spend_limit_enabled = $dailySpendLimitEnabled;
+        $obj['daily_spend_limit_enabled'] = $dailySpendLimitEnabled;
 
         return $obj;
     }
@@ -267,7 +291,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withEnabled(bool $enabled): self
     {
         $obj = clone $this;
-        $obj->enabled = $enabled;
+        $obj['enabled'] = $enabled;
 
         return $obj;
     }
@@ -278,7 +302,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withMmsFallBackToSMS(bool $mmsFallBackToSMS): self
     {
         $obj = clone $this;
-        $obj->mms_fall_back_to_sms = $mmsFallBackToSMS;
+        $obj['mms_fall_back_to_sms'] = $mmsFallBackToSMS;
 
         return $obj;
     }
@@ -289,7 +313,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withMmsTranscoding(bool $mmsTranscoding): self
     {
         $obj = clone $this;
-        $obj->mms_transcoding = $mmsTranscoding;
+        $obj['mms_transcoding'] = $mmsTranscoding;
 
         return $obj;
     }
@@ -300,7 +324,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withMobileOnly(bool $mobileOnly): self
     {
         $obj = clone $this;
-        $obj->mobile_only = $mobileOnly;
+        $obj['mobile_only'] = $mobileOnly;
 
         return $obj;
     }
@@ -311,12 +335,20 @@ final class MessagingProfileCreateParams implements BaseModel
      * assigned to the messaging profile.
      *
      * To disable this feature, set the object field to `null`.
+     *
+     * @param NumberPoolSettings|array{
+     *   long_code_weight: float,
+     *   skip_unhealthy: bool,
+     *   toll_free_weight: float,
+     *   geomatch?: bool|null,
+     *   sticky_sender?: bool|null,
+     * }|null $numberPoolSettings
      */
     public function withNumberPoolSettings(
-        ?NumberPoolSettings $numberPoolSettings
+        NumberPoolSettings|array|null $numberPoolSettings
     ): self {
         $obj = clone $this;
-        $obj->number_pool_settings = $numberPoolSettings;
+        $obj['number_pool_settings'] = $numberPoolSettings;
 
         return $obj;
     }
@@ -329,12 +361,19 @@ final class MessagingProfileCreateParams implements BaseModel
      * deliverability.
      *
      * To disable this feature, set the object field to `null`.
+     *
+     * @param URLShortenerSettings|array{
+     *   domain: string,
+     *   prefix?: string|null,
+     *   replace_blacklist_only?: bool|null,
+     *   send_webhooks?: bool|null,
+     * }|null $urlShortenerSettings
      */
     public function withURLShortenerSettings(
-        ?URLShortenerSettings $urlShortenerSettings
+        URLShortenerSettings|array|null $urlShortenerSettings
     ): self {
         $obj = clone $this;
-        $obj->url_shortener_settings = $urlShortenerSettings;
+        $obj['url_shortener_settings'] = $urlShortenerSettings;
 
         return $obj;
     }
@@ -359,7 +398,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhook_failover_url = $webhookFailoverURL;
+        $obj['webhook_failover_url'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -370,7 +409,7 @@ final class MessagingProfileCreateParams implements BaseModel
     public function withWebhookURL(?string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhook_url = $webhookURL;
+        $obj['webhook_url'] = $webhookURL;
 
         return $obj;
     }

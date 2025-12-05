@@ -78,9 +78,9 @@ final class MessagingFeatureSet implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->domestic_two_way = $domestic_two_way;
-        $obj->international_inbound = $international_inbound;
-        $obj->international_outbound = $international_outbound;
+        $obj['domestic_two_way'] = $domestic_two_way;
+        $obj['international_inbound'] = $international_inbound;
+        $obj['international_outbound'] = $international_outbound;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class MessagingFeatureSet implements BaseModel
     public function withDomesticTwoWay(bool $domesticTwoWay): self
     {
         $obj = clone $this;
-        $obj->domestic_two_way = $domesticTwoWay;
+        $obj['domestic_two_way'] = $domesticTwoWay;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class MessagingFeatureSet implements BaseModel
     public function withInternationalInbound(bool $internationalInbound): self
     {
         $obj = clone $this;
-        $obj->international_inbound = $internationalInbound;
+        $obj['international_inbound'] = $internationalInbound;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class MessagingFeatureSet implements BaseModel
     public function withInternationalOutbound(bool $internationalOutbound): self
     {
         $obj = clone $this;
-        $obj->international_outbound = $internationalOutbound;
+        $obj['international_outbound'] = $internationalOutbound;
 
         return $obj;
     }

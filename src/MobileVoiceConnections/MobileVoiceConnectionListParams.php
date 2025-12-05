@@ -69,10 +69,10 @@ final class MobileVoiceConnectionListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $filter_connection_name__contains_ && $obj->filter_connection_name__contains_ = $filter_connection_name__contains_;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
-        null !== $sort && $obj->sort = $sort;
+        null !== $filter_connection_name__contains_ && $obj['filter_connection_name__contains_'] = $filter_connection_name__contains_;
+        null !== $page_number_ && $obj['page_number_'] = $page_number_;
+        null !== $page_size_ && $obj['page_size_'] = $page_size_;
+        null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class MobileVoiceConnectionListParams implements BaseModel
         string $filterConnectionNameContains
     ): self {
         $obj = clone $this;
-        $obj->filter_connection_name__contains_ = $filterConnectionNameContains;
+        $obj['filter_connection_name__contains_'] = $filterConnectionNameContains;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class MobileVoiceConnectionListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
+        $obj['page_number_'] = $pageNumber;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class MobileVoiceConnectionListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj['page_size_'] = $pageSize;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class MobileVoiceConnectionListParams implements BaseModel
     public function withSort(string $sort): self
     {
         $obj = clone $this;
-        $obj->sort = $sort;
+        $obj['sort'] = $sort;
 
         return $obj;
     }

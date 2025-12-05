@@ -65,10 +65,10 @@ final class DateRangeFilter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $gt && $obj->gt = $gt;
-        null !== $gte && $obj->gte = $gte;
-        null !== $lt && $obj->lt = $lt;
-        null !== $lte && $obj->lte = $lte;
+        null !== $gt && $obj['gt'] = $gt;
+        null !== $gte && $obj['gte'] = $gte;
+        null !== $lt && $obj['lt'] = $lt;
+        null !== $lte && $obj['lte'] = $lte;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class DateRangeFilter implements BaseModel
     public function withGt(\DateTimeInterface $gt): self
     {
         $obj = clone $this;
-        $obj->gt = $gt;
+        $obj['gt'] = $gt;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class DateRangeFilter implements BaseModel
     public function withGte(\DateTimeInterface $gte): self
     {
         $obj = clone $this;
-        $obj->gte = $gte;
+        $obj['gte'] = $gte;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class DateRangeFilter implements BaseModel
     public function withLt(\DateTimeInterface $lt): self
     {
         $obj = clone $this;
-        $obj->lt = $lt;
+        $obj['lt'] = $lt;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class DateRangeFilter implements BaseModel
     public function withLte(\DateTimeInterface $lte): self
     {
         $obj = clone $this;
-        $obj->lte = $lte;
+        $obj['lte'] = $lte;
 
         return $obj;
     }

@@ -43,37 +43,60 @@ final class CallQualityStats implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Inbound|array{
+     *   jitter_max_variance?: string|null,
+     *   jitter_packet_count?: string|null,
+     *   mos?: string|null,
+     *   packet_count?: string|null,
+     *   skip_packet_count?: string|null,
+     * } $inbound
+     * @param Outbound|array{
+     *   packet_count?: string|null, skip_packet_count?: string|null
+     * } $outbound
      */
     public static function with(
-        ?Inbound $inbound = null,
-        ?Outbound $outbound = null
+        Inbound|array|null $inbound = null,
+        Outbound|array|null $outbound = null
     ): self {
         $obj = new self;
 
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $outbound && $obj->outbound = $outbound;
+        null !== $inbound && $obj['inbound'] = $inbound;
+        null !== $outbound && $obj['outbound'] = $outbound;
 
         return $obj;
     }
 
     /**
      * Inbound call quality statistics.
+     *
+     * @param Inbound|array{
+     *   jitter_max_variance?: string|null,
+     *   jitter_packet_count?: string|null,
+     *   mos?: string|null,
+     *   packet_count?: string|null,
+     *   skip_packet_count?: string|null,
+     * } $inbound
      */
-    public function withInbound(Inbound $inbound): self
+    public function withInbound(Inbound|array $inbound): self
     {
         $obj = clone $this;
-        $obj->inbound = $inbound;
+        $obj['inbound'] = $inbound;
 
         return $obj;
     }
 
     /**
      * Outbound call quality statistics.
+     *
+     * @param Outbound|array{
+     *   packet_count?: string|null, skip_packet_count?: string|null
+     * } $outbound
      */
-    public function withOutbound(Outbound $outbound): self
+    public function withOutbound(Outbound|array $outbound): self
     {
         $obj = clone $this;
-        $obj->outbound = $outbound;
+        $obj['outbound'] = $outbound;
 
         return $obj;
     }

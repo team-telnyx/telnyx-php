@@ -40,8 +40,8 @@ final class Metadata implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $best_effort_results && $obj->best_effort_results = $best_effort_results;
-        null !== $total_results && $obj->total_results = $total_results;
+        null !== $best_effort_results && $obj['best_effort_results'] = $best_effort_results;
+        null !== $total_results && $obj['total_results'] = $total_results;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Metadata implements BaseModel
     public function withBestEffortResults(int $bestEffortResults): self
     {
         $obj = clone $this;
-        $obj->best_effort_results = $bestEffortResults;
+        $obj['best_effort_results'] = $bestEffortResults;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class Metadata implements BaseModel
     public function withTotalResults(int $totalResults): self
     {
         $obj = clone $this;
-        $obj->total_results = $totalResults;
+        $obj['total_results'] = $totalResults;
 
         return $obj;
     }

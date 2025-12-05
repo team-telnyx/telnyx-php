@@ -178,24 +178,24 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->record_type = $record_type;
+        $obj['record_type'] = $record_type;
 
-        null !== $id && $obj->id = $id;
-        null !== $billed_sec && $obj->billed_sec = $billed_sec;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_sec && $obj->call_sec = $call_sec;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
-        null !== $conference_id && $obj->conference_id = $conference_id;
-        null !== $cost && $obj->cost = $cost;
-        null !== $currency && $obj->currency = $currency;
-        null !== $destination_number && $obj->destination_number = $destination_number;
-        null !== $is_telnyx_billable && $obj->is_telnyx_billable = $is_telnyx_billable;
-        null !== $joined_at && $obj->joined_at = $joined_at;
-        null !== $left_at && $obj->left_at = $left_at;
-        null !== $originating_number && $obj->originating_number = $originating_number;
-        null !== $rate && $obj->rate = $rate;
-        null !== $rate_measured_in && $obj->rate_measured_in = $rate_measured_in;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $billed_sec && $obj['billed_sec'] = $billed_sec;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_sec && $obj['call_sec'] = $call_sec;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
+        null !== $conference_id && $obj['conference_id'] = $conference_id;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $destination_number && $obj['destination_number'] = $destination_number;
+        null !== $is_telnyx_billable && $obj['is_telnyx_billable'] = $is_telnyx_billable;
+        null !== $joined_at && $obj['joined_at'] = $joined_at;
+        null !== $left_at && $obj['left_at'] = $left_at;
+        null !== $originating_number && $obj['originating_number'] = $originating_number;
+        null !== $rate && $obj['rate'] = $rate;
+        null !== $rate_measured_in && $obj['rate_measured_in'] = $rate_measured_in;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -225,7 +225,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withBilledSec(int $billedSec): self
     {
         $obj = clone $this;
-        $obj->billed_sec = $billedSec;
+        $obj['billed_sec'] = $billedSec;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCallSec(int $callSec): self
     {
         $obj = clone $this;
-        $obj->call_sec = $callSec;
+        $obj['call_sec'] = $callSec;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withConferenceID(string $conferenceID): self
     {
         $obj = clone $this;
-        $obj->conference_id = $conferenceID;
+        $obj['conference_id'] = $conferenceID;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCost(string $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -291,7 +291,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -302,7 +302,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withDestinationNumber(string $destinationNumber): self
     {
         $obj = clone $this;
-        $obj->destination_number = $destinationNumber;
+        $obj['destination_number'] = $destinationNumber;
 
         return $obj;
     }
@@ -313,7 +313,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withIsTelnyxBillable(bool $isTelnyxBillable): self
     {
         $obj = clone $this;
-        $obj->is_telnyx_billable = $isTelnyxBillable;
+        $obj['is_telnyx_billable'] = $isTelnyxBillable;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withJoinedAt(\DateTimeInterface $joinedAt): self
     {
         $obj = clone $this;
-        $obj->joined_at = $joinedAt;
+        $obj['joined_at'] = $joinedAt;
 
         return $obj;
     }
@@ -335,7 +335,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withLeftAt(\DateTimeInterface $leftAt): self
     {
         $obj = clone $this;
-        $obj->left_at = $leftAt;
+        $obj['left_at'] = $leftAt;
 
         return $obj;
     }
@@ -346,7 +346,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withOriginatingNumber(string $originatingNumber): self
     {
         $obj = clone $this;
-        $obj->originating_number = $originatingNumber;
+        $obj['originating_number'] = $originatingNumber;
 
         return $obj;
     }
@@ -357,7 +357,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withRate(string $rate): self
     {
         $obj = clone $this;
-        $obj->rate = $rate;
+        $obj['rate'] = $rate;
 
         return $obj;
     }
@@ -368,7 +368,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
         $obj = clone $this;
-        $obj->rate_measured_in = $rateMeasuredIn;
+        $obj['rate_measured_in'] = $rateMeasuredIn;
 
         return $obj;
     }
@@ -379,7 +379,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

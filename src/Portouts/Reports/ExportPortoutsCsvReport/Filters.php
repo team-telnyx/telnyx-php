@@ -92,11 +92,11 @@ final class Filters implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $created_at__gt && $obj->created_at__gt = $created_at__gt;
-        null !== $created_at__lt && $obj->created_at__lt = $created_at__lt;
-        null !== $customer_reference__in && $obj->customer_reference__in = $customer_reference__in;
-        null !== $end_user_name && $obj->end_user_name = $end_user_name;
-        null !== $phone_numbers__overlaps && $obj->phone_numbers__overlaps = $phone_numbers__overlaps;
+        null !== $created_at__gt && $obj['created_at__gt'] = $created_at__gt;
+        null !== $created_at__lt && $obj['created_at__lt'] = $created_at__lt;
+        null !== $customer_reference__in && $obj['customer_reference__in'] = $customer_reference__in;
+        null !== $end_user_name && $obj['end_user_name'] = $end_user_name;
+        null !== $phone_numbers__overlaps && $obj['phone_numbers__overlaps'] = $phone_numbers__overlaps;
         null !== $status__in && $obj['status__in'] = $status__in;
 
         return $obj;
@@ -108,7 +108,7 @@ final class Filters implements BaseModel
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
         $obj = clone $this;
-        $obj->created_at__gt = $createdAtGt;
+        $obj['created_at__gt'] = $createdAtGt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Filters implements BaseModel
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
         $obj = clone $this;
-        $obj->created_at__lt = $createdAtLt;
+        $obj['created_at__lt'] = $createdAtLt;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Filters implements BaseModel
     public function withCustomerReferenceIn(array $customerReferenceIn): self
     {
         $obj = clone $this;
-        $obj->customer_reference__in = $customerReferenceIn;
+        $obj['customer_reference__in'] = $customerReferenceIn;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Filters implements BaseModel
     public function withEndUserName(string $endUserName): self
     {
         $obj = clone $this;
-        $obj->end_user_name = $endUserName;
+        $obj['end_user_name'] = $endUserName;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Filters implements BaseModel
     public function withPhoneNumbersOverlaps(array $phoneNumbersOverlaps): self
     {
         $obj = clone $this;
-        $obj->phone_numbers__overlaps = $phoneNumbersOverlaps;
+        $obj['phone_numbers__overlaps'] = $phoneNumbersOverlaps;
 
         return $obj;
     }

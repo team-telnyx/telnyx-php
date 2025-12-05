@@ -46,8 +46,8 @@ final class Cost implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $currency && $obj->currency = $currency;
+        null !== $amount && $obj['amount'] = $amount;
+        null !== $currency && $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Cost implements BaseModel
     public function withAmount(string $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Cost implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }

@@ -46,8 +46,8 @@ final class CreatedAt implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $gt && $obj->gt = $gt;
-        null !== $lt && $obj->lt = $lt;
+        null !== $gt && $obj['gt'] = $gt;
+        null !== $lt && $obj['lt'] = $lt;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class CreatedAt implements BaseModel
     public function withGt(\DateTimeInterface $gt): self
     {
         $obj = clone $this;
-        $obj->gt = $gt;
+        $obj['gt'] = $gt;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class CreatedAt implements BaseModel
     public function withLt(\DateTimeInterface $lt): self
     {
         $obj = clone $this;
-        $obj->lt = $lt;
+        $obj['lt'] = $lt;
 
         return $obj;
     }

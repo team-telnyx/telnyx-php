@@ -67,10 +67,10 @@ final class RcsContentInfo implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->file_url = $file_url;
+        $obj['file_url'] = $file_url;
 
-        null !== $force_refresh && $obj->force_refresh = $force_refresh;
-        null !== $thumbnail_url && $obj->thumbnail_url = $thumbnail_url;
+        null !== $force_refresh && $obj['force_refresh'] = $force_refresh;
+        null !== $thumbnail_url && $obj['thumbnail_url'] = $thumbnail_url;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class RcsContentInfo implements BaseModel
     public function withFileURL(string $fileURL): self
     {
         $obj = clone $this;
-        $obj->file_url = $fileURL;
+        $obj['file_url'] = $fileURL;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class RcsContentInfo implements BaseModel
     public function withForceRefresh(bool $forceRefresh): self
     {
         $obj = clone $this;
-        $obj->force_refresh = $forceRefresh;
+        $obj['force_refresh'] = $forceRefresh;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class RcsContentInfo implements BaseModel
     public function withThumbnailURL(string $thumbnailURL): self
     {
         $obj = clone $this;
-        $obj->thumbnail_url = $thumbnailURL;
+        $obj['thumbnail_url'] = $thumbnailURL;
 
         return $obj;
     }

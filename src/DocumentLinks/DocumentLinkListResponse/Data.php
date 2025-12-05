@@ -87,13 +87,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $document_id && $obj->document_id = $document_id;
-        null !== $linked_record_type && $obj->linked_record_type = $linked_record_type;
-        null !== $linked_resource_id && $obj->linked_resource_id = $linked_resource_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $document_id && $obj['document_id'] = $document_id;
+        null !== $linked_record_type && $obj['linked_record_type'] = $linked_record_type;
+        null !== $linked_resource_id && $obj['linked_resource_id'] = $linked_resource_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj->document_id = $documentID;
+        $obj['document_id'] = $documentID;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     public function withLinkedRecordType(string $linkedRecordType): self
     {
         $obj = clone $this;
-        $obj->linked_record_type = $linkedRecordType;
+        $obj['linked_record_type'] = $linkedRecordType;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Data implements BaseModel
     public function withLinkedResourceID(string $linkedResourceID): self
     {
         $obj = clone $this;
-        $obj->linked_resource_id = $linkedResourceID;
+        $obj['linked_resource_id'] = $linkedResourceID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

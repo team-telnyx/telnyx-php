@@ -150,15 +150,15 @@ final class CallSiprecJsonParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
+        $obj['account_sid'] = $account_sid;
 
-        null !== $ConnectorName && $obj->ConnectorName = $ConnectorName;
-        null !== $IncludeMetadataCustomHeaders && $obj->IncludeMetadataCustomHeaders = $IncludeMetadataCustomHeaders;
-        null !== $Name && $obj->Name = $Name;
-        null !== $Secure && $obj->Secure = $Secure;
-        null !== $SessionTimeoutSecs && $obj->SessionTimeoutSecs = $SessionTimeoutSecs;
+        null !== $ConnectorName && $obj['ConnectorName'] = $ConnectorName;
+        null !== $IncludeMetadataCustomHeaders && $obj['IncludeMetadataCustomHeaders'] = $IncludeMetadataCustomHeaders;
+        null !== $Name && $obj['Name'] = $Name;
+        null !== $Secure && $obj['Secure'] = $Secure;
+        null !== $SessionTimeoutSecs && $obj['SessionTimeoutSecs'] = $SessionTimeoutSecs;
         null !== $SipTransport && $obj['SipTransport'] = $SipTransport;
-        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
+        null !== $StatusCallback && $obj['StatusCallback'] = $StatusCallback;
         null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
         null !== $Track && $obj['Track'] = $Track;
 
@@ -168,7 +168,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withConnectorName(string $connectorName): self
     {
         $obj = clone $this;
-        $obj->ConnectorName = $connectorName;
+        $obj['ConnectorName'] = $connectorName;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class CallSiprecJsonParams implements BaseModel
         bool $includeMetadataCustomHeaders
     ): self {
         $obj = clone $this;
-        $obj->IncludeMetadataCustomHeaders = $includeMetadataCustomHeaders;
+        $obj['IncludeMetadataCustomHeaders'] = $includeMetadataCustomHeaders;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->Name = $name;
+        $obj['Name'] = $name;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withSecure(bool $secure): self
     {
         $obj = clone $this;
-        $obj->Secure = $secure;
+        $obj['Secure'] = $secure;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withSessionTimeoutSecs(int $sessionTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->SessionTimeoutSecs = $sessionTimeoutSecs;
+        $obj['SessionTimeoutSecs'] = $sessionTimeoutSecs;
 
         return $obj;
     }
@@ -249,7 +249,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->StatusCallback = $statusCallback;
+        $obj['StatusCallback'] = $statusCallback;
 
         return $obj;
     }

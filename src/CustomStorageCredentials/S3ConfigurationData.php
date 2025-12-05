@@ -92,10 +92,10 @@ final class S3ConfigurationData implements BaseModel
 
         $obj['backend'] = $backend;
 
-        null !== $aws_access_key_id && $obj->aws_access_key_id = $aws_access_key_id;
-        null !== $aws_secret_access_key && $obj->aws_secret_access_key = $aws_secret_access_key;
-        null !== $bucket && $obj->bucket = $bucket;
-        null !== $region && $obj->region = $region;
+        null !== $aws_access_key_id && $obj['aws_access_key_id'] = $aws_access_key_id;
+        null !== $aws_secret_access_key && $obj['aws_secret_access_key'] = $aws_secret_access_key;
+        null !== $bucket && $obj['bucket'] = $bucket;
+        null !== $region && $obj['region'] = $region;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class S3ConfigurationData implements BaseModel
     public function withAwsAccessKeyID(string $awsAccessKeyID): self
     {
         $obj = clone $this;
-        $obj->aws_access_key_id = $awsAccessKeyID;
+        $obj['aws_access_key_id'] = $awsAccessKeyID;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class S3ConfigurationData implements BaseModel
     public function withAwsSecretAccessKey(string $awsSecretAccessKey): self
     {
         $obj = clone $this;
-        $obj->aws_secret_access_key = $awsSecretAccessKey;
+        $obj['aws_secret_access_key'] = $awsSecretAccessKey;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class S3ConfigurationData implements BaseModel
     public function withBucket(string $bucket): self
     {
         $obj = clone $this;
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class S3ConfigurationData implements BaseModel
     public function withRegion(string $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }

@@ -66,9 +66,9 @@ final class Change implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $field && $obj->field = $field;
-        null !== $from && $obj->from = $from;
-        null !== $to && $obj->to = $to;
+        null !== $field && $obj['field'] = $field;
+        null !== $from && $obj['from'] = $from;
+        null !== $to && $obj['to'] = $to;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Change implements BaseModel
     public function withField(string $field): self
     {
         $obj = clone $this;
-        $obj->field = $field;
+        $obj['field'] = $field;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Change implements BaseModel
     public function withFrom(string|float|bool|array|null $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class Change implements BaseModel
     public function withTo(string|float|bool|array|null $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

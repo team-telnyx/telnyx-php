@@ -44,9 +44,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $description && $obj->description = $description;
-        null !== $reason_required && $obj->reason_required = $reason_required;
+        null !== $code && $obj['code'] = $code;
+        null !== $description && $obj['description'] = $description;
+        null !== $reason_required && $obj['reason_required'] = $reason_required;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class Data implements BaseModel
     public function withCode(int $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class Data implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Data implements BaseModel
     public function withReasonRequired(bool $reasonRequired): self
     {
         $obj = clone $this;
-        $obj->reason_required = $reasonRequired;
+        $obj['reason_required'] = $reasonRequired;
 
         return $obj;
     }

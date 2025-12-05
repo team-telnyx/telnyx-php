@@ -54,33 +54,53 @@ final class IntegrationSecretListResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<IntegrationSecret> $data
+     * @param list<IntegrationSecret|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   identifier: string,
+     *   record_type: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<IntegrationSecret> $data
+     * @param list<IntegrationSecret|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   identifier: string,
+     *   record_type: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

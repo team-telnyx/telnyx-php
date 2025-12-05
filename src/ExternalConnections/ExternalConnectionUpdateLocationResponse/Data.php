@@ -46,9 +46,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $accepted_address_suggestions && $obj->accepted_address_suggestions = $accepted_address_suggestions;
-        null !== $location_id && $obj->location_id = $location_id;
-        null !== $static_emergency_address_id && $obj->static_emergency_address_id = $static_emergency_address_id;
+        null !== $accepted_address_suggestions && $obj['accepted_address_suggestions'] = $accepted_address_suggestions;
+        null !== $location_id && $obj['location_id'] = $location_id;
+        null !== $static_emergency_address_id && $obj['static_emergency_address_id'] = $static_emergency_address_id;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class Data implements BaseModel
         bool $acceptedAddressSuggestions
     ): self {
         $obj = clone $this;
-        $obj->accepted_address_suggestions = $acceptedAddressSuggestions;
+        $obj['accepted_address_suggestions'] = $acceptedAddressSuggestions;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class Data implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->location_id = $locationID;
+        $obj['location_id'] = $locationID;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Data implements BaseModel
         string $staticEmergencyAddressID
     ): self {
         $obj = clone $this;
-        $obj->static_emergency_address_id = $staticEmergencyAddressID;
+        $obj['static_emergency_address_id'] = $staticEmergencyAddressID;
 
         return $obj;
     }

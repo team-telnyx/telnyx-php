@@ -86,12 +86,12 @@ final class NotificationChannel implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $channel_destination && $obj->channel_destination = $channel_destination;
+        null !== $id && $obj['id'] = $id;
+        null !== $channel_destination && $obj['channel_destination'] = $channel_destination;
         null !== $channel_type_id && $obj['channel_type_id'] = $channel_type_id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $notification_profile_id && $obj->notification_profile_id = $notification_profile_id;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $notification_profile_id && $obj['notification_profile_id'] = $notification_profile_id;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class NotificationChannel implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class NotificationChannel implements BaseModel
     public function withChannelDestination(string $channelDestination): self
     {
         $obj = clone $this;
-        $obj->channel_destination = $channelDestination;
+        $obj['channel_destination'] = $channelDestination;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class NotificationChannel implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class NotificationChannel implements BaseModel
         string $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj->notification_profile_id = $notificationProfileID;
+        $obj['notification_profile_id'] = $notificationProfileID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class NotificationChannel implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

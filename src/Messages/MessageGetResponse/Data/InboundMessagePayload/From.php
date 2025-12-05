@@ -68,9 +68,9 @@ final class From implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $carrier && $obj->carrier = $carrier;
+        null !== $carrier && $obj['carrier'] = $carrier;
         null !== $line_type && $obj['line_type'] = $line_type;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -82,7 +82,7 @@ final class From implements BaseModel
     public function withCarrier(string $carrier): self
     {
         $obj = clone $this;
-        $obj->carrier = $carrier;
+        $obj['carrier'] = $carrier;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class From implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

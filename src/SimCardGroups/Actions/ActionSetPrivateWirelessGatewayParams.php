@@ -58,7 +58,7 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->private_wireless_gateway_id = $private_wireless_gateway_id;
+        $obj['private_wireless_gateway_id'] = $private_wireless_gateway_id;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
         string $privateWirelessGatewayID
     ): self {
         $obj = clone $this;
-        $obj->private_wireless_gateway_id = $privateWirelessGatewayID;
+        $obj['private_wireless_gateway_id'] = $privateWirelessGatewayID;
 
         return $obj;
     }

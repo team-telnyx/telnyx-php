@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   instructions?: string,
  *   max_duration_seconds?: int,
  *   name?: string,
- *   rubric?: list<Rubric>,
+ *   rubric?: list<Rubric|array{criteria: string, name: string}>,
  *   telnyx_conversation_channel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
  *   test_suite?: string,
  * }
@@ -94,7 +94,7 @@ final class TestUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rubric> $rubric
+     * @param list<Rubric|array{criteria: string, name: string}> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyx_conversation_channel
      */
     public static function with(
@@ -109,14 +109,14 @@ final class TestUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $description && $obj->description = $description;
-        null !== $destination && $obj->destination = $destination;
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $max_duration_seconds && $obj->max_duration_seconds = $max_duration_seconds;
-        null !== $name && $obj->name = $name;
-        null !== $rubric && $obj->rubric = $rubric;
+        null !== $description && $obj['description'] = $description;
+        null !== $destination && $obj['destination'] = $destination;
+        null !== $instructions && $obj['instructions'] = $instructions;
+        null !== $max_duration_seconds && $obj['max_duration_seconds'] = $max_duration_seconds;
+        null !== $name && $obj['name'] = $name;
+        null !== $rubric && $obj['rubric'] = $rubric;
         null !== $telnyx_conversation_channel && $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
-        null !== $test_suite && $obj->test_suite = $test_suite;
+        null !== $test_suite && $obj['test_suite'] = $test_suite;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class TestUpdateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class TestUpdateParams implements BaseModel
     public function withDestination(string $destination): self
     {
         $obj = clone $this;
-        $obj->destination = $destination;
+        $obj['destination'] = $destination;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class TestUpdateParams implements BaseModel
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class TestUpdateParams implements BaseModel
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
         $obj = clone $this;
-        $obj->max_duration_seconds = $maxDurationSeconds;
+        $obj['max_duration_seconds'] = $maxDurationSeconds;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class TestUpdateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -179,12 +179,12 @@ final class TestUpdateParams implements BaseModel
     /**
      * Updated evaluation criteria for assessing assistant performance.
      *
-     * @param list<Rubric> $rubric
+     * @param list<Rubric|array{criteria: string, name: string}> $rubric
      */
     public function withRubric(array $rubric): self
     {
         $obj = clone $this;
-        $obj->rubric = $rubric;
+        $obj['rubric'] = $rubric;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class TestUpdateParams implements BaseModel
     public function withTestSuite(string $testSuite): self
     {
         $obj = clone $this;
-        $obj->test_suite = $testSuite;
+        $obj['test_suite'] = $testSuite;
 
         return $obj;
     }

@@ -118,17 +118,33 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $features
+     * @param Local|array{
+     *   features?: list<string>|null,
+     *   full_pstn_replacement?: bool|null,
+     *   international_sms?: bool|null,
+     *   p2p?: bool|null,
+     *   quickship?: bool|null,
+     *   reservable?: bool|null,
+     * } $local
      * @param array<string,mixed> $mobile
      * @param array<string,mixed> $national
      * @param list<string> $phone_number_type
      * @param array<string,mixed> $shared_cost
+     * @param TollFree|array{
+     *   features?: list<string>|null,
+     *   full_pstn_replacement?: bool|null,
+     *   international_sms?: bool|null,
+     *   p2p?: bool|null,
+     *   quickship?: bool|null,
+     *   reservable?: bool|null,
+     * } $toll_free
      */
     public static function with(
         ?string $code = null,
         ?array $features = null,
         ?bool $international_sms = null,
         ?bool $inventory_coverage = null,
-        ?Local $local = null,
+        Local|array|null $local = null,
         ?array $mobile = null,
         ?array $national = null,
         ?bool $numbers = null,
@@ -138,25 +154,25 @@ final class Data implements BaseModel
         ?string $region = null,
         ?bool $reservable = null,
         ?array $shared_cost = null,
-        ?TollFree $toll_free = null,
+        TollFree|array|null $toll_free = null,
     ): self {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $features && $obj->features = $features;
-        null !== $international_sms && $obj->international_sms = $international_sms;
-        null !== $inventory_coverage && $obj->inventory_coverage = $inventory_coverage;
-        null !== $local && $obj->local = $local;
-        null !== $mobile && $obj->mobile = $mobile;
-        null !== $national && $obj->national = $national;
-        null !== $numbers && $obj->numbers = $numbers;
-        null !== $p2p && $obj->p2p = $p2p;
-        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
-        null !== $quickship && $obj->quickship = $quickship;
-        null !== $region && $obj->region = $region;
-        null !== $reservable && $obj->reservable = $reservable;
-        null !== $shared_cost && $obj->shared_cost = $shared_cost;
-        null !== $toll_free && $obj->toll_free = $toll_free;
+        null !== $code && $obj['code'] = $code;
+        null !== $features && $obj['features'] = $features;
+        null !== $international_sms && $obj['international_sms'] = $international_sms;
+        null !== $inventory_coverage && $obj['inventory_coverage'] = $inventory_coverage;
+        null !== $local && $obj['local'] = $local;
+        null !== $mobile && $obj['mobile'] = $mobile;
+        null !== $national && $obj['national'] = $national;
+        null !== $numbers && $obj['numbers'] = $numbers;
+        null !== $p2p && $obj['p2p'] = $p2p;
+        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $quickship && $obj['quickship'] = $quickship;
+        null !== $region && $obj['region'] = $region;
+        null !== $reservable && $obj['reservable'] = $reservable;
+        null !== $shared_cost && $obj['shared_cost'] = $shared_cost;
+        null !== $toll_free && $obj['toll_free'] = $toll_free;
 
         return $obj;
     }
@@ -167,7 +183,7 @@ final class Data implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -180,7 +196,7 @@ final class Data implements BaseModel
     public function withFeatures(array $features): self
     {
         $obj = clone $this;
-        $obj->features = $features;
+        $obj['features'] = $features;
 
         return $obj;
     }
@@ -188,7 +204,7 @@ final class Data implements BaseModel
     public function withInternationalSMS(bool $internationalSMS): self
     {
         $obj = clone $this;
-        $obj->international_sms = $internationalSMS;
+        $obj['international_sms'] = $internationalSMS;
 
         return $obj;
     }
@@ -199,15 +215,25 @@ final class Data implements BaseModel
     public function withInventoryCoverage(bool $inventoryCoverage): self
     {
         $obj = clone $this;
-        $obj->inventory_coverage = $inventoryCoverage;
+        $obj['inventory_coverage'] = $inventoryCoverage;
 
         return $obj;
     }
 
-    public function withLocal(Local $local): self
+    /**
+     * @param Local|array{
+     *   features?: list<string>|null,
+     *   full_pstn_replacement?: bool|null,
+     *   international_sms?: bool|null,
+     *   p2p?: bool|null,
+     *   quickship?: bool|null,
+     *   reservable?: bool|null,
+     * } $local
+     */
+    public function withLocal(Local|array $local): self
     {
         $obj = clone $this;
-        $obj->local = $local;
+        $obj['local'] = $local;
 
         return $obj;
     }
@@ -218,7 +244,7 @@ final class Data implements BaseModel
     public function withMobile(array $mobile): self
     {
         $obj = clone $this;
-        $obj->mobile = $mobile;
+        $obj['mobile'] = $mobile;
 
         return $obj;
     }
@@ -229,7 +255,7 @@ final class Data implements BaseModel
     public function withNational(array $national): self
     {
         $obj = clone $this;
-        $obj->national = $national;
+        $obj['national'] = $national;
 
         return $obj;
     }
@@ -237,7 +263,7 @@ final class Data implements BaseModel
     public function withNumbers(bool $numbers): self
     {
         $obj = clone $this;
-        $obj->numbers = $numbers;
+        $obj['numbers'] = $numbers;
 
         return $obj;
     }
@@ -245,7 +271,7 @@ final class Data implements BaseModel
     public function withP2p(bool $p2p): self
     {
         $obj = clone $this;
-        $obj->p2p = $p2p;
+        $obj['p2p'] = $p2p;
 
         return $obj;
     }
@@ -258,7 +284,7 @@ final class Data implements BaseModel
     public function withPhoneNumberType(array $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phone_number_type = $phoneNumberType;
+        $obj['phone_number_type'] = $phoneNumberType;
 
         return $obj;
     }
@@ -269,7 +295,7 @@ final class Data implements BaseModel
     public function withQuickship(bool $quickship): self
     {
         $obj = clone $this;
-        $obj->quickship = $quickship;
+        $obj['quickship'] = $quickship;
 
         return $obj;
     }
@@ -280,7 +306,7 @@ final class Data implements BaseModel
     public function withRegion(?string $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }
@@ -291,7 +317,7 @@ final class Data implements BaseModel
     public function withReservable(bool $reservable): self
     {
         $obj = clone $this;
-        $obj->reservable = $reservable;
+        $obj['reservable'] = $reservable;
 
         return $obj;
     }
@@ -302,15 +328,25 @@ final class Data implements BaseModel
     public function withSharedCost(array $sharedCost): self
     {
         $obj = clone $this;
-        $obj->shared_cost = $sharedCost;
+        $obj['shared_cost'] = $sharedCost;
 
         return $obj;
     }
 
-    public function withTollFree(TollFree $tollFree): self
+    /**
+     * @param TollFree|array{
+     *   features?: list<string>|null,
+     *   full_pstn_replacement?: bool|null,
+     *   international_sms?: bool|null,
+     *   p2p?: bool|null,
+     *   quickship?: bool|null,
+     *   reservable?: bool|null,
+     * } $tollFree
+     */
+    public function withTollFree(TollFree|array $tollFree): self
     {
         $obj = clone $this;
-        $obj->toll_free = $tollFree;
+        $obj['toll_free'] = $tollFree;
 
         return $obj;
     }

@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
+use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 
 /**
@@ -17,7 +18,7 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
  * @see Telnyx\Services\RequirementTypesService::list()
  *
  * @phpstan-type RequirementTypeListParamsShape = array{
- *   filter?: Filter, sort?: list<Sort|value-of<Sort>>
+ *   filter?: Filter|array{name?: Name|null}, sort?: list<Sort|value-of<Sort>>
  * }
  */
 final class RequirementTypeListParams implements BaseModel
@@ -50,13 +51,16 @@ final class RequirementTypeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{name?: Name|null} $filter
      * @param list<Sort|value-of<Sort>> $sort
      */
-    public static function with(?Filter $filter = null, ?array $sort = null): self
-    {
+    public static function with(
+        Filter|array|null $filter = null,
+        ?array $sort = null
+    ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $obj['filter'] = $filter;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -64,11 +68,13 @@ final class RequirementTypeListParams implements BaseModel
 
     /**
      * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
+     *
+     * @param Filter|array{name?: Name|null} $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }

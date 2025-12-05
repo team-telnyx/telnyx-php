@@ -71,11 +71,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $channel_limit && $obj->channel_limit = $channel_limit;
-        null !== $email && $obj->email = $email;
-        null !== $manager_account_id && $obj->manager_account_id = $manager_account_id;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $email && $obj['email'] = $email;
+        null !== $manager_account_id && $obj['manager_account_id'] = $manager_account_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channel_limit = $channelLimit;
+        $obj['channel_limit'] = $channelLimit;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withManagerAccountID(string $managerAccountID): self
     {
         $obj = clone $this;
-        $obj->manager_account_id = $managerAccountID;
+        $obj['manager_account_id'] = $managerAccountID;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

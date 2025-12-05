@@ -85,12 +85,12 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $primary_cloud_ip && $obj->primary_cloud_ip = $primary_cloud_ip;
-        null !== $primary_enabled && $obj->primary_enabled = $primary_enabled;
-        null !== $primary_routing_announcement && $obj->primary_routing_announcement = $primary_routing_announcement;
-        null !== $secondary_cloud_ip && $obj->secondary_cloud_ip = $secondary_cloud_ip;
-        null !== $secondary_enabled && $obj->secondary_enabled = $secondary_enabled;
-        null !== $secondary_routing_announcement && $obj->secondary_routing_announcement = $secondary_routing_announcement;
+        null !== $primary_cloud_ip && $obj['primary_cloud_ip'] = $primary_cloud_ip;
+        null !== $primary_enabled && $obj['primary_enabled'] = $primary_enabled;
+        null !== $primary_routing_announcement && $obj['primary_routing_announcement'] = $primary_routing_announcement;
+        null !== $secondary_cloud_ip && $obj['secondary_cloud_ip'] = $secondary_cloud_ip;
+        null !== $secondary_enabled && $obj['secondary_enabled'] = $secondary_enabled;
+        null !== $secondary_routing_announcement && $obj['secondary_routing_announcement'] = $secondary_routing_announcement;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
     public function withPrimaryCloudIP(string $primaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->primary_cloud_ip = $primaryCloudIP;
+        $obj['primary_cloud_ip'] = $primaryCloudIP;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
     public function withPrimaryEnabled(bool $primaryEnabled): self
     {
         $obj = clone $this;
-        $obj->primary_enabled = $primaryEnabled;
+        $obj['primary_enabled'] = $primaryEnabled;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
         bool $primaryRoutingAnnouncement
     ): self {
         $obj = clone $this;
-        $obj->primary_routing_announcement = $primaryRoutingAnnouncement;
+        $obj['primary_routing_announcement'] = $primaryRoutingAnnouncement;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
     public function withSecondaryCloudIP(string $secondaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->secondary_cloud_ip = $secondaryCloudIP;
+        $obj['secondary_cloud_ip'] = $secondaryCloudIP;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
     public function withSecondaryEnabled(bool $secondaryEnabled): self
     {
         $obj = clone $this;
-        $obj->secondary_enabled = $secondaryEnabled;
+        $obj['secondary_enabled'] = $secondaryEnabled;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
         bool $secondaryRoutingAnnouncement
     ): self {
         $obj = clone $this;
-        $obj->secondary_routing_announcement = $secondaryRoutingAnnouncement;
+        $obj['secondary_routing_announcement'] = $secondaryRoutingAnnouncement;
 
         return $obj;
     }

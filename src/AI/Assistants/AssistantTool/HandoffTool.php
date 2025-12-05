@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\AIAssistant;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\VoiceMode;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -51,22 +53,30 @@ final class HandoffTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Handoff|array{
+     *   ai_assistants: list<AIAssistant>, voice_mode?: value-of<VoiceMode>|null
+     * } $handoff
      * @param Type|value-of<Type> $type
      */
-    public static function with(Handoff $handoff, Type|string $type): self
+    public static function with(Handoff|array $handoff, Type|string $type): self
     {
         $obj = new self;
 
-        $obj->handoff = $handoff;
+        $obj['handoff'] = $handoff;
         $obj['type'] = $type;
 
         return $obj;
     }
 
-    public function withHandoff(Handoff $handoff): self
+    /**
+     * @param Handoff|array{
+     *   ai_assistants: list<AIAssistant>, voice_mode?: value-of<VoiceMode>|null
+     * } $handoff
+     */
+    public function withHandoff(Handoff|array $handoff): self
     {
         $obj = clone $this;
-        $obj->handoff = $handoff;
+        $obj['handoff'] = $handoff;
 
         return $obj;
     }

@@ -46,8 +46,8 @@ final class Inbound implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $interception_app_id && $obj->interception_app_id = $interception_app_id;
-        null !== $interception_app_name && $obj->interception_app_name = $interception_app_name;
+        null !== $interception_app_id && $obj['interception_app_id'] = $interception_app_id;
+        null !== $interception_app_name && $obj['interception_app_name'] = $interception_app_name;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Inbound implements BaseModel
     public function withInterceptionAppID(?string $interceptionAppID): self
     {
         $obj = clone $this;
-        $obj->interception_app_id = $interceptionAppID;
+        $obj['interception_app_id'] = $interceptionAppID;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Inbound implements BaseModel
     public function withInterceptionAppName(?string $interceptionAppName): self
     {
         $obj = clone $this;
-        $obj->interception_app_name = $interceptionAppName;
+        $obj['interception_app_name'] = $interceptionAppName;
 
         return $obj;
     }

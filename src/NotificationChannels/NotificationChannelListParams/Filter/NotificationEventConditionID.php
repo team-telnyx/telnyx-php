@@ -36,7 +36,7 @@ final class NotificationEventConditionID implements BaseModel
     {
         $obj = new self;
 
-        null !== $eq && $obj->eq = $eq;
+        null !== $eq && $obj['eq'] = $eq;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class NotificationEventConditionID implements BaseModel
     public function withEq(string $eq): self
     {
         $obj = clone $this;
-        $obj->eq = $eq;
+        $obj['eq'] = $eq;
 
         return $obj;
     }

@@ -29,20 +29,29 @@ final class EndUser implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Admin|array{
+     *   auth_person_name?: string|null, entity_name?: string|null
+     * } $admin
      */
-    public static function with(?Admin $admin = null): self
+    public static function with(Admin|array|null $admin = null): self
     {
         $obj = new self;
 
-        null !== $admin && $obj->admin = $admin;
+        null !== $admin && $obj['admin'] = $admin;
 
         return $obj;
     }
 
-    public function withAdmin(Admin $admin): self
+    /**
+     * @param Admin|array{
+     *   auth_person_name?: string|null, entity_name?: string|null
+     * } $admin
+     */
+    public function withAdmin(Admin|array $admin): self
     {
         $obj = clone $this;
-        $obj->admin = $admin;
+        $obj['admin'] = $admin;
 
         return $obj;
     }

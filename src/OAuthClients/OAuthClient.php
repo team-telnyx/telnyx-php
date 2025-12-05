@@ -211,23 +211,23 @@ final class OAuthClient implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->client_id = $client_id;
+        $obj['client_id'] = $client_id;
         $obj['client_type'] = $client_type;
-        $obj->created_at = $created_at;
-        $obj->name = $name;
-        $obj->org_id = $org_id;
+        $obj['created_at'] = $created_at;
+        $obj['name'] = $name;
+        $obj['org_id'] = $org_id;
         $obj['record_type'] = $record_type;
-        $obj->require_pkce = $require_pkce;
-        $obj->updated_at = $updated_at;
-        $obj->user_id = $user_id;
+        $obj['require_pkce'] = $require_pkce;
+        $obj['updated_at'] = $updated_at;
+        $obj['user_id'] = $user_id;
 
         null !== $allowed_grant_types && $obj['allowed_grant_types'] = $allowed_grant_types;
-        null !== $allowed_scopes && $obj->allowed_scopes = $allowed_scopes;
-        null !== $client_secret && $obj->client_secret = $client_secret;
-        null !== $logo_uri && $obj->logo_uri = $logo_uri;
-        null !== $policy_uri && $obj->policy_uri = $policy_uri;
-        null !== $redirect_uris && $obj->redirect_uris = $redirect_uris;
-        null !== $tos_uri && $obj->tos_uri = $tos_uri;
+        null !== $allowed_scopes && $obj['allowed_scopes'] = $allowed_scopes;
+        null !== $client_secret && $obj['client_secret'] = $client_secret;
+        null !== $logo_uri && $obj['logo_uri'] = $logo_uri;
+        null !== $policy_uri && $obj['policy_uri'] = $policy_uri;
+        null !== $redirect_uris && $obj['redirect_uris'] = $redirect_uris;
+        null !== $tos_uri && $obj['tos_uri'] = $tos_uri;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class OAuthClient implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->client_id = $clientID;
+        $obj['client_id'] = $clientID;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class OAuthClient implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class OAuthClient implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class OAuthClient implements BaseModel
     public function withOrgID(string $orgID): self
     {
         $obj = clone $this;
-        $obj->org_id = $orgID;
+        $obj['org_id'] = $orgID;
 
         return $obj;
     }
@@ -308,7 +308,7 @@ final class OAuthClient implements BaseModel
     public function withRequirePkce(bool $requirePkce): self
     {
         $obj = clone $this;
-        $obj->require_pkce = $requirePkce;
+        $obj['require_pkce'] = $requirePkce;
 
         return $obj;
     }
@@ -319,7 +319,7 @@ final class OAuthClient implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -330,7 +330,7 @@ final class OAuthClient implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class OAuthClient implements BaseModel
     public function withAllowedScopes(array $allowedScopes): self
     {
         $obj = clone $this;
-        $obj->allowed_scopes = $allowedScopes;
+        $obj['allowed_scopes'] = $allowedScopes;
 
         return $obj;
     }
@@ -367,7 +367,7 @@ final class OAuthClient implements BaseModel
     public function withClientSecret(?string $clientSecret): self
     {
         $obj = clone $this;
-        $obj->client_secret = $clientSecret;
+        $obj['client_secret'] = $clientSecret;
 
         return $obj;
     }
@@ -378,7 +378,7 @@ final class OAuthClient implements BaseModel
     public function withLogoUri(?string $logoUri): self
     {
         $obj = clone $this;
-        $obj->logo_uri = $logoUri;
+        $obj['logo_uri'] = $logoUri;
 
         return $obj;
     }
@@ -389,7 +389,7 @@ final class OAuthClient implements BaseModel
     public function withPolicyUri(?string $policyUri): self
     {
         $obj = clone $this;
-        $obj->policy_uri = $policyUri;
+        $obj['policy_uri'] = $policyUri;
 
         return $obj;
     }
@@ -402,7 +402,7 @@ final class OAuthClient implements BaseModel
     public function withRedirectUris(array $redirectUris): self
     {
         $obj = clone $this;
-        $obj->redirect_uris = $redirectUris;
+        $obj['redirect_uris'] = $redirectUris;
 
         return $obj;
     }
@@ -413,7 +413,7 @@ final class OAuthClient implements BaseModel
     public function withTosUri(?string $tosUri): self
     {
         $obj = clone $this;
-        $obj->tos_uri = $tosUri;
+        $obj['tos_uri'] = $tosUri;
 
         return $obj;
     }

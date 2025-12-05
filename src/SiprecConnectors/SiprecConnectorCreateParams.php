@@ -80,11 +80,11 @@ final class SiprecConnectorCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->host = $host;
-        $obj->name = $name;
-        $obj->port = $port;
+        $obj['host'] = $host;
+        $obj['name'] = $name;
+        $obj['port'] = $port;
 
-        null !== $app_subdomain && $obj->app_subdomain = $app_subdomain;
+        null !== $app_subdomain && $obj['app_subdomain'] = $app_subdomain;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class SiprecConnectorCreateParams implements BaseModel
     public function withHost(string $host): self
     {
         $obj = clone $this;
-        $obj->host = $host;
+        $obj['host'] = $host;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class SiprecConnectorCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class SiprecConnectorCreateParams implements BaseModel
     public function withPort(int $port): self
     {
         $obj = clone $this;
-        $obj->port = $port;
+        $obj['port'] = $port;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class SiprecConnectorCreateParams implements BaseModel
     public function withAppSubdomain(string $appSubdomain): self
     {
         $obj = clone $this;
-        $obj->app_subdomain = $appSubdomain;
+        $obj['app_subdomain'] = $appSubdomain;
 
         return $obj;
     }

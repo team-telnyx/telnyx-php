@@ -44,8 +44,8 @@ final class CreatedAt implements BaseModel
     {
         $obj = new self;
 
-        null !== $gt && $obj->gt = $gt;
-        null !== $lt && $obj->lt = $lt;
+        null !== $gt && $obj['gt'] = $gt;
+        null !== $lt && $obj['lt'] = $lt;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class CreatedAt implements BaseModel
     public function withGt(string $gt): self
     {
         $obj = clone $this;
-        $obj->gt = $gt;
+        $obj['gt'] = $gt;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class CreatedAt implements BaseModel
     public function withLt(string $lt): self
     {
         $obj = clone $this;
-        $obj->lt = $lt;
+        $obj['lt'] = $lt;
 
         return $obj;
     }

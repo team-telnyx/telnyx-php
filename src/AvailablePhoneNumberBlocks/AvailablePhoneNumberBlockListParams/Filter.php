@@ -70,9 +70,9 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $locality && $obj->locality = $locality;
-        null !== $national_destination_code && $obj->national_destination_code = $national_destination_code;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $locality && $obj['locality'] = $locality;
+        null !== $national_destination_code && $obj['national_destination_code'] = $national_destination_code;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
 
         return $obj;
@@ -84,7 +84,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class Filter implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class Filter implements BaseModel
         string $nationalDestinationCode
     ): self {
         $obj = clone $this;
-        $obj->national_destination_code = $nationalDestinationCode;
+        $obj['national_destination_code'] = $nationalDestinationCode;
 
         return $obj;
     }

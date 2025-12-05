@@ -6,7 +6,16 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
+use Telnyx\AI\Assistants\ImportMetadata\ImportProvider;
+use Telnyx\AI\Assistants\TranscriptionSettings\Model;
+use Telnyx\AI\Assistants\TranscriptionSettings\Settings;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember1;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember2;
+use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -159,7 +168,52 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
      *
      * @param array<string,mixed> $dynamic_variables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabled_features
-     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
+     * @param ImportMetadata|array{
+     *   import_id?: string|null, import_provider?: value-of<ImportProvider>|null
+     * } $import_metadata
+     * @param InsightSettings|array{insight_group_id?: string|null} $insight_settings
+     * @param MessagingSettings|array{
+     *   default_messaging_profile_id?: string|null,
+     *   delivery_status_webhook_url?: string|null,
+     * } $messaging_settings
+     * @param PrivacySettings|array{data_retention?: bool|null} $privacy_settings
+     * @param TelephonySettings|array{
+     *   default_texml_app_id?: string|null,
+     *   supports_unauthenticated_web_calls?: bool|null,
+     * } $telephony_settings
+     * @param list<WebhookTool|array{
+     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
+     * }|RetrievalTool|array{
+     *   retrieval: InferenceEmbeddingBucketIDs,
+     *   type: value-of<RetrievalTool\Type>,
+     * }|HandoffTool|array{
+     *   handoff: Handoff,
+     *   type: value-of<HandoffTool\Type>,
+     * }|HangupTool|array{
+     *   hangup: HangupToolParams,
+     *   type: value-of<HangupTool\Type>,
+     * }|TransferTool|array{
+     *   transfer: InferenceEmbeddingTransferToolParams,
+     *   type: value-of<TransferTool\Type>,
+     * }|SipReferTool|array{
+     *   refer: Refer,
+     *   type: value-of<SipReferTool\Type>,
+     * }|DtmfTool|array{
+     *   send_dtmf: array<string,mixed>,
+     *   type: value-of<DtmfTool\Type>,
+     * }> $tools
+     * @param TranscriptionSettings|array{
+     *   language?: string|null,
+     *   model?: value-of<Model>|null,
+     *   region?: string|null,
+     *   settings?: Settings|null,
+     * } $transcription
+     * @param VoiceSettings|array{
+     *   voice: string,
+     *   api_key_ref?: string|null,
+     *   background_audio?: UnionMember0|UnionMember1|UnionMember2|null,
+     *   voice_speed?: float|null,
+     * } $voice_settings
      */
     public static function with(
         string $id,
@@ -172,38 +226,38 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
         ?string $dynamic_variables_webhook_url = null,
         ?array $enabled_features = null,
         ?string $greeting = null,
-        ?ImportMetadata $import_metadata = null,
-        ?InsightSettings $insight_settings = null,
+        ImportMetadata|array|null $import_metadata = null,
+        InsightSettings|array|null $insight_settings = null,
         ?string $llm_api_key_ref = null,
-        ?MessagingSettings $messaging_settings = null,
-        ?PrivacySettings $privacy_settings = null,
-        ?TelephonySettings $telephony_settings = null,
+        MessagingSettings|array|null $messaging_settings = null,
+        PrivacySettings|array|null $privacy_settings = null,
+        TelephonySettings|array|null $telephony_settings = null,
         ?array $tools = null,
-        ?TranscriptionSettings $transcription = null,
-        ?VoiceSettings $voice_settings = null,
+        TranscriptionSettings|array|null $transcription = null,
+        VoiceSettings|array|null $voice_settings = null,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->instructions = $instructions;
-        $obj->model = $model;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['instructions'] = $instructions;
+        $obj['model'] = $model;
+        $obj['name'] = $name;
 
-        null !== $description && $obj->description = $description;
-        null !== $dynamic_variables && $obj->dynamic_variables = $dynamic_variables;
-        null !== $dynamic_variables_webhook_url && $obj->dynamic_variables_webhook_url = $dynamic_variables_webhook_url;
+        null !== $description && $obj['description'] = $description;
+        null !== $dynamic_variables && $obj['dynamic_variables'] = $dynamic_variables;
+        null !== $dynamic_variables_webhook_url && $obj['dynamic_variables_webhook_url'] = $dynamic_variables_webhook_url;
         null !== $enabled_features && $obj['enabled_features'] = $enabled_features;
-        null !== $greeting && $obj->greeting = $greeting;
-        null !== $import_metadata && $obj->import_metadata = $import_metadata;
-        null !== $insight_settings && $obj->insight_settings = $insight_settings;
-        null !== $llm_api_key_ref && $obj->llm_api_key_ref = $llm_api_key_ref;
-        null !== $messaging_settings && $obj->messaging_settings = $messaging_settings;
-        null !== $privacy_settings && $obj->privacy_settings = $privacy_settings;
-        null !== $telephony_settings && $obj->telephony_settings = $telephony_settings;
-        null !== $tools && $obj->tools = $tools;
-        null !== $transcription && $obj->transcription = $transcription;
-        null !== $voice_settings && $obj->voice_settings = $voice_settings;
+        null !== $greeting && $obj['greeting'] = $greeting;
+        null !== $import_metadata && $obj['import_metadata'] = $import_metadata;
+        null !== $insight_settings && $obj['insight_settings'] = $insight_settings;
+        null !== $llm_api_key_ref && $obj['llm_api_key_ref'] = $llm_api_key_ref;
+        null !== $messaging_settings && $obj['messaging_settings'] = $messaging_settings;
+        null !== $privacy_settings && $obj['privacy_settings'] = $privacy_settings;
+        null !== $telephony_settings && $obj['telephony_settings'] = $telephony_settings;
+        null !== $tools && $obj['tools'] = $tools;
+        null !== $transcription && $obj['transcription'] = $transcription;
+        null !== $voice_settings && $obj['voice_settings'] = $voice_settings;
 
         return $obj;
     }
@@ -211,7 +265,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -219,7 +273,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -230,7 +284,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -241,7 +295,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withModel(string $model): self
     {
         $obj = clone $this;
-        $obj->model = $model;
+        $obj['model'] = $model;
 
         return $obj;
     }
@@ -249,7 +303,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -257,7 +311,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -270,7 +324,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withDynamicVariables(array $dynamicVariables): self
     {
         $obj = clone $this;
-        $obj->dynamic_variables = $dynamicVariables;
+        $obj['dynamic_variables'] = $dynamicVariables;
 
         return $obj;
     }
@@ -282,7 +336,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
         string $dynamicVariablesWebhookURL
     ): self {
         $obj = clone $this;
-        $obj->dynamic_variables_webhook_url = $dynamicVariablesWebhookURL;
+        $obj['dynamic_variables_webhook_url'] = $dynamicVariablesWebhookURL;
 
         return $obj;
     }
@@ -304,23 +358,33 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withGreeting(string $greeting): self
     {
         $obj = clone $this;
-        $obj->greeting = $greeting;
+        $obj['greeting'] = $greeting;
 
         return $obj;
     }
 
-    public function withImportMetadata(ImportMetadata $importMetadata): self
-    {
+    /**
+     * @param ImportMetadata|array{
+     *   import_id?: string|null, import_provider?: value-of<ImportProvider>|null
+     * } $importMetadata
+     */
+    public function withImportMetadata(
+        ImportMetadata|array $importMetadata
+    ): self {
         $obj = clone $this;
-        $obj->import_metadata = $importMetadata;
+        $obj['import_metadata'] = $importMetadata;
 
         return $obj;
     }
 
-    public function withInsightSettings(InsightSettings $insightSettings): self
-    {
+    /**
+     * @param InsightSettings|array{insight_group_id?: string|null} $insightSettings
+     */
+    public function withInsightSettings(
+        InsightSettings|array $insightSettings
+    ): self {
         $obj = clone $this;
-        $obj->insight_settings = $insightSettings;
+        $obj['insight_settings'] = $insightSettings;
 
         return $obj;
     }
@@ -331,33 +395,49 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj->llm_api_key_ref = $llmAPIKeyRef;
+        $obj['llm_api_key_ref'] = $llmAPIKeyRef;
 
         return $obj;
     }
 
+    /**
+     * @param MessagingSettings|array{
+     *   default_messaging_profile_id?: string|null,
+     *   delivery_status_webhook_url?: string|null,
+     * } $messagingSettings
+     */
     public function withMessagingSettings(
-        MessagingSettings $messagingSettings
+        MessagingSettings|array $messagingSettings
     ): self {
         $obj = clone $this;
-        $obj->messaging_settings = $messagingSettings;
+        $obj['messaging_settings'] = $messagingSettings;
 
         return $obj;
     }
 
-    public function withPrivacySettings(PrivacySettings $privacySettings): self
-    {
+    /**
+     * @param PrivacySettings|array{data_retention?: bool|null} $privacySettings
+     */
+    public function withPrivacySettings(
+        PrivacySettings|array $privacySettings
+    ): self {
         $obj = clone $this;
-        $obj->privacy_settings = $privacySettings;
+        $obj['privacy_settings'] = $privacySettings;
 
         return $obj;
     }
 
+    /**
+     * @param TelephonySettings|array{
+     *   default_texml_app_id?: string|null,
+     *   supports_unauthenticated_web_calls?: bool|null,
+     * } $telephonySettings
+     */
     public function withTelephonySettings(
-        TelephonySettings $telephonySettings
+        TelephonySettings|array $telephonySettings
     ): self {
         $obj = clone $this;
-        $obj->telephony_settings = $telephonySettings;
+        $obj['telephony_settings'] = $telephonySettings;
 
         return $obj;
     }
@@ -365,29 +445,65 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
+     * @param list<WebhookTool|array{
+     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
+     * }|RetrievalTool|array{
+     *   retrieval: InferenceEmbeddingBucketIDs,
+     *   type: value-of<RetrievalTool\Type>,
+     * }|HandoffTool|array{
+     *   handoff: Handoff,
+     *   type: value-of<HandoffTool\Type>,
+     * }|HangupTool|array{
+     *   hangup: HangupToolParams,
+     *   type: value-of<HangupTool\Type>,
+     * }|TransferTool|array{
+     *   transfer: InferenceEmbeddingTransferToolParams,
+     *   type: value-of<TransferTool\Type>,
+     * }|SipReferTool|array{
+     *   refer: Refer,
+     *   type: value-of<SipReferTool\Type>,
+     * }|DtmfTool|array{
+     *   send_dtmf: array<string,mixed>,
+     *   type: value-of<DtmfTool\Type>,
+     * }> $tools
      */
     public function withTools(array $tools): self
     {
         $obj = clone $this;
-        $obj->tools = $tools;
+        $obj['tools'] = $tools;
 
         return $obj;
     }
 
+    /**
+     * @param TranscriptionSettings|array{
+     *   language?: string|null,
+     *   model?: value-of<Model>|null,
+     *   region?: string|null,
+     *   settings?: Settings|null,
+     * } $transcription
+     */
     public function withTranscription(
-        TranscriptionSettings $transcription
+        TranscriptionSettings|array $transcription
     ): self {
         $obj = clone $this;
-        $obj->transcription = $transcription;
+        $obj['transcription'] = $transcription;
 
         return $obj;
     }
 
-    public function withVoiceSettings(VoiceSettings $voiceSettings): self
+    /**
+     * @param VoiceSettings|array{
+     *   voice: string,
+     *   api_key_ref?: string|null,
+     *   background_audio?: UnionMember0|UnionMember1|UnionMember2|null,
+     *   voice_speed?: float|null,
+     * } $voiceSettings
+     */
+    public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
     {
         $obj = clone $this;
-        $obj->voice_settings = $voiceSettings;
+        $obj['voice_settings'] = $voiceSettings;
 
         return $obj;
     }

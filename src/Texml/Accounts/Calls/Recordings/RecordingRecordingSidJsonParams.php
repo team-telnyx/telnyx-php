@@ -75,8 +75,8 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
-        $obj->call_sid = $call_sid;
+        $obj['account_sid'] = $account_sid;
+        $obj['call_sid'] = $call_sid;
 
         null !== $Status && $obj['Status'] = $Status;
 
@@ -86,7 +86,7 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->call_sid = $callSid;
+        $obj['call_sid'] = $callSid;
 
         return $obj;
     }

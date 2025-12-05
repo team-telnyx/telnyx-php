@@ -50,28 +50,33 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ConnectionName|array{contains?: string|null} $connection_name
      */
     public static function with(
-        ?ConnectionName $connection_name = null,
+        ConnectionName|array|null $connection_name = null,
         ?string $fqdn = null,
         ?string $outbound_voice_profile_id = null,
     ): self {
         $obj = new self;
 
-        null !== $connection_name && $obj->connection_name = $connection_name;
-        null !== $fqdn && $obj->fqdn = $fqdn;
-        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
+        null !== $connection_name && $obj['connection_name'] = $connection_name;
+        null !== $fqdn && $obj['fqdn'] = $fqdn;
+        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
 
         return $obj;
     }
 
     /**
      * Filter by connection_name using nested operations.
+     *
+     * @param ConnectionName|array{contains?: string|null} $connectionName
      */
-    public function withConnectionName(ConnectionName $connectionName): self
-    {
+    public function withConnectionName(
+        ConnectionName|array $connectionName
+    ): self {
         $obj = clone $this;
-        $obj->connection_name = $connectionName;
+        $obj['connection_name'] = $connectionName;
 
         return $obj;
     }
@@ -82,7 +87,7 @@ final class Filter implements BaseModel
     public function withFqdn(string $fqdn): self
     {
         $obj = clone $this;
-        $obj->fqdn = $fqdn;
+        $obj['fqdn'] = $fqdn;
 
         return $obj;
     }
@@ -94,7 +99,7 @@ final class Filter implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
+        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
 
         return $obj;
     }

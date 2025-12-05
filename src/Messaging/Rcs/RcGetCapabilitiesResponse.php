@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
 
 /**
  * @phpstan-type RcGetCapabilitiesResponseShape = array{
@@ -34,20 +35,37 @@ final class RcGetCapabilitiesResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param RcsCapabilities|array{
+     *   agent_id?: string|null,
+     *   agent_name?: string|null,
+     *   features?: list<string>|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
      */
-    public static function with(?RcsCapabilities $data = null): self
+    public static function with(RcsCapabilities|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(RcsCapabilities $data): self
+    /**
+     * @param RcsCapabilities|array{
+     *   agent_id?: string|null,
+     *   agent_name?: string|null,
+     *   features?: list<string>|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
+     */
+    public function withData(RcsCapabilities|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

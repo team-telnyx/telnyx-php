@@ -93,12 +93,12 @@ final class Conversation implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->last_message_at = $last_message_at;
-        $obj->metadata = $metadata;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['last_message_at'] = $last_message_at;
+        $obj['metadata'] = $metadata;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Conversation implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Conversation implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Conversation implements BaseModel, ResponseConverter
     public function withLastMessageAt(\DateTimeInterface $lastMessageAt): self
     {
         $obj = clone $this;
-        $obj->last_message_at = $lastMessageAt;
+        $obj['last_message_at'] = $lastMessageAt;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Conversation implements BaseModel, ResponseConverter
     public function withMetadata(array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Conversation implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

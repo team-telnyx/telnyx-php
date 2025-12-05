@@ -55,7 +55,7 @@ final class JobDeletePhoneNumberBlockParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->phone_number_block_id = $phone_number_block_id;
+        $obj['phone_number_block_id'] = $phone_number_block_id;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class JobDeletePhoneNumberBlockParams implements BaseModel
     public function withPhoneNumberBlockID(string $phoneNumberBlockID): self
     {
         $obj = clone $this;
-        $obj->phone_number_block_id = $phoneNumberBlockID;
+        $obj['phone_number_block_id'] = $phoneNumberBlockID;
 
         return $obj;
     }

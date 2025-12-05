@@ -61,12 +61,12 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $finished_at && $obj->finished_at = $finished_at;
-        null !== $status && $obj->status = $status;
-        null !== $task_id && $obj->task_id = $task_id;
-        null !== $task_name && $obj->task_name = $task_name;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $finished_at && $obj['finished_at'] = $finished_at;
+        null !== $status && $obj['status'] = $status;
+        null !== $task_id && $obj['task_id'] = $task_id;
+        null !== $task_name && $obj['task_name'] = $task_name;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withFinishedAt(?string $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finished_at = $finishedAt;
+        $obj['finished_at'] = $finishedAt;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Data implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->task_id = $taskID;
+        $obj['task_id'] = $taskID;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withTaskName(string $taskName): self
     {
         $obj = clone $this;
-        $obj->task_name = $taskName;
+        $obj['task_name'] = $taskName;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

@@ -85,12 +85,12 @@ final class RoomCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $enable_recording && $obj->enable_recording = $enable_recording;
-        null !== $max_participants && $obj->max_participants = $max_participants;
-        null !== $unique_name && $obj->unique_name = $unique_name;
-        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
+        null !== $enable_recording && $obj['enable_recording'] = $enable_recording;
+        null !== $max_participants && $obj['max_participants'] = $max_participants;
+        null !== $unique_name && $obj['unique_name'] = $unique_name;
+        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class RoomCreateParams implements BaseModel
     public function withEnableRecording(bool $enableRecording): self
     {
         $obj = clone $this;
-        $obj->enable_recording = $enableRecording;
+        $obj['enable_recording'] = $enableRecording;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class RoomCreateParams implements BaseModel
     public function withMaxParticipants(int $maxParticipants): self
     {
         $obj = clone $this;
-        $obj->max_participants = $maxParticipants;
+        $obj['max_participants'] = $maxParticipants;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class RoomCreateParams implements BaseModel
     public function withUniqueName(string $uniqueName): self
     {
         $obj = clone $this;
-        $obj->unique_name = $uniqueName;
+        $obj['unique_name'] = $uniqueName;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class RoomCreateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
+        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class RoomCreateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhook_event_url = $webhookEventURL;
+        $obj['webhook_event_url'] = $webhookEventURL;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class RoomCreateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
+        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

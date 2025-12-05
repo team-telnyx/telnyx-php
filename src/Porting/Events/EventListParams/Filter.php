@@ -54,17 +54,20 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param CreatedAt|array{
+     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
+     * } $created_at
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?CreatedAt $created_at = null,
+        CreatedAt|array|null $created_at = null,
         ?string $porting_order_id = null,
         Type|string|null $type = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -72,11 +75,15 @@ final class Filter implements BaseModel
 
     /**
      * Created at date range filtering operations.
+     *
+     * @param CreatedAt|array{
+     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
+     * } $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -87,7 +94,7 @@ final class Filter implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
+        $obj['porting_order_id'] = $portingOrderID;
 
         return $obj;
     }

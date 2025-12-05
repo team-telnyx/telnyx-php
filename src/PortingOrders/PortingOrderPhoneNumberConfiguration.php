@@ -71,11 +71,11 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $emergency_address_id && $obj->emergency_address_id = $emergency_address_id;
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
-        null !== $tags && $obj->tags = $tags;
+        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $emergency_address_id && $obj['emergency_address_id'] = $emergency_address_id;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $tags && $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     public function withBillingGroupID(?string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billing_group_id = $billingGroupID;
+        $obj['billing_group_id'] = $billingGroupID;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     public function withConnectionID(?string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     public function withEmergencyAddressID(?string $emergencyAddressID): self
     {
         $obj = clone $this;
-        $obj->emergency_address_id = $emergencyAddressID;
+        $obj['emergency_address_id'] = $emergencyAddressID;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }

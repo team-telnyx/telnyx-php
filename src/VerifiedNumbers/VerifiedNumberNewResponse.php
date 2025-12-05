@@ -44,8 +44,8 @@ final class VerifiedNumberNewResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $verification_method && $obj->verification_method = $verification_method;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $verification_method && $obj['verification_method'] = $verification_method;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class VerifiedNumberNewResponse implements BaseModel, ResponseConverter
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class VerifiedNumberNewResponse implements BaseModel, ResponseConverter
     public function withVerificationMethod(string $verificationMethod): self
     {
         $obj = clone $this;
-        $obj->verification_method = $verificationMethod;
+        $obj['verification_method'] = $verificationMethod;
 
         return $obj;
     }

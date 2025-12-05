@@ -51,7 +51,7 @@ final class DownlinkData implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $amount && $obj->amount = $amount;
+        null !== $amount && $obj['amount'] = $amount;
         null !== $unit && $obj['unit'] = $unit;
 
         return $obj;
@@ -63,7 +63,7 @@ final class DownlinkData implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }

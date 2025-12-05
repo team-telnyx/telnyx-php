@@ -46,20 +46,37 @@ final class IntegrationSecretNewResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param IntegrationSecret|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   identifier: string,
+     *   record_type: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(IntegrationSecret $data): self
+    public static function with(IntegrationSecret|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(IntegrationSecret $data): self
+    /**
+     * @param IntegrationSecret|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   identifier: string,
+     *   record_type: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
+     */
+    public function withData(IntegrationSecret|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

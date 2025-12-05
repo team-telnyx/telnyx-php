@@ -8,6 +8,9 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data;
+use Telnyx\Webhooks\CallHangupWebhookEvent\Data\EventType;
+use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload;
+use Telnyx\Webhooks\CallHangupWebhookEvent\Data\RecordType;
 
 /**
  * @phpstan-type CallHangupWebhookEventShape = array{data?: Data|null}
@@ -29,20 +32,37 @@ final class CallHangupWebhookEvent implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   id?: string|null,
+     *   event_type?: value-of<EventType>|null,
+     *   occurred_at?: \DateTimeInterface|null,
+     *   payload?: Payload|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   id?: string|null,
+     *   event_type?: value-of<EventType>|null,
+     *   occurred_at?: \DateTimeInterface|null,
+     *   payload?: Payload|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

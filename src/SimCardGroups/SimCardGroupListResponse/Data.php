@@ -105,12 +105,17 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ConsumedData|array{
+     *   amount?: string|null, unit?: string|null
+     * } $consumed_data
+     * @param DataLimit|array{amount?: string|null, unit?: string|null} $data_limit
      */
     public static function with(
         ?string $id = null,
-        ?ConsumedData $consumed_data = null,
+        ConsumedData|array|null $consumed_data = null,
         ?string $created_at = null,
-        ?DataLimit $data_limit = null,
+        DataLimit|array|null $data_limit = null,
         ?bool $default = null,
         ?string $name = null,
         ?string $private_wireless_gateway_id = null,
@@ -121,17 +126,17 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $consumed_data && $obj->consumed_data = $consumed_data;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $data_limit && $obj->data_limit = $data_limit;
-        null !== $default && $obj->default = $default;
-        null !== $name && $obj->name = $name;
-        null !== $private_wireless_gateway_id && $obj->private_wireless_gateway_id = $private_wireless_gateway_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $sim_card_count && $obj->sim_card_count = $sim_card_count;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $wireless_blocklist_id && $obj->wireless_blocklist_id = $wireless_blocklist_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $consumed_data && $obj['consumed_data'] = $consumed_data;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $data_limit && $obj['data_limit'] = $data_limit;
+        null !== $default && $obj['default'] = $default;
+        null !== $name && $obj['name'] = $name;
+        null !== $private_wireless_gateway_id && $obj['private_wireless_gateway_id'] = $private_wireless_gateway_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $sim_card_count && $obj['sim_card_count'] = $sim_card_count;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $wireless_blocklist_id && $obj['wireless_blocklist_id'] = $wireless_blocklist_id;
 
         return $obj;
     }
@@ -142,18 +147,22 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * Represents the amount of data consumed.
+     *
+     * @param ConsumedData|array{
+     *   amount?: string|null, unit?: string|null
+     * } $consumedData
      */
-    public function withConsumedData(ConsumedData $consumedData): self
+    public function withConsumedData(ConsumedData|array $consumedData): self
     {
         $obj = clone $this;
-        $obj->consumed_data = $consumedData;
+        $obj['consumed_data'] = $consumedData;
 
         return $obj;
     }
@@ -164,18 +173,20 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
+     *
+     * @param DataLimit|array{amount?: string|null, unit?: string|null} $dataLimit
      */
-    public function withDataLimit(DataLimit $dataLimit): self
+    public function withDataLimit(DataLimit|array $dataLimit): self
     {
         $obj = clone $this;
-        $obj->data_limit = $dataLimit;
+        $obj['data_limit'] = $dataLimit;
 
         return $obj;
     }
@@ -186,7 +197,7 @@ final class Data implements BaseModel
     public function withDefault(bool $default): self
     {
         $obj = clone $this;
-        $obj->default = $default;
+        $obj['default'] = $default;
 
         return $obj;
     }
@@ -197,7 +208,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -209,7 +220,7 @@ final class Data implements BaseModel
         string $privateWirelessGatewayID
     ): self {
         $obj = clone $this;
-        $obj->private_wireless_gateway_id = $privateWirelessGatewayID;
+        $obj['private_wireless_gateway_id'] = $privateWirelessGatewayID;
 
         return $obj;
     }
@@ -220,7 +231,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -231,7 +242,7 @@ final class Data implements BaseModel
     public function withSimCardCount(int $simCardCount): self
     {
         $obj = clone $this;
-        $obj->sim_card_count = $simCardCount;
+        $obj['sim_card_count'] = $simCardCount;
 
         return $obj;
     }
@@ -242,7 +253,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -253,7 +264,7 @@ final class Data implements BaseModel
     public function withWirelessBlocklistID(string $wirelessBlocklistID): self
     {
         $obj = clone $this;
-        $obj->wireless_blocklist_id = $wirelessBlocklistID;
+        $obj['wireless_blocklist_id'] = $wirelessBlocklistID;
 
         return $obj;
     }

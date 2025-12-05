@@ -64,8 +64,8 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->address_id = $address_id;
-        $obj->quantity = $quantity;
+        $obj['address_id'] = $address_id;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
     public function withAddressID(string $addressID): self
     {
         $obj = clone $this;
-        $obj->address_id = $addressID;
+        $obj['address_id'] = $addressID;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }

@@ -164,22 +164,22 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $assistant_id && $obj->assistant_id = $assistant_id;
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $assistant_id && $obj['assistant_id'] = $assistant_id;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
         null !== $calling_party_type && $obj['calling_party_type'] = $calling_party_type;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $conversation_id && $obj->conversation_id = $conversation_id;
-        null !== $duration_sec && $obj->duration_sec = $duration_sec;
-        null !== $from && $obj->from = $from;
-        null !== $llm_model && $obj->llm_model = $llm_model;
-        null !== $stt_model && $obj->stt_model = $stt_model;
-        null !== $to && $obj->to = $to;
-        null !== $tts_model_id && $obj->tts_model_id = $tts_model_id;
-        null !== $tts_provider && $obj->tts_provider = $tts_provider;
-        null !== $tts_voice_id && $obj->tts_voice_id = $tts_voice_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $conversation_id && $obj['conversation_id'] = $conversation_id;
+        null !== $duration_sec && $obj['duration_sec'] = $duration_sec;
+        null !== $from && $obj['from'] = $from;
+        null !== $llm_model && $obj['llm_model'] = $llm_model;
+        null !== $stt_model && $obj['stt_model'] = $stt_model;
+        null !== $to && $obj['to'] = $to;
+        null !== $tts_model_id && $obj['tts_model_id'] = $tts_model_id;
+        null !== $tts_provider && $obj['tts_provider'] = $tts_provider;
+        null !== $tts_voice_id && $obj['tts_voice_id'] = $tts_voice_id;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Payload implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistant_id = $assistantID;
+        $obj['assistant_id'] = $assistantID;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -270,7 +270,7 @@ final class Payload implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversation_id = $conversationID;
+        $obj['conversation_id'] = $conversationID;
 
         return $obj;
     }
@@ -281,7 +281,7 @@ final class Payload implements BaseModel
     public function withDurationSec(int $durationSec): self
     {
         $obj = clone $this;
-        $obj->duration_sec = $durationSec;
+        $obj['duration_sec'] = $durationSec;
 
         return $obj;
     }
@@ -292,7 +292,7 @@ final class Payload implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class Payload implements BaseModel
     public function withLlmModel(string $llmModel): self
     {
         $obj = clone $this;
-        $obj->llm_model = $llmModel;
+        $obj['llm_model'] = $llmModel;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class Payload implements BaseModel
     public function withSttModel(string $sttModel): self
     {
         $obj = clone $this;
-        $obj->stt_model = $sttModel;
+        $obj['stt_model'] = $sttModel;
 
         return $obj;
     }
@@ -325,7 +325,7 @@ final class Payload implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class Payload implements BaseModel
     public function withTtsModelID(string $ttsModelID): self
     {
         $obj = clone $this;
-        $obj->tts_model_id = $ttsModelID;
+        $obj['tts_model_id'] = $ttsModelID;
 
         return $obj;
     }
@@ -347,7 +347,7 @@ final class Payload implements BaseModel
     public function withTtsProvider(string $ttsProvider): self
     {
         $obj = clone $this;
-        $obj->tts_provider = $ttsProvider;
+        $obj['tts_provider'] = $ttsProvider;
 
         return $obj;
     }
@@ -358,7 +358,7 @@ final class Payload implements BaseModel
     public function withTtsVoiceID(string $ttsVoiceID): self
     {
         $obj = clone $this;
-        $obj->tts_voice_id = $ttsVoiceID;
+        $obj['tts_voice_id'] = $ttsVoiceID;
 
         return $obj;
     }

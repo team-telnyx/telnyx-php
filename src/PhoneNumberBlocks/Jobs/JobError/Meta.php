@@ -36,7 +36,7 @@ final class Meta implements BaseModel
     {
         $obj = new self;
 
-        null !== $url && $obj->url = $url;
+        null !== $url && $obj['url'] = $url;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Meta implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

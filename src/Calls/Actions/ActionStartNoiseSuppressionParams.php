@@ -22,7 +22,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   command_id?: string,
  *   direction?: Direction|value-of<Direction>,
  *   noise_suppression_engine?: NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>,
- *   noise_suppression_engine_config?: NoiseSuppressionEngineConfig,
+ *   noise_suppression_engine_config?: NoiseSuppressionEngineConfig|array{
+ *     attenuation_limit?: int|null
+ *   },
  * }
  */
 final class ActionStartNoiseSuppressionParams implements BaseModel
@@ -80,21 +82,24 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      *
      * @param Direction|value-of<Direction> $direction
      * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine> $noise_suppression_engine
+     * @param NoiseSuppressionEngineConfig|array{
+     *   attenuation_limit?: int|null
+     * } $noise_suppression_engine_config
      */
     public static function with(
         ?string $client_state = null,
         ?string $command_id = null,
         Direction|string|null $direction = null,
         NoiseSuppressionEngine|string|null $noise_suppression_engine = null,
-        ?NoiseSuppressionEngineConfig $noise_suppression_engine_config = null,
+        NoiseSuppressionEngineConfig|array|null $noise_suppression_engine_config = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
         null !== $direction && $obj['direction'] = $direction;
         null !== $noise_suppression_engine && $obj['noise_suppression_engine'] = $noise_suppression_engine;
-        null !== $noise_suppression_engine_config && $obj->noise_suppression_engine_config = $noise_suppression_engine_config;
+        null !== $noise_suppression_engine_config && $obj['noise_suppression_engine_config'] = $noise_suppression_engine_config;
 
         return $obj;
     }
@@ -105,7 +110,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -116,7 +121,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -153,12 +158,16 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
 
     /**
      * Configuration parameters for noise suppression engines.
+     *
+     * @param NoiseSuppressionEngineConfig|array{
+     *   attenuation_limit?: int|null
+     * } $noiseSuppressionEngineConfig
      */
     public function withNoiseSuppressionEngineConfig(
-        NoiseSuppressionEngineConfig $noiseSuppressionEngineConfig
+        NoiseSuppressionEngineConfig|array $noiseSuppressionEngineConfig
     ): self {
         $obj = clone $this;
-        $obj->noise_suppression_engine_config = $noiseSuppressionEngineConfig;
+        $obj['noise_suppression_engine_config'] = $noiseSuppressionEngineConfig;
 
         return $obj;
     }

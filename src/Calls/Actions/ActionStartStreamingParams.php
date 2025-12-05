@@ -26,7 +26,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionStartStreamingParamsShape = array{
  *   client_state?: string,
  *   command_id?: string,
- *   dialogflow_config?: DialogflowConfig,
+ *   dialogflow_config?: DialogflowConfig|array{
+ *     analyze_sentiment?: bool|null, partial_automated_agent_reply?: bool|null
+ *   },
  *   enable_dialogflow?: bool,
  *   stream_bidirectional_codec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   stream_bidirectional_mode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
@@ -128,6 +130,9 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param DialogflowConfig|array{
+     *   analyze_sentiment?: bool|null, partial_automated_agent_reply?: bool|null
+     * } $dialogflow_config
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $stream_bidirectional_codec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $stream_bidirectional_mode
      * @param 8000|16000|22050|24000|48000 $stream_bidirectional_sampling_rate
@@ -138,7 +143,7 @@ final class ActionStartStreamingParams implements BaseModel
     public static function with(
         ?string $client_state = null,
         ?string $command_id = null,
-        ?DialogflowConfig $dialogflow_config = null,
+        DialogflowConfig|array|null $dialogflow_config = null,
         ?bool $enable_dialogflow = null,
         StreamBidirectionalCodec|string|null $stream_bidirectional_codec = null,
         StreamBidirectionalMode|string|null $stream_bidirectional_mode = null,
@@ -150,17 +155,17 @@ final class ActionStartStreamingParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $dialogflow_config && $obj->dialogflow_config = $dialogflow_config;
-        null !== $enable_dialogflow && $obj->enable_dialogflow = $enable_dialogflow;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $dialogflow_config && $obj['dialogflow_config'] = $dialogflow_config;
+        null !== $enable_dialogflow && $obj['enable_dialogflow'] = $enable_dialogflow;
         null !== $stream_bidirectional_codec && $obj['stream_bidirectional_codec'] = $stream_bidirectional_codec;
         null !== $stream_bidirectional_mode && $obj['stream_bidirectional_mode'] = $stream_bidirectional_mode;
-        null !== $stream_bidirectional_sampling_rate && $obj->stream_bidirectional_sampling_rate = $stream_bidirectional_sampling_rate;
+        null !== $stream_bidirectional_sampling_rate && $obj['stream_bidirectional_sampling_rate'] = $stream_bidirectional_sampling_rate;
         null !== $stream_bidirectional_target_legs && $obj['stream_bidirectional_target_legs'] = $stream_bidirectional_target_legs;
         null !== $stream_codec && $obj['stream_codec'] = $stream_codec;
         null !== $stream_track && $obj['stream_track'] = $stream_track;
-        null !== $stream_url && $obj->stream_url = $stream_url;
+        null !== $stream_url && $obj['stream_url'] = $stream_url;
 
         return $obj;
     }
@@ -171,7 +176,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -182,16 +187,21 @@ final class ActionStartStreamingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
 
+    /**
+     * @param DialogflowConfig|array{
+     *   analyze_sentiment?: bool|null, partial_automated_agent_reply?: bool|null
+     * } $dialogflowConfig
+     */
     public function withDialogflowConfig(
-        DialogflowConfig $dialogflowConfig
+        DialogflowConfig|array $dialogflowConfig
     ): self {
         $obj = clone $this;
-        $obj->dialogflow_config = $dialogflowConfig;
+        $obj['dialogflow_config'] = $dialogflowConfig;
 
         return $obj;
     }
@@ -202,7 +212,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withEnableDialogflow(bool $enableDialogflow): self
     {
         $obj = clone $this;
-        $obj->enable_dialogflow = $enableDialogflow;
+        $obj['enable_dialogflow'] = $enableDialogflow;
 
         return $obj;
     }
@@ -244,7 +254,7 @@ final class ActionStartStreamingParams implements BaseModel
         int $streamBidirectionalSamplingRate
     ): self {
         $obj = clone $this;
-        $obj->stream_bidirectional_sampling_rate = $streamBidirectionalSamplingRate;
+        $obj['stream_bidirectional_sampling_rate'] = $streamBidirectionalSamplingRate;
 
         return $obj;
     }
@@ -295,7 +305,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamURL(string $streamURL): self
     {
         $obj = clone $this;
-        $obj->stream_url = $streamURL;
+        $obj['stream_url'] = $streamURL;
 
         return $obj;
     }

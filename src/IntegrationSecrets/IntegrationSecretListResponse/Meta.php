@@ -68,10 +68,10 @@ final class Meta implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->page_number = $page_number;
-        $obj->page_size = $page_size;
-        $obj->total_pages = $total_pages;
-        $obj->total_results = $total_results;
+        $obj['page_number'] = $page_number;
+        $obj['page_size'] = $page_size;
+        $obj['total_pages'] = $total_pages;
+        $obj['total_results'] = $total_results;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Meta implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page_number = $pageNumber;
+        $obj['page_number'] = $pageNumber;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class Meta implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size = $pageSize;
+        $obj['page_size'] = $pageSize;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class Meta implements BaseModel
     public function withTotalPages(int $totalPages): self
     {
         $obj = clone $this;
-        $obj->total_pages = $totalPages;
+        $obj['total_pages'] = $totalPages;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Meta implements BaseModel
     public function withTotalResults(int $totalResults): self
     {
         $obj = clone $this;
-        $obj->total_results = $totalResults;
+        $obj['total_results'] = $totalResults;
 
         return $obj;
     }

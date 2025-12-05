@@ -8,6 +8,9 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data\OrderingGroup;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data\OrderingGroup\Order;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data\OrderingGroup\Status;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data\OrderingGroup\Strategy;
 
 /**
  * @phpstan-type DataShape = array{
@@ -82,7 +85,25 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OrderingGroup> $ordering_groups
+     * @param list<OrderingGroup|array{
+     *   administrative_area?: string|null,
+     *   count_allocated?: int|null,
+     *   count_requested?: int|null,
+     *   country_iso?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   error_reason?: string|null,
+     *   exclude_held_numbers?: bool|null,
+     *   national_destination_code?: string|null,
+     *   orders?: list<Order>|null,
+     *   phone_number_type?: string|null,
+     *   phone_number_contains_?: string|null,
+     *   phone_number_ends_with_?: string|null,
+     *   phone_number_starts_with_?: string|null,
+     *   quickship?: bool|null,
+     *   status?: value-of<Status>|null,
+     *   strategy?: value-of<Strategy>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $ordering_groups
      */
     public static function with(
         ?string $id = null,
@@ -96,14 +117,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
-        null !== $ordering_groups && $obj->ordering_groups = $ordering_groups;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $ordering_groups && $obj['ordering_groups'] = $ordering_groups;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -114,7 +135,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -125,7 +146,7 @@ final class Data implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billing_group_id = $billingGroupID;
+        $obj['billing_group_id'] = $billingGroupID;
 
         return $obj;
     }
@@ -136,7 +157,7 @@ final class Data implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -147,7 +168,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -158,7 +179,7 @@ final class Data implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -169,18 +190,36 @@ final class Data implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
 
     /**
-     * @param list<OrderingGroup> $orderingGroups
+     * @param list<OrderingGroup|array{
+     *   administrative_area?: string|null,
+     *   count_allocated?: int|null,
+     *   count_requested?: int|null,
+     *   country_iso?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   error_reason?: string|null,
+     *   exclude_held_numbers?: bool|null,
+     *   national_destination_code?: string|null,
+     *   orders?: list<Order>|null,
+     *   phone_number_type?: string|null,
+     *   phone_number_contains_?: string|null,
+     *   phone_number_ends_with_?: string|null,
+     *   phone_number_starts_with_?: string|null,
+     *   quickship?: bool|null,
+     *   status?: value-of<Status>|null,
+     *   strategy?: value-of<Strategy>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $orderingGroups
      */
     public function withOrderingGroups(array $orderingGroups): self
     {
         $obj = clone $this;
-        $obj->ordering_groups = $orderingGroups;
+        $obj['ordering_groups'] = $orderingGroups;
 
         return $obj;
     }
@@ -191,7 +230,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

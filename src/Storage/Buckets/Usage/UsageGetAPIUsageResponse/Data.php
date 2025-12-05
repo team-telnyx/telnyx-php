@@ -7,12 +7,13 @@ namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1 as Category;
+use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1;
+use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Category;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total;
 
 /**
  * @phpstan-type DataShape = array{
- *   categories?: list<Category>|null,
+ *   categories?: list<Category1>|null,
  *   timestamp?: \DateTimeInterface|null,
  *   total?: Total|null,
  * }
@@ -22,8 +23,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<Category>|null $categories */
-    #[Api(list: Category::class, optional: true)]
+    /** @var list<Category1>|null $categories */
+    #[Api(list: Category1::class, optional: true)]
     public ?array $categories;
 
     /**
@@ -45,29 +46,47 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Category> $categories
+     * @param list<Category1|array{
+     *   bytes_received?: int|null,
+     *   bytes_sent?: int|null,
+     *   category?: value-of<Category>|null,
+     *   ops?: int|null,
+     *   successful_ops?: int|null,
+     * }> $categories
+     * @param Total|array{
+     *   bytes_received?: int|null,
+     *   bytes_sent?: int|null,
+     *   ops?: int|null,
+     *   successful_ops?: int|null,
+     * } $total
      */
     public static function with(
         ?array $categories = null,
         ?\DateTimeInterface $timestamp = null,
-        ?Total $total = null,
+        Total|array|null $total = null,
     ): self {
         $obj = new self;
 
-        null !== $categories && $obj->categories = $categories;
-        null !== $timestamp && $obj->timestamp = $timestamp;
-        null !== $total && $obj->total = $total;
+        null !== $categories && $obj['categories'] = $categories;
+        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $total && $obj['total'] = $total;
 
         return $obj;
     }
 
     /**
-     * @param list<Category> $categories
+     * @param list<Category1|array{
+     *   bytes_received?: int|null,
+     *   bytes_sent?: int|null,
+     *   category?: value-of<Category>|null,
+     *   ops?: int|null,
+     *   successful_ops?: int|null,
+     * }> $categories
      */
     public function withCategories(array $categories): self
     {
         $obj = clone $this;
-        $obj->categories = $categories;
+        $obj['categories'] = $categories;
 
         return $obj;
     }
@@ -78,15 +97,23 @@ final class Data implements BaseModel
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
 
-    public function withTotal(Total $total): self
+    /**
+     * @param Total|array{
+     *   bytes_received?: int|null,
+     *   bytes_sent?: int|null,
+     *   ops?: int|null,
+     *   successful_ops?: int|null,
+     * } $total
+     */
+    public function withTotal(Total|array $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }

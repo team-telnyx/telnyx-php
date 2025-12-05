@@ -77,9 +77,9 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $action_type && $obj['action_type'] = $action_type;
-        null !== $requirement_type_id && $obj->requirement_type_id = $requirement_type_id;
+        null !== $requirement_type_id && $obj['requirement_type_id'] = $requirement_type_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -93,7 +93,7 @@ final class Filter implements BaseModel
     public function withID(array $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Filter implements BaseModel
     public function withRequirementTypeID(string $requirementTypeID): self
     {
         $obj = clone $this;
-        $obj->requirement_type_id = $requirementTypeID;
+        $obj['requirement_type_id'] = $requirementTypeID;
 
         return $obj;
     }

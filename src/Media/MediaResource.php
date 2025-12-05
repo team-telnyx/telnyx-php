@@ -71,11 +71,11 @@ final class MediaResource implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $content_type && $obj->content_type = $content_type;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $expires_at && $obj->expires_at = $expires_at;
-        null !== $media_name && $obj->media_name = $media_name;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $content_type && $obj['content_type'] = $content_type;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $expires_at && $obj['expires_at'] = $expires_at;
+        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class MediaResource implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj->content_type = $contentType;
+        $obj['content_type'] = $contentType;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class MediaResource implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class MediaResource implements BaseModel
     public function withExpiresAt(string $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expires_at = $expiresAt;
+        $obj['expires_at'] = $expiresAt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class MediaResource implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class MediaResource implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

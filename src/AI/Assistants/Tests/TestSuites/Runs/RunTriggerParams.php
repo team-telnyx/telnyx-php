@@ -42,7 +42,7 @@ final class RunTriggerParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $destination_version_id && $obj->destination_version_id = $destination_version_id;
+        null !== $destination_version_id && $obj['destination_version_id'] = $destination_version_id;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class RunTriggerParams implements BaseModel
     public function withDestinationVersionID(string $destinationVersionID): self
     {
         $obj = clone $this;
-        $obj->destination_version_id = $destinationVersionID;
+        $obj['destination_version_id'] = $destinationVersionID;
 
         return $obj;
     }

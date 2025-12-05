@@ -55,29 +55,33 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingPhoneNumber> $porting_phone_numbers
+     * @param From|array{id?: string|null} $from
+     * @param list<PortingPhoneNumber|array{id?: string|null}> $porting_phone_numbers
+     * @param To|array{id?: string|null} $to
      */
     public static function with(
-        ?From $from = null,
+        From|array|null $from = null,
         ?array $porting_phone_numbers = null,
-        ?To $to = null
+        To|array|null $to = null,
     ): self {
         $obj = new self;
 
-        null !== $from && $obj->from = $from;
-        null !== $porting_phone_numbers && $obj->porting_phone_numbers = $porting_phone_numbers;
-        null !== $to && $obj->to = $to;
+        null !== $from && $obj['from'] = $from;
+        null !== $porting_phone_numbers && $obj['porting_phone_numbers'] = $porting_phone_numbers;
+        null !== $to && $obj['to'] = $to;
 
         return $obj;
     }
 
     /**
      * The porting order that was split.
+     *
+     * @param From|array{id?: string|null} $from
      */
-    public function withFrom(From $from): self
+    public function withFrom(From|array $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -85,23 +89,25 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
     /**
      * The list of porting phone numbers that were moved to the new porting order.
      *
-     * @param list<PortingPhoneNumber> $portingPhoneNumbers
+     * @param list<PortingPhoneNumber|array{id?: string|null}> $portingPhoneNumbers
      */
     public function withPortingPhoneNumbers(array $portingPhoneNumbers): self
     {
         $obj = clone $this;
-        $obj->porting_phone_numbers = $portingPhoneNumbers;
+        $obj['porting_phone_numbers'] = $portingPhoneNumbers;
 
         return $obj;
     }
 
     /**
      * The new porting order that the phone numbers was moved to.
+     *
+     * @param To|array{id?: string|null} $to
      */
-    public function withTo(To $to): self
+    public function withTo(To|array $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

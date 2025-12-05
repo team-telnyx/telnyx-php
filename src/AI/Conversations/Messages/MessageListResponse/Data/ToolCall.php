@@ -61,17 +61,18 @@ final class ToolCall implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Function1|array{arguments: string, name: string} $function
      * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
-        Function1 $function,
+        Function1|array $function,
         Type|string $type
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->function = $function;
+        $obj['id'] = $id;
+        $obj['function'] = $function;
         $obj['type'] = $type;
 
         return $obj;
@@ -83,15 +84,18 @@ final class ToolCall implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
-    public function withFunction(Function1 $function): self
+    /**
+     * @param Function1|array{arguments: string, name: string} $function
+     */
+    public function withFunction(Function1|array $function): self
     {
         $obj = clone $this;
-        $obj->function = $function;
+        $obj['function'] = $function;
 
         return $obj;
     }

@@ -54,29 +54,36 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param CreatedAt|array{
+     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
+     * } $created_at
      * @param EventType|value-of<EventType> $event_type
      */
     public static function with(
-        ?CreatedAt $created_at = null,
+        CreatedAt|array|null $created_at = null,
         EventType|string|null $event_type = null,
         ?string $portout_id = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $portout_id && $obj->portout_id = $portout_id;
+        null !== $portout_id && $obj['portout_id'] = $portout_id;
 
         return $obj;
     }
 
     /**
      * Filter by created_at date range using nested operations.
+     *
+     * @param CreatedAt|array{
+     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
+     * } $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -100,7 +107,7 @@ final class Filter implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj->portout_id = $portoutID;
+        $obj['portout_id'] = $portoutID;
 
         return $obj;
     }

@@ -53,7 +53,7 @@ final class BrandQualifyByUsecaseParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->brandId = $brandId;
+        $obj['brandId'] = $brandId;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class BrandQualifyByUsecaseParams implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }

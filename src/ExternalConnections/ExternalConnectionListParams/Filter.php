@@ -66,22 +66,24 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ConnectionName|array{contains?: string|null} $connection_name
      * @param ExternalSipConnection|value-of<ExternalSipConnection> $external_sip_connection
+     * @param PhoneNumber|array{contains?: string|null} $phone_number
      */
     public static function with(
         ?string $id = null,
-        ?ConnectionName $connection_name = null,
+        ConnectionName|array|null $connection_name = null,
         ?string $created_at = null,
         ExternalSipConnection|string|null $external_sip_connection = null,
-        ?PhoneNumber $phone_number = null,
+        PhoneNumber|array|null $phone_number = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $connection_name && $obj->connection_name = $connection_name;
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $connection_name && $obj['connection_name'] = $connection_name;
+        null !== $created_at && $obj['created_at'] = $created_at;
         null !== $external_sip_connection && $obj['external_sip_connection'] = $external_sip_connection;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -92,15 +94,19 @@ final class Filter implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
-    public function withConnectionName(ConnectionName $connectionName): self
-    {
+    /**
+     * @param ConnectionName|array{contains?: string|null} $connectionName
+     */
+    public function withConnectionName(
+        ConnectionName|array $connectionName
+    ): self {
         $obj = clone $this;
-        $obj->connection_name = $connectionName;
+        $obj['connection_name'] = $connectionName;
 
         return $obj;
     }
@@ -111,7 +117,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -132,11 +138,13 @@ final class Filter implements BaseModel
 
     /**
      * Phone number filter for connections. Note: Despite the 'contains' name, this requires a full E164 match per the original specification.
+     *
+     * @param PhoneNumber|array{contains?: string|null} $phoneNumber
      */
-    public function withPhoneNumber(PhoneNumber $phoneNumber): self
+    public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

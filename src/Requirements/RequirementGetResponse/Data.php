@@ -8,6 +8,8 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocReqsRequirementType;
+use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
+use Telnyx\DocReqsRequirementType\Type;
 use Telnyx\Requirements\RequirementGetResponse\Data\Action;
 use Telnyx\Requirements\RequirementGetResponse\Data\PhoneNumberType;
 
@@ -101,7 +103,17 @@ final class Data implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
-     * @param list<DocReqsRequirementType> $requirements_types
+     * @param list<DocReqsRequirementType|array{
+     *   id?: string|null,
+     *   acceptance_criteria?: AcceptanceCriteria|null,
+     *   created_at?: string|null,
+     *   description?: string|null,
+     *   example?: string|null,
+     *   name?: string|null,
+     *   record_type?: string|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: string|null,
+     * }> $requirements_types
      */
     public static function with(
         ?string $id = null,
@@ -116,15 +128,15 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $action && $obj['action'] = $action;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $locality && $obj->locality = $locality;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $locality && $obj['locality'] = $locality;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $requirements_types && $obj->requirements_types = $requirements_types;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $requirements_types && $obj['requirements_types'] = $requirements_types;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -135,7 +147,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -159,7 +171,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -170,7 +182,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -181,7 +193,7 @@ final class Data implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -206,7 +218,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -214,12 +226,22 @@ final class Data implements BaseModel
     /**
      * Lists the requirement types necessary to fulfill this requirement.
      *
-     * @param list<DocReqsRequirementType> $requirementsTypes
+     * @param list<DocReqsRequirementType|array{
+     *   id?: string|null,
+     *   acceptance_criteria?: AcceptanceCriteria|null,
+     *   created_at?: string|null,
+     *   description?: string|null,
+     *   example?: string|null,
+     *   name?: string|null,
+     *   record_type?: string|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: string|null,
+     * }> $requirementsTypes
      */
     public function withRequirementsTypes(array $requirementsTypes): self
     {
         $obj = clone $this;
-        $obj->requirements_types = $requirementsTypes;
+        $obj['requirements_types'] = $requirementsTypes;
 
         return $obj;
     }
@@ -230,7 +252,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

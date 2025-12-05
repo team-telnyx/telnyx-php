@@ -84,13 +84,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $app_subdomain && $obj->app_subdomain = $app_subdomain;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $host && $obj->host = $host;
-        null !== $name && $obj->name = $name;
-        null !== $port && $obj->port = $port;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $app_subdomain && $obj['app_subdomain'] = $app_subdomain;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $host && $obj['host'] = $host;
+        null !== $name && $obj['name'] = $name;
+        null !== $port && $obj['port'] = $port;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Data implements BaseModel
     public function withAppSubdomain(string $appSubdomain): self
     {
         $obj = clone $this;
-        $obj->app_subdomain = $appSubdomain;
+        $obj['app_subdomain'] = $appSubdomain;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Data implements BaseModel
     public function withHost(string $host): self
     {
         $obj = clone $this;
-        $obj->host = $host;
+        $obj['host'] = $host;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withPort(int $port): self
     {
         $obj = clone $this;
-        $obj->port = $port;
+        $obj['port'] = $port;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

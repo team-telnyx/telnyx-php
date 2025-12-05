@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
+use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPAssignmentID\In;
 
 /**
  * Global IP Assignment Usage Metrics.
@@ -16,7 +17,10 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filte
  * @see Telnyx\Services\GlobalIPAssignmentsUsageService::retrieve()
  *
  * @phpstan-type GlobalIPAssignmentsUsageRetrieveParamsShape = array{
- *   filter?: Filter
+ *   filter?: Filter|array{
+ *     global_ip_assignment_id?: string|null|In,
+ *     global_ip_id?: string|null|\Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPID\In,
+ *   },
  * }
  */
 final class GlobalIPAssignmentsUsageRetrieveParams implements BaseModel
@@ -40,23 +44,33 @@ final class GlobalIPAssignmentsUsageRetrieveParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   global_ip_assignment_id?: string|In|null,
+     *   global_ip_id?: string|Filter\GlobalIPID\In|null,
+     * } $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in].
+     *
+     * @param Filter|array{
+     *   global_ip_assignment_id?: string|In|null,
+     *   global_ip_id?: string|Filter\GlobalIPID\In|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }

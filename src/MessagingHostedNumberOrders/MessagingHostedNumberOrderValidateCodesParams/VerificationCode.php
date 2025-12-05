@@ -50,8 +50,8 @@ final class VerificationCode implements BaseModel
     {
         $obj = new self;
 
-        $obj->code = $code;
-        $obj->phone_number = $phone_number;
+        $obj['code'] = $code;
+        $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -59,7 +59,7 @@ final class VerificationCode implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class VerificationCode implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

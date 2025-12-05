@@ -259,31 +259,31 @@ final class BrandCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->country = $country;
-        $obj->displayName = $displayName;
-        $obj->email = $email;
+        $obj['country'] = $country;
+        $obj['displayName'] = $displayName;
+        $obj['email'] = $email;
         $obj['entityType'] = $entityType;
         $obj['vertical'] = $vertical;
 
-        null !== $businessContactEmail && $obj->businessContactEmail = $businessContactEmail;
-        null !== $city && $obj->city = $city;
-        null !== $companyName && $obj->companyName = $companyName;
-        null !== $ein && $obj->ein = $ein;
-        null !== $firstName && $obj->firstName = $firstName;
-        null !== $ipAddress && $obj->ipAddress = $ipAddress;
-        null !== $isReseller && $obj->isReseller = $isReseller;
-        null !== $lastName && $obj->lastName = $lastName;
-        null !== $mobilePhone && $obj->mobilePhone = $mobilePhone;
-        null !== $mock && $obj->mock = $mock;
-        null !== $phone && $obj->phone = $phone;
-        null !== $postalCode && $obj->postalCode = $postalCode;
-        null !== $state && $obj->state = $state;
+        null !== $businessContactEmail && $obj['businessContactEmail'] = $businessContactEmail;
+        null !== $city && $obj['city'] = $city;
+        null !== $companyName && $obj['companyName'] = $companyName;
+        null !== $ein && $obj['ein'] = $ein;
+        null !== $firstName && $obj['firstName'] = $firstName;
+        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
+        null !== $isReseller && $obj['isReseller'] = $isReseller;
+        null !== $lastName && $obj['lastName'] = $lastName;
+        null !== $mobilePhone && $obj['mobilePhone'] = $mobilePhone;
+        null !== $mock && $obj['mock'] = $mock;
+        null !== $phone && $obj['phone'] = $phone;
+        null !== $postalCode && $obj['postalCode'] = $postalCode;
+        null !== $state && $obj['state'] = $state;
         null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
-        null !== $stockSymbol && $obj->stockSymbol = $stockSymbol;
-        null !== $street && $obj->street = $street;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
-        null !== $website && $obj->website = $website;
+        null !== $stockSymbol && $obj['stockSymbol'] = $stockSymbol;
+        null !== $street && $obj['street'] = $street;
+        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $website && $obj['website'] = $website;
 
         return $obj;
     }
@@ -294,7 +294,7 @@ final class BrandCreateParams implements BaseModel
     public function withCountry(string $country): self
     {
         $obj = clone $this;
-        $obj->country = $country;
+        $obj['country'] = $country;
 
         return $obj;
     }
@@ -305,7 +305,7 @@ final class BrandCreateParams implements BaseModel
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -316,7 +316,7 @@ final class BrandCreateParams implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -355,7 +355,7 @@ final class BrandCreateParams implements BaseModel
     public function withBusinessContactEmail(string $businessContactEmail): self
     {
         $obj = clone $this;
-        $obj->businessContactEmail = $businessContactEmail;
+        $obj['businessContactEmail'] = $businessContactEmail;
 
         return $obj;
     }
@@ -366,7 +366,7 @@ final class BrandCreateParams implements BaseModel
     public function withCity(string $city): self
     {
         $obj = clone $this;
-        $obj->city = $city;
+        $obj['city'] = $city;
 
         return $obj;
     }
@@ -377,7 +377,7 @@ final class BrandCreateParams implements BaseModel
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj->companyName = $companyName;
+        $obj['companyName'] = $companyName;
 
         return $obj;
     }
@@ -388,7 +388,7 @@ final class BrandCreateParams implements BaseModel
     public function withEin(string $ein): self
     {
         $obj = clone $this;
-        $obj->ein = $ein;
+        $obj['ein'] = $ein;
 
         return $obj;
     }
@@ -399,7 +399,7 @@ final class BrandCreateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->firstName = $firstName;
+        $obj['firstName'] = $firstName;
 
         return $obj;
     }
@@ -410,7 +410,7 @@ final class BrandCreateParams implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }
@@ -418,7 +418,7 @@ final class BrandCreateParams implements BaseModel
     public function withIsReseller(bool $isReseller): self
     {
         $obj = clone $this;
-        $obj->isReseller = $isReseller;
+        $obj['isReseller'] = $isReseller;
 
         return $obj;
     }
@@ -429,7 +429,7 @@ final class BrandCreateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->lastName = $lastName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }
@@ -440,7 +440,7 @@ final class BrandCreateParams implements BaseModel
     public function withMobilePhone(string $mobilePhone): self
     {
         $obj = clone $this;
-        $obj->mobilePhone = $mobilePhone;
+        $obj['mobilePhone'] = $mobilePhone;
 
         return $obj;
     }
@@ -451,7 +451,7 @@ final class BrandCreateParams implements BaseModel
     public function withMock(bool $mock): self
     {
         $obj = clone $this;
-        $obj->mock = $mock;
+        $obj['mock'] = $mock;
 
         return $obj;
     }
@@ -462,7 +462,7 @@ final class BrandCreateParams implements BaseModel
     public function withPhone(string $phone): self
     {
         $obj = clone $this;
-        $obj->phone = $phone;
+        $obj['phone'] = $phone;
 
         return $obj;
     }
@@ -473,7 +473,7 @@ final class BrandCreateParams implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postalCode = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -484,7 +484,7 @@ final class BrandCreateParams implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -508,7 +508,7 @@ final class BrandCreateParams implements BaseModel
     public function withStockSymbol(string $stockSymbol): self
     {
         $obj = clone $this;
-        $obj->stockSymbol = $stockSymbol;
+        $obj['stockSymbol'] = $stockSymbol;
 
         return $obj;
     }
@@ -519,7 +519,7 @@ final class BrandCreateParams implements BaseModel
     public function withStreet(string $street): self
     {
         $obj = clone $this;
-        $obj->street = $street;
+        $obj['street'] = $street;
 
         return $obj;
     }
@@ -530,7 +530,7 @@ final class BrandCreateParams implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj['webhookFailoverURL'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -541,7 +541,7 @@ final class BrandCreateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -552,7 +552,7 @@ final class BrandCreateParams implements BaseModel
     public function withWebsite(string $website): self
     {
         $obj = clone $this;
-        $obj->website = $website;
+        $obj['website'] = $website;
 
         return $obj;
     }

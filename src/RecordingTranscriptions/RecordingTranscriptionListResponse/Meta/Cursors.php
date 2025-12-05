@@ -44,8 +44,8 @@ final class Cursors implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $after && $obj->after = $after;
-        null !== $before && $obj->before = $before;
+        null !== $after && $obj['after'] = $after;
+        null !== $before && $obj['before'] = $before;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Cursors implements BaseModel
     public function withAfter(string $after): self
     {
         $obj = clone $this;
-        $obj->after = $after;
+        $obj['after'] = $after;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Cursors implements BaseModel
     public function withBefore(string $before): self
     {
         $obj = clone $this;
-        $obj->before = $before;
+        $obj['before'] = $before;
 
         return $obj;
     }

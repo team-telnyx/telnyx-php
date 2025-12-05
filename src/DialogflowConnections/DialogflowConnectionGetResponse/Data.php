@@ -68,11 +68,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $conversation_profile_id && $obj->conversation_profile_id = $conversation_profile_id;
-        null !== $environment && $obj->environment = $environment;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $service_account && $obj->service_account = $service_account;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $conversation_profile_id && $obj['conversation_profile_id'] = $conversation_profile_id;
+        null !== $environment && $obj['environment'] = $environment;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $service_account && $obj['service_account'] = $service_account;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class Data implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class Data implements BaseModel
         string $conversationProfileID
     ): self {
         $obj = clone $this;
-        $obj->conversation_profile_id = $conversationProfileID;
+        $obj['conversation_profile_id'] = $conversationProfileID;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withEnvironment(string $environment): self
     {
         $obj = clone $this;
-        $obj->environment = $environment;
+        $obj['environment'] = $environment;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withServiceAccount(string $serviceAccount): self
     {
         $obj = clone $this;
-        $obj->service_account = $serviceAccount;
+        $obj['service_account'] = $serviceAccount;
 
         return $obj;
     }

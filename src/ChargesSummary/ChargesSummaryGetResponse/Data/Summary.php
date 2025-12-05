@@ -8,6 +8,7 @@ use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
+use Telnyx\ChargesSummary\MonthDetail;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -62,15 +63,25 @@ final class Summary implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Adjustment> $adjustments
-     * @param list<Comparative|Simple> $lines
+     * @param list<Adjustment|array{
+     *   amount: string, description: string, event_date: \DateTimeInterface
+     * }> $adjustments
+     * @param list<Comparative|array{
+     *   alias: string,
+     *   existing_this_month: MonthDetail,
+     *   name: string,
+     *   new_this_month: MonthDetail,
+     *   type: 'comparative',
+     * }|Simple|array{
+     *   alias: string, amount: string, name: string, quantity: int, type: 'simple'
+     * }> $lines
      */
     public static function with(array $adjustments, array $lines): self
     {
         $obj = new self;
 
-        $obj->adjustments = $adjustments;
-        $obj->lines = $lines;
+        $obj['adjustments'] = $adjustments;
+        $obj['lines'] = $lines;
 
         return $obj;
     }
@@ -78,12 +89,14 @@ final class Summary implements BaseModel
     /**
      * List of billing adjustments.
      *
-     * @param list<Adjustment> $adjustments
+     * @param list<Adjustment|array{
+     *   amount: string, description: string, event_date: \DateTimeInterface
+     * }> $adjustments
      */
     public function withAdjustments(array $adjustments): self
     {
         $obj = clone $this;
-        $obj->adjustments = $adjustments;
+        $obj['adjustments'] = $adjustments;
 
         return $obj;
     }
@@ -91,12 +104,20 @@ final class Summary implements BaseModel
     /**
      * List of charge summary lines.
      *
-     * @param list<Comparative|Simple> $lines
+     * @param list<Comparative|array{
+     *   alias: string,
+     *   existing_this_month: MonthDetail,
+     *   name: string,
+     *   new_this_month: MonthDetail,
+     *   type: 'comparative',
+     * }|Simple|array{
+     *   alias: string, amount: string, name: string, quantity: int, type: 'simple'
+     * }> $lines
      */
     public function withLines(array $lines): self
     {
         $obj = clone $this;
-        $obj->lines = $lines;
+        $obj['lines'] = $lines;
 
         return $obj;
     }

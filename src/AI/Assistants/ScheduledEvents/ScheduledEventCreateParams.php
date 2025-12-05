@@ -112,13 +112,13 @@ final class ScheduledEventCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->scheduled_at_fixed_datetime = $scheduled_at_fixed_datetime;
-        $obj->telnyx_agent_target = $telnyx_agent_target;
+        $obj['scheduled_at_fixed_datetime'] = $scheduled_at_fixed_datetime;
+        $obj['telnyx_agent_target'] = $telnyx_agent_target;
         $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
-        $obj->telnyx_end_user_target = $telnyx_end_user_target;
+        $obj['telnyx_end_user_target'] = $telnyx_end_user_target;
 
-        null !== $conversation_metadata && $obj->conversation_metadata = $conversation_metadata;
-        null !== $text && $obj->text = $text;
+        null !== $conversation_metadata && $obj['conversation_metadata'] = $conversation_metadata;
+        null !== $text && $obj['text'] = $text;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class ScheduledEventCreateParams implements BaseModel
         \DateTimeInterface $scheduledAtFixedDatetime
     ): self {
         $obj = clone $this;
-        $obj->scheduled_at_fixed_datetime = $scheduledAtFixedDatetime;
+        $obj['scheduled_at_fixed_datetime'] = $scheduledAtFixedDatetime;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withTelnyxAgentTarget(string $telnyxAgentTarget): self
     {
         $obj = clone $this;
-        $obj->telnyx_agent_target = $telnyxAgentTarget;
+        $obj['telnyx_agent_target'] = $telnyxAgentTarget;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withTelnyxEndUserTarget(string $telnyxEndUserTarget): self
     {
         $obj = clone $this;
-        $obj->telnyx_end_user_target = $telnyxEndUserTarget;
+        $obj['telnyx_end_user_target'] = $telnyxEndUserTarget;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withConversationMetadata(array $conversationMetadata): self
     {
         $obj = clone $this;
-        $obj->conversation_metadata = $conversationMetadata;
+        $obj['conversation_metadata'] = $conversationMetadata;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

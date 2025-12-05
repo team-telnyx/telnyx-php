@@ -87,7 +87,22 @@ final class MdrUsageReport implements BaseModel
      *
      * @param AggregationType|value-of<AggregationType> $aggregation_type
      * @param list<int> $connections
-     * @param list<Result> $result
+     * @param list<Result|array{
+     *   carrier_passthrough_fee?: string|null,
+     *   connection?: string|null,
+     *   cost?: string|null,
+     *   currency?: string|null,
+     *   delivered?: string|null,
+     *   direction?: string|null,
+     *   message_type?: string|null,
+     *   parts?: string|null,
+     *   product?: string|null,
+     *   profile_id?: string|null,
+     *   received?: string|null,
+     *   sent?: string|null,
+     *   tags?: string|null,
+     *   tn_type?: string|null,
+     * }> $result
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -106,18 +121,18 @@ final class MdrUsageReport implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $aggregation_type && $obj['aggregation_type'] = $aggregation_type;
-        null !== $connections && $obj->connections = $connections;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $end_date && $obj->end_date = $end_date;
-        null !== $profiles && $obj->profiles = $profiles;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $report_url && $obj->report_url = $report_url;
-        null !== $result && $obj->result = $result;
-        null !== $start_date && $obj->start_date = $start_date;
+        null !== $connections && $obj['connections'] = $connections;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $profiles && $obj['profiles'] = $profiles;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $result && $obj['result'] = $result;
+        null !== $start_date && $obj['start_date'] = $start_date;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -128,7 +143,7 @@ final class MdrUsageReport implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -151,7 +166,7 @@ final class MdrUsageReport implements BaseModel
     public function withConnections(array $connections): self
     {
         $obj = clone $this;
-        $obj->connections = $connections;
+        $obj['connections'] = $connections;
 
         return $obj;
     }
@@ -159,7 +174,7 @@ final class MdrUsageReport implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -167,7 +182,7 @@ final class MdrUsageReport implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->end_date = $endDate;
+        $obj['end_date'] = $endDate;
 
         return $obj;
     }
@@ -175,7 +190,7 @@ final class MdrUsageReport implements BaseModel
     public function withProfiles(string $profiles): self
     {
         $obj = clone $this;
-        $obj->profiles = $profiles;
+        $obj['profiles'] = $profiles;
 
         return $obj;
     }
@@ -183,7 +198,7 @@ final class MdrUsageReport implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -191,18 +206,33 @@ final class MdrUsageReport implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj->report_url = $reportURL;
+        $obj['report_url'] = $reportURL;
 
         return $obj;
     }
 
     /**
-     * @param list<Result> $result
+     * @param list<Result|array{
+     *   carrier_passthrough_fee?: string|null,
+     *   connection?: string|null,
+     *   cost?: string|null,
+     *   currency?: string|null,
+     *   delivered?: string|null,
+     *   direction?: string|null,
+     *   message_type?: string|null,
+     *   parts?: string|null,
+     *   product?: string|null,
+     *   profile_id?: string|null,
+     *   received?: string|null,
+     *   sent?: string|null,
+     *   tags?: string|null,
+     *   tn_type?: string|null,
+     * }> $result
      */
     public function withResult(array $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }
@@ -210,7 +240,7 @@ final class MdrUsageReport implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->start_date = $startDate;
+        $obj['start_date'] = $startDate;
 
         return $obj;
     }
@@ -229,7 +259,7 @@ final class MdrUsageReport implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

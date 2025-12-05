@@ -78,10 +78,10 @@ final class Comment implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $body && $obj->body = $body;
-        null !== $inserted_at && $obj->inserted_at = $inserted_at;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $body && $obj['body'] = $body;
+        null !== $inserted_at && $obj['inserted_at'] = $inserted_at;
+        null !== $user_id && $obj['user_id'] = $user_id;
         null !== $user_type && $obj['user_type'] = $user_type;
 
         return $obj;
@@ -93,7 +93,7 @@ final class Comment implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Comment implements BaseModel
     public function withBody(string $body): self
     {
         $obj = clone $this;
-        $obj->body = $body;
+        $obj['body'] = $body;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Comment implements BaseModel
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
         $obj = clone $this;
-        $obj->inserted_at = $insertedAt;
+        $obj['inserted_at'] = $insertedAt;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Comment implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

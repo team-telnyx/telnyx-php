@@ -52,8 +52,8 @@ final class SimCardRetrieveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $include_pin_puk_codes && $obj->include_pin_puk_codes = $include_pin_puk_codes;
-        null !== $include_sim_card_group && $obj->include_sim_card_group = $include_sim_card_group;
+        null !== $include_pin_puk_codes && $obj['include_pin_puk_codes'] = $include_pin_puk_codes;
+        null !== $include_sim_card_group && $obj['include_sim_card_group'] = $include_sim_card_group;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class SimCardRetrieveParams implements BaseModel
     public function withIncludePinPukCodes(bool $includePinPukCodes): self
     {
         $obj = clone $this;
-        $obj->include_pin_puk_codes = $includePinPukCodes;
+        $obj['include_pin_puk_codes'] = $includePinPukCodes;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class SimCardRetrieveParams implements BaseModel
     public function withIncludeSimCardGroup(bool $includeSimCardGroup): self
     {
         $obj = clone $this;
-        $obj->include_sim_card_group = $includeSimCardGroup;
+        $obj['include_sim_card_group'] = $includeSimCardGroup;
 
         return $obj;
     }

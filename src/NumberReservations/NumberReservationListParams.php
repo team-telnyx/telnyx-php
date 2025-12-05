@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservationListParams\Filter;
+use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
 use Telnyx\NumberReservations\NumberReservationListParams\Page;
 
 /**
@@ -17,7 +18,13 @@ use Telnyx\NumberReservations\NumberReservationListParams\Page;
  * @see Telnyx\Services\NumberReservationsService::list()
  *
  * @phpstan-type NumberReservationListParamsShape = array{
- *   filter?: Filter, page?: Page
+ *   filter?: Filter|array{
+ *     created_at?: CreatedAt|null,
+ *     customer_reference?: string|null,
+ *     phone_numbers_phone_number?: string|null,
+ *     status?: string|null,
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
 final class NumberReservationListParams implements BaseModel
@@ -47,35 +54,54 @@ final class NumberReservationListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   created_at?: CreatedAt|null,
+     *   customer_reference?: string|null,
+     *   phone_numbers_phone_number?: string|null,
+     *   status?: string|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
+    public static function with(
+        Filter|array|null $filter = null,
+        Page|array|null $page = null
+    ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference].
+     *
+     * @param Filter|array{
+     *   created_at?: CreatedAt|null,
+     *   customer_reference?: string|null,
+     *   phone_numbers_phone_number?: string|null,
+     *   status?: string|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

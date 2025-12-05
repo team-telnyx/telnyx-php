@@ -56,8 +56,8 @@ final class AIAssistant implements BaseModel
     {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class AIAssistant implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class AIAssistant implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

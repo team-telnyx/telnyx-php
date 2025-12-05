@@ -69,7 +69,9 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status> $status
-     * @param list<TelephoneNumber> $telephone_numbers
+     * @param list<TelephoneNumber|array{
+     *   number_id?: string|null, phone_number?: string|null
+     * }> $telephone_numbers
      */
     public static function with(
         ?string $created_at = null,
@@ -81,12 +83,12 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $error_message && $obj->error_message = $error_message;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $error_message && $obj['error_message'] = $error_message;
         null !== $status && $obj['status'] = $status;
-        null !== $telephone_numbers && $obj->telephone_numbers = $telephone_numbers;
-        null !== $tenant_id && $obj->tenant_id = $tenant_id;
-        null !== $ticket_id && $obj->ticket_id = $ticket_id;
+        null !== $telephone_numbers && $obj['telephone_numbers'] = $telephone_numbers;
+        null !== $tenant_id && $obj['tenant_id'] = $tenant_id;
+        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
 
         return $obj;
     }
@@ -97,7 +99,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -108,7 +110,7 @@ final class Data implements BaseModel
     public function withErrorMessage(string $errorMessage): self
     {
         $obj = clone $this;
-        $obj->error_message = $errorMessage;
+        $obj['error_message'] = $errorMessage;
 
         return $obj;
     }
@@ -127,12 +129,14 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<TelephoneNumber> $telephoneNumbers
+     * @param list<TelephoneNumber|array{
+     *   number_id?: string|null, phone_number?: string|null
+     * }> $telephoneNumbers
      */
     public function withTelephoneNumbers(array $telephoneNumbers): self
     {
         $obj = clone $this;
-        $obj->telephone_numbers = $telephoneNumbers;
+        $obj['telephone_numbers'] = $telephoneNumbers;
 
         return $obj;
     }
@@ -140,7 +144,7 @@ final class Data implements BaseModel
     public function withTenantID(string $tenantID): self
     {
         $obj = clone $this;
-        $obj->tenant_id = $tenantID;
+        $obj['tenant_id'] = $tenantID;
 
         return $obj;
     }
@@ -151,7 +155,7 @@ final class Data implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj->ticket_id = $ticketID;
+        $obj['ticket_id'] = $ticketID;
 
         return $obj;
     }

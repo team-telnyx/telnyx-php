@@ -53,33 +53,63 @@ final class BillingBundleListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BillingBundleSummary> $data
+     * @param list<BillingBundleSummary|array{
+     *   id: string,
+     *   cost_code: string,
+     *   created_at: \DateTimeInterface,
+     *   is_public: bool,
+     *   name: string,
+     *   currency?: string|null,
+     *   mrc_price?: float|null,
+     *   slug?: string|null,
+     *   specs?: list<string>|null,
+     * }> $data
+     * @param PaginationResponse|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
      */
-    public static function with(array $data, PaginationResponse $meta): self
-    {
+    public static function with(
+        array $data,
+        PaginationResponse|array $meta
+    ): self {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<BillingBundleSummary> $data
+     * @param list<BillingBundleSummary|array{
+     *   id: string,
+     *   cost_code: string,
+     *   created_at: \DateTimeInterface,
+     *   is_public: bool,
+     *   name: string,
+     *   currency?: string|null,
+     *   mrc_price?: float|null,
+     *   slug?: string|null,
+     *   specs?: list<string>|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationResponse $meta): self
+    /**
+     * @param PaginationResponse|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
+     */
+    public function withMeta(PaginationResponse|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

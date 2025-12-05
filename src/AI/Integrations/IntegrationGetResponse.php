@@ -105,12 +105,12 @@ final class IntegrationGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->available_tools = $available_tools;
-        $obj->description = $description;
-        $obj->display_name = $display_name;
-        $obj->logo_url = $logo_url;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['available_tools'] = $available_tools;
+        $obj['description'] = $description;
+        $obj['display_name'] = $display_name;
+        $obj['logo_url'] = $logo_url;
+        $obj['name'] = $name;
         $obj['status'] = $status;
 
         return $obj;
@@ -119,7 +119,7 @@ final class IntegrationGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class IntegrationGetResponse implements BaseModel, ResponseConverter
     public function withAvailableTools(array $availableTools): self
     {
         $obj = clone $this;
-        $obj->available_tools = $availableTools;
+        $obj['available_tools'] = $availableTools;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class IntegrationGetResponse implements BaseModel, ResponseConverter
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class IntegrationGetResponse implements BaseModel, ResponseConverter
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->display_name = $displayName;
+        $obj['display_name'] = $displayName;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class IntegrationGetResponse implements BaseModel, ResponseConverter
     public function withLogoURL(string $logoURL): self
     {
         $obj = clone $this;
-        $obj->logo_url = $logoURL;
+        $obj['logo_url'] = $logoURL;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class IntegrationGetResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

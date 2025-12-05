@@ -50,24 +50,28 @@ final class HangupTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param HangupToolParams|array{description?: string|null} $hangup
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        HangupToolParams $hangup,
+        HangupToolParams|array $hangup,
         Type|string $type
     ): self {
         $obj = new self;
 
-        $obj->hangup = $hangup;
+        $obj['hangup'] = $hangup;
         $obj['type'] = $type;
 
         return $obj;
     }
 
-    public function withHangup(HangupToolParams $hangup): self
+    /**
+     * @param HangupToolParams|array{description?: string|null} $hangup
+     */
+    public function withHangup(HangupToolParams|array $hangup): self
     {
         $obj = clone $this;
-        $obj->hangup = $hangup;
+        $obj['hangup'] = $hangup;
 
         return $obj;
     }

@@ -45,17 +45,21 @@ final class GlobalIPAssignment implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param WireguardPeer|array{
+     *   ip_address?: string|null, name?: string|null
+     * } $wireguard_peer
      */
     public static function with(
         ?string $id = null,
-        ?WireguardPeer $wireguard_peer = null,
+        WireguardPeer|array|null $wireguard_peer = null,
         ?string $wireguard_peer_id = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $wireguard_peer && $obj->wireguard_peer = $wireguard_peer;
-        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $wireguard_peer && $obj['wireguard_peer'] = $wireguard_peer;
+        null !== $wireguard_peer_id && $obj['wireguard_peer_id'] = $wireguard_peer_id;
 
         return $obj;
     }
@@ -66,15 +70,20 @@ final class GlobalIPAssignment implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
-    public function withWireguardPeer(WireguardPeer $wireguardPeer): self
+    /**
+     * @param WireguardPeer|array{
+     *   ip_address?: string|null, name?: string|null
+     * } $wireguardPeer
+     */
+    public function withWireguardPeer(WireguardPeer|array $wireguardPeer): self
     {
         $obj = clone $this;
-        $obj->wireguard_peer = $wireguardPeer;
+        $obj['wireguard_peer'] = $wireguardPeer;
 
         return $obj;
     }
@@ -85,7 +94,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguard_peer_id = $wireguardPeerID;
+        $obj['wireguard_peer_id'] = $wireguardPeerID;
 
         return $obj;
     }

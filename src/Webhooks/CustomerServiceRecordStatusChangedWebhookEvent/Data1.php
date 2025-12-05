@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data1\EventType;
 use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data1\Payload;
+use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data1\Payload\Status;
 use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data1\RecordType;
 
 /**
@@ -67,21 +68,27 @@ final class Data1 implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $event_type
+     * @param Payload|array{
+     *   id?: string|null,
+     *   phone_number?: string|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $payload
      * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
         EventType|string|null $event_type = null,
         ?\DateTimeInterface $occurred_at = null,
-        ?Payload $payload = null,
+        Payload|array|null $payload = null,
         RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $occurred_at && $obj->occurred_at = $occurred_at;
-        null !== $payload && $obj->payload = $payload;
+        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -93,7 +100,7 @@ final class Data1 implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -117,15 +124,23 @@ final class Data1 implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }
 
-    public function withPayload(Payload $payload): self
+    /**
+     * @param Payload|array{
+     *   id?: string|null,
+     *   phone_number?: string|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $payload
+     */
+    public function withPayload(Payload|array $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }

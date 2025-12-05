@@ -7,7 +7,9 @@ namespace Telnyx\Porting\Events\EventGetResponse\Data\Payload;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PortingOrdersExceptionType;
 use Telnyx\PortingOrderStatus;
+use Telnyx\PortingOrderStatus\Value;
 
 /**
  * The webhook payload for the porting_order.status_changed event.
@@ -71,23 +73,27 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PortingOrderStatus|array{
+     *   details?: list<PortingOrdersExceptionType>|null, value?: value-of<Value>|null
+     * } $status
      */
     public static function with(
         ?string $id = null,
         ?string $customer_reference = null,
-        ?PortingOrderStatus $status = null,
+        PortingOrderStatus|array|null $status = null,
         ?string $support_key = null,
         ?\DateTimeInterface $updated_at = null,
         ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $status && $obj->status = $status;
-        null !== $support_key && $obj->support_key = $support_key;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $webhook_url && $obj->webhook_url = $webhook_url;
+        null !== $id && $obj['id'] = $id;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $status && $obj['status'] = $status;
+        null !== $support_key && $obj['support_key'] = $support_key;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
 
         return $obj;
     }
@@ -98,7 +104,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -109,18 +115,22 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * Porting order status.
+     *
+     * @param PortingOrderStatus|array{
+     *   details?: list<PortingOrdersExceptionType>|null, value?: value-of<Value>|null
+     * } $status
      */
-    public function withStatus(PortingOrderStatus $status): self
+    public function withStatus(PortingOrderStatus|array $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -131,7 +141,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj->support_key = $supportKey;
+        $obj['support_key'] = $supportKey;
 
         return $obj;
     }
@@ -142,7 +152,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -153,7 +163,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhook_url = $webhookURL;
+        $obj['webhook_url'] = $webhookURL;
 
         return $obj;
     }

@@ -91,12 +91,12 @@ final class UserBundleResource implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->resource = $resource;
-        $obj->resource_type = $resource_type;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['resource'] = $resource;
+        $obj['resource_type'] = $resource_type;
 
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class UserBundleResource implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class UserBundleResource implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class UserBundleResource implements BaseModel
     public function withResource(string $resource): self
     {
         $obj = clone $this;
-        $obj->resource = $resource;
+        $obj['resource'] = $resource;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class UserBundleResource implements BaseModel
     public function withResourceType(string $resourceType): self
     {
         $obj = clone $this;
-        $obj->resource_type = $resourceType;
+        $obj['resource_type'] = $resourceType;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class UserBundleResource implements BaseModel
     public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -91,13 +91,13 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     ): self {
         $obj = new self;
 
-        null !== $createDate && $obj->createDate = $createDate;
-        null !== $evpId && $obj->evpId = $evpId;
-        null !== $vettedDate && $obj->vettedDate = $vettedDate;
-        null !== $vettingClass && $obj->vettingClass = $vettingClass;
-        null !== $vettingId && $obj->vettingId = $vettingId;
-        null !== $vettingScore && $obj->vettingScore = $vettingScore;
-        null !== $vettingToken && $obj->vettingToken = $vettingToken;
+        null !== $createDate && $obj['createDate'] = $createDate;
+        null !== $evpId && $obj['evpId'] = $evpId;
+        null !== $vettedDate && $obj['vettedDate'] = $vettedDate;
+        null !== $vettingClass && $obj['vettingClass'] = $vettingClass;
+        null !== $vettingId && $obj['vettingId'] = $vettingId;
+        null !== $vettingScore && $obj['vettingScore'] = $vettingScore;
+        null !== $vettingToken && $obj['vettingToken'] = $vettingToken;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withCreateDate(string $createDate): self
     {
         $obj = clone $this;
-        $obj->createDate = $createDate;
+        $obj['createDate'] = $createDate;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withEvpID(string $evpID): self
     {
         $obj = clone $this;
-        $obj->evpId = $evpID;
+        $obj['evpId'] = $evpID;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withVettedDate(string $vettedDate): self
     {
         $obj = clone $this;
-        $obj->vettedDate = $vettedDate;
+        $obj['vettedDate'] = $vettedDate;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withVettingClass(string $vettingClass): self
     {
         $obj = clone $this;
-        $obj->vettingClass = $vettingClass;
+        $obj['vettingClass'] = $vettingClass;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withVettingID(string $vettingID): self
     {
         $obj = clone $this;
-        $obj->vettingId = $vettingID;
+        $obj['vettingId'] = $vettingID;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withVettingScore(int $vettingScore): self
     {
         $obj = clone $this;
-        $obj->vettingScore = $vettingScore;
+        $obj['vettingScore'] = $vettingScore;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withVettingToken(string $vettingToken): self
     {
         $obj = clone $this;
-        $obj->vettingToken = $vettingToken;
+        $obj['vettingToken'] = $vettingToken;
 
         return $obj;
     }

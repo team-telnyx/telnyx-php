@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ScheduledEventListParamsShape = array{
  *   conversation_channel?: ConversationChannelType|value-of<ConversationChannelType>,
  *   from_date?: \DateTimeInterface,
- *   page?: Page,
+ *   page?: Page|array{number?: int|null, size?: int|null},
  *   to_date?: \DateTimeInterface,
  * }
  */
@@ -55,19 +55,20 @@ final class ScheduledEventListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $conversation_channel
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
         ConversationChannelType|string|null $conversation_channel = null,
         ?\DateTimeInterface $from_date = null,
-        ?Page $page = null,
+        Page|array|null $page = null,
         ?\DateTimeInterface $to_date = null,
     ): self {
         $obj = new self;
 
         null !== $conversation_channel && $obj['conversation_channel'] = $conversation_channel;
-        null !== $from_date && $obj->from_date = $from_date;
-        null !== $page && $obj->page = $page;
-        null !== $to_date && $obj->to_date = $to_date;
+        null !== $from_date && $obj['from_date'] = $from_date;
+        null !== $page && $obj['page'] = $page;
+        null !== $to_date && $obj['to_date'] = $to_date;
 
         return $obj;
     }
@@ -87,18 +88,20 @@ final class ScheduledEventListParams implements BaseModel
     public function withFromDate(\DateTimeInterface $fromDate): self
     {
         $obj = clone $this;
-        $obj->from_date = $fromDate;
+        $obj['from_date'] = $fromDate;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -106,7 +109,7 @@ final class ScheduledEventListParams implements BaseModel
     public function withToDate(\DateTimeInterface $toDate): self
     {
         $obj = clone $this;
-        $obj->to_date = $toDate;
+        $obj['to_date'] = $toDate;
 
         return $obj;
     }

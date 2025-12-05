@@ -8,6 +8,9 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsCardContent\Media;
+use Telnyx\Messsages\RcsCardContent\Media\Height;
+use Telnyx\Messsages\RcsSuggestion\Action;
+use Telnyx\Messsages\RcsSuggestion\Reply;
 
 /**
  * @phpstan-type RcsCardContentShape = array{
@@ -58,20 +61,25 @@ final class RcsCardContent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsSuggestion> $suggestions
+     * @param Media|array{
+     *   content_info?: RcsContentInfo|null, height?: value-of<Height>|null
+     * } $media
+     * @param list<RcsSuggestion|array{
+     *   action?: Action|null, reply?: Reply|null
+     * }> $suggestions
      */
     public static function with(
         ?string $description = null,
-        ?Media $media = null,
+        Media|array|null $media = null,
         ?array $suggestions = null,
         ?string $title = null,
     ): self {
         $obj = new self;
 
-        null !== $description && $obj->description = $description;
-        null !== $media && $obj->media = $media;
-        null !== $suggestions && $obj->suggestions = $suggestions;
-        null !== $title && $obj->title = $title;
+        null !== $description && $obj['description'] = $description;
+        null !== $media && $obj['media'] = $media;
+        null !== $suggestions && $obj['suggestions'] = $suggestions;
+        null !== $title && $obj['title'] = $title;
 
         return $obj;
     }
@@ -82,18 +90,22 @@ final class RcsCardContent implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
 
     /**
      * A media file within a rich card.
+     *
+     * @param Media|array{
+     *   content_info?: RcsContentInfo|null, height?: value-of<Height>|null
+     * } $media
      */
-    public function withMedia(Media $media): self
+    public function withMedia(Media|array $media): self
     {
         $obj = clone $this;
-        $obj->media = $media;
+        $obj['media'] = $media;
 
         return $obj;
     }
@@ -101,12 +113,14 @@ final class RcsCardContent implements BaseModel
     /**
      * List of suggestions to include in the card. Maximum 10 suggestions.
      *
-     * @param list<RcsSuggestion> $suggestions
+     * @param list<RcsSuggestion|array{
+     *   action?: Action|null, reply?: Reply|null
+     * }> $suggestions
      */
     public function withSuggestions(array $suggestions): self
     {
         $obj = clone $this;
-        $obj->suggestions = $suggestions;
+        $obj['suggestions'] = $suggestions;
 
         return $obj;
     }
@@ -117,7 +131,7 @@ final class RcsCardContent implements BaseModel
     public function withTitle(string $title): self
     {
         $obj = clone $this;
-        $obj->title = $title;
+        $obj['title'] = $title;
 
         return $obj;
     }

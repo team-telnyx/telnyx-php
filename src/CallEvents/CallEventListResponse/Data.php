@@ -121,11 +121,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_leg_id = $call_leg_id;
-        $obj->call_session_id = $call_session_id;
-        $obj->event_timestamp = $event_timestamp;
-        $obj->metadata = $metadata;
-        $obj->name = $name;
+        $obj['call_leg_id'] = $call_leg_id;
+        $obj['call_session_id'] = $call_session_id;
+        $obj['event_timestamp'] = $event_timestamp;
+        $obj['metadata'] = $metadata;
+        $obj['name'] = $name;
         $obj['record_type'] = $record_type;
         $obj['type'] = $type;
 
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withEventTimestamp(string $eventTimestamp): self
     {
         $obj = clone $this;
-        $obj->event_timestamp = $eventTimestamp;
+        $obj['event_timestamp'] = $eventTimestamp;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Data implements BaseModel
     public function withMetadata(mixed $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

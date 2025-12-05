@@ -61,7 +61,7 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
     {
         $obj = new self;
 
-        $obj->requirement_group_id = $requirement_group_id;
+        $obj['requirement_group_id'] = $requirement_group_id;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj->requirement_group_id = $requirementGroupID;
+        $obj['requirement_group_id'] = $requirementGroupID;
 
         return $obj;
     }

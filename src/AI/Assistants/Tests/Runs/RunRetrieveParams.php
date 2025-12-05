@@ -53,7 +53,7 @@ final class RunRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->test_id = $test_id;
+        $obj['test_id'] = $test_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class RunRetrieveParams implements BaseModel
     public function withTestID(string $testID): self
     {
         $obj = clone $this;
-        $obj->test_id = $testID;
+        $obj['test_id'] = $testID;
 
         return $obj;
     }

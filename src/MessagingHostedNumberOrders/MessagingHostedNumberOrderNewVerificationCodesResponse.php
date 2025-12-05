@@ -12,6 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeError;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeSuccess;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeSuccess\Type;
 
 /**
  * @phpstan-type MessagingHostedNumberOrderNewVerificationCodesResponseShape = array{
@@ -53,24 +54,28 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCodeSuccess|VerificationCodeError> $data
+     * @param list<VerificationCodeSuccess|array{
+     *   phone_number: string, type: value-of<Type>, verification_code_id: string
+     * }|VerificationCodeError|array{error: string, phone_number: string}> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<VerificationCodeSuccess|VerificationCodeError> $data
+     * @param list<VerificationCodeSuccess|array{
+     *   phone_number: string, type: value-of<Type>, verification_code_id: string
+     * }|VerificationCodeError|array{error: string, phone_number: string}> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

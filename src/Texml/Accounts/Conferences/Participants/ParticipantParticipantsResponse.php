@@ -112,15 +112,15 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
-        null !== $call_sid && $obj->call_sid = $call_sid;
-        null !== $coaching && $obj->coaching = $coaching;
-        null !== $coaching_call_sid && $obj->coaching_call_sid = $coaching_call_sid;
-        null !== $end_conference_on_exit && $obj->end_conference_on_exit = $end_conference_on_exit;
-        null !== $hold && $obj->hold = $hold;
-        null !== $muted && $obj->muted = $muted;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
+        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $coaching && $obj['coaching'] = $coaching;
+        null !== $coaching_call_sid && $obj['coaching_call_sid'] = $coaching_call_sid;
+        null !== $end_conference_on_exit && $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        null !== $hold && $obj['hold'] = $hold;
+        null !== $muted && $obj['muted'] = $muted;
         null !== $status && $obj['status'] = $status;
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->call_sid = $callSid;
+        $obj['call_sid'] = $callSid;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withCoaching(bool $coaching): self
     {
         $obj = clone $this;
-        $obj->coaching = $coaching;
+        $obj['coaching'] = $coaching;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withCoachingCallSid(string $coachingCallSid): self
     {
         $obj = clone $this;
-        $obj->coaching_call_sid = $coachingCallSid;
+        $obj['coaching_call_sid'] = $coachingCallSid;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->end_conference_on_exit = $endConferenceOnExit;
+        $obj['end_conference_on_exit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withHold(bool $hold): self
     {
         $obj = clone $this;
-        $obj->hold = $hold;
+        $obj['hold'] = $hold;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withMuted(bool $muted): self
     {
         $obj = clone $this;
-        $obj->muted = $muted;
+        $obj['muted'] = $muted;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class ParticipantParticipantsResponse implements BaseModel, ResponseConver
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

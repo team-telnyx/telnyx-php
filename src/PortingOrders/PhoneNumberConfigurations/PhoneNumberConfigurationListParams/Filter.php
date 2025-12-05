@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][].
@@ -52,27 +53,31 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param PortingOrder|array{status?: list<value-of<Status>>|null} $porting_order
      * @param list<string> $porting_phone_number
      * @param list<string> $user_bundle_id
      */
     public static function with(
-        ?PortingOrder $porting_order = null,
+        PortingOrder|array|null $porting_order = null,
         ?array $porting_phone_number = null,
         ?array $user_bundle_id = null,
     ): self {
         $obj = new self;
 
-        null !== $porting_order && $obj->porting_order = $porting_order;
-        null !== $porting_phone_number && $obj->porting_phone_number = $porting_phone_number;
-        null !== $user_bundle_id && $obj->user_bundle_id = $user_bundle_id;
+        null !== $porting_order && $obj['porting_order'] = $porting_order;
+        null !== $porting_phone_number && $obj['porting_phone_number'] = $porting_phone_number;
+        null !== $user_bundle_id && $obj['user_bundle_id'] = $user_bundle_id;
 
         return $obj;
     }
 
-    public function withPortingOrder(PortingOrder $portingOrder): self
+    /**
+     * @param PortingOrder|array{status?: list<value-of<Status>>|null} $portingOrder
+     */
+    public function withPortingOrder(PortingOrder|array $portingOrder): self
     {
         $obj = clone $this;
-        $obj->porting_order = $portingOrder;
+        $obj['porting_order'] = $portingOrder;
 
         return $obj;
     }
@@ -85,7 +90,7 @@ final class Filter implements BaseModel
     public function withPortingPhoneNumber(array $portingPhoneNumber): self
     {
         $obj = clone $this;
-        $obj->porting_phone_number = $portingPhoneNumber;
+        $obj['porting_phone_number'] = $portingPhoneNumber;
 
         return $obj;
     }
@@ -98,7 +103,7 @@ final class Filter implements BaseModel
     public function withUserBundleID(array $userBundleID): self
     {
         $obj = clone $this;
-        $obj->user_bundle_id = $userBundleID;
+        $obj['user_bundle_id'] = $userBundleID;
 
         return $obj;
     }

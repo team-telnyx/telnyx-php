@@ -11,6 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort\Value;
 
 /**
  * Returns a list of verification codes for a porting order.
@@ -18,7 +19,9 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
  * @see Telnyx\Services\PortingOrders\VerificationCodesService::list()
  *
  * @phpstan-type VerificationCodeListParamsShape = array{
- *   filter?: Filter, page?: Page, sort?: Sort
+ *   filter?: Filter|array{verified?: bool|null},
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: Sort|array{value?: value-of<Value>|null},
  * }
  */
 final class VerificationCodeListParams implements BaseModel
@@ -54,50 +57,60 @@ final class VerificationCodeListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{verified?: bool|null} $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param Sort|array{value?: value-of<Value>|null} $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        ?Sort $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|array|null $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj->sort = $sort;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
+        null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[verified].
+     *
+     * @param Filter|array{verified?: bool|null} $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
+     *
+     * @param Sort|array{value?: value-of<Value>|null} $sort
      */
-    public function withSort(Sort $sort): self
+    public function withSort(Sort|array $sort): self
     {
         $obj = clone $this;
-        $obj->sort = $sort;
+        $obj['sort'] = $sort;
 
         return $obj;
     }

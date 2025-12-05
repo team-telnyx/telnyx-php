@@ -54,8 +54,8 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
         $obj = new self;
 
         null !== $field_type && $obj['field_type'] = $field_type;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $requirement_id && $obj->requirement_id = $requirement_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $requirement_id && $obj['requirement_id'] = $requirement_id;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
     public function withRequirementID(string $requirementID): self
     {
         $obj = clone $this;
-        $obj->requirement_id = $requirementID;
+        $obj['requirement_id'] = $requirementID;
 
         return $obj;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\AI\Assistants;
 use Telnyx\AI\Assistants\Assistant\Tool;
 use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
 use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
+use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -62,7 +63,24 @@ final class Assistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
+     * @param list<BookAppointment|array{
+     *   book_appointment: BookAppointment\BookAppointment,
+     *   type: 'book_appointment',
+     * }|CheckAvailability|array{
+     *   check_availability: CheckAvailability\CheckAvailability,
+     *   type: 'check_availability',
+     * }|WebhookTool|array{
+     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
+     * }|HangupTool|array{
+     *   hangup: HangupToolParams,
+     *   type: value-of<HangupTool\Type>,
+     * }|TransferTool|array{
+     *   transfer: InferenceEmbeddingTransferToolParams,
+     *   type: value-of<TransferTool\Type>,
+     * }|RetrievalTool|array{
+     *   retrieval: InferenceEmbeddingBucketIDs,
+     *   type: value-of<RetrievalTool\Type>,
+     * }> $tools
      */
     public static function with(
         ?string $instructions = null,
@@ -72,10 +90,10 @@ final class Assistant implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $model && $obj->model = $model;
-        null !== $openai_api_key_ref && $obj->openai_api_key_ref = $openai_api_key_ref;
-        null !== $tools && $obj->tools = $tools;
+        null !== $instructions && $obj['instructions'] = $instructions;
+        null !== $model && $obj['model'] = $model;
+        null !== $openai_api_key_ref && $obj['openai_api_key_ref'] = $openai_api_key_ref;
+        null !== $tools && $obj['tools'] = $tools;
 
         return $obj;
     }
@@ -86,7 +104,7 @@ final class Assistant implements BaseModel
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -97,7 +115,7 @@ final class Assistant implements BaseModel
     public function withModel(string $model): self
     {
         $obj = clone $this;
-        $obj->model = $model;
+        $obj['model'] = $model;
 
         return $obj;
     }
@@ -108,7 +126,7 @@ final class Assistant implements BaseModel
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj->openai_api_key_ref = $openaiAPIKeyRef;
+        $obj['openai_api_key_ref'] = $openaiAPIKeyRef;
 
         return $obj;
     }
@@ -116,12 +134,29 @@ final class Assistant implements BaseModel
     /**
      * The tools that the voice assistant can use.
      *
-     * @param list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
+     * @param list<BookAppointment|array{
+     *   book_appointment: BookAppointment\BookAppointment,
+     *   type: 'book_appointment',
+     * }|CheckAvailability|array{
+     *   check_availability: CheckAvailability\CheckAvailability,
+     *   type: 'check_availability',
+     * }|WebhookTool|array{
+     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
+     * }|HangupTool|array{
+     *   hangup: HangupToolParams,
+     *   type: value-of<HangupTool\Type>,
+     * }|TransferTool|array{
+     *   transfer: InferenceEmbeddingTransferToolParams,
+     *   type: value-of<TransferTool\Type>,
+     * }|RetrievalTool|array{
+     *   retrieval: InferenceEmbeddingBucketIDs,
+     *   type: value-of<RetrievalTool\Type>,
+     * }> $tools
      */
     public function withTools(array $tools): self
     {
         $obj = clone $this;
-        $obj->tools = $tools;
+        $obj['tools'] = $tools;
 
         return $obj;
     }

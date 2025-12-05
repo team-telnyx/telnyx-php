@@ -43,25 +43,30 @@ final class Meta implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
      */
     public static function with(
-        ?Cursors $cursors = null,
+        Cursors|array|null $cursors = null,
         ?string $next = null,
         ?string $previous = null
     ): self {
         $obj = new self;
 
-        null !== $cursors && $obj->cursors = $cursors;
-        null !== $next && $obj->next = $next;
-        null !== $previous && $obj->previous = $previous;
+        null !== $cursors && $obj['cursors'] = $cursors;
+        null !== $next && $obj['next'] = $next;
+        null !== $previous && $obj['previous'] = $previous;
 
         return $obj;
     }
 
-    public function withCursors(Cursors $cursors): self
+    /**
+     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
+     */
+    public function withCursors(Cursors|array $cursors): self
     {
         $obj = clone $this;
-        $obj->cursors = $cursors;
+        $obj['cursors'] = $cursors;
 
         return $obj;
     }
@@ -72,7 +77,7 @@ final class Meta implements BaseModel
     public function withNext(string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -83,7 +88,7 @@ final class Meta implements BaseModel
     public function withPrevious(string $previous): self
     {
         $obj = clone $this;
-        $obj->previous = $previous;
+        $obj['previous'] = $previous;
 
         return $obj;
     }

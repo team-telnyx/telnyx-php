@@ -36,7 +36,7 @@ final class StreetAddress implements BaseModel
     {
         $obj = new self;
 
-        null !== $contains && $obj->contains = $contains;
+        null !== $contains && $obj['contains'] = $contains;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class StreetAddress implements BaseModel
     public function withContains(string $contains): self
     {
         $obj = clone $this;
-        $obj->contains = $contains;
+        $obj['contains'] = $contains;
 
         return $obj;
     }

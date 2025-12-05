@@ -71,14 +71,14 @@ final class Voice implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $accent && $obj->accent = $accent;
-        null !== $age && $obj->age = $age;
-        null !== $gender && $obj->gender = $gender;
-        null !== $label && $obj->label = $label;
-        null !== $language && $obj->language = $language;
-        null !== $name && $obj->name = $name;
-        null !== $provider && $obj->provider = $provider;
+        null !== $id && $obj['id'] = $id;
+        null !== $accent && $obj['accent'] = $accent;
+        null !== $age && $obj['age'] = $age;
+        null !== $gender && $obj['gender'] = $gender;
+        null !== $label && $obj['label'] = $label;
+        null !== $language && $obj['language'] = $language;
+        null !== $name && $obj['name'] = $name;
+        null !== $provider && $obj['provider'] = $provider;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Voice implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class Voice implements BaseModel
     public function withAccent(string $accent): self
     {
         $obj = clone $this;
-        $obj->accent = $accent;
+        $obj['accent'] = $accent;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Voice implements BaseModel
     public function withAge(string $age): self
     {
         $obj = clone $this;
-        $obj->age = $age;
+        $obj['age'] = $age;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Voice implements BaseModel
     public function withGender(string $gender): self
     {
         $obj = clone $this;
-        $obj->gender = $gender;
+        $obj['gender'] = $gender;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Voice implements BaseModel
     public function withLabel(string $label): self
     {
         $obj = clone $this;
-        $obj->label = $label;
+        $obj['label'] = $label;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Voice implements BaseModel
     public function withLanguage(string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Voice implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Voice implements BaseModel
     public function withProvider(string $provider): self
     {
         $obj = clone $this;
-        $obj->provider = $provider;
+        $obj['provider'] = $provider;
 
         return $obj;
     }

@@ -70,10 +70,10 @@ final class PortoutUpdateStatusParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->reason = $reason;
+        $obj['id'] = $id;
+        $obj['reason'] = $reason;
 
-        null !== $host_messaging && $obj->host_messaging = $host_messaging;
+        null !== $host_messaging && $obj['host_messaging'] = $host_messaging;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class PortoutUpdateStatusParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class PortoutUpdateStatusParams implements BaseModel
     public function withReason(string $reason): self
     {
         $obj = clone $this;
-        $obj->reason = $reason;
+        $obj['reason'] = $reason;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class PortoutUpdateStatusParams implements BaseModel
     public function withHostMessaging(bool $hostMessaging): self
     {
         $obj = clone $this;
-        $obj->host_messaging = $hostMessaging;
+        $obj['host_messaging'] = $hostMessaging;
 
         return $obj;
     }

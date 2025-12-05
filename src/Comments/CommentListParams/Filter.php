@@ -54,7 +54,7 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $comment_record_id && $obj->comment_record_id = $comment_record_id;
+        null !== $comment_record_id && $obj['comment_record_id'] = $comment_record_id;
         null !== $comment_record_type && $obj['comment_record_type'] = $comment_record_type;
 
         return $obj;
@@ -66,7 +66,7 @@ final class Filter implements BaseModel
     public function withCommentRecordID(string $commentRecordID): self
     {
         $obj = clone $this;
-        $obj->comment_record_id = $commentRecordID;
+        $obj['comment_record_id'] = $commentRecordID;
 
         return $obj;
     }

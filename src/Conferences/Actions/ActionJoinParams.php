@@ -184,21 +184,21 @@ final class ActionJoinParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
+        $obj['call_control_id'] = $call_control_id;
 
         null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $end_conference_on_exit && $obj->end_conference_on_exit = $end_conference_on_exit;
-        null !== $hold && $obj->hold = $hold;
-        null !== $hold_audio_url && $obj->hold_audio_url = $hold_audio_url;
-        null !== $hold_media_name && $obj->hold_media_name = $hold_media_name;
-        null !== $mute && $obj->mute = $mute;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $end_conference_on_exit && $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        null !== $hold && $obj['hold'] = $hold;
+        null !== $hold_audio_url && $obj['hold_audio_url'] = $hold_audio_url;
+        null !== $hold_media_name && $obj['hold_media_name'] = $hold_media_name;
+        null !== $mute && $obj['mute'] = $mute;
         null !== $region && $obj['region'] = $region;
-        null !== $soft_end_conference_on_exit && $obj->soft_end_conference_on_exit = $soft_end_conference_on_exit;
-        null !== $start_conference_on_enter && $obj->start_conference_on_enter = $start_conference_on_enter;
+        null !== $soft_end_conference_on_exit && $obj['soft_end_conference_on_exit'] = $soft_end_conference_on_exit;
+        null !== $start_conference_on_enter && $obj['start_conference_on_enter'] = $start_conference_on_enter;
         null !== $supervisor_role && $obj['supervisor_role'] = $supervisor_role;
-        null !== $whisper_call_control_ids && $obj->whisper_call_control_ids = $whisper_call_control_ids;
+        null !== $whisper_call_control_ids && $obj['whisper_call_control_ids'] = $whisper_call_control_ids;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class ActionJoinParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class ActionJoinParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class ActionJoinParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class ActionJoinParams implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->end_conference_on_exit = $endConferenceOnExit;
+        $obj['end_conference_on_exit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class ActionJoinParams implements BaseModel
     public function withHold(bool $hold): self
     {
         $obj = clone $this;
-        $obj->hold = $hold;
+        $obj['hold'] = $hold;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class ActionJoinParams implements BaseModel
     public function withHoldAudioURL(string $holdAudioURL): self
     {
         $obj = clone $this;
-        $obj->hold_audio_url = $holdAudioURL;
+        $obj['hold_audio_url'] = $holdAudioURL;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class ActionJoinParams implements BaseModel
     public function withHoldMediaName(string $holdMediaName): self
     {
         $obj = clone $this;
-        $obj->hold_media_name = $holdMediaName;
+        $obj['hold_media_name'] = $holdMediaName;
 
         return $obj;
     }
@@ -299,7 +299,7 @@ final class ActionJoinParams implements BaseModel
     public function withMute(bool $mute): self
     {
         $obj = clone $this;
-        $obj->mute = $mute;
+        $obj['mute'] = $mute;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class ActionJoinParams implements BaseModel
         bool $softEndConferenceOnExit
     ): self {
         $obj = clone $this;
-        $obj->soft_end_conference_on_exit = $softEndConferenceOnExit;
+        $obj['soft_end_conference_on_exit'] = $softEndConferenceOnExit;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class ActionJoinParams implements BaseModel
         bool $startConferenceOnEnter
     ): self {
         $obj = clone $this;
-        $obj->start_conference_on_enter = $startConferenceOnEnter;
+        $obj['start_conference_on_enter'] = $startConferenceOnEnter;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class ActionJoinParams implements BaseModel
         array $whisperCallControlIDs
     ): self {
         $obj = clone $this;
-        $obj->whisper_call_control_ids = $whisperCallControlIDs;
+        $obj['whisper_call_control_ids'] = $whisperCallControlIDs;
 
         return $obj;
     }

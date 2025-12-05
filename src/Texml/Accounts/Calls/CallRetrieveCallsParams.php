@@ -141,18 +141,18 @@ final class CallRetrieveCallsParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $EndTime && $obj->EndTime = $EndTime;
-        null !== $EndTime_gt && $obj->EndTime_gt = $EndTime_gt;
-        null !== $EndTime_lt && $obj->EndTime_lt = $EndTime_lt;
-        null !== $From && $obj->From = $From;
-        null !== $Page && $obj->Page = $Page;
-        null !== $PageSize && $obj->PageSize = $PageSize;
-        null !== $PageToken && $obj->PageToken = $PageToken;
-        null !== $StartTime && $obj->StartTime = $StartTime;
-        null !== $StartTime_gt && $obj->StartTime_gt = $StartTime_gt;
-        null !== $StartTime_lt && $obj->StartTime_lt = $StartTime_lt;
+        null !== $EndTime && $obj['EndTime'] = $EndTime;
+        null !== $EndTime_gt && $obj['EndTime_gt'] = $EndTime_gt;
+        null !== $EndTime_lt && $obj['EndTime_lt'] = $EndTime_lt;
+        null !== $From && $obj['From'] = $From;
+        null !== $Page && $obj['Page'] = $Page;
+        null !== $PageSize && $obj['PageSize'] = $PageSize;
+        null !== $PageToken && $obj['PageToken'] = $PageToken;
+        null !== $StartTime && $obj['StartTime'] = $StartTime;
+        null !== $StartTime_gt && $obj['StartTime_gt'] = $StartTime_gt;
+        null !== $StartTime_lt && $obj['StartTime_lt'] = $StartTime_lt;
         null !== $Status && $obj['Status'] = $Status;
-        null !== $To && $obj->To = $To;
+        null !== $To && $obj['To'] = $To;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->EndTime = $endTime;
+        $obj['EndTime'] = $endTime;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withEndTimeGt(string $endTimeGt): self
     {
         $obj = clone $this;
-        $obj->EndTime_gt = $endTimeGt;
+        $obj['EndTime_gt'] = $endTimeGt;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withEndTimeLt(string $endTimeLt): self
     {
         $obj = clone $this;
-        $obj->EndTime_lt = $endTimeLt;
+        $obj['EndTime_lt'] = $endTimeLt;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->From = $from;
+        $obj['From'] = $from;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->Page = $page;
+        $obj['Page'] = $page;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->PageSize = $pageSize;
+        $obj['PageSize'] = $pageSize;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withPageToken(string $pageToken): self
     {
         $obj = clone $this;
-        $obj->PageToken = $pageToken;
+        $obj['PageToken'] = $pageToken;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->StartTime = $startTime;
+        $obj['StartTime'] = $startTime;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withStartTimeGt(string $startTimeGt): self
     {
         $obj = clone $this;
-        $obj->StartTime_gt = $startTimeGt;
+        $obj['StartTime_gt'] = $startTimeGt;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withStartTimeLt(string $startTimeLt): self
     {
         $obj = clone $this;
-        $obj->StartTime_lt = $startTimeLt;
+        $obj['StartTime_lt'] = $startTimeLt;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->To = $to;
+        $obj['To'] = $to;
 
         return $obj;
     }

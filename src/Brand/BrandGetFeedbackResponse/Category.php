@@ -82,10 +82,10 @@ final class Category implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->description = $description;
-        $obj->displayName = $displayName;
-        $obj->fields = $fields;
+        $obj['id'] = $id;
+        $obj['description'] = $description;
+        $obj['displayName'] = $displayName;
+        $obj['fields'] = $fields;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class Category implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class Category implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Category implements BaseModel
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Category implements BaseModel
     public function withFields(array $fields): self
     {
         $obj = clone $this;
-        $obj->fields = $fields;
+        $obj['fields'] = $fields;
 
         return $obj;
     }

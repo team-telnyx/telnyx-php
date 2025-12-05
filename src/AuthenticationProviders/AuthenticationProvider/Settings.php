@@ -94,13 +94,13 @@ final class Settings implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $assertion_consumer_service_url && $obj->assertion_consumer_service_url = $assertion_consumer_service_url;
-        null !== $idp_cert_fingerprint && $obj->idp_cert_fingerprint = $idp_cert_fingerprint;
+        null !== $assertion_consumer_service_url && $obj['assertion_consumer_service_url'] = $assertion_consumer_service_url;
+        null !== $idp_cert_fingerprint && $obj['idp_cert_fingerprint'] = $idp_cert_fingerprint;
         null !== $idp_cert_fingerprint_algorithm && $obj['idp_cert_fingerprint_algorithm'] = $idp_cert_fingerprint_algorithm;
-        null !== $idp_entity_id && $obj->idp_entity_id = $idp_entity_id;
-        null !== $idp_sso_target_url && $obj->idp_sso_target_url = $idp_sso_target_url;
-        null !== $name_identifier_format && $obj->name_identifier_format = $name_identifier_format;
-        null !== $service_provider_entity_id && $obj->service_provider_entity_id = $service_provider_entity_id;
+        null !== $idp_entity_id && $obj['idp_entity_id'] = $idp_entity_id;
+        null !== $idp_sso_target_url && $obj['idp_sso_target_url'] = $idp_sso_target_url;
+        null !== $name_identifier_format && $obj['name_identifier_format'] = $name_identifier_format;
+        null !== $service_provider_entity_id && $obj['service_provider_entity_id'] = $service_provider_entity_id;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Settings implements BaseModel
         string $assertionConsumerServiceURL
     ): self {
         $obj = clone $this;
-        $obj->assertion_consumer_service_url = $assertionConsumerServiceURL;
+        $obj['assertion_consumer_service_url'] = $assertionConsumerServiceURL;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Settings implements BaseModel
     public function withIdpCertFingerprint(string $idpCertFingerprint): self
     {
         $obj = clone $this;
-        $obj->idp_cert_fingerprint = $idpCertFingerprint;
+        $obj['idp_cert_fingerprint'] = $idpCertFingerprint;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Settings implements BaseModel
     public function withIdpEntityID(string $idpEntityID): self
     {
         $obj = clone $this;
-        $obj->idp_entity_id = $idpEntityID;
+        $obj['idp_entity_id'] = $idpEntityID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Settings implements BaseModel
     public function withIdpSSOTargetURL(string $idpSSOTargetURL): self
     {
         $obj = clone $this;
-        $obj->idp_sso_target_url = $idpSSOTargetURL;
+        $obj['idp_sso_target_url'] = $idpSSOTargetURL;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class Settings implements BaseModel
     public function withNameIdentifierFormat(string $nameIdentifierFormat): self
     {
         $obj = clone $this;
-        $obj->name_identifier_format = $nameIdentifierFormat;
+        $obj['name_identifier_format'] = $nameIdentifierFormat;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Settings implements BaseModel
         string $serviceProviderEntityID
     ): self {
         $obj = clone $this;
-        $obj->service_provider_entity_id = $serviceProviderEntityID;
+        $obj['service_provider_entity_id'] = $serviceProviderEntityID;
 
         return $obj;
     }

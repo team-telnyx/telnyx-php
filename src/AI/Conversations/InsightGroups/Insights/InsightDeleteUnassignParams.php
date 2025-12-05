@@ -56,7 +56,7 @@ final class InsightDeleteUnassignParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->group_id = $group_id;
+        $obj['group_id'] = $group_id;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class InsightDeleteUnassignParams implements BaseModel
     public function withGroupID(string $groupID): self
     {
         $obj = clone $this;
-        $obj->group_id = $groupID;
+        $obj['group_id'] = $groupID;
 
         return $obj;
     }

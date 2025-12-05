@@ -118,9 +118,9 @@ final class ActionRecordStartParams implements BaseModel
 
         $obj['format'] = $format;
 
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $custom_file_name && $obj->custom_file_name = $custom_file_name;
-        null !== $play_beep && $obj->play_beep = $play_beep;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $custom_file_name && $obj['custom_file_name'] = $custom_file_name;
+        null !== $play_beep && $obj['play_beep'] = $play_beep;
         null !== $region && $obj['region'] = $region;
         null !== $trim && $obj['trim'] = $trim;
 
@@ -146,7 +146,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withCustomFileName(string $customFileName): self
     {
         $obj = clone $this;
-        $obj->custom_file_name = $customFileName;
+        $obj['custom_file_name'] = $customFileName;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withPlayBeep(bool $playBeep): self
     {
         $obj = clone $this;
-        $obj->play_beep = $playBeep;
+        $obj['play_beep'] = $playBeep;
 
         return $obj;
     }

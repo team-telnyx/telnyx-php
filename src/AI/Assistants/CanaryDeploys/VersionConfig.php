@@ -58,8 +58,8 @@ final class VersionConfig implements BaseModel
     {
         $obj = new self;
 
-        $obj->percentage = $percentage;
-        $obj->version_id = $version_id;
+        $obj['percentage'] = $percentage;
+        $obj['version_id'] = $version_id;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class VersionConfig implements BaseModel
     public function withPercentage(float $percentage): self
     {
         $obj = clone $this;
-        $obj->percentage = $percentage;
+        $obj['percentage'] = $percentage;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class VersionConfig implements BaseModel
     public function withVersionID(string $versionID): self
     {
         $obj = clone $this;
-        $obj->version_id = $versionID;
+        $obj['version_id'] = $versionID;
 
         return $obj;
     }

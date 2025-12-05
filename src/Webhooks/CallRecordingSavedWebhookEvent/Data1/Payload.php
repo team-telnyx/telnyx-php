@@ -96,6 +96,10 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Channels|value-of<Channels> $channels
+     * @param PublicRecordingURLs|array{
+     *   mp3?: string|null, wav?: string|null
+     * } $public_recording_urls
+     * @param RecordingURLs|array{mp3?: string|null, wav?: string|null} $recording_urls
      */
     public static function with(
         ?string $call_leg_id = null,
@@ -103,22 +107,22 @@ final class Payload implements BaseModel
         Channels|string|null $channels = null,
         ?string $client_state = null,
         ?string $connection_id = null,
-        ?PublicRecordingURLs $public_recording_urls = null,
+        PublicRecordingURLs|array|null $public_recording_urls = null,
         ?\DateTimeInterface $recording_ended_at = null,
         ?\DateTimeInterface $recording_started_at = null,
-        ?RecordingURLs $recording_urls = null,
+        RecordingURLs|array|null $recording_urls = null,
     ): self {
         $obj = new self;
 
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
         null !== $channels && $obj['channels'] = $channels;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $public_recording_urls && $obj->public_recording_urls = $public_recording_urls;
-        null !== $recording_ended_at && $obj->recording_ended_at = $recording_ended_at;
-        null !== $recording_started_at && $obj->recording_started_at = $recording_started_at;
-        null !== $recording_urls && $obj->recording_urls = $recording_urls;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $public_recording_urls && $obj['public_recording_urls'] = $public_recording_urls;
+        null !== $recording_ended_at && $obj['recording_ended_at'] = $recording_ended_at;
+        null !== $recording_started_at && $obj['recording_started_at'] = $recording_started_at;
+        null !== $recording_urls && $obj['recording_urls'] = $recording_urls;
 
         return $obj;
     }
@@ -129,7 +133,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -140,7 +144,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -164,7 +168,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -175,19 +179,23 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
 
     /**
      * Recording URLs in requested format. The URL is valid for as long as the file exists. For security purposes, this feature is activated on a per request basis.  Please contact customer support with your Account ID to request activation.
+     *
+     * @param PublicRecordingURLs|array{
+     *   mp3?: string|null, wav?: string|null
+     * } $publicRecordingURLs
      */
     public function withPublicRecordingURLs(
-        PublicRecordingURLs $publicRecordingURLs
+        PublicRecordingURLs|array $publicRecordingURLs
     ): self {
         $obj = clone $this;
-        $obj->public_recording_urls = $publicRecordingURLs;
+        $obj['public_recording_urls'] = $publicRecordingURLs;
 
         return $obj;
     }
@@ -199,7 +207,7 @@ final class Payload implements BaseModel
         \DateTimeInterface $recordingEndedAt
     ): self {
         $obj = clone $this;
-        $obj->recording_ended_at = $recordingEndedAt;
+        $obj['recording_ended_at'] = $recordingEndedAt;
 
         return $obj;
     }
@@ -211,18 +219,20 @@ final class Payload implements BaseModel
         \DateTimeInterface $recordingStartedAt
     ): self {
         $obj = clone $this;
-        $obj->recording_started_at = $recordingStartedAt;
+        $obj['recording_started_at'] = $recordingStartedAt;
 
         return $obj;
     }
 
     /**
      * Recording URLs in requested format. These URLs are valid for 10 minutes. After 10 minutes, you may retrieve recordings via API using Reports -> Call Recordings documentation, or via Mission Control under Reporting -> Recordings.
+     *
+     * @param RecordingURLs|array{mp3?: string|null, wav?: string|null} $recordingURLs
      */
-    public function withRecordingURLs(RecordingURLs $recordingURLs): self
+    public function withRecordingURLs(RecordingURLs|array $recordingURLs): self
     {
         $obj = clone $this;
-        $obj->recording_urls = $recordingURLs;
+        $obj['recording_urls'] = $recordingURLs;
 
         return $obj;
     }

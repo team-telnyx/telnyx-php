@@ -10,6 +10,8 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Source;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Status;
 
 /**
  * @phpstan-type ConferenceGetRecordingsResponseShape = array{
@@ -86,7 +88,23 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Recording> $recordings
+     * @param list<Recording|array{
+     *   account_sid?: string|null,
+     *   call_sid?: string|null,
+     *   channels?: int|null,
+     *   conference_sid?: string|null,
+     *   date_created?: string|null,
+     *   date_updated?: string|null,
+     *   duration?: int|null,
+     *   error_code?: string|null,
+     *   media_url?: string|null,
+     *   sid?: string|null,
+     *   source?: value-of<Source>|null,
+     *   start_time?: string|null,
+     *   status?: value-of<Status>|null,
+     *   subresource_uris?: array<string,mixed>|null,
+     *   uri?: string|null,
+     * }> $recordings
      */
     public static function with(
         ?int $end = null,
@@ -100,14 +118,14 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     ): self {
         $obj = new self;
 
-        null !== $end && $obj->end = $end;
-        null !== $first_page_uri && $obj->first_page_uri = $first_page_uri;
-        null !== $next_page_uri && $obj->next_page_uri = $next_page_uri;
-        null !== $page && $obj->page = $page;
-        null !== $page_size && $obj->page_size = $page_size;
-        null !== $recordings && $obj->recordings = $recordings;
-        null !== $start && $obj->start = $start;
-        null !== $uri && $obj->uri = $uri;
+        null !== $end && $obj['end'] = $end;
+        null !== $first_page_uri && $obj['first_page_uri'] = $first_page_uri;
+        null !== $next_page_uri && $obj['next_page_uri'] = $next_page_uri;
+        null !== $page && $obj['page'] = $page;
+        null !== $page_size && $obj['page_size'] = $page_size;
+        null !== $recordings && $obj['recordings'] = $recordings;
+        null !== $start && $obj['start'] = $start;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -118,7 +136,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withEnd(int $end): self
     {
         $obj = clone $this;
-        $obj->end = $end;
+        $obj['end'] = $end;
 
         return $obj;
     }
@@ -129,7 +147,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj->first_page_uri = $firstPageUri;
+        $obj['first_page_uri'] = $firstPageUri;
 
         return $obj;
     }
@@ -140,7 +158,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj->next_page_uri = $nextPageUri;
+        $obj['next_page_uri'] = $nextPageUri;
 
         return $obj;
     }
@@ -151,7 +169,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -162,18 +180,34 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size = $pageSize;
+        $obj['page_size'] = $pageSize;
 
         return $obj;
     }
 
     /**
-     * @param list<Recording> $recordings
+     * @param list<Recording|array{
+     *   account_sid?: string|null,
+     *   call_sid?: string|null,
+     *   channels?: int|null,
+     *   conference_sid?: string|null,
+     *   date_created?: string|null,
+     *   date_updated?: string|null,
+     *   duration?: int|null,
+     *   error_code?: string|null,
+     *   media_url?: string|null,
+     *   sid?: string|null,
+     *   source?: value-of<Source>|null,
+     *   start_time?: string|null,
+     *   status?: value-of<Status>|null,
+     *   subresource_uris?: array<string,mixed>|null,
+     *   uri?: string|null,
+     * }> $recordings
      */
     public function withRecordings(array $recordings): self
     {
         $obj = clone $this;
-        $obj->recordings = $recordings;
+        $obj['recordings'] = $recordings;
 
         return $obj;
     }
@@ -184,7 +218,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withStart(int $start): self
     {
         $obj = clone $this;
-        $obj->start = $start;
+        $obj['start'] = $start;
 
         return $obj;
     }
@@ -195,7 +229,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

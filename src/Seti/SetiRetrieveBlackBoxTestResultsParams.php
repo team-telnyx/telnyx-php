@@ -16,7 +16,7 @@ use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
  * @see Telnyx\Services\SetiService::retrieveBlackBoxTestResults()
  *
  * @phpstan-type SetiRetrieveBlackBoxTestResultsParamsShape = array{
- *   filter?: Filter
+ *   filter?: Filter|array{product?: string|null}
  * }
  */
 final class SetiRetrieveBlackBoxTestResultsParams implements BaseModel
@@ -40,23 +40,27 @@ final class SetiRetrieveBlackBoxTestResultsParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{product?: string|null} $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[product].
+     *
+     * @param Filter|array{product?: string|null} $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }

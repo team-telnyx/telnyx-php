@@ -79,11 +79,11 @@ final class AssignProfileToCampaignResponse implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->messagingProfileId = $messagingProfileId;
-        $obj->taskId = $taskId;
+        $obj['messagingProfileId'] = $messagingProfileId;
+        $obj['taskId'] = $taskId;
 
-        null !== $campaignId && $obj->campaignId = $campaignId;
-        null !== $tcrCampaignId && $obj->tcrCampaignId = $tcrCampaignId;
+        null !== $campaignId && $obj['campaignId'] = $campaignId;
+        null !== $tcrCampaignId && $obj['tcrCampaignId'] = $tcrCampaignId;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messagingProfileId = $messagingProfileID;
+        $obj['messagingProfileId'] = $messagingProfileID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->taskId = $taskID;
+        $obj['taskId'] = $taskID;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignId = $campaignID;
+        $obj['campaignId'] = $campaignID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj->tcrCampaignId = $tcrCampaignID;
+        $obj['tcrCampaignId'] = $tcrCampaignID;
 
         return $obj;
     }

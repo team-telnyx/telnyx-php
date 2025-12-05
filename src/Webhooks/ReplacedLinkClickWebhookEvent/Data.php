@@ -71,11 +71,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $message_id && $obj->message_id = $message_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $time_clicked && $obj->time_clicked = $time_clicked;
-        null !== $to && $obj->to = $to;
-        null !== $url && $obj->url = $url;
+        null !== $message_id && $obj['message_id'] = $message_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $time_clicked && $obj['time_clicked'] = $time_clicked;
+        null !== $to && $obj['to'] = $to;
+        null !== $url && $obj['url'] = $url;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withMessageID(string $messageID): self
     {
         $obj = clone $this;
-        $obj->message_id = $messageID;
+        $obj['message_id'] = $messageID;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withTimeClicked(\DateTimeInterface $timeClicked): self
     {
         $obj = clone $this;
-        $obj->time_clicked = $timeClicked;
+        $obj['time_clicked'] = $timeClicked;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

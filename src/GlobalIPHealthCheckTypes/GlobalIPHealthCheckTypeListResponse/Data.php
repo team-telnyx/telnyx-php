@@ -59,9 +59,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $health_check_params && $obj->health_check_params = $health_check_params;
-        null !== $health_check_type && $obj->health_check_type = $health_check_type;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $health_check_params && $obj['health_check_params'] = $health_check_params;
+        null !== $health_check_type && $obj['health_check_type'] = $health_check_type;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     public function withHealthCheckParams(array $healthCheckParams): self
     {
         $obj = clone $this;
-        $obj->health_check_params = $healthCheckParams;
+        $obj['health_check_params'] = $healthCheckParams;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Data implements BaseModel
     public function withHealthCheckType(string $healthCheckType): self
     {
         $obj = clone $this;
-        $obj->health_check_type = $healthCheckType;
+        $obj['health_check_type'] = $healthCheckType;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

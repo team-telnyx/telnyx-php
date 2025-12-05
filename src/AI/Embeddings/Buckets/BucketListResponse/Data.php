@@ -50,7 +50,7 @@ final class Data implements BaseModel
     {
         $obj = new self;
 
-        $obj->buckets = $buckets;
+        $obj['buckets'] = $buckets;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class Data implements BaseModel
     public function withBuckets(array $buckets): self
     {
         $obj = clone $this;
-        $obj->buckets = $buckets;
+        $obj['buckets'] = $buckets;
 
         return $obj;
     }

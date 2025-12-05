@@ -15,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\Tests\RunsService::list()
  *
- * @phpstan-type RunListParamsShape = array{page?: Page, status?: string}
+ * @phpstan-type RunListParamsShape = array{
+ *   page?: Page|array{number?: int|null, size?: int|null}, status?: string
+ * }
  */
 final class RunListParams implements BaseModel
 {
@@ -44,24 +46,30 @@ final class RunListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public static function with(?Page $page = null, ?string $status = null): self
-    {
+    public static function with(
+        Page|array|null $page = null,
+        ?string $status = null
+    ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $status && $obj->status = $status;
+        null !== $page && $obj['page'] = $page;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -72,7 +80,7 @@ final class RunListParams implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

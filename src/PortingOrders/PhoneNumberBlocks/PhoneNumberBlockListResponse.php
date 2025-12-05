@@ -10,6 +10,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\ActivationRange;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRange;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberType;
 
 /**
  * @phpstan-type PhoneNumberBlockListResponseShape = array{
@@ -40,35 +43,67 @@ final class PhoneNumberBlockListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingPhoneNumberBlock> $data
+     * @param list<PortingPhoneNumberBlock|array{
+     *   id?: string|null,
+     *   activation_ranges?: list<ActivationRange>|null,
+     *   country_code?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   phone_number_range?: PhoneNumberRange|null,
+     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<PortingPhoneNumberBlock> $data
+     * @param list<PortingPhoneNumberBlock|array{
+     *   id?: string|null,
+     *   activation_ranges?: list<ActivationRange>|null,
+     *   country_code?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   phone_number_range?: PhoneNumberRange|null,
+     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

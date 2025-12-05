@@ -11,6 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data\Status;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data\TelephoneNumber;
 
 /**
  * @phpstan-type ReleaseListResponseShape = array{
@@ -41,36 +43,64 @@ final class ReleaseListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   created_at?: string|null,
+     *   error_message?: string|null,
+     *   status?: value-of<Status>|null,
+     *   telephone_numbers?: list<TelephoneNumber>|null,
+     *   tenant_id?: string|null,
+     *   ticket_id?: string|null,
+     * }> $data
+     * @param ExternalVoiceIntegrationsPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?ExternalVoiceIntegrationsPaginationMeta $meta = null
+        ExternalVoiceIntegrationsPaginationMeta|array|null $meta = null,
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   created_at?: string|null,
+     *   error_message?: string|null,
+     *   status?: value-of<Status>|null,
+     *   telephone_numbers?: list<TelephoneNumber>|null,
+     *   tenant_id?: string|null,
+     *   ticket_id?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
+    /**
+     * @param ExternalVoiceIntegrationsPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
     public function withMeta(
-        ExternalVoiceIntegrationsPaginationMeta $meta
+        ExternalVoiceIntegrationsPaginationMeta|array $meta
     ): self {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

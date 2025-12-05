@@ -47,7 +47,7 @@ final class Data implements BaseModel
     {
         $obj = new self;
 
-        $obj->task_id = $task_id;
+        $obj['task_id'] = $task_id;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->task_id = $taskID;
+        $obj['task_id'] = $taskID;
 
         return $obj;
     }

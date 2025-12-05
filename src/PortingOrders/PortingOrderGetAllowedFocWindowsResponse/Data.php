@@ -55,9 +55,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $ended_at && $obj->ended_at = $ended_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $started_at && $obj->started_at = $started_at;
+        null !== $ended_at && $obj['ended_at'] = $ended_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $started_at && $obj['started_at'] = $started_at;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Data implements BaseModel
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
         $obj = clone $this;
-        $obj->ended_at = $endedAt;
+        $obj['ended_at'] = $endedAt;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj->started_at = $startedAt;
+        $obj['started_at'] = $startedAt;
 
         return $obj;
     }

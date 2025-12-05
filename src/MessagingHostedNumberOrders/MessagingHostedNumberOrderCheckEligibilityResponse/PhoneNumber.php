@@ -68,10 +68,10 @@ final class PhoneNumber implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $detail && $obj->detail = $detail;
-        null !== $eligible && $obj->eligible = $eligible;
+        null !== $detail && $obj['detail'] = $detail;
+        null !== $eligible && $obj['eligible'] = $eligible;
         null !== $eligible_status && $obj['eligible_status'] = $eligible_status;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class PhoneNumber implements BaseModel
     public function withDetail(string $detail): self
     {
         $obj = clone $this;
-        $obj->detail = $detail;
+        $obj['detail'] = $detail;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class PhoneNumber implements BaseModel
     public function withEligible(bool $eligible): self
     {
         $obj = clone $this;
-        $obj->eligible = $eligible;
+        $obj['eligible'] = $eligible;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class PhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

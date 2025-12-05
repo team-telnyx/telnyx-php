@@ -56,7 +56,7 @@ final class CallRecording implements BaseModel
         $obj = new self;
 
         null !== $inbound_call_recording_channels && $obj['inbound_call_recording_channels'] = $inbound_call_recording_channels;
-        null !== $inbound_call_recording_enabled && $obj->inbound_call_recording_enabled = $inbound_call_recording_enabled;
+        null !== $inbound_call_recording_enabled && $obj['inbound_call_recording_enabled'] = $inbound_call_recording_enabled;
         null !== $inbound_call_recording_format && $obj['inbound_call_recording_format'] = $inbound_call_recording_format;
 
         return $obj;
@@ -78,7 +78,7 @@ final class CallRecording implements BaseModel
         bool $inboundCallRecordingEnabled
     ): self {
         $obj = clone $this;
-        $obj->inbound_call_recording_enabled = $inboundCallRecordingEnabled;
+        $obj['inbound_call_recording_enabled'] = $inboundCallRecordingEnabled;
 
         return $obj;
     }

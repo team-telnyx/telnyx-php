@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
 
 /**
  * @phpstan-type PhoneNumberCampaignListResponseShape = array{
@@ -61,7 +62,18 @@ final class PhoneNumberCampaignListResponse implements BaseModel, ResponseConver
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberCampaign> $records
+     * @param list<PhoneNumberCampaign|array{
+     *   campaignId: string,
+     *   createdAt: string,
+     *   phoneNumber: string,
+     *   updatedAt: string,
+     *   assignmentStatus?: value-of<AssignmentStatus>|null,
+     *   brandId?: string|null,
+     *   failureReasons?: string|null,
+     *   tcrBrandId?: string|null,
+     *   tcrCampaignId?: string|null,
+     *   telnyxCampaignId?: string|null,
+     * }> $records
      */
     public static function with(
         int $page,
@@ -70,9 +82,9 @@ final class PhoneNumberCampaignListResponse implements BaseModel, ResponseConver
     ): self {
         $obj = new self;
 
-        $obj->page = $page;
-        $obj->records = $records;
-        $obj->totalRecords = $totalRecords;
+        $obj['page'] = $page;
+        $obj['records'] = $records;
+        $obj['totalRecords'] = $totalRecords;
 
         return $obj;
     }
@@ -80,18 +92,29 @@ final class PhoneNumberCampaignListResponse implements BaseModel, ResponseConver
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
-     * @param list<PhoneNumberCampaign> $records
+     * @param list<PhoneNumberCampaign|array{
+     *   campaignId: string,
+     *   createdAt: string,
+     *   phoneNumber: string,
+     *   updatedAt: string,
+     *   assignmentStatus?: value-of<AssignmentStatus>|null,
+     *   brandId?: string|null,
+     *   failureReasons?: string|null,
+     *   tcrBrandId?: string|null,
+     *   tcrCampaignId?: string|null,
+     *   telnyxCampaignId?: string|null,
+     * }> $records
      */
     public function withRecords(array $records): self
     {
         $obj = clone $this;
-        $obj->records = $records;
+        $obj['records'] = $records;
 
         return $obj;
     }
@@ -99,7 +122,7 @@ final class PhoneNumberCampaignListResponse implements BaseModel, ResponseConver
     public function withTotalRecords(int $totalRecords): self
     {
         $obj = clone $this;
-        $obj->totalRecords = $totalRecords;
+        $obj['totalRecords'] = $totalRecords;
 
         return $obj;
     }

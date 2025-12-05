@@ -60,8 +60,8 @@ final class ParticipantRetrieveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
-        $obj->conference_sid = $conference_sid;
+        $obj['account_sid'] = $account_sid;
+        $obj['conference_sid'] = $conference_sid;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ParticipantRetrieveParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class ParticipantRetrieveParams implements BaseModel
     public function withConferenceSid(string $conferenceSid): self
     {
         $obj = clone $this;
-        $obj->conference_sid = $conferenceSid;
+        $obj['conference_sid'] = $conferenceSid;
 
         return $obj;
     }

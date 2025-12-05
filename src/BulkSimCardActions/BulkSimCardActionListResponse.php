@@ -6,6 +6,8 @@ namespace Telnyx\BulkSimCardActions;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\ActionType;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\SimCardActionsSummary;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -41,35 +43,65 @@ final class BulkSimCardActionListResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   action_type?: value-of<ActionType>|null,
+     *   created_at?: string|null,
+     *   record_type?: string|null,
+     *   settings?: array<string,mixed>|null,
+     *   sim_card_actions_summary?: list<SimCardActionsSummary>|null,
+     *   updated_at?: string|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   action_type?: value-of<ActionType>|null,
+     *   created_at?: string|null,
+     *   record_type?: string|null,
+     *   settings?: array<string,mixed>|null,
+     *   sim_card_actions_summary?: list<SimCardActionsSummary>|null,
+     *   updated_at?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

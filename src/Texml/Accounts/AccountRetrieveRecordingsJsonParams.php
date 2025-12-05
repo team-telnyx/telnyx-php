@@ -59,9 +59,9 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $DateCreated && $obj->DateCreated = $DateCreated;
-        null !== $Page && $obj->Page = $Page;
-        null !== $PageSize && $obj->PageSize = $PageSize;
+        null !== $DateCreated && $obj['DateCreated'] = $DateCreated;
+        null !== $Page && $obj['Page'] = $Page;
+        null !== $PageSize && $obj['PageSize'] = $PageSize;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
         $obj = clone $this;
-        $obj->DateCreated = $dateCreated;
+        $obj['DateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->Page = $page;
+        $obj['Page'] = $page;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->PageSize = $pageSize;
+        $obj['PageSize'] = $pageSize;
 
         return $obj;
     }

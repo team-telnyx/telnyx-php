@@ -47,9 +47,9 @@ final class From implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $agent_id && $obj->agent_id = $agent_id;
-        null !== $agent_name && $obj->agent_name = $agent_name;
-        null !== $carrier && $obj->carrier = $carrier;
+        null !== $agent_id && $obj['agent_id'] = $agent_id;
+        null !== $agent_name && $obj['agent_name'] = $agent_name;
+        null !== $carrier && $obj['carrier'] = $carrier;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class From implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agent_id = $agentID;
+        $obj['agent_id'] = $agentID;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class From implements BaseModel
     public function withAgentName(string $agentName): self
     {
         $obj = clone $this;
-        $obj->agent_name = $agentName;
+        $obj['agent_name'] = $agentName;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class From implements BaseModel
     public function withCarrier(string $carrier): self
     {
         $obj = clone $this;
-        $obj->carrier = $carrier;
+        $obj['carrier'] = $carrier;
 
         return $obj;
     }

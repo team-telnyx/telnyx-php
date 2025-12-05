@@ -62,8 +62,8 @@ final class Requirement implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->field_value = $field_value;
-        $obj->requirement_type_id = $requirement_type_id;
+        $obj['field_value'] = $field_value;
+        $obj['requirement_type_id'] = $requirement_type_id;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Requirement implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj->field_value = $fieldValue;
+        $obj['field_value'] = $fieldValue;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Requirement implements BaseModel
     public function withRequirementTypeID(string $requirementTypeID): self
     {
         $obj = clone $this;
-        $obj->requirement_type_id = $requirementTypeID;
+        $obj['requirement_type_id'] = $requirementTypeID;
 
         return $obj;
     }

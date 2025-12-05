@@ -229,25 +229,25 @@ final class ActionBridgeParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
+        $obj['call_control_id'] = $call_control_id;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
         null !== $mute_dtmf && $obj['mute_dtmf'] = $mute_dtmf;
-        null !== $park_after_unbridge && $obj->park_after_unbridge = $park_after_unbridge;
-        null !== $play_ringtone && $obj->play_ringtone = $play_ringtone;
-        null !== $queue && $obj->queue = $queue;
+        null !== $park_after_unbridge && $obj['park_after_unbridge'] = $park_after_unbridge;
+        null !== $play_ringtone && $obj['play_ringtone'] = $play_ringtone;
+        null !== $queue && $obj['queue'] = $queue;
         null !== $record && $obj['record'] = $record;
         null !== $record_channels && $obj['record_channels'] = $record_channels;
-        null !== $record_custom_file_name && $obj->record_custom_file_name = $record_custom_file_name;
+        null !== $record_custom_file_name && $obj['record_custom_file_name'] = $record_custom_file_name;
         null !== $record_format && $obj['record_format'] = $record_format;
-        null !== $record_max_length && $obj->record_max_length = $record_max_length;
-        null !== $record_timeout_secs && $obj->record_timeout_secs = $record_timeout_secs;
+        null !== $record_max_length && $obj['record_max_length'] = $record_max_length;
+        null !== $record_timeout_secs && $obj['record_timeout_secs'] = $record_timeout_secs;
         null !== $record_track && $obj['record_track'] = $record_track;
         null !== $record_trim && $obj['record_trim'] = $record_trim;
         null !== $ringtone && $obj['ringtone'] = $ringtone;
-        null !== $video_room_context && $obj->video_room_context = $video_room_context;
-        null !== $video_room_id && $obj->video_room_id = $video_room_id;
+        null !== $video_room_context && $obj['video_room_context'] = $video_room_context;
+        null !== $video_room_id && $obj['video_room_id'] = $video_room_id;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class ActionBridgeParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class ActionBridgeParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class ActionBridgeParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -304,7 +304,7 @@ final class ActionBridgeParams implements BaseModel
     public function withParkAfterUnbridge(string $parkAfterUnbridge): self
     {
         $obj = clone $this;
-        $obj->park_after_unbridge = $parkAfterUnbridge;
+        $obj['park_after_unbridge'] = $parkAfterUnbridge;
 
         return $obj;
     }
@@ -315,7 +315,7 @@ final class ActionBridgeParams implements BaseModel
     public function withPlayRingtone(bool $playRingtone): self
     {
         $obj = clone $this;
-        $obj->play_ringtone = $playRingtone;
+        $obj['play_ringtone'] = $playRingtone;
 
         return $obj;
     }
@@ -326,7 +326,7 @@ final class ActionBridgeParams implements BaseModel
     public function withQueue(string $queue): self
     {
         $obj = clone $this;
-        $obj->queue = $queue;
+        $obj['queue'] = $queue;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
         $obj = clone $this;
-        $obj->record_custom_file_name = $recordCustomFileName;
+        $obj['record_custom_file_name'] = $recordCustomFileName;
 
         return $obj;
     }
@@ -388,7 +388,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRecordMaxLength(int $recordMaxLength): self
     {
         $obj = clone $this;
-        $obj->record_max_length = $recordMaxLength;
+        $obj['record_max_length'] = $recordMaxLength;
 
         return $obj;
     }
@@ -399,7 +399,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->record_timeout_secs = $recordTimeoutSecs;
+        $obj['record_timeout_secs'] = $recordTimeoutSecs;
 
         return $obj;
     }
@@ -449,7 +449,7 @@ final class ActionBridgeParams implements BaseModel
     public function withVideoRoomContext(string $videoRoomContext): self
     {
         $obj = clone $this;
-        $obj->video_room_context = $videoRoomContext;
+        $obj['video_room_context'] = $videoRoomContext;
 
         return $obj;
     }
@@ -460,7 +460,7 @@ final class ActionBridgeParams implements BaseModel
     public function withVideoRoomID(string $videoRoomID): self
     {
         $obj = clone $this;
-        $obj->video_room_id = $videoRoomID;
+        $obj['video_room_id'] = $videoRoomID;
 
         return $obj;
     }

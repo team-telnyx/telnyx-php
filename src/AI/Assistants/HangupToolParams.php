@@ -36,7 +36,7 @@ final class HangupToolParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $description && $obj->description = $description;
+        null !== $description && $obj['description'] = $description;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class HangupToolParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }

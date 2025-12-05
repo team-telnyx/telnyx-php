@@ -56,8 +56,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $accepted && $obj->accepted = $accepted;
+        null !== $id && $obj['id'] = $id;
+        null !== $accepted && $obj['accepted'] = $accepted;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -69,7 +69,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Data implements BaseModel
     public function withAccepted(bool $accepted): self
     {
         $obj = clone $this;
-        $obj->accepted = $accepted;
+        $obj['accepted'] = $accepted;
 
         return $obj;
     }

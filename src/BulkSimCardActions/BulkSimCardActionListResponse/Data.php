@@ -6,6 +6,7 @@ namespace Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\ActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\SimCardActionsSummary;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\SimCardActionsSummary\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -82,7 +83,9 @@ final class Data implements BaseModel
      *
      * @param ActionType|value-of<ActionType> $action_type
      * @param array<string,mixed> $settings
-     * @param list<SimCardActionsSummary> $sim_card_actions_summary
+     * @param list<SimCardActionsSummary|array{
+     *   count?: int|null, status?: value-of<Status>|null
+     * }> $sim_card_actions_summary
      */
     public static function with(
         ?string $id = null,
@@ -95,13 +98,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $action_type && $obj['action_type'] = $action_type;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $settings && $obj->settings = $settings;
-        null !== $sim_card_actions_summary && $obj->sim_card_actions_summary = $sim_card_actions_summary;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $settings && $obj['settings'] = $settings;
+        null !== $sim_card_actions_summary && $obj['sim_card_actions_summary'] = $sim_card_actions_summary;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -112,7 +115,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -139,7 +142,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -147,7 +150,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -160,19 +163,21 @@ final class Data implements BaseModel
     public function withSettings(array $settings): self
     {
         $obj = clone $this;
-        $obj->settings = $settings;
+        $obj['settings'] = $settings;
 
         return $obj;
     }
 
     /**
-     * @param list<SimCardActionsSummary> $simCardActionsSummary
+     * @param list<SimCardActionsSummary|array{
+     *   count?: int|null, status?: value-of<Status>|null
+     * }> $simCardActionsSummary
      */
     public function withSimCardActionsSummary(
         array $simCardActionsSummary
     ): self {
         $obj = clone $this;
-        $obj->sim_card_actions_summary = $simCardActionsSummary;
+        $obj['sim_card_actions_summary'] = $simCardActionsSummary;
 
         return $obj;
     }
@@ -183,7 +188,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -64,9 +64,9 @@ final class RecordType implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $product_dimensions && $obj->product_dimensions = $product_dimensions;
-        null !== $product_metrics && $obj->product_metrics = $product_metrics;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $product_dimensions && $obj['product_dimensions'] = $product_dimensions;
+        null !== $product_metrics && $obj['product_metrics'] = $product_metrics;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class RecordType implements BaseModel
     public function withProductDimensions(array $productDimensions): self
     {
         $obj = clone $this;
-        $obj->product_dimensions = $productDimensions;
+        $obj['product_dimensions'] = $productDimensions;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class RecordType implements BaseModel
     public function withProductMetrics(array $productMetrics): self
     {
         $obj = clone $this;
-        $obj->product_metrics = $productMetrics;
+        $obj['product_metrics'] = $productMetrics;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class RecordType implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

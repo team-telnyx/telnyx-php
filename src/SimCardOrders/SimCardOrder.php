@@ -95,13 +95,26 @@ final class SimCardOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Cost|array{amount?: string|null, currency?: string|null} $cost
+     * @param OrderAddress|array{
+     *   id?: string|null,
+     *   administrative_area?: string|null,
+     *   business_name?: string|null,
+     *   country_code?: string|null,
+     *   extended_address?: string|null,
+     *   first_name?: string|null,
+     *   last_name?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $order_address
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?Cost $cost = null,
+        Cost|array|null $cost = null,
         ?string $created_at = null,
-        ?OrderAddress $order_address = null,
+        OrderAddress|array|null $order_address = null,
         ?int $quantity = null,
         ?string $record_type = null,
         Status|string|null $status = null,
@@ -110,15 +123,15 @@ final class SimCardOrder implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $cost && $obj->cost = $cost;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $order_address && $obj->order_address = $order_address;
-        null !== $quantity && $obj->quantity = $quantity;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $order_address && $obj['order_address'] = $order_address;
+        null !== $quantity && $obj['quantity'] = $quantity;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $tracking_url && $obj->tracking_url = $tracking_url;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $tracking_url && $obj['tracking_url'] = $tracking_url;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -129,18 +142,20 @@ final class SimCardOrder implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * An object representing the total cost of the order.
+     *
+     * @param Cost|array{amount?: string|null, currency?: string|null} $cost
      */
-    public function withCost(Cost $cost): self
+    public function withCost(Cost|array $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -151,18 +166,31 @@ final class SimCardOrder implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
     /**
      * An object representing the address information from when the order was submitted.
+     *
+     * @param OrderAddress|array{
+     *   id?: string|null,
+     *   administrative_area?: string|null,
+     *   business_name?: string|null,
+     *   country_code?: string|null,
+     *   extended_address?: string|null,
+     *   first_name?: string|null,
+     *   last_name?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $orderAddress
      */
-    public function withOrderAddress(OrderAddress $orderAddress): self
+    public function withOrderAddress(OrderAddress|array $orderAddress): self
     {
         $obj = clone $this;
-        $obj->order_address = $orderAddress;
+        $obj['order_address'] = $orderAddress;
 
         return $obj;
     }
@@ -173,7 +201,7 @@ final class SimCardOrder implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -184,7 +212,7 @@ final class SimCardOrder implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -208,7 +236,7 @@ final class SimCardOrder implements BaseModel
     public function withTrackingURL(string $trackingURL): self
     {
         $obj = clone $this;
-        $obj->tracking_url = $trackingURL;
+        $obj['tracking_url'] = $trackingURL;
 
         return $obj;
     }
@@ -219,7 +247,7 @@ final class SimCardOrder implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -63,9 +63,9 @@ final class GlobalIPCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $description && $obj->description = $description;
-        null !== $name && $obj->name = $name;
-        null !== $ports && $obj->ports = $ports;
+        null !== $description && $obj['description'] = $description;
+        null !== $name && $obj['name'] = $name;
+        null !== $ports && $obj['ports'] = $ports;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class GlobalIPCreateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class GlobalIPCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class GlobalIPCreateParams implements BaseModel
     public function withPorts(array $ports): self
     {
         $obj = clone $this;
-        $obj->ports = $ports;
+        $obj['ports'] = $ports;
 
         return $obj;
     }

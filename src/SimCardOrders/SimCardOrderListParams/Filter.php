@@ -59,37 +59,62 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Address|array{
+     *   id?: string|null,
+     *   administrative_area?: string|null,
+     *   country_code?: string|null,
+     *   extended_address?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $address
+     * @param Cost|array{amount?: string|null, currency?: string|null} $cost
      */
     public static function with(
-        ?Address $address = null,
-        ?Cost $cost = null,
+        Address|array|null $address = null,
+        Cost|array|null $cost = null,
         ?\DateTimeInterface $created_at = null,
         ?int $quantity = null,
         ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $address && $obj->address = $address;
-        null !== $cost && $obj->cost = $cost;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $quantity && $obj->quantity = $quantity;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $address && $obj['address'] = $address;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $quantity && $obj['quantity'] = $quantity;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
 
-    public function withAddress(Address $address): self
+    /**
+     * @param Address|array{
+     *   id?: string|null,
+     *   administrative_area?: string|null,
+     *   country_code?: string|null,
+     *   extended_address?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $address
+     */
+    public function withAddress(Address|array $address): self
     {
         $obj = clone $this;
-        $obj->address = $address;
+        $obj['address'] = $address;
 
         return $obj;
     }
 
-    public function withCost(Cost $cost): self
+    /**
+     * @param Cost|array{amount?: string|null, currency?: string|null} $cost
+     */
+    public function withCost(Cost|array $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -100,7 +125,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -111,7 +136,7 @@ final class Filter implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -122,7 +147,7 @@ final class Filter implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

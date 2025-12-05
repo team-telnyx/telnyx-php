@@ -59,10 +59,10 @@ final class CreateCalendarEventAction implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $description && $obj->description = $description;
-        null !== $end_time && $obj->end_time = $end_time;
-        null !== $start_time && $obj->start_time = $start_time;
-        null !== $title && $obj->title = $title;
+        null !== $description && $obj['description'] = $description;
+        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $title && $obj['title'] = $title;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withTitle(string $title): self
     {
         $obj = clone $this;
-        $obj->title = $title;
+        $obj['title'] = $title;
 
         return $obj;
     }

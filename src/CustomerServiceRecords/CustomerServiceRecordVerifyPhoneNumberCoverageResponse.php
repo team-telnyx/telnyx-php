@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data\AdditionalDataRequired;
 
 /**
  * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape = array{
@@ -37,24 +38,36 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements Ba
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   additional_data_required?: list<value-of<AdditionalDataRequired>>|null,
+     *   has_csr_coverage?: bool|null,
+     *   phone_number?: string|null,
+     *   reason?: string|null,
+     *   record_type?: string|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   additional_data_required?: list<value-of<AdditionalDataRequired>>|null,
+     *   has_csr_coverage?: bool|null,
+     *   phone_number?: string|null,
+     *   reason?: string|null,
+     *   record_type?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

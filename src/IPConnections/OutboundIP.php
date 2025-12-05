@@ -133,18 +133,18 @@ final class OutboundIP implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $ani_override && $obj->ani_override = $ani_override;
+        null !== $ani_override && $obj['ani_override'] = $ani_override;
         null !== $ani_override_type && $obj['ani_override_type'] = $ani_override_type;
-        null !== $call_parking_enabled && $obj->call_parking_enabled = $call_parking_enabled;
-        null !== $channel_limit && $obj->channel_limit = $channel_limit;
-        null !== $generate_ringback_tone && $obj->generate_ringback_tone = $generate_ringback_tone;
-        null !== $instant_ringback_enabled && $obj->instant_ringback_enabled = $instant_ringback_enabled;
+        null !== $call_parking_enabled && $obj['call_parking_enabled'] = $call_parking_enabled;
+        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $generate_ringback_tone && $obj['generate_ringback_tone'] = $generate_ringback_tone;
+        null !== $instant_ringback_enabled && $obj['instant_ringback_enabled'] = $instant_ringback_enabled;
         null !== $ip_authentication_method && $obj['ip_authentication_method'] = $ip_authentication_method;
-        null !== $ip_authentication_token && $obj->ip_authentication_token = $ip_authentication_token;
-        null !== $localization && $obj->localization = $localization;
-        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
+        null !== $ip_authentication_token && $obj['ip_authentication_token'] = $ip_authentication_token;
+        null !== $localization && $obj['localization'] = $localization;
+        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
         null !== $t38_reinvite_source && $obj['t38_reinvite_source'] = $t38_reinvite_source;
-        null !== $tech_prefix && $obj->tech_prefix = $tech_prefix;
+        null !== $tech_prefix && $obj['tech_prefix'] = $tech_prefix;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class OutboundIP implements BaseModel
     public function withAniOverride(string $aniOverride): self
     {
         $obj = clone $this;
-        $obj->ani_override = $aniOverride;
+        $obj['ani_override'] = $aniOverride;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class OutboundIP implements BaseModel
     public function withCallParkingEnabled(?bool $callParkingEnabled): self
     {
         $obj = clone $this;
-        $obj->call_parking_enabled = $callParkingEnabled;
+        $obj['call_parking_enabled'] = $callParkingEnabled;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class OutboundIP implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channel_limit = $channelLimit;
+        $obj['channel_limit'] = $channelLimit;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class OutboundIP implements BaseModel
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
         $obj = clone $this;
-        $obj->generate_ringback_tone = $generateRingbackTone;
+        $obj['generate_ringback_tone'] = $generateRingbackTone;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class OutboundIP implements BaseModel
         bool $instantRingbackEnabled
     ): self {
         $obj = clone $this;
-        $obj->instant_ringback_enabled = $instantRingbackEnabled;
+        $obj['instant_ringback_enabled'] = $instantRingbackEnabled;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class OutboundIP implements BaseModel
         string $ipAuthenticationToken
     ): self {
         $obj = clone $this;
-        $obj->ip_authentication_token = $ipAuthenticationToken;
+        $obj['ip_authentication_token'] = $ipAuthenticationToken;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class OutboundIP implements BaseModel
     public function withLocalization(string $localization): self
     {
         $obj = clone $this;
-        $obj->localization = $localization;
+        $obj['localization'] = $localization;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class OutboundIP implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
+        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
 
         return $obj;
     }
@@ -283,7 +283,7 @@ final class OutboundIP implements BaseModel
     public function withTechPrefix(string $techPrefix): self
     {
         $obj = clone $this;
-        $obj->tech_prefix = $techPrefix;
+        $obj['tech_prefix'] = $techPrefix;
 
         return $obj;
     }

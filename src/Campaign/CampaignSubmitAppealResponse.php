@@ -42,7 +42,7 @@ final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        null !== $appealed_at && $obj->appealed_at = $appealed_at;
+        null !== $appealed_at && $obj['appealed_at'] = $appealed_at;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
     public function withAppealedAt(\DateTimeInterface $appealedAt): self
     {
         $obj = clone $this;
-        $obj->appealed_at = $appealedAt;
+        $obj['appealed_at'] = $appealedAt;
 
         return $obj;
     }

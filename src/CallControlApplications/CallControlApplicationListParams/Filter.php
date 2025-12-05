@@ -131,19 +131,27 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ApplicationName|array{contains?: string|null} $application_name
+     * @param OccurredAt|array{
+     *   eq?: string|null,
+     *   gt?: string|null,
+     *   gte?: string|null,
+     *   lt?: string|null,
+     *   lte?: string|null,
+     * } $occurred_at
      * @param Product|value-of<Product> $product
      * @param Status|value-of<Status> $status
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?ApplicationName $application_name = null,
+        ApplicationName|array|null $application_name = null,
         ?string $application_session_id = null,
         ?string $connection_id = null,
         ?bool $failed = null,
         ?string $from = null,
         ?string $leg_id = null,
         ?string $name = null,
-        ?OccurredAt $occurred_at = null,
+        OccurredAt|array|null $occurred_at = null,
         ?string $outbound_outbound_voice_profile_id = null,
         Product|string|null $product = null,
         Status|string|null $status = null,
@@ -152,18 +160,18 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $application_name && $obj->application_name = $application_name;
-        null !== $application_session_id && $obj->application_session_id = $application_session_id;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $failed && $obj->failed = $failed;
-        null !== $from && $obj->from = $from;
-        null !== $leg_id && $obj->leg_id = $leg_id;
-        null !== $name && $obj->name = $name;
-        null !== $occurred_at && $obj->occurred_at = $occurred_at;
-        null !== $outbound_outbound_voice_profile_id && $obj->outbound_outbound_voice_profile_id = $outbound_outbound_voice_profile_id;
+        null !== $application_name && $obj['application_name'] = $application_name;
+        null !== $application_session_id && $obj['application_session_id'] = $application_session_id;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $failed && $obj['failed'] = $failed;
+        null !== $from && $obj['from'] = $from;
+        null !== $leg_id && $obj['leg_id'] = $leg_id;
+        null !== $name && $obj['name'] = $name;
+        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $outbound_outbound_voice_profile_id && $obj['outbound_outbound_voice_profile_id'] = $outbound_outbound_voice_profile_id;
         null !== $product && $obj['product'] = $product;
         null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
+        null !== $to && $obj['to'] = $to;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -171,11 +179,14 @@ final class Filter implements BaseModel
 
     /**
      * Application name filters.
+     *
+     * @param ApplicationName|array{contains?: string|null} $applicationName
      */
-    public function withApplicationName(ApplicationName $applicationName): self
-    {
+    public function withApplicationName(
+        ApplicationName|array $applicationName
+    ): self {
         $obj = clone $this;
-        $obj->application_name = $applicationName;
+        $obj['application_name'] = $applicationName;
 
         return $obj;
     }
@@ -186,7 +197,7 @@ final class Filter implements BaseModel
     public function withApplicationSessionID(string $applicationSessionID): self
     {
         $obj = clone $this;
-        $obj->application_session_id = $applicationSessionID;
+        $obj['application_session_id'] = $applicationSessionID;
 
         return $obj;
     }
@@ -197,7 +208,7 @@ final class Filter implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -208,7 +219,7 @@ final class Filter implements BaseModel
     public function withFailed(bool $failed): self
     {
         $obj = clone $this;
-        $obj->failed = $failed;
+        $obj['failed'] = $failed;
 
         return $obj;
     }
@@ -219,7 +230,7 @@ final class Filter implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -230,7 +241,7 @@ final class Filter implements BaseModel
     public function withLegID(string $legID): self
     {
         $obj = clone $this;
-        $obj->leg_id = $legID;
+        $obj['leg_id'] = $legID;
 
         return $obj;
     }
@@ -241,18 +252,26 @@ final class Filter implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
 
     /**
      * Event occurred_at filters.
+     *
+     * @param OccurredAt|array{
+     *   eq?: string|null,
+     *   gt?: string|null,
+     *   gte?: string|null,
+     *   lt?: string|null,
+     *   lte?: string|null,
+     * } $occurredAt
      */
-    public function withOccurredAt(OccurredAt $occurredAt): self
+    public function withOccurredAt(OccurredAt|array $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }
@@ -264,7 +283,7 @@ final class Filter implements BaseModel
         string $outboundOutboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outbound_outbound_voice_profile_id = $outboundOutboundVoiceProfileID;
+        $obj['outbound_outbound_voice_profile_id'] = $outboundOutboundVoiceProfileID;
 
         return $obj;
     }
@@ -301,7 +320,7 @@ final class Filter implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

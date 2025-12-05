@@ -39,14 +39,18 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MobileNetworkOperatorsPreference> $mobile_network_operators_preferences
+     * @param list<MobileNetworkOperatorsPreference|array{
+     *   mobile_network_operator_id?: string|null,
+     *   mobile_network_operator_name?: string|null,
+     *   priority?: int|null,
+     * }> $mobile_network_operators_preferences
      */
     public static function with(
         ?array $mobile_network_operators_preferences = null
     ): self {
         $obj = new self;
 
-        null !== $mobile_network_operators_preferences && $obj->mobile_network_operators_preferences = $mobile_network_operators_preferences;
+        null !== $mobile_network_operators_preferences && $obj['mobile_network_operators_preferences'] = $mobile_network_operators_preferences;
 
         return $obj;
     }
@@ -54,13 +58,17 @@ final class Settings implements BaseModel
     /**
      * A list of mobile network operators and the priority that should be applied when the SIM is connecting to the network.
      *
-     * @param list<MobileNetworkOperatorsPreference> $mobileNetworkOperatorsPreferences
+     * @param list<MobileNetworkOperatorsPreference|array{
+     *   mobile_network_operator_id?: string|null,
+     *   mobile_network_operator_name?: string|null,
+     *   priority?: int|null,
+     * }> $mobileNetworkOperatorsPreferences
      */
     public function withMobileNetworkOperatorsPreferences(
         array $mobileNetworkOperatorsPreferences
     ): self {
         $obj = clone $this;
-        $obj->mobile_network_operators_preferences = $mobileNetworkOperatorsPreferences;
+        $obj['mobile_network_operators_preferences'] = $mobileNetworkOperatorsPreferences;
 
         return $obj;
     }

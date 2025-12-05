@@ -46,8 +46,8 @@ final class TelephoneNumber implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $number_id && $obj->number_id = $number_id;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $number_id && $obj['number_id'] = $number_id;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class TelephoneNumber implements BaseModel
     public function withNumberID(string $numberID): self
     {
         $obj = clone $this;
-        $obj->number_id = $numberID;
+        $obj['number_id'] = $numberID;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class TelephoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

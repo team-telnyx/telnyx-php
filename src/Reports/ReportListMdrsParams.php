@@ -122,14 +122,14 @@ final class ReportListMdrsParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $cld && $obj->cld = $cld;
-        null !== $cli && $obj->cli = $cli;
+        null !== $id && $obj['id'] = $id;
+        null !== $cld && $obj['cld'] = $cld;
+        null !== $cli && $obj['cli'] = $cli;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $end_date && $obj->end_date = $end_date;
+        null !== $end_date && $obj['end_date'] = $end_date;
         null !== $message_type && $obj['message_type'] = $message_type;
-        null !== $profile && $obj->profile = $profile;
-        null !== $start_date && $obj->start_date = $start_date;
+        null !== $profile && $obj['profile'] = $profile;
+        null !== $start_date && $obj['start_date'] = $start_date;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -141,7 +141,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withCld(string $cld): self
     {
         $obj = clone $this;
-        $obj->cld = $cld;
+        $obj['cld'] = $cld;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withCli(string $cli): self
     {
         $obj = clone $this;
-        $obj->cli = $cli;
+        $obj['cli'] = $cli;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withEndDate(string $endDate): self
     {
         $obj = clone $this;
-        $obj->end_date = $endDate;
+        $obj['end_date'] = $endDate;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withProfile(string $profile): self
     {
         $obj = clone $this;
-        $obj->profile = $profile;
+        $obj['profile'] = $profile;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withStartDate(string $startDate): self
     {
         $obj = clone $this;
-        $obj->start_date = $startDate;
+        $obj['start_date'] = $startDate;
 
         return $obj;
     }

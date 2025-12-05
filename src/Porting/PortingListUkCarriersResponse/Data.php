@@ -91,13 +91,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $alternative_cupids && $obj->alternative_cupids = $alternative_cupids;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $cupid && $obj->cupid = $cupid;
-        null !== $name && $obj->name = $name;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $alternative_cupids && $obj['alternative_cupids'] = $alternative_cupids;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $cupid && $obj['cupid'] = $cupid;
+        null !== $name && $obj['name'] = $name;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withAlternativeCupids(array $alternativeCupids): self
     {
         $obj = clone $this;
-        $obj->alternative_cupids = $alternativeCupids;
+        $obj['alternative_cupids'] = $alternativeCupids;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Data implements BaseModel
     public function withCupid(string $cupid): self
     {
         $obj = clone $this;
-        $obj->cupid = $cupid;
+        $obj['cupid'] = $cupid;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

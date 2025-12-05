@@ -48,35 +48,45 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $global_ip
+     * @param Received|array{amount?: float|null, unit?: string|null} $received
+     * @param Transmitted|array{amount?: float|null, unit?: string|null} $transmitted
      */
     public static function with(
-        ?GlobalIP $global_ip = null,
-        ?Received $received = null,
+        GlobalIP|array|null $global_ip = null,
+        Received|array|null $received = null,
         ?\DateTimeInterface $timestamp = null,
-        ?Transmitted $transmitted = null,
+        Transmitted|array|null $transmitted = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip && $obj->global_ip = $global_ip;
-        null !== $received && $obj->received = $received;
-        null !== $timestamp && $obj->timestamp = $timestamp;
-        null !== $transmitted && $obj->transmitted = $transmitted;
+        null !== $global_ip && $obj['global_ip'] = $global_ip;
+        null !== $received && $obj['received'] = $received;
+        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $transmitted && $obj['transmitted'] = $transmitted;
 
         return $obj;
     }
 
-    public function withGlobalIP(GlobalIP $globalIP): self
+    /**
+     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $globalIP
+     */
+    public function withGlobalIP(GlobalIP|array $globalIP): self
     {
         $obj = clone $this;
-        $obj->global_ip = $globalIP;
+        $obj['global_ip'] = $globalIP;
 
         return $obj;
     }
 
-    public function withReceived(Received $received): self
+    /**
+     * @param Received|array{amount?: float|null, unit?: string|null} $received
+     */
+    public function withReceived(Received|array $received): self
     {
         $obj = clone $this;
-        $obj->received = $received;
+        $obj['received'] = $received;
 
         return $obj;
     }
@@ -87,15 +97,18 @@ final class Data implements BaseModel
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
 
-    public function withTransmitted(Transmitted $transmitted): self
+    /**
+     * @param Transmitted|array{amount?: float|null, unit?: string|null} $transmitted
+     */
+    public function withTransmitted(Transmitted|array $transmitted): self
     {
         $obj = clone $this;
-        $obj->transmitted = $transmitted;
+        $obj['transmitted'] = $transmitted;
 
         return $obj;
     }

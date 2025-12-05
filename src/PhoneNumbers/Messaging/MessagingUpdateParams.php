@@ -59,8 +59,8 @@ final class MessagingUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $messaging_product && $obj->messaging_product = $messaging_product;
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
+        null !== $messaging_product && $obj['messaging_product'] = $messaging_product;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class MessagingUpdateParams implements BaseModel
     public function withMessagingProduct(string $messagingProduct): self
     {
         $obj = clone $this;
-        $obj->messaging_product = $messagingProduct;
+        $obj['messaging_product'] = $messagingProduct;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class MessagingUpdateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }

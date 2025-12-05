@@ -141,15 +141,15 @@ final class CallStreamsJsonParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
+        $obj['account_sid'] = $account_sid;
 
         null !== $BidirectionalCodec && $obj['BidirectionalCodec'] = $BidirectionalCodec;
         null !== $BidirectionalMode && $obj['BidirectionalMode'] = $BidirectionalMode;
-        null !== $Name && $obj->Name = $Name;
-        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
+        null !== $Name && $obj['Name'] = $Name;
+        null !== $StatusCallback && $obj['StatusCallback'] = $StatusCallback;
         null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
         null !== $Track && $obj['Track'] = $Track;
-        null !== $Url && $obj->Url = $Url;
+        null !== $Url && $obj['Url'] = $Url;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->Name = $name;
+        $obj['Name'] = $name;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->StatusCallback = $statusCallback;
+        $obj['StatusCallback'] = $statusCallback;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->Url = $url;
+        $obj['Url'] = $url;
 
         return $obj;
     }

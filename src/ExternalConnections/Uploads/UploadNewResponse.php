@@ -50,8 +50,8 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $success && $obj->success = $success;
-        null !== $ticket_id && $obj->ticket_id = $ticket_id;
+        null !== $success && $obj['success'] = $success;
+        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
     public function withSuccess(bool $success): self
     {
         $obj = clone $this;
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj->ticket_id = $ticketID;
+        $obj['ticket_id'] = $ticketID;
 
         return $obj;
     }

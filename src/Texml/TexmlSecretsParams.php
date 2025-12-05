@@ -62,8 +62,8 @@ final class TexmlSecretsParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->name = $name;
-        $obj->value = $value;
+        $obj['name'] = $name;
+        $obj['value'] = $value;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class TexmlSecretsParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class TexmlSecretsParams implements BaseModel
     public function withValue(string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

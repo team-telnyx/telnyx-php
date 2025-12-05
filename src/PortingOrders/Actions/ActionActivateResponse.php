@@ -10,6 +10,9 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
+use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationType;
+use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
+use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
 
 /**
  * @phpstan-type ActionActivateResponseShape = array{
@@ -35,20 +38,44 @@ final class ActionActivateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PortingOrdersActivationJob|array{
+     *   id?: string|null,
+     *   activate_at?: \DateTimeInterface|null,
+     *   activation_type?: value-of<ActivationType>|null,
+     *   activation_windows?: list<ActivationWindow>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?PortingOrdersActivationJob $data = null): self
-    {
+    public static function with(
+        PortingOrdersActivationJob|array|null $data = null
+    ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(PortingOrdersActivationJob $data): self
+    /**
+     * @param PortingOrdersActivationJob|array{
+     *   id?: string|null,
+     *   activate_at?: \DateTimeInterface|null,
+     *   activation_type?: value-of<ActivationType>|null,
+     *   activation_windows?: list<ActivationWindow>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
+     */
+    public function withData(PortingOrdersActivationJob|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

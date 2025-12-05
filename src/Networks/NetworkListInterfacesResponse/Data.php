@@ -99,6 +99,9 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     * @param Region|array{
+     *   code?: string|null, name?: string|null, record_type?: string|null
+     * } $region
      */
     public static function with(
         ?string $id = null,
@@ -108,22 +111,22 @@ final class Data implements BaseModel
         ?string $name = null,
         ?string $network_id = null,
         InterfaceStatus|string|null $status = null,
-        ?Region $region = null,
+        Region|array|null $region = null,
         ?string $region_code = null,
         ?string $type = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $name && $obj->name = $name;
-        null !== $network_id && $obj->network_id = $network_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $network_id && $obj['network_id'] = $network_id;
         null !== $status && $obj['status'] = $status;
-        null !== $region && $obj->region = $region;
-        null !== $region_code && $obj->region_code = $region_code;
-        null !== $type && $obj->type = $type;
+        null !== $region && $obj['region'] = $region;
+        null !== $region_code && $obj['region_code'] = $region_code;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -134,7 +137,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -145,7 +148,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -156,7 +159,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -167,7 +170,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -178,7 +181,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -189,7 +192,7 @@ final class Data implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->network_id = $networkID;
+        $obj['network_id'] = $networkID;
 
         return $obj;
     }
@@ -207,10 +210,15 @@ final class Data implements BaseModel
         return $obj;
     }
 
-    public function withRegion(Region $region): self
+    /**
+     * @param Region|array{
+     *   code?: string|null, name?: string|null, record_type?: string|null
+     * } $region
+     */
+    public function withRegion(Region|array $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }
@@ -221,7 +229,7 @@ final class Data implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->region_code = $regionCode;
+        $obj['region_code'] = $regionCode;
 
         return $obj;
     }
@@ -232,7 +240,7 @@ final class Data implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

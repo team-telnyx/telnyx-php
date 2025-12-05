@@ -57,7 +57,7 @@ final class ActionShareParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $expires_in_seconds && $obj->expires_in_seconds = $expires_in_seconds;
+        null !== $expires_in_seconds && $obj['expires_in_seconds'] = $expires_in_seconds;
         null !== $permissions && $obj['permissions'] = $permissions;
 
         return $obj;
@@ -69,7 +69,7 @@ final class ActionShareParams implements BaseModel
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
         $obj = clone $this;
-        $obj->expires_in_seconds = $expiresInSeconds;
+        $obj['expires_in_seconds'] = $expiresInSeconds;
 
         return $obj;
     }

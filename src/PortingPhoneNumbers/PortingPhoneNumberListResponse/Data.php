@@ -125,14 +125,14 @@ final class Data implements BaseModel
         $obj = new self;
 
         null !== $activation_status && $obj['activation_status'] = $activation_status;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
         null !== $portability_status && $obj['portability_status'] = $portability_status;
-        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
         null !== $porting_order_status && $obj['porting_order_status'] = $porting_order_status;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $requirements_status && $obj['requirements_status'] = $requirements_status;
-        null !== $support_key && $obj->support_key = $support_key;
+        null !== $support_key && $obj['support_key'] = $support_key;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
+        $obj['porting_order_id'] = $portingOrderID;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class Data implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj->support_key = $supportKey;
+        $obj['support_key'] = $supportKey;
 
         return $obj;
     }

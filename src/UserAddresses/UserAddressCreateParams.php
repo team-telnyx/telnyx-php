@@ -176,21 +176,21 @@ final class UserAddressCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->business_name = $business_name;
-        $obj->country_code = $country_code;
-        $obj->first_name = $first_name;
-        $obj->last_name = $last_name;
-        $obj->locality = $locality;
-        $obj->street_address = $street_address;
+        $obj['business_name'] = $business_name;
+        $obj['country_code'] = $country_code;
+        $obj['first_name'] = $first_name;
+        $obj['last_name'] = $last_name;
+        $obj['locality'] = $locality;
+        $obj['street_address'] = $street_address;
 
-        null !== $administrative_area && $obj->administrative_area = $administrative_area;
-        null !== $borough && $obj->borough = $borough;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $extended_address && $obj->extended_address = $extended_address;
-        null !== $neighborhood && $obj->neighborhood = $neighborhood;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $postal_code && $obj->postal_code = $postal_code;
-        null !== $skip_address_verification && $obj->skip_address_verification = $skip_address_verification;
+        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $borough && $obj['borough'] = $borough;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $extended_address && $obj['extended_address'] = $extended_address;
+        null !== $neighborhood && $obj['neighborhood'] = $neighborhood;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $postal_code && $obj['postal_code'] = $postal_code;
+        null !== $skip_address_verification && $obj['skip_address_verification'] = $skip_address_verification;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withBusinessName(string $businessName): self
     {
         $obj = clone $this;
-        $obj->business_name = $businessName;
+        $obj['business_name'] = $businessName;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->first_name = $firstName;
+        $obj['first_name'] = $firstName;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->last_name = $lastName;
+        $obj['last_name'] = $lastName;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrative_area = $administrativeArea;
+        $obj['administrative_area'] = $administrativeArea;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withBorough(string $borough): self
     {
         $obj = clone $this;
-        $obj->borough = $borough;
+        $obj['borough'] = $borough;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj->extended_address = $extendedAddress;
+        $obj['extended_address'] = $extendedAddress;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withNeighborhood(string $neighborhood): self
     {
         $obj = clone $this;
-        $obj->neighborhood = $neighborhood;
+        $obj['neighborhood'] = $neighborhood;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -333,7 +333,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postal_code = $postalCode;
+        $obj['postal_code'] = $postalCode;
 
         return $obj;
     }
@@ -345,7 +345,7 @@ final class UserAddressCreateParams implements BaseModel
         string $skipAddressVerification
     ): self {
         $obj = clone $this;
-        $obj->skip_address_verification = $skipAddressVerification;
+        $obj['skip_address_verification'] = $skipAddressVerification;
 
         return $obj;
     }

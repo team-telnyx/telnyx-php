@@ -124,16 +124,16 @@ final class BillingBundleSummary implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->cost_code = $cost_code;
-        $obj->created_at = $created_at;
-        $obj->is_public = $is_public;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['cost_code'] = $cost_code;
+        $obj['created_at'] = $created_at;
+        $obj['is_public'] = $is_public;
+        $obj['name'] = $name;
 
-        null !== $currency && $obj->currency = $currency;
-        null !== $mrc_price && $obj->mrc_price = $mrc_price;
-        null !== $slug && $obj->slug = $slug;
-        null !== $specs && $obj->specs = $specs;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $mrc_price && $obj['mrc_price'] = $mrc_price;
+        null !== $slug && $obj['slug'] = $slug;
+        null !== $specs && $obj['specs'] = $specs;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class BillingBundleSummary implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class BillingBundleSummary implements BaseModel
     public function withCostCode(string $costCode): self
     {
         $obj = clone $this;
-        $obj->cost_code = $costCode;
+        $obj['cost_code'] = $costCode;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class BillingBundleSummary implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class BillingBundleSummary implements BaseModel
     public function withIsPublic(bool $isPublic): self
     {
         $obj = clone $this;
-        $obj->is_public = $isPublic;
+        $obj['is_public'] = $isPublic;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class BillingBundleSummary implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class BillingBundleSummary implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class BillingBundleSummary implements BaseModel
     public function withMrcPrice(float $mrcPrice): self
     {
         $obj = clone $this;
-        $obj->mrc_price = $mrcPrice;
+        $obj['mrc_price'] = $mrcPrice;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class BillingBundleSummary implements BaseModel
     public function withSlug(string $slug): self
     {
         $obj = clone $this;
-        $obj->slug = $slug;
+        $obj['slug'] = $slug;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class BillingBundleSummary implements BaseModel
     public function withSpecs(array $specs): self
     {
         $obj = clone $this;
-        $obj->specs = $specs;
+        $obj['specs'] = $specs;
 
         return $obj;
     }

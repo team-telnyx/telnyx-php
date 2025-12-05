@@ -9,6 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\FaxFailedWebhookEvent\EventType;
 use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Direction;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\FailureReason;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Status;
 use Telnyx\Webhooks\FaxFailedWebhookEvent\RecordType;
 
 /**
@@ -60,19 +63,32 @@ final class FaxFailedWebhookEvent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $event_type
+     * @param Payload|array{
+     *   client_state?: string|null,
+     *   connection_id?: string|null,
+     *   direction?: value-of<Direction>|null,
+     *   failure_reason?: value-of<FailureReason>|null,
+     *   fax_id?: string|null,
+     *   from?: string|null,
+     *   media_name?: string|null,
+     *   original_media_url?: string|null,
+     *   status?: value-of<Status>|null,
+     *   to?: string|null,
+     *   user_id?: string|null,
+     * } $payload
      * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
         EventType|string|null $event_type = null,
-        ?Payload $payload = null,
+        Payload|array|null $payload = null,
         RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $payload && $obj->payload = $payload;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -84,7 +100,7 @@ final class FaxFailedWebhookEvent implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -102,10 +118,25 @@ final class FaxFailedWebhookEvent implements BaseModel
         return $obj;
     }
 
-    public function withPayload(Payload $payload): self
+    /**
+     * @param Payload|array{
+     *   client_state?: string|null,
+     *   connection_id?: string|null,
+     *   direction?: value-of<Direction>|null,
+     *   failure_reason?: value-of<FailureReason>|null,
+     *   fax_id?: string|null,
+     *   from?: string|null,
+     *   media_name?: string|null,
+     *   original_media_url?: string|null,
+     *   status?: value-of<Status>|null,
+     *   to?: string|null,
+     *   user_id?: string|null,
+     * } $payload
+     */
+    public function withPayload(Payload|array $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }

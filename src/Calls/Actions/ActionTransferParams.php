@@ -18,6 +18,7 @@ use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
+use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Calls\SoundModifications;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -42,11 +43,22 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionTransferParamsShape = array{
  *   to: string,
  *   answering_machine_detection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
- *   answering_machine_detection_config?: AnsweringMachineDetectionConfig,
+ *   answering_machine_detection_config?: AnsweringMachineDetectionConfig|array{
+ *     after_greeting_silence_millis?: int|null,
+ *     between_words_silence_millis?: int|null,
+ *     greeting_duration_millis?: int|null,
+ *     greeting_silence_duration_millis?: int|null,
+ *     greeting_total_analysis_time_millis?: int|null,
+ *     initial_silence_millis?: int|null,
+ *     maximum_number_of_words?: int|null,
+ *     maximum_word_length_millis?: int|null,
+ *     silence_threshold?: int|null,
+ *     total_analysis_time_millis?: int|null,
+ *   },
  *   audio_url?: string,
  *   client_state?: string,
  *   command_id?: string,
- *   custom_headers?: list<CustomSipHeader>,
+ *   custom_headers?: list<CustomSipHeader|array{name: string, value: string}>,
  *   early_media?: bool,
  *   from?: string,
  *   from_display_name?: string,
@@ -64,10 +76,15 @@ use Telnyx\Core\Contracts\BaseModel;
  *   record_trim?: RecordTrim|value-of<RecordTrim>,
  *   sip_auth_password?: string,
  *   sip_auth_username?: string,
- *   sip_headers?: list<SipHeader>,
+ *   sip_headers?: list<SipHeader|array{name: value-of<Name>, value: string}>,
  *   sip_region?: SipRegion|value-of<SipRegion>,
  *   sip_transport_protocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
- *   sound_modifications?: SoundModifications,
+ *   sound_modifications?: SoundModifications|array{
+ *     octaves?: float|null,
+ *     pitch?: float|null,
+ *     semitone?: float|null,
+ *     track?: string|null,
+ *   },
  *   target_leg_client_state?: string,
  *   time_limit_secs?: int,
  *   timeout_secs?: int,
@@ -330,7 +347,19 @@ final class ActionTransferParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answering_machine_detection
-     * @param list<CustomSipHeader> $custom_headers
+     * @param AnsweringMachineDetectionConfig|array{
+     *   after_greeting_silence_millis?: int|null,
+     *   between_words_silence_millis?: int|null,
+     *   greeting_duration_millis?: int|null,
+     *   greeting_silence_duration_millis?: int|null,
+     *   greeting_total_analysis_time_millis?: int|null,
+     *   initial_silence_millis?: int|null,
+     *   maximum_number_of_words?: int|null,
+     *   maximum_word_length_millis?: int|null,
+     *   silence_threshold?: int|null,
+     *   total_analysis_time_millis?: int|null,
+     * } $answering_machine_detection_config
+     * @param list<CustomSipHeader|array{name: string, value: string}> $custom_headers
      * @param MediaEncryption|value-of<MediaEncryption> $media_encryption
      * @param MuteDtmf|value-of<MuteDtmf> $mute_dtmf
      * @param Record|value-of<Record> $record
@@ -338,15 +367,21 @@ final class ActionTransferParams implements BaseModel
      * @param RecordFormat|value-of<RecordFormat> $record_format
      * @param RecordTrack|value-of<RecordTrack> $record_track
      * @param RecordTrim|value-of<RecordTrim> $record_trim
-     * @param list<SipHeader> $sip_headers
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sip_headers
      * @param SipRegion|value-of<SipRegion> $sip_region
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sip_transport_protocol
+     * @param SoundModifications|array{
+     *   octaves?: float|null,
+     *   pitch?: float|null,
+     *   semitone?: float|null,
+     *   track?: string|null,
+     * } $sound_modifications
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhook_url_method
      */
     public static function with(
         string $to,
         AnsweringMachineDetection|string|null $answering_machine_detection = null,
-        ?AnsweringMachineDetectionConfig $answering_machine_detection_config = null,
+        AnsweringMachineDetectionConfig|array|null $answering_machine_detection_config = null,
         ?string $audio_url = null,
         ?string $client_state = null,
         ?string $command_id = null,
@@ -371,7 +406,7 @@ final class ActionTransferParams implements BaseModel
         ?array $sip_headers = null,
         SipRegion|string|null $sip_region = null,
         SipTransportProtocol|string|null $sip_transport_protocol = null,
-        ?SoundModifications $sound_modifications = null,
+        SoundModifications|array|null $sound_modifications = null,
         ?string $target_leg_client_state = null,
         ?int $time_limit_secs = null,
         ?int $timeout_secs = null,
@@ -380,39 +415,39 @@ final class ActionTransferParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         null !== $answering_machine_detection && $obj['answering_machine_detection'] = $answering_machine_detection;
-        null !== $answering_machine_detection_config && $obj->answering_machine_detection_config = $answering_machine_detection_config;
-        null !== $audio_url && $obj->audio_url = $audio_url;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $custom_headers && $obj->custom_headers = $custom_headers;
-        null !== $early_media && $obj->early_media = $early_media;
-        null !== $from && $obj->from = $from;
-        null !== $from_display_name && $obj->from_display_name = $from_display_name;
+        null !== $answering_machine_detection_config && $obj['answering_machine_detection_config'] = $answering_machine_detection_config;
+        null !== $audio_url && $obj['audio_url'] = $audio_url;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
+        null !== $early_media && $obj['early_media'] = $early_media;
+        null !== $from && $obj['from'] = $from;
+        null !== $from_display_name && $obj['from_display_name'] = $from_display_name;
         null !== $media_encryption && $obj['media_encryption'] = $media_encryption;
-        null !== $media_name && $obj->media_name = $media_name;
+        null !== $media_name && $obj['media_name'] = $media_name;
         null !== $mute_dtmf && $obj['mute_dtmf'] = $mute_dtmf;
-        null !== $park_after_unbridge && $obj->park_after_unbridge = $park_after_unbridge;
+        null !== $park_after_unbridge && $obj['park_after_unbridge'] = $park_after_unbridge;
         null !== $record && $obj['record'] = $record;
         null !== $record_channels && $obj['record_channels'] = $record_channels;
-        null !== $record_custom_file_name && $obj->record_custom_file_name = $record_custom_file_name;
+        null !== $record_custom_file_name && $obj['record_custom_file_name'] = $record_custom_file_name;
         null !== $record_format && $obj['record_format'] = $record_format;
-        null !== $record_max_length && $obj->record_max_length = $record_max_length;
-        null !== $record_timeout_secs && $obj->record_timeout_secs = $record_timeout_secs;
+        null !== $record_max_length && $obj['record_max_length'] = $record_max_length;
+        null !== $record_timeout_secs && $obj['record_timeout_secs'] = $record_timeout_secs;
         null !== $record_track && $obj['record_track'] = $record_track;
         null !== $record_trim && $obj['record_trim'] = $record_trim;
-        null !== $sip_auth_password && $obj->sip_auth_password = $sip_auth_password;
-        null !== $sip_auth_username && $obj->sip_auth_username = $sip_auth_username;
-        null !== $sip_headers && $obj->sip_headers = $sip_headers;
+        null !== $sip_auth_password && $obj['sip_auth_password'] = $sip_auth_password;
+        null !== $sip_auth_username && $obj['sip_auth_username'] = $sip_auth_username;
+        null !== $sip_headers && $obj['sip_headers'] = $sip_headers;
         null !== $sip_region && $obj['sip_region'] = $sip_region;
         null !== $sip_transport_protocol && $obj['sip_transport_protocol'] = $sip_transport_protocol;
-        null !== $sound_modifications && $obj->sound_modifications = $sound_modifications;
-        null !== $target_leg_client_state && $obj->target_leg_client_state = $target_leg_client_state;
-        null !== $time_limit_secs && $obj->time_limit_secs = $time_limit_secs;
-        null !== $timeout_secs && $obj->timeout_secs = $timeout_secs;
-        null !== $webhook_url && $obj->webhook_url = $webhook_url;
+        null !== $sound_modifications && $obj['sound_modifications'] = $sound_modifications;
+        null !== $target_leg_client_state && $obj['target_leg_client_state'] = $target_leg_client_state;
+        null !== $time_limit_secs && $obj['time_limit_secs'] = $time_limit_secs;
+        null !== $timeout_secs && $obj['timeout_secs'] = $timeout_secs;
+        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
         null !== $webhook_url_method && $obj['webhook_url_method'] = $webhook_url_method;
 
         return $obj;
@@ -424,7 +459,7 @@ final class ActionTransferParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -445,12 +480,25 @@ final class ActionTransferParams implements BaseModel
 
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
+     *
+     * @param AnsweringMachineDetectionConfig|array{
+     *   after_greeting_silence_millis?: int|null,
+     *   between_words_silence_millis?: int|null,
+     *   greeting_duration_millis?: int|null,
+     *   greeting_silence_duration_millis?: int|null,
+     *   greeting_total_analysis_time_millis?: int|null,
+     *   initial_silence_millis?: int|null,
+     *   maximum_number_of_words?: int|null,
+     *   maximum_word_length_millis?: int|null,
+     *   silence_threshold?: int|null,
+     *   total_analysis_time_millis?: int|null,
+     * } $answeringMachineDetectionConfig
      */
     public function withAnsweringMachineDetectionConfig(
-        AnsweringMachineDetectionConfig $answeringMachineDetectionConfig
+        AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
     ): self {
         $obj = clone $this;
-        $obj->answering_machine_detection_config = $answeringMachineDetectionConfig;
+        $obj['answering_machine_detection_config'] = $answeringMachineDetectionConfig;
 
         return $obj;
     }
@@ -461,7 +509,7 @@ final class ActionTransferParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj->audio_url = $audioURL;
+        $obj['audio_url'] = $audioURL;
 
         return $obj;
     }
@@ -472,7 +520,7 @@ final class ActionTransferParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -483,7 +531,7 @@ final class ActionTransferParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -491,12 +539,12 @@ final class ActionTransferParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeader> $customHeaders
+     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj->custom_headers = $customHeaders;
+        $obj['custom_headers'] = $customHeaders;
 
         return $obj;
     }
@@ -507,7 +555,7 @@ final class ActionTransferParams implements BaseModel
     public function withEarlyMedia(bool $earlyMedia): self
     {
         $obj = clone $this;
-        $obj->early_media = $earlyMedia;
+        $obj['early_media'] = $earlyMedia;
 
         return $obj;
     }
@@ -518,7 +566,7 @@ final class ActionTransferParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -529,7 +577,7 @@ final class ActionTransferParams implements BaseModel
     public function withFromDisplayName(string $fromDisplayName): self
     {
         $obj = clone $this;
-        $obj->from_display_name = $fromDisplayName;
+        $obj['from_display_name'] = $fromDisplayName;
 
         return $obj;
     }
@@ -554,7 +602,7 @@ final class ActionTransferParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }
@@ -578,7 +626,7 @@ final class ActionTransferParams implements BaseModel
     public function withParkAfterUnbridge(string $parkAfterUnbridge): self
     {
         $obj = clone $this;
-        $obj->park_after_unbridge = $parkAfterUnbridge;
+        $obj['park_after_unbridge'] = $parkAfterUnbridge;
 
         return $obj;
     }
@@ -616,7 +664,7 @@ final class ActionTransferParams implements BaseModel
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
         $obj = clone $this;
-        $obj->record_custom_file_name = $recordCustomFileName;
+        $obj['record_custom_file_name'] = $recordCustomFileName;
 
         return $obj;
     }
@@ -640,7 +688,7 @@ final class ActionTransferParams implements BaseModel
     public function withRecordMaxLength(int $recordMaxLength): self
     {
         $obj = clone $this;
-        $obj->record_max_length = $recordMaxLength;
+        $obj['record_max_length'] = $recordMaxLength;
 
         return $obj;
     }
@@ -651,7 +699,7 @@ final class ActionTransferParams implements BaseModel
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->record_timeout_secs = $recordTimeoutSecs;
+        $obj['record_timeout_secs'] = $recordTimeoutSecs;
 
         return $obj;
     }
@@ -688,7 +736,7 @@ final class ActionTransferParams implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj->sip_auth_password = $sipAuthPassword;
+        $obj['sip_auth_password'] = $sipAuthPassword;
 
         return $obj;
     }
@@ -699,7 +747,7 @@ final class ActionTransferParams implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj->sip_auth_username = $sipAuthUsername;
+        $obj['sip_auth_username'] = $sipAuthUsername;
 
         return $obj;
     }
@@ -707,12 +755,12 @@ final class ActionTransferParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader> $sipHeaders
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
         $obj = clone $this;
-        $obj->sip_headers = $sipHeaders;
+        $obj['sip_headers'] = $sipHeaders;
 
         return $obj;
     }
@@ -746,12 +794,19 @@ final class ActionTransferParams implements BaseModel
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
+     *
+     * @param SoundModifications|array{
+     *   octaves?: float|null,
+     *   pitch?: float|null,
+     *   semitone?: float|null,
+     *   track?: string|null,
+     * } $soundModifications
      */
     public function withSoundModifications(
-        SoundModifications $soundModifications
+        SoundModifications|array $soundModifications
     ): self {
         $obj = clone $this;
-        $obj->sound_modifications = $soundModifications;
+        $obj['sound_modifications'] = $soundModifications;
 
         return $obj;
     }
@@ -762,7 +817,7 @@ final class ActionTransferParams implements BaseModel
     public function withTargetLegClientState(string $targetLegClientState): self
     {
         $obj = clone $this;
-        $obj->target_leg_client_state = $targetLegClientState;
+        $obj['target_leg_client_state'] = $targetLegClientState;
 
         return $obj;
     }
@@ -773,7 +828,7 @@ final class ActionTransferParams implements BaseModel
     public function withTimeLimitSecs(int $timeLimitSecs): self
     {
         $obj = clone $this;
-        $obj->time_limit_secs = $timeLimitSecs;
+        $obj['time_limit_secs'] = $timeLimitSecs;
 
         return $obj;
     }
@@ -784,7 +839,7 @@ final class ActionTransferParams implements BaseModel
     public function withTimeoutSecs(int $timeoutSecs): self
     {
         $obj = clone $this;
-        $obj->timeout_secs = $timeoutSecs;
+        $obj['timeout_secs'] = $timeoutSecs;
 
         return $obj;
     }
@@ -795,7 +850,7 @@ final class ActionTransferParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhook_url = $webhookURL;
+        $obj['webhook_url'] = $webhookURL;
 
         return $obj;
     }

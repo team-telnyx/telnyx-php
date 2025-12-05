@@ -62,7 +62,7 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
     {
         $obj = new self;
 
-        $obj->phone_numbers = $phone_numbers;
+        $obj['phone_numbers'] = $phone_numbers;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }

@@ -113,15 +113,15 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $attempted_pin && $obj->attempted_pin = $attempted_pin;
-        null !== $carrier_name && $obj->carrier_name = $carrier_name;
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
-        null !== $rejection_reason && $obj->rejection_reason = $rejection_reason;
-        null !== $spid && $obj->spid = $spid;
+        null !== $id && $obj['id'] = $id;
+        null !== $attempted_pin && $obj['attempted_pin'] = $attempted_pin;
+        null !== $carrier_name && $obj['carrier_name'] = $carrier_name;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $rejection_reason && $obj['rejection_reason'] = $rejection_reason;
+        null !== $spid && $obj['spid'] = $spid;
         null !== $status && $obj['status'] = $status;
-        null !== $subscriber_name && $obj->subscriber_name = $subscriber_name;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $subscriber_name && $obj['subscriber_name'] = $subscriber_name;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withAttemptedPin(string $attemptedPin): self
     {
         $obj = clone $this;
-        $obj->attempted_pin = $attemptedPin;
+        $obj['attempted_pin'] = $attemptedPin;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj->carrier_name = $carrierName;
+        $obj['carrier_name'] = $carrierName;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withRejectionReason(?string $rejectionReason): self
     {
         $obj = clone $this;
-        $obj->rejection_reason = $rejectionReason;
+        $obj['rejection_reason'] = $rejectionReason;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withSpid(string $spid): self
     {
         $obj = clone $this;
-        $obj->spid = $spid;
+        $obj['spid'] = $spid;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withSubscriberName(string $subscriberName): self
     {
         $obj = clone $this;
-        $obj->subscriber_name = $subscriberName;
+        $obj['subscriber_name'] = $subscriberName;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

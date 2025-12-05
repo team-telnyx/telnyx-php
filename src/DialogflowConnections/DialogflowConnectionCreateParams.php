@@ -99,12 +99,12 @@ final class DialogflowConnectionCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->service_account = $service_account;
+        $obj['service_account'] = $service_account;
 
-        null !== $conversation_profile_id && $obj->conversation_profile_id = $conversation_profile_id;
+        null !== $conversation_profile_id && $obj['conversation_profile_id'] = $conversation_profile_id;
         null !== $dialogflow_api && $obj['dialogflow_api'] = $dialogflow_api;
-        null !== $environment && $obj->environment = $environment;
-        null !== $location && $obj->location = $location;
+        null !== $environment && $obj['environment'] = $environment;
+        null !== $location && $obj['location'] = $location;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class DialogflowConnectionCreateParams implements BaseModel
     public function withServiceAccount(array $serviceAccount): self
     {
         $obj = clone $this;
-        $obj->service_account = $serviceAccount;
+        $obj['service_account'] = $serviceAccount;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class DialogflowConnectionCreateParams implements BaseModel
         string $conversationProfileID
     ): self {
         $obj = clone $this;
-        $obj->conversation_profile_id = $conversationProfileID;
+        $obj['conversation_profile_id'] = $conversationProfileID;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class DialogflowConnectionCreateParams implements BaseModel
     public function withEnvironment(string $environment): self
     {
         $obj = clone $this;
-        $obj->environment = $environment;
+        $obj['environment'] = $environment;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class DialogflowConnectionCreateParams implements BaseModel
     public function withLocation(string $location): self
     {
         $obj = clone $this;
-        $obj->location = $location;
+        $obj['location'] = $location;
 
         return $obj;
     }

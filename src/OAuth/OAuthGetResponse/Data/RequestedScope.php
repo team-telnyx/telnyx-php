@@ -53,9 +53,9 @@ final class RequestedScope implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $description && $obj->description = $description;
-        null !== $name && $obj->name = $name;
+        null !== $id && $obj['id'] = $id;
+        null !== $description && $obj['description'] = $description;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -66,7 +66,7 @@ final class RequestedScope implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class RequestedScope implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class RequestedScope implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

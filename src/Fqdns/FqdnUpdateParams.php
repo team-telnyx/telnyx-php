@@ -69,10 +69,10 @@ final class FqdnUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $dns_record_type && $obj->dns_record_type = $dns_record_type;
-        null !== $fqdn && $obj->fqdn = $fqdn;
-        null !== $port && $obj->port = $port;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $dns_record_type && $obj['dns_record_type'] = $dns_record_type;
+        null !== $fqdn && $obj['fqdn'] = $fqdn;
+        null !== $port && $obj['port'] = $port;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class FqdnUpdateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class FqdnUpdateParams implements BaseModel
     public function withDNSRecordType(string $dnsRecordType): self
     {
         $obj = clone $this;
-        $obj->dns_record_type = $dnsRecordType;
+        $obj['dns_record_type'] = $dnsRecordType;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class FqdnUpdateParams implements BaseModel
     public function withFqdn(string $fqdn): self
     {
         $obj = clone $this;
-        $obj->fqdn = $fqdn;
+        $obj['fqdn'] = $fqdn;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class FqdnUpdateParams implements BaseModel
     public function withPort(?int $port): self
     {
         $obj = clone $this;
-        $obj->port = $port;
+        $obj['port'] = $port;
 
         return $obj;
     }

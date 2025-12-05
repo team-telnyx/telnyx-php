@@ -29,8 +29,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   isvReseller: string,
  *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
- *   optInWorkflowImageURLs: list<URL>,
- *   phoneNumbers: list<TfPhoneNumber>,
+ *   optInWorkflowImageURLs: list<URL|array{url: string}>,
+ *   phoneNumbers: list<TfPhoneNumber|array{phoneNumber: string}>,
  *   productionMessageContent: string,
  *   useCase: UseCaseCategories|value-of<UseCaseCategories>,
  *   useCaseSummary: string,
@@ -325,8 +325,8 @@ final class RequestCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Volume|value-of<Volume> $messageVolume
-     * @param list<URL> $optInWorkflowImageURLs
-     * @param list<TfPhoneNumber> $phoneNumbers
+     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
+     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
@@ -366,39 +366,39 @@ final class RequestCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->additionalInformation = $additionalInformation;
-        $obj->businessAddr1 = $businessAddr1;
-        $obj->businessCity = $businessCity;
-        $obj->businessContactEmail = $businessContactEmail;
-        $obj->businessContactFirstName = $businessContactFirstName;
-        $obj->businessContactLastName = $businessContactLastName;
-        $obj->businessContactPhone = $businessContactPhone;
-        $obj->businessName = $businessName;
-        $obj->businessState = $businessState;
-        $obj->businessZip = $businessZip;
-        $obj->corporateWebsite = $corporateWebsite;
-        $obj->isvReseller = $isvReseller;
+        $obj['additionalInformation'] = $additionalInformation;
+        $obj['businessAddr1'] = $businessAddr1;
+        $obj['businessCity'] = $businessCity;
+        $obj['businessContactEmail'] = $businessContactEmail;
+        $obj['businessContactFirstName'] = $businessContactFirstName;
+        $obj['businessContactLastName'] = $businessContactLastName;
+        $obj['businessContactPhone'] = $businessContactPhone;
+        $obj['businessName'] = $businessName;
+        $obj['businessState'] = $businessState;
+        $obj['businessZip'] = $businessZip;
+        $obj['corporateWebsite'] = $corporateWebsite;
+        $obj['isvReseller'] = $isvReseller;
         $obj['messageVolume'] = $messageVolume;
-        $obj->optInWorkflow = $optInWorkflow;
-        $obj->optInWorkflowImageURLs = $optInWorkflowImageURLs;
-        $obj->phoneNumbers = $phoneNumbers;
-        $obj->productionMessageContent = $productionMessageContent;
+        $obj['optInWorkflow'] = $optInWorkflow;
+        $obj['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
+        $obj['phoneNumbers'] = $phoneNumbers;
+        $obj['productionMessageContent'] = $productionMessageContent;
         $obj['useCase'] = $useCase;
-        $obj->useCaseSummary = $useCaseSummary;
+        $obj['useCaseSummary'] = $useCaseSummary;
 
-        null !== $ageGatedContent && $obj->ageGatedContent = $ageGatedContent;
-        null !== $businessAddr2 && $obj->businessAddr2 = $businessAddr2;
-        null !== $businessRegistrationCountry && $obj->businessRegistrationCountry = $businessRegistrationCountry;
-        null !== $businessRegistrationNumber && $obj->businessRegistrationNumber = $businessRegistrationNumber;
-        null !== $businessRegistrationType && $obj->businessRegistrationType = $businessRegistrationType;
-        null !== $doingBusinessAs && $obj->doingBusinessAs = $doingBusinessAs;
+        null !== $ageGatedContent && $obj['ageGatedContent'] = $ageGatedContent;
+        null !== $businessAddr2 && $obj['businessAddr2'] = $businessAddr2;
+        null !== $businessRegistrationCountry && $obj['businessRegistrationCountry'] = $businessRegistrationCountry;
+        null !== $businessRegistrationNumber && $obj['businessRegistrationNumber'] = $businessRegistrationNumber;
+        null !== $businessRegistrationType && $obj['businessRegistrationType'] = $businessRegistrationType;
+        null !== $doingBusinessAs && $obj['doingBusinessAs'] = $doingBusinessAs;
         null !== $entityType && $obj['entityType'] = $entityType;
-        null !== $helpMessageResponse && $obj->helpMessageResponse = $helpMessageResponse;
-        null !== $optInConfirmationResponse && $obj->optInConfirmationResponse = $optInConfirmationResponse;
-        null !== $optInKeywords && $obj->optInKeywords = $optInKeywords;
-        null !== $privacyPolicyURL && $obj->privacyPolicyURL = $privacyPolicyURL;
-        null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
-        null !== $webhookUrl && $obj->webhookUrl = $webhookUrl;
+        null !== $helpMessageResponse && $obj['helpMessageResponse'] = $helpMessageResponse;
+        null !== $optInConfirmationResponse && $obj['optInConfirmationResponse'] = $optInConfirmationResponse;
+        null !== $optInKeywords && $obj['optInKeywords'] = $optInKeywords;
+        null !== $privacyPolicyURL && $obj['privacyPolicyURL'] = $privacyPolicyURL;
+        null !== $termsAndConditionURL && $obj['termsAndConditionURL'] = $termsAndConditionURL;
+        null !== $webhookUrl && $obj['webhookUrl'] = $webhookUrl;
 
         return $obj;
     }
@@ -410,7 +410,7 @@ final class RequestCreateParams implements BaseModel
         string $additionalInformation
     ): self {
         $obj = clone $this;
-        $obj->additionalInformation = $additionalInformation;
+        $obj['additionalInformation'] = $additionalInformation;
 
         return $obj;
     }
@@ -421,7 +421,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessAddr1(string $businessAddr1): self
     {
         $obj = clone $this;
-        $obj->businessAddr1 = $businessAddr1;
+        $obj['businessAddr1'] = $businessAddr1;
 
         return $obj;
     }
@@ -432,7 +432,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessCity(string $businessCity): self
     {
         $obj = clone $this;
-        $obj->businessCity = $businessCity;
+        $obj['businessCity'] = $businessCity;
 
         return $obj;
     }
@@ -443,7 +443,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessContactEmail(string $businessContactEmail): self
     {
         $obj = clone $this;
-        $obj->businessContactEmail = $businessContactEmail;
+        $obj['businessContactEmail'] = $businessContactEmail;
 
         return $obj;
     }
@@ -455,7 +455,7 @@ final class RequestCreateParams implements BaseModel
         string $businessContactFirstName
     ): self {
         $obj = clone $this;
-        $obj->businessContactFirstName = $businessContactFirstName;
+        $obj['businessContactFirstName'] = $businessContactFirstName;
 
         return $obj;
     }
@@ -467,7 +467,7 @@ final class RequestCreateParams implements BaseModel
         string $businessContactLastName
     ): self {
         $obj = clone $this;
-        $obj->businessContactLastName = $businessContactLastName;
+        $obj['businessContactLastName'] = $businessContactLastName;
 
         return $obj;
     }
@@ -478,7 +478,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessContactPhone(string $businessContactPhone): self
     {
         $obj = clone $this;
-        $obj->businessContactPhone = $businessContactPhone;
+        $obj['businessContactPhone'] = $businessContactPhone;
 
         return $obj;
     }
@@ -489,7 +489,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessName(string $businessName): self
     {
         $obj = clone $this;
-        $obj->businessName = $businessName;
+        $obj['businessName'] = $businessName;
 
         return $obj;
     }
@@ -500,7 +500,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessState(string $businessState): self
     {
         $obj = clone $this;
-        $obj->businessState = $businessState;
+        $obj['businessState'] = $businessState;
 
         return $obj;
     }
@@ -511,7 +511,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessZip(string $businessZip): self
     {
         $obj = clone $this;
-        $obj->businessZip = $businessZip;
+        $obj['businessZip'] = $businessZip;
 
         return $obj;
     }
@@ -522,7 +522,7 @@ final class RequestCreateParams implements BaseModel
     public function withCorporateWebsite(string $corporateWebsite): self
     {
         $obj = clone $this;
-        $obj->corporateWebsite = $corporateWebsite;
+        $obj['corporateWebsite'] = $corporateWebsite;
 
         return $obj;
     }
@@ -533,7 +533,7 @@ final class RequestCreateParams implements BaseModel
     public function withIsvReseller(string $isvReseller): self
     {
         $obj = clone $this;
-        $obj->isvReseller = $isvReseller;
+        $obj['isvReseller'] = $isvReseller;
 
         return $obj;
     }
@@ -557,7 +557,7 @@ final class RequestCreateParams implements BaseModel
     public function withOptInWorkflow(string $optInWorkflow): self
     {
         $obj = clone $this;
-        $obj->optInWorkflow = $optInWorkflow;
+        $obj['optInWorkflow'] = $optInWorkflow;
 
         return $obj;
     }
@@ -565,13 +565,13 @@ final class RequestCreateParams implements BaseModel
     /**
      * Images showing the opt-in workflow.
      *
-     * @param list<URL> $optInWorkflowImageURLs
+     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
      */
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
     ): self {
         $obj = clone $this;
-        $obj->optInWorkflowImageURLs = $optInWorkflowImageURLs;
+        $obj['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
 
         return $obj;
     }
@@ -579,12 +579,12 @@ final class RequestCreateParams implements BaseModel
     /**
      * The phone numbers to request the verification of.
      *
-     * @param list<TfPhoneNumber> $phoneNumbers
+     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -596,7 +596,7 @@ final class RequestCreateParams implements BaseModel
         string $productionMessageContent
     ): self {
         $obj = clone $this;
-        $obj->productionMessageContent = $productionMessageContent;
+        $obj['productionMessageContent'] = $productionMessageContent;
 
         return $obj;
     }
@@ -620,7 +620,7 @@ final class RequestCreateParams implements BaseModel
     public function withUseCaseSummary(string $useCaseSummary): self
     {
         $obj = clone $this;
-        $obj->useCaseSummary = $useCaseSummary;
+        $obj['useCaseSummary'] = $useCaseSummary;
 
         return $obj;
     }
@@ -631,7 +631,7 @@ final class RequestCreateParams implements BaseModel
     public function withAgeGatedContent(bool $ageGatedContent): self
     {
         $obj = clone $this;
-        $obj->ageGatedContent = $ageGatedContent;
+        $obj['ageGatedContent'] = $ageGatedContent;
 
         return $obj;
     }
@@ -642,7 +642,7 @@ final class RequestCreateParams implements BaseModel
     public function withBusinessAddr2(string $businessAddr2): self
     {
         $obj = clone $this;
-        $obj->businessAddr2 = $businessAddr2;
+        $obj['businessAddr2'] = $businessAddr2;
 
         return $obj;
     }
@@ -654,7 +654,7 @@ final class RequestCreateParams implements BaseModel
         ?string $businessRegistrationCountry
     ): self {
         $obj = clone $this;
-        $obj->businessRegistrationCountry = $businessRegistrationCountry;
+        $obj['businessRegistrationCountry'] = $businessRegistrationCountry;
 
         return $obj;
     }
@@ -666,7 +666,7 @@ final class RequestCreateParams implements BaseModel
         ?string $businessRegistrationNumber
     ): self {
         $obj = clone $this;
-        $obj->businessRegistrationNumber = $businessRegistrationNumber;
+        $obj['businessRegistrationNumber'] = $businessRegistrationNumber;
 
         return $obj;
     }
@@ -678,7 +678,7 @@ final class RequestCreateParams implements BaseModel
         ?string $businessRegistrationType
     ): self {
         $obj = clone $this;
-        $obj->businessRegistrationType = $businessRegistrationType;
+        $obj['businessRegistrationType'] = $businessRegistrationType;
 
         return $obj;
     }
@@ -689,7 +689,7 @@ final class RequestCreateParams implements BaseModel
     public function withDoingBusinessAs(?string $doingBusinessAs): self
     {
         $obj = clone $this;
-        $obj->doingBusinessAs = $doingBusinessAs;
+        $obj['doingBusinessAs'] = $doingBusinessAs;
 
         return $obj;
     }
@@ -714,7 +714,7 @@ final class RequestCreateParams implements BaseModel
     public function withHelpMessageResponse(?string $helpMessageResponse): self
     {
         $obj = clone $this;
-        $obj->helpMessageResponse = $helpMessageResponse;
+        $obj['helpMessageResponse'] = $helpMessageResponse;
 
         return $obj;
     }
@@ -726,7 +726,7 @@ final class RequestCreateParams implements BaseModel
         ?string $optInConfirmationResponse
     ): self {
         $obj = clone $this;
-        $obj->optInConfirmationResponse = $optInConfirmationResponse;
+        $obj['optInConfirmationResponse'] = $optInConfirmationResponse;
 
         return $obj;
     }
@@ -737,7 +737,7 @@ final class RequestCreateParams implements BaseModel
     public function withOptInKeywords(?string $optInKeywords): self
     {
         $obj = clone $this;
-        $obj->optInKeywords = $optInKeywords;
+        $obj['optInKeywords'] = $optInKeywords;
 
         return $obj;
     }
@@ -748,7 +748,7 @@ final class RequestCreateParams implements BaseModel
     public function withPrivacyPolicyURL(?string $privacyPolicyURL): self
     {
         $obj = clone $this;
-        $obj->privacyPolicyURL = $privacyPolicyURL;
+        $obj['privacyPolicyURL'] = $privacyPolicyURL;
 
         return $obj;
     }
@@ -760,7 +760,7 @@ final class RequestCreateParams implements BaseModel
         ?string $termsAndConditionURL
     ): self {
         $obj = clone $this;
-        $obj->termsAndConditionURL = $termsAndConditionURL;
+        $obj['termsAndConditionURL'] = $termsAndConditionURL;
 
         return $obj;
     }
@@ -771,7 +771,7 @@ final class RequestCreateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookUrl = $webhookURL;
+        $obj['webhookUrl'] = $webhookURL;
 
         return $obj;
     }

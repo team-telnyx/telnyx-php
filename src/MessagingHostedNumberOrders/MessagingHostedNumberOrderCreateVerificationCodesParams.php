@@ -71,7 +71,7 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
     ): self {
         $obj = new self;
 
-        $obj->phone_numbers = $phone_numbers;
+        $obj['phone_numbers'] = $phone_numbers;
         $obj['verification_method'] = $verification_method;
 
         return $obj;
@@ -83,7 +83,7 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }

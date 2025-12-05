@@ -112,17 +112,17 @@ final class Transcription implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
-        null !== $api_version && $obj->api_version = $api_version;
-        null !== $call_sid && $obj->call_sid = $call_sid;
-        null !== $date_created && $obj->date_created = $date_created;
-        null !== $date_updated && $obj->date_updated = $date_updated;
-        null !== $duration && $obj->duration = $duration;
-        null !== $recording_sid && $obj->recording_sid = $recording_sid;
-        null !== $sid && $obj->sid = $sid;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
+        null !== $api_version && $obj['api_version'] = $api_version;
+        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $date_created && $obj['date_created'] = $date_created;
+        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $duration && $obj['duration'] = $duration;
+        null !== $recording_sid && $obj['recording_sid'] = $recording_sid;
+        null !== $sid && $obj['sid'] = $sid;
         null !== $status && $obj['status'] = $status;
-        null !== $transcription_text && $obj->transcription_text = $transcription_text;
-        null !== $uri && $obj->uri = $uri;
+        null !== $transcription_text && $obj['transcription_text'] = $transcription_text;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Transcription implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Transcription implements BaseModel
     public function withAPIVersion(string $apiVersion): self
     {
         $obj = clone $this;
-        $obj->api_version = $apiVersion;
+        $obj['api_version'] = $apiVersion;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Transcription implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->call_sid = $callSid;
+        $obj['call_sid'] = $callSid;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Transcription implements BaseModel
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
         $obj = clone $this;
-        $obj->date_created = $dateCreated;
+        $obj['date_created'] = $dateCreated;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Transcription implements BaseModel
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->date_updated = $dateUpdated;
+        $obj['date_updated'] = $dateUpdated;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Transcription implements BaseModel
     public function withDuration(?string $duration): self
     {
         $obj = clone $this;
-        $obj->duration = $duration;
+        $obj['duration'] = $duration;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class Transcription implements BaseModel
     public function withRecordingSid(string $recordingSid): self
     {
         $obj = clone $this;
-        $obj->recording_sid = $recordingSid;
+        $obj['recording_sid'] = $recordingSid;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class Transcription implements BaseModel
     public function withSid(string $sid): self
     {
         $obj = clone $this;
-        $obj->sid = $sid;
+        $obj['sid'] = $sid;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class Transcription implements BaseModel
     public function withTranscriptionText(string $transcriptionText): self
     {
         $obj = clone $this;
-        $obj->transcription_text = $transcriptionText;
+        $obj['transcription_text'] = $transcriptionText;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class Transcription implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

@@ -97,13 +97,13 @@ final class SMS implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->whitelisted_destinations = $whitelisted_destinations;
+        $obj['whitelisted_destinations'] = $whitelisted_destinations;
 
-        null !== $alpha_sender && $obj->alpha_sender = $alpha_sender;
-        null !== $app_name && $obj->app_name = $app_name;
-        null !== $code_length && $obj->code_length = $code_length;
-        null !== $default_verification_timeout_secs && $obj->default_verification_timeout_secs = $default_verification_timeout_secs;
-        null !== $messaging_template_id && $obj->messaging_template_id = $messaging_template_id;
+        null !== $alpha_sender && $obj['alpha_sender'] = $alpha_sender;
+        null !== $app_name && $obj['app_name'] = $app_name;
+        null !== $code_length && $obj['code_length'] = $code_length;
+        null !== $default_verification_timeout_secs && $obj['default_verification_timeout_secs'] = $default_verification_timeout_secs;
+        null !== $messaging_template_id && $obj['messaging_template_id'] = $messaging_template_id;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class SMS implements BaseModel
         array $whitelistedDestinations
     ): self {
         $obj = clone $this;
-        $obj->whitelisted_destinations = $whitelistedDestinations;
+        $obj['whitelisted_destinations'] = $whitelistedDestinations;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class SMS implements BaseModel
     public function withAlphaSender(?string $alphaSender): self
     {
         $obj = clone $this;
-        $obj->alpha_sender = $alphaSender;
+        $obj['alpha_sender'] = $alphaSender;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class SMS implements BaseModel
     public function withAppName(string $appName): self
     {
         $obj = clone $this;
-        $obj->app_name = $appName;
+        $obj['app_name'] = $appName;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class SMS implements BaseModel
     public function withCodeLength(int $codeLength): self
     {
         $obj = clone $this;
-        $obj->code_length = $codeLength;
+        $obj['code_length'] = $codeLength;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class SMS implements BaseModel
         int $defaultVerificationTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj->default_verification_timeout_secs = $defaultVerificationTimeoutSecs;
+        $obj['default_verification_timeout_secs'] = $defaultVerificationTimeoutSecs;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class SMS implements BaseModel
     public function withMessagingTemplateID(string $messagingTemplateID): self
     {
         $obj = clone $this;
-        $obj->messaging_template_id = $messagingTemplateID;
+        $obj['messaging_template_id'] = $messagingTemplateID;
 
         return $obj;
     }

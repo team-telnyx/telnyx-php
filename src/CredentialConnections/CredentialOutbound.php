@@ -112,14 +112,14 @@ final class CredentialOutbound implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $ani_override && $obj->ani_override = $ani_override;
+        null !== $ani_override && $obj['ani_override'] = $ani_override;
         null !== $ani_override_type && $obj['ani_override_type'] = $ani_override_type;
-        null !== $call_parking_enabled && $obj->call_parking_enabled = $call_parking_enabled;
-        null !== $channel_limit && $obj->channel_limit = $channel_limit;
-        null !== $generate_ringback_tone && $obj->generate_ringback_tone = $generate_ringback_tone;
-        null !== $instant_ringback_enabled && $obj->instant_ringback_enabled = $instant_ringback_enabled;
-        null !== $localization && $obj->localization = $localization;
-        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
+        null !== $call_parking_enabled && $obj['call_parking_enabled'] = $call_parking_enabled;
+        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $generate_ringback_tone && $obj['generate_ringback_tone'] = $generate_ringback_tone;
+        null !== $instant_ringback_enabled && $obj['instant_ringback_enabled'] = $instant_ringback_enabled;
+        null !== $localization && $obj['localization'] = $localization;
+        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
         null !== $t38_reinvite_source && $obj['t38_reinvite_source'] = $t38_reinvite_source;
 
         return $obj;
@@ -131,7 +131,7 @@ final class CredentialOutbound implements BaseModel
     public function withAniOverride(string $aniOverride): self
     {
         $obj = clone $this;
-        $obj->ani_override = $aniOverride;
+        $obj['ani_override'] = $aniOverride;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class CredentialOutbound implements BaseModel
     public function withCallParkingEnabled(?bool $callParkingEnabled): self
     {
         $obj = clone $this;
-        $obj->call_parking_enabled = $callParkingEnabled;
+        $obj['call_parking_enabled'] = $callParkingEnabled;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class CredentialOutbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channel_limit = $channelLimit;
+        $obj['channel_limit'] = $channelLimit;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class CredentialOutbound implements BaseModel
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
         $obj = clone $this;
-        $obj->generate_ringback_tone = $generateRingbackTone;
+        $obj['generate_ringback_tone'] = $generateRingbackTone;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class CredentialOutbound implements BaseModel
         bool $instantRingbackEnabled
     ): self {
         $obj = clone $this;
-        $obj->instant_ringback_enabled = $instantRingbackEnabled;
+        $obj['instant_ringback_enabled'] = $instantRingbackEnabled;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class CredentialOutbound implements BaseModel
     public function withLocalization(string $localization): self
     {
         $obj = clone $this;
-        $obj->localization = $localization;
+        $obj['localization'] = $localization;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class CredentialOutbound implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
+        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
 
         return $obj;
     }

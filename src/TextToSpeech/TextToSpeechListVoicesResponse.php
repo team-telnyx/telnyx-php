@@ -37,24 +37,42 @@ final class TextToSpeechListVoicesResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Voice> $voices
+     * @param list<Voice|array{
+     *   id?: string|null,
+     *   accent?: string|null,
+     *   age?: string|null,
+     *   gender?: string|null,
+     *   label?: string|null,
+     *   language?: string|null,
+     *   name?: string|null,
+     *   provider?: string|null,
+     * }> $voices
      */
     public static function with(?array $voices = null): self
     {
         $obj = new self;
 
-        null !== $voices && $obj->voices = $voices;
+        null !== $voices && $obj['voices'] = $voices;
 
         return $obj;
     }
 
     /**
-     * @param list<Voice> $voices
+     * @param list<Voice|array{
+     *   id?: string|null,
+     *   accent?: string|null,
+     *   age?: string|null,
+     *   gender?: string|null,
+     *   label?: string|null,
+     *   language?: string|null,
+     *   name?: string|null,
+     *   provider?: string|null,
+     * }> $voices
      */
     public function withVoices(array $voices): self
     {
         $obj = clone $this;
-        $obj->voices = $voices;
+        $obj['voices'] = $voices;
 
         return $obj;
     }

@@ -69,9 +69,9 @@ final class PortingOrderActivationSettings implements BaseModel
         $obj = new self;
 
         null !== $activation_status && $obj['activation_status'] = $activation_status;
-        null !== $fast_port_eligible && $obj->fast_port_eligible = $fast_port_eligible;
-        null !== $foc_datetime_actual && $obj->foc_datetime_actual = $foc_datetime_actual;
-        null !== $foc_datetime_requested && $obj->foc_datetime_requested = $foc_datetime_requested;
+        null !== $fast_port_eligible && $obj['fast_port_eligible'] = $fast_port_eligible;
+        null !== $foc_datetime_actual && $obj['foc_datetime_actual'] = $foc_datetime_actual;
+        null !== $foc_datetime_requested && $obj['foc_datetime_requested'] = $foc_datetime_requested;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class PortingOrderActivationSettings implements BaseModel
     public function withFastPortEligible(bool $fastPortEligible): self
     {
         $obj = clone $this;
-        $obj->fast_port_eligible = $fastPortEligible;
+        $obj['fast_port_eligible'] = $fastPortEligible;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class PortingOrderActivationSettings implements BaseModel
         ?\DateTimeInterface $focDatetimeActual
     ): self {
         $obj = clone $this;
-        $obj->foc_datetime_actual = $focDatetimeActual;
+        $obj['foc_datetime_actual'] = $focDatetimeActual;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class PortingOrderActivationSettings implements BaseModel
         ?\DateTimeInterface $focDatetimeRequested
     ): self {
         $obj = clone $this;
-        $obj->foc_datetime_requested = $focDatetimeRequested;
+        $obj['foc_datetime_requested'] = $focDatetimeRequested;
 
         return $obj;
     }

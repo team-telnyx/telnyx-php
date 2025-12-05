@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
+use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -49,24 +50,28 @@ final class UserBundleListUnusedResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   billing_bundle: BillingBundleSummary, user_bundle_ids: list<string>
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   billing_bundle: BillingBundleSummary, user_bundle_ids: list<string>
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

@@ -148,19 +148,19 @@ final class Record implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $assignedCampaingsCount && $obj->assignedCampaingsCount = $assignedCampaingsCount;
-        null !== $brandId && $obj->brandId = $brandId;
-        null !== $companyName && $obj->companyName = $companyName;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $displayName && $obj->displayName = $displayName;
-        null !== $email && $obj->email = $email;
+        null !== $assignedCampaingsCount && $obj['assignedCampaingsCount'] = $assignedCampaingsCount;
+        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $companyName && $obj['companyName'] = $companyName;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $displayName && $obj['displayName'] = $displayName;
+        null !== $email && $obj['email'] = $email;
         null !== $entityType && $obj['entityType'] = $entityType;
-        null !== $failureReasons && $obj->failureReasons = $failureReasons;
+        null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
         null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
         null !== $status && $obj['status'] = $status;
-        null !== $tcrBrandId && $obj->tcrBrandId = $tcrBrandId;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $website && $obj->website = $website;
+        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $website && $obj['website'] = $website;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class Record implements BaseModel
         int $assignedCampaingsCount
     ): self {
         $obj = clone $this;
-        $obj->assignedCampaingsCount = $assignedCampaingsCount;
+        $obj['assignedCampaingsCount'] = $assignedCampaingsCount;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class Record implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class Record implements BaseModel
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj->companyName = $companyName;
+        $obj['companyName'] = $companyName;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class Record implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class Record implements BaseModel
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class Record implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class Record implements BaseModel
     public function withFailureReasons(string $failureReasons): self
     {
         $obj = clone $this;
-        $obj->failureReasons = $failureReasons;
+        $obj['failureReasons'] = $failureReasons;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class Record implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj->tcrBrandId = $tcrBrandID;
+        $obj['tcrBrandId'] = $tcrBrandID;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class Record implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class Record implements BaseModel
     public function withWebsite(string $website): self
     {
         $obj = clone $this;
-        $obj->website = $website;
+        $obj['website'] = $website;
 
         return $obj;
     }

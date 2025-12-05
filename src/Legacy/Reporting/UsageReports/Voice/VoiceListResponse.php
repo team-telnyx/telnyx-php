@@ -41,35 +41,75 @@ final class VoiceListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CdrUsageReportResponseLegacy> $data
+     * @param list<CdrUsageReportResponseLegacy|array{
+     *   id?: string|null,
+     *   aggregation_type?: int|null,
+     *   connections?: list<string>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   end_time?: \DateTimeInterface|null,
+     *   product_breakdown?: int|null,
+     *   record_type?: string|null,
+     *   report_url?: string|null,
+     *   result?: mixed,
+     *   start_time?: \DateTimeInterface|null,
+     *   status?: int|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
+     * @param StandardPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?StandardPaginationMeta $meta = null
+        StandardPaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<CdrUsageReportResponseLegacy> $data
+     * @param list<CdrUsageReportResponseLegacy|array{
+     *   id?: string|null,
+     *   aggregation_type?: int|null,
+     *   connections?: list<string>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   end_time?: \DateTimeInterface|null,
+     *   product_breakdown?: int|null,
+     *   record_type?: string|null,
+     *   report_url?: string|null,
+     *   result?: mixed,
+     *   start_time?: \DateTimeInterface|null,
+     *   status?: int|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(StandardPaginationMeta $meta): self
+    /**
+     * @param StandardPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(StandardPaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

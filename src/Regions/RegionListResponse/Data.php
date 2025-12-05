@@ -83,12 +83,12 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $name && $obj->name = $name;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $supported_interfaces && $obj->supported_interfaces = $supported_interfaces;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $code && $obj['code'] = $code;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $supported_interfaces && $obj['supported_interfaces'] = $supported_interfaces;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Data implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withSupportedInterfaces(array $supportedInterfaces): self
     {
         $obj = clone $this;
-        $obj->supported_interfaces = $supportedInterfaces;
+        $obj['supported_interfaces'] = $supportedInterfaces;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -52,8 +52,8 @@ final class DetailRecordsReportCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $end_time && $obj->end_time = $end_time;
-        null !== $start_time && $obj->start_time = $start_time;
+        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $start_time && $obj['start_time'] = $start_time;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class DetailRecordsReportCreateParams implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class DetailRecordsReportCreateParams implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }

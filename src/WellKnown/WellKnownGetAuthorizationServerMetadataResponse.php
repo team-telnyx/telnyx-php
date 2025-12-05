@@ -139,17 +139,17 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $authorization_endpoint && $obj->authorization_endpoint = $authorization_endpoint;
-        null !== $code_challenge_methods_supported && $obj->code_challenge_methods_supported = $code_challenge_methods_supported;
-        null !== $grant_types_supported && $obj->grant_types_supported = $grant_types_supported;
-        null !== $introspection_endpoint && $obj->introspection_endpoint = $introspection_endpoint;
-        null !== $issuer && $obj->issuer = $issuer;
-        null !== $jwks_uri && $obj->jwks_uri = $jwks_uri;
-        null !== $registration_endpoint && $obj->registration_endpoint = $registration_endpoint;
-        null !== $response_types_supported && $obj->response_types_supported = $response_types_supported;
-        null !== $scopes_supported && $obj->scopes_supported = $scopes_supported;
-        null !== $token_endpoint && $obj->token_endpoint = $token_endpoint;
-        null !== $token_endpoint_auth_methods_supported && $obj->token_endpoint_auth_methods_supported = $token_endpoint_auth_methods_supported;
+        null !== $authorization_endpoint && $obj['authorization_endpoint'] = $authorization_endpoint;
+        null !== $code_challenge_methods_supported && $obj['code_challenge_methods_supported'] = $code_challenge_methods_supported;
+        null !== $grant_types_supported && $obj['grant_types_supported'] = $grant_types_supported;
+        null !== $introspection_endpoint && $obj['introspection_endpoint'] = $introspection_endpoint;
+        null !== $issuer && $obj['issuer'] = $issuer;
+        null !== $jwks_uri && $obj['jwks_uri'] = $jwks_uri;
+        null !== $registration_endpoint && $obj['registration_endpoint'] = $registration_endpoint;
+        null !== $response_types_supported && $obj['response_types_supported'] = $response_types_supported;
+        null !== $scopes_supported && $obj['scopes_supported'] = $scopes_supported;
+        null !== $token_endpoint && $obj['token_endpoint'] = $token_endpoint;
+        null !== $token_endpoint_auth_methods_supported && $obj['token_endpoint_auth_methods_supported'] = $token_endpoint_auth_methods_supported;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
         string $authorizationEndpoint
     ): self {
         $obj = clone $this;
-        $obj->authorization_endpoint = $authorizationEndpoint;
+        $obj['authorization_endpoint'] = $authorizationEndpoint;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
         array $codeChallengeMethodsSupported
     ): self {
         $obj = clone $this;
-        $obj->code_challenge_methods_supported = $codeChallengeMethodsSupported;
+        $obj['code_challenge_methods_supported'] = $codeChallengeMethodsSupported;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withGrantTypesSupported(array $grantTypesSupported): self
     {
         $obj = clone $this;
-        $obj->grant_types_supported = $grantTypesSupported;
+        $obj['grant_types_supported'] = $grantTypesSupported;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
         string $introspectionEndpoint
     ): self {
         $obj = clone $this;
-        $obj->introspection_endpoint = $introspectionEndpoint;
+        $obj['introspection_endpoint'] = $introspectionEndpoint;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withIssuer(string $issuer): self
     {
         $obj = clone $this;
-        $obj->issuer = $issuer;
+        $obj['issuer'] = $issuer;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withJwksUri(string $jwksUri): self
     {
         $obj = clone $this;
-        $obj->jwks_uri = $jwksUri;
+        $obj['jwks_uri'] = $jwksUri;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withRegistrationEndpoint(string $registrationEndpoint): self
     {
         $obj = clone $this;
-        $obj->registration_endpoint = $registrationEndpoint;
+        $obj['registration_endpoint'] = $registrationEndpoint;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
         array $responseTypesSupported
     ): self {
         $obj = clone $this;
-        $obj->response_types_supported = $responseTypesSupported;
+        $obj['response_types_supported'] = $responseTypesSupported;
 
         return $obj;
     }
@@ -260,7 +260,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withScopesSupported(array $scopesSupported): self
     {
         $obj = clone $this;
-        $obj->scopes_supported = $scopesSupported;
+        $obj['scopes_supported'] = $scopesSupported;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withTokenEndpoint(string $tokenEndpoint): self
     {
         $obj = clone $this;
-        $obj->token_endpoint = $tokenEndpoint;
+        $obj['token_endpoint'] = $tokenEndpoint;
 
         return $obj;
     }
@@ -285,7 +285,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
         array $tokenEndpointAuthMethodsSupported
     ): self {
         $obj = clone $this;
-        $obj->token_endpoint_auth_methods_supported = $tokenEndpointAuthMethodsSupported;
+        $obj['token_endpoint_auth_methods_supported'] = $tokenEndpointAuthMethodsSupported;
 
         return $obj;
     }

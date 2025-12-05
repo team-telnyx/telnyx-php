@@ -44,39 +44,60 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param string|CidrBlockPatternFilter|array{
+     *   contains?: string|null, endswith?: string|null, startswith?: string|null
+     * } $cidr_block
+     * @param \DateTimeInterface|DateRangeFilter|array{
+     *   gt?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lt?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $created_at
      */
     public static function with(
-        string|CidrBlockPatternFilter|null $cidr_block = null,
-        \DateTimeInterface|DateRangeFilter|null $created_at = null,
+        string|CidrBlockPatternFilter|array|null $cidr_block = null,
+        \DateTimeInterface|DateRangeFilter|array|null $created_at = null,
     ): self {
         $obj = new self;
 
-        null !== $cidr_block && $obj->cidr_block = $cidr_block;
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $cidr_block && $obj['cidr_block'] = $cidr_block;
+        null !== $created_at && $obj['created_at'] = $created_at;
 
         return $obj;
     }
 
     /**
      * Filter by exact CIDR block match.
+     *
+     * @param string|CidrBlockPatternFilter|array{
+     *   contains?: string|null, endswith?: string|null, startswith?: string|null
+     * } $cidrBlock
      */
     public function withCidrBlock(
-        string|CidrBlockPatternFilter $cidrBlock
+        string|CidrBlockPatternFilter|array $cidrBlock
     ): self {
         $obj = clone $this;
-        $obj->cidr_block = $cidrBlock;
+        $obj['cidr_block'] = $cidrBlock;
 
         return $obj;
     }
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @param \DateTimeInterface|DateRangeFilter|array{
+     *   gt?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lt?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $createdAt
      */
     public function withCreatedAt(
-        \DateTimeInterface|DateRangeFilter $createdAt
+        \DateTimeInterface|DateRangeFilter|array $createdAt
     ): self {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }

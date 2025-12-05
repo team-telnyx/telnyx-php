@@ -58,8 +58,8 @@ final class Contact implements BaseModel
     {
         $obj = new self;
 
-        $obj->email = $email;
-        $obj->phone_number = $phone_number;
+        $obj['email'] = $email;
+        $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Contact implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class Contact implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

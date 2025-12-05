@@ -55,9 +55,9 @@ final class CidrBlockPatternFilter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $endswith && $obj->endswith = $endswith;
-        null !== $startswith && $obj->startswith = $startswith;
+        null !== $contains && $obj['contains'] = $contains;
+        null !== $endswith && $obj['endswith'] = $endswith;
+        null !== $startswith && $obj['startswith'] = $startswith;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class CidrBlockPatternFilter implements BaseModel
     public function withContains(string $contains): self
     {
         $obj = clone $this;
-        $obj->contains = $contains;
+        $obj['contains'] = $contains;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class CidrBlockPatternFilter implements BaseModel
     public function withEndswith(string $endswith): self
     {
         $obj = clone $this;
-        $obj->endswith = $endswith;
+        $obj['endswith'] = $endswith;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class CidrBlockPatternFilter implements BaseModel
     public function withStartswith(string $startswith): self
     {
         $obj = clone $this;
-        $obj->startswith = $startswith;
+        $obj['startswith'] = $startswith;
 
         return $obj;
     }

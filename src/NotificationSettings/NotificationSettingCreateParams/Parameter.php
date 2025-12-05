@@ -36,8 +36,8 @@ final class Parameter implements BaseModel
     {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $value && $obj->value = $value;
+        null !== $name && $obj['name'] = $name;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -45,7 +45,7 @@ final class Parameter implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class Parameter implements BaseModel
     public function withValue(string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

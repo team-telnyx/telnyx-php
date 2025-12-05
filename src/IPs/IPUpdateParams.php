@@ -73,10 +73,10 @@ final class IPUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->ip_address = $ip_address;
+        $obj['ip_address'] = $ip_address;
 
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $port && $obj->port = $port;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $port && $obj['port'] = $port;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class IPUpdateParams implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ip_address = $ipAddress;
+        $obj['ip_address'] = $ipAddress;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class IPUpdateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class IPUpdateParams implements BaseModel
     public function withPort(int $port): self
     {
         $obj = clone $this;
-        $obj->port = $port;
+        $obj['port'] = $port;
 
         return $obj;
     }

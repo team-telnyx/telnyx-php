@@ -43,8 +43,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $conversation_id && $obj->conversation_id = $conversation_id;
-        null !== $result && $obj->result = $result;
+        null !== $conversation_id && $obj['conversation_id'] = $conversation_id;
+        null !== $result && $obj['result'] = $result;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversation_id = $conversationID;
+        $obj['conversation_id'] = $conversationID;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Data implements BaseModel
     public function withResult(string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

@@ -53,7 +53,7 @@ final class AutorespConfigDeleteParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->profile_id = $profile_id;
+        $obj['profile_id'] = $profile_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class AutorespConfigDeleteParams implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj->profile_id = $profileID;
+        $obj['profile_id'] = $profileID;
 
         return $obj;
     }

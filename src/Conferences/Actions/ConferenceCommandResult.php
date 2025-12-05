@@ -47,7 +47,7 @@ final class ConferenceCommandResult implements BaseModel
     {
         $obj = new self;
 
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class ConferenceCommandResult implements BaseModel
     public function withResult(string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

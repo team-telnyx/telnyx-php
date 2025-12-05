@@ -47,20 +47,39 @@ final class EmbeddingResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   created_at?: string|null,
+     *   finished_at?: string|null,
+     *   status?: string|null,
+     *   task_id?: string|null,
+     *   task_name?: string|null,
+     *   user_id?: string|null,
+     * } $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   created_at?: string|null,
+     *   finished_at?: string|null,
+     *   status?: string|null,
+     *   task_id?: string|null,
+     *   task_name?: string|null,
+     *   user_id?: string|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

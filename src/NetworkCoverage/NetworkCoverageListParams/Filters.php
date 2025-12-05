@@ -41,10 +41,12 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvailableService|Contains|value-of<AvailableService> $available_services
+     * @param AvailableService|Contains|array{
+     *   contains?: value-of<AvailableService>|null
+     * }|value-of<AvailableService> $available_services
      */
     public static function with(
-        AvailableService|Contains|string|null $available_services = null
+        AvailableService|Contains|array|string|null $available_services = null
     ): self {
         $obj = new self;
 
@@ -56,10 +58,12 @@ final class Filters implements BaseModel
     /**
      * Filter by exact available service match.
      *
-     * @param AvailableService|Contains|value-of<AvailableService> $availableServices
+     * @param AvailableService|Contains|array{
+     *   contains?: value-of<AvailableService>|null
+     * }|value-of<AvailableService> $availableServices
      */
     public function withAvailableServices(
-        AvailableService|Contains|string $availableServices
+        AvailableService|Contains|array|string $availableServices
     ): self {
         $obj = clone $this;
         $obj['available_services'] = $availableServices;

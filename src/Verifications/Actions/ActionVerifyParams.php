@@ -57,7 +57,7 @@ final class ActionVerifyParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
+        null !== $code && $obj['code'] = $code;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -69,7 +69,7 @@ final class ActionVerifyParams implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }

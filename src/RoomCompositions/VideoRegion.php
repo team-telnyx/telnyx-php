@@ -99,14 +99,14 @@ final class VideoRegion implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $height && $obj->height = $height;
-        null !== $max_columns && $obj->max_columns = $max_columns;
-        null !== $max_rows && $obj->max_rows = $max_rows;
-        null !== $video_sources && $obj->video_sources = $video_sources;
-        null !== $width && $obj->width = $width;
-        null !== $x_pos && $obj->x_pos = $x_pos;
-        null !== $y_pos && $obj->y_pos = $y_pos;
-        null !== $z_pos && $obj->z_pos = $z_pos;
+        null !== $height && $obj['height'] = $height;
+        null !== $max_columns && $obj['max_columns'] = $max_columns;
+        null !== $max_rows && $obj['max_rows'] = $max_rows;
+        null !== $video_sources && $obj['video_sources'] = $video_sources;
+        null !== $width && $obj['width'] = $width;
+        null !== $x_pos && $obj['x_pos'] = $x_pos;
+        null !== $y_pos && $obj['y_pos'] = $y_pos;
+        null !== $z_pos && $obj['z_pos'] = $z_pos;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class VideoRegion implements BaseModel
     public function withHeight(?int $height): self
     {
         $obj = clone $this;
-        $obj->height = $height;
+        $obj['height'] = $height;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class VideoRegion implements BaseModel
     public function withMaxColumns(?int $maxColumns): self
     {
         $obj = clone $this;
-        $obj->max_columns = $maxColumns;
+        $obj['max_columns'] = $maxColumns;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class VideoRegion implements BaseModel
     public function withMaxRows(?int $maxRows): self
     {
         $obj = clone $this;
-        $obj->max_rows = $maxRows;
+        $obj['max_rows'] = $maxRows;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class VideoRegion implements BaseModel
     public function withVideoSources(array $videoSources): self
     {
         $obj = clone $this;
-        $obj->video_sources = $videoSources;
+        $obj['video_sources'] = $videoSources;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class VideoRegion implements BaseModel
     public function withWidth(?int $width): self
     {
         $obj = clone $this;
-        $obj->width = $width;
+        $obj['width'] = $width;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class VideoRegion implements BaseModel
     public function withXPos(?int $xPos): self
     {
         $obj = clone $this;
-        $obj->x_pos = $xPos;
+        $obj['x_pos'] = $xPos;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class VideoRegion implements BaseModel
     public function withYPos(?int $yPos): self
     {
         $obj = clone $this;
-        $obj->y_pos = $yPos;
+        $obj['y_pos'] = $yPos;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class VideoRegion implements BaseModel
     public function withZPos(?int $zPos): self
     {
         $obj = clone $this;
-        $obj->z_pos = $zPos;
+        $obj['z_pos'] = $zPos;
 
         return $obj;
     }

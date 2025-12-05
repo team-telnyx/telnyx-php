@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\FaxApplications\FaxApplicationListParams\Filter;
+use Telnyx\FaxApplications\FaxApplicationListParams\Filter\ApplicationName;
 use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 
@@ -18,7 +19,12 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
  * @see Telnyx\Services\FaxApplicationsService::list()
  *
  * @phpstan-type FaxApplicationListParamsShape = array{
- *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
+ *   filter?: Filter|array{
+ *     application_name?: ApplicationName|null,
+ *     outbound_voice_profile_id?: string|null,
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: Sort|value-of<Sort>,
  * }
  */
 final class FaxApplicationListParams implements BaseModel
@@ -68,17 +74,22 @@ final class FaxApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   application_name?: ApplicationName|null,
+     *   outbound_voice_profile_id?: string|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Sort|string|null $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -86,22 +97,29 @@ final class FaxApplicationListParams implements BaseModel
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
+     *
+     * @param Filter|array{
+     *   application_name?: ApplicationName|null,
+     *   outbound_voice_profile_id?: string|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
