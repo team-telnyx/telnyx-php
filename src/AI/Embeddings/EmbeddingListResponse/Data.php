@@ -95,14 +95,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->created_at = $created_at;
+        $obj['created_at'] = $created_at;
         $obj['status'] = $status;
-        $obj->task_id = $task_id;
-        $obj->task_name = $task_name;
-        $obj->user_id = $user_id;
+        $obj['task_id'] = $task_id;
+        $obj['task_name'] = $task_name;
+        $obj['user_id'] = $user_id;
 
-        null !== $bucket && $obj->bucket = $bucket;
-        null !== $finished_at && $obj->finished_at = $finished_at;
+        null !== $bucket && $obj['bucket'] = $bucket;
+        null !== $finished_at && $obj['finished_at'] = $finished_at;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Data implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->task_id = $taskID;
+        $obj['task_id'] = $taskID;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withTaskName(string $taskName): self
     {
         $obj = clone $this;
-        $obj->task_name = $taskName;
+        $obj['task_name'] = $taskName;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Data implements BaseModel
     public function withBucket(string $bucket): self
     {
         $obj = clone $this;
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class Data implements BaseModel
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finished_at = $finishedAt;
+        $obj['finished_at'] = $finishedAt;
 
         return $obj;
     }

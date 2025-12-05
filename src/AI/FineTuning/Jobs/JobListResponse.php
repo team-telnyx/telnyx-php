@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\FineTuning\Jobs;
 
+use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
+use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -48,24 +50,44 @@ final class JobListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FineTuningJob> $data
+     * @param list<FineTuningJob|array{
+     *   id: string,
+     *   created_at: int,
+     *   finished_at: int|null,
+     *   hyperparameters: Hyperparameters,
+     *   model: string,
+     *   organization_id: string,
+     *   status: value-of<Status>,
+     *   trained_tokens: int|null,
+     *   training_file: string,
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<FineTuningJob> $data
+     * @param list<FineTuningJob|array{
+     *   id: string,
+     *   created_at: int,
+     *   finished_at: int|null,
+     *   hyperparameters: Hyperparameters,
+     *   model: string,
+     *   organization_id: string,
+     *   status: value-of<Status>,
+     *   trained_tokens: int|null,
+     *   training_file: string,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

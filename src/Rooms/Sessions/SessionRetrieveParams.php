@@ -42,7 +42,7 @@ final class SessionRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $include_participants && $obj->include_participants = $include_participants;
+        null !== $include_participants && $obj['include_participants'] = $include_participants;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class SessionRetrieveParams implements BaseModel
     public function withIncludeParticipants(bool $includeParticipants): self
     {
         $obj = clone $this;
-        $obj->include_participants = $includeParticipants;
+        $obj['include_participants'] = $includeParticipants;
 
         return $obj;
     }

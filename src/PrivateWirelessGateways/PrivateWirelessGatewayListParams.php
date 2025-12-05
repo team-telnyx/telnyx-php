@@ -93,13 +93,13 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $filter_created_at_ && $obj->filter_created_at_ = $filter_created_at_;
-        null !== $filter_ip_range_ && $obj->filter_ip_range_ = $filter_ip_range_;
-        null !== $filter_name_ && $obj->filter_name_ = $filter_name_;
-        null !== $filter_region_code_ && $obj->filter_region_code_ = $filter_region_code_;
-        null !== $filter_updated_at_ && $obj->filter_updated_at_ = $filter_updated_at_;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $filter_created_at_ && $obj['filter_created_at_'] = $filter_created_at_;
+        null !== $filter_ip_range_ && $obj['filter_ip_range_'] = $filter_ip_range_;
+        null !== $filter_name_ && $obj['filter_name_'] = $filter_name_;
+        null !== $filter_region_code_ && $obj['filter_region_code_'] = $filter_region_code_;
+        null !== $filter_updated_at_ && $obj['filter_updated_at_'] = $filter_updated_at_;
+        null !== $page_number_ && $obj['page_number_'] = $page_number_;
+        null !== $page_size_ && $obj['page_size_'] = $page_size_;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     public function withFilterCreatedAt(string $filterCreatedAt): self
     {
         $obj = clone $this;
-        $obj->filter_created_at_ = $filterCreatedAt;
+        $obj['filter_created_at_'] = $filterCreatedAt;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     public function withFilterIPRange(string $filterIPRange): self
     {
         $obj = clone $this;
-        $obj->filter_ip_range_ = $filterIPRange;
+        $obj['filter_ip_range_'] = $filterIPRange;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     public function withFilterName(string $filterName): self
     {
         $obj = clone $this;
-        $obj->filter_name_ = $filterName;
+        $obj['filter_name_'] = $filterName;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     public function withFilterRegionCode(string $filterRegionCode): self
     {
         $obj = clone $this;
-        $obj->filter_region_code_ = $filterRegionCode;
+        $obj['filter_region_code_'] = $filterRegionCode;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     public function withFilterUpdatedAt(string $filterUpdatedAt): self
     {
         $obj = clone $this;
-        $obj->filter_updated_at_ = $filterUpdatedAt;
+        $obj['filter_updated_at_'] = $filterUpdatedAt;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
+        $obj['page_number_'] = $pageNumber;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj['page_size_'] = $pageSize;
 
         return $obj;
     }

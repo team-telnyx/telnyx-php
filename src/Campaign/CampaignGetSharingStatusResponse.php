@@ -38,31 +38,66 @@ final class CampaignGetSharingStatusResponse implements BaseModel, ResponseConve
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CampaignSharingStatus|array{
+     *   downstreamCnpId?: string|null,
+     *   sharedDate?: string|null,
+     *   sharingStatus?: string|null,
+     *   statusDate?: string|null,
+     *   upstreamCnpId?: string|null,
+     * } $sharedByMe
+     * @param CampaignSharingStatus|array{
+     *   downstreamCnpId?: string|null,
+     *   sharedDate?: string|null,
+     *   sharingStatus?: string|null,
+     *   statusDate?: string|null,
+     *   upstreamCnpId?: string|null,
+     * } $sharedWithMe
      */
     public static function with(
-        ?CampaignSharingStatus $sharedByMe = null,
-        ?CampaignSharingStatus $sharedWithMe = null,
+        CampaignSharingStatus|array|null $sharedByMe = null,
+        CampaignSharingStatus|array|null $sharedWithMe = null,
     ): self {
         $obj = new self;
 
-        null !== $sharedByMe && $obj->sharedByMe = $sharedByMe;
-        null !== $sharedWithMe && $obj->sharedWithMe = $sharedWithMe;
+        null !== $sharedByMe && $obj['sharedByMe'] = $sharedByMe;
+        null !== $sharedWithMe && $obj['sharedWithMe'] = $sharedWithMe;
 
         return $obj;
     }
 
-    public function withSharedByMe(CampaignSharingStatus $sharedByMe): self
-    {
+    /**
+     * @param CampaignSharingStatus|array{
+     *   downstreamCnpId?: string|null,
+     *   sharedDate?: string|null,
+     *   sharingStatus?: string|null,
+     *   statusDate?: string|null,
+     *   upstreamCnpId?: string|null,
+     * } $sharedByMe
+     */
+    public function withSharedByMe(
+        CampaignSharingStatus|array $sharedByMe
+    ): self {
         $obj = clone $this;
-        $obj->sharedByMe = $sharedByMe;
+        $obj['sharedByMe'] = $sharedByMe;
 
         return $obj;
     }
 
-    public function withSharedWithMe(CampaignSharingStatus $sharedWithMe): self
-    {
+    /**
+     * @param CampaignSharingStatus|array{
+     *   downstreamCnpId?: string|null,
+     *   sharedDate?: string|null,
+     *   sharingStatus?: string|null,
+     *   statusDate?: string|null,
+     *   upstreamCnpId?: string|null,
+     * } $sharedWithMe
+     */
+    public function withSharedWithMe(
+        CampaignSharingStatus|array $sharedWithMe
+    ): self {
         $obj = clone $this;
-        $obj->sharedWithMe = $sharedWithMe;
+        $obj['sharedWithMe'] = $sharedWithMe;
 
         return $obj;
     }

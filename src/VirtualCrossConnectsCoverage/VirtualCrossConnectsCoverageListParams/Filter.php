@@ -87,11 +87,11 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $cloud_provider && $obj['cloud_provider'] = $cloud_provider;
-        null !== $cloud_provider_region && $obj->cloud_provider_region = $cloud_provider_region;
-        null !== $location_code && $obj->location_code = $location_code;
-        null !== $location_pop && $obj->location_pop = $location_pop;
-        null !== $location_region && $obj->location_region = $location_region;
-        null !== $location_site && $obj->location_site = $location_site;
+        null !== $cloud_provider_region && $obj['cloud_provider_region'] = $cloud_provider_region;
+        null !== $location_code && $obj['location_code'] = $location_code;
+        null !== $location_pop && $obj['location_pop'] = $location_pop;
+        null !== $location_region && $obj['location_region'] = $location_region;
+        null !== $location_site && $obj['location_site'] = $location_site;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Filter implements BaseModel
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
         $obj = clone $this;
-        $obj->cloud_provider_region = $cloudProviderRegion;
+        $obj['cloud_provider_region'] = $cloudProviderRegion;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Filter implements BaseModel
     public function withLocationCode(string $locationCode): self
     {
         $obj = clone $this;
-        $obj->location_code = $locationCode;
+        $obj['location_code'] = $locationCode;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Filter implements BaseModel
     public function withLocationPop(string $locationPop): self
     {
         $obj = clone $this;
-        $obj->location_pop = $locationPop;
+        $obj['location_pop'] = $locationPop;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Filter implements BaseModel
     public function withLocationRegion(string $locationRegion): self
     {
         $obj = clone $this;
-        $obj->location_region = $locationRegion;
+        $obj['location_region'] = $locationRegion;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Filter implements BaseModel
     public function withLocationSite(string $locationSite): self
     {
         $obj = clone $this;
-        $obj->location_site = $locationSite;
+        $obj['location_site'] = $locationSite;
 
         return $obj;
     }

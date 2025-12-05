@@ -62,7 +62,7 @@ final class SipHeader implements BaseModel
         $obj = new self;
 
         $obj['name'] = $name;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class SipHeader implements BaseModel
     public function withValue(string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\SimCardAction\ActionType;
 use Telnyx\SimCards\Actions\SimCardAction\Status;
+use Telnyx\SimCards\Actions\SimCardAction\Status\Value;
 
 /**
  * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
@@ -93,6 +94,7 @@ final class SimCardAction implements BaseModel
      *
      * @param ActionType|value-of<ActionType> $action_type
      * @param array<string,mixed>|null $settings
+     * @param Status|array{reason?: string|null, value?: value-of<Value>|null} $status
      */
     public static function with(
         ?string $id = null,
@@ -101,19 +103,19 @@ final class SimCardAction implements BaseModel
         ?string $record_type = null,
         ?array $settings = null,
         ?string $sim_card_id = null,
-        ?Status $status = null,
+        Status|array|null $status = null,
         ?string $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $action_type && $obj['action_type'] = $action_type;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $settings && $obj->settings = $settings;
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
-        null !== $status && $obj->status = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $settings && $obj['settings'] = $settings;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $status && $obj['status'] = $status;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -124,7 +126,7 @@ final class SimCardAction implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -154,7 +156,7 @@ final class SimCardAction implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -162,7 +164,7 @@ final class SimCardAction implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -175,7 +177,7 @@ final class SimCardAction implements BaseModel
     public function withSettings(?array $settings): self
     {
         $obj = clone $this;
-        $obj->settings = $settings;
+        $obj['settings'] = $settings;
 
         return $obj;
     }
@@ -186,15 +188,18 @@ final class SimCardAction implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }
 
-    public function withStatus(Status $status): self
+    /**
+     * @param Status|array{reason?: string|null, value?: value-of<Value>|null} $status
+     */
+    public function withStatus(Status|array $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -205,7 +210,7 @@ final class SimCardAction implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

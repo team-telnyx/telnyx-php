@@ -74,10 +74,10 @@ final class Segment implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->end = $end;
-        $obj->start = $start;
-        $obj->text = $text;
+        $obj['id'] = $id;
+        $obj['end'] = $end;
+        $obj['start'] = $start;
+        $obj['text'] = $text;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Segment implements BaseModel
     public function withID(float $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Segment implements BaseModel
     public function withEnd(float $end): self
     {
         $obj = clone $this;
-        $obj->end = $end;
+        $obj['end'] = $end;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Segment implements BaseModel
     public function withStart(float $start): self
     {
         $obj = clone $this;
-        $obj->start = $start;
+        $obj['start'] = $start;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Segment implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

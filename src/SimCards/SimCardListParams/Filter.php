@@ -72,9 +72,9 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $iccid && $obj->iccid = $iccid;
+        null !== $iccid && $obj['iccid'] = $iccid;
         null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj->tags = $tags;
+        null !== $tags && $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Filter implements BaseModel
     public function withIccid(string $iccid): self
     {
         $obj = clone $this;
-        $obj->iccid = $iccid;
+        $obj['iccid'] = $iccid;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Filter implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }

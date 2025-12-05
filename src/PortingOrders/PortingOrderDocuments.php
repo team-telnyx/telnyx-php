@@ -48,8 +48,8 @@ final class PortingOrderDocuments implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $invoice && $obj->invoice = $invoice;
-        null !== $loa && $obj->loa = $loa;
+        null !== $invoice && $obj['invoice'] = $invoice;
+        null !== $loa && $obj['loa'] = $loa;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class PortingOrderDocuments implements BaseModel
     public function withInvoice(?string $invoice): self
     {
         $obj = clone $this;
-        $obj->invoice = $invoice;
+        $obj['invoice'] = $invoice;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class PortingOrderDocuments implements BaseModel
     public function withLoa(?string $loa): self
     {
         $obj = clone $this;
-        $obj->loa = $loa;
+        $obj['loa'] = $loa;
 
         return $obj;
     }

@@ -10,6 +10,9 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
+use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\AnsweredBy;
+use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Direction;
+use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Status;
 
 /**
  * @phpstan-type CallGetCallsResponseShape = array{
@@ -86,7 +89,26 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Call> $calls
+     * @param list<Call|array{
+     *   account_sid?: string|null,
+     *   answered_by?: value-of<AnsweredBy>|null,
+     *   caller_name?: string|null,
+     *   date_created?: string|null,
+     *   date_updated?: string|null,
+     *   direction?: value-of<Direction>|null,
+     *   duration?: string|null,
+     *   end_time?: string|null,
+     *   from?: string|null,
+     *   from_formatted?: string|null,
+     *   price?: string|null,
+     *   price_unit?: string|null,
+     *   sid?: string|null,
+     *   start_time?: string|null,
+     *   status?: value-of<Status>|null,
+     *   to?: string|null,
+     *   to_formatted?: string|null,
+     *   uri?: string|null,
+     * }> $calls
      */
     public static function with(
         ?array $calls = null,
@@ -100,25 +122,44 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $calls && $obj->calls = $calls;
-        null !== $end && $obj->end = $end;
-        null !== $first_page_uri && $obj->first_page_uri = $first_page_uri;
-        null !== $next_page_uri && $obj->next_page_uri = $next_page_uri;
-        null !== $page && $obj->page = $page;
-        null !== $page_size && $obj->page_size = $page_size;
-        null !== $start && $obj->start = $start;
-        null !== $uri && $obj->uri = $uri;
+        null !== $calls && $obj['calls'] = $calls;
+        null !== $end && $obj['end'] = $end;
+        null !== $first_page_uri && $obj['first_page_uri'] = $first_page_uri;
+        null !== $next_page_uri && $obj['next_page_uri'] = $next_page_uri;
+        null !== $page && $obj['page'] = $page;
+        null !== $page_size && $obj['page_size'] = $page_size;
+        null !== $start && $obj['start'] = $start;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
 
     /**
-     * @param list<Call> $calls
+     * @param list<Call|array{
+     *   account_sid?: string|null,
+     *   answered_by?: value-of<AnsweredBy>|null,
+     *   caller_name?: string|null,
+     *   date_created?: string|null,
+     *   date_updated?: string|null,
+     *   direction?: value-of<Direction>|null,
+     *   duration?: string|null,
+     *   end_time?: string|null,
+     *   from?: string|null,
+     *   from_formatted?: string|null,
+     *   price?: string|null,
+     *   price_unit?: string|null,
+     *   sid?: string|null,
+     *   start_time?: string|null,
+     *   status?: value-of<Status>|null,
+     *   to?: string|null,
+     *   to_formatted?: string|null,
+     *   uri?: string|null,
+     * }> $calls
      */
     public function withCalls(array $calls): self
     {
         $obj = clone $this;
-        $obj->calls = $calls;
+        $obj['calls'] = $calls;
 
         return $obj;
     }
@@ -129,7 +170,7 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     public function withEnd(int $end): self
     {
         $obj = clone $this;
-        $obj->end = $end;
+        $obj['end'] = $end;
 
         return $obj;
     }
@@ -140,7 +181,7 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj->first_page_uri = $firstPageUri;
+        $obj['first_page_uri'] = $firstPageUri;
 
         return $obj;
     }
@@ -151,7 +192,7 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj->next_page_uri = $nextPageUri;
+        $obj['next_page_uri'] = $nextPageUri;
 
         return $obj;
     }
@@ -162,7 +203,7 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -173,7 +214,7 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size = $pageSize;
+        $obj['page_size'] = $pageSize;
 
         return $obj;
     }
@@ -184,7 +225,7 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     public function withStart(int $start): self
     {
         $obj = clone $this;
-        $obj->start = $start;
+        $obj['start'] = $start;
 
         return $obj;
     }
@@ -195,7 +236,7 @@ final class CallGetCallsResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

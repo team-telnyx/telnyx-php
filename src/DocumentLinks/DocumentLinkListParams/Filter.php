@@ -48,8 +48,8 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $linked_record_type && $obj->linked_record_type = $linked_record_type;
-        null !== $linked_resource_id && $obj->linked_resource_id = $linked_resource_id;
+        null !== $linked_record_type && $obj['linked_record_type'] = $linked_record_type;
+        null !== $linked_resource_id && $obj['linked_resource_id'] = $linked_resource_id;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
     public function withLinkedRecordType(string $linkedRecordType): self
     {
         $obj = clone $this;
-        $obj->linked_record_type = $linkedRecordType;
+        $obj['linked_record_type'] = $linkedRecordType;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Filter implements BaseModel
     public function withLinkedResourceID(string $linkedResourceID): self
     {
         $obj = clone $this;
-        $obj->linked_resource_id = $linkedResourceID;
+        $obj['linked_resource_id'] = $linkedResourceID;
 
         return $obj;
     }

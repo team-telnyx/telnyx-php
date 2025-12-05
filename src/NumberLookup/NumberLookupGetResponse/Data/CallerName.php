@@ -46,8 +46,8 @@ final class CallerName implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $caller_name && $obj->caller_name = $caller_name;
-        null !== $error_code && $obj->error_code = $error_code;
+        null !== $caller_name && $obj['caller_name'] = $caller_name;
+        null !== $error_code && $obj['error_code'] = $error_code;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class CallerName implements BaseModel
     public function withCallerName(string $callerName): self
     {
         $obj = clone $this;
-        $obj->caller_name = $callerName;
+        $obj['caller_name'] = $callerName;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class CallerName implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->error_code = $errorCode;
+        $obj['error_code'] = $errorCode;
 
         return $obj;
     }

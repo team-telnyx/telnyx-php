@@ -69,10 +69,10 @@ final class PhoneNumber implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->phone_number = $phone_number;
+        $obj['phone_number'] = $phone_number;
 
-        null !== $bundle_id && $obj->bundle_id = $bundle_id;
-        null !== $requirement_group_id && $obj->requirement_group_id = $requirement_group_id;
+        null !== $bundle_id && $obj['bundle_id'] = $bundle_id;
+        null !== $requirement_group_id && $obj['requirement_group_id'] = $requirement_group_id;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class PhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class PhoneNumber implements BaseModel
     public function withBundleID(string $bundleID): self
     {
         $obj = clone $this;
-        $obj->bundle_id = $bundleID;
+        $obj['bundle_id'] = $bundleID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class PhoneNumber implements BaseModel
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj->requirement_group_id = $requirementGroupID;
+        $obj['requirement_group_id'] = $requirementGroupID;
 
         return $obj;
     }

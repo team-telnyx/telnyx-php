@@ -71,11 +71,11 @@ final class CampaignStatusUpdateEvent implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $brandId && $obj->brandId = $brandId;
-        null !== $campaignId && $obj->campaignId = $campaignId;
-        null !== $createDate && $obj->createDate = $createDate;
-        null !== $cspId && $obj->cspId = $cspId;
-        null !== $isTMobileRegistered && $obj->isTMobileRegistered = $isTMobileRegistered;
+        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $campaignId && $obj['campaignId'] = $campaignId;
+        null !== $createDate && $obj['createDate'] = $createDate;
+        null !== $cspId && $obj['cspId'] = $cspId;
+        null !== $isTMobileRegistered && $obj['isTMobileRegistered'] = $isTMobileRegistered;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class CampaignStatusUpdateEvent implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class CampaignStatusUpdateEvent implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignId = $campaignID;
+        $obj['campaignId'] = $campaignID;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class CampaignStatusUpdateEvent implements BaseModel
     public function withCreateDate(string $createDate): self
     {
         $obj = clone $this;
-        $obj->createDate = $createDate;
+        $obj['createDate'] = $createDate;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class CampaignStatusUpdateEvent implements BaseModel
     public function withCspID(string $cspID): self
     {
         $obj = clone $this;
-        $obj->cspId = $cspID;
+        $obj['cspId'] = $cspID;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class CampaignStatusUpdateEvent implements BaseModel
     public function withIsTMobileRegistered(bool $isTMobileRegistered): self
     {
         $obj = clone $this;
-        $obj->isTMobileRegistered = $isTMobileRegistered;
+        $obj['isTMobileRegistered'] = $isTMobileRegistered;
 
         return $obj;
     }

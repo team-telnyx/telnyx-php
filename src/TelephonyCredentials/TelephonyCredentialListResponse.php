@@ -40,35 +40,71 @@ final class TelephonyCredentialListResponse implements BaseModel, ResponseConver
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TelephonyCredential> $data
+     * @param list<TelephonyCredential|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   expired?: bool|null,
+     *   expires_at?: string|null,
+     *   name?: string|null,
+     *   record_type?: string|null,
+     *   resource_id?: string|null,
+     *   sip_password?: string|null,
+     *   sip_username?: string|null,
+     *   updated_at?: string|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<TelephonyCredential> $data
+     * @param list<TelephonyCredential|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   expired?: bool|null,
+     *   expires_at?: string|null,
+     *   name?: string|null,
+     *   record_type?: string|null,
+     *   resource_id?: string|null,
+     *   sip_password?: string|null,
+     *   sip_username?: string|null,
+     *   updated_at?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

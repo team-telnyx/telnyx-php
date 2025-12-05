@@ -309,38 +309,38 @@ final class MessageDetailRecord implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->record_type = $record_type;
+        $obj['record_type'] = $record_type;
 
-        null !== $carrier && $obj->carrier = $carrier;
-        null !== $carrier_fee && $obj->carrier_fee = $carrier_fee;
-        null !== $cld && $obj->cld = $cld;
-        null !== $cli && $obj->cli = $cli;
-        null !== $completed_at && $obj->completed_at = $completed_at;
-        null !== $cost && $obj->cost = $cost;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $currency && $obj->currency = $currency;
-        null !== $delivery_status && $obj->delivery_status = $delivery_status;
-        null !== $delivery_status_failover_url && $obj->delivery_status_failover_url = $delivery_status_failover_url;
-        null !== $delivery_status_webhook_url && $obj->delivery_status_webhook_url = $delivery_status_webhook_url;
+        null !== $carrier && $obj['carrier'] = $carrier;
+        null !== $carrier_fee && $obj['carrier_fee'] = $carrier_fee;
+        null !== $cld && $obj['cld'] = $cld;
+        null !== $cli && $obj['cli'] = $cli;
+        null !== $completed_at && $obj['completed_at'] = $completed_at;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $delivery_status && $obj['delivery_status'] = $delivery_status;
+        null !== $delivery_status_failover_url && $obj['delivery_status_failover_url'] = $delivery_status_failover_url;
+        null !== $delivery_status_webhook_url && $obj['delivery_status_webhook_url'] = $delivery_status_webhook_url;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $errors && $obj->errors = $errors;
-        null !== $fteu && $obj->fteu = $fteu;
-        null !== $mcc && $obj->mcc = $mcc;
+        null !== $errors && $obj['errors'] = $errors;
+        null !== $fteu && $obj['fteu'] = $fteu;
+        null !== $mcc && $obj['mcc'] = $mcc;
         null !== $message_type && $obj['message_type'] = $message_type;
-        null !== $mnc && $obj->mnc = $mnc;
-        null !== $on_net && $obj->on_net = $on_net;
-        null !== $parts && $obj->parts = $parts;
-        null !== $profile_id && $obj->profile_id = $profile_id;
-        null !== $profile_name && $obj->profile_name = $profile_name;
-        null !== $rate && $obj->rate = $rate;
-        null !== $sent_at && $obj->sent_at = $sent_at;
-        null !== $source_country_code && $obj->source_country_code = $source_country_code;
+        null !== $mnc && $obj['mnc'] = $mnc;
+        null !== $on_net && $obj['on_net'] = $on_net;
+        null !== $parts && $obj['parts'] = $parts;
+        null !== $profile_id && $obj['profile_id'] = $profile_id;
+        null !== $profile_name && $obj['profile_name'] = $profile_name;
+        null !== $rate && $obj['rate'] = $rate;
+        null !== $sent_at && $obj['sent_at'] = $sent_at;
+        null !== $source_country_code && $obj['source_country_code'] = $source_country_code;
         null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj->tags = $tags;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $user_id && $obj->user_id = $user_id;
-        null !== $uuid && $obj->uuid = $uuid;
+        null !== $tags && $obj['tags'] = $tags;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $uuid && $obj['uuid'] = $uuid;
 
         return $obj;
     }
@@ -351,7 +351,7 @@ final class MessageDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -362,7 +362,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCarrier(string $carrier): self
     {
         $obj = clone $this;
-        $obj->carrier = $carrier;
+        $obj['carrier'] = $carrier;
 
         return $obj;
     }
@@ -373,7 +373,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCarrierFee(string $carrierFee): self
     {
         $obj = clone $this;
-        $obj->carrier_fee = $carrierFee;
+        $obj['carrier_fee'] = $carrierFee;
 
         return $obj;
     }
@@ -384,7 +384,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCld(string $cld): self
     {
         $obj = clone $this;
-        $obj->cld = $cld;
+        $obj['cld'] = $cld;
 
         return $obj;
     }
@@ -395,7 +395,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCli(string $cli): self
     {
         $obj = clone $this;
-        $obj->cli = $cli;
+        $obj['cli'] = $cli;
 
         return $obj;
     }
@@ -406,7 +406,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
-        $obj->completed_at = $completedAt;
+        $obj['completed_at'] = $completedAt;
 
         return $obj;
     }
@@ -417,7 +417,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCost(string $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -428,7 +428,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -439,7 +439,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -450,7 +450,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -461,7 +461,7 @@ final class MessageDetailRecord implements BaseModel
     public function withDeliveryStatus(string $deliveryStatus): self
     {
         $obj = clone $this;
-        $obj->delivery_status = $deliveryStatus;
+        $obj['delivery_status'] = $deliveryStatus;
 
         return $obj;
     }
@@ -473,7 +473,7 @@ final class MessageDetailRecord implements BaseModel
         string $deliveryStatusFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->delivery_status_failover_url = $deliveryStatusFailoverURL;
+        $obj['delivery_status_failover_url'] = $deliveryStatusFailoverURL;
 
         return $obj;
     }
@@ -485,7 +485,7 @@ final class MessageDetailRecord implements BaseModel
         string $deliveryStatusWebhookURL
     ): self {
         $obj = clone $this;
-        $obj->delivery_status_webhook_url = $deliveryStatusWebhookURL;
+        $obj['delivery_status_webhook_url'] = $deliveryStatusWebhookURL;
 
         return $obj;
     }
@@ -511,7 +511,7 @@ final class MessageDetailRecord implements BaseModel
     public function withErrors(array $errors): self
     {
         $obj = clone $this;
-        $obj->errors = $errors;
+        $obj['errors'] = $errors;
 
         return $obj;
     }
@@ -522,7 +522,7 @@ final class MessageDetailRecord implements BaseModel
     public function withFteu(bool $fteu): self
     {
         $obj = clone $this;
-        $obj->fteu = $fteu;
+        $obj['fteu'] = $fteu;
 
         return $obj;
     }
@@ -533,7 +533,7 @@ final class MessageDetailRecord implements BaseModel
     public function withMcc(string $mcc): self
     {
         $obj = clone $this;
-        $obj->mcc = $mcc;
+        $obj['mcc'] = $mcc;
 
         return $obj;
     }
@@ -557,7 +557,7 @@ final class MessageDetailRecord implements BaseModel
     public function withMnc(string $mnc): self
     {
         $obj = clone $this;
-        $obj->mnc = $mnc;
+        $obj['mnc'] = $mnc;
 
         return $obj;
     }
@@ -568,7 +568,7 @@ final class MessageDetailRecord implements BaseModel
     public function withOnNet(bool $onNet): self
     {
         $obj = clone $this;
-        $obj->on_net = $onNet;
+        $obj['on_net'] = $onNet;
 
         return $obj;
     }
@@ -579,7 +579,7 @@ final class MessageDetailRecord implements BaseModel
     public function withParts(int $parts): self
     {
         $obj = clone $this;
-        $obj->parts = $parts;
+        $obj['parts'] = $parts;
 
         return $obj;
     }
@@ -590,7 +590,7 @@ final class MessageDetailRecord implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj->profile_id = $profileID;
+        $obj['profile_id'] = $profileID;
 
         return $obj;
     }
@@ -601,7 +601,7 @@ final class MessageDetailRecord implements BaseModel
     public function withProfileName(string $profileName): self
     {
         $obj = clone $this;
-        $obj->profile_name = $profileName;
+        $obj['profile_name'] = $profileName;
 
         return $obj;
     }
@@ -612,7 +612,7 @@ final class MessageDetailRecord implements BaseModel
     public function withRate(string $rate): self
     {
         $obj = clone $this;
-        $obj->rate = $rate;
+        $obj['rate'] = $rate;
 
         return $obj;
     }
@@ -623,7 +623,7 @@ final class MessageDetailRecord implements BaseModel
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
-        $obj->sent_at = $sentAt;
+        $obj['sent_at'] = $sentAt;
 
         return $obj;
     }
@@ -634,7 +634,7 @@ final class MessageDetailRecord implements BaseModel
     public function withSourceCountryCode(string $sourceCountryCode): self
     {
         $obj = clone $this;
-        $obj->source_country_code = $sourceCountryCode;
+        $obj['source_country_code'] = $sourceCountryCode;
 
         return $obj;
     }
@@ -658,7 +658,7 @@ final class MessageDetailRecord implements BaseModel
     public function withTags(string $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -669,7 +669,7 @@ final class MessageDetailRecord implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -680,7 +680,7 @@ final class MessageDetailRecord implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
@@ -691,7 +691,7 @@ final class MessageDetailRecord implements BaseModel
     public function withUuid(string $uuid): self
     {
         $obj = clone $this;
-        $obj->uuid = $uuid;
+        $obj['uuid'] = $uuid;
 
         return $obj;
     }

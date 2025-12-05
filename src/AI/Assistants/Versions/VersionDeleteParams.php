@@ -53,7 +53,7 @@ final class VersionDeleteParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->assistant_id = $assistant_id;
+        $obj['assistant_id'] = $assistant_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class VersionDeleteParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistant_id = $assistantID;
+        $obj['assistant_id'] = $assistantID;
 
         return $obj;
     }

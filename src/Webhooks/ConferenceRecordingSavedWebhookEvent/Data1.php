@@ -9,6 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data1\EventType;
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data1\Payload;
+use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data1\Payload\Channels;
+use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data1\Payload\Format;
+use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data1\Payload\PublicRecordingURLs;
+use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data1\Payload\RecordingURLs;
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data1\RecordType;
 
 /**
@@ -60,19 +64,33 @@ final class Data1 implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $event_type
+     * @param Payload|array{
+     *   call_control_id?: string|null,
+     *   call_session_id?: string|null,
+     *   channels?: value-of<Channels>|null,
+     *   client_state?: string|null,
+     *   conference_id?: string|null,
+     *   connection_id?: string|null,
+     *   format?: value-of<Format>|null,
+     *   public_recording_urls?: PublicRecordingURLs|null,
+     *   recording_ended_at?: \DateTimeInterface|null,
+     *   recording_id?: string|null,
+     *   recording_started_at?: \DateTimeInterface|null,
+     *   recording_urls?: RecordingURLs|null,
+     * } $payload
      * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
         EventType|string|null $event_type = null,
-        ?Payload $payload = null,
+        Payload|array|null $payload = null,
         RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $payload && $obj->payload = $payload;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -84,7 +102,7 @@ final class Data1 implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -102,10 +120,26 @@ final class Data1 implements BaseModel
         return $obj;
     }
 
-    public function withPayload(Payload $payload): self
+    /**
+     * @param Payload|array{
+     *   call_control_id?: string|null,
+     *   call_session_id?: string|null,
+     *   channels?: value-of<Channels>|null,
+     *   client_state?: string|null,
+     *   conference_id?: string|null,
+     *   connection_id?: string|null,
+     *   format?: value-of<Format>|null,
+     *   public_recording_urls?: PublicRecordingURLs|null,
+     *   recording_ended_at?: \DateTimeInterface|null,
+     *   recording_id?: string|null,
+     *   recording_started_at?: \DateTimeInterface|null,
+     *   recording_urls?: RecordingURLs|null,
+     * } $payload
+     */
+    public function withPayload(Payload|array $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }

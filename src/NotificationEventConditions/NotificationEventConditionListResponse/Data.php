@@ -100,7 +100,9 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AssociatedRecordType|value-of<AssociatedRecordType> $associated_record_type
-     * @param list<Parameter> $parameters
+     * @param list<Parameter|array{
+     *   data_type?: string|null, name?: string|null, optional?: bool|null
+     * }> $parameters
      * @param list<string> $supported_channels
      */
     public static function with(
@@ -119,18 +121,18 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $allow_multiple_channels && $obj->allow_multiple_channels = $allow_multiple_channels;
+        null !== $id && $obj['id'] = $id;
+        null !== $allow_multiple_channels && $obj['allow_multiple_channels'] = $allow_multiple_channels;
         null !== $associated_record_type && $obj['associated_record_type'] = $associated_record_type;
-        null !== $asynchronous && $obj->asynchronous = $asynchronous;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $description && $obj->description = $description;
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $name && $obj->name = $name;
-        null !== $notification_event_id && $obj->notification_event_id = $notification_event_id;
-        null !== $parameters && $obj->parameters = $parameters;
-        null !== $supported_channels && $obj->supported_channels = $supported_channels;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $asynchronous && $obj['asynchronous'] = $asynchronous;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $description && $obj['description'] = $description;
+        null !== $enabled && $obj['enabled'] = $enabled;
+        null !== $name && $obj['name'] = $name;
+        null !== $notification_event_id && $obj['notification_event_id'] = $notification_event_id;
+        null !== $parameters && $obj['parameters'] = $parameters;
+        null !== $supported_channels && $obj['supported_channels'] = $supported_channels;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -141,7 +143,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -152,7 +154,7 @@ final class Data implements BaseModel
     public function withAllowMultipleChannels(bool $allowMultipleChannels): self
     {
         $obj = clone $this;
-        $obj->allow_multiple_channels = $allowMultipleChannels;
+        $obj['allow_multiple_channels'] = $allowMultipleChannels;
 
         return $obj;
     }
@@ -175,7 +177,7 @@ final class Data implements BaseModel
     public function withAsynchronous(bool $asynchronous): self
     {
         $obj = clone $this;
-        $obj->asynchronous = $asynchronous;
+        $obj['asynchronous'] = $asynchronous;
 
         return $obj;
     }
@@ -186,7 +188,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -194,7 +196,7 @@ final class Data implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -202,7 +204,7 @@ final class Data implements BaseModel
     public function withEnabled(bool $enabled): self
     {
         $obj = clone $this;
-        $obj->enabled = $enabled;
+        $obj['enabled'] = $enabled;
 
         return $obj;
     }
@@ -210,7 +212,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -218,18 +220,20 @@ final class Data implements BaseModel
     public function withNotificationEventID(string $notificationEventID): self
     {
         $obj = clone $this;
-        $obj->notification_event_id = $notificationEventID;
+        $obj['notification_event_id'] = $notificationEventID;
 
         return $obj;
     }
 
     /**
-     * @param list<Parameter> $parameters
+     * @param list<Parameter|array{
+     *   data_type?: string|null, name?: string|null, optional?: bool|null
+     * }> $parameters
      */
     public function withParameters(array $parameters): self
     {
         $obj = clone $this;
-        $obj->parameters = $parameters;
+        $obj['parameters'] = $parameters;
 
         return $obj;
     }
@@ -242,7 +246,7 @@ final class Data implements BaseModel
     public function withSupportedChannels(array $supportedChannels): self
     {
         $obj = clone $this;
-        $obj->supported_channels = $supportedChannels;
+        $obj['supported_channels'] = $supportedChannels;
 
         return $obj;
     }
@@ -253,7 +257,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthGetResponse\Data;
+use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
 
 /**
  * @phpstan-type OAuthGetResponseShape = array{data?: Data|null}
@@ -33,20 +34,43 @@ final class OAuthGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   client_id?: string|null,
+     *   logo_uri?: string|null,
+     *   name?: string|null,
+     *   policy_uri?: string|null,
+     *   redirect_uri?: string|null,
+     *   requested_scopes?: list<RequestedScope>|null,
+     *   tos_uri?: string|null,
+     *   verified?: bool|null,
+     * } $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   client_id?: string|null,
+     *   logo_uri?: string|null,
+     *   name?: string|null,
+     *   policy_uri?: string|null,
+     *   redirect_uri?: string|null,
+     *   requested_scopes?: list<RequestedScope>|null,
+     *   tos_uri?: string|null,
+     *   verified?: bool|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

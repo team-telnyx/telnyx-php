@@ -51,22 +51,32 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Function1|array{
+     *   name: string, description?: string|null, parameters?: array<string,mixed>|null
+     * } $function
      * @param Type|value-of<Type> $type
      */
-    public static function with(Function1 $function, Type|string $type): self
-    {
+    public static function with(
+        Function1|array $function,
+        Type|string $type
+    ): self {
         $obj = new self;
 
-        $obj->function = $function;
+        $obj['function'] = $function;
         $obj['type'] = $type;
 
         return $obj;
     }
 
-    public function withFunction(Function1 $function): self
+    /**
+     * @param Function1|array{
+     *   name: string, description?: string|null, parameters?: array<string,mixed>|null
+     * } $function
+     */
+    public function withFunction(Function1|array $function): self
     {
         $obj = clone $this;
-        $obj->function = $function;
+        $obj['function'] = $function;
 
         return $obj;
     }

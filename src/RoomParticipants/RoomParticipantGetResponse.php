@@ -35,20 +35,41 @@ final class RoomParticipantGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param RoomParticipant|array{
+     *   id?: string|null,
+     *   context?: string|null,
+     *   joined_at?: \DateTimeInterface|null,
+     *   left_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   session_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?RoomParticipant $data = null): self
+    public static function with(RoomParticipant|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(RoomParticipant $data): self
+    /**
+     * @param RoomParticipant|array{
+     *   id?: string|null,
+     *   context?: string|null,
+     *   joined_at?: \DateTimeInterface|null,
+     *   left_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   session_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
+     */
+    public function withData(RoomParticipant|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

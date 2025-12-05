@@ -48,8 +48,8 @@ final class SuccessfulOperation implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $id && $obj['id'] = $id;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class SuccessfulOperation implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class SuccessfulOperation implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

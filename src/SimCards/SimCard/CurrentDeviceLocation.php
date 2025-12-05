@@ -53,10 +53,10 @@ final class CurrentDeviceLocation implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $accuracy && $obj->accuracy = $accuracy;
-        null !== $accuracy_unit && $obj->accuracy_unit = $accuracy_unit;
-        null !== $latitude && $obj->latitude = $latitude;
-        null !== $longitude && $obj->longitude = $longitude;
+        null !== $accuracy && $obj['accuracy'] = $accuracy;
+        null !== $accuracy_unit && $obj['accuracy_unit'] = $accuracy_unit;
+        null !== $latitude && $obj['latitude'] = $latitude;
+        null !== $longitude && $obj['longitude'] = $longitude;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class CurrentDeviceLocation implements BaseModel
     public function withAccuracy(int $accuracy): self
     {
         $obj = clone $this;
-        $obj->accuracy = $accuracy;
+        $obj['accuracy'] = $accuracy;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class CurrentDeviceLocation implements BaseModel
     public function withAccuracyUnit(string $accuracyUnit): self
     {
         $obj = clone $this;
-        $obj->accuracy_unit = $accuracyUnit;
+        $obj['accuracy_unit'] = $accuracyUnit;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class CurrentDeviceLocation implements BaseModel
     public function withLatitude(string $latitude): self
     {
         $obj = clone $this;
-        $obj->latitude = $latitude;
+        $obj['latitude'] = $latitude;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class CurrentDeviceLocation implements BaseModel
     public function withLongitude(string $longitude): self
     {
         $obj = clone $this;
-        $obj->longitude = $longitude;
+        $obj['longitude'] = $longitude;
 
         return $obj;
     }

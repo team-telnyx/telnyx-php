@@ -56,8 +56,8 @@ final class Node implements BaseModel
     {
         $obj = new self;
 
-        $obj->filename = $filename;
-        $obj->text = $text;
+        $obj['filename'] = $filename;
+        $obj['text'] = $text;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Node implements BaseModel
     public function withFilename(string $filename): self
     {
         $obj = clone $this;
-        $obj->filename = $filename;
+        $obj['filename'] = $filename;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Node implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

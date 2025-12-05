@@ -95,13 +95,13 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     ): self {
         $obj = new self;
 
-        null !== $annualFee && $obj->annualFee = $annualFee;
-        null !== $maxSubUsecases && $obj->maxSubUsecases = $maxSubUsecases;
-        null !== $minSubUsecases && $obj->minSubUsecases = $minSubUsecases;
-        null !== $mnoMetadata && $obj->mnoMetadata = $mnoMetadata;
-        null !== $monthlyFee && $obj->monthlyFee = $monthlyFee;
-        null !== $quarterlyFee && $obj->quarterlyFee = $quarterlyFee;
-        null !== $usecase && $obj->usecase = $usecase;
+        null !== $annualFee && $obj['annualFee'] = $annualFee;
+        null !== $maxSubUsecases && $obj['maxSubUsecases'] = $maxSubUsecases;
+        null !== $minSubUsecases && $obj['minSubUsecases'] = $minSubUsecases;
+        null !== $mnoMetadata && $obj['mnoMetadata'] = $mnoMetadata;
+        null !== $monthlyFee && $obj['monthlyFee'] = $monthlyFee;
+        null !== $quarterlyFee && $obj['quarterlyFee'] = $quarterlyFee;
+        null !== $usecase && $obj['usecase'] = $usecase;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     public function withAnnualFee(float $annualFee): self
     {
         $obj = clone $this;
-        $obj->annualFee = $annualFee;
+        $obj['annualFee'] = $annualFee;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     public function withMaxSubUsecases(int $maxSubUsecases): self
     {
         $obj = clone $this;
-        $obj->maxSubUsecases = $maxSubUsecases;
+        $obj['maxSubUsecases'] = $maxSubUsecases;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     public function withMinSubUsecases(int $minSubUsecases): self
     {
         $obj = clone $this;
-        $obj->minSubUsecases = $minSubUsecases;
+        $obj['minSubUsecases'] = $minSubUsecases;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     public function withMnoMetadata(array $mnoMetadata): self
     {
         $obj = clone $this;
-        $obj->mnoMetadata = $mnoMetadata;
+        $obj['mnoMetadata'] = $mnoMetadata;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     public function withMonthlyFee(float $monthlyFee): self
     {
         $obj = clone $this;
-        $obj->monthlyFee = $monthlyFee;
+        $obj['monthlyFee'] = $monthlyFee;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     public function withQuarterlyFee(float $quarterlyFee): self
     {
         $obj = clone $this;
-        $obj->quarterlyFee = $quarterlyFee;
+        $obj['quarterlyFee'] = $quarterlyFee;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     public function withUsecase(string $usecase): self
     {
         $obj = clone $this;
-        $obj->usecase = $usecase;
+        $obj['usecase'] = $usecase;
 
         return $obj;
     }

@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard\CardWidth;
 use Telnyx\Messsages\RcsCardContent;
+use Telnyx\Messsages\RcsCardContent\Media;
+use Telnyx\Messsages\RcsSuggestion;
 
 /**
  * Carousel of cards.
@@ -62,7 +64,12 @@ final class CarouselCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsCardContent> $card_contents
+     * @param list<RcsCardContent|array{
+     *   description?: string|null,
+     *   media?: Media|null,
+     *   suggestions?: list<RcsSuggestion>|null,
+     *   title?: string|null,
+     * }> $card_contents
      * @param CardWidth|value-of<CardWidth> $card_width
      */
     public static function with(
@@ -71,7 +78,7 @@ final class CarouselCard implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->card_contents = $card_contents;
+        $obj['card_contents'] = $card_contents;
         $obj['card_width'] = $card_width;
 
         return $obj;
@@ -80,12 +87,17 @@ final class CarouselCard implements BaseModel
     /**
      * The list of contents for each card in the carousel. A carousel can have a minimum of 2 cards and a maximum 10 cards.
      *
-     * @param list<RcsCardContent> $cardContents
+     * @param list<RcsCardContent|array{
+     *   description?: string|null,
+     *   media?: Media|null,
+     *   suggestions?: list<RcsSuggestion>|null,
+     *   title?: string|null,
+     * }> $cardContents
      */
     public function withCardContents(array $cardContents): self
     {
         $obj = clone $this;
-        $obj->card_contents = $cardContents;
+        $obj['card_contents'] = $cardContents;
 
         return $obj;
     }

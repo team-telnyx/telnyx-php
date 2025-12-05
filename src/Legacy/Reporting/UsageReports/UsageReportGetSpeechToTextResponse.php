@@ -37,7 +37,7 @@ final class UsageReportGetSpeechToTextResponse implements BaseModel, ResponseCon
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
@@ -45,7 +45,7 @@ final class UsageReportGetSpeechToTextResponse implements BaseModel, ResponseCon
     public function withData(mixed $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

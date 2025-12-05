@@ -38,7 +38,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $verified && $obj->verified = $verified;
+        null !== $verified && $obj['verified'] = $verified;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withVerified(bool $verified): self
     {
         $obj = clone $this;
-        $obj->verified = $verified;
+        $obj['verified'] = $verified;
 
         return $obj;
     }

@@ -34,24 +34,29 @@ final class Filters implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param int|Contains|array{contains?: int|null} $available_bandwidth
      */
-    public static function with(int|Contains|null $available_bandwidth = null): self
-    {
+    public static function with(
+        int|Contains|array|null $available_bandwidth = null
+    ): self {
         $obj = new self;
 
-        null !== $available_bandwidth && $obj->available_bandwidth = $available_bandwidth;
+        null !== $available_bandwidth && $obj['available_bandwidth'] = $available_bandwidth;
 
         return $obj;
     }
 
     /**
      * Filter by exact available bandwidth match.
+     *
+     * @param int|Contains|array{contains?: int|null} $availableBandwidth
      */
     public function withAvailableBandwidth(
-        int|Contains $availableBandwidth
+        int|Contains|array $availableBandwidth
     ): self {
         $obj = clone $this;
-        $obj->available_bandwidth = $availableBandwidth;
+        $obj['available_bandwidth'] = $availableBandwidth;
 
         return $obj;
     }

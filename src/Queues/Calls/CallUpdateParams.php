@@ -63,9 +63,9 @@ final class CallUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->queue_name = $queue_name;
+        $obj['queue_name'] = $queue_name;
 
-        null !== $keep_after_hangup && $obj->keep_after_hangup = $keep_after_hangup;
+        null !== $keep_after_hangup && $obj['keep_after_hangup'] = $keep_after_hangup;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class CallUpdateParams implements BaseModel
     public function withQueueName(string $queueName): self
     {
         $obj = clone $this;
-        $obj->queue_name = $queueName;
+        $obj['queue_name'] = $queueName;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class CallUpdateParams implements BaseModel
     public function withKeepAfterHangup(bool $keepAfterHangup): self
     {
         $obj = clone $this;
-        $obj->keep_after_hangup = $keepAfterHangup;
+        $obj['keep_after_hangup'] = $keepAfterHangup;
 
         return $obj;
     }

@@ -58,7 +58,7 @@ final class DtmfTool implements BaseModel
     {
         $obj = new self;
 
-        $obj->send_dtmf = $send_dtmf;
+        $obj['send_dtmf'] = $send_dtmf;
         $obj['type'] = $type;
 
         return $obj;
@@ -70,7 +70,7 @@ final class DtmfTool implements BaseModel
     public function withSendDtmf(array $sendDtmf): self
     {
         $obj = clone $this;
-        $obj->send_dtmf = $sendDtmf;
+        $obj['send_dtmf'] = $sendDtmf;
 
         return $obj;
     }

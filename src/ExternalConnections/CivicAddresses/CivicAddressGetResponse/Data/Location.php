@@ -57,10 +57,10 @@ final class Location implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $additional_info && $obj->additional_info = $additional_info;
-        null !== $description && $obj->description = $description;
-        null !== $is_default && $obj->is_default = $is_default;
+        null !== $id && $obj['id'] = $id;
+        null !== $additional_info && $obj['additional_info'] = $additional_info;
+        null !== $description && $obj['description'] = $description;
+        null !== $is_default && $obj['is_default'] = $is_default;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Location implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Location implements BaseModel
     public function withAdditionalInfo(string $additionalInfo): self
     {
         $obj = clone $this;
-        $obj->additional_info = $additionalInfo;
+        $obj['additional_info'] = $additionalInfo;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class Location implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Location implements BaseModel
     public function withIsDefault(bool $isDefault): self
     {
         $obj = clone $this;
-        $obj->is_default = $isDefault;
+        $obj['is_default'] = $isDefault;
 
         return $obj;
     }

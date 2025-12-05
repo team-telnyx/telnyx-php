@@ -36,7 +36,7 @@ final class Meta implements BaseModel
     {
         $obj = new self;
 
-        null !== $phone_numbers_url && $obj->phone_numbers_url = $phone_numbers_url;
+        null !== $phone_numbers_url && $obj['phone_numbers_url'] = $phone_numbers_url;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Meta implements BaseModel
     public function withPhoneNumbersURL(string $phoneNumbersURL): self
     {
         $obj = clone $this;
-        $obj->phone_numbers_url = $phoneNumbersURL;
+        $obj['phone_numbers_url'] = $phoneNumbersURL;
 
         return $obj;
     }

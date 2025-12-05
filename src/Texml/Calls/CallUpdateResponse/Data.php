@@ -36,8 +36,8 @@ final class Data implements BaseModel
     {
         $obj = new self;
 
-        null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj->status = $status;
+        null !== $sid && $obj['sid'] = $sid;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -45,7 +45,7 @@ final class Data implements BaseModel
     public function withSid(string $sid): self
     {
         $obj = clone $this;
-        $obj->sid = $sid;
+        $obj['sid'] = $sid;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class Data implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

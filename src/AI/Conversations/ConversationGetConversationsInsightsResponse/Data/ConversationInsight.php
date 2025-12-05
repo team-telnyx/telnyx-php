@@ -58,8 +58,8 @@ final class ConversationInsight implements BaseModel
     {
         $obj = new self;
 
-        $obj->insight_id = $insight_id;
-        $obj->result = $result;
+        $obj['insight_id'] = $insight_id;
+        $obj['result'] = $result;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class ConversationInsight implements BaseModel
     public function withInsightID(string $insightID): self
     {
         $obj = clone $this;
-        $obj->insight_id = $insightID;
+        $obj['insight_id'] = $insightID;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class ConversationInsight implements BaseModel
     public function withResult(string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

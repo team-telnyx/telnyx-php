@@ -40,7 +40,7 @@ final class NoiseSuppressionEngineConfig implements BaseModel
     {
         $obj = new self;
 
-        null !== $attenuation_limit && $obj->attenuation_limit = $attenuation_limit;
+        null !== $attenuation_limit && $obj['attenuation_limit'] = $attenuation_limit;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class NoiseSuppressionEngineConfig implements BaseModel
     public function withAttenuationLimit(int $attenuationLimit): self
     {
         $obj = clone $this;
-        $obj->attenuation_limit = $attenuationLimit;
+        $obj['attenuation_limit'] = $attenuationLimit;
 
         return $obj;
     }

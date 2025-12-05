@@ -80,11 +80,11 @@ final class DocumentUploadJsonParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->url = $url;
-        $obj->file = $file;
+        $obj['url'] = $url;
+        $obj['file'] = $file;
 
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $filename && $obj->filename = $filename;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $filename && $obj['filename'] = $filename;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class DocumentUploadJsonParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class DocumentUploadJsonParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class DocumentUploadJsonParams implements BaseModel
     public function withFilename(string $filename): self
     {
         $obj = clone $this;
-        $obj->filename = $filename;
+        $obj['filename'] = $filename;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class DocumentUploadJsonParams implements BaseModel
     public function withFile(string $file): self
     {
         $obj = clone $this;
-        $obj->file = $file;
+        $obj['file'] = $file;
 
         return $obj;
     }

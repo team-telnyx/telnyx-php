@@ -39,7 +39,7 @@ final class AssistantSendSMSResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        null !== $conversation_id && $obj->conversation_id = $conversation_id;
+        null !== $conversation_id && $obj['conversation_id'] = $conversation_id;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class AssistantSendSMSResponse implements BaseModel, ResponseConverter
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversation_id = $conversationID;
+        $obj['conversation_id'] = $conversationID;
 
         return $obj;
     }

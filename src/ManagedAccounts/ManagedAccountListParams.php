@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
+use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\Email;
+use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Page;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 
@@ -18,9 +20,11 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
  * @see Telnyx\Services\ManagedAccountsService::list()
  *
  * @phpstan-type ManagedAccountListParamsShape = array{
- *   filter?: Filter,
+ *   filter?: Filter|array{
+ *     email?: Email|null, organization_name?: OrganizationName|null
+ *   },
  *   include_cancelled_accounts?: bool,
- *   page?: Page,
+ *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
  * }
  */
@@ -77,19 +81,23 @@ final class ManagedAccountListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   email?: Email|null, organization_name?: OrganizationName|null
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?bool $include_cancelled_accounts = null,
-        ?Page $page = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $include_cancelled_accounts && $obj->include_cancelled_accounts = $include_cancelled_accounts;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $include_cancelled_accounts && $obj['include_cancelled_accounts'] = $include_cancelled_accounts;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -97,11 +105,15 @@ final class ManagedAccountListParams implements BaseModel
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
+     *
+     * @param Filter|array{
+     *   email?: Email|null, organization_name?: OrganizationName|null
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
@@ -113,18 +125,20 @@ final class ManagedAccountListParams implements BaseModel
         bool $includeCancelledAccounts
     ): self {
         $obj = clone $this;
-        $obj->include_cancelled_accounts = $includeCancelledAccounts;
+        $obj['include_cancelled_accounts'] = $includeCancelledAccounts;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

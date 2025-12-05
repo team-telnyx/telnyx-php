@@ -157,17 +157,17 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
-        $obj->call_leg_id = $call_leg_id;
-        $obj->call_session_id = $call_session_id;
-        $obj->connection_id = $connection_id;
-        $obj->enqueued_at = $enqueued_at;
-        $obj->from = $from;
-        $obj->queue_id = $queue_id;
-        $obj->queue_position = $queue_position;
+        $obj['call_control_id'] = $call_control_id;
+        $obj['call_leg_id'] = $call_leg_id;
+        $obj['call_session_id'] = $call_session_id;
+        $obj['connection_id'] = $connection_id;
+        $obj['enqueued_at'] = $enqueued_at;
+        $obj['from'] = $from;
+        $obj['queue_id'] = $queue_id;
+        $obj['queue_position'] = $queue_position;
         $obj['record_type'] = $record_type;
-        $obj->to = $to;
-        $obj->wait_time_secs = $wait_time_secs;
+        $obj['to'] = $to;
+        $obj['wait_time_secs'] = $wait_time_secs;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class Data implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class Data implements BaseModel
     public function withEnqueuedAt(string $enqueuedAt): self
     {
         $obj = clone $this;
-        $obj->enqueued_at = $enqueuedAt;
+        $obj['enqueued_at'] = $enqueuedAt;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class Data implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class Data implements BaseModel
     public function withQueueID(string $queueID): self
     {
         $obj = clone $this;
-        $obj->queue_id = $queueID;
+        $obj['queue_id'] = $queueID;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class Data implements BaseModel
     public function withQueuePosition(int $queuePosition): self
     {
         $obj = clone $this;
-        $obj->queue_position = $queuePosition;
+        $obj['queue_position'] = $queuePosition;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class Data implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class Data implements BaseModel
     public function withWaitTimeSecs(int $waitTimeSecs): self
     {
         $obj = clone $this;
-        $obj->wait_time_secs = $waitTimeSecs;
+        $obj['wait_time_secs'] = $waitTimeSecs;
 
         return $obj;
     }

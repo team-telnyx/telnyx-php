@@ -164,20 +164,20 @@ final class ParticipantUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
-        $obj->conference_sid = $conference_sid;
+        $obj['account_sid'] = $account_sid;
+        $obj['conference_sid'] = $conference_sid;
 
         null !== $AnnounceMethod && $obj['AnnounceMethod'] = $AnnounceMethod;
-        null !== $AnnounceUrl && $obj->AnnounceUrl = $AnnounceUrl;
-        null !== $BeepOnExit && $obj->BeepOnExit = $BeepOnExit;
-        null !== $CallSidToCoach && $obj->CallSidToCoach = $CallSidToCoach;
-        null !== $Coaching && $obj->Coaching = $Coaching;
-        null !== $EndConferenceOnExit && $obj->EndConferenceOnExit = $EndConferenceOnExit;
-        null !== $Hold && $obj->Hold = $Hold;
+        null !== $AnnounceUrl && $obj['AnnounceUrl'] = $AnnounceUrl;
+        null !== $BeepOnExit && $obj['BeepOnExit'] = $BeepOnExit;
+        null !== $CallSidToCoach && $obj['CallSidToCoach'] = $CallSidToCoach;
+        null !== $Coaching && $obj['Coaching'] = $Coaching;
+        null !== $EndConferenceOnExit && $obj['EndConferenceOnExit'] = $EndConferenceOnExit;
+        null !== $Hold && $obj['Hold'] = $Hold;
         null !== $HoldMethod && $obj['HoldMethod'] = $HoldMethod;
-        null !== $HoldUrl && $obj->HoldUrl = $HoldUrl;
-        null !== $Muted && $obj->Muted = $Muted;
-        null !== $WaitUrl && $obj->WaitUrl = $WaitUrl;
+        null !== $HoldUrl && $obj['HoldUrl'] = $HoldUrl;
+        null !== $Muted && $obj['Muted'] = $Muted;
+        null !== $WaitUrl && $obj['WaitUrl'] = $WaitUrl;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withConferenceSid(string $conferenceSid): self
     {
         $obj = clone $this;
-        $obj->conference_sid = $conferenceSid;
+        $obj['conference_sid'] = $conferenceSid;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withAnnounceURL(string $announceURL): self
     {
         $obj = clone $this;
-        $obj->AnnounceUrl = $announceURL;
+        $obj['AnnounceUrl'] = $announceURL;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withBeepOnExit(bool $beepOnExit): self
     {
         $obj = clone $this;
-        $obj->BeepOnExit = $beepOnExit;
+        $obj['BeepOnExit'] = $beepOnExit;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withCallSidToCoach(string $callSidToCoach): self
     {
         $obj = clone $this;
-        $obj->CallSidToCoach = $callSidToCoach;
+        $obj['CallSidToCoach'] = $callSidToCoach;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withCoaching(bool $coaching): self
     {
         $obj = clone $this;
-        $obj->Coaching = $coaching;
+        $obj['Coaching'] = $coaching;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->EndConferenceOnExit = $endConferenceOnExit;
+        $obj['EndConferenceOnExit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withHold(bool $hold): self
     {
         $obj = clone $this;
-        $obj->Hold = $hold;
+        $obj['Hold'] = $hold;
 
         return $obj;
     }
@@ -298,7 +298,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withHoldURL(string $holdURL): self
     {
         $obj = clone $this;
-        $obj->HoldUrl = $holdURL;
+        $obj['HoldUrl'] = $holdURL;
 
         return $obj;
     }
@@ -309,7 +309,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withMuted(bool $muted): self
     {
         $obj = clone $this;
-        $obj->Muted = $muted;
+        $obj['Muted'] = $muted;
 
         return $obj;
     }
@@ -320,7 +320,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withWaitURL(string $waitURL): self
     {
         $obj = clone $this;
-        $obj->WaitUrl = $waitURL;
+        $obj['WaitUrl'] = $waitURL;
 
         return $obj;
     }

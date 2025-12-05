@@ -91,14 +91,14 @@ final class InsightTemplate implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->instructions = $instructions;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['instructions'] = $instructions;
 
         null !== $insight_type && $obj['insight_type'] = $insight_type;
-        null !== $json_schema && $obj->json_schema = $json_schema;
-        null !== $name && $obj->name = $name;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $json_schema && $obj['json_schema'] = $json_schema;
+        null !== $name && $obj['name'] = $name;
+        null !== $webhook && $obj['webhook'] = $webhook;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class InsightTemplate implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class InsightTemplate implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class InsightTemplate implements BaseModel
     public function withInstructions(string $instructions): self
     {
         $obj = clone $this;
-        $obj->instructions = $instructions;
+        $obj['instructions'] = $instructions;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class InsightTemplate implements BaseModel
     public function withJsonSchema(mixed $jsonSchema): self
     {
         $obj = clone $this;
-        $obj->json_schema = $jsonSchema;
+        $obj['json_schema'] = $jsonSchema;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class InsightTemplate implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class InsightTemplate implements BaseModel
     public function withWebhook(string $webhook): self
     {
         $obj = clone $this;
-        $obj->webhook = $webhook;
+        $obj['webhook'] = $webhook;
 
         return $obj;
     }

@@ -58,7 +58,7 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->wireless_blocklist_id = $wireless_blocklist_id;
+        $obj['wireless_blocklist_id'] = $wireless_blocklist_id;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
     public function withWirelessBlocklistID(string $wirelessBlocklistID): self
     {
         $obj = clone $this;
-        $obj->wireless_blocklist_id = $wirelessBlocklistID;
+        $obj['wireless_blocklist_id'] = $wirelessBlocklistID;
 
         return $obj;
     }

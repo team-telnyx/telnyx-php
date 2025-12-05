@@ -55,9 +55,9 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $muted && $obj->muted = $muted;
-        null !== $on_hold && $obj->on_hold = $on_hold;
-        null !== $whispering && $obj->whispering = $whispering;
+        null !== $muted && $obj['muted'] = $muted;
+        null !== $on_hold && $obj['on_hold'] = $on_hold;
+        null !== $whispering && $obj['whispering'] = $whispering;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Filter implements BaseModel
     public function withMuted(bool $muted): self
     {
         $obj = clone $this;
-        $obj->muted = $muted;
+        $obj['muted'] = $muted;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Filter implements BaseModel
     public function withOnHold(bool $onHold): self
     {
         $obj = clone $this;
-        $obj->on_hold = $onHold;
+        $obj['on_hold'] = $onHold;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     public function withWhispering(bool $whispering): self
     {
         $obj = clone $this;
-        $obj->whispering = $whispering;
+        $obj['whispering'] = $whispering;
 
         return $obj;
     }

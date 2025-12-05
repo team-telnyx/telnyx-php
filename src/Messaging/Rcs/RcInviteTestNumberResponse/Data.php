@@ -68,10 +68,10 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $agent_id && $obj->agent_id = $agent_id;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $agent_id && $obj['agent_id'] = $agent_id;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $status && $obj->status = $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agent_id = $agentID;
+        $obj['agent_id'] = $agentID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -85,10 +85,10 @@ final class ActionPlayParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $audio_url && $obj->audio_url = $audio_url;
-        null !== $call_control_ids && $obj->call_control_ids = $call_control_ids;
-        null !== $loop && $obj->loop = $loop;
-        null !== $media_name && $obj->media_name = $media_name;
+        null !== $audio_url && $obj['audio_url'] = $audio_url;
+        null !== $call_control_ids && $obj['call_control_ids'] = $call_control_ids;
+        null !== $loop && $obj['loop'] = $loop;
+        null !== $media_name && $obj['media_name'] = $media_name;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -100,7 +100,7 @@ final class ActionPlayParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj->audio_url = $audioURL;
+        $obj['audio_url'] = $audioURL;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class ActionPlayParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj->call_control_ids = $callControlIDs;
+        $obj['call_control_ids'] = $callControlIDs;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class ActionPlayParams implements BaseModel
     public function withLoop(string|int $loop): self
     {
         $obj = clone $this;
-        $obj->loop = $loop;
+        $obj['loop'] = $loop;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ActionPlayParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }

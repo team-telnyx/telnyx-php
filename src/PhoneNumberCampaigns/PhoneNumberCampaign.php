@@ -131,17 +131,17 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->campaignId = $campaignId;
-        $obj->createdAt = $createdAt;
-        $obj->phoneNumber = $phoneNumber;
-        $obj->updatedAt = $updatedAt;
+        $obj['campaignId'] = $campaignId;
+        $obj['createdAt'] = $createdAt;
+        $obj['phoneNumber'] = $phoneNumber;
+        $obj['updatedAt'] = $updatedAt;
 
         null !== $assignmentStatus && $obj['assignmentStatus'] = $assignmentStatus;
-        null !== $brandId && $obj->brandId = $brandId;
-        null !== $failureReasons && $obj->failureReasons = $failureReasons;
-        null !== $tcrBrandId && $obj->tcrBrandId = $tcrBrandId;
-        null !== $tcrCampaignId && $obj->tcrCampaignId = $tcrCampaignId;
-        null !== $telnyxCampaignId && $obj->telnyxCampaignId = $telnyxCampaignId;
+        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
+        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
+        null !== $tcrCampaignId && $obj['tcrCampaignId'] = $tcrCampaignId;
+        null !== $telnyxCampaignId && $obj['telnyxCampaignId'] = $telnyxCampaignId;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignId = $campaignID;
+        $obj['campaignId'] = $campaignID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withFailureReasons(string $failureReasons): self
     {
         $obj = clone $this;
-        $obj->failureReasons = $failureReasons;
+        $obj['failureReasons'] = $failureReasons;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj->tcrBrandId = $tcrBrandID;
+        $obj['tcrBrandId'] = $tcrBrandID;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj->tcrCampaignId = $tcrCampaignID;
+        $obj['tcrCampaignId'] = $tcrCampaignID;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withTelnyxCampaignID(string $telnyxCampaignID): self
     {
         $obj = clone $this;
-        $obj->telnyxCampaignId = $telnyxCampaignID;
+        $obj['telnyxCampaignId'] = $telnyxCampaignID;
 
         return $obj;
     }

@@ -67,21 +67,28 @@ final class Data implements BaseModel
      *
      * @param list<float> $available_bandwidth
      * @param CloudProvider|value-of<CloudProvider> $cloud_provider
+     * @param Location|array{
+     *   code?: string|null,
+     *   name?: string|null,
+     *   pop?: string|null,
+     *   region?: string|null,
+     *   site?: string|null,
+     * } $location
      */
     public static function with(
         ?array $available_bandwidth = null,
         CloudProvider|string|null $cloud_provider = null,
         ?string $cloud_provider_region = null,
-        ?Location $location = null,
+        Location|array|null $location = null,
         ?string $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $available_bandwidth && $obj->available_bandwidth = $available_bandwidth;
+        null !== $available_bandwidth && $obj['available_bandwidth'] = $available_bandwidth;
         null !== $cloud_provider && $obj['cloud_provider'] = $cloud_provider;
-        null !== $cloud_provider_region && $obj->cloud_provider_region = $cloud_provider_region;
-        null !== $location && $obj->location = $location;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $cloud_provider_region && $obj['cloud_provider_region'] = $cloud_provider_region;
+        null !== $location && $obj['location'] = $location;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -94,7 +101,7 @@ final class Data implements BaseModel
     public function withAvailableBandwidth(array $availableBandwidth): self
     {
         $obj = clone $this;
-        $obj->available_bandwidth = $availableBandwidth;
+        $obj['available_bandwidth'] = $availableBandwidth;
 
         return $obj;
     }
@@ -118,15 +125,24 @@ final class Data implements BaseModel
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
         $obj = clone $this;
-        $obj->cloud_provider_region = $cloudProviderRegion;
+        $obj['cloud_provider_region'] = $cloudProviderRegion;
 
         return $obj;
     }
 
-    public function withLocation(Location $location): self
+    /**
+     * @param Location|array{
+     *   code?: string|null,
+     *   name?: string|null,
+     *   pop?: string|null,
+     *   region?: string|null,
+     *   site?: string|null,
+     * } $location
+     */
+    public function withLocation(Location|array $location): self
     {
         $obj = clone $this;
-        $obj->location = $location;
+        $obj['location'] = $location;
 
         return $obj;
     }
@@ -137,7 +153,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

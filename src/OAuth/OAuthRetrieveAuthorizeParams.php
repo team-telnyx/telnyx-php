@@ -121,14 +121,14 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->client_id = $client_id;
-        $obj->redirect_uri = $redirect_uri;
+        $obj['client_id'] = $client_id;
+        $obj['redirect_uri'] = $redirect_uri;
         $obj['response_type'] = $response_type;
 
-        null !== $code_challenge && $obj->code_challenge = $code_challenge;
+        null !== $code_challenge && $obj['code_challenge'] = $code_challenge;
         null !== $code_challenge_method && $obj['code_challenge_method'] = $code_challenge_method;
-        null !== $scope && $obj->scope = $scope;
-        null !== $state && $obj->state = $state;
+        null !== $scope && $obj['scope'] = $scope;
+        null !== $state && $obj['state'] = $state;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->client_id = $clientID;
+        $obj['client_id'] = $clientID;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj->redirect_uri = $redirectUri;
+        $obj['redirect_uri'] = $redirectUri;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withCodeChallenge(string $codeChallenge): self
     {
         $obj = clone $this;
-        $obj->code_challenge = $codeChallenge;
+        $obj['code_challenge'] = $codeChallenge;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withScope(string $scope): self
     {
         $obj = clone $this;
-        $obj->scope = $scope;
+        $obj['scope'] = $scope;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }

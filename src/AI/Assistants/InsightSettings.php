@@ -36,7 +36,7 @@ final class InsightSettings implements BaseModel
     {
         $obj = new self;
 
-        null !== $insight_group_id && $obj->insight_group_id = $insight_group_id;
+        null !== $insight_group_id && $obj['insight_group_id'] = $insight_group_id;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class InsightSettings implements BaseModel
     public function withInsightGroupID(string $insightGroupID): self
     {
         $obj = clone $this;
-        $obj->insight_group_id = $insightGroupID;
+        $obj['insight_group_id'] = $insightGroupID;
 
         return $obj;
     }

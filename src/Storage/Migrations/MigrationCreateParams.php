@@ -88,11 +88,11 @@ final class MigrationCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->source_id = $source_id;
-        $obj->target_bucket_name = $target_bucket_name;
-        $obj->target_region = $target_region;
+        $obj['source_id'] = $source_id;
+        $obj['target_bucket_name'] = $target_bucket_name;
+        $obj['target_region'] = $target_region;
 
-        null !== $refresh && $obj->refresh = $refresh;
+        null !== $refresh && $obj['refresh'] = $refresh;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class MigrationCreateParams implements BaseModel
     public function withSourceID(string $sourceID): self
     {
         $obj = clone $this;
-        $obj->source_id = $sourceID;
+        $obj['source_id'] = $sourceID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class MigrationCreateParams implements BaseModel
     public function withTargetBucketName(string $targetBucketName): self
     {
         $obj = clone $this;
-        $obj->target_bucket_name = $targetBucketName;
+        $obj['target_bucket_name'] = $targetBucketName;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class MigrationCreateParams implements BaseModel
     public function withTargetRegion(string $targetRegion): self
     {
         $obj = clone $this;
-        $obj->target_region = $targetRegion;
+        $obj['target_region'] = $targetRegion;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class MigrationCreateParams implements BaseModel
     public function withRefresh(bool $refresh): self
     {
         $obj = clone $this;
-        $obj->refresh = $refresh;
+        $obj['refresh'] = $refresh;
 
         return $obj;
     }

@@ -9,6 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Verifications\Verification\RecordType;
+use Telnyx\Verifications\Verification\Status;
+use Telnyx\Verifications\Verification\Type;
 
 /**
  * @phpstan-type CreateVerificationResponseShape = array{data: Verification}
@@ -46,20 +49,47 @@ final class CreateVerificationResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Verification|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   custom_code?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   status?: value-of<Status>|null,
+     *   timeout_secs?: int|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: string|null,
+     *   verify_profile_id?: string|null,
+     * } $data
      */
-    public static function with(Verification $data): self
+    public static function with(Verification|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Verification $data): self
+    /**
+     * @param Verification|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   custom_code?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   status?: value-of<Status>|null,
+     *   timeout_secs?: int|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: string|null,
+     *   verify_profile_id?: string|null,
+     * } $data
+     */
+    public function withData(Verification|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

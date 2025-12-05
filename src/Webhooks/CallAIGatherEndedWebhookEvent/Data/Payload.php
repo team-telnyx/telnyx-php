@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\MessageHistory;
+use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\MessageHistory\Role;
 use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\Status;
 
 /**
@@ -103,7 +104,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessageHistory> $message_history
+     * @param list<MessageHistory|array{
+     *   content?: string|null, role?: value-of<Role>|null
+     * }> $message_history
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -120,16 +123,16 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $from && $obj->from = $from;
-        null !== $message_history && $obj->message_history = $message_history;
-        null !== $result && $obj->result = $result;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $from && $obj['from'] = $from;
+        null !== $message_history && $obj['message_history'] = $message_history;
+        null !== $result && $obj['result'] = $result;
         null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
+        null !== $to && $obj['to'] = $to;
 
         return $obj;
     }
@@ -140,7 +143,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -151,7 +154,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -162,7 +165,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -173,7 +176,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -184,7 +187,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -195,7 +198,7 @@ final class Payload implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -203,12 +206,14 @@ final class Payload implements BaseModel
     /**
      * The history of the messages exchanged during the AI gather.
      *
-     * @param list<MessageHistory> $messageHistory
+     * @param list<MessageHistory|array{
+     *   content?: string|null, role?: value-of<Role>|null
+     * }> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {
         $obj = clone $this;
-        $obj->message_history = $messageHistory;
+        $obj['message_history'] = $messageHistory;
 
         return $obj;
     }
@@ -219,7 +224,7 @@ final class Payload implements BaseModel
     public function withResult(mixed $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }
@@ -243,7 +248,7 @@ final class Payload implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

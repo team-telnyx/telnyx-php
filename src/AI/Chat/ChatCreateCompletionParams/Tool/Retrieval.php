@@ -51,24 +51,33 @@ final class Retrieval implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param InferenceEmbeddingBucketIDs|array{
+     *   bucket_ids: list<string>, max_num_results?: int|null
+     * } $retrieval
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        InferenceEmbeddingBucketIDs $retrieval,
+        InferenceEmbeddingBucketIDs|array $retrieval,
         Type|string $type
     ): self {
         $obj = new self;
 
-        $obj->retrieval = $retrieval;
+        $obj['retrieval'] = $retrieval;
         $obj['type'] = $type;
 
         return $obj;
     }
 
-    public function withRetrieval(InferenceEmbeddingBucketIDs $retrieval): self
-    {
+    /**
+     * @param InferenceEmbeddingBucketIDs|array{
+     *   bucket_ids: list<string>, max_num_results?: int|null
+     * } $retrieval
+     */
+    public function withRetrieval(
+        InferenceEmbeddingBucketIDs|array $retrieval
+    ): self {
         $obj = clone $this;
-        $obj->retrieval = $retrieval;
+        $obj['retrieval'] = $retrieval;
 
         return $obj;
     }

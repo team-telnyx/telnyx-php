@@ -65,17 +65,26 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Metadata|array{
+     *   checksum: string,
+     *   embedding: string,
+     *   filename: string,
+     *   source: string,
+     *   certainty?: float|null,
+     *   loader_metadata?: array<string,mixed>|null,
+     * } $metadata
      */
     public static function with(
         float $distance,
         string $document_chunk,
-        Metadata $metadata
+        Metadata|array $metadata
     ): self {
         $obj = new self;
 
-        $obj->distance = $distance;
-        $obj->document_chunk = $document_chunk;
-        $obj->metadata = $metadata;
+        $obj['distance'] = $distance;
+        $obj['document_chunk'] = $document_chunk;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -83,7 +92,7 @@ final class Data implements BaseModel
     public function withDistance(float $distance): self
     {
         $obj = clone $this;
-        $obj->distance = $distance;
+        $obj['distance'] = $distance;
 
         return $obj;
     }
@@ -91,15 +100,25 @@ final class Data implements BaseModel
     public function withDocumentChunk(string $documentChunk): self
     {
         $obj = clone $this;
-        $obj->document_chunk = $documentChunk;
+        $obj['document_chunk'] = $documentChunk;
 
         return $obj;
     }
 
-    public function withMetadata(Metadata $metadata): self
+    /**
+     * @param Metadata|array{
+     *   checksum: string,
+     *   embedding: string,
+     *   filename: string,
+     *   source: string,
+     *   certainty?: float|null,
+     *   loader_metadata?: array<string,mixed>|null,
+     * } $metadata
+     */
+    public function withMetadata(Metadata|array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }

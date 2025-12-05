@@ -51,7 +51,7 @@ final class Status implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $reason && $obj->reason = $reason;
+        null !== $reason && $obj['reason'] = $reason;
         null !== $value && $obj['value'] = $value;
 
         return $obj;
@@ -63,7 +63,7 @@ final class Status implements BaseModel
     public function withReason(string $reason): self
     {
         $obj = clone $this;
-        $obj->reason = $reason;
+        $obj['reason'] = $reason;
 
         return $obj;
     }

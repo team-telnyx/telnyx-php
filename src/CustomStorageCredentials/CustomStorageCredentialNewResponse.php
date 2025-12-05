@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse\RecordType;
 
 /**
@@ -71,17 +72,21 @@ final class CustomStorageCredentialNewResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param CustomStorageConfiguration|array{
+     *   backend: value-of<Backend>,
+     *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
+     * } $data
      * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         string $connection_id,
-        CustomStorageConfiguration $data,
+        CustomStorageConfiguration|array $data,
         RecordType|string $record_type,
     ): self {
         $obj = new self;
 
-        $obj->connection_id = $connection_id;
-        $obj->data = $data;
+        $obj['connection_id'] = $connection_id;
+        $obj['data'] = $data;
         $obj['record_type'] = $record_type;
 
         return $obj;
@@ -93,15 +98,21 @@ final class CustomStorageCredentialNewResponse implements BaseModel, ResponseCon
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
 
-    public function withData(CustomStorageConfiguration $data): self
+    /**
+     * @param CustomStorageConfiguration|array{
+     *   backend: value-of<Backend>,
+     *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
+     * } $data
+     */
+    public function withData(CustomStorageConfiguration|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

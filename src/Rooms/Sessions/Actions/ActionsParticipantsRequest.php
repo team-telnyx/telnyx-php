@@ -56,7 +56,7 @@ final class ActionsParticipantsRequest implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $exclude && $obj->exclude = $exclude;
+        null !== $exclude && $obj['exclude'] = $exclude;
         null !== $participants && $obj['participants'] = $participants;
 
         return $obj;
@@ -70,7 +70,7 @@ final class ActionsParticipantsRequest implements BaseModel
     public function withExclude(array $exclude): self
     {
         $obj = clone $this;
-        $obj->exclude = $exclude;
+        $obj['exclude'] = $exclude;
 
         return $obj;
     }

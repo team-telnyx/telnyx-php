@@ -77,11 +77,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->code = $code;
-        $obj->name = $name;
+        $obj['code'] = $code;
+        $obj['name'] = $name;
 
-        null !== $inserted_at && $obj->inserted_at = $inserted_at;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $inserted_at && $obj['inserted_at'] = $inserted_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Data implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
         $obj = clone $this;
-        $obj->inserted_at = $insertedAt;
+        $obj['inserted_at'] = $insertedAt;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

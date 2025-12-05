@@ -114,13 +114,13 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj->administrative_area = $administrative_area;
-        null !== $count && $obj->count = $count;
+        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $count && $obj['count'] = $count;
         null !== $country_code && $obj['country_code'] = $country_code;
         null !== $features && $obj['features'] = $features;
         null !== $groupBy && $obj['groupBy'] = $groupBy;
-        null !== $npa && $obj->npa = $npa;
-        null !== $nxx && $obj->nxx = $nxx;
+        null !== $npa && $obj['npa'] = $npa;
+        null !== $nxx && $obj['nxx'] = $nxx;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
 
         return $obj;
@@ -132,7 +132,7 @@ final class Filter implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrative_area = $administrativeArea;
+        $obj['administrative_area'] = $administrativeArea;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Filter implements BaseModel
     public function withCount(bool $count): self
     {
         $obj = clone $this;
-        $obj->count = $count;
+        $obj['count'] = $count;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Filter implements BaseModel
     public function withNpa(int $npa): self
     {
         $obj = clone $this;
-        $obj->npa = $npa;
+        $obj['npa'] = $npa;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class Filter implements BaseModel
     public function withNxx(int $nxx): self
     {
         $obj = clone $this;
-        $obj->nxx = $nxx;
+        $obj['nxx'] = $nxx;
 
         return $obj;
     }

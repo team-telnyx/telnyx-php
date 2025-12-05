@@ -50,9 +50,9 @@ final class CallForwarding implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_forwarding_enabled && $obj->call_forwarding_enabled = $call_forwarding_enabled;
+        null !== $call_forwarding_enabled && $obj['call_forwarding_enabled'] = $call_forwarding_enabled;
         null !== $forwarding_type && $obj['forwarding_type'] = $forwarding_type;
-        null !== $forwards_to && $obj->forwards_to = $forwards_to;
+        null !== $forwards_to && $obj['forwards_to'] = $forwards_to;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class CallForwarding implements BaseModel
     public function withCallForwardingEnabled(bool $callForwardingEnabled): self
     {
         $obj = clone $this;
-        $obj->call_forwarding_enabled = $callForwardingEnabled;
+        $obj['call_forwarding_enabled'] = $callForwardingEnabled;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class CallForwarding implements BaseModel
     public function withForwardsTo(?string $forwardsTo): self
     {
         $obj = clone $this;
-        $obj->forwards_to = $forwardsTo;
+        $obj['forwards_to'] = $forwardsTo;
 
         return $obj;
     }

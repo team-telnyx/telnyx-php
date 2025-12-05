@@ -8,6 +8,9 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data;
+use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data\EventType;
+use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data\Payload;
+use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data\RecordType;
 use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Meta;
 
 /**
@@ -35,29 +38,52 @@ final class CustomerServiceRecordStatusChangedWebhookEvent implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   id?: string|null,
+     *   event_type?: value-of<EventType>|null,
+     *   occurred_at?: \DateTimeInterface|null,
+     *   payload?: Payload|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
+     * @param Meta|array{attempt?: int|null, delivered_to?: string|null} $meta
      */
-    public static function with(?Data $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        Data|array|null $data = null,
+        Meta|array|null $meta = null
+    ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   id?: string|null,
+     *   event_type?: value-of<EventType>|null,
+     *   occurred_at?: \DateTimeInterface|null,
+     *   payload?: Payload|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{attempt?: int|null, delivered_to?: string|null} $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

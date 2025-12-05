@@ -52,8 +52,8 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $PageSize && $obj->PageSize = $PageSize;
-        null !== $PageToken && $obj->PageToken = $PageToken;
+        null !== $PageSize && $obj['PageSize'] = $PageSize;
+        null !== $PageToken && $obj['PageToken'] = $PageToken;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->PageSize = $pageSize;
+        $obj['PageSize'] = $pageSize;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     public function withPageToken(string $pageToken): self
     {
         $obj = clone $this;
-        $obj->PageToken = $pageToken;
+        $obj['PageToken'] = $pageToken;
 
         return $obj;
     }

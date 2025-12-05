@@ -56,7 +56,7 @@ final class ActionChangeBundleStatusParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->bundle_id = $bundle_id;
+        $obj['bundle_id'] = $bundle_id;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class ActionChangeBundleStatusParams implements BaseModel
     public function withBundleID(string $bundleID): self
     {
         $obj = clone $this;
-        $obj->bundle_id = $bundleID;
+        $obj['bundle_id'] = $bundleID;
 
         return $obj;
     }

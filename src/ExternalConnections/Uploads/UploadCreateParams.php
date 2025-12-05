@@ -95,11 +95,11 @@ final class UploadCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->number_ids = $number_ids;
+        $obj['number_ids'] = $number_ids;
 
         null !== $additional_usages && $obj['additional_usages'] = $additional_usages;
-        null !== $civic_address_id && $obj->civic_address_id = $civic_address_id;
-        null !== $location_id && $obj->location_id = $location_id;
+        null !== $civic_address_id && $obj['civic_address_id'] = $civic_address_id;
+        null !== $location_id && $obj['location_id'] = $location_id;
         null !== $usage && $obj['usage'] = $usage;
 
         return $obj;
@@ -111,7 +111,7 @@ final class UploadCreateParams implements BaseModel
     public function withNumberIDs(array $numberIDs): self
     {
         $obj = clone $this;
-        $obj->number_ids = $numberIDs;
+        $obj['number_ids'] = $numberIDs;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class UploadCreateParams implements BaseModel
     public function withCivicAddressID(string $civicAddressID): self
     {
         $obj = clone $this;
-        $obj->civic_address_id = $civicAddressID;
+        $obj['civic_address_id'] = $civicAddressID;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class UploadCreateParams implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->location_id = $locationID;
+        $obj['location_id'] = $locationID;
 
         return $obj;
     }

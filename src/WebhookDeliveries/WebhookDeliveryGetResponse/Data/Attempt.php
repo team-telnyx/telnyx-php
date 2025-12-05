@@ -8,6 +8,8 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP;
+use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Request;
+use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Response;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status;
 
 /**
@@ -72,21 +74,22 @@ final class Attempt implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<int> $errors
+     * @param HTTP|array{request?: Request|null, response?: Response|null} $http
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?array $errors = null,
         ?\DateTimeInterface $finished_at = null,
-        ?HTTP $http = null,
+        HTTP|array|null $http = null,
         ?\DateTimeInterface $started_at = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $errors && $obj->errors = $errors;
-        null !== $finished_at && $obj->finished_at = $finished_at;
-        null !== $http && $obj->http = $http;
-        null !== $started_at && $obj->started_at = $started_at;
+        null !== $errors && $obj['errors'] = $errors;
+        null !== $finished_at && $obj['finished_at'] = $finished_at;
+        null !== $http && $obj['http'] = $http;
+        null !== $started_at && $obj['started_at'] = $started_at;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -100,7 +103,7 @@ final class Attempt implements BaseModel
     public function withErrors(array $errors): self
     {
         $obj = clone $this;
-        $obj->errors = $errors;
+        $obj['errors'] = $errors;
 
         return $obj;
     }
@@ -111,18 +114,20 @@ final class Attempt implements BaseModel
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finished_at = $finishedAt;
+        $obj['finished_at'] = $finishedAt;
 
         return $obj;
     }
 
     /**
      * HTTP request and response information.
+     *
+     * @param HTTP|array{request?: Request|null, response?: Response|null} $http
      */
-    public function withHTTP(HTTP $http): self
+    public function withHTTP(HTTP|array $http): self
     {
         $obj = clone $this;
-        $obj->http = $http;
+        $obj['http'] = $http;
 
         return $obj;
     }
@@ -133,7 +138,7 @@ final class Attempt implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj->started_at = $startedAt;
+        $obj['started_at'] = $startedAt;
 
         return $obj;
     }

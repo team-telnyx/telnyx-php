@@ -60,8 +60,8 @@ final class VerificationCodeError implements BaseModel
     {
         $obj = new self;
 
-        $obj->error = $error;
-        $obj->phone_number = $phone_number;
+        $obj['error'] = $error;
+        $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class VerificationCodeError implements BaseModel
     public function withError(string $error): self
     {
         $obj = clone $this;
-        $obj->error = $error;
+        $obj['error'] = $error;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class VerificationCodeError implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

@@ -53,8 +53,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $number_tags && $obj->number_tags = $number_tags;
-        null !== $outbound_profile_tags && $obj->outbound_profile_tags = $outbound_profile_tags;
+        null !== $number_tags && $obj['number_tags'] = $number_tags;
+        null !== $outbound_profile_tags && $obj['outbound_profile_tags'] = $outbound_profile_tags;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Data implements BaseModel
     public function withNumberTags(array $numberTags): self
     {
         $obj = clone $this;
-        $obj->number_tags = $numberTags;
+        $obj['number_tags'] = $numberTags;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Data implements BaseModel
     public function withOutboundProfileTags(array $outboundProfileTags): self
     {
         $obj = clone $this;
-        $obj->outbound_profile_tags = $outboundProfileTags;
+        $obj['outbound_profile_tags'] = $outboundProfileTags;
 
         return $obj;
     }

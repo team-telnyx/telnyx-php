@@ -10,6 +10,9 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\Verification;
+use Telnyx\Verifications\Verification\RecordType;
+use Telnyx\Verifications\Verification\Status;
+use Telnyx\Verifications\Verification\Type;
 
 /**
  * @phpstan-type ByPhoneNumberListResponseShape = array{
@@ -54,33 +57,69 @@ final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Verification> $data
+     * @param list<Verification|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   custom_code?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   status?: value-of<Status>|null,
+     *   timeout_secs?: int|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: string|null,
+     *   verify_profile_id?: string|null,
+     * }> $data
+     * @param VerifyMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
-    public static function with(array $data, VerifyMeta $meta): self
+    public static function with(array $data, VerifyMeta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<Verification> $data
+     * @param list<Verification|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   custom_code?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   status?: value-of<Status>|null,
+     *   timeout_secs?: int|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: string|null,
+     *   verify_profile_id?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(VerifyMeta $meta): self
+    /**
+     * @param VerifyMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(VerifyMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

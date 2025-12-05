@@ -56,8 +56,8 @@ final class PartnerCampaignListSharedByMeParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $recordsPerPage && $obj->recordsPerPage = $recordsPerPage;
+        null !== $page && $obj['page'] = $page;
+        null !== $recordsPerPage && $obj['recordsPerPage'] = $recordsPerPage;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class PartnerCampaignListSharedByMeParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class PartnerCampaignListSharedByMeParams implements BaseModel
     public function withRecordsPerPage(int $recordsPerPage): self
     {
         $obj = clone $this;
-        $obj->recordsPerPage = $recordsPerPage;
+        $obj['recordsPerPage'] = $recordsPerPage;
 
         return $obj;
     }

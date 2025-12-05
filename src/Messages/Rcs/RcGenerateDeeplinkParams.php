@@ -52,8 +52,8 @@ final class RcGenerateDeeplinkParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $body && $obj->body = $body;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $body && $obj['body'] = $body;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class RcGenerateDeeplinkParams implements BaseModel
     public function withBody(string $body): self
     {
         $obj = clone $this;
-        $obj->body = $body;
+        $obj['body'] = $body;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class RcGenerateDeeplinkParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

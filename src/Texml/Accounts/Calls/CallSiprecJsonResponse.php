@@ -124,16 +124,16 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
-        null !== $call_sid && $obj->call_sid = $call_sid;
-        null !== $date_created && $obj->date_created = $date_created;
-        null !== $date_updated && $obj->date_updated = $date_updated;
-        null !== $error_code && $obj->error_code = $error_code;
-        null !== $sid && $obj->sid = $sid;
-        null !== $start_time && $obj->start_time = $start_time;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
+        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $date_created && $obj['date_created'] = $date_created;
+        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $sid && $obj['sid'] = $sid;
+        null !== $start_time && $obj['start_time'] = $start_time;
         null !== $status && $obj['status'] = $status;
         null !== $track && $obj['track'] = $track;
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->call_sid = $callSid;
+        $obj['call_sid'] = $callSid;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->date_created = $dateCreated;
+        $obj['date_created'] = $dateCreated;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->date_updated = $dateUpdated;
+        $obj['date_updated'] = $dateUpdated;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->error_code = $errorCode;
+        $obj['error_code'] = $errorCode;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withSid(string $sid): self
     {
         $obj = clone $this;
-        $obj->sid = $sid;
+        $obj['sid'] = $sid;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

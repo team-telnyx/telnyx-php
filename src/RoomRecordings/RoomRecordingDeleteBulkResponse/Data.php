@@ -36,7 +36,7 @@ final class Data implements BaseModel
     {
         $obj = new self;
 
-        null !== $room_recordings && $obj->room_recordings = $room_recordings;
+        null !== $room_recordings && $obj['room_recordings'] = $room_recordings;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Data implements BaseModel
     public function withRoomRecordings(int $roomRecordings): self
     {
         $obj = clone $this;
-        $obj->room_recordings = $roomRecordings;
+        $obj['room_recordings'] = $roomRecordings;
 
         return $obj;
     }

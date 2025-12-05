@@ -89,9 +89,9 @@ final class Settings implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->idp_cert_fingerprint = $idp_cert_fingerprint;
-        $obj->idp_entity_id = $idp_entity_id;
-        $obj->idp_sso_target_url = $idp_sso_target_url;
+        $obj['idp_cert_fingerprint'] = $idp_cert_fingerprint;
+        $obj['idp_entity_id'] = $idp_entity_id;
+        $obj['idp_sso_target_url'] = $idp_sso_target_url;
 
         null !== $idp_cert_fingerprint_algorithm && $obj['idp_cert_fingerprint_algorithm'] = $idp_cert_fingerprint_algorithm;
 
@@ -104,7 +104,7 @@ final class Settings implements BaseModel
     public function withIdpCertFingerprint(string $idpCertFingerprint): self
     {
         $obj = clone $this;
-        $obj->idp_cert_fingerprint = $idpCertFingerprint;
+        $obj['idp_cert_fingerprint'] = $idpCertFingerprint;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Settings implements BaseModel
     public function withIdpEntityID(string $idpEntityID): self
     {
         $obj = clone $this;
-        $obj->idp_entity_id = $idpEntityID;
+        $obj['idp_entity_id'] = $idpEntityID;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Settings implements BaseModel
     public function withIdpSSOTargetURL(string $idpSSOTargetURL): self
     {
         $obj = clone $this;
-        $obj->idp_sso_target_url = $idpSSOTargetURL;
+        $obj['idp_sso_target_url'] = $idpSSOTargetURL;
 
         return $obj;
     }

@@ -38,7 +38,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $product && $obj->product = $product;
+        null !== $product && $obj['product'] = $product;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }

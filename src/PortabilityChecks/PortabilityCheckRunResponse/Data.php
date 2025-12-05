@@ -71,11 +71,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $fast_portable && $obj->fast_portable = $fast_portable;
-        null !== $not_portable_reason && $obj->not_portable_reason = $not_portable_reason;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $portable && $obj->portable = $portable;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $fast_portable && $obj['fast_portable'] = $fast_portable;
+        null !== $not_portable_reason && $obj['not_portable_reason'] = $not_portable_reason;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $portable && $obj['portable'] = $portable;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withFastPortable(bool $fastPortable): self
     {
         $obj = clone $this;
-        $obj->fast_portable = $fastPortable;
+        $obj['fast_portable'] = $fastPortable;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withNotPortableReason(string $notPortableReason): self
     {
         $obj = clone $this;
-        $obj->not_portable_reason = $notPortableReason;
+        $obj['not_portable_reason'] = $notPortableReason;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withPortable(bool $portable): self
     {
         $obj = clone $this;
-        $obj->portable = $portable;
+        $obj['portable'] = $portable;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

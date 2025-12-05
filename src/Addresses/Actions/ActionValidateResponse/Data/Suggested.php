@@ -81,12 +81,12 @@ final class Suggested implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj->administrative_area = $administrative_area;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $extended_address && $obj->extended_address = $extended_address;
-        null !== $locality && $obj->locality = $locality;
-        null !== $postal_code && $obj->postal_code = $postal_code;
-        null !== $street_address && $obj->street_address = $street_address;
+        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $extended_address && $obj['extended_address'] = $extended_address;
+        null !== $locality && $obj['locality'] = $locality;
+        null !== $postal_code && $obj['postal_code'] = $postal_code;
+        null !== $street_address && $obj['street_address'] = $street_address;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Suggested implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrative_area = $administrativeArea;
+        $obj['administrative_area'] = $administrativeArea;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Suggested implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Suggested implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj->extended_address = $extendedAddress;
+        $obj['extended_address'] = $extendedAddress;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Suggested implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Suggested implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postal_code = $postalCode;
+        $obj['postal_code'] = $postalCode;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Suggested implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }

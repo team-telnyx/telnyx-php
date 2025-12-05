@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthClients\PaginationMetaOAuth;
+use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
 /**
  * @phpstan-type OAuthGrantListResponseShape = array{
@@ -40,35 +41,63 @@ final class OAuthGrantListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OAuthGrant> $data
+     * @param list<OAuthGrant|array{
+     *   id: string,
+     *   client_id: string,
+     *   created_at: \DateTimeInterface,
+     *   record_type: value-of<RecordType>,
+     *   scopes: list<string>,
+     *   last_used_at?: \DateTimeInterface|null,
+     * }> $data
+     * @param PaginationMetaOAuth|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMetaOAuth $meta = null
+        PaginationMetaOAuth|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<OAuthGrant> $data
+     * @param list<OAuthGrant|array{
+     *   id: string,
+     *   client_id: string,
+     *   created_at: \DateTimeInterface,
+     *   record_type: value-of<RecordType>,
+     *   scopes: list<string>,
+     *   last_used_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMetaOAuth $meta): self
+    /**
+     * @param PaginationMetaOAuth|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMetaOAuth|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

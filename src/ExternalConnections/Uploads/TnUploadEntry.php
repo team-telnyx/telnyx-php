@@ -108,13 +108,13 @@ final class TnUploadEntry implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $civic_address_id && $obj->civic_address_id = $civic_address_id;
+        null !== $civic_address_id && $obj['civic_address_id'] = $civic_address_id;
         null !== $error_code && $obj['error_code'] = $error_code;
-        null !== $error_message && $obj->error_message = $error_message;
+        null !== $error_message && $obj['error_message'] = $error_message;
         null !== $internal_status && $obj['internal_status'] = $internal_status;
-        null !== $location_id && $obj->location_id = $location_id;
-        null !== $number_id && $obj->number_id = $number_id;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $location_id && $obj['location_id'] = $location_id;
+        null !== $number_id && $obj['number_id'] = $number_id;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -126,7 +126,7 @@ final class TnUploadEntry implements BaseModel
     public function withCivicAddressID(string $civicAddressID): self
     {
         $obj = clone $this;
-        $obj->civic_address_id = $civicAddressID;
+        $obj['civic_address_id'] = $civicAddressID;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class TnUploadEntry implements BaseModel
     public function withErrorMessage(string $errorMessage): self
     {
         $obj = clone $this;
-        $obj->error_message = $errorMessage;
+        $obj['error_message'] = $errorMessage;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class TnUploadEntry implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->location_id = $locationID;
+        $obj['location_id'] = $locationID;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class TnUploadEntry implements BaseModel
     public function withNumberID(string $numberID): self
     {
         $obj = clone $this;
-        $obj->number_id = $numberID;
+        $obj['number_id'] = $numberID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class TnUploadEntry implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

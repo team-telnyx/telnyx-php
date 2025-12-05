@@ -74,8 +74,8 @@ final class GcsConfigurationData implements BaseModel
 
         $obj['backend'] = $backend;
 
-        null !== $bucket && $obj->bucket = $bucket;
-        null !== $credentials && $obj->credentials = $credentials;
+        null !== $bucket && $obj['bucket'] = $bucket;
+        null !== $credentials && $obj['credentials'] = $credentials;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class GcsConfigurationData implements BaseModel
     public function withBucket(string $bucket): self
     {
         $obj = clone $this;
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class GcsConfigurationData implements BaseModel
     public function withCredentials(string $credentials): self
     {
         $obj = clone $this;
-        $obj->credentials = $credentials;
+        $obj['credentials'] = $credentials;
 
         return $obj;
     }

@@ -9,6 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Documents\DocServiceDocument\AvScanStatus;
+use Telnyx\Documents\DocServiceDocument\Size;
+use Telnyx\Documents\DocServiceDocument\Status;
 
 /**
  * @phpstan-type DocumentGetResponseShape = array{data?: DocServiceDocument|null}
@@ -32,20 +35,49 @@ final class DocumentGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DocServiceDocument|array{
+     *   id?: string|null,
+     *   av_scan_status?: value-of<AvScanStatus>|null,
+     *   content_type?: string|null,
+     *   created_at?: string|null,
+     *   customer_reference?: string|null,
+     *   filename?: string|null,
+     *   record_type?: string|null,
+     *   sha256?: string|null,
+     *   size?: Size|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: string|null,
+     * } $data
      */
-    public static function with(?DocServiceDocument $data = null): self
+    public static function with(DocServiceDocument|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(DocServiceDocument $data): self
+    /**
+     * @param DocServiceDocument|array{
+     *   id?: string|null,
+     *   av_scan_status?: value-of<AvScanStatus>|null,
+     *   content_type?: string|null,
+     *   created_at?: string|null,
+     *   customer_reference?: string|null,
+     *   filename?: string|null,
+     *   record_type?: string|null,
+     *   sha256?: string|null,
+     *   size?: Size|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: string|null,
+     * } $data
+     */
+    public function withData(DocServiceDocument|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

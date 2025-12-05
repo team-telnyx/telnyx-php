@@ -71,7 +71,15 @@ final class NumberReservation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumber> $phone_numbers
+     * @param list<ReservedPhoneNumber|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   expired_at?: \DateTimeInterface|null,
+     *   phone_number?: string|null,
+     *   record_type?: string|null,
+     *   status?: value-of<ReservedPhoneNumber\Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $phone_numbers
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -85,13 +93,13 @@ final class NumberReservation implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -99,7 +107,7 @@ final class NumberReservation implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -110,7 +118,7 @@ final class NumberReservation implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -121,18 +129,26 @@ final class NumberReservation implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
     /**
-     * @param list<ReservedPhoneNumber> $phoneNumbers
+     * @param list<ReservedPhoneNumber|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   expired_at?: \DateTimeInterface|null,
+     *   phone_number?: string|null,
+     *   record_type?: string|null,
+     *   status?: value-of<ReservedPhoneNumber\Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -140,7 +156,7 @@ final class NumberReservation implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -164,7 +180,7 @@ final class NumberReservation implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

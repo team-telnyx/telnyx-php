@@ -17,7 +17,9 @@ use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
  *
  * @phpstan-type RequirementGroupUpdateParamsShape = array{
  *   customer_reference?: string,
- *   regulatory_requirements?: list<RegulatoryRequirement>,
+ *   regulatory_requirements?: list<RegulatoryRequirement|array{
+ *     field_value?: string|null, requirement_id?: string|null
+ *   }>,
  * }
  */
 final class RequirementGroupUpdateParams implements BaseModel
@@ -46,7 +48,9 @@ final class RequirementGroupUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement> $regulatory_requirements
+     * @param list<RegulatoryRequirement|array{
+     *   field_value?: string|null, requirement_id?: string|null
+     * }> $regulatory_requirements
      */
     public static function with(
         ?string $customer_reference = null,
@@ -54,8 +58,8 @@ final class RequirementGroupUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
 
         return $obj;
     }
@@ -66,19 +70,21 @@ final class RequirementGroupUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
     /**
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|array{
+     *   field_value?: string|null, requirement_id?: string|null
+     * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatory_requirements = $regulatoryRequirements;
+        $obj['regulatory_requirements'] = $regulatoryRequirements;
 
         return $obj;
     }

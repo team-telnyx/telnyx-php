@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
+use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
 
 /**
  * @phpstan-type SetiGetBlackBoxTestResultsResponseShape = array{
@@ -37,24 +38,32 @@ final class SetiGetBlackBoxTestResultsResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   black_box_tests?: list<BlackBoxTest>|null,
+     *   product?: string|null,
+     *   record_type?: string|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   black_box_tests?: list<BlackBoxTest>|null,
+     *   product?: string|null,
+     *   record_type?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

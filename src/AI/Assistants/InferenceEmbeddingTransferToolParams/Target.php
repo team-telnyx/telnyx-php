@@ -42,8 +42,8 @@ final class Target implements BaseModel
     {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $to && $obj->to = $to;
+        null !== $name && $obj['name'] = $name;
+        null !== $to && $obj['to'] = $to;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class Target implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class Target implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

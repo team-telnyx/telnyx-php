@@ -64,8 +64,8 @@ final class OAuthGrantsParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->allowed = $allowed;
-        $obj->consent_token = $consent_token;
+        $obj['allowed'] = $allowed;
+        $obj['consent_token'] = $consent_token;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class OAuthGrantsParams implements BaseModel
     public function withAllowed(bool $allowed): self
     {
         $obj = clone $this;
-        $obj->allowed = $allowed;
+        $obj['allowed'] = $allowed;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class OAuthGrantsParams implements BaseModel
     public function withConsentToken(string $consentToken): self
     {
         $obj = clone $this;
-        $obj->consent_token = $consentToken;
+        $obj['consent_token'] = $consentToken;
 
         return $obj;
     }

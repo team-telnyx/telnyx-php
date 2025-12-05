@@ -255,33 +255,33 @@ final class PortoutDetails implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $already_ported && $obj->already_ported = $already_ported;
-        null !== $authorized_name && $obj->authorized_name = $authorized_name;
-        null !== $carrier_name && $obj->carrier_name = $carrier_name;
-        null !== $city && $obj->city = $city;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $current_carrier && $obj->current_carrier = $current_carrier;
-        null !== $end_user_name && $obj->end_user_name = $end_user_name;
-        null !== $foc_date && $obj->foc_date = $foc_date;
-        null !== $host_messaging && $obj->host_messaging = $host_messaging;
-        null !== $inserted_at && $obj->inserted_at = $inserted_at;
-        null !== $lsr && $obj->lsr = $lsr;
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
-        null !== $pon && $obj->pon = $pon;
-        null !== $reason && $obj->reason = $reason;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $rejection_code && $obj->rejection_code = $rejection_code;
-        null !== $requested_foc_date && $obj->requested_foc_date = $requested_foc_date;
-        null !== $service_address && $obj->service_address = $service_address;
-        null !== $spid && $obj->spid = $spid;
-        null !== $state && $obj->state = $state;
+        null !== $id && $obj['id'] = $id;
+        null !== $already_ported && $obj['already_ported'] = $already_ported;
+        null !== $authorized_name && $obj['authorized_name'] = $authorized_name;
+        null !== $carrier_name && $obj['carrier_name'] = $carrier_name;
+        null !== $city && $obj['city'] = $city;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $current_carrier && $obj['current_carrier'] = $current_carrier;
+        null !== $end_user_name && $obj['end_user_name'] = $end_user_name;
+        null !== $foc_date && $obj['foc_date'] = $foc_date;
+        null !== $host_messaging && $obj['host_messaging'] = $host_messaging;
+        null !== $inserted_at && $obj['inserted_at'] = $inserted_at;
+        null !== $lsr && $obj['lsr'] = $lsr;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $pon && $obj['pon'] = $pon;
+        null !== $reason && $obj['reason'] = $reason;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $rejection_code && $obj['rejection_code'] = $rejection_code;
+        null !== $requested_foc_date && $obj['requested_foc_date'] = $requested_foc_date;
+        null !== $service_address && $obj['service_address'] = $service_address;
+        null !== $spid && $obj['spid'] = $spid;
+        null !== $state && $obj['state'] = $state;
         null !== $status && $obj['status'] = $status;
-        null !== $support_key && $obj->support_key = $support_key;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $user_id && $obj->user_id = $user_id;
-        null !== $vendor && $obj->vendor = $vendor;
-        null !== $zip && $obj->zip = $zip;
+        null !== $support_key && $obj['support_key'] = $support_key;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $vendor && $obj['vendor'] = $vendor;
+        null !== $zip && $obj['zip'] = $zip;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class PortoutDetails implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class PortoutDetails implements BaseModel
     public function withAlreadyPorted(bool $alreadyPorted): self
     {
         $obj = clone $this;
-        $obj->already_ported = $alreadyPorted;
+        $obj['already_ported'] = $alreadyPorted;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class PortoutDetails implements BaseModel
     public function withAuthorizedName(string $authorizedName): self
     {
         $obj = clone $this;
-        $obj->authorized_name = $authorizedName;
+        $obj['authorized_name'] = $authorizedName;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class PortoutDetails implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj->carrier_name = $carrierName;
+        $obj['carrier_name'] = $carrierName;
 
         return $obj;
     }
@@ -333,7 +333,7 @@ final class PortoutDetails implements BaseModel
     public function withCity(string $city): self
     {
         $obj = clone $this;
-        $obj->city = $city;
+        $obj['city'] = $city;
 
         return $obj;
     }
@@ -344,7 +344,7 @@ final class PortoutDetails implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -355,7 +355,7 @@ final class PortoutDetails implements BaseModel
     public function withCurrentCarrier(string $currentCarrier): self
     {
         $obj = clone $this;
-        $obj->current_carrier = $currentCarrier;
+        $obj['current_carrier'] = $currentCarrier;
 
         return $obj;
     }
@@ -366,7 +366,7 @@ final class PortoutDetails implements BaseModel
     public function withEndUserName(string $endUserName): self
     {
         $obj = clone $this;
-        $obj->end_user_name = $endUserName;
+        $obj['end_user_name'] = $endUserName;
 
         return $obj;
     }
@@ -377,7 +377,7 @@ final class PortoutDetails implements BaseModel
     public function withFocDate(string $focDate): self
     {
         $obj = clone $this;
-        $obj->foc_date = $focDate;
+        $obj['foc_date'] = $focDate;
 
         return $obj;
     }
@@ -388,7 +388,7 @@ final class PortoutDetails implements BaseModel
     public function withHostMessaging(bool $hostMessaging): self
     {
         $obj = clone $this;
-        $obj->host_messaging = $hostMessaging;
+        $obj['host_messaging'] = $hostMessaging;
 
         return $obj;
     }
@@ -399,7 +399,7 @@ final class PortoutDetails implements BaseModel
     public function withInsertedAt(string $insertedAt): self
     {
         $obj = clone $this;
-        $obj->inserted_at = $insertedAt;
+        $obj['inserted_at'] = $insertedAt;
 
         return $obj;
     }
@@ -412,7 +412,7 @@ final class PortoutDetails implements BaseModel
     public function withLsr(array $lsr): self
     {
         $obj = clone $this;
-        $obj->lsr = $lsr;
+        $obj['lsr'] = $lsr;
 
         return $obj;
     }
@@ -425,7 +425,7 @@ final class PortoutDetails implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -436,7 +436,7 @@ final class PortoutDetails implements BaseModel
     public function withPon(string $pon): self
     {
         $obj = clone $this;
-        $obj->pon = $pon;
+        $obj['pon'] = $pon;
 
         return $obj;
     }
@@ -447,7 +447,7 @@ final class PortoutDetails implements BaseModel
     public function withReason(?string $reason): self
     {
         $obj = clone $this;
-        $obj->reason = $reason;
+        $obj['reason'] = $reason;
 
         return $obj;
     }
@@ -458,7 +458,7 @@ final class PortoutDetails implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -469,7 +469,7 @@ final class PortoutDetails implements BaseModel
     public function withRejectionCode(int $rejectionCode): self
     {
         $obj = clone $this;
-        $obj->rejection_code = $rejectionCode;
+        $obj['rejection_code'] = $rejectionCode;
 
         return $obj;
     }
@@ -480,7 +480,7 @@ final class PortoutDetails implements BaseModel
     public function withRequestedFocDate(string $requestedFocDate): self
     {
         $obj = clone $this;
-        $obj->requested_foc_date = $requestedFocDate;
+        $obj['requested_foc_date'] = $requestedFocDate;
 
         return $obj;
     }
@@ -491,7 +491,7 @@ final class PortoutDetails implements BaseModel
     public function withServiceAddress(string $serviceAddress): self
     {
         $obj = clone $this;
-        $obj->service_address = $serviceAddress;
+        $obj['service_address'] = $serviceAddress;
 
         return $obj;
     }
@@ -502,7 +502,7 @@ final class PortoutDetails implements BaseModel
     public function withSpid(string $spid): self
     {
         $obj = clone $this;
-        $obj->spid = $spid;
+        $obj['spid'] = $spid;
 
         return $obj;
     }
@@ -513,7 +513,7 @@ final class PortoutDetails implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -537,7 +537,7 @@ final class PortoutDetails implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj->support_key = $supportKey;
+        $obj['support_key'] = $supportKey;
 
         return $obj;
     }
@@ -548,7 +548,7 @@ final class PortoutDetails implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -559,7 +559,7 @@ final class PortoutDetails implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
@@ -570,7 +570,7 @@ final class PortoutDetails implements BaseModel
     public function withVendor(string $vendor): self
     {
         $obj = clone $this;
-        $obj->vendor = $vendor;
+        $obj['vendor'] = $vendor;
 
         return $obj;
     }
@@ -581,7 +581,7 @@ final class PortoutDetails implements BaseModel
     public function withZip(string $zip): self
     {
         $obj = clone $this;
-        $obj->zip = $zip;
+        $obj['zip'] = $zip;
 
         return $obj;
     }

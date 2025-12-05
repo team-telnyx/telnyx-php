@@ -160,20 +160,20 @@ final class ConferenceConfig implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
-        null !== $conference_name && $obj->conference_name = $conference_name;
-        null !== $early_media && $obj->early_media = $early_media;
-        null !== $end_conference_on_exit && $obj->end_conference_on_exit = $end_conference_on_exit;
-        null !== $hold && $obj->hold = $hold;
-        null !== $hold_audio_url && $obj->hold_audio_url = $hold_audio_url;
-        null !== $hold_media_name && $obj->hold_media_name = $hold_media_name;
-        null !== $mute && $obj->mute = $mute;
-        null !== $soft_end_conference_on_exit && $obj->soft_end_conference_on_exit = $soft_end_conference_on_exit;
-        null !== $start_conference_on_create && $obj->start_conference_on_create = $start_conference_on_create;
-        null !== $start_conference_on_enter && $obj->start_conference_on_enter = $start_conference_on_enter;
+        null !== $conference_name && $obj['conference_name'] = $conference_name;
+        null !== $early_media && $obj['early_media'] = $early_media;
+        null !== $end_conference_on_exit && $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        null !== $hold && $obj['hold'] = $hold;
+        null !== $hold_audio_url && $obj['hold_audio_url'] = $hold_audio_url;
+        null !== $hold_media_name && $obj['hold_media_name'] = $hold_media_name;
+        null !== $mute && $obj['mute'] = $mute;
+        null !== $soft_end_conference_on_exit && $obj['soft_end_conference_on_exit'] = $soft_end_conference_on_exit;
+        null !== $start_conference_on_create && $obj['start_conference_on_create'] = $start_conference_on_create;
+        null !== $start_conference_on_enter && $obj['start_conference_on_enter'] = $start_conference_on_enter;
         null !== $supervisor_role && $obj['supervisor_role'] = $supervisor_role;
-        null !== $whisper_call_control_ids && $obj->whisper_call_control_ids = $whisper_call_control_ids;
+        null !== $whisper_call_control_ids && $obj['whisper_call_control_ids'] = $whisper_call_control_ids;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class ConferenceConfig implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class ConferenceConfig implements BaseModel
     public function withConferenceName(string $conferenceName): self
     {
         $obj = clone $this;
-        $obj->conference_name = $conferenceName;
+        $obj['conference_name'] = $conferenceName;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class ConferenceConfig implements BaseModel
     public function withEarlyMedia(bool $earlyMedia): self
     {
         $obj = clone $this;
-        $obj->early_media = $earlyMedia;
+        $obj['early_media'] = $earlyMedia;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class ConferenceConfig implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->end_conference_on_exit = $endConferenceOnExit;
+        $obj['end_conference_on_exit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -241,7 +241,7 @@ final class ConferenceConfig implements BaseModel
     public function withHold(bool $hold): self
     {
         $obj = clone $this;
-        $obj->hold = $hold;
+        $obj['hold'] = $hold;
 
         return $obj;
     }
@@ -252,7 +252,7 @@ final class ConferenceConfig implements BaseModel
     public function withHoldAudioURL(string $holdAudioURL): self
     {
         $obj = clone $this;
-        $obj->hold_audio_url = $holdAudioURL;
+        $obj['hold_audio_url'] = $holdAudioURL;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class ConferenceConfig implements BaseModel
     public function withHoldMediaName(string $holdMediaName): self
     {
         $obj = clone $this;
-        $obj->hold_media_name = $holdMediaName;
+        $obj['hold_media_name'] = $holdMediaName;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class ConferenceConfig implements BaseModel
     public function withMute(bool $mute): self
     {
         $obj = clone $this;
-        $obj->mute = $mute;
+        $obj['mute'] = $mute;
 
         return $obj;
     }
@@ -286,7 +286,7 @@ final class ConferenceConfig implements BaseModel
         bool $softEndConferenceOnExit
     ): self {
         $obj = clone $this;
-        $obj->soft_end_conference_on_exit = $softEndConferenceOnExit;
+        $obj['soft_end_conference_on_exit'] = $softEndConferenceOnExit;
 
         return $obj;
     }
@@ -298,7 +298,7 @@ final class ConferenceConfig implements BaseModel
         bool $startConferenceOnCreate
     ): self {
         $obj = clone $this;
-        $obj->start_conference_on_create = $startConferenceOnCreate;
+        $obj['start_conference_on_create'] = $startConferenceOnCreate;
 
         return $obj;
     }
@@ -310,7 +310,7 @@ final class ConferenceConfig implements BaseModel
         bool $startConferenceOnEnter
     ): self {
         $obj = clone $this;
-        $obj->start_conference_on_enter = $startConferenceOnEnter;
+        $obj['start_conference_on_enter'] = $startConferenceOnEnter;
 
         return $obj;
     }
@@ -338,7 +338,7 @@ final class ConferenceConfig implements BaseModel
         array $whisperCallControlIDs
     ): self {
         $obj = clone $this;
-        $obj->whisper_call_control_ids = $whisperCallControlIDs;
+        $obj['whisper_call_control_ids'] = $whisperCallControlIDs;
 
         return $obj;
     }

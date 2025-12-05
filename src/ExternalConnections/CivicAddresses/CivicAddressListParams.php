@@ -15,7 +15,9 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
  *
  * @see Telnyx\Services\ExternalConnections\CivicAddressesService::list()
  *
- * @phpstan-type CivicAddressListParamsShape = array{filter?: Filter}
+ * @phpstan-type CivicAddressListParamsShape = array{
+ *   filter?: Filter|array{country?: list<string>|null}
+ * }
  */
 final class CivicAddressListParams implements BaseModel
 {
@@ -38,23 +40,27 @@ final class CivicAddressListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{country?: list<string>|null} $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Filter parameter for civic addresses (deepObject style). Supports filtering by country.
+     *
+     * @param Filter|array{country?: list<string>|null} $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }

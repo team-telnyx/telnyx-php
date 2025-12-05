@@ -100,14 +100,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $ip_address && $obj->ip_address = $ip_address;
-        null !== $last_registration && $obj->last_registration = $last_registration;
-        null !== $port && $obj->port = $port;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $sip_username && $obj->sip_username = $sip_username;
+        null !== $ip_address && $obj['ip_address'] = $ip_address;
+        null !== $last_registration && $obj['last_registration'] = $last_registration;
+        null !== $port && $obj['port'] = $port;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $sip_username && $obj['sip_username'] = $sip_username;
         null !== $status && $obj['status'] = $status;
-        null !== $transport && $obj->transport = $transport;
-        null !== $user_agent && $obj->user_agent = $user_agent;
+        null !== $transport && $obj['transport'] = $transport;
+        null !== $user_agent && $obj['user_agent'] = $user_agent;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Data implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ip_address = $ipAddress;
+        $obj['ip_address'] = $ipAddress;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withLastRegistration(string $lastRegistration): self
     {
         $obj = clone $this;
-        $obj->last_registration = $lastRegistration;
+        $obj['last_registration'] = $lastRegistration;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withPort(int $port): self
     {
         $obj = clone $this;
-        $obj->port = $port;
+        $obj['port'] = $port;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Data implements BaseModel
     public function withSipUsername(string $sipUsername): self
     {
         $obj = clone $this;
-        $obj->sip_username = $sipUsername;
+        $obj['sip_username'] = $sipUsername;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class Data implements BaseModel
     public function withTransport(string $transport): self
     {
         $obj = clone $this;
-        $obj->transport = $transport;
+        $obj['transport'] = $transport;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Data implements BaseModel
     public function withUserAgent(string $userAgent): self
     {
         $obj = clone $this;
-        $obj->user_agent = $userAgent;
+        $obj['user_agent'] = $userAgent;
 
         return $obj;
     }

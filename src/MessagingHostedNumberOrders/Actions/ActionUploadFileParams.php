@@ -48,8 +48,8 @@ final class ActionUploadFileParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $bill && $obj->bill = $bill;
-        null !== $loa && $obj->loa = $loa;
+        null !== $bill && $obj['bill'] = $bill;
+        null !== $loa && $obj['loa'] = $loa;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class ActionUploadFileParams implements BaseModel
     public function withBill(string $bill): self
     {
         $obj = clone $this;
-        $obj->bill = $bill;
+        $obj['bill'] = $bill;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class ActionUploadFileParams implements BaseModel
     public function withLoa(string $loa): self
     {
         $obj = clone $this;
-        $obj->loa = $loa;
+        $obj['loa'] = $loa;
 
         return $obj;
     }

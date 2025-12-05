@@ -50,28 +50,32 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $created_at
      */
     public static function with(
-        ?CreatedAt $created_at = null,
+        CreatedAt|array|null $created_at = null,
         ?string $phone_numbers_starting_number = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $phone_numbers_starting_number && $obj->phone_numbers_starting_number = $phone_numbers_starting_number;
-        null !== $status && $obj->status = $status;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $phone_numbers_starting_number && $obj['phone_numbers_starting_number'] = $phone_numbers_starting_number;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
 
     /**
      * Filter number block orders by date range.
+     *
+     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -83,7 +87,7 @@ final class Filter implements BaseModel
         string $phoneNumbersStartingNumber
     ): self {
         $obj = clone $this;
-        $obj->phone_numbers_starting_number = $phoneNumbersStartingNumber;
+        $obj['phone_numbers_starting_number'] = $phoneNumbersStartingNumber;
 
         return $obj;
     }
@@ -94,7 +98,7 @@ final class Filter implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

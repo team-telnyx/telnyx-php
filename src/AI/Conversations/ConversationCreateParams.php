@@ -53,8 +53,8 @@ final class ConversationCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $metadata && $obj->metadata = $metadata;
-        null !== $name && $obj->name = $name;
+        null !== $metadata && $obj['metadata'] = $metadata;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class ConversationCreateParams implements BaseModel
     public function withMetadata(array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ConversationCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

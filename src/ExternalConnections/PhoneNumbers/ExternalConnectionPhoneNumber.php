@@ -89,12 +89,12 @@ final class ExternalConnectionPhoneNumber implements BaseModel
         $obj = new self;
 
         null !== $acquired_capabilities && $obj['acquired_capabilities'] = $acquired_capabilities;
-        null !== $civic_address_id && $obj->civic_address_id = $civic_address_id;
-        null !== $displayed_country_code && $obj->displayed_country_code = $displayed_country_code;
-        null !== $location_id && $obj->location_id = $location_id;
-        null !== $number_id && $obj->number_id = $number_id;
-        null !== $telephone_number && $obj->telephone_number = $telephone_number;
-        null !== $ticket_id && $obj->ticket_id = $ticket_id;
+        null !== $civic_address_id && $obj['civic_address_id'] = $civic_address_id;
+        null !== $displayed_country_code && $obj['displayed_country_code'] = $displayed_country_code;
+        null !== $location_id && $obj['location_id'] = $location_id;
+        null !== $number_id && $obj['number_id'] = $number_id;
+        null !== $telephone_number && $obj['telephone_number'] = $telephone_number;
+        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withCivicAddressID(string $civicAddressID): self
     {
         $obj = clone $this;
-        $obj->civic_address_id = $civicAddressID;
+        $obj['civic_address_id'] = $civicAddressID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withDisplayedCountryCode(string $displayedCountryCode): self
     {
         $obj = clone $this;
-        $obj->displayed_country_code = $displayedCountryCode;
+        $obj['displayed_country_code'] = $displayedCountryCode;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->location_id = $locationID;
+        $obj['location_id'] = $locationID;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withNumberID(string $numberID): self
     {
         $obj = clone $this;
-        $obj->number_id = $numberID;
+        $obj['number_id'] = $numberID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withTelephoneNumber(string $telephoneNumber): self
     {
         $obj = clone $this;
-        $obj->telephone_number = $telephoneNumber;
+        $obj['telephone_number'] = $telephoneNumber;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj->ticket_id = $ticketID;
+        $obj['ticket_id'] = $ticketID;
 
         return $obj;
     }

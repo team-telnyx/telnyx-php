@@ -46,8 +46,8 @@ final class SpeechContext implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $boost && $obj->boost = $boost;
-        null !== $phrases && $obj->phrases = $phrases;
+        null !== $boost && $obj['boost'] = $boost;
+        null !== $phrases && $obj['phrases'] = $phrases;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class SpeechContext implements BaseModel
     public function withBoost(float $boost): self
     {
         $obj = clone $this;
-        $obj->boost = $boost;
+        $obj['boost'] = $boost;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class SpeechContext implements BaseModel
     public function withPhrases(array $phrases): self
     {
         $obj = clone $this;
-        $obj->phrases = $phrases;
+        $obj['phrases'] = $phrases;
 
         return $obj;
     }

@@ -10,10 +10,19 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
+use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\IPConnections\InboundIP\AniNumberFormat;
+use Telnyx\IPConnections\InboundIP\DefaultRoutingMethod;
+use Telnyx\IPConnections\InboundIP\DnisNumberFormat;
+use Telnyx\IPConnections\InboundIP\SipRegion;
+use Telnyx\IPConnections\InboundIP\SipSubdomainReceiveSettings;
 use Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
+use Telnyx\IPConnections\OutboundIP\AniOverrideType;
+use Telnyx\IPConnections\OutboundIP\IPAuthenticationMethod;
+use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
 
 /**
  * Updates settings of an existing IP connection.
@@ -30,11 +39,47 @@ use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
  *   dtmf_type?: DtmfType|value-of<DtmfType>,
  *   encode_contact_header_enabled?: bool,
  *   encrypted_media?: null|EncryptedMedia|value-of<EncryptedMedia>,
- *   inbound?: InboundIP,
+ *   inbound?: InboundIP|array{
+ *     ani_number_format?: value-of<AniNumberFormat>|null,
+ *     channel_limit?: int|null,
+ *     codecs?: list<string>|null,
+ *     default_primary_ip_id?: string|null,
+ *     default_routing_method?: value-of<DefaultRoutingMethod>|null,
+ *     default_secondary_ip_id?: string|null,
+ *     default_tertiary_ip_id?: string|null,
+ *     dnis_number_format?: value-of<DnisNumberFormat>|null,
+ *     generate_ringback_tone?: bool|null,
+ *     isup_headers_enabled?: bool|null,
+ *     prack_enabled?: bool|null,
+ *     shaken_stir_enabled?: bool|null,
+ *     sip_compact_headers_enabled?: bool|null,
+ *     sip_region?: value-of<SipRegion>|null,
+ *     sip_subdomain?: string|null,
+ *     sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+ *     timeout_1xx_secs?: int|null,
+ *     timeout_2xx_secs?: int|null,
+ *   },
  *   ios_push_credential_id?: string|null,
  *   onnet_t38_passthrough_enabled?: bool,
- *   outbound?: OutboundIP,
- *   rtcp_settings?: ConnectionRtcpSettings,
+ *   outbound?: OutboundIP|array{
+ *     ani_override?: string|null,
+ *     ani_override_type?: value-of<AniOverrideType>|null,
+ *     call_parking_enabled?: bool|null,
+ *     channel_limit?: int|null,
+ *     generate_ringback_tone?: bool|null,
+ *     instant_ringback_enabled?: bool|null,
+ *     ip_authentication_method?: value-of<IPAuthenticationMethod>|null,
+ *     ip_authentication_token?: string|null,
+ *     localization?: string|null,
+ *     outbound_voice_profile_id?: string|null,
+ *     t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+ *     tech_prefix?: string|null,
+ *   },
+ *   rtcp_settings?: ConnectionRtcpSettings|array{
+ *     capture_enabled?: bool|null,
+ *     port?: value-of<Port>|null,
+ *     report_frequency_secs?: int|null,
+ *   },
  *   tags?: list<string>,
  *   transport_protocol?: TransportProtocol|value-of<TransportProtocol>,
  *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -182,6 +227,45 @@ final class IPConnectionUpdateParams implements BaseModel
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
      * @param DtmfType|value-of<DtmfType> $dtmf_type
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encrypted_media
+     * @param InboundIP|array{
+     *   ani_number_format?: value-of<AniNumberFormat>|null,
+     *   channel_limit?: int|null,
+     *   codecs?: list<string>|null,
+     *   default_primary_ip_id?: string|null,
+     *   default_routing_method?: value-of<DefaultRoutingMethod>|null,
+     *   default_secondary_ip_id?: string|null,
+     *   default_tertiary_ip_id?: string|null,
+     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
+     *   generate_ringback_tone?: bool|null,
+     *   isup_headers_enabled?: bool|null,
+     *   prack_enabled?: bool|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_compact_headers_enabled?: bool|null,
+     *   sip_region?: value-of<SipRegion>|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     *   timeout_1xx_secs?: int|null,
+     *   timeout_2xx_secs?: int|null,
+     * } $inbound
+     * @param OutboundIP|array{
+     *   ani_override?: string|null,
+     *   ani_override_type?: value-of<AniOverrideType>|null,
+     *   call_parking_enabled?: bool|null,
+     *   channel_limit?: int|null,
+     *   generate_ringback_tone?: bool|null,
+     *   instant_ringback_enabled?: bool|null,
+     *   ip_authentication_method?: value-of<IPAuthenticationMethod>|null,
+     *   ip_authentication_token?: string|null,
+     *   localization?: string|null,
+     *   outbound_voice_profile_id?: string|null,
+     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+     *   tech_prefix?: string|null,
+     * } $outbound
+     * @param ConnectionRtcpSettings|array{
+     *   capture_enabled?: bool|null,
+     *   port?: value-of<Port>|null,
+     *   report_frequency_secs?: int|null,
+     * } $rtcp_settings
      * @param list<string> $tags
      * @param TransportProtocol|value-of<TransportProtocol> $transport_protocol
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
@@ -196,11 +280,11 @@ final class IPConnectionUpdateParams implements BaseModel
         DtmfType|string|null $dtmf_type = null,
         ?bool $encode_contact_header_enabled = null,
         EncryptedMedia|string|null $encrypted_media = null,
-        ?InboundIP $inbound = null,
+        InboundIP|array|null $inbound = null,
         ?string $ios_push_credential_id = null,
         ?bool $onnet_t38_passthrough_enabled = null,
-        ?OutboundIP $outbound = null,
-        ?ConnectionRtcpSettings $rtcp_settings = null,
+        OutboundIP|array|null $outbound = null,
+        ConnectionRtcpSettings|array|null $rtcp_settings = null,
         ?array $tags = null,
         TransportProtocol|string|null $transport_protocol = null,
         WebhookAPIVersion|string|null $webhook_api_version = null,
@@ -210,26 +294,26 @@ final class IPConnectionUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $active && $obj->active = $active;
+        null !== $active && $obj['active'] = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $android_push_credential_id && $obj->android_push_credential_id = $android_push_credential_id;
-        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
-        null !== $connection_name && $obj->connection_name = $connection_name;
-        null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
+        null !== $android_push_credential_id && $obj['android_push_credential_id'] = $android_push_credential_id;
+        null !== $call_cost_in_webhooks && $obj['call_cost_in_webhooks'] = $call_cost_in_webhooks;
+        null !== $connection_name && $obj['connection_name'] = $connection_name;
+        null !== $default_on_hold_comfort_noise_enabled && $obj['default_on_hold_comfort_noise_enabled'] = $default_on_hold_comfort_noise_enabled;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
-        null !== $encode_contact_header_enabled && $obj->encode_contact_header_enabled = $encode_contact_header_enabled;
+        null !== $encode_contact_header_enabled && $obj['encode_contact_header_enabled'] = $encode_contact_header_enabled;
         null !== $encrypted_media && $obj['encrypted_media'] = $encrypted_media;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $ios_push_credential_id && $obj->ios_push_credential_id = $ios_push_credential_id;
-        null !== $onnet_t38_passthrough_enabled && $obj->onnet_t38_passthrough_enabled = $onnet_t38_passthrough_enabled;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $rtcp_settings && $obj->rtcp_settings = $rtcp_settings;
-        null !== $tags && $obj->tags = $tags;
+        null !== $inbound && $obj['inbound'] = $inbound;
+        null !== $ios_push_credential_id && $obj['ios_push_credential_id'] = $ios_push_credential_id;
+        null !== $onnet_t38_passthrough_enabled && $obj['onnet_t38_passthrough_enabled'] = $onnet_t38_passthrough_enabled;
+        null !== $outbound && $obj['outbound'] = $outbound;
+        null !== $rtcp_settings && $obj['rtcp_settings'] = $rtcp_settings;
+        null !== $tags && $obj['tags'] = $tags;
         null !== $transport_protocol && $obj['transport_protocol'] = $transport_protocol;
         null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
+        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -240,7 +324,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -266,7 +350,7 @@ final class IPConnectionUpdateParams implements BaseModel
         ?string $androidPushCredentialID
     ): self {
         $obj = clone $this;
-        $obj->android_push_credential_id = $androidPushCredentialID;
+        $obj['android_push_credential_id'] = $androidPushCredentialID;
 
         return $obj;
     }
@@ -277,7 +361,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
         $obj = clone $this;
-        $obj->call_cost_in_webhooks = $callCostInWebhooks;
+        $obj['call_cost_in_webhooks'] = $callCostInWebhooks;
 
         return $obj;
     }
@@ -285,7 +369,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj->connection_name = $connectionName;
+        $obj['connection_name'] = $connectionName;
 
         return $obj;
     }
@@ -297,7 +381,7 @@ final class IPConnectionUpdateParams implements BaseModel
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
         $obj = clone $this;
-        $obj->default_on_hold_comfort_noise_enabled = $defaultOnHoldComfortNoiseEnabled;
+        $obj['default_on_hold_comfort_noise_enabled'] = $defaultOnHoldComfortNoiseEnabled;
 
         return $obj;
     }
@@ -322,7 +406,7 @@ final class IPConnectionUpdateParams implements BaseModel
         bool $encodeContactHeaderEnabled
     ): self {
         $obj = clone $this;
-        $obj->encode_contact_header_enabled = $encodeContactHeaderEnabled;
+        $obj['encode_contact_header_enabled'] = $encodeContactHeaderEnabled;
 
         return $obj;
     }
@@ -341,10 +425,32 @@ final class IPConnectionUpdateParams implements BaseModel
         return $obj;
     }
 
-    public function withInbound(InboundIP $inbound): self
+    /**
+     * @param InboundIP|array{
+     *   ani_number_format?: value-of<AniNumberFormat>|null,
+     *   channel_limit?: int|null,
+     *   codecs?: list<string>|null,
+     *   default_primary_ip_id?: string|null,
+     *   default_routing_method?: value-of<DefaultRoutingMethod>|null,
+     *   default_secondary_ip_id?: string|null,
+     *   default_tertiary_ip_id?: string|null,
+     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
+     *   generate_ringback_tone?: bool|null,
+     *   isup_headers_enabled?: bool|null,
+     *   prack_enabled?: bool|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_compact_headers_enabled?: bool|null,
+     *   sip_region?: value-of<SipRegion>|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     *   timeout_1xx_secs?: int|null,
+     *   timeout_2xx_secs?: int|null,
+     * } $inbound
+     */
+    public function withInbound(InboundIP|array $inbound): self
     {
         $obj = clone $this;
-        $obj->inbound = $inbound;
+        $obj['inbound'] = $inbound;
 
         return $obj;
     }
@@ -355,7 +461,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withIosPushCredentialID(?string $iosPushCredentialID): self
     {
         $obj = clone $this;
-        $obj->ios_push_credential_id = $iosPushCredentialID;
+        $obj['ios_push_credential_id'] = $iosPushCredentialID;
 
         return $obj;
     }
@@ -367,23 +473,47 @@ final class IPConnectionUpdateParams implements BaseModel
         bool $onnetT38PassthroughEnabled
     ): self {
         $obj = clone $this;
-        $obj->onnet_t38_passthrough_enabled = $onnetT38PassthroughEnabled;
+        $obj['onnet_t38_passthrough_enabled'] = $onnetT38PassthroughEnabled;
 
         return $obj;
     }
 
-    public function withOutbound(OutboundIP $outbound): self
+    /**
+     * @param OutboundIP|array{
+     *   ani_override?: string|null,
+     *   ani_override_type?: value-of<AniOverrideType>|null,
+     *   call_parking_enabled?: bool|null,
+     *   channel_limit?: int|null,
+     *   generate_ringback_tone?: bool|null,
+     *   instant_ringback_enabled?: bool|null,
+     *   ip_authentication_method?: value-of<IPAuthenticationMethod>|null,
+     *   ip_authentication_token?: string|null,
+     *   localization?: string|null,
+     *   outbound_voice_profile_id?: string|null,
+     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+     *   tech_prefix?: string|null,
+     * } $outbound
+     */
+    public function withOutbound(OutboundIP|array $outbound): self
     {
         $obj = clone $this;
-        $obj->outbound = $outbound;
+        $obj['outbound'] = $outbound;
 
         return $obj;
     }
 
-    public function withRtcpSettings(ConnectionRtcpSettings $rtcpSettings): self
-    {
+    /**
+     * @param ConnectionRtcpSettings|array{
+     *   capture_enabled?: bool|null,
+     *   port?: value-of<Port>|null,
+     *   report_frequency_secs?: int|null,
+     * } $rtcpSettings
+     */
+    public function withRtcpSettings(
+        ConnectionRtcpSettings|array $rtcpSettings
+    ): self {
         $obj = clone $this;
-        $obj->rtcp_settings = $rtcpSettings;
+        $obj['rtcp_settings'] = $rtcpSettings;
 
         return $obj;
     }
@@ -396,7 +526,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -436,7 +566,7 @@ final class IPConnectionUpdateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
+        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -447,7 +577,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhook_event_url = $webhookEventURL;
+        $obj['webhook_event_url'] = $webhookEventURL;
 
         return $obj;
     }
@@ -458,7 +588,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
+        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

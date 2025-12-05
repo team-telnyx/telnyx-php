@@ -113,15 +113,15 @@ final class ShortCode implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->messaging_profile_id = $messaging_profile_id;
+        $obj['messaging_profile_id'] = $messaging_profile_id;
 
-        null !== $id && $obj->id = $id;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $created_at && $obj['created_at'] = $created_at;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $short_code && $obj->short_code = $short_code;
-        null !== $tags && $obj->tags = $tags;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $short_code && $obj['short_code'] = $short_code;
+        null !== $tags && $obj['tags'] = $tags;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class ShortCode implements BaseModel
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class ShortCode implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class ShortCode implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class ShortCode implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class ShortCode implements BaseModel
     public function withShortCode(string $shortCode): self
     {
         $obj = clone $this;
-        $obj->short_code = $shortCode;
+        $obj['short_code'] = $shortCode;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class ShortCode implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class ShortCode implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

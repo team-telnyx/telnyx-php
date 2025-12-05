@@ -18,10 +18,17 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
  * @see Telnyx\Services\Porting\LoaConfigurationsService::create()
  *
  * @phpstan-type LoaConfigurationCreateParamsShape = array{
- *   address: Address,
+ *   address: Address|array{
+ *     city: string,
+ *     country_code: string,
+ *     state: string,
+ *     street_address: string,
+ *     zip_code: string,
+ *     extended_address?: string|null,
+ *   },
  *   company_name: string,
- *   contact: Contact,
- *   logo: Logo,
+ *   contact: Contact|array{email: string, phone_number: string},
+ *   logo: Logo|array{document_id: string},
  *   name: string,
  * }
  */
@@ -91,32 +98,52 @@ final class LoaConfigurationCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Address|array{
+     *   city: string,
+     *   country_code: string,
+     *   state: string,
+     *   street_address: string,
+     *   zip_code: string,
+     *   extended_address?: string|null,
+     * } $address
+     * @param Contact|array{email: string, phone_number: string} $contact
+     * @param Logo|array{document_id: string} $logo
      */
     public static function with(
-        Address $address,
+        Address|array $address,
         string $company_name,
-        Contact $contact,
-        Logo $logo,
+        Contact|array $contact,
+        Logo|array $logo,
         string $name,
     ): self {
         $obj = new self;
 
-        $obj->address = $address;
-        $obj->company_name = $company_name;
-        $obj->contact = $contact;
-        $obj->logo = $logo;
-        $obj->name = $name;
+        $obj['address'] = $address;
+        $obj['company_name'] = $company_name;
+        $obj['contact'] = $contact;
+        $obj['logo'] = $logo;
+        $obj['name'] = $name;
 
         return $obj;
     }
 
     /**
      * The address of the company.
+     *
+     * @param Address|array{
+     *   city: string,
+     *   country_code: string,
+     *   state: string,
+     *   street_address: string,
+     *   zip_code: string,
+     *   extended_address?: string|null,
+     * } $address
      */
-    public function withAddress(Address $address): self
+    public function withAddress(Address|array $address): self
     {
         $obj = clone $this;
-        $obj->address = $address;
+        $obj['address'] = $address;
 
         return $obj;
     }
@@ -127,29 +154,33 @@ final class LoaConfigurationCreateParams implements BaseModel
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj->company_name = $companyName;
+        $obj['company_name'] = $companyName;
 
         return $obj;
     }
 
     /**
      * The contact information of the company.
+     *
+     * @param Contact|array{email: string, phone_number: string} $contact
      */
-    public function withContact(Contact $contact): self
+    public function withContact(Contact|array $contact): self
     {
         $obj = clone $this;
-        $obj->contact = $contact;
+        $obj['contact'] = $contact;
 
         return $obj;
     }
 
     /**
      * The logo of the LOA configuration.
+     *
+     * @param Logo|array{document_id: string} $logo
      */
-    public function withLogo(Logo $logo): self
+    public function withLogo(Logo|array $logo): self
     {
         $obj = clone $this;
-        $obj->logo = $logo;
+        $obj['logo'] = $logo;
 
         return $obj;
     }
@@ -160,7 +191,7 @@ final class LoaConfigurationCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

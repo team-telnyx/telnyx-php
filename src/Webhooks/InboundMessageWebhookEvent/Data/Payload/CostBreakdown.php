@@ -37,31 +37,44 @@ final class CostBreakdown implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CarrierFee|array{
+     *   amount?: string|null, currency?: string|null
+     * } $carrier_fee
+     * @param Rate|array{amount?: string|null, currency?: string|null} $rate
      */
     public static function with(
-        ?CarrierFee $carrier_fee = null,
-        ?Rate $rate = null
+        CarrierFee|array|null $carrier_fee = null,
+        Rate|array|null $rate = null
     ): self {
         $obj = new self;
 
-        null !== $carrier_fee && $obj->carrier_fee = $carrier_fee;
-        null !== $rate && $obj->rate = $rate;
+        null !== $carrier_fee && $obj['carrier_fee'] = $carrier_fee;
+        null !== $rate && $obj['rate'] = $rate;
 
         return $obj;
     }
 
-    public function withCarrierFee(CarrierFee $carrierFee): self
+    /**
+     * @param CarrierFee|array{
+     *   amount?: string|null, currency?: string|null
+     * } $carrierFee
+     */
+    public function withCarrierFee(CarrierFee|array $carrierFee): self
     {
         $obj = clone $this;
-        $obj->carrier_fee = $carrierFee;
+        $obj['carrier_fee'] = $carrierFee;
 
         return $obj;
     }
 
-    public function withRate(Rate $rate): self
+    /**
+     * @param Rate|array{amount?: string|null, currency?: string|null} $rate
+     */
+    public function withRate(Rate|array $rate): self
     {
         $obj = clone $this;
-        $obj->rate = $rate;
+        $obj['rate'] = $rate;
 
         return $obj;
     }

@@ -40,35 +40,65 @@ final class IPListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<IP> $data
+     * @param list<IP|array{
+     *   id?: string|null,
+     *   connection_id?: string|null,
+     *   created_at?: string|null,
+     *   ip_address?: string|null,
+     *   port?: int|null,
+     *   record_type?: string|null,
+     *   updated_at?: string|null,
+     * }> $data
+     * @param ConnectionsPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?ConnectionsPaginationMeta $meta = null
+        ConnectionsPaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<IP> $data
+     * @param list<IP|array{
+     *   id?: string|null,
+     *   connection_id?: string|null,
+     *   created_at?: string|null,
+     *   ip_address?: string|null,
+     *   port?: int|null,
+     *   record_type?: string|null,
+     *   updated_at?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(ConnectionsPaginationMeta $meta): self
+    /**
+     * @param ConnectionsPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(ConnectionsPaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

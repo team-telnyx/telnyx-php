@@ -10,6 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\CardOrientation;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\ThumbnailImageAlignment;
 use Telnyx\Messsages\RcsCardContent;
+use Telnyx\Messsages\RcsCardContent\Media;
+use Telnyx\Messsages\RcsSuggestion;
 
 /**
  * Standalone card.
@@ -73,27 +75,41 @@ final class StandaloneCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param RcsCardContent|array{
+     *   description?: string|null,
+     *   media?: Media|null,
+     *   suggestions?: list<RcsSuggestion>|null,
+     *   title?: string|null,
+     * } $card_content
      * @param CardOrientation|value-of<CardOrientation> $card_orientation
      * @param ThumbnailImageAlignment|value-of<ThumbnailImageAlignment> $thumbnail_image_alignment
      */
     public static function with(
-        RcsCardContent $card_content,
+        RcsCardContent|array $card_content,
         CardOrientation|string $card_orientation,
         ThumbnailImageAlignment|string $thumbnail_image_alignment,
     ): self {
         $obj = new self;
 
-        $obj->card_content = $card_content;
+        $obj['card_content'] = $card_content;
         $obj['card_orientation'] = $card_orientation;
         $obj['thumbnail_image_alignment'] = $thumbnail_image_alignment;
 
         return $obj;
     }
 
-    public function withCardContent(RcsCardContent $cardContent): self
+    /**
+     * @param RcsCardContent|array{
+     *   description?: string|null,
+     *   media?: Media|null,
+     *   suggestions?: list<RcsSuggestion>|null,
+     *   title?: string|null,
+     * } $cardContent
+     */
+    public function withCardContent(RcsCardContent|array $cardContent): self
     {
         $obj = clone $this;
-        $obj->card_content = $cardContent;
+        $obj['card_content'] = $cardContent;
 
         return $obj;
     }

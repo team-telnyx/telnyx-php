@@ -52,8 +52,8 @@ final class PartnerCampaignUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class PartnerCampaignUpdateParams implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj['webhookFailoverURL'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class PartnerCampaignUpdateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

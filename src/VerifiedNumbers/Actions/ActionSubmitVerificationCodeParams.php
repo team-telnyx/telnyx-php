@@ -55,7 +55,7 @@ final class ActionSubmitVerificationCodeParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->verification_code = $verification_code;
+        $obj['verification_code'] = $verification_code;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class ActionSubmitVerificationCodeParams implements BaseModel
     public function withVerificationCode(string $verificationCode): self
     {
         $obj = clone $this;
-        $obj->verification_code = $verificationCode;
+        $obj['verification_code'] = $verificationCode;
 
         return $obj;
     }

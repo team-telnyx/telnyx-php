@@ -38,8 +38,8 @@ final class VerifyProfileMessageTemplateResponse implements BaseModel
     {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $text && $obj->text = $text;
+        null !== $id && $obj['id'] = $id;
+        null !== $text && $obj['text'] = $text;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class VerifyProfileMessageTemplateResponse implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class VerifyProfileMessageTemplateResponse implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

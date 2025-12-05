@@ -90,11 +90,11 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $created_at_gt && $obj->created_at_gt = $created_at_gt;
-        null !== $created_at_lt && $obj->created_at_lt = $created_at_lt;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $order_request_id && $obj->order_request_id = $order_request_id;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $created_at_gt && $obj['created_at_gt'] = $created_at_gt;
+        null !== $created_at_lt && $obj['created_at_lt'] = $created_at_lt;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $order_request_id && $obj['order_request_id'] = $order_request_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -106,7 +106,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
         $obj = clone $this;
-        $obj->created_at_gt = $createdAtGt;
+        $obj['created_at_gt'] = $createdAtGt;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
         $obj = clone $this;
-        $obj->created_at_lt = $createdAtLt;
+        $obj['created_at_lt'] = $createdAtLt;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->order_request_id = $orderRequestID;
+        $obj['order_request_id'] = $orderRequestID;
 
         return $obj;
     }

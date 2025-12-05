@@ -39,7 +39,7 @@ final class ActivationSettings implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $foc_datetime_requested && $obj->foc_datetime_requested = $foc_datetime_requested;
+        null !== $foc_datetime_requested && $obj['foc_datetime_requested'] = $foc_datetime_requested;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class ActivationSettings implements BaseModel
         \DateTimeInterface $focDatetimeRequested
     ): self {
         $obj = clone $this;
-        $obj->foc_datetime_requested = $focDatetimeRequested;
+        $obj['foc_datetime_requested'] = $focDatetimeRequested;
 
         return $obj;
     }

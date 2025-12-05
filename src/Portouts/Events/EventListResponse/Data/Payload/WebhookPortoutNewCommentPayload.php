@@ -65,10 +65,10 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $comment && $obj->comment = $comment;
-        null !== $portout_id && $obj->portout_id = $portout_id;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $comment && $obj['comment'] = $comment;
+        null !== $portout_id && $obj['portout_id'] = $portout_id;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withComment(string $comment): self
     {
         $obj = clone $this;
-        $obj->comment = $comment;
+        $obj['comment'] = $comment;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj->portout_id = $portoutID;
+        $obj['portout_id'] = $portoutID;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

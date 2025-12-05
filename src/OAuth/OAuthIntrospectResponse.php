@@ -105,14 +105,14 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->active = $active;
+        $obj['active'] = $active;
 
-        null !== $aud && $obj->aud = $aud;
-        null !== $client_id && $obj->client_id = $client_id;
-        null !== $exp && $obj->exp = $exp;
-        null !== $iat && $obj->iat = $iat;
-        null !== $iss && $obj->iss = $iss;
-        null !== $scope && $obj->scope = $scope;
+        null !== $aud && $obj['aud'] = $aud;
+        null !== $client_id && $obj['client_id'] = $client_id;
+        null !== $exp && $obj['exp'] = $exp;
+        null !== $iat && $obj['iat'] = $iat;
+        null !== $iss && $obj['iss'] = $iss;
+        null !== $scope && $obj['scope'] = $scope;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withAud(string $aud): self
     {
         $obj = clone $this;
-        $obj->aud = $aud;
+        $obj['aud'] = $aud;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->client_id = $clientID;
+        $obj['client_id'] = $clientID;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withExp(int $exp): self
     {
         $obj = clone $this;
-        $obj->exp = $exp;
+        $obj['exp'] = $exp;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withIat(int $iat): self
     {
         $obj = clone $this;
-        $obj->iat = $iat;
+        $obj['iat'] = $iat;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withIss(string $iss): self
     {
         $obj = clone $this;
-        $obj->iss = $iss;
+        $obj['iss'] = $iss;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withScope(string $scope): self
     {
         $obj = clone $this;
-        $obj->scope = $scope;
+        $obj['scope'] = $scope;
 
         return $obj;
     }

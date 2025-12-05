@@ -57,9 +57,9 @@ final class Response implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $body && $obj->body = $body;
-        null !== $headers && $obj->headers = $headers;
-        null !== $status && $obj->status = $status;
+        null !== $body && $obj['body'] = $body;
+        null !== $headers && $obj['headers'] = $headers;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Response implements BaseModel
     public function withBody(string $body): self
     {
         $obj = clone $this;
-        $obj->body = $body;
+        $obj['body'] = $body;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class Response implements BaseModel
     public function withHeaders(array $headers): self
     {
         $obj = clone $this;
-        $obj->headers = $headers;
+        $obj['headers'] = $headers;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Response implements BaseModel
     public function withStatus(int $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

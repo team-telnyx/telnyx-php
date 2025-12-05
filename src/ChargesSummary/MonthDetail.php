@@ -67,10 +67,10 @@ final class MonthDetail implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->mrc = $mrc;
-        $obj->quantity = $quantity;
+        $obj['mrc'] = $mrc;
+        $obj['quantity'] = $quantity;
 
-        null !== $otc && $obj->otc = $otc;
+        null !== $otc && $obj['otc'] = $otc;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class MonthDetail implements BaseModel
     public function withMrc(string $mrc): self
     {
         $obj = clone $this;
-        $obj->mrc = $mrc;
+        $obj['mrc'] = $mrc;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class MonthDetail implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class MonthDetail implements BaseModel
     public function withOtc(?string $otc): self
     {
         $obj = clone $this;
-        $obj->otc = $otc;
+        $obj['otc'] = $otc;
 
         return $obj;
     }

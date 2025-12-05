@@ -73,11 +73,11 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $order_request_id && $obj->order_request_id = $order_request_id;
-        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
-        null !== $phone_numbers_count && $obj->phone_numbers_count = $phone_numbers_count;
-        null !== $status && $obj->status = $status;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $order_request_id && $obj['order_request_id'] = $order_request_id;
+        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $phone_numbers_count && $obj['phone_numbers_count'] = $phone_numbers_count;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Filter implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->order_request_id = $orderRequestID;
+        $obj['order_request_id'] = $orderRequestID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phone_number_type = $phoneNumberType;
+        $obj['phone_number_type'] = $phoneNumberType;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Filter implements BaseModel
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
         $obj = clone $this;
-        $obj->phone_numbers_count = $phoneNumbersCount;
+        $obj['phone_numbers_count'] = $phoneNumbersCount;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Filter implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplication\Inbound;
+use Telnyx\FaxApplications\FaxApplication\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\FaxApplications\FaxApplication\Outbound;
 
 /**
@@ -120,6 +121,14 @@ final class FaxApplication implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
+     * @param Inbound|array{
+     *   channel_limit?: int|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     * } $inbound
+     * @param Outbound|array{
+     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     * } $outbound
      * @param list<string> $tags
      */
     public static function with(
@@ -128,8 +137,8 @@ final class FaxApplication implements BaseModel
         AnchorsiteOverride|string|null $anchorsite_override = null,
         ?string $application_name = null,
         ?string $created_at = null,
-        ?Inbound $inbound = null,
-        ?Outbound $outbound = null,
+        Inbound|array|null $inbound = null,
+        Outbound|array|null $outbound = null,
         ?string $record_type = null,
         ?array $tags = null,
         ?string $updated_at = null,
@@ -139,19 +148,19 @@ final class FaxApplication implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $active && $obj->active = $active;
+        null !== $id && $obj['id'] = $id;
+        null !== $active && $obj['active'] = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $application_name && $obj->application_name = $application_name;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $tags && $obj->tags = $tags;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
+        null !== $application_name && $obj['application_name'] = $application_name;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $inbound && $obj['inbound'] = $inbound;
+        null !== $outbound && $obj['outbound'] = $outbound;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $tags && $obj['tags'] = $tags;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -162,7 +171,7 @@ final class FaxApplication implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -173,7 +182,7 @@ final class FaxApplication implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -198,7 +207,7 @@ final class FaxApplication implements BaseModel
     public function withApplicationName(string $applicationName): self
     {
         $obj = clone $this;
-        $obj->application_name = $applicationName;
+        $obj['application_name'] = $applicationName;
 
         return $obj;
     }
@@ -209,23 +218,35 @@ final class FaxApplication implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
-    public function withInbound(Inbound $inbound): self
+    /**
+     * @param Inbound|array{
+     *   channel_limit?: int|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     * } $inbound
+     */
+    public function withInbound(Inbound|array $inbound): self
     {
         $obj = clone $this;
-        $obj->inbound = $inbound;
+        $obj['inbound'] = $inbound;
 
         return $obj;
     }
 
-    public function withOutbound(Outbound $outbound): self
+    /**
+     * @param Outbound|array{
+     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     * } $outbound
+     */
+    public function withOutbound(Outbound|array $outbound): self
     {
         $obj = clone $this;
-        $obj->outbound = $outbound;
+        $obj['outbound'] = $outbound;
 
         return $obj;
     }
@@ -236,7 +257,7 @@ final class FaxApplication implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -249,7 +270,7 @@ final class FaxApplication implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -260,7 +281,7 @@ final class FaxApplication implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -272,7 +293,7 @@ final class FaxApplication implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
+        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -283,7 +304,7 @@ final class FaxApplication implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhook_event_url = $webhookEventURL;
+        $obj['webhook_event_url'] = $webhookEventURL;
 
         return $obj;
     }
@@ -294,7 +315,7 @@ final class FaxApplication implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
+        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

@@ -35,20 +35,47 @@ final class CampaignGetMnoMetadataResponse implements BaseModel, ResponseConvert
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param mno_10999|array{
+     *   minMsgSamples: int,
+     *   mno: string,
+     *   mnoReview: bool,
+     *   mnoSupport: bool,
+     *   noEmbeddedLink: bool,
+     *   noEmbeddedPhone: bool,
+     *   qualify: bool,
+     *   reqSubscriberHelp: bool,
+     *   reqSubscriberOptin: bool,
+     *   reqSubscriberOptout: bool,
+     * } $_10999
      */
-    public static function with(?mno_10999 $_10999 = null): self
+    public static function with(mno_10999|array|null $_10999 = null): self
     {
         $obj = new self;
 
-        null !== $_10999 && $obj->_10999 = $_10999;
+        null !== $_10999 && $obj['_10999'] = $_10999;
 
         return $obj;
     }
 
-    public function with10999(mno_10999 $_10999): self
+    /**
+     * @param mno_10999|array{
+     *   minMsgSamples: int,
+     *   mno: string,
+     *   mnoReview: bool,
+     *   mnoSupport: bool,
+     *   noEmbeddedLink: bool,
+     *   noEmbeddedPhone: bool,
+     *   qualify: bool,
+     *   reqSubscriberHelp: bool,
+     *   reqSubscriberOptin: bool,
+     *   reqSubscriberOptout: bool,
+     * } $_10999
+     */
+    public function with10999(mno_10999|array $_10999): self
     {
         $obj = clone $this;
-        $obj->_10999 = $_10999;
+        $obj['_10999'] = $_10999;
 
         return $obj;
     }

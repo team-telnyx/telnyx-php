@@ -162,22 +162,22 @@ final class MediaStorageDetailRecord implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->record_type = $record_type;
+        $obj['record_type'] = $record_type;
 
-        null !== $id && $obj->id = $id;
-        null !== $action_type && $obj->action_type = $action_type;
-        null !== $asset_id && $obj->asset_id = $asset_id;
-        null !== $cost && $obj->cost = $cost;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $currency && $obj->currency = $currency;
-        null !== $link_channel_id && $obj->link_channel_id = $link_channel_id;
-        null !== $link_channel_type && $obj->link_channel_type = $link_channel_type;
-        null !== $org_id && $obj->org_id = $org_id;
-        null !== $rate && $obj->rate = $rate;
-        null !== $rate_measured_in && $obj->rate_measured_in = $rate_measured_in;
-        null !== $status && $obj->status = $status;
-        null !== $user_id && $obj->user_id = $user_id;
-        null !== $webhook_id && $obj->webhook_id = $webhook_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $action_type && $obj['action_type'] = $action_type;
+        null !== $asset_id && $obj['asset_id'] = $asset_id;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $link_channel_id && $obj['link_channel_id'] = $link_channel_id;
+        null !== $link_channel_type && $obj['link_channel_type'] = $link_channel_type;
+        null !== $org_id && $obj['org_id'] = $org_id;
+        null !== $rate && $obj['rate'] = $rate;
+        null !== $rate_measured_in && $obj['rate_measured_in'] = $rate_measured_in;
+        null !== $status && $obj['status'] = $status;
+        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $webhook_id && $obj['webhook_id'] = $webhook_id;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withActionType(string $actionType): self
     {
         $obj = clone $this;
-        $obj->action_type = $actionType;
+        $obj['action_type'] = $actionType;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withAssetID(string $assetID): self
     {
         $obj = clone $this;
-        $obj->asset_id = $assetID;
+        $obj['asset_id'] = $assetID;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withCost(string $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withLinkChannelID(string $linkChannelID): self
     {
         $obj = clone $this;
-        $obj->link_channel_id = $linkChannelID;
+        $obj['link_channel_id'] = $linkChannelID;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withLinkChannelType(string $linkChannelType): self
     {
         $obj = clone $this;
-        $obj->link_channel_type = $linkChannelType;
+        $obj['link_channel_type'] = $linkChannelType;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withOrgID(string $orgID): self
     {
         $obj = clone $this;
-        $obj->org_id = $orgID;
+        $obj['org_id'] = $orgID;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withRate(string $rate): self
     {
         $obj = clone $this;
-        $obj->rate = $rate;
+        $obj['rate'] = $rate;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
         $obj = clone $this;
-        $obj->rate_measured_in = $rateMeasuredIn;
+        $obj['rate_measured_in'] = $rateMeasuredIn;
 
         return $obj;
     }
@@ -317,7 +317,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -328,7 +328,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
@@ -339,7 +339,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withWebhookID(string $webhookID): self
     {
         $obj = clone $this;
-        $obj->webhook_id = $webhookID;
+        $obj['webhook_id'] = $webhookID;
 
         return $obj;
     }

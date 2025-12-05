@@ -94,9 +94,13 @@ final class Job implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperation> $failed_operations
+     * @param list<FailedOperation|array{
+     *   id?: string|null, errors?: list<JobError>|null, phone_number?: string|null
+     * }> $failed_operations
      * @param Status|value-of<Status> $status
-     * @param list<SuccessfulOperation> $successful_operations
+     * @param list<SuccessfulOperation|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $successful_operations
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -112,15 +116,15 @@ final class Job implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $etc && $obj->etc = $etc;
-        null !== $failed_operations && $obj->failed_operations = $failed_operations;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $etc && $obj['etc'] = $etc;
+        null !== $failed_operations && $obj['failed_operations'] = $failed_operations;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $successful_operations && $obj->successful_operations = $successful_operations;
+        null !== $successful_operations && $obj['successful_operations'] = $successful_operations;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -131,7 +135,7 @@ final class Job implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -142,7 +146,7 @@ final class Job implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -153,18 +157,20 @@ final class Job implements BaseModel
     public function withEtc(\DateTimeInterface $etc): self
     {
         $obj = clone $this;
-        $obj->etc = $etc;
+        $obj['etc'] = $etc;
 
         return $obj;
     }
 
     /**
-     * @param list<FailedOperation> $failedOperations
+     * @param list<FailedOperation|array{
+     *   id?: string|null, errors?: list<JobError>|null, phone_number?: string|null
+     * }> $failedOperations
      */
     public function withFailedOperations(array $failedOperations): self
     {
         $obj = clone $this;
-        $obj->failed_operations = $failedOperations;
+        $obj['failed_operations'] = $failedOperations;
 
         return $obj;
     }
@@ -175,7 +181,7 @@ final class Job implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -194,12 +200,14 @@ final class Job implements BaseModel
     }
 
     /**
-     * @param list<SuccessfulOperation> $successfulOperations
+     * @param list<SuccessfulOperation|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $successfulOperations
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {
         $obj = clone $this;
-        $obj->successful_operations = $successfulOperations;
+        $obj['successful_operations'] = $successfulOperations;
 
         return $obj;
     }
@@ -223,7 +231,7 @@ final class Job implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

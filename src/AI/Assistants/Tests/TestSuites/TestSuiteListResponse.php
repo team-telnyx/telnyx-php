@@ -63,7 +63,7 @@ final class TestSuiteListResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class TestSuiteListResponse implements BaseModel, ResponseConverter
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

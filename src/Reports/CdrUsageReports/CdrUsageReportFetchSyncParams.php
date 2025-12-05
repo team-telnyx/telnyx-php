@@ -92,9 +92,9 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
         $obj['aggregation_type'] = $aggregation_type;
         $obj['product_breakdown'] = $product_breakdown;
 
-        null !== $connections && $obj->connections = $connections;
-        null !== $end_date && $obj->end_date = $end_date;
-        null !== $start_date && $obj->start_date = $start_date;
+        null !== $connections && $obj['connections'] = $connections;
+        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $start_date && $obj['start_date'] = $start_date;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     public function withConnections(array $connections): self
     {
         $obj = clone $this;
-        $obj->connections = $connections;
+        $obj['connections'] = $connections;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->end_date = $endDate;
+        $obj['end_date'] = $endDate;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->start_date = $startDate;
+        $obj['start_date'] = $startDate;
 
         return $obj;
     }

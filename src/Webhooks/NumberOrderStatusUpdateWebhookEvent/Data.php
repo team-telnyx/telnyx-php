@@ -8,6 +8,8 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
+use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
+use Telnyx\NumberOrders\PhoneNumber;
 
 /**
  * @phpstan-type DataShape = array{
@@ -80,21 +82,37 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NumberOrderWithPhoneNumbers|array{
+     *   id?: string|null,
+     *   billing_group_id?: string|null,
+     *   connection_id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   customer_reference?: string|null,
+     *   messaging_profile_id?: string|null,
+     *   phone_numbers?: list<PhoneNumber>|null,
+     *   phone_numbers_count?: int|null,
+     *   record_type?: string|null,
+     *   requirements_met?: bool|null,
+     *   status?: value-of<Status>|null,
+     *   sub_number_orders_ids?: list<string>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $payload
      */
     public static function with(
         string $id,
         string $event_type,
         \DateTimeInterface $occurred_at,
-        NumberOrderWithPhoneNumbers $payload,
+        NumberOrderWithPhoneNumbers|array $payload,
         string $record_type,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->event_type = $event_type;
-        $obj->occurred_at = $occurred_at;
-        $obj->payload = $payload;
-        $obj->record_type = $record_type;
+        $obj['id'] = $id;
+        $obj['event_type'] = $event_type;
+        $obj['occurred_at'] = $occurred_at;
+        $obj['payload'] = $payload;
+        $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -105,7 +123,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -116,7 +134,7 @@ final class Data implements BaseModel
     public function withEventType(string $eventType): self
     {
         $obj = clone $this;
-        $obj->event_type = $eventType;
+        $obj['event_type'] = $eventType;
 
         return $obj;
     }
@@ -127,15 +145,33 @@ final class Data implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }
 
-    public function withPayload(NumberOrderWithPhoneNumbers $payload): self
-    {
+    /**
+     * @param NumberOrderWithPhoneNumbers|array{
+     *   id?: string|null,
+     *   billing_group_id?: string|null,
+     *   connection_id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   customer_reference?: string|null,
+     *   messaging_profile_id?: string|null,
+     *   phone_numbers?: list<PhoneNumber>|null,
+     *   phone_numbers_count?: int|null,
+     *   record_type?: string|null,
+     *   requirements_met?: bool|null,
+     *   status?: value-of<Status>|null,
+     *   sub_number_orders_ids?: list<string>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $payload
+     */
+    public function withPayload(
+        NumberOrderWithPhoneNumbers|array $payload
+    ): self {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }
@@ -146,7 +182,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

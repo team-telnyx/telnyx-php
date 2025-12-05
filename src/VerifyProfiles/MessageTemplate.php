@@ -34,21 +34,31 @@ final class MessageTemplate implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param VerifyProfileMessageTemplateResponse|array{
+     *   id?: string|null, text?: string|null
+     * } $data
      */
     public static function with(
-        ?VerifyProfileMessageTemplateResponse $data = null
+        VerifyProfileMessageTemplateResponse|array|null $data = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(VerifyProfileMessageTemplateResponse $data): self
-    {
+    /**
+     * @param VerifyProfileMessageTemplateResponse|array{
+     *   id?: string|null, text?: string|null
+     * } $data
+     */
+    public function withData(
+        VerifyProfileMessageTemplateResponse|array $data
+    ): self {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

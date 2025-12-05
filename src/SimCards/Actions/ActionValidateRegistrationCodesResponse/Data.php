@@ -60,10 +60,10 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $invalid_detail && $obj->invalid_detail = $invalid_detail;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $registration_code && $obj->registration_code = $registration_code;
-        null !== $valid && $obj->valid = $valid;
+        null !== $invalid_detail && $obj['invalid_detail'] = $invalid_detail;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $registration_code && $obj['registration_code'] = $registration_code;
+        null !== $valid && $obj['valid'] = $valid;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     public function withInvalidDetail(?string $invalidDetail): self
     {
         $obj = clone $this;
-        $obj->invalid_detail = $invalidDetail;
+        $obj['invalid_detail'] = $invalidDetail;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Data implements BaseModel
     public function withRegistrationCode(string $registrationCode): self
     {
         $obj = clone $this;
-        $obj->registration_code = $registrationCode;
+        $obj['registration_code'] = $registrationCode;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Data implements BaseModel
     public function withValid(bool $valid): self
     {
         $obj = clone $this;
-        $obj->valid = $valid;
+        $obj['valid'] = $valid;
 
         return $obj;
     }

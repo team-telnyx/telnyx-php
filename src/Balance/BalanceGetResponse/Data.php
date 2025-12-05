@@ -84,11 +84,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $available_credit && $obj->available_credit = $available_credit;
-        null !== $balance && $obj->balance = $balance;
-        null !== $credit_limit && $obj->credit_limit = $credit_limit;
-        null !== $currency && $obj->currency = $currency;
-        null !== $pending && $obj->pending = $pending;
+        null !== $available_credit && $obj['available_credit'] = $available_credit;
+        null !== $balance && $obj['balance'] = $balance;
+        null !== $credit_limit && $obj['credit_limit'] = $credit_limit;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $pending && $obj['pending'] = $pending;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -100,7 +100,7 @@ final class Data implements BaseModel
     public function withAvailableCredit(string $availableCredit): self
     {
         $obj = clone $this;
-        $obj->available_credit = $availableCredit;
+        $obj['available_credit'] = $availableCredit;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Data implements BaseModel
     public function withBalance(string $balance): self
     {
         $obj = clone $this;
-        $obj->balance = $balance;
+        $obj['balance'] = $balance;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Data implements BaseModel
     public function withCreditLimit(string $creditLimit): self
     {
         $obj = clone $this;
-        $obj->credit_limit = $creditLimit;
+        $obj['credit_limit'] = $creditLimit;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Data implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Data implements BaseModel
     public function withPending(string $pending): self
     {
         $obj = clone $this;
-        $obj->pending = $pending;
+        $obj['pending'] = $pending;
 
         return $obj;
     }

@@ -10,6 +10,9 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data;
+use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\CoverageType;
+use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\NumberType;
+use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\PhoneNumberType;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
 
 /**
@@ -41,33 +44,61 @@ final class InventoryCoverageListResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   administrative_area?: string|null,
+     *   advance_requirements?: bool|null,
+     *   count?: int|null,
+     *   coverage_type?: value-of<CoverageType>|null,
+     *   group?: string|null,
+     *   group_type?: string|null,
+     *   number_range?: int|null,
+     *   number_type?: value-of<NumberType>|null,
+     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   record_type?: string|null,
+     * }> $data
+     * @param Meta|array{total_results?: int|null} $meta
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        Meta|array|null $meta = null
+    ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   administrative_area?: string|null,
+     *   advance_requirements?: bool|null,
+     *   count?: int|null,
+     *   coverage_type?: value-of<CoverageType>|null,
+     *   group?: string|null,
+     *   group_type?: string|null,
+     *   number_range?: int|null,
+     *   number_type?: value-of<NumberType>|null,
+     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   record_type?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{total_results?: int|null} $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

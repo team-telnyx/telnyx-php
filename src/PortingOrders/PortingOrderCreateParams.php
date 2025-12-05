@@ -79,10 +79,10 @@ final class PortingOrderCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->phone_numbers = $phone_numbers;
+        $obj['phone_numbers'] = $phone_numbers;
 
-        null !== $customer_group_reference && $obj->customer_group_reference = $customer_group_reference;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $customer_group_reference && $obj['customer_group_reference'] = $customer_group_reference;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class PortingOrderCreateParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class PortingOrderCreateParams implements BaseModel
         string $customerGroupReference
     ): self {
         $obj = clone $this;
-        $obj->customer_group_reference = $customerGroupReference;
+        $obj['customer_group_reference'] = $customerGroupReference;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class PortingOrderCreateParams implements BaseModel
     public function withCustomerReference(?string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }

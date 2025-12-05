@@ -7,6 +7,7 @@ namespace Telnyx\Portouts\Reports;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
 use Telnyx\Portouts\Reports\PortoutReport\ReportType;
 use Telnyx\Portouts\Reports\PortoutReport\Status;
 
@@ -89,6 +90,7 @@ final class PortoutReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
      * @param ReportType|value-of<ReportType> $report_type
      * @param Status|value-of<Status> $status
      */
@@ -96,7 +98,7 @@ final class PortoutReport implements BaseModel
         ?string $id = null,
         ?\DateTimeInterface $created_at = null,
         ?string $document_id = null,
-        ?ExportPortoutsCsvReport $params = null,
+        ExportPortoutsCsvReport|array|null $params = null,
         ?string $record_type = null,
         ReportType|string|null $report_type = null,
         Status|string|null $status = null,
@@ -104,14 +106,14 @@ final class PortoutReport implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $document_id && $obj->document_id = $document_id;
-        null !== $params && $obj->params = $params;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $document_id && $obj['document_id'] = $document_id;
+        null !== $params && $obj['params'] = $params;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $report_type && $obj['report_type'] = $report_type;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -122,7 +124,7 @@ final class PortoutReport implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -133,7 +135,7 @@ final class PortoutReport implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -144,18 +146,20 @@ final class PortoutReport implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj->document_id = $documentID;
+        $obj['document_id'] = $documentID;
 
         return $obj;
     }
 
     /**
      * The parameters for generating a port-outs CSV report.
+     *
+     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
      */
-    public function withParams(ExportPortoutsCsvReport $params): self
+    public function withParams(ExportPortoutsCsvReport|array $params): self
     {
         $obj = clone $this;
-        $obj->params = $params;
+        $obj['params'] = $params;
 
         return $obj;
     }
@@ -166,7 +170,7 @@ final class PortoutReport implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -203,7 +207,7 @@ final class PortoutReport implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -52,23 +52,39 @@ final class ToolTestResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   content_type: string,
+     *   request: array<string,mixed>,
+     *   response: string,
+     *   status_code: int,
+     *   success: bool,
+     * } $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
      * Response model for webhook tool test results.
+     *
+     * @param Data|array{
+     *   content_type: string,
+     *   request: array<string,mixed>,
+     *   response: string,
+     *   status_code: int,
+     *   success: bool,
+     * } $data
      */
-    public function withData(Data $data): self
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

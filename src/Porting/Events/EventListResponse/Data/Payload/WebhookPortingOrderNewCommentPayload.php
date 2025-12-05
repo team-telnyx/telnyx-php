@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewCommentPayload\Comment;
+use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewCommentPayload\Comment\UserType;
 
 /**
  * The webhook payload for the porting_order.new_comment event.
@@ -50,28 +51,44 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Comment|array{
+     *   id?: string|null,
+     *   body?: string|null,
+     *   inserted_at?: \DateTimeInterface|null,
+     *   user_id?: string|null,
+     *   user_type?: value-of<UserType>|null,
+     * } $comment
      */
     public static function with(
-        ?Comment $comment = null,
+        Comment|array|null $comment = null,
         ?string $porting_order_id = null,
         ?string $support_key = null,
     ): self {
         $obj = new self;
 
-        null !== $comment && $obj->comment = $comment;
-        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
-        null !== $support_key && $obj->support_key = $support_key;
+        null !== $comment && $obj['comment'] = $comment;
+        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
+        null !== $support_key && $obj['support_key'] = $support_key;
 
         return $obj;
     }
 
     /**
      * The comment that was added to the porting order.
+     *
+     * @param Comment|array{
+     *   id?: string|null,
+     *   body?: string|null,
+     *   inserted_at?: \DateTimeInterface|null,
+     *   user_id?: string|null,
+     *   user_type?: value-of<UserType>|null,
+     * } $comment
      */
-    public function withComment(Comment $comment): self
+    public function withComment(Comment|array $comment): self
     {
         $obj = clone $this;
-        $obj->comment = $comment;
+        $obj['comment'] = $comment;
 
         return $obj;
     }
@@ -82,7 +99,7 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
+        $obj['porting_order_id'] = $portingOrderID;
 
         return $obj;
     }
@@ -93,7 +110,7 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj->support_key = $supportKey;
+        $obj['support_key'] = $supportKey;
 
         return $obj;
     }

@@ -85,11 +85,11 @@ final class URLShortenerSettings implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->domain = $domain;
+        $obj['domain'] = $domain;
 
-        null !== $prefix && $obj->prefix = $prefix;
-        null !== $replace_blacklist_only && $obj->replace_blacklist_only = $replace_blacklist_only;
-        null !== $send_webhooks && $obj->send_webhooks = $send_webhooks;
+        null !== $prefix && $obj['prefix'] = $prefix;
+        null !== $replace_blacklist_only && $obj['replace_blacklist_only'] = $replace_blacklist_only;
+        null !== $send_webhooks && $obj['send_webhooks'] = $send_webhooks;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class URLShortenerSettings implements BaseModel
     public function withDomain(string $domain): self
     {
         $obj = clone $this;
-        $obj->domain = $domain;
+        $obj['domain'] = $domain;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class URLShortenerSettings implements BaseModel
     public function withPrefix(string $prefix): self
     {
         $obj = clone $this;
-        $obj->prefix = $prefix;
+        $obj['prefix'] = $prefix;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class URLShortenerSettings implements BaseModel
     public function withReplaceBlacklistOnly(bool $replaceBlacklistOnly): self
     {
         $obj = clone $this;
-        $obj->replace_blacklist_only = $replaceBlacklistOnly;
+        $obj['replace_blacklist_only'] = $replaceBlacklistOnly;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class URLShortenerSettings implements BaseModel
     public function withSendWebhooks(bool $sendWebhooks): self
     {
         $obj = clone $this;
-        $obj->send_webhooks = $sendWebhooks;
+        $obj['send_webhooks'] = $sendWebhooks;
 
         return $obj;
     }

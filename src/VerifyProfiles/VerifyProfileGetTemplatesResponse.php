@@ -52,24 +52,28 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel, ResponseConv
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerifyProfileMessageTemplateResponse> $data
+     * @param list<VerifyProfileMessageTemplateResponse|array{
+     *   id?: string|null, text?: string|null
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<VerifyProfileMessageTemplateResponse> $data
+     * @param list<VerifyProfileMessageTemplateResponse|array{
+     *   id?: string|null, text?: string|null
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

@@ -39,7 +39,7 @@ final class ClusterFetchGraphParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $cluster_id && $obj->cluster_id = $cluster_id;
+        null !== $cluster_id && $obj['cluster_id'] = $cluster_id;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class ClusterFetchGraphParams implements BaseModel
     public function withClusterID(int $clusterID): self
     {
         $obj = clone $this;
-        $obj->cluster_id = $clusterID;
+        $obj['cluster_id'] = $clusterID;
 
         return $obj;
     }

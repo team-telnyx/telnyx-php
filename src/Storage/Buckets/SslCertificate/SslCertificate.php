@@ -64,23 +64,34 @@ final class SslCertificate implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param IssuedBy|array{
+     *   common_name?: string|null,
+     *   organization?: string|null,
+     *   organization_unit?: string|null,
+     * } $issued_by
+     * @param IssuedTo|array{
+     *   common_name?: string|null,
+     *   organization?: string|null,
+     *   organization_unit?: string|null,
+     * } $issued_to
      */
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $created_at = null,
-        ?IssuedBy $issued_by = null,
-        ?IssuedTo $issued_to = null,
+        IssuedBy|array|null $issued_by = null,
+        IssuedTo|array|null $issued_to = null,
         ?\DateTimeInterface $valid_from = null,
         ?\DateTimeInterface $valid_to = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $issued_by && $obj->issued_by = $issued_by;
-        null !== $issued_to && $obj->issued_to = $issued_to;
-        null !== $valid_from && $obj->valid_from = $valid_from;
-        null !== $valid_to && $obj->valid_to = $valid_to;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $issued_by && $obj['issued_by'] = $issued_by;
+        null !== $issued_to && $obj['issued_to'] = $issued_to;
+        null !== $valid_from && $obj['valid_from'] = $valid_from;
+        null !== $valid_to && $obj['valid_to'] = $valid_to;
 
         return $obj;
     }
@@ -91,7 +102,7 @@ final class SslCertificate implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -102,23 +113,37 @@ final class SslCertificate implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
-    public function withIssuedBy(IssuedBy $issuedBy): self
+    /**
+     * @param IssuedBy|array{
+     *   common_name?: string|null,
+     *   organization?: string|null,
+     *   organization_unit?: string|null,
+     * } $issuedBy
+     */
+    public function withIssuedBy(IssuedBy|array $issuedBy): self
     {
         $obj = clone $this;
-        $obj->issued_by = $issuedBy;
+        $obj['issued_by'] = $issuedBy;
 
         return $obj;
     }
 
-    public function withIssuedTo(IssuedTo $issuedTo): self
+    /**
+     * @param IssuedTo|array{
+     *   common_name?: string|null,
+     *   organization?: string|null,
+     *   organization_unit?: string|null,
+     * } $issuedTo
+     */
+    public function withIssuedTo(IssuedTo|array $issuedTo): self
     {
         $obj = clone $this;
-        $obj->issued_to = $issuedTo;
+        $obj['issued_to'] = $issuedTo;
 
         return $obj;
     }
@@ -129,7 +154,7 @@ final class SslCertificate implements BaseModel
     public function withValidFrom(\DateTimeInterface $validFrom): self
     {
         $obj = clone $this;
-        $obj->valid_from = $validFrom;
+        $obj['valid_from'] = $validFrom;
 
         return $obj;
     }
@@ -140,7 +165,7 @@ final class SslCertificate implements BaseModel
     public function withValidTo(\DateTimeInterface $validTo): self
     {
         $obj = clone $this;
-        $obj->valid_to = $validTo;
+        $obj['valid_to'] = $validTo;
 
         return $obj;
     }

@@ -10,6 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\MesssageRcsResponse\Data\From;
 use Telnyx\Messsages\MesssageRcsResponse\Data\To;
 use Telnyx\Messsages\RcsAgentMessage;
+use Telnyx\Messsages\RcsAgentMessage\ContentMessage;
+use Telnyx\Messsages\RcsAgentMessage\Event;
 
 /**
  * @phpstan-type DataShape = array{
@@ -78,14 +80,28 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<To> $to
+     * @param RcsAgentMessage|array{
+     *   content_message?: ContentMessage|null,
+     *   event?: Event|null,
+     *   expire_time?: \DateTimeInterface|null,
+     *   ttl?: string|null,
+     * } $body
+     * @param From|array{
+     *   agent_id?: string|null, agent_name?: string|null, carrier?: string|null
+     * } $from
+     * @param list<To|array{
+     *   carrier?: string|null,
+     *   line_type?: string|null,
+     *   phone_number?: string|null,
+     *   status?: string|null,
+     * }> $to
      */
     public static function with(
         ?string $id = null,
-        ?RcsAgentMessage $body = null,
+        RcsAgentMessage|array|null $body = null,
         ?string $direction = null,
         ?string $encoding = null,
-        ?From $from = null,
+        From|array|null $from = null,
         ?string $messaging_profile_id = null,
         ?string $organization_id = null,
         ?\DateTimeInterface $received_at = null,
@@ -95,17 +111,17 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $body && $obj->body = $body;
-        null !== $direction && $obj->direction = $direction;
-        null !== $encoding && $obj->encoding = $encoding;
-        null !== $from && $obj->from = $from;
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
-        null !== $organization_id && $obj->organization_id = $organization_id;
-        null !== $received_at && $obj->received_at = $received_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $to && $obj->to = $to;
-        null !== $type && $obj->type = $type;
+        null !== $id && $obj['id'] = $id;
+        null !== $body && $obj['body'] = $body;
+        null !== $direction && $obj['direction'] = $direction;
+        null !== $encoding && $obj['encoding'] = $encoding;
+        null !== $from && $obj['from'] = $from;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $organization_id && $obj['organization_id'] = $organization_id;
+        null !== $received_at && $obj['received_at'] = $received_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $to && $obj['to'] = $to;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -116,15 +132,23 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
-    public function withBody(RcsAgentMessage $body): self
+    /**
+     * @param RcsAgentMessage|array{
+     *   content_message?: ContentMessage|null,
+     *   event?: Event|null,
+     *   expire_time?: \DateTimeInterface|null,
+     *   ttl?: string|null,
+     * } $body
+     */
+    public function withBody(RcsAgentMessage|array $body): self
     {
         $obj = clone $this;
-        $obj->body = $body;
+        $obj['body'] = $body;
 
         return $obj;
     }
@@ -132,7 +156,7 @@ final class Data implements BaseModel
     public function withDirection(string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -140,15 +164,20 @@ final class Data implements BaseModel
     public function withEncoding(string $encoding): self
     {
         $obj = clone $this;
-        $obj->encoding = $encoding;
+        $obj['encoding'] = $encoding;
 
         return $obj;
     }
 
-    public function withFrom(From $from): self
+    /**
+     * @param From|array{
+     *   agent_id?: string|null, agent_name?: string|null, carrier?: string|null
+     * } $from
+     */
+    public function withFrom(From|array $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -156,7 +185,7 @@ final class Data implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
@@ -164,7 +193,7 @@ final class Data implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organization_id = $organizationID;
+        $obj['organization_id'] = $organizationID;
 
         return $obj;
     }
@@ -172,7 +201,7 @@ final class Data implements BaseModel
     public function withReceivedAt(\DateTimeInterface $receivedAt): self
     {
         $obj = clone $this;
-        $obj->received_at = $receivedAt;
+        $obj['received_at'] = $receivedAt;
 
         return $obj;
     }
@@ -180,18 +209,23 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
-     * @param list<To> $to
+     * @param list<To|array{
+     *   carrier?: string|null,
+     *   line_type?: string|null,
+     *   phone_number?: string|null,
+     *   status?: string|null,
+     * }> $to
      */
     public function withTo(array $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -199,7 +233,7 @@ final class Data implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

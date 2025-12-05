@@ -86,11 +86,11 @@ final class ActionListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $filter_sim_card_group_id_ && $obj->filter_sim_card_group_id_ = $filter_sim_card_group_id_;
+        null !== $filter_sim_card_group_id_ && $obj['filter_sim_card_group_id_'] = $filter_sim_card_group_id_;
         null !== $filter_status_ && $obj['filter_status_'] = $filter_status_;
         null !== $filter_type_ && $obj['filter_type_'] = $filter_type_;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $page_number_ && $obj['page_number_'] = $page_number_;
+        null !== $page_size_ && $obj['page_size_'] = $page_size_;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class ActionListParams implements BaseModel
     public function withFilterSimCardGroupID(string $filterSimCardGroupID): self
     {
         $obj = clone $this;
-        $obj->filter_sim_card_group_id_ = $filterSimCardGroupID;
+        $obj['filter_sim_card_group_id_'] = $filterSimCardGroupID;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class ActionListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
+        $obj['page_number_'] = $pageNumber;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class ActionListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj['page_size_'] = $pageSize;
 
         return $obj;
     }

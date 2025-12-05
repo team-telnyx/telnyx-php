@@ -136,18 +136,18 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_duration_secs && $obj->call_duration_secs = $call_duration_secs;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $call_duration_secs && $obj['call_duration_secs'] = $call_duration_secs;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $fax_id && $obj->fax_id = $fax_id;
-        null !== $from && $obj->from = $from;
-        null !== $media_name && $obj->media_name = $media_name;
-        null !== $original_media_url && $obj->original_media_url = $original_media_url;
-        null !== $page_count && $obj->page_count = $page_count;
+        null !== $fax_id && $obj['fax_id'] = $fax_id;
+        null !== $from && $obj['from'] = $from;
+        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $original_media_url && $obj['original_media_url'] = $original_media_url;
+        null !== $page_count && $obj['page_count'] = $page_count;
         null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $to && $obj['to'] = $to;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class Payload implements BaseModel
     public function withCallDurationSecs(int $callDurationSecs): self
     {
         $obj = clone $this;
-        $obj->call_duration_secs = $callDurationSecs;
+        $obj['call_duration_secs'] = $callDurationSecs;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class Payload implements BaseModel
     public function withFaxID(string $faxID): self
     {
         $obj = clone $this;
-        $obj->fax_id = $faxID;
+        $obj['fax_id'] = $faxID;
 
         return $obj;
     }
@@ -215,7 +215,7 @@ final class Payload implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class Payload implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Payload implements BaseModel
     public function withOriginalMediaURL(string $originalMediaURL): self
     {
         $obj = clone $this;
-        $obj->original_media_url = $originalMediaURL;
+        $obj['original_media_url'] = $originalMediaURL;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class Payload implements BaseModel
     public function withPageCount(int $pageCount): self
     {
         $obj = clone $this;
-        $obj->page_count = $pageCount;
+        $obj['page_count'] = $pageCount;
 
         return $obj;
     }
@@ -272,7 +272,7 @@ final class Payload implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -283,7 +283,7 @@ final class Payload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

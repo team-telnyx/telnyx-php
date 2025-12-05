@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPRanges;
 
+use Telnyx\AccessIPAddress\CloudflareSyncStatus;
 use Telnyx\AccessIPAddress\PaginationMetaCloudflareIPListSync;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -54,35 +55,60 @@ final class AccessIPRangeListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AccessIPRange> $data
+     * @param list<AccessIPRange|array{
+     *   id: string,
+     *   cidr_block: string,
+     *   status: value-of<CloudflareSyncStatus>,
+     *   user_id: string,
+     *   created_at?: \DateTimeInterface|null,
+     *   description?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
+     * @param PaginationMetaCloudflareIPListSync|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
      */
     public static function with(
         array $data,
-        PaginationMetaCloudflareIPListSync $meta
+        PaginationMetaCloudflareIPListSync|array $meta
     ): self {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<AccessIPRange> $data
+     * @param list<AccessIPRange|array{
+     *   id: string,
+     *   cidr_block: string,
+     *   status: value-of<CloudflareSyncStatus>,
+     *   user_id: string,
+     *   created_at?: \DateTimeInterface|null,
+     *   description?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMetaCloudflareIPListSync $meta): self
-    {
+    /**
+     * @param PaginationMetaCloudflareIPListSync|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
+     */
+    public function withMeta(
+        PaginationMetaCloudflareIPListSync|array $meta
+    ): self {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

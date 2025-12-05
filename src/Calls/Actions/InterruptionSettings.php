@@ -38,7 +38,7 @@ final class InterruptionSettings implements BaseModel
     {
         $obj = new self;
 
-        null !== $enable && $obj->enable = $enable;
+        null !== $enable && $obj['enable'] = $enable;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class InterruptionSettings implements BaseModel
     public function withEnable(bool $enable): self
     {
         $obj = clone $this;
-        $obj->enable = $enable;
+        $obj['enable'] = $enable;
 
         return $obj;
     }

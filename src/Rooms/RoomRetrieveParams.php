@@ -42,7 +42,7 @@ final class RoomRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $include_sessions && $obj->include_sessions = $include_sessions;
+        null !== $include_sessions && $obj['include_sessions'] = $include_sessions;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class RoomRetrieveParams implements BaseModel
     public function withIncludeSessions(bool $includeSessions): self
     {
         $obj = clone $this;
-        $obj->include_sessions = $includeSessions;
+        $obj['include_sessions'] = $includeSessions;
 
         return $obj;
     }

@@ -133,13 +133,14 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Hyperparameters|array{n_epochs: int} $hyperparameters
      * @param Status|value-of<Status> $status
      */
     public static function with(
         string $id,
         int $created_at,
         ?int $finished_at,
-        Hyperparameters $hyperparameters,
+        Hyperparameters|array $hyperparameters,
         string $model,
         string $organization_id,
         Status|string $status,
@@ -148,15 +149,15 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->finished_at = $finished_at;
-        $obj->hyperparameters = $hyperparameters;
-        $obj->model = $model;
-        $obj->organization_id = $organization_id;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['finished_at'] = $finished_at;
+        $obj['hyperparameters'] = $hyperparameters;
+        $obj['model'] = $model;
+        $obj['organization_id'] = $organization_id;
         $obj['status'] = $status;
-        $obj->trained_tokens = $trained_tokens;
-        $obj->training_file = $training_file;
+        $obj['trained_tokens'] = $trained_tokens;
+        $obj['training_file'] = $training_file;
 
         return $obj;
     }
@@ -167,7 +168,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -178,7 +179,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withCreatedAt(int $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -189,18 +190,21 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withFinishedAt(?int $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finished_at = $finishedAt;
+        $obj['finished_at'] = $finishedAt;
 
         return $obj;
     }
 
     /**
      * The hyperparameters used for the fine-tuning job.
+     *
+     * @param Hyperparameters|array{n_epochs: int} $hyperparameters
      */
-    public function withHyperparameters(Hyperparameters $hyperparameters): self
-    {
+    public function withHyperparameters(
+        Hyperparameters|array $hyperparameters
+    ): self {
         $obj = clone $this;
-        $obj->hyperparameters = $hyperparameters;
+        $obj['hyperparameters'] = $hyperparameters;
 
         return $obj;
     }
@@ -211,7 +215,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withModel(string $model): self
     {
         $obj = clone $this;
-        $obj->model = $model;
+        $obj['model'] = $model;
 
         return $obj;
     }
@@ -222,7 +226,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organization_id = $organizationID;
+        $obj['organization_id'] = $organizationID;
 
         return $obj;
     }
@@ -246,7 +250,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withTrainedTokens(?int $trainedTokens): self
     {
         $obj = clone $this;
-        $obj->trained_tokens = $trainedTokens;
+        $obj['trained_tokens'] = $trainedTokens;
 
         return $obj;
     }
@@ -257,7 +261,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withTrainingFile(string $trainingFile): self
     {
         $obj = clone $this;
-        $obj->training_file = $trainingFile;
+        $obj['training_file'] = $trainingFile;
 
         return $obj;
     }

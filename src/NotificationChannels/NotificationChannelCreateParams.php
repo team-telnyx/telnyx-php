@@ -66,9 +66,9 @@ final class NotificationChannelCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $channel_destination && $obj->channel_destination = $channel_destination;
+        null !== $channel_destination && $obj['channel_destination'] = $channel_destination;
         null !== $channel_type_id && $obj['channel_type_id'] = $channel_type_id;
-        null !== $notification_profile_id && $obj->notification_profile_id = $notification_profile_id;
+        null !== $notification_profile_id && $obj['notification_profile_id'] = $notification_profile_id;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class NotificationChannelCreateParams implements BaseModel
     public function withChannelDestination(string $channelDestination): self
     {
         $obj = clone $this;
-        $obj->channel_destination = $channelDestination;
+        $obj['channel_destination'] = $channelDestination;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class NotificationChannelCreateParams implements BaseModel
         string $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj->notification_profile_id = $notificationProfileID;
+        $obj['notification_profile_id'] = $notificationProfileID;
 
         return $obj;
     }

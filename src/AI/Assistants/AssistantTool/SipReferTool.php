@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -49,22 +52,34 @@ final class SipReferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Refer|array{
+     *   targets: list<Target>,
+     *   custom_headers?: list<CustomHeader>|null,
+     *   sip_headers?: list<SipHeader>|null,
+     * } $refer
      * @param Type|value-of<Type> $type
      */
-    public static function with(Refer $refer, Type|string $type): self
+    public static function with(Refer|array $refer, Type|string $type): self
     {
         $obj = new self;
 
-        $obj->refer = $refer;
+        $obj['refer'] = $refer;
         $obj['type'] = $type;
 
         return $obj;
     }
 
-    public function withRefer(Refer $refer): self
+    /**
+     * @param Refer|array{
+     *   targets: list<Target>,
+     *   custom_headers?: list<CustomHeader>|null,
+     *   sip_headers?: list<SipHeader>|null,
+     * } $refer
+     */
+    public function withRefer(Refer|array $refer): self
     {
         $obj = clone $this;
-        $obj->refer = $refer;
+        $obj['refer'] = $refer;
 
         return $obj;
     }

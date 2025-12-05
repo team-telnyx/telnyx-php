@@ -91,13 +91,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $global_ip_id && $obj->global_ip_id = $global_ip_id;
-        null !== $health_check_params && $obj->health_check_params = $health_check_params;
-        null !== $health_check_type && $obj->health_check_type = $health_check_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
+        null !== $health_check_params && $obj['health_check_params'] = $health_check_params;
+        null !== $health_check_type && $obj['health_check_type'] = $health_check_type;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Data implements BaseModel
     public function withGlobalIPID(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj->global_ip_id = $globalIPID;
+        $obj['global_ip_id'] = $globalIPID;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Data implements BaseModel
     public function withHealthCheckParams(array $healthCheckParams): self
     {
         $obj = clone $this;
-        $obj->health_check_params = $healthCheckParams;
+        $obj['health_check_params'] = $healthCheckParams;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Data implements BaseModel
     public function withHealthCheckType(string $healthCheckType): self
     {
         $obj = clone $this;
-        $obj->health_check_type = $healthCheckType;
+        $obj['health_check_type'] = $healthCheckType;
 
         return $obj;
     }

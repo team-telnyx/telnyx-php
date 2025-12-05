@@ -51,8 +51,8 @@ final class Flashcall implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $default_verification_timeout_secs && $obj->default_verification_timeout_secs = $default_verification_timeout_secs;
-        null !== $whitelisted_destinations && $obj->whitelisted_destinations = $whitelisted_destinations;
+        null !== $default_verification_timeout_secs && $obj['default_verification_timeout_secs'] = $default_verification_timeout_secs;
+        null !== $whitelisted_destinations && $obj['whitelisted_destinations'] = $whitelisted_destinations;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class Flashcall implements BaseModel
         int $defaultVerificationTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj->default_verification_timeout_secs = $defaultVerificationTimeoutSecs;
+        $obj['default_verification_timeout_secs'] = $defaultVerificationTimeoutSecs;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class Flashcall implements BaseModel
         array $whitelistedDestinations
     ): self {
         $obj = clone $this;
-        $obj->whitelisted_destinations = $whitelistedDestinations;
+        $obj['whitelisted_destinations'] = $whitelistedDestinations;
 
         return $obj;
     }

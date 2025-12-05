@@ -94,16 +94,16 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj->administrative_area = $administrative_area;
-        null !== $advance_requirements && $obj->advance_requirements = $advance_requirements;
-        null !== $count && $obj->count = $count;
+        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $advance_requirements && $obj['advance_requirements'] = $advance_requirements;
+        null !== $count && $obj['count'] = $count;
         null !== $coverage_type && $obj['coverage_type'] = $coverage_type;
-        null !== $group && $obj->group = $group;
-        null !== $group_type && $obj->group_type = $group_type;
-        null !== $number_range && $obj->number_range = $number_range;
+        null !== $group && $obj['group'] = $group;
+        null !== $group_type && $obj['group_type'] = $group_type;
+        null !== $number_range && $obj['number_range'] = $number_range;
         null !== $number_type && $obj['number_type'] = $number_type;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Data implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrative_area = $administrativeArea;
+        $obj['administrative_area'] = $administrativeArea;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Data implements BaseModel
     public function withAdvanceRequirements(bool $advanceRequirements): self
     {
         $obj = clone $this;
-        $obj->advance_requirements = $advanceRequirements;
+        $obj['advance_requirements'] = $advanceRequirements;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withCount(int $count): self
     {
         $obj = clone $this;
-        $obj->count = $count;
+        $obj['count'] = $count;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withGroup(string $group): self
     {
         $obj = clone $this;
-        $obj->group = $group;
+        $obj['group'] = $group;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withGroupType(string $groupType): self
     {
         $obj = clone $this;
-        $obj->group_type = $groupType;
+        $obj['group_type'] = $groupType;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Data implements BaseModel
     public function withNumberRange(int $numberRange): self
     {
         $obj = clone $this;
-        $obj->number_range = $numberRange;
+        $obj['number_range'] = $numberRange;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

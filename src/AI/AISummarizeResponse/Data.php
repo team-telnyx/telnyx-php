@@ -47,7 +47,7 @@ final class Data implements BaseModel
     {
         $obj = new self;
 
-        $obj->summary = $summary;
+        $obj['summary'] = $summary;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withSummary(string $summary): self
     {
         $obj = clone $this;
-        $obj->summary = $summary;
+        $obj['summary'] = $summary;
 
         return $obj;
     }

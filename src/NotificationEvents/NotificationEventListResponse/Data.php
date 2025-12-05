@@ -75,12 +75,12 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $name && $obj->name = $name;
-        null !== $notification_category && $obj->notification_category = $notification_category;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $enabled && $obj['enabled'] = $enabled;
+        null !== $name && $obj['name'] = $name;
+        null !== $notification_category && $obj['notification_category'] = $notification_category;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     public function withEnabled(bool $enabled): self
     {
         $obj = clone $this;
-        $obj->enabled = $enabled;
+        $obj['enabled'] = $enabled;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withNotificationCategory(string $notificationCategory): self
     {
         $obj = clone $this;
-        $obj->notification_category = $notificationCategory;
+        $obj['notification_category'] = $notificationCategory;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

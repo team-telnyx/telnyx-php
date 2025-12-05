@@ -128,6 +128,9 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Feature|value-of<Feature>> $features
+     * @param PhoneNumber|array{
+     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+     * } $phone_number
      * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
      */
     public static function with(
@@ -139,7 +142,7 @@ final class Filter implements BaseModel
         ?int $limit = null,
         ?string $locality = null,
         ?string $national_destination_code = null,
-        ?PhoneNumber $phone_number = null,
+        PhoneNumber|array|null $phone_number = null,
         PhoneNumberType|string|null $phone_number_type = null,
         ?bool $quickship = null,
         ?string $rate_center = null,
@@ -147,19 +150,19 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj->administrative_area = $administrative_area;
-        null !== $best_effort && $obj->best_effort = $best_effort;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $exclude_held_numbers && $obj->exclude_held_numbers = $exclude_held_numbers;
+        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $best_effort && $obj['best_effort'] = $best_effort;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $exclude_held_numbers && $obj['exclude_held_numbers'] = $exclude_held_numbers;
         null !== $features && $obj['features'] = $features;
-        null !== $limit && $obj->limit = $limit;
-        null !== $locality && $obj->locality = $locality;
-        null !== $national_destination_code && $obj->national_destination_code = $national_destination_code;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $locality && $obj['locality'] = $locality;
+        null !== $national_destination_code && $obj['national_destination_code'] = $national_destination_code;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $quickship && $obj->quickship = $quickship;
-        null !== $rate_center && $obj->rate_center = $rate_center;
-        null !== $reservable && $obj->reservable = $reservable;
+        null !== $quickship && $obj['quickship'] = $quickship;
+        null !== $rate_center && $obj['rate_center'] = $rate_center;
+        null !== $reservable && $obj['reservable'] = $reservable;
 
         return $obj;
     }
@@ -170,7 +173,7 @@ final class Filter implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrative_area = $administrativeArea;
+        $obj['administrative_area'] = $administrativeArea;
 
         return $obj;
     }
@@ -181,7 +184,7 @@ final class Filter implements BaseModel
     public function withBestEffort(bool $bestEffort): self
     {
         $obj = clone $this;
-        $obj->best_effort = $bestEffort;
+        $obj['best_effort'] = $bestEffort;
 
         return $obj;
     }
@@ -192,7 +195,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -203,7 +206,7 @@ final class Filter implements BaseModel
     public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
     {
         $obj = clone $this;
-        $obj->exclude_held_numbers = $excludeHeldNumbers;
+        $obj['exclude_held_numbers'] = $excludeHeldNumbers;
 
         return $obj;
     }
@@ -227,7 +230,7 @@ final class Filter implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -238,7 +241,7 @@ final class Filter implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -250,18 +253,22 @@ final class Filter implements BaseModel
         string $nationalDestinationCode
     ): self {
         $obj = clone $this;
-        $obj->national_destination_code = $nationalDestinationCode;
+        $obj['national_destination_code'] = $nationalDestinationCode;
 
         return $obj;
     }
 
     /**
      * Filter phone numbers by pattern matching.
+     *
+     * @param PhoneNumber|array{
+     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+     * } $phoneNumber
      */
-    public function withPhoneNumber(PhoneNumber $phoneNumber): self
+    public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -286,7 +293,7 @@ final class Filter implements BaseModel
     public function withQuickship(bool $quickship): self
     {
         $obj = clone $this;
-        $obj->quickship = $quickship;
+        $obj['quickship'] = $quickship;
 
         return $obj;
     }
@@ -297,7 +304,7 @@ final class Filter implements BaseModel
     public function withRateCenter(string $rateCenter): self
     {
         $obj = clone $this;
-        $obj->rate_center = $rateCenter;
+        $obj['rate_center'] = $rateCenter;
 
         return $obj;
     }
@@ -308,7 +315,7 @@ final class Filter implements BaseModel
     public function withReservable(bool $reservable): self
     {
         $obj = clone $this;
-        $obj->reservable = $reservable;
+        $obj['reservable'] = $reservable;
 
         return $obj;
     }

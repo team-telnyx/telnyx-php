@@ -8,7 +8,9 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Cost;
+use Telnyx\Reports\ReportListWdrsResponse\Data\Cost\Currency;
 use Telnyx\Reports\ReportListWdrsResponse\Data\DownlinkData;
+use Telnyx\Reports\ReportListWdrsResponse\Data\DownlinkData\Unit;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Rate;
 use Telnyx\Reports\ReportListWdrsResponse\Data\UplinkData;
 
@@ -120,41 +122,56 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Cost|array{
+     *   amount?: string|null, currency?: value-of<Currency>|null
+     * } $cost
+     * @param DownlinkData|array{
+     *   amount?: float|null, unit?: value-of<Unit>|null
+     * } $downlink_data
+     * @param Rate|array{
+     *   amount?: string|null,
+     *   currency?: value-of<Rate\Currency>|null,
+     * } $rate
+     * @param UplinkData|array{
+     *   amount?: float|null,
+     *   unit?: value-of<UplinkData\Unit>|null,
+     * } $uplink_data
      */
     public static function with(
         ?string $id = null,
-        ?Cost $cost = null,
+        Cost|array|null $cost = null,
         ?\DateTimeInterface $created_at = null,
-        ?DownlinkData $downlink_data = null,
+        DownlinkData|array|null $downlink_data = null,
         ?float $duration_seconds = null,
         ?string $imsi = null,
         ?string $mcc = null,
         ?string $mnc = null,
         ?string $phone_number = null,
-        ?Rate $rate = null,
+        Rate|array|null $rate = null,
         ?string $record_type = null,
         ?string $sim_card_id = null,
         ?string $sim_group_id = null,
         ?string $sim_group_name = null,
-        ?UplinkData $uplink_data = null,
+        UplinkData|array|null $uplink_data = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $cost && $obj->cost = $cost;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $downlink_data && $obj->downlink_data = $downlink_data;
-        null !== $duration_seconds && $obj->duration_seconds = $duration_seconds;
-        null !== $imsi && $obj->imsi = $imsi;
-        null !== $mcc && $obj->mcc = $mcc;
-        null !== $mnc && $obj->mnc = $mnc;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $rate && $obj->rate = $rate;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
-        null !== $sim_group_id && $obj->sim_group_id = $sim_group_id;
-        null !== $sim_group_name && $obj->sim_group_name = $sim_group_name;
-        null !== $uplink_data && $obj->uplink_data = $uplink_data;
+        null !== $id && $obj['id'] = $id;
+        null !== $cost && $obj['cost'] = $cost;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $downlink_data && $obj['downlink_data'] = $downlink_data;
+        null !== $duration_seconds && $obj['duration_seconds'] = $duration_seconds;
+        null !== $imsi && $obj['imsi'] = $imsi;
+        null !== $mcc && $obj['mcc'] = $mcc;
+        null !== $mnc && $obj['mnc'] = $mnc;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $rate && $obj['rate'] = $rate;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $sim_group_id && $obj['sim_group_id'] = $sim_group_id;
+        null !== $sim_group_name && $obj['sim_group_name'] = $sim_group_name;
+        null !== $uplink_data && $obj['uplink_data'] = $uplink_data;
 
         return $obj;
     }
@@ -165,15 +182,20 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
-    public function withCost(Cost $cost): self
+    /**
+     * @param Cost|array{
+     *   amount?: string|null, currency?: value-of<Currency>|null
+     * } $cost
+     */
+    public function withCost(Cost|array $cost): self
     {
         $obj = clone $this;
-        $obj->cost = $cost;
+        $obj['cost'] = $cost;
 
         return $obj;
     }
@@ -184,15 +206,20 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
-    public function withDownlinkData(DownlinkData $downlinkData): self
+    /**
+     * @param DownlinkData|array{
+     *   amount?: float|null, unit?: value-of<Unit>|null
+     * } $downlinkData
+     */
+    public function withDownlinkData(DownlinkData|array $downlinkData): self
     {
         $obj = clone $this;
-        $obj->downlink_data = $downlinkData;
+        $obj['downlink_data'] = $downlinkData;
 
         return $obj;
     }
@@ -203,7 +230,7 @@ final class Data implements BaseModel
     public function withDurationSeconds(float $durationSeconds): self
     {
         $obj = clone $this;
-        $obj->duration_seconds = $durationSeconds;
+        $obj['duration_seconds'] = $durationSeconds;
 
         return $obj;
     }
@@ -214,7 +241,7 @@ final class Data implements BaseModel
     public function withImsi(string $imsi): self
     {
         $obj = clone $this;
-        $obj->imsi = $imsi;
+        $obj['imsi'] = $imsi;
 
         return $obj;
     }
@@ -225,7 +252,7 @@ final class Data implements BaseModel
     public function withMcc(string $mcc): self
     {
         $obj = clone $this;
-        $obj->mcc = $mcc;
+        $obj['mcc'] = $mcc;
 
         return $obj;
     }
@@ -236,7 +263,7 @@ final class Data implements BaseModel
     public function withMnc(string $mnc): self
     {
         $obj = clone $this;
-        $obj->mnc = $mnc;
+        $obj['mnc'] = $mnc;
 
         return $obj;
     }
@@ -247,15 +274,21 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
 
-    public function withRate(Rate $rate): self
+    /**
+     * @param Rate|array{
+     *   amount?: string|null,
+     *   currency?: value-of<Rate\Currency>|null,
+     * } $rate
+     */
+    public function withRate(Rate|array $rate): self
     {
         $obj = clone $this;
-        $obj->rate = $rate;
+        $obj['rate'] = $rate;
 
         return $obj;
     }
@@ -263,7 +296,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -274,7 +307,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }
@@ -285,7 +318,7 @@ final class Data implements BaseModel
     public function withSimGroupID(string $simGroupID): self
     {
         $obj = clone $this;
-        $obj->sim_group_id = $simGroupID;
+        $obj['sim_group_id'] = $simGroupID;
 
         return $obj;
     }
@@ -296,15 +329,21 @@ final class Data implements BaseModel
     public function withSimGroupName(string $simGroupName): self
     {
         $obj = clone $this;
-        $obj->sim_group_name = $simGroupName;
+        $obj['sim_group_name'] = $simGroupName;
 
         return $obj;
     }
 
-    public function withUplinkData(UplinkData $uplinkData): self
+    /**
+     * @param UplinkData|array{
+     *   amount?: float|null,
+     *   unit?: value-of<UplinkData\Unit>|null,
+     * } $uplinkData
+     */
+    public function withUplinkData(UplinkData|array $uplinkData): self
     {
         $obj = clone $this;
-        $obj->uplink_data = $uplinkData;
+        $obj['uplink_data'] = $uplinkData;
 
         return $obj;
     }

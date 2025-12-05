@@ -53,7 +53,7 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $alias && $obj->alias = $alias;
+        null !== $alias && $obj['alias'] = $alias;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -65,7 +65,7 @@ final class Filter implements BaseModel
     public function withAlias(string $alias): self
     {
         $obj = clone $this;
-        $obj->alias = $alias;
+        $obj['alias'] = $alias;
 
         return $obj;
     }

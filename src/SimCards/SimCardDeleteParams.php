@@ -44,7 +44,7 @@ final class SimCardDeleteParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $report_lost && $obj->report_lost = $report_lost;
+        null !== $report_lost && $obj['report_lost'] = $report_lost;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class SimCardDeleteParams implements BaseModel
     public function withReportLost(bool $reportLost): self
     {
         $obj = clone $this;
-        $obj->report_lost = $reportLost;
+        $obj['report_lost'] = $reportLost;
 
         return $obj;
     }

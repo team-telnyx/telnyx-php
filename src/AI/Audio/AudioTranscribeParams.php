@@ -110,8 +110,8 @@ final class AudioTranscribeParams implements BaseModel
 
         $obj['model'] = $model;
 
-        null !== $file && $obj->file = $file;
-        null !== $file_url && $obj->file_url = $file_url;
+        null !== $file && $obj['file'] = $file;
+        null !== $file_url && $obj['file_url'] = $file_url;
         null !== $response_format && $obj['response_format'] = $response_format;
         null !== $timestamp_granularities__ && $obj['timestamp_granularities__'] = $timestamp_granularities__;
 
@@ -137,7 +137,7 @@ final class AudioTranscribeParams implements BaseModel
     public function withFile(string $file): self
     {
         $obj = clone $this;
-        $obj->file = $file;
+        $obj['file'] = $file;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class AudioTranscribeParams implements BaseModel
     public function withFileURL(string $fileURL): self
     {
         $obj = clone $this;
-        $obj->file_url = $fileURL;
+        $obj['file_url'] = $fileURL;
 
         return $obj;
     }

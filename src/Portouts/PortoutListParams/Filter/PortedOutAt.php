@@ -48,8 +48,8 @@ final class PortedOutAt implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $gte && $obj->gte = $gte;
-        null !== $lte && $obj->lte = $lte;
+        null !== $gte && $obj['gte'] = $gte;
+        null !== $lte && $obj['lte'] = $lte;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class PortedOutAt implements BaseModel
     public function withGte(\DateTimeInterface $gte): self
     {
         $obj = clone $this;
-        $obj->gte = $gte;
+        $obj['gte'] = $gte;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class PortedOutAt implements BaseModel
     public function withLte(\DateTimeInterface $lte): self
     {
         $obj = clone $this;
-        $obj->lte = $lte;
+        $obj['lte'] = $lte;
 
         return $obj;
     }

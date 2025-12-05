@@ -44,7 +44,7 @@ final class DefaultGatewayCreateParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
+        null !== $wireguard_peer_id && $obj['wireguard_peer_id'] = $wireguard_peer_id;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class DefaultGatewayCreateParams implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguard_peer_id = $wireguardPeerID;
+        $obj['wireguard_peer_id'] = $wireguardPeerID;
 
         return $obj;
     }

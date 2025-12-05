@@ -8,6 +8,9 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data;
+use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data\EventType;
+use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data\Payload;
+use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data\RecordType;
 
 /**
  * @phpstan-type ConferenceParticipantPlaybackEndedWebhookEventShape = array{
@@ -31,20 +34,35 @@ final class ConferenceParticipantPlaybackEndedWebhookEvent implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   id?: string|null,
+     *   event_type?: value-of<EventType>|null,
+     *   payload?: Payload|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   id?: string|null,
+     *   event_type?: value-of<EventType>|null,
+     *   payload?: Payload|null,
+     *   record_type?: value-of<RecordType>|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

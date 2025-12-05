@@ -10,6 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\TexmlApplications\TexmlApplication\Inbound;
+use Telnyx\TexmlApplications\TexmlApplication\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\TexmlApplications\TexmlApplication\Outbound;
 use Telnyx\TexmlApplications\TexmlApplication\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplication\VoiceMethod;
@@ -172,6 +173,15 @@ final class TexmlApplication implements BaseModel
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
      * @param DtmfType|value-of<DtmfType> $dtmf_type
+     * @param Inbound|array{
+     *   channel_limit?: int|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     * } $inbound
+     * @param Outbound|array{
+     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     * } $outbound
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $status_callback_method
      * @param list<string> $tags
      * @param VoiceMethod|value-of<VoiceMethod> $voice_method
@@ -186,8 +196,8 @@ final class TexmlApplication implements BaseModel
         ?bool $first_command_timeout = null,
         ?int $first_command_timeout_secs = null,
         ?string $friendly_name = null,
-        ?Inbound $inbound = null,
-        ?Outbound $outbound = null,
+        Inbound|array|null $inbound = null,
+        Outbound|array|null $outbound = null,
         ?string $record_type = null,
         ?string $status_callback = null,
         StatusCallbackMethod|string|null $status_callback_method = null,
@@ -199,25 +209,25 @@ final class TexmlApplication implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $active && $obj->active = $active;
+        null !== $id && $obj['id'] = $id;
+        null !== $active && $obj['active'] = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $call_cost_in_webhooks && $obj['call_cost_in_webhooks'] = $call_cost_in_webhooks;
+        null !== $created_at && $obj['created_at'] = $created_at;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
-        null !== $first_command_timeout && $obj->first_command_timeout = $first_command_timeout;
-        null !== $first_command_timeout_secs && $obj->first_command_timeout_secs = $first_command_timeout_secs;
-        null !== $friendly_name && $obj->friendly_name = $friendly_name;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $status_callback && $obj->status_callback = $status_callback;
+        null !== $first_command_timeout && $obj['first_command_timeout'] = $first_command_timeout;
+        null !== $first_command_timeout_secs && $obj['first_command_timeout_secs'] = $first_command_timeout_secs;
+        null !== $friendly_name && $obj['friendly_name'] = $friendly_name;
+        null !== $inbound && $obj['inbound'] = $inbound;
+        null !== $outbound && $obj['outbound'] = $outbound;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $status_callback && $obj['status_callback'] = $status_callback;
         null !== $status_callback_method && $obj['status_callback_method'] = $status_callback_method;
-        null !== $tags && $obj->tags = $tags;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $voice_fallback_url && $obj->voice_fallback_url = $voice_fallback_url;
+        null !== $tags && $obj['tags'] = $tags;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $voice_fallback_url && $obj['voice_fallback_url'] = $voice_fallback_url;
         null !== $voice_method && $obj['voice_method'] = $voice_method;
-        null !== $voice_url && $obj->voice_url = $voice_url;
+        null !== $voice_url && $obj['voice_url'] = $voice_url;
 
         return $obj;
     }
@@ -228,7 +238,7 @@ final class TexmlApplication implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -239,7 +249,7 @@ final class TexmlApplication implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -264,7 +274,7 @@ final class TexmlApplication implements BaseModel
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
         $obj = clone $this;
-        $obj->call_cost_in_webhooks = $callCostInWebhooks;
+        $obj['call_cost_in_webhooks'] = $callCostInWebhooks;
 
         return $obj;
     }
@@ -275,7 +285,7 @@ final class TexmlApplication implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -299,7 +309,7 @@ final class TexmlApplication implements BaseModel
     public function withFirstCommandTimeout(bool $firstCommandTimeout): self
     {
         $obj = clone $this;
-        $obj->first_command_timeout = $firstCommandTimeout;
+        $obj['first_command_timeout'] = $firstCommandTimeout;
 
         return $obj;
     }
@@ -311,7 +321,7 @@ final class TexmlApplication implements BaseModel
         int $firstCommandTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj->first_command_timeout_secs = $firstCommandTimeoutSecs;
+        $obj['first_command_timeout_secs'] = $firstCommandTimeoutSecs;
 
         return $obj;
     }
@@ -322,23 +332,36 @@ final class TexmlApplication implements BaseModel
     public function withFriendlyName(string $friendlyName): self
     {
         $obj = clone $this;
-        $obj->friendly_name = $friendlyName;
+        $obj['friendly_name'] = $friendlyName;
 
         return $obj;
     }
 
-    public function withInbound(Inbound $inbound): self
+    /**
+     * @param Inbound|array{
+     *   channel_limit?: int|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_subdomain?: string|null,
+     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     * } $inbound
+     */
+    public function withInbound(Inbound|array $inbound): self
     {
         $obj = clone $this;
-        $obj->inbound = $inbound;
+        $obj['inbound'] = $inbound;
 
         return $obj;
     }
 
-    public function withOutbound(Outbound $outbound): self
+    /**
+     * @param Outbound|array{
+     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     * } $outbound
+     */
+    public function withOutbound(Outbound|array $outbound): self
     {
         $obj = clone $this;
-        $obj->outbound = $outbound;
+        $obj['outbound'] = $outbound;
 
         return $obj;
     }
@@ -349,7 +372,7 @@ final class TexmlApplication implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -360,7 +383,7 @@ final class TexmlApplication implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->status_callback = $statusCallback;
+        $obj['status_callback'] = $statusCallback;
 
         return $obj;
     }
@@ -387,7 +410,7 @@ final class TexmlApplication implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -398,7 +421,7 @@ final class TexmlApplication implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -409,7 +432,7 @@ final class TexmlApplication implements BaseModel
     public function withVoiceFallbackURL(string $voiceFallbackURL): self
     {
         $obj = clone $this;
-        $obj->voice_fallback_url = $voiceFallbackURL;
+        $obj['voice_fallback_url'] = $voiceFallbackURL;
 
         return $obj;
     }
@@ -433,7 +456,7 @@ final class TexmlApplication implements BaseModel
     public function withVoiceURL(string $voiceURL): self
     {
         $obj = clone $this;
-        $obj->voice_url = $voiceURL;
+        $obj['voice_url'] = $voiceURL;
 
         return $obj;
     }

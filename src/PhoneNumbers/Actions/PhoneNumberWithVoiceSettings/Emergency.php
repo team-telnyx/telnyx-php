@@ -62,8 +62,8 @@ final class Emergency implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $emergency_address_id && $obj->emergency_address_id = $emergency_address_id;
-        null !== $emergency_enabled && $obj->emergency_enabled = $emergency_enabled;
+        null !== $emergency_address_id && $obj['emergency_address_id'] = $emergency_address_id;
+        null !== $emergency_enabled && $obj['emergency_enabled'] = $emergency_enabled;
         null !== $emergency_status && $obj['emergency_status'] = $emergency_status;
 
         return $obj;
@@ -75,7 +75,7 @@ final class Emergency implements BaseModel
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
         $obj = clone $this;
-        $obj->emergency_address_id = $emergencyAddressID;
+        $obj['emergency_address_id'] = $emergencyAddressID;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Emergency implements BaseModel
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
         $obj = clone $this;
-        $obj->emergency_enabled = $emergencyEnabled;
+        $obj['emergency_enabled'] = $emergencyEnabled;
 
         return $obj;
     }

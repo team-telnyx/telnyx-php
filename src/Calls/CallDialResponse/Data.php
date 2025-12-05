@@ -137,17 +137,17 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
-        $obj->call_leg_id = $call_leg_id;
-        $obj->call_session_id = $call_session_id;
-        $obj->is_alive = $is_alive;
+        $obj['call_control_id'] = $call_control_id;
+        $obj['call_leg_id'] = $call_leg_id;
+        $obj['call_session_id'] = $call_session_id;
+        $obj['is_alive'] = $is_alive;
         $obj['record_type'] = $record_type;
 
-        null !== $call_duration && $obj->call_duration = $call_duration;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $end_time && $obj->end_time = $end_time;
-        null !== $recording_id && $obj->recording_id = $recording_id;
-        null !== $start_time && $obj->start_time = $start_time;
+        null !== $call_duration && $obj['call_duration'] = $call_duration;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $recording_id && $obj['recording_id'] = $recording_id;
+        null !== $start_time && $obj['start_time'] = $start_time;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class Data implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Data implements BaseModel
     public function withIsAlive(bool $isAlive): self
     {
         $obj = clone $this;
-        $obj->is_alive = $isAlive;
+        $obj['is_alive'] = $isAlive;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class Data implements BaseModel
     public function withCallDuration(int $callDuration): self
     {
         $obj = clone $this;
-        $obj->call_duration = $callDuration;
+        $obj['call_duration'] = $callDuration;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class Data implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class Data implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class Data implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj->recording_id = $recordingID;
+        $obj['recording_id'] = $recordingID;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class Data implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }

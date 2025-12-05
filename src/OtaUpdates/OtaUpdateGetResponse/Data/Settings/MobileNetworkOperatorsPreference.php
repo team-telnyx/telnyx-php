@@ -55,9 +55,9 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $mobile_network_operator_id && $obj->mobile_network_operator_id = $mobile_network_operator_id;
-        null !== $mobile_network_operator_name && $obj->mobile_network_operator_name = $mobile_network_operator_name;
-        null !== $priority && $obj->priority = $priority;
+        null !== $mobile_network_operator_id && $obj['mobile_network_operator_id'] = $mobile_network_operator_id;
+        null !== $mobile_network_operator_name && $obj['mobile_network_operator_name'] = $mobile_network_operator_name;
+        null !== $priority && $obj['priority'] = $priority;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class MobileNetworkOperatorsPreference implements BaseModel
         string $mobileNetworkOperatorID
     ): self {
         $obj = clone $this;
-        $obj->mobile_network_operator_id = $mobileNetworkOperatorID;
+        $obj['mobile_network_operator_id'] = $mobileNetworkOperatorID;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class MobileNetworkOperatorsPreference implements BaseModel
         string $mobileNetworkOperatorName
     ): self {
         $obj = clone $this;
-        $obj->mobile_network_operator_name = $mobileNetworkOperatorName;
+        $obj['mobile_network_operator_name'] = $mobileNetworkOperatorName;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     public function withPriority(int $priority): self
     {
         $obj = clone $this;
-        $obj->priority = $priority;
+        $obj['priority'] = $priority;
 
         return $obj;
     }

@@ -42,15 +42,19 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param TelephoneNumber|array{
+     *   contains?: string|null, eq?: string|null
+     * } $telephone_number
      */
     public static function with(
         ?string $external_connection_id = null,
-        ?TelephoneNumber $telephone_number = null,
+        TelephoneNumber|array|null $telephone_number = null,
     ): self {
         $obj = new self;
 
-        null !== $external_connection_id && $obj->external_connection_id = $external_connection_id;
-        null !== $telephone_number && $obj->telephone_number = $telephone_number;
+        null !== $external_connection_id && $obj['external_connection_id'] = $external_connection_id;
+        null !== $telephone_number && $obj['telephone_number'] = $telephone_number;
 
         return $obj;
     }
@@ -61,18 +65,23 @@ final class Filter implements BaseModel
     public function withExternalConnectionID(string $externalConnectionID): self
     {
         $obj = clone $this;
-        $obj->external_connection_id = $externalConnectionID;
+        $obj['external_connection_id'] = $externalConnectionID;
 
         return $obj;
     }
 
     /**
      * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
+     *
+     * @param TelephoneNumber|array{
+     *   contains?: string|null, eq?: string|null
+     * } $telephoneNumber
      */
-    public function withTelephoneNumber(TelephoneNumber $telephoneNumber): self
-    {
+    public function withTelephoneNumber(
+        TelephoneNumber|array $telephoneNumber
+    ): self {
         $obj = clone $this;
-        $obj->telephone_number = $telephoneNumber;
+        $obj['telephone_number'] = $telephoneNumber;
 
         return $obj;
     }

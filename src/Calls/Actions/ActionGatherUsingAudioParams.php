@@ -150,19 +150,19 @@ final class ActionGatherUsingAudioParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $audio_url && $obj->audio_url = $audio_url;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $inter_digit_timeout_millis && $obj->inter_digit_timeout_millis = $inter_digit_timeout_millis;
-        null !== $invalid_audio_url && $obj->invalid_audio_url = $invalid_audio_url;
-        null !== $invalid_media_name && $obj->invalid_media_name = $invalid_media_name;
-        null !== $maximum_digits && $obj->maximum_digits = $maximum_digits;
-        null !== $maximum_tries && $obj->maximum_tries = $maximum_tries;
-        null !== $media_name && $obj->media_name = $media_name;
-        null !== $minimum_digits && $obj->minimum_digits = $minimum_digits;
-        null !== $terminating_digit && $obj->terminating_digit = $terminating_digit;
-        null !== $timeout_millis && $obj->timeout_millis = $timeout_millis;
-        null !== $valid_digits && $obj->valid_digits = $valid_digits;
+        null !== $audio_url && $obj['audio_url'] = $audio_url;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $inter_digit_timeout_millis && $obj['inter_digit_timeout_millis'] = $inter_digit_timeout_millis;
+        null !== $invalid_audio_url && $obj['invalid_audio_url'] = $invalid_audio_url;
+        null !== $invalid_media_name && $obj['invalid_media_name'] = $invalid_media_name;
+        null !== $maximum_digits && $obj['maximum_digits'] = $maximum_digits;
+        null !== $maximum_tries && $obj['maximum_tries'] = $maximum_tries;
+        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $minimum_digits && $obj['minimum_digits'] = $minimum_digits;
+        null !== $terminating_digit && $obj['terminating_digit'] = $terminating_digit;
+        null !== $timeout_millis && $obj['timeout_millis'] = $timeout_millis;
+        null !== $valid_digits && $obj['valid_digits'] = $valid_digits;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj->audio_url = $audioURL;
+        $obj['audio_url'] = $audioURL;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
         int $interDigitTimeoutMillis
     ): self {
         $obj = clone $this;
-        $obj->inter_digit_timeout_millis = $interDigitTimeoutMillis;
+        $obj['inter_digit_timeout_millis'] = $interDigitTimeoutMillis;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withInvalidAudioURL(string $invalidAudioURL): self
     {
         $obj = clone $this;
-        $obj->invalid_audio_url = $invalidAudioURL;
+        $obj['invalid_audio_url'] = $invalidAudioURL;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withInvalidMediaName(string $invalidMediaName): self
     {
         $obj = clone $this;
-        $obj->invalid_media_name = $invalidMediaName;
+        $obj['invalid_media_name'] = $invalidMediaName;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMaximumDigits(int $maximumDigits): self
     {
         $obj = clone $this;
-        $obj->maximum_digits = $maximumDigits;
+        $obj['maximum_digits'] = $maximumDigits;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMaximumTries(int $maximumTries): self
     {
         $obj = clone $this;
-        $obj->maximum_tries = $maximumTries;
+        $obj['maximum_tries'] = $maximumTries;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMinimumDigits(int $minimumDigits): self
     {
         $obj = clone $this;
-        $obj->minimum_digits = $minimumDigits;
+        $obj['minimum_digits'] = $minimumDigits;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withTerminatingDigit(string $terminatingDigit): self
     {
         $obj = clone $this;
-        $obj->terminating_digit = $terminatingDigit;
+        $obj['terminating_digit'] = $terminatingDigit;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withTimeoutMillis(int $timeoutMillis): self
     {
         $obj = clone $this;
-        $obj->timeout_millis = $timeoutMillis;
+        $obj['timeout_millis'] = $timeoutMillis;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withValidDigits(string $validDigits): self
     {
         $obj = clone $this;
-        $obj->valid_digits = $validDigits;
+        $obj['valid_digits'] = $validDigits;
 
         return $obj;
     }

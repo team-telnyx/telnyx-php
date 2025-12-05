@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\CustomHeader;
+use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\Target;
 use Telnyx\AI\Assistants\TransferTool\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -50,25 +52,39 @@ final class TransferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param InferenceEmbeddingTransferToolParams|array{
+     *   from: string,
+     *   targets: list<Target>,
+     *   custom_headers?: list<CustomHeader>|null,
+     *   warm_transfer_instructions?: string|null,
+     * } $transfer
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        InferenceEmbeddingTransferToolParams $transfer,
+        InferenceEmbeddingTransferToolParams|array $transfer,
         Type|string $type
     ): self {
         $obj = new self;
 
-        $obj->transfer = $transfer;
+        $obj['transfer'] = $transfer;
         $obj['type'] = $type;
 
         return $obj;
     }
 
+    /**
+     * @param InferenceEmbeddingTransferToolParams|array{
+     *   from: string,
+     *   targets: list<Target>,
+     *   custom_headers?: list<CustomHeader>|null,
+     *   warm_transfer_instructions?: string|null,
+     * } $transfer
+     */
     public function withTransfer(
-        InferenceEmbeddingTransferToolParams $transfer
+        InferenceEmbeddingTransferToolParams|array $transfer
     ): self {
         $obj = clone $this;
-        $obj->transfer = $transfer;
+        $obj['transfer'] = $transfer;
 
         return $obj;
     }

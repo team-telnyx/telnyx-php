@@ -40,8 +40,8 @@ final class CnamListing implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $cnam_listing_details && $obj->cnam_listing_details = $cnam_listing_details;
-        null !== $cnam_listing_enabled && $obj->cnam_listing_enabled = $cnam_listing_enabled;
+        null !== $cnam_listing_details && $obj['cnam_listing_details'] = $cnam_listing_details;
+        null !== $cnam_listing_enabled && $obj['cnam_listing_enabled'] = $cnam_listing_enabled;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class CnamListing implements BaseModel
     public function withCnamListingDetails(?string $cnamListingDetails): self
     {
         $obj = clone $this;
-        $obj->cnam_listing_details = $cnamListingDetails;
+        $obj['cnam_listing_details'] = $cnamListingDetails;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class CnamListing implements BaseModel
     public function withCnamListingEnabled(bool $cnamListingEnabled): self
     {
         $obj = clone $this;
-        $obj->cnam_listing_enabled = $cnamListingEnabled;
+        $obj['cnam_listing_enabled'] = $cnamListingEnabled;
 
         return $obj;
     }

@@ -78,9 +78,9 @@ final class NumberLookupCreateParams implements BaseModel
         $obj = new self;
 
         null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $managedAccounts && $obj->managedAccounts = $managedAccounts;
-        null !== $startDate && $obj->startDate = $startDate;
+        null !== $endDate && $obj['endDate'] = $endDate;
+        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
+        null !== $startDate && $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class NumberLookupCreateParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->endDate = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class NumberLookupCreateParams implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj->managedAccounts = $managedAccounts;
+        $obj['managedAccounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class NumberLookupCreateParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->startDate = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }

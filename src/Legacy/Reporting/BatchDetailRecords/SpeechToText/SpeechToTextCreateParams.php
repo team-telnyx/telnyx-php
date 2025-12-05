@@ -66,8 +66,8 @@ final class SpeechToTextCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->end_date = $end_date;
-        $obj->start_date = $start_date;
+        $obj['end_date'] = $end_date;
+        $obj['start_date'] = $start_date;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class SpeechToTextCreateParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->end_date = $endDate;
+        $obj['end_date'] = $endDate;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class SpeechToTextCreateParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->start_date = $startDate;
+        $obj['start_date'] = $startDate;
 
         return $obj;
     }

@@ -52,7 +52,7 @@ final class PortingOrdersExceptionType implements BaseModel
         $obj = new self;
 
         null !== $code && $obj['code'] = $code;
-        null !== $description && $obj->description = $description;
+        null !== $description && $obj['description'] = $description;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class PortingOrdersExceptionType implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }

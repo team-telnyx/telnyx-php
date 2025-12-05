@@ -101,15 +101,15 @@ final class ConversationAddMessageParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->role = $role;
+        $obj['role'] = $role;
 
-        null !== $content && $obj->content = $content;
-        null !== $metadata && $obj->metadata = $metadata;
-        null !== $name && $obj->name = $name;
-        null !== $sent_at && $obj->sent_at = $sent_at;
-        null !== $tool_call_id && $obj->tool_call_id = $tool_call_id;
-        null !== $tool_calls && $obj->tool_calls = $tool_calls;
-        null !== $tool_choice && $obj->tool_choice = $tool_choice;
+        null !== $content && $obj['content'] = $content;
+        null !== $metadata && $obj['metadata'] = $metadata;
+        null !== $name && $obj['name'] = $name;
+        null !== $sent_at && $obj['sent_at'] = $sent_at;
+        null !== $tool_call_id && $obj['tool_call_id'] = $tool_call_id;
+        null !== $tool_calls && $obj['tool_calls'] = $tool_calls;
+        null !== $tool_choice && $obj['tool_choice'] = $tool_choice;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withRole(string $role): self
     {
         $obj = clone $this;
-        $obj->role = $role;
+        $obj['role'] = $role;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withContent(string $content): self
     {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withMetadata(array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
-        $obj->sent_at = $sentAt;
+        $obj['sent_at'] = $sentAt;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withToolCallID(string $toolCallID): self
     {
         $obj = clone $this;
-        $obj->tool_call_id = $toolCallID;
+        $obj['tool_call_id'] = $toolCallID;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withToolCalls(array $toolCalls): self
     {
         $obj = clone $this;
-        $obj->tool_calls = $toolCalls;
+        $obj['tool_calls'] = $toolCalls;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withToolChoice(mixed $toolChoice): self
     {
         $obj = clone $this;
-        $obj->tool_choice = $toolChoice;
+        $obj['tool_choice'] = $toolChoice;
 
         return $obj;
     }

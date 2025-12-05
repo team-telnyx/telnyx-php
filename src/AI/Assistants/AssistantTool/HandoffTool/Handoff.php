@@ -60,7 +60,7 @@ final class Handoff implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AIAssistant> $ai_assistants
+     * @param list<AIAssistant|array{id: string, name: string}> $ai_assistants
      * @param VoiceMode|value-of<VoiceMode> $voice_mode
      */
     public static function with(
@@ -69,7 +69,7 @@ final class Handoff implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->ai_assistants = $ai_assistants;
+        $obj['ai_assistants'] = $ai_assistants;
 
         null !== $voice_mode && $obj['voice_mode'] = $voice_mode;
 
@@ -79,12 +79,12 @@ final class Handoff implements BaseModel
     /**
      * List of possible assistants that can receive a handoff.
      *
-     * @param list<AIAssistant> $aiAssistants
+     * @param list<AIAssistant|array{id: string, name: string}> $aiAssistants
      */
     public function withAIAssistants(array $aiAssistants): self
     {
         $obj = clone $this;
-        $obj->ai_assistants = $aiAssistants;
+        $obj['ai_assistants'] = $aiAssistants;
 
         return $obj;
     }

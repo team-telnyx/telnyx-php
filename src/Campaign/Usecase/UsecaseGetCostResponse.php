@@ -75,10 +75,10 @@ final class UsecaseGetCostResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->campaignUsecase = $campaignUsecase;
-        $obj->description = $description;
-        $obj->monthlyCost = $monthlyCost;
-        $obj->upFrontCost = $upFrontCost;
+        $obj['campaignUsecase'] = $campaignUsecase;
+        $obj['description'] = $description;
+        $obj['monthlyCost'] = $monthlyCost;
+        $obj['upFrontCost'] = $upFrontCost;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class UsecaseGetCostResponse implements BaseModel, ResponseConverter
     public function withCampaignUsecase(string $campaignUsecase): self
     {
         $obj = clone $this;
-        $obj->campaignUsecase = $campaignUsecase;
+        $obj['campaignUsecase'] = $campaignUsecase;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class UsecaseGetCostResponse implements BaseModel, ResponseConverter
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class UsecaseGetCostResponse implements BaseModel, ResponseConverter
     public function withMonthlyCost(string $monthlyCost): self
     {
         $obj = clone $this;
-        $obj->monthlyCost = $monthlyCost;
+        $obj['monthlyCost'] = $monthlyCost;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class UsecaseGetCostResponse implements BaseModel, ResponseConverter
     public function withUpFrontCost(string $upFrontCost): self
     {
         $obj = clone $this;
-        $obj->upFrontCost = $upFrontCost;
+        $obj['upFrontCost'] = $upFrontCost;
 
         return $obj;
     }

@@ -12,6 +12,7 @@ use Telnyx\Portouts\Events\EventListResponse\Data\EventType;
 use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutFocDateChangedPayload;
 use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutNewCommentPayload;
 use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutStatusChangedPayload;
+use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutStatusChangedPayload\Status;
 use Telnyx\Portouts\Events\EventListResponse\Data\PayloadStatus;
 
 /**
@@ -104,6 +105,24 @@ final class Data implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $available_notification_methods
      * @param EventType|value-of<EventType> $event_type
+     * @param WebhookPortoutStatusChangedPayload|array{
+     *   id?: string|null,
+     *   attempted_pin?: string|null,
+     *   carrier_name?: string|null,
+     *   phone_numbers?: list<string>|null,
+     *   rejection_reason?: string|null,
+     *   spid?: string|null,
+     *   status?: value-of<Status>|null,
+     *   subscriber_name?: string|null,
+     *   user_id?: string|null,
+     * }|WebhookPortoutNewCommentPayload|array{
+     *   id?: string|null,
+     *   comment?: string|null,
+     *   portout_id?: string|null,
+     *   user_id?: string|null,
+     * }|WebhookPortoutFocDateChangedPayload|array{
+     *   id?: string|null, foc_date?: \DateTimeInterface|null, user_id?: string|null
+     * } $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payload_status
      */
     public static function with(
@@ -111,7 +130,7 @@ final class Data implements BaseModel
         ?array $available_notification_methods = null,
         ?\DateTimeInterface $created_at = null,
         EventType|string|null $event_type = null,
-        WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null $payload = null,
+        WebhookPortoutStatusChangedPayload|array|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null $payload = null,
         PayloadStatus|string|null $payload_status = null,
         ?string $portout_id = null,
         ?string $record_type = null,
@@ -119,15 +138,15 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $available_notification_methods && $obj['available_notification_methods'] = $available_notification_methods;
-        null !== $created_at && $obj->created_at = $created_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $payload && $obj->payload = $payload;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $payload_status && $obj['payload_status'] = $payload_status;
-        null !== $portout_id && $obj->portout_id = $portout_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $portout_id && $obj['portout_id'] = $portout_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -138,7 +157,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -163,7 +182,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -183,12 +202,31 @@ final class Data implements BaseModel
 
     /**
      * The webhook payload for the portout.status_changed event.
+     *
+     * @param WebhookPortoutStatusChangedPayload|array{
+     *   id?: string|null,
+     *   attempted_pin?: string|null,
+     *   carrier_name?: string|null,
+     *   phone_numbers?: list<string>|null,
+     *   rejection_reason?: string|null,
+     *   spid?: string|null,
+     *   status?: value-of<Status>|null,
+     *   subscriber_name?: string|null,
+     *   user_id?: string|null,
+     * }|WebhookPortoutNewCommentPayload|array{
+     *   id?: string|null,
+     *   comment?: string|null,
+     *   portout_id?: string|null,
+     *   user_id?: string|null,
+     * }|WebhookPortoutFocDateChangedPayload|array{
+     *   id?: string|null, foc_date?: \DateTimeInterface|null, user_id?: string|null
+     * } $payload
      */
     public function withPayload(
-        WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload $payload,
+        WebhookPortoutStatusChangedPayload|array|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload $payload,
     ): self {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }
@@ -212,7 +250,7 @@ final class Data implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj->portout_id = $portoutID;
+        $obj['portout_id'] = $portoutID;
 
         return $obj;
     }
@@ -223,7 +261,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -234,7 +272,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

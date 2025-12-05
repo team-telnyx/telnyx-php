@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
+use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
 
 /**
@@ -17,7 +18,15 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
  * @see Telnyx\Services\MobileNetworkOperatorsService::list()
  *
  * @phpstan-type MobileNetworkOperatorListParamsShape = array{
- *   filter?: Filter, page?: Page
+ *   filter?: Filter|array{
+ *     country_code?: string|null,
+ *     mcc?: string|null,
+ *     mnc?: string|null,
+ *     name?: Name|null,
+ *     network_preferences_enabled?: bool|null,
+ *     tadig?: string|null,
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
 final class MobileNetworkOperatorListParams implements BaseModel
@@ -47,35 +56,58 @@ final class MobileNetworkOperatorListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   country_code?: string|null,
+     *   mcc?: string|null,
+     *   mnc?: string|null,
+     *   name?: Name|null,
+     *   network_preferences_enabled?: bool|null,
+     *   tadig?: string|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
+    public static function with(
+        Filter|array|null $filter = null,
+        Page|array|null $page = null
+    ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
+     *
+     * @param Filter|array{
+     *   country_code?: string|null,
+     *   mcc?: string|null,
+     *   mnc?: string|null,
+     *   name?: Name|null,
+     *   network_preferences_enabled?: bool|null,
+     *   tadig?: string|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

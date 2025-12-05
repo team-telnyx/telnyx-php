@@ -56,8 +56,8 @@ final class Rubric implements BaseModel
     {
         $obj = new self;
 
-        $obj->criteria = $criteria;
-        $obj->name = $name;
+        $obj['criteria'] = $criteria;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Rubric implements BaseModel
     public function withCriteria(string $criteria): self
     {
         $obj = clone $this;
-        $obj->criteria = $criteria;
+        $obj['criteria'] = $criteria;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Rubric implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

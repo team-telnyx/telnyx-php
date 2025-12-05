@@ -51,7 +51,7 @@ final class AdditionalDocument implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $document_id && $obj->document_id = $document_id;
+        null !== $document_id && $obj['document_id'] = $document_id;
         null !== $document_type && $obj['document_type'] = $document_type;
 
         return $obj;
@@ -63,7 +63,7 @@ final class AdditionalDocument implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj->document_id = $documentID;
+        $obj['document_id'] = $documentID;
 
         return $obj;
     }

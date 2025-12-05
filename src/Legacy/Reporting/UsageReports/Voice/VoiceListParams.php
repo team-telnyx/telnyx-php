@@ -48,8 +48,8 @@ final class VoiceListParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $per_page && $obj->per_page = $per_page;
+        null !== $page && $obj['page'] = $page;
+        null !== $per_page && $obj['per_page'] = $per_page;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class VoiceListParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class VoiceListParams implements BaseModel
     public function withPerPage(int $perPage): self
     {
         $obj = clone $this;
-        $obj->per_page = $perPage;
+        $obj['per_page'] = $perPage;
 
         return $obj;
     }

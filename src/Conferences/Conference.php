@@ -133,6 +133,9 @@ final class Conference implements BaseModel
      *
      * @param RecordType|value-of<RecordType> $record_type
      * @param EndReason|value-of<EndReason> $end_reason
+     * @param EndedBy|array{
+     *   call_control_id?: string|null, call_session_id?: string|null
+     * } $ended_by
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -143,25 +146,25 @@ final class Conference implements BaseModel
         RecordType|string $record_type,
         ?string $connection_id = null,
         EndReason|string|null $end_reason = null,
-        ?EndedBy $ended_by = null,
+        EndedBy|array|null $ended_by = null,
         ?string $region = null,
         Status|string|null $status = null,
         ?string $updated_at = null,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->expires_at = $expires_at;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['expires_at'] = $expires_at;
+        $obj['name'] = $name;
         $obj['record_type'] = $record_type;
 
-        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
         null !== $end_reason && $obj['end_reason'] = $end_reason;
-        null !== $ended_by && $obj->ended_by = $ended_by;
-        null !== $region && $obj->region = $region;
+        null !== $ended_by && $obj['ended_by'] = $ended_by;
+        null !== $region && $obj['region'] = $region;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -172,7 +175,7 @@ final class Conference implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -183,7 +186,7 @@ final class Conference implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -194,7 +197,7 @@ final class Conference implements BaseModel
     public function withExpiresAt(string $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expires_at = $expiresAt;
+        $obj['expires_at'] = $expiresAt;
 
         return $obj;
     }
@@ -205,7 +208,7 @@ final class Conference implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -227,7 +230,7 @@ final class Conference implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -247,11 +250,15 @@ final class Conference implements BaseModel
 
     /**
      * IDs related to who ended the conference. It is expected for them to all be there or all be null.
+     *
+     * @param EndedBy|array{
+     *   call_control_id?: string|null, call_session_id?: string|null
+     * } $endedBy
      */
-    public function withEndedBy(EndedBy $endedBy): self
+    public function withEndedBy(EndedBy|array $endedBy): self
     {
         $obj = clone $this;
-        $obj->ended_by = $endedBy;
+        $obj['ended_by'] = $endedBy;
 
         return $obj;
     }
@@ -262,7 +269,7 @@ final class Conference implements BaseModel
     public function withRegion(string $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }
@@ -286,7 +293,7 @@ final class Conference implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

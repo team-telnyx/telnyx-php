@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardListParams\Filter;
+use Telnyx\SimCards\SimCardListParams\Filter\Status;
 use Telnyx\SimCards\SimCardListParams\Page;
 use Telnyx\SimCards\SimCardListParams\Sort;
 
@@ -18,10 +19,14 @@ use Telnyx\SimCards\SimCardListParams\Sort;
  * @see Telnyx\Services\SimCardsService::list()
  *
  * @phpstan-type SimCardListParamsShape = array{
- *   filter?: Filter,
+ *   filter?: Filter|array{
+ *     iccid?: string|null,
+ *     status?: list<value-of<Status>>|null,
+ *     tags?: list<string>|null,
+ *   },
  *   filter_sim_card_group_id_?: string,
  *   include_sim_card_group?: bool,
- *   page?: Page,
+ *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
  * }
  */
@@ -73,21 +78,27 @@ final class SimCardListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   iccid?: string|null,
+     *   status?: list<value-of<Status>>|null,
+     *   tags?: list<string>|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?string $filter_sim_card_group_id_ = null,
         ?bool $include_sim_card_group = null,
-        ?Page $page = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $filter_sim_card_group_id_ && $obj->filter_sim_card_group_id_ = $filter_sim_card_group_id_;
-        null !== $include_sim_card_group && $obj->include_sim_card_group = $include_sim_card_group;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $filter_sim_card_group_id_ && $obj['filter_sim_card_group_id_'] = $filter_sim_card_group_id_;
+        null !== $include_sim_card_group && $obj['include_sim_card_group'] = $include_sim_card_group;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -95,11 +106,17 @@ final class SimCardListParams implements BaseModel
 
     /**
      * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+     *
+     * @param Filter|array{
+     *   iccid?: string|null,
+     *   status?: list<value-of<Status>>|null,
+     *   tags?: list<string>|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
@@ -110,7 +127,7 @@ final class SimCardListParams implements BaseModel
     public function withFilterSimCardGroupID(string $filterSimCardGroupID): self
     {
         $obj = clone $this;
-        $obj->filter_sim_card_group_id_ = $filterSimCardGroupID;
+        $obj['filter_sim_card_group_id_'] = $filterSimCardGroupID;
 
         return $obj;
     }
@@ -121,18 +138,20 @@ final class SimCardListParams implements BaseModel
     public function withIncludeSimCardGroup(bool $includeSimCardGroup): self
     {
         $obj = clone $this;
-        $obj->include_sim_card_group = $includeSimCardGroup;
+        $obj['include_sim_card_group'] = $includeSimCardGroup;
 
         return $obj;
     }
 
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

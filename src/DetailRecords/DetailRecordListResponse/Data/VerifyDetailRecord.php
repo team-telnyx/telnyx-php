@@ -148,21 +148,21 @@ final class VerifyDetailRecord implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->record_type = $record_type;
+        $obj['record_type'] = $record_type;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $currency && $obj->currency = $currency;
-        null !== $delivery_status && $obj->delivery_status = $delivery_status;
-        null !== $destination_phone_number && $obj->destination_phone_number = $destination_phone_number;
-        null !== $rate && $obj->rate = $rate;
-        null !== $rate_measured_in && $obj->rate_measured_in = $rate_measured_in;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $verification_status && $obj->verification_status = $verification_status;
-        null !== $verify_channel_id && $obj->verify_channel_id = $verify_channel_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $currency && $obj['currency'] = $currency;
+        null !== $delivery_status && $obj['delivery_status'] = $delivery_status;
+        null !== $destination_phone_number && $obj['destination_phone_number'] = $destination_phone_number;
+        null !== $rate && $obj['rate'] = $rate;
+        null !== $rate_measured_in && $obj['rate_measured_in'] = $rate_measured_in;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $verification_status && $obj['verification_status'] = $verification_status;
+        null !== $verify_channel_id && $obj['verify_channel_id'] = $verify_channel_id;
         null !== $verify_channel_type && $obj['verify_channel_type'] = $verify_channel_type;
-        null !== $verify_profile_id && $obj->verify_profile_id = $verify_profile_id;
-        null !== $verify_usage_fee && $obj->verify_usage_fee = $verify_usage_fee;
+        null !== $verify_profile_id && $obj['verify_profile_id'] = $verify_profile_id;
+        null !== $verify_usage_fee && $obj['verify_usage_fee'] = $verify_usage_fee;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withDeliveryStatus(string $deliveryStatus): self
     {
         $obj = clone $this;
-        $obj->delivery_status = $deliveryStatus;
+        $obj['delivery_status'] = $deliveryStatus;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class VerifyDetailRecord implements BaseModel
         string $destinationPhoneNumber
     ): self {
         $obj = clone $this;
-        $obj->destination_phone_number = $destinationPhoneNumber;
+        $obj['destination_phone_number'] = $destinationPhoneNumber;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withRate(string $rate): self
     {
         $obj = clone $this;
-        $obj->rate = $rate;
+        $obj['rate'] = $rate;
 
         return $obj;
     }
@@ -242,7 +242,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
         $obj = clone $this;
-        $obj->rate_measured_in = $rateMeasuredIn;
+        $obj['rate_measured_in'] = $rateMeasuredIn;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerificationStatus(string $verificationStatus): self
     {
         $obj = clone $this;
-        $obj->verification_status = $verificationStatus;
+        $obj['verification_status'] = $verificationStatus;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerifyChannelID(string $verifyChannelID): self
     {
         $obj = clone $this;
-        $obj->verify_channel_id = $verifyChannelID;
+        $obj['verify_channel_id'] = $verifyChannelID;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerifyProfileID(string $verifyProfileID): self
     {
         $obj = clone $this;
-        $obj->verify_profile_id = $verifyProfileID;
+        $obj['verify_profile_id'] = $verifyProfileID;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerifyUsageFee(string $verifyUsageFee): self
     {
         $obj = clone $this;
-        $obj->verify_usage_fee = $verifyUsageFee;
+        $obj['verify_usage_fee'] = $verifyUsageFee;
 
         return $obj;
     }

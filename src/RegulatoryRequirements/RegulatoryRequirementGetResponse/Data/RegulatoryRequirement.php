@@ -51,10 +51,21 @@ final class RegulatoryRequirement implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AcceptanceCriteria|array{
+     *   acceptable_characters?: string|null,
+     *   acceptable_values?: list<string>|null,
+     *   case_sensitive?: string|null,
+     *   locality_limit?: string|null,
+     *   max_length?: string|null,
+     *   min_length?: string|null,
+     *   regex?: string|null,
+     *   time_limit?: string|null,
+     * } $acceptance_criteria
      */
     public static function with(
         ?string $id = null,
-        ?AcceptanceCriteria $acceptance_criteria = null,
+        AcceptanceCriteria|array|null $acceptance_criteria = null,
         ?string $description = null,
         ?string $example = null,
         ?string $field_type = null,
@@ -62,12 +73,12 @@ final class RegulatoryRequirement implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $acceptance_criteria && $obj->acceptance_criteria = $acceptance_criteria;
-        null !== $description && $obj->description = $description;
-        null !== $example && $obj->example = $example;
-        null !== $field_type && $obj->field_type = $field_type;
-        null !== $name && $obj->name = $name;
+        null !== $id && $obj['id'] = $id;
+        null !== $acceptance_criteria && $obj['acceptance_criteria'] = $acceptance_criteria;
+        null !== $description && $obj['description'] = $description;
+        null !== $example && $obj['example'] = $example;
+        null !== $field_type && $obj['field_type'] = $field_type;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -75,16 +86,28 @@ final class RegulatoryRequirement implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
+    /**
+     * @param AcceptanceCriteria|array{
+     *   acceptable_characters?: string|null,
+     *   acceptable_values?: list<string>|null,
+     *   case_sensitive?: string|null,
+     *   locality_limit?: string|null,
+     *   max_length?: string|null,
+     *   min_length?: string|null,
+     *   regex?: string|null,
+     *   time_limit?: string|null,
+     * } $acceptanceCriteria
+     */
     public function withAcceptanceCriteria(
-        AcceptanceCriteria $acceptanceCriteria
+        AcceptanceCriteria|array $acceptanceCriteria
     ): self {
         $obj = clone $this;
-        $obj->acceptance_criteria = $acceptanceCriteria;
+        $obj['acceptance_criteria'] = $acceptanceCriteria;
 
         return $obj;
     }
@@ -92,7 +115,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -100,7 +123,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withExample(string $example): self
     {
         $obj = clone $this;
-        $obj->example = $example;
+        $obj['example'] = $example;
 
         return $obj;
     }
@@ -108,7 +131,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withFieldType(string $fieldType): self
     {
         $obj = clone $this;
-        $obj->field_type = $fieldType;
+        $obj['field_type'] = $fieldType;
 
         return $obj;
     }
@@ -116,7 +139,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

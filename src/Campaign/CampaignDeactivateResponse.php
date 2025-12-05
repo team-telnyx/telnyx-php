@@ -62,10 +62,10 @@ final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->time = $time;
+        $obj['time'] = $time;
 
-        null !== $message && $obj->message = $message;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $message && $obj['message'] = $message;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
     public function withTime(float $time): self
     {
         $obj = clone $this;
-        $obj->time = $time;
+        $obj['time'] = $time;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
     public function withMessage(string $message): self
     {
         $obj = clone $this;
-        $obj->message = $message;
+        $obj['message'] = $message;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

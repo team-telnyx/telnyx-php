@@ -49,24 +49,38 @@ final class BucketGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   created_at: \DateTimeInterface,
+     *   filename: string,
+     *   status: string,
+     *   error_reason?: string|null,
+     *   last_embedded_at?: \DateTimeInterface|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   created_at: \DateTimeInterface,
+     *   filename: string,
+     *   status: string,
+     *   error_reason?: string|null,
+     *   last_embedded_at?: \DateTimeInterface|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

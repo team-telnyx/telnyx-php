@@ -38,8 +38,8 @@ final class UpdatedAt implements BaseModel
     {
         $obj = new self;
 
-        null !== $gte && $obj->gte = $gte;
-        null !== $lte && $obj->lte = $lte;
+        null !== $gte && $obj['gte'] = $gte;
+        null !== $lte && $obj['lte'] = $lte;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class UpdatedAt implements BaseModel
     public function withGte(string $gte): self
     {
         $obj = clone $this;
-        $obj->gte = $gte;
+        $obj['gte'] = $gte;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class UpdatedAt implements BaseModel
     public function withLte(string $lte): self
     {
         $obj = clone $this;
-        $obj->lte = $lte;
+        $obj['lte'] = $lte;
 
         return $obj;
     }

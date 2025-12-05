@@ -58,8 +58,8 @@ final class Params implements BaseModel
     {
         $obj = new self;
 
-        $obj->first_name = $first_name;
-        $obj->last_name = $last_name;
+        $obj['first_name'] = $first_name;
+        $obj['last_name'] = $last_name;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Params implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->first_name = $firstName;
+        $obj['first_name'] = $firstName;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class Params implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->last_name = $lastName;
+        $obj['last_name'] = $lastName;
 
         return $obj;
     }

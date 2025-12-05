@@ -61,9 +61,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->allowed_tools = $allowed_tools;
-        $obj->integration_id = $integration_id;
+        $obj['id'] = $id;
+        $obj['allowed_tools'] = $allowed_tools;
+        $obj['integration_id'] = $integration_id;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withAllowedTools(array $allowedTools): self
     {
         $obj = clone $this;
-        $obj->allowed_tools = $allowedTools;
+        $obj['allowed_tools'] = $allowedTools;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withIntegrationID(string $integrationID): self
     {
         $obj = clone $this;
-        $obj->integration_id = $integrationID;
+        $obj['integration_id'] = $integrationID;
 
         return $obj;
     }

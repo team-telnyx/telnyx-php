@@ -63,7 +63,7 @@ final class PortingOrderMisc implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $new_billing_phone_number && $obj->new_billing_phone_number = $new_billing_phone_number;
+        null !== $new_billing_phone_number && $obj['new_billing_phone_number'] = $new_billing_phone_number;
         null !== $remaining_numbers_action && $obj['remaining_numbers_action'] = $remaining_numbers_action;
         null !== $type && $obj['type'] = $type;
 
@@ -77,7 +77,7 @@ final class PortingOrderMisc implements BaseModel
         ?string $newBillingPhoneNumber
     ): self {
         $obj = clone $this;
-        $obj->new_billing_phone_number = $newBillingPhoneNumber;
+        $obj['new_billing_phone_number'] = $newBillingPhoneNumber;
 
         return $obj;
     }

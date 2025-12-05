@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
+use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result\Service;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -99,7 +100,13 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Result> $results
+     * @param list<Result|array{
+     *   charge_type: string,
+     *   service_owner_email: string,
+     *   service_owner_user_id: string,
+     *   services: list<Service>,
+     *   tn: string,
+     * }> $results
      */
     public static function with(
         string $currency,
@@ -111,12 +118,12 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->currency = $currency;
-        $obj->end_date = $end_date;
-        $obj->results = $results;
-        $obj->start_date = $start_date;
-        $obj->user_email = $user_email;
-        $obj->user_id = $user_id;
+        $obj['currency'] = $currency;
+        $obj['end_date'] = $end_date;
+        $obj['results'] = $results;
+        $obj['start_date'] = $start_date;
+        $obj['user_email'] = $user_email;
+        $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -127,7 +134,7 @@ final class Data implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -138,7 +145,7 @@ final class Data implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->end_date = $endDate;
+        $obj['end_date'] = $endDate;
 
         return $obj;
     }
@@ -146,12 +153,18 @@ final class Data implements BaseModel
     /**
      * List of phone number charge breakdowns.
      *
-     * @param list<Result> $results
+     * @param list<Result|array{
+     *   charge_type: string,
+     *   service_owner_email: string,
+     *   service_owner_user_id: string,
+     *   services: list<Service>,
+     *   tn: string,
+     * }> $results
      */
     public function withResults(array $results): self
     {
         $obj = clone $this;
-        $obj->results = $results;
+        $obj['results'] = $results;
 
         return $obj;
     }
@@ -162,7 +175,7 @@ final class Data implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->start_date = $startDate;
+        $obj['start_date'] = $startDate;
 
         return $obj;
     }
@@ -173,7 +186,7 @@ final class Data implements BaseModel
     public function withUserEmail(string $userEmail): self
     {
         $obj = clone $this;
-        $obj->user_email = $userEmail;
+        $obj['user_email'] = $userEmail;
 
         return $obj;
     }
@@ -184,7 +197,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

@@ -99,15 +99,15 @@ final class BrandListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $brandId && $obj->brandId = $brandId;
-        null !== $country && $obj->country = $country;
-        null !== $displayName && $obj->displayName = $displayName;
-        null !== $entityType && $obj->entityType = $entityType;
-        null !== $page && $obj->page = $page;
-        null !== $recordsPerPage && $obj->recordsPerPage = $recordsPerPage;
+        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $country && $obj['country'] = $country;
+        null !== $displayName && $obj['displayName'] = $displayName;
+        null !== $entityType && $obj['entityType'] = $entityType;
+        null !== $page && $obj['page'] = $page;
+        null !== $recordsPerPage && $obj['recordsPerPage'] = $recordsPerPage;
         null !== $sort && $obj['sort'] = $sort;
-        null !== $state && $obj->state = $state;
-        null !== $tcrBrandId && $obj->tcrBrandId = $tcrBrandId;
+        null !== $state && $obj['state'] = $state;
+        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class BrandListParams implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class BrandListParams implements BaseModel
     public function withCountry(string $country): self
     {
         $obj = clone $this;
-        $obj->country = $country;
+        $obj['country'] = $country;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class BrandListParams implements BaseModel
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class BrandListParams implements BaseModel
     public function withEntityType(string $entityType): self
     {
         $obj = clone $this;
-        $obj->entityType = $entityType;
+        $obj['entityType'] = $entityType;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class BrandListParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class BrandListParams implements BaseModel
     public function withRecordsPerPage(int $recordsPerPage): self
     {
         $obj = clone $this;
-        $obj->recordsPerPage = $recordsPerPage;
+        $obj['recordsPerPage'] = $recordsPerPage;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class BrandListParams implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class BrandListParams implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj->tcrBrandId = $tcrBrandID;
+        $obj['tcrBrandId'] = $tcrBrandID;
 
         return $obj;
     }

@@ -16,7 +16,9 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
  * @see Telnyx\Services\PortingOrders\PhoneNumberConfigurationsService::create()
  *
  * @phpstan-type PhoneNumberConfigurationCreateParamsShape = array{
- *   phone_number_configurations?: list<PhoneNumberConfiguration>
+ *   phone_number_configurations?: list<PhoneNumberConfiguration|array{
+ *     porting_phone_number_id: string, user_bundle_id: string
+ *   }>,
  * }
  */
 final class PhoneNumberConfigurationCreateParams implements BaseModel
@@ -39,25 +41,29 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberConfiguration> $phone_number_configurations
+     * @param list<PhoneNumberConfiguration|array{
+     *   porting_phone_number_id: string, user_bundle_id: string
+     * }> $phone_number_configurations
      */
     public static function with(?array $phone_number_configurations = null): self
     {
         $obj = new self;
 
-        null !== $phone_number_configurations && $obj->phone_number_configurations = $phone_number_configurations;
+        null !== $phone_number_configurations && $obj['phone_number_configurations'] = $phone_number_configurations;
 
         return $obj;
     }
 
     /**
-     * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
+     * @param list<PhoneNumberConfiguration|array{
+     *   porting_phone_number_id: string, user_bundle_id: string
+     * }> $phoneNumberConfigurations
      */
     public function withPhoneNumberConfigurations(
         array $phoneNumberConfigurations
     ): self {
         $obj = clone $this;
-        $obj->phone_number_configurations = $phoneNumberConfigurations;
+        $obj['phone_number_configurations'] = $phoneNumberConfigurations;
 
         return $obj;
     }

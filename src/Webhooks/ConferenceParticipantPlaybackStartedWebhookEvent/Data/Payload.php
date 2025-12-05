@@ -111,16 +111,16 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $conference_id && $obj->conference_id = $conference_id;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $creator_call_session_id && $obj->creator_call_session_id = $creator_call_session_id;
-        null !== $media_name && $obj->media_name = $media_name;
-        null !== $media_url && $obj->media_url = $media_url;
-        null !== $occurred_at && $obj->occurred_at = $occurred_at;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $conference_id && $obj['conference_id'] = $conference_id;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $creator_call_session_id && $obj['creator_call_session_id'] = $creator_call_session_id;
+        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $media_url && $obj['media_url'] = $media_url;
+        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Payload implements BaseModel
     public function withConferenceID(string $conferenceID): self
     {
         $obj = clone $this;
-        $obj->conference_id = $conferenceID;
+        $obj['conference_id'] = $conferenceID;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Payload implements BaseModel
     public function withCreatorCallSessionID(string $creatorCallSessionID): self
     {
         $obj = clone $this;
-        $obj->creator_call_session_id = $creatorCallSessionID;
+        $obj['creator_call_session_id'] = $creatorCallSessionID;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class Payload implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class Payload implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj->media_url = $mediaURL;
+        $obj['media_url'] = $mediaURL;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Payload implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }

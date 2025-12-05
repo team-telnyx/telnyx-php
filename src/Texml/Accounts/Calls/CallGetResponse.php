@@ -192,24 +192,24 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
         null !== $answered_by && $obj['answered_by'] = $answered_by;
-        null !== $caller_name && $obj->caller_name = $caller_name;
-        null !== $date_created && $obj->date_created = $date_created;
-        null !== $date_updated && $obj->date_updated = $date_updated;
+        null !== $caller_name && $obj['caller_name'] = $caller_name;
+        null !== $date_created && $obj['date_created'] = $date_created;
+        null !== $date_updated && $obj['date_updated'] = $date_updated;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $duration && $obj->duration = $duration;
-        null !== $end_time && $obj->end_time = $end_time;
-        null !== $from && $obj->from = $from;
-        null !== $from_formatted && $obj->from_formatted = $from_formatted;
-        null !== $price && $obj->price = $price;
-        null !== $price_unit && $obj->price_unit = $price_unit;
-        null !== $sid && $obj->sid = $sid;
-        null !== $start_time && $obj->start_time = $start_time;
+        null !== $duration && $obj['duration'] = $duration;
+        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $from && $obj['from'] = $from;
+        null !== $from_formatted && $obj['from_formatted'] = $from_formatted;
+        null !== $price && $obj['price'] = $price;
+        null !== $price_unit && $obj['price_unit'] = $price_unit;
+        null !== $sid && $obj['sid'] = $sid;
+        null !== $start_time && $obj['start_time'] = $start_time;
         null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
-        null !== $to_formatted && $obj->to_formatted = $to_formatted;
-        null !== $uri && $obj->uri = $uri;
+        null !== $to && $obj['to'] = $to;
+        null !== $to_formatted && $obj['to_formatted'] = $to_formatted;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withCallerName(string $callerName): self
     {
         $obj = clone $this;
-        $obj->caller_name = $callerName;
+        $obj['caller_name'] = $callerName;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->date_created = $dateCreated;
+        $obj['date_created'] = $dateCreated;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->date_updated = $dateUpdated;
+        $obj['date_updated'] = $dateUpdated;
 
         return $obj;
     }
@@ -290,7 +290,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withDuration(string $duration): self
     {
         $obj = clone $this;
-        $obj->duration = $duration;
+        $obj['duration'] = $duration;
 
         return $obj;
     }
@@ -301,7 +301,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -312,7 +312,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -323,7 +323,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withFromFormatted(string $fromFormatted): self
     {
         $obj = clone $this;
-        $obj->from_formatted = $fromFormatted;
+        $obj['from_formatted'] = $fromFormatted;
 
         return $obj;
     }
@@ -334,7 +334,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withPrice(string $price): self
     {
         $obj = clone $this;
-        $obj->price = $price;
+        $obj['price'] = $price;
 
         return $obj;
     }
@@ -345,7 +345,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withPriceUnit(string $priceUnit): self
     {
         $obj = clone $this;
-        $obj->price_unit = $priceUnit;
+        $obj['price_unit'] = $priceUnit;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withSid(string $sid): self
     {
         $obj = clone $this;
-        $obj->sid = $sid;
+        $obj['sid'] = $sid;
 
         return $obj;
     }
@@ -367,7 +367,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -391,7 +391,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -402,7 +402,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withToFormatted(string $toFormatted): self
     {
         $obj = clone $this;
-        $obj->to_formatted = $toFormatted;
+        $obj['to_formatted'] = $toFormatted;
 
         return $obj;
     }
@@ -413,7 +413,7 @@ final class CallGetResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

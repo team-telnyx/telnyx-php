@@ -54,7 +54,7 @@ final class Logo implements BaseModel
         $obj = new self;
 
         null !== $content_type && $obj['content_type'] = $content_type;
-        null !== $document_id && $obj->document_id = $document_id;
+        null !== $document_id && $obj['document_id'] = $document_id;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class Logo implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj->document_id = $documentID;
+        $obj['document_id'] = $documentID;
 
         return $obj;
     }

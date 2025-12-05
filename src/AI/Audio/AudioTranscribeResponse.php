@@ -67,7 +67,9 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Segment> $segments
+     * @param list<Segment|array{
+     *   id: float, end: float, start: float, text: string
+     * }> $segments
      */
     public static function with(
         string $text,
@@ -76,10 +78,10 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->text = $text;
+        $obj['text'] = $text;
 
-        null !== $duration && $obj->duration = $duration;
-        null !== $segments && $obj->segments = $segments;
+        null !== $duration && $obj['duration'] = $duration;
+        null !== $segments && $obj['segments'] = $segments;
 
         return $obj;
     }
@@ -90,7 +92,7 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }
@@ -101,7 +103,7 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
     public function withDuration(float $duration): self
     {
         $obj = clone $this;
-        $obj->duration = $duration;
+        $obj['duration'] = $duration;
 
         return $obj;
     }
@@ -109,12 +111,14 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
     /**
      * Segments of the transcribed text and their corresponding details. This is only included if `response_format` is set to `verbose_json`.
      *
-     * @param list<Segment> $segments
+     * @param list<Segment|array{
+     *   id: float, end: float, start: float, text: string
+     * }> $segments
      */
     public function withSegments(array $segments): self
     {
         $obj = clone $this;
-        $obj->segments = $segments;
+        $obj['segments'] = $segments;
 
         return $obj;
     }

@@ -35,24 +35,40 @@ final class PortingListUkCarriersResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   alternative_cupids?: list<string>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   cupid?: string|null,
+     *   name?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   alternative_cupids?: list<string>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   cupid?: string|null,
+     *   name?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

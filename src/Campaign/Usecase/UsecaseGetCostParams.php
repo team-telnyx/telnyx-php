@@ -53,7 +53,7 @@ final class UsecaseGetCostParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->usecase = $usecase;
+        $obj['usecase'] = $usecase;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class UsecaseGetCostParams implements BaseModel
     public function withUsecase(string $usecase): self
     {
         $obj = clone $this;
-        $obj->usecase = $usecase;
+        $obj['usecase'] = $usecase;
 
         return $obj;
     }

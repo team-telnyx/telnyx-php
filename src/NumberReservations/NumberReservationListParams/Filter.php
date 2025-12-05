@@ -57,30 +57,34 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $created_at
      */
     public static function with(
-        ?CreatedAt $created_at = null,
+        CreatedAt|array|null $created_at = null,
         ?string $customer_reference = null,
         ?string $phone_numbers_phone_number = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $phone_numbers_phone_number && $obj->phone_numbers_phone_number = $phone_numbers_phone_number;
-        null !== $status && $obj->status = $status;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $phone_numbers_phone_number && $obj['phone_numbers_phone_number'] = $phone_numbers_phone_number;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
 
     /**
      * Filter number reservations by date range.
+     *
+     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -91,7 +95,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -103,7 +107,7 @@ final class Filter implements BaseModel
         string $phoneNumbersPhoneNumber
     ): self {
         $obj = clone $this;
-        $obj->phone_numbers_phone_number = $phoneNumbersPhoneNumber;
+        $obj['phone_numbers_phone_number'] = $phoneNumbersPhoneNumber;
 
         return $obj;
     }
@@ -114,7 +118,7 @@ final class Filter implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

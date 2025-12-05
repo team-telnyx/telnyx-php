@@ -75,13 +75,13 @@ final class McpServerUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $allowed_tools && $obj->allowed_tools = $allowed_tools;
-        null !== $api_key_ref && $obj->api_key_ref = $api_key_ref;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $name && $obj->name = $name;
-        null !== $type && $obj->type = $type;
-        null !== $url && $obj->url = $url;
+        null !== $id && $obj['id'] = $id;
+        null !== $allowed_tools && $obj['allowed_tools'] = $allowed_tools;
+        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $type && $obj['type'] = $type;
+        null !== $url && $obj['url'] = $url;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withAllowedTools(?array $allowedTools): self
     {
         $obj = clone $this;
-        $obj->allowed_tools = $allowedTools;
+        $obj['allowed_tools'] = $allowedTools;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->api_key_ref = $apiKeyRef;
+        $obj['api_key_ref'] = $apiKeyRef;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

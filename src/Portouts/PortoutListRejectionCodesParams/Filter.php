@@ -43,7 +43,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
+        null !== $code && $obj['code'] = $code;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Filter implements BaseModel
     public function withCode(int|array $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }

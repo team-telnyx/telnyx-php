@@ -84,11 +84,11 @@ final class ActionSendSipInfoParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->body = $body;
-        $obj->content_type = $content_type;
+        $obj['body'] = $body;
+        $obj['content_type'] = $content_type;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class ActionSendSipInfoParams implements BaseModel
     public function withBody(string $body): self
     {
         $obj = clone $this;
-        $obj->body = $body;
+        $obj['body'] = $body;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class ActionSendSipInfoParams implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj->content_type = $contentType;
+        $obj['content_type'] = $contentType;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class ActionSendSipInfoParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class ActionSendSipInfoParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }

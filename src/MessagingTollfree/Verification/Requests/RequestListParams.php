@@ -93,12 +93,12 @@ final class RequestListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->page = $page;
-        $obj->page_size = $page_size;
+        $obj['page'] = $page;
+        $obj['page_size'] = $page_size;
 
-        null !== $date_end && $obj->date_end = $date_end;
-        null !== $date_start && $obj->date_start = $date_start;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $date_end && $obj['date_end'] = $date_end;
+        null !== $date_start && $obj['date_start'] = $date_start;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -107,7 +107,7 @@ final class RequestListParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class RequestListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size = $pageSize;
+        $obj['page_size'] = $pageSize;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class RequestListParams implements BaseModel
     public function withDateEnd(\DateTimeInterface $dateEnd): self
     {
         $obj = clone $this;
-        $obj->date_end = $dateEnd;
+        $obj['date_end'] = $dateEnd;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class RequestListParams implements BaseModel
     public function withDateStart(\DateTimeInterface $dateStart): self
     {
         $obj = clone $this;
-        $obj->date_start = $dateStart;
+        $obj['date_start'] = $dateStart;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class RequestListParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

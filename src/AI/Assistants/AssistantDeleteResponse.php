@@ -62,9 +62,9 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->deleted = $deleted;
-        $obj->object = $object;
+        $obj['id'] = $id;
+        $obj['deleted'] = $deleted;
+        $obj['object'] = $object;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
     public function withDeleted(bool $deleted): self
     {
         $obj = clone $this;
-        $obj->deleted = $deleted;
+        $obj['deleted'] = $deleted;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
     public function withObject(string $object): self
     {
         $obj = clone $this;
-        $obj->object = $object;
+        $obj['object'] = $object;
 
         return $obj;
     }

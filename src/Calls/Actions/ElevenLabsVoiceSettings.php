@@ -67,7 +67,7 @@ final class ElevenLabsVoiceSettings implements BaseModel
 
         $obj['type'] = $type;
 
-        null !== $api_key_ref && $obj->api_key_ref = $api_key_ref;
+        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class ElevenLabsVoiceSettings implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->api_key_ref = $apiKeyRef;
+        $obj['api_key_ref'] = $apiKeyRef;
 
         return $obj;
     }

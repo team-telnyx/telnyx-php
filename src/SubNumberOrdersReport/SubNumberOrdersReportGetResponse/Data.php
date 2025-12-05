@@ -80,12 +80,20 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filters|array{
+     *   country_code?: string|null,
+     *   created_at_gt?: \DateTimeInterface|null,
+     *   created_at_lt?: \DateTimeInterface|null,
+     *   customer_reference?: string|null,
+     *   order_request_id?: string|null,
+     *   status?: string|null,
+     * } $filters
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $created_at = null,
-        ?Filters $filters = null,
+        Filters|array|null $filters = null,
         ?string $order_type = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updated_at = null,
@@ -93,13 +101,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $filters && $obj->filters = $filters;
-        null !== $order_type && $obj->order_type = $order_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $filters && $obj['filters'] = $filters;
+        null !== $order_type && $obj['order_type'] = $order_type;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -110,7 +118,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -121,18 +129,27 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
     /**
      * The filters that were applied to generate this report.
+     *
+     * @param Filters|array{
+     *   country_code?: string|null,
+     *   created_at_gt?: \DateTimeInterface|null,
+     *   created_at_lt?: \DateTimeInterface|null,
+     *   customer_reference?: string|null,
+     *   order_request_id?: string|null,
+     *   status?: string|null,
+     * } $filters
      */
-    public function withFilters(Filters $filters): self
+    public function withFilters(Filters|array $filters): self
     {
         $obj = clone $this;
-        $obj->filters = $filters;
+        $obj['filters'] = $filters;
 
         return $obj;
     }
@@ -143,7 +160,7 @@ final class Data implements BaseModel
     public function withOrderType(string $orderType): self
     {
         $obj = clone $this;
-        $obj->order_type = $orderType;
+        $obj['order_type'] = $orderType;
 
         return $obj;
     }
@@ -167,7 +184,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -178,7 +195,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

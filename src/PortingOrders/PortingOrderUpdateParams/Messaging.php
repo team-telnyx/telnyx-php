@@ -36,7 +36,7 @@ final class Messaging implements BaseModel
     {
         $obj = new self;
 
-        null !== $enable_messaging && $obj->enable_messaging = $enable_messaging;
+        null !== $enable_messaging && $obj['enable_messaging'] = $enable_messaging;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Messaging implements BaseModel
     public function withEnableMessaging(bool $enableMessaging): self
     {
         $obj = clone $this;
-        $obj->enable_messaging = $enableMessaging;
+        $obj['enable_messaging'] = $enableMessaging;
 
         return $obj;
     }

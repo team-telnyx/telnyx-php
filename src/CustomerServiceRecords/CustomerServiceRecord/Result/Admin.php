@@ -65,10 +65,10 @@ final class Admin implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_number && $obj->account_number = $account_number;
-        null !== $authorized_person_name && $obj->authorized_person_name = $authorized_person_name;
-        null !== $billing_phone_number && $obj->billing_phone_number = $billing_phone_number;
-        null !== $name && $obj->name = $name;
+        null !== $account_number && $obj['account_number'] = $account_number;
+        null !== $authorized_person_name && $obj['authorized_person_name'] = $authorized_person_name;
+        null !== $billing_phone_number && $obj['billing_phone_number'] = $billing_phone_number;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Admin implements BaseModel
     public function withAccountNumber(string $accountNumber): self
     {
         $obj = clone $this;
-        $obj->account_number = $accountNumber;
+        $obj['account_number'] = $accountNumber;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Admin implements BaseModel
     public function withAuthorizedPersonName(string $authorizedPersonName): self
     {
         $obj = clone $this;
-        $obj->authorized_person_name = $authorizedPersonName;
+        $obj['authorized_person_name'] = $authorizedPersonName;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Admin implements BaseModel
     public function withBillingPhoneNumber(string $billingPhoneNumber): self
     {
         $obj = clone $this;
-        $obj->billing_phone_number = $billingPhoneNumber;
+        $obj['billing_phone_number'] = $billingPhoneNumber;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Admin implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

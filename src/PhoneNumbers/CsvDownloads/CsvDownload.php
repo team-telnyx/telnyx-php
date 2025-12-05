@@ -68,10 +68,10 @@ final class CsvDownload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $url && $obj->url = $url;
+        null !== $url && $obj['url'] = $url;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class CsvDownload implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class CsvDownload implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class CsvDownload implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

@@ -344,6 +344,9 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
      * @param EntityType|value-of<EntityType> $entityType
      * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIdType
      * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
+     * @param OptionalAttributes|array{
+     *   taxExemptStatus?: string|null
+     * } $optionalAttributes
      * @param Status|value-of<Status> $status
      * @param StockExchange|value-of<StockExchange> $stockExchange
      */
@@ -371,7 +374,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
         ?string $lastName = null,
         ?string $mobilePhone = null,
         ?bool $mock = null,
-        ?OptionalAttributes $optionalAttributes = null,
+        OptionalAttributes|array|null $optionalAttributes = null,
         ?string $phone = null,
         ?string $postalCode = null,
         ?string $referenceId = null,
@@ -390,44 +393,44 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
         $obj = new self;
 
         $obj['brandRelationship'] = $brandRelationship;
-        $obj->country = $country;
-        $obj->displayName = $displayName;
-        $obj->email = $email;
+        $obj['country'] = $country;
+        $obj['displayName'] = $displayName;
+        $obj['email'] = $email;
         $obj['entityType'] = $entityType;
-        $obj->vertical = $vertical;
+        $obj['vertical'] = $vertical;
 
-        null !== $altBusinessId && $obj->altBusinessId = $altBusinessId;
+        null !== $altBusinessId && $obj['altBusinessId'] = $altBusinessId;
         null !== $altBusinessIdType && $obj['altBusinessIdType'] = $altBusinessIdType;
-        null !== $brandId && $obj->brandId = $brandId;
-        null !== $businessContactEmail && $obj->businessContactEmail = $businessContactEmail;
-        null !== $city && $obj->city = $city;
-        null !== $companyName && $obj->companyName = $companyName;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $cspId && $obj->cspId = $cspId;
-        null !== $ein && $obj->ein = $ein;
-        null !== $failureReasons && $obj->failureReasons = $failureReasons;
-        null !== $firstName && $obj->firstName = $firstName;
+        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $businessContactEmail && $obj['businessContactEmail'] = $businessContactEmail;
+        null !== $city && $obj['city'] = $city;
+        null !== $companyName && $obj['companyName'] = $companyName;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $cspId && $obj['cspId'] = $cspId;
+        null !== $ein && $obj['ein'] = $ein;
+        null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
+        null !== $firstName && $obj['firstName'] = $firstName;
         null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
-        null !== $ipAddress && $obj->ipAddress = $ipAddress;
-        null !== $isReseller && $obj->isReseller = $isReseller;
-        null !== $lastName && $obj->lastName = $lastName;
-        null !== $mobilePhone && $obj->mobilePhone = $mobilePhone;
-        null !== $mock && $obj->mock = $mock;
-        null !== $optionalAttributes && $obj->optionalAttributes = $optionalAttributes;
-        null !== $phone && $obj->phone = $phone;
-        null !== $postalCode && $obj->postalCode = $postalCode;
-        null !== $referenceId && $obj->referenceId = $referenceId;
-        null !== $state && $obj->state = $state;
+        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
+        null !== $isReseller && $obj['isReseller'] = $isReseller;
+        null !== $lastName && $obj['lastName'] = $lastName;
+        null !== $mobilePhone && $obj['mobilePhone'] = $mobilePhone;
+        null !== $mock && $obj['mock'] = $mock;
+        null !== $optionalAttributes && $obj['optionalAttributes'] = $optionalAttributes;
+        null !== $phone && $obj['phone'] = $phone;
+        null !== $postalCode && $obj['postalCode'] = $postalCode;
+        null !== $referenceId && $obj['referenceId'] = $referenceId;
+        null !== $state && $obj['state'] = $state;
         null !== $status && $obj['status'] = $status;
         null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
-        null !== $stockSymbol && $obj->stockSymbol = $stockSymbol;
-        null !== $street && $obj->street = $street;
-        null !== $tcrBrandId && $obj->tcrBrandId = $tcrBrandId;
-        null !== $universalEin && $obj->universalEin = $universalEin;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
-        null !== $website && $obj->website = $website;
+        null !== $stockSymbol && $obj['stockSymbol'] = $stockSymbol;
+        null !== $street && $obj['street'] = $street;
+        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
+        null !== $universalEin && $obj['universalEin'] = $universalEin;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $website && $obj['website'] = $website;
 
         return $obj;
     }
@@ -452,7 +455,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withCountry(string $country): self
     {
         $obj = clone $this;
-        $obj->country = $country;
+        $obj['country'] = $country;
 
         return $obj;
     }
@@ -463,7 +466,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -474,7 +477,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -498,7 +501,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withVertical(string $vertical): self
     {
         $obj = clone $this;
-        $obj->vertical = $vertical;
+        $obj['vertical'] = $vertical;
 
         return $obj;
     }
@@ -509,7 +512,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withAltBusinessID(string $altBusinessID): self
     {
         $obj = clone $this;
-        $obj->altBusinessId = $altBusinessID;
+        $obj['altBusinessId'] = $altBusinessID;
 
         return $obj;
     }
@@ -534,7 +537,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -547,7 +550,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withBusinessContactEmail(string $businessContactEmail): self
     {
         $obj = clone $this;
-        $obj->businessContactEmail = $businessContactEmail;
+        $obj['businessContactEmail'] = $businessContactEmail;
 
         return $obj;
     }
@@ -558,7 +561,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withCity(string $city): self
     {
         $obj = clone $this;
-        $obj->city = $city;
+        $obj['city'] = $city;
 
         return $obj;
     }
@@ -569,7 +572,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj->companyName = $companyName;
+        $obj['companyName'] = $companyName;
 
         return $obj;
     }
@@ -580,7 +583,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -591,7 +594,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withCspID(string $cspID): self
     {
         $obj = clone $this;
-        $obj->cspId = $cspID;
+        $obj['cspId'] = $cspID;
 
         return $obj;
     }
@@ -602,7 +605,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withEin(string $ein): self
     {
         $obj = clone $this;
-        $obj->ein = $ein;
+        $obj['ein'] = $ein;
 
         return $obj;
     }
@@ -613,7 +616,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withFailureReasons(string $failureReasons): self
     {
         $obj = clone $this;
-        $obj->failureReasons = $failureReasons;
+        $obj['failureReasons'] = $failureReasons;
 
         return $obj;
     }
@@ -624,7 +627,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->firstName = $firstName;
+        $obj['firstName'] = $firstName;
 
         return $obj;
     }
@@ -649,7 +652,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }
@@ -660,7 +663,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withIsReseller(bool $isReseller): self
     {
         $obj = clone $this;
-        $obj->isReseller = $isReseller;
+        $obj['isReseller'] = $isReseller;
 
         return $obj;
     }
@@ -671,7 +674,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->lastName = $lastName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }
@@ -682,7 +685,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withMobilePhone(string $mobilePhone): self
     {
         $obj = clone $this;
-        $obj->mobilePhone = $mobilePhone;
+        $obj['mobilePhone'] = $mobilePhone;
 
         return $obj;
     }
@@ -693,16 +696,21 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withMock(bool $mock): self
     {
         $obj = clone $this;
-        $obj->mock = $mock;
+        $obj['mock'] = $mock;
 
         return $obj;
     }
 
+    /**
+     * @param OptionalAttributes|array{
+     *   taxExemptStatus?: string|null
+     * } $optionalAttributes
+     */
     public function withOptionalAttributes(
-        OptionalAttributes $optionalAttributes
+        OptionalAttributes|array $optionalAttributes
     ): self {
         $obj = clone $this;
-        $obj->optionalAttributes = $optionalAttributes;
+        $obj['optionalAttributes'] = $optionalAttributes;
 
         return $obj;
     }
@@ -713,7 +721,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withPhone(string $phone): self
     {
         $obj = clone $this;
-        $obj->phone = $phone;
+        $obj['phone'] = $phone;
 
         return $obj;
     }
@@ -724,7 +732,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postalCode = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -735,7 +743,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withReferenceID(string $referenceID): self
     {
         $obj = clone $this;
-        $obj->referenceId = $referenceID;
+        $obj['referenceId'] = $referenceID;
 
         return $obj;
     }
@@ -746,7 +754,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -783,7 +791,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withStockSymbol(string $stockSymbol): self
     {
         $obj = clone $this;
-        $obj->stockSymbol = $stockSymbol;
+        $obj['stockSymbol'] = $stockSymbol;
 
         return $obj;
     }
@@ -794,7 +802,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withStreet(string $street): self
     {
         $obj = clone $this;
-        $obj->street = $street;
+        $obj['street'] = $street;
 
         return $obj;
     }
@@ -805,7 +813,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj->tcrBrandId = $tcrBrandID;
+        $obj['tcrBrandId'] = $tcrBrandID;
 
         return $obj;
     }
@@ -816,7 +824,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withUniversalEin(string $universalEin): self
     {
         $obj = clone $this;
-        $obj->universalEin = $universalEin;
+        $obj['universalEin'] = $universalEin;
 
         return $obj;
     }
@@ -827,7 +835,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -838,7 +846,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj['webhookFailoverURL'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -849,7 +857,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -860,7 +868,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withWebsite(string $website): self
     {
         $obj = clone $this;
-        $obj->website = $website;
+        $obj['website'] = $website;
 
         return $obj;
     }

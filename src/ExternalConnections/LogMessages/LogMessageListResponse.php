@@ -11,6 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage\Meta;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage\Source;
 
 /**
  * @phpstan-type LogMessageListResponseShape = array{
@@ -42,36 +44,62 @@ final class LogMessageListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessage> $log_messages
+     * @param list<LogMessage|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: Meta|null,
+     *   source?: Source|null,
+     * }> $log_messages
+     * @param ExternalVoiceIntegrationsPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $log_messages = null,
-        ?ExternalVoiceIntegrationsPaginationMeta $meta = null,
+        ExternalVoiceIntegrationsPaginationMeta|array|null $meta = null,
     ): self {
         $obj = new self;
 
-        null !== $log_messages && $obj->log_messages = $log_messages;
-        null !== $meta && $obj->meta = $meta;
+        null !== $log_messages && $obj['log_messages'] = $log_messages;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<LogMessage> $logMessages
+     * @param list<LogMessage|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: Meta|null,
+     *   source?: Source|null,
+     * }> $logMessages
      */
     public function withLogMessages(array $logMessages): self
     {
         $obj = clone $this;
-        $obj->log_messages = $logMessages;
+        $obj['log_messages'] = $logMessages;
 
         return $obj;
     }
 
+    /**
+     * @param ExternalVoiceIntegrationsPaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
     public function withMeta(
-        ExternalVoiceIntegrationsPaginationMeta $meta
+        ExternalVoiceIntegrationsPaginationMeta|array $meta
     ): self {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

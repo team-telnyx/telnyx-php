@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\NotificationSettings\NotificationSetting\Parameter;
+use Telnyx\NotificationSettings\NotificationSetting\Status;
 
 /**
  * @phpstan-type NotificationSettingNewResponseShape = array{
@@ -34,20 +36,47 @@ final class NotificationSettingNewResponse implements BaseModel, ResponseConvert
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NotificationSetting|array{
+     *   id?: string|null,
+     *   associated_record_type?: string|null,
+     *   associated_record_type_value?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   notification_channel_id?: string|null,
+     *   notification_event_condition_id?: string|null,
+     *   notification_profile_id?: string|null,
+     *   parameters?: list<Parameter>|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?NotificationSetting $data = null): self
+    public static function with(NotificationSetting|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(NotificationSetting $data): self
+    /**
+     * @param NotificationSetting|array{
+     *   id?: string|null,
+     *   associated_record_type?: string|null,
+     *   associated_record_type_value?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   notification_channel_id?: string|null,
+     *   notification_event_condition_id?: string|null,
+     *   notification_profile_id?: string|null,
+     *   parameters?: list<Parameter>|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
+     */
+    public function withData(NotificationSetting|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

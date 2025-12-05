@@ -108,13 +108,13 @@ final class PurchaseCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
-        null !== $product && $obj->product = $product;
-        null !== $sim_card_group_id && $obj->sim_card_group_id = $sim_card_group_id;
+        null !== $product && $obj['product'] = $product;
+        null !== $sim_card_group_id && $obj['sim_card_group_id'] = $sim_card_group_id;
         null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj->tags = $tags;
-        null !== $whitelabel_name && $obj->whitelabel_name = $whitelabel_name;
+        null !== $tags && $obj['tags'] = $tags;
+        null !== $whitelabel_name && $obj['whitelabel_name'] = $whitelabel_name;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withAmount(int $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj->sim_card_group_id = $simCardGroupID;
+        $obj['sim_card_group_id'] = $simCardGroupID;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withWhitelabelName(string $whitelabelName): self
     {
         $obj = clone $this;
-        $obj->whitelabel_name = $whitelabelName;
+        $obj['whitelabel_name'] = $whitelabelName;
 
         return $obj;
     }

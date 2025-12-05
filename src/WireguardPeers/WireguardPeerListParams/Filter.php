@@ -38,7 +38,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $wireguard_interface_id && $obj->wireguard_interface_id = $wireguard_interface_id;
+        null !== $wireguard_interface_id && $obj['wireguard_interface_id'] = $wireguard_interface_id;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
         $obj = clone $this;
-        $obj->wireguard_interface_id = $wireguardInterfaceID;
+        $obj['wireguard_interface_id'] = $wireguardInterfaceID;
 
         return $obj;
     }

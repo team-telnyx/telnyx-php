@@ -76,12 +76,12 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $brand_name && $obj->brand_name = $brand_name;
-        null !== $device_type && $obj->device_type = $device_type;
-        null !== $imei && $obj->imei = $imei;
-        null !== $model_name && $obj->model_name = $model_name;
-        null !== $operating_system && $obj->operating_system = $operating_system;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $brand_name && $obj['brand_name'] = $brand_name;
+        null !== $device_type && $obj['device_type'] = $device_type;
+        null !== $imei && $obj['imei'] = $imei;
+        null !== $model_name && $obj['model_name'] = $model_name;
+        null !== $operating_system && $obj['operating_system'] = $operating_system;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Data implements BaseModel
     public function withBrandName(string $brandName): self
     {
         $obj = clone $this;
-        $obj->brand_name = $brandName;
+        $obj['brand_name'] = $brandName;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Data implements BaseModel
     public function withDeviceType(string $deviceType): self
     {
         $obj = clone $this;
-        $obj->device_type = $deviceType;
+        $obj['device_type'] = $deviceType;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withImei(string $imei): self
     {
         $obj = clone $this;
-        $obj->imei = $imei;
+        $obj['imei'] = $imei;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withModelName(string $modelName): self
     {
         $obj = clone $this;
-        $obj->model_name = $modelName;
+        $obj['model_name'] = $modelName;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class Data implements BaseModel
     public function withOperatingSystem(string $operatingSystem): self
     {
         $obj = clone $this;
-        $obj->operating_system = $operatingSystem;
+        $obj['operating_system'] = $operatingSystem;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

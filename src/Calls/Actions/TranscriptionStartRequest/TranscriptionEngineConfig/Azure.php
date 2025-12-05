@@ -89,7 +89,7 @@ final class Azure implements BaseModel
 
         $obj['region'] = $region;
 
-        null !== $api_key_ref && $obj->api_key_ref = $api_key_ref;
+        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
         null !== $language && $obj['language'] = $language;
 
         return $obj;
@@ -114,7 +114,7 @@ final class Azure implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->api_key_ref = $apiKeyRef;
+        $obj['api_key_ref'] = $apiKeyRef;
 
         return $obj;
     }

@@ -79,12 +79,12 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $first_port && $obj->first_port = $first_port;
-        null !== $last_port && $obj->last_port = $last_port;
-        null !== $name && $obj->name = $name;
-        null !== $protocol_code && $obj->protocol_code = $protocol_code;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $first_port && $obj['first_port'] = $first_port;
+        null !== $last_port && $obj['last_port'] = $last_port;
+        null !== $name && $obj['name'] = $name;
+        null !== $protocol_code && $obj['protocol_code'] = $protocol_code;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withFirstPort(int $firstPort): self
     {
         $obj = clone $this;
-        $obj->first_port = $firstPort;
+        $obj['first_port'] = $firstPort;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withLastPort(int $lastPort): self
     {
         $obj = clone $this;
-        $obj->last_port = $lastPort;
+        $obj['last_port'] = $lastPort;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withProtocolCode(string $protocolCode): self
     {
         $obj = clone $this;
-        $obj->protocol_code = $protocolCode;
+        $obj['protocol_code'] = $protocolCode;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

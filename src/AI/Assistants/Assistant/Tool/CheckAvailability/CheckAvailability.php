@@ -58,8 +58,8 @@ final class CheckAvailability implements BaseModel
     {
         $obj = new self;
 
-        $obj->api_key_ref = $api_key_ref;
-        $obj->event_type_id = $event_type_id;
+        $obj['api_key_ref'] = $api_key_ref;
+        $obj['event_type_id'] = $event_type_id;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class CheckAvailability implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->api_key_ref = $apiKeyRef;
+        $obj['api_key_ref'] = $apiKeyRef;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class CheckAvailability implements BaseModel
     public function withEventTypeID(int $eventTypeID): self
     {
         $obj = clone $this;
-        $obj->event_type_id = $eventTypeID;
+        $obj['event_type_id'] = $eventTypeID;
 
         return $obj;
     }

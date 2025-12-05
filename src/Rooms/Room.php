@@ -7,6 +7,7 @@ namespace Telnyx\Rooms;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\RoomParticipant;
 
 /**
  * @phpstan-type RoomShape = array{
@@ -106,7 +107,16 @@ final class Room implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RoomSession> $sessions
+     * @param list<RoomSession|array{
+     *   id?: string|null,
+     *   active?: bool|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   ended_at?: \DateTimeInterface|null,
+     *   participants?: list<RoomParticipant>|null,
+     *   record_type?: string|null,
+     *   room_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $sessions
      */
     public static function with(
         ?string $id = null,
@@ -124,18 +134,18 @@ final class Room implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $active_session_id && $obj->active_session_id = $active_session_id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $enable_recording && $obj->enable_recording = $enable_recording;
-        null !== $max_participants && $obj->max_participants = $max_participants;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $sessions && $obj->sessions = $sessions;
-        null !== $unique_name && $obj->unique_name = $unique_name;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
+        null !== $id && $obj['id'] = $id;
+        null !== $active_session_id && $obj['active_session_id'] = $active_session_id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $enable_recording && $obj['enable_recording'] = $enable_recording;
+        null !== $max_participants && $obj['max_participants'] = $max_participants;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $sessions && $obj['sessions'] = $sessions;
+        null !== $unique_name && $obj['unique_name'] = $unique_name;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -146,7 +156,7 @@ final class Room implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -157,7 +167,7 @@ final class Room implements BaseModel
     public function withActiveSessionID(string $activeSessionID): self
     {
         $obj = clone $this;
-        $obj->active_session_id = $activeSessionID;
+        $obj['active_session_id'] = $activeSessionID;
 
         return $obj;
     }
@@ -168,7 +178,7 @@ final class Room implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -179,7 +189,7 @@ final class Room implements BaseModel
     public function withEnableRecording(bool $enableRecording): self
     {
         $obj = clone $this;
-        $obj->enable_recording = $enableRecording;
+        $obj['enable_recording'] = $enableRecording;
 
         return $obj;
     }
@@ -190,7 +200,7 @@ final class Room implements BaseModel
     public function withMaxParticipants(int $maxParticipants): self
     {
         $obj = clone $this;
-        $obj->max_participants = $maxParticipants;
+        $obj['max_participants'] = $maxParticipants;
 
         return $obj;
     }
@@ -198,18 +208,27 @@ final class Room implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
-     * @param list<RoomSession> $sessions
+     * @param list<RoomSession|array{
+     *   id?: string|null,
+     *   active?: bool|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   ended_at?: \DateTimeInterface|null,
+     *   participants?: list<RoomParticipant>|null,
+     *   record_type?: string|null,
+     *   room_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $sessions
      */
     public function withSessions(array $sessions): self
     {
         $obj = clone $this;
-        $obj->sessions = $sessions;
+        $obj['sessions'] = $sessions;
 
         return $obj;
     }
@@ -220,7 +239,7 @@ final class Room implements BaseModel
     public function withUniqueName(string $uniqueName): self
     {
         $obj = clone $this;
-        $obj->unique_name = $uniqueName;
+        $obj['unique_name'] = $uniqueName;
 
         return $obj;
     }
@@ -231,7 +250,7 @@ final class Room implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -243,7 +262,7 @@ final class Room implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
+        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -254,7 +273,7 @@ final class Room implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhook_event_url = $webhookEventURL;
+        $obj['webhook_event_url'] = $webhookEventURL;
 
         return $obj;
     }
@@ -265,7 +284,7 @@ final class Room implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
+        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

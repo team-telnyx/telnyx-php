@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Migrations\MigrationParams;
+use Telnyx\Storage\Migrations\MigrationParams\Status;
 
 /**
  * @phpstan-type ActionStopResponseShape = array{data?: MigrationParams|null}
@@ -33,20 +34,51 @@ final class ActionStopResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MigrationParams|array{
+     *   source_id: string,
+     *   target_bucket_name: string,
+     *   target_region: string,
+     *   id?: string|null,
+     *   bytes_migrated?: int|null,
+     *   bytes_to_migrate?: int|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   eta?: \DateTimeInterface|null,
+     *   last_copy?: \DateTimeInterface|null,
+     *   refresh?: bool|null,
+     *   speed?: int|null,
+     *   status?: value-of<Status>|null,
+     * } $data
      */
-    public static function with(?MigrationParams $data = null): self
+    public static function with(MigrationParams|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(MigrationParams $data): self
+    /**
+     * @param MigrationParams|array{
+     *   source_id: string,
+     *   target_bucket_name: string,
+     *   target_region: string,
+     *   id?: string|null,
+     *   bytes_migrated?: int|null,
+     *   bytes_to_migrate?: int|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   eta?: \DateTimeInterface|null,
+     *   last_copy?: \DateTimeInterface|null,
+     *   refresh?: bool|null,
+     *   speed?: int|null,
+     *   status?: value-of<Status>|null,
+     * } $data
+     */
+    public function withData(MigrationParams|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

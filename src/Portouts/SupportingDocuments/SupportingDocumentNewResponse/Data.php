@@ -118,13 +118,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->document_id = $document_id;
-        $obj->portout_id = $portout_id;
-        $obj->record_type = $record_type;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['document_id'] = $document_id;
+        $obj['portout_id'] = $portout_id;
+        $obj['record_type'] = $record_type;
         $obj['type'] = $type;
-        $obj->updated_at = $updated_at;
+        $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Data implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj->document_id = $documentID;
+        $obj['document_id'] = $documentID;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Data implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj->portout_id = $portoutID;
+        $obj['portout_id'] = $portoutID;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

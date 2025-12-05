@@ -15,7 +15,15 @@ use Telnyx\Queues\Calls\CallListParams\Page;
  *
  * @see Telnyx\Services\Queues\CallsService::list()
  *
- * @phpstan-type CallListParamsShape = array{page?: Page}
+ * @phpstan-type CallListParamsShape = array{
+ *   page?: Page|array{
+ *     after?: string|null,
+ *     before?: string|null,
+ *     limit?: int|null,
+ *     number?: int|null,
+ *     size?: int|null,
+ *   },
+ * }
  */
 final class CallListParams implements BaseModel
 {
@@ -38,23 +46,39 @@ final class CallListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Page|array{
+     *   after?: string|null,
+     *   before?: string|null,
+     *   limit?: int|null,
+     *   number?: int|null,
+     *   size?: int|null,
+     * } $page
      */
-    public static function with(?Page $page = null): self
+    public static function with(Page|array|null $page = null): self
     {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page && $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
+     *
+     * @param Page|array{
+     *   after?: string|null,
+     *   before?: string|null,
+     *   limit?: int|null,
+     *   number?: int|null,
+     *   size?: int|null,
+     * } $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

@@ -44,8 +44,8 @@ final class Meta implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $attempt && $obj->attempt = $attempt;
-        null !== $delivered_to && $obj->delivered_to = $delivered_to;
+        null !== $attempt && $obj['attempt'] = $attempt;
+        null !== $delivered_to && $obj['delivered_to'] = $delivered_to;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Meta implements BaseModel
     public function withAttempt(int $attempt): self
     {
         $obj = clone $this;
-        $obj->attempt = $attempt;
+        $obj['attempt'] = $attempt;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Meta implements BaseModel
     public function withDeliveredTo(string $deliveredTo): self
     {
         $obj = clone $this;
-        $obj->delivered_to = $deliveredTo;
+        $obj['delivered_to'] = $deliveredTo;
 
         return $obj;
     }

@@ -42,35 +42,69 @@ final class MobilePushCredentialListResponse implements BaseModel, ResponseConve
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PushCredential> $data
+     * @param list<PushCredential|array{
+     *   id: string,
+     *   alias: string,
+     *   certificate: string,
+     *   created_at: \DateTimeInterface,
+     *   private_key: string,
+     *   project_account_json_file: array<string,mixed>,
+     *   record_type: string,
+     *   type: string,
+     *   updated_at: \DateTimeInterface,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<PushCredential> $data
+     * @param list<PushCredential|array{
+     *   id: string,
+     *   alias: string,
+     *   certificate: string,
+     *   created_at: \DateTimeInterface,
+     *   private_key: string,
+     *   project_account_json_file: array<string,mixed>,
+     *   record_type: string,
+     *   type: string,
+     *   updated_at: \DateTimeInterface,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

@@ -152,20 +152,20 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
-        null !== $api_version && $obj->api_version = $api_version;
-        null !== $call_sid && $obj->call_sid = $call_sid;
-        null !== $call_sid_legacy && $obj->call_sid_legacy = $call_sid_legacy;
-        null !== $coaching && $obj->coaching = $coaching;
-        null !== $coaching_call_sid && $obj->coaching_call_sid = $coaching_call_sid;
-        null !== $coaching_call_sid_legacy && $obj->coaching_call_sid_legacy = $coaching_call_sid_legacy;
-        null !== $date_created && $obj->date_created = $date_created;
-        null !== $date_updated && $obj->date_updated = $date_updated;
-        null !== $end_conference_on_exit && $obj->end_conference_on_exit = $end_conference_on_exit;
-        null !== $hold && $obj->hold = $hold;
-        null !== $muted && $obj->muted = $muted;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
+        null !== $api_version && $obj['api_version'] = $api_version;
+        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $call_sid_legacy && $obj['call_sid_legacy'] = $call_sid_legacy;
+        null !== $coaching && $obj['coaching'] = $coaching;
+        null !== $coaching_call_sid && $obj['coaching_call_sid'] = $coaching_call_sid;
+        null !== $coaching_call_sid_legacy && $obj['coaching_call_sid_legacy'] = $coaching_call_sid_legacy;
+        null !== $date_created && $obj['date_created'] = $date_created;
+        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $end_conference_on_exit && $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        null !== $hold && $obj['hold'] = $hold;
+        null !== $muted && $obj['muted'] = $muted;
         null !== $status && $obj['status'] = $status;
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withAPIVersion(string $apiVersion): self
     {
         $obj = clone $this;
-        $obj->api_version = $apiVersion;
+        $obj['api_version'] = $apiVersion;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->call_sid = $callSid;
+        $obj['call_sid'] = $callSid;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withCallSidLegacy(string $callSidLegacy): self
     {
         $obj = clone $this;
-        $obj->call_sid_legacy = $callSidLegacy;
+        $obj['call_sid_legacy'] = $callSidLegacy;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withCoaching(bool $coaching): self
     {
         $obj = clone $this;
-        $obj->coaching = $coaching;
+        $obj['coaching'] = $coaching;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withCoachingCallSid(string $coachingCallSid): self
     {
         $obj = clone $this;
-        $obj->coaching_call_sid = $coachingCallSid;
+        $obj['coaching_call_sid'] = $coachingCallSid;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
         string $coachingCallSidLegacy
     ): self {
         $obj = clone $this;
-        $obj->coaching_call_sid_legacy = $coachingCallSidLegacy;
+        $obj['coaching_call_sid_legacy'] = $coachingCallSidLegacy;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->date_created = $dateCreated;
+        $obj['date_created'] = $dateCreated;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->date_updated = $dateUpdated;
+        $obj['date_updated'] = $dateUpdated;
 
         return $obj;
     }
@@ -276,7 +276,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->end_conference_on_exit = $endConferenceOnExit;
+        $obj['end_conference_on_exit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withHold(bool $hold): self
     {
         $obj = clone $this;
-        $obj->hold = $hold;
+        $obj['hold'] = $hold;
 
         return $obj;
     }
@@ -298,7 +298,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withMuted(bool $muted): self
     {
         $obj = clone $this;
-        $obj->muted = $muted;
+        $obj['muted'] = $muted;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class ParticipantGetResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

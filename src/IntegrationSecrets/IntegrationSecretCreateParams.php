@@ -96,12 +96,12 @@ final class IntegrationSecretCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->identifier = $identifier;
+        $obj['identifier'] = $identifier;
         $obj['type'] = $type;
 
-        null !== $token && $obj->token = $token;
-        null !== $password && $obj->password = $password;
-        null !== $username && $obj->username = $username;
+        null !== $token && $obj['token'] = $token;
+        null !== $password && $obj['password'] = $password;
+        null !== $username && $obj['username'] = $username;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class IntegrationSecretCreateParams implements BaseModel
     public function withIdentifier(string $identifier): self
     {
         $obj = clone $this;
-        $obj->identifier = $identifier;
+        $obj['identifier'] = $identifier;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class IntegrationSecretCreateParams implements BaseModel
     public function withToken(string $token): self
     {
         $obj = clone $this;
-        $obj->token = $token;
+        $obj['token'] = $token;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class IntegrationSecretCreateParams implements BaseModel
     public function withPassword(string $password): self
     {
         $obj = clone $this;
-        $obj->password = $password;
+        $obj['password'] = $password;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class IntegrationSecretCreateParams implements BaseModel
     public function withUsername(string $username): self
     {
         $obj = clone $this;
-        $obj->username = $username;
+        $obj['username'] = $username;
 
         return $obj;
     }

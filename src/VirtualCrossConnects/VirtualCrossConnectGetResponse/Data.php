@@ -231,6 +231,9 @@ final class Data implements BaseModel
      *
      * @param CloudProvider|value-of<CloudProvider> $cloud_provider
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     * @param Region|array{
+     *   code?: string|null, name?: string|null, record_type?: string|null
+     * } $region
      */
     public static function with(
         float $bgp_asn,
@@ -251,7 +254,7 @@ final class Data implements BaseModel
         ?bool $primary_enabled = null,
         ?bool $primary_routing_announcement = null,
         ?string $primary_telnyx_ip = null,
-        ?Region $region = null,
+        Region|array|null $region = null,
         ?string $secondary_bgp_key = null,
         ?string $secondary_cloud_account_id = null,
         ?string $secondary_cloud_ip = null,
@@ -261,32 +264,32 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bgp_asn = $bgp_asn;
+        $obj['bgp_asn'] = $bgp_asn;
         $obj['cloud_provider'] = $cloud_provider;
-        $obj->cloud_provider_region = $cloud_provider_region;
-        $obj->primary_cloud_account_id = $primary_cloud_account_id;
+        $obj['cloud_provider_region'] = $cloud_provider_region;
+        $obj['primary_cloud_account_id'] = $primary_cloud_account_id;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $name && $obj->name = $name;
-        null !== $network_id && $obj->network_id = $network_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $network_id && $obj['network_id'] = $network_id;
         null !== $status && $obj['status'] = $status;
-        null !== $region_code && $obj->region_code = $region_code;
-        null !== $bandwidth_mbps && $obj->bandwidth_mbps = $bandwidth_mbps;
-        null !== $primary_bgp_key && $obj->primary_bgp_key = $primary_bgp_key;
-        null !== $primary_cloud_ip && $obj->primary_cloud_ip = $primary_cloud_ip;
-        null !== $primary_enabled && $obj->primary_enabled = $primary_enabled;
-        null !== $primary_routing_announcement && $obj->primary_routing_announcement = $primary_routing_announcement;
-        null !== $primary_telnyx_ip && $obj->primary_telnyx_ip = $primary_telnyx_ip;
-        null !== $region && $obj->region = $region;
-        null !== $secondary_bgp_key && $obj->secondary_bgp_key = $secondary_bgp_key;
-        null !== $secondary_cloud_account_id && $obj->secondary_cloud_account_id = $secondary_cloud_account_id;
-        null !== $secondary_cloud_ip && $obj->secondary_cloud_ip = $secondary_cloud_ip;
-        null !== $secondary_enabled && $obj->secondary_enabled = $secondary_enabled;
-        null !== $secondary_routing_announcement && $obj->secondary_routing_announcement = $secondary_routing_announcement;
-        null !== $secondary_telnyx_ip && $obj->secondary_telnyx_ip = $secondary_telnyx_ip;
+        null !== $region_code && $obj['region_code'] = $region_code;
+        null !== $bandwidth_mbps && $obj['bandwidth_mbps'] = $bandwidth_mbps;
+        null !== $primary_bgp_key && $obj['primary_bgp_key'] = $primary_bgp_key;
+        null !== $primary_cloud_ip && $obj['primary_cloud_ip'] = $primary_cloud_ip;
+        null !== $primary_enabled && $obj['primary_enabled'] = $primary_enabled;
+        null !== $primary_routing_announcement && $obj['primary_routing_announcement'] = $primary_routing_announcement;
+        null !== $primary_telnyx_ip && $obj['primary_telnyx_ip'] = $primary_telnyx_ip;
+        null !== $region && $obj['region'] = $region;
+        null !== $secondary_bgp_key && $obj['secondary_bgp_key'] = $secondary_bgp_key;
+        null !== $secondary_cloud_account_id && $obj['secondary_cloud_account_id'] = $secondary_cloud_account_id;
+        null !== $secondary_cloud_ip && $obj['secondary_cloud_ip'] = $secondary_cloud_ip;
+        null !== $secondary_enabled && $obj['secondary_enabled'] = $secondary_enabled;
+        null !== $secondary_routing_announcement && $obj['secondary_routing_announcement'] = $secondary_routing_announcement;
+        null !== $secondary_telnyx_ip && $obj['secondary_telnyx_ip'] = $secondary_telnyx_ip;
 
         return $obj;
     }
@@ -297,7 +300,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -308,7 +311,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -319,7 +322,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -330,7 +333,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -341,7 +344,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -352,7 +355,7 @@ final class Data implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->network_id = $networkID;
+        $obj['network_id'] = $networkID;
 
         return $obj;
     }
@@ -376,7 +379,7 @@ final class Data implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->region_code = $regionCode;
+        $obj['region_code'] = $regionCode;
 
         return $obj;
     }
@@ -387,7 +390,7 @@ final class Data implements BaseModel
     public function withBgpAsn(float $bgpAsn): self
     {
         $obj = clone $this;
-        $obj->bgp_asn = $bgpAsn;
+        $obj['bgp_asn'] = $bgpAsn;
 
         return $obj;
     }
@@ -411,7 +414,7 @@ final class Data implements BaseModel
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
         $obj = clone $this;
-        $obj->cloud_provider_region = $cloudProviderRegion;
+        $obj['cloud_provider_region'] = $cloudProviderRegion;
 
         return $obj;
     }
@@ -423,7 +426,7 @@ final class Data implements BaseModel
         string $primaryCloudAccountID
     ): self {
         $obj = clone $this;
-        $obj->primary_cloud_account_id = $primaryCloudAccountID;
+        $obj['primary_cloud_account_id'] = $primaryCloudAccountID;
 
         return $obj;
     }
@@ -434,7 +437,7 @@ final class Data implements BaseModel
     public function withBandwidthMbps(float $bandwidthMbps): self
     {
         $obj = clone $this;
-        $obj->bandwidth_mbps = $bandwidthMbps;
+        $obj['bandwidth_mbps'] = $bandwidthMbps;
 
         return $obj;
     }
@@ -445,7 +448,7 @@ final class Data implements BaseModel
     public function withPrimaryBgpKey(string $primaryBgpKey): self
     {
         $obj = clone $this;
-        $obj->primary_bgp_key = $primaryBgpKey;
+        $obj['primary_bgp_key'] = $primaryBgpKey;
 
         return $obj;
     }
@@ -456,7 +459,7 @@ final class Data implements BaseModel
     public function withPrimaryCloudIP(string $primaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->primary_cloud_ip = $primaryCloudIP;
+        $obj['primary_cloud_ip'] = $primaryCloudIP;
 
         return $obj;
     }
@@ -467,7 +470,7 @@ final class Data implements BaseModel
     public function withPrimaryEnabled(bool $primaryEnabled): self
     {
         $obj = clone $this;
-        $obj->primary_enabled = $primaryEnabled;
+        $obj['primary_enabled'] = $primaryEnabled;
 
         return $obj;
     }
@@ -479,7 +482,7 @@ final class Data implements BaseModel
         bool $primaryRoutingAnnouncement
     ): self {
         $obj = clone $this;
-        $obj->primary_routing_announcement = $primaryRoutingAnnouncement;
+        $obj['primary_routing_announcement'] = $primaryRoutingAnnouncement;
 
         return $obj;
     }
@@ -490,15 +493,20 @@ final class Data implements BaseModel
     public function withPrimaryTelnyxIP(string $primaryTelnyxIP): self
     {
         $obj = clone $this;
-        $obj->primary_telnyx_ip = $primaryTelnyxIP;
+        $obj['primary_telnyx_ip'] = $primaryTelnyxIP;
 
         return $obj;
     }
 
-    public function withRegion(Region $region): self
+    /**
+     * @param Region|array{
+     *   code?: string|null, name?: string|null, record_type?: string|null
+     * } $region
+     */
+    public function withRegion(Region|array $region): self
     {
         $obj = clone $this;
-        $obj->region = $region;
+        $obj['region'] = $region;
 
         return $obj;
     }
@@ -509,7 +517,7 @@ final class Data implements BaseModel
     public function withSecondaryBgpKey(string $secondaryBgpKey): self
     {
         $obj = clone $this;
-        $obj->secondary_bgp_key = $secondaryBgpKey;
+        $obj['secondary_bgp_key'] = $secondaryBgpKey;
 
         return $obj;
     }
@@ -521,7 +529,7 @@ final class Data implements BaseModel
         string $secondaryCloudAccountID
     ): self {
         $obj = clone $this;
-        $obj->secondary_cloud_account_id = $secondaryCloudAccountID;
+        $obj['secondary_cloud_account_id'] = $secondaryCloudAccountID;
 
         return $obj;
     }
@@ -532,7 +540,7 @@ final class Data implements BaseModel
     public function withSecondaryCloudIP(string $secondaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->secondary_cloud_ip = $secondaryCloudIP;
+        $obj['secondary_cloud_ip'] = $secondaryCloudIP;
 
         return $obj;
     }
@@ -543,7 +551,7 @@ final class Data implements BaseModel
     public function withSecondaryEnabled(bool $secondaryEnabled): self
     {
         $obj = clone $this;
-        $obj->secondary_enabled = $secondaryEnabled;
+        $obj['secondary_enabled'] = $secondaryEnabled;
 
         return $obj;
     }
@@ -555,7 +563,7 @@ final class Data implements BaseModel
         bool $secondaryRoutingAnnouncement
     ): self {
         $obj = clone $this;
-        $obj->secondary_routing_announcement = $secondaryRoutingAnnouncement;
+        $obj['secondary_routing_announcement'] = $secondaryRoutingAnnouncement;
 
         return $obj;
     }
@@ -566,7 +574,7 @@ final class Data implements BaseModel
     public function withSecondaryTelnyxIP(string $secondaryTelnyxIP): self
     {
         $obj = clone $this;
-        $obj->secondary_telnyx_ip = $secondaryTelnyxIP;
+        $obj['secondary_telnyx_ip'] = $secondaryTelnyxIP;
 
         return $obj;
     }

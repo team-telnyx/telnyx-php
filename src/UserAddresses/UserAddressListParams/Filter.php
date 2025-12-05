@@ -44,38 +44,49 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CustomerReference|array{
+     *   contains?: string|null, eq?: string|null
+     * } $customer_reference
+     * @param StreetAddress|array{contains?: string|null} $street_address
      */
     public static function with(
-        ?CustomerReference $customer_reference = null,
-        ?StreetAddress $street_address = null,
+        CustomerReference|array|null $customer_reference = null,
+        StreetAddress|array|null $street_address = null,
     ): self {
         $obj = new self;
 
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $street_address && $obj->street_address = $street_address;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $street_address && $obj['street_address'] = $street_address;
 
         return $obj;
     }
 
     /**
      * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
+     *
+     * @param CustomerReference|array{
+     *   contains?: string|null, eq?: string|null
+     * } $customerReference
      */
     public function withCustomerReference(
-        CustomerReference $customerReference
+        CustomerReference|array $customerReference
     ): self {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
+     *
+     * @param StreetAddress|array{contains?: string|null} $streetAddress
      */
-    public function withStreetAddress(StreetAddress $streetAddress): self
+    public function withStreetAddress(StreetAddress|array $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }

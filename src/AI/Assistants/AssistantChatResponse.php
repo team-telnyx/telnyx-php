@@ -54,7 +54,7 @@ final class AssistantChatResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class AssistantChatResponse implements BaseModel, ResponseConverter
     public function withContent(string $content): self
     {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }

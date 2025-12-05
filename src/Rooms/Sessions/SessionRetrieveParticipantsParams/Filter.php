@@ -50,19 +50,35 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DateJoinedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_joined_at
+     * @param DateLeftAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_left_at
+     * @param DateUpdatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_updated_at
      */
     public static function with(
         ?string $context = null,
-        ?DateJoinedAt $date_joined_at = null,
-        ?DateLeftAt $date_left_at = null,
-        ?DateUpdatedAt $date_updated_at = null,
+        DateJoinedAt|array|null $date_joined_at = null,
+        DateLeftAt|array|null $date_left_at = null,
+        DateUpdatedAt|array|null $date_updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $context && $obj->context = $context;
-        null !== $date_joined_at && $obj->date_joined_at = $date_joined_at;
-        null !== $date_left_at && $obj->date_left_at = $date_left_at;
-        null !== $date_updated_at && $obj->date_updated_at = $date_updated_at;
+        null !== $context && $obj['context'] = $context;
+        null !== $date_joined_at && $obj['date_joined_at'] = $date_joined_at;
+        null !== $date_left_at && $obj['date_left_at'] = $date_left_at;
+        null !== $date_updated_at && $obj['date_updated_at'] = $date_updated_at;
 
         return $obj;
     }
@@ -73,31 +89,52 @@ final class Filter implements BaseModel
     public function withContext(string $context): self
     {
         $obj = clone $this;
-        $obj->context = $context;
+        $obj['context'] = $context;
 
         return $obj;
     }
 
-    public function withDateJoinedAt(DateJoinedAt $dateJoinedAt): self
+    /**
+     * @param DateJoinedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateJoinedAt
+     */
+    public function withDateJoinedAt(DateJoinedAt|array $dateJoinedAt): self
     {
         $obj = clone $this;
-        $obj->date_joined_at = $dateJoinedAt;
+        $obj['date_joined_at'] = $dateJoinedAt;
 
         return $obj;
     }
 
-    public function withDateLeftAt(DateLeftAt $dateLeftAt): self
+    /**
+     * @param DateLeftAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateLeftAt
+     */
+    public function withDateLeftAt(DateLeftAt|array $dateLeftAt): self
     {
         $obj = clone $this;
-        $obj->date_left_at = $dateLeftAt;
+        $obj['date_left_at'] = $dateLeftAt;
 
         return $obj;
     }
 
-    public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
+    /**
+     * @param DateUpdatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateUpdatedAt
+     */
+    public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj->date_updated_at = $dateUpdatedAt;
+        $obj['date_updated_at'] = $dateUpdatedAt;
 
         return $obj;
     }

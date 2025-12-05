@@ -77,11 +77,11 @@ final class Target implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
-        $obj->sip_address = $sip_address;
+        $obj['name'] = $name;
+        $obj['sip_address'] = $sip_address;
 
-        null !== $sip_auth_password && $obj->sip_auth_password = $sip_auth_password;
-        null !== $sip_auth_username && $obj->sip_auth_username = $sip_auth_username;
+        null !== $sip_auth_password && $obj['sip_auth_password'] = $sip_auth_password;
+        null !== $sip_auth_username && $obj['sip_auth_username'] = $sip_auth_username;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Target implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Target implements BaseModel
     public function withSipAddress(string $sipAddress): self
     {
         $obj = clone $this;
-        $obj->sip_address = $sipAddress;
+        $obj['sip_address'] = $sipAddress;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Target implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj->sip_auth_password = $sipAuthPassword;
+        $obj['sip_auth_password'] = $sipAuthPassword;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Target implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj->sip_auth_username = $sipAuthUsername;
+        $obj['sip_auth_username'] = $sipAuthUsername;
 
         return $obj;
     }

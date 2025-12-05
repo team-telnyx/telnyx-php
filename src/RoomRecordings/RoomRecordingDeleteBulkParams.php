@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter;
+use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateEndedAt;
+use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateStartedAt;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page;
 
 /**
@@ -17,7 +19,17 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page;
  * @see Telnyx\Services\RoomRecordingsService::deleteBulk()
  *
  * @phpstan-type RoomRecordingDeleteBulkParamsShape = array{
- *   filter?: Filter, page?: Page
+ *   filter?: Filter|array{
+ *     date_ended_at?: DateEndedAt|null,
+ *     date_started_at?: DateStartedAt|null,
+ *     duration_secs?: int|null,
+ *     participant_id?: string|null,
+ *     room_id?: string|null,
+ *     session_id?: string|null,
+ *     status?: string|null,
+ *     type?: string|null,
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
 final class RoomRecordingDeleteBulkParams implements BaseModel
@@ -47,35 +59,62 @@ final class RoomRecordingDeleteBulkParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   date_ended_at?: DateEndedAt|null,
+     *   date_started_at?: DateStartedAt|null,
+     *   duration_secs?: int|null,
+     *   participant_id?: string|null,
+     *   room_id?: string|null,
+     *   session_id?: string|null,
+     *   status?: string|null,
+     *   type?: string|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
+    public static function with(
+        Filter|array|null $filter = null,
+        Page|array|null $page = null
+    ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs].
+     *
+     * @param Filter|array{
+     *   date_ended_at?: DateEndedAt|null,
+     *   date_started_at?: DateStartedAt|null,
+     *   duration_secs?: int|null,
+     *   participant_id?: string|null,
+     *   room_id?: string|null,
+     *   session_id?: string|null,
+     *   status?: string|null,
+     *   type?: string|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

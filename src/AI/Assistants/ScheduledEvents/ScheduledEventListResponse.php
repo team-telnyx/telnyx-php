@@ -56,33 +56,97 @@ final class ScheduledEventListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data
+     * @param list<ScheduledPhoneCallEventResponse|array{
+     *   assistant_id: string,
+     *   scheduled_at_fixed_datetime: \DateTimeInterface,
+     *   telnyx_agent_target: string,
+     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
+     *   telnyx_end_user_target: string,
+     *   conversation_id?: string|null,
+     *   conversation_metadata?: array<string,string|int|bool>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   errors?: list<string>|null,
+     *   retry_attempts?: int|null,
+     *   retry_count?: int|null,
+     *   scheduled_event_id?: string|null,
+     *   status?: value-of<EventStatus>|null,
+     * }|ScheduledSMSEventResponse|array{
+     *   assistant_id: string,
+     *   scheduled_at_fixed_datetime: \DateTimeInterface,
+     *   telnyx_agent_target: string,
+     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
+     *   telnyx_end_user_target: string,
+     *   text: string,
+     *   conversation_id?: string|null,
+     *   conversation_metadata?: array<string,string|int|bool>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   errors?: list<string>|null,
+     *   retry_count?: int|null,
+     *   scheduled_event_id?: string|null,
+     *   status?: value-of<EventStatus>|null,
+     * }> $data
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data
+     * @param list<ScheduledPhoneCallEventResponse|array{
+     *   assistant_id: string,
+     *   scheduled_at_fixed_datetime: \DateTimeInterface,
+     *   telnyx_agent_target: string,
+     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
+     *   telnyx_end_user_target: string,
+     *   conversation_id?: string|null,
+     *   conversation_metadata?: array<string,string|int|bool>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   errors?: list<string>|null,
+     *   retry_attempts?: int|null,
+     *   retry_count?: int|null,
+     *   scheduled_event_id?: string|null,
+     *   status?: value-of<EventStatus>|null,
+     * }|ScheduledSMSEventResponse|array{
+     *   assistant_id: string,
+     *   scheduled_at_fixed_datetime: \DateTimeInterface,
+     *   telnyx_agent_target: string,
+     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
+     *   telnyx_end_user_target: string,
+     *   text: string,
+     *   conversation_id?: string|null,
+     *   conversation_metadata?: array<string,string|int|bool>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   errors?: list<string>|null,
+     *   retry_count?: int|null,
+     *   scheduled_event_id?: string|null,
+     *   status?: value-of<EventStatus>|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

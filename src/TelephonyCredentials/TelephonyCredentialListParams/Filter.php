@@ -73,11 +73,11 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $resource_id && $obj->resource_id = $resource_id;
-        null !== $sip_username && $obj->sip_username = $sip_username;
-        null !== $status && $obj->status = $status;
-        null !== $tag && $obj->tag = $tag;
+        null !== $name && $obj['name'] = $name;
+        null !== $resource_id && $obj['resource_id'] = $resource_id;
+        null !== $sip_username && $obj['sip_username'] = $sip_username;
+        null !== $status && $obj['status'] = $status;
+        null !== $tag && $obj['tag'] = $tag;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Filter implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Filter implements BaseModel
     public function withResourceID(string $resourceID): self
     {
         $obj = clone $this;
-        $obj->resource_id = $resourceID;
+        $obj['resource_id'] = $resourceID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Filter implements BaseModel
     public function withSipUsername(string $sipUsername): self
     {
         $obj = clone $this;
-        $obj->sip_username = $sipUsername;
+        $obj['sip_username'] = $sipUsername;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Filter implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Filter implements BaseModel
     public function withTag(string $tag): self
     {
         $obj = clone $this;
-        $obj->tag = $tag;
+        $obj['tag'] = $tag;
 
         return $obj;
     }

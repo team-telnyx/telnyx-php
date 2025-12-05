@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings;
+use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -90,6 +91,16 @@ final class AuthenticationProvider implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Settings|array{
+     *   assertion_consumer_service_url?: string|null,
+     *   idp_cert_fingerprint?: string|null,
+     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idp_entity_id?: string|null,
+     *   idp_sso_target_url?: string|null,
+     *   name_identifier_format?: string|null,
+     *   service_provider_entity_id?: string|null,
+     * } $settings
      */
     public static function with(
         ?string $id = null,
@@ -98,21 +109,21 @@ final class AuthenticationProvider implements BaseModel
         ?string $name = null,
         ?string $organization_id = null,
         ?string $record_type = null,
-        ?Settings $settings = null,
+        Settings|array|null $settings = null,
         ?string $short_name = null,
         ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $active && $obj->active = $active;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $name && $obj->name = $name;
-        null !== $organization_id && $obj->organization_id = $organization_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $settings && $obj->settings = $settings;
-        null !== $short_name && $obj->short_name = $short_name;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $active && $obj['active'] = $active;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $organization_id && $obj['organization_id'] = $organization_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $settings && $obj['settings'] = $settings;
+        null !== $short_name && $obj['short_name'] = $short_name;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -123,7 +134,7 @@ final class AuthenticationProvider implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -134,7 +145,7 @@ final class AuthenticationProvider implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -145,7 +156,7 @@ final class AuthenticationProvider implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -156,7 +167,7 @@ final class AuthenticationProvider implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -167,7 +178,7 @@ final class AuthenticationProvider implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organization_id = $organizationID;
+        $obj['organization_id'] = $organizationID;
 
         return $obj;
     }
@@ -178,19 +189,29 @@ final class AuthenticationProvider implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
      * The settings associated with the authentication provider.
+     *
+     * @param Settings|array{
+     *   assertion_consumer_service_url?: string|null,
+     *   idp_cert_fingerprint?: string|null,
+     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idp_entity_id?: string|null,
+     *   idp_sso_target_url?: string|null,
+     *   name_identifier_format?: string|null,
+     *   service_provider_entity_id?: string|null,
+     * } $settings
      */
     public function withSettings(
-        Settings $settings
+        Settings|array $settings,
     ): self {
         $obj = clone $this;
-        $obj->settings = $settings;
+        $obj['settings'] = $settings;
 
         return $obj;
     }
@@ -201,7 +222,7 @@ final class AuthenticationProvider implements BaseModel
     public function withShortName(string $shortName): self
     {
         $obj = clone $this;
-        $obj->short_name = $shortName;
+        $obj['short_name'] = $shortName;
 
         return $obj;
     }
@@ -212,7 +233,7 @@ final class AuthenticationProvider implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

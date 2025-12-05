@@ -11,6 +11,7 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\RequirementsStatus;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\Status;
 use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
+use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
 
 /**
  * @phpstan-type NumberOrderPhoneNumberShape = array{
@@ -112,7 +113,12 @@ final class NumberOrderPhoneNumber implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
-     * @param list<SubNumberOrderRegulatoryRequirementWithValue> $regulatory_requirements
+     * @param list<SubNumberOrderRegulatoryRequirementWithValue|array{
+     *   field_type?: value-of<FieldType>|null,
+     *   field_value?: string|null,
+     *   record_type?: string|null,
+     *   requirement_id?: string|null,
+     * }> $regulatory_requirements
      * @param RequirementsStatus|value-of<RequirementsStatus> $requirements_status
      * @param Status|value-of<Status> $status
      */
@@ -135,21 +141,21 @@ final class NumberOrderPhoneNumber implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $bundle_id && $obj->bundle_id = $bundle_id;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $deadline && $obj->deadline = $deadline;
-        null !== $is_block_number && $obj->is_block_number = $is_block_number;
-        null !== $locality && $obj->locality = $locality;
-        null !== $order_request_id && $obj->order_request_id = $order_request_id;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $id && $obj['id'] = $id;
+        null !== $bundle_id && $obj['bundle_id'] = $bundle_id;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $deadline && $obj['deadline'] = $deadline;
+        null !== $is_block_number && $obj['is_block_number'] = $is_block_number;
+        null !== $locality && $obj['locality'] = $locality;
+        null !== $order_request_id && $obj['order_request_id'] = $order_request_id;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
-        null !== $requirements_met && $obj->requirements_met = $requirements_met;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $requirements_met && $obj['requirements_met'] = $requirements_met;
         null !== $requirements_status && $obj['requirements_status'] = $requirements_status;
         null !== $status && $obj['status'] = $status;
-        null !== $sub_number_order_id && $obj->sub_number_order_id = $sub_number_order_id;
+        null !== $sub_number_order_id && $obj['sub_number_order_id'] = $sub_number_order_id;
 
         return $obj;
     }
@@ -157,7 +163,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -165,7 +171,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withBundleID(string $bundleID): self
     {
         $obj = clone $this;
-        $obj->bundle_id = $bundleID;
+        $obj['bundle_id'] = $bundleID;
 
         return $obj;
     }
@@ -173,7 +179,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -181,7 +187,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withDeadline(\DateTimeInterface $deadline): self
     {
         $obj = clone $this;
-        $obj->deadline = $deadline;
+        $obj['deadline'] = $deadline;
 
         return $obj;
     }
@@ -189,7 +195,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withIsBlockNumber(bool $isBlockNumber): self
     {
         $obj = clone $this;
-        $obj->is_block_number = $isBlockNumber;
+        $obj['is_block_number'] = $isBlockNumber;
 
         return $obj;
     }
@@ -197,7 +203,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withLocality(string $locality): self
     {
         $obj = clone $this;
-        $obj->locality = $locality;
+        $obj['locality'] = $locality;
 
         return $obj;
     }
@@ -205,7 +211,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->order_request_id = $orderRequestID;
+        $obj['order_request_id'] = $orderRequestID;
 
         return $obj;
     }
@@ -213,7 +219,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -233,19 +239,24 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
-     * @param list<SubNumberOrderRegulatoryRequirementWithValue> $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirementWithValue|array{
+     *   field_type?: value-of<FieldType>|null,
+     *   field_value?: string|null,
+     *   record_type?: string|null,
+     *   requirement_id?: string|null,
+     * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatory_requirements = $regulatoryRequirements;
+        $obj['regulatory_requirements'] = $regulatoryRequirements;
 
         return $obj;
     }
@@ -256,7 +267,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withRequirementsMet(bool $requirementsMet): self
     {
         $obj = clone $this;
-        $obj->requirements_met = $requirementsMet;
+        $obj['requirements_met'] = $requirementsMet;
 
         return $obj;
     }
@@ -291,7 +302,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withSubNumberOrderID(string $subNumberOrderID): self
     {
         $obj = clone $this;
-        $obj->sub_number_order_id = $subNumberOrderID;
+        $obj['sub_number_order_id'] = $subNumberOrderID;
 
         return $obj;
     }

@@ -46,8 +46,8 @@ final class Source implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $parameter && $obj->parameter = $parameter;
-        null !== $pointer && $obj->pointer = $pointer;
+        null !== $parameter && $obj['parameter'] = $parameter;
+        null !== $pointer && $obj['pointer'] = $pointer;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Source implements BaseModel
     public function withParameter(string $parameter): self
     {
         $obj = clone $this;
-        $obj->parameter = $parameter;
+        $obj['parameter'] = $parameter;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Source implements BaseModel
     public function withPointer(string $pointer): self
     {
         $obj = clone $this;
-        $obj->pointer = $pointer;
+        $obj['pointer'] = $pointer;
 
         return $obj;
     }

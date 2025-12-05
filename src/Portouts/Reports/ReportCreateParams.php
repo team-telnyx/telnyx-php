@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
 use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
 
 /**
@@ -16,7 +17,8 @@ use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
  * @see Telnyx\Services\Portouts\ReportsService::create()
  *
  * @phpstan-type ReportCreateParamsShape = array{
- *   params: ExportPortoutsCsvReport, report_type: ReportType|value-of<ReportType>
+ *   params: ExportPortoutsCsvReport|array{filters: Filters},
+ *   report_type: ReportType|value-of<ReportType>,
  * }
  */
 final class ReportCreateParams implements BaseModel
@@ -63,15 +65,16 @@ final class ReportCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
      * @param ReportType|value-of<ReportType> $report_type
      */
     public static function with(
-        ExportPortoutsCsvReport $params,
+        ExportPortoutsCsvReport|array $params,
         ReportType|string $report_type
     ): self {
         $obj = new self;
 
-        $obj->params = $params;
+        $obj['params'] = $params;
         $obj['report_type'] = $report_type;
 
         return $obj;
@@ -79,11 +82,13 @@ final class ReportCreateParams implements BaseModel
 
     /**
      * The parameters for generating a port-outs CSV report.
+     *
+     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
      */
-    public function withParams(ExportPortoutsCsvReport $params): self
+    public function withParams(ExportPortoutsCsvReport|array $params): self
     {
         $obj = clone $this;
-        $obj->params = $params;
+        $obj['params'] = $params;
 
         return $obj;
     }

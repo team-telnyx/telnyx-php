@@ -88,11 +88,11 @@ final class ConferenceUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
+        $obj['account_sid'] = $account_sid;
 
         null !== $AnnounceMethod && $obj['AnnounceMethod'] = $AnnounceMethod;
-        null !== $AnnounceUrl && $obj->AnnounceUrl = $AnnounceUrl;
-        null !== $Status && $obj->Status = $Status;
+        null !== $AnnounceUrl && $obj['AnnounceUrl'] = $AnnounceUrl;
+        null !== $Status && $obj['Status'] = $Status;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class ConferenceUpdateParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class ConferenceUpdateParams implements BaseModel
     public function withAnnounceURL(string $announceURL): self
     {
         $obj = clone $this;
-        $obj->AnnounceUrl = $announceURL;
+        $obj['AnnounceUrl'] = $announceURL;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class ConferenceUpdateParams implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->Status = $status;
+        $obj['Status'] = $status;
 
         return $obj;
     }

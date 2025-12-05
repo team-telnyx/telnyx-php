@@ -8,6 +8,8 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Address;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
 /**
@@ -87,6 +89,12 @@ final class CustomerServiceRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Result|array{
+     *   address?: Address|null,
+     *   admin?: Admin|null,
+     *   associated_phone_numbers?: list<string>|null,
+     *   carrier_name?: string|null,
+     * }|null $result
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -95,20 +103,20 @@ final class CustomerServiceRecord implements BaseModel
         ?string $error_message = null,
         ?string $phone_number = null,
         ?string $record_type = null,
-        ?Result $result = null,
+        Result|array|null $result = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $error_message && $obj->error_message = $error_message;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $result && $obj->result = $result;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $error_message && $obj['error_message'] = $error_message;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $result && $obj['result'] = $result;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -119,7 +127,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -130,7 +138,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -141,7 +149,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withErrorMessage(?string $errorMessage): self
     {
         $obj = clone $this;
-        $obj->error_message = $errorMessage;
+        $obj['error_message'] = $errorMessage;
 
         return $obj;
     }
@@ -152,7 +160,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -163,18 +171,25 @@ final class CustomerServiceRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
+     *
+     * @param Result|array{
+     *   address?: Address|null,
+     *   admin?: Admin|null,
+     *   associated_phone_numbers?: list<string>|null,
+     *   carrier_name?: string|null,
+     * }|null $result
      */
-    public function withResult(?Result $result): self
+    public function withResult(Result|array|null $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }
@@ -198,7 +213,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

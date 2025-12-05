@@ -42,8 +42,8 @@ final class Health implements BaseModel
     {
         $obj = new self;
 
-        null !== $fail && $obj->fail = $fail;
-        null !== $pass && $obj->pass = $pass;
+        null !== $fail && $obj['fail'] = $fail;
+        null !== $pass && $obj['pass'] = $pass;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class Health implements BaseModel
     public function withFail(float $fail): self
     {
         $obj = clone $this;
-        $obj->fail = $fail;
+        $obj['fail'] = $fail;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class Health implements BaseModel
     public function withPass(float $pass): self
     {
         $obj = clone $this;
-        $obj->pass = $pass;
+        $obj['pass'] = $pass;
 
         return $obj;
     }

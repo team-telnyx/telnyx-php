@@ -17,7 +17,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\BillingBundlesService::list()
  *
  * @phpstan-type BillingBundleListParamsShape = array{
- *   filter?: Filter, page?: Page, authorization_bearer?: string
+ *   filter?: Filter|array{
+ *     country_iso?: list<string>|null, resource?: list<string>|null
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   authorization_bearer?: string,
  * }
  */
 final class BillingBundleListParams implements BaseModel
@@ -53,39 +57,50 @@ final class BillingBundleListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   country_iso?: list<string>|null, resource?: list<string>|null
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
         ?string $authorization_bearer = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
-        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
+        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
+     *
+     * @param Filter|array{
+     *   country_iso?: list<string>|null, resource?: list<string>|null
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -96,7 +111,7 @@ final class BillingBundleListParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorization_bearer = $authorizationBearer;
+        $obj['authorization_bearer'] = $authorizationBearer;
 
         return $obj;
     }

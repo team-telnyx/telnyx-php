@@ -62,8 +62,8 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->end_time = $end_time;
-        $obj->start_time = $start_time;
+        $obj['end_time'] = $end_time;
+        $obj['start_time'] = $start_time;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Filter implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Filter implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }

@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 
 /**
  * @phpstan-type VerifiedNumberDataWrapperShape = array{data?: VerifiedNumber|null}
@@ -32,20 +33,33 @@ final class VerifiedNumberDataWrapper implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param VerifiedNumber|array{
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   verified_at?: string|null,
+     * } $data
      */
-    public static function with(?VerifiedNumber $data = null): self
+    public static function with(VerifiedNumber|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(VerifiedNumber $data): self
+    /**
+     * @param VerifiedNumber|array{
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   verified_at?: string|null,
+     * } $data
+     */
+    public function withData(VerifiedNumber|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

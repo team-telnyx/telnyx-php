@@ -63,10 +63,10 @@ final class Total implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $bytes_received && $obj->bytes_received = $bytes_received;
-        null !== $bytes_sent && $obj->bytes_sent = $bytes_sent;
-        null !== $ops && $obj->ops = $ops;
-        null !== $successful_ops && $obj->successful_ops = $successful_ops;
+        null !== $bytes_received && $obj['bytes_received'] = $bytes_received;
+        null !== $bytes_sent && $obj['bytes_sent'] = $bytes_sent;
+        null !== $ops && $obj['ops'] = $ops;
+        null !== $successful_ops && $obj['successful_ops'] = $successful_ops;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Total implements BaseModel
     public function withBytesReceived(int $bytesReceived): self
     {
         $obj = clone $this;
-        $obj->bytes_received = $bytesReceived;
+        $obj['bytes_received'] = $bytesReceived;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Total implements BaseModel
     public function withBytesSent(int $bytesSent): self
     {
         $obj = clone $this;
-        $obj->bytes_sent = $bytesSent;
+        $obj['bytes_sent'] = $bytesSent;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Total implements BaseModel
     public function withOps(int $ops): self
     {
         $obj = clone $this;
-        $obj->ops = $ops;
+        $obj['ops'] = $ops;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Total implements BaseModel
     public function withSuccessfulOps(int $successfulOps): self
     {
         $obj = clone $this;
-        $obj->successful_ops = $successfulOps;
+        $obj['successful_ops'] = $successfulOps;
 
         return $obj;
     }

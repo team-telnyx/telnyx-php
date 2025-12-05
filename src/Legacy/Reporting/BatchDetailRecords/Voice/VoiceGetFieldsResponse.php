@@ -82,10 +82,10 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $Billing && $obj->Billing = $Billing;
-        null !== $Interaction_Data && $obj->Interaction_Data = $Interaction_Data;
-        null !== $Number_Information && $obj->Number_Information = $Number_Information;
-        null !== $Telephony_Data && $obj->Telephony_Data = $Telephony_Data;
+        null !== $Billing && $obj['Billing'] = $Billing;
+        null !== $Interaction_Data && $obj['Interaction_Data'] = $Interaction_Data;
+        null !== $Number_Information && $obj['Number_Information'] = $Number_Information;
+        null !== $Telephony_Data && $obj['Telephony_Data'] = $Telephony_Data;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withBilling(array $billing): self
     {
         $obj = clone $this;
-        $obj->Billing = $billing;
+        $obj['Billing'] = $billing;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withInteractionData(array $interactionData): self
     {
         $obj = clone $this;
-        $obj->Interaction_Data = $interactionData;
+        $obj['Interaction_Data'] = $interactionData;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withNumberInformation(array $numberInformation): self
     {
         $obj = clone $this;
-        $obj->Number_Information = $numberInformation;
+        $obj['Number_Information'] = $numberInformation;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withTelephonyData(array $telephonyData): self
     {
         $obj = clone $this;
-        $obj->Telephony_Data = $telephonyData;
+        $obj['Telephony_Data'] = $telephonyData;
 
         return $obj;
     }

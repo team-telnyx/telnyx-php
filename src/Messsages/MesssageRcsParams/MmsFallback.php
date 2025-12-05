@@ -67,10 +67,10 @@ final class MmsFallback implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $from && $obj->from = $from;
-        null !== $media_urls && $obj->media_urls = $media_urls;
-        null !== $subject && $obj->subject = $subject;
-        null !== $text && $obj->text = $text;
+        null !== $from && $obj['from'] = $from;
+        null !== $media_urls && $obj['media_urls'] = $media_urls;
+        null !== $subject && $obj['subject'] = $subject;
+        null !== $text && $obj['text'] = $text;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class MmsFallback implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class MmsFallback implements BaseModel
     public function withMediaURLs(array $mediaURLs): self
     {
         $obj = clone $this;
-        $obj->media_urls = $mediaURLs;
+        $obj['media_urls'] = $mediaURLs;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class MmsFallback implements BaseModel
     public function withSubject(string $subject): self
     {
         $obj = clone $this;
-        $obj->subject = $subject;
+        $obj['subject'] = $subject;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class MmsFallback implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

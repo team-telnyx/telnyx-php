@@ -50,19 +50,35 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DateCreatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_created_at
+     * @param DateEndedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_ended_at
+     * @param DateUpdatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_updated_at
      */
     public static function with(
         ?bool $active = null,
-        ?DateCreatedAt $date_created_at = null,
-        ?DateEndedAt $date_ended_at = null,
-        ?DateUpdatedAt $date_updated_at = null,
+        DateCreatedAt|array|null $date_created_at = null,
+        DateEndedAt|array|null $date_ended_at = null,
+        DateUpdatedAt|array|null $date_updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $active && $obj->active = $active;
-        null !== $date_created_at && $obj->date_created_at = $date_created_at;
-        null !== $date_ended_at && $obj->date_ended_at = $date_ended_at;
-        null !== $date_updated_at && $obj->date_updated_at = $date_updated_at;
+        null !== $active && $obj['active'] = $active;
+        null !== $date_created_at && $obj['date_created_at'] = $date_created_at;
+        null !== $date_ended_at && $obj['date_ended_at'] = $date_ended_at;
+        null !== $date_updated_at && $obj['date_updated_at'] = $date_updated_at;
 
         return $obj;
     }
@@ -73,31 +89,52 @@ final class Filter implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
 
-    public function withDateCreatedAt(DateCreatedAt $dateCreatedAt): self
+    /**
+     * @param DateCreatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateCreatedAt
+     */
+    public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
         $obj = clone $this;
-        $obj->date_created_at = $dateCreatedAt;
+        $obj['date_created_at'] = $dateCreatedAt;
 
         return $obj;
     }
 
-    public function withDateEndedAt(DateEndedAt $dateEndedAt): self
+    /**
+     * @param DateEndedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateEndedAt
+     */
+    public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
     {
         $obj = clone $this;
-        $obj->date_ended_at = $dateEndedAt;
+        $obj['date_ended_at'] = $dateEndedAt;
 
         return $obj;
     }
 
-    public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
+    /**
+     * @param DateUpdatedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateUpdatedAt
+     */
+    public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj->date_updated_at = $dateUpdatedAt;
+        $obj['date_updated_at'] = $dateUpdatedAt;
 
         return $obj;
     }

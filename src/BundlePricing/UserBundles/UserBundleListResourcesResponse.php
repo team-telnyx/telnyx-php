@@ -50,24 +50,36 @@ final class UserBundleListResourcesResponse implements BaseModel, ResponseConver
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserBundleResource> $data
+     * @param list<UserBundleResource|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   resource: string,
+     *   resource_type: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<UserBundleResource> $data
+     * @param list<UserBundleResource|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   resource: string,
+     *   resource_type: string,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

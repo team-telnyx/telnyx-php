@@ -56,11 +56,11 @@ final class CampaignSharingStatus implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $downstreamCnpId && $obj->downstreamCnpId = $downstreamCnpId;
-        null !== $sharedDate && $obj->sharedDate = $sharedDate;
-        null !== $sharingStatus && $obj->sharingStatus = $sharingStatus;
-        null !== $statusDate && $obj->statusDate = $statusDate;
-        null !== $upstreamCnpId && $obj->upstreamCnpId = $upstreamCnpId;
+        null !== $downstreamCnpId && $obj['downstreamCnpId'] = $downstreamCnpId;
+        null !== $sharedDate && $obj['sharedDate'] = $sharedDate;
+        null !== $sharingStatus && $obj['sharingStatus'] = $sharingStatus;
+        null !== $statusDate && $obj['statusDate'] = $statusDate;
+        null !== $upstreamCnpId && $obj['upstreamCnpId'] = $upstreamCnpId;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class CampaignSharingStatus implements BaseModel
     public function withDownstreamCnpID(string $downstreamCnpID): self
     {
         $obj = clone $this;
-        $obj->downstreamCnpId = $downstreamCnpID;
+        $obj['downstreamCnpId'] = $downstreamCnpID;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class CampaignSharingStatus implements BaseModel
     public function withSharedDate(string $sharedDate): self
     {
         $obj = clone $this;
-        $obj->sharedDate = $sharedDate;
+        $obj['sharedDate'] = $sharedDate;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class CampaignSharingStatus implements BaseModel
     public function withSharingStatus(string $sharingStatus): self
     {
         $obj = clone $this;
-        $obj->sharingStatus = $sharingStatus;
+        $obj['sharingStatus'] = $sharingStatus;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class CampaignSharingStatus implements BaseModel
     public function withStatusDate(string $statusDate): self
     {
         $obj = clone $this;
-        $obj->statusDate = $statusDate;
+        $obj['statusDate'] = $statusDate;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class CampaignSharingStatus implements BaseModel
     public function withUpstreamCnpID(string $upstreamCnpID): self
     {
         $obj = clone $this;
-        $obj->upstreamCnpId = $upstreamCnpID;
+        $obj['upstreamCnpId'] = $upstreamCnpID;
 
         return $obj;
     }

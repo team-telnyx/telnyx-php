@@ -47,20 +47,25 @@ final class DocumentGenerateDownloadLinkResponse implements BaseModel, ResponseC
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{url: string} $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{url: string} $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

@@ -75,10 +75,10 @@ final class Webhook implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $event_type && $obj->event_type = $event_type;
-        null !== $occurred_at && $obj->occurred_at = $occurred_at;
-        null !== $payload && $obj->payload = $payload;
+        null !== $id && $obj['id'] = $id;
+        null !== $event_type && $obj['event_type'] = $event_type;
+        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -90,7 +90,7 @@ final class Webhook implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Webhook implements BaseModel
     public function withEventType(string $eventType): self
     {
         $obj = clone $this;
-        $obj->event_type = $eventType;
+        $obj['event_type'] = $eventType;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Webhook implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Webhook implements BaseModel
     public function withPayload(mixed $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }

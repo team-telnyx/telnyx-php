@@ -90,7 +90,12 @@ final class PortingPhoneNumberBlock implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange> $activation_ranges
+     * @param list<ActivationRange|array{
+     *   end_at?: string|null, start_at?: string|null
+     * }> $activation_ranges
+     * @param PhoneNumberRange|array{
+     *   end_at?: string|null, start_at?: string|null
+     * } $phone_number_range
      * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
      */
     public static function with(
@@ -98,21 +103,21 @@ final class PortingPhoneNumberBlock implements BaseModel
         ?array $activation_ranges = null,
         ?string $country_code = null,
         ?\DateTimeInterface $created_at = null,
-        ?PhoneNumberRange $phone_number_range = null,
+        PhoneNumberRange|array|null $phone_number_range = null,
         PhoneNumberType|string|null $phone_number_type = null,
         ?string $record_type = null,
         ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $activation_ranges && $obj->activation_ranges = $activation_ranges;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $phone_number_range && $obj->phone_number_range = $phone_number_range;
+        null !== $id && $obj['id'] = $id;
+        null !== $activation_ranges && $obj['activation_ranges'] = $activation_ranges;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $phone_number_range && $obj['phone_number_range'] = $phone_number_range;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -123,7 +128,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -131,12 +136,14 @@ final class PortingPhoneNumberBlock implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number block. The activation range must be within the phone number range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRange> $activationRanges
+     * @param list<ActivationRange|array{
+     *   end_at?: string|null, start_at?: string|null
+     * }> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
         $obj = clone $this;
-        $obj->activation_ranges = $activationRanges;
+        $obj['activation_ranges'] = $activationRanges;
 
         return $obj;
     }
@@ -147,7 +154,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -158,19 +165,23 @@ final class PortingPhoneNumberBlock implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
     /**
      * Specifies the phone number range for this porting phone number block.
+     *
+     * @param PhoneNumberRange|array{
+     *   end_at?: string|null, start_at?: string|null
+     * } $phoneNumberRange
      */
     public function withPhoneNumberRange(
-        PhoneNumberRange $phoneNumberRange
+        PhoneNumberRange|array $phoneNumberRange
     ): self {
         $obj = clone $this;
-        $obj->phone_number_range = $phoneNumberRange;
+        $obj['phone_number_range'] = $phoneNumberRange;
 
         return $obj;
     }
@@ -195,7 +206,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -206,7 +217,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

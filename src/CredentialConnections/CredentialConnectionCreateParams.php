@@ -8,8 +8,13 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
+use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
+use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
+use Telnyx\CredentialConnections\CredentialOutbound\AniOverrideType;
+use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 
 /**
  * Creates a credential connection.
@@ -28,11 +33,37 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  *   dtmf_type?: DtmfType|value-of<DtmfType>,
  *   encode_contact_header_enabled?: bool,
  *   encrypted_media?: null|EncryptedMedia|value-of<EncryptedMedia>,
- *   inbound?: CredentialInbound,
+ *   inbound?: CredentialInbound|array{
+ *     ani_number_format?: value-of<AniNumberFormat>|null,
+ *     channel_limit?: int|null,
+ *     codecs?: list<string>|null,
+ *     dnis_number_format?: value-of<DnisNumberFormat>|null,
+ *     generate_ringback_tone?: bool|null,
+ *     isup_headers_enabled?: bool|null,
+ *     prack_enabled?: bool|null,
+ *     shaken_stir_enabled?: bool|null,
+ *     sip_compact_headers_enabled?: bool|null,
+ *     timeout_1xx_secs?: int|null,
+ *     timeout_2xx_secs?: int|null,
+ *   },
  *   ios_push_credential_id?: string|null,
  *   onnet_t38_passthrough_enabled?: bool,
- *   outbound?: CredentialOutbound,
- *   rtcp_settings?: ConnectionRtcpSettings,
+ *   outbound?: CredentialOutbound|array{
+ *     ani_override?: string|null,
+ *     ani_override_type?: value-of<AniOverrideType>|null,
+ *     call_parking_enabled?: bool|null,
+ *     channel_limit?: int|null,
+ *     generate_ringback_tone?: bool|null,
+ *     instant_ringback_enabled?: bool|null,
+ *     localization?: string|null,
+ *     outbound_voice_profile_id?: string|null,
+ *     t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+ *   },
+ *   rtcp_settings?: ConnectionRtcpSettings|array{
+ *     capture_enabled?: bool|null,
+ *     port?: value-of<Port>|null,
+ *     report_frequency_secs?: int|null,
+ *   },
  *   sip_uri_calling_preference?: SipUriCallingPreference|value-of<SipUriCallingPreference>,
  *   tags?: list<string>,
  *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -214,6 +245,35 @@ final class CredentialConnectionCreateParams implements BaseModel
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
      * @param DtmfType|value-of<DtmfType> $dtmf_type
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encrypted_media
+     * @param CredentialInbound|array{
+     *   ani_number_format?: value-of<AniNumberFormat>|null,
+     *   channel_limit?: int|null,
+     *   codecs?: list<string>|null,
+     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
+     *   generate_ringback_tone?: bool|null,
+     *   isup_headers_enabled?: bool|null,
+     *   prack_enabled?: bool|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_compact_headers_enabled?: bool|null,
+     *   timeout_1xx_secs?: int|null,
+     *   timeout_2xx_secs?: int|null,
+     * } $inbound
+     * @param CredentialOutbound|array{
+     *   ani_override?: string|null,
+     *   ani_override_type?: value-of<AniOverrideType>|null,
+     *   call_parking_enabled?: bool|null,
+     *   channel_limit?: int|null,
+     *   generate_ringback_tone?: bool|null,
+     *   instant_ringback_enabled?: bool|null,
+     *   localization?: string|null,
+     *   outbound_voice_profile_id?: string|null,
+     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+     * } $outbound
+     * @param ConnectionRtcpSettings|array{
+     *   capture_enabled?: bool|null,
+     *   port?: value-of<Port>|null,
+     *   report_frequency_secs?: int|null,
+     * } $rtcp_settings
      * @param SipUriCallingPreference|value-of<SipUriCallingPreference> $sip_uri_calling_preference
      * @param list<string> $tags
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
@@ -230,11 +290,11 @@ final class CredentialConnectionCreateParams implements BaseModel
         DtmfType|string|null $dtmf_type = null,
         ?bool $encode_contact_header_enabled = null,
         EncryptedMedia|string|null $encrypted_media = null,
-        ?CredentialInbound $inbound = null,
+        CredentialInbound|array|null $inbound = null,
         ?string $ios_push_credential_id = null,
         ?bool $onnet_t38_passthrough_enabled = null,
-        ?CredentialOutbound $outbound = null,
-        ?ConnectionRtcpSettings $rtcp_settings = null,
+        CredentialOutbound|array|null $outbound = null,
+        ConnectionRtcpSettings|array|null $rtcp_settings = null,
         SipUriCallingPreference|string|null $sip_uri_calling_preference = null,
         ?array $tags = null,
         WebhookAPIVersion|string|null $webhook_api_version = null,
@@ -244,29 +304,29 @@ final class CredentialConnectionCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->connection_name = $connection_name;
-        $obj->password = $password;
-        $obj->user_name = $user_name;
+        $obj['connection_name'] = $connection_name;
+        $obj['password'] = $password;
+        $obj['user_name'] = $user_name;
 
-        null !== $active && $obj->active = $active;
+        null !== $active && $obj['active'] = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $android_push_credential_id && $obj->android_push_credential_id = $android_push_credential_id;
-        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
-        null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
+        null !== $android_push_credential_id && $obj['android_push_credential_id'] = $android_push_credential_id;
+        null !== $call_cost_in_webhooks && $obj['call_cost_in_webhooks'] = $call_cost_in_webhooks;
+        null !== $default_on_hold_comfort_noise_enabled && $obj['default_on_hold_comfort_noise_enabled'] = $default_on_hold_comfort_noise_enabled;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
-        null !== $encode_contact_header_enabled && $obj->encode_contact_header_enabled = $encode_contact_header_enabled;
+        null !== $encode_contact_header_enabled && $obj['encode_contact_header_enabled'] = $encode_contact_header_enabled;
         null !== $encrypted_media && $obj['encrypted_media'] = $encrypted_media;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $ios_push_credential_id && $obj->ios_push_credential_id = $ios_push_credential_id;
-        null !== $onnet_t38_passthrough_enabled && $obj->onnet_t38_passthrough_enabled = $onnet_t38_passthrough_enabled;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $rtcp_settings && $obj->rtcp_settings = $rtcp_settings;
+        null !== $inbound && $obj['inbound'] = $inbound;
+        null !== $ios_push_credential_id && $obj['ios_push_credential_id'] = $ios_push_credential_id;
+        null !== $onnet_t38_passthrough_enabled && $obj['onnet_t38_passthrough_enabled'] = $onnet_t38_passthrough_enabled;
+        null !== $outbound && $obj['outbound'] = $outbound;
+        null !== $rtcp_settings && $obj['rtcp_settings'] = $rtcp_settings;
         null !== $sip_uri_calling_preference && $obj['sip_uri_calling_preference'] = $sip_uri_calling_preference;
-        null !== $tags && $obj->tags = $tags;
+        null !== $tags && $obj['tags'] = $tags;
         null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
+        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -277,7 +337,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj->connection_name = $connectionName;
+        $obj['connection_name'] = $connectionName;
 
         return $obj;
     }
@@ -288,7 +348,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withPassword(string $password): self
     {
         $obj = clone $this;
-        $obj->password = $password;
+        $obj['password'] = $password;
 
         return $obj;
     }
@@ -299,7 +359,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withUserName(string $userName): self
     {
         $obj = clone $this;
-        $obj->user_name = $userName;
+        $obj['user_name'] = $userName;
 
         return $obj;
     }
@@ -310,7 +370,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -336,7 +396,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         ?string $androidPushCredentialID
     ): self {
         $obj = clone $this;
-        $obj->android_push_credential_id = $androidPushCredentialID;
+        $obj['android_push_credential_id'] = $androidPushCredentialID;
 
         return $obj;
     }
@@ -347,7 +407,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
         $obj = clone $this;
-        $obj->call_cost_in_webhooks = $callCostInWebhooks;
+        $obj['call_cost_in_webhooks'] = $callCostInWebhooks;
 
         return $obj;
     }
@@ -359,7 +419,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
         $obj = clone $this;
-        $obj->default_on_hold_comfort_noise_enabled = $defaultOnHoldComfortNoiseEnabled;
+        $obj['default_on_hold_comfort_noise_enabled'] = $defaultOnHoldComfortNoiseEnabled;
 
         return $obj;
     }
@@ -384,7 +444,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         bool $encodeContactHeaderEnabled
     ): self {
         $obj = clone $this;
-        $obj->encode_contact_header_enabled = $encodeContactHeaderEnabled;
+        $obj['encode_contact_header_enabled'] = $encodeContactHeaderEnabled;
 
         return $obj;
     }
@@ -403,10 +463,25 @@ final class CredentialConnectionCreateParams implements BaseModel
         return $obj;
     }
 
-    public function withInbound(CredentialInbound $inbound): self
+    /**
+     * @param CredentialInbound|array{
+     *   ani_number_format?: value-of<AniNumberFormat>|null,
+     *   channel_limit?: int|null,
+     *   codecs?: list<string>|null,
+     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
+     *   generate_ringback_tone?: bool|null,
+     *   isup_headers_enabled?: bool|null,
+     *   prack_enabled?: bool|null,
+     *   shaken_stir_enabled?: bool|null,
+     *   sip_compact_headers_enabled?: bool|null,
+     *   timeout_1xx_secs?: int|null,
+     *   timeout_2xx_secs?: int|null,
+     * } $inbound
+     */
+    public function withInbound(CredentialInbound|array $inbound): self
     {
         $obj = clone $this;
-        $obj->inbound = $inbound;
+        $obj['inbound'] = $inbound;
 
         return $obj;
     }
@@ -417,7 +492,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withIosPushCredentialID(?string $iosPushCredentialID): self
     {
         $obj = clone $this;
-        $obj->ios_push_credential_id = $iosPushCredentialID;
+        $obj['ios_push_credential_id'] = $iosPushCredentialID;
 
         return $obj;
     }
@@ -429,23 +504,44 @@ final class CredentialConnectionCreateParams implements BaseModel
         bool $onnetT38PassthroughEnabled
     ): self {
         $obj = clone $this;
-        $obj->onnet_t38_passthrough_enabled = $onnetT38PassthroughEnabled;
+        $obj['onnet_t38_passthrough_enabled'] = $onnetT38PassthroughEnabled;
 
         return $obj;
     }
 
-    public function withOutbound(CredentialOutbound $outbound): self
+    /**
+     * @param CredentialOutbound|array{
+     *   ani_override?: string|null,
+     *   ani_override_type?: value-of<AniOverrideType>|null,
+     *   call_parking_enabled?: bool|null,
+     *   channel_limit?: int|null,
+     *   generate_ringback_tone?: bool|null,
+     *   instant_ringback_enabled?: bool|null,
+     *   localization?: string|null,
+     *   outbound_voice_profile_id?: string|null,
+     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+     * } $outbound
+     */
+    public function withOutbound(CredentialOutbound|array $outbound): self
     {
         $obj = clone $this;
-        $obj->outbound = $outbound;
+        $obj['outbound'] = $outbound;
 
         return $obj;
     }
 
-    public function withRtcpSettings(ConnectionRtcpSettings $rtcpSettings): self
-    {
+    /**
+     * @param ConnectionRtcpSettings|array{
+     *   capture_enabled?: bool|null,
+     *   port?: value-of<Port>|null,
+     *   report_frequency_secs?: int|null,
+     * } $rtcpSettings
+     */
+    public function withRtcpSettings(
+        ConnectionRtcpSettings|array $rtcpSettings
+    ): self {
         $obj = clone $this;
-        $obj->rtcp_settings = $rtcpSettings;
+        $obj['rtcp_settings'] = $rtcpSettings;
 
         return $obj;
     }
@@ -472,7 +568,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -498,7 +594,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
+        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -509,7 +605,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhook_event_url = $webhookEventURL;
+        $obj['webhook_event_url'] = $webhookEventURL;
 
         return $obj;
     }
@@ -520,7 +616,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
+        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

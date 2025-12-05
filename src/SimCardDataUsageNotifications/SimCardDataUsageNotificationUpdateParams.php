@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold\Unit;
 
 /**
  * Updates information for a SIM Card Data Usage Notification.
@@ -16,7 +17,8 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParam
  * @see Telnyx\Services\SimCardDataUsageNotificationsService::update()
  *
  * @phpstan-type SimCardDataUsageNotificationUpdateParamsShape = array{
- *   sim_card_id?: string, threshold?: Threshold
+ *   sim_card_id?: string,
+ *   threshold?: Threshold|array{amount?: string|null, unit?: value-of<Unit>|null},
  * }
  */
 final class SimCardDataUsageNotificationUpdateParams implements BaseModel
@@ -46,15 +48,19 @@ final class SimCardDataUsageNotificationUpdateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Threshold|array{
+     *   amount?: string|null, unit?: value-of<Unit>|null
+     * } $threshold
      */
     public static function with(
         ?string $sim_card_id = null,
-        ?Threshold $threshold = null
+        Threshold|array|null $threshold = null
     ): self {
         $obj = new self;
 
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
-        null !== $threshold && $obj->threshold = $threshold;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $threshold && $obj['threshold'] = $threshold;
 
         return $obj;
     }
@@ -65,18 +71,22 @@ final class SimCardDataUsageNotificationUpdateParams implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }
 
     /**
      * Data usage threshold that will trigger the notification.
+     *
+     * @param Threshold|array{
+     *   amount?: string|null, unit?: value-of<Unit>|null
+     * } $threshold
      */
-    public function withThreshold(Threshold $threshold): self
+    public function withThreshold(Threshold|array $threshold): self
     {
         $obj = clone $this;
-        $obj->threshold = $threshold;
+        $obj['threshold'] = $threshold;
 
         return $obj;
     }

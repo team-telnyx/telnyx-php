@@ -96,14 +96,14 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->cidr_block = $cidr_block;
+        $obj['id'] = $id;
+        $obj['cidr_block'] = $cidr_block;
         $obj['status'] = $status;
-        $obj->user_id = $user_id;
+        $obj['user_id'] = $user_id;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $description && $obj->description = $description;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $description && $obj['description'] = $description;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withCidrBlock(string $cidrBlock): self
     {
         $obj = clone $this;
-        $obj->cidr_block = $cidrBlock;
+        $obj['cidr_block'] = $cidrBlock;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

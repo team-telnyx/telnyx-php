@@ -59,9 +59,9 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $global_ip_id && $obj->global_ip_id = $global_ip_id;
-        null !== $is_in_maintenance && $obj->is_in_maintenance = $is_in_maintenance;
-        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
+        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
+        null !== $is_in_maintenance && $obj['is_in_maintenance'] = $is_in_maintenance;
+        null !== $wireguard_peer_id && $obj['wireguard_peer_id'] = $wireguard_peer_id;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     public function withGlobalIPID(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj->global_ip_id = $globalIPID;
+        $obj['global_ip_id'] = $globalIPID;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     public function withIsInMaintenance(bool $isInMaintenance): self
     {
         $obj = clone $this;
-        $obj->is_in_maintenance = $isInMaintenance;
+        $obj['is_in_maintenance'] = $isInMaintenance;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguard_peer_id = $wireguardPeerID;
+        $obj['wireguard_peer_id'] = $wireguardPeerID;
 
         return $obj;
     }

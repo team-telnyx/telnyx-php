@@ -44,7 +44,7 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $registration_codes && $obj->registration_codes = $registration_codes;
+        null !== $registration_codes && $obj['registration_codes'] = $registration_codes;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
     public function withRegistrationCodes(array $registrationCodes): self
     {
         $obj = clone $this;
-        $obj->registration_codes = $registrationCodes;
+        $obj['registration_codes'] = $registrationCodes;
 
         return $obj;
     }

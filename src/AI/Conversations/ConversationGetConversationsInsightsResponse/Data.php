@@ -79,7 +79,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ConversationInsight> $conversation_insights
+     * @param list<ConversationInsight|array{
+     *   insight_id: string, result: string
+     * }> $conversation_insights
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -90,9 +92,9 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->conversation_insights = $conversation_insights;
-        $obj->created_at = $created_at;
+        $obj['id'] = $id;
+        $obj['conversation_insights'] = $conversation_insights;
+        $obj['created_at'] = $created_at;
         $obj['status'] = $status;
 
         return $obj;
@@ -104,7 +106,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -112,12 +114,14 @@ final class Data implements BaseModel
     /**
      * List of insights extracted from the conversation.
      *
-     * @param list<ConversationInsight> $conversationInsights
+     * @param list<ConversationInsight|array{
+     *   insight_id: string, result: string
+     * }> $conversationInsights
      */
     public function withConversationInsights(array $conversationInsights): self
     {
         $obj = clone $this;
-        $obj->conversation_insights = $conversationInsights;
+        $obj['conversation_insights'] = $conversationInsights;
 
         return $obj;
     }
@@ -128,7 +132,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }

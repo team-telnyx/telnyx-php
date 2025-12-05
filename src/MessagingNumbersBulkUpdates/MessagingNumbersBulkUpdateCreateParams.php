@@ -77,8 +77,8 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->messaging_profile_id = $messaging_profile_id;
-        $obj->numbers = $numbers;
+        $obj['messaging_profile_id'] = $messaging_profile_id;
+        $obj['numbers'] = $numbers;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
     public function withNumbers(array $numbers): self
     {
         $obj = clone $this;
-        $obj->numbers = $numbers;
+        $obj['numbers'] = $numbers;
 
         return $obj;
     }

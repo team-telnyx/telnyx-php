@@ -6,6 +6,8 @@ namespace Telnyx\AI\Conversations\Messages\MessageListResponse;
 
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\Role;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
+use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function1;
+use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -83,7 +85,9 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Role|value-of<Role> $role
-     * @param list<ToolCall> $tool_calls
+     * @param list<ToolCall|array{
+     *   id: string, function: Function1, type: value-of<Type>
+     * }> $tool_calls
      */
     public static function with(
         Role|string $role,
@@ -95,11 +99,11 @@ final class Data implements BaseModel
         $obj = new self;
 
         $obj['role'] = $role;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $sent_at && $obj->sent_at = $sent_at;
-        null !== $tool_calls && $obj->tool_calls = $tool_calls;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $sent_at && $obj['sent_at'] = $sent_at;
+        null !== $tool_calls && $obj['tool_calls'] = $tool_calls;
 
         return $obj;
     }
@@ -123,7 +127,7 @@ final class Data implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }
@@ -134,7 +138,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -145,7 +149,7 @@ final class Data implements BaseModel
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
-        $obj->sent_at = $sentAt;
+        $obj['sent_at'] = $sentAt;
 
         return $obj;
     }
@@ -153,12 +157,14 @@ final class Data implements BaseModel
     /**
      * Optional tool calls made by the assistant.
      *
-     * @param list<ToolCall> $toolCalls
+     * @param list<ToolCall|array{
+     *   id: string, function: Function1, type: value-of<Type>
+     * }> $toolCalls
      */
     public function withToolCalls(array $toolCalls): self
     {
         $obj = clone $this;
-        $obj->tool_calls = $toolCalls;
+        $obj['tool_calls'] = $toolCalls;
 
         return $obj;
     }

@@ -38,7 +38,7 @@ final class Hyperparameters implements BaseModel
     {
         $obj = new self;
 
-        null !== $n_epochs && $obj->n_epochs = $n_epochs;
+        null !== $n_epochs && $obj['n_epochs'] = $n_epochs;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Hyperparameters implements BaseModel
     public function withNEpochs(int $nEpochs): self
     {
         $obj = clone $this;
-        $obj->n_epochs = $nEpochs;
+        $obj['n_epochs'] = $nEpochs;
 
         return $obj;
     }

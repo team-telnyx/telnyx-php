@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BillingGroups;
 
+use Telnyx\BillingGroups\BillingGroup\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -32,20 +33,41 @@ final class BillingGroupDeleteResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param BillingGroup|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   deleted_at?: \DateTimeInterface|null,
+     *   name?: string|null,
+     *   organization_id?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?BillingGroup $data = null): self
+    public static function with(BillingGroup|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(BillingGroup $data): self
+    /**
+     * @param BillingGroup|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   deleted_at?: \DateTimeInterface|null,
+     *   name?: string|null,
+     *   organization_id?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
+     */
+    public function withData(BillingGroup|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

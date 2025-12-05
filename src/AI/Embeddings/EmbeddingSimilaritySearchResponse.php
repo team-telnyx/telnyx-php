@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Embeddings;
 
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data;
+use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data\Metadata;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -49,24 +50,28 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel, ResponseConv
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   distance: float, document_chunk: string, metadata: Metadata
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   distance: float, document_chunk: string, metadata: Metadata
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

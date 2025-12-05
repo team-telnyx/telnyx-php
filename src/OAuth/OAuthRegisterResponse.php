@@ -155,19 +155,19 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->client_id = $client_id;
-        $obj->client_id_issued_at = $client_id_issued_at;
+        $obj['client_id'] = $client_id;
+        $obj['client_id_issued_at'] = $client_id_issued_at;
 
-        null !== $client_name && $obj->client_name = $client_name;
-        null !== $client_secret && $obj->client_secret = $client_secret;
-        null !== $grant_types && $obj->grant_types = $grant_types;
-        null !== $logo_uri && $obj->logo_uri = $logo_uri;
-        null !== $policy_uri && $obj->policy_uri = $policy_uri;
-        null !== $redirect_uris && $obj->redirect_uris = $redirect_uris;
-        null !== $response_types && $obj->response_types = $response_types;
-        null !== $scope && $obj->scope = $scope;
-        null !== $token_endpoint_auth_method && $obj->token_endpoint_auth_method = $token_endpoint_auth_method;
-        null !== $tos_uri && $obj->tos_uri = $tos_uri;
+        null !== $client_name && $obj['client_name'] = $client_name;
+        null !== $client_secret && $obj['client_secret'] = $client_secret;
+        null !== $grant_types && $obj['grant_types'] = $grant_types;
+        null !== $logo_uri && $obj['logo_uri'] = $logo_uri;
+        null !== $policy_uri && $obj['policy_uri'] = $policy_uri;
+        null !== $redirect_uris && $obj['redirect_uris'] = $redirect_uris;
+        null !== $response_types && $obj['response_types'] = $response_types;
+        null !== $scope && $obj['scope'] = $scope;
+        null !== $token_endpoint_auth_method && $obj['token_endpoint_auth_method'] = $token_endpoint_auth_method;
+        null !== $tos_uri && $obj['tos_uri'] = $tos_uri;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->client_id = $clientID;
+        $obj['client_id'] = $clientID;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withClientIDIssuedAt(int $clientIDIssuedAt): self
     {
         $obj = clone $this;
-        $obj->client_id_issued_at = $clientIDIssuedAt;
+        $obj['client_id_issued_at'] = $clientIDIssuedAt;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withClientName(string $clientName): self
     {
         $obj = clone $this;
-        $obj->client_name = $clientName;
+        $obj['client_name'] = $clientName;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withClientSecret(string $clientSecret): self
     {
         $obj = clone $this;
-        $obj->client_secret = $clientSecret;
+        $obj['client_secret'] = $clientSecret;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withGrantTypes(array $grantTypes): self
     {
         $obj = clone $this;
-        $obj->grant_types = $grantTypes;
+        $obj['grant_types'] = $grantTypes;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withLogoUri(string $logoUri): self
     {
         $obj = clone $this;
-        $obj->logo_uri = $logoUri;
+        $obj['logo_uri'] = $logoUri;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withPolicyUri(string $policyUri): self
     {
         $obj = clone $this;
-        $obj->policy_uri = $policyUri;
+        $obj['policy_uri'] = $policyUri;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withRedirectUris(array $redirectUris): self
     {
         $obj = clone $this;
-        $obj->redirect_uris = $redirectUris;
+        $obj['redirect_uris'] = $redirectUris;
 
         return $obj;
     }
@@ -272,7 +272,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withResponseTypes(array $responseTypes): self
     {
         $obj = clone $this;
-        $obj->response_types = $responseTypes;
+        $obj['response_types'] = $responseTypes;
 
         return $obj;
     }
@@ -283,7 +283,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withScope(string $scope): self
     {
         $obj = clone $this;
-        $obj->scope = $scope;
+        $obj['scope'] = $scope;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
         string $tokenEndpointAuthMethod
     ): self {
         $obj = clone $this;
-        $obj->token_endpoint_auth_method = $tokenEndpointAuthMethod;
+        $obj['token_endpoint_auth_method'] = $tokenEndpointAuthMethod;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withTosUri(string $tosUri): self
     {
         $obj = clone $this;
-        $obj->tos_uri = $tosUri;
+        $obj['tos_uri'] = $tosUri;
 
         return $obj;
     }

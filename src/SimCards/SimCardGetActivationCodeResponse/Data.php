@@ -43,8 +43,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $activation_code && $obj->activation_code = $activation_code;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $activation_code && $obj['activation_code'] = $activation_code;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withActivationCode(string $activationCode): self
     {
         $obj = clone $this;
-        $obj->activation_code = $activationCode;
+        $obj['activation_code'] = $activationCode;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

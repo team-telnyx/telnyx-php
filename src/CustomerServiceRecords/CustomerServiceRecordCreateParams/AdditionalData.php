@@ -111,16 +111,16 @@ final class AdditionalData implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_number && $obj->account_number = $account_number;
-        null !== $address_line_1 && $obj->address_line_1 = $address_line_1;
-        null !== $authorized_person_name && $obj->authorized_person_name = $authorized_person_name;
-        null !== $billing_phone_number && $obj->billing_phone_number = $billing_phone_number;
-        null !== $city && $obj->city = $city;
-        null !== $customer_code && $obj->customer_code = $customer_code;
-        null !== $name && $obj->name = $name;
-        null !== $pin && $obj->pin = $pin;
-        null !== $state && $obj->state = $state;
-        null !== $zip_code && $obj->zip_code = $zip_code;
+        null !== $account_number && $obj['account_number'] = $account_number;
+        null !== $address_line_1 && $obj['address_line_1'] = $address_line_1;
+        null !== $authorized_person_name && $obj['authorized_person_name'] = $authorized_person_name;
+        null !== $billing_phone_number && $obj['billing_phone_number'] = $billing_phone_number;
+        null !== $city && $obj['city'] = $city;
+        null !== $customer_code && $obj['customer_code'] = $customer_code;
+        null !== $name && $obj['name'] = $name;
+        null !== $pin && $obj['pin'] = $pin;
+        null !== $state && $obj['state'] = $state;
+        null !== $zip_code && $obj['zip_code'] = $zip_code;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class AdditionalData implements BaseModel
     public function withAccountNumber(string $accountNumber): self
     {
         $obj = clone $this;
-        $obj->account_number = $accountNumber;
+        $obj['account_number'] = $accountNumber;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class AdditionalData implements BaseModel
     public function withAddressLine1(string $addressLine1): self
     {
         $obj = clone $this;
-        $obj->address_line_1 = $addressLine1;
+        $obj['address_line_1'] = $addressLine1;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class AdditionalData implements BaseModel
     public function withAuthorizedPersonName(string $authorizedPersonName): self
     {
         $obj = clone $this;
-        $obj->authorized_person_name = $authorizedPersonName;
+        $obj['authorized_person_name'] = $authorizedPersonName;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class AdditionalData implements BaseModel
     public function withBillingPhoneNumber(string $billingPhoneNumber): self
     {
         $obj = clone $this;
-        $obj->billing_phone_number = $billingPhoneNumber;
+        $obj['billing_phone_number'] = $billingPhoneNumber;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class AdditionalData implements BaseModel
     public function withCity(string $city): self
     {
         $obj = clone $this;
-        $obj->city = $city;
+        $obj['city'] = $city;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class AdditionalData implements BaseModel
     public function withCustomerCode(string $customerCode): self
     {
         $obj = clone $this;
-        $obj->customer_code = $customerCode;
+        $obj['customer_code'] = $customerCode;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class AdditionalData implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class AdditionalData implements BaseModel
     public function withPin(string $pin): self
     {
         $obj = clone $this;
-        $obj->pin = $pin;
+        $obj['pin'] = $pin;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class AdditionalData implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class AdditionalData implements BaseModel
     public function withZipCode(string $zipCode): self
     {
         $obj = clone $this;
-        $obj->zip_code = $zipCode;
+        $obj['zip_code'] = $zipCode;
 
         return $obj;
     }

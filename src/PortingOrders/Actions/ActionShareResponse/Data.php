@@ -100,14 +100,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $token && $obj->token = $token;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $expires_at && $obj->expires_at = $expires_at;
-        null !== $expires_in_seconds && $obj->expires_in_seconds = $expires_in_seconds;
+        null !== $id && $obj['id'] = $id;
+        null !== $token && $obj['token'] = $token;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $expires_at && $obj['expires_at'] = $expires_at;
+        null !== $expires_in_seconds && $obj['expires_in_seconds'] = $expires_in_seconds;
         null !== $permissions && $obj['permissions'] = $permissions;
-        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withToken(string $token): self
     {
         $obj = clone $this;
-        $obj->token = $token;
+        $obj['token'] = $token;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expires_at = $expiresAt;
+        $obj['expires_at'] = $expiresAt;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Data implements BaseModel
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
         $obj = clone $this;
-        $obj->expires_in_seconds = $expiresInSeconds;
+        $obj['expires_in_seconds'] = $expiresInSeconds;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
+        $obj['porting_order_id'] = $portingOrderID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

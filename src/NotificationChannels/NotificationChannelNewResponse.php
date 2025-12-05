@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
 
 /**
  * @phpstan-type NotificationChannelNewResponseShape = array{
@@ -37,23 +38,41 @@ final class NotificationChannelNewResponse implements BaseModel, ResponseConvert
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NotificationChannel|array{
+     *   id?: string|null,
+     *   channel_destination?: string|null,
+     *   channel_type_id?: value-of<ChannelTypeID>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   notification_profile_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?NotificationChannel $data = null): self
+    public static function with(NotificationChannel|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
      * A Notification Channel.
+     *
+     * @param NotificationChannel|array{
+     *   id?: string|null,
+     *   channel_destination?: string|null,
+     *   channel_type_id?: value-of<ChannelTypeID>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   notification_profile_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public function withData(NotificationChannel $data): self
+    public function withData(NotificationChannel|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

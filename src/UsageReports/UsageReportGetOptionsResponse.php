@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data;
+use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
 
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
@@ -41,13 +42,18 @@ final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   product?: string|null,
+     *   product_dimensions?: list<string>|null,
+     *   product_metrics?: list<string>|null,
+     *   record_types?: list<RecordType>|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
@@ -55,12 +61,17 @@ final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverte
     /**
      * Collection of product description.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   product?: string|null,
+     *   product_dimensions?: list<string>|null,
+     *   product_metrics?: list<string>|null,
+     *   record_types?: list<RecordType>|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

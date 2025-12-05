@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 
 /**
  * List of Auto-Response Settings.
@@ -56,33 +57,63 @@ final class AutorespConfigListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AutoRespConfig> $data
+     * @param list<AutoRespConfig|array{
+     *   id: string,
+     *   country_code: string,
+     *   created_at: \DateTimeInterface,
+     *   keywords: list<string>,
+     *   op: value-of<Op>,
+     *   updated_at: \DateTimeInterface,
+     *   resp_text?: string|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
-    public static function with(array $data, PaginationMeta $meta): self
+    public static function with(array $data, PaginationMeta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<AutoRespConfig> $data
+     * @param list<AutoRespConfig|array{
+     *   id: string,
+     *   country_code: string,
+     *   created_at: \DateTimeInterface,
+     *   keywords: list<string>,
+     *   op: value-of<Op>,
+     *   updated_at: \DateTimeInterface,
+     *   resp_text?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

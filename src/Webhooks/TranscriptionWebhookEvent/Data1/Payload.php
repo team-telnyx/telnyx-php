@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\TranscriptionWebhookEvent\Data1\Payload\TranscriptionData;
+use Telnyx\Webhooks\TranscriptionWebhookEvent\Data1\Payload\TranscriptionData\TranscriptionTrack;
 
 /**
  * @phpstan-type PayloadShape = array{
@@ -66,6 +67,13 @@ final class Payload implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param TranscriptionData|array{
+     *   confidence?: float|null,
+     *   is_final?: bool|null,
+     *   transcript?: string|null,
+     *   transcription_track?: value-of<TranscriptionTrack>|null,
+     * } $transcription_data
      */
     public static function with(
         ?string $call_control_id = null,
@@ -73,16 +81,16 @@ final class Payload implements BaseModel
         ?string $call_session_id = null,
         ?string $client_state = null,
         ?string $connection_id = null,
-        ?TranscriptionData $transcription_data = null,
+        TranscriptionData|array|null $transcription_data = null,
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $transcription_data && $obj->transcription_data = $transcription_data;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $transcription_data && $obj['transcription_data'] = $transcription_data;
 
         return $obj;
     }
@@ -93,7 +101,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -104,7 +112,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -115,7 +123,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -126,7 +134,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -137,16 +145,24 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
 
+    /**
+     * @param TranscriptionData|array{
+     *   confidence?: float|null,
+     *   is_final?: bool|null,
+     *   transcript?: string|null,
+     *   transcription_track?: value-of<TranscriptionTrack>|null,
+     * } $transcriptionData
+     */
     public function withTranscriptionData(
-        TranscriptionData $transcriptionData
+        TranscriptionData|array $transcriptionData
     ): self {
         $obj = clone $this;
-        $obj->transcription_data = $transcriptionData;
+        $obj['transcription_data'] = $transcriptionData;
 
         return $obj;
     }

@@ -17,7 +17,10 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNum
  * @see Telnyx\Services\PortingOrders\PhoneNumberBlocksService::create()
  *
  * @phpstan-type PhoneNumberBlockCreateParamsShape = array{
- *   activation_ranges: list<ActivationRange>, phone_number_range: PhoneNumberRange
+ *   activation_ranges: list<ActivationRange|array{
+ *     end_at: string, start_at: string
+ *   }>,
+ *   phone_number_range: PhoneNumberRange|array{end_at: string, start_at: string},
  * }
  */
 final class PhoneNumberBlockCreateParams implements BaseModel
@@ -65,16 +68,21 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange> $activation_ranges
+     * @param list<ActivationRange|array{
+     *   end_at: string, start_at: string
+     * }> $activation_ranges
+     * @param PhoneNumberRange|array{
+     *   end_at: string, start_at: string
+     * } $phone_number_range
      */
     public static function with(
         array $activation_ranges,
-        PhoneNumberRange $phone_number_range
+        PhoneNumberRange|array $phone_number_range
     ): self {
         $obj = new self;
 
-        $obj->activation_ranges = $activation_ranges;
-        $obj->phone_number_range = $phone_number_range;
+        $obj['activation_ranges'] = $activation_ranges;
+        $obj['phone_number_range'] = $phone_number_range;
 
         return $obj;
     }
@@ -82,21 +90,28 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRange> $activationRanges
+     * @param list<ActivationRange|array{
+     *   end_at: string, start_at: string
+     * }> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
         $obj = clone $this;
-        $obj->activation_ranges = $activationRanges;
+        $obj['activation_ranges'] = $activationRanges;
 
         return $obj;
     }
 
+    /**
+     * @param PhoneNumberRange|array{
+     *   end_at: string, start_at: string
+     * } $phoneNumberRange
+     */
     public function withPhoneNumberRange(
-        PhoneNumberRange $phoneNumberRange
+        PhoneNumberRange|array $phoneNumberRange
     ): self {
         $obj = clone $this;
-        $obj->phone_number_range = $phoneNumberRange;
+        $obj['phone_number_range'] = $phoneNumberRange;
 
         return $obj;
     }

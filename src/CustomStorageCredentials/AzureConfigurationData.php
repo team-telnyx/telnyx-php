@@ -84,9 +84,9 @@ final class AzureConfigurationData implements BaseModel
 
         $obj['backend'] = $backend;
 
-        null !== $account_key && $obj->account_key = $account_key;
-        null !== $account_name && $obj->account_name = $account_name;
-        null !== $bucket && $obj->bucket = $bucket;
+        null !== $account_key && $obj['account_key'] = $account_key;
+        null !== $account_name && $obj['account_name'] = $account_name;
+        null !== $bucket && $obj['bucket'] = $bucket;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class AzureConfigurationData implements BaseModel
     public function withAccountKey(string $accountKey): self
     {
         $obj = clone $this;
-        $obj->account_key = $accountKey;
+        $obj['account_key'] = $accountKey;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class AzureConfigurationData implements BaseModel
     public function withAccountName(string $accountName): self
     {
         $obj = clone $this;
-        $obj->account_name = $accountName;
+        $obj['account_name'] = $accountName;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class AzureConfigurationData implements BaseModel
     public function withBucket(string $bucket): self
     {
         $obj = clone $this;
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
         return $obj;
     }

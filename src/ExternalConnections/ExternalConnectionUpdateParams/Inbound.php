@@ -36,7 +36,7 @@ final class Inbound implements BaseModel
     {
         $obj = new self;
 
-        null !== $channel_limit && $obj->channel_limit = $channel_limit;
+        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Inbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channel_limit = $channelLimit;
+        $obj['channel_limit'] = $channelLimit;
 
         return $obj;
     }

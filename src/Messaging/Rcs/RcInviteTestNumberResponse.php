@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data;
+use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
 
 /**
  * @phpstan-type RcInviteTestNumberResponseShape = array{data: Data}
@@ -47,20 +48,35 @@ final class RcInviteTestNumberResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   agent_id?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   status?: string|null,
+     * } $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   agent_id?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   status?: string|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

@@ -142,16 +142,16 @@ final class ActionStartPlaybackParams implements BaseModel
         $obj = new self;
 
         null !== $audio_type && $obj['audio_type'] = $audio_type;
-        null !== $audio_url && $obj->audio_url = $audio_url;
-        null !== $cache_audio && $obj->cache_audio = $cache_audio;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $loop && $obj->loop = $loop;
-        null !== $media_name && $obj->media_name = $media_name;
-        null !== $overlay && $obj->overlay = $overlay;
-        null !== $playback_content && $obj->playback_content = $playback_content;
-        null !== $stop && $obj->stop = $stop;
-        null !== $target_legs && $obj->target_legs = $target_legs;
+        null !== $audio_url && $obj['audio_url'] = $audio_url;
+        null !== $cache_audio && $obj['cache_audio'] = $cache_audio;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $loop && $obj['loop'] = $loop;
+        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $overlay && $obj['overlay'] = $overlay;
+        null !== $playback_content && $obj['playback_content'] = $playback_content;
+        null !== $stop && $obj['stop'] = $stop;
+        null !== $target_legs && $obj['target_legs'] = $target_legs;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj->audio_url = $audioURL;
+        $obj['audio_url'] = $audioURL;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withCacheAudio(bool $cacheAudio): self
     {
         $obj = clone $this;
-        $obj->cache_audio = $cacheAudio;
+        $obj['cache_audio'] = $cacheAudio;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withLoop(string|int $loop): self
     {
         $obj = clone $this;
-        $obj->loop = $loop;
+        $obj['loop'] = $loop;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->media_name = $mediaName;
+        $obj['media_name'] = $mediaName;
 
         return $obj;
     }
@@ -241,7 +241,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withOverlay(bool $overlay): self
     {
         $obj = clone $this;
-        $obj->overlay = $overlay;
+        $obj['overlay'] = $overlay;
 
         return $obj;
     }
@@ -252,7 +252,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withPlaybackContent(string $playbackContent): self
     {
         $obj = clone $this;
-        $obj->playback_content = $playbackContent;
+        $obj['playback_content'] = $playbackContent;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withStop(string $stop): self
     {
         $obj = clone $this;
-        $obj->stop = $stop;
+        $obj['stop'] = $stop;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withTargetLegs(string $targetLegs): self
     {
         $obj = clone $this;
-        $obj->target_legs = $targetLegs;
+        $obj['target_legs'] = $targetLegs;
 
         return $obj;
     }

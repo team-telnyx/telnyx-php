@@ -7,9 +7,14 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure\Region;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Deepgram;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Deepgram\Language;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google\Model;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google\SpeechContext;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx\TranscriptionModel;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -68,21 +73,63 @@ final class TranscriptionStartRequest implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcription_engine
+     * @param Google|array{
+     *   enable_speaker_diarization?: bool|null,
+     *   hints?: list<string>|null,
+     *   interim_results?: bool|null,
+     *   language?: value-of<GoogleTranscriptionLanguage>|null,
+     *   max_speaker_count?: int|null,
+     *   min_speaker_count?: int|null,
+     *   model?: value-of<Model>|null,
+     *   profanity_filter?: bool|null,
+     *   speech_context?: list<SpeechContext>|null,
+     *   transcription_engine?: value-of<Google\TranscriptionEngine>|null,
+     *   use_enhanced?: bool|null,
+     * }|Telnyx|array{
+     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
+     *   transcription_engine?: value-of<Telnyx\TranscriptionEngine>|null,
+     *   transcription_model?: value-of<TranscriptionModel>|null,
+     * }|Deepgram|array{
+     *   transcription_engine: 'Deepgram',
+     *   transcription_model: value-of<Deepgram\TranscriptionModel>,
+     *   language?: value-of<Language>|null,
+     * }|Azure|array{
+     *   region: value-of<Region>,
+     *   transcription_engine: 'Azure',
+     *   api_key_ref?: string|null,
+     *   language?: value-of<Azure\Language>|null,
+     * }|TranscriptionEngineAConfig|array{
+     *   enable_speaker_diarization?: bool|null,
+     *   hints?: list<string>|null,
+     *   interim_results?: bool|null,
+     *   language?: value-of<GoogleTranscriptionLanguage>|null,
+     *   max_speaker_count?: int|null,
+     *   min_speaker_count?: int|null,
+     *   model?: value-of<TranscriptionEngineAConfig\Model>|null,
+     *   profanity_filter?: bool|null,
+     *   speech_context?: list<TranscriptionEngineAConfig\SpeechContext>|null,
+     *   transcription_engine?: value-of<TranscriptionEngineAConfig\TranscriptionEngine>|null,
+     *   use_enhanced?: bool|null,
+     * }|TranscriptionEngineBConfig|array{
+     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
+     *   transcription_engine?: value-of<TranscriptionEngineBConfig\TranscriptionEngine>|null,
+     *   transcription_model?: value-of<TranscriptionEngineBConfig\TranscriptionModel>|null,
+     * } $transcription_engine_config
      */
     public static function with(
         ?string $client_state = null,
         ?string $command_id = null,
         TranscriptionEngine|string|null $transcription_engine = null,
-        Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config = null,
+        Google|array|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config = null,
         ?string $transcription_tracks = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
         null !== $transcription_engine && $obj['transcription_engine'] = $transcription_engine;
-        null !== $transcription_engine_config && $obj->transcription_engine_config = $transcription_engine_config;
-        null !== $transcription_tracks && $obj->transcription_tracks = $transcription_tracks;
+        null !== $transcription_engine_config && $obj['transcription_engine_config'] = $transcription_engine_config;
+        null !== $transcription_tracks && $obj['transcription_tracks'] = $transcription_tracks;
 
         return $obj;
     }
@@ -93,7 +140,7 @@ final class TranscriptionStartRequest implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -104,7 +151,7 @@ final class TranscriptionStartRequest implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -123,11 +170,55 @@ final class TranscriptionStartRequest implements BaseModel
         return $obj;
     }
 
+    /**
+     * @param Google|array{
+     *   enable_speaker_diarization?: bool|null,
+     *   hints?: list<string>|null,
+     *   interim_results?: bool|null,
+     *   language?: value-of<GoogleTranscriptionLanguage>|null,
+     *   max_speaker_count?: int|null,
+     *   min_speaker_count?: int|null,
+     *   model?: value-of<Model>|null,
+     *   profanity_filter?: bool|null,
+     *   speech_context?: list<SpeechContext>|null,
+     *   transcription_engine?: value-of<Google\TranscriptionEngine>|null,
+     *   use_enhanced?: bool|null,
+     * }|Telnyx|array{
+     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
+     *   transcription_engine?: value-of<Telnyx\TranscriptionEngine>|null,
+     *   transcription_model?: value-of<TranscriptionModel>|null,
+     * }|Deepgram|array{
+     *   transcription_engine: 'Deepgram',
+     *   transcription_model: value-of<Deepgram\TranscriptionModel>,
+     *   language?: value-of<Language>|null,
+     * }|Azure|array{
+     *   region: value-of<Region>,
+     *   transcription_engine: 'Azure',
+     *   api_key_ref?: string|null,
+     *   language?: value-of<Azure\Language>|null,
+     * }|TranscriptionEngineAConfig|array{
+     *   enable_speaker_diarization?: bool|null,
+     *   hints?: list<string>|null,
+     *   interim_results?: bool|null,
+     *   language?: value-of<GoogleTranscriptionLanguage>|null,
+     *   max_speaker_count?: int|null,
+     *   min_speaker_count?: int|null,
+     *   model?: value-of<TranscriptionEngineAConfig\Model>|null,
+     *   profanity_filter?: bool|null,
+     *   speech_context?: list<TranscriptionEngineAConfig\SpeechContext>|null,
+     *   transcription_engine?: value-of<TranscriptionEngineAConfig\TranscriptionEngine>|null,
+     *   use_enhanced?: bool|null,
+     * }|TranscriptionEngineBConfig|array{
+     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
+     *   transcription_engine?: value-of<TranscriptionEngineBConfig\TranscriptionEngine>|null,
+     *   transcription_model?: value-of<TranscriptionEngineBConfig\TranscriptionModel>|null,
+     * } $transcriptionEngineConfig
+     */
     public function withTranscriptionEngineConfig(
-        Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
+        Google|array|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
     ): self {
         $obj = clone $this;
-        $obj->transcription_engine_config = $transcriptionEngineConfig;
+        $obj['transcription_engine_config'] = $transcriptionEngineConfig;
 
         return $obj;
     }
@@ -138,7 +229,7 @@ final class TranscriptionStartRequest implements BaseModel
     public function withTranscriptionTracks(string $transcriptionTracks): self
     {
         $obj = clone $this;
-        $obj->transcription_tracks = $transcriptionTracks;
+        $obj['transcription_tracks'] = $transcriptionTracks;
 
         return $obj;
     }

@@ -6,6 +6,8 @@ namespace Telnyx\AI\Conversations;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data;
+use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\ConversationInsight;
+use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -55,33 +57,51 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel, R
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string,
+     *   conversation_insights: list<ConversationInsight>,
+     *   created_at: \DateTimeInterface,
+     *   status: value-of<Status>,
+     * }> $data
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string,
+     *   conversation_insights: list<ConversationInsight>,
+     *   created_at: \DateTimeInterface,
+     *   status: value-of<Status>,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

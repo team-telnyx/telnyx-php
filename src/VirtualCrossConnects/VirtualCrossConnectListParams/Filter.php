@@ -38,7 +38,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $network_id && $obj->network_id = $network_id;
+        null !== $network_id && $obj['network_id'] = $network_id;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->network_id = $networkID;
+        $obj['network_id'] = $networkID;
 
         return $obj;
     }

@@ -54,26 +54,30 @@ final class AIGetModelsResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string, created: int, owned_by: string, object?: string|null
+     * }> $data
      */
     public static function with(array $data, ?string $object = null): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
-        null !== $object && $obj->object = $object;
+        null !== $object && $obj['object'] = $object;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string, created: int, owned_by: string, object?: string|null
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
@@ -81,7 +85,7 @@ final class AIGetModelsResponse implements BaseModel, ResponseConverter
     public function withObject(string $object): self
     {
         $obj = clone $this;
-        $obj->object = $object;
+        $obj['object'] = $object;
 
         return $obj;
     }

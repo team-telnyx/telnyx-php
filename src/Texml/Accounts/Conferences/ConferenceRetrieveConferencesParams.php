@@ -101,12 +101,12 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $DateCreated && $obj->DateCreated = $DateCreated;
-        null !== $DateUpdated && $obj->DateUpdated = $DateUpdated;
-        null !== $FriendlyName && $obj->FriendlyName = $FriendlyName;
-        null !== $Page && $obj->Page = $Page;
-        null !== $PageSize && $obj->PageSize = $PageSize;
-        null !== $PageToken && $obj->PageToken = $PageToken;
+        null !== $DateCreated && $obj['DateCreated'] = $DateCreated;
+        null !== $DateUpdated && $obj['DateUpdated'] = $DateUpdated;
+        null !== $FriendlyName && $obj['FriendlyName'] = $FriendlyName;
+        null !== $Page && $obj['Page'] = $Page;
+        null !== $PageSize && $obj['PageSize'] = $PageSize;
+        null !== $PageToken && $obj['PageToken'] = $PageToken;
         null !== $Status && $obj['Status'] = $Status;
 
         return $obj;
@@ -118,7 +118,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->DateCreated = $dateCreated;
+        $obj['DateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->DateUpdated = $dateUpdated;
+        $obj['DateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withFriendlyName(string $friendlyName): self
     {
         $obj = clone $this;
-        $obj->FriendlyName = $friendlyName;
+        $obj['FriendlyName'] = $friendlyName;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->Page = $page;
+        $obj['Page'] = $page;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->PageSize = $pageSize;
+        $obj['PageSize'] = $pageSize;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withPageToken(string $pageToken): self
     {
         $obj = clone $this;
-        $obj->PageToken = $pageToken;
+        $obj['PageToken'] = $pageToken;
 
         return $obj;
     }

@@ -10,6 +10,8 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data;
+use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Status;
+use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Type;
 
 /**
  * @phpstan-type RoomRecordingGetResponseShape = array{data?: Data|null}
@@ -33,20 +35,59 @@ final class RoomRecordingGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   id?: string|null,
+     *   codec?: string|null,
+     *   completed_at?: \DateTimeInterface|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   download_url?: string|null,
+     *   duration_secs?: int|null,
+     *   ended_at?: \DateTimeInterface|null,
+     *   participant_id?: string|null,
+     *   record_type?: string|null,
+     *   room_id?: string|null,
+     *   session_id?: string|null,
+     *   size_mb?: float|null,
+     *   started_at?: \DateTimeInterface|null,
+     *   status?: value-of<Status>|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   id?: string|null,
+     *   codec?: string|null,
+     *   completed_at?: \DateTimeInterface|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   download_url?: string|null,
+     *   duration_secs?: int|null,
+     *   ended_at?: \DateTimeInterface|null,
+     *   participant_id?: string|null,
+     *   record_type?: string|null,
+     *   room_id?: string|null,
+     *   session_id?: string|null,
+     *   size_mb?: float|null,
+     *   started_at?: \DateTimeInterface|null,
+     *   status?: value-of<Status>|null,
+     *   type?: value-of<Type>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

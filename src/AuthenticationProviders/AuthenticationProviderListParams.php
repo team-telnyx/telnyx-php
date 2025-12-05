@@ -17,7 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AuthenticationProvidersService::list()
  *
  * @phpstan-type AuthenticationProviderListParamsShape = array{
- *   page?: Page, sort?: Sort|value-of<Sort>
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: Sort|value-of<Sort>,
  * }
  */
 final class AuthenticationProviderListParams implements BaseModel
@@ -60,15 +61,16 @@ final class AuthenticationProviderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Page $page = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null
     ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -76,11 +78,13 @@ final class AuthenticationProviderListParams implements BaseModel
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

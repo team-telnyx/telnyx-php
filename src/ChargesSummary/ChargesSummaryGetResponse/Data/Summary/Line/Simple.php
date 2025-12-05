@@ -78,10 +78,10 @@ final class Simple implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->alias = $alias;
-        $obj->amount = $amount;
-        $obj->name = $name;
-        $obj->quantity = $quantity;
+        $obj['alias'] = $alias;
+        $obj['amount'] = $amount;
+        $obj['name'] = $name;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Simple implements BaseModel
     public function withAlias(string $alias): self
     {
         $obj = clone $this;
-        $obj->alias = $alias;
+        $obj['alias'] = $alias;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Simple implements BaseModel
     public function withAmount(string $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Simple implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Simple implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }

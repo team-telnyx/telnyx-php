@@ -124,13 +124,13 @@ final class CallUpdateParams implements BaseModel
         $obj = new self;
 
         null !== $FallbackMethod && $obj['FallbackMethod'] = $FallbackMethod;
-        null !== $FallbackUrl && $obj->FallbackUrl = $FallbackUrl;
+        null !== $FallbackUrl && $obj['FallbackUrl'] = $FallbackUrl;
         null !== $Method && $obj['Method'] = $Method;
-        null !== $Status && $obj->Status = $Status;
-        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
+        null !== $Status && $obj['Status'] = $Status;
+        null !== $StatusCallback && $obj['StatusCallback'] = $StatusCallback;
         null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
-        null !== $Texml && $obj->Texml = $Texml;
-        null !== $Url && $obj->Url = $Url;
+        null !== $Texml && $obj['Texml'] = $Texml;
+        null !== $Url && $obj['Url'] = $Url;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class CallUpdateParams implements BaseModel
     public function withFallbackURL(string $fallbackURL): self
     {
         $obj = clone $this;
-        $obj->FallbackUrl = $fallbackURL;
+        $obj['FallbackUrl'] = $fallbackURL;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class CallUpdateParams implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->Status = $status;
+        $obj['Status'] = $status;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class CallUpdateParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->StatusCallback = $statusCallback;
+        $obj['StatusCallback'] = $statusCallback;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class CallUpdateParams implements BaseModel
     public function withTexml(string $texml): self
     {
         $obj = clone $this;
-        $obj->Texml = $texml;
+        $obj['Texml'] = $texml;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class CallUpdateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->Url = $url;
+        $obj['Url'] = $url;
 
         return $obj;
     }

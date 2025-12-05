@@ -56,8 +56,8 @@ final class Item implements BaseModel
     {
         $obj = new self;
 
-        $obj->billing_bundle_id = $billing_bundle_id;
-        $obj->quantity = $quantity;
+        $obj['billing_bundle_id'] = $billing_bundle_id;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Item implements BaseModel
     public function withBillingBundleID(string $billingBundleID): self
     {
         $obj = clone $this;
-        $obj->billing_bundle_id = $billingBundleID;
+        $obj['billing_bundle_id'] = $billingBundleID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Item implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }

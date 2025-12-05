@@ -101,16 +101,16 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $area_code && $obj->area_code = $area_code;
-        null !== $comments && $obj->comments = $comments;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $id && $obj['id'] = $id;
+        null !== $area_code && $obj['area_code'] = $area_code;
+        null !== $comments && $obj['comments'] = $comments;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
         null !== $features && $obj['features'] = $features;
-        null !== $orders && $obj->orders = $orders;
+        null !== $orders && $obj['orders'] = $orders;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $quantity && $obj->quantity = $quantity;
-        null !== $requirement_group_id && $obj->requirement_group_id = $requirement_group_id;
+        null !== $quantity && $obj['quantity'] = $quantity;
+        null !== $requirement_group_id && $obj['requirement_group_id'] = $requirement_group_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class Data implements BaseModel
     public function withAreaCode(string $areaCode): self
     {
         $obj = clone $this;
-        $obj->area_code = $areaCode;
+        $obj['area_code'] = $areaCode;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Data implements BaseModel
     public function withComments(string $comments): self
     {
         $obj = clone $this;
-        $obj->comments = $comments;
+        $obj['comments'] = $comments;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Data implements BaseModel
     public function withOrders(array $orders): self
     {
         $obj = clone $this;
-        $obj->orders = $orders;
+        $obj['orders'] = $orders;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class Data implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class Data implements BaseModel
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj->requirement_group_id = $requirementGroupID;
+        $obj['requirement_group_id'] = $requirementGroupID;
 
         return $obj;
     }

@@ -63,10 +63,10 @@ final class Media implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $content_type && $obj->content_type = $content_type;
-        null !== $sha256 && $obj->sha256 = $sha256;
-        null !== $size && $obj->size = $size;
-        null !== $url && $obj->url = $url;
+        null !== $content_type && $obj['content_type'] = $content_type;
+        null !== $sha256 && $obj['sha256'] = $sha256;
+        null !== $size && $obj['size'] = $size;
+        null !== $url && $obj['url'] = $url;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Media implements BaseModel
     public function withContentType(?string $contentType): self
     {
         $obj = clone $this;
-        $obj->content_type = $contentType;
+        $obj['content_type'] = $contentType;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Media implements BaseModel
     public function withSha256(?string $sha256): self
     {
         $obj = clone $this;
-        $obj->sha256 = $sha256;
+        $obj['sha256'] = $sha256;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Media implements BaseModel
     public function withSize(?int $size): self
     {
         $obj = clone $this;
-        $obj->size = $size;
+        $obj['size'] = $size;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Media implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

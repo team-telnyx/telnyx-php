@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant\Status;
 
 /**
  * @phpstan-type ParticipantGetParticipantsResponseShape = array{
@@ -86,7 +87,22 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Participant> $participants
+     * @param list<Participant|array{
+     *   account_sid?: string|null,
+     *   api_version?: string|null,
+     *   call_sid?: string|null,
+     *   call_sid_legacy?: string|null,
+     *   coaching?: bool|null,
+     *   coaching_call_sid?: string|null,
+     *   coaching_call_sid_legacy?: string|null,
+     *   date_created?: string|null,
+     *   date_updated?: string|null,
+     *   end_conference_on_exit?: bool|null,
+     *   hold?: bool|null,
+     *   muted?: bool|null,
+     *   status?: value-of<Status>|null,
+     *   uri?: string|null,
+     * }> $participants
      */
     public static function with(
         ?int $end = null,
@@ -100,14 +116,14 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     ): self {
         $obj = new self;
 
-        null !== $end && $obj->end = $end;
-        null !== $first_page_uri && $obj->first_page_uri = $first_page_uri;
-        null !== $next_page_uri && $obj->next_page_uri = $next_page_uri;
-        null !== $page && $obj->page = $page;
-        null !== $page_size && $obj->page_size = $page_size;
-        null !== $participants && $obj->participants = $participants;
-        null !== $start && $obj->start = $start;
-        null !== $uri && $obj->uri = $uri;
+        null !== $end && $obj['end'] = $end;
+        null !== $first_page_uri && $obj['first_page_uri'] = $first_page_uri;
+        null !== $next_page_uri && $obj['next_page_uri'] = $next_page_uri;
+        null !== $page && $obj['page'] = $page;
+        null !== $page_size && $obj['page_size'] = $page_size;
+        null !== $participants && $obj['participants'] = $participants;
+        null !== $start && $obj['start'] = $start;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -118,7 +134,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     public function withEnd(int $end): self
     {
         $obj = clone $this;
-        $obj->end = $end;
+        $obj['end'] = $end;
 
         return $obj;
     }
@@ -129,7 +145,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj->first_page_uri = $firstPageUri;
+        $obj['first_page_uri'] = $firstPageUri;
 
         return $obj;
     }
@@ -140,7 +156,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj->next_page_uri = $nextPageUri;
+        $obj['next_page_uri'] = $nextPageUri;
 
         return $obj;
     }
@@ -151,7 +167,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -162,18 +178,33 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size = $pageSize;
+        $obj['page_size'] = $pageSize;
 
         return $obj;
     }
 
     /**
-     * @param list<Participant> $participants
+     * @param list<Participant|array{
+     *   account_sid?: string|null,
+     *   api_version?: string|null,
+     *   call_sid?: string|null,
+     *   call_sid_legacy?: string|null,
+     *   coaching?: bool|null,
+     *   coaching_call_sid?: string|null,
+     *   coaching_call_sid_legacy?: string|null,
+     *   date_created?: string|null,
+     *   date_updated?: string|null,
+     *   end_conference_on_exit?: bool|null,
+     *   hold?: bool|null,
+     *   muted?: bool|null,
+     *   status?: value-of<Status>|null,
+     *   uri?: string|null,
+     * }> $participants
      */
     public function withParticipants(array $participants): self
     {
         $obj = clone $this;
-        $obj->participants = $participants;
+        $obj['participants'] = $participants;
 
         return $obj;
     }
@@ -184,7 +215,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     public function withStart(int $start): self
     {
         $obj = clone $this;
-        $obj->start = $start;
+        $obj['start'] = $start;
 
         return $obj;
     }
@@ -195,7 +226,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel, ResponseCon
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

@@ -116,16 +116,16 @@ final class GlobalIPAssignment implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $global_ip_id && $obj->global_ip_id = $global_ip_id;
-        null !== $is_announced && $obj->is_announced = $is_announced;
-        null !== $is_connected && $obj->is_connected = $is_connected;
-        null !== $is_in_maintenance && $obj->is_in_maintenance = $is_in_maintenance;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
+        null !== $is_announced && $obj['is_announced'] = $is_announced;
+        null !== $is_connected && $obj['is_connected'] = $is_connected;
+        null !== $is_in_maintenance && $obj['is_in_maintenance'] = $is_in_maintenance;
         null !== $status && $obj['status'] = $status;
-        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
+        null !== $wireguard_peer_id && $obj['wireguard_peer_id'] = $wireguard_peer_id;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withGlobalIPID(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj->global_ip_id = $globalIPID;
+        $obj['global_ip_id'] = $globalIPID;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withIsAnnounced(bool $isAnnounced): self
     {
         $obj = clone $this;
-        $obj->is_announced = $isAnnounced;
+        $obj['is_announced'] = $isAnnounced;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withIsConnected(bool $isConnected): self
     {
         $obj = clone $this;
-        $obj->is_connected = $isConnected;
+        $obj['is_connected'] = $isConnected;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withIsInMaintenance(bool $isInMaintenance): self
     {
         $obj = clone $this;
-        $obj->is_in_maintenance = $isInMaintenance;
+        $obj['is_in_maintenance'] = $isInMaintenance;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguard_peer_id = $wireguardPeerID;
+        $obj['wireguard_peer_id'] = $wireguardPeerID;
 
         return $obj;
     }

@@ -72,8 +72,8 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->text = $text;
-        $obj->voice = $voice;
+        $obj['text'] = $text;
+        $obj['voice'] = $voice;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     public function withVoice(string $voice): self
     {
         $obj = clone $this;
-        $obj->voice = $voice;
+        $obj['voice'] = $voice;
 
         return $obj;
     }

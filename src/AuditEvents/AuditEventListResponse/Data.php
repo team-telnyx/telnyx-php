@@ -104,7 +104,11 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ChangeMadeBy|value-of<ChangeMadeBy> $change_made_by
-     * @param list<Change>|null $changes
+     * @param list<Change|array{
+     *   field?: string|null,
+     *   from?: string|float|bool|list<mixed>|array<string,mixed>|null,
+     *   to?: string|float|bool|list<mixed>|array<string,mixed>|null,
+     * }>|null $changes
      */
     public static function with(
         ?string $id = null,
@@ -120,16 +124,16 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $alternate_resource_id && $obj->alternate_resource_id = $alternate_resource_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $alternate_resource_id && $obj['alternate_resource_id'] = $alternate_resource_id;
         null !== $change_made_by && $obj['change_made_by'] = $change_made_by;
-        null !== $change_type && $obj->change_type = $change_type;
-        null !== $changes && $obj->changes = $changes;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $organization_id && $obj->organization_id = $organization_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $resource_id && $obj->resource_id = $resource_id;
-        null !== $user_id && $obj->user_id = $user_id;
+        null !== $change_type && $obj['change_type'] = $change_type;
+        null !== $changes && $obj['changes'] = $changes;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $organization_id && $obj['organization_id'] = $organization_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $resource_id && $obj['resource_id'] = $resource_id;
+        null !== $user_id && $obj['user_id'] = $user_id;
 
         return $obj;
     }
@@ -140,7 +144,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -151,7 +155,7 @@ final class Data implements BaseModel
     public function withAlternateResourceID(?string $alternateResourceID): self
     {
         $obj = clone $this;
-        $obj->alternate_resource_id = $alternateResourceID;
+        $obj['alternate_resource_id'] = $alternateResourceID;
 
         return $obj;
     }
@@ -175,7 +179,7 @@ final class Data implements BaseModel
     public function withChangeType(string $changeType): self
     {
         $obj = clone $this;
-        $obj->change_type = $changeType;
+        $obj['change_type'] = $changeType;
 
         return $obj;
     }
@@ -183,12 +187,16 @@ final class Data implements BaseModel
     /**
      * Details of the changes made to the resource.
      *
-     * @param list<Change>|null $changes
+     * @param list<Change|array{
+     *   field?: string|null,
+     *   from?: string|float|bool|list<mixed>|array<string,mixed>|null,
+     *   to?: string|float|bool|list<mixed>|array<string,mixed>|null,
+     * }>|null $changes
      */
     public function withChanges(?array $changes): self
     {
         $obj = clone $this;
-        $obj->changes = $changes;
+        $obj['changes'] = $changes;
 
         return $obj;
     }
@@ -199,7 +207,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -210,7 +218,7 @@ final class Data implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organization_id = $organizationID;
+        $obj['organization_id'] = $organizationID;
 
         return $obj;
     }
@@ -221,7 +229,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -232,7 +240,7 @@ final class Data implements BaseModel
     public function withResourceID(string $resourceID): self
     {
         $obj = clone $this;
-        $obj->resource_id = $resourceID;
+        $obj['resource_id'] = $resourceID;
 
         return $obj;
     }
@@ -243,7 +251,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->user_id = $userID;
+        $obj['user_id'] = $userID;
 
         return $obj;
     }

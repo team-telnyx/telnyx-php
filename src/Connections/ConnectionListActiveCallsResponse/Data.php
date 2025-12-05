@@ -107,11 +107,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
-        $obj->call_duration = $call_duration;
-        $obj->call_leg_id = $call_leg_id;
-        $obj->call_session_id = $call_session_id;
-        $obj->client_state = $client_state;
+        $obj['call_control_id'] = $call_control_id;
+        $obj['call_duration'] = $call_duration;
+        $obj['call_leg_id'] = $call_leg_id;
+        $obj['call_session_id'] = $call_session_id;
+        $obj['client_state'] = $client_state;
         $obj['record_type'] = $record_type;
 
         return $obj;
@@ -123,7 +123,7 @@ final class Data implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Data implements BaseModel
     public function withCallDuration(int $callDuration): self
     {
         $obj = clone $this;
-        $obj->call_duration = $callDuration;
+        $obj['call_duration'] = $callDuration;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }

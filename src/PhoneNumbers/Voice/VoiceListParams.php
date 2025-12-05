@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter;
+use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\ConnectionName;
+use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Page;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
 
@@ -18,7 +20,14 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
  * @see Telnyx\Services\PhoneNumbers\VoiceService::list()
  *
  * @phpstan-type VoiceListParamsShape = array{
- *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
+ *   filter?: Filter|array{
+ *     connection_name?: ConnectionName|null,
+ *     customer_reference?: string|null,
+ *     phone_number?: string|null,
+ *     voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: Sort|value-of<Sort>,
  * }
  */
 final class VoiceListParams implements BaseModel
@@ -57,17 +66,24 @@ final class VoiceListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   connection_name?: ConnectionName|null,
+     *   customer_reference?: string|null,
+     *   phone_number?: string|null,
+     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Sort|string|null $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -75,22 +91,31 @@ final class VoiceListParams implements BaseModel
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method].
+     *
+     * @param Filter|array{
+     *   connection_name?: ConnectionName|null,
+     *   customer_reference?: string|null,
+     *   phone_number?: string|null,
+     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

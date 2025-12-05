@@ -109,12 +109,12 @@ final class NumberPoolSettings implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->long_code_weight = $long_code_weight;
-        $obj->skip_unhealthy = $skip_unhealthy;
-        $obj->toll_free_weight = $toll_free_weight;
+        $obj['long_code_weight'] = $long_code_weight;
+        $obj['skip_unhealthy'] = $skip_unhealthy;
+        $obj['toll_free_weight'] = $toll_free_weight;
 
-        null !== $geomatch && $obj->geomatch = $geomatch;
-        null !== $sticky_sender && $obj->sticky_sender = $sticky_sender;
+        null !== $geomatch && $obj['geomatch'] = $geomatch;
+        null !== $sticky_sender && $obj['sticky_sender'] = $sticky_sender;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class NumberPoolSettings implements BaseModel
     public function withLongCodeWeight(float $longCodeWeight): self
     {
         $obj = clone $this;
-        $obj->long_code_weight = $longCodeWeight;
+        $obj['long_code_weight'] = $longCodeWeight;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class NumberPoolSettings implements BaseModel
     public function withSkipUnhealthy(bool $skipUnhealthy): self
     {
         $obj = clone $this;
-        $obj->skip_unhealthy = $skipUnhealthy;
+        $obj['skip_unhealthy'] = $skipUnhealthy;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class NumberPoolSettings implements BaseModel
     public function withTollFreeWeight(float $tollFreeWeight): self
     {
         $obj = clone $this;
-        $obj->toll_free_weight = $tollFreeWeight;
+        $obj['toll_free_weight'] = $tollFreeWeight;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class NumberPoolSettings implements BaseModel
     public function withGeomatch(bool $geomatch): self
     {
         $obj = clone $this;
-        $obj->geomatch = $geomatch;
+        $obj['geomatch'] = $geomatch;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class NumberPoolSettings implements BaseModel
     public function withStickySender(bool $stickySender): self
     {
         $obj = clone $this;
-        $obj->sticky_sender = $stickySender;
+        $obj['sticky_sender'] = $stickySender;
 
         return $obj;
     }

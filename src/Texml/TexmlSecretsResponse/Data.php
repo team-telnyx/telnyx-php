@@ -44,7 +44,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $obj['name'] = $name;
         null !== $value && $obj['value'] = $value;
 
         return $obj;
@@ -53,7 +53,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

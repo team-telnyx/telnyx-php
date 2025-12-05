@@ -72,10 +72,10 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bucket_name = $bucket_name;
-        $obj->query = $query;
+        $obj['bucket_name'] = $bucket_name;
+        $obj['query'] = $query;
 
-        null !== $num_of_docs && $obj->num_of_docs = $num_of_docs;
+        null !== $num_of_docs && $obj['num_of_docs'] = $num_of_docs;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
     public function withBucketName(string $bucketName): self
     {
         $obj = clone $this;
-        $obj->bucket_name = $bucketName;
+        $obj['bucket_name'] = $bucketName;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
     public function withQuery(string $query): self
     {
         $obj = clone $this;
-        $obj->query = $query;
+        $obj['query'] = $query;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
     public function withNumOfDocs(int $numOfDocs): self
     {
         $obj = clone $this;
-        $obj->num_of_docs = $numOfDocs;
+        $obj['num_of_docs'] = $numOfDocs;
 
         return $obj;
     }

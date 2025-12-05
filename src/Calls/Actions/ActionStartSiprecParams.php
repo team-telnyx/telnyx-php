@@ -108,11 +108,11 @@ final class ActionStartSiprecParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connector_name && $obj->connector_name = $connector_name;
-        null !== $include_metadata_custom_headers && $obj->include_metadata_custom_headers = $include_metadata_custom_headers;
-        null !== $secure && $obj->secure = $secure;
-        null !== $session_timeout_secs && $obj->session_timeout_secs = $session_timeout_secs;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connector_name && $obj['connector_name'] = $connector_name;
+        null !== $include_metadata_custom_headers && $obj['include_metadata_custom_headers'] = $include_metadata_custom_headers;
+        null !== $secure && $obj['secure'] = $secure;
+        null !== $session_timeout_secs && $obj['session_timeout_secs'] = $session_timeout_secs;
         null !== $sip_transport && $obj['sip_transport'] = $sip_transport;
         null !== $siprec_track && $obj['siprec_track'] = $siprec_track;
 
@@ -125,7 +125,7 @@ final class ActionStartSiprecParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class ActionStartSiprecParams implements BaseModel
     public function withConnectorName(string $connectorName): self
     {
         $obj = clone $this;
-        $obj->connector_name = $connectorName;
+        $obj['connector_name'] = $connectorName;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class ActionStartSiprecParams implements BaseModel
         bool $includeMetadataCustomHeaders
     ): self {
         $obj = clone $this;
-        $obj->include_metadata_custom_headers = $includeMetadataCustomHeaders;
+        $obj['include_metadata_custom_headers'] = $includeMetadataCustomHeaders;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class ActionStartSiprecParams implements BaseModel
     public function withSecure(bool $secure): self
     {
         $obj = clone $this;
-        $obj->secure = $secure;
+        $obj['secure'] = $secure;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class ActionStartSiprecParams implements BaseModel
     public function withSessionTimeoutSecs(int $sessionTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->session_timeout_secs = $sessionTimeoutSecs;
+        $obj['session_timeout_secs'] = $sessionTimeoutSecs;
 
         return $obj;
     }

@@ -62,9 +62,9 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $obj['name'] = $name;
         null !== $status && $obj['status'] = $status;
-        null !== $type && $obj->type = $type;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class Filter implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Filter implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

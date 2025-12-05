@@ -76,12 +76,12 @@ final class SttDetailReportResponse implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $download_link && $obj->download_link = $download_link;
-        null !== $end_date && $obj->end_date = $end_date;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $start_date && $obj->start_date = $start_date;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $download_link && $obj['download_link'] = $download_link;
+        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $start_date && $obj['start_date'] = $start_date;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -93,7 +93,7 @@ final class SttDetailReportResponse implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class SttDetailReportResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class SttDetailReportResponse implements BaseModel
     public function withDownloadLink(string $downloadLink): self
     {
         $obj = clone $this;
-        $obj->download_link = $downloadLink;
+        $obj['download_link'] = $downloadLink;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class SttDetailReportResponse implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->end_date = $endDate;
+        $obj['end_date'] = $endDate;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class SttDetailReportResponse implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class SttDetailReportResponse implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->start_date = $startDate;
+        $obj['start_date'] = $startDate;
 
         return $obj;
     }

@@ -120,16 +120,16 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
         null !== $calling_party_type && $obj['calling_party_type'] = $calling_party_type;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $recording_id && $obj->recording_id = $recording_id;
-        null !== $recording_transcription_id && $obj->recording_transcription_id = $recording_transcription_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $recording_id && $obj['recording_id'] = $recording_id;
+        null !== $recording_transcription_id && $obj['recording_transcription_id'] = $recording_transcription_id;
         null !== $status && $obj['status'] = $status;
-        null !== $transcription_text && $obj->transcription_text = $transcription_text;
+        null !== $transcription_text && $obj['transcription_text'] = $transcription_text;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class Payload implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj->recording_id = $recordingID;
+        $obj['recording_id'] = $recordingID;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Payload implements BaseModel
         string $recordingTranscriptionID
     ): self {
         $obj = clone $this;
-        $obj->recording_transcription_id = $recordingTranscriptionID;
+        $obj['recording_transcription_id'] = $recordingTranscriptionID;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class Payload implements BaseModel
     public function withTranscriptionText(string $transcriptionText): self
     {
         $obj = clone $this;
-        $obj->transcription_text = $transcriptionText;
+        $obj['transcription_text'] = $transcriptionText;
 
         return $obj;
     }

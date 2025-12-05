@@ -48,7 +48,7 @@ final class ConversationUpdateParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $metadata && $obj->metadata = $metadata;
+        null !== $metadata && $obj['metadata'] = $metadata;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class ConversationUpdateParams implements BaseModel
     public function withMetadata(array $metadata): self
     {
         $obj = clone $this;
-        $obj->metadata = $metadata;
+        $obj['metadata'] = $metadata;
 
         return $obj;
     }

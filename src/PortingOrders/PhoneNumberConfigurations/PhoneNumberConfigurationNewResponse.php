@@ -37,24 +37,38 @@ final class PhoneNumberConfigurationNewResponse implements BaseModel, ResponseCo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   porting_phone_number_id?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     *   user_bundle_id?: string|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   porting_phone_number_id?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     *   user_bundle_id?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

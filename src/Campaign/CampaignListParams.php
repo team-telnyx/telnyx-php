@@ -82,10 +82,10 @@ final class CampaignListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->brandId = $brandId;
+        $obj['brandId'] = $brandId;
 
-        null !== $page && $obj->page = $page;
-        null !== $recordsPerPage && $obj->recordsPerPage = $recordsPerPage;
+        null !== $page && $obj['page'] = $page;
+        null !== $recordsPerPage && $obj['recordsPerPage'] = $recordsPerPage;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -94,7 +94,7 @@ final class CampaignListParams implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class CampaignListParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class CampaignListParams implements BaseModel
     public function withRecordsPerPage(int $recordsPerPage): self
     {
         $obj = clone $this;
-        $obj->recordsPerPage = $recordsPerPage;
+        $obj['recordsPerPage'] = $recordsPerPage;
 
         return $obj;
     }

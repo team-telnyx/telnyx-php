@@ -165,19 +165,19 @@ final class ConferenceCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
-        $obj->name = $name;
+        $obj['call_control_id'] = $call_control_id;
+        $obj['name'] = $name;
 
         null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $comfort_noise && $obj->comfort_noise = $comfort_noise;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $duration_minutes && $obj->duration_minutes = $duration_minutes;
-        null !== $hold_audio_url && $obj->hold_audio_url = $hold_audio_url;
-        null !== $hold_media_name && $obj->hold_media_name = $hold_media_name;
-        null !== $max_participants && $obj->max_participants = $max_participants;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $comfort_noise && $obj['comfort_noise'] = $comfort_noise;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $duration_minutes && $obj['duration_minutes'] = $duration_minutes;
+        null !== $hold_audio_url && $obj['hold_audio_url'] = $hold_audio_url;
+        null !== $hold_media_name && $obj['hold_media_name'] = $hold_media_name;
+        null !== $max_participants && $obj['max_participants'] = $max_participants;
         null !== $region && $obj['region'] = $region;
-        null !== $start_conference_on_create && $obj->start_conference_on_create = $start_conference_on_create;
+        null !== $start_conference_on_create && $obj['start_conference_on_create'] = $start_conference_on_create;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withComfortNoise(bool $comfortNoise): self
     {
         $obj = clone $this;
-        $obj->comfort_noise = $comfortNoise;
+        $obj['comfort_noise'] = $comfortNoise;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withDurationMinutes(int $durationMinutes): self
     {
         $obj = clone $this;
-        $obj->duration_minutes = $durationMinutes;
+        $obj['duration_minutes'] = $durationMinutes;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withHoldAudioURL(string $holdAudioURL): self
     {
         $obj = clone $this;
-        $obj->hold_audio_url = $holdAudioURL;
+        $obj['hold_audio_url'] = $holdAudioURL;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withHoldMediaName(string $holdMediaName): self
     {
         $obj = clone $this;
-        $obj->hold_media_name = $holdMediaName;
+        $obj['hold_media_name'] = $holdMediaName;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withMaxParticipants(int $maxParticipants): self
     {
         $obj = clone $this;
-        $obj->max_participants = $maxParticipants;
+        $obj['max_participants'] = $maxParticipants;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class ConferenceCreateParams implements BaseModel
         bool $startConferenceOnCreate
     ): self {
         $obj = clone $this;
-        $obj->start_conference_on_create = $startConferenceOnCreate;
+        $obj['start_conference_on_create'] = $startConferenceOnCreate;
 
         return $obj;
     }

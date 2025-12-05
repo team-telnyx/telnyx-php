@@ -11,6 +11,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Attempts;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\FinishedAt;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\StartedAt;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status\Eq;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook;
 
 /**
@@ -60,31 +61,40 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Attempts|array{contains?: string|null} $attempts
+     * @param FinishedAt|array{gte?: string|null, lte?: string|null} $finished_at
+     * @param StartedAt|array{gte?: string|null, lte?: string|null} $started_at
+     * @param Status|array{eq?: value-of<Eq>|null} $status
+     * @param Webhook|array{contains?: string|null} $webhook
      */
     public static function with(
-        ?Attempts $attempts = null,
+        Attempts|array|null $attempts = null,
         ?string $event_type = null,
-        ?FinishedAt $finished_at = null,
-        ?StartedAt $started_at = null,
-        ?Status $status = null,
-        ?Webhook $webhook = null,
+        FinishedAt|array|null $finished_at = null,
+        StartedAt|array|null $started_at = null,
+        Status|array|null $status = null,
+        Webhook|array|null $webhook = null,
     ): self {
         $obj = new self;
 
-        null !== $attempts && $obj->attempts = $attempts;
-        null !== $event_type && $obj->event_type = $event_type;
-        null !== $finished_at && $obj->finished_at = $finished_at;
-        null !== $started_at && $obj->started_at = $started_at;
-        null !== $status && $obj->status = $status;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $attempts && $obj['attempts'] = $attempts;
+        null !== $event_type && $obj['event_type'] = $event_type;
+        null !== $finished_at && $obj['finished_at'] = $finished_at;
+        null !== $started_at && $obj['started_at'] = $started_at;
+        null !== $status && $obj['status'] = $status;
+        null !== $webhook && $obj['webhook'] = $webhook;
 
         return $obj;
     }
 
-    public function withAttempts(Attempts $attempts): self
+    /**
+     * @param Attempts|array{contains?: string|null} $attempts
+     */
+    public function withAttempts(Attempts|array $attempts): self
     {
         $obj = clone $this;
-        $obj->attempts = $attempts;
+        $obj['attempts'] = $attempts;
 
         return $obj;
     }
@@ -95,39 +105,51 @@ final class Filter implements BaseModel
     public function withEventType(string $eventType): self
     {
         $obj = clone $this;
-        $obj->event_type = $eventType;
+        $obj['event_type'] = $eventType;
 
         return $obj;
     }
 
-    public function withFinishedAt(FinishedAt $finishedAt): self
+    /**
+     * @param FinishedAt|array{gte?: string|null, lte?: string|null} $finishedAt
+     */
+    public function withFinishedAt(FinishedAt|array $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finished_at = $finishedAt;
+        $obj['finished_at'] = $finishedAt;
 
         return $obj;
     }
 
-    public function withStartedAt(StartedAt $startedAt): self
+    /**
+     * @param StartedAt|array{gte?: string|null, lte?: string|null} $startedAt
+     */
+    public function withStartedAt(StartedAt|array $startedAt): self
     {
         $obj = clone $this;
-        $obj->started_at = $startedAt;
+        $obj['started_at'] = $startedAt;
 
         return $obj;
     }
 
-    public function withStatus(Status $status): self
+    /**
+     * @param Status|array{eq?: value-of<Eq>|null} $status
+     */
+    public function withStatus(Status|array $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
 
-    public function withWebhook(Webhook $webhook): self
+    /**
+     * @param Webhook|array{contains?: string|null} $webhook
+     */
+    public function withWebhook(Webhook|array $webhook): self
     {
         $obj = clone $this;
-        $obj->webhook = $webhook;
+        $obj['webhook'] = $webhook;
 
         return $obj;
     }

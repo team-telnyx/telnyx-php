@@ -52,8 +52,8 @@ final class ActionGenerateJoinClientTokenParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $refresh_token_ttl_secs && $obj->refresh_token_ttl_secs = $refresh_token_ttl_secs;
-        null !== $token_ttl_secs && $obj->token_ttl_secs = $token_ttl_secs;
+        null !== $refresh_token_ttl_secs && $obj['refresh_token_ttl_secs'] = $refresh_token_ttl_secs;
+        null !== $token_ttl_secs && $obj['token_ttl_secs'] = $token_ttl_secs;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class ActionGenerateJoinClientTokenParams implements BaseModel
     public function withRefreshTokenTtlSecs(int $refreshTokenTtlSecs): self
     {
         $obj = clone $this;
-        $obj->refresh_token_ttl_secs = $refreshTokenTtlSecs;
+        $obj['refresh_token_ttl_secs'] = $refreshTokenTtlSecs;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ActionGenerateJoinClientTokenParams implements BaseModel
     public function withTokenTtlSecs(int $tokenTtlSecs): self
     {
         $obj = clone $this;
-        $obj->token_ttl_secs = $tokenTtlSecs;
+        $obj['token_ttl_secs'] = $tokenTtlSecs;
 
         return $obj;
     }

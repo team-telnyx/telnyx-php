@@ -38,7 +38,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }

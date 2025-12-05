@@ -12,8 +12,14 @@ use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Deepgram;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
+use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Calls\SoundModifications;
 use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
@@ -40,7 +46,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   billing_group_id?: string,
  *   client_state?: string,
  *   command_id?: string,
- *   custom_headers?: list<CustomSipHeader>,
+ *   custom_headers?: list<CustomSipHeader|array{name: string, value: string}>,
  *   preferred_codecs?: PreferredCodecs|value-of<PreferredCodecs>,
  *   record?: Record|value-of<Record>,
  *   record_channels?: RecordChannels|value-of<RecordChannels>,
@@ -51,8 +57,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   record_track?: RecordTrack|value-of<RecordTrack>,
  *   record_trim?: RecordTrim|value-of<RecordTrim>,
  *   send_silence_when_idle?: bool,
- *   sip_headers?: list<SipHeader>,
- *   sound_modifications?: SoundModifications,
+ *   sip_headers?: list<SipHeader|array{name: value-of<Name>, value: string}>,
+ *   sound_modifications?: SoundModifications|array{
+ *     octaves?: float|null,
+ *     pitch?: float|null,
+ *     semitone?: float|null,
+ *     track?: string|null,
+ *   },
  *   stream_bidirectional_codec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   stream_bidirectional_mode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
  *   stream_bidirectional_target_legs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
@@ -60,7 +71,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   stream_track?: StreamTrack|value-of<StreamTrack>,
  *   stream_url?: string,
  *   transcription?: bool,
- *   transcription_config?: TranscriptionStartRequest,
+ *   transcription_config?: TranscriptionStartRequest|array{
+ *     client_state?: string|null,
+ *     command_id?: string|null,
+ *     transcription_engine?: value-of<TranscriptionEngine>|null,
+ *     transcription_engine_config?: null|Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
+ *     transcription_tracks?: string|null,
+ *   },
  *   webhook_url?: string,
  *   webhook_url_method?: WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
@@ -262,19 +279,32 @@ final class ActionAnswerParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader> $custom_headers
+     * @param list<CustomSipHeader|array{name: string, value: string}> $custom_headers
      * @param PreferredCodecs|value-of<PreferredCodecs> $preferred_codecs
      * @param Record|value-of<Record> $record
      * @param RecordChannels|value-of<RecordChannels> $record_channels
      * @param RecordFormat|value-of<RecordFormat> $record_format
      * @param RecordTrack|value-of<RecordTrack> $record_track
      * @param RecordTrim|value-of<RecordTrim> $record_trim
-     * @param list<SipHeader> $sip_headers
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sip_headers
+     * @param SoundModifications|array{
+     *   octaves?: float|null,
+     *   pitch?: float|null,
+     *   semitone?: float|null,
+     *   track?: string|null,
+     * } $sound_modifications
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $stream_bidirectional_codec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $stream_bidirectional_mode
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $stream_bidirectional_target_legs
      * @param StreamCodec|value-of<StreamCodec> $stream_codec
      * @param StreamTrack|value-of<StreamTrack> $stream_track
+     * @param TranscriptionStartRequest|array{
+     *   client_state?: string|null,
+     *   command_id?: string|null,
+     *   transcription_engine?: value-of<TranscriptionEngine>|null,
+     *   transcription_engine_config?: Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
+     *   transcription_tracks?: string|null,
+     * } $transcription_config
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhook_url_method
      */
     public static function with(
@@ -293,7 +323,7 @@ final class ActionAnswerParams implements BaseModel
         RecordTrim|string|null $record_trim = null,
         ?bool $send_silence_when_idle = null,
         ?array $sip_headers = null,
-        ?SoundModifications $sound_modifications = null,
+        SoundModifications|array|null $sound_modifications = null,
         StreamBidirectionalCodec|string|null $stream_bidirectional_codec = null,
         StreamBidirectionalMode|string|null $stream_bidirectional_mode = null,
         StreamBidirectionalTargetLegs|string|null $stream_bidirectional_target_legs = null,
@@ -301,37 +331,37 @@ final class ActionAnswerParams implements BaseModel
         StreamTrack|string|null $stream_track = null,
         ?string $stream_url = null,
         ?bool $transcription = null,
-        ?TranscriptionStartRequest $transcription_config = null,
+        TranscriptionStartRequest|array|null $transcription_config = null,
         ?string $webhook_url = null,
         WebhookURLMethod|string|null $webhook_url_method = null,
     ): self {
         $obj = new self;
 
-        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $custom_headers && $obj->custom_headers = $custom_headers;
+        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
         null !== $preferred_codecs && $obj['preferred_codecs'] = $preferred_codecs;
         null !== $record && $obj['record'] = $record;
         null !== $record_channels && $obj['record_channels'] = $record_channels;
-        null !== $record_custom_file_name && $obj->record_custom_file_name = $record_custom_file_name;
+        null !== $record_custom_file_name && $obj['record_custom_file_name'] = $record_custom_file_name;
         null !== $record_format && $obj['record_format'] = $record_format;
-        null !== $record_max_length && $obj->record_max_length = $record_max_length;
-        null !== $record_timeout_secs && $obj->record_timeout_secs = $record_timeout_secs;
+        null !== $record_max_length && $obj['record_max_length'] = $record_max_length;
+        null !== $record_timeout_secs && $obj['record_timeout_secs'] = $record_timeout_secs;
         null !== $record_track && $obj['record_track'] = $record_track;
         null !== $record_trim && $obj['record_trim'] = $record_trim;
-        null !== $send_silence_when_idle && $obj->send_silence_when_idle = $send_silence_when_idle;
-        null !== $sip_headers && $obj->sip_headers = $sip_headers;
-        null !== $sound_modifications && $obj->sound_modifications = $sound_modifications;
+        null !== $send_silence_when_idle && $obj['send_silence_when_idle'] = $send_silence_when_idle;
+        null !== $sip_headers && $obj['sip_headers'] = $sip_headers;
+        null !== $sound_modifications && $obj['sound_modifications'] = $sound_modifications;
         null !== $stream_bidirectional_codec && $obj['stream_bidirectional_codec'] = $stream_bidirectional_codec;
         null !== $stream_bidirectional_mode && $obj['stream_bidirectional_mode'] = $stream_bidirectional_mode;
         null !== $stream_bidirectional_target_legs && $obj['stream_bidirectional_target_legs'] = $stream_bidirectional_target_legs;
         null !== $stream_codec && $obj['stream_codec'] = $stream_codec;
         null !== $stream_track && $obj['stream_track'] = $stream_track;
-        null !== $stream_url && $obj->stream_url = $stream_url;
-        null !== $transcription && $obj->transcription = $transcription;
-        null !== $transcription_config && $obj->transcription_config = $transcription_config;
-        null !== $webhook_url && $obj->webhook_url = $webhook_url;
+        null !== $stream_url && $obj['stream_url'] = $stream_url;
+        null !== $transcription && $obj['transcription'] = $transcription;
+        null !== $transcription_config && $obj['transcription_config'] = $transcription_config;
+        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
         null !== $webhook_url_method && $obj['webhook_url_method'] = $webhook_url_method;
 
         return $obj;
@@ -343,7 +373,7 @@ final class ActionAnswerParams implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billing_group_id = $billingGroupID;
+        $obj['billing_group_id'] = $billingGroupID;
 
         return $obj;
     }
@@ -354,7 +384,7 @@ final class ActionAnswerParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -365,7 +395,7 @@ final class ActionAnswerParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -373,12 +403,12 @@ final class ActionAnswerParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE response.
      *
-     * @param list<CustomSipHeader> $customHeaders
+     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj->custom_headers = $customHeaders;
+        $obj['custom_headers'] = $customHeaders;
 
         return $obj;
     }
@@ -430,7 +460,7 @@ final class ActionAnswerParams implements BaseModel
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
         $obj = clone $this;
-        $obj->record_custom_file_name = $recordCustomFileName;
+        $obj['record_custom_file_name'] = $recordCustomFileName;
 
         return $obj;
     }
@@ -454,7 +484,7 @@ final class ActionAnswerParams implements BaseModel
     public function withRecordMaxLength(int $recordMaxLength): self
     {
         $obj = clone $this;
-        $obj->record_max_length = $recordMaxLength;
+        $obj['record_max_length'] = $recordMaxLength;
 
         return $obj;
     }
@@ -465,7 +495,7 @@ final class ActionAnswerParams implements BaseModel
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->record_timeout_secs = $recordTimeoutSecs;
+        $obj['record_timeout_secs'] = $recordTimeoutSecs;
 
         return $obj;
     }
@@ -502,7 +532,7 @@ final class ActionAnswerParams implements BaseModel
     public function withSendSilenceWhenIdle(bool $sendSilenceWhenIdle): self
     {
         $obj = clone $this;
-        $obj->send_silence_when_idle = $sendSilenceWhenIdle;
+        $obj['send_silence_when_idle'] = $sendSilenceWhenIdle;
 
         return $obj;
     }
@@ -510,24 +540,31 @@ final class ActionAnswerParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE response. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader> $sipHeaders
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
         $obj = clone $this;
-        $obj->sip_headers = $sipHeaders;
+        $obj['sip_headers'] = $sipHeaders;
 
         return $obj;
     }
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
+     *
+     * @param SoundModifications|array{
+     *   octaves?: float|null,
+     *   pitch?: float|null,
+     *   semitone?: float|null,
+     *   track?: string|null,
+     * } $soundModifications
      */
     public function withSoundModifications(
-        SoundModifications $soundModifications
+        SoundModifications|array $soundModifications
     ): self {
         $obj = clone $this;
-        $obj->sound_modifications = $soundModifications;
+        $obj['sound_modifications'] = $soundModifications;
 
         return $obj;
     }
@@ -606,7 +643,7 @@ final class ActionAnswerParams implements BaseModel
     public function withStreamURL(string $streamURL): self
     {
         $obj = clone $this;
-        $obj->stream_url = $streamURL;
+        $obj['stream_url'] = $streamURL;
 
         return $obj;
     }
@@ -617,16 +654,25 @@ final class ActionAnswerParams implements BaseModel
     public function withTranscription(bool $transcription): self
     {
         $obj = clone $this;
-        $obj->transcription = $transcription;
+        $obj['transcription'] = $transcription;
 
         return $obj;
     }
 
+    /**
+     * @param TranscriptionStartRequest|array{
+     *   client_state?: string|null,
+     *   command_id?: string|null,
+     *   transcription_engine?: value-of<TranscriptionEngine>|null,
+     *   transcription_engine_config?: Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
+     *   transcription_tracks?: string|null,
+     * } $transcriptionConfig
+     */
     public function withTranscriptionConfig(
-        TranscriptionStartRequest $transcriptionConfig
+        TranscriptionStartRequest|array $transcriptionConfig
     ): self {
         $obj = clone $this;
-        $obj->transcription_config = $transcriptionConfig;
+        $obj['transcription_config'] = $transcriptionConfig;
 
         return $obj;
     }
@@ -637,7 +683,7 @@ final class ActionAnswerParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhook_url = $webhookURL;
+        $obj['webhook_url'] = $webhookURL;
 
         return $obj;
     }

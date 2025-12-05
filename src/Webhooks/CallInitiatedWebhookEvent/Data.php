@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallInitiatedWebhookEvent;
 
+use Telnyx\Calls\CustomSipHeader;
+use Telnyx\Calls\SipHeader;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\Payload;
+use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\Payload\Direction;
+use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\Payload\State;
 use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\RecordType;
 
 /**
@@ -67,21 +71,42 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $event_type
+     * @param Payload|array{
+     *   call_control_id?: string|null,
+     *   call_leg_id?: string|null,
+     *   call_screening_result?: string|null,
+     *   call_session_id?: string|null,
+     *   caller_id_name?: string|null,
+     *   client_state?: string|null,
+     *   connection_codecs?: string|null,
+     *   connection_id?: string|null,
+     *   custom_headers?: list<CustomSipHeader>|null,
+     *   direction?: value-of<Direction>|null,
+     *   from?: string|null,
+     *   offered_codecs?: string|null,
+     *   shaken_stir_attestation?: string|null,
+     *   shaken_stir_validated?: bool|null,
+     *   sip_headers?: list<SipHeader>|null,
+     *   start_time?: \DateTimeInterface|null,
+     *   state?: value-of<State>|null,
+     *   tags?: list<string>|null,
+     *   to?: string|null,
+     * } $payload
      * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
         EventType|string|null $event_type = null,
         ?\DateTimeInterface $occurred_at = null,
-        ?Payload $payload = null,
+        Payload|array|null $payload = null,
         RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $occurred_at && $obj->occurred_at = $occurred_at;
-        null !== $payload && $obj->payload = $payload;
+        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -93,7 +118,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -117,15 +142,38 @@ final class Data implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }
 
-    public function withPayload(Payload $payload): self
+    /**
+     * @param Payload|array{
+     *   call_control_id?: string|null,
+     *   call_leg_id?: string|null,
+     *   call_screening_result?: string|null,
+     *   call_session_id?: string|null,
+     *   caller_id_name?: string|null,
+     *   client_state?: string|null,
+     *   connection_codecs?: string|null,
+     *   connection_id?: string|null,
+     *   custom_headers?: list<CustomSipHeader>|null,
+     *   direction?: value-of<Direction>|null,
+     *   from?: string|null,
+     *   offered_codecs?: string|null,
+     *   shaken_stir_attestation?: string|null,
+     *   shaken_stir_validated?: bool|null,
+     *   sip_headers?: list<SipHeader>|null,
+     *   start_time?: \DateTimeInterface|null,
+     *   state?: value-of<State>|null,
+     *   tags?: list<string>|null,
+     *   to?: string|null,
+     * } $payload
+     */
+    public function withPayload(Payload|array $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }

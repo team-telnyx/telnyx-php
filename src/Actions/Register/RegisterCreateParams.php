@@ -91,11 +91,11 @@ final class RegisterCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->registration_codes = $registration_codes;
+        $obj['registration_codes'] = $registration_codes;
 
-        null !== $sim_card_group_id && $obj->sim_card_group_id = $sim_card_group_id;
+        null !== $sim_card_group_id && $obj['sim_card_group_id'] = $sim_card_group_id;
         null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj->tags = $tags;
+        null !== $tags && $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class RegisterCreateParams implements BaseModel
     public function withRegistrationCodes(array $registrationCodes): self
     {
         $obj = clone $this;
-        $obj->registration_codes = $registrationCodes;
+        $obj['registration_codes'] = $registrationCodes;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class RegisterCreateParams implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj->sim_card_group_id = $simCardGroupID;
+        $obj['sim_card_group_id'] = $simCardGroupID;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class RegisterCreateParams implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }

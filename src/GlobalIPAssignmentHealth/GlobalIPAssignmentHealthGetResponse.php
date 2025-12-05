@@ -10,6 +10,9 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
+use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP;
+use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment;
+use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Health;
 
 /**
  * @phpstan-type GlobalIPAssignmentHealthGetResponseShape = array{
@@ -37,24 +40,34 @@ final class GlobalIPAssignmentHealthGetResponse implements BaseModel, ResponseCo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   global_ip?: GlobalIP|null,
+     *   global_ip_assignment?: GlobalIPAssignment|null,
+     *   health?: Health|null,
+     *   timestamp?: \DateTimeInterface|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   global_ip?: GlobalIP|null,
+     *   global_ip_assignment?: GlobalIPAssignment|null,
+     *   health?: Health|null,
+     *   timestamp?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

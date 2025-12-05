@@ -87,13 +87,13 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj->account_sid = $account_sid;
-        null !== $call_sid && $obj->call_sid = $call_sid;
-        null !== $date_updated && $obj->date_updated = $date_updated;
-        null !== $name && $obj->name = $name;
-        null !== $sid && $obj->sid = $sid;
+        null !== $account_sid && $obj['account_sid'] = $account_sid;
+        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $name && $obj['name'] = $name;
+        null !== $sid && $obj['sid'] = $sid;
         null !== $status && $obj['status'] = $status;
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->call_sid = $callSid;
+        $obj['call_sid'] = $callSid;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->date_updated = $dateUpdated;
+        $obj['date_updated'] = $dateUpdated;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withSid(string $sid): self
     {
         $obj = clone $this;
-        $obj->sid = $sid;
+        $obj['sid'] = $sid;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

@@ -18,7 +18,11 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
  * @see Telnyx\Services\TexmlApplicationsService::list()
  *
  * @phpstan-type TexmlApplicationListParamsShape = array{
- *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
+ *   filter?: Filter|array{
+ *     friendly_name?: string|null, outbound_voice_profile_id?: string|null
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: Sort|value-of<Sort>,
  * }
  */
 final class TexmlApplicationListParams implements BaseModel
@@ -68,17 +72,21 @@ final class TexmlApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   friendly_name?: string|null, outbound_voice_profile_id?: string|null
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Sort|string|null $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -86,22 +94,28 @@ final class TexmlApplicationListParams implements BaseModel
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
+     *
+     * @param Filter|array{
+     *   friendly_name?: string|null, outbound_voice_profile_id?: string|null
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

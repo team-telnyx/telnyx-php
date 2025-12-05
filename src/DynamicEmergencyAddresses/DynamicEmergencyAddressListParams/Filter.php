@@ -53,7 +53,7 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $country_code && $obj->country_code = $country_code;
+        null !== $country_code && $obj['country_code'] = $country_code;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -65,7 +65,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }

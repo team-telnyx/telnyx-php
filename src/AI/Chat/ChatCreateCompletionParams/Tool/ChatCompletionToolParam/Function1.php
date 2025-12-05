@@ -61,10 +61,10 @@ final class Function1 implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
+        $obj['name'] = $name;
 
-        null !== $description && $obj->description = $description;
-        null !== $parameters && $obj->parameters = $parameters;
+        null !== $description && $obj['description'] = $description;
+        null !== $parameters && $obj['parameters'] = $parameters;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class Function1 implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Function1 implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Function1 implements BaseModel
     public function withParameters(array $parameters): self
     {
         $obj = clone $this;
-        $obj->parameters = $parameters;
+        $obj['parameters'] = $parameters;
 
         return $obj;
     }

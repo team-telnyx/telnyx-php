@@ -90,7 +90,9 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CallingPartyType|value-of<CallingPartyType> $calling_party_type
-     * @param list<Result> $results
+     * @param list<Result|array{
+     *   insight_id?: string|null, result?: mixed|string|null
+     * }> $results
      */
     public static function with(
         ?string $call_control_id = null,
@@ -104,14 +106,14 @@ final class Payload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
         null !== $calling_party_type && $obj['calling_party_type'] = $calling_party_type;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $insight_group_id && $obj->insight_group_id = $insight_group_id;
-        null !== $results && $obj->results = $results;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $insight_group_id && $obj['insight_group_id'] = $insight_group_id;
+        null !== $results && $obj['results'] = $results;
 
         return $obj;
     }
@@ -122,7 +124,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -133,7 +135,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -144,7 +146,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -169,7 +171,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -180,7 +182,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -191,7 +193,7 @@ final class Payload implements BaseModel
     public function withInsightGroupID(string $insightGroupID): self
     {
         $obj = clone $this;
-        $obj->insight_group_id = $insightGroupID;
+        $obj['insight_group_id'] = $insightGroupID;
 
         return $obj;
     }
@@ -199,12 +201,14 @@ final class Payload implements BaseModel
     /**
      * Array of insight results being generated for the call.
      *
-     * @param list<Result> $results
+     * @param list<Result|array{
+     *   insight_id?: string|null, result?: mixed|string|null
+     * }> $results
      */
     public function withResults(array $results): self
     {
         $obj = clone $this;
-        $obj->results = $results;
+        $obj['results'] = $results;
 
         return $obj;
     }

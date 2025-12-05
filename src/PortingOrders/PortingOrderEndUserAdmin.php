@@ -87,13 +87,13 @@ final class PortingOrderEndUserAdmin implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_number && $obj->account_number = $account_number;
-        null !== $auth_person_name && $obj->auth_person_name = $auth_person_name;
-        null !== $billing_phone_number && $obj->billing_phone_number = $billing_phone_number;
-        null !== $business_identifier && $obj->business_identifier = $business_identifier;
-        null !== $entity_name && $obj->entity_name = $entity_name;
-        null !== $pin_passcode && $obj->pin_passcode = $pin_passcode;
-        null !== $tax_identifier && $obj->tax_identifier = $tax_identifier;
+        null !== $account_number && $obj['account_number'] = $account_number;
+        null !== $auth_person_name && $obj['auth_person_name'] = $auth_person_name;
+        null !== $billing_phone_number && $obj['billing_phone_number'] = $billing_phone_number;
+        null !== $business_identifier && $obj['business_identifier'] = $business_identifier;
+        null !== $entity_name && $obj['entity_name'] = $entity_name;
+        null !== $pin_passcode && $obj['pin_passcode'] = $pin_passcode;
+        null !== $tax_identifier && $obj['tax_identifier'] = $tax_identifier;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withAccountNumber(?string $accountNumber): self
     {
         $obj = clone $this;
-        $obj->account_number = $accountNumber;
+        $obj['account_number'] = $accountNumber;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withAuthPersonName(?string $authPersonName): self
     {
         $obj = clone $this;
-        $obj->auth_person_name = $authPersonName;
+        $obj['auth_person_name'] = $authPersonName;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withBillingPhoneNumber(?string $billingPhoneNumber): self
     {
         $obj = clone $this;
-        $obj->billing_phone_number = $billingPhoneNumber;
+        $obj['billing_phone_number'] = $billingPhoneNumber;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withBusinessIdentifier(?string $businessIdentifier): self
     {
         $obj = clone $this;
-        $obj->business_identifier = $businessIdentifier;
+        $obj['business_identifier'] = $businessIdentifier;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withEntityName(?string $entityName): self
     {
         $obj = clone $this;
-        $obj->entity_name = $entityName;
+        $obj['entity_name'] = $entityName;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withPinPasscode(?string $pinPasscode): self
     {
         $obj = clone $this;
-        $obj->pin_passcode = $pinPasscode;
+        $obj['pin_passcode'] = $pinPasscode;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withTaxIdentifier(?string $taxIdentifier): self
     {
         $obj = clone $this;
-        $obj->tax_identifier = $taxIdentifier;
+        $obj['tax_identifier'] = $taxIdentifier;
 
         return $obj;
     }

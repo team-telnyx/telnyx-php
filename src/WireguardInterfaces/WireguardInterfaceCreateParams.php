@@ -83,11 +83,11 @@ final class WireguardInterfaceCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->network_id = $network_id;
-        $obj->region_code = $region_code;
+        $obj['network_id'] = $network_id;
+        $obj['region_code'] = $region_code;
 
-        null !== $enable_sip_trunking && $obj->enable_sip_trunking = $enable_sip_trunking;
-        null !== $name && $obj->name = $name;
+        null !== $enable_sip_trunking && $obj['enable_sip_trunking'] = $enable_sip_trunking;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->network_id = $networkID;
+        $obj['network_id'] = $networkID;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->region_code = $regionCode;
+        $obj['region_code'] = $regionCode;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public function withEnableSipTrunking(bool $enableSipTrunking): self
     {
         $obj = clone $this;
-        $obj->enable_sip_trunking = $enableSipTrunking;
+        $obj['enable_sip_trunking'] = $enableSipTrunking;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

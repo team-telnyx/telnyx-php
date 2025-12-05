@@ -75,8 +75,10 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Target> $targets
-     * @param list<CustomHeader> $custom_headers
+     * @param list<Target|array{name?: string|null, to?: string|null}> $targets
+     * @param list<CustomHeader|array{
+     *   name?: string|null, value?: string|null
+     * }> $custom_headers
      */
     public static function with(
         string $from,
@@ -86,11 +88,11 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->from = $from;
-        $obj->targets = $targets;
+        $obj['from'] = $from;
+        $obj['targets'] = $targets;
 
-        null !== $custom_headers && $obj->custom_headers = $custom_headers;
-        null !== $warm_transfer_instructions && $obj->warm_transfer_instructions = $warm_transfer_instructions;
+        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
+        null !== $warm_transfer_instructions && $obj['warm_transfer_instructions'] = $warm_transfer_instructions;
 
         return $obj;
     }
@@ -101,7 +103,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -109,12 +111,12 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to.
      *
-     * @param list<Target> $targets
+     * @param list<Target|array{name?: string|null, to?: string|null}> $targets
      */
     public function withTargets(array $targets): self
     {
         $obj = clone $this;
-        $obj->targets = $targets;
+        $obj['targets'] = $targets;
 
         return $obj;
     }
@@ -122,12 +124,14 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE for the transfer command.
      *
-     * @param list<CustomHeader> $customHeaders
+     * @param list<CustomHeader|array{
+     *   name?: string|null, value?: string|null
+     * }> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj->custom_headers = $customHeaders;
+        $obj['custom_headers'] = $customHeaders;
 
         return $obj;
     }
@@ -139,7 +143,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
         string $warmTransferInstructions
     ): self {
         $obj = clone $this;
-        $obj->warm_transfer_instructions = $warmTransferInstructions;
+        $obj['warm_transfer_instructions'] = $warmTransferInstructions;
 
         return $obj;
     }

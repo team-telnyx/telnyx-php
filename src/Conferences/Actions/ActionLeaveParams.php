@@ -96,10 +96,10 @@ final class ActionLeaveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
+        $obj['call_control_id'] = $call_control_id;
 
         null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
-        null !== $command_id && $obj->command_id = $command_id;
+        null !== $command_id && $obj['command_id'] = $command_id;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -111,7 +111,7 @@ final class ActionLeaveParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ActionLeaveParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }

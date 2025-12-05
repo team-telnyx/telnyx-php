@@ -55,8 +55,8 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $country_iso && $obj->country_iso = $country_iso;
-        null !== $resource && $obj->resource = $resource;
+        null !== $country_iso && $obj['country_iso'] = $country_iso;
+        null !== $resource && $obj['resource'] = $resource;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Filter implements BaseModel
     public function withCountryISO(array $countryISO): self
     {
         $obj = clone $this;
-        $obj->country_iso = $countryISO;
+        $obj['country_iso'] = $countryISO;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Filter implements BaseModel
     public function withResource(array $resource): self
     {
         $obj = clone $this;
-        $obj->resource = $resource;
+        $obj['resource'] = $resource;
 
         return $obj;
     }

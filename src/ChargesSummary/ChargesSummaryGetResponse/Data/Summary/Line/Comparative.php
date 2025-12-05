@@ -74,19 +74,26 @@ final class Comparative implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MonthDetail|array{
+     *   mrc: string, quantity: int, otc?: string|null
+     * } $existing_this_month
+     * @param MonthDetail|array{
+     *   mrc: string, quantity: int, otc?: string|null
+     * } $new_this_month
      */
     public static function with(
         string $alias,
-        MonthDetail $existing_this_month,
+        MonthDetail|array $existing_this_month,
         string $name,
-        MonthDetail $new_this_month,
+        MonthDetail|array $new_this_month,
     ): self {
         $obj = new self;
 
-        $obj->alias = $alias;
-        $obj->existing_this_month = $existing_this_month;
-        $obj->name = $name;
-        $obj->new_this_month = $new_this_month;
+        $obj['alias'] = $alias;
+        $obj['existing_this_month'] = $existing_this_month;
+        $obj['name'] = $name;
+        $obj['new_this_month'] = $new_this_month;
 
         return $obj;
     }
@@ -97,15 +104,21 @@ final class Comparative implements BaseModel
     public function withAlias(string $alias): self
     {
         $obj = clone $this;
-        $obj->alias = $alias;
+        $obj['alias'] = $alias;
 
         return $obj;
     }
 
-    public function withExistingThisMonth(MonthDetail $existingThisMonth): self
-    {
+    /**
+     * @param MonthDetail|array{
+     *   mrc: string, quantity: int, otc?: string|null
+     * } $existingThisMonth
+     */
+    public function withExistingThisMonth(
+        MonthDetail|array $existingThisMonth
+    ): self {
         $obj = clone $this;
-        $obj->existing_this_month = $existingThisMonth;
+        $obj['existing_this_month'] = $existingThisMonth;
 
         return $obj;
     }
@@ -116,15 +129,20 @@ final class Comparative implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
 
-    public function withNewThisMonth(MonthDetail $newThisMonth): self
+    /**
+     * @param MonthDetail|array{
+     *   mrc: string, quantity: int, otc?: string|null
+     * } $newThisMonth
+     */
+    public function withNewThisMonth(MonthDetail|array $newThisMonth): self
     {
         $obj = clone $this;
-        $obj->new_this_month = $newThisMonth;
+        $obj['new_this_month'] = $newThisMonth;
 
         return $obj;
     }

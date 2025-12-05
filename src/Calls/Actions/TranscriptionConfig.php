@@ -42,7 +42,7 @@ final class TranscriptionConfig implements BaseModel
     {
         $obj = new self;
 
-        null !== $model && $obj->model = $model;
+        null !== $model && $obj['model'] = $model;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class TranscriptionConfig implements BaseModel
     public function withModel(string $model): self
     {
         $obj = clone $this;
-        $obj->model = $model;
+        $obj['model'] = $model;
 
         return $obj;
     }

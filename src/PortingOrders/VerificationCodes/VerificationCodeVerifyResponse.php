@@ -37,24 +37,40 @@ final class VerificationCodeVerifyResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   phone_number?: string|null,
+     *   porting_order_id?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     *   verified?: bool|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   phone_number?: string|null,
+     *   porting_order_id?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     *   verified?: bool|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

@@ -52,8 +52,8 @@ final class ClusterRetrieveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $show_subclusters && $obj->show_subclusters = $show_subclusters;
-        null !== $top_n_nodes && $obj->top_n_nodes = $top_n_nodes;
+        null !== $show_subclusters && $obj['show_subclusters'] = $show_subclusters;
+        null !== $top_n_nodes && $obj['top_n_nodes'] = $top_n_nodes;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class ClusterRetrieveParams implements BaseModel
     public function withShowSubclusters(bool $showSubclusters): self
     {
         $obj = clone $this;
-        $obj->show_subclusters = $showSubclusters;
+        $obj['show_subclusters'] = $showSubclusters;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ClusterRetrieveParams implements BaseModel
     public function withTopNNodes(int $topNNodes): self
     {
         $obj = clone $this;
-        $obj->top_n_nodes = $topNNodes;
+        $obj['top_n_nodes'] = $topNNodes;
 
         return $obj;
     }

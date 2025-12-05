@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse\Status;
 
 /**
  * @phpstan-type SpeechToTextListResponseShape = array{
@@ -36,24 +37,40 @@ final class SpeechToTextListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SttDetailReportResponse> $data
+     * @param list<SttDetailReportResponse|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   download_link?: string|null,
+     *   end_date?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   start_date?: \DateTimeInterface|null,
+     *   status?: value-of<Status>|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<SttDetailReportResponse> $data
+     * @param list<SttDetailReportResponse|array{
+     *   id?: string|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   download_link?: string|null,
+     *   end_date?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   start_date?: \DateTimeInterface|null,
+     *   status?: value-of<Status>|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

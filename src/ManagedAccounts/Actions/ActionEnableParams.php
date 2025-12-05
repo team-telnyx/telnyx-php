@@ -42,7 +42,7 @@ final class ActionEnableParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $reenable_all_connections && $obj->reenable_all_connections = $reenable_all_connections;
+        null !== $reenable_all_connections && $obj['reenable_all_connections'] = $reenable_all_connections;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class ActionEnableParams implements BaseModel
         bool $reenableAllConnections
     ): self {
         $obj = clone $this;
-        $obj->reenable_all_connections = $reenableAllConnections;
+        $obj['reenable_all_connections'] = $reenableAllConnections;
 
         return $obj;
     }

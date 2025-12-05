@@ -61,42 +61,70 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Address|array{
+     *   administrative_area?: string|null,
+     *   full_address?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $address
+     * @param Admin|array{
+     *   account_number?: string|null,
+     *   authorized_person_name?: string|null,
+     *   billing_phone_number?: string|null,
+     *   name?: string|null,
+     * } $admin
      * @param list<string> $associated_phone_numbers
      */
     public static function with(
-        ?Address $address = null,
-        ?Admin $admin = null,
+        Address|array|null $address = null,
+        Admin|array|null $admin = null,
         ?array $associated_phone_numbers = null,
         ?string $carrier_name = null,
     ): self {
         $obj = new self;
 
-        null !== $address && $obj->address = $address;
-        null !== $admin && $obj->admin = $admin;
-        null !== $associated_phone_numbers && $obj->associated_phone_numbers = $associated_phone_numbers;
-        null !== $carrier_name && $obj->carrier_name = $carrier_name;
+        null !== $address && $obj['address'] = $address;
+        null !== $admin && $obj['admin'] = $admin;
+        null !== $associated_phone_numbers && $obj['associated_phone_numbers'] = $associated_phone_numbers;
+        null !== $carrier_name && $obj['carrier_name'] = $carrier_name;
 
         return $obj;
     }
 
     /**
      * The address of the customer service record.
+     *
+     * @param Address|array{
+     *   administrative_area?: string|null,
+     *   full_address?: string|null,
+     *   locality?: string|null,
+     *   postal_code?: string|null,
+     *   street_address?: string|null,
+     * } $address
      */
-    public function withAddress(Address $address): self
+    public function withAddress(Address|array $address): self
     {
         $obj = clone $this;
-        $obj->address = $address;
+        $obj['address'] = $address;
 
         return $obj;
     }
 
     /**
      * The admin of the customer service record.
+     *
+     * @param Admin|array{
+     *   account_number?: string|null,
+     *   authorized_person_name?: string|null,
+     *   billing_phone_number?: string|null,
+     *   name?: string|null,
+     * } $admin
      */
-    public function withAdmin(Admin $admin): self
+    public function withAdmin(Admin|array $admin): self
     {
         $obj = clone $this;
-        $obj->admin = $admin;
+        $obj['admin'] = $admin;
 
         return $obj;
     }
@@ -110,7 +138,7 @@ final class Result implements BaseModel
         array $associatedPhoneNumbers
     ): self {
         $obj = clone $this;
-        $obj->associated_phone_numbers = $associatedPhoneNumbers;
+        $obj['associated_phone_numbers'] = $associatedPhoneNumbers;
 
         return $obj;
     }
@@ -121,7 +149,7 @@ final class Result implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj->carrier_name = $carrierName;
+        $obj['carrier_name'] = $carrierName;
 
         return $obj;
     }

@@ -67,9 +67,9 @@ final class Adjustment implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->amount = $amount;
-        $obj->description = $description;
-        $obj->event_date = $event_date;
+        $obj['amount'] = $amount;
+        $obj['description'] = $description;
+        $obj['event_date'] = $event_date;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Adjustment implements BaseModel
     public function withAmount(string $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Adjustment implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Adjustment implements BaseModel
     public function withEventDate(\DateTimeInterface $eventDate): self
     {
         $obj = clone $this;
-        $obj->event_date = $eventDate;
+        $obj['event_date'] = $eventDate;
 
         return $obj;
     }

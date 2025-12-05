@@ -50,17 +50,24 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AvailableService|value-of<AvailableService>> $available_services
+     * @param Location|array{
+     *   code?: string|null,
+     *   name?: string|null,
+     *   pop?: string|null,
+     *   region?: string|null,
+     *   site?: string|null,
+     * } $location
      */
     public static function with(
         ?array $available_services = null,
-        ?Location $location = null,
+        Location|array|null $location = null,
         ?string $record_type = null,
     ): self {
         $obj = new self;
 
         null !== $available_services && $obj['available_services'] = $available_services;
-        null !== $location && $obj->location = $location;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $location && $obj['location'] = $location;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -78,10 +85,19 @@ final class Data implements BaseModel
         return $obj;
     }
 
-    public function withLocation(Location $location): self
+    /**
+     * @param Location|array{
+     *   code?: string|null,
+     *   name?: string|null,
+     *   pop?: string|null,
+     *   region?: string|null,
+     *   site?: string|null,
+     * } $location
+     */
+    public function withLocation(Location|array $location): self
     {
         $obj = clone $this;
-        $obj->location = $location;
+        $obj['location'] = $location;
 
         return $obj;
     }
@@ -92,7 +108,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

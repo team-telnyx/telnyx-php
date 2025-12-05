@@ -71,11 +71,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $from && $obj->from = $from;
-        null !== $keyword && $obj->keyword = $keyword;
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
-        null !== $to && $obj->to = $to;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $from && $obj['from'] = $from;
+        null !== $keyword && $obj['keyword'] = $keyword;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $to && $obj['to'] = $to;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withKeyword(?string $keyword): self
     {
         $obj = clone $this;
-        $obj->keyword = $keyword;
+        $obj['keyword'] = $keyword;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }

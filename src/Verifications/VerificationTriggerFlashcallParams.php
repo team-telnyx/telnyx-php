@@ -77,10 +77,10 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->phone_number = $phone_number;
-        $obj->verify_profile_id = $verify_profile_id;
+        $obj['phone_number'] = $phone_number;
+        $obj['verify_profile_id'] = $verify_profile_id;
 
-        null !== $timeout_secs && $obj->timeout_secs = $timeout_secs;
+        null !== $timeout_secs && $obj['timeout_secs'] = $timeout_secs;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     public function withVerifyProfileID(string $verifyProfileID): self
     {
         $obj = clone $this;
-        $obj->verify_profile_id = $verifyProfileID;
+        $obj['verify_profile_id'] = $verifyProfileID;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     public function withTimeoutSecs(int $timeoutSecs): self
     {
         $obj = clone $this;
-        $obj->timeout_secs = $timeoutSecs;
+        $obj['timeout_secs'] = $timeoutSecs;
 
         return $obj;
     }

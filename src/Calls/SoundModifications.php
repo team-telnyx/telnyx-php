@@ -65,10 +65,10 @@ final class SoundModifications implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $octaves && $obj->octaves = $octaves;
-        null !== $pitch && $obj->pitch = $pitch;
-        null !== $semitone && $obj->semitone = $semitone;
-        null !== $track && $obj->track = $track;
+        null !== $octaves && $obj['octaves'] = $octaves;
+        null !== $pitch && $obj['pitch'] = $pitch;
+        null !== $semitone && $obj['semitone'] = $semitone;
+        null !== $track && $obj['track'] = $track;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class SoundModifications implements BaseModel
     public function withOctaves(float $octaves): self
     {
         $obj = clone $this;
-        $obj->octaves = $octaves;
+        $obj['octaves'] = $octaves;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class SoundModifications implements BaseModel
     public function withPitch(float $pitch): self
     {
         $obj = clone $this;
-        $obj->pitch = $pitch;
+        $obj['pitch'] = $pitch;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class SoundModifications implements BaseModel
     public function withSemitone(float $semitone): self
     {
         $obj = clone $this;
-        $obj->semitone = $semitone;
+        $obj['semitone'] = $semitone;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class SoundModifications implements BaseModel
     public function withTrack(string $track): self
     {
         $obj = clone $this;
-        $obj->track = $track;
+        $obj['track'] = $track;
 
         return $obj;
     }

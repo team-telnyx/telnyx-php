@@ -16,7 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\UserBundlesService::listUnused()
  *
  * @phpstan-type UserBundleListUnusedParamsShape = array{
- *   filter?: Filter, authorization_bearer?: string
+ *   filter?: Filter|array{
+ *     country_iso?: list<string>|null, resource?: list<string>|null
+ *   },
+ *   authorization_bearer?: string,
  * }
  */
 final class UserBundleListUnusedParams implements BaseModel
@@ -46,26 +49,34 @@ final class UserBundleListUnusedParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   country_iso?: list<string>|null, resource?: list<string>|null
+     * } $filter
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?string $authorization_bearer = null
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
 
         return $obj;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
+     *
+     * @param Filter|array{
+     *   country_iso?: list<string>|null, resource?: list<string>|null
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
@@ -76,7 +87,7 @@ final class UserBundleListUnusedParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorization_bearer = $authorizationBearer;
+        $obj['authorization_bearer'] = $authorizationBearer;
 
         return $obj;
     }

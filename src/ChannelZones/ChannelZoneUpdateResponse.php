@@ -107,14 +107,14 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->channels = $channels;
-        $obj->countries = $countries;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['channels'] = $channels;
+        $obj['countries'] = $countries;
+        $obj['name'] = $name;
         $obj['record_type'] = $record_type;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
     public function withChannels(int $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels;
+        $obj['channels'] = $channels;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
     public function withCountries(array $countries): self
     {
         $obj = clone $this;
-        $obj->countries = $countries;
+        $obj['countries'] = $countries;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

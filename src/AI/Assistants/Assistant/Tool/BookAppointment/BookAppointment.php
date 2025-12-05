@@ -77,11 +77,11 @@ final class BookAppointment implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->api_key_ref = $api_key_ref;
-        $obj->event_type_id = $event_type_id;
+        $obj['api_key_ref'] = $api_key_ref;
+        $obj['event_type_id'] = $event_type_id;
 
-        null !== $attendee_name && $obj->attendee_name = $attendee_name;
-        null !== $attendee_timezone && $obj->attendee_timezone = $attendee_timezone;
+        null !== $attendee_name && $obj['attendee_name'] = $attendee_name;
+        null !== $attendee_timezone && $obj['attendee_timezone'] = $attendee_timezone;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class BookAppointment implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->api_key_ref = $apiKeyRef;
+        $obj['api_key_ref'] = $apiKeyRef;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class BookAppointment implements BaseModel
     public function withEventTypeID(int $eventTypeID): self
     {
         $obj = clone $this;
-        $obj->event_type_id = $eventTypeID;
+        $obj['event_type_id'] = $eventTypeID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class BookAppointment implements BaseModel
     public function withAttendeeName(string $attendeeName): self
     {
         $obj = clone $this;
-        $obj->attendee_name = $attendeeName;
+        $obj['attendee_name'] = $attendeeName;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class BookAppointment implements BaseModel
     public function withAttendeeTimezone(string $attendeeTimezone): self
     {
         $obj = clone $this;
-        $obj->attendee_timezone = $attendeeTimezone;
+        $obj['attendee_timezone'] = $attendeeTimezone;
 
         return $obj;
     }

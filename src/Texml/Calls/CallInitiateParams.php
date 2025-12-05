@@ -367,37 +367,37 @@ final class CallInitiateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->From = $From;
-        $obj->To = $To;
+        $obj['From'] = $From;
+        $obj['To'] = $To;
 
-        null !== $AsyncAmd && $obj->AsyncAmd = $AsyncAmd;
-        null !== $AsyncAmdStatusCallback && $obj->AsyncAmdStatusCallback = $AsyncAmdStatusCallback;
+        null !== $AsyncAmd && $obj['AsyncAmd'] = $AsyncAmd;
+        null !== $AsyncAmdStatusCallback && $obj['AsyncAmdStatusCallback'] = $AsyncAmdStatusCallback;
         null !== $AsyncAmdStatusCallbackMethod && $obj['AsyncAmdStatusCallbackMethod'] = $AsyncAmdStatusCallbackMethod;
-        null !== $CallerId && $obj->CallerId = $CallerId;
-        null !== $CancelPlaybackOnDetectMessageEnd && $obj->CancelPlaybackOnDetectMessageEnd = $CancelPlaybackOnDetectMessageEnd;
-        null !== $CancelPlaybackOnMachineDetection && $obj->CancelPlaybackOnMachineDetection = $CancelPlaybackOnMachineDetection;
+        null !== $CallerId && $obj['CallerId'] = $CallerId;
+        null !== $CancelPlaybackOnDetectMessageEnd && $obj['CancelPlaybackOnDetectMessageEnd'] = $CancelPlaybackOnDetectMessageEnd;
+        null !== $CancelPlaybackOnMachineDetection && $obj['CancelPlaybackOnMachineDetection'] = $CancelPlaybackOnMachineDetection;
         null !== $DetectionMode && $obj['DetectionMode'] = $DetectionMode;
-        null !== $FallbackUrl && $obj->FallbackUrl = $FallbackUrl;
+        null !== $FallbackUrl && $obj['FallbackUrl'] = $FallbackUrl;
         null !== $MachineDetection && $obj['MachineDetection'] = $MachineDetection;
-        null !== $MachineDetectionSilenceTimeout && $obj->MachineDetectionSilenceTimeout = $MachineDetectionSilenceTimeout;
-        null !== $MachineDetectionSpeechEndThreshold && $obj->MachineDetectionSpeechEndThreshold = $MachineDetectionSpeechEndThreshold;
-        null !== $MachineDetectionSpeechThreshold && $obj->MachineDetectionSpeechThreshold = $MachineDetectionSpeechThreshold;
-        null !== $MachineDetectionTimeout && $obj->MachineDetectionTimeout = $MachineDetectionTimeout;
-        null !== $PreferredCodecs && $obj->PreferredCodecs = $PreferredCodecs;
-        null !== $Record && $obj->Record = $Record;
+        null !== $MachineDetectionSilenceTimeout && $obj['MachineDetectionSilenceTimeout'] = $MachineDetectionSilenceTimeout;
+        null !== $MachineDetectionSpeechEndThreshold && $obj['MachineDetectionSpeechEndThreshold'] = $MachineDetectionSpeechEndThreshold;
+        null !== $MachineDetectionSpeechThreshold && $obj['MachineDetectionSpeechThreshold'] = $MachineDetectionSpeechThreshold;
+        null !== $MachineDetectionTimeout && $obj['MachineDetectionTimeout'] = $MachineDetectionTimeout;
+        null !== $PreferredCodecs && $obj['PreferredCodecs'] = $PreferredCodecs;
+        null !== $Record && $obj['Record'] = $Record;
         null !== $RecordingChannels && $obj['RecordingChannels'] = $RecordingChannels;
-        null !== $RecordingStatusCallback && $obj->RecordingStatusCallback = $RecordingStatusCallback;
-        null !== $RecordingStatusCallbackEvent && $obj->RecordingStatusCallbackEvent = $RecordingStatusCallbackEvent;
+        null !== $RecordingStatusCallback && $obj['RecordingStatusCallback'] = $RecordingStatusCallback;
+        null !== $RecordingStatusCallbackEvent && $obj['RecordingStatusCallbackEvent'] = $RecordingStatusCallbackEvent;
         null !== $RecordingStatusCallbackMethod && $obj['RecordingStatusCallbackMethod'] = $RecordingStatusCallbackMethod;
-        null !== $RecordingTimeout && $obj->RecordingTimeout = $RecordingTimeout;
+        null !== $RecordingTimeout && $obj['RecordingTimeout'] = $RecordingTimeout;
         null !== $RecordingTrack && $obj['RecordingTrack'] = $RecordingTrack;
-        null !== $SipAuthPassword && $obj->SipAuthPassword = $SipAuthPassword;
-        null !== $SipAuthUsername && $obj->SipAuthUsername = $SipAuthUsername;
-        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
+        null !== $SipAuthPassword && $obj['SipAuthPassword'] = $SipAuthPassword;
+        null !== $SipAuthUsername && $obj['SipAuthUsername'] = $SipAuthUsername;
+        null !== $StatusCallback && $obj['StatusCallback'] = $StatusCallback;
         null !== $StatusCallbackEvent && $obj['StatusCallbackEvent'] = $StatusCallbackEvent;
         null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
         null !== $Trim && $obj['Trim'] = $Trim;
-        null !== $Url && $obj->Url = $Url;
+        null !== $Url && $obj['Url'] = $Url;
         null !== $UrlMethod && $obj['UrlMethod'] = $UrlMethod;
 
         return $obj;
@@ -409,7 +409,7 @@ final class CallInitiateParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->From = $from;
+        $obj['From'] = $from;
 
         return $obj;
     }
@@ -420,7 +420,7 @@ final class CallInitiateParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->To = $to;
+        $obj['To'] = $to;
 
         return $obj;
     }
@@ -431,7 +431,7 @@ final class CallInitiateParams implements BaseModel
     public function withAsyncAmd(bool $asyncAmd): self
     {
         $obj = clone $this;
-        $obj->AsyncAmd = $asyncAmd;
+        $obj['AsyncAmd'] = $asyncAmd;
 
         return $obj;
     }
@@ -443,7 +443,7 @@ final class CallInitiateParams implements BaseModel
         string $asyncAmdStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->AsyncAmdStatusCallback = $asyncAmdStatusCallback;
+        $obj['AsyncAmdStatusCallback'] = $asyncAmdStatusCallback;
 
         return $obj;
     }
@@ -468,7 +468,7 @@ final class CallInitiateParams implements BaseModel
     public function withCallerID(string $callerID): self
     {
         $obj = clone $this;
-        $obj->CallerId = $callerID;
+        $obj['CallerId'] = $callerID;
 
         return $obj;
     }
@@ -480,7 +480,7 @@ final class CallInitiateParams implements BaseModel
         bool $cancelPlaybackOnDetectMessageEnd
     ): self {
         $obj = clone $this;
-        $obj->CancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
+        $obj['CancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
 
         return $obj;
     }
@@ -492,7 +492,7 @@ final class CallInitiateParams implements BaseModel
         bool $cancelPlaybackOnMachineDetection
     ): self {
         $obj = clone $this;
-        $obj->CancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
+        $obj['CancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
 
         return $obj;
     }
@@ -517,7 +517,7 @@ final class CallInitiateParams implements BaseModel
     public function withFallbackURL(string $fallbackURL): self
     {
         $obj = clone $this;
-        $obj->FallbackUrl = $fallbackURL;
+        $obj['FallbackUrl'] = $fallbackURL;
 
         return $obj;
     }
@@ -543,7 +543,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionSilenceTimeout
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
+        $obj['MachineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
 
         return $obj;
     }
@@ -555,7 +555,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionSpeechEndThreshold
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
+        $obj['MachineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
 
         return $obj;
     }
@@ -567,7 +567,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionSpeechThreshold
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
+        $obj['MachineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
 
         return $obj;
     }
@@ -579,7 +579,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionTimeout
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionTimeout = $machineDetectionTimeout;
+        $obj['MachineDetectionTimeout'] = $machineDetectionTimeout;
 
         return $obj;
     }
@@ -590,7 +590,7 @@ final class CallInitiateParams implements BaseModel
     public function withPreferredCodecs(string $preferredCodecs): self
     {
         $obj = clone $this;
-        $obj->PreferredCodecs = $preferredCodecs;
+        $obj['PreferredCodecs'] = $preferredCodecs;
 
         return $obj;
     }
@@ -601,7 +601,7 @@ final class CallInitiateParams implements BaseModel
     public function withRecord(bool $record): self
     {
         $obj = clone $this;
-        $obj->Record = $record;
+        $obj['Record'] = $record;
 
         return $obj;
     }
@@ -627,7 +627,7 @@ final class CallInitiateParams implements BaseModel
         string $recordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->RecordingStatusCallback = $recordingStatusCallback;
+        $obj['RecordingStatusCallback'] = $recordingStatusCallback;
 
         return $obj;
     }
@@ -639,7 +639,7 @@ final class CallInitiateParams implements BaseModel
         string $recordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->RecordingStatusCallbackEvent = $recordingStatusCallbackEvent;
+        $obj['RecordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -664,7 +664,7 @@ final class CallInitiateParams implements BaseModel
     public function withRecordingTimeout(int $recordingTimeout): self
     {
         $obj = clone $this;
-        $obj->RecordingTimeout = $recordingTimeout;
+        $obj['RecordingTimeout'] = $recordingTimeout;
 
         return $obj;
     }
@@ -689,7 +689,7 @@ final class CallInitiateParams implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj->SipAuthPassword = $sipAuthPassword;
+        $obj['SipAuthPassword'] = $sipAuthPassword;
 
         return $obj;
     }
@@ -700,7 +700,7 @@ final class CallInitiateParams implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj->SipAuthUsername = $sipAuthUsername;
+        $obj['SipAuthUsername'] = $sipAuthUsername;
 
         return $obj;
     }
@@ -711,7 +711,7 @@ final class CallInitiateParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->StatusCallback = $statusCallback;
+        $obj['StatusCallback'] = $statusCallback;
 
         return $obj;
     }
@@ -764,7 +764,7 @@ final class CallInitiateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->Url = $url;
+        $obj['Url'] = $url;
 
         return $obj;
     }

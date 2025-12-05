@@ -7,6 +7,7 @@ namespace Telnyx\PhoneNumbers\Jobs;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PhoneNumberBlocks\Jobs\JobError;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PhoneNumber;
@@ -106,11 +107,19 @@ final class PhoneNumbersJob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperation> $failed_operations
-     * @param list<PendingOperation> $pending_operations
-     * @param list<PhoneNumber> $phone_numbers
+     * @param list<FailedOperation|array{
+     *   id?: string|null, errors?: list<JobError>|null, phone_number?: string|null
+     * }> $failed_operations
+     * @param list<PendingOperation|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $pending_operations
+     * @param list<PhoneNumber|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $phone_numbers
      * @param Status|value-of<Status> $status
-     * @param list<SuccessfulOperation> $successful_operations
+     * @param list<SuccessfulOperation|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $successful_operations
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -128,17 +137,17 @@ final class PhoneNumbersJob implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $etc && $obj->etc = $etc;
-        null !== $failed_operations && $obj->failed_operations = $failed_operations;
-        null !== $pending_operations && $obj->pending_operations = $pending_operations;
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $etc && $obj['etc'] = $etc;
+        null !== $failed_operations && $obj['failed_operations'] = $failed_operations;
+        null !== $pending_operations && $obj['pending_operations'] = $pending_operations;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $successful_operations && $obj->successful_operations = $successful_operations;
+        null !== $successful_operations && $obj['successful_operations'] = $successful_operations;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -149,7 +158,7 @@ final class PhoneNumbersJob implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -160,7 +169,7 @@ final class PhoneNumbersJob implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -171,40 +180,46 @@ final class PhoneNumbersJob implements BaseModel
     public function withEtc(\DateTimeInterface $etc): self
     {
         $obj = clone $this;
-        $obj->etc = $etc;
+        $obj['etc'] = $etc;
 
         return $obj;
     }
 
     /**
-     * @param list<FailedOperation> $failedOperations
+     * @param list<FailedOperation|array{
+     *   id?: string|null, errors?: list<JobError>|null, phone_number?: string|null
+     * }> $failedOperations
      */
     public function withFailedOperations(array $failedOperations): self
     {
         $obj = clone $this;
-        $obj->failed_operations = $failedOperations;
+        $obj['failed_operations'] = $failedOperations;
 
         return $obj;
     }
 
     /**
-     * @param list<PendingOperation> $pendingOperations
+     * @param list<PendingOperation|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $pendingOperations
      */
     public function withPendingOperations(array $pendingOperations): self
     {
         $obj = clone $this;
-        $obj->pending_operations = $pendingOperations;
+        $obj['pending_operations'] = $pendingOperations;
 
         return $obj;
     }
 
     /**
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -215,7 +230,7 @@ final class PhoneNumbersJob implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -234,12 +249,14 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<SuccessfulOperation> $successfulOperations
+     * @param list<SuccessfulOperation|array{
+     *   id?: string|null, phone_number?: string|null
+     * }> $successfulOperations
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {
         $obj = clone $this;
-        $obj->successful_operations = $successfulOperations;
+        $obj['successful_operations'] = $successfulOperations;
 
         return $obj;
     }
@@ -263,7 +280,7 @@ final class PhoneNumbersJob implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -99,13 +99,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bucket = $bucket;
-        $obj->created_at = $created_at;
-        $obj->finished_at = $finished_at;
-        $obj->min_cluster_size = $min_cluster_size;
-        $obj->min_subcluster_size = $min_subcluster_size;
+        $obj['bucket'] = $bucket;
+        $obj['created_at'] = $created_at;
+        $obj['finished_at'] = $finished_at;
+        $obj['min_cluster_size'] = $min_cluster_size;
+        $obj['min_subcluster_size'] = $min_subcluster_size;
         $obj['status'] = $status;
-        $obj->task_id = $task_id;
+        $obj['task_id'] = $task_id;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withBucket(string $bucket): self
     {
         $obj = clone $this;
-        $obj->bucket = $bucket;
+        $obj['bucket'] = $bucket;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finished_at = $finishedAt;
+        $obj['finished_at'] = $finishedAt;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     public function withMinClusterSize(int $minClusterSize): self
     {
         $obj = clone $this;
-        $obj->min_cluster_size = $minClusterSize;
+        $obj['min_cluster_size'] = $minClusterSize;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withMinSubclusterSize(int $minSubclusterSize): self
     {
         $obj = clone $this;
-        $obj->min_subcluster_size = $minSubclusterSize;
+        $obj['min_subcluster_size'] = $minSubclusterSize;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->task_id = $taskID;
+        $obj['task_id'] = $taskID;
 
         return $obj;
     }

@@ -134,15 +134,15 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
+        $obj['account_sid'] = $account_sid;
 
-        null !== $PlayBeep && $obj->PlayBeep = $PlayBeep;
+        null !== $PlayBeep && $obj['PlayBeep'] = $PlayBeep;
         null !== $RecordingChannels && $obj['RecordingChannels'] = $RecordingChannels;
-        null !== $RecordingStatusCallback && $obj->RecordingStatusCallback = $RecordingStatusCallback;
-        null !== $RecordingStatusCallbackEvent && $obj->RecordingStatusCallbackEvent = $RecordingStatusCallbackEvent;
+        null !== $RecordingStatusCallback && $obj['RecordingStatusCallback'] = $RecordingStatusCallback;
+        null !== $RecordingStatusCallbackEvent && $obj['RecordingStatusCallbackEvent'] = $RecordingStatusCallbackEvent;
         null !== $RecordingStatusCallbackMethod && $obj['RecordingStatusCallbackMethod'] = $RecordingStatusCallbackMethod;
         null !== $RecordingTrack && $obj['RecordingTrack'] = $RecordingTrack;
-        null !== $SendRecordingUrl && $obj->SendRecordingUrl = $SendRecordingUrl;
+        null !== $SendRecordingUrl && $obj['SendRecordingUrl'] = $SendRecordingUrl;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     public function withPlayBeep(bool $playBeep): self
     {
         $obj = clone $this;
-        $obj->PlayBeep = $playBeep;
+        $obj['PlayBeep'] = $playBeep;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         string $recordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->RecordingStatusCallback = $recordingStatusCallback;
+        $obj['RecordingStatusCallback'] = $recordingStatusCallback;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         string $recordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->RecordingStatusCallbackEvent = $recordingStatusCallbackEvent;
+        $obj['RecordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     public function withSendRecordingURL(bool $sendRecordingURL): self
     {
         $obj = clone $this;
-        $obj->SendRecordingUrl = $sendRecordingURL;
+        $obj['SendRecordingUrl'] = $sendRecordingURL;
 
         return $obj;
     }

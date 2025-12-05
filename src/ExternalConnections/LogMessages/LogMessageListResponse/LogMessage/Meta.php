@@ -55,9 +55,9 @@ final class Meta implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $external_connection_id && $obj->external_connection_id = $external_connection_id;
-        null !== $telephone_number && $obj->telephone_number = $telephone_number;
-        null !== $ticket_id && $obj->ticket_id = $ticket_id;
+        null !== $external_connection_id && $obj['external_connection_id'] = $external_connection_id;
+        null !== $telephone_number && $obj['telephone_number'] = $telephone_number;
+        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Meta implements BaseModel
     public function withExternalConnectionID(string $externalConnectionID): self
     {
         $obj = clone $this;
-        $obj->external_connection_id = $externalConnectionID;
+        $obj['external_connection_id'] = $externalConnectionID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Meta implements BaseModel
     public function withTelephoneNumber(string $telephoneNumber): self
     {
         $obj = clone $this;
-        $obj->telephone_number = $telephoneNumber;
+        $obj['telephone_number'] = $telephoneNumber;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Meta implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj->ticket_id = $ticketID;
+        $obj['ticket_id'] = $ticketID;
 
         return $obj;
     }

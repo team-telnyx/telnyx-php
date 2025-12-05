@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Requirements\RequirementListParams\Filter;
+use Telnyx\Requirements\RequirementListParams\Filter\Action;
+use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
 use Telnyx\Requirements\RequirementListParams\Page;
 use Telnyx\Requirements\RequirementListParams\Sort;
 
@@ -18,7 +20,13 @@ use Telnyx\Requirements\RequirementListParams\Sort;
  * @see Telnyx\Services\RequirementsService::list()
  *
  * @phpstan-type RequirementListParamsShape = array{
- *   filter?: Filter, page?: Page, sort?: list<Sort|value-of<Sort>>
+ *   filter?: Filter|array{
+ *     action?: value-of<Action>|null,
+ *     country_code?: string|null,
+ *     phone_number_type?: value-of<PhoneNumberType>|null,
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: list<Sort|value-of<Sort>>,
  * }
  */
 final class RequirementListParams implements BaseModel
@@ -57,17 +65,23 @@ final class RequirementListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Filter|array{
+     *   action?: value-of<Action>|null,
+     *   country_code?: string|null,
+     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param list<Sort|value-of<Sort>> $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
         ?array $sort = null
     ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -75,22 +89,30 @@ final class RequirementListParams implements BaseModel
 
     /**
      * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
+     *
+     * @param Filter|array{
+     *   action?: value-of<Action>|null,
+     *   country_code?: string|null,
+     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

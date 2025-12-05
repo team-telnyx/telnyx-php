@@ -9,7 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Networks\InterfaceStatus;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\CloudProvider;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
 
 /**
  * @phpstan-type VirtualCrossConnectGetResponseShape = array{data?: Data|null}
@@ -33,20 +36,77 @@ final class VirtualCrossConnectGetResponse implements BaseModel, ResponseConvert
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: string|null,
+     *   name?: string|null,
+     *   network_id?: string|null,
+     *   status?: value-of<InterfaceStatus>|null,
+     *   region_code?: string|null,
+     *   bgp_asn: float,
+     *   cloud_provider: value-of<CloudProvider>,
+     *   cloud_provider_region: string,
+     *   primary_cloud_account_id: string,
+     *   bandwidth_mbps?: float|null,
+     *   primary_bgp_key?: string|null,
+     *   primary_cloud_ip?: string|null,
+     *   primary_enabled?: bool|null,
+     *   primary_routing_announcement?: bool|null,
+     *   primary_telnyx_ip?: string|null,
+     *   region?: Region|null,
+     *   secondary_bgp_key?: string|null,
+     *   secondary_cloud_account_id?: string|null,
+     *   secondary_cloud_ip?: string|null,
+     *   secondary_enabled?: bool|null,
+     *   secondary_routing_announcement?: bool|null,
+     *   secondary_telnyx_ip?: string|null,
+     * } $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   id?: string|null,
+     *   created_at?: string|null,
+     *   record_type?: string|null,
+     *   updated_at?: string|null,
+     *   name?: string|null,
+     *   network_id?: string|null,
+     *   status?: value-of<InterfaceStatus>|null,
+     *   region_code?: string|null,
+     *   bgp_asn: float,
+     *   cloud_provider: value-of<CloudProvider>,
+     *   cloud_provider_region: string,
+     *   primary_cloud_account_id: string,
+     *   bandwidth_mbps?: float|null,
+     *   primary_bgp_key?: string|null,
+     *   primary_cloud_ip?: string|null,
+     *   primary_enabled?: bool|null,
+     *   primary_routing_announcement?: bool|null,
+     *   primary_telnyx_ip?: string|null,
+     *   region?: Region|null,
+     *   secondary_bgp_key?: string|null,
+     *   secondary_cloud_account_id?: string|null,
+     *   secondary_cloud_ip?: string|null,
+     *   secondary_enabled?: bool|null,
+     *   secondary_routing_announcement?: bool|null,
+     *   secondary_telnyx_ip?: string|null,
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

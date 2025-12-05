@@ -10,6 +10,9 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data;
+use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\GlobalIP;
+use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Received;
+use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 
 /**
  * @phpstan-type GlobalIPUsageGetResponseShape = array{data?: list<Data>|null}
@@ -35,24 +38,34 @@ final class GlobalIPUsageGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   global_ip?: GlobalIP|null,
+     *   received?: Received|null,
+     *   timestamp?: \DateTimeInterface|null,
+     *   transmitted?: Transmitted|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   global_ip?: GlobalIP|null,
+     *   received?: Received|null,
+     *   timestamp?: \DateTimeInterface|null,
+     *   transmitted?: Transmitted|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

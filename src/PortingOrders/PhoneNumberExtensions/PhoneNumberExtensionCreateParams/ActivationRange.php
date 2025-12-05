@@ -56,8 +56,8 @@ final class ActivationRange implements BaseModel
     {
         $obj = new self;
 
-        $obj->end_at = $end_at;
-        $obj->start_at = $start_at;
+        $obj['end_at'] = $end_at;
+        $obj['start_at'] = $start_at;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class ActivationRange implements BaseModel
     public function withEndAt(int $endAt): self
     {
         $obj = clone $this;
-        $obj->end_at = $endAt;
+        $obj['end_at'] = $endAt;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class ActivationRange implements BaseModel
     public function withStartAt(int $startAt): self
     {
         $obj = clone $this;
-        $obj->start_at = $startAt;
+        $obj['start_at'] = $startAt;
 
         return $obj;
     }

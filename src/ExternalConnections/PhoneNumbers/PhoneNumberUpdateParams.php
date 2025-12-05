@@ -61,9 +61,9 @@ final class PhoneNumberUpdateParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->id = $id;
+        $obj['id'] = $id;
 
-        null !== $location_id && $obj->location_id = $location_id;
+        null !== $location_id && $obj['location_id'] = $location_id;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->location_id = $locationID;
+        $obj['location_id'] = $locationID;
 
         return $obj;
     }

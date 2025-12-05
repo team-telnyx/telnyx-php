@@ -182,24 +182,24 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $apn && $obj->apn = $apn;
-        null !== $cell_id && $obj->cell_id = $cell_id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $imei && $obj->imei = $imei;
-        null !== $imsi && $obj->imsi = $imsi;
-        null !== $ipv4 && $obj->ipv4 = $ipv4;
-        null !== $ipv6 && $obj->ipv6 = $ipv6;
-        null !== $last_seen && $obj->last_seen = $last_seen;
+        null !== $id && $obj['id'] = $id;
+        null !== $apn && $obj['apn'] = $apn;
+        null !== $cell_id && $obj['cell_id'] = $cell_id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $imei && $obj['imei'] = $imei;
+        null !== $imsi && $obj['imsi'] = $imsi;
+        null !== $ipv4 && $obj['ipv4'] = $ipv4;
+        null !== $ipv6 && $obj['ipv6'] = $ipv6;
+        null !== $last_seen && $obj['last_seen'] = $last_seen;
         null !== $log_type && $obj['log_type'] = $log_type;
-        null !== $mobile_country_code && $obj->mobile_country_code = $mobile_country_code;
-        null !== $mobile_network_code && $obj->mobile_network_code = $mobile_network_code;
-        null !== $radio_access_technology && $obj->radio_access_technology = $radio_access_technology;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
-        null !== $start_time && $obj->start_time = $start_time;
-        null !== $state && $obj->state = $state;
-        null !== $stop_time && $obj->stop_time = $stop_time;
+        null !== $mobile_country_code && $obj['mobile_country_code'] = $mobile_country_code;
+        null !== $mobile_network_code && $obj['mobile_network_code'] = $mobile_network_code;
+        null !== $radio_access_technology && $obj['radio_access_technology'] = $radio_access_technology;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $state && $obj['state'] = $state;
+        null !== $stop_time && $obj['stop_time'] = $stop_time;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Data implements BaseModel
     public function withID(int $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Data implements BaseModel
     public function withApn(string $apn): self
     {
         $obj = clone $this;
-        $obj->apn = $apn;
+        $obj['apn'] = $apn;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class Data implements BaseModel
     public function withCellID(string $cellID): self
     {
         $obj = clone $this;
-        $obj->cell_id = $cellID;
+        $obj['cell_id'] = $cellID;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class Data implements BaseModel
     public function withImei(string $imei): self
     {
         $obj = clone $this;
-        $obj->imei = $imei;
+        $obj['imei'] = $imei;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class Data implements BaseModel
     public function withImsi(string $imsi): self
     {
         $obj = clone $this;
-        $obj->imsi = $imsi;
+        $obj['imsi'] = $imsi;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class Data implements BaseModel
     public function withIpv4(string $ipv4): self
     {
         $obj = clone $this;
-        $obj->ipv4 = $ipv4;
+        $obj['ipv4'] = $ipv4;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class Data implements BaseModel
     public function withIpv6(string $ipv6): self
     {
         $obj = clone $this;
-        $obj->ipv6 = $ipv6;
+        $obj['ipv6'] = $ipv6;
 
         return $obj;
     }
@@ -299,7 +299,7 @@ final class Data implements BaseModel
     public function withLastSeen(string $lastSeen): self
     {
         $obj = clone $this;
-        $obj->last_seen = $lastSeen;
+        $obj['last_seen'] = $lastSeen;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class Data implements BaseModel
     public function withMobileCountryCode(string $mobileCountryCode): self
     {
         $obj = clone $this;
-        $obj->mobile_country_code = $mobileCountryCode;
+        $obj['mobile_country_code'] = $mobileCountryCode;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class Data implements BaseModel
     public function withMobileNetworkCode(string $mobileNetworkCode): self
     {
         $obj = clone $this;
-        $obj->mobile_network_code = $mobileNetworkCode;
+        $obj['mobile_network_code'] = $mobileNetworkCode;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class Data implements BaseModel
         string $radioAccessTechnology
     ): self {
         $obj = clone $this;
-        $obj->radio_access_technology = $radioAccessTechnology;
+        $obj['radio_access_technology'] = $radioAccessTechnology;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -367,7 +367,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }
@@ -378,7 +378,7 @@ final class Data implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -389,7 +389,7 @@ final class Data implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -400,7 +400,7 @@ final class Data implements BaseModel
     public function withStopTime(string $stopTime): self
     {
         $obj = clone $this;
-        $obj->stop_time = $stopTime;
+        $obj['stop_time'] = $stopTime;
 
         return $obj;
     }

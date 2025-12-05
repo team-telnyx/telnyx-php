@@ -107,11 +107,11 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $activation_status && $obj['activation_status'] = $activation_status;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $portability_status && $obj['portability_status'] = $portability_status;
-        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
         null !== $status && $obj['status'] = $status;
-        null !== $support_key && $obj->support_key = $support_key;
+        null !== $support_key && $obj['support_key'] = $support_key;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Filter implements BaseModel
     public function withPortingOrderID(array $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
+        $obj['porting_order_id'] = $portingOrderID;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Filter implements BaseModel
     public function withSupportKey(string|array $supportKey): self
     {
         $obj = clone $this;
-        $obj->support_key = $supportKey;
+        $obj['support_key'] = $supportKey;
 
         return $obj;
     }

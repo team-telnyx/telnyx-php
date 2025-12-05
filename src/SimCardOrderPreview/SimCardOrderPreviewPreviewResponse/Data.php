@@ -55,21 +55,29 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ShippingCost|array{
+     *   amount?: string|null, currency?: string|null
+     * } $shipping_cost
+     * @param SimCardsCost|array{
+     *   amount?: string|null, currency?: string|null
+     * } $sim_cards_cost
+     * @param TotalCost|array{amount?: string|null, currency?: string|null} $total_cost
      */
     public static function with(
         ?int $quantity = null,
         ?string $record_type = null,
-        ?ShippingCost $shipping_cost = null,
-        ?SimCardsCost $sim_cards_cost = null,
-        ?TotalCost $total_cost = null,
+        ShippingCost|array|null $shipping_cost = null,
+        SimCardsCost|array|null $sim_cards_cost = null,
+        TotalCost|array|null $total_cost = null,
     ): self {
         $obj = new self;
 
-        null !== $quantity && $obj->quantity = $quantity;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $shipping_cost && $obj->shipping_cost = $shipping_cost;
-        null !== $sim_cards_cost && $obj->sim_cards_cost = $sim_cards_cost;
-        null !== $total_cost && $obj->total_cost = $total_cost;
+        null !== $quantity && $obj['quantity'] = $quantity;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $shipping_cost && $obj['shipping_cost'] = $shipping_cost;
+        null !== $sim_cards_cost && $obj['sim_cards_cost'] = $sim_cards_cost;
+        null !== $total_cost && $obj['total_cost'] = $total_cost;
 
         return $obj;
     }
@@ -80,7 +88,7 @@ final class Data implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -91,31 +99,44 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
-    public function withShippingCost(ShippingCost $shippingCost): self
+    /**
+     * @param ShippingCost|array{
+     *   amount?: string|null, currency?: string|null
+     * } $shippingCost
+     */
+    public function withShippingCost(ShippingCost|array $shippingCost): self
     {
         $obj = clone $this;
-        $obj->shipping_cost = $shippingCost;
+        $obj['shipping_cost'] = $shippingCost;
 
         return $obj;
     }
 
-    public function withSimCardsCost(SimCardsCost $simCardsCost): self
+    /**
+     * @param SimCardsCost|array{
+     *   amount?: string|null, currency?: string|null
+     * } $simCardsCost
+     */
+    public function withSimCardsCost(SimCardsCost|array $simCardsCost): self
     {
         $obj = clone $this;
-        $obj->sim_cards_cost = $simCardsCost;
+        $obj['sim_cards_cost'] = $simCardsCost;
 
         return $obj;
     }
 
-    public function withTotalCost(TotalCost $totalCost): self
+    /**
+     * @param TotalCost|array{amount?: string|null, currency?: string|null} $totalCost
+     */
+    public function withTotalCost(TotalCost|array $totalCost): self
     {
         $obj = clone $this;
-        $obj->total_cost = $totalCost;
+        $obj['total_cost'] = $totalCost;
 
         return $obj;
     }

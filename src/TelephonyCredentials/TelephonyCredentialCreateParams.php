@@ -77,11 +77,11 @@ final class TelephonyCredentialCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->connection_id = $connection_id;
+        $obj['connection_id'] = $connection_id;
 
-        null !== $expires_at && $obj->expires_at = $expires_at;
-        null !== $name && $obj->name = $name;
-        null !== $tag && $obj->tag = $tag;
+        null !== $expires_at && $obj['expires_at'] = $expires_at;
+        null !== $name && $obj['name'] = $name;
+        null !== $tag && $obj['tag'] = $tag;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class TelephonyCredentialCreateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class TelephonyCredentialCreateParams implements BaseModel
     public function withExpiresAt(string $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expires_at = $expiresAt;
+        $obj['expires_at'] = $expiresAt;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class TelephonyCredentialCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class TelephonyCredentialCreateParams implements BaseModel
     public function withTag(string $tag): self
     {
         $obj = clone $this;
-        $obj->tag = $tag;
+        $obj['tag'] = $tag;
 
         return $obj;
     }

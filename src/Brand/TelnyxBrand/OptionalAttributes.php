@@ -36,7 +36,7 @@ final class OptionalAttributes implements BaseModel
     {
         $obj = new self;
 
-        null !== $taxExemptStatus && $obj->taxExemptStatus = $taxExemptStatus;
+        null !== $taxExemptStatus && $obj['taxExemptStatus'] = $taxExemptStatus;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class OptionalAttributes implements BaseModel
     public function withTaxExemptStatus(string $taxExemptStatus): self
     {
         $obj = clone $this;
-        $obj->taxExemptStatus = $taxExemptStatus;
+        $obj['taxExemptStatus'] = $taxExemptStatus;
 
         return $obj;
     }

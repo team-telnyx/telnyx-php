@@ -43,39 +43,50 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param string|In|array{in?: string|null} $global_ip_assignment_id
+     * @param string|Filter\GlobalIPID\In|array{
+     *   in?: string|null
+     * } $global_ip_id
      */
     public static function with(
-        string|In|null $global_ip_assignment_id = null,
-        string|Filter\GlobalIPID\In|null $global_ip_id = null,
+        string|In|array|null $global_ip_assignment_id = null,
+        string|Filter\GlobalIPID\In|array|null $global_ip_id = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip_assignment_id && $obj->global_ip_assignment_id = $global_ip_assignment_id;
-        null !== $global_ip_id && $obj->global_ip_id = $global_ip_id;
+        null !== $global_ip_assignment_id && $obj['global_ip_assignment_id'] = $global_ip_assignment_id;
+        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
 
         return $obj;
     }
 
     /**
      * Filter by exact Global IP Assignment ID.
+     *
+     * @param string|In|array{in?: string|null} $globalIPAssignmentID
      */
     public function withGlobalIPAssignmentID(
-        string|In $globalIPAssignmentID
+        string|In|array $globalIPAssignmentID
     ): self {
         $obj = clone $this;
-        $obj->global_ip_assignment_id = $globalIPAssignmentID;
+        $obj['global_ip_assignment_id'] = $globalIPAssignmentID;
 
         return $obj;
     }
 
     /**
      * Filter by exact Global IP ID.
+     *
+     * @param string|Filter\GlobalIPID\In|array{
+     *   in?: string|null
+     * } $globalIPID
      */
     public function withGlobalIPID(
-        string|Filter\GlobalIPID\In $globalIPID,
+        string|Filter\GlobalIPID\In|array $globalIPID,
     ): self {
         $obj = clone $this;
-        $obj->global_ip_id = $globalIPID;
+        $obj['global_ip_id'] = $globalIPID;
 
         return $obj;
     }

@@ -122,13 +122,13 @@ final class OAuthTokenParams implements BaseModel
 
         $obj['grant_type'] = $grant_type;
 
-        null !== $client_id && $obj->client_id = $client_id;
-        null !== $client_secret && $obj->client_secret = $client_secret;
-        null !== $code && $obj->code = $code;
-        null !== $code_verifier && $obj->code_verifier = $code_verifier;
-        null !== $redirect_uri && $obj->redirect_uri = $redirect_uri;
-        null !== $refresh_token && $obj->refresh_token = $refresh_token;
-        null !== $scope && $obj->scope = $scope;
+        null !== $client_id && $obj['client_id'] = $client_id;
+        null !== $client_secret && $obj['client_secret'] = $client_secret;
+        null !== $code && $obj['code'] = $code;
+        null !== $code_verifier && $obj['code_verifier'] = $code_verifier;
+        null !== $redirect_uri && $obj['redirect_uri'] = $redirect_uri;
+        null !== $refresh_token && $obj['refresh_token'] = $refresh_token;
+        null !== $scope && $obj['scope'] = $scope;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class OAuthTokenParams implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->client_id = $clientID;
+        $obj['client_id'] = $clientID;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class OAuthTokenParams implements BaseModel
     public function withClientSecret(string $clientSecret): self
     {
         $obj = clone $this;
-        $obj->client_secret = $clientSecret;
+        $obj['client_secret'] = $clientSecret;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class OAuthTokenParams implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class OAuthTokenParams implements BaseModel
     public function withCodeVerifier(string $codeVerifier): self
     {
         $obj = clone $this;
-        $obj->code_verifier = $codeVerifier;
+        $obj['code_verifier'] = $codeVerifier;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class OAuthTokenParams implements BaseModel
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj->redirect_uri = $redirectUri;
+        $obj['redirect_uri'] = $redirectUri;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class OAuthTokenParams implements BaseModel
     public function withRefreshToken(string $refreshToken): self
     {
         $obj = clone $this;
-        $obj->refresh_token = $refreshToken;
+        $obj['refresh_token'] = $refreshToken;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class OAuthTokenParams implements BaseModel
     public function withScope(string $scope): self
     {
         $obj = clone $this;
-        $obj->scope = $scope;
+        $obj['scope'] = $scope;
 
         return $obj;
     }

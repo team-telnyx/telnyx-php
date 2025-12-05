@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data;
+use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data\Type;
 
 /**
  * @phpstan-type SupportingDocumentListResponseShape = array{
@@ -37,24 +38,40 @@ final class SupportingDocumentListResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string,
+     *   created_at: string,
+     *   document_id: string,
+     *   portout_id: string,
+     *   record_type: string,
+     *   type: value-of<Type>,
+     *   updated_at: string,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string,
+     *   created_at: string,
+     *   document_id: string,
+     *   portout_id: string,
+     *   record_type: string,
+     *   type: value-of<Type>,
+     *   updated_at: string,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

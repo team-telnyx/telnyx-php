@@ -66,7 +66,11 @@ final class Data implements BaseModel
      *
      * @param list<string> $product_dimensions
      * @param list<string> $product_metrics
-     * @param list<RecordType> $record_types
+     * @param list<RecordType|array{
+     *   product_dimensions?: list<string>|null,
+     *   product_metrics?: list<string>|null,
+     *   record_type?: string|null,
+     * }> $record_types
      */
     public static function with(
         ?string $product = null,
@@ -76,10 +80,10 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $product && $obj->product = $product;
-        null !== $product_dimensions && $obj->product_dimensions = $product_dimensions;
-        null !== $product_metrics && $obj->product_metrics = $product_metrics;
-        null !== $record_types && $obj->record_types = $record_types;
+        null !== $product && $obj['product'] = $product;
+        null !== $product_dimensions && $obj['product_dimensions'] = $product_dimensions;
+        null !== $product_metrics && $obj['product_metrics'] = $product_metrics;
+        null !== $record_types && $obj['record_types'] = $record_types;
 
         return $obj;
     }
@@ -90,7 +94,7 @@ final class Data implements BaseModel
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -103,7 +107,7 @@ final class Data implements BaseModel
     public function withProductDimensions(array $productDimensions): self
     {
         $obj = clone $this;
-        $obj->product_dimensions = $productDimensions;
+        $obj['product_dimensions'] = $productDimensions;
 
         return $obj;
     }
@@ -116,7 +120,7 @@ final class Data implements BaseModel
     public function withProductMetrics(array $productMetrics): self
     {
         $obj = clone $this;
-        $obj->product_metrics = $productMetrics;
+        $obj['product_metrics'] = $productMetrics;
 
         return $obj;
     }
@@ -124,12 +128,16 @@ final class Data implements BaseModel
     /**
      * Subproducts if applicable.
      *
-     * @param list<RecordType> $recordTypes
+     * @param list<RecordType|array{
+     *   product_dimensions?: list<string>|null,
+     *   product_metrics?: list<string>|null,
+     *   record_type?: string|null,
+     * }> $recordTypes
      */
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj->record_types = $recordTypes;
+        $obj['record_types'] = $recordTypes;
 
         return $obj;
     }

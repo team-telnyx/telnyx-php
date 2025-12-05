@@ -33,20 +33,29 @@ final class SimCardGetActivationCodeResponse implements BaseModel, ResponseConve
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|array{
+     *   activation_code?: string|null, record_type?: string|null
+     * } $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|array{
+     *   activation_code?: string|null, record_type?: string|null
+     * } $data
+     */
+    public function withData(Data|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

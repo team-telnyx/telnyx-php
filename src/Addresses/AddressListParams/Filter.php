@@ -53,47 +53,63 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AddressBook|array{eq?: string|null} $address_book
+     * @param string|UnionMember1|array{
+     *   contains?: string|null, eq?: string|null
+     * } $customer_reference
+     * @param StreetAddress|array{contains?: string|null} $street_address
      */
     public static function with(
-        ?AddressBook $address_book = null,
-        string|UnionMember1|null $customer_reference = null,
-        ?StreetAddress $street_address = null,
+        AddressBook|array|null $address_book = null,
+        string|UnionMember1|array|null $customer_reference = null,
+        StreetAddress|array|null $street_address = null,
         ?string $used_as_emergency = null,
     ): self {
         $obj = new self;
 
-        null !== $address_book && $obj->address_book = $address_book;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $street_address && $obj->street_address = $street_address;
-        null !== $used_as_emergency && $obj->used_as_emergency = $used_as_emergency;
+        null !== $address_book && $obj['address_book'] = $address_book;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $street_address && $obj['street_address'] = $street_address;
+        null !== $used_as_emergency && $obj['used_as_emergency'] = $used_as_emergency;
 
         return $obj;
     }
 
-    public function withAddressBook(AddressBook $addressBook): self
+    /**
+     * @param AddressBook|array{eq?: string|null} $addressBook
+     */
+    public function withAddressBook(AddressBook|array $addressBook): self
     {
         $obj = clone $this;
-        $obj->address_book = $addressBook;
+        $obj['address_book'] = $addressBook;
 
         return $obj;
     }
 
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
+     *
+     * @param string|UnionMember1|array{
+     *   contains?: string|null, eq?: string|null
+     * } $customerReference
      */
     public function withCustomerReference(
-        string|UnionMember1 $customerReference
+        string|UnionMember1|array $customerReference
     ): self {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
-    public function withStreetAddress(StreetAddress $streetAddress): self
+    /**
+     * @param StreetAddress|array{contains?: string|null} $streetAddress
+     */
+    public function withStreetAddress(StreetAddress|array $streetAddress): self
     {
         $obj = clone $this;
-        $obj->street_address = $streetAddress;
+        $obj['street_address'] = $streetAddress;
 
         return $obj;
     }
@@ -104,7 +120,7 @@ final class Filter implements BaseModel
     public function withUsedAsEmergency(string $usedAsEmergency): self
     {
         $obj = clone $this;
-        $obj->used_as_emergency = $usedAsEmergency;
+        $obj['used_as_emergency'] = $usedAsEmergency;
 
         return $obj;
     }

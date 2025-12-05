@@ -37,23 +37,54 @@ final class VoiceDeleteResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CdrUsageReportResponseLegacy|array{
+     *   id?: string|null,
+     *   aggregation_type?: int|null,
+     *   connections?: list<string>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   end_time?: \DateTimeInterface|null,
+     *   product_breakdown?: int|null,
+     *   record_type?: string|null,
+     *   report_url?: string|null,
+     *   result?: mixed,
+     *   start_time?: \DateTimeInterface|null,
+     *   status?: int|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public static function with(?CdrUsageReportResponseLegacy $data = null): self
-    {
+    public static function with(
+        CdrUsageReportResponseLegacy|array|null $data = null
+    ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
      * Legacy V2 CDR usage report response.
+     *
+     * @param CdrUsageReportResponseLegacy|array{
+     *   id?: string|null,
+     *   aggregation_type?: int|null,
+     *   connections?: list<string>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   end_time?: \DateTimeInterface|null,
+     *   product_breakdown?: int|null,
+     *   record_type?: string|null,
+     *   report_url?: string|null,
+     *   result?: mixed,
+     *   start_time?: \DateTimeInterface|null,
+     *   status?: int|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * } $data
      */
-    public function withData(CdrUsageReportResponseLegacy $data): self
+    public function withData(CdrUsageReportResponseLegacy|array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

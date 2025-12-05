@@ -43,26 +43,31 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ApplicationName|array{contains?: string|null} $application_name
      */
     public static function with(
-        ?ApplicationName $application_name = null,
+        ApplicationName|array|null $application_name = null,
         ?string $outbound_voice_profile_id = null,
     ): self {
         $obj = new self;
 
-        null !== $application_name && $obj->application_name = $application_name;
-        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
+        null !== $application_name && $obj['application_name'] = $application_name;
+        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
 
         return $obj;
     }
 
     /**
      * Application name filtering operations.
+     *
+     * @param ApplicationName|array{contains?: string|null} $applicationName
      */
-    public function withApplicationName(ApplicationName $applicationName): self
-    {
+    public function withApplicationName(
+        ApplicationName|array $applicationName
+    ): self {
         $obj = clone $this;
-        $obj->application_name = $applicationName;
+        $obj['application_name'] = $applicationName;
 
         return $obj;
     }
@@ -74,7 +79,7 @@ final class Filter implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
+        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
 
         return $obj;
     }

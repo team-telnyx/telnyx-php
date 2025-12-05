@@ -67,9 +67,9 @@ final class ShortCodeUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->messaging_profile_id = $messaging_profile_id;
+        $obj['messaging_profile_id'] = $messaging_profile_id;
 
-        null !== $tags && $obj->tags = $tags;
+        null !== $tags && $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class ShortCodeUpdateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class ShortCodeUpdateParams implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }

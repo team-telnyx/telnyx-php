@@ -42,7 +42,7 @@ final class SimCardGroupRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $include_iccids && $obj->include_iccids = $include_iccids;
+        null !== $include_iccids && $obj['include_iccids'] = $include_iccids;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class SimCardGroupRetrieveParams implements BaseModel
     public function withIncludeIccids(bool $includeIccids): self
     {
         $obj = clone $this;
-        $obj->include_iccids = $includeIccids;
+        $obj['include_iccids'] = $includeIccids;
 
         return $obj;
     }

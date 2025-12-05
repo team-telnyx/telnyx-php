@@ -70,7 +70,9 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|array{
+     *   percentage: float, version_id: string
+     * }> $versions
      */
     public static function with(
         string $assistant_id,
@@ -80,10 +82,10 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->assistant_id = $assistant_id;
-        $obj->created_at = $created_at;
-        $obj->updated_at = $updated_at;
-        $obj->versions = $versions;
+        $obj['assistant_id'] = $assistant_id;
+        $obj['created_at'] = $created_at;
+        $obj['updated_at'] = $updated_at;
+        $obj['versions'] = $versions;
 
         return $obj;
     }
@@ -91,7 +93,7 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistant_id = $assistantID;
+        $obj['assistant_id'] = $assistantID;
 
         return $obj;
     }
@@ -99,7 +101,7 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -107,18 +109,20 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
 
     /**
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|array{
+     *   percentage: float, version_id: string
+     * }> $versions
      */
     public function withVersions(array $versions): self
     {
         $obj = clone $this;
-        $obj->versions = $versions;
+        $obj['versions'] = $versions;
 
         return $obj;
     }

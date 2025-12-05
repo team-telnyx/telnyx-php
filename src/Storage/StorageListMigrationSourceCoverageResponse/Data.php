@@ -52,7 +52,7 @@ final class Data implements BaseModel
         $obj = new self;
 
         null !== $provider && $obj['provider'] = $provider;
-        null !== $source_region && $obj->source_region = $source_region;
+        null !== $source_region && $obj['source_region'] = $source_region;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Data implements BaseModel
     public function withSourceRegion(string $sourceRegion): self
     {
         $obj = clone $this;
-        $obj->source_region = $sourceRegion;
+        $obj['source_region'] = $sourceRegion;
 
         return $obj;
     }

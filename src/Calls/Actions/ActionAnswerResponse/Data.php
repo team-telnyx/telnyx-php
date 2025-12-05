@@ -43,8 +43,8 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $recording_id && $obj->recording_id = $recording_id;
-        null !== $result && $obj->result = $result;
+        null !== $recording_id && $obj['recording_id'] = $recording_id;
+        null !== $result && $obj['result'] = $result;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj->recording_id = $recordingID;
+        $obj['recording_id'] = $recordingID;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Data implements BaseModel
     public function withResult(string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

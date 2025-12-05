@@ -137,15 +137,15 @@ final class PushCredential implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->alias = $alias;
-        $obj->certificate = $certificate;
-        $obj->created_at = $created_at;
-        $obj->private_key = $private_key;
-        $obj->project_account_json_file = $project_account_json_file;
-        $obj->record_type = $record_type;
-        $obj->type = $type;
-        $obj->updated_at = $updated_at;
+        $obj['id'] = $id;
+        $obj['alias'] = $alias;
+        $obj['certificate'] = $certificate;
+        $obj['created_at'] = $created_at;
+        $obj['private_key'] = $private_key;
+        $obj['project_account_json_file'] = $project_account_json_file;
+        $obj['record_type'] = $record_type;
+        $obj['type'] = $type;
+        $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class PushCredential implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class PushCredential implements BaseModel
     public function withAlias(string $alias): self
     {
         $obj = clone $this;
-        $obj->alias = $alias;
+        $obj['alias'] = $alias;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class PushCredential implements BaseModel
     public function withCertificate(string $certificate): self
     {
         $obj = clone $this;
-        $obj->certificate = $certificate;
+        $obj['certificate'] = $certificate;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class PushCredential implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class PushCredential implements BaseModel
     public function withPrivateKey(string $privateKey): self
     {
         $obj = clone $this;
-        $obj->private_key = $privateKey;
+        $obj['private_key'] = $privateKey;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class PushCredential implements BaseModel
         array $projectAccountJsonFile
     ): self {
         $obj = clone $this;
-        $obj->project_account_json_file = $projectAccountJsonFile;
+        $obj['project_account_json_file'] = $projectAccountJsonFile;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class PushCredential implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class PushCredential implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class PushCredential implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

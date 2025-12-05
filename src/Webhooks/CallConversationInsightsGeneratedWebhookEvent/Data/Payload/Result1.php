@@ -51,8 +51,8 @@ final class Result1 implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $insight_id && $obj->insight_id = $insight_id;
-        null !== $result && $obj->result = $result;
+        null !== $insight_id && $obj['insight_id'] = $insight_id;
+        null !== $result && $obj['result'] = $result;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Result1 implements BaseModel
     public function withInsightID(string $insightID): self
     {
         $obj = clone $this;
-        $obj->insight_id = $insightID;
+        $obj['insight_id'] = $insightID;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Result1 implements BaseModel
     public function withResult(mixed $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

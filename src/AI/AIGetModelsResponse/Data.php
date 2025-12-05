@@ -62,11 +62,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created = $created;
-        $obj->owned_by = $owned_by;
+        $obj['id'] = $id;
+        $obj['created'] = $created;
+        $obj['owned_by'] = $owned_by;
 
-        null !== $object && $obj->object = $object;
+        null !== $object && $obj['object'] = $object;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withCreated(int $created): self
     {
         $obj = clone $this;
-        $obj->created = $created;
+        $obj['created'] = $created;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withOwnedBy(string $ownedBy): self
     {
         $obj = clone $this;
-        $obj->owned_by = $ownedBy;
+        $obj['owned_by'] = $ownedBy;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Data implements BaseModel
     public function withObject(string $object): self
     {
         $obj = clone $this;
-        $obj->object = $object;
+        $obj['object'] = $object;
 
         return $obj;
     }

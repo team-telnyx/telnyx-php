@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallHangupWebhookEvent;
 
+use Telnyx\Calls\CustomSipHeader;
+use Telnyx\Calls\SipHeader;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload;
+use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats;
+use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\HangupCause;
+use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\HangupSource;
+use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\State;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\RecordType;
 
 /**
@@ -67,21 +73,39 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $event_type
+     * @param Payload|array{
+     *   call_control_id?: string|null,
+     *   call_leg_id?: string|null,
+     *   call_quality_stats?: CallQualityStats|null,
+     *   call_session_id?: string|null,
+     *   client_state?: string|null,
+     *   connection_id?: string|null,
+     *   custom_headers?: list<CustomSipHeader>|null,
+     *   from?: string|null,
+     *   hangup_cause?: value-of<HangupCause>|null,
+     *   hangup_source?: value-of<HangupSource>|null,
+     *   sip_hangup_cause?: string|null,
+     *   sip_headers?: list<SipHeader>|null,
+     *   start_time?: \DateTimeInterface|null,
+     *   state?: value-of<State>|null,
+     *   tags?: list<string>|null,
+     *   to?: string|null,
+     * } $payload
      * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
         EventType|string|null $event_type = null,
         ?\DateTimeInterface $occurred_at = null,
-        ?Payload $payload = null,
+        Payload|array|null $payload = null,
         RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $obj['id'] = $id;
         null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $occurred_at && $obj->occurred_at = $occurred_at;
-        null !== $payload && $obj->payload = $payload;
+        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $payload && $obj['payload'] = $payload;
         null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
@@ -93,7 +117,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -117,15 +141,35 @@ final class Data implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurred_at = $occurredAt;
+        $obj['occurred_at'] = $occurredAt;
 
         return $obj;
     }
 
-    public function withPayload(Payload $payload): self
+    /**
+     * @param Payload|array{
+     *   call_control_id?: string|null,
+     *   call_leg_id?: string|null,
+     *   call_quality_stats?: CallQualityStats|null,
+     *   call_session_id?: string|null,
+     *   client_state?: string|null,
+     *   connection_id?: string|null,
+     *   custom_headers?: list<CustomSipHeader>|null,
+     *   from?: string|null,
+     *   hangup_cause?: value-of<HangupCause>|null,
+     *   hangup_source?: value-of<HangupSource>|null,
+     *   sip_hangup_cause?: string|null,
+     *   sip_headers?: list<SipHeader>|null,
+     *   start_time?: \DateTimeInterface|null,
+     *   state?: value-of<State>|null,
+     *   tags?: list<string>|null,
+     *   to?: string|null,
+     * } $payload
+     */
+    public function withPayload(Payload|array $payload): self
     {
         $obj = clone $this;
-        $obj->payload = $payload;
+        $obj['payload'] = $payload;
 
         return $obj;
     }

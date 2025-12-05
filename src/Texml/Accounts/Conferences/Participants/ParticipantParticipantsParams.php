@@ -46,7 +46,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   ConferenceStatusCallbackEvent?: string,
  *   ConferenceStatusCallbackMethod?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod>,
  *   ConferenceTrim?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim>,
- *   CustomHeaders?: list<CustomHeader>,
+ *   CustomHeaders?: list<CustomHeader|array{name: string, value: string}>,
  *   EarlyMedia?: bool,
  *   EndConferenceOnExit?: bool,
  *   From?: string,
@@ -454,7 +454,7 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod> $ConferenceRecordingStatusCallbackMethod
      * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $ConferenceStatusCallbackMethod
      * @param ConferenceTrim|value-of<ConferenceTrim> $ConferenceTrim
-     * @param list<CustomHeader> $CustomHeaders
+     * @param list<CustomHeader|array{name: string, value: string}> $CustomHeaders
      * @param MachineDetection|value-of<MachineDetection> $MachineDetection
      * @param RecordingChannels|value-of<RecordingChannels> $RecordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $RecordingStatusCallbackMethod
@@ -513,54 +513,54 @@ final class ParticipantParticipantsParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->account_sid = $account_sid;
+        $obj['account_sid'] = $account_sid;
 
-        null !== $AmdStatusCallback && $obj->AmdStatusCallback = $AmdStatusCallback;
+        null !== $AmdStatusCallback && $obj['AmdStatusCallback'] = $AmdStatusCallback;
         null !== $AmdStatusCallbackMethod && $obj['AmdStatusCallbackMethod'] = $AmdStatusCallbackMethod;
         null !== $Beep && $obj['Beep'] = $Beep;
-        null !== $CallerId && $obj->CallerId = $CallerId;
-        null !== $CallSidToCoach && $obj->CallSidToCoach = $CallSidToCoach;
-        null !== $CancelPlaybackOnDetectMessageEnd && $obj->CancelPlaybackOnDetectMessageEnd = $CancelPlaybackOnDetectMessageEnd;
-        null !== $CancelPlaybackOnMachineDetection && $obj->CancelPlaybackOnMachineDetection = $CancelPlaybackOnMachineDetection;
-        null !== $Coaching && $obj->Coaching = $Coaching;
+        null !== $CallerId && $obj['CallerId'] = $CallerId;
+        null !== $CallSidToCoach && $obj['CallSidToCoach'] = $CallSidToCoach;
+        null !== $CancelPlaybackOnDetectMessageEnd && $obj['CancelPlaybackOnDetectMessageEnd'] = $CancelPlaybackOnDetectMessageEnd;
+        null !== $CancelPlaybackOnMachineDetection && $obj['CancelPlaybackOnMachineDetection'] = $CancelPlaybackOnMachineDetection;
+        null !== $Coaching && $obj['Coaching'] = $Coaching;
         null !== $ConferenceRecord && $obj['ConferenceRecord'] = $ConferenceRecord;
-        null !== $ConferenceRecordingStatusCallback && $obj->ConferenceRecordingStatusCallback = $ConferenceRecordingStatusCallback;
-        null !== $ConferenceRecordingStatusCallbackEvent && $obj->ConferenceRecordingStatusCallbackEvent = $ConferenceRecordingStatusCallbackEvent;
+        null !== $ConferenceRecordingStatusCallback && $obj['ConferenceRecordingStatusCallback'] = $ConferenceRecordingStatusCallback;
+        null !== $ConferenceRecordingStatusCallbackEvent && $obj['ConferenceRecordingStatusCallbackEvent'] = $ConferenceRecordingStatusCallbackEvent;
         null !== $ConferenceRecordingStatusCallbackMethod && $obj['ConferenceRecordingStatusCallbackMethod'] = $ConferenceRecordingStatusCallbackMethod;
-        null !== $ConferenceRecordingTimeout && $obj->ConferenceRecordingTimeout = $ConferenceRecordingTimeout;
-        null !== $ConferenceStatusCallback && $obj->ConferenceStatusCallback = $ConferenceStatusCallback;
-        null !== $ConferenceStatusCallbackEvent && $obj->ConferenceStatusCallbackEvent = $ConferenceStatusCallbackEvent;
+        null !== $ConferenceRecordingTimeout && $obj['ConferenceRecordingTimeout'] = $ConferenceRecordingTimeout;
+        null !== $ConferenceStatusCallback && $obj['ConferenceStatusCallback'] = $ConferenceStatusCallback;
+        null !== $ConferenceStatusCallbackEvent && $obj['ConferenceStatusCallbackEvent'] = $ConferenceStatusCallbackEvent;
         null !== $ConferenceStatusCallbackMethod && $obj['ConferenceStatusCallbackMethod'] = $ConferenceStatusCallbackMethod;
         null !== $ConferenceTrim && $obj['ConferenceTrim'] = $ConferenceTrim;
-        null !== $CustomHeaders && $obj->CustomHeaders = $CustomHeaders;
-        null !== $EarlyMedia && $obj->EarlyMedia = $EarlyMedia;
-        null !== $EndConferenceOnExit && $obj->EndConferenceOnExit = $EndConferenceOnExit;
-        null !== $From && $obj->From = $From;
+        null !== $CustomHeaders && $obj['CustomHeaders'] = $CustomHeaders;
+        null !== $EarlyMedia && $obj['EarlyMedia'] = $EarlyMedia;
+        null !== $EndConferenceOnExit && $obj['EndConferenceOnExit'] = $EndConferenceOnExit;
+        null !== $From && $obj['From'] = $From;
         null !== $MachineDetection && $obj['MachineDetection'] = $MachineDetection;
-        null !== $MachineDetectionSilenceTimeout && $obj->MachineDetectionSilenceTimeout = $MachineDetectionSilenceTimeout;
-        null !== $MachineDetectionSpeechEndThreshold && $obj->MachineDetectionSpeechEndThreshold = $MachineDetectionSpeechEndThreshold;
-        null !== $MachineDetectionSpeechThreshold && $obj->MachineDetectionSpeechThreshold = $MachineDetectionSpeechThreshold;
-        null !== $MachineDetectionTimeout && $obj->MachineDetectionTimeout = $MachineDetectionTimeout;
-        null !== $MaxParticipants && $obj->MaxParticipants = $MaxParticipants;
-        null !== $Muted && $obj->Muted = $Muted;
-        null !== $PreferredCodecs && $obj->PreferredCodecs = $PreferredCodecs;
-        null !== $Record && $obj->Record = $Record;
+        null !== $MachineDetectionSilenceTimeout && $obj['MachineDetectionSilenceTimeout'] = $MachineDetectionSilenceTimeout;
+        null !== $MachineDetectionSpeechEndThreshold && $obj['MachineDetectionSpeechEndThreshold'] = $MachineDetectionSpeechEndThreshold;
+        null !== $MachineDetectionSpeechThreshold && $obj['MachineDetectionSpeechThreshold'] = $MachineDetectionSpeechThreshold;
+        null !== $MachineDetectionTimeout && $obj['MachineDetectionTimeout'] = $MachineDetectionTimeout;
+        null !== $MaxParticipants && $obj['MaxParticipants'] = $MaxParticipants;
+        null !== $Muted && $obj['Muted'] = $Muted;
+        null !== $PreferredCodecs && $obj['PreferredCodecs'] = $PreferredCodecs;
+        null !== $Record && $obj['Record'] = $Record;
         null !== $RecordingChannels && $obj['RecordingChannels'] = $RecordingChannels;
-        null !== $RecordingStatusCallback && $obj->RecordingStatusCallback = $RecordingStatusCallback;
-        null !== $RecordingStatusCallbackEvent && $obj->RecordingStatusCallbackEvent = $RecordingStatusCallbackEvent;
+        null !== $RecordingStatusCallback && $obj['RecordingStatusCallback'] = $RecordingStatusCallback;
+        null !== $RecordingStatusCallbackEvent && $obj['RecordingStatusCallbackEvent'] = $RecordingStatusCallbackEvent;
         null !== $RecordingStatusCallbackMethod && $obj['RecordingStatusCallbackMethod'] = $RecordingStatusCallbackMethod;
         null !== $RecordingTrack && $obj['RecordingTrack'] = $RecordingTrack;
-        null !== $SipAuthPassword && $obj->SipAuthPassword = $SipAuthPassword;
-        null !== $SipAuthUsername && $obj->SipAuthUsername = $SipAuthUsername;
-        null !== $StartConferenceOnEnter && $obj->StartConferenceOnEnter = $StartConferenceOnEnter;
-        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
-        null !== $StatusCallbackEvent && $obj->StatusCallbackEvent = $StatusCallbackEvent;
+        null !== $SipAuthPassword && $obj['SipAuthPassword'] = $SipAuthPassword;
+        null !== $SipAuthUsername && $obj['SipAuthUsername'] = $SipAuthUsername;
+        null !== $StartConferenceOnEnter && $obj['StartConferenceOnEnter'] = $StartConferenceOnEnter;
+        null !== $StatusCallback && $obj['StatusCallback'] = $StatusCallback;
+        null !== $StatusCallbackEvent && $obj['StatusCallbackEvent'] = $StatusCallbackEvent;
         null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
-        null !== $TimeLimit && $obj->TimeLimit = $TimeLimit;
-        null !== $timeout_seconds && $obj->timeout_seconds = $timeout_seconds;
-        null !== $To && $obj->To = $To;
+        null !== $TimeLimit && $obj['TimeLimit'] = $TimeLimit;
+        null !== $timeout_seconds && $obj['timeout_seconds'] = $timeout_seconds;
+        null !== $To && $obj['To'] = $To;
         null !== $Trim && $obj['Trim'] = $Trim;
-        null !== $WaitUrl && $obj->WaitUrl = $WaitUrl;
+        null !== $WaitUrl && $obj['WaitUrl'] = $WaitUrl;
 
         return $obj;
     }
@@ -568,7 +568,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->account_sid = $accountSid;
+        $obj['account_sid'] = $accountSid;
 
         return $obj;
     }
@@ -579,7 +579,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withAmdStatusCallback(string $amdStatusCallback): self
     {
         $obj = clone $this;
-        $obj->AmdStatusCallback = $amdStatusCallback;
+        $obj['AmdStatusCallback'] = $amdStatusCallback;
 
         return $obj;
     }
@@ -618,7 +618,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withCallerID(string $callerID): self
     {
         $obj = clone $this;
-        $obj->CallerId = $callerID;
+        $obj['CallerId'] = $callerID;
 
         return $obj;
     }
@@ -629,7 +629,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withCallSidToCoach(string $callSidToCoach): self
     {
         $obj = clone $this;
-        $obj->CallSidToCoach = $callSidToCoach;
+        $obj['CallSidToCoach'] = $callSidToCoach;
 
         return $obj;
     }
@@ -641,7 +641,7 @@ final class ParticipantParticipantsParams implements BaseModel
         bool $cancelPlaybackOnDetectMessageEnd
     ): self {
         $obj = clone $this;
-        $obj->CancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
+        $obj['CancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
 
         return $obj;
     }
@@ -653,7 +653,7 @@ final class ParticipantParticipantsParams implements BaseModel
         bool $cancelPlaybackOnMachineDetection
     ): self {
         $obj = clone $this;
-        $obj->CancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
+        $obj['CancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
 
         return $obj;
     }
@@ -664,7 +664,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withCoaching(bool $coaching): self
     {
         $obj = clone $this;
-        $obj->Coaching = $coaching;
+        $obj['Coaching'] = $coaching;
 
         return $obj;
     }
@@ -690,7 +690,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceRecordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->ConferenceRecordingStatusCallback = $conferenceRecordingStatusCallback;
+        $obj['ConferenceRecordingStatusCallback'] = $conferenceRecordingStatusCallback;
 
         return $obj;
     }
@@ -702,7 +702,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceRecordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->ConferenceRecordingStatusCallbackEvent = $conferenceRecordingStatusCallbackEvent;
+        $obj['ConferenceRecordingStatusCallbackEvent'] = $conferenceRecordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -728,7 +728,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $conferenceRecordingTimeout
     ): self {
         $obj = clone $this;
-        $obj->ConferenceRecordingTimeout = $conferenceRecordingTimeout;
+        $obj['ConferenceRecordingTimeout'] = $conferenceRecordingTimeout;
 
         return $obj;
     }
@@ -740,7 +740,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->ConferenceStatusCallback = $conferenceStatusCallback;
+        $obj['ConferenceStatusCallback'] = $conferenceStatusCallback;
 
         return $obj;
     }
@@ -752,7 +752,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->ConferenceStatusCallbackEvent = $conferenceStatusCallbackEvent;
+        $obj['ConferenceStatusCallbackEvent'] = $conferenceStatusCallbackEvent;
 
         return $obj;
     }
@@ -788,12 +788,12 @@ final class ParticipantParticipantsParams implements BaseModel
     /**
      * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      *
-     * @param list<CustomHeader> $customHeaders
+     * @param list<CustomHeader|array{name: string, value: string}> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj->CustomHeaders = $customHeaders;
+        $obj['CustomHeaders'] = $customHeaders;
 
         return $obj;
     }
@@ -804,7 +804,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withEarlyMedia(bool $earlyMedia): self
     {
         $obj = clone $this;
-        $obj->EarlyMedia = $earlyMedia;
+        $obj['EarlyMedia'] = $earlyMedia;
 
         return $obj;
     }
@@ -815,7 +815,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->EndConferenceOnExit = $endConferenceOnExit;
+        $obj['EndConferenceOnExit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -826,7 +826,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->From = $from;
+        $obj['From'] = $from;
 
         return $obj;
     }
@@ -852,7 +852,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionSilenceTimeout
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
+        $obj['MachineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
 
         return $obj;
     }
@@ -864,7 +864,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionSpeechEndThreshold
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
+        $obj['MachineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
 
         return $obj;
     }
@@ -876,7 +876,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionSpeechThreshold
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
+        $obj['MachineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
 
         return $obj;
     }
@@ -888,7 +888,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionTimeout
     ): self {
         $obj = clone $this;
-        $obj->MachineDetectionTimeout = $machineDetectionTimeout;
+        $obj['MachineDetectionTimeout'] = $machineDetectionTimeout;
 
         return $obj;
     }
@@ -899,7 +899,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withMaxParticipants(int $maxParticipants): self
     {
         $obj = clone $this;
-        $obj->MaxParticipants = $maxParticipants;
+        $obj['MaxParticipants'] = $maxParticipants;
 
         return $obj;
     }
@@ -910,7 +910,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withMuted(bool $muted): self
     {
         $obj = clone $this;
-        $obj->Muted = $muted;
+        $obj['Muted'] = $muted;
 
         return $obj;
     }
@@ -921,7 +921,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withPreferredCodecs(string $preferredCodecs): self
     {
         $obj = clone $this;
-        $obj->PreferredCodecs = $preferredCodecs;
+        $obj['PreferredCodecs'] = $preferredCodecs;
 
         return $obj;
     }
@@ -932,7 +932,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withRecord(bool $record): self
     {
         $obj = clone $this;
-        $obj->Record = $record;
+        $obj['Record'] = $record;
 
         return $obj;
     }
@@ -958,7 +958,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $recordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->RecordingStatusCallback = $recordingStatusCallback;
+        $obj['RecordingStatusCallback'] = $recordingStatusCallback;
 
         return $obj;
     }
@@ -970,7 +970,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $recordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->RecordingStatusCallbackEvent = $recordingStatusCallbackEvent;
+        $obj['RecordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -1009,7 +1009,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj->SipAuthPassword = $sipAuthPassword;
+        $obj['SipAuthPassword'] = $sipAuthPassword;
 
         return $obj;
     }
@@ -1020,7 +1020,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj->SipAuthUsername = $sipAuthUsername;
+        $obj['SipAuthUsername'] = $sipAuthUsername;
 
         return $obj;
     }
@@ -1032,7 +1032,7 @@ final class ParticipantParticipantsParams implements BaseModel
         bool $startConferenceOnEnter
     ): self {
         $obj = clone $this;
-        $obj->StartConferenceOnEnter = $startConferenceOnEnter;
+        $obj['StartConferenceOnEnter'] = $startConferenceOnEnter;
 
         return $obj;
     }
@@ -1043,7 +1043,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->StatusCallback = $statusCallback;
+        $obj['StatusCallback'] = $statusCallback;
 
         return $obj;
     }
@@ -1054,7 +1054,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withStatusCallbackEvent(string $statusCallbackEvent): self
     {
         $obj = clone $this;
-        $obj->StatusCallbackEvent = $statusCallbackEvent;
+        $obj['StatusCallbackEvent'] = $statusCallbackEvent;
 
         return $obj;
     }
@@ -1079,7 +1079,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withTimeLimit(int $timeLimit): self
     {
         $obj = clone $this;
-        $obj->TimeLimit = $timeLimit;
+        $obj['TimeLimit'] = $timeLimit;
 
         return $obj;
     }
@@ -1090,7 +1090,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withTimeoutSeconds(int $timeoutSeconds): self
     {
         $obj = clone $this;
-        $obj->timeout_seconds = $timeoutSeconds;
+        $obj['timeout_seconds'] = $timeoutSeconds;
 
         return $obj;
     }
@@ -1101,7 +1101,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->To = $to;
+        $obj['To'] = $to;
 
         return $obj;
     }
@@ -1126,7 +1126,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withWaitURL(string $waitURL): self
     {
         $obj = clone $this;
-        $obj->WaitUrl = $waitURL;
+        $obj['WaitUrl'] = $waitURL;
 
         return $obj;
     }

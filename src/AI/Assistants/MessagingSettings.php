@@ -47,8 +47,8 @@ final class MessagingSettings implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $default_messaging_profile_id && $obj->default_messaging_profile_id = $default_messaging_profile_id;
-        null !== $delivery_status_webhook_url && $obj->delivery_status_webhook_url = $delivery_status_webhook_url;
+        null !== $default_messaging_profile_id && $obj['default_messaging_profile_id'] = $default_messaging_profile_id;
+        null !== $delivery_status_webhook_url && $obj['delivery_status_webhook_url'] = $delivery_status_webhook_url;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class MessagingSettings implements BaseModel
         string $defaultMessagingProfileID
     ): self {
         $obj = clone $this;
-        $obj->default_messaging_profile_id = $defaultMessagingProfileID;
+        $obj['default_messaging_profile_id'] = $defaultMessagingProfileID;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class MessagingSettings implements BaseModel
         string $deliveryStatusWebhookURL
     ): self {
         $obj = clone $this;
-        $obj->delivery_status_webhook_url = $deliveryStatusWebhookURL;
+        $obj['delivery_status_webhook_url'] = $deliveryStatusWebhookURL;
 
         return $obj;
     }

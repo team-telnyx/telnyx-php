@@ -54,7 +54,7 @@ final class OAuthGrantsResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        $obj->redirect_uri = $redirect_uri;
+        $obj['redirect_uri'] = $redirect_uri;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class OAuthGrantsResponse implements BaseModel, ResponseConverter
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj->redirect_uri = $redirectUri;
+        $obj['redirect_uri'] = $redirectUri;
 
         return $obj;
     }

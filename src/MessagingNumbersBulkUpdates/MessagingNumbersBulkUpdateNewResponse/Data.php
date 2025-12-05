@@ -85,11 +85,11 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $failed && $obj->failed = $failed;
-        null !== $order_id && $obj->order_id = $order_id;
-        null !== $pending && $obj->pending = $pending;
+        null !== $failed && $obj['failed'] = $failed;
+        null !== $order_id && $obj['order_id'] = $order_id;
+        null !== $pending && $obj['pending'] = $pending;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $success && $obj->success = $success;
+        null !== $success && $obj['success'] = $success;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     public function withFailed(array $failed): self
     {
         $obj = clone $this;
-        $obj->failed = $failed;
+        $obj['failed'] = $failed;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withOrderID(string $orderID): self
     {
         $obj = clone $this;
-        $obj->order_id = $orderID;
+        $obj['order_id'] = $orderID;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withPending(array $pending): self
     {
         $obj = clone $this;
-        $obj->pending = $pending;
+        $obj['pending'] = $pending;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Data implements BaseModel
     public function withSuccess(array $success): self
     {
         $obj = clone $this;
-        $obj->success = $success;
+        $obj['success'] = $success;
 
         return $obj;
     }

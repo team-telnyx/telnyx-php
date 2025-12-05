@@ -120,16 +120,16 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $action_type && $obj->action_type = $action_type;
-        null !== $action_url && $obj->action_url = $action_url;
-        null !== $cancel_reason && $obj->cancel_reason = $cancel_reason;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $action_type && $obj['action_type'] = $action_type;
+        null !== $action_url && $obj['action_url'] = $action_url;
+        null !== $cancel_reason && $obj['cancel_reason'] = $cancel_reason;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $requirement_type_id && $obj->requirement_type_id = $requirement_type_id;
+        null !== $requirement_type_id && $obj['requirement_type_id'] = $requirement_type_id;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withActionType(string $actionType): self
     {
         $obj = clone $this;
-        $obj->action_type = $actionType;
+        $obj['action_type'] = $actionType;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Data implements BaseModel
     public function withActionURL(?string $actionURL): self
     {
         $obj = clone $this;
-        $obj->action_url = $actionURL;
+        $obj['action_url'] = $actionURL;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Data implements BaseModel
     public function withCancelReason(?string $cancelReason): self
     {
         $obj = clone $this;
-        $obj->cancel_reason = $cancelReason;
+        $obj['cancel_reason'] = $cancelReason;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
+        $obj['porting_order_id'] = $portingOrderID;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class Data implements BaseModel
     public function withRequirementTypeID(string $requirementTypeID): self
     {
         $obj = clone $this;
-        $obj->requirement_type_id = $requirementTypeID;
+        $obj['requirement_type_id'] = $requirementTypeID;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -45,17 +45,19 @@ final class ViewLocationAction implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param LatLong|array{latitude: float, longitude: float} $lat_long
      */
     public static function with(
         ?string $label = null,
-        ?LatLong $lat_long = null,
+        LatLong|array|null $lat_long = null,
         ?string $query = null
     ): self {
         $obj = new self;
 
-        null !== $label && $obj->label = $label;
-        null !== $lat_long && $obj->lat_long = $lat_long;
-        null !== $query && $obj->query = $query;
+        null !== $label && $obj['label'] = $label;
+        null !== $lat_long && $obj['lat_long'] = $lat_long;
+        null !== $query && $obj['query'] = $query;
 
         return $obj;
     }
@@ -66,15 +68,18 @@ final class ViewLocationAction implements BaseModel
     public function withLabel(string $label): self
     {
         $obj = clone $this;
-        $obj->label = $label;
+        $obj['label'] = $label;
 
         return $obj;
     }
 
-    public function withLatLong(LatLong $latLong): self
+    /**
+     * @param LatLong|array{latitude: float, longitude: float} $latLong
+     */
+    public function withLatLong(LatLong|array $latLong): self
     {
         $obj = clone $this;
-        $obj->lat_long = $latLong;
+        $obj['lat_long'] = $latLong;
 
         return $obj;
     }
@@ -85,7 +90,7 @@ final class ViewLocationAction implements BaseModel
     public function withQuery(string $query): self
     {
         $obj = clone $this;
-        $obj->query = $query;
+        $obj['query'] = $query;
 
         return $obj;
     }

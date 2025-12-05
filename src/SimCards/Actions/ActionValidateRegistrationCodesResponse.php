@@ -37,24 +37,34 @@ final class ActionValidateRegistrationCodesResponse implements BaseModel, Respon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   invalid_detail?: string|null,
+     *   record_type?: string|null,
+     *   registration_code?: string|null,
+     *   valid?: bool|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   invalid_detail?: string|null,
+     *   record_type?: string|null,
+     *   registration_code?: string|null,
+     *   valid?: bool|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

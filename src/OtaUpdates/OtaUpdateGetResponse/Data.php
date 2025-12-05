@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings;
+use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsPreference;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Status;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Type;
 
@@ -85,6 +86,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Settings|array{
+     *   mobile_network_operators_preferences?: list<MobileNetworkOperatorsPreference>|null,
+     * } $settings
      * @param Status|value-of<Status> $status
      * @param Type|value-of<Type> $type
      */
@@ -92,7 +96,7 @@ final class Data implements BaseModel
         ?string $id = null,
         ?string $created_at = null,
         ?string $record_type = null,
-        ?Settings $settings = null,
+        Settings|array|null $settings = null,
         ?string $sim_card_id = null,
         Status|string|null $status = null,
         Type|string|null $type = null,
@@ -100,14 +104,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $settings && $obj->settings = $settings;
-        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $settings && $obj['settings'] = $settings;
+        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
         null !== $status && $obj['status'] = $status;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -118,7 +122,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -129,7 +133,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -137,18 +141,22 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
      * A JSON object representation of the operation. The information present here will relate directly to the source of the OTA request.
+     *
+     * @param Settings|array{
+     *   mobile_network_operators_preferences?: list<MobileNetworkOperatorsPreference>|null,
+     * } $settings
      */
-    public function withSettings(Settings $settings): self
+    public function withSettings(Settings|array $settings): self
     {
         $obj = clone $this;
-        $obj->settings = $settings;
+        $obj['settings'] = $settings;
 
         return $obj;
     }
@@ -159,7 +167,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->sim_card_id = $simCardID;
+        $obj['sim_card_id'] = $simCardID;
 
         return $obj;
     }
@@ -194,7 +202,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

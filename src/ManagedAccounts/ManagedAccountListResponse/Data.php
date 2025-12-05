@@ -145,17 +145,17 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->api_user = $api_user;
-        $obj->created_at = $created_at;
-        $obj->email = $email;
-        $obj->manager_account_id = $manager_account_id;
+        $obj['id'] = $id;
+        $obj['api_user'] = $api_user;
+        $obj['created_at'] = $created_at;
+        $obj['email'] = $email;
+        $obj['manager_account_id'] = $manager_account_id;
         $obj['record_type'] = $record_type;
-        $obj->updated_at = $updated_at;
+        $obj['updated_at'] = $updated_at;
 
-        null !== $managed_account_allow_custom_pricing && $obj->managed_account_allow_custom_pricing = $managed_account_allow_custom_pricing;
-        null !== $organization_name && $obj->organization_name = $organization_name;
-        null !== $rollup_billing && $obj->rollup_billing = $rollup_billing;
+        null !== $managed_account_allow_custom_pricing && $obj['managed_account_allow_custom_pricing'] = $managed_account_allow_custom_pricing;
+        null !== $organization_name && $obj['organization_name'] = $organization_name;
+        null !== $rollup_billing && $obj['rollup_billing'] = $rollup_billing;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Data implements BaseModel
     public function withAPIUser(string $apiUser): self
     {
         $obj = clone $this;
-        $obj->api_user = $apiUser;
+        $obj['api_user'] = $apiUser;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Data implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Data implements BaseModel
     public function withManagerAccountID(string $managerAccountID): self
     {
         $obj = clone $this;
-        $obj->manager_account_id = $managerAccountID;
+        $obj['manager_account_id'] = $managerAccountID;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class Data implements BaseModel
         bool $managedAccountAllowCustomPricing
     ): self {
         $obj = clone $this;
-        $obj->managed_account_allow_custom_pricing = $managedAccountAllowCustomPricing;
+        $obj['managed_account_allow_custom_pricing'] = $managedAccountAllowCustomPricing;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class Data implements BaseModel
     public function withOrganizationName(string $organizationName): self
     {
         $obj = clone $this;
-        $obj->organization_name = $organizationName;
+        $obj['organization_name'] = $organizationName;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class Data implements BaseModel
     public function withRollupBilling(bool $rollupBilling): self
     {
         $obj = clone $this;
-        $obj->rollup_billing = $rollupBilling;
+        $obj['rollup_billing'] = $rollupBilling;
 
         return $obj;
     }

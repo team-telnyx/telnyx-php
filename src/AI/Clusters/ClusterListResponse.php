@@ -11,6 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
  * @phpstan-type ClusterListResponseShape = array{data: list<Data>, meta: Meta}
@@ -53,33 +54,57 @@ final class ClusterListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   bucket: string,
+     *   created_at: \DateTimeInterface,
+     *   finished_at: \DateTimeInterface,
+     *   min_cluster_size: int,
+     *   min_subcluster_size: int,
+     *   status: value-of<TaskStatus>,
+     *   task_id: string,
+     * }> $data
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   bucket: string,
+     *   created_at: \DateTimeInterface,
+     *   finished_at: \DateTimeInterface,
+     *   min_cluster_size: int,
+     *   min_subcluster_size: int,
+     *   status: value-of<TaskStatus>,
+     *   task_id: string,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

@@ -52,24 +52,28 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Record> $records
+     * @param list<Record|array{
+     *   phoneNumber: string, status: string, taskId: string
+     * }> $records
      */
     public static function with(array $records): self
     {
         $obj = new self;
 
-        $obj->records = $records;
+        $obj['records'] = $records;
 
         return $obj;
     }
 
     /**
-     * @param list<Record> $records
+     * @param list<Record|array{
+     *   phoneNumber: string, status: string, taskId: string
+     * }> $records
      */
     public function withRecords(array $records): self
     {
         $obj = clone $this;
-        $obj->records = $records;
+        $obj['records'] = $records;
 
         return $obj;
     }

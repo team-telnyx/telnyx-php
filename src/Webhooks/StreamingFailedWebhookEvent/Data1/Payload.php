@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\StreamingFailedWebhookEvent\Data1\Payload\StreamParams;
+use Telnyx\Webhooks\StreamingFailedWebhookEvent\Data1\Payload\StreamParams\Track;
 use Telnyx\Webhooks\StreamingFailedWebhookEvent\Data1\Payload\StreamType;
 
 /**
@@ -94,6 +95,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param StreamParams|array{
+     *   stream_url?: string|null, track?: value-of<Track>|null
+     * } $stream_params
      * @param StreamType|value-of<StreamType> $stream_type
      */
     public static function with(
@@ -104,19 +108,19 @@ final class Payload implements BaseModel
         ?string $connection_id = null,
         ?string $failure_reason = null,
         ?string $stream_id = null,
-        ?StreamParams $stream_params = null,
+        StreamParams|array|null $stream_params = null,
         StreamType|string|null $stream_type = null,
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj->call_control_id = $call_control_id;
-        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
-        null !== $call_session_id && $obj->call_session_id = $call_session_id;
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $failure_reason && $obj->failure_reason = $failure_reason;
-        null !== $stream_id && $obj->stream_id = $stream_id;
-        null !== $stream_params && $obj->stream_params = $stream_params;
+        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
+        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
+        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $failure_reason && $obj['failure_reason'] = $failure_reason;
+        null !== $stream_id && $obj['stream_id'] = $stream_id;
+        null !== $stream_params && $obj['stream_params'] = $stream_params;
         null !== $stream_type && $obj['stream_type'] = $stream_type;
 
         return $obj;
@@ -128,7 +132,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj['call_control_id'] = $callControlID;
 
         return $obj;
     }
@@ -139,7 +143,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
+        $obj['call_leg_id'] = $callLegID;
 
         return $obj;
     }
@@ -150,7 +154,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
+        $obj['call_session_id'] = $callSessionID;
 
         return $obj;
     }
@@ -161,7 +165,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -172,7 +176,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -183,7 +187,7 @@ final class Payload implements BaseModel
     public function withFailureReason(string $failureReason): self
     {
         $obj = clone $this;
-        $obj->failure_reason = $failureReason;
+        $obj['failure_reason'] = $failureReason;
 
         return $obj;
     }
@@ -194,18 +198,22 @@ final class Payload implements BaseModel
     public function withStreamID(string $streamID): self
     {
         $obj = clone $this;
-        $obj->stream_id = $streamID;
+        $obj['stream_id'] = $streamID;
 
         return $obj;
     }
 
     /**
      * Streaming parameters as they were originally given to the Call Control API.
+     *
+     * @param StreamParams|array{
+     *   stream_url?: string|null, track?: value-of<Track>|null
+     * } $streamParams
      */
-    public function withStreamParams(StreamParams $streamParams): self
+    public function withStreamParams(StreamParams|array $streamParams): self
     {
         $obj = clone $this;
-        $obj->stream_params = $streamParams;
+        $obj['stream_params'] = $streamParams;
 
         return $obj;
     }

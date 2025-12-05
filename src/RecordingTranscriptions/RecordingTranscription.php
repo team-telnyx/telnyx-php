@@ -100,14 +100,14 @@ final class RecordingTranscription implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $duration_millis && $obj->duration_millis = $duration_millis;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $duration_millis && $obj['duration_millis'] = $duration_millis;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $recording_id && $obj->recording_id = $recording_id;
+        null !== $recording_id && $obj['recording_id'] = $recording_id;
         null !== $status && $obj['status'] = $status;
-        null !== $transcription_text && $obj->transcription_text = $transcription_text;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $transcription_text && $obj['transcription_text'] = $transcription_text;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class RecordingTranscription implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class RecordingTranscription implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class RecordingTranscription implements BaseModel
     public function withDurationMillis(int $durationMillis): self
     {
         $obj = clone $this;
-        $obj->duration_millis = $durationMillis;
+        $obj['duration_millis'] = $durationMillis;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class RecordingTranscription implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj->recording_id = $recordingID;
+        $obj['recording_id'] = $recordingID;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class RecordingTranscription implements BaseModel
     public function withTranscriptionText(string $transcriptionText): self
     {
         $obj = clone $this;
-        $obj->transcription_text = $transcriptionText;
+        $obj['transcription_text'] = $transcriptionText;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class RecordingTranscription implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

@@ -79,7 +79,7 @@ final class OutboundCallRecording implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $call_recording_caller_phone_numbers && $obj->call_recording_caller_phone_numbers = $call_recording_caller_phone_numbers;
+        null !== $call_recording_caller_phone_numbers && $obj['call_recording_caller_phone_numbers'] = $call_recording_caller_phone_numbers;
         null !== $call_recording_channels && $obj['call_recording_channels'] = $call_recording_channels;
         null !== $call_recording_format && $obj['call_recording_format'] = $call_recording_format;
         null !== $call_recording_type && $obj['call_recording_type'] = $call_recording_type;
@@ -96,7 +96,7 @@ final class OutboundCallRecording implements BaseModel
         array $callRecordingCallerPhoneNumbers
     ): self {
         $obj = clone $this;
-        $obj->call_recording_caller_phone_numbers = $callRecordingCallerPhoneNumbers;
+        $obj['call_recording_caller_phone_numbers'] = $callRecordingCallerPhoneNumbers;
 
         return $obj;
     }

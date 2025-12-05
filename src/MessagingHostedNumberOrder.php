@@ -59,7 +59,12 @@ final class MessagingHostedNumberOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<HostedNumber> $phone_numbers
+     * @param list<HostedNumber|array{
+     *   id?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: string|null,
+     *   status?: value-of<HostedNumber\Status>|null,
+     * }> $phone_numbers
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -71,10 +76,10 @@ final class MessagingHostedNumberOrder implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $id && $obj['id'] = $id;
+        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -86,7 +91,7 @@ final class MessagingHostedNumberOrder implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -97,18 +102,23 @@ final class MessagingHostedNumberOrder implements BaseModel
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
+        $obj['messaging_profile_id'] = $messagingProfileID;
 
         return $obj;
     }
 
     /**
-     * @param list<HostedNumber> $phoneNumbers
+     * @param list<HostedNumber|array{
+     *   id?: string|null,
+     *   phone_number?: string|null,
+     *   record_type?: string|null,
+     *   status?: value-of<HostedNumber\Status>|null,
+     * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -119,7 +129,7 @@ final class MessagingHostedNumberOrder implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

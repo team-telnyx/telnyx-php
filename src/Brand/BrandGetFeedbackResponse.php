@@ -61,14 +61,16 @@ final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Category> $category
+     * @param list<Category|array{
+     *   id: string, description: string, displayName: string, fields: list<string>
+     * }> $category
      */
     public static function with(string $brandId, array $category): self
     {
         $obj = new self;
 
-        $obj->brandId = $brandId;
-        $obj->category = $category;
+        $obj['brandId'] = $brandId;
+        $obj['category'] = $category;
 
         return $obj;
     }
@@ -79,7 +81,7 @@ final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandId = $brandID;
+        $obj['brandId'] = $brandID;
 
         return $obj;
     }
@@ -87,12 +89,14 @@ final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
     /**
      * A list of reasons why brand creation/revetting didn't go as planned.
      *
-     * @param list<Category> $category
+     * @param list<Category|array{
+     *   id: string, description: string, displayName: string, fields: list<string>
+     * }> $category
      */
     public function withCategory(array $category): self
     {
         $obj = clone $this;
-        $obj->category = $category;
+        $obj['category'] = $category;
 
         return $obj;
     }

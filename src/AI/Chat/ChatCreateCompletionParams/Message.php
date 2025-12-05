@@ -6,6 +6,7 @@ namespace Telnyx\AI\Chat\ChatCreateCompletionParams;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray\Type;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -53,26 +54,30 @@ final class Message implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<TextAndImageArray> $content
+     * @param string|list<TextAndImageArray|array{
+     *   type: value-of<Type>, image_url?: string|null, text?: string|null
+     * }> $content
      * @param Role|value-of<Role> $role
      */
     public static function with(string|array $content, Role|string $role): self
     {
         $obj = new self;
 
-        $obj->content = $content;
+        $obj['content'] = $content;
         $obj['role'] = $role;
 
         return $obj;
     }
 
     /**
-     * @param string|list<TextAndImageArray> $content
+     * @param string|list<TextAndImageArray|array{
+     *   type: value-of<Type>, image_url?: string|null, text?: string|null
+     * }> $content
      */
     public function withContent(string|array $content): self
     {
         $obj = clone $this;
-        $obj->content = $content;
+        $obj['content'] = $content;
 
         return $obj;
     }

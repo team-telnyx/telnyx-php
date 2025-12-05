@@ -89,13 +89,13 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $invoice_enabled && $obj->invoice_enabled = $invoice_enabled;
+        null !== $id && $obj['id'] = $id;
+        null !== $enabled && $obj['enabled'] = $enabled;
+        null !== $invoice_enabled && $obj['invoice_enabled'] = $invoice_enabled;
         null !== $preference && $obj['preference'] = $preference;
-        null !== $recharge_amount && $obj->recharge_amount = $recharge_amount;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $threshold_amount && $obj->threshold_amount = $threshold_amount;
+        null !== $recharge_amount && $obj['recharge_amount'] = $recharge_amount;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $threshold_amount && $obj['threshold_amount'] = $threshold_amount;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withEnabled(bool $enabled): self
     {
         $obj = clone $this;
-        $obj->enabled = $enabled;
+        $obj['enabled'] = $enabled;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withInvoiceEnabled(bool $invoiceEnabled): self
     {
         $obj = clone $this;
-        $obj->invoice_enabled = $invoiceEnabled;
+        $obj['invoice_enabled'] = $invoiceEnabled;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withRechargeAmount(string $rechargeAmount): self
     {
         $obj = clone $this;
-        $obj->recharge_amount = $rechargeAmount;
+        $obj['recharge_amount'] = $rechargeAmount;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Data implements BaseModel
     public function withThresholdAmount(string $thresholdAmount): self
     {
         $obj = clone $this;
-        $obj->threshold_amount = $thresholdAmount;
+        $obj['threshold_amount'] = $thresholdAmount;
 
         return $obj;
     }

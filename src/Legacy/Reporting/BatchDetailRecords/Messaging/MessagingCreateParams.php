@@ -9,6 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 
 /**
  * Creates a new MDR detailed report request with the specified filters.
@@ -20,7 +23,15 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *   start_time: \DateTimeInterface,
  *   connections?: list<int>,
  *   directions?: list<int>,
- *   filters?: list<Filter>,
+ *   filters?: list<Filter|array{
+ *     billing_group?: string|null,
+ *     cld?: string|null,
+ *     cld_filter?: value-of<CldFilter>|null,
+ *     cli?: string|null,
+ *     cli_filter?: value-of<CliFilter>|null,
+ *     filter_type?: value-of<FilterType>|null,
+ *     tags_list?: string|null,
+ *   }>,
  *   include_message_body?: bool,
  *   managed_accounts?: list<string>,
  *   profiles?: list<string>,
@@ -146,7 +157,15 @@ final class MessagingCreateParams implements BaseModel
      *
      * @param list<int> $connections
      * @param list<int> $directions
-     * @param list<Filter> $filters
+     * @param list<Filter|array{
+     *   billing_group?: string|null,
+     *   cld?: string|null,
+     *   cld_filter?: value-of<CldFilter>|null,
+     *   cli?: string|null,
+     *   cli_filter?: value-of<CliFilter>|null,
+     *   filter_type?: value-of<FilterType>|null,
+     *   tags_list?: string|null,
+     * }> $filters
      * @param list<string> $managed_accounts
      * @param list<string> $profiles
      * @param list<int> $record_types
@@ -167,19 +186,19 @@ final class MessagingCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->end_time = $end_time;
-        $obj->start_time = $start_time;
+        $obj['end_time'] = $end_time;
+        $obj['start_time'] = $start_time;
 
-        null !== $connections && $obj->connections = $connections;
-        null !== $directions && $obj->directions = $directions;
-        null !== $filters && $obj->filters = $filters;
-        null !== $include_message_body && $obj->include_message_body = $include_message_body;
-        null !== $managed_accounts && $obj->managed_accounts = $managed_accounts;
-        null !== $profiles && $obj->profiles = $profiles;
-        null !== $record_types && $obj->record_types = $record_types;
-        null !== $report_name && $obj->report_name = $report_name;
-        null !== $select_all_managed_accounts && $obj->select_all_managed_accounts = $select_all_managed_accounts;
-        null !== $timezone && $obj->timezone = $timezone;
+        null !== $connections && $obj['connections'] = $connections;
+        null !== $directions && $obj['directions'] = $directions;
+        null !== $filters && $obj['filters'] = $filters;
+        null !== $include_message_body && $obj['include_message_body'] = $include_message_body;
+        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
+        null !== $profiles && $obj['profiles'] = $profiles;
+        null !== $record_types && $obj['record_types'] = $record_types;
+        null !== $report_name && $obj['report_name'] = $report_name;
+        null !== $select_all_managed_accounts && $obj['select_all_managed_accounts'] = $select_all_managed_accounts;
+        null !== $timezone && $obj['timezone'] = $timezone;
 
         return $obj;
     }
@@ -190,7 +209,7 @@ final class MessagingCreateParams implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj->end_time = $endTime;
+        $obj['end_time'] = $endTime;
 
         return $obj;
     }
@@ -201,7 +220,7 @@ final class MessagingCreateParams implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->start_time = $startTime;
+        $obj['start_time'] = $startTime;
 
         return $obj;
     }
@@ -214,7 +233,7 @@ final class MessagingCreateParams implements BaseModel
     public function withConnections(array $connections): self
     {
         $obj = clone $this;
-        $obj->connections = $connections;
+        $obj['connections'] = $connections;
 
         return $obj;
     }
@@ -227,7 +246,7 @@ final class MessagingCreateParams implements BaseModel
     public function withDirections(array $directions): self
     {
         $obj = clone $this;
-        $obj->directions = $directions;
+        $obj['directions'] = $directions;
 
         return $obj;
     }
@@ -235,12 +254,20 @@ final class MessagingCreateParams implements BaseModel
     /**
      * List of filters to apply.
      *
-     * @param list<Filter> $filters
+     * @param list<Filter|array{
+     *   billing_group?: string|null,
+     *   cld?: string|null,
+     *   cld_filter?: value-of<CldFilter>|null,
+     *   cli?: string|null,
+     *   cli_filter?: value-of<CliFilter>|null,
+     *   filter_type?: value-of<FilterType>|null,
+     *   tags_list?: string|null,
+     * }> $filters
      */
     public function withFilters(array $filters): self
     {
         $obj = clone $this;
-        $obj->filters = $filters;
+        $obj['filters'] = $filters;
 
         return $obj;
     }
@@ -251,7 +278,7 @@ final class MessagingCreateParams implements BaseModel
     public function withIncludeMessageBody(bool $includeMessageBody): self
     {
         $obj = clone $this;
-        $obj->include_message_body = $includeMessageBody;
+        $obj['include_message_body'] = $includeMessageBody;
 
         return $obj;
     }
@@ -264,7 +291,7 @@ final class MessagingCreateParams implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj->managed_accounts = $managedAccounts;
+        $obj['managed_accounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -277,7 +304,7 @@ final class MessagingCreateParams implements BaseModel
     public function withProfiles(array $profiles): self
     {
         $obj = clone $this;
-        $obj->profiles = $profiles;
+        $obj['profiles'] = $profiles;
 
         return $obj;
     }
@@ -290,7 +317,7 @@ final class MessagingCreateParams implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj->record_types = $recordTypes;
+        $obj['record_types'] = $recordTypes;
 
         return $obj;
     }
@@ -301,7 +328,7 @@ final class MessagingCreateParams implements BaseModel
     public function withReportName(string $reportName): self
     {
         $obj = clone $this;
-        $obj->report_name = $reportName;
+        $obj['report_name'] = $reportName;
 
         return $obj;
     }
@@ -313,7 +340,7 @@ final class MessagingCreateParams implements BaseModel
         bool $selectAllManagedAccounts
     ): self {
         $obj = clone $this;
-        $obj->select_all_managed_accounts = $selectAllManagedAccounts;
+        $obj['select_all_managed_accounts'] = $selectAllManagedAccounts;
 
         return $obj;
     }
@@ -324,7 +351,7 @@ final class MessagingCreateParams implements BaseModel
     public function withTimezone(string $timezone): self
     {
         $obj = clone $this;
-        $obj->timezone = $timezone;
+        $obj['timezone'] = $timezone;
 
         return $obj;
     }

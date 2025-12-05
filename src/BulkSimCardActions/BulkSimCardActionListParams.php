@@ -67,8 +67,8 @@ final class BulkSimCardActionListParams implements BaseModel
         $obj = new self;
 
         null !== $filter_action_type_ && $obj['filter_action_type_'] = $filter_action_type_;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $page_number_ && $obj['page_number_'] = $page_number_;
+        null !== $page_size_ && $obj['page_size_'] = $page_size_;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class BulkSimCardActionListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
+        $obj['page_number_'] = $pageNumber;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class BulkSimCardActionListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj['page_size_'] = $pageSize;
 
         return $obj;
     }

@@ -48,8 +48,8 @@ final class Outbound implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $packet_count && $obj->packet_count = $packet_count;
-        null !== $skip_packet_count && $obj->skip_packet_count = $skip_packet_count;
+        null !== $packet_count && $obj['packet_count'] = $packet_count;
+        null !== $skip_packet_count && $obj['skip_packet_count'] = $skip_packet_count;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class Outbound implements BaseModel
     public function withPacketCount(string $packetCount): self
     {
         $obj = clone $this;
-        $obj->packet_count = $packetCount;
+        $obj['packet_count'] = $packetCount;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Outbound implements BaseModel
     public function withSkipPacketCount(string $skipPacketCount): self
     {
         $obj = clone $this;
-        $obj->skip_packet_count = $skipPacketCount;
+        $obj['skip_packet_count'] = $skipPacketCount;
 
         return $obj;
     }

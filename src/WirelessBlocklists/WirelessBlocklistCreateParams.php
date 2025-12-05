@@ -84,9 +84,9 @@ final class WirelessBlocklistCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
+        $obj['name'] = $name;
         $obj['type'] = $type;
-        $obj->values = $values;
+        $obj['values'] = $values;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class WirelessBlocklistCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class WirelessBlocklistCreateParams implements BaseModel
     public function withValues(array $values): self
     {
         $obj = clone $this;
-        $obj->values = $values;
+        $obj['values'] = $values;
 
         return $obj;
     }

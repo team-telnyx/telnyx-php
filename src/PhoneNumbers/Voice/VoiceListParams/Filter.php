@@ -66,19 +66,20 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ConnectionName|array{contains?: string|null} $connection_name
      * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voice_usage_payment_method
      */
     public static function with(
-        ?ConnectionName $connection_name = null,
+        ConnectionName|array|null $connection_name = null,
         ?string $customer_reference = null,
         ?string $phone_number = null,
         VoiceUsagePaymentMethod|string|null $voice_usage_payment_method = null,
     ): self {
         $obj = new self;
 
-        null !== $connection_name && $obj->connection_name = $connection_name;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $connection_name && $obj['connection_name'] = $connection_name;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $voice_usage_payment_method && $obj['voice_usage_payment_method'] = $voice_usage_payment_method;
 
         return $obj;
@@ -86,11 +87,14 @@ final class Filter implements BaseModel
 
     /**
      * Filter by connection name pattern matching.
+     *
+     * @param ConnectionName|array{contains?: string|null} $connectionName
      */
-    public function withConnectionName(ConnectionName $connectionName): self
-    {
+    public function withConnectionName(
+        ConnectionName|array $connectionName
+    ): self {
         $obj = clone $this;
-        $obj->connection_name = $connectionName;
+        $obj['connection_name'] = $connectionName;
 
         return $obj;
     }
@@ -101,7 +105,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -113,7 +117,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

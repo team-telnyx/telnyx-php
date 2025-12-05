@@ -11,6 +11,9 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
+use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationType;
+use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
+use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
 
 /**
  * @phpstan-type ActivationJobListResponseShape = array{
@@ -41,35 +44,67 @@ final class ActivationJobListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersActivationJob> $data
+     * @param list<PortingOrdersActivationJob|array{
+     *   id?: string|null,
+     *   activate_at?: \DateTimeInterface|null,
+     *   activation_type?: value-of<ActivationType>|null,
+     *   activation_windows?: list<ActivationWindow>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $obj['data'] = $data;
+        null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<PortingOrdersActivationJob> $data
+     * @param list<PortingOrdersActivationJob|array{
+     *   id?: string|null,
+     *   activate_at?: \DateTimeInterface|null,
+     *   activation_type?: value-of<ActivationType>|null,
+     *   activation_windows?: list<ActivationWindow>|null,
+     *   created_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   status?: value-of<Status>|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }

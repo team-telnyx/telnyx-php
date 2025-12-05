@@ -189,22 +189,22 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bgp_asn = $bgp_asn;
+        $obj['bgp_asn'] = $bgp_asn;
         $obj['cloud_provider'] = $cloud_provider;
-        $obj->cloud_provider_region = $cloud_provider_region;
-        $obj->network_id = $network_id;
-        $obj->primary_cloud_account_id = $primary_cloud_account_id;
-        $obj->region_code = $region_code;
+        $obj['cloud_provider_region'] = $cloud_provider_region;
+        $obj['network_id'] = $network_id;
+        $obj['primary_cloud_account_id'] = $primary_cloud_account_id;
+        $obj['region_code'] = $region_code;
 
-        null !== $bandwidth_mbps && $obj->bandwidth_mbps = $bandwidth_mbps;
-        null !== $name && $obj->name = $name;
-        null !== $primary_bgp_key && $obj->primary_bgp_key = $primary_bgp_key;
-        null !== $primary_cloud_ip && $obj->primary_cloud_ip = $primary_cloud_ip;
-        null !== $primary_telnyx_ip && $obj->primary_telnyx_ip = $primary_telnyx_ip;
-        null !== $secondary_bgp_key && $obj->secondary_bgp_key = $secondary_bgp_key;
-        null !== $secondary_cloud_account_id && $obj->secondary_cloud_account_id = $secondary_cloud_account_id;
-        null !== $secondary_cloud_ip && $obj->secondary_cloud_ip = $secondary_cloud_ip;
-        null !== $secondary_telnyx_ip && $obj->secondary_telnyx_ip = $secondary_telnyx_ip;
+        null !== $bandwidth_mbps && $obj['bandwidth_mbps'] = $bandwidth_mbps;
+        null !== $name && $obj['name'] = $name;
+        null !== $primary_bgp_key && $obj['primary_bgp_key'] = $primary_bgp_key;
+        null !== $primary_cloud_ip && $obj['primary_cloud_ip'] = $primary_cloud_ip;
+        null !== $primary_telnyx_ip && $obj['primary_telnyx_ip'] = $primary_telnyx_ip;
+        null !== $secondary_bgp_key && $obj['secondary_bgp_key'] = $secondary_bgp_key;
+        null !== $secondary_cloud_account_id && $obj['secondary_cloud_account_id'] = $secondary_cloud_account_id;
+        null !== $secondary_cloud_ip && $obj['secondary_cloud_ip'] = $secondary_cloud_ip;
+        null !== $secondary_telnyx_ip && $obj['secondary_telnyx_ip'] = $secondary_telnyx_ip;
 
         return $obj;
     }
@@ -215,7 +215,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withBgpAsn(float $bgpAsn): self
     {
         $obj = clone $this;
-        $obj->bgp_asn = $bgpAsn;
+        $obj['bgp_asn'] = $bgpAsn;
 
         return $obj;
     }
@@ -239,7 +239,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
         $obj = clone $this;
-        $obj->cloud_provider_region = $cloudProviderRegion;
+        $obj['cloud_provider_region'] = $cloudProviderRegion;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->network_id = $networkID;
+        $obj['network_id'] = $networkID;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
         string $primaryCloudAccountID
     ): self {
         $obj = clone $this;
-        $obj->primary_cloud_account_id = $primaryCloudAccountID;
+        $obj['primary_cloud_account_id'] = $primaryCloudAccountID;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->region_code = $regionCode;
+        $obj['region_code'] = $regionCode;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withBandwidthMbps(float $bandwidthMbps): self
     {
         $obj = clone $this;
-        $obj->bandwidth_mbps = $bandwidthMbps;
+        $obj['bandwidth_mbps'] = $bandwidthMbps;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withPrimaryBgpKey(string $primaryBgpKey): self
     {
         $obj = clone $this;
-        $obj->primary_bgp_key = $primaryBgpKey;
+        $obj['primary_bgp_key'] = $primaryBgpKey;
 
         return $obj;
     }
@@ -317,7 +317,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withPrimaryCloudIP(string $primaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->primary_cloud_ip = $primaryCloudIP;
+        $obj['primary_cloud_ip'] = $primaryCloudIP;
 
         return $obj;
     }
@@ -328,7 +328,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withPrimaryTelnyxIP(string $primaryTelnyxIP): self
     {
         $obj = clone $this;
-        $obj->primary_telnyx_ip = $primaryTelnyxIP;
+        $obj['primary_telnyx_ip'] = $primaryTelnyxIP;
 
         return $obj;
     }
@@ -339,7 +339,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withSecondaryBgpKey(string $secondaryBgpKey): self
     {
         $obj = clone $this;
-        $obj->secondary_bgp_key = $secondaryBgpKey;
+        $obj['secondary_bgp_key'] = $secondaryBgpKey;
 
         return $obj;
     }
@@ -351,7 +351,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
         string $secondaryCloudAccountID
     ): self {
         $obj = clone $this;
-        $obj->secondary_cloud_account_id = $secondaryCloudAccountID;
+        $obj['secondary_cloud_account_id'] = $secondaryCloudAccountID;
 
         return $obj;
     }
@@ -362,7 +362,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withSecondaryCloudIP(string $secondaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->secondary_cloud_ip = $secondaryCloudIP;
+        $obj['secondary_cloud_ip'] = $secondaryCloudIP;
 
         return $obj;
     }
@@ -373,7 +373,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withSecondaryTelnyxIP(string $secondaryTelnyxIP): self
     {
         $obj = clone $this;
-        $obj->secondary_telnyx_ip = $secondaryTelnyxIP;
+        $obj['secondary_telnyx_ip'] = $secondaryTelnyxIP;
 
         return $obj;
     }

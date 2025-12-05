@@ -79,9 +79,9 @@ final class VerificationCodeSuccess implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->phone_number = $phone_number;
+        $obj['phone_number'] = $phone_number;
         $obj['type'] = $type;
-        $obj->verification_code_id = $verification_code_id;
+        $obj['verification_code_id'] = $verification_code_id;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class VerificationCodeSuccess implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class VerificationCodeSuccess implements BaseModel
     public function withVerificationCodeID(string $verificationCodeID): self
     {
         $obj = clone $this;
-        $obj->verification_code_id = $verificationCodeID;
+        $obj['verification_code_id'] = $verificationCodeID;
 
         return $obj;
     }

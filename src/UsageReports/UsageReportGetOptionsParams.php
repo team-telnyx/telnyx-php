@@ -52,8 +52,8 @@ final class UsageReportGetOptionsParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $product && $obj->product = $product;
-        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
+        null !== $product && $obj['product'] = $product;
+        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class UsageReportGetOptionsParams implements BaseModel
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class UsageReportGetOptionsParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorization_bearer = $authorizationBearer;
+        $obj['authorization_bearer'] = $authorizationBearer;
 
         return $obj;
     }

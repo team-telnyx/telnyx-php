@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Integrations;
 
 use Telnyx\AI\Integrations\IntegrationListResponse\Data;
+use Telnyx\AI\Integrations\IntegrationListResponse\Data\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -49,24 +50,40 @@ final class IntegrationListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string,
+     *   available_tools: list<string>,
+     *   description: string,
+     *   display_name: string,
+     *   logo_url: string,
+     *   name: string,
+     *   status: value-of<Status>,
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   id: string,
+     *   available_tools: list<string>,
+     *   description: string,
+     *   display_name: string,
+     *   logo_url: string,
+     *   name: string,
+     *   status: value-of<Status>,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

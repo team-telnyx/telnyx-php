@@ -112,6 +112,12 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status> $status
+     * @param VoiceConnectionName|array{
+     *   contains?: string|null,
+     *   ends_with?: string|null,
+     *   eq?: string|null,
+     *   starts_with?: string|null,
+     * } $voice_connection_name
      * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voice_usage_payment_method
      */
     public static function with(
@@ -123,20 +129,20 @@ final class Filter implements BaseModel
         ?string $phone_number = null,
         Status|string|null $status = null,
         ?string $tag = null,
-        ?VoiceConnectionName $voice_connection_name = null,
+        VoiceConnectionName|array|null $voice_connection_name = null,
         VoiceUsagePaymentMethod|string|null $voice_usage_payment_method = null,
     ): self {
         $obj = new self;
 
-        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $emergency_address_id && $obj->emergency_address_id = $emergency_address_id;
-        null !== $has_bundle && $obj->has_bundle = $has_bundle;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $emergency_address_id && $obj['emergency_address_id'] = $emergency_address_id;
+        null !== $has_bundle && $obj['has_bundle'] = $has_bundle;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $status && $obj['status'] = $status;
-        null !== $tag && $obj->tag = $tag;
-        null !== $voice_connection_name && $obj->voice_connection_name = $voice_connection_name;
+        null !== $tag && $obj['tag'] = $tag;
+        null !== $voice_connection_name && $obj['voice_connection_name'] = $voice_connection_name;
         null !== $voice_usage_payment_method && $obj['voice_usage_payment_method'] = $voice_usage_payment_method;
 
         return $obj;
@@ -148,7 +154,7 @@ final class Filter implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billing_group_id = $billingGroupID;
+        $obj['billing_group_id'] = $billingGroupID;
 
         return $obj;
     }
@@ -159,7 +165,7 @@ final class Filter implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -170,7 +176,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -181,7 +187,7 @@ final class Filter implements BaseModel
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
         $obj = clone $this;
-        $obj->emergency_address_id = $emergencyAddressID;
+        $obj['emergency_address_id'] = $emergencyAddressID;
 
         return $obj;
     }
@@ -192,7 +198,7 @@ final class Filter implements BaseModel
     public function withHasBundle(string $hasBundle): self
     {
         $obj = clone $this;
-        $obj->has_bundle = $hasBundle;
+        $obj['has_bundle'] = $hasBundle;
 
         return $obj;
     }
@@ -204,7 +210,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -228,19 +234,26 @@ final class Filter implements BaseModel
     public function withTag(string $tag): self
     {
         $obj = clone $this;
-        $obj->tag = $tag;
+        $obj['tag'] = $tag;
 
         return $obj;
     }
 
     /**
      * Filter by voice connection name pattern matching.
+     *
+     * @param VoiceConnectionName|array{
+     *   contains?: string|null,
+     *   ends_with?: string|null,
+     *   eq?: string|null,
+     *   starts_with?: string|null,
+     * } $voiceConnectionName
      */
     public function withVoiceConnectionName(
-        VoiceConnectionName $voiceConnectionName
+        VoiceConnectionName|array $voiceConnectionName
     ): self {
         $obj = clone $this;
-        $obj->voice_connection_name = $voiceConnectionName;
+        $obj['voice_connection_name'] = $voiceConnectionName;
 
         return $obj;
     }

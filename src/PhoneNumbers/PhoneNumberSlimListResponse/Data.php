@@ -217,27 +217,27 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
-        null !== $call_forwarding_enabled && $obj->call_forwarding_enabled = $call_forwarding_enabled;
-        null !== $call_recording_enabled && $obj->call_recording_enabled = $call_recording_enabled;
-        null !== $caller_id_name_enabled && $obj->caller_id_name_enabled = $caller_id_name_enabled;
-        null !== $cnam_listing_enabled && $obj->cnam_listing_enabled = $cnam_listing_enabled;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $country_iso_alpha2 && $obj->country_iso_alpha2 = $country_iso_alpha2;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $emergency_address_id && $obj->emergency_address_id = $emergency_address_id;
-        null !== $emergency_enabled && $obj->emergency_enabled = $emergency_enabled;
+        null !== $id && $obj['id'] = $id;
+        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
+        null !== $call_forwarding_enabled && $obj['call_forwarding_enabled'] = $call_forwarding_enabled;
+        null !== $call_recording_enabled && $obj['call_recording_enabled'] = $call_recording_enabled;
+        null !== $caller_id_name_enabled && $obj['caller_id_name_enabled'] = $caller_id_name_enabled;
+        null !== $cnam_listing_enabled && $obj['cnam_listing_enabled'] = $cnam_listing_enabled;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $country_iso_alpha2 && $obj['country_iso_alpha2'] = $country_iso_alpha2;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $emergency_address_id && $obj['emergency_address_id'] = $emergency_address_id;
+        null !== $emergency_enabled && $obj['emergency_enabled'] = $emergency_enabled;
         null !== $emergency_status && $obj['emergency_status'] = $emergency_status;
-        null !== $external_pin && $obj->external_pin = $external_pin;
+        null !== $external_pin && $obj['external_pin'] = $external_pin;
         null !== $inbound_call_screening && $obj['inbound_call_screening'] = $inbound_call_screening;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $purchased_at && $obj->purchased_at = $purchased_at;
-        null !== $record_type && $obj->record_type = $record_type;
+        null !== $purchased_at && $obj['purchased_at'] = $purchased_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $t38_fax_gateway_enabled && $obj->t38_fax_gateway_enabled = $t38_fax_gateway_enabled;
+        null !== $t38_fax_gateway_enabled && $obj['t38_fax_gateway_enabled'] = $t38_fax_gateway_enabled;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class Data implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billing_group_id = $billingGroupID;
+        $obj['billing_group_id'] = $billingGroupID;
 
         return $obj;
     }
@@ -270,7 +270,7 @@ final class Data implements BaseModel
     public function withCallForwardingEnabled(bool $callForwardingEnabled): self
     {
         $obj = clone $this;
-        $obj->call_forwarding_enabled = $callForwardingEnabled;
+        $obj['call_forwarding_enabled'] = $callForwardingEnabled;
 
         return $obj;
     }
@@ -281,7 +281,7 @@ final class Data implements BaseModel
     public function withCallRecordingEnabled(bool $callRecordingEnabled): self
     {
         $obj = clone $this;
-        $obj->call_recording_enabled = $callRecordingEnabled;
+        $obj['call_recording_enabled'] = $callRecordingEnabled;
 
         return $obj;
     }
@@ -292,7 +292,7 @@ final class Data implements BaseModel
     public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
     {
         $obj = clone $this;
-        $obj->caller_id_name_enabled = $callerIDNameEnabled;
+        $obj['caller_id_name_enabled'] = $callerIDNameEnabled;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class Data implements BaseModel
     public function withCnamListingEnabled(bool $cnamListingEnabled): self
     {
         $obj = clone $this;
-        $obj->cnam_listing_enabled = $cnamListingEnabled;
+        $obj['cnam_listing_enabled'] = $cnamListingEnabled;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class Data implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -325,7 +325,7 @@ final class Data implements BaseModel
     public function withCountryISOAlpha2(string $countryISOAlpha2): self
     {
         $obj = clone $this;
-        $obj->country_iso_alpha2 = $countryISOAlpha2;
+        $obj['country_iso_alpha2'] = $countryISOAlpha2;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -347,7 +347,7 @@ final class Data implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -358,7 +358,7 @@ final class Data implements BaseModel
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
         $obj = clone $this;
-        $obj->emergency_address_id = $emergencyAddressID;
+        $obj['emergency_address_id'] = $emergencyAddressID;
 
         return $obj;
     }
@@ -369,7 +369,7 @@ final class Data implements BaseModel
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
         $obj = clone $this;
-        $obj->emergency_enabled = $emergencyEnabled;
+        $obj['emergency_enabled'] = $emergencyEnabled;
 
         return $obj;
     }
@@ -394,7 +394,7 @@ final class Data implements BaseModel
     public function withExternalPin(string $externalPin): self
     {
         $obj = clone $this;
-        $obj->external_pin = $externalPin;
+        $obj['external_pin'] = $externalPin;
 
         return $obj;
     }
@@ -419,7 +419,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -445,7 +445,7 @@ final class Data implements BaseModel
     public function withPurchasedAt(string $purchasedAt): self
     {
         $obj = clone $this;
-        $obj->purchased_at = $purchasedAt;
+        $obj['purchased_at'] = $purchasedAt;
 
         return $obj;
     }
@@ -456,7 +456,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -480,7 +480,7 @@ final class Data implements BaseModel
     public function withT38FaxGatewayEnabled(bool $t38FaxGatewayEnabled): self
     {
         $obj = clone $this;
-        $obj->t38_fax_gateway_enabled = $t38FaxGatewayEnabled;
+        $obj['t38_fax_gateway_enabled'] = $t38FaxGatewayEnabled;
 
         return $obj;
     }

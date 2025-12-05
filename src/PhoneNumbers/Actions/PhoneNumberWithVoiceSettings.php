@@ -8,10 +8,14 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency;
+use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\EmergencyStatus;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\InboundCallScreening;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\UsagePaymentMethod;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
+use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
+use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingChannels;
+use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingFormat;
 use Telnyx\PhoneNumbers\Voice\CnamListing;
 use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 
@@ -136,19 +140,42 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param CallForwarding|array{
+     *   call_forwarding_enabled?: bool|null,
+     *   forwarding_type?: value-of<ForwardingType>|null,
+     *   forwards_to?: string|null,
+     * } $call_forwarding
+     * @param CallRecording|array{
+     *   inbound_call_recording_channels?: value-of<InboundCallRecordingChannels>|null,
+     *   inbound_call_recording_enabled?: bool|null,
+     *   inbound_call_recording_format?: value-of<InboundCallRecordingFormat>|null,
+     * } $call_recording
+     * @param CnamListing|array{
+     *   cnam_listing_details?: string|null, cnam_listing_enabled?: bool|null
+     * } $cnam_listing
+     * @param Emergency|array{
+     *   emergency_address_id?: string|null,
+     *   emergency_enabled?: bool|null,
+     *   emergency_status?: value-of<EmergencyStatus>|null,
+     * } $emergency
      * @param InboundCallScreening|value-of<InboundCallScreening> $inbound_call_screening
+     * @param MediaFeatures|array{
+     *   accept_any_rtp_packets_enabled?: bool|null,
+     *   rtp_auto_adjust_enabled?: bool|null,
+     *   t38_fax_gateway_enabled?: bool|null,
+     * } $media_features
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usage_payment_method
      */
     public static function with(
         ?string $id = null,
-        ?CallForwarding $call_forwarding = null,
-        ?CallRecording $call_recording = null,
-        ?CnamListing $cnam_listing = null,
+        CallForwarding|array|null $call_forwarding = null,
+        CallRecording|array|null $call_recording = null,
+        CnamListing|array|null $cnam_listing = null,
         ?string $connection_id = null,
         ?string $customer_reference = null,
-        ?Emergency $emergency = null,
+        Emergency|array|null $emergency = null,
         InboundCallScreening|string|null $inbound_call_screening = null,
-        ?MediaFeatures $media_features = null,
+        MediaFeatures|array|null $media_features = null,
         ?string $phone_number = null,
         ?string $record_type = null,
         ?bool $tech_prefix_enabled = null,
@@ -157,19 +184,19 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $call_forwarding && $obj->call_forwarding = $call_forwarding;
-        null !== $call_recording && $obj->call_recording = $call_recording;
-        null !== $cnam_listing && $obj->cnam_listing = $cnam_listing;
-        null !== $connection_id && $obj->connection_id = $connection_id;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $emergency && $obj->emergency = $emergency;
+        null !== $id && $obj['id'] = $id;
+        null !== $call_forwarding && $obj['call_forwarding'] = $call_forwarding;
+        null !== $call_recording && $obj['call_recording'] = $call_recording;
+        null !== $cnam_listing && $obj['cnam_listing'] = $cnam_listing;
+        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $emergency && $obj['emergency'] = $emergency;
         null !== $inbound_call_screening && $obj['inbound_call_screening'] = $inbound_call_screening;
-        null !== $media_features && $obj->media_features = $media_features;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $tech_prefix_enabled && $obj->tech_prefix_enabled = $tech_prefix_enabled;
-        null !== $translated_number && $obj->translated_number = $translated_number;
+        null !== $media_features && $obj['media_features'] = $media_features;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $tech_prefix_enabled && $obj['tech_prefix_enabled'] = $tech_prefix_enabled;
+        null !== $translated_number && $obj['translated_number'] = $translated_number;
         null !== $usage_payment_method && $obj['usage_payment_method'] = $usage_payment_method;
 
         return $obj;
@@ -181,40 +208,57 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * The call forwarding settings for a phone number.
+     *
+     * @param CallForwarding|array{
+     *   call_forwarding_enabled?: bool|null,
+     *   forwarding_type?: value-of<ForwardingType>|null,
+     *   forwards_to?: string|null,
+     * } $callForwarding
      */
-    public function withCallForwarding(CallForwarding $callForwarding): self
-    {
+    public function withCallForwarding(
+        CallForwarding|array $callForwarding
+    ): self {
         $obj = clone $this;
-        $obj->call_forwarding = $callForwarding;
+        $obj['call_forwarding'] = $callForwarding;
 
         return $obj;
     }
 
     /**
      * The call recording settings for a phone number.
+     *
+     * @param CallRecording|array{
+     *   inbound_call_recording_channels?: value-of<InboundCallRecordingChannels>|null,
+     *   inbound_call_recording_enabled?: bool|null,
+     *   inbound_call_recording_format?: value-of<InboundCallRecordingFormat>|null,
+     * } $callRecording
      */
-    public function withCallRecording(CallRecording $callRecording): self
+    public function withCallRecording(CallRecording|array $callRecording): self
     {
         $obj = clone $this;
-        $obj->call_recording = $callRecording;
+        $obj['call_recording'] = $callRecording;
 
         return $obj;
     }
 
     /**
      * The CNAM listing settings for a phone number.
+     *
+     * @param CnamListing|array{
+     *   cnam_listing_details?: string|null, cnam_listing_enabled?: bool|null
+     * } $cnamListing
      */
-    public function withCnamListing(CnamListing $cnamListing): self
+    public function withCnamListing(CnamListing|array $cnamListing): self
     {
         $obj = clone $this;
-        $obj->cnam_listing = $cnamListing;
+        $obj['cnam_listing'] = $cnamListing;
 
         return $obj;
     }
@@ -225,7 +269,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connection_id = $connectionID;
+        $obj['connection_id'] = $connectionID;
 
         return $obj;
     }
@@ -236,18 +280,24 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * The emergency services settings for a phone number.
+     *
+     * @param Emergency|array{
+     *   emergency_address_id?: string|null,
+     *   emergency_enabled?: bool|null,
+     *   emergency_status?: value-of<EmergencyStatus>|null,
+     * } $emergency
      */
-    public function withEmergency(Emergency $emergency): self
+    public function withEmergency(Emergency|array $emergency): self
     {
         $obj = clone $this;
-        $obj->emergency = $emergency;
+        $obj['emergency'] = $emergency;
 
         return $obj;
     }
@@ -268,11 +318,17 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
 
     /**
      * The media features settings for a phone number.
+     *
+     * @param MediaFeatures|array{
+     *   accept_any_rtp_packets_enabled?: bool|null,
+     *   rtp_auto_adjust_enabled?: bool|null,
+     *   t38_fax_gateway_enabled?: bool|null,
+     * } $mediaFeatures
      */
-    public function withMediaFeatures(MediaFeatures $mediaFeatures): self
+    public function withMediaFeatures(MediaFeatures|array $mediaFeatures): self
     {
         $obj = clone $this;
-        $obj->media_features = $mediaFeatures;
+        $obj['media_features'] = $mediaFeatures;
 
         return $obj;
     }
@@ -283,7 +339,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -294,7 +350,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -305,7 +361,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withTechPrefixEnabled(bool $techPrefixEnabled): self
     {
         $obj = clone $this;
-        $obj->tech_prefix_enabled = $techPrefixEnabled;
+        $obj['tech_prefix_enabled'] = $techPrefixEnabled;
 
         return $obj;
     }
@@ -316,7 +372,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withTranslatedNumber(string $translatedNumber): self
     {
         $obj = clone $this;
-        $obj->translated_number = $translatedNumber;
+        $obj['translated_number'] = $translatedNumber;
 
         return $obj;
     }

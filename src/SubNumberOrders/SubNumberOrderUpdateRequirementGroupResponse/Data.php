@@ -87,8 +87,23 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber> $phone_numbers
-     * @param list<RegulatoryRequirement> $regulatory_requirements
+     * @param list<PhoneNumber|array{
+     *   id?: string|null,
+     *   bundle_id?: string|null,
+     *   country_code?: string|null,
+     *   phone_number?: string|null,
+     *   phone_number_type?: string|null,
+     *   record_type?: string|null,
+     *   regulatory_requirements?: list<PhoneNumber\RegulatoryRequirement>|null,
+     *   requirements_met?: bool|null,
+     *   requirements_status?: string|null,
+     *   status?: string|null,
+     * }> $phone_numbers
+     * @param list<RegulatoryRequirement|array{
+     *   field_type?: string|null,
+     *   record_type?: string|null,
+     *   requirement_id?: string|null,
+     * }> $regulatory_requirements
      */
     public static function with(
         ?string $id = null,
@@ -108,20 +123,20 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $country_code && $obj->country_code = $country_code;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $customer_reference && $obj->customer_reference = $customer_reference;
-        null !== $is_block_sub_number_order && $obj->is_block_sub_number_order = $is_block_sub_number_order;
-        null !== $order_request_id && $obj->order_request_id = $order_request_id;
-        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
-        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
-        null !== $phone_numbers_count && $obj->phone_numbers_count = $phone_numbers_count;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
-        null !== $requirements_met && $obj->requirements_met = $requirements_met;
-        null !== $status && $obj->status = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $is_block_sub_number_order && $obj['is_block_sub_number_order'] = $is_block_sub_number_order;
+        null !== $order_request_id && $obj['order_request_id'] = $order_request_id;
+        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $phone_numbers_count && $obj['phone_numbers_count'] = $phone_numbers_count;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $requirements_met && $obj['requirements_met'] = $requirements_met;
+        null !== $status && $obj['status'] = $status;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -129,7 +144,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -137,7 +152,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -145,7 +160,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -153,7 +168,7 @@ final class Data implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customer_reference = $customerReference;
+        $obj['customer_reference'] = $customerReference;
 
         return $obj;
     }
@@ -161,7 +176,7 @@ final class Data implements BaseModel
     public function withIsBlockSubNumberOrder(bool $isBlockSubNumberOrder): self
     {
         $obj = clone $this;
-        $obj->is_block_sub_number_order = $isBlockSubNumberOrder;
+        $obj['is_block_sub_number_order'] = $isBlockSubNumberOrder;
 
         return $obj;
     }
@@ -169,7 +184,7 @@ final class Data implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->order_request_id = $orderRequestID;
+        $obj['order_request_id'] = $orderRequestID;
 
         return $obj;
     }
@@ -177,18 +192,29 @@ final class Data implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phone_number_type = $phoneNumberType;
+        $obj['phone_number_type'] = $phoneNumberType;
 
         return $obj;
     }
 
     /**
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber|array{
+     *   id?: string|null,
+     *   bundle_id?: string|null,
+     *   country_code?: string|null,
+     *   phone_number?: string|null,
+     *   phone_number_type?: string|null,
+     *   record_type?: string|null,
+     *   regulatory_requirements?: list<PhoneNumber\RegulatoryRequirement>|null,
+     *   requirements_met?: bool|null,
+     *   requirements_status?: string|null,
+     *   status?: string|null,
+     * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phone_numbers = $phoneNumbers;
+        $obj['phone_numbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -196,7 +222,7 @@ final class Data implements BaseModel
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
         $obj = clone $this;
-        $obj->phone_numbers_count = $phoneNumbersCount;
+        $obj['phone_numbers_count'] = $phoneNumbersCount;
 
         return $obj;
     }
@@ -204,19 +230,23 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
 
     /**
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|array{
+     *   field_type?: string|null,
+     *   record_type?: string|null,
+     *   requirement_id?: string|null,
+     * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatory_requirements = $regulatoryRequirements;
+        $obj['regulatory_requirements'] = $regulatoryRequirements;
 
         return $obj;
     }
@@ -224,7 +254,7 @@ final class Data implements BaseModel
     public function withRequirementsMet(bool $requirementsMet): self
     {
         $obj = clone $this;
-        $obj->requirements_met = $requirementsMet;
+        $obj['requirements_met'] = $requirementsMet;
 
         return $obj;
     }
@@ -232,7 +262,7 @@ final class Data implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -240,7 +270,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

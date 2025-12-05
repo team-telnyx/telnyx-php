@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType;
+use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType\Eq;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationEventConditionID;
@@ -58,75 +59,114 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AssociatedRecordType|array{
+     *   eq?: value-of<Eq>|null
+     * } $associated_record_type
+     * @param ChannelTypeID|array{
+     *   eq?: value-of<ChannelTypeID\Eq>|null,
+     * } $channel_type_id
+     * @param NotificationChannel|array{eq?: string|null} $notification_channel
+     * @param NotificationEventConditionID|array{
+     *   eq?: string|null
+     * } $notification_event_condition_id
+     * @param NotificationProfileID|array{eq?: string|null} $notification_profile_id
+     * @param Status|array{
+     *   eq?: value-of<Status\Eq>|null,
+     * } $status
      */
     public static function with(
-        ?AssociatedRecordType $associated_record_type = null,
-        ?ChannelTypeID $channel_type_id = null,
-        ?NotificationChannel $notification_channel = null,
-        ?NotificationEventConditionID $notification_event_condition_id = null,
-        ?NotificationProfileID $notification_profile_id = null,
-        ?Status $status = null,
+        AssociatedRecordType|array|null $associated_record_type = null,
+        ChannelTypeID|array|null $channel_type_id = null,
+        NotificationChannel|array|null $notification_channel = null,
+        NotificationEventConditionID|array|null $notification_event_condition_id = null,
+        NotificationProfileID|array|null $notification_profile_id = null,
+        Status|array|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $associated_record_type && $obj->associated_record_type = $associated_record_type;
-        null !== $channel_type_id && $obj->channel_type_id = $channel_type_id;
-        null !== $notification_channel && $obj->notification_channel = $notification_channel;
-        null !== $notification_event_condition_id && $obj->notification_event_condition_id = $notification_event_condition_id;
-        null !== $notification_profile_id && $obj->notification_profile_id = $notification_profile_id;
-        null !== $status && $obj->status = $status;
+        null !== $associated_record_type && $obj['associated_record_type'] = $associated_record_type;
+        null !== $channel_type_id && $obj['channel_type_id'] = $channel_type_id;
+        null !== $notification_channel && $obj['notification_channel'] = $notification_channel;
+        null !== $notification_event_condition_id && $obj['notification_event_condition_id'] = $notification_event_condition_id;
+        null !== $notification_profile_id && $obj['notification_profile_id'] = $notification_profile_id;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
 
+    /**
+     * @param AssociatedRecordType|array{eq?: value-of<Eq>|null} $associatedRecordType
+     */
     public function withAssociatedRecordType(
-        AssociatedRecordType $associatedRecordType
+        AssociatedRecordType|array $associatedRecordType
     ): self {
         $obj = clone $this;
-        $obj->associated_record_type = $associatedRecordType;
+        $obj['associated_record_type'] = $associatedRecordType;
 
         return $obj;
     }
 
-    public function withChannelTypeID(ChannelTypeID $channelTypeID): self
+    /**
+     * @param ChannelTypeID|array{
+     *   eq?: value-of<ChannelTypeID\Eq>|null,
+     * } $channelTypeID
+     */
+    public function withChannelTypeID(ChannelTypeID|array $channelTypeID): self
     {
         $obj = clone $this;
-        $obj->channel_type_id = $channelTypeID;
+        $obj['channel_type_id'] = $channelTypeID;
 
         return $obj;
     }
 
+    /**
+     * @param NotificationChannel|array{eq?: string|null} $notificationChannel
+     */
     public function withNotificationChannel(
-        NotificationChannel $notificationChannel
+        NotificationChannel|array $notificationChannel
     ): self {
         $obj = clone $this;
-        $obj->notification_channel = $notificationChannel;
+        $obj['notification_channel'] = $notificationChannel;
 
         return $obj;
     }
 
+    /**
+     * @param NotificationEventConditionID|array{
+     *   eq?: string|null
+     * } $notificationEventConditionID
+     */
     public function withNotificationEventConditionID(
-        NotificationEventConditionID $notificationEventConditionID
+        NotificationEventConditionID|array $notificationEventConditionID
     ): self {
         $obj = clone $this;
-        $obj->notification_event_condition_id = $notificationEventConditionID;
+        $obj['notification_event_condition_id'] = $notificationEventConditionID;
 
         return $obj;
     }
 
+    /**
+     * @param NotificationProfileID|array{eq?: string|null} $notificationProfileID
+     */
     public function withNotificationProfileID(
-        NotificationProfileID $notificationProfileID
+        NotificationProfileID|array $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj->notification_profile_id = $notificationProfileID;
+        $obj['notification_profile_id'] = $notificationProfileID;
 
         return $obj;
     }
 
-    public function withStatus(Status $status): self
+    /**
+     * @param Status|array{
+     *   eq?: value-of<Status\Eq>|null,
+     * } $status
+     */
+    public function withStatus(Status|array $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

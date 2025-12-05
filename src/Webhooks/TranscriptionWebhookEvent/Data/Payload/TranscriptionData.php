@@ -68,9 +68,9 @@ final class TranscriptionData implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $confidence && $obj->confidence = $confidence;
-        null !== $is_final && $obj->is_final = $is_final;
-        null !== $transcript && $obj->transcript = $transcript;
+        null !== $confidence && $obj['confidence'] = $confidence;
+        null !== $is_final && $obj['is_final'] = $is_final;
+        null !== $transcript && $obj['transcript'] = $transcript;
         null !== $transcription_track && $obj['transcription_track'] = $transcription_track;
 
         return $obj;
@@ -82,7 +82,7 @@ final class TranscriptionData implements BaseModel
     public function withConfidence(float $confidence): self
     {
         $obj = clone $this;
-        $obj->confidence = $confidence;
+        $obj['confidence'] = $confidence;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class TranscriptionData implements BaseModel
     public function withIsFinal(bool $isFinal): self
     {
         $obj = clone $this;
-        $obj->is_final = $isFinal;
+        $obj['is_final'] = $isFinal;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class TranscriptionData implements BaseModel
     public function withTranscript(string $transcript): self
     {
         $obj = clone $this;
-        $obj->transcript = $transcript;
+        $obj['transcript'] = $transcript;
 
         return $obj;
     }

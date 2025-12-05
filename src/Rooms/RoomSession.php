@@ -79,7 +79,15 @@ final class RoomSession implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RoomParticipant> $participants
+     * @param list<RoomParticipant|array{
+     *   id?: string|null,
+     *   context?: string|null,
+     *   joined_at?: \DateTimeInterface|null,
+     *   left_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   session_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $participants
      */
     public static function with(
         ?string $id = null,
@@ -93,14 +101,14 @@ final class RoomSession implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $active && $obj->active = $active;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $ended_at && $obj->ended_at = $ended_at;
-        null !== $participants && $obj->participants = $participants;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $room_id && $obj->room_id = $room_id;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $active && $obj['active'] = $active;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $ended_at && $obj['ended_at'] = $ended_at;
+        null !== $participants && $obj['participants'] = $participants;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $room_id && $obj['room_id'] = $room_id;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -111,7 +119,7 @@ final class RoomSession implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -122,7 +130,7 @@ final class RoomSession implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -133,7 +141,7 @@ final class RoomSession implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -144,18 +152,26 @@ final class RoomSession implements BaseModel
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
         $obj = clone $this;
-        $obj->ended_at = $endedAt;
+        $obj['ended_at'] = $endedAt;
 
         return $obj;
     }
 
     /**
-     * @param list<RoomParticipant> $participants
+     * @param list<RoomParticipant|array{
+     *   id?: string|null,
+     *   context?: string|null,
+     *   joined_at?: \DateTimeInterface|null,
+     *   left_at?: \DateTimeInterface|null,
+     *   record_type?: string|null,
+     *   session_id?: string|null,
+     *   updated_at?: \DateTimeInterface|null,
+     * }> $participants
      */
     public function withParticipants(array $participants): self
     {
         $obj = clone $this;
-        $obj->participants = $participants;
+        $obj['participants'] = $participants;
 
         return $obj;
     }
@@ -163,7 +179,7 @@ final class RoomSession implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -174,7 +190,7 @@ final class RoomSession implements BaseModel
     public function withRoomID(string $roomID): self
     {
         $obj = clone $this;
-        $obj->room_id = $roomID;
+        $obj['room_id'] = $roomID;
 
         return $obj;
     }
@@ -185,7 +201,7 @@ final class RoomSession implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

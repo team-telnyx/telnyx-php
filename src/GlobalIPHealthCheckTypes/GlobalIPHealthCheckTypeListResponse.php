@@ -37,24 +37,32 @@ final class GlobalIPHealthCheckTypeListResponse implements BaseModel, ResponseCo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   health_check_params?: array<string,mixed>|null,
+     *   health_check_type?: string|null,
+     *   record_type?: string|null,
+     * }> $data
      */
     public static function with(?array $data = null): self
     {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   health_check_params?: array<string,mixed>|null,
+     *   health_check_type?: string|null,
+     *   record_type?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

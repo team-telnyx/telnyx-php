@@ -51,7 +51,7 @@ final class ImportMetadata implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $import_id && $obj->import_id = $import_id;
+        null !== $import_id && $obj['import_id'] = $import_id;
         null !== $import_provider && $obj['import_provider'] = $import_provider;
 
         return $obj;
@@ -63,7 +63,7 @@ final class ImportMetadata implements BaseModel
     public function withImportID(string $importID): self
     {
         $obj = clone $this;
-        $obj->import_id = $importID;
+        $obj['import_id'] = $importID;
 
         return $obj;
     }

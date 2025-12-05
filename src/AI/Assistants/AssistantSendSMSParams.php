@@ -85,12 +85,12 @@ final class AssistantSendSMSParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->from = $from;
-        $obj->text = $text;
-        $obj->to = $to;
+        $obj['from'] = $from;
+        $obj['text'] = $text;
+        $obj['to'] = $to;
 
-        null !== $conversation_metadata && $obj->conversation_metadata = $conversation_metadata;
-        null !== $should_create_conversation && $obj->should_create_conversation = $should_create_conversation;
+        null !== $conversation_metadata && $obj['conversation_metadata'] = $conversation_metadata;
+        null !== $should_create_conversation && $obj['should_create_conversation'] = $should_create_conversation;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class AssistantSendSMSParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class AssistantSendSMSParams implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class AssistantSendSMSParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class AssistantSendSMSParams implements BaseModel
     public function withConversationMetadata(array $conversationMetadata): self
     {
         $obj = clone $this;
-        $obj->conversation_metadata = $conversationMetadata;
+        $obj['conversation_metadata'] = $conversationMetadata;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class AssistantSendSMSParams implements BaseModel
         bool $shouldCreateConversation
     ): self {
         $obj = clone $this;
-        $obj->should_create_conversation = $shouldCreateConversation;
+        $obj['should_create_conversation'] = $shouldCreateConversation;
 
         return $obj;
     }

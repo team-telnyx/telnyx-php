@@ -55,9 +55,9 @@ final class PhoneNumber implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $ends_with && $obj->ends_with = $ends_with;
-        null !== $starts_with && $obj->starts_with = $starts_with;
+        null !== $contains && $obj['contains'] = $contains;
+        null !== $ends_with && $obj['ends_with'] = $ends_with;
+        null !== $starts_with && $obj['starts_with'] = $starts_with;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class PhoneNumber implements BaseModel
     public function withContains(string $contains): self
     {
         $obj = clone $this;
-        $obj->contains = $contains;
+        $obj['contains'] = $contains;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class PhoneNumber implements BaseModel
     public function withEndsWith(string $endsWith): self
     {
         $obj = clone $this;
-        $obj->ends_with = $endsWith;
+        $obj['ends_with'] = $endsWith;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class PhoneNumber implements BaseModel
     public function withStartsWith(string $startsWith): self
     {
         $obj = clone $this;
-        $obj->starts_with = $startsWith;
+        $obj['starts_with'] = $startsWith;
 
         return $obj;
     }

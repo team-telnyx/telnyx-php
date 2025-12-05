@@ -76,12 +76,12 @@ final class IntegrationSecret implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->identifier = $identifier;
-        $obj->record_type = $record_type;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['identifier'] = $identifier;
+        $obj['record_type'] = $record_type;
 
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class IntegrationSecret implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class IntegrationSecret implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class IntegrationSecret implements BaseModel
     public function withIdentifier(string $identifier): self
     {
         $obj = clone $this;
-        $obj->identifier = $identifier;
+        $obj['identifier'] = $identifier;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class IntegrationSecret implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class IntegrationSecret implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

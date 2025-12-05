@@ -79,11 +79,11 @@ final class AutoRechargePrefUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $invoice_enabled && $obj->invoice_enabled = $invoice_enabled;
+        null !== $enabled && $obj['enabled'] = $enabled;
+        null !== $invoice_enabled && $obj['invoice_enabled'] = $invoice_enabled;
         null !== $preference && $obj['preference'] = $preference;
-        null !== $recharge_amount && $obj->recharge_amount = $recharge_amount;
-        null !== $threshold_amount && $obj->threshold_amount = $threshold_amount;
+        null !== $recharge_amount && $obj['recharge_amount'] = $recharge_amount;
+        null !== $threshold_amount && $obj['threshold_amount'] = $threshold_amount;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class AutoRechargePrefUpdateParams implements BaseModel
     public function withEnabled(bool $enabled): self
     {
         $obj = clone $this;
-        $obj->enabled = $enabled;
+        $obj['enabled'] = $enabled;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class AutoRechargePrefUpdateParams implements BaseModel
     public function withInvoiceEnabled(bool $invoiceEnabled): self
     {
         $obj = clone $this;
-        $obj->invoice_enabled = $invoiceEnabled;
+        $obj['invoice_enabled'] = $invoiceEnabled;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class AutoRechargePrefUpdateParams implements BaseModel
     public function withRechargeAmount(string $rechargeAmount): self
     {
         $obj = clone $this;
-        $obj->recharge_amount = $rechargeAmount;
+        $obj['recharge_amount'] = $rechargeAmount;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class AutoRechargePrefUpdateParams implements BaseModel
     public function withThresholdAmount(string $thresholdAmount): self
     {
         $obj = clone $this;
-        $obj->threshold_amount = $thresholdAmount;
+        $obj['threshold_amount'] = $thresholdAmount;
 
         return $obj;
     }

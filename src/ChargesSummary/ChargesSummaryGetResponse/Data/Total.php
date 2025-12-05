@@ -116,13 +116,13 @@ final class Total implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->credits = $credits;
-        $obj->existing_mrc = $existing_mrc;
-        $obj->grand_total = $grand_total;
-        $obj->ledger_adjustments = $ledger_adjustments;
-        $obj->new_mrc = $new_mrc;
-        $obj->new_otc = $new_otc;
-        $obj->other = $other;
+        $obj['credits'] = $credits;
+        $obj['existing_mrc'] = $existing_mrc;
+        $obj['grand_total'] = $grand_total;
+        $obj['ledger_adjustments'] = $ledger_adjustments;
+        $obj['new_mrc'] = $new_mrc;
+        $obj['new_otc'] = $new_otc;
+        $obj['other'] = $other;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Total implements BaseModel
     public function withCredits(string $credits): self
     {
         $obj = clone $this;
-        $obj->credits = $credits;
+        $obj['credits'] = $credits;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Total implements BaseModel
     public function withExistingMrc(string $existingMrc): self
     {
         $obj = clone $this;
-        $obj->existing_mrc = $existingMrc;
+        $obj['existing_mrc'] = $existingMrc;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Total implements BaseModel
     public function withGrandTotal(string $grandTotal): self
     {
         $obj = clone $this;
-        $obj->grand_total = $grandTotal;
+        $obj['grand_total'] = $grandTotal;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Total implements BaseModel
     public function withLedgerAdjustments(string $ledgerAdjustments): self
     {
         $obj = clone $this;
-        $obj->ledger_adjustments = $ledgerAdjustments;
+        $obj['ledger_adjustments'] = $ledgerAdjustments;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Total implements BaseModel
     public function withNewMrc(string $newMrc): self
     {
         $obj = clone $this;
-        $obj->new_mrc = $newMrc;
+        $obj['new_mrc'] = $newMrc;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Total implements BaseModel
     public function withNewOtc(string $newOtc): self
     {
         $obj = clone $this;
-        $obj->new_otc = $newOtc;
+        $obj['new_otc'] = $newOtc;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Total implements BaseModel
     public function withOther(string $other): self
     {
         $obj = clone $this;
-        $obj->other = $other;
+        $obj['other'] = $other;
 
         return $obj;
     }

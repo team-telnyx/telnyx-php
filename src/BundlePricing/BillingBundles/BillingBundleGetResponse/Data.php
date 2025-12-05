@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit\Direction;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -111,7 +112,21 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BundleLimit> $bundle_limits
+     * @param list<BundleLimit|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   metric: string,
+     *   service: string,
+     *   updated_at: \DateTimeInterface,
+     *   billing_service?: string|null,
+     *   country?: string|null,
+     *   country_code?: int|null,
+     *   country_iso?: string|null,
+     *   direction?: value-of<Direction>|null,
+     *   limit?: int|null,
+     *   rate?: string|null,
+     *   types?: list<string>|null,
+     * }> $bundle_limits
      */
     public static function with(
         string $id,
@@ -125,15 +140,15 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->active = $active;
-        $obj->bundle_limits = $bundle_limits;
-        $obj->cost_code = $cost_code;
-        $obj->created_at = $created_at;
-        $obj->is_public = $is_public;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['active'] = $active;
+        $obj['bundle_limits'] = $bundle_limits;
+        $obj['cost_code'] = $cost_code;
+        $obj['created_at'] = $created_at;
+        $obj['is_public'] = $is_public;
+        $obj['name'] = $name;
 
-        null !== $slug && $obj->slug = $slug;
+        null !== $slug && $obj['slug'] = $slug;
 
         return $obj;
     }
@@ -144,7 +159,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -155,18 +170,32 @@ final class Data implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
 
     /**
-     * @param list<BundleLimit> $bundleLimits
+     * @param list<BundleLimit|array{
+     *   id: string,
+     *   created_at: \DateTimeInterface,
+     *   metric: string,
+     *   service: string,
+     *   updated_at: \DateTimeInterface,
+     *   billing_service?: string|null,
+     *   country?: string|null,
+     *   country_code?: int|null,
+     *   country_iso?: string|null,
+     *   direction?: value-of<Direction>|null,
+     *   limit?: int|null,
+     *   rate?: string|null,
+     *   types?: list<string>|null,
+     * }> $bundleLimits
      */
     public function withBundleLimits(array $bundleLimits): self
     {
         $obj = clone $this;
-        $obj->bundle_limits = $bundleLimits;
+        $obj['bundle_limits'] = $bundleLimits;
 
         return $obj;
     }
@@ -177,7 +206,7 @@ final class Data implements BaseModel
     public function withCostCode(string $costCode): self
     {
         $obj = clone $this;
-        $obj->cost_code = $costCode;
+        $obj['cost_code'] = $costCode;
 
         return $obj;
     }
@@ -188,7 +217,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -199,7 +228,7 @@ final class Data implements BaseModel
     public function withIsPublic(bool $isPublic): self
     {
         $obj = clone $this;
-        $obj->is_public = $isPublic;
+        $obj['is_public'] = $isPublic;
 
         return $obj;
     }
@@ -210,7 +239,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -221,7 +250,7 @@ final class Data implements BaseModel
     public function withSlug(string $slug): self
     {
         $obj = clone $this;
-        $obj->slug = $slug;
+        $obj['slug'] = $slug;
 
         return $obj;
     }

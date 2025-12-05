@@ -18,7 +18,22 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configur
  *
  * @phpstan-type CustomStorageCredentialUpdateParamsShape = array{
  *   backend: Backend|value-of<Backend>,
- *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
+ *   configuration: GcsConfigurationData|array{
+ *     backend: value-of<\Telnyx\CustomStorageCredentials\GcsConfigurationData\Backend>,
+ *     bucket?: string|null,
+ *     credentials?: string|null,
+ *   }|S3ConfigurationData|array{
+ *     backend: value-of<\Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend>,
+ *     aws_access_key_id?: string|null,
+ *     aws_secret_access_key?: string|null,
+ *     bucket?: string|null,
+ *     region?: string|null,
+ *   }|AzureConfigurationData|array{
+ *     backend: value-of<\Telnyx\CustomStorageCredentials\AzureConfigurationData\Backend>,
+ *     account_key?: string|null,
+ *     account_name?: string|null,
+ *     bucket?: string|null,
+ *   },
  * }
  */
 final class CustomStorageCredentialUpdateParams implements BaseModel
@@ -61,15 +76,31 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Backend|value-of<Backend> $backend
+     * @param GcsConfigurationData|array{
+     *   backend: value-of<GcsConfigurationData\Backend>,
+     *   bucket?: string|null,
+     *   credentials?: string|null,
+     * }|S3ConfigurationData|array{
+     *   backend: value-of<S3ConfigurationData\Backend>,
+     *   aws_access_key_id?: string|null,
+     *   aws_secret_access_key?: string|null,
+     *   bucket?: string|null,
+     *   region?: string|null,
+     * }|AzureConfigurationData|array{
+     *   backend: value-of<AzureConfigurationData\Backend>,
+     *   account_key?: string|null,
+     *   account_name?: string|null,
+     *   bucket?: string|null,
+     * } $configuration
      */
     public static function with(
         Backend|string $backend,
-        GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
     ): self {
         $obj = new self;
 
         $obj['backend'] = $backend;
-        $obj->configuration = $configuration;
+        $obj['configuration'] = $configuration;
 
         return $obj;
     }
@@ -85,11 +116,29 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
         return $obj;
     }
 
+    /**
+     * @param GcsConfigurationData|array{
+     *   backend: value-of<GcsConfigurationData\Backend>,
+     *   bucket?: string|null,
+     *   credentials?: string|null,
+     * }|S3ConfigurationData|array{
+     *   backend: value-of<S3ConfigurationData\Backend>,
+     *   aws_access_key_id?: string|null,
+     *   aws_secret_access_key?: string|null,
+     *   bucket?: string|null,
+     *   region?: string|null,
+     * }|AzureConfigurationData|array{
+     *   backend: value-of<AzureConfigurationData\Backend>,
+     *   account_key?: string|null,
+     *   account_name?: string|null,
+     *   bucket?: string|null,
+     * } $configuration
+     */
     public function withConfiguration(
-        GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
     ): self {
         $obj = clone $this;
-        $obj->configuration = $configuration;
+        $obj['configuration'] = $configuration;
 
         return $obj;
     }

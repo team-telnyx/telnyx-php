@@ -16,7 +16,8 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
  * @see Telnyx\Services\PortingOrders\ActionRequirementsService::initiate()
  *
  * @phpstan-type ActionRequirementInitiateParamsShape = array{
- *   porting_order_id: string, params: Params
+ *   porting_order_id: string,
+ *   params: Params|array{first_name: string, last_name: string},
  * }
  */
 final class ActionRequirementInitiateParams implements BaseModel
@@ -57,13 +58,17 @@ final class ActionRequirementInitiateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Params|array{first_name: string, last_name: string} $params
      */
-    public static function with(string $porting_order_id, Params $params): self
-    {
+    public static function with(
+        string $porting_order_id,
+        Params|array $params
+    ): self {
         $obj = new self;
 
-        $obj->porting_order_id = $porting_order_id;
-        $obj->params = $params;
+        $obj['porting_order_id'] = $porting_order_id;
+        $obj['params'] = $params;
 
         return $obj;
     }
@@ -71,18 +76,20 @@ final class ActionRequirementInitiateParams implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
+        $obj['porting_order_id'] = $portingOrderID;
 
         return $obj;
     }
 
     /**
      * Required information for initiating the action requirement for AU ID verification.
+     *
+     * @param Params|array{first_name: string, last_name: string} $params
      */
-    public function withParams(Params $params): self
+    public function withParams(Params|array $params): self
     {
         $obj = clone $this;
-        $obj->params = $params;
+        $obj['params'] = $params;
 
         return $obj;
     }

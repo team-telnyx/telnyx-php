@@ -8,6 +8,7 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\CostInfor
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RecordType;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation;
+use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation\RegionType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -79,13 +80,18 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Feature> $features
+     * @param CostInformation|array{
+     *   currency?: string|null, monthly_cost?: string|null, upfront_cost?: string|null
+     * } $cost_information
+     * @param list<Feature|array{name?: string|null}> $features
      * @param RecordType|value-of<RecordType> $record_type
-     * @param list<RegionInformation> $region_information
+     * @param list<RegionInformation|array{
+     *   region_name?: string|null, region_type?: value-of<RegionType>|null
+     * }> $region_information
      */
     public static function with(
         ?bool $best_effort = null,
-        ?CostInformation $cost_information = null,
+        CostInformation|array|null $cost_information = null,
         ?array $features = null,
         ?string $phone_number = null,
         ?bool $quickship = null,
@@ -96,15 +102,15 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $best_effort && $obj->best_effort = $best_effort;
-        null !== $cost_information && $obj->cost_information = $cost_information;
-        null !== $features && $obj->features = $features;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $quickship && $obj->quickship = $quickship;
+        null !== $best_effort && $obj['best_effort'] = $best_effort;
+        null !== $cost_information && $obj['cost_information'] = $cost_information;
+        null !== $features && $obj['features'] = $features;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $quickship && $obj['quickship'] = $quickship;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $region_information && $obj->region_information = $region_information;
-        null !== $reservable && $obj->reservable = $reservable;
-        null !== $vanity_format && $obj->vanity_format = $vanity_format;
+        null !== $region_information && $obj['region_information'] = $region_information;
+        null !== $reservable && $obj['reservable'] = $reservable;
+        null !== $vanity_format && $obj['vanity_format'] = $vanity_format;
 
         return $obj;
     }
@@ -115,26 +121,32 @@ final class Data implements BaseModel
     public function withBestEffort(bool $bestEffort): self
     {
         $obj = clone $this;
-        $obj->best_effort = $bestEffort;
-
-        return $obj;
-    }
-
-    public function withCostInformation(CostInformation $costInformation): self
-    {
-        $obj = clone $this;
-        $obj->cost_information = $costInformation;
+        $obj['best_effort'] = $bestEffort;
 
         return $obj;
     }
 
     /**
-     * @param list<Feature> $features
+     * @param CostInformation|array{
+     *   currency?: string|null, monthly_cost?: string|null, upfront_cost?: string|null
+     * } $costInformation
+     */
+    public function withCostInformation(
+        CostInformation|array $costInformation
+    ): self {
+        $obj = clone $this;
+        $obj['cost_information'] = $costInformation;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<Feature|array{name?: string|null}> $features
      */
     public function withFeatures(array $features): self
     {
         $obj = clone $this;
-        $obj->features = $features;
+        $obj['features'] = $features;
 
         return $obj;
     }
@@ -142,7 +154,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -153,7 +165,7 @@ final class Data implements BaseModel
     public function withQuickship(bool $quickship): self
     {
         $obj = clone $this;
-        $obj->quickship = $quickship;
+        $obj['quickship'] = $quickship;
 
         return $obj;
     }
@@ -170,12 +182,14 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegionInformation> $regionInformation
+     * @param list<RegionInformation|array{
+     *   region_name?: string|null, region_type?: value-of<RegionType>|null
+     * }> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {
         $obj = clone $this;
-        $obj->region_information = $regionInformation;
+        $obj['region_information'] = $regionInformation;
 
         return $obj;
     }
@@ -186,7 +200,7 @@ final class Data implements BaseModel
     public function withReservable(bool $reservable): self
     {
         $obj = clone $this;
-        $obj->reservable = $reservable;
+        $obj['reservable'] = $reservable;
 
         return $obj;
     }
@@ -194,7 +208,7 @@ final class Data implements BaseModel
     public function withVanityFormat(string $vanityFormat): self
     {
         $obj = clone $this;
-        $obj->vanity_format = $vanityFormat;
+        $obj['vanity_format'] = $vanityFormat;
 
         return $obj;
     }

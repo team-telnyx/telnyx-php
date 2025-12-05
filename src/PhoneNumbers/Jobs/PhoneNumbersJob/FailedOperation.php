@@ -8,6 +8,8 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError;
+use Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta;
+use Telnyx\PhoneNumberBlocks\Jobs\JobError\Source;
 
 /**
  * @phpstan-type FailedOperationShape = array{
@@ -45,7 +47,13 @@ final class FailedOperation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<JobError> $errors
+     * @param list<JobError|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: Meta|null,
+     *   source?: Source|null,
+     * }> $errors
      */
     public static function with(
         ?string $id = null,
@@ -54,9 +62,9 @@ final class FailedOperation implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $errors && $obj->errors = $errors;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $id && $obj['id'] = $id;
+        null !== $errors && $obj['errors'] = $errors;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
 
         return $obj;
     }
@@ -67,18 +75,24 @@ final class FailedOperation implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
-     * @param list<JobError> $errors
+     * @param list<JobError|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: Meta|null,
+     *   source?: Source|null,
+     * }> $errors
      */
     public function withErrors(array $errors): self
     {
         $obj = clone $this;
-        $obj->errors = $errors;
+        $obj['errors'] = $errors;
 
         return $obj;
     }
@@ -89,7 +103,7 @@ final class FailedOperation implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

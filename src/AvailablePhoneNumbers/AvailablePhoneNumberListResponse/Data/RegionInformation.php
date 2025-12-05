@@ -44,7 +44,7 @@ final class RegionInformation implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $region_name && $obj->region_name = $region_name;
+        null !== $region_name && $obj['region_name'] = $region_name;
         null !== $region_type && $obj['region_type'] = $region_type;
 
         return $obj;
@@ -53,7 +53,7 @@ final class RegionInformation implements BaseModel
     public function withRegionName(string $regionName): self
     {
         $obj = clone $this;
-        $obj->region_name = $regionName;
+        $obj['region_name'] = $regionName;
 
         return $obj;
     }

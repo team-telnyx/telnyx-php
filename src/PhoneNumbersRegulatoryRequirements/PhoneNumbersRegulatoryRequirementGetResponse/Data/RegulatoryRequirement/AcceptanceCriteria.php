@@ -46,9 +46,9 @@ final class AcceptanceCriteria implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $field_type && $obj->field_type = $field_type;
-        null !== $field_value && $obj->field_value = $field_value;
-        null !== $locality_limit && $obj->locality_limit = $locality_limit;
+        null !== $field_type && $obj['field_type'] = $field_type;
+        null !== $field_value && $obj['field_value'] = $field_value;
+        null !== $locality_limit && $obj['locality_limit'] = $locality_limit;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withFieldType(string $fieldType): self
     {
         $obj = clone $this;
-        $obj->field_type = $fieldType;
+        $obj['field_type'] = $fieldType;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj->field_value = $fieldValue;
+        $obj['field_value'] = $fieldValue;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withLocalityLimit(string $localityLimit): self
     {
         $obj = clone $this;
-        $obj->locality_limit = $localityLimit;
+        $obj['locality_limit'] = $localityLimit;
 
         return $obj;
     }

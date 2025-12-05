@@ -90,11 +90,11 @@ final class ActionStartForkingParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj->client_state = $client_state;
-        null !== $command_id && $obj->command_id = $command_id;
-        null !== $rx && $obj->rx = $rx;
+        null !== $client_state && $obj['client_state'] = $client_state;
+        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $rx && $obj['rx'] = $rx;
         null !== $stream_type && $obj['stream_type'] = $stream_type;
-        null !== $tx && $obj->tx = $tx;
+        null !== $tx && $obj['tx'] = $tx;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->client_state = $clientState;
+        $obj['client_state'] = $clientState;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->command_id = $commandID;
+        $obj['command_id'] = $commandID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withRx(string $rx): self
     {
         $obj = clone $this;
-        $obj->rx = $rx;
+        $obj['rx'] = $rx;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withTx(string $tx): self
     {
         $obj = clone $this;
-        $obj->tx = $tx;
+        $obj['tx'] = $tx;
 
         return $obj;
     }

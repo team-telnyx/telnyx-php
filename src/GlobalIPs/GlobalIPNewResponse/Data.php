@@ -99,14 +99,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $description && $obj->description = $description;
-        null !== $ip_address && $obj->ip_address = $ip_address;
-        null !== $name && $obj->name = $name;
-        null !== $ports && $obj->ports = $ports;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $description && $obj['description'] = $description;
+        null !== $ip_address && $obj['ip_address'] = $ip_address;
+        null !== $name && $obj['name'] = $name;
+        null !== $ports && $obj['ports'] = $ports;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class Data implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class Data implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ip_address = $ipAddress;
+        $obj['ip_address'] = $ipAddress;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class Data implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class Data implements BaseModel
     public function withPorts(array $ports): self
     {
         $obj = clone $this;
-        $obj->ports = $ports;
+        $obj['ports'] = $ports;
 
         return $obj;
     }

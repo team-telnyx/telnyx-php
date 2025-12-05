@@ -46,8 +46,8 @@ final class Reply implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $postback_data && $obj->postback_data = $postback_data;
-        null !== $text && $obj->text = $text;
+        null !== $postback_data && $obj['postback_data'] = $postback_data;
+        null !== $text && $obj['text'] = $text;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Reply implements BaseModel
     public function withPostbackData(string $postbackData): self
     {
         $obj = clone $this;
-        $obj->postback_data = $postbackData;
+        $obj['postback_data'] = $postbackData;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Reply implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }

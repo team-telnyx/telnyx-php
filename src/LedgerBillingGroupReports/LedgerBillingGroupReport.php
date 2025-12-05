@@ -96,13 +96,13 @@ final class LedgerBillingGroupReport implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $organization_id && $obj->organization_id = $organization_id;
+        null !== $id && $obj['id'] = $id;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $organization_id && $obj['organization_id'] = $organization_id;
         null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $report_url && $obj->report_url = $report_url;
+        null !== $report_url && $obj['report_url'] = $report_url;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organization_id = $organizationID;
+        $obj['organization_id'] = $organizationID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withReportURL(?string $reportURL): self
     {
         $obj = clone $this;
-        $obj->report_url = $reportURL;
+        $obj['report_url'] = $reportURL;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

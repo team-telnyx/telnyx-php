@@ -7,8 +7,10 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\SimCardStatus\Value;
 use Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimpleSimCard\DataLimit;
+use Telnyx\SimpleSimCard\DataLimit\Unit;
 use Telnyx\SimpleSimCard\EsimInstallationStatus;
 use Telnyx\SimpleSimCard\Type;
 
@@ -171,8 +173,17 @@ final class SimpleSimCard implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorized_imeis
+     * @param CurrentBillingPeriodConsumedData|array{
+     *   amount?: string|null, unit?: string|null
+     * } $current_billing_period_consumed_data
+     * @param DataLimit|array{
+     *   amount?: string|null, unit?: value-of<Unit>|null
+     * } $data_limit
      * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esim_installation_status
      * @param list<mixed> $resources_with_in_progress_actions
+     * @param SimCardStatus|array{
+     *   reason?: string|null, value?: value-of<Value>|null
+     * } $status
      * @param list<string> $tags
      * @param Type|value-of<Type> $type
      */
@@ -181,8 +192,8 @@ final class SimpleSimCard implements BaseModel
         ?bool $actions_in_progress = null,
         ?array $authorized_imeis = null,
         ?string $created_at = null,
-        ?CurrentBillingPeriodConsumedData $current_billing_period_consumed_data = null,
-        ?DataLimit $data_limit = null,
+        CurrentBillingPeriodConsumedData|array|null $current_billing_period_consumed_data = null,
+        DataLimit|array|null $data_limit = null,
         ?string $eid = null,
         EsimInstallationStatus|string|null $esim_installation_status = null,
         ?string $iccid = null,
@@ -191,7 +202,7 @@ final class SimpleSimCard implements BaseModel
         ?string $record_type = null,
         ?array $resources_with_in_progress_actions = null,
         ?string $sim_card_group_id = null,
-        ?SimCardStatus $status = null,
+        SimCardStatus|array|null $status = null,
         ?array $tags = null,
         Type|string|null $type = null,
         ?string $updated_at = null,
@@ -199,25 +210,25 @@ final class SimpleSimCard implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $actions_in_progress && $obj->actions_in_progress = $actions_in_progress;
-        null !== $authorized_imeis && $obj->authorized_imeis = $authorized_imeis;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $current_billing_period_consumed_data && $obj->current_billing_period_consumed_data = $current_billing_period_consumed_data;
-        null !== $data_limit && $obj->data_limit = $data_limit;
-        null !== $eid && $obj->eid = $eid;
+        null !== $id && $obj['id'] = $id;
+        null !== $actions_in_progress && $obj['actions_in_progress'] = $actions_in_progress;
+        null !== $authorized_imeis && $obj['authorized_imeis'] = $authorized_imeis;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $current_billing_period_consumed_data && $obj['current_billing_period_consumed_data'] = $current_billing_period_consumed_data;
+        null !== $data_limit && $obj['data_limit'] = $data_limit;
+        null !== $eid && $obj['eid'] = $eid;
         null !== $esim_installation_status && $obj['esim_installation_status'] = $esim_installation_status;
-        null !== $iccid && $obj->iccid = $iccid;
-        null !== $imsi && $obj->imsi = $imsi;
-        null !== $msisdn && $obj->msisdn = $msisdn;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $resources_with_in_progress_actions && $obj->resources_with_in_progress_actions = $resources_with_in_progress_actions;
-        null !== $sim_card_group_id && $obj->sim_card_group_id = $sim_card_group_id;
-        null !== $status && $obj->status = $status;
-        null !== $tags && $obj->tags = $tags;
+        null !== $iccid && $obj['iccid'] = $iccid;
+        null !== $imsi && $obj['imsi'] = $imsi;
+        null !== $msisdn && $obj['msisdn'] = $msisdn;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $resources_with_in_progress_actions && $obj['resources_with_in_progress_actions'] = $resources_with_in_progress_actions;
+        null !== $sim_card_group_id && $obj['sim_card_group_id'] = $sim_card_group_id;
+        null !== $status && $obj['status'] = $status;
+        null !== $tags && $obj['tags'] = $tags;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $version && $obj->version = $version;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $version && $obj['version'] = $version;
 
         return $obj;
     }
@@ -228,7 +239,7 @@ final class SimpleSimCard implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -239,7 +250,7 @@ final class SimpleSimCard implements BaseModel
     public function withActionsInProgress(bool $actionsInProgress): self
     {
         $obj = clone $this;
-        $obj->actions_in_progress = $actionsInProgress;
+        $obj['actions_in_progress'] = $actionsInProgress;
 
         return $obj;
     }
@@ -252,7 +263,7 @@ final class SimpleSimCard implements BaseModel
     public function withAuthorizedImeis(?array $authorizedImeis): self
     {
         $obj = clone $this;
-        $obj->authorized_imeis = $authorizedImeis;
+        $obj['authorized_imeis'] = $authorizedImeis;
 
         return $obj;
     }
@@ -263,30 +274,38 @@ final class SimpleSimCard implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
     /**
      * The SIM card consumption so far in the current billing cycle.
+     *
+     * @param CurrentBillingPeriodConsumedData|array{
+     *   amount?: string|null, unit?: string|null
+     * } $currentBillingPeriodConsumedData
      */
     public function withCurrentBillingPeriodConsumedData(
-        CurrentBillingPeriodConsumedData $currentBillingPeriodConsumedData
+        CurrentBillingPeriodConsumedData|array $currentBillingPeriodConsumedData
     ): self {
         $obj = clone $this;
-        $obj->current_billing_period_consumed_data = $currentBillingPeriodConsumedData;
+        $obj['current_billing_period_consumed_data'] = $currentBillingPeriodConsumedData;
 
         return $obj;
     }
 
     /**
      * The SIM card individual data limit configuration.
+     *
+     * @param DataLimit|array{
+     *   amount?: string|null, unit?: value-of<Unit>|null
+     * } $dataLimit
      */
-    public function withDataLimit(DataLimit $dataLimit): self
+    public function withDataLimit(DataLimit|array $dataLimit): self
     {
         $obj = clone $this;
-        $obj->data_limit = $dataLimit;
+        $obj['data_limit'] = $dataLimit;
 
         return $obj;
     }
@@ -297,7 +316,7 @@ final class SimpleSimCard implements BaseModel
     public function withEid(?string $eid): self
     {
         $obj = clone $this;
-        $obj->eid = $eid;
+        $obj['eid'] = $eid;
 
         return $obj;
     }
@@ -322,7 +341,7 @@ final class SimpleSimCard implements BaseModel
     public function withIccid(string $iccid): self
     {
         $obj = clone $this;
-        $obj->iccid = $iccid;
+        $obj['iccid'] = $iccid;
 
         return $obj;
     }
@@ -334,7 +353,7 @@ final class SimpleSimCard implements BaseModel
     public function withImsi(string $imsi): self
     {
         $obj = clone $this;
-        $obj->imsi = $imsi;
+        $obj['imsi'] = $imsi;
 
         return $obj;
     }
@@ -346,7 +365,7 @@ final class SimpleSimCard implements BaseModel
     public function withMsisdn(string $msisdn): self
     {
         $obj = clone $this;
-        $obj->msisdn = $msisdn;
+        $obj['msisdn'] = $msisdn;
 
         return $obj;
     }
@@ -354,7 +373,7 @@ final class SimpleSimCard implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->record_type = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -368,7 +387,7 @@ final class SimpleSimCard implements BaseModel
         array $resourcesWithInProgressActions
     ): self {
         $obj = clone $this;
-        $obj->resources_with_in_progress_actions = $resourcesWithInProgressActions;
+        $obj['resources_with_in_progress_actions'] = $resourcesWithInProgressActions;
 
         return $obj;
     }
@@ -379,15 +398,20 @@ final class SimpleSimCard implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj->sim_card_group_id = $simCardGroupID;
+        $obj['sim_card_group_id'] = $simCardGroupID;
 
         return $obj;
     }
 
-    public function withStatus(SimCardStatus $status): self
+    /**
+     * @param SimCardStatus|array{
+     *   reason?: string|null, value?: value-of<Value>|null
+     * } $status
+     */
+    public function withStatus(SimCardStatus|array $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -400,7 +424,7 @@ final class SimpleSimCard implements BaseModel
     public function withTags(array $tags): self
     {
         $obj = clone $this;
-        $obj->tags = $tags;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -424,7 +448,7 @@ final class SimpleSimCard implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -435,7 +459,7 @@ final class SimpleSimCard implements BaseModel
     public function withVersion(string $version): self
     {
         $obj = clone $this;
-        $obj->version = $version;
+        $obj['version'] = $version;
 
         return $obj;
     }

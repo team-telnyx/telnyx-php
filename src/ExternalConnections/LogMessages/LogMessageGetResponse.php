@@ -10,6 +10,8 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
+use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Meta;
+use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Source;
 
 /**
  * @phpstan-type LogMessageGetResponseShape = array{
@@ -37,24 +39,36 @@ final class LogMessageGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessage> $log_messages
+     * @param list<LogMessage|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: Meta|null,
+     *   source?: Source|null,
+     * }> $log_messages
      */
     public static function with(?array $log_messages = null): self
     {
         $obj = new self;
 
-        null !== $log_messages && $obj->log_messages = $log_messages;
+        null !== $log_messages && $obj['log_messages'] = $log_messages;
 
         return $obj;
     }
 
     /**
-     * @param list<LogMessage> $logMessages
+     * @param list<LogMessage|array{
+     *   code: string,
+     *   title: string,
+     *   detail?: string|null,
+     *   meta?: Meta|null,
+     *   source?: Source|null,
+     * }> $logMessages
      */
     public function withLogMessages(array $logMessages): self
     {
         $obj = clone $this;
-        $obj->log_messages = $logMessages;
+        $obj['log_messages'] = $logMessages;
 
         return $obj;
     }

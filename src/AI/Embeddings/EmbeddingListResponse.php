@@ -49,24 +49,40 @@ final class EmbeddingListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   created_at: \DateTimeInterface,
+     *   status: value-of<BackgroundTaskStatus>,
+     *   task_id: string,
+     *   task_name: string,
+     *   user_id: string,
+     *   bucket?: string|null,
+     *   finished_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public static function with(array $data): self
     {
         $obj = new self;
 
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|array{
+     *   created_at: \DateTimeInterface,
+     *   status: value-of<BackgroundTaskStatus>,
+     *   task_id: string,
+     *   task_name: string,
+     *   user_id: string,
+     *   bucket?: string|null,
+     *   finished_at?: \DateTimeInterface|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }

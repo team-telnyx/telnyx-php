@@ -80,10 +80,21 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DateEndedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_ended_at
+     * @param DateStartedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $date_started_at
      */
     public static function with(
-        ?DateEndedAt $date_ended_at = null,
-        ?DateStartedAt $date_started_at = null,
+        DateEndedAt|array|null $date_ended_at = null,
+        DateStartedAt|array|null $date_started_at = null,
         ?int $duration_secs = null,
         ?string $participant_id = null,
         ?string $room_id = null,
@@ -93,30 +104,44 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $date_ended_at && $obj->date_ended_at = $date_ended_at;
-        null !== $date_started_at && $obj->date_started_at = $date_started_at;
-        null !== $duration_secs && $obj->duration_secs = $duration_secs;
-        null !== $participant_id && $obj->participant_id = $participant_id;
-        null !== $room_id && $obj->room_id = $room_id;
-        null !== $session_id && $obj->session_id = $session_id;
-        null !== $status && $obj->status = $status;
-        null !== $type && $obj->type = $type;
+        null !== $date_ended_at && $obj['date_ended_at'] = $date_ended_at;
+        null !== $date_started_at && $obj['date_started_at'] = $date_started_at;
+        null !== $duration_secs && $obj['duration_secs'] = $duration_secs;
+        null !== $participant_id && $obj['participant_id'] = $participant_id;
+        null !== $room_id && $obj['room_id'] = $room_id;
+        null !== $session_id && $obj['session_id'] = $session_id;
+        null !== $status && $obj['status'] = $status;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
 
-    public function withDateEndedAt(DateEndedAt $dateEndedAt): self
+    /**
+     * @param DateEndedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateEndedAt
+     */
+    public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
     {
         $obj = clone $this;
-        $obj->date_ended_at = $dateEndedAt;
+        $obj['date_ended_at'] = $dateEndedAt;
 
         return $obj;
     }
 
-    public function withDateStartedAt(DateStartedAt $dateStartedAt): self
+    /**
+     * @param DateStartedAt|array{
+     *   eq?: \DateTimeInterface|null,
+     *   gte?: \DateTimeInterface|null,
+     *   lte?: \DateTimeInterface|null,
+     * } $dateStartedAt
+     */
+    public function withDateStartedAt(DateStartedAt|array $dateStartedAt): self
     {
         $obj = clone $this;
-        $obj->date_started_at = $dateStartedAt;
+        $obj['date_started_at'] = $dateStartedAt;
 
         return $obj;
     }
@@ -127,7 +152,7 @@ final class Filter implements BaseModel
     public function withDurationSecs(int $durationSecs): self
     {
         $obj = clone $this;
-        $obj->duration_secs = $durationSecs;
+        $obj['duration_secs'] = $durationSecs;
 
         return $obj;
     }
@@ -138,7 +163,7 @@ final class Filter implements BaseModel
     public function withParticipantID(string $participantID): self
     {
         $obj = clone $this;
-        $obj->participant_id = $participantID;
+        $obj['participant_id'] = $participantID;
 
         return $obj;
     }
@@ -149,7 +174,7 @@ final class Filter implements BaseModel
     public function withRoomID(string $roomID): self
     {
         $obj = clone $this;
-        $obj->room_id = $roomID;
+        $obj['room_id'] = $roomID;
 
         return $obj;
     }
@@ -160,7 +185,7 @@ final class Filter implements BaseModel
     public function withSessionID(string $sessionID): self
     {
         $obj = clone $this;
-        $obj->session_id = $sessionID;
+        $obj['session_id'] = $sessionID;
 
         return $obj;
     }
@@ -171,7 +196,7 @@ final class Filter implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -182,7 +207,7 @@ final class Filter implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

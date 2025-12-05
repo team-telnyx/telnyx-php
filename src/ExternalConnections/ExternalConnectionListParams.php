@@ -9,6 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
+use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ConnectionName;
+use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ExternalSipConnection;
+use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\PhoneNumber;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 
 /**
@@ -17,7 +20,14 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
  * @see Telnyx\Services\ExternalConnectionsService::list()
  *
  * @phpstan-type ExternalConnectionListParamsShape = array{
- *   filter?: Filter, page?: Page
+ *   filter?: Filter|array{
+ *     id?: string|null,
+ *     connection_name?: ConnectionName|null,
+ *     created_at?: string|null,
+ *     external_sip_connection?: value-of<ExternalSipConnection>|null,
+ *     phone_number?: PhoneNumber|null,
+ *   },
+ *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
 final class ExternalConnectionListParams implements BaseModel
@@ -47,35 +57,56 @@ final class ExternalConnectionListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|array{
+     *   id?: string|null,
+     *   connection_name?: ConnectionName|null,
+     *   created_at?: string|null,
+     *   external_sip_connection?: value-of<ExternalSipConnection>|null,
+     *   phone_number?: PhoneNumber|null,
+     * } $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
+    public static function with(
+        Filter|array|null $filter = null,
+        Page|array|null $page = null
+    ): self {
         $obj = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $obj['filter'] = $filter;
+        null !== $page && $obj['page'] = $page;
 
         return $obj;
     }
 
     /**
      * Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
+     *
+     * @param Filter|array{
+     *   id?: string|null,
+     *   connection_name?: ConnectionName|null,
+     *   created_at?: string|null,
+     *   external_sip_connection?: value-of<ExternalSipConnection>|null,
+     *   phone_number?: PhoneNumber|null,
+     * } $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
         $obj = clone $this;
-        $obj->filter = $filter;
+        $obj['filter'] = $filter;
 
         return $obj;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }

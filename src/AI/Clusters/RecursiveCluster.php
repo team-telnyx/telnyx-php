@@ -73,7 +73,7 @@ final class RecursiveCluster implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Node> $nodes
+     * @param list<Node|array{filename: string, text: string}> $nodes
      * @param list<mixed> $subclusters
      */
     public static function with(
@@ -86,13 +86,13 @@ final class RecursiveCluster implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->cluster_id = $cluster_id;
-        $obj->cluster_summary = $cluster_summary;
-        $obj->total_number_of_nodes = $total_number_of_nodes;
+        $obj['cluster_id'] = $cluster_id;
+        $obj['cluster_summary'] = $cluster_summary;
+        $obj['total_number_of_nodes'] = $total_number_of_nodes;
 
-        null !== $cluster_header && $obj->cluster_header = $cluster_header;
-        null !== $nodes && $obj->nodes = $nodes;
-        null !== $subclusters && $obj->subclusters = $subclusters;
+        null !== $cluster_header && $obj['cluster_header'] = $cluster_header;
+        null !== $nodes && $obj['nodes'] = $nodes;
+        null !== $subclusters && $obj['subclusters'] = $subclusters;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class RecursiveCluster implements BaseModel
     public function withClusterID(string $clusterID): self
     {
         $obj = clone $this;
-        $obj->cluster_id = $clusterID;
+        $obj['cluster_id'] = $clusterID;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class RecursiveCluster implements BaseModel
     public function withClusterSummary(string $clusterSummary): self
     {
         $obj = clone $this;
-        $obj->cluster_summary = $clusterSummary;
+        $obj['cluster_summary'] = $clusterSummary;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class RecursiveCluster implements BaseModel
     public function withTotalNumberOfNodes(int $totalNumberOfNodes): self
     {
         $obj = clone $this;
-        $obj->total_number_of_nodes = $totalNumberOfNodes;
+        $obj['total_number_of_nodes'] = $totalNumberOfNodes;
 
         return $obj;
     }
@@ -124,18 +124,18 @@ final class RecursiveCluster implements BaseModel
     public function withClusterHeader(string $clusterHeader): self
     {
         $obj = clone $this;
-        $obj->cluster_header = $clusterHeader;
+        $obj['cluster_header'] = $clusterHeader;
 
         return $obj;
     }
 
     /**
-     * @param list<Node> $nodes
+     * @param list<Node|array{filename: string, text: string}> $nodes
      */
     public function withNodes(array $nodes): self
     {
         $obj = clone $this;
-        $obj->nodes = $nodes;
+        $obj['nodes'] = $nodes;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class RecursiveCluster implements BaseModel
     public function withSubclusters(array $subclusters): self
     {
         $obj = clone $this;
-        $obj->subclusters = $subclusters;
+        $obj['subclusters'] = $subclusters;
 
         return $obj;
     }

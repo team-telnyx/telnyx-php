@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 use Telnyx\VerifiedNumbers\VerifiedNumberListResponse\Meta;
 
 /**
@@ -56,33 +57,55 @@ final class VerifiedNumberListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerifiedNumber> $data
+     * @param list<VerifiedNumber|array{
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   verified_at?: string|null,
+     * }> $data
+     * @param Meta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
         $obj = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $obj['data'] = $data;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
 
     /**
-     * @param list<VerifiedNumber> $data
+     * @param list<VerifiedNumber|array{
+     *   phone_number?: string|null,
+     *   record_type?: value-of<RecordType>|null,
+     *   verified_at?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj['data'] = $data;
 
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|array{
+     *   page_number?: int|null,
+     *   page_size?: int|null,
+     *   total_pages?: int|null,
+     *   total_results?: int|null,
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj['meta'] = $meta;
 
         return $obj;
     }
