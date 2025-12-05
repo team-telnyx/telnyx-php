@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse\Data\Region;
 
 /**
  * @phpstan-type DataShape = array{
@@ -20,7 +19,6 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse\Data\Region;
  *   network_id?: string|null,
  *   status?: value-of<InterfaceStatus>|null,
  *   public_ip?: string|null,
- *   region?: Region|null,
  *   region_code?: string|null,
  * }
  */
@@ -79,9 +77,6 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $public_ip;
 
-    #[Api(optional: true)]
-    public ?Region $region;
-
     /**
      * The region interface is deployed to.
      */
@@ -109,7 +104,6 @@ final class Data implements BaseModel
         ?string $network_id = null,
         InterfaceStatus|string|null $status = null,
         ?string $public_ip = null,
-        ?Region $region = null,
         ?string $region_code = null,
     ): self {
         $obj = new self;
@@ -122,7 +116,6 @@ final class Data implements BaseModel
         null !== $network_id && $obj->network_id = $network_id;
         null !== $status && $obj['status'] = $status;
         null !== $public_ip && $obj->public_ip = $public_ip;
-        null !== $region && $obj->region = $region;
         null !== $region_code && $obj->region_code = $region_code;
 
         return $obj;
@@ -214,14 +207,6 @@ final class Data implements BaseModel
     {
         $obj = clone $this;
         $obj->public_ip = $publicIP;
-
-        return $obj;
-    }
-
-    public function withRegion(Region $region): self
-    {
-        $obj = clone $this;
-        $obj->region = $region;
 
         return $obj;
     }

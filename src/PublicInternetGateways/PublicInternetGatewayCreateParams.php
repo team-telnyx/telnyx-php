@@ -37,7 +37,7 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     public ?string $network_id;
 
     /**
-     * The region the interface should be deployed to.
+     * The region interface is deployed to.
      */
     #[Api(optional: true)]
     public ?string $region_code;
@@ -89,7 +89,7 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     }
 
     /**
-     * The region the interface should be deployed to.
+     * The region interface is deployed to.
      */
     public function withRegionCode(string $regionCode): self
     {
