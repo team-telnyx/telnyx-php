@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
+namespace Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;

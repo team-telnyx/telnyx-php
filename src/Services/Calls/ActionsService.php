@@ -334,7 +334,7 @@ final class ActionsService implements ActionsContract
      *   transcription?: array{model?: string},
      *   user_response_timeout_ms?: int,
      *   voice?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array<string,mixed>,
      * }|ActionGatherUsingAIParams $params
      *
      * @throws APIException
@@ -439,7 +439,7 @@ final class ActionsService implements ActionsContract
      *   terminating_digit?: string,
      *   timeout_millis?: int,
      *   valid_digits?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array<string,mixed>,
      * }|ActionGatherUsingSpeakParams $params
      *
      * @throws APIException
@@ -771,7 +771,7 @@ final class ActionsService implements ActionsContract
      *   payload_type?: 'text'|'ssml',
      *   service_level?: 'basic'|'premium',
      *   stop?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array<string,mixed>,
      * }|ActionSpeakParams $params
      *
      * @throws APIException
@@ -816,7 +816,7 @@ final class ActionsService implements ActionsContract
      *   interruption_settings?: array{enable?: bool},
      *   transcription?: array{model?: string},
      *   voice?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array<string,mixed>,
      * }|ActionStartAIAssistantParams $params
      *
      * @throws APIException

@@ -7,9 +7,11 @@ namespace Telnyx\CustomStorageCredentials;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend;
 
 /**
  * @phpstan-type S3ConfigurationDataShape = array{
+ *   backend: value-of<Backend>,
  *   aws_access_key_id?: string|null,
  *   aws_secret_access_key?: string|null,
  *   bucket?: string|null,
@@ -20,6 +22,14 @@ final class S3ConfigurationData implements BaseModel
 {
     /** @use SdkModel<S3ConfigurationDataShape> */
     use SdkModel;
+
+    /**
+     * Storage backend type.
+     *
+     * @var value-of<Backend> $backend
+     */
+    #[Api(enum: Backend::class)]
+    public string $backend;
 
     /**
      * AWS credentials access key id.
@@ -45,6 +55,20 @@ final class S3ConfigurationData implements BaseModel
     #[Api(optional: true)]
     public ?string $region;
 
+    /**
+     * `new S3ConfigurationData()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * S3ConfigurationData::with(backend: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new S3ConfigurationData)->withBackend(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -54,8 +78,11 @@ final class S3ConfigurationData implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Backend|value-of<Backend> $backend
      */
     public static function with(
+        Backend|string $backend,
         ?string $aws_access_key_id = null,
         ?string $aws_secret_access_key = null,
         ?string $bucket = null,
@@ -63,10 +90,25 @@ final class S3ConfigurationData implements BaseModel
     ): self {
         $obj = new self;
 
+        $obj['backend'] = $backend;
+
         null !== $aws_access_key_id && $obj->aws_access_key_id = $aws_access_key_id;
         null !== $aws_secret_access_key && $obj->aws_secret_access_key = $aws_secret_access_key;
         null !== $bucket && $obj->bucket = $bucket;
         null !== $region && $obj->region = $region;
+
+        return $obj;
+    }
+
+    /**
+     * Storage backend type.
+     *
+     * @param Backend|value-of<Backend> $backend
+     */
+    public function withBackend(Backend|string $backend): self
+    {
+        $obj = clone $this;
+        $obj['backend'] = $backend;
 
         return $obj;
     }

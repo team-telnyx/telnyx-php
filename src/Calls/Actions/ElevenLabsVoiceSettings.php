@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ElevenLabsVoiceSettingsShape = array{api_key_ref?: string|null}
+ * @phpstan-type ElevenLabsVoiceSettingsShape = array{
+ *   type: value-of<Type>, api_key_ref?: string|null
+ * }
  */
 final class ElevenLabsVoiceSettings implements BaseModel
 {
@@ -17,11 +20,33 @@ final class ElevenLabsVoiceSettings implements BaseModel
     use SdkModel;
 
     /**
+     * Voice settings provider type.
+     *
+     * @var value-of<Type> $type
+     */
+    #[Api(enum: Type::class)]
+    public string $type;
+
+    /**
      * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
      */
     #[Api(optional: true)]
     public ?string $api_key_ref;
 
+    /**
+     * `new ElevenLabsVoiceSettings()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * ElevenLabsVoiceSettings::with(type: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new ElevenLabsVoiceSettings)->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -31,12 +56,31 @@ final class ElevenLabsVoiceSettings implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Type|value-of<Type> $type
      */
-    public static function with(?string $api_key_ref = null): self
-    {
+    public static function with(
+        Type|string $type,
+        ?string $api_key_ref = null
+    ): self {
         $obj = new self;
 
+        $obj['type'] = $type;
+
         null !== $api_key_ref && $obj->api_key_ref = $api_key_ref;
+
+        return $obj;
+    }
+
+    /**
+     * Voice settings provider type.
+     *
+     * @param Type|value-of<Type> $type
+     */
+    public function withType(Type|string $type): self
+    {
+        $obj = clone $this;
+        $obj['type'] = $type;
 
         return $obj;
     }

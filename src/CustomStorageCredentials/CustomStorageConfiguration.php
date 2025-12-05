@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
+use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration;
 
 /**
  * @phpstan-type CustomStorageConfigurationShape = array{
@@ -24,7 +25,7 @@ final class CustomStorageConfiguration implements BaseModel
     #[Api(enum: Backend::class)]
     public string $backend;
 
-    #[Api]
+    #[Api(union: Configuration::class)]
     public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
 
     /**

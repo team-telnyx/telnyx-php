@@ -40,7 +40,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   transcription?: TranscriptionConfig,
  *   user_response_timeout_ms?: int,
  *   voice?: string,
- *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings,
  * }
  */
 final class ActionGatherUsingAIParams implements BaseModel
@@ -139,11 +139,9 @@ final class ActionGatherUsingAIParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
-     *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
      */
     #[Api(union: VoiceSettings::class, optional: true)]
-    public mixed $voice_settings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     /**
      * `new ActionGatherUsingAIParams()` is missing required properties by the API.
@@ -171,7 +169,6 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
      * @param list<MessageHistory> $message_history
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
      */
     public static function with(
         mixed $parameters,
@@ -187,7 +184,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         ?TranscriptionConfig $transcription = null,
         ?int $user_response_timeout_ms = null,
         ?string $voice = null,
-        mixed $voice_settings = null,
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
     ): self {
         $obj = new self;
 
@@ -368,11 +365,10 @@ final class ActionGatherUsingAIParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
-     *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
      */
-    public function withVoiceSettings(mixed $voiceSettings): self
-    {
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings
+    ): self {
         $obj = clone $this;
         $obj->voice_settings = $voiceSettings;
 

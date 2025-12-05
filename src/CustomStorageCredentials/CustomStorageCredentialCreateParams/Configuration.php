@@ -15,15 +15,20 @@ final class Configuration implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'backend';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
         return [
-            GcsConfigurationData::class,
-            S3ConfigurationData::class,
-            AzureConfigurationData::class,
+            'gcs' => GcsConfigurationData::class,
+            's3' => S3ConfigurationData::class,
+            'azure' => AzureConfigurationData::class,
         ];
     }
 }
