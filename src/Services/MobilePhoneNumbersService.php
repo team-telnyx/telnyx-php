@@ -13,13 +13,22 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbersContract;
+use Telnyx\Services\MobilePhoneNumbers\MessagingService;
 
 final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
 {
     /**
+     * @api
+     */
+    public MessagingService $messaging;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->messaging = new MessagingService($client);
+    }
 
     /**
      * @api
