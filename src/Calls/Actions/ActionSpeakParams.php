@@ -32,7 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   payload_type?: PayloadType|value-of<PayloadType>,
  *   service_level?: ServiceLevel|value-of<ServiceLevel>,
  *   stop?: string,
- *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings,
  * }
  */
 final class ActionSpeakParams implements BaseModel
@@ -107,11 +107,9 @@ final class ActionSpeakParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
-     *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
      */
     #[Api(union: VoiceSettings::class, optional: true)]
-    public mixed $voice_settings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -140,7 +138,6 @@ final class ActionSpeakParams implements BaseModel
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payload_type
      * @param ServiceLevel|value-of<ServiceLevel> $service_level
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
      */
     public static function with(
         string $payload,
@@ -151,7 +148,7 @@ final class ActionSpeakParams implements BaseModel
         PayloadType|string|null $payload_type = null,
         ServiceLevel|string|null $service_level = null,
         ?string $stop = null,
-        mixed $voice_settings = null,
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
     ): self {
         $obj = new self;
 
@@ -275,11 +272,10 @@ final class ActionSpeakParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
-     *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
      */
-    public function withVoiceSettings(mixed $voiceSettings): self
-    {
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings
+    ): self {
         $obj = clone $this;
         $obj->voice_settings = $voiceSettings;
 

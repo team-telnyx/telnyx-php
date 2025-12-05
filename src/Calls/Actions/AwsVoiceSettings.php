@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Calls\Actions\TelnyxVoiceSettings\Type;
+use Telnyx\Calls\Actions\AwsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type TelnyxVoiceSettingsShape = array{
- *   type: value-of<Type>, voice_speed?: float|null
- * }
+ * @phpstan-type AwsVoiceSettingsShape = array{type: value-of<Type>}
  */
-final class TelnyxVoiceSettings implements BaseModel
+final class AwsVoiceSettings implements BaseModel
 {
-    /** @use SdkModel<TelnyxVoiceSettingsShape> */
+    /** @use SdkModel<AwsVoiceSettingsShape> */
     use SdkModel;
 
     /**
@@ -28,23 +26,17 @@ final class TelnyxVoiceSettings implements BaseModel
     public string $type;
 
     /**
-     * The voice speed to be used for the voice. The voice speed must be between 0.1 and 2.0. Default value is 1.0.
-     */
-    #[Api(optional: true)]
-    public ?float $voice_speed;
-
-    /**
-     * `new TelnyxVoiceSettings()` is missing required properties by the API.
+     * `new AwsVoiceSettings()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * TelnyxVoiceSettings::with(type: ...)
+     * AwsVoiceSettings::with(type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new TelnyxVoiceSettings)->withType(...)
+     * (new AwsVoiceSettings)->withType(...)
      * ```
      */
     public function __construct()
@@ -59,15 +51,11 @@ final class TelnyxVoiceSettings implements BaseModel
      *
      * @param Type|value-of<Type> $type
      */
-    public static function with(
-        Type|string $type,
-        ?float $voice_speed = null
-    ): self {
+    public static function with(Type|string $type): self
+    {
         $obj = new self;
 
         $obj['type'] = $type;
-
-        null !== $voice_speed && $obj->voice_speed = $voice_speed;
 
         return $obj;
     }
@@ -81,17 +69,6 @@ final class TelnyxVoiceSettings implements BaseModel
     {
         $obj = clone $this;
         $obj['type'] = $type;
-
-        return $obj;
-    }
-
-    /**
-     * The voice speed to be used for the voice. The voice speed must be between 0.1 and 2.0. Default value is 1.0.
-     */
-    public function withVoiceSpeed(float $voiceSpeed): self
-    {
-        $obj = clone $this;
-        $obj->voice_speed = $voiceSpeed;
 
         return $obj;
     }

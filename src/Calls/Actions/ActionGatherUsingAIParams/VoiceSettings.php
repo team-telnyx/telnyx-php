@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionGatherUsingAIParams;
 
+use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Core\Concerns\SdkUnion;
@@ -17,13 +18,20 @@ final class VoiceSettings implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'type';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
         return [
-            ElevenLabsVoiceSettings::class, TelnyxVoiceSettings::class, 'mixed',
+            'elevenlabs' => ElevenLabsVoiceSettings::class,
+            'telnyx' => TelnyxVoiceSettings::class,
+            'aws' => AwsVoiceSettings::class,
         ];
     }
 }

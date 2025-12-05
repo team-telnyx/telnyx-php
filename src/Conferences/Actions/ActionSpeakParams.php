@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
@@ -28,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   language?: Language|value-of<Language>,
  *   payload_type?: PayloadType|value-of<PayloadType>,
  *   region?: Region|value-of<Region>,
- *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings,
  * }
  */
 final class ActionSpeakParams implements BaseModel
@@ -99,11 +100,9 @@ final class ActionSpeakParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
-     *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
      */
     #[Api(union: VoiceSettings::class, optional: true)]
-    public mixed $voice_settings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -133,7 +132,6 @@ final class ActionSpeakParams implements BaseModel
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payload_type
      * @param Region|value-of<Region> $region
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
      */
     public static function with(
         string $payload,
@@ -143,7 +141,7 @@ final class ActionSpeakParams implements BaseModel
         Language|string|null $language = null,
         PayloadType|string|null $payload_type = null,
         Region|string|null $region = null,
-        mixed $voice_settings = null,
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
     ): self {
         $obj = new self;
 
@@ -257,11 +255,10 @@ final class ActionSpeakParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
-     *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
      */
-    public function withVoiceSettings(mixed $voiceSettings): self
-    {
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings
+    ): self {
         $obj = clone $this;
         $obj->voice_settings = $voiceSettings;
 

@@ -425,7 +425,7 @@ final class ActionsService implements ActionsContract
      *   language?: value-of<Language>,
      *   payload_type?: 'text'|'ssml',
      *   region?: 'Australia'|'Europe'|'Middle East'|'US',
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array<string,mixed>,
      * }|ActionSpeakParams $params
      *
      * @throws APIException

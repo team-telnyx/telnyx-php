@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration;
 
 /**
  * Creates a custom storage credentials configuration.
@@ -30,7 +31,7 @@ final class CustomStorageCredentialCreateParams implements BaseModel
     #[Api(enum: Backend::class)]
     public string $backend;
 
-    #[Api]
+    #[Api(union: Configuration::class)]
     public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
 
     /**

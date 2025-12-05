@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration;
 
 /**
  * Updates a stored custom credentials configuration.
@@ -30,7 +31,7 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
     #[Api(enum: Backend::class)]
     public string $backend;
 
-    #[Api]
+    #[Api(union: Configuration::class)]
     public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
 
     /**

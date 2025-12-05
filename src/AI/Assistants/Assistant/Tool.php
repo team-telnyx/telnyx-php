@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Assistant;
 
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
+use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
 use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TransferTool;
@@ -18,18 +18,23 @@ final class Tool implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'type';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
         return [
-            BookAppointmentTool::class,
-            CheckAvailabilityTool::class,
-            WebhookTool::class,
-            HangupTool::class,
-            TransferTool::class,
-            RetrievalTool::class,
+            'book_appointment' => BookAppointment::class,
+            'check_availability' => CheckAvailability::class,
+            'webhook' => WebhookTool::class,
+            'hangup' => HangupTool::class,
+            'transfer' => TransferTool::class,
+            'retrieval' => RetrievalTool::class,
         ];
     }
 }
