@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams;
 use Telnyx\Client;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ChatContract;
@@ -50,12 +51,14 @@ final class ChatService implements ChatContract
      *   use_beam_search?: bool,
      * }|ChatCreateCompletionParams $params
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function createCompletion(
         array|ChatCreateCompletionParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): array {
         [$parsed, $options] = ChatCreateCompletionParams::parseRequest(
             $params,
             $requestOptions,
@@ -67,7 +70,7 @@ final class ChatService implements ChatContract
             path: 'ai/chat/completions',
             body: (object) $parsed,
             options: $options,
-            convert: 'mixed',
+            convert: new MapOf('mixed'),
         );
     }
 }

@@ -41,7 +41,7 @@ final class ChatTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsArray($result);
     }
 
     #[Test]
@@ -90,6 +90,6 @@ final class ChatTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsArray($result);
     }
 }
