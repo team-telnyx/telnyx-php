@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Admin implements BaseModel
     /**
      * Filter results by authorized person.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $auth_person_name;
 
     /**
      * Filter results by person or company name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $entity_name;
 
     public function __construct()

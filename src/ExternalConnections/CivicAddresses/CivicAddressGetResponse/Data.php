@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Location;
@@ -37,59 +37,59 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city_or_town;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city_or_town_alias;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $company_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_or_district;
 
     /**
      * Identifies what is the default location in the list of locations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $default_location_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $house_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $house_number_suffix;
 
     /** @var list<Location>|null $locations */
-    #[Api(list: Location::class, optional: true)]
+    #[Optional(list: Location::class)]
     public ?array $locations;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postal_or_zip_code;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state_or_province;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_suffix;
 
     public function __construct()

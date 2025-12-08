@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\EmergencyStatus;
@@ -26,13 +26,13 @@ final class Emergency implements BaseModel
     /**
      * Identifies the address to be used with emergency services.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $emergency_address_id;
 
     /**
      * Allows you to enable or disable emergency services on the phone number. In order to enable emergency services, you must also set an emergency_address_id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $emergency_enabled;
 
     /**
@@ -40,7 +40,7 @@ final class Emergency implements BaseModel
      *
      * @var value-of<EmergencyStatus>|null $emergency_status
      */
-    #[Api(enum: EmergencyStatus::class, optional: true)]
+    #[Optional(enum: EmergencyStatus::class)]
     public ?string $emergency_status;
 
     public function __construct()

@@ -7,7 +7,7 @@ namespace Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListParticipantsResponse\Data\Conference;
 use Telnyx\Conferences\ConferenceListParticipantsResponse\Data\RecordType;
 use Telnyx\Conferences\ConferenceListParticipantsResponse\Data\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -36,59 +36,59 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies the participant.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Call Control ID associated with the partiipant of the conference.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
      * Uniquely identifies the call leg associated with the participant.
      */
-    #[Api]
+    #[Required]
     public string $call_leg_id;
 
     /**
      * Info about the conference that the participant is in.
      */
-    #[Api]
+    #[Required]
     public Conference $conference;
 
     /**
      * ISO 8601 formatted date of when the participant was created.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * Whether the conference will end and all remaining participants be hung up after the participant leaves the conference.
      */
-    #[Api]
+    #[Required]
     public bool $end_conference_on_exit;
 
     /**
      * Whether the participant is muted.
      */
-    #[Api]
+    #[Required]
     public bool $muted;
 
     /**
      * Whether the participant is put on_hold.
      */
-    #[Api]
+    #[Required]
     public bool $on_hold;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * Whether the conference will end after the participant leaves the conference.
      */
-    #[Api]
+    #[Required]
     public bool $soft_end_conference_on_exit;
 
     /**
@@ -96,13 +96,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * ISO 8601 formatted date of when the participant was last updated.
      */
-    #[Api]
+    #[Required]
     public string $updated_at;
 
     /**
@@ -110,7 +110,7 @@ final class Data implements BaseModel
      *
      * @var list<string> $whisper_call_control_ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $whisper_call_control_ids;
 
     /**

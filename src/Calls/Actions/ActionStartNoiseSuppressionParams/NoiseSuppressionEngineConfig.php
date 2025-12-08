@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,7 +23,7 @@ final class NoiseSuppressionEngineConfig implements BaseModel
     /**
      * The attenuation limit for noise suppression (0-100). Only applicable for DeepFilterNet.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $attenuation_limit;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BillingGroups;
 
 use Telnyx\BillingGroups\BillingGroup\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class BillingGroupNewResponse implements BaseModel
     /** @use SdkModel<BillingGroupNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?BillingGroup $data;
 
     public function __construct()

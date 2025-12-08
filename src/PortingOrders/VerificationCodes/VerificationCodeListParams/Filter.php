@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Filter implements BaseModel
     /**
      * Filter verification codes that have been verified or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $verified;
 
     public function __construct()

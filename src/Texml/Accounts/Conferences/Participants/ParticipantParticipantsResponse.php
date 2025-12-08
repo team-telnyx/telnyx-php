@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse\Status;
@@ -30,43 +30,43 @@ final class ParticipantParticipantsResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
      * The identifier of this participant's call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
     /**
      * Whether the participant is coaching another call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $coaching;
 
     /**
      * The identifier of the coached participant's call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $coaching_call_sid;
 
     /**
      * Whether the conference ends when the participant leaves.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $end_conference_on_exit;
 
     /**
      * Whether the participant is on hold.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hold;
 
     /**
      * Whether the participant is muted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $muted;
 
     /**
@@ -74,13 +74,13 @@ final class ParticipantParticipantsResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The relative URI for this participant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Connections\ConnectionListResponse;
 
 use Telnyx\Connections\ConnectionListResponse\Data\WebhookAPIVersion;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -34,13 +34,13 @@ final class Data implements BaseModel
     /**
      * Identifies the specific resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Defaults to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -48,28 +48,28 @@ final class Data implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional(enum: AnchorsiteOverride::class)]
     public ?string $anchorsite_override;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_name;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $outbound_voice_profile_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -77,13 +77,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
@@ -91,19 +91,19 @@ final class Data implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_url;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberAssignmentByProfile;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +28,19 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
     /**
      * The ID of the messaging profile that you want to link to the specified campaign.
      */
-    #[Api]
+    #[Required]
     public string $messagingProfileId;
 
     /**
      * The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $campaignId;
 
     /**
      * The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcrCampaignId;
 
     /**

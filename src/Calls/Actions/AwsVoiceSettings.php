@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\AwsVoiceSettings\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,7 +22,7 @@ final class AwsVoiceSettings implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

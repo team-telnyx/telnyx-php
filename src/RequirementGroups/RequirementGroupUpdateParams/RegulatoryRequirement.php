@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups\RequirementGroupUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class RegulatoryRequirement implements BaseModel
     /**
      * New value for the regulatory requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_value;
 
     /**
      * Unique identifier for the regulatory requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_id;
 
     public function __construct()

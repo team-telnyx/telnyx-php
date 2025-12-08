@@ -6,7 +6,7 @@ namespace Telnyx\Calls;
 
 use Telnyx\Calls\CallDialResponse\Data;
 use Telnyx\Calls\CallDialResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class CallDialResponse implements BaseModel
     /** @use SdkModel<CallDialResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

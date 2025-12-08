@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PartnerCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,13 +30,13 @@ final class PartnerCampaignListParams implements BaseModel
     /**
      * The 1-indexed page number to get. The default value is `1`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $recordsPerPage;
 
     /**
@@ -44,7 +44,7 @@ final class PartnerCampaignListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()

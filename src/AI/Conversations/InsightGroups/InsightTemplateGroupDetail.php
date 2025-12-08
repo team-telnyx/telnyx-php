@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\InsightGroups;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class InsightTemplateGroupDetail implements BaseModel
     /** @use SdkModel<InsightTemplateGroupDetailShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public InsightTemplateGroup $data;
 
     /**

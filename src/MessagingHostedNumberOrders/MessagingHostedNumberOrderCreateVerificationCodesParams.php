@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,11 +27,11 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
     use SdkParams;
 
     /** @var list<string> $phone_numbers */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $phone_numbers;
 
     /** @var value-of<VerificationMethod> $verification_method */
-    #[Api(enum: VerificationMethod::class)]
+    #[Required(enum: VerificationMethod::class)]
     public string $verification_method;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -49,25 +50,25 @@ final class VerifyProfileCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Call $call;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Flashcall $flashcall;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SMS $sms;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_failover_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**

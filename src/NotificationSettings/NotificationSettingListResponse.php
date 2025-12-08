@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\NotificationSettings;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSetting\Parameter;
@@ -22,10 +22,10 @@ final class NotificationSettingListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<NotificationSetting>|null $data */
-    #[Api(list: NotificationSetting::class, optional: true)]
+    #[Optional(list: NotificationSetting::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

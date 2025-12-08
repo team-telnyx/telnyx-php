@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,13 +33,13 @@ final class NumberLookupCreateParams implements BaseModel
      *
      * @var value-of<AggregationType>|null $aggregationType
      */
-    #[Api(enum: AggregationType::class, optional: true)]
+    #[Optional(enum: AggregationType::class)]
     public ?string $aggregationType;
 
     /**
      * End date for the usage report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $endDate;
 
     /**
@@ -47,13 +47,13 @@ final class NumberLookupCreateParams implements BaseModel
      *
      * @var list<string>|null $managedAccounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managedAccounts;
 
     /**
      * Start date for the usage report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $startDate;
 
     public function __construct()

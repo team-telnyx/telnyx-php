@@ -6,7 +6,7 @@ namespace Telnyx\AccessIPRanges\AccessIPRangeListParams;
 
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock\CidrBlockPatternFilter;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt\DateRangeFilter;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,13 +26,13 @@ final class Filter implements BaseModel
     /**
      * Filter by exact CIDR block match.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public string|CidrBlockPatternFilter|null $cidr_block;
 
     /**
      * Filter by exact creation date-time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public \DateTimeInterface|DateRangeFilter|null $created_at;
 
     public function __construct()

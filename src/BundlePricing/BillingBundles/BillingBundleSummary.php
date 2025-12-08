@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\BillingBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -29,53 +30,53 @@ final class BillingBundleSummary implements BaseModel
     /**
      * Bundle's ID, this is used to identify the bundle in the API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Api]
+    #[Required]
     public string $cost_code;
 
     /**
      * Date the bundle was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Api]
+    #[Required]
     public bool $is_public;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Bundle's currency code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * Monthly recurring charge price.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $mrc_price;
 
     /**
      * Slugified version of the bundle's name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $slug;
 
     /** @var list<string>|null $specs */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $specs;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\Payload\CallingPartyType;
@@ -32,19 +32,19 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
@@ -52,31 +52,31 @@ final class Payload implements BaseModel
      *
      * @var value-of<CallingPartyType>|null $calling_party_type
      */
-    #[Api(enum: CallingPartyType::class, optional: true)]
+    #[Optional(enum: CallingPartyType::class)]
     public ?string $calling_party_type;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ID that is unique to the recording session and can be used to correlate webhook events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_id;
 
     /**
      * ID that is unique to the transcription process and can be used to correlate webhook events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_transcription_id;
 
     /**
@@ -84,13 +84,13 @@ final class Payload implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The transcribed text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transcription_text;
 
     public function __construct()

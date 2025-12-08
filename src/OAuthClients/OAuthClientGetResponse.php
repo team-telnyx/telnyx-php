@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
@@ -19,7 +19,7 @@ final class OAuthClientGetResponse implements BaseModel
     /** @use SdkModel<OAuthClientGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OAuthClient $data;
 
     public function __construct()

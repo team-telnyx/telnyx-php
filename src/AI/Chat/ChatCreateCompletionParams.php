@@ -15,7 +15,8 @@ use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function1;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -70,31 +71,31 @@ final class ChatCreateCompletionParams implements BaseModel
      *
      * @var list<Message> $messages
      */
-    #[Api(list: Message::class)]
+    #[Required(list: Message::class)]
     public array $messages;
 
     /**
      * If you are using an external inference provider like xAI or OpenAI, this field allows you to pass along a reference to your API key. After creating an [integration secret](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for you API key, pass the secret's `identifier` in this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $api_key_ref;
 
     /**
      * This is used with `use_beam_search` to determine how many candidate beams to explore.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $best_of;
 
     /**
      * This is used with `use_beam_search`. If `true`, generation stops as soon as there are `best_of` complete candidates; if `false`, a heuristic is applied and the generation stops when is it very unlikely to find better candidates.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $early_stopping;
 
     /**
      * Higher values will penalize the model from repeating the same output tokens.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $frequency_penalty;
 
     /**
@@ -102,7 +103,7 @@ final class ChatCreateCompletionParams implements BaseModel
      *
      * @var list<string>|null $guided_choice
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $guided_choice;
 
     /**
@@ -110,77 +111,77 @@ final class ChatCreateCompletionParams implements BaseModel
      *
      * @var array<string,mixed>|null $guided_json
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $guided_json;
 
     /**
      * If specified, the output will follow the regex pattern.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $guided_regex;
 
     /**
      * This is used with `use_beam_search` to prefer shorter or longer completions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $length_penalty;
 
     /**
      * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $logprobs;
 
     /**
      * Maximum number of completion tokens the model should generate.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_tokens;
 
     /**
      * This is an alternative to `top_p` that [many prefer](https://github.com/huggingface/transformers/issues/27670). Must be in [0, 1].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $min_p;
 
     /**
      * The language model to chat with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model;
 
     /**
      * This will return multiple choices for you instead of a single chat completion.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $n;
 
     /**
      * Higher values will penalize the model from repeating the same output tokens.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $presence_penalty;
 
     /**
      * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ResponseFormat $response_format;
 
     /**
      * Whether or not to stream data-only server-sent events as they become available.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $stream;
 
     /**
      * Adjusts the "creativity" of the model. Lower values make the model more deterministic and repetitive, while higher values make the model more random and creative.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $temperature;
 
     /** @var value-of<ToolChoice>|null $tool_choice */
-    #[Api(enum: ToolChoice::class, optional: true)]
+    #[Optional(enum: ToolChoice::class)]
     public ?string $tool_choice;
 
     /**
@@ -188,25 +189,25 @@ final class ChatCreateCompletionParams implements BaseModel
      *
      * @var list<ChatCompletionToolParam|Retrieval>|null $tools
      */
-    #[Api(list: Tool::class, optional: true)]
+    #[Optional(list: Tool::class)]
     public ?array $tools;
 
     /**
      * This is used with `logprobs`. An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $top_logprobs;
 
     /**
      * An alternative or complement to `temperature`. This adjusts how many of the top possibilities to consider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $top_p;
 
     /**
      * Setting this to `true` will allow the model to [explore more completion options](https://huggingface.co/blog/how-to-generate#beam-search). This is not supported by OpenAI.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $use_beam_search;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -39,61 +39,61 @@ final class CallRetrieveCallsParams implements BaseModel
     /**
      * Filters calls by their end date. Expected format is YYYY-MM-DD.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $EndTime;
 
     /**
      * Filters calls by their end date (after). Expected format is YYYY-MM-DD.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $EndTime_gt;
 
     /**
      * Filters calls by their end date (before). Expected format is YYYY-MM-DD.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $EndTime_lt;
 
     /**
      * Filters calls by the from number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $From;
 
     /**
      * The number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $Page;
 
     /**
      * The number of records to be displayed on a page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $PageSize;
 
     /**
      * Used to request the next page of results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $PageToken;
 
     /**
      * Filters calls by their start date. Expected format is YYYY-MM-DD.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $StartTime;
 
     /**
      * Filters calls by their start date (after). Expected format is YYYY-MM-DD.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $StartTime_gt;
 
     /**
      * Filters calls by their start date (before). Expected format is YYYY-MM-DD.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $StartTime_lt;
 
     /**
@@ -101,16 +101,15 @@ final class CallRetrieveCallsParams implements BaseModel
      *
      * @var value-of<Status>|null $Status
      */
-    #[Api(
-        enum: Status::class,
-        optional: true,
+    #[Optional(
+        enum: Status::class
     )]
     public ?string $Status;
 
     /**
      * Filters calls by the to number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $To;
 
     public function __construct()

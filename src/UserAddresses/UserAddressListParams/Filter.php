@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UserAddresses\UserAddressListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UserAddresses\UserAddressListParams\Filter\CustomerReference;
@@ -26,13 +26,13 @@ final class Filter implements BaseModel
     /**
      * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CustomerReference $customer_reference;
 
     /**
      * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?StreetAddress $street_address;
 
     public function __construct()

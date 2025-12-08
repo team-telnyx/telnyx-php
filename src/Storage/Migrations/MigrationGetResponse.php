@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Migrations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Migrations\MigrationParams\Status;
@@ -17,7 +17,7 @@ final class MigrationGetResponse implements BaseModel
     /** @use SdkModel<MigrationGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MigrationParams $data;
 
     public function __construct()

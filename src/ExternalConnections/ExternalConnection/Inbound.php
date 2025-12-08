@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\ExternalConnection;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Inbound implements BaseModel
     /**
      * When set, this will limit the number of concurrent inbound calls to phone numbers associated with this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     public function __construct()

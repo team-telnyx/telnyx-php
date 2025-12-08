@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DocReqsRequirementType;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,7 +28,7 @@ final class AcceptanceCriteria implements BaseModel
     /**
      * Specifies the allowed characters as a string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $acceptable_characters;
 
     /**
@@ -36,31 +36,31 @@ final class AcceptanceCriteria implements BaseModel
      *
      * @var list<string>|null $acceptable_values
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $acceptable_values;
 
     /**
      * Specifies geography-based acceptance criteria.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality_limit;
 
     /**
      * Maximum length allowed for the value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_length;
 
     /**
      * Minimum length allowed for the value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $min_length;
 
     /**
      * Specifies time-based acceptance criteria.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $time_limit;
 
     public function __construct()

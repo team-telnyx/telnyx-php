@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\IPs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +28,19 @@ final class IPUpdateParams implements BaseModel
     /**
      * IP adddress represented by this resource.
      */
-    #[Api]
+    #[Required]
     public string $ip_address;
 
     /**
      * ID of the IP Connection to which this IP should be attached.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Port to use when connecting to this IP.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     /**

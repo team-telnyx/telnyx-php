@@ -8,7 +8,7 @@ use Telnyx\Connections\ConnectionListActiveCallsResponse\Data;
 use Telnyx\Connections\ConnectionListActiveCallsResponse\Data\RecordType;
 use Telnyx\Connections\ConnectionListActiveCallsResponse\Meta;
 use Telnyx\Connections\ConnectionListActiveCallsResponse\Meta\Cursors;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,10 +23,10 @@ final class ConnectionListActiveCallsResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocServiceDocument\AvScanStatus;
@@ -34,7 +34,7 @@ final class DocServiceDocument implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -42,49 +42,49 @@ final class DocServiceDocument implements BaseModel
      *
      * @var value-of<AvScanStatus>|null $av_scan_status
      */
-    #[Api(enum: AvScanStatus::class, optional: true)]
+    #[Optional(enum: AvScanStatus::class)]
     public ?string $av_scan_status;
 
     /**
      * The document's content_type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $content_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Optional reference string for customer tracking.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * The filename of the document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filename;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The document's SHA256 hash provided for optional verification purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sha256;
 
     /**
      * Indicates the document's filesize.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Size $size;
 
     /**
@@ -92,13 +92,13 @@ final class DocServiceDocument implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

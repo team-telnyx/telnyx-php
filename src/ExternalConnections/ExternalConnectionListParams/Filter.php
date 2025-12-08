@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\ExternalConnectionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ConnectionName;
@@ -30,16 +30,16 @@ final class Filter implements BaseModel
     /**
      * If present, connections with <code>id</code> matching the given value will be returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionName $connection_name;
 
     /**
      * If present, connections with <code>created_at</code> date matching the given YYYY-MM-DD date will be returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
@@ -47,13 +47,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<ExternalSipConnection>|null $external_sip_connection
      */
-    #[Api(enum: ExternalSipConnection::class, optional: true)]
+    #[Optional(enum: ExternalSipConnection::class)]
     public ?string $external_sip_connection;
 
     /**
      * Phone number filter for connections. Note: Despite the 'contains' name, this requires a full E164 match per the original specification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumber $phone_number;
 
     public function __construct()

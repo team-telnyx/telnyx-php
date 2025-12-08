@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Clusters\ClusterGetResponse;
 
 use Telnyx\AI\Clusters\RecursiveCluster;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
@@ -20,15 +20,15 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $bucket;
 
     /** @var list<mixed> $clusters */
-    #[Api(list: RecursiveCluster::class)]
+    #[Required(list: RecursiveCluster::class)]
     public array $clusters;
 
     /** @var value-of<TaskStatus> $status */
-    #[Api(enum: TaskStatus::class)]
+    #[Required(enum: TaskStatus::class)]
     public string $status;
 
     /**

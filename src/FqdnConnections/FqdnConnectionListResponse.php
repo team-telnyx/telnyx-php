@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\FqdnConnections;
 
 use Telnyx\ConnectionsPaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -24,10 +24,10 @@ final class FqdnConnectionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<FqdnConnection>|null $data */
-    #[Api(list: FqdnConnection::class, optional: true)]
+    #[Optional(list: FqdnConnection::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionsPaginationMeta $meta;
 
     public function __construct()

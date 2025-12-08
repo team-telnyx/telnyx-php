@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthGrants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthGrants\OAuthGrant\RecordType;
@@ -27,19 +28,19 @@ final class OAuthGrant implements BaseModel
     /**
      * Unique identifier for the OAuth grant.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * OAuth client identifier.
      */
-    #[Api]
+    #[Required]
     public string $client_id;
 
     /**
      * Timestamp when the grant was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
@@ -47,7 +48,7 @@ final class OAuthGrant implements BaseModel
      *
      * @var value-of<RecordType> $record_type
      */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
@@ -55,13 +56,13 @@ final class OAuthGrant implements BaseModel
      *
      * @var list<string> $scopes
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $scopes;
 
     /**
      * Timestamp when the grant was last used.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $last_used_at;
 
     /**

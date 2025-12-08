@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,10 +20,10 @@ final class AuthenticationProviderListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<AuthenticationProvider>|null $data */
-    #[Api(list: AuthenticationProvider::class, optional: true)]
+    #[Optional(list: AuthenticationProvider::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

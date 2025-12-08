@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\Verification\RecordType;
@@ -19,7 +19,7 @@ final class CreateVerificationResponse implements BaseModel
     /** @use SdkModel<CreateVerificationResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Verification $data;
 
     /**

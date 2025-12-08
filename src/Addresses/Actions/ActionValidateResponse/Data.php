@@ -8,7 +8,8 @@ use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Result;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
 use Telnyx\APIError;
 use Telnyx\APIError\Source;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -30,23 +31,23 @@ final class Data implements BaseModel
      *
      * @var value-of<Result> $result
      */
-    #[Api(enum: Result::class)]
+    #[Required(enum: Result::class)]
     public string $result;
 
     /**
      * Provides normalized address when available.
      */
-    #[Api]
+    #[Required]
     public Suggested $suggested;
 
     /** @var list<APIError>|null $errors */
-    #[Api(list: APIError::class, optional: true)]
+    #[Optional(list: APIError::class)]
     public ?array $errors;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**

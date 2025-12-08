@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrder\PhoneNumberType;
@@ -34,54 +34,54 @@ final class SubNumberOrder implements BaseModel
     /** @use SdkModel<SubNumberOrderShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * An ISO 8901 datetime string denoting when the number order was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * True if the sub number order is a block sub number order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_block_sub_number_order;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order_request_id;
 
     /** @var value-of<PhoneNumberType>|null $phone_number_type */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * The count of phone numbers in the number order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $phone_numbers_count;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var list<SubNumberOrderRegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: SubNumberOrderRegulatoryRequirement::class, optional: true)]
+    #[Optional(list: SubNumberOrderRegulatoryRequirement::class)]
     public ?array $regulatory_requirements;
 
     /**
      * True if all requirements are met for every phone number, false otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $requirements_met;
 
     /**
@@ -89,16 +89,16 @@ final class SubNumberOrder implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * An ISO 8901 datetime string for when the number order was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     public function __construct()

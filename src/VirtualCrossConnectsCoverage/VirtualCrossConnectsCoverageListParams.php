@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -41,19 +41,19 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filters $filters;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class Metadata implements BaseModel
     /**
      * Current Page based on pagination settings (included when defaults are used.).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $page_number;
 
     /**
      * Number of results to return per page based on pagination settings (included when defaults are used.).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $page_size;
 
     /**
      * Total number of pages based on pagination settings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $total_pages;
 
     /**
      * Total number of results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $total_results;
 
     public function __construct()

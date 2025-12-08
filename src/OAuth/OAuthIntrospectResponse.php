@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +28,43 @@ final class OAuthIntrospectResponse implements BaseModel
     /**
      * Whether the token is active.
      */
-    #[Api]
+    #[Required]
     public bool $active;
 
     /**
      * Audience.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $aud;
 
     /**
      * Client identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_id;
 
     /**
      * Expiration timestamp.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $exp;
 
     /**
      * Issued at timestamp.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $iat;
 
     /**
      * Issuer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $iss;
 
     /**
      * Space-separated list of scopes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**

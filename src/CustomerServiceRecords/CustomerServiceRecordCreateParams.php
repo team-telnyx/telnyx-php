@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -41,16 +42,16 @@ final class CustomerServiceRecordCreateParams implements BaseModel
     /**
      * A valid US phone number in E164 format.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?AdditionalData $additional_data;
 
     /**
      * Callback URL to receive webhook notifications.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**

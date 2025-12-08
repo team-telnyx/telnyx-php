@@ -6,7 +6,7 @@ namespace Telnyx\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\AssistantTest\Rubric;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -30,13 +30,13 @@ final class TestListResponse implements BaseModel
      *
      * @var list<AssistantTest> $data
      */
-    #[Api(list: AssistantTest::class)]
+    #[Required(list: AssistantTest::class)]
     public array $data;
 
     /**
      * Pagination metadata including total counts and current page info.
      */
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

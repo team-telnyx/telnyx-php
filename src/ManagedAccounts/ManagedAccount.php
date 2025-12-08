@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
@@ -34,43 +35,43 @@ final class ManagedAccount implements BaseModel
     /**
      * Uniquely identifies the managed account.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The managed account's V2 API access key.
      */
-    #[Api]
+    #[Required]
     public string $api_key;
 
     /**
      * The managed account's V1 API token.
      */
-    #[Api]
+    #[Required]
     public string $api_token;
 
     /**
      * The manager account's email, which serves as the V1 API user identifier.
      */
-    #[Api]
+    #[Required]
     public string $api_user;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * The managed account's email.
      */
-    #[Api]
+    #[Required]
     public string $email;
 
     /**
      * The ID of the manager account associated with the managed account.
      */
-    #[Api]
+    #[Required]
     public string $manager_account_id;
 
     /**
@@ -78,34 +79,34 @@ final class ManagedAccount implements BaseModel
      *
      * @var value-of<RecordType> $record_type
      */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api]
+    #[Required]
     public string $updated_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ManagedAccountBalance $balance;
 
     /**
      * Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. There may be time lag between when the value is changed and pricing changes take effect.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $managed_account_allow_custom_pricing;
 
     /**
      * The organization the managed account is associated with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_name;
 
     /**
      * Boolean value that indicates if the billing information and charges to the managed account "roll up" to the manager account. If true, the managed account will not have its own balance and will use the shared balance with the manager account. This value cannot be changed after account creation without going through Telnyx support as changes require manual updates to the account ledger. Defaults to false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $rollup_billing;
 
     /**

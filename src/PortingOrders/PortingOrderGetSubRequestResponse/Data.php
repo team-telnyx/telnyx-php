@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Data implements BaseModel
     /**
      * Identifies the Port Request associated with the Porting Order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $port_request_id;
 
     /**
      * Identifies the Sub Request associated with the Porting Order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sub_request_id;
 
     public function __construct()

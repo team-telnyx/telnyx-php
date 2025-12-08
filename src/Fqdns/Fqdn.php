@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,49 +28,49 @@ final class Fqdn implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ID of the FQDN connection to which this FQDN is attached.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $dns_record_type;
 
     /**
      * FQDN represented by this resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Port to use when connecting to this FQDN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

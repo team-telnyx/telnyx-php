@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileVoiceConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,25 +30,25 @@ final class MobileVoiceConnectionListParams implements BaseModel
     /**
      * Filter by connection name containing the given string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_connection_name__contains_;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     /**
      * Sort by field (e.g., created_at, connection_name, active). Prefix with - for descending order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sort;
 
     public function __construct()

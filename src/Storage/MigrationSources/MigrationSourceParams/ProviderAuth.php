@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\MigrationSources\MigrationSourceParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class ProviderAuth implements BaseModel
     /**
      * AWS Access Key. For Telnyx-to-Telnyx migrations, use your Telnyx API key here.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $access_key;
 
     /**
      * AWS Secret Access Key. For Telnyx-to-Telnyx migrations, use your Telnyx API key here as well.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $secret_access_key;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
@@ -26,13 +26,13 @@ final class RcsCapabilities implements BaseModel
     /**
      * RCS agent ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $agent_id;
 
     /**
      * RCS agent name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $agent_name;
 
     /**
@@ -40,13 +40,13 @@ final class RcsCapabilities implements BaseModel
      *
      * @var list<string>|null $features
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $features;
 
     /**
      * Phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -54,7 +54,7 @@ final class RcsCapabilities implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     public function __construct()

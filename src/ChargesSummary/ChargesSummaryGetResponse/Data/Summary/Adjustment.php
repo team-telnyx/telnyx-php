@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class Adjustment implements BaseModel
     /**
      * Adjustment amount as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $amount;
 
     /**
      * Description of the adjustment.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * Date when the adjustment occurred.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $event_date;
 
     /**

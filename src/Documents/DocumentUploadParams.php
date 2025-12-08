@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,25 +28,25 @@ final class DocumentUploadParams implements BaseModel
     /**
      * If the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * The filename of the document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filename;
 
     /**
      * The Base64 encoded contents of the file you are uploading.
      */
-    #[Api]
+    #[Required]
     public string $file;
 
     /**

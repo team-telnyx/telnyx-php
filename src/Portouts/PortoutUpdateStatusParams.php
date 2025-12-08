@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,19 +25,19 @@ final class PortoutUpdateStatusParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Provide a reason if rejecting the port out request.
      */
-    #[Api]
+    #[Required]
     public string $reason;
 
     /**
      * Indicates whether messaging services should be maintained with Telnyx after the port out completes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $host_messaging;
 
     /**

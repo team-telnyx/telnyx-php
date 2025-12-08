@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UserTags\UserTagListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,7 +23,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $number_tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $number_tags;
 
     /**
@@ -31,7 +31,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $outbound_profile_tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $outbound_profile_tags;
 
     public function __construct()

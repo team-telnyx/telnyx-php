@@ -6,7 +6,8 @@ namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngin
 
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config\Language;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config\TranscriptionModel;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,11 +25,11 @@ final class DeepgramNova3Config implements BaseModel
     use SdkModel;
 
     /** @var 'Deepgram' $transcription_engine */
-    #[Api]
+    #[Required]
     public string $transcription_engine = 'Deepgram';
 
     /** @var value-of<TranscriptionModel> $transcription_model */
-    #[Api(enum: TranscriptionModel::class)]
+    #[Required(enum: TranscriptionModel::class)]
     public string $transcription_model;
 
     /**
@@ -36,7 +37,7 @@ final class DeepgramNova3Config implements BaseModel
      *
      * @var array<string,float>|null $keywords_boosting
      */
-    #[Api(map: 'float', optional: true)]
+    #[Optional(map: 'float')]
     public ?array $keywords_boosting;
 
     /**
@@ -44,7 +45,7 @@ final class DeepgramNova3Config implements BaseModel
      *
      * @var value-of<Language>|null $language
      */
-    #[Api(enum: Language::class, optional: true)]
+    #[Optional(enum: Language::class)]
     public ?string $language;
 
     /**

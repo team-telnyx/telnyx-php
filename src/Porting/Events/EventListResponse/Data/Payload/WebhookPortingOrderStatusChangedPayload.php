@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventListResponse\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrdersExceptionType;
@@ -31,37 +31,37 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     /**
      * Identifies the porting order that was moved.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Identifies the customer reference associated with the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Porting order status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderStatus $status;
 
     /**
      * Identifies the support key associated with the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $support_key;
 
     /**
      * ISO 8601 formatted date indicating when the porting order was moved.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * The URL to send the webhook to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     public function __construct()

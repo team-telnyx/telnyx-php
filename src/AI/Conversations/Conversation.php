@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,19 +23,19 @@ final class Conversation implements BaseModel
     /** @use SdkModel<ConversationShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The datetime the conversation was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * The datetime of the latest message in the conversation.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $last_message_at;
 
     /**
@@ -42,10 +43,10 @@ final class Conversation implements BaseModel
      *
      * @var array<string,string> $metadata
      */
-    #[Api(map: 'string')]
+    #[Required(map: 'string')]
     public array $metadata;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
     use SdkParams;
 
     /** @var list<string>|null $registration_codes */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $registration_codes;
 
     public function __construct()

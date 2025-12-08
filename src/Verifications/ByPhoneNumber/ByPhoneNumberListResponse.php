@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\Verification;
@@ -23,10 +23,10 @@ final class ByPhoneNumberListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Verification> $data */
-    #[Api(list: Verification::class)]
+    #[Required(list: Verification::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public VerifyMeta $meta;
 
     /**

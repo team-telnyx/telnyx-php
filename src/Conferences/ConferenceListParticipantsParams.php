@@ -7,7 +7,7 @@ namespace Telnyx\Conferences;
 use Telnyx\Conferences\ConferenceListParticipantsParams\Filter;
 use Telnyx\Conferences\ConferenceListParticipantsParams\Page;
 use Telnyx\Conferences\ConferenceListParticipantsParams\Region;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -40,13 +40,13 @@ final class ConferenceListParticipantsParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -54,7 +54,7 @@ final class ConferenceListParticipantsParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     public function __construct()

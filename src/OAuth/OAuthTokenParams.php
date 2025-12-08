@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,49 +38,49 @@ final class OAuthTokenParams implements BaseModel
      *
      * @var value-of<GrantType> $grant_type
      */
-    #[Api(enum: GrantType::class)]
+    #[Required(enum: GrantType::class)]
     public string $grant_type;
 
     /**
      * OAuth client ID (if not using HTTP Basic auth).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_id;
 
     /**
      * OAuth client secret (if not using HTTP Basic auth).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_secret;
 
     /**
      * Authorization code (for authorization_code flow).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
      * PKCE code verifier (for authorization_code flow).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code_verifier;
 
     /**
      * Redirect URI (for authorization_code flow).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $redirect_uri;
 
     /**
      * Refresh token (for refresh_token flow).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $refresh_token;
 
     /**
      * Space-separated list of requested scopes (for client_credentials).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**

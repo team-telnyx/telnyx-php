@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class UsageGetAPIUsageParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time].
      */
-    #[Api]
+    #[Required]
     public Filter $filter;
 
     /**

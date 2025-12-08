@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Conference;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class EndedBy implements BaseModel
     /**
      * Call Control ID which ended the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * Call Session ID which ended the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     public function __construct()

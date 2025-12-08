@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class ActionHoldResponse implements BaseModel
     /** @use SdkModel<ActionHoldResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConferenceCommandResult $data;
 
     public function __construct()

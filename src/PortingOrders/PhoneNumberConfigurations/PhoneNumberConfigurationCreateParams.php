@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
     use SdkParams;
 
     /** @var list<PhoneNumberConfiguration>|null $phone_number_configurations */
-    #[Api(list: PhoneNumberConfiguration::class, optional: true)]
+    #[Optional(list: PhoneNumberConfiguration::class)]
     public ?array $phone_number_configurations;
 
     public function __construct()

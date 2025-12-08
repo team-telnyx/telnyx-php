@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrders\NumberOrderListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderListResponse\Data\PhoneNumber;
@@ -32,56 +32,56 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Identifies the connection associated with this phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * An ISO 8901 datetime string denoting when the number order was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     /** @var list<PhoneNumber>|null $phone_numbers */
-    #[Api(list: PhoneNumber::class, optional: true)]
+    #[Optional(list: PhoneNumber::class)]
     public ?array $phone_numbers;
 
     /**
      * The count of phone numbers in the number order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $phone_numbers_count;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * True if all requirements are met for every phone number, false otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $requirements_met;
 
     /**
@@ -89,17 +89,17 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /** @var list<string>|null $sub_number_orders_ids */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $sub_number_orders_ids;
 
     /**
      * An ISO 8901 datetime string for when the number order was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

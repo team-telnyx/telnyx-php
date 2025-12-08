@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklists;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
@@ -19,7 +19,7 @@ final class WirelessBlocklistGetResponse implements BaseModel
     /** @use SdkModel<WirelessBlocklistGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?WirelessBlocklist $data;
 
     public function __construct()

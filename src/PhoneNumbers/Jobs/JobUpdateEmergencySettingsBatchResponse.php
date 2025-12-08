@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation;
@@ -24,7 +24,7 @@ final class JobUpdateEmergencySettingsBatchResponse implements BaseModel
     /** @use SdkModel<JobUpdateEmergencySettingsBatchResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumbersJob $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberAssignmentByProfile;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -26,10 +26,10 @@ final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implem
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $recordsPerPage;
 
     public function __construct()

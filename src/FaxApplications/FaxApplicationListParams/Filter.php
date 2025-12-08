@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\FaxApplications\FaxApplicationListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\FaxApplications\FaxApplicationListParams\Filter\ApplicationName;
@@ -25,13 +25,13 @@ final class Filter implements BaseModel
     /**
      * Application name filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ApplicationName $application_name;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $outbound_voice_profile_id;
 
     public function __construct()

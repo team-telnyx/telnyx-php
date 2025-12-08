@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations\NumberReservationListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class CreatedAt implements BaseModel
     /**
      * Filter number reservations later than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gt;
 
     /**
      * Filter number reservations earlier than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lt;
 
     public function __construct()

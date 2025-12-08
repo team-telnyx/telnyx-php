@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class ConferenceCommandResult implements BaseModel
     /** @use SdkModel<ConferenceCommandResultShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $result;
 
     /**

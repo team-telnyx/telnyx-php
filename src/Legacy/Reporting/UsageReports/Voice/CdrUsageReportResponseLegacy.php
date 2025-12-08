@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -34,50 +34,50 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Aggregation type: All = 0, By Connections = 1, By Tags = 2, By Billing Group = 3.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $aggregation_type;
 
     /** @var list<string>|null $connections */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $connections;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_time;
 
     /**
      * Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $product_breakdown;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public mixed $result;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_time;
 
     /**
      * Status of the report: Pending = 1, Complete = 2, Failed = 3, Expired = 4.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

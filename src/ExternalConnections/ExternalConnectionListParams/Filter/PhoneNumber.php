@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class PhoneNumber implements BaseModel
     /**
      * If present, connections associated with the given phone_number will be returned. A full match is necessary with a e164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationChannels;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
@@ -29,13 +29,13 @@ final class NotificationChannel implements BaseModel
     /**
      * A UUID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The destination associated with the channel type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $channel_destination;
 
     /**
@@ -43,25 +43,25 @@ final class NotificationChannel implements BaseModel
      *
      * @var value-of<ChannelTypeID>|null $channel_type_id
      */
-    #[Api(enum: ChannelTypeID::class, optional: true)]
+    #[Optional(enum: ChannelTypeID::class)]
     public ?string $channel_type_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_profile_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

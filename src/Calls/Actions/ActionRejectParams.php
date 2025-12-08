@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionRejectParams\Cause;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,19 +35,19 @@ final class ActionRejectParams implements BaseModel
      *
      * @var value-of<Cause> $cause
      */
-    #[Api(enum: Cause::class)]
+    #[Required(enum: Cause::class)]
     public string $cause;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**

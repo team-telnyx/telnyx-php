@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Invoices\InvoiceGetResponse\Data;
@@ -17,7 +17,7 @@ final class InvoiceGetResponse implements BaseModel
     /** @use SdkModel<InvoiceGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrdersReport;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data;
@@ -19,7 +19,7 @@ final class SubNumberOrdersReportNewResponse implements BaseModel
     /** @use SdkModel<SubNumberOrdersReportNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -9,7 +9,7 @@ use Telnyx\Conferences\ConferenceListParams\Filter\OccurredAt;
 use Telnyx\Conferences\ConferenceListParams\Filter\Product;
 use Telnyx\Conferences\ConferenceListParams\Filter\Status;
 use Telnyx\Conferences\ConferenceListParams\Filter\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -40,55 +40,55 @@ final class Filter implements BaseModel
     /**
      * Application name filters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ApplicationName $application_name;
 
     /**
      * The unique identifier of the call session. A session may include multiple call leg events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $application_session_id;
 
     /**
      * The unique identifier of the conection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Delivery failed or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $failed;
 
     /**
      * Filter by From number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The unique identifier of an individual call leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $leg_id;
 
     /**
      * If present, conferences will be filtered to those with a matching `name` attribute. Matching is case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Event occurred_at filters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?OccurredAt $occurred_at;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound.outbound_voice_profile_id', optional: true)]
+    #[Optional('outbound.outbound_voice_profile_id')]
     public ?string $outbound_outbound_voice_profile_id;
 
     /**
@@ -96,7 +96,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Product>|null $product
      */
-    #[Api(enum: Product::class, optional: true)]
+    #[Optional(enum: Product::class)]
     public ?string $product;
 
     /**
@@ -104,13 +104,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Filter by To number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
@@ -118,7 +118,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()

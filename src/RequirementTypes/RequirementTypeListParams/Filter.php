@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementTypes\RequirementTypeListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
@@ -19,7 +19,7 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Name $name;
 
     public function __construct()

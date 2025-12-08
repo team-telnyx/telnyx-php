@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\PhoneNumber\RegulatoryRequirement;
@@ -28,40 +28,39 @@ final class PhoneNumber implements BaseModel
     /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bundle_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * @var list<RegulatoryRequirement>|null $regulatory_requirements
      */
-    #[Api(
+    #[Optional(
         list: RegulatoryRequirement::class,
-        optional: true,
     )]
     public ?array $regulatory_requirements;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $requirements_met;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirements_status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,19 +28,19 @@ final class Settings implements BaseModel
     /**
      * The certificate fingerprint for the identity provider (IdP).
      */
-    #[Api]
+    #[Required]
     public string $idp_cert_fingerprint;
 
     /**
      * The Entity ID for the identity provider (IdP).
      */
-    #[Api]
+    #[Required]
     public string $idp_entity_id;
 
     /**
      * The SSO target url for the identity provider (IdP).
      */
-    #[Api]
+    #[Required]
     public string $idp_sso_target_url;
 
     /**
@@ -47,7 +48,7 @@ final class Settings implements BaseModel
      *
      * @var value-of<IdpCertFingerprintAlgorithm>|null $idp_cert_fingerprint_algorithm
      */
-    #[Api(enum: IdpCertFingerprintAlgorithm::class, optional: true)]
+    #[Optional(enum: IdpCertFingerprintAlgorithm::class)]
     public ?string $idp_cert_fingerprint_algorithm;
 
     /**

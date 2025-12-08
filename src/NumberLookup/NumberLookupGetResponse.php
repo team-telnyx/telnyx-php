@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data;
@@ -20,7 +20,7 @@ final class NumberLookupGetResponse implements BaseModel
     /** @use SdkModel<NumberLookupGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

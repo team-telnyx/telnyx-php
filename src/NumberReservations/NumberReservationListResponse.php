@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\NumberReservations;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservation\Status;
@@ -21,10 +21,10 @@ final class NumberReservationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<NumberReservation>|null $data */
-    #[Api(list: NumberReservation::class, optional: true)]
+    #[Optional(list: NumberReservation::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

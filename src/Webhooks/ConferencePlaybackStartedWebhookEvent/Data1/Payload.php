@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\ConferencePlaybackStartedWebhookEvent\Data1;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,37 +26,37 @@ final class Payload implements BaseModel
     /**
      * ID of the conference the text was spoken in.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conference_id;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ID that is unique to the call session that started the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $creator_call_session_id;
 
     /**
      * The name of the audio media file being played back, if media_name has been used to start.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
      * The audio URL being played back, if audio_url has been used to start.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_url;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $occurred_at;
 
     public function __construct()

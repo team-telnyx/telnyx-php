@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles\VerifyProfile;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,31 +26,31 @@ final class SMS implements BaseModel
     /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $alpha_sender;
 
     /**
      * The name that identifies the application requesting 2fa in the verification message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $app_name;
 
     /**
      * The length of the verify code to generate.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $code_length;
 
     /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $default_verification_timeout_secs;
 
     /**
      * The message template identifier selected from /verify_profiles/templates.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_template_id;
 
     /**
@@ -58,7 +58,7 @@ final class SMS implements BaseModel
      *
      * @var list<string>|null $whitelisted_destinations
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $whitelisted_destinations;
 
     public function __construct()

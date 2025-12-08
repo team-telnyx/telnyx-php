@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePushCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -29,31 +29,31 @@ final class PushCredential implements BaseModel
     /**
      * Unique identifier of a push credential.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Alias to uniquely identify a credential.
      */
-    #[Api]
+    #[Required]
     public string $alias;
 
     /**
      * Apple certificate for sending push notifications. For iOS only.
      */
-    #[Api]
+    #[Required]
     public string $certificate;
 
     /**
      * ISO 8601 timestamp when the room was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * Apple private key for a given certificate for sending push notifications. For iOS only.
      */
-    #[Api]
+    #[Required]
     public string $private_key;
 
     /**
@@ -61,22 +61,22 @@ final class PushCredential implements BaseModel
      *
      * @var array<string,mixed> $project_account_json_file
      */
-    #[Api(map: 'mixed')]
+    #[Required(map: 'mixed')]
     public array $project_account_json_file;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Type of mobile push credential. Either <code>ios</code> or <code>android</code>.
      */
-    #[Api]
+    #[Required]
     public string $type;
 
     /**
      * ISO 8601 timestamp when the room was updated.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $updated_at;
 
     /**

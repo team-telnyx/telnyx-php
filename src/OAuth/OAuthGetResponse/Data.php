@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth\OAuthGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
@@ -29,47 +29,47 @@ final class Data implements BaseModel
     /**
      * Client ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_id;
 
     /**
      * URL of the client logo.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $logo_uri;
 
     /**
      * Client name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $policy_uri;
 
     /**
      * The redirect URI for this authorization.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $redirect_uri;
 
     /** @var list<RequestedScope>|null $requested_scopes */
-    #[Api(list: RequestedScope::class, optional: true)]
+    #[Optional(list: RequestedScope::class)]
     public ?array $requested_scopes;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $tos_uri;
 
     /**
      * Whether the client is verified.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $verified;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsSuggestion\Action;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class DialAction implements BaseModel
     /**
      * Phone number in +E.164 format.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**

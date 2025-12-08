@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,40 +27,40 @@ final class RoomParticipant implements BaseModel
     /**
      * A unique identifier for the room participant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Context provided to the given participant through the client SDK.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $context;
 
     /**
      * ISO 8601 timestamp when the participant joined the session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $joined_at;
 
     /**
      * ISO 8601 timestamp when the participant left the session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $left_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Identify the room session that participant is part of.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $session_id;
 
     /**
      * ISO 8601 timestamp when the participant was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

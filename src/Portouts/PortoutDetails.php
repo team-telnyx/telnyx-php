@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutDetails\Status;
@@ -45,67 +45,67 @@ final class PortoutDetails implements BaseModel
     /** @use SdkModel<PortoutDetailsShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Is true when the number is already ported.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $already_ported;
 
     /**
      * Name of person authorizing the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorized_name;
 
     /**
      * Carrier the number will be ported out to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier_name;
 
     /**
      * City or municipality of billing address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * ISO 8601 formatted date of when the portout was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * The current carrier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $current_carrier;
 
     /**
      * Person name or company name requesting the port.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_user_name;
 
     /**
      * ISO 8601 formatted Date/Time of the FOC date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $foc_date;
 
     /**
      * Indicates whether messaging services should be maintained with Telnyx after the port out completes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $host_messaging;
 
     /**
      * ISO 8601 formatted date of when the portout was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $inserted_at;
 
     /**
@@ -113,7 +113,7 @@ final class PortoutDetails implements BaseModel
      *
      * @var list<string>|null $lsr
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $lsr;
 
     /**
@@ -121,55 +121,55 @@ final class PortoutDetails implements BaseModel
      *
      * @var list<string>|null $phone_numbers
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_numbers;
 
     /**
      * Port order number assigned by the carrier the number will be ported out to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pon;
 
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $reason;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The rejection code for one of the valid rejections to reject a port out order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $rejection_code;
 
     /**
      * ISO 8601 formatted Date/Time of the user requested FOC date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requested_foc_date;
 
     /**
      * First line of billing address (street address).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $service_address;
 
     /**
      * New service provider spid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid;
 
     /**
      * State, province, or similar of billing address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
@@ -177,37 +177,37 @@ final class PortoutDetails implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * A key to reference this port out request when contacting Telnyx customer support.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $support_key;
 
     /**
      * ISO 8601 formatted date of when the portout was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
      * Identifies the user (or organization) who requested the port out.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**
      * Telnyx partner providing network coverage.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vendor;
 
     /**
      * Postal Code of billing address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $zip;
 
     public function __construct()

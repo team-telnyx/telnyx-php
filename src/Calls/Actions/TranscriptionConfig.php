@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,7 +25,7 @@ final class TranscriptionConfig implements BaseModel
      * - `openai/whisper-large-v3-turbo` is multi-lingual with automatic language detection but slightly higher latency.
      * - `google` is a multi-lingual option, please describe the language in the `language` field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model;
 
     public function __construct()

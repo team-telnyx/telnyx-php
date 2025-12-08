@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse\Data\Result;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class Aggregation implements BaseModel
     /**
      * Currency code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * Total cost for this aggregation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $total_cost;
 
     /**
      * Total number of lookups performed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_dips;
 
     /**
      * Type of telco data lookup.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating the end of the range of foc window.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $ended_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating the start of the range of foc window.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $started_at;
 
     public function __construct()

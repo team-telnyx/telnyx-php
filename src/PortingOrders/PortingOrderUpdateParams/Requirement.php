@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class Requirement implements BaseModel
     /**
      * identifies the document or provides the text value that satisfies this requirement.
      */
-    #[Api]
+    #[Required]
     public string $field_value;
 
     /**
      * Identifies the requirement type that the `field_value` fulfills.
      */
-    #[Api]
+    #[Required]
     public string $requirement_type_id;
 
     /**

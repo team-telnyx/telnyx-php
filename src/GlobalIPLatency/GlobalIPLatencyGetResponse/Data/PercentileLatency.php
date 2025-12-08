@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_0;
@@ -31,25 +31,25 @@ final class PercentileLatency implements BaseModel
     /** @use SdkModel<PercentileLatencyShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?_0 $p0;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?_100 $p100;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?_25 $p25;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?_50 $p50;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?_75 $p75;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?_90 $p90;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?_99 $p99;
 
     public function __construct()

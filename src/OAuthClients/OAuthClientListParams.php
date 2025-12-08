@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -38,13 +38,13 @@ final class OAuthClientListParams implements BaseModel
      *
      * @var value-of<FilterAllowedGrantTypesContains>|null $filter_allowed_grant_types__contains_
      */
-    #[Api(enum: FilterAllowedGrantTypesContains::class, optional: true)]
+    #[Optional(enum: FilterAllowedGrantTypesContains::class)]
     public ?string $filter_allowed_grant_types__contains_;
 
     /**
      * Filter by client ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_client_id_;
 
     /**
@@ -52,37 +52,37 @@ final class OAuthClientListParams implements BaseModel
      *
      * @var value-of<FilterClientType>|null $filter_client_type_
      */
-    #[Api(enum: FilterClientType::class, optional: true)]
+    #[Optional(enum: FilterClientType::class)]
     public ?string $filter_client_type_;
 
     /**
      * Filter by exact client name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_name_;
 
     /**
      * Filter by client name containing text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_name__contains_;
 
     /**
      * Filter by verification status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $filter_verified_;
 
     /**
      * Page number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * Number of results per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

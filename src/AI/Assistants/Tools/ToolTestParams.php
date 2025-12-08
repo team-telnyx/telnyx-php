@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tools;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -26,7 +27,7 @@ final class ToolTestParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $assistant_id;
 
     /**
@@ -34,7 +35,7 @@ final class ToolTestParams implements BaseModel
      *
      * @var array<string,mixed>|null $arguments
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $arguments;
 
     /**
@@ -42,7 +43,7 @@ final class ToolTestParams implements BaseModel
      *
      * @var array<string,mixed>|null $dynamic_variables
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $dynamic_variables;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class Admin implements BaseModel
     /**
      * The account number of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_number;
 
     /**
      * The authorized person name of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorized_person_name;
 
     /**
      * The billing phone number of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_phone_number;
 
     /**
      * The name of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

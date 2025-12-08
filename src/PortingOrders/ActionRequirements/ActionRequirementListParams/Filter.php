@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
@@ -30,7 +30,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $id
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $id;
 
     /**
@@ -38,13 +38,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<ActionType>|null $action_type
      */
-    #[Api(enum: ActionType::class, optional: true)]
+    #[Optional(enum: ActionType::class)]
     public ?string $action_type;
 
     /**
      * Filter action requirements by requirement type ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_type_id;
 
     /**
@@ -52,7 +52,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

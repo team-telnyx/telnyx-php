@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Plmn implements BaseModel
     /**
      * Public land mobile network code (MCC + MNC).
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * The name of the network.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

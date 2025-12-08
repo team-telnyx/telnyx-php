@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialConnection\SipUriCallingPreference;
@@ -20,7 +20,7 @@ final class CredentialConnectionDeleteResponse implements BaseModel
     /** @use SdkModel<CredentialConnectionDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CredentialConnection $data;
 
     public function __construct()

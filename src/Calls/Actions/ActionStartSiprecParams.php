@@ -6,7 +6,7 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -41,31 +41,31 @@ final class ActionStartSiprecParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Name of configured SIPREC connector to be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connector_name;
 
     /**
      * When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_metadata_custom_headers;
 
     /**
      * Controls whether to encrypt media sent to your SRS using SRTP and TLS. When set you need to configure SRS port in your connector to 5061.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $secure;
 
     /**
      * Sets `Session-Expires` header to the INVITE. A reinvite is sent every half the value set. Usefull for session keep alive. Minimum value is 90, set to 0 to disable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $session_timeout_secs;
 
     /**
@@ -73,7 +73,7 @@ final class ActionStartSiprecParams implements BaseModel
      *
      * @var value-of<SipTransport>|null $sip_transport
      */
-    #[Api(enum: SipTransport::class, optional: true)]
+    #[Optional(enum: SipTransport::class)]
     public ?string $sip_transport;
 
     /**
@@ -81,7 +81,7 @@ final class ActionStartSiprecParams implements BaseModel
      *
      * @var value-of<SiprecTrack>|null $siprec_track
      */
-    #[Api(enum: SiprecTrack::class, optional: true)]
+    #[Optional(enum: SiprecTrack::class)]
     public ?string $siprec_track;
 
     public function __construct()

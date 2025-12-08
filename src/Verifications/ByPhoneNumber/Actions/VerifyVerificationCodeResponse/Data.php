@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data\ResponseCode;
@@ -22,7 +22,7 @@ final class Data implements BaseModel
     /**
      * +E164 formatted phone number.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**
@@ -30,7 +30,7 @@ final class Data implements BaseModel
      *
      * @var value-of<ResponseCode> $response_code
      */
-    #[Api(enum: ResponseCode::class)]
+    #[Required(enum: ResponseCode::class)]
     public string $response_code;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice\VoiceListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\ConnectionName;
@@ -28,20 +28,20 @@ final class Filter implements BaseModel
     /**
      * Filter by connection name pattern matching.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionName $connection_name;
 
     /**
      * Filter numbers via the customer_reference set.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Filter by phone number. Requires at least three digits.
      *              Non-numerical characters will result in no values being returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -49,10 +49,9 @@ final class Filter implements BaseModel
      *
      * @var value-of<VoiceUsagePaymentMethod>|null $voice_usage_payment_method
      */
-    #[Api(
+    #[Optional(
         'voice.usage_payment_method',
-        enum: VoiceUsagePaymentMethod::class,
-        optional: true,
+        enum: VoiceUsagePaymentMethod::class
     )]
     public ?string $voice_usage_payment_method;
 

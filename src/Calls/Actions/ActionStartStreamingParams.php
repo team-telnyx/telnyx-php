@@ -11,7 +11,7 @@ use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -48,22 +48,22 @@ final class ActionStartStreamingParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DialogflowConfig $dialogflow_config;
 
     /**
      * Enables Dialogflow for the current call. The default value is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable_dialogflow;
 
     /**
@@ -71,7 +71,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalCodec>|null $stream_bidirectional_codec
      */
-    #[Api(enum: StreamBidirectionalCodec::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalCodec::class)]
     public ?string $stream_bidirectional_codec;
 
     /**
@@ -79,7 +79,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalMode>|null $stream_bidirectional_mode
      */
-    #[Api(enum: StreamBidirectionalMode::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalMode::class)]
     public ?string $stream_bidirectional_mode;
 
     /**
@@ -87,7 +87,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var 8000|16000|22050|24000|48000|null $stream_bidirectional_sampling_rate
      */
-    #[Api(enum: StreamBidirectionalSamplingRate::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalSamplingRate::class)]
     public ?int $stream_bidirectional_sampling_rate;
 
     /**
@@ -95,7 +95,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalTargetLegs>|null $stream_bidirectional_target_legs
      */
-    #[Api(enum: StreamBidirectionalTargetLegs::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalTargetLegs::class)]
     public ?string $stream_bidirectional_target_legs;
 
     /**
@@ -103,7 +103,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var value-of<StreamCodec>|null $stream_codec
      */
-    #[Api(enum: StreamCodec::class, optional: true)]
+    #[Optional(enum: StreamCodec::class)]
     public ?string $stream_codec;
 
     /**
@@ -111,13 +111,13 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var value-of<StreamTrack>|null $stream_track
      */
-    #[Api(enum: StreamTrack::class, optional: true)]
+    #[Optional(enum: StreamTrack::class)]
     public ?string $stream_track;
 
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stream_url;
 
     public function __construct()

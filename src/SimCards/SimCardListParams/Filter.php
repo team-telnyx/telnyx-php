@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardListParams\Filter\Status;
@@ -26,7 +26,7 @@ final class Filter implements BaseModel
     /**
      * A search string to partially match for the SIM card's ICCID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $iccid;
 
     /**
@@ -34,7 +34,7 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<Status>>|null $status
      */
-    #[Api(list: Status::class, optional: true)]
+    #[Optional(list: Status::class)]
     public ?array $status;
 
     /**
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     public function __construct()

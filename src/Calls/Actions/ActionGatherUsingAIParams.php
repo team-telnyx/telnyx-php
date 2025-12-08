@@ -15,7 +15,8 @@ use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory\Role;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -74,37 +75,37 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
-    #[Api]
+    #[Required]
     public mixed $parameters;
 
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Assistant $assistant;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * Text that will be played when the gathering starts, if none then nothing will be played when the gathering starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $greeting;
 
     /**
      * Settings for handling user interruptions during assistant speech.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?InterruptionSettings $interruption_settings;
 
     /**
@@ -112,7 +113,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * @var value-of<GoogleTranscriptionLanguage>|null $language
      */
-    #[Api(enum: GoogleTranscriptionLanguage::class, optional: true)]
+    #[Optional(enum: GoogleTranscriptionLanguage::class)]
     public ?string $language;
 
     /**
@@ -120,31 +121,31 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * @var list<MessageHistory>|null $message_history
      */
-    #[Api(list: MessageHistory::class, optional: true)]
+    #[Optional(list: MessageHistory::class)]
     public ?array $message_history;
 
     /**
      * Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $send_message_history_updates;
 
     /**
      * Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` callback in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $send_partial_results;
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionConfig $transcription;
 
     /**
      * The number of milliseconds to wait for a user response before the voice assistant times out and check if the user is still there.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $user_response_timeout_ms;
 
     /**
@@ -156,13 +157,13 @@ final class ActionGatherUsingAIParams implements BaseModel
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $voice;
 
     /**
      * The settings associated with the voice selected.
      */
-    #[Api(union: VoiceSettings::class, optional: true)]
+    #[Optional(union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     /**

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,19 +36,19 @@ final class TestCreateParams implements BaseModel
     /**
      * The target destination for the test conversation. Format depends on the channel: phone number for SMS/voice, webhook URL for web chat, etc.
      */
-    #[Api]
+    #[Required]
     public string $destination;
 
     /**
      * Detailed instructions that define the test scenario and what the assistant should accomplish. This guides the test execution and evaluation.
      */
-    #[Api]
+    #[Required]
     public string $instructions;
 
     /**
      * A descriptive name for the assistant test. This will be used to identify the test in the UI and reports.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -55,19 +56,19 @@ final class TestCreateParams implements BaseModel
      *
      * @var list<Rubric> $rubric
      */
-    #[Api(list: Rubric::class)]
+    #[Required(list: Rubric::class)]
     public array $rubric;
 
     /**
      * Optional detailed description of what this test evaluates and its purpose. Helps team members understand the test's objectives.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Maximum duration in seconds that the test conversation should run before timing out. If not specified, uses system default timeout.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_duration_seconds;
 
     /**
@@ -75,13 +76,13 @@ final class TestCreateParams implements BaseModel
      *
      * @var value-of<TelnyxConversationChannel>|null $telnyx_conversation_channel
      */
-    #[Api(enum: TelnyxConversationChannel::class, optional: true)]
+    #[Optional(enum: TelnyxConversationChannel::class)]
     public ?string $telnyx_conversation_channel;
 
     /**
      * Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $test_suite;
 
     /**

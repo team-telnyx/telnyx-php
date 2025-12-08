@@ -8,7 +8,7 @@ use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\AIAssistant;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\VoiceMode;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,11 +22,11 @@ final class HandoffTool implements BaseModel
     /** @use SdkModel<HandoffToolShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Handoff $handoff;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

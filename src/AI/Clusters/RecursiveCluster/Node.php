@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters\RecursiveCluster;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Node implements BaseModel
     /**
      * The corresponding source file of your embedded storage bucket that the node is from.
      */
-    #[Api]
+    #[Required]
     public string $filename;
 
     /**
      * The text of the node.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**

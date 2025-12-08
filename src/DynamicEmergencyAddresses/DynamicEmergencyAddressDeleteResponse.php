@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\CountryCode;
@@ -20,7 +20,7 @@ final class DynamicEmergencyAddressDeleteResponse implements BaseModel
     /** @use SdkModel<DynamicEmergencyAddressDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DynamicEmergencyAddress $data;
 
     public function __construct()

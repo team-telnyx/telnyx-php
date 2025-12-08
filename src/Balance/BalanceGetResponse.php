@@ -6,7 +6,7 @@ namespace Telnyx\Balance;
 
 use Telnyx\Balance\BalanceGetResponse\Data;
 use Telnyx\Balance\BalanceGetResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class BalanceGetResponse implements BaseModel
     /** @use SdkModel<BalanceGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -7,7 +7,7 @@ namespace Telnyx\ChannelZones;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\ChannelZones\ChannelZoneListResponse\Data;
 use Telnyx\ChannelZones\ChannelZoneListResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,10 +22,10 @@ final class ChannelZoneListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

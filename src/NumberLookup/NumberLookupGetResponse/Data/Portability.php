@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
@@ -34,49 +34,49 @@ final class Portability implements BaseModel
     /**
      * Alternative SPID (Service Provider ID). Often used when a carrier is using a number from another carrier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $altspid;
 
     /**
      * Alternative service provider name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $altspid_carrier_name;
 
     /**
      * Alternative service provider type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $altspid_carrier_type;
 
     /**
      * City name extracted from the locality in the Local Exchange Routing Guide (LERG) database.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * Type of number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $line_type;
 
     /**
      * Local Routing Number, if assigned to the requested phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lrn;
 
     /**
      * Operating Company Name (OCN) as per the Local Exchange Routing Guide (LERG) database.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ocn;
 
     /**
      * ISO-formatted date when the requested phone number has been ported.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ported_date;
 
     /**
@@ -84,28 +84,28 @@ final class Portability implements BaseModel
      *
      * @var value-of<PortedStatus>|null $ported_status
      */
-    #[Api(enum: PortedStatus::class, optional: true)]
+    #[Optional(enum: PortedStatus::class)]
     public ?string $ported_status;
 
     /**
      * SPID (Service Provider ID).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid;
 
     /**
      * Service provider name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid_carrier_name;
 
     /**
      * Service provider type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid_carrier_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     public function __construct()

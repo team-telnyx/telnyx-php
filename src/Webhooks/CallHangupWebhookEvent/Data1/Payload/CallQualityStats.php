@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data1\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data1\Payload\CallQualityStats\Inbound;
@@ -25,13 +25,13 @@ final class CallQualityStats implements BaseModel
     /**
      * Inbound call quality statistics.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
     /**
      * Outbound call quality statistics.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     public function __construct()

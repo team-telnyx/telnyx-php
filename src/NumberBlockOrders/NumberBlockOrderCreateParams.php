@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberBlockOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,31 +32,31 @@ final class NumberBlockOrderCreateParams implements BaseModel
     /**
      * The phone number range included in the block.
      */
-    #[Api]
+    #[Required]
     public int $range;
 
     /**
      * Starting phone number block.
      */
-    #[Api]
+    #[Required]
     public string $starting_number;
 
     /**
      * Identifies the connection associated with this phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     /**

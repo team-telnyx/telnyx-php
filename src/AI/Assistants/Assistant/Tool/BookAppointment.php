@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Assistant\Tool;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,10 +20,10 @@ final class BookAppointment implements BaseModel
     use SdkModel;
 
     /** @var 'book_appointment' $type */
-    #[Api]
+    #[Required]
     public string $type = 'book_appointment';
 
-    #[Api]
+    #[Required]
     public BookAppointment\BookAppointment $book_appointment;
 
     /**

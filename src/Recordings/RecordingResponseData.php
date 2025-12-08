@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Recordings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Recordings\RecordingResponseData\Channels;
@@ -40,25 +40,25 @@ final class RecordingResponseData implements BaseModel
     /**
      * Uniquely identifies the recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * ID unique to the call leg (used to correlate webhook events).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
@@ -66,47 +66,47 @@ final class RecordingResponseData implements BaseModel
      *
      * @var value-of<Channels>|null $channels
      */
-    #[Api(enum: Channels::class, optional: true)]
+    #[Optional(enum: Channels::class)]
     public ?string $channels;
 
     /**
      * Uniquely identifies the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conference_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Links to download the recording files.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?DownloadURLs $download_urls;
 
     /**
      * The duration of the recording in milliseconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration_millis;
 
     /** @var value-of<RecordType>|null $record_type */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date of when the recording ended.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_ended_at;
 
     /**
      * ISO 8601 formatted date of when the recording started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_started_at;
 
     /**
@@ -114,7 +114,7 @@ final class RecordingResponseData implements BaseModel
      *
      * @var value-of<Source>|null $source
      */
-    #[Api(enum: Source::class, optional: true)]
+    #[Optional(enum: Source::class)]
     public ?string $source;
 
     /**
@@ -122,13 +122,13 @@ final class RecordingResponseData implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

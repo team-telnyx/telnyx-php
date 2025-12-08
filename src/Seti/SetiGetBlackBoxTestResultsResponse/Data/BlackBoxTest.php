@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,16 +21,16 @@ final class BlackBoxTest implements BaseModel
     /**
      * The name of the black box test.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The average result of the black box test over the last hour.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $result;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\DeliveryUpdateWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Meta implements BaseModel
     /**
      * Number of attempts to deliver the webhook event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $attempt;
 
     /**
      * The webhook URL the event was delivered to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivered_to;
 
     public function __construct()

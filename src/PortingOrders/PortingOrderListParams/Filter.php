@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
@@ -34,34 +34,34 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ActivationSettings $activation_settings;
 
     /**
      * Filter results by customer_group_reference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_group_reference;
 
     /**
      * Filter results by customer_reference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?EndUser $end_user;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Misc $misc;
 
     /**
      * Filter results by parent_support_key.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $parent_support_key;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumbers $phone_numbers;
 
     public function __construct()

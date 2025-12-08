@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,21 +30,21 @@ final class AutorespConfigUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $profile_id;
 
-    #[Api]
+    #[Required]
     public string $country_code;
 
     /** @var list<string> $keywords */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $keywords;
 
     /** @var value-of<Op> $op */
-    #[Api(enum: Op::class)]
+    #[Required(enum: Op::class)]
     public string $op;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $resp_text;
 
     /**

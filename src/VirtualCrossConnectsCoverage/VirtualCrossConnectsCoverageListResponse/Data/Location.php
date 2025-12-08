@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class Location implements BaseModel
     /**
      * Location code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
      * Human readable name of location.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Point of presence of location.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pop;
 
     /**
      * Identifies the geographical region of location.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
     /**
      * Site of location.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $site;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
@@ -35,13 +35,13 @@ final class CredentialInbound implements BaseModel
      *
      * @var value-of<AniNumberFormat>|null $ani_number_format
      */
-    #[Api(enum: AniNumberFormat::class, optional: true)]
+    #[Optional(enum: AniNumberFormat::class)]
     public ?string $ani_number_format;
 
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     /**
@@ -49,53 +49,53 @@ final class CredentialInbound implements BaseModel
      *
      * @var list<string>|null $codecs
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $codecs;
 
     /** @var value-of<DnisNumberFormat>|null $dnis_number_format */
-    #[Api(enum: DnisNumberFormat::class, optional: true)]
+    #[Optional(enum: DnisNumberFormat::class)]
     public ?string $dnis_number_format;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $generate_ringback_tone;
 
     /**
      * When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isup_headers_enabled;
 
     /**
      * Enable PRACK messages as defined in RFC3262.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $prack_enabled;
 
     /**
      * When enabled the SIP Connection will receive the Identity header with Shaken/Stir data in the SIP INVITE message of inbound calls, even when using UDP transport.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $shaken_stir_enabled;
 
     /**
      * Defaults to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $sip_compact_headers_enabled;
 
     /**
      * Time(sec) before aborting if connection is not made.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_1xx_secs;
 
     /**
      * Time(sec) before aborting if call is unanswered (min: 1, max: 600).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_2xx_secs;
 
     public function __construct()

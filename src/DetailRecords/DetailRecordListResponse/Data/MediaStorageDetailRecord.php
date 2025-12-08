@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,91 +33,91 @@ final class MediaStorageDetailRecord implements BaseModel
     /** @use SdkModel<MediaStorageDetailRecordShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Unique identifier for the Media Storage Event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Type of action performed against the Media Storage API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $action_type;
 
     /**
      * Asset id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $asset_id;
 
     /**
      * Currency amount for Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
     /**
      * Event creation time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * Link channel id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $link_channel_id;
 
     /**
      * Link channel type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $link_channel_type;
 
     /**
      * Organization owner id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $org_id;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
     /**
      * Billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate_measured_in;
 
     /**
      * Request status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * User id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**
      * Webhook id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_id;
 
     /**

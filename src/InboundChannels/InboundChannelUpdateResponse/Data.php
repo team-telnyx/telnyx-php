@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InboundChannels\InboundChannelUpdateResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Data implements BaseModel
     /**
      * The number of channels set for the account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channels;
 
     /**
      * Identifies the type of the response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

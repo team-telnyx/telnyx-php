@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\NotificationChannels;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
@@ -21,10 +21,10 @@ final class NotificationChannelListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<NotificationChannel>|null $data */
-    #[Api(list: NotificationChannel::class, optional: true)]
+    #[Optional(list: NotificationChannel::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

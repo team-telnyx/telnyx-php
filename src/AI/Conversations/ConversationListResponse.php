@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class ConversationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Conversation> $data */
-    #[Api(list: Conversation::class)]
+    #[Required(list: Conversation::class)]
     public array $data;
 
     /**

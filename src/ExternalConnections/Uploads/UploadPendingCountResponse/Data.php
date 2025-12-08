@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Data implements BaseModel
     /**
      * The count of phone numbers that are pending assignment to the external connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pending_numbers_count;
 
     /**
      * The count of number uploads that have not yet been uploaded to Microsoft.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pending_orders_count;
 
     public function __construct()

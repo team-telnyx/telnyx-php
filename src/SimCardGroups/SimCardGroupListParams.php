@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,31 +31,31 @@ final class SimCardGroupListParams implements BaseModel
     /**
      * A valid SIM card group name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_name_;
 
     /**
      * A Private Wireless Gateway ID associated with the group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_private_wireless_gateway_id_;
 
     /**
      * A Wireless Blocklist ID associated with the group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_wireless_blocklist_id_;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

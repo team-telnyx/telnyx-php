@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Logo implements BaseModel
     /**
      * The document identification.
      */
-    #[Api]
+    #[Required]
     public string $document_id;
 
     /**

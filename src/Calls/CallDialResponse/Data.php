@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls\CallDialResponse;
 
 use Telnyx\Calls\CallDialResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,59 +32,59 @@ final class Data implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api]
+    #[Required]
     public string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api]
+    #[Required]
     public string $call_session_id;
 
     /**
      * Indicates whether the call is alive or not. For Dial command it will always be `false` (dialing is asynchronous).
      */
-    #[Api]
+    #[Required]
     public bool $is_alive;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * Indicates the duration of the call in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $call_duration;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * ISO 8601 formatted date indicating when the call ended. Only present when the call is not alive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_time;
 
     /**
      * The ID of the recording. Only present when the record parameter is set to record-from-answer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_id;
 
     /**
      * ISO 8601 formatted date indicating when the call started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -54,43 +55,43 @@ final class VerificationRequestEgress implements BaseModel
     /** @use SdkModel<VerificationRequestEgressShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public string $additionalInformation;
 
-    #[Api]
+    #[Required]
     public string $businessAddr1;
 
-    #[Api]
+    #[Required]
     public string $businessCity;
 
-    #[Api]
+    #[Required]
     public string $businessContactEmail;
 
-    #[Api]
+    #[Required]
     public string $businessContactFirstName;
 
-    #[Api]
+    #[Required]
     public string $businessContactLastName;
 
-    #[Api]
+    #[Required]
     public string $businessContactPhone;
 
-    #[Api]
+    #[Required]
     public string $businessName;
 
-    #[Api]
+    #[Required]
     public string $businessState;
 
-    #[Api]
+    #[Required]
     public string $businessZip;
 
-    #[Api]
+    #[Required]
     public string $corporateWebsite;
 
-    #[Api]
+    #[Required]
     public string $isvReseller;
 
     /**
@@ -98,21 +99,21 @@ final class VerificationRequestEgress implements BaseModel
      *
      * @var value-of<Volume> $messageVolume
      */
-    #[Api(enum: Volume::class)]
+    #[Required(enum: Volume::class)]
     public string $messageVolume;
 
-    #[Api]
+    #[Required]
     public string $optInWorkflow;
 
     /** @var list<URL> $optInWorkflowImageURLs */
-    #[Api(list: URL::class)]
+    #[Required(list: URL::class)]
     public array $optInWorkflowImageURLs;
 
     /** @var list<TfPhoneNumber> $phoneNumbers */
-    #[Api(list: TfPhoneNumber::class)]
+    #[Required(list: TfPhoneNumber::class)]
     public array $phoneNumbers;
 
-    #[Api]
+    #[Required]
     public string $productionMessageContent;
 
     /**
@@ -120,31 +121,31 @@ final class VerificationRequestEgress implements BaseModel
      *
      * @var value-of<UseCaseCategories> $useCase
      */
-    #[Api(enum: UseCaseCategories::class)]
+    #[Required(enum: UseCaseCategories::class)]
     public string $useCase;
 
-    #[Api]
+    #[Required]
     public string $useCaseSummary;
 
-    #[Api]
+    #[Required]
     public string $verificationRequestId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $ageGatedContent;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessAddr2;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessRegistrationCountry;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessRegistrationNumber;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessRegistrationType;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $doingBusinessAs;
 
     /**
@@ -152,22 +153,22 @@ final class VerificationRequestEgress implements BaseModel
      *
      * @var value-of<TollFreeVerificationEntityType>|null $entityType
      */
-    #[Api(enum: TollFreeVerificationEntityType::class, optional: true)]
+    #[Optional(enum: TollFreeVerificationEntityType::class)]
     public ?string $entityType;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $helpMessageResponse;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $optInConfirmationResponse;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $optInKeywords;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $privacyPolicyURL;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $termsAndConditionURL;
 
     /**
@@ -175,10 +176,10 @@ final class VerificationRequestEgress implements BaseModel
      *
      * @var value-of<TfVerificationStatus>|null $verificationStatus
      */
-    #[Api(enum: TfVerificationStatus::class, optional: true)]
+    #[Optional(enum: TfVerificationStatus::class)]
     public ?string $verificationStatus;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookUrl;
 
     /**

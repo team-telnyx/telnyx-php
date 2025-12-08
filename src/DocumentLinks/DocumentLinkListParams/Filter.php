@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DocumentLinks\DocumentLinkListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class Filter implements BaseModel
     /**
      * The linked_record_type of the document to filter on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $linked_record_type;
 
     /**
      * The linked_resource_id of the document to filter on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $linked_resource_id;
 
     public function __construct()

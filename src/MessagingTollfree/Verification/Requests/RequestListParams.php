@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,7 +30,7 @@ final class RequestListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public int $page;
 
     /**
@@ -37,16 +38,16 @@ final class RequestListParams implements BaseModel
      *
      *         This value is automatically clamped if the provided value is too large.
      */
-    #[Api]
+    #[Required]
     public int $page_size;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_end;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_start;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -54,7 +55,7 @@ final class RequestListParams implements BaseModel
      *
      * @var value-of<TfVerificationStatus>|null $status
      */
-    #[Api(enum: TfVerificationStatus::class, optional: true)]
+    #[Optional(enum: TfVerificationStatus::class)]
     public ?string $status;
 
     /**

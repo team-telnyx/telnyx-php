@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class TfPhoneNumber implements BaseModel
     /** @use SdkModel<TfPhoneNumberShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $phoneNumber;
 
     /**

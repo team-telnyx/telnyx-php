@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
@@ -21,7 +21,7 @@ final class VerifiedNumber implements BaseModel
     /** @use SdkModel<VerifiedNumberShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -29,10 +29,10 @@ final class VerifiedNumber implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verified_at;
 
     public function __construct()

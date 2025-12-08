@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class Filter implements BaseModel
     /**
      * Filter results by the TCR Brand id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcr_brand_id;
 
     /**
      * Filter results by the TCR Campaign id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcr_campaign_id;
 
     /**
      * Filter results by the Telnyx Brand id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $telnyx_brand_id;
 
     /**
      * Filter results by the Telnyx Campaign id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $telnyx_campaign_id;
 
     public function __construct()

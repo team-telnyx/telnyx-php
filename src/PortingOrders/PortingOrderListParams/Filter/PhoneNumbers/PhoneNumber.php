@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class PhoneNumber implements BaseModel
     /**
      * Filter results by full or partial phone_number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()

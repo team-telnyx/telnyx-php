@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Brand;
 
 use Telnyx\Brand\BrandListParams\Sort;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -36,25 +36,25 @@ final class BrandListParams implements BaseModel
     /**
      * Filter results by the Telnyx Brand id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $brandId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $displayName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $entityType;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * number of records per page. maximum of 500.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $recordsPerPage;
 
     /**
@@ -62,16 +62,16 @@ final class BrandListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
      * Filter results by the TCR Brand id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcrBrandId;
 
     public function __construct()

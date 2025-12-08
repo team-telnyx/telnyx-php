@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Category;
@@ -26,13 +26,13 @@ final class Category1 implements BaseModel
     /**
      * The number of bytes received.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $bytes_received;
 
     /**
      * The number of bytes sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $bytes_sent;
 
     /**
@@ -40,19 +40,19 @@ final class Category1 implements BaseModel
      *
      * @var value-of<Category>|null $category
      */
-    #[Api(enum: Category::class, optional: true)]
+    #[Optional(enum: Category::class)]
     public ?string $category;
 
     /**
      * The number of operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $ops;
 
     /**
      * The number of successful operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $successful_ops;
 
     public function __construct()

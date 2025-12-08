@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -70,49 +71,49 @@ final class JobUpdateBatchParams implements BaseModel
      *
      * @var list<string> $phone_numbers
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $phone_numbers;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Identifies the connection associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Indicates whether to enable or disable the deletion lock on each phone number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $deletion_lock_enabled;
 
     /**
      * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $external_pin;
 
     /**
      * Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hd_voice_enabled;
 
     /**
@@ -120,10 +121,10 @@ final class JobUpdateBatchParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?UpdateVoiceSettings $voice;
 
     /**

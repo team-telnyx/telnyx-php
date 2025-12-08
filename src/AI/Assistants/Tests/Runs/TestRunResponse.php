@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests\Runs;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -38,13 +39,13 @@ final class TestRunResponse implements BaseModel
     /**
      * Timestamp when the test run was created and queued.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * Unique identifier for this specific test run execution.
      */
-    #[Api]
+    #[Required]
     public string $run_id;
 
     /**
@@ -58,37 +59,37 @@ final class TestRunResponse implements BaseModel
      *
      * @var value-of<TestStatus> $status
      */
-    #[Api(enum: TestStatus::class)]
+    #[Required(enum: TestStatus::class)]
     public string $status;
 
     /**
      * Identifier of the assistant test that was executed.
      */
-    #[Api]
+    #[Required]
     public string $test_id;
 
     /**
      * How this test run was initiated (manual, scheduled, or API).
      */
-    #[Api]
+    #[Required]
     public string $triggered_by;
 
     /**
      * Timestamp when the test run finished execution.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $completed_at;
 
     /**
      * Identifier of the conversation created during test execution.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversation_id;
 
     /**
      * Identifier for conversation analysis and insights data.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversation_insights_id;
 
     /**
@@ -96,25 +97,25 @@ final class TestRunResponse implements BaseModel
      *
      * @var list<DetailStatus>|null $detail_status
      */
-    #[Api(list: DetailStatus::class, optional: true)]
+    #[Optional(list: DetailStatus::class)]
     public ?array $detail_status;
 
     /**
      * Detailed execution logs and debug information.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $logs;
 
     /**
      * Identifier linking this run to a test suite execution batch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $test_suite_run_id;
 
     /**
      * Timestamp of the last update to this test run.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**

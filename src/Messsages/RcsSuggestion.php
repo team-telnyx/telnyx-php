@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsSuggestion\Action;
@@ -27,10 +27,10 @@ final class RcsSuggestion implements BaseModel
     /**
      * When tapped, initiates the corresponding native action on the device.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Action $action;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Reply $reply;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class Meta implements BaseModel
     /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $best_effort_results;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_results;
 
     public function __construct()

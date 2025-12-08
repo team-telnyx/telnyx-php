@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class Service implements BaseModel
     /**
      * Cost per unit as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $cost;
 
     /**
      * Type of cost (MRC or OTC).
      */
-    #[Api]
+    #[Required]
     public string $cost_type;
 
     /**
      * Service name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
@@ -23,7 +23,7 @@ final class ExportPortoutsCsvReport implements BaseModel
     /**
      * The filters to apply to the export port-out CSV report.
      */
-    #[Api]
+    #[Required]
     public Filters $filters;
 
     /**

@@ -6,7 +6,8 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\CustomHeader;
 use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\Target;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,7 +27,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * Number or SIP URI placing the call.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
@@ -34,7 +35,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      *
      * @var list<Target> $targets
      */
-    #[Api(list: Target::class)]
+    #[Required(list: Target::class)]
     public array $targets;
 
     /**
@@ -42,13 +43,13 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      *
      * @var list<CustomHeader>|null $custom_headers
      */
-    #[Api(list: CustomHeader::class, optional: true)]
+    #[Optional(list: CustomHeader::class)]
     public ?array $custom_headers;
 
     /**
      * Natural language instructions for your agent for how to provide context for the transfer recipient.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $warm_transfer_instructions;
 
     /**

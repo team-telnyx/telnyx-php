@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls\Siprec;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse\Status;
@@ -28,31 +28,31 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
      * The id of the call the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
     /**
      * The date and time the siprec session was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_updated;
 
     /**
      * The error code of the siprec session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_code;
 
     /**
      * The SID of the siprec session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -60,13 +60,13 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The URI of the siprec session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\CredentialConnections;
 
 use Telnyx\ConnectionsPaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialConnection\SipUriCallingPreference;
@@ -22,10 +22,10 @@ final class CredentialConnectionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<CredentialConnection>|null $data */
-    #[Api(list: CredentialConnection::class, optional: true)]
+    #[Optional(list: CredentialConnection::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionsPaginationMeta $meta;
 
     public function __construct()

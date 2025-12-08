@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Actions\ActionShareResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
@@ -29,31 +29,31 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies this sharing token.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * A signed JWT token that can be used to access the shared resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * ISO 8601 formatted date indicating when the sharing token expires.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $expires_at;
 
     /**
      * The number of seconds until the sharing token expires.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $expires_in_seconds;
 
     /**
@@ -61,19 +61,19 @@ final class Data implements BaseModel
      *
      * @var list<value-of<Permission>>|null $permissions
      */
-    #[Api(list: Permission::class, optional: true)]
+    #[Optional(list: Permission::class)]
     public ?array $permissions;
 
     /**
      * Identifies the porting order resource being shared.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

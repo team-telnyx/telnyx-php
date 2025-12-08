@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\PhoneNumberType;
@@ -46,103 +46,103 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Indicates if call forwarding will be enabled for this number if forwards_to and forwarding_type are filled in. Defaults to true for backwards compatibility with APIV1 use of numbers endpoints.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_forwarding_enabled;
 
     /**
      * Indicates whether call recording is enabled for this number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_recording_enabled;
 
     /**
      * Indicates whether caller ID is enabled for this number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $caller_id_name_enabled;
 
     /**
      * Indicates whether a CNAM listing is enabled for this number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $cnam_listing_enabled;
 
     /**
      * Identifies the connection associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * The user-assigned name of the connection to be associated with this phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_name;
 
     /**
      * ISO 8601 formatted date indicating when the time it took to activate after the purchase.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $deletion_lock_enabled;
 
     /**
      * Identifies the emergency address associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $emergency_address_id;
 
     /**
      * Indicates whether emergency services are enabled for this number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $emergency_enabled;
 
     /**
      * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $external_pin;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     /**
      * The name of the messaging profile associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_name;
 
     /**
      * The +E.164-formatted phone number associated with this record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -150,19 +150,19 @@ final class Data implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * ISO 8601 formatted date indicating the time the request was made to purchase the number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $purchased_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -170,13 +170,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Indicates whether T38 Fax Gateway for inbound calls to this number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $t38_fax_gateway_enabled;
 
     /**
@@ -184,13 +184,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

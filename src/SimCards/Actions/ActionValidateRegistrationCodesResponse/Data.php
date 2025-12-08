@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,22 +24,22 @@ final class Data implements BaseModel
     /**
      * The validation message.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $invalid_detail;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The 10-digit SIM card registration code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $registration_code;
 
     /**
      * The attribute that denotes whether the code is valid or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $valid;
 
     public function __construct()

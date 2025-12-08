@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Target implements BaseModel
     /**
      * The name of the target.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The destination number or SIP URI of the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()

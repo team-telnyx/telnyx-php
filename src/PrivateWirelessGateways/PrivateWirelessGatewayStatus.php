@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
@@ -26,13 +26,13 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     /**
      * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_code;
 
     /**
      * This attribute provides a human-readable explanation of why a failure happened.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_description;
 
     /**
@@ -46,7 +46,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()

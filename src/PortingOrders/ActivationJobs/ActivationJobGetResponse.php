@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActivationJobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
@@ -22,7 +22,7 @@ final class ActivationJobGetResponse implements BaseModel
     /** @use SdkModel<ActivationJobGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrdersActivationJob $data;
 
     public function __construct()

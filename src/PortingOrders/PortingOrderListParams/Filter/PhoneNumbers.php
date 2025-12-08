@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber;
@@ -24,19 +24,19 @@ final class PhoneNumbers implements BaseModel
     /**
      * Filter results by old service provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier_name;
 
     /**
      * Filter results by country ISO 3166-1 alpha-2 code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Phone number pattern filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumber $phone_number;
 
     public function __construct()

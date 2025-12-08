@@ -9,7 +9,7 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RecordType;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation\RegionType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -34,40 +34,40 @@ final class Data implements BaseModel
     /**
      * Specifies whether the phone number is an exact match based on the search criteria or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $best_effort;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CostInformation $cost_information;
 
     /** @var list<Feature>|null $features */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Specifies whether the phone number can receive calls immediately after purchase or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
     /** @var value-of<RecordType>|null $record_type */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /** @var list<RegionInformation>|null $region_information */
-    #[Api(list: RegionInformation::class, optional: true)]
+    #[Optional(list: RegionInformation::class)]
     public ?array $region_information;
 
     /**
      * Specifies whether the phone number can be reserved before purchase or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $reservable;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vanity_format;
 
     public function __construct()

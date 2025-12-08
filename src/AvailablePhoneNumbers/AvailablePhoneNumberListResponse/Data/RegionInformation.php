@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data;
 
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation\RegionType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,11 +19,11 @@ final class RegionInformation implements BaseModel
     /** @use SdkModel<RegionInformationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_name;
 
     /** @var value-of<RegionType>|null $region_type */
-    #[Api(enum: RegionType::class, optional: true)]
+    #[Optional(enum: RegionType::class)]
     public ?string $region_type;
 
     public function __construct()

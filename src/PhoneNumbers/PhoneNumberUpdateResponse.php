@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\EmergencyStatus;
@@ -23,7 +23,7 @@ final class PhoneNumberUpdateResponse implements BaseModel
     /** @use SdkModel<PhoneNumberUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumberDetailed $data;
 
     public function __construct()

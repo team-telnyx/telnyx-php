@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
@@ -24,10 +24,10 @@ final class LogMessageListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<LogMessage>|null $log_messages */
-    #[Api(list: LogMessage::class, optional: true)]
+    #[Optional(list: LogMessage::class)]
     public ?array $log_messages;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalVoiceIntegrationsPaginationMeta $meta;
 
     public function __construct()

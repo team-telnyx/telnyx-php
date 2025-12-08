@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Payment\AutoRechargePrefs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse\Data;
@@ -18,7 +18,7 @@ final class AutoRechargePrefUpdateResponse implements BaseModel
     /** @use SdkModel<AutoRechargePrefUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses\AddressListParams\Filter\CustomerReference;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class UnionMember1 implements BaseModel
     /**
      * Partial match for customer_reference. Matching is not case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Exact match for customer_reference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()

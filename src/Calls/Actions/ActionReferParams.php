@@ -7,7 +7,8 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SipHeader\Name;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -42,19 +43,19 @@ final class ActionReferParams implements BaseModel
     /**
      * The SIP URI to which the call will be referred to.
      */
-    #[Api]
+    #[Required]
     public string $sip_address;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -62,19 +63,19 @@ final class ActionReferParams implements BaseModel
      *
      * @var list<CustomSipHeader>|null $custom_headers
      */
-    #[Api(list: CustomSipHeader::class, optional: true)]
+    #[Optional(list: CustomSipHeader::class)]
     public ?array $custom_headers;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_password;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_username;
 
     /**
@@ -82,7 +83,7 @@ final class ActionReferParams implements BaseModel
      *
      * @var list<SipHeader>|null $sip_headers
      */
-    #[Api(list: SipHeader::class, optional: true)]
+    #[Optional(list: SipHeader::class)]
     public ?array $sip_headers;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Function1 implements BaseModel
     /**
      * JSON-formatted arguments to pass to the function.
      */
-    #[Api]
+    #[Required]
     public string $arguments;
 
     /**
      * Name of the function to call.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

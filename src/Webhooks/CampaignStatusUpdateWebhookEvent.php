@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent\Status;
@@ -30,37 +30,37 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
     /**
      * Brand ID associated with the campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $brandId;
 
     /**
      * The ID of the campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $campaignId;
 
     /**
      * Unix timestamp when campaign was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $createDate;
 
     /**
      * Alphanumeric identifier of the CSP associated with this campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cspId;
 
     /**
      * Description of the event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Indicates whether the campaign is registered with T-Mobile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isTMobileRegistered;
 
     /**
@@ -68,11 +68,11 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /** @var value-of<Type>|null $type */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()

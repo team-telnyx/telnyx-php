@@ -31,7 +31,7 @@ use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember1;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember2;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\AI\Assistants\WebhookTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -60,7 +60,7 @@ final class UpdateAssistant implements BaseModel
     /** @use SdkModel<UpdateAssistantShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
@@ -68,56 +68,56 @@ final class UpdateAssistant implements BaseModel
      *
      * @var array<string,mixed>|null $dynamic_variables
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $dynamic_variables;
 
     /**
      * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $dynamic_variables_webhook_url;
 
     /** @var list<value-of<EnabledFeatures>>|null $enabled_features */
-    #[Api(list: EnabledFeatures::class, optional: true)]
+    #[Optional(list: EnabledFeatures::class)]
     public ?array $enabled_features;
 
     /**
      * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $greeting;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?InsightSettings $insight_settings;
 
     /**
      * System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $llm_api_key_ref;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MessagingSettings $messaging_settings;
 
     /**
      * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PrivacySettings $privacy_settings;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TelephonySettings $telephony_settings;
 
     /**
@@ -125,13 +125,13 @@ final class UpdateAssistant implements BaseModel
      *
      * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
      */
-    #[Api(list: AssistantTool::class, optional: true)]
+    #[Optional(list: AssistantTool::class)]
     public ?array $tools;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionSettings $transcription;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?VoiceSettings $voice_settings;
 
     public function __construct()

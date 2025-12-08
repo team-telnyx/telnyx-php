@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomCompositions\RoomCompositionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\DateCreatedAt;
@@ -24,13 +24,13 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateCreatedAt $date_created_at;
 
     /**
      * The session_id for filtering room compositions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $session_id;
 
     /**
@@ -38,7 +38,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

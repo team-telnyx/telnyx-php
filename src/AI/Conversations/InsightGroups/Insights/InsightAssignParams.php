@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\InsightGroups\Insights;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class InsightAssignParams implements BaseModel
     /**
      * The ID of the insight group.
      */
-    #[Api]
+    #[Required]
     public string $group_id;
 
     /**

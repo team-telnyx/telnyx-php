@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage\NetworkCoverageListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NetworkCoverage\AvailableService;
@@ -27,16 +27,16 @@ final class Data implements BaseModel
      *
      * @var list<value-of<AvailableService>>|null $available_services
      */
-    #[Api(list: AvailableService::class, optional: true)]
+    #[Optional(list: AvailableService::class)]
     public ?array $available_services;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Location $location;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

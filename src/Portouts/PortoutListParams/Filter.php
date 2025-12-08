@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\PortoutListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutListParams\Filter\InsertedAt;
@@ -38,13 +38,13 @@ final class Filter implements BaseModel
     /**
      * Filter by new carrier name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier_name;
 
     /**
      * Filter by 2-letter country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
@@ -52,43 +52,43 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $country_code_in
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $country_code_in;
 
     /**
      * Filter by foc_date. Matches all portouts with the same date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $foc_date;
 
     /**
      * Filter by inserted_at date range using nested operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?InsertedAt $inserted_at;
 
     /**
      * Filter by a phone number on the portout. Matches all portouts with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Filter by Port Order Number (PON).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pon;
 
     /**
      * Filter by ported_out_at date range using nested operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortedOutAt $ported_out_at;
 
     /**
      * Filter by new carrier spid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid;
 
     /**
@@ -96,7 +96,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -104,13 +104,13 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<StatusIn>>|null $status_in
      */
-    #[Api(list: StatusIn::class, optional: true)]
+    #[Optional(list: StatusIn::class)]
     public ?array $status_in;
 
     /**
      * Filter by the portout's support_key.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $support_key;
 
     public function __construct()

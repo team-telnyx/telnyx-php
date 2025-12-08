@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData\Backend;
@@ -27,25 +28,25 @@ final class AzureConfigurationData implements BaseModel
      *
      * @var value-of<Backend> $backend
      */
-    #[Api(enum: Backend::class)]
+    #[Required(enum: Backend::class)]
     public string $backend;
 
     /**
      * Azure Blob Storage account key.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_key;
 
     /**
      * Azure Blob Storage account name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_name;
 
     /**
      * Name of the bucket to be used to store recording files.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bucket;
 
     /**

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,31 +38,31 @@ final class AuthenticationProviderCreateParams implements BaseModel
     /**
      * The name associated with the authentication provider.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The settings associated with the authentication provider.
      */
-    #[Api]
+    #[Required]
     public Settings $settings;
 
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Api]
+    #[Required]
     public string $short_name;
 
     /**
      * The active status of the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $settings_url;
 
     /**

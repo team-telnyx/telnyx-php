@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse\Data;
@@ -17,7 +17,7 @@ final class DocumentGenerateDownloadLinkResponse implements BaseModel
     /** @use SdkModel<DocumentGenerateDownloadLinkResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

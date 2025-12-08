@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events\EventListResponse\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
     /**
      * Identifies the port-out order that have the FOC date changed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating the new FOC date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $foc_date;
 
     /**
      * Identifies the organization that port-out order belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     public function __construct()

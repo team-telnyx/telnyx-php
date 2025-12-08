@@ -6,7 +6,8 @@ namespace Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit\Direction;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -30,47 +31,47 @@ final class Data implements BaseModel
     /**
      * Bundle's ID, this is used to identify the bundle in the API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * If that bundle is active or not.
      */
-    #[Api]
+    #[Required]
     public bool $active;
 
     /** @var list<BundleLimit> $bundle_limits */
-    #[Api(list: BundleLimit::class)]
+    #[Required(list: BundleLimit::class)]
     public array $bundle_limits;
 
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Api]
+    #[Required]
     public string $cost_code;
 
     /**
      * Date the bundle was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Api]
+    #[Required]
     public bool $is_public;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Slugified version of the bundle's name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $slug;
 
     /**

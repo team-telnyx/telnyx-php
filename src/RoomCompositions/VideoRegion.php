@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomCompositions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,19 +28,19 @@ final class VideoRegion implements BaseModel
     /**
      * Height of the video region.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $height;
 
     /**
      * Maximum number of columns of the region's placement grid. By default, the region has as many columns as needed to layout all the specified video sources.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $max_columns;
 
     /**
      * Maximum number of rows of the region's placement grid. By default, the region has as many rows as needed to layout all the specified video sources.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $max_rows;
 
     /**
@@ -48,31 +48,31 @@ final class VideoRegion implements BaseModel
      *
      * @var list<string>|null $video_sources
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $video_sources;
 
     /**
      * Width of the video region.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $width;
 
     /**
      * X axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $x_pos;
 
     /**
      * Y axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $y_pos;
 
     /**
      * Regions with higher z_pos values are stacked on top of regions with lower z_pos values.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $z_pos;
 
     public function __construct()

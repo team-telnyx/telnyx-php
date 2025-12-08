@@ -9,7 +9,7 @@ use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RecordType;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RegionInformation;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RegionInformation\RegionType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,25 +28,25 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CostInformation $cost_information;
 
     /** @var list<Feature>|null $features */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $range;
 
     /** @var value-of<RecordType>|null $record_type */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /** @var list<RegionInformation>|null $region_information */
-    #[Api(list: RegionInformation::class, optional: true)]
+    #[Optional(list: RegionInformation::class)]
     public ?array $region_information;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $starting_number;
 
     public function __construct()

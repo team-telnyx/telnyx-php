@@ -6,7 +6,7 @@ namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\BundlePricing\BillingBundles\PaginationResponse;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class UserBundleListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<UserBundle> $data */
-    #[Api(list: UserBundle::class)]
+    #[Required(list: UserBundle::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public PaginationResponse $meta;
 
     /**

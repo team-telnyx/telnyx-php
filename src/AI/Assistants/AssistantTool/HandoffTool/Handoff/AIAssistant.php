@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class AIAssistant implements BaseModel
     /**
      * The ID of the assistant to hand off to.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Helpful name for giving context on when to handoff to the assistant.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,10 +19,10 @@ final class CampaignGetSharingStatusResponse implements BaseModel
     /** @use SdkModel<CampaignGetSharingStatusResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CampaignSharingStatus $sharedByMe;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CampaignSharingStatus $sharedWithMe;
 
     public function __construct()

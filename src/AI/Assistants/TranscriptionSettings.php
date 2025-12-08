@@ -6,7 +6,7 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
 use Telnyx\AI\Assistants\TranscriptionSettings\Settings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,7 +26,7 @@ final class TranscriptionSettings implements BaseModel
     /**
      * The language of the audio to be transcribed. If not set, of if set to `auto`, the model will automatically detect the language.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
     /**
@@ -37,16 +37,16 @@ final class TranscriptionSettings implements BaseModel
      *
      * @var value-of<Model>|null $model
      */
-    #[Api(enum: Model::class, optional: true)]
+    #[Optional(enum: Model::class)]
     public ?string $model;
 
     /**
      * Region on third party cloud providers (currently Azure) if using one of their models.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Settings $settings;
 
     public function __construct()

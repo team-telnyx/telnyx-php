@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumbersFeatures;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class NumbersFeatureCreateParams implements BaseModel
     use SdkParams;
 
     /** @var list<string> $phone_numbers */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $phone_numbers;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class LocationID implements BaseModel
     /**
      * The location ID to filter by.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()

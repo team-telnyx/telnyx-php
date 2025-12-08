@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\SimCardGroupListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class DataLimit implements BaseModel
     /** @use SdkModel<DataLimitShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     public function __construct()

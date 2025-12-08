@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TelephonyCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -30,58 +30,58 @@ final class TelephonyCredential implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO-8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Defaults to false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $expired;
 
     /**
      * ISO-8601 formatted date indicating when the resource will expire.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $expires_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Identifies the resource this credential is associated with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $resource_id;
 
     /**
      * The randomly generated SIP password for the credential.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_password;
 
     /**
      * The randomly generated SIP username for the credential.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_username;
 
     /**
      * ISO-8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Connections\ConnectionListActiveCallsResponse;
 
 use Telnyx\Connections\ConnectionListActiveCallsResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,35 +27,35 @@ final class Data implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
      * Indicates the duration of the call in seconds.
      */
-    #[Api]
+    #[Required]
     public int $call_duration;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api]
+    #[Required]
     public string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api]
+    #[Required]
     public string $call_session_id;
 
     /**
      * State received from a command.
      */
-    #[Api]
+    #[Required]
     public string $client_state;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**

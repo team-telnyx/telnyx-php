@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data;
@@ -18,7 +18,7 @@ final class RcInviteTestNumberResponse implements BaseModel
     /** @use SdkModel<RcInviteTestNumberResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

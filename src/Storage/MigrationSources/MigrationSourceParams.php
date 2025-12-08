@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\MigrationSources;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
@@ -27,7 +28,7 @@ final class MigrationSourceParams implements BaseModel
     /**
      * Bucket name to migrate the data from.
      */
-    #[Api]
+    #[Required]
     public string $bucket_name;
 
     /**
@@ -35,22 +36,22 @@ final class MigrationSourceParams implements BaseModel
      *
      * @var value-of<Provider> $provider
      */
-    #[Api(enum: Provider::class)]
+    #[Required(enum: Provider::class)]
     public string $provider;
 
-    #[Api]
+    #[Required]
     public ProviderAuth $provider_auth;
 
     /**
      * Unique identifier for the data migration source.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * For intra-Telnyx buckets migration, specify the source bucket region in this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $source_region;
 
     /**

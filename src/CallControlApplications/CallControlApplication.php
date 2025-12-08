@@ -9,7 +9,7 @@ use Telnyx\CallControlApplications\CallControlApplication\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
 use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -41,13 +41,13 @@ final class CallControlApplication implements BaseModel
     /** @use SdkModel<CallControlApplicationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Specifies whether the connection can be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -55,25 +55,25 @@ final class CallControlApplication implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional(enum: AnchorsiteOverride::class)]
     public ?string $anchorsite_override;
 
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $application_name;
 
     /**
      * Specifies if call cost webhooks should be sent for this Call Control Application.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_cost_in_webhooks;
 
     /**
      * ISO 8601 formatted date of when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
@@ -81,35 +81,35 @@ final class CallControlApplication implements BaseModel
      *
      * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api(enum: DtmfType::class, optional: true)]
+    #[Optional(enum: DtmfType::class)]
     public ?string $dtmf_type;
 
     /**
      * Specifies whether calls to phone numbers associated with this connection should hangup after timing out.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $first_command_timeout;
 
     /**
      * Specifies how many seconds to wait before timing out a dial command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $first_command_timeout_secs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallControlApplicationInbound $inbound;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallControlApplicationOutbound $outbound;
 
     /** @var value-of<RecordType>|null $record_type */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * When enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $redact_dtmf_debug_logging;
 
     /**
@@ -117,13 +117,13 @@ final class CallControlApplication implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * ISO 8601 formatted date of when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
@@ -131,22 +131,22 @@ final class CallControlApplication implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as `https`.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as `https`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_event_url;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     public function __construct()

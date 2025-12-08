@@ -6,7 +6,7 @@ namespace Telnyx\Brand;
 
 use Telnyx\Brand\BrandListResponse\Record;
 use Telnyx\Brand\BrandListResponse\Record\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,14 +20,14 @@ final class BrandListResponse implements BaseModel
     /** @use SdkModel<BrandListResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /** @var list<Record>|null $records */
-    #[Api(list: Record::class, optional: true)]
+    #[Optional(list: Record::class)]
     public ?array $records;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $totalRecords;
 
     public function __construct()

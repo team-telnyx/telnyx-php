@@ -8,7 +8,7 @@ use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class AdvancedOrderListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     public function __construct()

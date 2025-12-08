@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Payment\AutoRechargePrefs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,10 +32,10 @@ final class AutoRechargePrefUpdateParams implements BaseModel
     /**
      * Whether auto recharge is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $invoice_enabled;
 
     /**
@@ -43,19 +43,19 @@ final class AutoRechargePrefUpdateParams implements BaseModel
      *
      * @var value-of<Preference>|null $preference
      */
-    #[Api(enum: Preference::class, optional: true)]
+    #[Optional(enum: Preference::class)]
     public ?string $preference;
 
     /**
      * The amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recharge_amount;
 
     /**
      * The threshold amount at which the account will be recharged.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $threshold_amount;
 
     public function __construct()

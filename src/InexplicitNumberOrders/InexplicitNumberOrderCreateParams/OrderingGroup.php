@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\CountryISO;
@@ -34,7 +35,7 @@ final class OrderingGroup implements BaseModel
     /**
      * Quantity of phone numbers to order.
      */
-    #[Api]
+    #[Required]
     public string $count_requested;
 
     /**
@@ -42,25 +43,25 @@ final class OrderingGroup implements BaseModel
      *
      * @var value-of<CountryISO> $country_iso
      */
-    #[Api(enum: CountryISO::class)]
+    #[Required(enum: CountryISO::class)]
     public string $country_iso;
 
     /**
      * Number type (local, toll-free, etc.).
      */
-    #[Api]
+    #[Required]
     public string $phone_number_type;
 
     /**
      * Filter for phone numbers in a given state / province.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * Filter to exclude phone numbers that are currently on hold/reserved for your account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $exclude_held_numbers;
 
     /**
@@ -68,31 +69,31 @@ final class OrderingGroup implements BaseModel
      *
      * @var list<string>|null $features
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $features;
 
     /**
      * Filter for phone numbers in a given city / region / rate center.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * Filter by area code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $national_destination_code;
 
     /**
      * Phone number search criteria.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumber $phone_number;
 
     /**
      * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
     /**
@@ -100,7 +101,7 @@ final class OrderingGroup implements BaseModel
      *
      * @var value-of<Strategy>|null $strategy
      */
-    #[Api(enum: Strategy::class, optional: true)]
+    #[Optional(enum: Strategy::class)]
     public ?string $strategy;
 
     /**

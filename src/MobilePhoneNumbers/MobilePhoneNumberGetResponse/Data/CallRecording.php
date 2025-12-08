@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse\Data\CallRecording\InboundCallRecordingChannels;
@@ -25,14 +25,14 @@ final class CallRecording implements BaseModel
     /**
      * @var value-of<InboundCallRecordingChannels>|null $inbound_call_recording_channels
      */
-    #[Api(enum: InboundCallRecordingChannels::class, optional: true)]
+    #[Optional(enum: InboundCallRecordingChannels::class)]
     public ?string $inbound_call_recording_channels;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $inbound_call_recording_enabled;
 
     /** @var value-of<InboundCallRecordingFormat>|null $inbound_call_recording_format */
-    #[Api(enum: InboundCallRecordingFormat::class, optional: true)]
+    #[Optional(enum: InboundCallRecordingFormat::class)]
     public ?string $inbound_call_recording_format;
 
     public function __construct()

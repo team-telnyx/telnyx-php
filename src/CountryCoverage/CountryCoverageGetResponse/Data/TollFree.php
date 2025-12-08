@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CountryCoverage\CountryCoverageGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,22 +24,22 @@ final class TollFree implements BaseModel
     use SdkModel;
 
     /** @var list<string>|null $features */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $features;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $full_pstn_replacement;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $international_sms;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $p2p;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $reservable;
 
     public function __construct()

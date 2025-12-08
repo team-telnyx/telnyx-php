@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateJoinedAt;
@@ -29,16 +29,16 @@ final class Filter implements BaseModel
     /**
      * Filter room participants based on the context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $context;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateJoinedAt $date_joined_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateLeftAt $date_left_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateUpdatedAt $date_updated_at;
 
     public function __construct()

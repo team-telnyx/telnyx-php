@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber;
@@ -25,7 +25,7 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      *
      * @var list<PhoneNumber>|null $phone_numbers
      */
-    #[Api(list: PhoneNumber::class, optional: true)]
+    #[Optional(list: PhoneNumber::class)]
     public ?array $phone_numbers;
 
     public function __construct()

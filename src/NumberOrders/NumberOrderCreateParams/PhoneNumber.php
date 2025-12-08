@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrders\NumberOrderCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +24,19 @@ final class PhoneNumber implements BaseModel
     /**
      * e164_phone_number.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**
      * ID of bundle to associate the number to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bundle_id;
 
     /**
      * ID of requirement group to use to satisfy number requirements.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_group_id;
 
     /**

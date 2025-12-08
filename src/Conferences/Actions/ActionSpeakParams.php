@@ -12,7 +12,8 @@ use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Region;
 use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -49,7 +50,7 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The text or SSML to be converted into speech. There is a 3,000 character limit.
      */
-    #[Api]
+    #[Required]
     public string $payload;
 
     /**
@@ -65,7 +66,7 @@ final class ActionSpeakParams implements BaseModel
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      */
-    #[Api]
+    #[Required]
     public string $voice;
 
     /**
@@ -73,13 +74,13 @@ final class ActionSpeakParams implements BaseModel
      *
      * @var list<string>|null $call_control_ids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $call_control_ids;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -87,7 +88,7 @@ final class ActionSpeakParams implements BaseModel
      *
      * @var value-of<Language>|null $language
      */
-    #[Api(enum: Language::class, optional: true)]
+    #[Optional(enum: Language::class)]
     public ?string $language;
 
     /**
@@ -95,7 +96,7 @@ final class ActionSpeakParams implements BaseModel
      *
      * @var value-of<PayloadType>|null $payload_type
      */
-    #[Api(enum: PayloadType::class, optional: true)]
+    #[Optional(enum: PayloadType::class)]
     public ?string $payload_type;
 
     /**
@@ -103,13 +104,13 @@ final class ActionSpeakParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
      * The settings associated with the voice selected.
      */
-    #[Api(union: VoiceSettings::class, optional: true)]
+    #[Optional(union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     /**

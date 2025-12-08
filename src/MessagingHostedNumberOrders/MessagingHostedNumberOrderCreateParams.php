@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
     /**
      * Automatically associate the number with this messaging profile ID when the order is complete.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     /**
@@ -35,7 +35,7 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
      *
      * @var list<string>|null $phone_numbers
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_numbers;
 
     public function __construct()

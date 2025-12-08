@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Rooms\Sessions;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomParticipant;
@@ -22,10 +22,10 @@ final class SessionList0Response implements BaseModel
     use SdkModel;
 
     /** @var list<RoomSession>|null $data */
-    #[Api(list: RoomSession::class, optional: true)]
+    #[Optional(list: RoomSession::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

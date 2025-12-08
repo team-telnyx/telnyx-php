@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Brand;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -51,19 +52,19 @@ final class BrandUpdateParams implements BaseModel
     /**
      * ISO2 2 characters country code. Example: US - United States.
      */
-    #[Api]
+    #[Required]
     public string $country;
 
     /**
      * Display or marketing name of the brand.
      */
-    #[Api]
+    #[Required]
     public string $displayName;
 
     /**
      * Valid email address of brand support contact.
      */
-    #[Api]
+    #[Required]
     public string $email;
 
     /**
@@ -71,7 +72,7 @@ final class BrandUpdateParams implements BaseModel
      *
      * @var value-of<EntityType> $entityType
      */
-    #[Api(enum: EntityType::class)]
+    #[Required(enum: EntityType::class)]
     public string $entityType;
 
     /**
@@ -79,13 +80,13 @@ final class BrandUpdateParams implements BaseModel
      *
      * @var value-of<Vertical> $vertical
      */
-    #[Api(enum: Vertical::class)]
+    #[Required(enum: Vertical::class)]
     public string $vertical;
 
     /**
      * Alternate business identifier such as DUNS, LEI, or GIIN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $altBusiness_id;
 
     /**
@@ -93,7 +94,7 @@ final class BrandUpdateParams implements BaseModel
      *
      * @var value-of<AltBusinessIDType>|null $altBusinessIdType
      */
-    #[Api(enum: AltBusinessIDType::class, optional: true)]
+    #[Optional(enum: AltBusinessIDType::class)]
     public ?string $altBusinessIdType;
 
     /**
@@ -101,31 +102,31 @@ final class BrandUpdateParams implements BaseModel
      *
      * Required if `entityType` will be changed to `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessContactEmail;
 
     /**
      * City name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * (Required for Non-profit/private/public) Legal company name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $companyName;
 
     /**
      * (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ein;
 
     /**
      * First name of business contact.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $firstName;
 
     /**
@@ -133,40 +134,40 @@ final class BrandUpdateParams implements BaseModel
      *
      * @var value-of<BrandIdentityStatus>|null $identityStatus
      */
-    #[Api(enum: BrandIdentityStatus::class, optional: true)]
+    #[Optional(enum: BrandIdentityStatus::class)]
     public ?string $identityStatus;
 
     /**
      * IP address of the browser requesting to create brand identity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ipAddress;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isReseller;
 
     /**
      * Last name of business contact.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastName;
 
     /**
      * Valid phone number in e.164 international format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone;
 
     /**
      * Postal codes. Use 5 digit zipcode for United States.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postalCode;
 
     /**
      * State. Must be 2 letters code for United States.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
@@ -174,37 +175,37 @@ final class BrandUpdateParams implements BaseModel
      *
      * @var value-of<StockExchange>|null $stockExchange
      */
-    #[Api(enum: StockExchange::class, optional: true)]
+    #[Optional(enum: StockExchange::class)]
     public ?string $stockExchange;
 
     /**
      * (Required for public company) stock symbol.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stockSymbol;
 
     /**
      * Street number and name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street;
 
     /**
      * Webhook failover URL for brand status updates.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookFailoverURL;
 
     /**
      * Webhook URL for brand status updates.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookURL;
 
     /**
      * Brand website URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $website;
 
     /**

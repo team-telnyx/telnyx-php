@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -38,10 +39,10 @@ final class ParticipantUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $account_sid;
 
-    #[Api]
+    #[Required]
     public string $conference_sid;
 
     /**
@@ -49,46 +50,45 @@ final class ParticipantUpdateParams implements BaseModel
      *
      * @var value-of<AnnounceMethod>|null $AnnounceMethod
      */
-    #[Api(
+    #[Optional(
         enum: AnnounceMethod::class,
-        optional: true,
     )]
     public ?string $AnnounceMethod;
 
     /**
      * The URL to call to announce something to the participant. The URL may return an MP3 fileo a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $AnnounceUrl;
 
     /**
      * Whether to play a notification beep to the conference when the participant exits.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $BeepOnExit;
 
     /**
      * The SID of the participant who is being coached. The participant being coached is the only participant who can hear the participant who is coaching.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $CallSidToCoach;
 
     /**
      * Whether the participant is coaching another call. When `true`, `CallSidToCoach` has to be given.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $Coaching;
 
     /**
      * Whether to end the conference when the participant leaves.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $EndConferenceOnExit;
 
     /**
      * Whether the participant should be on hold.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $Hold;
 
     /**
@@ -96,28 +96,27 @@ final class ParticipantUpdateParams implements BaseModel
      *
      * @var value-of<HoldMethod>|null $HoldMethod
      */
-    #[Api(
+    #[Optional(
         enum: HoldMethod::class,
-        optional: true,
     )]
     public ?string $HoldMethod;
 
     /**
      * The URL to be called using the `HoldMethod` for music that plays when the participant is on hold. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $HoldUrl;
 
     /**
      * Whether the participant should be muted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $Muted;
 
     /**
      * The URL to call for an audio file to play while the participant is waiting for the conference to start.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $WaitUrl;
 
     /**

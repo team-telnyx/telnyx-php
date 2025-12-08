@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports\UsageReportGetOptionsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
@@ -27,7 +27,7 @@ final class Data implements BaseModel
     /**
      * Telnyx Product.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     /**
@@ -35,7 +35,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $product_dimensions
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $product_dimensions;
 
     /**
@@ -43,7 +43,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $product_metrics
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $product_metrics;
 
     /**
@@ -51,7 +51,7 @@ final class Data implements BaseModel
      *
      * @var list<RecordType>|null $record_types
      */
-    #[Api(list: RecordType::class, optional: true)]
+    #[Optional(list: RecordType::class)]
     public ?array $record_types;
 
     public function __construct()

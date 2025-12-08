@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,40 +27,40 @@ final class Data implements BaseModel
     /**
      * Subdomain to route calls when using Telnyx SRS (optional).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $app_subdomain;
 
     /**
      * ISO 8601 formatted date/time of creation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Hostname/IPv4 address of the SIPREC SRS.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $host;
 
     /**
      * Name for the SIPREC connector resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Port for the SIPREC SRS.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date/time of last update.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

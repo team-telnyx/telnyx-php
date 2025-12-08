@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PortingOrders;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
@@ -23,10 +23,10 @@ final class PortingOrderListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PortingOrder>|null $data */
-    #[Api(list: PortingOrder::class, optional: true)]
+    #[Optional(list: PortingOrder::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse\Data;
@@ -19,7 +19,7 @@ final class ActionGenerateJoinClientTokenResponse implements BaseModel
     /** @use SdkModel<ActionGenerateJoinClientTokenResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

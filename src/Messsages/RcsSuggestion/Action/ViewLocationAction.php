@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsSuggestion\Action;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction\LatLong;
@@ -24,16 +24,16 @@ final class ViewLocationAction implements BaseModel
     /**
      * The label of the pin dropped.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $label;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?LatLong $lat_long;
 
     /**
      * query string (Android only).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $query;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\AcquiredCapability;
@@ -26,43 +26,43 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     use SdkModel;
 
     /** @var list<value-of<AcquiredCapability>>|null $acquired_capabilities */
-    #[Api(list: AcquiredCapability::class, optional: true)]
+    #[Optional(list: AcquiredCapability::class)]
     public ?array $acquired_capabilities;
 
     /**
      * Identifies the civic address assigned to the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $civic_address_id;
 
     /**
      * The iso country code that will be displayed to the user when they receive a call from this phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $displayed_country_code;
 
     /**
      * Identifies the location assigned to the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location_id;
 
     /**
      * Phone number ID from the Telnyx API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $number_id;
 
     /**
      * Phone number in E164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $telephone_number;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ticket_id;
 
     public function __construct()

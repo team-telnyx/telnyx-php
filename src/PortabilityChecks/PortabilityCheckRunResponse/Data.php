@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class Data implements BaseModel
     /**
      * Indicates whether this phone number is FastPort eligible.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $fast_portable;
 
     /**
      * If this phone number is not portable, explains why. Empty string if the number is portable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $not_portable_reason;
 
     /**
      * The +E.164 formatted phone number this result is about.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Indicates whether this phone number is portable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $portable;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

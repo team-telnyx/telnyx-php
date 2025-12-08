@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\PortoutListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class PortedOutAt implements BaseModel
     /**
      * Filter by ported_out_at date greater than or equal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gte;
 
     /**
      * Filter by ported_out_at date less than or equal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lte;
 
     public function __construct()

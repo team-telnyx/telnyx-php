@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CountryCoverage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data;
@@ -22,7 +22,7 @@ final class CountryCoverageGetResponse implements BaseModel
     use SdkModel;
 
     /** @var array<string,Data>|null $data */
-    #[Api(map: Data::class, optional: true)]
+    #[Optional(map: Data::class)]
     public ?array $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomCompositions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomCompositions\RoomComposition\Format;
@@ -20,7 +20,7 @@ final class RoomCompositionNewResponse implements BaseModel
     /** @use SdkModel<RoomCompositionNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RoomComposition $data;
 
     public function __construct()

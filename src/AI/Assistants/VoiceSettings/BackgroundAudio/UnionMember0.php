@@ -6,7 +6,7 @@ namespace Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio;
 
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0\Type;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0\Value;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,7 +25,7 @@ final class UnionMember0 implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -33,7 +33,7 @@ final class UnionMember0 implements BaseModel
      *
      * @var value-of<Value> $value
      */
-    #[Api(enum: Value::class)]
+    #[Required(enum: Value::class)]
     public string $value;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrderPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
@@ -37,50 +37,47 @@ final class NumberOrderPhoneNumber implements BaseModel
     /** @use SdkModel<NumberOrderPhoneNumberShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bundle_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $deadline;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_block_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order_request_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /** @var value-of<PhoneNumberType>|null $phone_number_type */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * @var list<SubNumberOrderRegulatoryRequirementWithValue>|null $regulatory_requirements
      */
-    #[Api(
-        list: SubNumberOrderRegulatoryRequirementWithValue::class,
-        optional: true
-    )]
+    #[Optional(list: SubNumberOrderRegulatoryRequirementWithValue::class)]
     public ?array $regulatory_requirements;
 
     /**
      * True if all requirements are met for a phone number, false otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $requirements_met;
 
     /**
@@ -88,7 +85,7 @@ final class NumberOrderPhoneNumber implements BaseModel
      *
      * @var value-of<RequirementsStatus>|null $requirements_status
      */
-    #[Api(enum: RequirementsStatus::class, optional: true)]
+    #[Optional(enum: RequirementsStatus::class)]
     public ?string $requirements_status;
 
     /**
@@ -96,10 +93,10 @@ final class NumberOrderPhoneNumber implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sub_number_order_id;
 
     public function __construct()

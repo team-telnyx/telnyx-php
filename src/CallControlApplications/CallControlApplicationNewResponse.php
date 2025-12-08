@@ -8,7 +8,7 @@ use Telnyx\CallControlApplications\CallControlApplication\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplication\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,7 +22,7 @@ final class CallControlApplicationNewResponse implements BaseModel
     /** @use SdkModel<CallControlApplicationNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallControlApplication $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomParticipants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomParticipant;
@@ -19,7 +19,7 @@ final class RoomParticipantGetResponse implements BaseModel
     /** @use SdkModel<RoomParticipantGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RoomParticipant $data;
 
     public function __construct()

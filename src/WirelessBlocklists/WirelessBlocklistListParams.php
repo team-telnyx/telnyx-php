@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklists;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,31 +31,31 @@ final class WirelessBlocklistListParams implements BaseModel
     /**
      * The name of the Wireless Blocklist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_name_;
 
     /**
      * When the Private Wireless Gateway was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_type_;
 
     /**
      * Values to filter on (inclusive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_values_;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

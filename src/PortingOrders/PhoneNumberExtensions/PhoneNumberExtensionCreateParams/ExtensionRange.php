@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class ExtensionRange implements BaseModel
     /**
      * Specifies the end of the extension range for this porting phone number extension.
      */
-    #[Api]
+    #[Required]
     public int $end_at;
 
     /**
      * Specifies the start of the extension range for this porting phone number extension.
      */
-    #[Api]
+    #[Required]
     public int $start_at;
 
     /**

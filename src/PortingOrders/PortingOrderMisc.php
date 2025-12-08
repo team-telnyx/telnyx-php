@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
@@ -24,7 +24,7 @@ final class PortingOrderMisc implements BaseModel
     /**
      * New billing phone number for the remaining numbers. Used in case the current billing phone number is being ported to Telnyx. This will be set on your account with your current service provider and should be one of the numbers remaining on that account.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $new_billing_phone_number;
 
     /**
@@ -32,7 +32,7 @@ final class PortingOrderMisc implements BaseModel
      *
      * @var value-of<RemainingNumbersAction>|null $remaining_numbers_action
      */
-    #[Api(enum: RemainingNumbersAction::class, nullable: true, optional: true)]
+    #[Optional(enum: RemainingNumbersAction::class, nullable: true)]
     public ?string $remaining_numbers_action;
 
     /**
@@ -40,7 +40,7 @@ final class PortingOrderMisc implements BaseModel
      *
      * @var value-of<PortingOrderType>|null $type
      */
-    #[Api(enum: PortingOrderType::class, optional: true)]
+    #[Optional(enum: PortingOrderType::class)]
     public ?string $type;
 
     public function __construct()

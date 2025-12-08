@@ -6,7 +6,7 @@ namespace Telnyx\AI\Embeddings;
 
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data\Metadata;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class CustomHeader implements BaseModel
     /**
      * The name of the custom header.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The value of the custom header.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**

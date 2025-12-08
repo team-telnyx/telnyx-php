@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnection\ExternalSipConnection;
@@ -38,25 +38,25 @@ final class ExternalConnection implements BaseModel
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Specifies whether the connection can be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * If the credential associated with this service is active.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $credential_active;
 
     /**
@@ -64,19 +64,19 @@ final class ExternalConnection implements BaseModel
      *
      * @var value-of<ExternalSipConnection>|null $external_sip_connection
      */
-    #[Api(enum: ExternalSipConnection::class, optional: true)]
+    #[Optional(enum: ExternalSipConnection::class)]
     public ?string $external_sip_connection;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -84,13 +84,13 @@ final class ExternalConnection implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
@@ -98,25 +98,25 @@ final class ExternalConnection implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     public function __construct()

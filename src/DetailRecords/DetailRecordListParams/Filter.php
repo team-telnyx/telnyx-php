@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter\DateRange;
@@ -27,7 +28,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<RecordType> $record_type
      */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
@@ -35,7 +36,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<DateRange>|null $date_range
      */
-    #[Api(enum: DateRange::class, optional: true)]
+    #[Optional(enum: DateRange::class)]
     public ?string $date_range;
 
     /**

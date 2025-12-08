@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Country implements BaseModel
     /**
      * ISO 3166-1 Alpha-2 Country Code.
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * The name of the country.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

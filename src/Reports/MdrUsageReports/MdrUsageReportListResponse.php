@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\AggregationType;
@@ -22,10 +22,10 @@ final class MdrUsageReportListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<MdrUsageReport>|null $data */
-    #[Api(list: MdrUsageReport::class, optional: true)]
+    #[Optional(list: MdrUsageReport::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMetaReporting $meta;
 
     public function __construct()

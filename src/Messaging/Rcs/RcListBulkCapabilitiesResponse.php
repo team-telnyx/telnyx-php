@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
@@ -20,7 +20,7 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
     use SdkModel;
 
     /** @var list<RcsCapabilities>|null $data */
-    #[Api(list: RcsCapabilities::class, optional: true)]
+    #[Optional(list: RcsCapabilities::class)]
     public ?array $data;
 
     public function __construct()

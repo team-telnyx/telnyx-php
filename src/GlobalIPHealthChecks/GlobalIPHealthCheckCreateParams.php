@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPHealthChecks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,7 +29,7 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     /**
      * Global IP ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $global_ip_id;
 
     /**
@@ -37,13 +37,13 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
      *
      * @var array<string,mixed>|null $health_check_params
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $health_check_params;
 
     /**
      * The Global IP health check type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $health_check_type;
 
     public function __construct()

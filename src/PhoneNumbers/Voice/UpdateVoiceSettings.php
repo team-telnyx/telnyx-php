@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
@@ -34,25 +34,25 @@ final class UpdateVoiceSettings implements BaseModel
     /**
      * The call forwarding settings for a phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallForwarding $call_forwarding;
 
     /**
      * The call recording settings for a phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallRecording $call_recording;
 
     /**
      * Controls whether the caller ID name is enabled for this phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $caller_id_name_enabled;
 
     /**
      * The CNAM listing settings for a phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CnamListing $cnam_listing;
 
     /**
@@ -60,25 +60,25 @@ final class UpdateVoiceSettings implements BaseModel
      *
      * @var value-of<InboundCallScreening>|null $inbound_call_screening
      */
-    #[Api(enum: InboundCallScreening::class, optional: true)]
+    #[Optional(enum: InboundCallScreening::class)]
     public ?string $inbound_call_screening;
 
     /**
      * The media features settings for a phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?MediaFeatures $media_features;
 
     /**
      * Controls whether a tech prefix is enabled for this phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $tech_prefix_enabled;
 
     /**
      * This field allows you to rewrite the destination number of an inbound call before the call is routed to you. The value of this field may be any alphanumeric value, and the value will replace the number originally dialed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $translated_number;
 
     /**
@@ -86,7 +86,7 @@ final class UpdateVoiceSettings implements BaseModel
      *
      * @var value-of<UsagePaymentMethod>|null $usage_payment_method
      */
-    #[Api(enum: UsagePaymentMethod::class, optional: true)]
+    #[Optional(enum: UsagePaymentMethod::class)]
     public ?string $usage_payment_method;
 
     public function __construct()

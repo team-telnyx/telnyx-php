@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\CoverageType;
@@ -30,40 +30,40 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * Indicates if the phone number requires advance requirements.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $advance_requirements;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $count;
 
     /** @var value-of<CoverageType>|null $coverage_type */
-    #[Api(enum: CoverageType::class, optional: true)]
+    #[Optional(enum: CoverageType::class)]
     public ?string $coverage_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $group;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $group_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number_range;
 
     /** @var value-of<NumberType>|null $number_type */
-    #[Api(enum: NumberType::class, optional: true)]
+    #[Optional(enum: NumberType::class)]
     public ?string $number_type;
 
     /** @var value-of<PhoneNumberType>|null $phone_number_type */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

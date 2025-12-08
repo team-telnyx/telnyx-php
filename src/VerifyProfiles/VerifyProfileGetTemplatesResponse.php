@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel
     use SdkModel;
 
     /** @var list<VerifyProfileMessageTemplateResponse> $data */
-    #[Api(list: VerifyProfileMessageTemplateResponse::class)]
+    #[Required(list: VerifyProfileMessageTemplateResponse::class)]
     public array $data;
 
     /**

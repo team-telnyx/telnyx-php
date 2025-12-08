@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Source implements BaseModel
     /**
      * JSON pointer (RFC6901) to the offending entity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pointer;
 
     public function __construct()

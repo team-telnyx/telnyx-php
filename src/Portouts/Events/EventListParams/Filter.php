@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events\EventListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Events\EventListParams\Filter\CreatedAt;
@@ -27,7 +27,7 @@ final class Filter implements BaseModel
     /**
      * Filter by created_at date range using nested operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
@@ -35,13 +35,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<EventType>|null $event_type
      */
-    #[Api(enum: EventType::class, optional: true)]
+    #[Optional(enum: EventType::class)]
     public ?string $event_type;
 
     /**
      * Filter by port-out order ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $portout_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PublicInternetGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class RegionIn implements BaseModel
     /**
      * The region the interface should be deployed to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_code;
 
     public function __construct()

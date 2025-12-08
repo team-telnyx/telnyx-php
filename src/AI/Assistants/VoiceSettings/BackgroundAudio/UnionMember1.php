@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio;
 
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember1\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,13 +22,13 @@ final class UnionMember1 implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * HTTPS URL to an MP3 file.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class SoundModifications implements BaseModel
     /**
      * Adjust the pitch in octaves, values should be between -1 and 1, default 0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $octaves;
 
     /**
      * Set the pitch directly, value should be > 0, default 1 (lower = lower tone).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pitch;
 
     /**
      * Adjust the pitch in semitones, values should be between -14 and 14, default 0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $semitone;
 
     /**
      * The track to which the sound modifications will be applied. Accepted values are `inbound` or `outbound`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $track;
 
     public function __construct()

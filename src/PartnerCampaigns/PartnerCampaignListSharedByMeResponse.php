@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PartnerCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse\Record;
@@ -19,14 +19,14 @@ final class PartnerCampaignListSharedByMeResponse implements BaseModel
     /** @use SdkModel<PartnerCampaignListSharedByMeResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /** @var list<Record>|null $records */
-    #[Api(list: Record::class, optional: true)]
+    #[Optional(list: Record::class)]
     public ?array $records;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $totalRecords;
 
     public function __construct()

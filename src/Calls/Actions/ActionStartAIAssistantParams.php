@@ -7,7 +7,7 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -53,37 +53,37 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * AI Assistant configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Assistant $assistant;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $greeting;
 
     /**
      * Settings for handling user interruptions during assistant speech.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?InterruptionSettings $interruption_settings;
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionConfig $transcription;
 
     /**
@@ -95,13 +95,13 @@ final class ActionStartAIAssistantParams implements BaseModel
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $voice;
 
     /**
      * The settings associated with the voice selected.
      */
-    #[Api(union: VoiceSettings::class, optional: true)]
+    #[Optional(union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     public function __construct()

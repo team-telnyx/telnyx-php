@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderRequirement\FieldType;
@@ -27,25 +27,25 @@ final class PortingOrderRequirement implements BaseModel
      *
      * @var value-of<FieldType>|null $field_type
      */
-    #[Api(enum: FieldType::class, optional: true)]
+    #[Optional(enum: FieldType::class)]
     public ?string $field_type;
 
     /**
      * identifies the document that satisfies this requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_value;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Identifies the requirement type that meets this requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_type_id;
 
     public function __construct()

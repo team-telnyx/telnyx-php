@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InboundChannels;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class InboundChannelUpdateParams implements BaseModel
     /**
      * The new number of concurrent channels for the account.
      */
-    #[Api]
+    #[Required]
     public int $channels;
 
     /**

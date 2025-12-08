@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Campaign;
 
 use Telnyx\Campaign\CampaignGetMnoMetadataResponse\mno_10999;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
     /** @use SdkModel<CampaignGetMnoMetadataResponseShape> */
     use SdkModel;
 
-    #[Api('10999', optional: true)]
+    #[Optional('10999')]
     public ?mno_10999 $_10999;
 
     public function __construct()

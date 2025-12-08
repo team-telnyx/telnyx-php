@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,7 +32,7 @@ final class ClusterComputeParams implements BaseModel
     /**
      * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding).
      */
-    #[Api]
+    #[Required]
     public string $bucket;
 
     /**
@@ -39,25 +40,25 @@ final class ClusterComputeParams implements BaseModel
      *
      * @var list<string>|null $files
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $files;
 
     /**
      * Smallest number of related text chunks to qualify as a cluster. Top-level clusters should be thought of as identifying broad themes in your data.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $min_cluster_size;
 
     /**
      * Smallest number of related text chunks to qualify as a sub-cluster. Sub-clusters should be thought of as identifying more specific topics within a broader theme.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $min_subcluster_size;
 
     /**
      * Prefix to filter whcih files in the buckets are included.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $prefix;
 
     /**

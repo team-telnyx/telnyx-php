@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
@@ -30,49 +30,49 @@ final class CallGetCallsResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Call>|null $calls */
-    #[Api(list: Call::class, optional: true)]
+    #[Optional(list: Call::class)]
     public ?array $calls;
 
     /**
      * The number of the last element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $end;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Calls.json?Page=0&PageSize=1.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $first_page_uri;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Calls.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next_page_uri;
 
     /**
      * Current page number, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * The number of items on the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size;
 
     /**
      * The number of the first element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $start;
 
     /**
      * The URI of the current page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BillingGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class BillingGroupCreateParams implements BaseModel
     /**
      * A name for the billing group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

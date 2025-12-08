@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\SslCertificate;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class SslCertificateCreateParams implements BaseModel
     /**
      * The SSL certificate file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $certificate;
 
     /**
      * The private key file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $private_key;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless\DetailRecordsReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class DetailRecordsReportCreateParams implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating the end time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_time;
 
     /**
      * ISO 8601 formatted date-time indicating the start time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     public function __construct()

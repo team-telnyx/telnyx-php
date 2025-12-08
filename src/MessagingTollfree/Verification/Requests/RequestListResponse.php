@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,13 +25,13 @@ final class RequestListResponse implements BaseModel
      *
      * @var list<VerificationRequestStatus>|null $records
      */
-    #[Api(list: VerificationRequestStatus::class, optional: true)]
+    #[Optional(list: VerificationRequestStatus::class)]
     public ?array $records;
 
     /**
      * The total amount of records for these query parameters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_records;
 
     public function __construct()

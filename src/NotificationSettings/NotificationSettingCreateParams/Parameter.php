@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationSettings\NotificationSettingCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,10 +16,10 @@ final class Parameter implements BaseModel
     /** @use SdkModel<ParameterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $value;
 
     public function __construct()

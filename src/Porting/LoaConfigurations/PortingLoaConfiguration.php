@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
@@ -34,61 +34,61 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * Uniquely identifies the LOA configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The address of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Address $address;
 
     /**
      * The name of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $company_name;
 
     /**
      * The contact information of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Contact $contact;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * The logo to be used in the LOA.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Logo $logo;
 
     /**
      * The name of the LOA configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The organization that owns the LOA configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

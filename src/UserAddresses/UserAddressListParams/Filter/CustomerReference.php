@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UserAddresses\UserAddressListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class CustomerReference implements BaseModel
     /**
      * If present, user addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Filter user addresses via exact customer reference match. Matching is not case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()

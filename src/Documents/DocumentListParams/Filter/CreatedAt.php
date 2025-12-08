@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class CreatedAt implements BaseModel
     /**
      * Filter by created at greater than provided value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gt;
 
     /**
      * Filter by created at less than provided value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lt;
 
     public function __construct()

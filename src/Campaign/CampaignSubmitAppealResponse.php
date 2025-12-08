@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class CampaignSubmitAppealResponse implements BaseModel
     /**
      * Timestamp when the appeal was submitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $appealed_at;
 
     public function __construct()

@@ -8,7 +8,7 @@ use Telnyx\Addresses\Actions\ActionValidateResponse\Data;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Result;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
 use Telnyx\APIError;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,7 +20,7 @@ final class ActionValidateResponse implements BaseModel
     /** @use SdkModel<ActionValidateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

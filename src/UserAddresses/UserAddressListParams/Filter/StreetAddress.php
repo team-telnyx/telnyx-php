@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UserAddresses\UserAddressListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class StreetAddress implements BaseModel
     /**
      * If present, user addresses with <code>street_address</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()

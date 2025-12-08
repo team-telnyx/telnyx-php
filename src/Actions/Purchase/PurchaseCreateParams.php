@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Actions\Purchase;
 
 use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,19 +35,19 @@ final class PurchaseCreateParams implements BaseModel
     /**
      * The amount of eSIMs to be purchased.
      */
-    #[Api]
+    #[Required]
     public int $amount;
 
     /**
      * Type of product to be purchased, specify "whitelabel" to use a custom SPN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_group_id;
 
     /**
@@ -54,7 +55,7 @@ final class PurchaseCreateParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -62,13 +63,13 @@ final class PurchaseCreateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Service Provider Name (SPN) for the Whitelabel eSIM product. It will be displayed as the mobile service name by operating systems of smartphones. This parameter must only contain letters, numbers and whitespaces.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $whitelabel_name;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPAddress;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,13 +26,13 @@ final class AccessIPAddressResponse implements BaseModel
     /** @use SdkModel<AccessIPAddressResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public string $ip_address;
 
-    #[Api]
+    #[Required]
     public string $source;
 
     /**
@@ -39,19 +40,19 @@ final class AccessIPAddressResponse implements BaseModel
      *
      * @var value-of<CloudflareSyncStatus> $status
      */
-    #[Api(enum: CloudflareSyncStatus::class)]
+    #[Required(enum: CloudflareSyncStatus::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public string $user_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**

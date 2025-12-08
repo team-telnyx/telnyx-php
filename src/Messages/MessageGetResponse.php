@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
@@ -28,7 +28,7 @@ final class MessageGetResponse implements BaseModel
     /** @use SdkModel<MessageGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public OutboundMessagePayload|InboundMessagePayload|null $data;
 
     public function __construct()

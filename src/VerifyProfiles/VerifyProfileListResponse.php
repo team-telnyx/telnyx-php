@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\ByPhoneNumber\VerifyMeta;
@@ -26,10 +26,10 @@ final class VerifyProfileListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<VerifyProfile> $data */
-    #[Api(list: VerifyProfile::class)]
+    #[Required(list: VerifyProfile::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public VerifyMeta $meta;
 
     /**

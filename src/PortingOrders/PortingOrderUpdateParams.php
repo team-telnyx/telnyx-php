@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -64,37 +64,37 @@ final class PortingOrderUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ActivationSettings $activation_settings;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_group_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderDocuments $documents;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderEndUser $end_user;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Messaging $messaging;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?PortingOrderMisc $misc;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderPhoneNumberConfiguration $phone_number_configuration;
 
     /**
      * If present, we will read the current values from the specified Requirement Group into the Documents and Requirements for this Porting Order. Note that any future changes in the Requirement Group would have no impact on this Porting Order. We will return an error if a specified Requirement Group conflicts with documents or requirements in the same request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_group_id;
 
     /**
@@ -102,13 +102,13 @@ final class PortingOrderUpdateParams implements BaseModel
      *
      * @var list<Requirement>|null $requirements
      */
-    #[Api(list: Requirement::class, optional: true)]
+    #[Optional(list: Requirement::class)]
     public ?array $requirements;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderUserFeedback $user_feedback;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     public function __construct()

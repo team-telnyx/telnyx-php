@@ -8,7 +8,8 @@ use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader\Name;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -29,7 +30,7 @@ final class Refer implements BaseModel
      *
      * @var list<Target> $targets
      */
-    #[Api(list: Target::class)]
+    #[Required(list: Target::class)]
     public array $targets;
 
     /**
@@ -37,7 +38,7 @@ final class Refer implements BaseModel
      *
      * @var list<CustomHeader>|null $custom_headers
      */
-    #[Api(list: CustomHeader::class, optional: true)]
+    #[Optional(list: CustomHeader::class)]
     public ?array $custom_headers;
 
     /**
@@ -45,7 +46,7 @@ final class Refer implements BaseModel
      *
      * @var list<SipHeader>|null $sip_headers
      */
-    #[Api(list: SipHeader::class, optional: true)]
+    #[Optional(list: SipHeader::class)]
     public ?array $sip_headers;
 
     /**

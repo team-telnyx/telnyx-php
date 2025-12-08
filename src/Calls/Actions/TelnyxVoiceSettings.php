@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\TelnyxVoiceSettings\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,13 +25,13 @@ final class TelnyxVoiceSettings implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * The voice speed to be used for the voice. The voice speed must be between 0.1 and 2.0. Default value is 1.0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $voice_speed;
 
     /**

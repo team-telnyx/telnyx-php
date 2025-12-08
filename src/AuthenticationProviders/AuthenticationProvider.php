@@ -6,7 +6,7 @@ namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings;
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings\IdpCertFingerprintAlgorithm;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,55 +31,55 @@ final class AuthenticationProvider implements BaseModel
     /**
      * Uniquely identifies the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The active status of the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * The name associated with the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The id from the Organization the authentication provider belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The settings associated with the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Settings $settings;
 
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $short_name;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

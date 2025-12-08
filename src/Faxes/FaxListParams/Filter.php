@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes\FaxListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\FaxListParams\Filter\CreatedAt;
@@ -30,25 +30,25 @@ final class Filter implements BaseModel
     /**
      * Date range filtering operations for fax creation timestamp.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
      * Direction filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Direction $direction;
 
     /**
      * From number filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?From $from;
 
     /**
      * To number filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?To $to;
 
     public function __construct()

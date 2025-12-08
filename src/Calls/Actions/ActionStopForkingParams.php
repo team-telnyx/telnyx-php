@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStopForkingParams\StreamType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,13 +34,13 @@ final class ActionStopForkingParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -48,7 +48,7 @@ final class ActionStopForkingParams implements BaseModel
      *
      * @var value-of<StreamType>|null $stream_type
      */
-    #[Api(enum: StreamType::class, optional: true)]
+    #[Optional(enum: StreamType::class)]
     public ?string $stream_type;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\VerificationCodes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,11 +27,11 @@ final class VerificationCodeSendParams implements BaseModel
     use SdkParams;
 
     /** @var list<string>|null $phone_numbers */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_numbers;
 
     /** @var value-of<VerificationMethod>|null $verification_method */
-    #[Api(enum: VerificationMethod::class, optional: true)]
+    #[Optional(enum: VerificationMethod::class)]
     public ?string $verification_method;
 
     public function __construct()

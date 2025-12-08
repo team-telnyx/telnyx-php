@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InexplicitNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data;
@@ -18,7 +18,7 @@ final class InexplicitNumberOrderGetResponse implements BaseModel
     /** @use SdkModel<InexplicitNumberOrderGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberWithMessagingSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingFeatureSet;
@@ -24,7 +24,7 @@ final class Features implements BaseModel
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?MessagingFeatureSet $mms;
 
     /**
@@ -32,7 +32,7 @@ final class Features implements BaseModel
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?MessagingFeatureSet $sms;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
@@ -22,7 +22,7 @@ final class VoiceDeleteResponse implements BaseModel
     /**
      * Response object for CDR detailed report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CdrDetailedReqResponse $data;
 
     public function __construct()

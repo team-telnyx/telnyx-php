@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ShortCodes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ShortCode;
@@ -18,7 +18,7 @@ final class ShortCodeUpdateResponse implements BaseModel
     /** @use SdkModel<ShortCodeUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ShortCode $data;
 
     public function __construct()

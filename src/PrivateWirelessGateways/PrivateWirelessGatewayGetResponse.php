@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class PrivateWirelessGatewayGetResponse implements BaseModel
     /** @use SdkModel<PrivateWirelessGatewayGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PrivateWirelessGateway $data;
 
     public function __construct()

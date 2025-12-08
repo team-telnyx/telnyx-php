@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions\ActionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\ActionListParams\Filter\ActionType;
@@ -30,19 +30,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<ActionType>|null $action_type
      */
-    #[Api(enum: ActionType::class, optional: true)]
+    #[Optional(enum: ActionType::class)]
     public ?string $action_type;
 
     /**
      * Filter by a bulk SIM card action ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bulk_sim_card_action_id;
 
     /**
      * A valid SIM card ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
@@ -50,7 +50,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

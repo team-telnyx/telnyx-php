@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -51,52 +52,52 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     /**
      * A user-supplied name to help with organization.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $billing_group_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundCallRecording $call_recording;
 
     /**
      * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallingWindow $calling_window;
 
     /**
      * Must be no more than your global concurrent call limit. Null means no limit.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $concurrent_call_limit;
 
     /**
      * The maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $daily_spend_limit;
 
     /**
      * Specifies whether to enforce the daily_spend_limit on this outbound voice profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $daily_spend_limit_enabled;
 
     /**
      * Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $max_destination_rate;
 
     /**
@@ -104,11 +105,11 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var value-of<ServicePlan>|null $service_plan
      */
-    #[Api(enum: ServicePlan::class, optional: true)]
+    #[Optional(enum: ServicePlan::class)]
     public ?string $service_plan;
 
     /** @var list<string>|null $tags */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
@@ -116,7 +117,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var value-of<TrafficType>|null $traffic_type
      */
-    #[Api(enum: TrafficType::class, optional: true)]
+    #[Optional(enum: TrafficType::class)]
     public ?string $traffic_type;
 
     /**
@@ -124,7 +125,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var value-of<UsagePaymentMethod>|null $usage_payment_method
      */
-    #[Api(enum: UsagePaymentMethod::class, optional: true)]
+    #[Optional(enum: UsagePaymentMethod::class)]
     public ?string $usage_payment_method;
 
     /**
@@ -132,7 +133,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var list<string>|null $whitelisted_destinations
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $whitelisted_destinations;
 
     /**

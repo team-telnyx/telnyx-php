@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class CidrBlockPatternFilter implements BaseModel
     /**
      * Filter CIDR blocks containing the specified string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Filter CIDR blocks ending with the specified string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $endswith;
 
     /**
      * Filter CIDR blocks starting with the specified string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $startswith;
 
     public function __construct()

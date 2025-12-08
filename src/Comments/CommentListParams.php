@@ -6,7 +6,7 @@ namespace Telnyx\Comments;
 
 use Telnyx\Comments\CommentListParams\Filter;
 use Telnyx\Comments\CommentListParams\Filter\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,7 +32,7 @@ final class CommentListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()

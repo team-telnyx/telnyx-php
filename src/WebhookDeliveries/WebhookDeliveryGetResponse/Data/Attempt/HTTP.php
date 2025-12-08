@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Request;
@@ -25,13 +25,13 @@ final class HTTP implements BaseModel
     /**
      * Request details.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Request $request;
 
     /**
      * Response details, optional.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?Response $response;
 
     public function __construct()

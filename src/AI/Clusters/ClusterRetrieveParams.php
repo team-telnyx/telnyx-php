@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class ClusterRetrieveParams implements BaseModel
     /**
      * Whether or not to include subclusters and their nodes in the response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $show_subclusters;
 
     /**
      * The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $top_n_nodes;
 
     public function __construct()

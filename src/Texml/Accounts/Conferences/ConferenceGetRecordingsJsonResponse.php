@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
@@ -33,53 +33,53 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel
     /**
      * The number of the last element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $end;
 
     /**
      * Relative uri to the first page of the query results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $first_page_uri;
 
     /**
      * Relative uri to the next page of the query results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next_page_uri;
 
     /**
      * Current page number, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * The number of items on the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size;
 
     /**
      * Relative uri to the previous page of the query results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $previous_page_uri;
 
     /** @var list<TexmlGetCallRecordingResponseBody>|null $recordings */
-    #[Api(list: TexmlGetCallRecordingResponseBody::class, optional: true)]
+    #[Optional(list: TexmlGetCallRecordingResponseBody::class)]
     public ?array $recordings;
 
     /**
      * The number of the first element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $start;
 
     /**
      * The URI of the current page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

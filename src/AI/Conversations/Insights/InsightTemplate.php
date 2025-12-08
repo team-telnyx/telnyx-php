@@ -6,7 +6,8 @@ namespace Telnyx\AI\Conversations\Insights;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,17 +27,17 @@ final class InsightTemplate implements BaseModel
     /** @use SdkModel<InsightTemplateShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
-    #[Api]
+    #[Required]
     public string $instructions;
 
     /** @var value-of<InsightType>|null $insight_type */
-    #[Api(enum: InsightType::class, optional: true)]
+    #[Optional(enum: InsightType::class)]
     public ?string $insight_type;
 
     /**
@@ -44,13 +45,13 @@ final class InsightTemplate implements BaseModel
      *
      * @var mixed|string|null $json_schema
      */
-    #[Api(union: JsonSchema::class, optional: true)]
+    #[Optional(union: JsonSchema::class)]
     public mixed $json_schema;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
@@ -20,7 +20,7 @@ final class Document implements BaseModel
     /**
      * Identifies the associated document.
      */
-    #[Api]
+    #[Required]
     public string $document_id;
 
     /**
@@ -28,7 +28,7 @@ final class Document implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Meta1 implements BaseModel
     /**
      * The number of times the callback webhook has been attempted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $attempt;
 
     /**
      * The URL that the callback webhook was delivered to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivered_to;
 
     public function __construct()

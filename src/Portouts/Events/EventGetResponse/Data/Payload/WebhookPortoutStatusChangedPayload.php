@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events\EventGetResponse\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Events\EventGetResponse\Data\Payload\WebhookPortoutStatusChangedPayload\Status;
@@ -32,19 +32,19 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     /**
      * Identifies the port out that was moved.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The PIN that was attempted to be used to authorize the port out.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $attempted_pin;
 
     /**
      * Carrier the number will be ported out to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier_name;
 
     /**
@@ -52,19 +52,19 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      *
      * @var list<string>|null $phone_numbers
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_numbers;
 
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $rejection_reason;
 
     /**
      * The new carrier SPID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid;
 
     /**
@@ -72,19 +72,19 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The name of the port-out's end user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subscriber_name;
 
     /**
      * Identifies the user that the port-out order belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Brand\ExternalVetting;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class ExternalVettingOrderParams implements BaseModel
     /**
      * External vetting provider ID for the brand.
      */
-    #[Api]
+    #[Required]
     public string $evpId;
 
     /**
      * Identifies the vetting classification.
      */
-    #[Api]
+    #[Required]
     public string $vettingClass;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIP;
@@ -27,22 +27,22 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?GlobalIP $global_ip;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?GlobalIPAssignment $global_ip_assignment;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Received $received;
 
     /**
      * The timestamp of the metric.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Transmitted $transmitted;
 
     public function __construct()

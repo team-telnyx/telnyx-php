@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,19 +34,19 @@ final class VoiceCreateParams implements BaseModel
     /**
      * End time in ISO format.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_time;
 
     /**
      * Start time in ISO format.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_time;
 
     /**
      * Aggregation type: All = 0, By Connections = 1, By Tags = 2, By Billing Group = 3.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $aggregation_type;
 
     /**
@@ -53,7 +54,7 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<int>|null $connections
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
     /**
@@ -61,19 +62,19 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<string>|null $managed_accounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managed_accounts;
 
     /**
      * Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $product_breakdown;
 
     /**
      * Whether to select all managed accounts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $select_all_managed_accounts;
 
     /**

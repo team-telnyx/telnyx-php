@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\IPConnections;
 
 use Telnyx\ConnectionsPaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -26,10 +26,10 @@ final class IPConnectionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<IPConnection>|null $data */
-    #[Api(list: IPConnection::class, optional: true)]
+    #[Optional(list: IPConnection::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionsPaginationMeta $meta;
 
     public function __construct()

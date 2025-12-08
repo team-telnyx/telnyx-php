@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Brand\BrandGetFeedbackResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class Category implements BaseModel
     /**
      * One of `TAX_ID`, `STOCK_SYMBOL`, `GOVERNMENT_ENTITY`, `NONPROFIT`, and `OTHERS`.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Long-form description of the feedback with additional information.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * Human-readable version of the `id` field.
      */
-    #[Api]
+    #[Required]
     public string $displayName;
 
     /**
@@ -41,7 +41,7 @@ final class Category implements BaseModel
      *
      * @var list<string> $fields
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $fields;
 
     /**

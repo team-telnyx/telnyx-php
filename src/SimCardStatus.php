@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardStatus\Value;
@@ -22,7 +22,7 @@ final class SimCardStatus implements BaseModel
     /**
      * It describes why the SIM card is in the current status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reason;
 
     /**
@@ -41,7 +41,7 @@ final class SimCardStatus implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()

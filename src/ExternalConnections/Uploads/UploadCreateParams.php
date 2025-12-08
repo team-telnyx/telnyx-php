@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,23 +32,23 @@ final class UploadCreateParams implements BaseModel
     use SdkParams;
 
     /** @var list<string> $number_ids */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $number_ids;
 
     /** @var list<value-of<AdditionalUsage>>|null $additional_usages */
-    #[Api(list: AdditionalUsage::class, optional: true)]
+    #[Optional(list: AdditionalUsage::class)]
     public ?array $additional_usages;
 
     /**
      * Identifies the civic address to assign all phone numbers to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $civic_address_id;
 
     /**
      * Identifies the location to assign all phone numbers to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location_id;
 
     /**
@@ -55,7 +56,7 @@ final class UploadCreateParams implements BaseModel
      *
      * @var value-of<Usage>|null $usage
      */
-    #[Api(enum: Usage::class, optional: true)]
+    #[Optional(enum: Usage::class)]
     public ?string $usage;
 
     /**

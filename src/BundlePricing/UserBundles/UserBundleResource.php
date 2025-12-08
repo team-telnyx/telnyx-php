@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,31 +26,31 @@ final class UserBundleResource implements BaseModel
     /**
      * Resource's ID.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Date the resource was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * The resource itself (usually a phone number).
      */
-    #[Api]
+    #[Required]
     public string $resource;
 
     /**
      * The type of the resource (usually 'number').
      */
-    #[Api]
+    #[Required]
     public string $resource_type;
 
     /**
      * Date the resource was last updated.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $updated_at;
 
     /**

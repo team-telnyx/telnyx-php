@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,13 +25,13 @@ final class PhoneNumberUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Identifies the location to assign the phone number to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location_id;
 
     /**

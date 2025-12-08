@@ -6,7 +6,7 @@ namespace Telnyx\BillingGroups;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\BillingGroups\BillingGroup\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class BillingGroupListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<BillingGroup>|null $data */
-    #[Api(list: BillingGroup::class, optional: true)]
+    #[Optional(list: BillingGroup::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

@@ -10,7 +10,7 @@ use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Method;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameters;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParameters;
 use Telnyx\AI\Assistants\WebhookTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,10 +25,10 @@ final class WebhookTool implements BaseModel
     use SdkModel;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
-    #[Api]
+    #[Required]
     public InferenceEmbeddingWebhookToolParams $webhook;
 
     /**

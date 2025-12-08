@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AuditEvents\AuditEventListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,13 +24,13 @@ final class Filter implements BaseModel
     /**
      * Filter for audit events created after a specific date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_after;
 
     /**
      * Filter for audit events created before a specific date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_before;
 
     public function __construct()

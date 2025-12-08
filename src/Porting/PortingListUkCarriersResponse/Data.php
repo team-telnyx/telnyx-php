@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\PortingListUkCarriersResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,7 +27,7 @@ final class Data implements BaseModel
     /**
      * Identifies the UK carrier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -35,37 +35,37 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $alternative_cupids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $alternative_cupids;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * The CUPID of the carrier. This is a 3 digit number code that identifies the carrier in the UK.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cupid;
 
     /**
      * The name of the carrier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

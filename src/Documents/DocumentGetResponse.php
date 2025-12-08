@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocServiceDocument\AvScanStatus;
@@ -19,7 +19,7 @@ final class DocumentGetResponse implements BaseModel
     /** @use SdkModel<DocumentGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DocServiceDocument $data;
 
     public function __construct()

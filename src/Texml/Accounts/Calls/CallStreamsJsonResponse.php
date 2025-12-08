@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
@@ -25,25 +25,25 @@ final class CallStreamsJsonResponse implements BaseModel
     /** @use SdkModel<CallStreamsJsonResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_updated;
 
     /**
      * The user specified name of Stream.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifier of a resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -51,13 +51,13 @@ final class CallStreamsJsonResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The relative URI for this streaming resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,25 +30,25 @@ final class FqdnUpdateParams implements BaseModel
     /**
      * ID of the FQDN connection to which this IP should be attached.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $dns_record_type;
 
     /**
      * FQDN represented by this resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Port to use when connecting to this FQDN.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $port;
 
     public function __construct()

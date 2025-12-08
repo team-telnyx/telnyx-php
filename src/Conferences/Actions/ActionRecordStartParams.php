@@ -7,7 +7,8 @@ namespace Telnyx\Conferences\Actions;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Region;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -41,25 +42,25 @@ final class ActionRecordStartParams implements BaseModel
      *
      * @var value-of<Format> $format
      */
-    #[Api(enum: Format::class)]
+    #[Required(enum: Format::class)]
     public string $format;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `conference_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $custom_file_name;
 
     /**
      * If enabled, a beep sound will be played at the start of a recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $play_beep;
 
     /**
@@ -67,7 +68,7 @@ final class ActionRecordStartParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
@@ -75,7 +76,7 @@ final class ActionRecordStartParams implements BaseModel
      *
      * @var value-of<Trim>|null $trim
      */
-    #[Api(enum: Trim::class, optional: true)]
+    #[Optional(enum: Trim::class)]
     public ?string $trim;
 
     /**

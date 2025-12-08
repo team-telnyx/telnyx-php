@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventGetResponse\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,19 +25,19 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     /**
      * Identifies the porting order that was deleted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Identifies the customer reference associated with the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * ISO 8601 formatted date indicating when the porting order was deleted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $deleted_at;
 
     public function __construct()

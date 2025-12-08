@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrder\Status;
@@ -26,27 +26,27 @@ final class MessagingHostedNumberOrder implements BaseModel
     /**
      * Resource unique identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Automatically associate the number with this messaging profile ID when the order is complete.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $messaging_profile_id;
 
     /** @var list<HostedNumber>|null $phone_numbers */
-    #[Api(list: HostedNumber::class, optional: true)]
+    #[Optional(list: HostedNumber::class)]
     public ?array $phone_numbers;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

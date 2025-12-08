@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class NotificationProfileUpdateResponse implements BaseModel
     /**
      * A Collection of Notification Channels.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?NotificationProfile $data;
 
     public function __construct()

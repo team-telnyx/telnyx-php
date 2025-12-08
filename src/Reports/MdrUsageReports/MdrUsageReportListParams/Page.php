@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Page implements BaseModel
     /**
      * Page number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number;
 
     /**
      * Size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     public function __construct()

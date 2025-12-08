@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnects;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -42,7 +43,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     /**
      * The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
      */
-    #[Api]
+    #[Required]
     public float $bgp_asn;
 
     /**
@@ -50,85 +51,85 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      *
      * @var value-of<CloudProvider> $cloud_provider
      */
-    #[Api(enum: CloudProvider::class)]
+    #[Required(enum: CloudProvider::class)]
     public string $cloud_provider;
 
     /**
      * The region where your Virtual Private Cloud hosts are located.<br /><br />The available regions can be found using the /virtual_cross_connect_regions endpoint.
      */
-    #[Api]
+    #[Required]
     public string $cloud_provider_region;
 
     /**
      * The id of the network associated with the interface.
      */
-    #[Api]
+    #[Required]
     public string $network_id;
 
     /**
      * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
      */
-    #[Api]
+    #[Required]
     public string $primary_cloud_account_id;
 
     /**
      * The region the interface should be deployed to.
      */
-    #[Api]
+    #[Required]
     public string $region_code;
 
     /**
      * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $bandwidth_mbps;
 
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The authentication key for BGP peer configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $primary_bgp_key;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $primary_cloud_ip;
 
     /**
      * The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $primary_telnyx_ip;
 
     /**
      * The authentication key for BGP peer configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $secondary_bgp_key;
 
     /**
      * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.<br /><br />This attribute is only necessary for GCE.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $secondary_cloud_account_id;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $secondary_cloud_ip;
 
     /**
      * The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $secondary_telnyx_ip;
 
     /**

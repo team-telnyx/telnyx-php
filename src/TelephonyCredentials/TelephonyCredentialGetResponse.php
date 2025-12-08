@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TelephonyCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class TelephonyCredentialGetResponse implements BaseModel
     /** @use SdkModel<TelephonyCredentialGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TelephonyCredential $data;
 
     public function __construct()

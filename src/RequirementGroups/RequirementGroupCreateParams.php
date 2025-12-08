@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,24 +35,24 @@ final class RequirementGroupCreateParams implements BaseModel
     use SdkParams;
 
     /** @var value-of<Action> $action */
-    #[Api(enum: Action::class)]
+    #[Required(enum: Action::class)]
     public string $action;
 
     /**
      * ISO alpha 2 country code.
      */
-    #[Api]
+    #[Required]
     public string $country_code;
 
     /** @var value-of<PhoneNumberType> $phone_number_type */
-    #[Api(enum: PhoneNumberType::class)]
+    #[Required(enum: PhoneNumberType::class)]
     public string $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    #[Optional(list: RegulatoryRequirement::class)]
     public ?array $regulatory_requirements;
 
     /**

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx;
 
 use Telnyx\APIError\Source;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,20 +24,20 @@ final class APIError implements BaseModel
     /** @use SdkModel<APIErrorShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $code;
 
-    #[Api]
+    #[Required]
     public string $title;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detail;
 
     /** @var array<string,mixed>|null $meta */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $meta;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Source $source;
 
     /**

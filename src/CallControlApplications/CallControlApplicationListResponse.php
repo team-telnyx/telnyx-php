@@ -9,7 +9,7 @@ use Telnyx\CallControlApplications\CallControlApplication\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplication\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,10 +24,10 @@ final class CallControlApplicationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<CallControlApplication>|null $data */
-    #[Api(list: CallControlApplication::class, optional: true)]
+    #[Optional(list: CallControlApplication::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

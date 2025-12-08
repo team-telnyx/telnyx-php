@@ -6,7 +6,7 @@ namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result\Service;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,13 +28,13 @@ final class Data implements BaseModel
     /**
      * Currency code.
      */
-    #[Api]
+    #[Required]
     public string $currency;
 
     /**
      * End date of the breakdown period.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_date;
 
     /**
@@ -42,25 +42,25 @@ final class Data implements BaseModel
      *
      * @var list<Result> $results
      */
-    #[Api(list: Result::class)]
+    #[Required(list: Result::class)]
     public array $results;
 
     /**
      * Start date of the breakdown period.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_date;
 
     /**
      * User email address.
      */
-    #[Api]
+    #[Required]
     public string $user_email;
 
     /**
      * User identifier.
      */
-    #[Api]
+    #[Required]
     public string $user_id;
 
     /**

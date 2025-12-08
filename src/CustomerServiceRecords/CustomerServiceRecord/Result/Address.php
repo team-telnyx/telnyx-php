@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +27,31 @@ final class Address implements BaseModel
     /**
      * The state of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * The full address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $full_address;
 
     /**
      * The city of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * The zip code of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postal_code;
 
     /**
      * The street address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_address;
 
     public function __construct()

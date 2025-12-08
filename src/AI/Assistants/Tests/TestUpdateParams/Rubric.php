@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\TestUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Rubric implements BaseModel
     /**
      * Specific guidance on how to assess the assistant’s performance for this rubric item.
      */
-    #[Api]
+    #[Required]
     public string $criteria;
 
     /**
      * Label for the evaluation criterion, e.g., Empathy, Accuracy, Clarity.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

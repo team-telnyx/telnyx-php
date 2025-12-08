@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class ConnectionName implements BaseModel
     /**
      * Filter contains connection name. Requires at least three characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class PhoneNumber implements BaseModel
     /**
      * Filters records to those with a specified number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     /**
@@ -27,7 +27,7 @@ final class PhoneNumber implements BaseModel
      *
      * @var list<string>|null $in
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $in;
 
     public function __construct()

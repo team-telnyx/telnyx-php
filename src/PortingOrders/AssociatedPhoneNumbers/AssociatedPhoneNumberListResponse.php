@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Action;
@@ -23,10 +23,10 @@ final class AssociatedPhoneNumberListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PortingAssociatedPhoneNumber>|null $data */
-    #[Api(list: PortingAssociatedPhoneNumber::class, optional: true)]
+    #[Optional(list: PortingAssociatedPhoneNumber::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

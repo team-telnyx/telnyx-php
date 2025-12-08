@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class UserBundleDeactivateResponse implements BaseModel
     /** @use SdkModel<UserBundleDeactivateResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public UserBundle $data;
 
     /**

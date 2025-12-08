@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\RetrievalTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,11 +19,11 @@ final class RetrievalTool implements BaseModel
     /** @use SdkModel<RetrievalToolShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public InferenceEmbeddingBucketIDs $retrieval;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

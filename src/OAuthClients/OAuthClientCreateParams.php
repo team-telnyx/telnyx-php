@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -39,7 +40,7 @@ final class OAuthClientCreateParams implements BaseModel
      *
      * @var list<value-of<AllowedGrantType>> $allowed_grant_types
      */
-    #[Api(list: AllowedGrantType::class)]
+    #[Required(list: AllowedGrantType::class)]
     public array $allowed_grant_types;
 
     /**
@@ -47,7 +48,7 @@ final class OAuthClientCreateParams implements BaseModel
      *
      * @var list<string> $allowed_scopes
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $allowed_scopes;
 
     /**
@@ -55,25 +56,25 @@ final class OAuthClientCreateParams implements BaseModel
      *
      * @var value-of<ClientType> $client_type
      */
-    #[Api(enum: ClientType::class)]
+    #[Required(enum: ClientType::class)]
     public string $client_type;
 
     /**
      * The name of the OAuth client.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * URL of the client logo.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $logo_uri;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $policy_uri;
 
     /**
@@ -81,19 +82,19 @@ final class OAuthClientCreateParams implements BaseModel
      *
      * @var list<string>|null $redirect_uris
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $redirect_uris;
 
     /**
      * Whether PKCE (Proof Key for Code Exchange) is required for this client.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $require_pkce;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tos_uri;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\MesssageRcsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\MesssageRcsResponse\Data\From;
@@ -36,38 +36,38 @@ final class Data implements BaseModel
     /**
      * message ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RcsAgentMessage $body;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $direction;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $encoding;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?From $from;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $received_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var list<To>|null $to */
-    #[Api(list: To::class, optional: true)]
+    #[Optional(list: To::class)]
     public ?array $to;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()

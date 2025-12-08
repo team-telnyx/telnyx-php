@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPAddress;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,10 +19,10 @@ final class AccessIPAddressListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<AccessIPAddressResponse> $data */
-    #[Api(list: AccessIPAddressResponse::class)]
+    #[Required(list: AccessIPAddressResponse::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public PaginationMetaCloudflareIPListSync $meta;
 
     /**

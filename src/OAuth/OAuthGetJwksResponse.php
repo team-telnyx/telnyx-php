@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthGetJwksResponse\Key;
@@ -18,7 +18,7 @@ final class OAuthGetJwksResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Key>|null $keys */
-    #[Api(list: Key::class, optional: true)]
+    #[Optional(list: Key::class)]
     public ?array $keys;
 
     public function __construct()

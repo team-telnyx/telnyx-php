@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,13 +25,13 @@ final class CallUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $queue_name;
 
     /**
      * Whether the call should remain in queue after hangup.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $keep_after_hangup;
 
     /**

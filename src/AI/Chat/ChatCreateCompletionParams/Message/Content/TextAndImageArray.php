@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,13 +21,13 @@ final class TextAndImageArray implements BaseModel
     use SdkModel;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $image_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /**

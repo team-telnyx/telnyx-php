@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Migrations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,25 +31,25 @@ final class MigrationCreateParams implements BaseModel
     /**
      * ID of the Migration Source from which to migrate data.
      */
-    #[Api]
+    #[Required]
     public string $source_id;
 
     /**
      * Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      */
-    #[Api]
+    #[Required]
     public string $target_bucket_name;
 
     /**
      * Telnyx Cloud Storage region to migrate the data to.
      */
-    #[Api]
+    #[Required]
     public string $target_region;
 
     /**
      * If true, will continue to poll the source bucket to ensure new data is continually migrated over.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $refresh;
 
     /**

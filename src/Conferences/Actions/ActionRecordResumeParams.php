@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionRecordResumeParams\Region;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,13 +28,13 @@ final class ActionRecordResumeParams implements BaseModel
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * Use this field to resume specific recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_id;
 
     /**
@@ -42,7 +42,7 @@ final class ActionRecordResumeParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     public function __construct()

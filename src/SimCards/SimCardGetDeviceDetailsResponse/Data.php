@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,34 +26,34 @@ final class Data implements BaseModel
     /**
      * Brand of the device where the SIM card is being used in.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $brand_name;
 
     /**
      * Type of the device where the SIM card is being used in.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $device_type;
 
     /**
      * IMEI of the device where the SIM card is being used in.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $imei;
 
     /**
      * Brand of the device where the SIM card is being used in.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model_name;
 
     /**
      * Operating system of the device where the SIM card is being used in.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $operating_system;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

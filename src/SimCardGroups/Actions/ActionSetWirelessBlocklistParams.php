@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
     /**
      * The identification of the related Wireless Blocklist resource.
      */
-    #[Api]
+    #[Required]
     public string $wireless_blocklist_id;
 
     /**

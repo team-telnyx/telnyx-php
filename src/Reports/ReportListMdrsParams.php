@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -38,19 +38,19 @@ final class ReportListMdrsParams implements BaseModel
     /**
      * Message uuid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Destination number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cld;
 
     /**
      * Origination number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cli;
 
     /**
@@ -58,13 +58,13 @@ final class ReportListMdrsParams implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * Pagination end date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_date;
 
     /**
@@ -72,19 +72,19 @@ final class ReportListMdrsParams implements BaseModel
      *
      * @var value-of<MessageType>|null $message_type
      */
-    #[Api(enum: MessageType::class, optional: true)]
+    #[Optional(enum: MessageType::class)]
     public ?string $message_type;
 
     /**
      * Name of the profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profile;
 
     /**
      * Pagination start date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_date;
 
     /**
@@ -92,7 +92,7 @@ final class ReportListMdrsParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

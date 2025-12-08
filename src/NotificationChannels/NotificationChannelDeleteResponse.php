@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationChannels;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
@@ -22,7 +22,7 @@ final class NotificationChannelDeleteResponse implements BaseModel
     /**
      * A Notification Channel.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?NotificationChannel $data;
 
     public function __construct()

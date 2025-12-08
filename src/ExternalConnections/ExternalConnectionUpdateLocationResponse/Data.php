@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,13 +20,13 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $accepted_address_suggestions;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $static_emergency_address_id;
 
     public function __construct()

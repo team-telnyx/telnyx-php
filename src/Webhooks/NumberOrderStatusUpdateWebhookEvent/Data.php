@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
@@ -28,28 +28,28 @@ final class Data implements BaseModel
     /**
      * Unique identifier for the event.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The type of event being sent.
      */
-    #[Api]
+    #[Required]
     public string $event_type;
 
     /**
      * ISO 8601 timestamp of when the event occurred.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $occurred_at;
 
-    #[Api]
+    #[Required]
     public NumberOrderWithPhoneNumbers $payload;
 
     /**
      * Type of record.
      */
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**

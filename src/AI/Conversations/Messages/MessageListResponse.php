@@ -8,7 +8,7 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\Role;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class MessageListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

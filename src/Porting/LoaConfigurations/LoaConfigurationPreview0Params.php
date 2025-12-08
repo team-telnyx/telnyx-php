@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -41,31 +41,31 @@ final class LoaConfigurationPreview0Params implements BaseModel
     /**
      * The address of the company.
      */
-    #[Api]
+    #[Required]
     public Address $address;
 
     /**
      * The name of the company.
      */
-    #[Api]
+    #[Required]
     public string $company_name;
 
     /**
      * The contact information of the company.
      */
-    #[Api]
+    #[Required]
     public Contact $contact;
 
     /**
      * The logo of the LOA configuration.
      */
-    #[Api]
+    #[Required]
     public Logo $logo;
 
     /**
      * The name of the LOA configuration.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

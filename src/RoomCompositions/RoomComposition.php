@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomCompositions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomCompositions\RoomComposition\Format;
@@ -41,37 +41,37 @@ final class RoomComposition implements BaseModel
     /**
      * A unique identifier for the room composition.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 timestamp when the room composition has completed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $completed_at;
 
     /**
      * ISO 8601 timestamp when the room composition was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Url to download the composition.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $download_url;
 
     /**
      * Shows the room composition duration in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration_secs;
 
     /**
      * ISO 8601 timestamp when the room composition has ended.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $ended_at;
 
     /**
@@ -79,34 +79,34 @@ final class RoomComposition implements BaseModel
      *
      * @var value-of<Format>|null $format
      */
-    #[Api(enum: Format::class, optional: true)]
+    #[Optional(enum: Format::class)]
     public ?string $format;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Identify the room associated with the room composition.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $room_id;
 
     /**
      * Identify the room session associated with the room composition.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $session_id;
 
     /**
      * Shows the room composition size in MB.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $size_mb;
 
     /**
      * ISO 8601 timestamp when the room composition has stated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $started_at;
 
     /**
@@ -114,19 +114,19 @@ final class RoomComposition implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 timestamp when the room composition was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * Identify the user associated with the room composition.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**
@@ -134,25 +134,25 @@ final class RoomComposition implements BaseModel
      *
      * @var array<string,VideoRegion>|null $video_layout
      */
-    #[Api(map: VideoRegion::class, optional: true)]
+    #[Optional(map: VideoRegion::class)]
     public ?array $video_layout;
 
     /**
      * The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\MigrationSources;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
@@ -22,10 +22,10 @@ final class MigrationSourceListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<MigrationSourceParams>|null $data */
-    #[Api(list: MigrationSourceParams::class, optional: true)]
+    #[Optional(list: MigrationSourceParams::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMetaSimple $meta;
 
     public function __construct()

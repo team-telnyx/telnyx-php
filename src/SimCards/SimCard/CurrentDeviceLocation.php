@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCard;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,16 +23,16 @@ final class CurrentDeviceLocation implements BaseModel
     /** @use SdkModel<CurrentDeviceLocationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $accuracy;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $accuracy_unit;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $latitude;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $longitude;
 
     public function __construct()

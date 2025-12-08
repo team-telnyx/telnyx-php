@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Brand;
 
 use Telnyx\Brand\BrandGetFeedbackResponse\Category;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,7 +22,7 @@ final class BrandGetFeedbackResponse implements BaseModel
     /**
      * ID of the brand being queried about.
      */
-    #[Api]
+    #[Required]
     public string $brandId;
 
     /**
@@ -30,7 +30,7 @@ final class BrandGetFeedbackResponse implements BaseModel
      *
      * @var list<Category> $category
      */
-    #[Api(list: Category::class)]
+    #[Required(list: Category::class)]
     public array $category;
 
     /**

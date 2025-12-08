@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class UploadRefreshStatusResponse implements BaseModel
     /**
      * Describes wether or not the operation was successful.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $success;
 
     public function __construct()

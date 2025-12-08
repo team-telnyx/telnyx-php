@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls\Streams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse\Status;
@@ -24,19 +24,19 @@ final class StreamStreamingSidJsonResponse implements BaseModel
     /** @use SdkModel<StreamStreamingSidJsonResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_updated;
 
     /**
      * Identifier of a resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -44,13 +44,13 @@ final class StreamStreamingSidJsonResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The relative URI for this streaming resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

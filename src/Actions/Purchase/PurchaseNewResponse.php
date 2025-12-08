@@ -6,7 +6,7 @@ namespace Telnyx\Actions\Purchase;
 
 use Telnyx\Actions\Purchase\PurchaseNewResponse\Error;
 use Telnyx\Actions\Purchase\PurchaseNewResponse\Error\Source;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardStatus;
@@ -31,11 +31,11 @@ final class PurchaseNewResponse implements BaseModel
      *
      * @var list<SimpleSimCard>|null $data
      */
-    #[Api(list: SimpleSimCard::class, optional: true)]
+    #[Optional(list: SimpleSimCard::class)]
     public ?array $data;
 
     /** @var list<Error>|null $errors */
-    #[Api(list: Error::class, optional: true)]
+    #[Optional(list: Error::class)]
     public ?array $errors;
 
     public function __construct()

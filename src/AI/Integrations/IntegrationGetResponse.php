@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Integrations;
 
 use Telnyx\AI\Integrations\IntegrationGetResponse\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,27 +25,27 @@ final class IntegrationGetResponse implements BaseModel
     /** @use SdkModel<IntegrationGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /** @var list<string> $available_tools */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $available_tools;
 
-    #[Api]
+    #[Required]
     public string $description;
 
-    #[Api]
+    #[Required]
     public string $display_name;
 
-    #[Api]
+    #[Required]
     public string $logo_url;
 
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<Status> $status */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**

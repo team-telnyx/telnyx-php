@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found;
@@ -26,7 +26,7 @@ final class Data implements BaseModel
      *
      * @var list<Found>|null $found
      */
-    #[Api(list: Found::class, optional: true)]
+    #[Optional(list: Found::class)]
     public ?array $found;
 
     /**
@@ -34,13 +34,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $not_found
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $not_found;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingNumbersBulkUpdates;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      * * Set this field to `""` to unassign each number from their respective messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
      */
-    #[Api]
+    #[Required]
     public string $messaging_profile_id;
 
     /**
@@ -38,7 +38,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      *
      * @var list<string> $numbers
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $numbers;
 
     /**

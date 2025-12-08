@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberBlockOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
@@ -19,7 +19,7 @@ final class NumberBlockOrderNewResponse implements BaseModel
     /** @use SdkModel<NumberBlockOrderNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?NumberBlockOrder $data;
 
     public function __construct()

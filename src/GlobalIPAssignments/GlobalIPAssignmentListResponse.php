@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\GlobalIPAssignments;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
@@ -21,10 +21,10 @@ final class GlobalIPAssignmentListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<GlobalIPAssignment>|null $data */
-    #[Api(list: GlobalIPAssignment::class, optional: true)]
+    #[Optional(list: GlobalIPAssignment::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

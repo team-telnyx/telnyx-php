@@ -6,7 +6,7 @@ namespace Telnyx\ChargesBreakdown;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data;
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class ChargesBreakdownGetResponse implements BaseModel
     /** @use SdkModel<ChargesBreakdownGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

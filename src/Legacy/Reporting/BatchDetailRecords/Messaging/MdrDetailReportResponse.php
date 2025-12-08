@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
@@ -41,25 +41,25 @@ final class MdrDetailReportResponse implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /** @var list<int>|null $connections */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /** @var list<value-of<Direction>>|null $directions */
-    #[Api(list: Direction::class, optional: true)]
+    #[Optional(list: Direction::class)]
     public ?array $directions;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_date;
 
     /** @var list<Filter>|null $filters */
-    #[Api(list: Filter::class, optional: true)]
+    #[Optional(list: Filter::class)]
     public ?array $filters;
 
     /**
@@ -67,30 +67,30 @@ final class MdrDetailReportResponse implements BaseModel
      *
      * @var list<string>|null $profiles
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $profiles;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var list<value-of<RecordType>>|null $record_types */
-    #[Api(list: RecordType::class, optional: true)]
+    #[Optional(list: RecordType::class)]
     public ?array $record_types;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_date;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

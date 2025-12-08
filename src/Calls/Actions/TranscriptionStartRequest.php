@@ -16,7 +16,7 @@ use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Goo
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google\SpeechContext;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx\TranscriptionModel;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -37,13 +37,13 @@ final class TranscriptionStartRequest implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -51,16 +51,16 @@ final class TranscriptionStartRequest implements BaseModel
      *
      * @var value-of<TranscriptionEngine>|null $transcription_engine
      */
-    #[Api(enum: TranscriptionEngine::class, optional: true)]
+    #[Optional(enum: TranscriptionEngine::class)]
     public ?string $transcription_engine;
 
-    #[Api(union: TranscriptionEngineConfig::class, optional: true)]
+    #[Optional(union: TranscriptionEngineConfig::class)]
     public Google|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config;
 
     /**
      * Indicates which leg of the call will be transcribed. Use `inbound` for the leg that requested the transcription, `outbound` for the other leg, and `both` for both legs of the call. Will default to `inbound`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transcription_tracks;
 
     public function __construct()

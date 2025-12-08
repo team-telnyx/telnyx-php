@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class ActionAcceptSuggestionsParams implements BaseModel
     /**
      * The ID of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     public function __construct()

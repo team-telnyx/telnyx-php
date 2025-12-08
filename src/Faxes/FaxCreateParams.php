@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -50,49 +51,49 @@ final class FaxCreateParams implements BaseModel
     /**
      * The connection ID to send the fax with.
      */
-    #[Api]
+    #[Required]
     public string $connection_id;
 
     /**
      * The phone number, in E.164 format, the fax will be sent from.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * The phone number, in E.164 format, the fax will be sent to or SIP URI.
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from_display_name;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
      * The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_url;
 
     /**
      * The flag to enable monochrome, true black and white fax results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $monochrome;
 
     /**
@@ -100,7 +101,7 @@ final class FaxCreateParams implements BaseModel
      *
      * @var value-of<PreviewFormat>|null $preview_format
      */
-    #[Api(enum: PreviewFormat::class, optional: true)]
+    #[Optional(enum: PreviewFormat::class)]
     public ?string $preview_format;
 
     /**
@@ -108,31 +109,31 @@ final class FaxCreateParams implements BaseModel
      *
      * @var value-of<Quality>|null $quality
      */
-    #[Api(enum: Quality::class, optional: true)]
+    #[Optional(enum: Quality::class)]
     public ?string $quality;
 
     /**
      * Should fax media be stored on temporary URL. It does not support media_name, they can't be submitted together.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $store_media;
 
     /**
      * Should fax preview be stored on temporary URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $store_preview;
 
     /**
      * The flag to disable the T.38 protocol.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $t38_enabled;
 
     /**
      * Use this field to override the URL to which Telnyx will send subsequent webhooks for this fax.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**

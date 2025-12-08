@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\FqdnConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -22,7 +22,7 @@ final class FqdnConnectionUpdateResponse implements BaseModel
     /** @use SdkModel<FqdnConnectionUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?FqdnConnection $data;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,7 +35,7 @@ final class MessageSendGroupMmsParams implements BaseModel
     /**
      * Phone number, in +E.164 format, used to send the message.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
@@ -42,7 +43,7 @@ final class MessageSendGroupMmsParams implements BaseModel
      *
      * @var list<string> $to
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $to;
 
     /**
@@ -50,37 +51,37 @@ final class MessageSendGroupMmsParams implements BaseModel
      *
      * @var list<string>|null $media_urls
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $media_urls;
 
     /**
      * Subject of multimedia message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subject;
 
     /**
      * Message body (i.e., content) as a non-empty string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /**
      * If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $use_profile_webhooks;
 
     /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_failover_url;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,13 +19,13 @@ final class CampaignDeactivateResponse implements BaseModel
     /** @use SdkModel<CampaignDeactivateResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public float $time;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $message;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**

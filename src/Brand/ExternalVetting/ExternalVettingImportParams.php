@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Brand\ExternalVetting;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,19 +30,19 @@ final class ExternalVettingImportParams implements BaseModel
     /**
      * External vetting provider ID for the brand.
      */
-    #[Api]
+    #[Required]
     public string $evpId;
 
     /**
      * Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      */
-    #[Api]
+    #[Required]
     public string $vettingId;
 
     /**
      * Required by some providers for vetting record confirmation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vettingToken;
 
     /**

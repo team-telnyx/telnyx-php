@@ -10,7 +10,7 @@ use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\UnionMember1;
 use Telnyx\Addresses\AddressListParams\Filter\StreetAddress;
 use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -40,13 +40,13 @@ final class AddressListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -65,7 +65,7 @@ final class AddressListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()

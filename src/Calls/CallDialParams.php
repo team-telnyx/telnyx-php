@@ -30,7 +30,8 @@ use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\To;
 use Telnyx\Calls\CallDialParams\WebhookURLMethod;
 use Telnyx\Calls\SipHeader\Name;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -155,13 +156,13 @@ final class CallDialParams implements BaseModel
     /**
      * The ID of the Call Control App (formerly ID of the connection) to be used when dialing the destination.
      */
-    #[Api]
+    #[Required]
     public string $connection_id;
 
     /**
      * The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
@@ -169,7 +170,7 @@ final class CallDialParams implements BaseModel
      *
      * @var string|list<string> $to
      */
-    #[Api(union: To::class)]
+    #[Required(union: To::class)]
     public string|array $to;
 
     /**
@@ -177,55 +178,55 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<AnsweringMachineDetection>|null $answering_machine_detection
      */
-    #[Api(enum: AnsweringMachineDetection::class, optional: true)]
+    #[Optional(enum: AnsweringMachineDetection::class)]
     public ?string $answering_machine_detection;
 
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?AnsweringMachineDetectionConfig $answering_machine_detection_config;
 
     /**
      * The URL of a file to be played back to the callee when the call is answered. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $audio_url;
 
     /**
      * Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Indicates the intent to bridge this call with the call specified in link_to. When bridge_intent is true, link_to becomes required and the from number will be overwritten by the from number from the linked call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $bridge_intent;
 
     /**
      * Whether to automatically bridge answered call to the call specified in link_to. When bridge_on_answer is true, link_to becomes required.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $bridge_on_answer;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore others Dial commands with the same `command_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * Optional configuration parameters to dial new participant into a conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConferenceConfig $conference_config;
 
     /**
@@ -233,28 +234,28 @@ final class CallDialParams implements BaseModel
      *
      * @var list<CustomSipHeader>|null $custom_headers
      */
-    #[Api(list: CustomSipHeader::class, optional: true)]
+    #[Optional(list: CustomSipHeader::class)]
     public ?array $custom_headers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DialogflowConfig $dialogflow_config;
 
     /**
      * Enables Dialogflow for the current call. The default value is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable_dialogflow;
 
     /**
      * The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from_display_name;
 
     /**
      * Use another call's control id for sharing the same call session id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $link_to;
 
     /**
@@ -262,25 +263,25 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<MediaEncryption>|null $media_encryption
      */
-    #[Api(enum: MediaEncryption::class, optional: true)]
+    #[Optional(enum: MediaEncryption::class)]
     public ?string $media_encryption;
 
     /**
      * The media_name of a file to be played back to the callee when the call is answered. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
      * If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg. When park_after_unbridge is set, link_to becomes required.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $park_after_unbridge;
 
     /**
      * The list of comma-separated codecs in a preferred order for the forked media to be received.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $preferred_codecs;
 
     /**
@@ -288,7 +289,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<Record>|null $record
      */
-    #[Api(enum: Record::class, optional: true)]
+    #[Optional(enum: Record::class)]
     public ?string $record;
 
     /**
@@ -296,13 +297,13 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordChannels>|null $record_channels
      */
-    #[Api(enum: RecordChannels::class, optional: true)]
+    #[Optional(enum: RecordChannels::class)]
     public ?string $record_channels;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_custom_file_name;
 
     /**
@@ -310,19 +311,19 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordFormat>|null $record_format
      */
-    #[Api(enum: RecordFormat::class, optional: true)]
+    #[Optional(enum: RecordFormat::class)]
     public ?string $record_format;
 
     /**
      * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_max_length;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_timeout_secs;
 
     /**
@@ -330,7 +331,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordTrack>|null $record_track
      */
-    #[Api(enum: RecordTrack::class, optional: true)]
+    #[Optional(enum: RecordTrack::class)]
     public ?string $record_track;
 
     /**
@@ -338,25 +339,25 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordTrim>|null $record_trim
      */
-    #[Api(enum: RecordTrim::class, optional: true)]
+    #[Optional(enum: RecordTrim::class)]
     public ?string $record_trim;
 
     /**
      * Generate silence RTP packets when no transmission available.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $send_silence_when_idle;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_password;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_username;
 
     /**
@@ -364,7 +365,7 @@ final class CallDialParams implements BaseModel
      *
      * @var list<SipHeader>|null $sip_headers
      */
-    #[Api(list: SipHeader::class, optional: true)]
+    #[Optional(list: SipHeader::class)]
     public ?array $sip_headers;
 
     /**
@@ -372,7 +373,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<SipRegion>|null $sip_region
      */
-    #[Api(enum: SipRegion::class, optional: true)]
+    #[Optional(enum: SipRegion::class)]
     public ?string $sip_region;
 
     /**
@@ -380,13 +381,13 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<SipTransportProtocol>|null $sip_transport_protocol
      */
-    #[Api(enum: SipTransportProtocol::class, optional: true)]
+    #[Optional(enum: SipTransportProtocol::class)]
     public ?string $sip_transport_protocol;
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?SoundModifications $sound_modifications;
 
     /**
@@ -394,7 +395,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalCodec>|null $stream_bidirectional_codec
      */
-    #[Api(enum: StreamBidirectionalCodec::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalCodec::class)]
     public ?string $stream_bidirectional_codec;
 
     /**
@@ -402,7 +403,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalMode>|null $stream_bidirectional_mode
      */
-    #[Api(enum: StreamBidirectionalMode::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalMode::class)]
     public ?string $stream_bidirectional_mode;
 
     /**
@@ -410,7 +411,7 @@ final class CallDialParams implements BaseModel
      *
      * @var 8000|16000|22050|24000|48000|null $stream_bidirectional_sampling_rate
      */
-    #[Api(enum: StreamBidirectionalSamplingRate::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalSamplingRate::class)]
     public ?int $stream_bidirectional_sampling_rate;
 
     /**
@@ -418,7 +419,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalTargetLegs>|null $stream_bidirectional_target_legs
      */
-    #[Api(enum: StreamBidirectionalTargetLegs::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalTargetLegs::class)]
     public ?string $stream_bidirectional_target_legs;
 
     /**
@@ -426,13 +427,13 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamCodec>|null $stream_codec
      */
-    #[Api(enum: StreamCodec::class, optional: true)]
+    #[Optional(enum: StreamCodec::class)]
     public ?string $stream_codec;
 
     /**
      * Establish websocket connection before dialing the destination. This is useful for cases where the websocket connection takes a long time to establish.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $stream_establish_before_call_originate;
 
     /**
@@ -440,19 +441,19 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamTrack>|null $stream_track
      */
-    #[Api(enum: StreamTrack::class, optional: true)]
+    #[Optional(enum: StreamTrack::class)]
     public ?string $stream_track;
 
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stream_url;
 
     /**
      * The call leg which will be supervised by the new call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $supervise_call_control_id;
 
     /**
@@ -460,37 +461,34 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<CallDialParams\SupervisorRole>|null $supervisor_role
      */
-    #[Api(
-        enum: CallDialParams\SupervisorRole::class,
-        optional: true
-    )]
+    #[Optional(enum: CallDialParams\SupervisorRole::class)]
     public ?string $supervisor_role;
 
     /**
      * Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $time_limit_secs;
 
     /**
      * The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being called. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_secs;
 
     /**
      * Enable transcription upon call answer. The default value is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $transcription;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionStartRequest $transcription_config;
 
     /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**
@@ -498,7 +496,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<WebhookURLMethod>|null $webhook_url_method
      */
-    #[Api(enum: WebhookURLMethod::class, optional: true)]
+    #[Optional(enum: WebhookURLMethod::class)]
     public ?string $webhook_url_method;
 
     /**

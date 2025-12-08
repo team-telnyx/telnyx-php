@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\AggregationType;
@@ -19,7 +19,7 @@ final class MdrUsageReportNewResponse implements BaseModel
     /** @use SdkModel<MdrUsageReportNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MdrUsageReport $data;
 
     public function __construct()

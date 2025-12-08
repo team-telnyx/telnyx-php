@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\FqdnConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -69,25 +70,25 @@ final class FqdnConnection implements BaseModel
     /**
      * A user-assigned name to help manage the connection.
      */
-    #[Api]
+    #[Required]
     public string $connection_name;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Defaults to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * Indicates whether DTMF timestamp adjustment is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $adjust_dtmf_timestamp;
 
     /**
@@ -95,31 +96,31 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional(enum: AnchorsiteOverride::class)]
     public ?string $anchorsite_override;
 
     /**
      * Indicates whether call cost calculation is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_cost_enabled;
 
     /**
      * Specifies if call cost webhooks should be sent for this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_cost_in_webhooks;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $default_on_hold_comfort_noise_enabled;
 
     /**
@@ -127,13 +128,13 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api(enum: DtmfType::class, optional: true)]
+    #[Optional(enum: DtmfType::class)]
     public ?string $dtmf_type;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $encode_contact_header_enabled;
 
     /**
@@ -141,70 +142,70 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<EncryptedMedia>|null $encrypted_media
      */
-    #[Api(enum: EncryptedMedia::class, nullable: true, optional: true)]
+    #[Optional(enum: EncryptedMedia::class, nullable: true)]
     public ?string $encrypted_media;
 
     /**
      * Indicates whether DTMF duration should be ignored.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $ignore_dtmf_duration;
 
     /**
      * Indicates whether the mark bit should be ignored.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $ignore_mark_bit;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?InboundFqdn $inbound;
 
     /**
      * The connection is enabled for Microsoft Teams Direct Routing.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $microsoft_teams_sbc;
 
     /**
      * Indicates whether noise suppression is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $noise_suppression;
 
     /**
      * Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $onnet_t38_passthrough_enabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundFqdn $outbound;
 
     /**
      * The password for the FQDN connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $password;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionRtcpSettings $rtcp_settings;
 
     /**
      * Defines if codecs should be passed on stream change.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $rtp_pass_codecs_on_stream_change;
 
     /**
      * Indicates whether normalized timestamps should be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $send_normalized_timestamps;
 
     /**
@@ -212,13 +213,13 @@ final class FqdnConnection implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Indicates whether third-party control is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $third_party_control_enabled;
 
     /**
@@ -226,37 +227,37 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<TransportProtocol>|null $transport_protocol
      */
-    #[Api(enum: TransportProtocol::class, optional: true)]
+    #[Optional(enum: TransportProtocol::class)]
     public ?string $transport_protocol;
 
     /**
      * The name for the TXT record associated with the FQDN connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $txt_name;
 
     /**
      * The time to live for the TXT record associated with the FQDN connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $txt_ttl;
 
     /**
      * The value for the TXT record associated with the FQDN connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $txt_value;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
      * The username for the FQDN connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_name;
 
     /**
@@ -264,25 +265,25 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
@@ -20,7 +20,7 @@ final class RecordingTranscriptionDeleteResponse implements BaseModel
     /** @use SdkModel<RecordingTranscriptionDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RecordingTranscription $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo\ContentType;
@@ -26,13 +26,13 @@ final class Logo implements BaseModel
      *
      * @var value-of<ContentType>|null $content_type
      */
-    #[Api(enum: ContentType::class, optional: true)]
+    #[Optional(enum: ContentType::class)]
     public ?string $content_type;
 
     /**
      * Identifies the document that contains the logo.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $document_id;
 
     public function __construct()

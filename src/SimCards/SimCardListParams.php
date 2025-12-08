@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -39,25 +39,25 @@ final class SimCardListParams implements BaseModel
     /**
      * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * A valid SIM card group ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_sim_card_group_id_;
 
     /**
      * It includes the associated SIM card group object in the response when present.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_sim_card_group;
 
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -65,7 +65,7 @@ final class SimCardListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()

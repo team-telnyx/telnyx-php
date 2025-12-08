@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data;
@@ -21,7 +21,7 @@ final class SubNumberOrderUpdateRequirementGroupResponse implements BaseModel
     /** @use SdkModel<SubNumberOrderUpdateRequirementGroupResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

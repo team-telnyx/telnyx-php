@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AuditEvents\AuditEventListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Page implements BaseModel
     /**
      * Page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number;
 
     /**
      * Number of items per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     public function __construct()

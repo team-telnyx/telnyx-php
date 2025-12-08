@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsSuggestion;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsSuggestion\Action\CreateCalendarEventAction;
@@ -37,49 +37,49 @@ final class Action implements BaseModel
     /**
      * Opens the user's default calendar app and starts the new calendar event flow with the agent-specified event data pre-filled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreateCalendarEventAction $create_calendar_event_action;
 
     /**
      * Opens the user's default dialer app with the agent-specified phone number filled in.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?DialAction $dial_action;
 
     /**
      * Fallback URL to use if a client doesn't support a suggested action. Fallback URLs open in new browser windows. Maximum 2048 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fallback_url;
 
     /**
      * Opens the user's default web browser app to the specified URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?OpenURLAction $open_url_action;
 
     /**
      * Payload (base64 encoded) that will be sent to the agent in the user event that results when the user taps the suggested action. Maximum 2048 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postback_data;
 
     /**
      * Opens the RCS app's location chooser so the user can pick a location to send back to the agent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public mixed $share_location_action;
 
     /**
      * Text that is shown in the suggested action. Maximum 25 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /**
      * Opens the user's default map app and selects the agent-specified location.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ViewLocationAction $view_location_action;
 
     public function __construct()

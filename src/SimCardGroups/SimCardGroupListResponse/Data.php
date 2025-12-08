@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\SimCardGroupListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\ConsumedData;
@@ -33,67 +33,67 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Represents the amount of data consumed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConsumedData $consumed_data;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?DataLimit $data_limit;
 
     /**
      * Indicates whether the SIM card group is the users default group.<br/>The default group is created for the user and can not be removed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $default;
 
     /**
      * A user friendly name for the SIM card group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $private_wireless_gateway_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The number of SIM cards associated with the group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $sim_card_count;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
      * The identification of the related Wireless Blocklist resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wireless_blocklist_id;
 
     public function __construct()

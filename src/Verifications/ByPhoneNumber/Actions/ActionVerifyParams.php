@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class ActionVerifyParams implements BaseModel
     /**
      * This is the code the user submits for verification.
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Api]
+    #[Required]
     public string $verify_profile_id;
 
     /**

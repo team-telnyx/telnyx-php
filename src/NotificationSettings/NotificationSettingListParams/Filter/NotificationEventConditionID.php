@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class NotificationEventConditionID implements BaseModel
     /**
      * Filter by the id of a notification channel.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()

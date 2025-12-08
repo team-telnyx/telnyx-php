@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,19 +32,19 @@ final class PortingOrderCreateParams implements BaseModel
      *
      * @var list<string> $phone_numbers
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $phone_numbers;
 
     /**
      * A customer-specified group reference for customer bookkeeping purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_group_reference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $customer_reference;
 
     /**

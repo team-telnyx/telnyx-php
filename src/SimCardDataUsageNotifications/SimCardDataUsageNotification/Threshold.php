@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold\Unit;
@@ -21,11 +21,11 @@ final class Threshold implements BaseModel
     /** @use SdkModel<ThresholdShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /** @var value-of<Unit>|null $unit */
-    #[Api(enum: Unit::class, optional: true)]
+    #[Optional(enum: Unit::class)]
     public ?string $unit;
 
     public function __construct()

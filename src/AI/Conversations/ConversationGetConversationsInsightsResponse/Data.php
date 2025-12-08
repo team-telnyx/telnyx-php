@@ -6,7 +6,7 @@ namespace Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse;
 
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\ConversationInsight;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,7 +26,7 @@ final class Data implements BaseModel
     /**
      * Unique identifier for the conversation insight.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -34,13 +34,13 @@ final class Data implements BaseModel
      *
      * @var list<ConversationInsight> $conversation_insights
      */
-    #[Api(list: ConversationInsight::class)]
+    #[Required(list: ConversationInsight::class)]
     public array $conversation_insights;
 
     /**
      * Timestamp of when the object was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
@@ -48,7 +48,7 @@ final class Data implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**

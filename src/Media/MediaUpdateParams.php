@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Media;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,13 +25,13 @@ final class MediaUpdateParams implements BaseModel
     /**
      * The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_url;
 
     /**
      * The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $ttl_secs;
 
     public function __construct()

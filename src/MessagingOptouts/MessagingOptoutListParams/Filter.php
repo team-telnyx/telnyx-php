@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingOptouts\MessagingOptoutListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class Filter implements BaseModel
     /**
      * The sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code) to retrieve opt-outs for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The ID of the messaging profile to retrieve opt-outs for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     public function __construct()

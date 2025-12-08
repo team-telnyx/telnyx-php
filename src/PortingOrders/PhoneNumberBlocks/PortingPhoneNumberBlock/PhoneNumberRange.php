@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class PhoneNumberRange implements BaseModel
     /**
      * Specifies the end of the phone number range for this porting phone number block.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_at;
 
     /**
      * Specifies the start of the phone number range for this porting phone number block.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_at;
 
     public function __construct()

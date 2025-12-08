@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TexmlApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -26,10 +26,10 @@ final class TexmlApplicationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<TexmlApplication>|null $data */
-    #[Api(list: TexmlApplication::class, optional: true)]
+    #[Optional(list: TexmlApplication::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()

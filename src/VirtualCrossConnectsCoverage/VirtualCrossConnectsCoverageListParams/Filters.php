@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters\AvailableBandwidth\Contains;
@@ -22,7 +22,7 @@ final class Filters implements BaseModel
     /**
      * Filter by exact available bandwidth match.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public int|Contains|null $available_bandwidth;
 
     public function __construct()

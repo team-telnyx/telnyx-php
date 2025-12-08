@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,16 +27,16 @@ final class AssistantRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $fetch_dynamic_variables_from_webhook;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()

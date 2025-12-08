@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\OutboundVoiceProfiles;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
@@ -21,10 +21,10 @@ final class OutboundVoiceProfileListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<OutboundVoiceProfile>|null $data */
-    #[Api(list: OutboundVoiceProfile::class, optional: true)]
+    #[Optional(list: OutboundVoiceProfile::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,13 +29,13 @@ final class SimCardGroupUpdateParams implements BaseModel
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?DataLimit $data_limit;
 
     /**
      * A user friendly name for the SIM card group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

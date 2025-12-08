@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
@@ -29,37 +29,37 @@ final class Filter implements BaseModel
     /**
      * Filter by exact country_code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Filter by exact MCC.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mcc;
 
     /**
      * Filter by exact MNC.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mnc;
 
     /**
      * Advanced name filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Name $name;
 
     /**
      * Filter by network_preferences_enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $network_preferences_enabled;
 
     /**
      * Filter by exact TADIG.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tadig;
 
     public function __construct()

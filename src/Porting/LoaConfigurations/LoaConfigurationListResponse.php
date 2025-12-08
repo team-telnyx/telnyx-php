@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Porting\LoaConfigurations;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
@@ -23,10 +23,10 @@ final class LoaConfigurationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PortingLoaConfiguration>|null $data */
-    #[Api(list: PortingLoaConfiguration::class, optional: true)]
+    #[Optional(list: PortingLoaConfiguration::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\TestSuites;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,7 +26,7 @@ final class TestSuiteListResponse implements BaseModel
      *
      * @var list<string> $data
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $data;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber\EligibleStatus;
@@ -25,13 +25,13 @@ final class PhoneNumber implements BaseModel
     /**
      * Detailed information about the eligibility status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detail;
 
     /**
      * Whether the phone number is eligible for hosted messaging.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $eligible;
 
     /**
@@ -39,13 +39,13 @@ final class PhoneNumber implements BaseModel
      *
      * @var value-of<EligibleStatus>|null $eligible_status
      */
-    #[Api(enum: EligibleStatus::class, optional: true)]
+    #[Optional(enum: EligibleStatus::class)]
     public ?string $eligible_status;
 
     /**
      * The phone number in e164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     public function __construct()

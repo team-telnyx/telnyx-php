@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
@@ -43,7 +43,7 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * Unique identifier for the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -51,7 +51,7 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @var list<int>|null $call_types
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $call_types;
 
     /**
@@ -59,19 +59,19 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @var list<int>|null $connections
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
     /**
      * Creation date of the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * End time in ISO format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_time;
 
     /**
@@ -79,7 +79,7 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @var list<Filter>|null $filters
      */
-    #[Api(list: Filter::class, optional: true)]
+    #[Optional(list: Filter::class)]
     public ?array $filters;
 
     /**
@@ -87,10 +87,10 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @var list<string>|null $managed_accounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managed_accounts;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -98,55 +98,55 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @var list<int>|null $record_types
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $record_types;
 
     /**
      * Name of the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_name;
 
     /**
      * URL to download the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
     /**
      * Number of retries.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $retry;
 
     /**
      * Source of the report. Valid values: calls (default), call-control, fax-api, webrtc.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $source;
 
     /**
      * Start time in ISO format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     /**
      * Status of the report (Pending = 1, Complete = 2, Failed = 3, Expired = 4).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $status;
 
     /**
      * Timezone for the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $timezone;
 
     /**
      * Last update date of the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class CreatedAt implements BaseModel
     /**
      * Filter by created at greater than or equal to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gte;
 
     /**
      * Filter by created at less than or equal to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lte;
 
     public function __construct()

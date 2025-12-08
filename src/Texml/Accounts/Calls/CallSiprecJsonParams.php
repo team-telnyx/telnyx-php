@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -36,37 +37,37 @@ final class CallSiprecJsonParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $account_sid;
 
     /**
      * The name of the connector to use for the SIPREC session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ConnectorName;
 
     /**
      * When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $IncludeMetadataCustomHeaders;
 
     /**
      * Name of the SIPREC session. May be used to stop the SIPREC session from TeXML instruction.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Name;
 
     /**
      * Controls whether to encrypt media sent to your SRS using SRTP and TLS. When set you need to configure SRS port in your connector to 5061.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $Secure;
 
     /**
      * Sets `Session-Expires` header to the INVITE. A reinvite is sent every half the value set. Usefull for session keep alive. Minimum value is 90, set to 0 to disable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $SessionTimeoutSecs;
 
     /**
@@ -74,16 +75,15 @@ final class CallSiprecJsonParams implements BaseModel
      *
      * @var value-of<SipTransport>|null $SipTransport
      */
-    #[Api(
-        enum: SipTransport::class,
-        optional: true,
+    #[Optional(
+        enum: SipTransport::class
     )]
     public ?string $SipTransport;
 
     /**
      * URL destination for Telnyx to send status callback events to for the siprec session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $StatusCallback;
 
     /**
@@ -91,9 +91,8 @@ final class CallSiprecJsonParams implements BaseModel
      *
      * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
      */
-    #[Api(
+    #[Optional(
         enum: StatusCallbackMethod::class,
-        optional: true,
     )]
     public ?string $StatusCallbackMethod;
 
@@ -102,9 +101,8 @@ final class CallSiprecJsonParams implements BaseModel
      *
      * @var value-of<Track>|null $Track
      */
-    #[Api(
-        enum: Track::class,
-        optional: true,
+    #[Optional(
+        enum: Track::class
     )]
     public ?string $Track;
 

@@ -9,7 +9,8 @@ use Telnyx\Calls\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -52,7 +53,7 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The text or SSML to be converted into speech. There is a 3,000 character limit.
      */
-    #[Api]
+    #[Required]
     public string $payload;
 
     /**
@@ -68,19 +69,19 @@ final class ActionSpeakParams implements BaseModel
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      */
-    #[Api]
+    #[Required]
     public string $voice;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -88,7 +89,7 @@ final class ActionSpeakParams implements BaseModel
      *
      * @var value-of<Language>|null $language
      */
-    #[Api(enum: Language::class, optional: true)]
+    #[Optional(enum: Language::class)]
     public ?string $language;
 
     /**
@@ -96,7 +97,7 @@ final class ActionSpeakParams implements BaseModel
      *
      * @var value-of<PayloadType>|null $payload_type
      */
-    #[Api(enum: PayloadType::class, optional: true)]
+    #[Optional(enum: PayloadType::class)]
     public ?string $payload_type;
 
     /**
@@ -104,19 +105,19 @@ final class ActionSpeakParams implements BaseModel
      *
      * @var value-of<ServiceLevel>|null $service_level
      */
-    #[Api(enum: ServiceLevel::class, optional: true)]
+    #[Optional(enum: ServiceLevel::class)]
     public ?string $service_level;
 
     /**
      * When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stop;
 
     /**
      * The settings associated with the voice selected.
      */
-    #[Api(union: VoiceSettings::class, optional: true)]
+    #[Optional(union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     /**

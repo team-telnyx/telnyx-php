@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
@@ -27,31 +27,31 @@ final class Carrier implements BaseModel
     /**
      * Unused.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $error_code;
 
     /**
      * Region code that matches the specific country calling code if the requested phone number type is mobile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobile_country_code;
 
     /**
      * National destination code (NDC), with a 0 prefix, if an NDC is found and the requested phone number type is mobile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobile_network_code;
 
     /**
      * SPID (Service Provider ID) name, if the requested phone number has been ported; otherwise, the name of carrier who owns the phone number block.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * If known to Telnyx and applicable, the primary network carrier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $normalized_carrier;
 
     /**
@@ -59,7 +59,7 @@ final class Carrier implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()

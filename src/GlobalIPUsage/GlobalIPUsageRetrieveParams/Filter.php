@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID\In;
@@ -22,7 +22,7 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public string|In|null $global_ip_id;
 
     public function __construct()

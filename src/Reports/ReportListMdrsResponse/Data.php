@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\ReportListMdrsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListMdrsResponse\Data\Currency;
@@ -36,31 +36,31 @@ final class Data implements BaseModel
     /**
      * Id of message detail record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The destination number for a call, or the callee.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cld;
 
     /**
      * The number associated with the person initiating the call, or the caller.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cli;
 
     /**
      * Final cost. Cost is calculated as rate * parts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
     /**
      * Message sent time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
@@ -68,13 +68,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Currency>|null $currency
      */
-    #[Api(enum: Currency::class, optional: true)]
+    #[Optional(enum: Currency::class)]
     public ?string $currency;
 
     /**
      * Direction of message - inbound or outbound.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $direction;
 
     /**
@@ -82,28 +82,28 @@ final class Data implements BaseModel
      *
      * @var value-of<MessageType>|null $message_type
      */
-    #[Api(enum: MessageType::class, optional: true)]
+    #[Optional(enum: MessageType::class)]
     public ?string $message_type;
 
     /**
      * Number of parts this message has. Max number of character is 160. If message contains more characters then that it will be broken down in multiple parts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $parts;
 
     /**
      * Configured profile name. New profiles can be created and configured on Telnyx portal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profile_name;
 
     /**
      * Rate applied to the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -111,7 +111,7 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

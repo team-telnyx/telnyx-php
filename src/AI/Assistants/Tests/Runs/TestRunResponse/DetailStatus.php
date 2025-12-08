@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class DetailStatus implements BaseModel
     /** @use SdkModel<DetailStatusShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -33,7 +33,7 @@ final class DetailStatus implements BaseModel
      *
      * @var value-of<TestStatus> $status
      */
-    #[Api(enum: TestStatus::class)]
+    #[Required(enum: TestStatus::class)]
     public string $status;
 
     /**

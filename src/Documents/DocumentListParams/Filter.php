@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocumentListParams\Filter\CreatedAt;
@@ -25,13 +25,13 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CustomerReference $customer_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filename $filename;
 
     public function __construct()

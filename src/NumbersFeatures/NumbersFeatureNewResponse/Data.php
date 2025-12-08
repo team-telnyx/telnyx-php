@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,10 +17,10 @@ final class Data implements BaseModel
     use SdkModel;
 
     /** @var list<string> $features */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $features;
 
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**

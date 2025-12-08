@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DialogflowConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse\Data;
@@ -17,7 +17,7 @@ final class DialogflowConnectionUpdateResponse implements BaseModel
     /** @use SdkModel<DialogflowConnectionUpdateResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

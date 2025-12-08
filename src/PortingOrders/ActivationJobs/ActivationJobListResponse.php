@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PortingOrders\ActivationJobs;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
@@ -24,10 +24,10 @@ final class ActivationJobListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PortingOrdersActivationJob>|null $data */
-    #[Api(list: PortingOrdersActivationJob::class, optional: true)]
+    #[Optional(list: PortingOrdersActivationJob::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

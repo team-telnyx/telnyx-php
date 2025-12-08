@@ -7,7 +7,7 @@ namespace Telnyx\Webhooks\CallAnsweredWebhookEvent\Data;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SipHeader\Name;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAnsweredWebhookEvent\Data\Payload\State;
@@ -36,31 +36,31 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
@@ -68,13 +68,13 @@ final class Payload implements BaseModel
      *
      * @var list<CustomSipHeader>|null $custom_headers
      */
-    #[Api(list: CustomSipHeader::class, optional: true)]
+    #[Optional(list: CustomSipHeader::class)]
     public ?array $custom_headers;
 
     /**
      * Number or SIP URI placing the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
@@ -82,13 +82,13 @@ final class Payload implements BaseModel
      *
      * @var list<SipHeader>|null $sip_headers
      */
-    #[Api(list: SipHeader::class, optional: true)]
+    #[Optional(list: SipHeader::class)]
     public ?array $sip_headers;
 
     /**
      * ISO 8601 datetime of when the call started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_time;
 
     /**
@@ -96,7 +96,7 @@ final class Payload implements BaseModel
      *
      * @var value-of<State>|null $state
      */
-    #[Api(enum: State::class, optional: true)]
+    #[Optional(enum: State::class)]
     public ?string $state;
 
     /**
@@ -104,13 +104,13 @@ final class Payload implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Destination number or SIP URI of the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()

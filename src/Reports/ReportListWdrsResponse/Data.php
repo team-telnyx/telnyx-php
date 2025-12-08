@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\ReportListWdrsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Cost;
@@ -41,76 +41,76 @@ final class Data implements BaseModel
     /**
      * WDR id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cost $cost;
 
     /**
      * Record created time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DownlinkData $downlink_data;
 
     /**
      * Session duration in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration_seconds;
 
     /**
      * International mobile subscriber identity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $imsi;
 
     /**
      * Mobile country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mcc;
 
     /**
      * Mobile network code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mnc;
 
     /**
      * Phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Rate $rate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Sim card unique identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
      * Sim group unique identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_group_id;
 
     /**
      * Defined sim group name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_group_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?UplinkData $uplink_data;
 
     public function __construct()

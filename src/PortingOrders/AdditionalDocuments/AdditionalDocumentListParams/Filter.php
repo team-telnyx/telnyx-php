@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter\DocumentType;
@@ -26,7 +26,7 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<DocumentType>>|null $document_type
      */
-    #[Api(list: DocumentType::class, optional: true)]
+    #[Optional(list: DocumentType::class)]
     public ?array $document_type;
 
     public function __construct()

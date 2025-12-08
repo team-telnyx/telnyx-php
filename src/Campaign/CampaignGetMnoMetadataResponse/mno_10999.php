@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign\CampaignGetMnoMetadataResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,34 +27,34 @@ final class mno_10999 implements BaseModel
     /** @use SdkModel<Mno10999Shape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public int $minMsgSamples;
 
-    #[Api]
+    #[Required]
     public string $mno;
 
-    #[Api]
+    #[Required]
     public bool $mnoReview;
 
-    #[Api]
+    #[Required]
     public bool $mnoSupport;
 
-    #[Api]
+    #[Required]
     public bool $noEmbeddedLink;
 
-    #[Api]
+    #[Required]
     public bool $noEmbeddedPhone;
 
-    #[Api]
+    #[Required]
     public bool $qualify;
 
-    #[Api]
+    #[Required]
     public bool $reqSubscriberHelp;
 
-    #[Api]
+    #[Required]
     public bool $reqSubscriberOptin;
 
-    #[Api]
+    #[Required]
     public bool $reqSubscriberOptout;
 
     /**

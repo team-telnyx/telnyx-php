@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class GlobalIP implements BaseModel
     /**
      * Global IP ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The Global IP address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_address;
 
     public function __construct()

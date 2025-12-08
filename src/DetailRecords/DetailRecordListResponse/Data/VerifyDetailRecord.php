@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\VerifyDetailRecord\VerifyChannelType;
@@ -32,52 +33,52 @@ final class VerifyDetailRecord implements BaseModel
     /** @use SdkModel<VerifyDetailRecordShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Unique ID of the verification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing costs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivery_status;
 
     /**
      * E.164 formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_phone_number;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing costs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
     /**
      * Billing unit used to calculate the Telnyx billing costs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate_measured_in;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verification_status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verify_channel_id;
 
     /**
@@ -92,16 +93,16 @@ final class VerifyDetailRecord implements BaseModel
      *
      * @var value-of<VerifyChannelType>|null $verify_channel_type
      */
-    #[Api(enum: VerifyChannelType::class, optional: true)]
+    #[Optional(enum: VerifyChannelType::class)]
     public ?string $verify_channel_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verify_profile_id;
 
     /**
      * Currency amount for Verify Usage Fee.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verify_usage_fee;
 
     /**

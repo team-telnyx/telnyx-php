@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice;
@@ -20,7 +20,7 @@ final class TextToSpeechListVoicesResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Voice>|null $voices */
-    #[Api(list: Voice::class, optional: true)]
+    #[Optional(list: Voice::class)]
     public ?array $voices;
 
     public function __construct()

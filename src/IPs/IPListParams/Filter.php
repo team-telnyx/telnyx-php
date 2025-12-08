@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPs\IPListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class Filter implements BaseModel
     /**
      * ID of the IP Connection to which this IP should be attached.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * IP adddress represented by this resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_address;
 
     /**
      * Port to use when connecting to this IP.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     public function __construct()

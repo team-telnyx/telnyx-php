@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardDataUsageNotifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +27,19 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     /**
      * A valid SIM card ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_sim_card_id_;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

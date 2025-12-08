@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,7 +36,7 @@ final class CallStreamsJsonParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $account_sid;
 
     /**
@@ -43,9 +44,8 @@ final class CallStreamsJsonParams implements BaseModel
      *
      * @var value-of<BidirectionalCodec>|null $BidirectionalCodec
      */
-    #[Api(
+    #[Optional(
         enum: BidirectionalCodec::class,
-        optional: true,
     )]
     public ?string $BidirectionalCodec;
 
@@ -54,22 +54,21 @@ final class CallStreamsJsonParams implements BaseModel
      *
      * @var value-of<BidirectionalMode>|null $BidirectionalMode
      */
-    #[Api(
+    #[Optional(
         enum: BidirectionalMode::class,
-        optional: true,
     )]
     public ?string $BidirectionalMode;
 
     /**
      * The user specified name of Stream.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Name;
 
     /**
      * Url where status callbacks will be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $StatusCallback;
 
     /**
@@ -77,9 +76,8 @@ final class CallStreamsJsonParams implements BaseModel
      *
      * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
      */
-    #[Api(
+    #[Optional(
         enum: StatusCallbackMethod::class,
-        optional: true,
     )]
     public ?string $StatusCallbackMethod;
 
@@ -88,16 +86,15 @@ final class CallStreamsJsonParams implements BaseModel
      *
      * @var value-of<Track>|null $Track
      */
-    #[Api(
-        enum: Track::class,
-        optional: true,
+    #[Optional(
+        enum: Track::class
     )]
     public ?string $Track;
 
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Url;
 
     /**

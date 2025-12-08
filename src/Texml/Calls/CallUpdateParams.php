@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -39,16 +39,13 @@ final class CallUpdateParams implements BaseModel
      *
      * @var value-of<FallbackMethod>|null $FallbackMethod
      */
-    #[Api(
-        enum: FallbackMethod::class,
-        optional: true,
-    )]
+    #[Optional(enum: FallbackMethod::class)]
     public ?string $FallbackMethod;
 
     /**
      * A failover URL for which Telnyx will retrieve the TeXML call instructions if the Url is not responding.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $FallbackUrl;
 
     /**
@@ -56,22 +53,19 @@ final class CallUpdateParams implements BaseModel
      *
      * @var value-of<Method>|null $Method
      */
-    #[Api(
-        enum: Method::class,
-        optional: true
-    )]
+    #[Optional(enum: Method::class)]
     public ?string $Method;
 
     /**
      * The value to set the call status to. Setting the status to completed ends the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Status;
 
     /**
      * URL destination for Telnyx to send status callback events to for the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $StatusCallback;
 
     /**
@@ -79,22 +73,21 @@ final class CallUpdateParams implements BaseModel
      *
      * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
      */
-    #[Api(
-        enum: StatusCallbackMethod::class,
-        optional: true,
+    #[Optional(
+        enum: StatusCallbackMethod::class
     )]
     public ?string $StatusCallbackMethod;
 
     /**
      * TeXML to replace the current one with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Texml;
 
     /**
      * The URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Url;
 
     public function __construct()

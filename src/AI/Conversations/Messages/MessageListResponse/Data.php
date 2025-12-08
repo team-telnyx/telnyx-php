@@ -8,7 +8,8 @@ use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\Role;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function1;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,25 +32,25 @@ final class Data implements BaseModel
      *
      * @var value-of<Role> $role
      */
-    #[Api(enum: Role::class)]
+    #[Required(enum: Role::class)]
     public string $role;
 
     /**
      * The message content. Can be null for tool calls.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
      * The datetime the message was created on the conversation. This does not necesarily correspond to the time the message was sent. The best field to use to determine the time the end user experienced the message is `sent_at`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * The datetime the message was sent to the end user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $sent_at;
 
     /**
@@ -57,7 +58,7 @@ final class Data implements BaseModel
      *
      * @var list<ToolCall>|null $tool_calls
      */
-    #[Api(list: ToolCall::class, optional: true)]
+    #[Optional(list: ToolCall::class)]
     public ?array $tool_calls;
 
     /**

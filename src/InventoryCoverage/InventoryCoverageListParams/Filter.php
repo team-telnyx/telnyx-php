@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InventoryCoverage\InventoryCoverageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\CountryCode;
@@ -34,13 +34,13 @@ final class Filter implements BaseModel
     /**
      * Filter by administrative area.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * Include count in the result.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $count;
 
     /**
@@ -48,7 +48,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<CountryCode>|null $country_code
      */
-    #[Api(enum: CountryCode::class, optional: true)]
+    #[Optional(enum: CountryCode::class)]
     public ?string $country_code;
 
     /**
@@ -56,7 +56,7 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<Feature>>|null $features
      */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
     /**
@@ -64,19 +64,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<GroupBy>|null $groupBy
      */
-    #[Api(enum: GroupBy::class, optional: true)]
+    #[Optional(enum: GroupBy::class)]
     public ?string $groupBy;
 
     /**
      * Filter by npa.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $npa;
 
     /**
      * Filter by nxx.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $nxx;
 
     /**
@@ -84,7 +84,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     public function __construct()

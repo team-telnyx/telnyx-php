@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class SimCardDeleteParams implements BaseModel
     /**
      * Enables deletion of disabled eSIMs that can't be uninstalled from a device. This is irreversible and the eSIM cannot be re-registered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $report_lost;
 
     public function __construct()

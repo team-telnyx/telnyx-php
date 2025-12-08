@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardPeers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class WireguardPeerPatch implements BaseModel
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $public_key;
 
     public function __construct()

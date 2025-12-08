@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class Total implements BaseModel
     /**
      * Total credits as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $credits;
 
     /**
      * Total existing monthly recurring charges as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $existing_mrc;
 
     /**
      * Grand total of all charges as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $grand_total;
 
     /**
      * Ledger adjustments as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $ledger_adjustments;
 
     /**
      * Total new monthly recurring charges as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $new_mrc;
 
     /**
      * Total new one-time charges as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $new_otc;
 
     /**
      * Other charges as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $other;
 
     /**

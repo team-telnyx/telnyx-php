@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth\OAuthGetJwksResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,25 +21,25 @@ final class Key implements BaseModel
     /**
      * Algorithm.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $alg;
 
     /**
      * Key ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $kid;
 
     /**
      * Key type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $kty;
 
     /**
      * Key use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $use;
 
     public function __construct()

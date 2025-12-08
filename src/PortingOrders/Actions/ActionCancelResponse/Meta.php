@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Actions\ActionCancelResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Meta implements BaseModel
     /**
      * Link to list all phone numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_numbers_url;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventListResponse\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewCommentPayload\Comment;
@@ -27,19 +27,19 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
     /**
      * The comment that was added to the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Comment $comment;
 
     /**
      * Identifies the porting order that the comment was added to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
      * Identifies the support key associated with the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $support_key;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IPConnections\InboundIP\AniNumberFormat;
@@ -45,13 +45,13 @@ final class InboundIP implements BaseModel
      *
      * @var value-of<AniNumberFormat>|null $ani_number_format
      */
-    #[Api(enum: AniNumberFormat::class, optional: true)]
+    #[Optional(enum: AniNumberFormat::class)]
     public ?string $ani_number_format;
 
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     /**
@@ -59,14 +59,14 @@ final class InboundIP implements BaseModel
      *
      * @var list<string>|null $codecs
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $codecs;
 
     /**
      * The default primary IP to use for the number. Only settable if the connection is
      *               of IP authentication type. Value must be the ID of an authorized IP set on the connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $default_primary_ip_id;
 
     /**
@@ -74,55 +74,55 @@ final class InboundIP implements BaseModel
      *
      * @var value-of<DefaultRoutingMethod>|null $default_routing_method
      */
-    #[Api(enum: DefaultRoutingMethod::class, optional: true)]
+    #[Optional(enum: DefaultRoutingMethod::class)]
     public ?string $default_routing_method;
 
     /**
      * The default secondary IP to use for the number. Only settable if the connection is
      *               of IP authentication type. Value must be the ID of an authorized IP set on the connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $default_secondary_ip_id;
 
     /**
      * The default tertiary IP to use for the number. Only settable if the connection is
      *               of IP authentication type. Value must be the ID of an authorized IP set on the connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $default_tertiary_ip_id;
 
     /** @var value-of<DnisNumberFormat>|null $dnis_number_format */
-    #[Api(enum: DnisNumberFormat::class, optional: true)]
+    #[Optional(enum: DnisNumberFormat::class)]
     public ?string $dnis_number_format;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $generate_ringback_tone;
 
     /**
      * When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isup_headers_enabled;
 
     /**
      * Enable PRACK messages as defined in RFC3262.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $prack_enabled;
 
     /**
      * When enabled the SIP Connection will receive the Identity header with Shaken/Stir data in the SIP INVITE message of inbound calls, even when using UDP transport.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $shaken_stir_enabled;
 
     /**
      * Defaults to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $sip_compact_headers_enabled;
 
     /**
@@ -130,13 +130,13 @@ final class InboundIP implements BaseModel
      *
      * @var value-of<SipRegion>|null $sip_region
      */
-    #[Api(enum: SipRegion::class, optional: true)]
+    #[Optional(enum: SipRegion::class)]
     public ?string $sip_region;
 
     /**
      * Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_subdomain;
 
     /**
@@ -144,19 +144,19 @@ final class InboundIP implements BaseModel
      *
      * @var value-of<SipSubdomainReceiveSettings>|null $sip_subdomain_receive_settings
      */
-    #[Api(enum: SipSubdomainReceiveSettings::class, optional: true)]
+    #[Optional(enum: SipSubdomainReceiveSettings::class)]
     public ?string $sip_subdomain_receive_settings;
 
     /**
      * Time(sec) before aborting if connection is not made.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_1xx_secs;
 
     /**
      * Time(sec) before aborting if call is unanswered (min: 1, max: 600).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_2xx_secs;
 
     public function __construct()

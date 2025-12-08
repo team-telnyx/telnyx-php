@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\ReportListWdrsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Cost\Currency;
@@ -22,7 +22,7 @@ final class Cost implements BaseModel
     /**
      * Final cost. Cost is calculated as rate * unit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
@@ -30,7 +30,7 @@ final class Cost implements BaseModel
      *
      * @var value-of<Currency>|null $currency
      */
-    #[Api(enum: Currency::class, optional: true)]
+    #[Optional(enum: Currency::class)]
     public ?string $currency;
 
     public function __construct()

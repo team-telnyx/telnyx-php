@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\AssociatedRecordType\Eq;
@@ -22,7 +22,7 @@ final class AssociatedRecordType implements BaseModel
      *
      * @var value-of<Eq>|null $eq
      */
-    #[Api(enum: Eq::class, optional: true)]
+    #[Optional(enum: Eq::class)]
     public ?string $eq;
 
     public function __construct()

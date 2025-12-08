@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters\StatusIn;
@@ -29,13 +29,13 @@ final class Filters implements BaseModel
     /**
      * The date and time the port-out was created after.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at__gt;
 
     /**
      * The date and time the port-out was created before.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at__lt;
 
     /**
@@ -43,13 +43,13 @@ final class Filters implements BaseModel
      *
      * @var list<string>|null $customer_reference__in
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $customer_reference__in;
 
     /**
      * The end user name of the port-outs to include in the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_user_name;
 
     /**
@@ -57,7 +57,7 @@ final class Filters implements BaseModel
      *
      * @var list<string>|null $phone_numbers__overlaps
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_numbers__overlaps;
 
     /**
@@ -65,7 +65,7 @@ final class Filters implements BaseModel
      *
      * @var list<value-of<StatusIn>>|null $status__in
      */
-    #[Api(list: StatusIn::class, optional: true)]
+    #[Optional(list: StatusIn::class)]
     public ?array $status__in;
 
     public function __construct()

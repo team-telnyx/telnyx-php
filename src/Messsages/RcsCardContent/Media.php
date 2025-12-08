@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsCardContent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsCardContent\Media\Height;
@@ -22,7 +22,7 @@ final class Media implements BaseModel
     /** @use SdkModel<MediaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RcsContentInfo $content_info;
 
     /**
@@ -30,7 +30,7 @@ final class Media implements BaseModel
      *
      * @var value-of<Height>|null $height
      */
-    #[Api(enum: Height::class, optional: true)]
+    #[Optional(enum: Height::class)]
     public ?string $height;
 
     public function __construct()

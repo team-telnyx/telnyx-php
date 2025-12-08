@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse\Status;
@@ -20,7 +20,7 @@ final class SpeechToTextListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<SttDetailReportResponse>|null $data */
-    #[Api(list: SttDetailReportResponse::class, optional: true)]
+    #[Optional(list: SttDetailReportResponse::class)]
     public ?array $data;
 
     public function __construct()

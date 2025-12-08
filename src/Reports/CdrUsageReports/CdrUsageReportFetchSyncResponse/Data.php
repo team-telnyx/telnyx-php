@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\AggregationType;
@@ -35,45 +35,45 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /** @var value-of<AggregationType>|null $aggregation_type */
-    #[Api(enum: AggregationType::class, optional: true)]
+    #[Optional(enum: AggregationType::class)]
     public ?string $aggregation_type;
 
     /** @var list<int>|null $connections */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_time;
 
     /** @var value-of<ProductBreakdown>|null $product_breakdown */
-    #[Api(enum: ProductBreakdown::class, optional: true)]
+    #[Optional(enum: ProductBreakdown::class)]
     public ?string $product_breakdown;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
     /** @var array<string,mixed>|null $result */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $result;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_time;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

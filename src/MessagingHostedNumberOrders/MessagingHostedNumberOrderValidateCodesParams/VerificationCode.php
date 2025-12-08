@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,10 +16,10 @@ final class VerificationCode implements BaseModel
     /** @use SdkModel<VerificationCodeShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $code;
 
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**

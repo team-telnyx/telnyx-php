@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class Filter implements BaseModel
     /**
      * The end time of the period to filter the usage (ISO microsecond format).
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_time;
 
     /**
      * The start time of the period to filter the usage (ISO microsecond format).
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_time;
 
     /**

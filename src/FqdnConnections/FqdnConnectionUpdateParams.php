@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\FqdnConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -98,7 +98,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
     /**
      * Defaults to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -106,31 +106,31 @@ final class FqdnConnectionUpdateParams implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional(enum: AnchorsiteOverride::class)]
     public ?string $anchorsite_override;
 
     /**
      * The uuid of the push credential for Android.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $android_push_credential_id;
 
     /**
      * Specifies if call cost webhooks should be sent for this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_cost_in_webhooks;
 
     /**
      * A user-assigned name to help manage the connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_name;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $default_on_hold_comfort_noise_enabled;
 
     /**
@@ -138,13 +138,13 @@ final class FqdnConnectionUpdateParams implements BaseModel
      *
      * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api(enum: DtmfType::class, optional: true)]
+    #[Optional(enum: DtmfType::class)]
     public ?string $dtmf_type;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $encode_contact_header_enabled;
 
     /**
@@ -152,28 +152,28 @@ final class FqdnConnectionUpdateParams implements BaseModel
      *
      * @var value-of<EncryptedMedia>|null $encrypted_media
      */
-    #[Api(enum: EncryptedMedia::class, nullable: true, optional: true)]
+    #[Optional(enum: EncryptedMedia::class, nullable: true)]
     public ?string $encrypted_media;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?InboundFqdn $inbound;
 
     /**
      * The uuid of the push credential for Ios.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $ios_push_credential_id;
 
     /**
      * Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $onnet_t38_passthrough_enabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundFqdn $outbound;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionRtcpSettings $rtcp_settings;
 
     /**
@@ -181,7 +181,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
@@ -189,7 +189,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
      *
      * @var value-of<TransportProtocol>|null $transport_protocol
      */
-    #[Api(enum: TransportProtocol::class, optional: true)]
+    #[Optional(enum: TransportProtocol::class)]
     public ?string $transport_protocol;
 
     /**
@@ -197,25 +197,25 @@ final class FqdnConnectionUpdateParams implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     public function __construct()

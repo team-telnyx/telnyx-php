@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses\AddressListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class AddressBook implements BaseModel
     /**
      * If present, only returns results with the <code>address_book</code> flag equal to the given value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()

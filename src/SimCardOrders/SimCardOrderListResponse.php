@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\SimCardOrders;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrders\SimCardOrder\Cost;
@@ -23,10 +23,10 @@ final class SimCardOrderListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<SimCardOrder>|null $data */
-    #[Api(list: SimCardOrder::class, optional: true)]
+    #[Optional(list: SimCardOrder::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

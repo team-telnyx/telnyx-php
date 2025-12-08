@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses\Actions\ActionValidateResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,37 +28,37 @@ final class Suggested implements BaseModel
     /**
      * The locality of the address. For US addresses, this corresponds to the state of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * The two-character (ISO 3166-1 alpha-2) country code of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Additional street address information about the address such as, but not limited to, unit number or apartment number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $extended_address;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the city of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * The postal code of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postal_code;
 
     /**
      * The primary street address information about the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_address;
 
     public function __construct()

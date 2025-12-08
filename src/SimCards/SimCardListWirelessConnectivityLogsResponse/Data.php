@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data\LogType;
@@ -41,56 +41,56 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies the session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $id;
 
     /**
      * The Access Point Name (APN) identifies the packet data network that a mobile data user wants to communicate with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $apn;
 
     /**
      * The cell ID to which the SIM connected.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cell_id;
 
     /**
      * ISO 8601 formatted date-time indicating when the record was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * The International Mobile Equipment Identity (or IMEI) is a number, usually unique, that identifies the device currently being used connect to the network.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $imei;
 
     /**
      * SIM cards are identified on their individual network operators by a unique International Mobile Subscriber Identity (IMSI). <br/>
      * Mobile network operators connect mobile phone calls and communicate with their market SIM cards using their IMSIs. The IMSI is stored in the Subscriber  Identity Module (SIM) inside the device and is sent by the device to the appropriate network. It is used to acquire the details of the device in the Home  Location Register (HLR) or the Visitor Location Register (VLR).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $imsi;
 
     /**
      * The SIM's address in the currently connected network. This IPv4 address is usually obtained dynamically, so it may vary according to the location or new connections.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ipv4;
 
     /**
      * The SIM's address in the currently connected network. This IPv6 address is usually obtained dynamically, so it may vary according to the location or new connections.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ipv6;
 
     /**
      * ISO 8601 formatted date-time indicating when the last heartbeat to the device was successfully recorded.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $last_seen;
 
     /**
@@ -98,54 +98,54 @@ final class Data implements BaseModel
      *
      * @var value-of<LogType>|null $log_type
      */
-    #[Api(enum: LogType::class, optional: true)]
+    #[Optional(enum: LogType::class)]
     public ?string $log_type;
 
     /**
      * It's a three decimal digit that identifies a country.<br/><br/>
      * This code is commonly seen joined with a Mobile Network Code (MNC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobile_country_code;
 
     /**
      * It's a two to three decimal digits that identify a network.<br/><br/>
      *  This code is commonly seen joined with a Mobile Country Code (MCC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobile_network_code;
 
     /**
      * The radio technology the SIM card used during the session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $radio_access_technology;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The identification UUID of the related SIM card resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
      * ISO 8601 formatted date-time indicating when the session started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     /**
      * The state of the SIM card after when the session happened.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
      * ISO 8601 formatted date-time indicating when the session ended.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stop_time;
 
     public function __construct()

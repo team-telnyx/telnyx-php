@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\NumberOrderPhoneNumbers;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
@@ -24,10 +24,10 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<NumberOrderPhoneNumber>|null $data */
-    #[Api(list: NumberOrderPhoneNumber::class, optional: true)]
+    #[Optional(list: NumberOrderPhoneNumber::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

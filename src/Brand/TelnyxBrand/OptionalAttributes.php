@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Brand\TelnyxBrand;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class OptionalAttributes implements BaseModel
     /**
      * The tax exempt status of the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $taxExemptStatus;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices\InvoiceGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,25 +27,25 @@ final class Data implements BaseModel
     /**
      * Present only if the query parameter `action=link` is set.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $download_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $file_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $invoice_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $paid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $period_end;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $period_start;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class DialogflowConfig implements BaseModel
     /**
      * Enable sentiment analysis from Dialogflow.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $analyze_sentiment;
 
     /**
      * Enable partial automated agent reply from Dialogflow.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $partial_automated_agent_reply;
 
     public function __construct()

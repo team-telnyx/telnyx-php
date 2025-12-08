@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,11 +31,11 @@ final class NumberOrderUpdateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /** @var list<UpdateRegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: UpdateRegulatoryRequirement::class, optional: true)]
+    #[Optional(list: UpdateRegulatoryRequirement::class)]
     public ?array $regulatory_requirements;
 
     public function __construct()

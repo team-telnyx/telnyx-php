@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -50,13 +51,13 @@ final class MessagingCreateParams implements BaseModel
     /**
      * End time in ISO format. Note: If end time includes the last 4 hours, some MDRs might not appear in this report, due to wait time for downstream message delivery confirmation.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_time;
 
     /**
      * Start time in ISO format.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_time;
 
     /**
@@ -64,7 +65,7 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<int>|null $connections
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
     /**
@@ -72,7 +73,7 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<int>|null $directions
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $directions;
 
     /**
@@ -80,13 +81,13 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<Filter>|null $filters
      */
-    #[Api(list: Filter::class, optional: true)]
+    #[Optional(list: Filter::class)]
     public ?array $filters;
 
     /**
      * Whether to include message body in the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_message_body;
 
     /**
@@ -94,7 +95,7 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<string>|null $managed_accounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managed_accounts;
 
     /**
@@ -102,7 +103,7 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<string>|null $profiles
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $profiles;
 
     /**
@@ -110,25 +111,25 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<int>|null $record_types
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $record_types;
 
     /**
      * Name of the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_name;
 
     /**
      * Whether to select all managed accounts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $select_all_managed_accounts;
 
     /**
      * Timezone for the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $timezone;
 
     /**

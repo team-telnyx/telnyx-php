@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NetworkCoverage\AvailableService;
@@ -24,7 +24,7 @@ final class Contains implements BaseModel
      *
      * @var value-of<AvailableService>|null $contains
      */
-    #[Api(enum: AvailableService::class, optional: true)]
+    #[Optional(enum: AvailableService::class)]
     public ?string $contains;
 
     public function __construct()

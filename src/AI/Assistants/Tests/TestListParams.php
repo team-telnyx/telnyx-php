@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\TestListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,25 +31,25 @@ final class TestListParams implements BaseModel
     /**
      * Filter tests by destination (phone number, webhook URL, etc.).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Filter tests by communication channel (e.g., 'web_chat', 'sms').
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $telnyx_conversation_channel;
 
     /**
      * Filter tests by test suite name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $test_suite;
 
     public function __construct()

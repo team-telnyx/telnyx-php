@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionAnswerResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class Data implements BaseModel
     /**
      * The ID of the recording. Only present when the record parameter is set to record-from-answer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $result;
 
     public function __construct()

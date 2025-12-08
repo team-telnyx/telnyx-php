@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyEndpoints;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
@@ -21,10 +21,10 @@ final class DynamicEmergencyEndpointListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<DynamicEmergencyEndpoint>|null $data */
-    #[Api(list: DynamicEmergencyEndpoint::class, optional: true)]
+    #[Optional(list: DynamicEmergencyEndpoint::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Metadata $meta;
 
     public function __construct()

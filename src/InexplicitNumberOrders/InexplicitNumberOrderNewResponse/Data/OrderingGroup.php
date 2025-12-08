@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse\Data\OrderingGroup\Order;
@@ -40,49 +40,49 @@ final class OrderingGroup implements BaseModel
     /**
      * Filter for phone numbers in a given state / province.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * Quantity of phone numbers allocated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $count_allocated;
 
     /**
      * Quantity of phone numbers requested.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $count_requested;
 
     /**
      * Country where you would like to purchase phone numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_iso;
 
     /**
      * ISO 8601 formatted date indicating when the ordering group was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Error reason if applicable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_reason;
 
     /**
      * Filter to exclude phone numbers that are currently on hold/reserved for your account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $exclude_held_numbers;
 
     /**
      * Filter by area code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $national_destination_code;
 
     /**
@@ -90,37 +90,37 @@ final class OrderingGroup implements BaseModel
      *
      * @var list<Order>|null $orders
      */
-    #[Api(list: Order::class, optional: true)]
+    #[Optional(list: Order::class)]
     public ?array $orders;
 
     /**
      * Number type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number_type;
 
     /**
      * Filter for phone numbers that contain the digits specified.
      */
-    #[Api('phone_number[contains]', optional: true)]
+    #[Optional('phone_number[contains]')]
     public ?string $phone_number_contains_;
 
     /**
      * Filter by the ending digits of the phone number.
      */
-    #[Api('phone_number[ends_with]', optional: true)]
+    #[Optional('phone_number[ends_with]')]
     public ?string $phone_number_ends_with_;
 
     /**
      * Filter by the starting digits of the phone number.
      */
-    #[Api('phone_number[starts_with]', optional: true)]
+    #[Optional('phone_number[starts_with]')]
     public ?string $phone_number_starts_with_;
 
     /**
      * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
     /**
@@ -128,7 +128,7 @@ final class OrderingGroup implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -136,13 +136,13 @@ final class OrderingGroup implements BaseModel
      *
      * @var value-of<Strategy>|null $strategy
      */
-    #[Api(enum: Strategy::class, optional: true)]
+    #[Optional(enum: Strategy::class)]
     public ?string $strategy;
 
     /**
      * ISO 8601 formatted date indicating when the ordering group was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

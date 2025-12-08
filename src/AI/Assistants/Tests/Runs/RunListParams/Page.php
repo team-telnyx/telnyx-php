@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\Runs\RunListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Page implements BaseModel
     /**
      * Page number to retrieve (1-based indexing).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number;
 
     /**
      * Number of test runs to return per page (1-100).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     public function __construct()

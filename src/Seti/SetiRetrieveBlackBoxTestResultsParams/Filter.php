@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Filter implements BaseModel
     /**
      * Filter results for a specific product.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     public function __construct()

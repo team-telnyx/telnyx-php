@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles\UserBundleListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,7 +25,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $country_iso
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $country_iso;
 
     /**
@@ -33,7 +33,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $resource
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $resource;
 
     public function __construct()

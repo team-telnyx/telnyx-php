@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Fqdns;
 
 use Telnyx\ConnectionsPaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,10 +20,10 @@ final class FqdnListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Fqdn>|null $data */
-    #[Api(list: Fqdn::class, optional: true)]
+    #[Optional(list: Fqdn::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionsPaginationMeta $meta;
 
     public function __construct()

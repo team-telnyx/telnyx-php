@@ -9,7 +9,8 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -61,7 +62,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     /**
      * The text or SSML to be converted into speech. There is a 3,000 character limit.
      */
-    #[Api]
+    #[Required]
     public string $payload;
 
     /**
@@ -77,31 +78,31 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      */
-    #[Api]
+    #[Required]
     public string $voice;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * The number of milliseconds to wait for input between digits.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $inter_digit_timeout_millis;
 
     /**
      * The text or SSML to be converted into speech when digits don't match the `valid_digits` parameter or the number of digits is not between `min` and `max`. There is a 3,000 character limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $invalid_payload;
 
     /**
@@ -109,25 +110,25 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * @var value-of<Language>|null $language
      */
-    #[Api(enum: Language::class, optional: true)]
+    #[Optional(enum: Language::class)]
     public ?string $language;
 
     /**
      * The maximum number of digits to fetch. This parameter has a maximum value of 128.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maximum_digits;
 
     /**
      * The maximum number of times that a file should be played back if there is no input from the user on the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maximum_tries;
 
     /**
      * The minimum number of digits to fetch. This parameter has a minimum value of 1.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $minimum_digits;
 
     /**
@@ -135,7 +136,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * @var value-of<PayloadType>|null $payload_type
      */
-    #[Api(enum: PayloadType::class, optional: true)]
+    #[Optional(enum: PayloadType::class)]
     public ?string $payload_type;
 
     /**
@@ -143,31 +144,31 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * @var value-of<ServiceLevel>|null $service_level
      */
-    #[Api(enum: ServiceLevel::class, optional: true)]
+    #[Optional(enum: ServiceLevel::class)]
     public ?string $service_level;
 
     /**
      * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $terminating_digit;
 
     /**
      * The number of milliseconds to wait for a DTMF response after speak ends before a replaying the sound file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_millis;
 
     /**
      * A list of all digits accepted as valid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $valid_digits;
 
     /**
      * The settings associated with the voice selected.
      */
-    #[Api(union: VoiceSettings::class, optional: true)]
+    #[Optional(union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
 
     /**

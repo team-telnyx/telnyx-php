@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,19 +27,19 @@ final class MessagingFeatureSet implements BaseModel
     /**
      * Send messages to and receive messages from numbers in the same country.
      */
-    #[Api]
+    #[Required]
     public bool $domestic_two_way;
 
     /**
      * Receive messages from numbers in other countries.
      */
-    #[Api]
+    #[Required]
     public bool $international_inbound;
 
     /**
      * Send messages to numbers in other countries.
      */
-    #[Api]
+    #[Required]
     public bool $international_outbound;
 
     /**

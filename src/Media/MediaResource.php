@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Media;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class MediaResource implements BaseModel
     /**
      * Content type of the file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $content_type;
 
     /**
      * ISO 8601 formatted date of when the media resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * ISO 8601 formatted date of when the media resource will expire and be deleted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $expires_at;
 
     /**
      * Uniquely identifies a media resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
      * ISO 8601 formatted date of when the media resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

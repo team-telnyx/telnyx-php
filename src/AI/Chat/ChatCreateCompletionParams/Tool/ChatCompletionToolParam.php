@@ -6,7 +6,7 @@ namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function1;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,11 +20,11 @@ final class ChatCompletionToolParam implements BaseModel
     /** @use SdkModel<ChatCompletionToolParamShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Function1 $function;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

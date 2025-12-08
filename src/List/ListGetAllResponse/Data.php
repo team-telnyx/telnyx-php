@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\List\ListGetAllResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\List\ListGetAllResponse\Data\Number;
@@ -22,17 +22,17 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number_of_channels;
 
     /** @var list<Number>|null $numbers */
-    #[Api(list: Number::class, optional: true)]
+    #[Optional(list: Number::class)]
     public ?array $numbers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $zone_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $zone_name;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -42,7 +43,7 @@ final class UsageReportListParams implements BaseModel
      *
      * @var list<string> $dimensions
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $dimensions;
 
     /**
@@ -50,31 +51,31 @@ final class UsageReportListParams implements BaseModel
      *
      * @var list<string> $metrics
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $metrics;
 
     /**
      * Telnyx product.
      */
-    #[Api]
+    #[Required]
     public string $product;
 
     /**
      * A more user-friendly way to specify the timespan you want to filter by. More options can be found in the Telnyx API Reference docs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_range;
 
     /**
      * The end date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_date;
 
     /**
      * Filter records on dimensions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter;
 
     /**
@@ -82,19 +83,19 @@ final class UsageReportListParams implements BaseModel
      *
      * @var value-of<Format>|null $format
      */
-    #[Api(enum: Format::class, optional: true)]
+    #[Optional(enum: Format::class)]
     public ?string $format;
 
     /**
      * Return the aggregations for all Managed Accounts under the user making the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $managed_accounts;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -102,19 +103,19 @@ final class UsageReportListParams implements BaseModel
      *
      * @var list<string>|null $sort
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $sort;
 
     /**
      * The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_date;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorization_bearer;
 
     /**

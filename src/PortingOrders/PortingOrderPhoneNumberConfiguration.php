@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,29 +25,29 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     /**
      * identifies the billing group to set on the numbers when ported.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $billing_group_id;
 
     /**
      * identifies the connection to set on the numbers when ported.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $connection_id;
 
     /**
      * identifies the emergency address to set on the numbers when ported.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $emergency_address_id;
 
     /**
      * identifies the messaging profile to set on the numbers when ported.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $messaging_profile_id;
 
     /** @var list<string>|null $tags */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     public function __construct()

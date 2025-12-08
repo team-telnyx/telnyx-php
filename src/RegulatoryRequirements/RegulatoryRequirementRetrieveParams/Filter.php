@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Action;
@@ -31,19 +31,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     /**
      * Country code(iso2) to check requirements for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Phone number to check requirements for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -51,13 +51,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * ID of requirement group to check requirements for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_group_id;
 
     public function __construct()

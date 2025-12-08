@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,25 +32,25 @@ final class ActionSendSipInfoParams implements BaseModel
     /**
      * Content of the SIP INFO.
      */
-    #[Api]
+    #[Required]
     public string $body;
 
     /**
      * Content type of the INFO body. Must be MIME type compliant. There is a 1,400 bytes limit.
      */
-    #[Api]
+    #[Required]
     public string $content_type;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**

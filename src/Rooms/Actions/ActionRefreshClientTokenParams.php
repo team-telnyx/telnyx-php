@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,13 +25,13 @@ final class ActionRefreshClientTokenParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $refresh_token;
 
     /**
      * The time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $token_ttl_secs;
 
     /**

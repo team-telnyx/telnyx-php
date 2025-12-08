@@ -6,7 +6,8 @@ namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConf
 
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure\Language;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure\Region;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,7 +29,7 @@ final class Azure implements BaseModel
      *
      * @var 'Azure' $transcription_engine
      */
-    #[Api]
+    #[Required]
     public string $transcription_engine = 'Azure';
 
     /**
@@ -36,13 +37,13 @@ final class Azure implements BaseModel
      *
      * @var value-of<Region> $region
      */
-    #[Api(enum: Region::class)]
+    #[Required(enum: Region::class)]
     public string $region;
 
     /**
      * Reference to the API key for authentication. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. The parameter is optional as defaults are available for some regions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $api_key_ref;
 
     /**
@@ -50,7 +51,7 @@ final class Azure implements BaseModel
      *
      * @var value-of<Language>|null $language
      */
-    #[Api(enum: Language::class, optional: true)]
+    #[Optional(enum: Language::class)]
     public ?string $language;
 
     /**

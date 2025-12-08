@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +27,31 @@ final class Inbound implements BaseModel
     /**
      * Maximum jitter variance for inbound audio.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $jitter_max_variance;
 
     /**
      * Number of packets used for jitter calculation on inbound audio.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $jitter_packet_count;
 
     /**
      * Mean Opinion Score (MOS) for inbound audio quality.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mos;
 
     /**
      * Total number of inbound audio packets.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $packet_count;
 
     /**
      * Number of skipped inbound packets (packet loss).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $skip_packet_count;
 
     public function __construct()

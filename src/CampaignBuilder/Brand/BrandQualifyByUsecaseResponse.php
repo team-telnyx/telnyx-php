@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CampaignBuilder\Brand;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,19 +27,19 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
     /**
      * Campaign annual subscription fee.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $annualFee;
 
     /**
      * Maximum number of sub-usecases declaration required.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxSubUsecases;
 
     /**
      * Minimum number of sub-usecases declaration required.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $minSubUsecases;
 
     /**
@@ -47,25 +47,25 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      *
      * @var array<string,mixed>|null $mnoMetadata
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $mnoMetadata;
 
     /**
      * Campaign monthly subscription fee.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $monthlyFee;
 
     /**
      * Campaign quarterly subscription fee.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $quarterlyFee;
 
     /**
      * Campaign usecase.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $usecase;
 
     public function __construct()

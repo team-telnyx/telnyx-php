@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +27,19 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     /**
      * Global IP ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $global_ip_id;
 
     /**
      * Enable/disable BGP announcement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_in_maintenance;
 
     /**
      * Wireguard peer ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wireguard_peer_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\ShippingCost;
@@ -28,22 +28,22 @@ final class Data implements BaseModel
     /**
      * The amount of SIM cards requested in the SIM card order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $quantity;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ShippingCost $shipping_cost;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardsCost $sim_cards_cost;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TotalCost $total_cost;
 
     public function __construct()

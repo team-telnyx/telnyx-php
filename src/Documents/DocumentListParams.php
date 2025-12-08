@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -39,13 +39,13 @@ final class DocumentListParams implements BaseModel
     /**
      * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -53,7 +53,7 @@ final class DocumentListParams implements BaseModel
      *
      * @var list<value-of<Sort>>|null $sort
      */
-    #[Api(list: Sort::class, optional: true)]
+    #[Optional(list: Sort::class)]
     public ?array $sort;
 
     public function __construct()

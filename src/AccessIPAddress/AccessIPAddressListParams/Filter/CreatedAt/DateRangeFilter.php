@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class DateRangeFilter implements BaseModel
     /**
      * Filter for creation date-time greater than.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gt;
 
     /**
      * Filter for creation date-time greater than or equal to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gte;
 
     /**
      * Filter for creation date-time less than.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lt;
 
     /**
      * Filter for creation date-time less than or equal to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lte;
 
     public function __construct()

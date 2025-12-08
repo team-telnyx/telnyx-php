@@ -7,7 +7,7 @@ namespace Telnyx\AI\Assistants\Tests\TestSuites\Runs;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus;
 use Telnyx\AI\Assistants\Tests\Runs\TestStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,13 +31,13 @@ final class PaginatedTestRunList implements BaseModel
      *
      * @var list<TestRunResponse> $data
      */
-    #[Api(list: TestRunResponse::class)]
+    #[Required(list: TestRunResponse::class)]
     public array $data;
 
     /**
      * Pagination metadata including total counts and current page info.
      */
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

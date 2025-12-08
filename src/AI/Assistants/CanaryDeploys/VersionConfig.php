@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class VersionConfig implements BaseModel
     /**
      * Percentage of traffic for this version [1-99].
      */
-    #[Api]
+    #[Required]
     public float $percentage;
 
     /**
      * Version ID string that references assistant_versions.version_id.
      */
-    #[Api]
+    #[Required]
     public string $version_id;
 
     /**

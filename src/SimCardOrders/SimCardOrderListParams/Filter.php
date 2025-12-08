@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrders\SimCardOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Filter\Address;
@@ -26,28 +26,28 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Address $address;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cost $cost;
 
     /**
      * Filter by ISO 8601 formatted date-time string matching resource creation date-time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Filter orders by how many SIM cards were ordered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $quantity;
 
     /**
      * Filter by ISO 8601 formatted date-time string matching resource last update date-time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

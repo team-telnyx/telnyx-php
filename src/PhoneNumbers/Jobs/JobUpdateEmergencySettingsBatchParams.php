@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,17 +30,17 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
     /**
      * Indicates whether to enable or disable emergency services on the numbers.
      */
-    #[Api]
+    #[Required]
     public bool $emergency_enabled;
 
     /** @var list<string> $phone_numbers */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $phone_numbers;
 
     /**
      * Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $emergency_address_id;
 
     /**

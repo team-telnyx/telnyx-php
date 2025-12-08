@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IPConnections\OutboundIP\AniOverrideType;
@@ -35,7 +35,7 @@ final class OutboundIP implements BaseModel
     /**
      * Set a phone number as the ani_override value to override caller id number on outbound calls.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ani_override;
 
     /**
@@ -43,50 +43,50 @@ final class OutboundIP implements BaseModel
      *
      * @var value-of<AniOverrideType>|null $ani_override_type
      */
-    #[Api(enum: AniOverrideType::class, optional: true)]
+    #[Optional(enum: AniOverrideType::class)]
     public ?string $ani_override_type;
 
     /**
      * Forces all SIP calls originated on this connection to be "parked" instead of "bridged" to the destination specified on the URI. Parked calls will return ringback to the caller and will await for a Call Control command to define which action will be taken next.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?bool $call_parking_enabled;
 
     /**
      * When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $generate_ringback_tone;
 
     /**
      * When set, ringback will not wait for indication before sending ringback tone to calling party.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $instant_ringback_enabled;
 
     /** @var value-of<IPAuthenticationMethod>|null $ip_authentication_method */
-    #[Api(enum: IPAuthenticationMethod::class, optional: true)]
+    #[Optional(enum: IPAuthenticationMethod::class)]
     public ?string $ip_authentication_method;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_authentication_token;
 
     /**
      * A 2-character country code specifying the country whose national dialing rules should be used. For example, if set to `US` then any US number can be dialed without preprending +1 to the number. When left blank, Telnyx will try US and GB dialing rules, in that order, by default.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $localization;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $outbound_voice_profile_id;
 
     /**
@@ -94,13 +94,13 @@ final class OutboundIP implements BaseModel
      *
      * @var value-of<T38ReinviteSource>|null $t38_reinvite_source
      */
-    #[Api(enum: T38ReinviteSource::class, optional: true)]
+    #[Optional(enum: T38ReinviteSource::class)]
     public ?string $t38_reinvite_source;
 
     /**
      * Numerical chars only, exactly 4 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tech_prefix;
 
     public function __construct()

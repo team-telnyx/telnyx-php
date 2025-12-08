@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPAddress;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,16 +18,16 @@ final class PaginationMetaCloudflareIPListSync implements BaseModel
     /** @use SdkModel<PaginationMetaCloudflareIPListSyncShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public int $page_number;
 
-    #[Api]
+    #[Required]
     public int $page_size;
 
-    #[Api]
+    #[Required]
     public int $total_pages;
 
-    #[Api]
+    #[Required]
     public int $total_results;
 
     /**

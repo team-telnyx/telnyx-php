@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
@@ -23,10 +23,10 @@ final class AutorespConfigListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<AutoRespConfig> $data */
-    #[Api(list: AutoRespConfig::class)]
+    #[Required(list: AutoRespConfig::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public PaginationMeta $meta;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationType;
@@ -31,13 +31,13 @@ final class PortingOrdersActivationJob implements BaseModel
     /**
      * Uniquely identifies this activation job.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the activation job should be executed. This time should be between some activation window.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $activate_at;
 
     /**
@@ -45,7 +45,7 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * @var value-of<ActivationType>|null $activation_type
      */
-    #[Api(enum: ActivationType::class, optional: true)]
+    #[Optional(enum: ActivationType::class)]
     public ?string $activation_type;
 
     /**
@@ -53,19 +53,19 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * @var list<ActivationWindow>|null $activation_windows
      */
-    #[Api(list: ActivationWindow::class, optional: true)]
+    #[Optional(list: ActivationWindow::class)]
     public ?array $activation_windows;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -73,13 +73,13 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

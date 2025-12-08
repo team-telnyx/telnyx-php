@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\CdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,21 +32,21 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     use SdkParams;
 
     /** @var value-of<AggregationType> $aggregation_type */
-    #[Api(enum: AggregationType::class)]
+    #[Required(enum: AggregationType::class)]
     public string $aggregation_type;
 
     /** @var value-of<ProductBreakdown> $product_breakdown */
-    #[Api(enum: ProductBreakdown::class)]
+    #[Required(enum: ProductBreakdown::class)]
     public string $product_breakdown;
 
     /** @var list<float>|null $connections */
-    #[Api(list: 'float', optional: true)]
+    #[Optional(list: 'float')]
     public ?array $connections;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_date;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_date;
 
     /**

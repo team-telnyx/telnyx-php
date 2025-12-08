@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data\OrderingGroup;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Order implements BaseModel
     /**
      * ID of the main number order.
      */
-    #[Api]
+    #[Required]
     public string $number_order_id;
 
     /**
@@ -29,7 +29,7 @@ final class Order implements BaseModel
      *
      * @var list<string> $sub_number_order_ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $sub_number_order_ids;
 
     /**

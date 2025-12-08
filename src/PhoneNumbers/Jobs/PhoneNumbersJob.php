@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError;
@@ -38,37 +38,37 @@ final class PhoneNumbersJob implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * ISO 8601 formatted date indicating when the estimated time of completion of the background job.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $etc;
 
     /** @var list<FailedOperation>|null $failed_operations */
-    #[Api(list: FailedOperation::class, optional: true)]
+    #[Optional(list: FailedOperation::class)]
     public ?array $failed_operations;
 
     /** @var list<PendingOperation>|null $pending_operations */
-    #[Api(list: PendingOperation::class, optional: true)]
+    #[Optional(list: PendingOperation::class)]
     public ?array $pending_operations;
 
     /** @var list<PhoneNumber>|null $phone_numbers */
-    #[Api(list: PhoneNumber::class, optional: true)]
+    #[Optional(list: PhoneNumber::class)]
     public ?array $phone_numbers;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -76,11 +76,11 @@ final class PhoneNumbersJob implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /** @var list<SuccessfulOperation>|null $successful_operations */
-    #[Api(list: SuccessfulOperation::class, optional: true)]
+    #[Optional(list: SuccessfulOperation::class)]
     public ?array $successful_operations;
 
     /**
@@ -88,13 +88,13 @@ final class PhoneNumbersJob implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

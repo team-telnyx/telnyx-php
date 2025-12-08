@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
 
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader\Name;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,13 +20,13 @@ final class SipHeader implements BaseModel
     use SdkModel;
 
     /** @var value-of<Name>|null $name */
-    #[Api(enum: Name::class, optional: true)]
+    #[Optional(enum: Name::class)]
     public ?string $name;
 
     /**
      * The value of the header. Note that we support mustache templating for the value. For example you can use `{{#integration_secret}}test-secret{{/integration_secret}}` to pass the value of the integration secret.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $value;
 
     public function __construct()

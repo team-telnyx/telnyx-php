@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +27,31 @@ final class Filter implements BaseModel
     /**
      * ISO alpha-2 country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * ID of the number order the sub number order belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order_request_id;
 
     /**
      * Phone Number Type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number_type;
 
     /**
      * Amount of numbers in the sub number order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $phone_numbers_count;
 
     /**
      * Filter sub number orders by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()

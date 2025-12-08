@@ -7,7 +7,7 @@ namespace Telnyx\Brand\BrandListResponse;
 use Telnyx\Brand\BrandIdentityStatus;
 use Telnyx\Brand\BrandListResponse\Record\Status;
 use Telnyx\Brand\EntityType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -36,37 +36,37 @@ final class Record implements BaseModel
     /**
      * Number of campaigns associated with the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $assignedCampaingsCount;
 
     /**
      * Unique identifier assigned to the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $brandId;
 
     /**
      * (Required for Non-profit/private/public) Legal company name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $companyName;
 
     /**
      * Date and time that the brand was created at.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $createdAt;
 
     /**
      * Display or marketing name of the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $displayName;
 
     /**
      * Valid email address of brand support contact.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
@@ -74,13 +74,13 @@ final class Record implements BaseModel
      *
      * @var value-of<EntityType>|null $entityType
      */
-    #[Api(enum: EntityType::class, optional: true)]
+    #[Optional(enum: EntityType::class)]
     public ?string $entityType;
 
     /**
      * Failure reasons for brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $failureReasons;
 
     /**
@@ -88,7 +88,7 @@ final class Record implements BaseModel
      *
      * @var value-of<BrandIdentityStatus>|null $identityStatus
      */
-    #[Api(enum: BrandIdentityStatus::class, optional: true)]
+    #[Optional(enum: BrandIdentityStatus::class)]
     public ?string $identityStatus;
 
     /**
@@ -96,25 +96,25 @@ final class Record implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Unique identifier assigned to the brand by the registry.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcrBrandId;
 
     /**
      * Date and time that the brand was last updated at.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updatedAt;
 
     /**
      * Brand website URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $website;
 
     public function __construct()

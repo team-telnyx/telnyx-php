@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class UploadNewResponse implements BaseModel
     /**
      * Describes wether or not the operation was successful.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $success;
 
     /**
      * Ticket id of the upload request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ticket_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class InsightSettings implements BaseModel
     /**
      * Reference to an Insight Group. Insights in this group will be run automatically for all the assistant's conversations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $insight_group_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSetting\Parameter;
@@ -20,7 +20,7 @@ final class NotificationSettingDeleteResponse implements BaseModel
     /** @use SdkModel<NotificationSettingDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?NotificationSetting $data;
 
     public function __construct()

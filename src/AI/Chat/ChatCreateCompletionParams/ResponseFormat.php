@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,7 +20,7 @@ final class ResponseFormat implements BaseModel
     use SdkModel;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

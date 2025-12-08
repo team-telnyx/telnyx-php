@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePushCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,19 +32,19 @@ final class MobilePushCredentialCreateParams implements BaseModel
     /**
      * Alias to uniquely identify the credential.
      */
-    #[Api]
+    #[Required]
     public string $alias;
 
     /**
      * Certificate as received from APNs.
      */
-    #[Api]
+    #[Required]
     public string $certificate;
 
     /**
      * Corresponding private key to the certificate as received from APNs.
      */
-    #[Api]
+    #[Required]
     public string $private_key;
 
     /**
@@ -52,7 +52,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -60,7 +60,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
      *
      * @var array<string,mixed> $project_account_json_file
      */
-    #[Api(map: 'mixed')]
+    #[Required(map: 'mixed')]
     public array $project_account_json_file;
 
     /**

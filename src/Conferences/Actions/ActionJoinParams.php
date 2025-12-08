@@ -7,7 +7,8 @@ namespace Telnyx\Conferences\Actions;
 use Telnyx\Conferences\Actions\ActionJoinParams\BeepEnabled;
 use Telnyx\Conferences\Actions\ActionJoinParams\Region;
 use Telnyx\Conferences\Actions\ActionJoinParams\SupervisorRole;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -48,7 +49,7 @@ final class ActionJoinParams implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
@@ -56,49 +57,49 @@ final class ActionJoinParams implements BaseModel
      *
      * @var value-of<BeepEnabled>|null $beep_enabled
      */
-    #[Api(enum: BeepEnabled::class, optional: true)]
+    #[Optional(enum: BeepEnabled::class)]
     public ?string $beep_enabled;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string. Please note that the client_state will be updated for the participient call leg and the change will not affect conferencing webhooks unless the participient is the owner of the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * Whether the conference should end and all remaining participants be hung up after the participant leaves the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $end_conference_on_exit;
 
     /**
      * Whether the participant should be put on hold immediately after joining the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hold;
 
     /**
      * The URL of a file to be played to the participant when they are put on hold after joining the conference. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $hold_audio_url;
 
     /**
      * The media_name of a file to be played to the participant when they are put on hold after joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $hold_media_name;
 
     /**
      * Whether the participant should be muted immediately after joining the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mute;
 
     /**
@@ -106,19 +107,19 @@ final class ActionJoinParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
      * Whether the conference should end after the participant leaves the conference. NOTE this doesn't hang up the other participants. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $soft_end_conference_on_exit;
 
     /**
      * Whether the conference should be started after the participant joins the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $start_conference_on_enter;
 
     /**
@@ -126,7 +127,7 @@ final class ActionJoinParams implements BaseModel
      *
      * @var value-of<SupervisorRole>|null $supervisor_role
      */
-    #[Api(enum: SupervisorRole::class, optional: true)]
+    #[Optional(enum: SupervisorRole::class)]
     public ?string $supervisor_role;
 
     /**
@@ -134,7 +135,7 @@ final class ActionJoinParams implements BaseModel
      *
      * @var list<string>|null $whisper_call_control_ids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $whisper_call_control_ids;
 
     /**

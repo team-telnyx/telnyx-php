@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,7 +33,7 @@ final class ActionListParams implements BaseModel
     /**
      * A valid SIM card group ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_sim_card_group_id_;
 
     /**
@@ -41,7 +41,7 @@ final class ActionListParams implements BaseModel
      *
      * @var value-of<FilterStatus>|null $filter_status_
      */
-    #[Api(enum: FilterStatus::class, optional: true)]
+    #[Optional(enum: FilterStatus::class)]
     public ?string $filter_status_;
 
     /**
@@ -49,19 +49,19 @@ final class ActionListParams implements BaseModel
      *
      * @var value-of<FilterType>|null $filter_type_
      */
-    #[Api(enum: FilterType::class, optional: true)]
+    #[Optional(enum: FilterType::class)]
     public ?string $filter_type_;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

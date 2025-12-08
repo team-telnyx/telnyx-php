@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
     /**
      * The identifier of the LOA configuration to use for the template. If not provided, the default LOA configuration will be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $loa_configuration_id;
 
     public function __construct()

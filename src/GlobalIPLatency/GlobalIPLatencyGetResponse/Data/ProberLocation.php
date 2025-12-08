@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,25 +21,25 @@ final class ProberLocation implements BaseModel
     /**
      * Location ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Latitude.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lat;
 
     /**
      * Longitude.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lon;
 
     /**
      * Location name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

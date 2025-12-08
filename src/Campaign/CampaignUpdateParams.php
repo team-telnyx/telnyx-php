@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,67 +37,67 @@ final class CampaignUpdateParams implements BaseModel
     /**
      * Help message of the campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $autoRenewal;
 
     /**
      * Help message of the campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $helpMessage;
 
     /**
      * Message flow description.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messageFlow;
 
     /**
      * Alphanumeric identifier of the reseller that you want to associate with this campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $resellerId;
 
     /**
      * Message sample. Some campaign tiers require 1 or more message samples.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sample1;
 
     /**
      * Message sample. Some campaign tiers require 2 or more message samples.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sample2;
 
     /**
      * Message sample. Some campaign tiers require 3 or more message samples.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sample3;
 
     /**
      * Message sample. Some campaign tiers require 4 or more message samples.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sample4;
 
     /**
      * Message sample. Some campaign tiers require 5 or more message samples.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sample5;
 
     /**
      * Webhook failover to which campaign status updates are sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookFailoverURL;
 
     /**
      * Webhook to which campaign status updates are sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookURL;
 
     public function __construct()

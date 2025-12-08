@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,37 +33,37 @@ final class ActionEnqueueParams implements BaseModel
     /**
      * The name of the queue the call should be put in. If a queue with a given name doesn't exist yet it will be created.
      */
-    #[Api]
+    #[Required]
     public string $queue_name;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * If set to true, the call will remain in the queue after hangup. In this case bridging to such call will fail with necessary information needed to re-establish the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $keep_after_hangup;
 
     /**
      * The maximum number of calls allowed in the queue at a given time. Can't be modified for an existing queue.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_size;
 
     /**
      * The number of seconds after which the call will be removed from the queue.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_wait_time_secs;
 
     /**

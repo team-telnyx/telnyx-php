@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class InterruptionSettings implements BaseModel
     /**
      * When true, allows users to interrupt the assistant while speaking.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable;
 
     public function __construct()

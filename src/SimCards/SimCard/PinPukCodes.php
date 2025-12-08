@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCard;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,25 +23,25 @@ final class PinPukCodes implements BaseModel
     /**
      * The primary Personal Identification Number (PIN) for the SIM card. This is a 4-digit code used to protect the SIM card from unauthorized use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pin1;
 
     /**
      * The secondary Personal Identification Number (PIN2) for the SIM card. This is a 4-digit code used for additional security features.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pin2;
 
     /**
      * The primary Personal Unblocking Key (PUK1) for the SIM card. This is an 8-digit code used to unlock the SIM card if PIN1 is entered incorrectly multiple times.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $puk1;
 
     /**
      * The secondary Personal Unblocking Key (PUK2) for the SIM card. This is an 8-digit code used to unlock the SIM card if PIN2 is entered incorrectly multiple times.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $puk2;
 
     public function __construct()

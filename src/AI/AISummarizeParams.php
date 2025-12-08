@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,19 +35,19 @@ final class AISummarizeParams implements BaseModel
     /**
      * The name of the bucket that contains the file to be summarized.
      */
-    #[Api]
+    #[Required]
     public string $bucket;
 
     /**
      * The name of the file to be summarized.
      */
-    #[Api]
+    #[Required]
     public string $filename;
 
     /**
      * A system prompt to guide the summary generation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $system_prompt;
 
     /**

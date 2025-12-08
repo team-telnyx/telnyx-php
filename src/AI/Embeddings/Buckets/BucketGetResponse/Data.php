@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings\Buckets\BucketGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,22 +24,22 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
-    #[Api]
+    #[Required]
     public string $filename;
 
-    #[Api]
+    #[Required]
     public string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_reason;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $last_embedded_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class ConversationInsight implements BaseModel
     /**
      * Unique identifier for the insight configuration.
      */
-    #[Api]
+    #[Required]
     public string $insight_id;
 
     /**
      * Insight result from the conversation. If the insight has a JSON schema, this will be stringified JSON object.
      */
-    #[Api]
+    #[Required]
     public string $result;
 
     /**

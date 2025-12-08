@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IntegrationSecrets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IntegrationSecrets\IntegrationSecretListResponse\Meta;
@@ -20,10 +20,10 @@ final class IntegrationSecretListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<IntegrationSecret> $data */
-    #[Api(list: IntegrationSecret::class)]
+    #[Required(list: IntegrationSecret::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

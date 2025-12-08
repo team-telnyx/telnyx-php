@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,19 +22,19 @@ final class CampaignSharingStatus implements BaseModel
     /** @use SdkModel<CampaignSharingStatusShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $downstreamCnpId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sharedDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sharingStatus;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $statusDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $upstreamCnpId;
 
     public function __construct()

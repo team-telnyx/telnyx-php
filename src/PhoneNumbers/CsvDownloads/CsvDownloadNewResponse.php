@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\CsvDownloads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
@@ -18,7 +18,7 @@ final class CsvDownloadNewResponse implements BaseModel
     use SdkModel;
 
     /** @var list<CsvDownload>|null $data */
-    #[Api(list: CsvDownload::class, optional: true)]
+    #[Optional(list: CsvDownload::class)]
     public ?array $data;
 
     public function __construct()

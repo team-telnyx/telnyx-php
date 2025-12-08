@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\LedgerBillingGroupReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\RecordType;
@@ -20,7 +20,7 @@ final class LedgerBillingGroupReportNewResponse implements BaseModel
     /** @use SdkModel<LedgerBillingGroupReportNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?LedgerBillingGroupReport $data;
 
     public function __construct()

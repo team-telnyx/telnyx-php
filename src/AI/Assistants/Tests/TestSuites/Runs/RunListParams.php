@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests\TestSuites\Runs;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,19 +30,19 @@ final class RunListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Filter runs by execution status (pending, running, completed, failed, timeout).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * Filter runs by specific suite execution batch ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $test_suite_run_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrderPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class UpdateRegulatoryRequirement implements BaseModel
     /**
      * The value of the requirement. For address and document requirements, this should be the ID of the resource. For textual, this should be the value of the requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_value;
 
     /**
      * Unique id for a requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Data implements BaseModel
     /**
      * The generated deeplink URL.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActionRequirements;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -26,13 +26,13 @@ final class ActionRequirementInitiateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $porting_order_id;
 
     /**
      * Required information for initiating the action requirement for AU ID verification.
      */
-    #[Api]
+    #[Required]
     public Params $params;
 
     /**

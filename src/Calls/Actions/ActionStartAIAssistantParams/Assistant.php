@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class Assistant implements BaseModel
     /**
      * The identifier of the AI assistant to use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The system instructions that the voice assistant uses during the start assistant command. This will overwrite the instructions set in the assistant configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * Reference to the OpenAI API key. Required only when using OpenAI models.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $openai_api_key_ref;
 
     public function __construct()

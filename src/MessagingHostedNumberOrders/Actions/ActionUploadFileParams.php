@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,13 +25,13 @@ final class ActionUploadFileParams implements BaseModel
     /**
      * Must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bill;
 
     /**
      * Must be a signed LOA for the numbers in the order in PDF format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $loa;
 
     public function __construct()

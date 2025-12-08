@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocServiceDocument;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Size implements BaseModel
     /**
      * The number of bytes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $amount;
 
     /**
      * Identifies the unit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     public function __construct()

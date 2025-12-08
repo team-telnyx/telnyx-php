@@ -6,7 +6,7 @@ namespace Telnyx\Calls;
 
 use Telnyx\Calls\CallGetStatusResponse\Data;
 use Telnyx\Calls\CallGetStatusResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class CallGetStatusResponse implements BaseModel
     /** @use SdkModel<CallGetStatusResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

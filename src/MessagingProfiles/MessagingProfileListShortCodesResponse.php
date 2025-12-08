@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\MessagingProfiles;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ShortCode;
@@ -22,10 +22,10 @@ final class MessagingProfileListShortCodesResponse implements BaseModel
     use SdkModel;
 
     /** @var list<ShortCode>|null $data */
-    #[Api(list: ShortCode::class, optional: true)]
+    #[Optional(list: ShortCode::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

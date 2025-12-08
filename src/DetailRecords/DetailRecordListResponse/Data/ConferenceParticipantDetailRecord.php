@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -34,103 +35,103 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     /** @use SdkModel<ConferenceParticipantDetailRecordShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Participant id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Duration of the conference call for billing purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $billed_sec;
 
     /**
      * Telnyx UUID that identifies the conference call leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * Duration of the conference call in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $call_sec;
 
     /**
      * Telnyx UUID that identifies with conference call session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * Conference id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conference_id;
 
     /**
      * Currency amount for Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * Number called by the participant to join the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_number;
 
     /**
      * Indicates whether Telnyx billing charges might be applicable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_telnyx_billable;
 
     /**
      * Participant join time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $joined_at;
 
     /**
      * Participant leave time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $left_at;
 
     /**
      * Participant origin number used in the conference call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $originating_number;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
     /**
      * Billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate_measured_in;
 
     /**
      * User id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**

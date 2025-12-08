@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1;
@@ -24,16 +24,16 @@ final class Data implements BaseModel
     use SdkModel;
 
     /** @var list<Category1>|null $categories */
-    #[Api(list: Category1::class, optional: true)]
+    #[Optional(list: Category1::class)]
     public ?array $categories;
 
     /**
      * The time the usage was recorded.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Total $total;
 
     public function __construct()

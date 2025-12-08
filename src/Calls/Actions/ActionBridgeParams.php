@@ -11,7 +11,8 @@ use Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat;
 use Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionBridgeParams\Ringtone;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -56,19 +57,19 @@ final class ActionBridgeParams implements BaseModel
     /**
      * The Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -76,25 +77,25 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<MuteDtmf>|null $mute_dtmf
      */
-    #[Api(enum: MuteDtmf::class, optional: true)]
+    #[Optional(enum: MuteDtmf::class)]
     public ?string $mute_dtmf;
 
     /**
      * Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $park_after_unbridge;
 
     /**
      * Specifies whether to play a ringtone if the call you want to bridge with has not yet been answered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $play_ringtone;
 
     /**
      * The name of the queue you want to bridge with, can't be used together with call_control_id parameter or video_room_id parameter. Bridging with a queue means bridging with the first call in the queue. The call will always be removed from the queue regardless of whether bridging succeeds. Returns an error when the queue is empty.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $queue;
 
     /**
@@ -102,7 +103,7 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<Record>|null $record
      */
-    #[Api(enum: Record::class, optional: true)]
+    #[Optional(enum: Record::class)]
     public ?string $record;
 
     /**
@@ -110,13 +111,13 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordChannels>|null $record_channels
      */
-    #[Api(enum: RecordChannels::class, optional: true)]
+    #[Optional(enum: RecordChannels::class)]
     public ?string $record_channels;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_custom_file_name;
 
     /**
@@ -124,19 +125,19 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordFormat>|null $record_format
      */
-    #[Api(enum: RecordFormat::class, optional: true)]
+    #[Optional(enum: RecordFormat::class)]
     public ?string $record_format;
 
     /**
      * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_max_length;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_timeout_secs;
 
     /**
@@ -144,7 +145,7 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordTrack>|null $record_track
      */
-    #[Api(enum: RecordTrack::class, optional: true)]
+    #[Optional(enum: RecordTrack::class)]
     public ?string $record_track;
 
     /**
@@ -152,7 +153,7 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordTrim>|null $record_trim
      */
-    #[Api(enum: RecordTrim::class, optional: true)]
+    #[Optional(enum: RecordTrim::class)]
     public ?string $record_trim;
 
     /**
@@ -160,19 +161,19 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<Ringtone>|null $ringtone
      */
-    #[Api(enum: Ringtone::class, optional: true)]
+    #[Optional(enum: Ringtone::class)]
     public ?string $ringtone;
 
     /**
      * The additional parameter that will be passed to the video conference. It is a text field and the user can decide how to use it. For example, you can set the participant name or pass JSON text. It can be used only with video_room_id parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $video_room_context;
 
     /**
      * The ID of the video room you want to bridge with, can't be used together with call_control_id parameter or queue parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $video_room_id;
 
     /**

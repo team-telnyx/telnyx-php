@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class PaginationMetaOAuth implements BaseModel
     /**
      * Current page number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number;
 
     /**
      * Number of items per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size;
 
     /**
      * Total number of pages.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_pages;
 
     /**
      * Total number of results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_results;
 
     public function __construct()

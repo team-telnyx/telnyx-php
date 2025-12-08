@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\SimCardAction\ActionType;
@@ -21,7 +21,7 @@ final class ActionSetPublicIPResponse implements BaseModel
     /**
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardAction $data;
 
     public function __construct()

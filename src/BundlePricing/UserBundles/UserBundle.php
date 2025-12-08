@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,38 +29,38 @@ final class UserBundle implements BaseModel
     /**
      * User bundle's ID, this is used to identify the user bundle in the API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Status of the user bundle.
      */
-    #[Api]
+    #[Required]
     public bool $active;
 
-    #[Api]
+    #[Required]
     public BillingBundleSummary $billing_bundle;
 
     /**
      * Date the user bundle was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /** @var list<UserBundleResource> $resources */
-    #[Api(list: UserBundleResource::class)]
+    #[Required(list: UserBundleResource::class)]
     public array $resources;
 
     /**
      * The customer's ID that owns this user bundle.
      */
-    #[Api]
+    #[Required]
     public string $user_id;
 
     /**
      * Date the user bundle was last updated.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $updated_at;
 
     /**

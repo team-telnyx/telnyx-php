@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,91 +33,91 @@ final class ConferenceDetailRecord implements BaseModel
     /** @use SdkModel<ConferenceDetailRecordShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Conference id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Telnyx UUID that identifies the conference call leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * Duration of the conference call in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $call_sec;
 
     /**
      * Telnyx UUID that identifies with conference call session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * Connection id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Conference end time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $ended_at;
 
     /**
      * Conference expiry time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $expires_at;
 
     /**
      * Indicates whether Telnyx billing charges might be applicable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_telnyx_billable;
 
     /**
      * Conference name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Sum of the conference call duration for all participants in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $participant_call_sec;
 
     /**
      * Number of participants that joined the conference call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $participant_count;
 
     /**
      * Region where the conference is hosted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
     /**
      * Conference start time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $started_at;
 
     /**
      * User id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**

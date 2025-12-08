@@ -8,7 +8,8 @@ use Telnyx\Conferences\Conference\EndedBy;
 use Telnyx\Conferences\Conference\EndReason;
 use Telnyx\Conferences\Conference\RecordType;
 use Telnyx\Conferences\Conference\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -35,35 +36,35 @@ final class Conference implements BaseModel
     /**
      * Uniquely identifies the conference.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * ISO 8601 formatted date of when the conference was created.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * ISO 8601 formatted date of when the conference will expire.
      */
-    #[Api]
+    #[Required]
     public string $expires_at;
 
     /**
      * Name of the conference.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * Identifies the connection associated with the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
@@ -71,19 +72,19 @@ final class Conference implements BaseModel
      *
      * @var value-of<EndReason>|null $end_reason
      */
-    #[Api(enum: EndReason::class, optional: true)]
+    #[Optional(enum: EndReason::class)]
     public ?string $end_reason;
 
     /**
      * IDs related to who ended the conference. It is expected for them to all be there or all be null.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?EndedBy $ended_by;
 
     /**
      * Region where the conference is hosted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
     /**
@@ -91,13 +92,13 @@ final class Conference implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date of when the conference was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**

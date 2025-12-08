@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\MessageCancelScheduledResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class Media implements BaseModel
     /**
      * The MIME type of the requested media.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $content_type;
 
     /**
      * The SHA256 hash of the requested media.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $sha256;
 
     /**
      * The size of the requested media.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $size;
 
     /**
      * The url of the media requested to be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()

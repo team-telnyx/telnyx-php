@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Networks\NetworkListInterfacesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
@@ -32,37 +32,37 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The id of the network associated with the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $network_id;
 
     /**
@@ -70,22 +70,22 @@ final class Data implements BaseModel
      *
      * @var value-of<InterfaceStatus>|null $status
      */
-    #[Api(enum: InterfaceStatus::class, optional: true)]
+    #[Optional(enum: InterfaceStatus::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Region $region;
 
     /**
      * The region interface is deployed to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_code;
 
     /**
      * Identifies the type of the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()

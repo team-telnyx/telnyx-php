@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Networks\DefaultGateway;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class DefaultGatewayCreateParams implements BaseModel
     /**
      * Wireguard peer ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wireguard_peer_id;
 
     public function __construct()

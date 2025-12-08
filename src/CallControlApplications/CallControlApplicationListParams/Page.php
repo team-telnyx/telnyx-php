@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CallControlApplications\CallControlApplicationListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +27,31 @@ final class Page implements BaseModel
     /**
      * Opaque identifier of next page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $after;
 
     /**
      * Opaque identifier of previous page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $before;
 
     /**
      * Limit of records per single page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     public function __construct()

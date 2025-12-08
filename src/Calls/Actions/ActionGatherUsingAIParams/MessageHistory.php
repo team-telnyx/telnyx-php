@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions\ActionGatherUsingAIParams;
 
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory\Role;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,7 +22,7 @@ final class MessageHistory implements BaseModel
     /**
      * The content of the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $content;
 
     /**
@@ -30,7 +30,7 @@ final class MessageHistory implements BaseModel
      *
      * @var value-of<Role>|null $role
      */
-    #[Api(enum: Role::class, optional: true)]
+    #[Optional(enum: Role::class)]
     public ?string $role;
 
     public function __construct()

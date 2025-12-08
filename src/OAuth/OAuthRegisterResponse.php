@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,25 +33,25 @@ final class OAuthRegisterResponse implements BaseModel
     /**
      * Unique client identifier.
      */
-    #[Api]
+    #[Required]
     public string $client_id;
 
     /**
      * Unix timestamp of when the client ID was issued.
      */
-    #[Api]
+    #[Required]
     public int $client_id_issued_at;
 
     /**
      * Human-readable client name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_name;
 
     /**
      * Client secret (only for confidential clients).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_secret;
 
     /**
@@ -58,19 +59,19 @@ final class OAuthRegisterResponse implements BaseModel
      *
      * @var list<string>|null $grant_types
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $grant_types;
 
     /**
      * URL of the client logo.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $logo_uri;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $policy_uri;
 
     /**
@@ -78,7 +79,7 @@ final class OAuthRegisterResponse implements BaseModel
      *
      * @var list<string>|null $redirect_uris
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $redirect_uris;
 
     /**
@@ -86,25 +87,25 @@ final class OAuthRegisterResponse implements BaseModel
      *
      * @var list<string>|null $response_types
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $response_types;
 
     /**
      * Space-separated scope values.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**
      * Token endpoint authentication method.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token_endpoint_auth_method;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tos_uri;
 
     /**

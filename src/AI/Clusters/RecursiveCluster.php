@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Clusters;
 
 use Telnyx\AI\Clusters\RecursiveCluster\Node;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,24 +25,24 @@ final class RecursiveCluster implements BaseModel
     /** @use SdkModel<RecursiveClusterShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $cluster_id;
 
-    #[Api]
+    #[Required]
     public string $cluster_summary;
 
-    #[Api]
+    #[Required]
     public int $total_number_of_nodes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cluster_header;
 
     /** @var list<Node>|null $nodes */
-    #[Api(list: Node::class, optional: true)]
+    #[Optional(list: Node::class)]
     public ?array $nodes;
 
     /** @var list<mixed>|null $subclusters */
-    #[Api(list: RecursiveCluster::class, optional: true)]
+    #[Optional(list: RecursiveCluster::class)]
     public ?array $subclusters;
 
     /**

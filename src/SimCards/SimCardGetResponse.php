@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData;
@@ -24,7 +24,7 @@ final class SimCardGetResponse implements BaseModel
     /** @use SdkModel<SimCardGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCard $data;
 
     public function __construct()

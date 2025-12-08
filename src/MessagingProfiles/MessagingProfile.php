@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
@@ -44,67 +44,67 @@ final class MessagingProfile implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $alpha_sender;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * The maximum amount of money (in USD) that can be spent by this profile before midnight UTC.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $daily_spend_limit;
 
     /**
      * Whether to enforce the value configured by `daily_spend_limit`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $daily_spend_limit_enabled;
 
     /**
      * Specifies whether the messaging profile is enabled or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * DEPRECATED: health check url service checking.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $health_webhook_url;
 
     /**
      * enables SMS fallback for MMS messages.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mms_fall_back_to_sms;
 
     /**
      * enables automated resizing of MMS media.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mms_transcoding;
 
     /**
      * Send messages only to mobile phone numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mobile_only;
 
     /**
      * A user friendly name for the messaging profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -114,7 +114,7 @@ final class MessagingProfile implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?NumberPoolSettings $number_pool_settings;
 
     /**
@@ -122,25 +122,25 @@ final class MessagingProfile implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * Indicates whether message content redaction is enabled for this profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $redaction_enabled;
 
     /**
      * Determines how much information is redacted in messages for privacy or compliance purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $redaction_level;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
@@ -152,13 +152,13 @@ final class MessagingProfile implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?URLShortenerSettings $url_shortener_settings;
 
     /**
      * Secret used to authenticate with v1 endpoints.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $v1_secret;
 
     /**
@@ -166,19 +166,19 @@ final class MessagingProfile implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_failover_url;
 
     /**
      * The URL where webhooks related to this messaging profile will be sent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_url;
 
     /**
@@ -186,7 +186,7 @@ final class MessagingProfile implements BaseModel
      *
      * @var list<string>|null $whitelisted_destinations
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $whitelisted_destinations;
 
     public function __construct()
