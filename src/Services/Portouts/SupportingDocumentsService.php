@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
@@ -40,14 +41,16 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SupportingDocumentNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['portouts/%1$s/supporting_documents', $id],
             body: (object) $parsed,
             options: $options,
             convert: SupportingDocumentNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -61,12 +64,14 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SupportingDocumentListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SupportingDocumentListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['portouts/%1$s/supporting_documents', $id],
             options: $requestOptions,
             convert: SupportingDocumentListResponse::class,
         );
+
+        return $response->parse();
     }
 }

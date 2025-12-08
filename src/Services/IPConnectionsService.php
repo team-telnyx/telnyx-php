@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -102,14 +103,16 @@ final class IPConnectionsService implements IPConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPConnectionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ip_connections',
             body: (object) $parsed,
             options: $options,
             convert: IPConnectionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -123,13 +126,15 @@ final class IPConnectionsService implements IPConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ip_connections/%1$s', $id],
             options: $requestOptions,
             convert: IPConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -208,14 +213,16 @@ final class IPConnectionsService implements IPConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPConnectionUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['ip_connections/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: IPConnectionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -244,14 +251,16 @@ final class IPConnectionsService implements IPConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPConnectionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ip_connections',
             query: $parsed,
             options: $options,
             convert: IPConnectionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -265,12 +274,14 @@ final class IPConnectionsService implements IPConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPConnectionDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPConnectionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ip_connections/%1$s', $id],
             options: $requestOptions,
             convert: IPConnectionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

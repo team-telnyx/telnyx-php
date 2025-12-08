@@ -14,6 +14,7 @@ use Telnyx\AI\Conversations\ConversationListResponse;
 use Telnyx\AI\Conversations\ConversationUpdateParams;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
@@ -68,14 +69,16 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<Conversation> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/conversations',
             body: (object) $parsed,
             options: $options,
             convert: Conversation::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -89,13 +92,15 @@ final class ConversationsService implements ConversationsContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): ConversationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConversationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/conversations/%1$s', $conversationID],
             options: $requestOptions,
             convert: ConversationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -117,14 +122,16 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConversationUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['ai/conversations/%1$s', $conversationID],
             body: (object) $parsed,
             options: $options,
             convert: ConversationUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -158,14 +165,16 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConversationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/conversations',
             query: $parsed,
             options: $options,
             convert: ConversationListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -179,13 +188,15 @@ final class ConversationsService implements ConversationsContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/conversations/%1$s', $conversationID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -216,14 +227,16 @@ final class ConversationsService implements ConversationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/conversations/%1$s/message', $conversationID],
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -237,12 +250,14 @@ final class ConversationsService implements ConversationsContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): ConversationGetConversationsInsightsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConversationGetConversationsInsightsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/conversations/%1$s/conversations-insights', $conversationID],
             options: $requestOptions,
             convert: ConversationGetConversationsInsightsResponse::class,
         );
+
+        return $response->parse();
     }
 }

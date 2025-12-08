@@ -6,21 +6,17 @@ namespace Telnyx\PublicInternetGateways;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse\Data;
 
 /**
  * @phpstan-type PublicInternetGatewayGetResponseShape = array{data?: Data|null}
  */
-final class PublicInternetGatewayGetResponse implements BaseModel, ResponseConverter
+final class PublicInternetGatewayGetResponse implements BaseModel
 {
     /** @use SdkModel<PublicInternetGatewayGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

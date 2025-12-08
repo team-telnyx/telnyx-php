@@ -6,21 +6,17 @@ namespace Telnyx\Payment\AutoRechargePrefs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data\Preference;
 
 /**
  * @phpstan-type AutoRechargePrefListResponseShape = array{data?: Data|null}
  */
-final class AutoRechargePrefListResponse implements BaseModel, ResponseConverter
+final class AutoRechargePrefListResponse implements BaseModel
 {
     /** @use SdkModel<AutoRechargePrefListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

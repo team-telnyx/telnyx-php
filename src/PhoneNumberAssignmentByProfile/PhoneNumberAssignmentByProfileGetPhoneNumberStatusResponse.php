@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumberAssignmentByProfile;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhone
  *   records: list<Record>
  * }
  */
-final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel, ResponseConverter
+final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Record> $records */
     #[Api(list: Record::class)]

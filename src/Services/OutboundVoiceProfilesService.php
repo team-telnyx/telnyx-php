@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
@@ -69,14 +70,16 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OutboundVoiceProfileNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'outbound_voice_profiles',
             body: (object) $parsed,
             options: $options,
             convert: OutboundVoiceProfileNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -90,13 +93,15 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OutboundVoiceProfileGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['outbound_voice_profiles/%1$s', $id],
             options: $requestOptions,
             convert: OutboundVoiceProfileGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -140,14 +145,16 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OutboundVoiceProfileUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['outbound_voice_profiles/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: OutboundVoiceProfileUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -172,14 +179,16 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OutboundVoiceProfileListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'outbound_voice_profiles',
             query: $parsed,
             options: $options,
             convert: OutboundVoiceProfileListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -193,12 +202,14 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OutboundVoiceProfileDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['outbound_voice_profiles/%1$s', $id],
             options: $requestOptions,
             convert: OutboundVoiceProfileDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

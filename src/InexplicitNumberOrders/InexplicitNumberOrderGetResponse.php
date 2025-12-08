@@ -6,21 +6,17 @@ namespace Telnyx\InexplicitNumberOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data\OrderingGroup;
 
 /**
  * @phpstan-type InexplicitNumberOrderGetResponseShape = array{data?: Data|null}
  */
-final class InexplicitNumberOrderGetResponse implements BaseModel, ResponseConverter
+final class InexplicitNumberOrderGetResponse implements BaseModel
 {
     /** @use SdkModel<InexplicitNumberOrderGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

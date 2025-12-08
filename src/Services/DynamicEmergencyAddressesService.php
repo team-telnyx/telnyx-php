@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
@@ -52,14 +53,16 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyAddressNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'dynamic_emergency_addresses',
             body: (object) $parsed,
             options: $options,
             convert: DynamicEmergencyAddressNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -73,13 +76,15 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyAddressGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['dynamic_emergency_addresses/%1$s', $id],
             options: $requestOptions,
             convert: DynamicEmergencyAddressGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -105,14 +110,16 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyAddressListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'dynamic_emergency_addresses',
             query: $parsed,
             options: $options,
             convert: DynamicEmergencyAddressListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,12 +133,14 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyAddressDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['dynamic_emergency_addresses/%1$s', $id],
             options: $requestOptions,
             convert: DynamicEmergencyAddressDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

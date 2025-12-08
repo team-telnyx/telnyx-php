@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumberCampaigns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
  *   page: int, records: list<PhoneNumberCampaign>, totalRecords: int
  * }
  */
-final class PhoneNumberCampaignListResponse implements BaseModel, ResponseConverter
+final class PhoneNumberCampaignListResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberCampaignListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public int $page;

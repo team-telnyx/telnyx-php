@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
@@ -57,14 +58,16 @@ final class FaxApplicationsService implements FaxApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxApplicationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'fax_applications',
             body: (object) $parsed,
             options: $options,
             convert: FaxApplicationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,13 +81,15 @@ final class FaxApplicationsService implements FaxApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxApplicationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['fax_applications/%1$s', $id],
             options: $requestOptions,
             convert: FaxApplicationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,14 +126,16 @@ final class FaxApplicationsService implements FaxApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxApplicationUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['fax_applications/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: FaxApplicationUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -156,14 +163,16 @@ final class FaxApplicationsService implements FaxApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxApplicationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'fax_applications',
             query: $parsed,
             options: $options,
             convert: FaxApplicationListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -177,12 +186,14 @@ final class FaxApplicationsService implements FaxApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxApplicationDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['fax_applications/%1$s', $id],
             options: $requestOptions,
             convert: FaxApplicationDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

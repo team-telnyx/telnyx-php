@@ -7,9 +7,7 @@ namespace Telnyx\ManagedAccounts;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data\RecordType;
 
@@ -18,12 +16,10 @@ use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data\RecordType;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class ManagedAccountListResponse implements BaseModel, ResponseConverter
+final class ManagedAccountListResponse implements BaseModel
 {
     /** @use SdkModel<ManagedAccountListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

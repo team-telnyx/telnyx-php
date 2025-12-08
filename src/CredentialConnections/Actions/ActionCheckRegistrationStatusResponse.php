@@ -6,9 +6,7 @@ namespace Telnyx\CredentialConnections\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\D
  *   data?: Data|null
  * }
  */
-final class ActionCheckRegistrationStatusResponse implements BaseModel, ResponseConverter
+final class ActionCheckRegistrationStatusResponse implements BaseModel
 {
     /** @use SdkModel<ActionCheckRegistrationStatusResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

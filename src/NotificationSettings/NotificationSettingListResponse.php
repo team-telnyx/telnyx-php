@@ -7,9 +7,7 @@ namespace Telnyx\NotificationSettings;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NotificationSettings\NotificationSetting\Parameter;
 use Telnyx\NotificationSettings\NotificationSetting\Status;
 
@@ -18,12 +16,10 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
  *   data?: list<NotificationSetting>|null, meta?: PaginationMeta|null
  * }
  */
-final class NotificationSettingListResponse implements BaseModel, ResponseConverter
+final class NotificationSettingListResponse implements BaseModel
 {
     /** @use SdkModel<NotificationSettingListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<NotificationSetting>|null $data */
     #[Api(list: NotificationSetting::class, optional: true)]

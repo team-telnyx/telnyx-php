@@ -6,9 +6,7 @@ namespace Telnyx\OAuthGrants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthClients\PaginationMetaOAuth;
 use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
@@ -17,12 +15,10 @@ use Telnyx\OAuthGrants\OAuthGrant\RecordType;
  *   data?: list<OAuthGrant>|null, meta?: PaginationMetaOAuth|null
  * }
  */
-final class OAuthGrantListResponse implements BaseModel, ResponseConverter
+final class OAuthGrantListResponse implements BaseModel
 {
     /** @use SdkModel<OAuthGrantListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<OAuthGrant>|null $data */
     #[Api(list: OAuthGrant::class, optional: true)]

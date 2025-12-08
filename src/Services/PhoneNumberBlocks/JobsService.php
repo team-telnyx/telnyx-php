@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumberBlocks;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
@@ -32,13 +33,15 @@ final class JobsService implements JobsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): JobGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phone_number_blocks/jobs/%1$s', $id],
             options: $requestOptions,
             convert: JobGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -66,14 +69,16 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_number_blocks/jobs',
             query: $parsed,
             options: $options,
             convert: JobListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -96,13 +101,15 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobDeletePhoneNumberBlockResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phone_number_blocks/jobs/delete_phone_number_block',
             body: (object) $parsed,
             options: $options,
             convert: JobDeletePhoneNumberBlockResponse::class,
         );
+
+        return $response->parse();
     }
 }

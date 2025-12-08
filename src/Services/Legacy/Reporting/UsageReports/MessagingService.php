@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
@@ -47,8 +48,8 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'legacy/reporting/usage_reports/messaging',
             headers: ['Content-Type' => '*/*'],
@@ -56,6 +57,8 @@ final class MessagingService implements MessagingContract
             options: $options,
             convert: MessagingNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -69,13 +72,15 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['legacy/reporting/usage_reports/messaging/%1$s', $id],
             options: $requestOptions,
             convert: MessagingGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -96,14 +101,16 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/messaging',
             query: $parsed,
             options: $options,
             convert: MessagingListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -117,12 +124,14 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/usage_reports/messaging/%1$s', $id],
             options: $requestOptions,
             convert: MessagingDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

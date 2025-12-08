@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Integrations;
 use Telnyx\AI\Integrations\Connections\ConnectionGetResponse;
 use Telnyx\AI\Integrations\Connections\ConnectionListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Integrations\ConnectionsContract;
@@ -29,13 +30,15 @@ final class ConnectionsService implements ConnectionsContract
         string $userConnectionID,
         ?RequestOptions $requestOptions = null
     ): ConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/integrations/connections/%1$s', $userConnectionID],
             options: $requestOptions,
             convert: ConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -48,13 +51,15 @@ final class ConnectionsService implements ConnectionsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): ConnectionListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConnectionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/integrations/connections',
             options: $requestOptions,
             convert: ConnectionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -68,12 +73,14 @@ final class ConnectionsService implements ConnectionsContract
         string $userConnectionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/integrations/connections/%1$s', $userConnectionID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

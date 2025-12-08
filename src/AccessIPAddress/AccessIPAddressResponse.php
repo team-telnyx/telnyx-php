@@ -6,9 +6,7 @@ namespace Telnyx\AccessIPAddress;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccessIPAddressResponseShape = array{
@@ -22,12 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class AccessIPAddressResponse implements BaseModel, ResponseConverter
+final class AccessIPAddressResponse implements BaseModel
 {
     /** @use SdkModel<AccessIPAddressResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
@@ -44,14 +45,16 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AdditionalDocumentNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/additional_documents', $id],
             body: (object) $parsed,
             options: $options,
             convert: AdditionalDocumentNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -77,14 +80,16 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AdditionalDocumentListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/additional_documents', $id],
             query: $parsed,
             options: $options,
             convert: AdditionalDocumentListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -108,8 +113,8 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'porting_orders/%1$s/additional_documents/%2$s',
@@ -119,5 +124,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

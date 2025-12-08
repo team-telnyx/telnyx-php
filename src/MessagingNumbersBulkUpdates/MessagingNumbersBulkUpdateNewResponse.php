@@ -6,9 +6,7 @@ namespace Telnyx\MessagingNumbersBulkUpdates;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Data;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Data\RecordType;
 
@@ -17,12 +15,10 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Dat
  *   data?: Data|null
  * }
  */
-final class MessagingNumbersBulkUpdateNewResponse implements BaseModel, ResponseConverter
+final class MessagingNumbersBulkUpdateNewResponse implements BaseModel
 {
     /** @use SdkModel<MessagingNumbersBulkUpdateNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

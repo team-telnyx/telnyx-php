@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Transcriptions;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
@@ -42,8 +43,8 @@ final class JsonService implements JsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'texml/Accounts/%1$s/Transcriptions/%2$s.json',
@@ -53,6 +54,8 @@ final class JsonService implements JsonContract
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,8 +81,8 @@ final class JsonService implements JsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JsonGetRecordingTranscriptionSidJsonResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'texml/Accounts/%1$s/Transcriptions/%2$s.json',
@@ -89,5 +92,7 @@ final class JsonService implements JsonContract
             options: $options,
             convert: JsonGetRecordingTranscriptionSidJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

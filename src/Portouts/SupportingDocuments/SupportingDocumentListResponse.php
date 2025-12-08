@@ -6,9 +6,7 @@ namespace Telnyx\Portouts\SupportingDocuments;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data\Type;
 
@@ -17,12 +15,10 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data\Type
  *   data?: list<Data>|null
  * }
  */
-final class SupportingDocumentListResponse implements BaseModel, ResponseConverter
+final class SupportingDocumentListResponse implements BaseModel
 {
     /** @use SdkModel<SupportingDocumentListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

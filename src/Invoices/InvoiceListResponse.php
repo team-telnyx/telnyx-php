@@ -6,9 +6,7 @@ namespace Telnyx\Invoices;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Invoices\InvoiceListResponse\Data;
 use Telnyx\Invoices\InvoiceListResponse\Meta;
 
@@ -17,12 +15,10 @@ use Telnyx\Invoices\InvoiceListResponse\Meta;
  *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
-final class InvoiceListResponse implements BaseModel, ResponseConverter
+final class InvoiceListResponse implements BaseModel
 {
     /** @use SdkModel<InvoiceListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

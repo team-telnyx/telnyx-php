@@ -6,9 +6,7 @@ namespace Telnyx\WellKnown;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WellKnownGetAuthorizationServerMetadataResponseShape = array{
@@ -25,12 +23,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   token_endpoint_auth_methods_supported?: list<string>|null,
  * }
  */
-final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel, ResponseConverter
+final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
 {
     /** @use SdkModel<WellKnownGetAuthorizationServerMetadataResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Authorization endpoint URL.

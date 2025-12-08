@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OAuth\OAuthGetJwksResponse;
 use Telnyx\OAuth\OAuthGetResponse;
@@ -38,13 +39,15 @@ final class OAuthService implements OAuthContract
         string $consentToken,
         ?RequestOptions $requestOptions = null
     ): OAuthGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['oauth/consent/%1$s', $consentToken],
             options: $requestOptions,
             convert: OAuthGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,14 +68,16 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthGrantsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'oauth/grants',
             body: (object) $parsed,
             options: $options,
             convert: OAuthGrantsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,8 +98,8 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthIntrospectResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'oauth/introspect',
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
@@ -102,6 +107,8 @@ final class OAuthService implements OAuthContract
             options: $options,
             convert: OAuthIntrospectResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -132,14 +139,16 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthRegisterResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'oauth/register',
             body: (object) $parsed,
             options: $options,
             convert: OAuthRegisterResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -168,14 +177,16 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'get',
             path: 'oauth/authorize',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -188,13 +199,15 @@ final class OAuthService implements OAuthContract
     public function retrieveJwks(
         ?RequestOptions $requestOptions = null
     ): OAuthGetJwksResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthGetJwksResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'oauth/jwks',
             options: $requestOptions,
             convert: OAuthGetJwksResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -224,8 +237,8 @@ final class OAuthService implements OAuthContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthTokenResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'oauth/token',
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
@@ -233,5 +246,7 @@ final class OAuthService implements OAuthContract
             options: $options,
             convert: OAuthTokenResponse::class,
         );
+
+        return $response->parse();
     }
 }

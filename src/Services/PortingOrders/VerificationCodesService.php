@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
@@ -44,14 +45,16 @@ final class VerificationCodesService implements VerificationCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerificationCodeListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/verification_codes', $id],
             query: $parsed,
             options: $options,
             convert: VerificationCodeListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,14 +78,16 @@ final class VerificationCodesService implements VerificationCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/verification_codes/send', $id],
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -106,13 +111,15 @@ final class VerificationCodesService implements VerificationCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerificationCodeVerifyResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/verification_codes/verify', $id],
             body: (object) $parsed,
             options: $options,
             convert: VerificationCodeVerifyResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
@@ -44,14 +45,16 @@ final class IPsService implements IPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ips',
             body: (object) $parsed,
             options: $options,
             convert: IPNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class IPsService implements IPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ips/%1$s', $id],
             options: $requestOptions,
             convert: IPGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -95,14 +100,16 @@ final class IPsService implements IPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['ips/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: IPUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,14 +133,16 @@ final class IPsService implements IPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ips',
             query: $parsed,
             options: $options,
             convert: IPListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,12 +156,14 @@ final class IPsService implements IPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): IPDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IPDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ips/%1$s', $id],
             options: $requestOptions,
             convert: IPDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

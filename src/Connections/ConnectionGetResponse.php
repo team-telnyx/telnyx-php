@@ -8,20 +8,16 @@ use Telnyx\Connections\ConnectionGetResponse\Data;
 use Telnyx\Connections\ConnectionGetResponse\Data\WebhookAPIVersion;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 
 /**
  * @phpstan-type ConnectionGetResponseShape = array{data?: Data|null}
  */
-final class ConnectionGetResponse implements BaseModel, ResponseConverter
+final class ConnectionGetResponse implements BaseModel
 {
     /** @use SdkModel<ConnectionGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

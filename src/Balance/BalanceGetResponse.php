@@ -8,19 +8,15 @@ use Telnyx\Balance\BalanceGetResponse\Data;
 use Telnyx\Balance\BalanceGetResponse\Data\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BalanceGetResponseShape = array{data?: Data|null}
  */
-final class BalanceGetResponse implements BaseModel, ResponseConverter
+final class BalanceGetResponse implements BaseModel
 {
     /** @use SdkModel<BalanceGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -7,9 +7,7 @@ namespace Telnyx\NumberOrderPhoneNumbers;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\RequirementsStatus;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\Status;
@@ -20,12 +18,10 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
  *   data?: list<NumberOrderPhoneNumber>|null, meta?: PaginationMeta|null
  * }
  */
-final class NumberOrderPhoneNumberListResponse implements BaseModel, ResponseConverter
+final class NumberOrderPhoneNumberListResponse implements BaseModel
 {
     /** @use SdkModel<NumberOrderPhoneNumberListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<NumberOrderPhoneNumber>|null $data */
     #[Api(list: NumberOrderPhoneNumber::class, optional: true)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
@@ -42,14 +43,16 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PublicInternetGatewayNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'public_internet_gateways',
             body: (object) $parsed,
             options: $options,
             convert: PublicInternetGatewayNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PublicInternetGatewayGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['public_internet_gateways/%1$s', $id],
             options: $requestOptions,
             convert: PublicInternetGatewayGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -92,14 +97,16 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PublicInternetGatewayListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'public_internet_gateways',
             query: $parsed,
             options: $options,
             convert: PublicInternetGatewayListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -113,12 +120,14 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PublicInternetGatewayDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['public_internet_gateways/%1$s', $id],
             options: $requestOptions,
             convert: PublicInternetGatewayDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

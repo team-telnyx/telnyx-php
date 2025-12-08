@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 use Telnyx\ChargesSummary\ChargesSummaryRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesSummaryContract;
@@ -38,13 +39,15 @@ final class ChargesSummaryService implements ChargesSummaryContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ChargesSummaryGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'charges_summary',
             query: $parsed,
             options: $options,
             convert: ChargesSummaryGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

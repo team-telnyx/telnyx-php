@@ -6,9 +6,7 @@ namespace Telnyx\VerifyProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * A list of Verify profile message templates.
@@ -17,12 +15,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   data: list<VerifyProfileMessageTemplateResponse>
  * }
  */
-final class VerifyProfileGetTemplatesResponse implements BaseModel, ResponseConverter
+final class VerifyProfileGetTemplatesResponse implements BaseModel
 {
     /** @use SdkModel<VerifyProfileGetTemplatesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<VerifyProfileMessageTemplateResponse> $data */
     #[Api(list: VerifyProfileMessageTemplateResponse::class)]

@@ -6,9 +6,7 @@ namespace Telnyx\OtaUpdates;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Status;
@@ -17,12 +15,10 @@ use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Type;
 /**
  * @phpstan-type OtaUpdateGetResponseShape = array{data?: Data|null}
  */
-final class OtaUpdateGetResponse implements BaseModel, ResponseConverter
+final class OtaUpdateGetResponse implements BaseModel
 {
     /** @use SdkModel<OtaUpdateGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>.

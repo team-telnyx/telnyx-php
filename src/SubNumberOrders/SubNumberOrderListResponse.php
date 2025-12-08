@@ -7,9 +7,7 @@ namespace Telnyx\SubNumberOrders;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SubNumberOrders\SubNumberOrder\PhoneNumberType;
 use Telnyx\SubNumberOrders\SubNumberOrder\Status;
 
@@ -18,12 +16,10 @@ use Telnyx\SubNumberOrders\SubNumberOrder\Status;
  *   data?: list<SubNumberOrder>|null, meta?: PaginationMeta|null
  * }
  */
-final class SubNumberOrderListResponse implements BaseModel, ResponseConverter
+final class SubNumberOrderListResponse implements BaseModel
 {
     /** @use SdkModel<SubNumberOrderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<SubNumberOrder>|null $data */
     #[Api(list: SubNumberOrder::class, optional: true)]

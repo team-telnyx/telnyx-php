@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
@@ -48,14 +49,16 @@ final class ActionRequirementsService implements ActionRequirementsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRequirementListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/action_requirements', $portingOrderID],
             query: $parsed,
             options: $options,
             convert: ActionRequirementListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,8 +84,8 @@ final class ActionRequirementsService implements ActionRequirementsContract
         $portingOrderID = $parsed['porting_order_id'];
         unset($parsed['porting_order_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRequirementInitiateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'porting_orders/%1$s/action_requirements/%2$s/initiate',
@@ -93,5 +96,7 @@ final class ActionRequirementsService implements ActionRequirementsContract
             options: $options,
             convert: ActionRequirementInitiateResponse::class,
         );
+
+        return $response->parse();
     }
 }

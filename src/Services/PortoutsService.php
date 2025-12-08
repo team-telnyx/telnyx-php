@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
@@ -65,13 +66,15 @@ final class PortoutsService implements PortoutsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PortoutGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortoutGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['portouts/%1$s', $id],
             options: $requestOptions,
             convert: PortoutGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -112,14 +115,16 @@ final class PortoutsService implements PortoutsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortoutListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'portouts',
             query: $parsed,
             options: $options,
             convert: PortoutListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -143,14 +148,16 @@ final class PortoutsService implements PortoutsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortoutListRejectionCodesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['portouts/rejections/%1$s', $portoutID],
             query: $parsed,
             options: $options,
             convert: PortoutListRejectionCodesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -177,13 +184,15 @@ final class PortoutsService implements PortoutsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortoutUpdateStatusResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['portouts/%1$s/%2$s', $id, $status],
             body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: PortoutUpdateStatusResponse::class,
         );
+
+        return $response->parse();
     }
 }

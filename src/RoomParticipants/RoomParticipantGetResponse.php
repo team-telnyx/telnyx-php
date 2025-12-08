@@ -6,9 +6,7 @@ namespace Telnyx\RoomParticipants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomParticipant;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\RoomParticipant;
  *   data?: RoomParticipant|null
  * }
  */
-final class RoomParticipantGetResponse implements BaseModel, ResponseConverter
+final class RoomParticipantGetResponse implements BaseModel
 {
     /** @use SdkModel<RoomParticipantGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?RoomParticipant $data;

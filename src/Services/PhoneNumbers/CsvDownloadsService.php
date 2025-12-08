@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
@@ -55,14 +56,16 @@ final class CsvDownloadsService implements CsvDownloadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CsvDownloadNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phone_numbers/csv_downloads',
             query: $parsed,
             options: $options,
             convert: CsvDownloadNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -76,13 +79,15 @@ final class CsvDownloadsService implements CsvDownloadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CsvDownloadGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phone_numbers/csv_downloads/%1$s', $id],
             options: $requestOptions,
             convert: CsvDownloadGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -105,13 +110,15 @@ final class CsvDownloadsService implements CsvDownloadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CsvDownloadListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_numbers/csv_downloads',
             query: $parsed,
             options: $options,
             convert: CsvDownloadListResponse::class,
         );
+
+        return $response->parse();
     }
 }

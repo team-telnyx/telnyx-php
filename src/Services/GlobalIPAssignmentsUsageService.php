@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
@@ -41,13 +42,15 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAssignmentsUsageGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'global_ip_assignments_usage',
             query: $parsed,
             options: $options,
             convert: GlobalIPAssignmentsUsageGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

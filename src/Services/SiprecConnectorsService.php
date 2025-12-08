@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SiprecConnectorsContract;
@@ -41,14 +42,16 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SiprecConnectorNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'siprec_connectors',
             body: (object) $parsed,
             options: $options,
             convert: SiprecConnectorNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -62,13 +65,15 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         string $connectorName,
         ?RequestOptions $requestOptions = null
     ): SiprecConnectorGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SiprecConnectorGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['siprec_connectors/%1$s', $connectorName],
             options: $requestOptions,
             convert: SiprecConnectorGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -92,14 +97,16 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SiprecConnectorUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['siprec_connectors/%1$s', $connectorName],
             body: (object) $parsed,
             options: $options,
             convert: SiprecConnectorUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -113,12 +120,14 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         string $connectorName,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['siprec_connectors/%1$s', $connectorName],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

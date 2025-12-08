@@ -9,9 +9,7 @@ use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus;
 use Telnyx\AI\Assistants\Tests\Runs\TestStatus;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Paginated list of test runs with metadata.
@@ -23,12 +21,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   data: list<TestRunResponse>, meta: Meta
  * }
  */
-final class PaginatedTestRunList implements BaseModel, ResponseConverter
+final class PaginatedTestRunList implements BaseModel
 {
     /** @use SdkModel<PaginatedTestRunListShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Array of test run objects for the current page.

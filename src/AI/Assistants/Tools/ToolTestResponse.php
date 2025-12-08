@@ -7,21 +7,17 @@ namespace Telnyx\AI\Assistants\Tools;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model for webhook tool test results.
  *
  * @phpstan-type ToolTestResponseShape = array{data: Data}
  */
-final class ToolTestResponse implements BaseModel, ResponseConverter
+final class ToolTestResponse implements BaseModel
 {
     /** @use SdkModel<ToolTestResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Response model for webhook tool test results.

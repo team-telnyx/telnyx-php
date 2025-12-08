@@ -7,9 +7,7 @@ namespace Telnyx\Porting\LoaConfigurations;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
@@ -19,12 +17,10 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
  *   data?: list<PortingLoaConfiguration>|null, meta?: PaginationMeta|null
  * }
  */
-final class LoaConfigurationListResponse implements BaseModel, ResponseConverter
+final class LoaConfigurationListResponse implements BaseModel
 {
     /** @use SdkModel<LoaConfigurationListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortingLoaConfiguration>|null $data */
     #[Api(list: PortingLoaConfiguration::class, optional: true)]

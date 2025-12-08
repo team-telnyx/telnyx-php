@@ -15,6 +15,7 @@ use Telnyx\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Campaign\CampaignUpdateParams;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -54,13 +55,15 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): TelnyxCampaignCsp {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxCampaignCsp> */
+        $response = $this->client->request(
             method: 'get',
             path: ['campaign/%1$s', $campaignID],
             options: $requestOptions,
             convert: TelnyxCampaignCsp::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -94,14 +97,16 @@ final class CampaignService implements CampaignContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxCampaignCsp> */
+        $response = $this->client->request(
             method: 'put',
             path: ['campaign/%1$s', $campaignID],
             body: (object) $parsed,
             options: $options,
             convert: TelnyxCampaignCsp::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -124,14 +129,16 @@ final class CampaignService implements CampaignContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CampaignListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'campaign',
             query: $parsed,
             options: $options,
             convert: CampaignListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,13 +154,15 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<array<string,mixed>> */
+        $response = $this->client->request(
             method: 'post',
             path: ['campaign/acceptSharing/%1$s', $campaignID],
             options: $requestOptions,
             convert: new MapOf('mixed'),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -167,13 +176,15 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignDeactivateResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CampaignDeactivateResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['campaign/%1$s', $campaignID],
             options: $requestOptions,
             convert: CampaignDeactivateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -187,13 +198,15 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignGetMnoMetadataResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CampaignGetMnoMetadataResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/mnoMetadata', $campaignID],
             options: $requestOptions,
             convert: CampaignGetMnoMetadataResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -209,13 +222,15 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<array<string,mixed>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/operationStatus', $campaignID],
             options: $requestOptions,
             convert: new MapOf('mixed'),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -229,13 +244,15 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignGetSharingStatusResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CampaignGetSharingStatusResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/sharing', $campaignID],
             options: $requestOptions,
             convert: CampaignGetSharingStatusResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -257,13 +274,15 @@ final class CampaignService implements CampaignContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CampaignSubmitAppealResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['campaign/%1$s/appeal', $campaignID],
             body: (object) $parsed,
             options: $options,
             convert: CampaignSubmitAppealResponse::class,
         );
+
+        return $response->parse();
     }
 }

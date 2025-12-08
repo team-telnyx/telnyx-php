@@ -6,9 +6,7 @@ namespace Telnyx\UsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
 
@@ -17,12 +15,10 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
  *
  * @phpstan-type UsageReportGetOptionsResponseShape = array{data?: list<Data>|null}
  */
-final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverter
+final class UsageReportGetOptionsResponse implements BaseModel
 {
     /** @use SdkModel<UsageReportGetOptionsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Collection of product description.

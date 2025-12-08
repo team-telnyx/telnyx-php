@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Rooms\Sessions;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
@@ -34,13 +35,15 @@ final class ActionsService implements ActionsContract
         string $roomSessionID,
         ?RequestOptions $requestOptions = null
     ): ActionEndResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionEndResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/end', $roomSessionID],
             options: $requestOptions,
             convert: ActionEndResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -64,14 +67,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionKickResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/kick', $roomSessionID],
             body: (object) $parsed,
             options: $options,
             convert: ActionKickResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -95,14 +100,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionMuteResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/mute', $roomSessionID],
             body: (object) $parsed,
             options: $options,
             convert: ActionMuteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,13 +133,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionUnmuteResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['room_sessions/%1$s/actions/unmute', $roomSessionID],
             body: (object) $parsed,
             options: $options,
             convert: ActionUnmuteResponse::class,
         );
+
+        return $response->parse();
     }
 }

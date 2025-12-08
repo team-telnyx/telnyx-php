@@ -6,21 +6,17 @@ namespace Telnyx\PrivateWirelessGateways;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PrivateWirelessGatewayDeleteResponseShape = array{
  *   data?: PrivateWirelessGateway|null
  * }
  */
-final class PrivateWirelessGatewayDeleteResponse implements BaseModel, ResponseConverter
+final class PrivateWirelessGatewayDeleteResponse implements BaseModel
 {
     /** @use SdkModel<PrivateWirelessGatewayDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PrivateWirelessGateway $data;

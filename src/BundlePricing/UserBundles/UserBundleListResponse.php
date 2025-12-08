@@ -8,21 +8,17 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\BundlePricing\BillingBundles\PaginationResponse;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UserBundleListResponseShape = array{
  *   data: list<UserBundle>, meta: PaginationResponse
  * }
  */
-final class UserBundleListResponse implements BaseModel, ResponseConverter
+final class UserBundleListResponse implements BaseModel
 {
     /** @use SdkModel<UserBundleListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<UserBundle> $data */
     #[Api(list: UserBundle::class)]

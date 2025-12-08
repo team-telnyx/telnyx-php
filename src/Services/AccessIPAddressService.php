@@ -9,6 +9,7 @@ use Telnyx\AccessIPAddress\AccessIPAddressListParams;
 use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressContract;
@@ -40,14 +41,16 @@ final class AccessIPAddressService implements AccessIPAddressContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccessIPAddressResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'access_ip_address',
             body: (object) $parsed,
             options: $options,
             convert: AccessIPAddressResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -61,13 +64,15 @@ final class AccessIPAddressService implements AccessIPAddressContract
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
     ): AccessIPAddressResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccessIPAddressResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['access_ip_address/%1$s', $accessIPAddressID],
             options: $requestOptions,
             convert: AccessIPAddressResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,14 +105,16 @@ final class AccessIPAddressService implements AccessIPAddressContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccessIPAddressListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'access_ip_address',
             query: $parsed,
             options: $options,
             convert: AccessIPAddressListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,12 +128,14 @@ final class AccessIPAddressService implements AccessIPAddressContract
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
     ): AccessIPAddressResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccessIPAddressResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['access_ip_address/%1$s', $accessIPAddressID],
             options: $requestOptions,
             convert: AccessIPAddressResponse::class,
         );
+
+        return $response->parse();
     }
 }

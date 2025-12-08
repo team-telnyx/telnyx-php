@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
@@ -55,14 +56,16 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LoaConfigurationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'porting/loa_configurations',
             body: (object) $parsed,
             options: $options,
             convert: LoaConfigurationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -76,13 +79,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): LoaConfigurationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LoaConfigurationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting/loa_configurations/%1$s', $id],
             options: $requestOptions,
             convert: LoaConfigurationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -117,14 +122,16 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LoaConfigurationUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['porting/loa_configurations/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: LoaConfigurationUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,14 +154,16 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LoaConfigurationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'porting/loa_configurations',
             query: $parsed,
             options: $options,
             convert: LoaConfigurationListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -168,13 +177,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['porting/loa_configurations/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -208,8 +219,8 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'post',
             path: 'porting/loa_configuration/preview',
             headers: ['Accept' => 'application/pdf'],
@@ -217,6 +228,8 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
             options: $options,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 
     /**
@@ -230,13 +243,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting/loa_configurations/%1$s/preview', $id],
             headers: ['Accept' => 'application/pdf'],
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 }

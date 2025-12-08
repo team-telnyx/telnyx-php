@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messages;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkParams;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
@@ -39,13 +40,15 @@ final class RcsService implements RcsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RcGenerateDeeplinkResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messages/rcs/deeplinks/%1$s', $agentID],
             query: $parsed,
             options: $options,
             convert: RcGenerateDeeplinkResponse::class,
         );
+
+        return $response->parse();
     }
 }

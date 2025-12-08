@@ -7,9 +7,7 @@ namespace Telnyx\CredentialConnections;
 use Telnyx\ConnectionsPaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\CredentialConnection\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
 
@@ -18,12 +16,10 @@ use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
  *   data?: list<CredentialConnection>|null, meta?: ConnectionsPaginationMeta|null
  * }
  */
-final class CredentialConnectionListResponse implements BaseModel, ResponseConverter
+final class CredentialConnectionListResponse implements BaseModel
 {
     /** @use SdkModel<CredentialConnectionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<CredentialConnection>|null $data */
     #[Api(list: CredentialConnection::class, optional: true)]

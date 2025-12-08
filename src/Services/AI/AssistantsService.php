@@ -24,6 +24,7 @@ use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
@@ -126,14 +127,16 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InferenceEmbedding> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/assistants',
             body: (object) $parsed,
             options: $options,
             convert: InferenceEmbedding::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -160,14 +163,16 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InferenceEmbedding> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s', $assistantID],
             query: $parsed,
             options: $options,
             convert: InferenceEmbedding::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -226,14 +231,16 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InferenceEmbedding> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s', $assistantID],
             body: (object) $parsed,
             options: $options,
             convert: InferenceEmbedding::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -245,13 +252,15 @@ final class AssistantsService implements AssistantsContract
      */
     public function list(?RequestOptions $requestOptions = null): AssistantsList
     {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantsList> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/assistants',
             options: $requestOptions,
             convert: AssistantsList::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -265,13 +274,15 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): AssistantDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/assistants/%1$s', $assistantID],
             options: $requestOptions,
             convert: AssistantDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -295,14 +306,16 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantChatResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/chat', $assistantID],
             body: (object) $parsed,
             options: $options,
             convert: AssistantChatResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -316,13 +329,15 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): InferenceEmbedding {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InferenceEmbedding> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/clone', $assistantID],
             options: $requestOptions,
             convert: InferenceEmbedding::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -336,13 +351,15 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/texml', $assistantID],
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 
     /**
@@ -365,14 +382,16 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantsList> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/assistants/import',
             body: (object) $parsed,
             options: $options,
             convert: AssistantsList::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -405,13 +424,15 @@ final class AssistantsService implements AssistantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantSendSMSResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/chat/sms', $assistantID],
             body: (object) $parsed,
             options: $options,
             convert: AssistantSendSMSResponse::class,
         );
+
+        return $response->parse();
     }
 }

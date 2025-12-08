@@ -6,9 +6,7 @@ namespace Telnyx\MessagingTollfree\Verification\Requests;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * A paginated response.
@@ -17,12 +15,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   records?: list<VerificationRequestStatus>|null, total_records?: int|null
  * }
  */
-final class RequestListResponse implements BaseModel, ResponseConverter
+final class RequestListResponse implements BaseModel
 {
     /** @use SdkModel<RequestListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The records yielded by this request.

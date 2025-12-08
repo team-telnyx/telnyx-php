@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
@@ -30,13 +31,15 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
         string $recordingTranscriptionID,
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingTranscriptionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['recording_transcriptions/%1$s', $recordingTranscriptionID],
             options: $requestOptions,
             convert: RecordingTranscriptionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -49,13 +52,15 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
     public function list(
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingTranscriptionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'recording_transcriptions',
             options: $requestOptions,
             convert: RecordingTranscriptionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -69,12 +74,14 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
         string $recordingTranscriptionID,
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingTranscriptionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['recording_transcriptions/%1$s', $recordingTranscriptionID],
             options: $requestOptions,
             convert: RecordingTranscriptionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,20 +6,16 @@ namespace Telnyx\SiprecConnectors;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse\Data;
 
 /**
  * @phpstan-type SiprecConnectorUpdateResponseShape = array{data: Data}
  */
-final class SiprecConnectorUpdateResponse implements BaseModel, ResponseConverter
+final class SiprecConnectorUpdateResponse implements BaseModel
 {
     /** @use SdkModel<SiprecConnectorUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

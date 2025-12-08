@@ -6,20 +6,16 @@ namespace Telnyx\VerifiedNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 
 /**
  * @phpstan-type VerifiedNumberDataWrapperShape = array{data?: VerifiedNumber|null}
  */
-final class VerifiedNumberDataWrapper implements BaseModel, ResponseConverter
+final class VerifiedNumberDataWrapper implements BaseModel
 {
     /** @use SdkModel<VerifiedNumberDataWrapperShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?VerifiedNumber $data;

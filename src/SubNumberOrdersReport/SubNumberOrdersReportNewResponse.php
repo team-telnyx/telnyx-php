@@ -6,9 +6,7 @@ namespace Telnyx\SubNumberOrdersReport;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data\Filters;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data\Status;
@@ -16,12 +14,10 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data\Status;
 /**
  * @phpstan-type SubNumberOrdersReportNewResponseShape = array{data?: Data|null}
  */
-final class SubNumberOrdersReportNewResponse implements BaseModel, ResponseConverter
+final class SubNumberOrdersReportNewResponse implements BaseModel
 {
     /** @use SdkModel<SubNumberOrdersReportNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

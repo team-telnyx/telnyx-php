@@ -6,19 +6,15 @@ namespace Telnyx\IPs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IPUpdateResponseShape = array{data?: IP|null}
  */
-final class IPUpdateResponse implements BaseModel, ResponseConverter
+final class IPUpdateResponse implements BaseModel
 {
     /** @use SdkModel<IPUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?IP $data;

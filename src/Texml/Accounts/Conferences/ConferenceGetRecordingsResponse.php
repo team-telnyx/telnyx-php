@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Conferences;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Source;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Status;
@@ -25,12 +23,10 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\
  *   uri?: string|null,
  * }
  */
-final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConverter
+final class ConferenceGetRecordingsResponse implements BaseModel
 {
     /** @use SdkModel<ConferenceGetRecordingsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The number of the last element on the page, zero-indexed.

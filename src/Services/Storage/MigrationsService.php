@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationsContract;
@@ -52,14 +53,16 @@ final class MigrationsService implements MigrationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MigrationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'storage/migrations',
             body: (object) $parsed,
             options: $options,
             convert: MigrationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -73,13 +76,15 @@ final class MigrationsService implements MigrationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MigrationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MigrationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['storage/migrations/%1$s', $id],
             options: $requestOptions,
             convert: MigrationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -92,12 +97,14 @@ final class MigrationsService implements MigrationsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): MigrationListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MigrationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'storage/migrations',
             options: $requestOptions,
             convert: MigrationListResponse::class,
         );
+
+        return $response->parse();
     }
 }

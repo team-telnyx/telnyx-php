@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
@@ -40,13 +41,15 @@ final class RecordingsService implements RecordingsContract
         string $recordingID,
         ?RequestOptions $requestOptions = null
     ): RecordingGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['recordings/%1$s', $recordingID],
             options: $requestOptions,
             convert: RecordingGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,14 +82,16 @@ final class RecordingsService implements RecordingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'recordings',
             query: $parsed,
             options: $options,
             convert: RecordingListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,12 +105,14 @@ final class RecordingsService implements RecordingsContract
         string $recordingID,
         ?RequestOptions $requestOptions = null
     ): RecordingDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['recordings/%1$s', $recordingID],
             options: $requestOptions,
             convert: RecordingDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

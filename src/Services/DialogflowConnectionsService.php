@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams;
 use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
@@ -46,14 +47,16 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DialogflowConnectionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['dialogflow_connections/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
             convert: DialogflowConnectionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,13 +70,15 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): DialogflowConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DialogflowConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['dialogflow_connections/%1$s', $connectionID],
             options: $requestOptions,
             convert: DialogflowConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -101,14 +106,16 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DialogflowConnectionUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['dialogflow_connections/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
             convert: DialogflowConnectionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -122,12 +129,14 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['dialogflow_connections/%1$s', $connectionID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

@@ -9,19 +9,15 @@ use Telnyx\Comments\CommentGetResponse\Data\CommenterType;
 use Telnyx\Comments\CommentGetResponse\Data\CommentRecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CommentGetResponseShape = array{data?: Data|null}
  */
-final class CommentGetResponse implements BaseModel, ResponseConverter
+final class CommentGetResponse implements BaseModel
 {
     /** @use SdkModel<CommentGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

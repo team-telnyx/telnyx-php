@@ -6,9 +6,7 @@ namespace Telnyx\TextToSpeech;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice;
  *   voices?: list<Voice>|null
  * }
  */
-final class TextToSpeechListVoicesResponse implements BaseModel, ResponseConverter
+final class TextToSpeechListVoicesResponse implements BaseModel
 {
     /** @use SdkModel<TextToSpeechListVoicesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Voice>|null $voices */
     #[Api(list: Voice::class, optional: true)]

@@ -6,9 +6,7 @@ namespace Telnyx\RoomRecordings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Status;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Type;
@@ -16,12 +14,10 @@ use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Type;
 /**
  * @phpstan-type RoomRecordingGetResponseShape = array{data?: Data|null}
  */
-final class RoomRecordingGetResponse implements BaseModel, ResponseConverter
+final class RoomRecordingGetResponse implements BaseModel
 {
     /** @use SdkModel<RoomRecordingGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

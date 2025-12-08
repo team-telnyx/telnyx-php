@@ -7,21 +7,17 @@ namespace Telnyx\AI\Conversations\InsightGroups;
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InsightTemplateGroupDetailShape = array{
  *   data: InsightTemplateGroup
  * }
  */
-final class InsightTemplateGroupDetail implements BaseModel, ResponseConverter
+final class InsightTemplateGroupDetail implements BaseModel
 {
     /** @use SdkModel<InsightTemplateGroupDetailShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public InsightTemplateGroup $data;

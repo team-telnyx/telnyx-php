@@ -6,19 +6,15 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UploadRefreshStatusResponseShape = array{success?: bool|null}
  */
-final class UploadRefreshStatusResponse implements BaseModel, ResponseConverter
+final class UploadRefreshStatusResponse implements BaseModel
 {
     /** @use SdkModel<UploadRefreshStatusResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Describes wether or not the operation was successful.

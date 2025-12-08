@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders\ActionRequirements;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data\RecordType;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data\Status;
@@ -16,12 +14,10 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Da
 /**
  * @phpstan-type ActionRequirementInitiateResponseShape = array{data?: Data|null}
  */
-final class ActionRequirementInitiateResponse implements BaseModel, ResponseConverter
+final class ActionRequirementInitiateResponse implements BaseModel
 {
     /** @use SdkModel<ActionRequirementInitiateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

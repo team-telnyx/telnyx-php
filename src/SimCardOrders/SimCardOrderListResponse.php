@@ -7,9 +7,7 @@ namespace Telnyx\SimCardOrders;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardOrders\SimCardOrder\Cost;
 use Telnyx\SimCardOrders\SimCardOrder\OrderAddress;
 use Telnyx\SimCardOrders\SimCardOrder\Status;
@@ -19,12 +17,10 @@ use Telnyx\SimCardOrders\SimCardOrder\Status;
  *   data?: list<SimCardOrder>|null, meta?: PaginationMeta|null
  * }
  */
-final class SimCardOrderListResponse implements BaseModel, ResponseConverter
+final class SimCardOrderListResponse implements BaseModel
 {
     /** @use SdkModel<SimCardOrderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<SimCardOrder>|null $data */
     #[Api(list: SimCardOrder::class, optional: true)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesContract;
@@ -54,14 +55,16 @@ final class UserAddressesService implements UserAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserAddressNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'user_addresses',
             body: (object) $parsed,
             options: $options,
             convert: UserAddressNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,13 +78,15 @@ final class UserAddressesService implements UserAddressesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UserAddressGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserAddressGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['user_addresses/%1$s', $id],
             options: $requestOptions,
             convert: UserAddressGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -109,13 +114,15 @@ final class UserAddressesService implements UserAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserAddressListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'user_addresses',
             query: $parsed,
             options: $options,
             convert: UserAddressListResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -10,6 +10,7 @@ use Telnyx\AI\Assistants\Tests\Runs\RunTriggerParams;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsContract;
@@ -42,13 +43,15 @@ final class RunsService implements RunsContract
         $testID = $parsed['test_id'];
         unset($parsed['test_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TestRunResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/%1$s/runs/%2$s', $testID, $runID],
             options: $options,
             convert: TestRunResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,14 +75,16 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PaginatedTestRunList> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/%1$s/runs', $testID],
             query: $parsed,
             options: $options,
             convert: PaginatedTestRunList::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -101,13 +106,15 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TestRunResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/tests/%1$s/runs', $testID],
             body: (object) $parsed,
             options: $options,
             convert: TestRunResponse::class,
         );
+
+        return $response->parse();
     }
 }

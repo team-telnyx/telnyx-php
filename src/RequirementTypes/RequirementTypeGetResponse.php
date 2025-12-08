@@ -6,9 +6,7 @@ namespace Telnyx\RequirementTypes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocReqsRequirementType;
 use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
 use Telnyx\DocReqsRequirementType\Type;
@@ -18,12 +16,10 @@ use Telnyx\DocReqsRequirementType\Type;
  *   data?: DocReqsRequirementType|null
  * }
  */
-final class RequirementTypeGetResponse implements BaseModel, ResponseConverter
+final class RequirementTypeGetResponse implements BaseModel
 {
     /** @use SdkModel<RequirementTypeGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DocReqsRequirementType $data;

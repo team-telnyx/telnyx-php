@@ -6,9 +6,7 @@ namespace Telnyx\Messsages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messsages\MesssageRcsResponse\Data;
 use Telnyx\Messsages\MesssageRcsResponse\Data\From;
 use Telnyx\Messsages\MesssageRcsResponse\Data\To;
@@ -16,12 +14,10 @@ use Telnyx\Messsages\MesssageRcsResponse\Data\To;
 /**
  * @phpstan-type MesssageRcsResponseShape = array{data?: Data|null}
  */
-final class MesssageRcsResponse implements BaseModel, ResponseConverter
+final class MesssageRcsResponse implements BaseModel
 {
     /** @use SdkModel<MesssageRcsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

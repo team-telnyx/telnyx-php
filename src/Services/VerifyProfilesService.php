@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
@@ -67,14 +68,16 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifyProfileData> */
+        $response = $this->client->request(
             method: 'post',
             path: 'verify_profiles',
             body: (object) $parsed,
             options: $options,
             convert: VerifyProfileData::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -88,13 +91,15 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileData {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifyProfileData> */
+        $response = $this->client->request(
             method: 'get',
             path: ['verify_profiles/%1$s', $verifyProfileID],
             options: $requestOptions,
             convert: VerifyProfileData::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -140,14 +145,16 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifyProfileData> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['verify_profiles/%1$s', $verifyProfileID],
             body: (object) $parsed,
             options: $options,
             convert: VerifyProfileData::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -170,14 +177,16 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifyProfileListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'verify_profiles',
             query: $parsed,
             options: $options,
             convert: VerifyProfileListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -191,13 +200,15 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileData {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifyProfileData> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['verify_profiles/%1$s', $verifyProfileID],
             options: $requestOptions,
             convert: VerifyProfileData::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -218,14 +229,16 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageTemplate> */
+        $response = $this->client->request(
             method: 'post',
             path: 'verify_profiles/templates',
             body: (object) $parsed,
             options: $options,
             convert: MessageTemplate::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -238,13 +251,15 @@ final class VerifyProfilesService implements VerifyProfilesContract
     public function retrieveTemplates(
         ?RequestOptions $requestOptions = null
     ): VerifyProfileGetTemplatesResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifyProfileGetTemplatesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'verify_profiles/templates',
             options: $requestOptions,
             convert: VerifyProfileGetTemplatesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -266,13 +281,15 @@ final class VerifyProfilesService implements VerifyProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageTemplate> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['verify_profiles/templates/%1$s', $templateID],
             body: (object) $parsed,
             options: $options,
             convert: MessageTemplate::class,
         );
+
+        return $response->parse();
     }
 }

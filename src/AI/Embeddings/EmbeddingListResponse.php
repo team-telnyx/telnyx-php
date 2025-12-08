@@ -7,19 +7,15 @@ namespace Telnyx\AI\Embeddings;
 use Telnyx\AI\Embeddings\EmbeddingListResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type EmbeddingListResponseShape = array{data: list<Data>}
  */
-final class EmbeddingListResponse implements BaseModel, ResponseConverter
+final class EmbeddingListResponse implements BaseModel
 {
     /** @use SdkModel<EmbeddingListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

@@ -6,21 +6,17 @@ namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse\Data;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse\Data\Result;
 
 /**
  * @phpstan-type NumberLookupNewResponseShape = array{data?: Data|null}
  */
-final class NumberLookupNewResponse implements BaseModel, ResponseConverter
+final class NumberLookupNewResponse implements BaseModel
 {
     /** @use SdkModel<NumberLookupNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Telco data usage report response.

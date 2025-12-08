@@ -8,9 +8,7 @@ use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
@@ -27,12 +25,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   training_file: string,
  * }
  */
-final class FineTuningJob implements BaseModel, ResponseConverter
+final class FineTuningJob implements BaseModel
 {
     /** @use SdkModel<FineTuningJobShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The name of the fine-tuned model that is being created.

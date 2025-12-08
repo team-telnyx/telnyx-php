@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Wireless;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Wireless\DetailRecordsReportsContract;
@@ -42,14 +43,16 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DetailRecordsReportNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'wireless/detail_records_reports',
             body: (object) $parsed,
             options: $options,
             convert: DetailRecordsReportNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DetailRecordsReportGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['wireless/detail_records_reports/%1$s', $id],
             options: $requestOptions,
             convert: DetailRecordsReportGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -92,14 +97,16 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DetailRecordsReportListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'wireless/detail_records_reports',
             query: $parsed,
             options: $options,
             convert: DetailRecordsReportListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -113,12 +120,14 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DetailRecordsReportDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['wireless/detail_records_reports/%1$s', $id],
             options: $requestOptions,
             convert: DetailRecordsReportDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

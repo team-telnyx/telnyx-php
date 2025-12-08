@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
@@ -44,14 +45,16 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WirelessBlocklistNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'wireless_blocklists',
             body: (object) $parsed,
             options: $options,
             convert: WirelessBlocklistNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WirelessBlocklistGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['wireless_blocklists/%1$s', $id],
             options: $requestOptions,
             convert: WirelessBlocklistGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -94,14 +99,16 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WirelessBlocklistUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: 'wireless_blocklists',
             body: (object) $parsed,
             options: $options,
             convert: WirelessBlocklistUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -128,14 +135,16 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WirelessBlocklistListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'wireless_blocklists',
             query: $parsed,
             options: $options,
             convert: WirelessBlocklistListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -149,12 +158,14 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WirelessBlocklistDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['wireless_blocklists/%1$s', $id],
             options: $requestOptions,
             convert: WirelessBlocklistDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

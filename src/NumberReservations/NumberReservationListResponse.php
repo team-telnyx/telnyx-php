@@ -7,9 +7,7 @@ namespace Telnyx\NumberReservations;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberReservations\NumberReservation\Status;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\NumberReservations\NumberReservation\Status;
  *   data?: list<NumberReservation>|null, meta?: PaginationMeta|null
  * }
  */
-final class NumberReservationListResponse implements BaseModel, ResponseConverter
+final class NumberReservationListResponse implements BaseModel
 {
     /** @use SdkModel<NumberReservationListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<NumberReservation>|null $data */
     #[Api(list: NumberReservation::class, optional: true)]

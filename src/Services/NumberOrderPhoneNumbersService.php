@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
@@ -34,13 +35,15 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         string $numberOrderPhoneNumberID,
         ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderPhoneNumberGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['number_order_phone_numbers/%1$s', $numberOrderPhoneNumberID],
             options: $requestOptions,
             convert: NumberOrderPhoneNumberGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,14 +66,16 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderPhoneNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'number_order_phone_numbers',
             query: $parsed,
             options: $options,
             convert: NumberOrderPhoneNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -94,14 +99,16 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderPhoneNumberUpdateRequirementGroupResponse,> */
+        $response = $this->client->request(
             method: 'post',
             path: ['number_order_phone_numbers/%1$s/requirement_group', $id],
             body: (object) $parsed,
             options: $options,
             convert: NumberOrderPhoneNumberUpdateRequirementGroupResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -127,13 +134,15 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderPhoneNumberUpdateRequirementsResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['number_order_phone_numbers/%1$s', $numberOrderPhoneNumberID],
             body: (object) $parsed,
             options: $options,
             convert: NumberOrderPhoneNumberUpdateRequirementsResponse::class,
         );
+
+        return $response->parse();
     }
 }

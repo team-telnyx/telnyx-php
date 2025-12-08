@@ -6,9 +6,7 @@ namespace Telnyx\Portouts\Events;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\Events\EventGetResponse\Data;
 use Telnyx\Portouts\Events\EventGetResponse\Data\AvailableNotificationMethod;
 use Telnyx\Portouts\Events\EventGetResponse\Data\EventType;
@@ -20,12 +18,10 @@ use Telnyx\Portouts\Events\EventGetResponse\Data\PayloadStatus;
 /**
  * @phpstan-type EventGetResponseShape = array{data?: Data|null}
  */
-final class EventGetResponse implements BaseModel, ResponseConverter
+final class EventGetResponse implements BaseModel
 {
     /** @use SdkModel<EventGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

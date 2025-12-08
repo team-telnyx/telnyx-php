@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
@@ -79,13 +80,15 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phone_numbers/%1$s', $id],
             options: $requestOptions,
             convert: PhoneNumberGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -114,14 +117,16 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -164,14 +169,16 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_numbers',
             query: $parsed,
             options: $options,
             convert: PhoneNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -185,13 +192,15 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['phone_numbers/%1$s', $id],
             options: $requestOptions,
             convert: PhoneNumberDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -235,13 +244,15 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberSlimListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_numbers/slim',
             query: $parsed,
             options: $options,
             convert: PhoneNumberSlimListResponse::class,
         );
+
+        return $response->parse();
     }
 }

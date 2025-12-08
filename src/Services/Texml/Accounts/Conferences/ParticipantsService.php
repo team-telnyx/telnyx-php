@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Conferences;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Conferences\ParticipantsContract;
@@ -50,8 +51,8 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid = $parsed['conference_sid'];
         unset($parsed['conference_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ParticipantGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s/Participants/%3$s',
@@ -62,6 +63,8 @@ final class ParticipantsService implements ParticipantsContract
             options: $options,
             convert: ParticipantGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -101,8 +104,8 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid = $parsed['conference_sid'];
         unset($parsed['conference_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ParticipantUpdateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s/Participants/%3$s',
@@ -118,6 +121,8 @@ final class ParticipantsService implements ParticipantsContract
             options: $options,
             convert: ParticipantUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -145,8 +150,8 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid = $parsed['conference_sid'];
         unset($parsed['conference_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s/Participants/%3$s',
@@ -157,6 +162,8 @@ final class ParticipantsService implements ParticipantsContract
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -228,8 +235,8 @@ final class ParticipantsService implements ParticipantsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ParticipantParticipantsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s/Participants',
@@ -241,6 +248,8 @@ final class ParticipantsService implements ParticipantsContract
             options: $options,
             convert: ParticipantParticipantsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -264,8 +273,8 @@ final class ParticipantsService implements ParticipantsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ParticipantGetParticipantsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s/Participants',
@@ -275,5 +284,7 @@ final class ParticipantsService implements ParticipantsContract
             options: $options,
             convert: ParticipantGetParticipantsResponse::class,
         );
+
+        return $response->parse();
     }
 }

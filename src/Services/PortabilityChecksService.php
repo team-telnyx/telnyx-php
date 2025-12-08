@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortabilityChecks\PortabilityCheckRunParams;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
@@ -36,13 +37,15 @@ final class PortabilityChecksService implements PortabilityChecksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortabilityCheckRunResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'portability_checks',
             body: (object) $parsed,
             options: $options,
             convert: PortabilityCheckRunResponse::class,
         );
+
+        return $response->parse();
     }
 }

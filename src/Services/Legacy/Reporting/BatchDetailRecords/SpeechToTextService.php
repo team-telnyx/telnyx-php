@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextDeleteResponse;
@@ -41,14 +42,16 @@ final class SpeechToTextService implements SpeechToTextContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SpeechToTextNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'legacy/reporting/batch_detail_records/speech_to_text',
             body: (object) $parsed,
             options: $options,
             convert: SpeechToTextNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -62,13 +65,15 @@ final class SpeechToTextService implements SpeechToTextContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SpeechToTextGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['legacy/reporting/batch_detail_records/speech_to_text/%1$s', $id],
             options: $requestOptions,
             convert: SpeechToTextGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,13 +86,15 @@ final class SpeechToTextService implements SpeechToTextContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): SpeechToTextListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SpeechToTextListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/batch_detail_records/speech_to_text',
             options: $requestOptions,
             convert: SpeechToTextListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -101,12 +108,14 @@ final class SpeechToTextService implements SpeechToTextContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SpeechToTextDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/batch_detail_records/speech_to_text/%1$s', $id],
             options: $requestOptions,
             convert: SpeechToTextDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

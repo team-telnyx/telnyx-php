@@ -6,20 +6,16 @@ namespace Telnyx\GlobalIPs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPs\GlobalIPGetResponse\Data;
 
 /**
  * @phpstan-type GlobalIPGetResponseShape = array{data?: Data|null}
  */
-final class GlobalIPGetResponse implements BaseModel, ResponseConverter
+final class GlobalIPGetResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

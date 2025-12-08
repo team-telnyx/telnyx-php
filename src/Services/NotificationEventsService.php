@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationEvents\NotificationEventListParams;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
@@ -38,13 +39,15 @@ final class NotificationEventsService implements NotificationEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationEventListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'notification_events',
             query: $parsed,
             options: $options,
             convert: NotificationEventListResponse::class,
         );
+
+        return $response->parse();
     }
 }

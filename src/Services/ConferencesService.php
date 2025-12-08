@@ -13,6 +13,7 @@ use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Conferences\ConferenceRetrieveParams;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
@@ -73,14 +74,16 @@ final class ConferencesService implements ConferencesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'conferences',
             body: (object) $parsed,
             options: $options,
             convert: ConferenceNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,14 +107,16 @@ final class ConferencesService implements ConferencesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['conferences/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: ConferenceGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -154,14 +159,16 @@ final class ConferencesService implements ConferencesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'conferences',
             query: $parsed,
             options: $options,
             convert: ConferenceListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -189,13 +196,15 @@ final class ConferencesService implements ConferencesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceListParticipantsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['conferences/%1$s/participants', $conferenceID],
             query: $parsed,
             options: $options,
             convert: ConferenceListParticipantsResponse::class,
         );
+
+        return $response->parse();
     }
 }

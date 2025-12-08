@@ -9,9 +9,7 @@ use Telnyx\AdvancedOrders\AdvancedOrderGetResponse\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderGetResponse\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AdvancedOrderGetResponseShape = array{
@@ -28,12 +26,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   status?: list<value-of<Status>>|null,
  * }
  */
-final class AdvancedOrderGetResponse implements BaseModel, ResponseConverter
+final class AdvancedOrderGetResponse implements BaseModel
 {
     /** @use SdkModel<AdvancedOrderGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;

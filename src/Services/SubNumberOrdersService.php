@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersContract;
@@ -46,14 +47,16 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SubNumberOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sub_number_orders/%1$s', $subNumberOrderID],
             query: $parsed,
             options: $options,
             convert: SubNumberOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,14 +82,16 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SubNumberOrderUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['sub_number_orders/%1$s', $subNumberOrderID],
             body: (object) $parsed,
             options: $options,
             convert: SubNumberOrderUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -115,14 +120,16 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SubNumberOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'sub_number_orders',
             query: $parsed,
             options: $options,
             convert: SubNumberOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -136,13 +143,15 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         string $subNumberOrderID,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrderCancelResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SubNumberOrderCancelResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['sub_number_orders/%1$s/cancel', $subNumberOrderID],
             options: $requestOptions,
             convert: SubNumberOrderCancelResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -166,13 +175,15 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SubNumberOrderUpdateRequirementGroupResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sub_number_orders/%1$s/requirement_group', $id],
             body: (object) $parsed,
             options: $options,
             convert: SubNumberOrderUpdateRequirementGroupResponse::class,
         );
+
+        return $response->parse();
     }
 }

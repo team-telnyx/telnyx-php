@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessContract;
@@ -45,13 +46,15 @@ final class WirelessService implements WirelessContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WirelessGetRegionsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'wireless/regions',
             query: $parsed,
             options: $options,
             convert: WirelessGetRegionsResponse::class,
         );
+
+        return $response->parse();
     }
 }

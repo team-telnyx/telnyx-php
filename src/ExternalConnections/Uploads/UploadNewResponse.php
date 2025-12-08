@@ -6,21 +6,17 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UploadNewResponseShape = array{
  *   success?: bool|null, ticket_id?: string|null
  * }
  */
-final class UploadNewResponse implements BaseModel, ResponseConverter
+final class UploadNewResponse implements BaseModel
 {
     /** @use SdkModel<UploadNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Describes wether or not the operation was successful.

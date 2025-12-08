@@ -8,19 +8,15 @@ use Telnyx\AI\Integrations\IntegrationListResponse\Data;
 use Telnyx\AI\Integrations\IntegrationListResponse\Data\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IntegrationListResponseShape = array{data: list<Data>}
  */
-final class IntegrationListResponse implements BaseModel, ResponseConverter
+final class IntegrationListResponse implements BaseModel
 {
     /** @use SdkModel<IntegrationListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

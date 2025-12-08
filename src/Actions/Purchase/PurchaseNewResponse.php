@@ -8,9 +8,7 @@ use Telnyx\Actions\Purchase\PurchaseNewResponse\Error;
 use Telnyx\Actions\Purchase\PurchaseNewResponse\Error\Source;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardStatus;
 use Telnyx\SimpleSimCard;
 use Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData;
@@ -23,12 +21,10 @@ use Telnyx\SimpleSimCard\Type;
  *   data?: list<SimpleSimCard>|null, errors?: list<Error>|null
  * }
  */
-final class PurchaseNewResponse implements BaseModel, ResponseConverter
+final class PurchaseNewResponse implements BaseModel
 {
     /** @use SdkModel<PurchaseNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Successfully registered SIM cards.

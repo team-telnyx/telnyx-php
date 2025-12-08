@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
@@ -46,13 +47,15 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobileNetworkOperatorListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'mobile_network_operators',
             query: $parsed,
             options: $options,
             convert: MobileNetworkOperatorListResponse::class,
         );
+
+        return $response->parse();
     }
 }

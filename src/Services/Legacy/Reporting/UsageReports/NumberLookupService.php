@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
@@ -43,8 +44,8 @@ final class NumberLookupService implements NumberLookupContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberLookupNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'legacy/reporting/usage_reports/number_lookup',
             headers: ['Content-Type' => '*/*'],
@@ -52,6 +53,8 @@ final class NumberLookupService implements NumberLookupContract
             options: $options,
             convert: NumberLookupNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class NumberLookupService implements NumberLookupContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NumberLookupGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberLookupGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
             options: $requestOptions,
             convert: NumberLookupGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -84,13 +89,15 @@ final class NumberLookupService implements NumberLookupContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): NumberLookupListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberLookupListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/number_lookup',
             options: $requestOptions,
             convert: NumberLookupListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,12 +111,14 @@ final class NumberLookupService implements NumberLookupContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

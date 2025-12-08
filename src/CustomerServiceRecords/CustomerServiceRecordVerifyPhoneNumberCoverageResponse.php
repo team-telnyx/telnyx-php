@@ -6,9 +6,7 @@ namespace Telnyx\CustomerServiceRecords;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data\AdditionalDataRequired;
 
@@ -17,12 +15,10 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverage
  *   data?: list<Data>|null
  * }
  */
-final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements BaseModel, ResponseConverter
+final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements BaseModel
 {
     /** @use SdkModel<CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

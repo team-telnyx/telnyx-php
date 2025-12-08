@@ -12,6 +12,7 @@ use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateParams;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -48,14 +49,16 @@ final class McpServersService implements McpServersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<McpServerNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/mcp_servers',
             body: (object) $parsed,
             options: $options,
             convert: McpServerNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -69,13 +72,15 @@ final class McpServersService implements McpServersContract
         string $mcpServerID,
         ?RequestOptions $requestOptions = null
     ): McpServerGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<McpServerGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/mcp_servers/%1$s', $mcpServerID],
             options: $requestOptions,
             convert: McpServerGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -105,14 +110,16 @@ final class McpServersService implements McpServersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<McpServerUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['ai/mcp_servers/%1$s', $mcpServerID],
             body: (object) $parsed,
             options: $options,
             convert: McpServerUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -137,14 +144,16 @@ final class McpServersService implements McpServersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<McpServerListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/mcp_servers',
             query: $parsed,
             options: $options,
             convert: new ListOf(McpServerListResponseItem::class),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -158,12 +167,14 @@ final class McpServersService implements McpServersContract
         string $mcpServerID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/mcp_servers/%1$s', $mcpServerID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

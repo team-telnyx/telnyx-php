@@ -6,9 +6,7 @@ namespace Telnyx\Storage\Buckets\Usage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1 as Category;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total;
@@ -16,12 +14,10 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total;
 /**
  * @phpstan-type UsageGetAPIUsageResponseShape = array{data?: list<Data>|null}
  */
-final class UsageGetAPIUsageResponse implements BaseModel, ResponseConverter
+final class UsageGetAPIUsageResponse implements BaseModel
 {
     /** @use SdkModel<UsageGetAPIUsageResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

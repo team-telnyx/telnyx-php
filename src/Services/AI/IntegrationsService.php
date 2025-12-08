@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Integrations\IntegrationGetResponse;
 use Telnyx\AI\Integrations\IntegrationListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\IntegrationsContract;
@@ -38,13 +39,15 @@ final class IntegrationsService implements IntegrationsContract
         string $integrationID,
         ?RequestOptions $requestOptions = null
     ): IntegrationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IntegrationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/integrations/%1$s', $integrationID],
             options: $requestOptions,
             convert: IntegrationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -57,12 +60,14 @@ final class IntegrationsService implements IntegrationsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): IntegrationListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<IntegrationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/integrations',
             options: $requestOptions,
             convert: IntegrationListResponse::class,
         );
+
+        return $response->parse();
     }
 }

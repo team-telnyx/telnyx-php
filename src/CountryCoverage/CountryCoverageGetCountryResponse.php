@@ -6,9 +6,7 @@ namespace Telnyx\CountryCoverage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\Local;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree;
@@ -16,12 +14,10 @@ use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree;
 /**
  * @phpstan-type CountryCoverageGetCountryResponseShape = array{data?: Data|null}
  */
-final class CountryCoverageGetCountryResponse implements BaseModel, ResponseConverter
+final class CountryCoverageGetCountryResponse implements BaseModel
 {
     /** @use SdkModel<CountryCoverageGetCountryResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumbers\Messaging;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberHealthMetrics;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\PhoneNumberWithMessagingSettings\Features;
@@ -20,12 +18,10 @@ use Telnyx\PhoneNumberWithMessagingSettings\Type;
  *   data?: PhoneNumberWithMessagingSettings|null
  * }
  */
-final class MessagingGetResponse implements BaseModel, ResponseConverter
+final class MessagingGetResponse implements BaseModel
 {
     /** @use SdkModel<MessagingGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PhoneNumberWithMessagingSettings $data;

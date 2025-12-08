@@ -7,9 +7,7 @@ namespace Telnyx\MobilePhoneNumbers\Messaging;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data\Features;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data\RecordType;
@@ -20,12 +18,10 @@ use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data\Type;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class MessagingListResponse implements BaseModel, ResponseConverter
+final class MessagingListResponse implements BaseModel
 {
     /** @use SdkModel<MessagingListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

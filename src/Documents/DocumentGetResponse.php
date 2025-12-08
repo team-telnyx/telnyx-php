@@ -6,9 +6,7 @@ namespace Telnyx\Documents;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Documents\DocServiceDocument\AvScanStatus;
 use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
@@ -16,12 +14,10 @@ use Telnyx\Documents\DocServiceDocument\Status;
 /**
  * @phpstan-type DocumentGetResponseShape = array{data?: DocServiceDocument|null}
  */
-final class DocumentGetResponse implements BaseModel, ResponseConverter
+final class DocumentGetResponse implements BaseModel
 {
     /** @use SdkModel<DocumentGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DocServiceDocument $data;

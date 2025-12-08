@@ -7,21 +7,17 @@ namespace Telnyx\Rooms;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RoomListResponseShape = array{
  *   data?: list<Room>|null, meta?: PaginationMeta|null
  * }
  */
-final class RoomListResponse implements BaseModel, ResponseConverter
+final class RoomListResponse implements BaseModel
 {
     /** @use SdkModel<RoomListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Room>|null $data */
     #[Api(list: Room::class, optional: true)]

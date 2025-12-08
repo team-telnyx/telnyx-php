@@ -11,21 +11,17 @@ use Telnyx\Conferences\Conference\RecordType;
 use Telnyx\Conferences\Conference\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConferenceListResponseShape = array{
  *   data?: list<Conference>|null, meta?: PaginationMeta|null
  * }
  */
-final class ConferenceListResponse implements BaseModel, ResponseConverter
+final class ConferenceListResponse implements BaseModel
 {
     /** @use SdkModel<ConferenceListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Conference>|null $data */
     #[Api(list: Conference::class, optional: true)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse;
@@ -28,13 +29,15 @@ final class CountryCoverageService implements CountryCoverageContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): CountryCoverageGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CountryCoverageGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'country_coverage',
             options: $requestOptions,
             convert: CountryCoverageGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -48,12 +51,14 @@ final class CountryCoverageService implements CountryCoverageContract
         string $countryCode,
         ?RequestOptions $requestOptions = null
     ): CountryCoverageGetCountryResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CountryCoverageGetCountryResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['country_coverage/countries/%1$s', $countryCode],
             options: $requestOptions,
             convert: CountryCoverageGetCountryResponse::class,
         );
+
+        return $response->parse();
     }
 }

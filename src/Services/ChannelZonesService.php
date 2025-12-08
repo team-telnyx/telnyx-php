@@ -9,6 +9,7 @@ use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesContract;
@@ -39,14 +40,16 @@ final class ChannelZonesService implements ChannelZonesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ChannelZoneUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['channel_zones/%1$s', $channelZoneID],
             body: (object) $parsed,
             options: $options,
             convert: ChannelZoneUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -69,13 +72,15 @@ final class ChannelZonesService implements ChannelZonesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ChannelZoneListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'channel_zones',
             query: $parsed,
             options: $options,
             convert: ChannelZoneListResponse::class,
         );
+
+        return $response->parse();
     }
 }

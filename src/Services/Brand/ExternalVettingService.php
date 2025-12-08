@@ -10,6 +10,7 @@ use Telnyx\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -35,13 +36,15 @@ final class ExternalVettingService implements ExternalVettingContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<ExternalVettingListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['brand/%1$s/externalVetting', $brandID],
             options: $requestOptions,
             convert: new ListOf(ExternalVettingListResponseItem::class),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,14 +70,16 @@ final class ExternalVettingService implements ExternalVettingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalVettingImportResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
             convert: ExternalVettingImportResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,13 +103,15 @@ final class ExternalVettingService implements ExternalVettingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalVettingOrderResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
             convert: ExternalVettingOrderResponse::class,
         );
+
+        return $response->parse();
     }
 }

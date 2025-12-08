@@ -6,9 +6,7 @@ namespace Telnyx\FaxApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplication\Inbound;
 use Telnyx\FaxApplications\FaxApplication\Outbound;
@@ -18,12 +16,10 @@ use Telnyx\FaxApplications\FaxApplication\Outbound;
  *   data?: FaxApplication|null
  * }
  */
-final class FaxApplicationDeleteResponse implements BaseModel, ResponseConverter
+final class FaxApplicationDeleteResponse implements BaseModel
 {
     /** @use SdkModel<FaxApplicationDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?FaxApplication $data;

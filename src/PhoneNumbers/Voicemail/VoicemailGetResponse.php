@@ -6,21 +6,17 @@ namespace Telnyx\PhoneNumbers\Voicemail;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type VoicemailGetResponseShape = array{
  *   data?: VoicemailPrefResponse|null
  * }
  */
-final class VoicemailGetResponse implements BaseModel, ResponseConverter
+final class VoicemailGetResponse implements BaseModel
 {
     /** @use SdkModel<VoicemailGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?VoicemailPrefResponse $data;

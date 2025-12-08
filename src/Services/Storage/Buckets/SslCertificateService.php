@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\SslCertificateContract;
@@ -41,8 +42,8 @@ final class SslCertificateService implements SslCertificateContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SslCertificateNewResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
             headers: ['Content-Type' => 'multipart/form-data'],
@@ -50,6 +51,8 @@ final class SslCertificateService implements SslCertificateContract
             options: $options,
             convert: SslCertificateNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class SslCertificateService implements SslCertificateContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): SslCertificateGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SslCertificateGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
             options: $requestOptions,
             convert: SslCertificateGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -83,12 +88,14 @@ final class SslCertificateService implements SslCertificateContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): SslCertificateDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SslCertificateDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
             options: $requestOptions,
             convert: SslCertificateDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

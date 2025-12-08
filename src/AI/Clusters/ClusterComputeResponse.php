@@ -7,19 +7,15 @@ namespace Telnyx\AI\Clusters;
 use Telnyx\AI\Clusters\ClusterComputeResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ClusterComputeResponseShape = array{data: Data}
  */
-final class ClusterComputeResponse implements BaseModel, ResponseConverter
+final class ClusterComputeResponse implements BaseModel
 {
     /** @use SdkModel<ClusterComputeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

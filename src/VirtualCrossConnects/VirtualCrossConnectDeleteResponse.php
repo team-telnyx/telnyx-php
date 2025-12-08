@@ -6,9 +6,7 @@ namespace Telnyx\VirtualCrossConnects;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse\Data;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse\Data\CloudProvider;
@@ -17,12 +15,10 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse\Data\Region;
 /**
  * @phpstan-type VirtualCrossConnectDeleteResponseShape = array{data?: Data|null}
  */
-final class VirtualCrossConnectDeleteResponse implements BaseModel, ResponseConverter
+final class VirtualCrossConnectDeleteResponse implements BaseModel
 {
     /** @use SdkModel<VirtualCrossConnectDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

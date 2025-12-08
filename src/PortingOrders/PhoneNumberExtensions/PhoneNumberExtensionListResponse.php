@@ -7,9 +7,7 @@ namespace Telnyx\PortingOrders\PhoneNumberExtensions;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange;
 
@@ -18,12 +16,10 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\Exten
  *   data?: list<PortingPhoneNumberExtension>|null, meta?: PaginationMeta|null
  * }
  */
-final class PhoneNumberExtensionListResponse implements BaseModel, ResponseConverter
+final class PhoneNumberExtensionListResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberExtensionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortingPhoneNumberExtension>|null $data */
     #[Api(list: PortingPhoneNumberExtension::class, optional: true)]

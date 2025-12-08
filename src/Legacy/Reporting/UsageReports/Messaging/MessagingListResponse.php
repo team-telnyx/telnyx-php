@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessagingListResponseShape = array{
@@ -16,12 +14,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   meta?: StandardPaginationMeta|null,
  * }
  */
-final class MessagingListResponse implements BaseModel, ResponseConverter
+final class MessagingListResponse implements BaseModel
 {
     /** @use SdkModel<MessagingListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<MdrUsageReportResponseLegacy>|null $data */
     #[Api(list: MdrUsageReportResponseLegacy::class, optional: true)]

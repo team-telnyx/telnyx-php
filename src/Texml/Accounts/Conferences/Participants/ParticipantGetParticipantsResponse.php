@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant\Status;
 
@@ -24,12 +22,10 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
  *   uri?: string|null,
  * }
  */
-final class ParticipantGetParticipantsResponse implements BaseModel, ResponseConverter
+final class ParticipantGetParticipantsResponse implements BaseModel
 {
     /** @use SdkModel<ParticipantGetParticipantsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The number of the last element on the page, zero-indexed.

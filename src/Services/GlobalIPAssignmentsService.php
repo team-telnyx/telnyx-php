@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
@@ -45,14 +46,16 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAssignmentNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'global_ip_assignments',
             body: (object) $parsed,
             options: $options,
             convert: GlobalIPAssignmentNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -66,13 +69,15 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAssignmentGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['global_ip_assignments/%1$s', $id],
             options: $requestOptions,
             convert: GlobalIPAssignmentGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -105,14 +110,16 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAssignmentUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['global_ip_assignments/%1$s', $id],
             body: (object) $parsed['body'],
             options: $options,
             convert: GlobalIPAssignmentUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -135,14 +142,16 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAssignmentListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'global_ip_assignments',
             query: $parsed,
             options: $options,
             convert: GlobalIPAssignmentListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -156,12 +165,14 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAssignmentDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['global_ip_assignments/%1$s', $id],
             options: $requestOptions,
             convert: GlobalIPAssignmentDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

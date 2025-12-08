@@ -9,6 +9,7 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
@@ -39,14 +40,16 @@ final class BillingBundlesService implements BillingBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BillingBundleGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['bundle_pricing/billing_bundles/%1$s', $bundleID],
             headers: $parsed,
             options: $options,
             convert: BillingBundleGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,8 +78,8 @@ final class BillingBundlesService implements BillingBundlesContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BillingBundleListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'bundle_pricing/billing_bundles',
             query: array_intersect_key($parsed, $query_params),
@@ -84,5 +87,7 @@ final class BillingBundlesService implements BillingBundlesContract
             options: $options,
             convert: BillingBundleListResponse::class,
         );
+
+        return $response->parse();
     }
 }

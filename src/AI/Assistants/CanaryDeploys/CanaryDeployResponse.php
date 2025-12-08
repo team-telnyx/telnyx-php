@@ -6,9 +6,7 @@ namespace Telnyx\AI\Assistants\CanaryDeploys;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model for canary deploy operations.
@@ -20,12 +18,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   versions: list<VersionConfig>,
  * }
  */
-final class CanaryDeployResponse implements BaseModel, ResponseConverter
+final class CanaryDeployResponse implements BaseModel
 {
     /** @use SdkModel<CanaryDeployResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $assistant_id;

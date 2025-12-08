@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberType;
@@ -18,12 +16,10 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberTy
  *   data?: PortingPhoneNumberBlock|null
  * }
  */
-final class PhoneNumberBlockDeleteResponse implements BaseModel, ResponseConverter
+final class PhoneNumberBlockDeleteResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberBlockDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingPhoneNumberBlock $data;

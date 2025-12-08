@@ -6,9 +6,7 @@ namespace Telnyx\AI\McpServers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type McpServerUpdateResponseShape = array{
@@ -21,12 +19,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   api_key_ref?: string|null,
  * }
  */
-final class McpServerUpdateResponse implements BaseModel, ResponseConverter
+final class McpServerUpdateResponse implements BaseModel
 {
     /** @use SdkModel<McpServerUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

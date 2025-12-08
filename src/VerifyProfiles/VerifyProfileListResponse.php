@@ -6,9 +6,7 @@ namespace Telnyx\VerifyProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\ByPhoneNumber\VerifyMeta;
 use Telnyx\VerifyProfiles\VerifyProfile\Call;
 use Telnyx\VerifyProfiles\VerifyProfile\Flashcall;
@@ -22,12 +20,10 @@ use Telnyx\VerifyProfiles\VerifyProfile\SMS;
  *   data: list<VerifyProfile>, meta: VerifyMeta
  * }
  */
-final class VerifyProfileListResponse implements BaseModel, ResponseConverter
+final class VerifyProfileListResponse implements BaseModel
 {
     /** @use SdkModel<VerifyProfileListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<VerifyProfile> $data */
     #[Api(list: VerifyProfile::class)]

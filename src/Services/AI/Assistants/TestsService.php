@@ -11,6 +11,7 @@ use Telnyx\AI\Assistants\Tests\TestListParams;
 use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
@@ -65,14 +66,16 @@ final class TestsService implements TestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantTest> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/assistants/tests',
             body: (object) $parsed,
             options: $options,
             convert: AssistantTest::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -86,13 +89,15 @@ final class TestsService implements TestsContract
         string $testID,
         ?RequestOptions $requestOptions = null
     ): AssistantTest {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantTest> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/%1$s', $testID],
             options: $requestOptions,
             convert: AssistantTest::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -123,14 +128,16 @@ final class TestsService implements TestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantTest> */
+        $response = $this->client->request(
             method: 'put',
             path: ['ai/assistants/tests/%1$s', $testID],
             body: (object) $parsed,
             options: $options,
             convert: AssistantTest::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -156,14 +163,16 @@ final class TestsService implements TestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TestListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/assistants/tests',
             query: $parsed,
             options: $options,
             convert: TestListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -177,12 +186,14 @@ final class TestsService implements TestsContract
         string $testID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/assistants/tests/%1$s', $testID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

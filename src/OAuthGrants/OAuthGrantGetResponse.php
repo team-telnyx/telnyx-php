@@ -6,20 +6,16 @@ namespace Telnyx\OAuthGrants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
 /**
  * @phpstan-type OAuthGrantGetResponseShape = array{data?: OAuthGrant|null}
  */
-final class OAuthGrantGetResponse implements BaseModel, ResponseConverter
+final class OAuthGrantGetResponse implements BaseModel
 {
     /** @use SdkModel<OAuthGrantGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?OAuthGrant $data;

@@ -7,9 +7,7 @@ namespace Telnyx\RoomCompositions;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomCompositions\RoomComposition\Format;
 use Telnyx\RoomCompositions\RoomComposition\Status;
 
@@ -18,12 +16,10 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
  *   data?: list<RoomComposition>|null, meta?: PaginationMeta|null
  * }
  */
-final class RoomCompositionListResponse implements BaseModel, ResponseConverter
+final class RoomCompositionListResponse implements BaseModel
 {
     /** @use SdkModel<RoomCompositionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<RoomComposition>|null $data */
     #[Api(list: RoomComposition::class, optional: true)]

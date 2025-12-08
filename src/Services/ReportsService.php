@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsParams\Status;
@@ -65,14 +66,16 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ReportListMdrsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'reports/mdrs',
             query: $parsed,
             options: $options,
             convert: ReportListMdrsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -106,13 +109,15 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ReportListWdrsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'reports/wdrs',
             query: $parsed,
             options: $options,
             convert: ReportListWdrsResponse::class,
         );
+
+        return $response->parse();
     }
 }

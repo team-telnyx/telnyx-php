@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
@@ -45,14 +46,16 @@ final class NotificationSettingsService implements NotificationSettingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationSettingNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'notification_settings',
             body: (object) $parsed,
             options: $options,
             convert: NotificationSettingNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -66,13 +69,15 @@ final class NotificationSettingsService implements NotificationSettingsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationSettingGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['notification_settings/%1$s', $id],
             options: $requestOptions,
             convert: NotificationSettingGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -105,14 +110,16 @@ final class NotificationSettingsService implements NotificationSettingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationSettingListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'notification_settings',
             query: $parsed,
             options: $options,
             convert: NotificationSettingListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,12 +133,14 @@ final class NotificationSettingsService implements NotificationSettingsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationSettingDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['notification_settings/%1$s', $id],
             options: $requestOptions,
             convert: NotificationSettingDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

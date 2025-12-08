@@ -6,9 +6,7 @@ namespace Telnyx\CampaignBuilder\Brand;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BrandQualifyByUsecaseResponseShape = array{
@@ -21,12 +19,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   usecase?: string|null,
  * }
  */
-final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverter
+final class BrandQualifyByUsecaseResponse implements BaseModel
 {
     /** @use SdkModel<BrandQualifyByUsecaseResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Campaign annual subscription fee.

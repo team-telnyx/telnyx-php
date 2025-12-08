@@ -7,20 +7,16 @@ namespace Telnyx\AI\Clusters;
 use Telnyx\AI\Clusters\ClusterGetResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
  * @phpstan-type ClusterGetResponseShape = array{data: Data}
  */
-final class ClusterGetResponse implements BaseModel, ResponseConverter
+final class ClusterGetResponse implements BaseModel
 {
     /** @use SdkModel<ClusterGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
@@ -31,13 +32,15 @@ final class OAuthGrantsService implements OAuthGrantsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthGrantGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['oauth_grants/%1$s', $id],
             options: $requestOptions,
             convert: OAuthGrantGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -58,14 +61,16 @@ final class OAuthGrantsService implements OAuthGrantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthGrantListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'oauth_grants',
             query: $parsed,
             options: $options,
             convert: OAuthGrantListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,12 +84,14 @@ final class OAuthGrantsService implements OAuthGrantsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthGrantDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['oauth_grants/%1$s', $id],
             options: $requestOptions,
             convert: OAuthGrantDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalConnection\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnection\Inbound;
 use Telnyx\ExternalConnections\ExternalConnection\Outbound;
@@ -19,12 +17,10 @@ use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
  *   data?: ExternalConnection|null
  * }
  */
-final class ExternalConnectionDeleteResponse implements BaseModel, ResponseConverter
+final class ExternalConnectionDeleteResponse implements BaseModel
 {
     /** @use SdkModel<ExternalConnectionDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ExternalConnection $data;

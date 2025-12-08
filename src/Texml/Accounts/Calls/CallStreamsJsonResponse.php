@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
 
 /**
@@ -22,12 +20,10 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
  *   uri?: string|null,
  * }
  */
-final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
+final class CallStreamsJsonResponse implements BaseModel
 {
     /** @use SdkModel<CallStreamsJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $account_sid;

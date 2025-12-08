@@ -6,21 +6,17 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessagingDeleteResponseShape = array{
  *   data?: MdrUsageReportResponseLegacy|null
  * }
  */
-final class MessagingDeleteResponse implements BaseModel, ResponseConverter
+final class MessagingDeleteResponse implements BaseModel
 {
     /** @use SdkModel<MessagingDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Legacy V2 MDR usage report response.

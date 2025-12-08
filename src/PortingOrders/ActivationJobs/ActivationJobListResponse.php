@@ -7,9 +7,7 @@ namespace Telnyx\PortingOrders\ActivationJobs;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationType;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
@@ -20,12 +18,10 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
  *   data?: list<PortingOrdersActivationJob>|null, meta?: PaginationMeta|null
  * }
  */
-final class ActivationJobListResponse implements BaseModel, ResponseConverter
+final class ActivationJobListResponse implements BaseModel
 {
     /** @use SdkModel<ActivationJobListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortingOrdersActivationJob>|null $data */
     #[Api(list: PortingOrdersActivationJob::class, optional: true)]

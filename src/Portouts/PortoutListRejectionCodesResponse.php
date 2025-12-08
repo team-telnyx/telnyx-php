@@ -6,9 +6,7 @@ namespace Telnyx\Portouts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\Portouts\PortoutListRejectionCodesResponse\Data;
  *   data?: list<Data>|null
  * }
  */
-final class PortoutListRejectionCodesResponse implements BaseModel, ResponseConverter
+final class PortoutListRejectionCodesResponse implements BaseModel
 {
     /** @use SdkModel<PortoutListRejectionCodesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

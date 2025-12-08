@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Regions\RegionListResponse;
 use Telnyx\RequestOptions;
@@ -27,12 +28,14 @@ final class RegionsService implements RegionsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): RegionListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RegionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'regions',
             options: $requestOptions,
             convert: RegionListResponse::class,
         );
+
+        return $response->parse();
     }
 }

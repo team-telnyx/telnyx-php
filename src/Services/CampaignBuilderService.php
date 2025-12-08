@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\CampaignBuilder\CampaignBuilderCreateParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignBuilderContract;
@@ -81,13 +82,15 @@ final class CampaignBuilderService implements CampaignBuilderContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxCampaignCsp> */
+        $response = $this->client->request(
             method: 'post',
             path: 'campaignBuilder',
             body: (object) $parsed,
             options: $options,
             convert: TelnyxCampaignCsp::class,
         );
+
+        return $response->parse();
     }
 }

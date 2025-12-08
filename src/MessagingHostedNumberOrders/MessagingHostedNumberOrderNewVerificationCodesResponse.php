@@ -6,9 +6,7 @@ namespace Telnyx\MessagingHostedNumberOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\Type;
 
@@ -17,12 +15,10 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerification
  *   data: list<Data>
  * }
  */
-final class MessagingHostedNumberOrderNewVerificationCodesResponse implements BaseModel, ResponseConverter
+final class MessagingHostedNumberOrderNewVerificationCodesResponse implements BaseModel
 {
     /** @use SdkModel<MessagingHostedNumberOrderNewVerificationCodesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

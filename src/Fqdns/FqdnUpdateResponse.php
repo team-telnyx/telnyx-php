@@ -6,19 +6,15 @@ namespace Telnyx\Fqdns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type FqdnUpdateResponseShape = array{data?: Fqdn|null}
  */
-final class FqdnUpdateResponse implements BaseModel, ResponseConverter
+final class FqdnUpdateResponse implements BaseModel
 {
     /** @use SdkModel<FqdnUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Fqdn $data;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingHostedNumberOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileParams;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
@@ -37,8 +38,8 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionUploadFileResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['messaging_hosted_number_orders/%1$s/actions/file_upload', $id],
             headers: ['Content-Type' => 'multipart/form-data'],
@@ -46,5 +47,7 @@ final class ActionsService implements ActionsContract
             options: $options,
             convert: ActionUploadFileResponse::class,
         );
+
+        return $response->parse();
     }
 }

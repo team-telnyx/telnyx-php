@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Direction;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\RecordType;
@@ -19,12 +17,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
  *   data?: list<MdrDetailReportResponse>|null, meta?: BatchCsvPaginationMeta|null
  * }
  */
-final class MessagingListResponse implements BaseModel, ResponseConverter
+final class MessagingListResponse implements BaseModel
 {
     /** @use SdkModel<MessagingListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<MdrDetailReportResponse>|null $data */
     #[Api(list: MdrDetailReportResponse::class, optional: true)]

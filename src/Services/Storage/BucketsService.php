@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsContract;
@@ -59,8 +60,8 @@ final class BucketsService implements BucketsContract
         $bucketName = $parsed['bucketName'];
         unset($parsed['bucketName']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BucketNewPresignedURLResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'storage/buckets/%1$s/%2$s/presigned_url', $bucketName, $objectName,
@@ -69,5 +70,7 @@ final class BucketsService implements BucketsContract
             options: $options,
             convert: BucketNewPresignedURLResponse::class,
         );
+
+        return $response->parse();
     }
 }

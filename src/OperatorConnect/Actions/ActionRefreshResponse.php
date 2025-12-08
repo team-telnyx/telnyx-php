@@ -6,21 +6,17 @@ namespace Telnyx\OperatorConnect\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionRefreshResponseShape = array{
  *   message?: string|null, success?: bool|null
  * }
  */
-final class ActionRefreshResponse implements BaseModel, ResponseConverter
+final class ActionRefreshResponse implements BaseModel
 {
     /** @use SdkModel<ActionRefreshResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A message describing the result of the operation.

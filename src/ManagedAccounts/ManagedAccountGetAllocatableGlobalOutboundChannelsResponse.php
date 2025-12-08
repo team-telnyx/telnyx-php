@@ -6,9 +6,7 @@ namespace Telnyx\ManagedAccounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsRes
  *   data?: Data|null
  * }
  */
-final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel, ResponseConverter
+final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel
 {
     /** @use SdkModel<ManagedAccountGetAllocatableGlobalOutboundChannelsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

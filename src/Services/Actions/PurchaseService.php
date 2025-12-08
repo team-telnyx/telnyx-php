@@ -7,6 +7,7 @@ namespace Telnyx\Services\Actions;
 use Telnyx\Actions\Purchase\PurchaseCreateParams;
 use Telnyx\Actions\Purchase\PurchaseNewResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\PurchaseContract;
@@ -44,13 +45,15 @@ final class PurchaseService implements PurchaseContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PurchaseNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'actions/purchase/esims',
             body: (object) $parsed,
             options: $options,
             convert: PurchaseNewResponse::class,
         );
+
+        return $response->parse();
     }
 }

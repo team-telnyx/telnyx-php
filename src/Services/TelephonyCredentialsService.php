@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TelephonyCredentialsContract;
@@ -44,14 +45,16 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelephonyCredentialNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'telephony_credentials',
             body: (object) $parsed,
             options: $options,
             convert: TelephonyCredentialNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelephonyCredentialGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['telephony_credentials/%1$s', $id],
             options: $requestOptions,
             convert: TelephonyCredentialGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -95,14 +100,16 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelephonyCredentialUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['telephony_credentials/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: TelephonyCredentialUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -132,14 +139,16 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelephonyCredentialListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'telephony_credentials',
             query: $parsed,
             options: $options,
             convert: TelephonyCredentialListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -153,13 +162,15 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelephonyCredentialDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['telephony_credentials/%1$s', $id],
             options: $requestOptions,
             convert: TelephonyCredentialDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -173,13 +184,15 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'post',
             path: ['telephony_credentials/%1$s/token', $id],
             headers: ['Accept' => 'text/plain'],
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 }

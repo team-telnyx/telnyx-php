@@ -7,9 +7,7 @@ namespace Telnyx\NumberBlockOrders;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
  *   data?: list<NumberBlockOrder>|null, meta?: PaginationMeta|null
  * }
  */
-final class NumberBlockOrderListResponse implements BaseModel, ResponseConverter
+final class NumberBlockOrderListResponse implements BaseModel
 {
     /** @use SdkModel<NumberBlockOrderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<NumberBlockOrder>|null $data */
     #[Api(list: NumberBlockOrder::class, optional: true)]

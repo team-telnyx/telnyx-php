@@ -6,9 +6,7 @@ namespace Telnyx\Faxes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Faxes\Fax\Direction;
 use Telnyx\Faxes\Fax\Quality;
 use Telnyx\Faxes\Fax\RecordType;
@@ -17,12 +15,10 @@ use Telnyx\Faxes\Fax\Status;
 /**
  * @phpstan-type FaxListResponseShape = array{data?: list<Fax>|null, meta?: mixed}
  */
-final class FaxListResponse implements BaseModel, ResponseConverter
+final class FaxListResponse implements BaseModel
 {
     /** @use SdkModel<FaxListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Fax>|null $data */
     #[Api(list: Fax::class, optional: true)]

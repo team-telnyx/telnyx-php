@@ -6,9 +6,7 @@ namespace Telnyx\MessagingTollfree\Verification\Requests;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * A verification request as it comes out of the database.
@@ -51,12 +49,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   webhookUrl?: string|null,
  * }
  */
-final class VerificationRequestEgress implements BaseModel, ResponseConverter
+final class VerificationRequestEgress implements BaseModel
 {
     /** @use SdkModel<VerificationRequestEgressShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

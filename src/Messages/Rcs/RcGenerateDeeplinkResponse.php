@@ -6,20 +6,16 @@ namespace Telnyx\Messages\Rcs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse\Data;
 
 /**
  * @phpstan-type RcGenerateDeeplinkResponseShape = array{data: Data}
  */
-final class RcGenerateDeeplinkResponse implements BaseModel, ResponseConverter
+final class RcGenerateDeeplinkResponse implements BaseModel
 {
     /** @use SdkModel<RcGenerateDeeplinkResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

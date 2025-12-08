@@ -8,20 +8,16 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Clusters\ClusterListResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
  * @phpstan-type ClusterListResponseShape = array{data: list<Data>, meta: Meta}
  */
-final class ClusterListResponse implements BaseModel, ResponseConverter
+final class ClusterListResponse implements BaseModel
 {
     /** @use SdkModel<ClusterListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

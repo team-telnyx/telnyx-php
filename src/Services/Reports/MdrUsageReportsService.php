@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
@@ -47,8 +48,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MdrUsageReportNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'reports/mdr_usage_reports',
             headers: ['Content-Type' => '*/*'],
@@ -56,6 +57,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             options: $options,
             convert: MdrUsageReportNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -69,13 +72,15 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MdrUsageReportGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['reports/mdr_usage_reports/%1$s', $id],
             options: $requestOptions,
             convert: MdrUsageReportGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,14 +103,16 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MdrUsageReportListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'reports/mdr_usage_reports',
             query: $parsed,
             options: $options,
             convert: MdrUsageReportListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -119,13 +126,15 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MdrUsageReportDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['reports/mdr_usage_reports/%1$s', $id],
             options: $requestOptions,
             convert: MdrUsageReportDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -151,13 +160,15 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MdrUsageReportFetchSyncResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'reports/mdr_usage_reports/sync',
             query: $parsed,
             options: $options,
             convert: MdrUsageReportFetchSyncResponse::class,
         );
+
+        return $response->parse();
     }
 }

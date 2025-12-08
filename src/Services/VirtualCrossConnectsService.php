@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsContract;
@@ -58,14 +59,16 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VirtualCrossConnectNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'virtual_cross_connects',
             body: (object) $parsed,
             options: $options,
             convert: VirtualCrossConnectNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,13 +82,15 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VirtualCrossConnectGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['virtual_cross_connects/%1$s', $id],
             options: $requestOptions,
             convert: VirtualCrossConnectGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -114,14 +119,16 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VirtualCrossConnectUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['virtual_cross_connects/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: VirtualCrossConnectUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -144,14 +151,16 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VirtualCrossConnectListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'virtual_cross_connects',
             query: $parsed,
             options: $options,
             convert: VirtualCrossConnectListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -165,12 +174,14 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VirtualCrossConnectDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['virtual_cross_connects/%1$s', $id],
             options: $requestOptions,
             convert: VirtualCrossConnectDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

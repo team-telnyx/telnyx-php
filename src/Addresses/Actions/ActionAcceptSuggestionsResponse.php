@@ -8,19 +8,15 @@ use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data;
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionAcceptSuggestionsResponseShape = array{data?: Data|null}
  */
-final class ActionAcceptSuggestionsResponse implements BaseModel, ResponseConverter
+final class ActionAcceptSuggestionsResponse implements BaseModel
 {
     /** @use SdkModel<ActionAcceptSuggestionsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

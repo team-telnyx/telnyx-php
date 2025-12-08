@@ -13,6 +13,7 @@ use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
@@ -42,14 +43,16 @@ final class BillingGroupsService implements BillingGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BillingGroupNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'billing_groups',
             body: (object) $parsed,
             options: $options,
             convert: BillingGroupNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class BillingGroupsService implements BillingGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): BillingGroupGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BillingGroupGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['billing_groups/%1$s', $id],
             options: $requestOptions,
             convert: BillingGroupGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -91,14 +96,16 @@ final class BillingGroupsService implements BillingGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BillingGroupUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['billing_groups/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: BillingGroupUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,14 +128,16 @@ final class BillingGroupsService implements BillingGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BillingGroupListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'billing_groups',
             query: $parsed,
             options: $options,
             convert: BillingGroupListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -142,12 +151,14 @@ final class BillingGroupsService implements BillingGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): BillingGroupDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BillingGroupDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['billing_groups/%1$s', $id],
             options: $requestOptions,
             convert: BillingGroupDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

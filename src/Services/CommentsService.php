@@ -11,6 +11,7 @@ use Telnyx\Comments\CommentListParams;
 use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CommentsContract;
@@ -44,14 +45,16 @@ final class CommentsService implements CommentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CommentNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'comments',
             body: (object) $parsed,
             options: $options,
             convert: CommentNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class CommentsService implements CommentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CommentGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['comments/%1$s', $id],
             options: $requestOptions,
             convert: CommentGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -97,14 +102,16 @@ final class CommentsService implements CommentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CommentListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'comments',
             query: $parsed,
             options: $options,
             convert: CommentListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -118,12 +125,14 @@ final class CommentsService implements CommentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentMarkAsReadResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CommentMarkAsReadResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['comments/%1$s/read', $id],
             options: $requestOptions,
             convert: CommentMarkAsReadResponse::class,
         );
+
+        return $response->parse();
     }
 }

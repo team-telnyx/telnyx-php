@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportRetrieveSpeechToTextParams;
@@ -61,13 +62,15 @@ final class UsageReportsService implements UsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UsageReportGetSpeechToTextResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/speech_to_text',
             query: $parsed,
             options: $options,
             convert: UsageReportGetSpeechToTextResponse::class,
         );
+
+        return $response->parse();
     }
 }

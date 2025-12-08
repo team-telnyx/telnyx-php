@@ -18,9 +18,7 @@ use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember2;
 use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InferenceEmbeddingShape = array{
@@ -45,12 +43,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   voice_settings?: VoiceSettings|null,
  * }
  */
-final class InferenceEmbedding implements BaseModel, ResponseConverter
+final class InferenceEmbedding implements BaseModel
 {
     /** @use SdkModel<InferenceEmbeddingShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

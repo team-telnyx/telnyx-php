@@ -6,9 +6,7 @@ namespace Telnyx\DynamicEmergencyAddresses;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
  *   data?: DynamicEmergencyAddress|null
  * }
  */
-final class DynamicEmergencyAddressGetResponse implements BaseModel, ResponseConverter
+final class DynamicEmergencyAddressGetResponse implements BaseModel
 {
     /** @use SdkModel<DynamicEmergencyAddressGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DynamicEmergencyAddress $data;

@@ -7,21 +7,17 @@ namespace Telnyx\Brand;
 use Telnyx\Brand\BrandGetFeedbackResponse\Category;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BrandGetFeedbackResponseShape = array{
  *   brandId: string, category: list<Category>
  * }
  */
-final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
+final class BrandGetFeedbackResponse implements BaseModel
 {
     /** @use SdkModel<BrandGetFeedbackResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * ID of the brand being queried about.

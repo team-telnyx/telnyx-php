@@ -6,9 +6,7 @@ namespace Telnyx\GlobalIPAssignments;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\Networks\InterfaceStatus;
  *   data?: GlobalIPAssignment|null
  * }
  */
-final class GlobalIPAssignmentNewResponse implements BaseModel, ResponseConverter
+final class GlobalIPAssignmentNewResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPAssignmentNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?GlobalIPAssignment $data;

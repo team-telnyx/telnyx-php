@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
@@ -36,13 +37,15 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phone_numbers/%1$s/voice', $id],
             options: $requestOptions,
             convert: VoiceGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -88,14 +91,16 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s/voice', $id],
             body: (object) $parsed,
             options: $options,
             convert: VoiceUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -125,13 +130,15 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_numbers/voice',
             query: $parsed,
             options: $options,
             convert: VoiceListResponse::class,
         );
+
+        return $response->parse();
     }
 }

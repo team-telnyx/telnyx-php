@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Conversations\InsightGroups;
 use Telnyx\AI\Conversations\InsightGroups\Insights\InsightAssignParams;
 use Telnyx\AI\Conversations\InsightGroups\Insights\InsightDeleteUnassignParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroups\InsightsContract;
@@ -39,8 +40,8 @@ final class InsightsService implements InsightsContract
         $groupID = $parsed['group_id'];
         unset($parsed['group_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'ai/conversations/insight-groups/%1$s/insights/%2$s/assign',
@@ -50,6 +51,8 @@ final class InsightsService implements InsightsContract
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -73,8 +76,8 @@ final class InsightsService implements InsightsContract
         $groupID = $parsed['group_id'];
         unset($parsed['group_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'ai/conversations/insight-groups/%1$s/insights/%2$s/unassign',
@@ -84,5 +87,7 @@ final class InsightsService implements InsightsContract
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\List\ListGetAllResponse;
 use Telnyx\List\ListGetByZoneResponse;
@@ -28,13 +29,15 @@ final class ListService implements ListContract
     public function retrieveAll(
         ?RequestOptions $requestOptions = null
     ): ListGetAllResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ListGetAllResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'list',
             options: $requestOptions,
             convert: ListGetAllResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -48,12 +51,14 @@ final class ListService implements ListContract
         string $channelZoneID,
         ?RequestOptions $requestOptions = null
     ): ListGetByZoneResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ListGetByZoneResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['list/%1$s', $channelZoneID],
             options: $requestOptions,
             convert: ListGetByZoneResponse::class,
         );
+
+        return $response->parse();
     }
 }

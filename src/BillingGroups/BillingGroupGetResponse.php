@@ -7,19 +7,15 @@ namespace Telnyx\BillingGroups;
 use Telnyx\BillingGroups\BillingGroup\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BillingGroupGetResponseShape = array{data?: BillingGroup|null}
  */
-final class BillingGroupGetResponse implements BaseModel, ResponseConverter
+final class BillingGroupGetResponse implements BaseModel
 {
     /** @use SdkModel<BillingGroupGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?BillingGroup $data;

@@ -6,19 +6,15 @@ namespace Telnyx\Rooms;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RoomUpdateResponseShape = array{data?: Room|null}
  */
-final class RoomUpdateResponse implements BaseModel, ResponseConverter
+final class RoomUpdateResponse implements BaseModel
 {
     /** @use SdkModel<RoomUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Room $data;

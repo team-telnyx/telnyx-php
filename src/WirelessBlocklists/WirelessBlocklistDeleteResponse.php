@@ -6,9 +6,7 @@ namespace Telnyx\WirelessBlocklists;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
  *   data?: WirelessBlocklist|null
  * }
  */
-final class WirelessBlocklistDeleteResponse implements BaseModel, ResponseConverter
+final class WirelessBlocklistDeleteResponse implements BaseModel
 {
     /** @use SdkModel<WirelessBlocklistDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?WirelessBlocklist $data;

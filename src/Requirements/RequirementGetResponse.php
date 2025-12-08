@@ -6,9 +6,7 @@ namespace Telnyx\Requirements;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocReqsRequirementType;
 use Telnyx\Requirements\RequirementGetResponse\Data;
 use Telnyx\Requirements\RequirementGetResponse\Data\Action;
@@ -17,12 +15,10 @@ use Telnyx\Requirements\RequirementGetResponse\Data\PhoneNumberType;
 /**
  * @phpstan-type RequirementGetResponseShape = array{data?: Data|null}
  */
-final class RequirementGetResponse implements BaseModel, ResponseConverter
+final class RequirementGetResponse implements BaseModel
 {
     /** @use SdkModel<RequirementGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

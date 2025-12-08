@@ -6,9 +6,7 @@ namespace Telnyx\OAuth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthTokenResponse\TokenType;
 
 /**
@@ -20,12 +18,10 @@ use Telnyx\OAuth\OAuthTokenResponse\TokenType;
  *   scope?: string|null,
  * }
  */
-final class OAuthTokenResponse implements BaseModel, ResponseConverter
+final class OAuthTokenResponse implements BaseModel
 {
     /** @use SdkModel<OAuthTokenResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The access token.

@@ -7,9 +7,7 @@ namespace Telnyx\MessagingProfiles;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberHealthMetrics;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\PhoneNumberWithMessagingSettings\Features;
@@ -21,12 +19,10 @@ use Telnyx\PhoneNumberWithMessagingSettings\Type;
  *   data?: list<PhoneNumberWithMessagingSettings>|null, meta?: PaginationMeta|null
  * }
  */
-final class MessagingProfileListPhoneNumbersResponse implements BaseModel, ResponseConverter
+final class MessagingProfileListPhoneNumbersResponse implements BaseModel
 {
     /** @use SdkModel<MessagingProfileListPhoneNumbersResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PhoneNumberWithMessagingSettings>|null $data */
     #[Api(list: PhoneNumberWithMessagingSettings::class, optional: true)]

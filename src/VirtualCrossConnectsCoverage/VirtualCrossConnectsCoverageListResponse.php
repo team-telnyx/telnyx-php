@@ -7,9 +7,7 @@ namespace Telnyx\VirtualCrossConnectsCoverage;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data\CloudProvider;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data\Location;
@@ -19,12 +17,10 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class VirtualCrossConnectsCoverageListResponse implements BaseModel, ResponseConverter
+final class VirtualCrossConnectsCoverageListResponse implements BaseModel
 {
     /** @use SdkModel<VirtualCrossConnectsCoverageListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -6,9 +6,7 @@ namespace Telnyx\Reports\MdrUsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Result;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
@@ -16,12 +14,10 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
 /**
  * @phpstan-type MdrUsageReportGetResponseShape = array{data?: MdrUsageReport|null}
  */
-final class MdrUsageReportGetResponse implements BaseModel, ResponseConverter
+final class MdrUsageReportGetResponse implements BaseModel
 {
     /** @use SdkModel<MdrUsageReportGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MdrUsageReport $data;

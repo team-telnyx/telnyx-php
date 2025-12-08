@@ -6,20 +6,16 @@ namespace Telnyx\Storage\Buckets;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content;
 
 /**
  * @phpstan-type BucketNewPresignedURLResponseShape = array{content?: Content|null}
  */
-final class BucketNewPresignedURLResponse implements BaseModel, ResponseConverter
+final class BucketNewPresignedURLResponse implements BaseModel
 {
     /** @use SdkModel<BucketNewPresignedURLResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Content $content;

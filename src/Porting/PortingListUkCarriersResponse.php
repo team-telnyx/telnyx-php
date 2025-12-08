@@ -6,20 +6,16 @@ namespace Telnyx\Porting;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\PortingListUkCarriersResponse\Data;
 
 /**
  * @phpstan-type PortingListUkCarriersResponseShape = array{data?: list<Data>|null}
  */
-final class PortingListUkCarriersResponse implements BaseModel, ResponseConverter
+final class PortingListUkCarriersResponse implements BaseModel
 {
     /** @use SdkModel<PortingListUkCarriersResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

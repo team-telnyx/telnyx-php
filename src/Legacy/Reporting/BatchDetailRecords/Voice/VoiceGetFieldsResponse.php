@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Available CDR report fields grouped by category.
@@ -20,12 +18,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   Telephony_Data?: list<string>|null,
  * }
  */
-final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
+final class VoiceGetFieldsResponse implements BaseModel
 {
     /** @use SdkModel<VoiceGetFieldsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Cost and billing related information.

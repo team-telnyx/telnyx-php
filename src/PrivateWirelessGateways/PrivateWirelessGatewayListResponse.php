@@ -7,21 +7,17 @@ namespace Telnyx\PrivateWirelessGateways;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PrivateWirelessGatewayListResponseShape = array{
  *   data?: list<PrivateWirelessGateway>|null, meta?: PaginationMeta|null
  * }
  */
-final class PrivateWirelessGatewayListResponse implements BaseModel, ResponseConverter
+final class PrivateWirelessGatewayListResponse implements BaseModel
 {
     /** @use SdkModel<PrivateWirelessGatewayListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PrivateWirelessGateway>|null $data */
     #[Api(list: PrivateWirelessGateway::class, optional: true)]

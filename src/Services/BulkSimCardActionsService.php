@@ -8,6 +8,7 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsContract;
@@ -30,13 +31,15 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): BulkSimCardActionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BulkSimCardActionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['bulk_sim_card_actions/%1$s', $id],
             options: $requestOptions,
             convert: BulkSimCardActionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -61,13 +64,15 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BulkSimCardActionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'bulk_sim_card_actions',
             query: $parsed,
             options: $options,
             convert: BulkSimCardActionListResponse::class,
         );
+
+        return $response->parse();
     }
 }

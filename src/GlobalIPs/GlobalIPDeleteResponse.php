@@ -6,20 +6,16 @@ namespace Telnyx\GlobalIPs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse\Data;
 
 /**
  * @phpstan-type GlobalIPDeleteResponseShape = array{data?: Data|null}
  */
-final class GlobalIPDeleteResponse implements BaseModel, ResponseConverter
+final class GlobalIPDeleteResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

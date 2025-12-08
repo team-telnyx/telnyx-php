@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingTollfree\Verification;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
@@ -79,14 +80,16 @@ final class RequestsService implements RequestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerificationRequestEgress> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messaging_tollfree/verification/requests',
             body: (object) $parsed,
             options: $options,
             convert: VerificationRequestEgress::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,13 +103,15 @@ final class RequestsService implements RequestsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VerificationRequestStatus {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerificationRequestStatus> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
             options: $requestOptions,
             convert: VerificationRequestStatus::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -161,14 +166,16 @@ final class RequestsService implements RequestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerificationRequestEgress> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: VerificationRequestEgress::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -196,14 +203,16 @@ final class RequestsService implements RequestsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequestListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'messaging_tollfree/verification/requests',
             query: $parsed,
             options: $options,
             convert: RequestListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -223,12 +232,14 @@ final class RequestsService implements RequestsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

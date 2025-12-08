@@ -7,21 +7,17 @@ namespace Telnyx\TelephonyCredentials;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TelephonyCredentialListResponseShape = array{
  *   data?: list<TelephonyCredential>|null, meta?: PaginationMeta|null
  * }
  */
-final class TelephonyCredentialListResponse implements BaseModel, ResponseConverter
+final class TelephonyCredentialListResponse implements BaseModel
 {
     /** @use SdkModel<TelephonyCredentialListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<TelephonyCredential>|null $data */
     #[Api(list: TelephonyCredential::class, optional: true)]

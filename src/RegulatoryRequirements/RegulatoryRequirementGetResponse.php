@@ -6,9 +6,7 @@ namespace Telnyx\RegulatoryRequirements;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
@@ -17,12 +15,10 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
  *   data?: list<Data>|null
  * }
  */
-final class RegulatoryRequirementGetResponse implements BaseModel, ResponseConverter
+final class RegulatoryRequirementGetResponse implements BaseModel
 {
     /** @use SdkModel<RegulatoryRequirementGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

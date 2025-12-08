@@ -6,9 +6,7 @@ namespace Telnyx\Verifications\ByPhoneNumber;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\Verification;
 use Telnyx\Verifications\Verification\RecordType;
 use Telnyx\Verifications\Verification\Status;
@@ -19,12 +17,10 @@ use Telnyx\Verifications\Verification\Type;
  *   data: list<Verification>, meta: VerifyMeta
  * }
  */
-final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
+final class ByPhoneNumberListResponse implements BaseModel
 {
     /** @use SdkModel<ByPhoneNumberListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Verification> $data */
     #[Api(list: Verification::class)]

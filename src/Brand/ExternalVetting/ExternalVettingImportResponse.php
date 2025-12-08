@@ -6,9 +6,7 @@ namespace Telnyx\Brand\ExternalVetting;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ExternalVettingImportResponseShape = array{
@@ -21,12 +19,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   vettingToken?: string|null,
  * }
  */
-final class ExternalVettingImportResponse implements BaseModel, ResponseConverter
+final class ExternalVettingImportResponse implements BaseModel
 {
     /** @use SdkModel<ExternalVettingImportResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Vetting submission date. This is the date when the vetting request is generated in ISO 8601 format.

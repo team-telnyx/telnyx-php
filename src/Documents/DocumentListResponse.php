@@ -7,9 +7,7 @@ namespace Telnyx\Documents;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Documents\DocServiceDocument\AvScanStatus;
 use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
@@ -19,12 +17,10 @@ use Telnyx\Documents\DocServiceDocument\Status;
  *   data?: list<DocServiceDocument>|null, meta?: PaginationMeta|null
  * }
  */
-final class DocumentListResponse implements BaseModel, ResponseConverter
+final class DocumentListResponse implements BaseModel
 {
     /** @use SdkModel<DocumentListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<DocServiceDocument>|null $data */
     #[Api(list: DocServiceDocument::class, optional: true)]

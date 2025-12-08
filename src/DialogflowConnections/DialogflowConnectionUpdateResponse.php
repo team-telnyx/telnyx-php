@@ -6,20 +6,16 @@ namespace Telnyx\DialogflowConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse\Data;
 
 /**
  * @phpstan-type DialogflowConnectionUpdateResponseShape = array{data: Data}
  */
-final class DialogflowConnectionUpdateResponse implements BaseModel, ResponseConverter
+final class DialogflowConnectionUpdateResponse implements BaseModel
 {
     /** @use SdkModel<DialogflowConnectionUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

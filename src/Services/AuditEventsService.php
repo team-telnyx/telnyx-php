@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\AuditEvents\AuditEventListParams;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsContract;
@@ -43,13 +44,15 @@ final class AuditEventsService implements AuditEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuditEventListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'audit_events',
             query: $parsed,
             options: $options,
             convert: AuditEventListResponse::class,
         );
+
+        return $response->parse();
     }
 }

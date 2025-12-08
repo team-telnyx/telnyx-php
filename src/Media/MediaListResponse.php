@@ -7,21 +7,17 @@ namespace Telnyx\Media;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MediaListResponseShape = array{
  *   data?: list<MediaResource>|null, meta?: PaginationMeta|null
  * }
  */
-final class MediaListResponse implements BaseModel, ResponseConverter
+final class MediaListResponse implements BaseModel
 {
     /** @use SdkModel<MediaListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<MediaResource>|null $data */
     #[Api(list: MediaResource::class, optional: true)]

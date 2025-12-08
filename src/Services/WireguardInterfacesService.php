@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesContract;
@@ -45,14 +46,16 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardInterfaceNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'wireguard_interfaces',
             body: (object) $parsed,
             options: $options,
             convert: WireguardInterfaceNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -66,13 +69,15 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardInterfaceGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['wireguard_interfaces/%1$s', $id],
             options: $requestOptions,
             convert: WireguardInterfaceGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -95,14 +100,16 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardInterfaceListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'wireguard_interfaces',
             query: $parsed,
             options: $options,
             convert: WireguardInterfaceListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -116,12 +123,14 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardInterfaceDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['wireguard_interfaces/%1$s', $id],
             options: $requestOptions,
             convert: WireguardInterfaceDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

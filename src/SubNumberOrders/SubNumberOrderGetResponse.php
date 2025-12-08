@@ -6,21 +6,17 @@ namespace Telnyx\SubNumberOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SubNumberOrders\SubNumberOrder\PhoneNumberType;
 use Telnyx\SubNumberOrders\SubNumberOrder\Status;
 
 /**
  * @phpstan-type SubNumberOrderGetResponseShape = array{data?: SubNumberOrder|null}
  */
-final class SubNumberOrderGetResponse implements BaseModel, ResponseConverter
+final class SubNumberOrderGetResponse implements BaseModel
 {
     /** @use SdkModel<SubNumberOrderGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SubNumberOrder $data;

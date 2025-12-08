@@ -8,21 +8,17 @@ use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\BillingGroups\BillingGroup\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BillingGroupListResponseShape = array{
  *   data?: list<BillingGroup>|null, meta?: PaginationMeta|null
  * }
  */
-final class BillingGroupListResponse implements BaseModel, ResponseConverter
+final class BillingGroupListResponse implements BaseModel
 {
     /** @use SdkModel<BillingGroupListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<BillingGroup>|null $data */
     #[Api(list: BillingGroup::class, optional: true)]

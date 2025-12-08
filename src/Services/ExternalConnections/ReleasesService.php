@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
@@ -41,13 +42,15 @@ final class ReleasesService implements ReleasesContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ReleaseGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/releases/%2$s', $id, $releaseID],
             options: $options,
             convert: ReleaseGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,13 +82,15 @@ final class ReleasesService implements ReleasesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ReleaseListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/releases', $id],
             query: $parsed,
             options: $options,
             convert: ReleaseListResponse::class,
         );
+
+        return $response->parse();
     }
 }

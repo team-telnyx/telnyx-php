@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
@@ -51,14 +52,16 @@ final class OAuthClientsService implements OAuthClientsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthClientNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'oauth_clients',
             body: (object) $parsed,
             options: $options,
             convert: OAuthClientNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,13 +75,15 @@ final class OAuthClientsService implements OAuthClientsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthClientGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthClientGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['oauth_clients/%1$s', $id],
             options: $requestOptions,
             convert: OAuthClientGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -109,14 +114,16 @@ final class OAuthClientsService implements OAuthClientsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthClientUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['oauth_clients/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: OAuthClientUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -146,14 +153,16 @@ final class OAuthClientsService implements OAuthClientsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OAuthClientListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'oauth_clients',
             query: $parsed,
             options: $options,
             convert: OAuthClientListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -167,12 +176,14 @@ final class OAuthClientsService implements OAuthClientsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['oauth_clients/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

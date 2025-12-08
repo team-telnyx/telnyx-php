@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections\Releases;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\Status;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
@@ -16,12 +14,10 @@ use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
 /**
  * @phpstan-type ReleaseGetResponseShape = array{data?: Data|null}
  */
-final class ReleaseGetResponse implements BaseModel, ResponseConverter
+final class ReleaseGetResponse implements BaseModel
 {
     /** @use SdkModel<ReleaseGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

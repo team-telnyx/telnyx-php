@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
@@ -71,14 +72,16 @@ final class AccountsService implements AccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccountGetRecordingsJsonResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Recordings.json', $accountSid],
             query: $parsed,
             options: $options,
             convert: AccountGetRecordingsJsonResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,13 +105,15 @@ final class AccountsService implements AccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccountGetTranscriptionsJsonResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Transcriptions.json', $accountSid],
             query: $parsed,
             options: $options,
             convert: AccountGetTranscriptionsJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Telnyx\DetailRecords;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\AmdDetailRecord;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\AmdDetailRecord\Feature;
@@ -30,12 +28,10 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Meta;
  *   meta?: Meta|null,
  * }
  */
-final class DetailRecordListResponse implements BaseModel, ResponseConverter
+final class DetailRecordListResponse implements BaseModel
 {
     /** @use SdkModel<DetailRecordListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * @var list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord>|null $data

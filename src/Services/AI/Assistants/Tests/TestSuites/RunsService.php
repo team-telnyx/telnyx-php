@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunTriggerParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -44,14 +45,16 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PaginatedTestRunList> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
             query: $parsed,
             options: $options,
             convert: PaginatedTestRunList::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,13 +78,15 @@ final class RunsService implements RunsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<TestRunResponse>> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
             body: (object) $parsed,
             options: $options,
             convert: new ListOf(TestRunResponse::class),
         );
+
+        return $response->parse();
     }
 }

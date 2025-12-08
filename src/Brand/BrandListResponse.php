@@ -8,21 +8,17 @@ use Telnyx\Brand\BrandListResponse\Record;
 use Telnyx\Brand\BrandListResponse\Record\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BrandListResponseShape = array{
  *   page?: int|null, records?: list<Record>|null, totalRecords?: int|null
  * }
  */
-final class BrandListResponse implements BaseModel, ResponseConverter
+final class BrandListResponse implements BaseModel
 {
     /** @use SdkModel<BrandListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?int $page;

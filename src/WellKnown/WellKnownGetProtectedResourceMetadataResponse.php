@@ -6,21 +6,17 @@ namespace Telnyx\WellKnown;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WellKnownGetProtectedResourceMetadataResponseShape = array{
  *   authorization_servers?: list<string>|null, resource?: string|null
  * }
  */
-final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, ResponseConverter
+final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
 {
     /** @use SdkModel<WellKnownGetProtectedResourceMetadataResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * List of authorization server URLs.

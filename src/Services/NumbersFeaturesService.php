@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumbersFeatures\NumbersFeatureCreateParams;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
@@ -36,13 +37,15 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumbersFeatureNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'numbers_features',
             body: (object) $parsed,
             options: $options,
             convert: NumbersFeatureNewResponse::class,
         );
+
+        return $response->parse();
     }
 }

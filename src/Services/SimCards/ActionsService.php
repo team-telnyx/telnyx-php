@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\SimCards;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
@@ -40,13 +41,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_card_actions/%1$s', $id],
             options: $requestOptions,
             convert: ActionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,14 +78,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'sim_card_actions',
             query: $parsed,
             options: $options,
             convert: ActionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,14 +109,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionBulkSetPublicIPsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'sim_cards/actions/bulk_set_public_ips',
             body: (object) $parsed,
             options: $options,
             convert: ActionBulkSetPublicIPsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,13 +133,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionDisableResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionDisableResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_cards/%1$s/actions/disable', $id],
             options: $requestOptions,
             convert: ActionDisableResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -148,13 +157,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionEnableResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionEnableResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_cards/%1$s/actions/enable', $id],
             options: $requestOptions,
             convert: ActionEnableResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -169,13 +180,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionRemovePublicIPResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRemovePublicIPResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_cards/%1$s/actions/remove_public_ip', $id],
             options: $requestOptions,
             convert: ActionRemovePublicIPResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -199,14 +212,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSetPublicIPResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_cards/%1$s/actions/set_public_ip', $id],
             query: $parsed,
             options: $options,
             convert: ActionSetPublicIPResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -222,13 +237,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionSetStandbyResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSetStandbyResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_cards/%1$s/actions/set_standby', $id],
             options: $requestOptions,
             convert: ActionSetStandbyResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -251,13 +268,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionValidateRegistrationCodesResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'sim_cards/actions/validate_registration_codes',
             body: (object) $parsed,
             options: $options,
             convert: ActionValidateRegistrationCodesResponse::class,
         );
+
+        return $response->parse();
     }
 }

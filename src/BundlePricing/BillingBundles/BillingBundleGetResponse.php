@@ -8,19 +8,15 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BillingBundleGetResponseShape = array{data: Data}
  */
-final class BillingBundleGetResponse implements BaseModel, ResponseConverter
+final class BillingBundleGetResponse implements BaseModel
 {
     /** @use SdkModel<BillingBundleGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse\Data;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse\Data\Result;
@@ -18,12 +16,10 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse\D
  *   data?: list<Data>|null, meta?: StandardPaginationMeta|null
  * }
  */
-final class NumberLookupListResponse implements BaseModel, ResponseConverter
+final class NumberLookupListResponse implements BaseModel
 {
     /** @use SdkModel<NumberLookupListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

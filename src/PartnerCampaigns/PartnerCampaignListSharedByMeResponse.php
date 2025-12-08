@@ -6,9 +6,7 @@ namespace Telnyx\PartnerCampaigns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse\Record;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse\Record;
  *   page?: int|null, records?: list<Record>|null, totalRecords?: int|null
  * }
  */
-final class PartnerCampaignListSharedByMeResponse implements BaseModel, ResponseConverter
+final class PartnerCampaignListSharedByMeResponse implements BaseModel
 {
     /** @use SdkModel<PartnerCampaignListSharedByMeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?int $page;

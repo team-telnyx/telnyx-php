@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -47,14 +48,16 @@ final class RequirementGroupsService implements RequirementGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequirementGroup> */
+        $response = $this->client->request(
             method: 'post',
             path: 'requirement_groups',
             body: (object) $parsed,
             options: $options,
             convert: RequirementGroup::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -68,13 +71,15 @@ final class RequirementGroupsService implements RequirementGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequirementGroup> */
+        $response = $this->client->request(
             method: 'get',
             path: ['requirement_groups/%1$s', $id],
             options: $requestOptions,
             convert: RequirementGroup::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -101,14 +106,16 @@ final class RequirementGroupsService implements RequirementGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequirementGroup> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['requirement_groups/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: RequirementGroup::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -139,14 +146,16 @@ final class RequirementGroupsService implements RequirementGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<RequirementGroup>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'requirement_groups',
             query: $parsed,
             options: $options,
             convert: new ListOf(RequirementGroup::class),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -160,13 +169,15 @@ final class RequirementGroupsService implements RequirementGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequirementGroup> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['requirement_groups/%1$s', $id],
             options: $requestOptions,
             convert: RequirementGroup::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -180,12 +191,14 @@ final class RequirementGroupsService implements RequirementGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequirementGroup> */
+        $response = $this->client->request(
             method: 'post',
             path: ['requirement_groups/%1$s/submit_for_approval', $id],
             options: $requestOptions,
             convert: RequirementGroup::class,
         );
+
+        return $response->parse();
     }
 }

@@ -8,19 +8,15 @@ use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data;
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ChargesBreakdownGetResponseShape = array{data: Data}
  */
-final class ChargesBreakdownGetResponse implements BaseModel, ResponseConverter
+final class ChargesBreakdownGetResponse implements BaseModel
 {
     /** @use SdkModel<ChargesBreakdownGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

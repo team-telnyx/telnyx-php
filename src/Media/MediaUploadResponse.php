@@ -6,19 +6,15 @@ namespace Telnyx\Media;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MediaUploadResponseShape = array{data?: MediaResource|null}
  */
-final class MediaUploadResponse implements BaseModel, ResponseConverter
+final class MediaUploadResponse implements BaseModel
 {
     /** @use SdkModel<MediaUploadResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MediaResource $data;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
@@ -40,13 +41,15 @@ final class JobsService implements JobsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): JobGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phone_numbers/jobs/%1$s', $id],
             options: $requestOptions,
             convert: JobGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -73,14 +76,16 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_numbers/jobs',
             query: $parsed,
             options: $options,
             convert: JobListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -101,14 +106,16 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobDeleteBatchResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phone_numbers/jobs/delete_phone_numbers',
             body: (object) $parsed,
             options: $options,
             convert: JobDeleteBatchResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -178,8 +185,8 @@ final class JobsService implements JobsContract
         );
         $query_params = ['filter'];
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobUpdateBatchResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phone_numbers/jobs/update_phone_numbers',
             query: array_diff_key($parsed, $query_params),
@@ -187,6 +194,8 @@ final class JobsService implements JobsContract
             options: $options,
             convert: JobUpdateBatchResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -211,13 +220,15 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobUpdateEmergencySettingsBatchResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phone_numbers/jobs/update_emergency_settings',
             body: (object) $parsed,
             options: $options,
             convert: JobUpdateEmergencySettingsBatchResponse::class,
         );
+
+        return $response->parse();
     }
 }

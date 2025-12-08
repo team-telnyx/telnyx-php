@@ -6,21 +6,17 @@ namespace Telnyx\TelephonyCredentials;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TelephonyCredentialUpdateResponseShape = array{
  *   data?: TelephonyCredential|null
  * }
  */
-final class TelephonyCredentialUpdateResponse implements BaseModel, ResponseConverter
+final class TelephonyCredentialUpdateResponse implements BaseModel
 {
     /** @use SdkModel<TelephonyCredentialUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?TelephonyCredential $data;

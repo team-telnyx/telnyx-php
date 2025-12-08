@@ -7,21 +7,17 @@ namespace Telnyx\NotificationProfiles;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NotificationProfileListResponseShape = array{
  *   data?: list<NotificationProfile>|null, meta?: PaginationMeta|null
  * }
  */
-final class NotificationProfileListResponse implements BaseModel, ResponseConverter
+final class NotificationProfileListResponse implements BaseModel
 {
     /** @use SdkModel<NotificationProfileListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<NotificationProfile>|null $data */
     #[Api(list: NotificationProfile::class, optional: true)]

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\CallEvents\CallEventListParams;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallEventsContract;
@@ -59,13 +60,15 @@ final class CallEventsService implements CallEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallEventListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'call_events',
             query: $parsed,
             options: $options,
             convert: CallEventListResponse::class,
         );
+
+        return $response->parse();
     }
 }

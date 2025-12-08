@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportContract;
@@ -44,14 +45,16 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SubNumberOrdersReportNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'sub_number_orders_report',
             body: (object) $parsed,
             options: $options,
             convert: SubNumberOrdersReportNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
         string $reportID,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrdersReportGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SubNumberOrdersReportGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sub_number_orders_report/%1$s', $reportID],
             options: $requestOptions,
             convert: SubNumberOrdersReportGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -85,13 +90,15 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
         string $reportID,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sub_number_orders_report/%1$s/download', $reportID],
             headers: ['Accept' => 'text/csv'],
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 }

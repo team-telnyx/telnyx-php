@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams;
@@ -41,13 +42,15 @@ final class GlobalIPAssignmentHealthService implements GlobalIPAssignmentHealthC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAssignmentHealthGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'global_ip_assignment_health',
             query: $parsed,
             options: $options,
             convert: GlobalIPAssignmentHealthGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

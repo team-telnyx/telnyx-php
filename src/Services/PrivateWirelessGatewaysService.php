@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
@@ -42,14 +43,16 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PrivateWirelessGatewayNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'private_wireless_gateways',
             body: (object) $parsed,
             options: $options,
             convert: PrivateWirelessGatewayNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PrivateWirelessGatewayGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['private_wireless_gateways/%1$s', $id],
             options: $requestOptions,
             convert: PrivateWirelessGatewayGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,14 +103,16 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PrivateWirelessGatewayListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'private_wireless_gateways',
             query: $parsed,
             options: $options,
             convert: PrivateWirelessGatewayListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -119,12 +126,14 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PrivateWirelessGatewayDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['private_wireless_gateways/%1$s', $id],
             options: $requestOptions,
             convert: PrivateWirelessGatewayDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

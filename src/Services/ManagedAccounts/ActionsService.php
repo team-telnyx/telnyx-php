@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ManagedAccounts;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
 use Telnyx\ManagedAccounts\Actions\ActionEnableParams;
@@ -30,13 +31,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionDisableResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionDisableResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['managed_accounts/%1$s/actions/disable', $id],
             options: $requestOptions,
             convert: ActionDisableResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -58,13 +61,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionEnableResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['managed_accounts/%1$s/actions/enable', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionEnableResponse::class,
         );
+
+        return $response->parse();
     }
 }

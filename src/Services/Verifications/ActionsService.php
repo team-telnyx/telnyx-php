@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ActionsContract;
@@ -39,13 +40,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifyVerificationCodeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['verifications/%1$s/actions/verify', $verificationID],
             body: (object) $parsed,
             options: $options,
             convert: VerifyVerificationCodeResponse::class,
         );
+
+        return $response->parse();
     }
 }

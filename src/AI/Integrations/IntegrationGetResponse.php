@@ -7,9 +7,7 @@ namespace Telnyx\AI\Integrations;
 use Telnyx\AI\Integrations\IntegrationGetResponse\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IntegrationGetResponseShape = array{
@@ -22,12 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   status: value-of<Status>,
  * }
  */
-final class IntegrationGetResponse implements BaseModel, ResponseConverter
+final class IntegrationGetResponse implements BaseModel
 {
     /** @use SdkModel<IntegrationGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

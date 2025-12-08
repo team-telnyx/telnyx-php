@@ -16,6 +16,7 @@ use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
@@ -67,14 +68,16 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallControlApplicationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'call_control_applications',
             body: (object) $parsed,
             options: $options,
             convert: CallControlApplicationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -88,13 +91,15 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallControlApplicationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['call_control_applications/%1$s', $id],
             options: $requestOptions,
             convert: CallControlApplicationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -139,14 +144,16 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallControlApplicationUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['call_control_applications/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: CallControlApplicationUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -189,14 +196,16 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallControlApplicationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'call_control_applications',
             query: $parsed,
             options: $options,
             convert: CallControlApplicationListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -210,12 +219,14 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallControlApplicationDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['call_control_applications/%1$s', $id],
             options: $requestOptions,
             convert: CallControlApplicationDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

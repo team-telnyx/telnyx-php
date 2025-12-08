@@ -6,9 +6,7 @@ namespace Telnyx\Portouts\Comments;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Metadata;
 use Telnyx\Portouts\Comments\CommentListResponse\Data;
 
@@ -17,12 +15,10 @@ use Telnyx\Portouts\Comments\CommentListResponse\Data;
  *   data?: list<Data>|null, meta?: Metadata|null
  * }
  */
-final class CommentListResponse implements BaseModel, ResponseConverter
+final class CommentListResponse implements BaseModel
 {
     /** @use SdkModel<CommentListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

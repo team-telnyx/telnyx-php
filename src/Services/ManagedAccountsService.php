@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
@@ -59,14 +60,16 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ManagedAccountNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'managed_accounts',
             body: (object) $parsed,
             options: $options,
             convert: ManagedAccountNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -80,13 +83,15 @@ final class ManagedAccountsService implements ManagedAccountsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ManagedAccountGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['managed_accounts/%1$s', $id],
             options: $requestOptions,
             convert: ManagedAccountGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -110,14 +115,16 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ManagedAccountUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['managed_accounts/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: ManagedAccountUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -146,14 +153,16 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ManagedAccountListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'managed_accounts',
             query: $parsed,
             options: $options,
             convert: ManagedAccountListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -166,13 +175,15 @@ final class ManagedAccountsService implements ManagedAccountsContract
     public function getAllocatableGlobalOutboundChannels(
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ManagedAccountGetAllocatableGlobalOutboundChannelsResponse,> */
+        $response = $this->client->request(
             method: 'get',
             path: 'managed_accounts/allocatable_global_outbound_channels',
             options: $requestOptions,
             convert: ManagedAccountGetAllocatableGlobalOutboundChannelsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -196,13 +207,15 @@ final class ManagedAccountsService implements ManagedAccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ManagedAccountUpdateGlobalChannelLimitResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['managed_accounts/%1$s/update_global_channel_limit', $id],
             body: (object) $parsed,
             options: $options,
             convert: ManagedAccountUpdateGlobalChannelLimitResponse::class,
         );
+
+        return $response->parse();
     }
 }

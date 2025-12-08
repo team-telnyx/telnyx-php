@@ -6,9 +6,7 @@ namespace Telnyx\InventoryCoverage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\CoverageType;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\NumberType;
@@ -20,12 +18,10 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
  *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
-final class InventoryCoverageListResponse implements BaseModel, ResponseConverter
+final class InventoryCoverageListResponse implements BaseModel
 {
     /** @use SdkModel<InventoryCoverageListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrderPreviewContract;
@@ -38,13 +39,15 @@ final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardOrderPreviewPreviewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'sim_card_order_preview',
             body: (object) $parsed,
             options: $options,
             convert: SimCardOrderPreviewPreviewResponse::class,
         );
+
+        return $response->parse();
     }
 }

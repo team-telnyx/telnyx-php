@@ -6,21 +6,17 @@ namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionMuteResponseShape = array{
  *   data?: ConferenceCommandResult|null
  * }
  */
-final class ActionMuteResponse implements BaseModel, ResponseConverter
+final class ActionMuteResponse implements BaseModel
 {
     /** @use SdkModel<ActionMuteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ConferenceCommandResult $data;

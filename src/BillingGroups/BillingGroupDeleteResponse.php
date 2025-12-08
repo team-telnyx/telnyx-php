@@ -7,19 +7,15 @@ namespace Telnyx\BillingGroups;
 use Telnyx\BillingGroups\BillingGroup\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BillingGroupDeleteResponseShape = array{data?: BillingGroup|null}
  */
-final class BillingGroupDeleteResponse implements BaseModel, ResponseConverter
+final class BillingGroupDeleteResponse implements BaseModel
 {
     /** @use SdkModel<BillingGroupDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?BillingGroup $data;

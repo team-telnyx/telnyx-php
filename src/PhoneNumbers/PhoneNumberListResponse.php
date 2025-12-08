@@ -7,9 +7,7 @@ namespace Telnyx\PhoneNumbers;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\EmergencyStatus;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\InboundCallScreening;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\PhoneNumberType;
@@ -21,12 +19,10 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  *   data?: list<PhoneNumberDetailed>|null, meta?: PaginationMeta|null
  * }
  */
-final class PhoneNumberListResponse implements BaseModel, ResponseConverter
+final class PhoneNumberListResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PhoneNumberDetailed>|null $data */
     #[Api(list: PhoneNumberDetailed::class, optional: true)]

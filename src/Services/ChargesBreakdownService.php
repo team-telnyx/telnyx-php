@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesBreakdownContract;
@@ -40,13 +41,15 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ChargesBreakdownGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'charges_breakdown',
             query: $parsed,
             options: $options,
             convert: ChargesBreakdownGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

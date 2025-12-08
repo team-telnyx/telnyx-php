@@ -6,20 +6,16 @@ namespace Telnyx\Regions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Regions\RegionListResponse\Data;
 
 /**
  * @phpstan-type RegionListResponseShape = array{data?: list<Data>|null}
  */
-final class RegionListResponse implements BaseModel, ResponseConverter
+final class RegionListResponse implements BaseModel
 {
     /** @use SdkModel<RegionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

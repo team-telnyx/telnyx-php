@@ -10,19 +10,15 @@ use Telnyx\Conferences\Conference\RecordType;
 use Telnyx\Conferences\Conference\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConferenceGetResponseShape = array{data?: Conference|null}
  */
-final class ConferenceGetResponse implements BaseModel, ResponseConverter
+final class ConferenceGetResponse implements BaseModel
 {
     /** @use SdkModel<ConferenceGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Conference $data;

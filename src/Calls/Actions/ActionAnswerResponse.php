@@ -7,19 +7,15 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionAnswerResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionAnswerResponseShape = array{data?: Data|null}
  */
-final class ActionAnswerResponse implements BaseModel, ResponseConverter
+final class ActionAnswerResponse implements BaseModel
 {
     /** @use SdkModel<ActionAnswerResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

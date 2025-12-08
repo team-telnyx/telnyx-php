@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InboundChannels\InboundChannelListResponse;
 use Telnyx\InboundChannels\InboundChannelUpdateParams;
@@ -37,14 +38,16 @@ final class InboundChannelsService implements InboundChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InboundChannelUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: 'inbound_channels',
             body: (object) $parsed,
             options: $options,
             convert: InboundChannelUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -57,12 +60,14 @@ final class InboundChannelsService implements InboundChannelsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): InboundChannelListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InboundChannelListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'inbound_channels',
             options: $requestOptions,
             convert: InboundChannelListResponse::class,
         );
+
+        return $response->parse();
     }
 }

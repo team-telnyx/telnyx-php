@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
@@ -90,14 +91,16 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalConnectionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'external_connections',
             body: (object) $parsed,
             options: $options,
             convert: ExternalConnectionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -111,13 +114,15 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s', $id],
             options: $requestOptions,
             convert: ExternalConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,14 +152,16 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalConnectionUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['external_connections/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: ExternalConnectionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -184,14 +191,16 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalConnectionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'external_connections',
             query: $parsed,
             options: $options,
             convert: ExternalConnectionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -205,13 +214,15 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalConnectionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['external_connections/%1$s', $id],
             options: $requestOptions,
             convert: ExternalConnectionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -237,13 +248,15 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExternalConnectionUpdateLocationResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['external_connections/%1$s/locations/%2$s', $id, $locationID],
             body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: ExternalConnectionUpdateLocationResponse::class,
         );
+
+        return $response->parse();
     }
 }

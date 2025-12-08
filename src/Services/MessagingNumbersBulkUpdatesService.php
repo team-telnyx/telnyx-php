@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateCreateParams;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
@@ -39,14 +40,16 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingNumbersBulkUpdateNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messaging_numbers_bulk_updates',
             body: (object) $parsed,
             options: $options,
             convert: MessagingNumbersBulkUpdateNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -60,12 +63,14 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
         string $orderID,
         ?RequestOptions $requestOptions = null
     ): MessagingNumbersBulkUpdateGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingNumbersBulkUpdateGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging_numbers_bulk_updates/%1$s', $orderID],
             options: $requestOptions,
             convert: MessagingNumbersBulkUpdateGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

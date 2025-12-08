@@ -6,9 +6,7 @@ namespace Telnyx\Messages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cc;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cc\LineType;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cc\Status;
@@ -55,12 +53,10 @@ use Telnyx\Messages\MessagingError\Source;
  *   webhook_url?: string|null,
  * }
  */
-final class MessageCancelScheduledResponse implements BaseModel, ResponseConverter
+final class MessageCancelScheduledResponse implements BaseModel
 {
     /** @use SdkModel<MessageCancelScheduledResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the type of resource.

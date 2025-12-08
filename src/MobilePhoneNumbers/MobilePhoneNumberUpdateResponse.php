@@ -6,9 +6,7 @@ namespace Telnyx\MobilePhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\CallForwarding;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\CallRecording;
@@ -21,12 +19,10 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\Outbound;
 /**
  * @phpstan-type MobilePhoneNumberUpdateResponseShape = array{data?: Data|null}
  */
-final class MobilePhoneNumberUpdateResponse implements BaseModel, ResponseConverter
+final class MobilePhoneNumberUpdateResponse implements BaseModel
 {
     /** @use SdkModel<MobilePhoneNumberUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

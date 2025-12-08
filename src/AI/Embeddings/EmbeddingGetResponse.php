@@ -7,19 +7,15 @@ namespace Telnyx\AI\Embeddings;
 use Telnyx\AI\Embeddings\EmbeddingGetResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type EmbeddingGetResponseShape = array{data: Data}
  */
-final class EmbeddingGetResponse implements BaseModel, ResponseConverter
+final class EmbeddingGetResponse implements BaseModel
 {
     /** @use SdkModel<EmbeddingGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

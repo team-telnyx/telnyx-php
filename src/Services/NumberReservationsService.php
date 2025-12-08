@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
@@ -60,14 +61,16 @@ final class NumberReservationsService implements NumberReservationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberReservationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'number_reservations',
             body: (object) $parsed,
             options: $options,
             convert: NumberReservationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,13 +84,15 @@ final class NumberReservationsService implements NumberReservationsContract
         string $numberReservationID,
         ?RequestOptions $requestOptions = null
     ): NumberReservationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberReservationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['number_reservations/%1$s', $numberReservationID],
             options: $requestOptions,
             convert: NumberReservationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -116,13 +121,15 @@ final class NumberReservationsService implements NumberReservationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberReservationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'number_reservations',
             query: $parsed,
             options: $options,
             convert: NumberReservationListResponse::class,
         );
+
+        return $response->parse();
     }
 }

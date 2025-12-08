@@ -6,9 +6,7 @@ namespace Telnyx\NotificationSettings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NotificationSettings\NotificationSetting\Parameter;
 use Telnyx\NotificationSettings\NotificationSetting\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
  *   data?: NotificationSetting|null
  * }
  */
-final class NotificationSettingDeleteResponse implements BaseModel, ResponseConverter
+final class NotificationSettingDeleteResponse implements BaseModel
 {
     /** @use SdkModel<NotificationSettingDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?NotificationSetting $data;

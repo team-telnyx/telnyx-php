@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListParams;
@@ -41,13 +42,15 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobilePhoneNumberGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobilePhoneNumberGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['v2/mobile_phone_numbers/%1$s', $id],
             options: $requestOptions,
             convert: MobilePhoneNumberGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -91,14 +94,16 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobilePhoneNumberUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['v2/mobile_phone_numbers/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: MobilePhoneNumberUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,13 +126,15 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobilePhoneNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'v2/mobile_phone_numbers',
             query: $parsed,
             options: $options,
             convert: MobilePhoneNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 }

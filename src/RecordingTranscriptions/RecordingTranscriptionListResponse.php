@@ -6,9 +6,7 @@ namespace Telnyx\RecordingTranscriptions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
@@ -19,12 +17,10 @@ use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Curso
  *   data?: list<RecordingTranscription>|null, meta?: Meta|null
  * }
  */
-final class RecordingTranscriptionListResponse implements BaseModel, ResponseConverter
+final class RecordingTranscriptionListResponse implements BaseModel
 {
     /** @use SdkModel<RecordingTranscriptionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<RecordingTranscription>|null $data */
     #[Api(list: RecordingTranscription::class, optional: true)]

@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI\Conversations;
 
 use Telnyx\AI\Conversations\Messages\MessageListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\MessagesContract;
@@ -28,12 +29,14 @@ final class MessagesService implements MessagesContract
         string $conversationID,
         ?RequestOptions $requestOptions = null
     ): MessageListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/conversations/%1$s/messages', $conversationID],
             options: $requestOptions,
             convert: MessageListResponse::class,
         );
+
+        return $response->parse();
     }
 }

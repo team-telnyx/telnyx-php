@@ -6,20 +6,16 @@ namespace Telnyx\PhoneNumbers\CsvDownloads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
 
 /**
  * @phpstan-type CsvDownloadNewResponseShape = array{data?: list<CsvDownload>|null}
  */
-final class CsvDownloadNewResponse implements BaseModel, ResponseConverter
+final class CsvDownloadNewResponse implements BaseModel
 {
     /** @use SdkModel<CsvDownloadNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<CsvDownload>|null $data */
     #[Api(list: CsvDownload::class, optional: true)]

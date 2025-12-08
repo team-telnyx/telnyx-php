@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Embeddings;
 use Telnyx\AI\Embeddings\Buckets\BucketGetResponse;
 use Telnyx\AI\Embeddings\Buckets\BucketListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Embeddings\BucketsContract;
@@ -29,13 +30,15 @@ final class BucketsService implements BucketsContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): BucketGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BucketGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/embeddings/buckets/%1$s', $bucketName],
             options: $requestOptions,
             convert: BucketGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -48,13 +51,15 @@ final class BucketsService implements BucketsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): BucketListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BucketListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/embeddings/buckets',
             options: $requestOptions,
             convert: BucketListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -68,12 +73,14 @@ final class BucketsService implements BucketsContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/embeddings/buckets/%1$s', $bucketName],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

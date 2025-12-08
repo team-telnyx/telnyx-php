@@ -7,9 +7,7 @@ namespace Telnyx\Networks;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkListResponse\Data;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\Networks\NetworkListResponse\Data;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class NetworkListResponse implements BaseModel, ResponseConverter
+final class NetworkListResponse implements BaseModel
 {
     /** @use SdkModel<NetworkListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

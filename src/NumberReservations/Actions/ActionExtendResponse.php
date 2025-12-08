@@ -6,9 +6,7 @@ namespace Telnyx\NumberReservations\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservation\Status;
 use Telnyx\NumberReservations\ReservedPhoneNumber;
@@ -16,12 +14,10 @@ use Telnyx\NumberReservations\ReservedPhoneNumber;
 /**
  * @phpstan-type ActionExtendResponseShape = array{data?: NumberReservation|null}
  */
-final class ActionExtendResponse implements BaseModel, ResponseConverter
+final class ActionExtendResponse implements BaseModel
 {
     /** @use SdkModel<ActionExtendResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?NumberReservation $data;

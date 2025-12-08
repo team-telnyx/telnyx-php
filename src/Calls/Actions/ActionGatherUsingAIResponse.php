@@ -7,19 +7,15 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionGatherUsingAIResponseShape = array{data?: Data|null}
  */
-final class ActionGatherUsingAIResponse implements BaseModel, ResponseConverter
+final class ActionGatherUsingAIResponse implements BaseModel
 {
     /** @use SdkModel<ActionGatherUsingAIResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

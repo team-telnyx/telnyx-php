@@ -7,9 +7,7 @@ namespace Telnyx\ShortCodes;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 use Telnyx\ShortCode\RecordType;
 
@@ -18,12 +16,10 @@ use Telnyx\ShortCode\RecordType;
  *   data?: list<ShortCode>|null, meta?: PaginationMeta|null
  * }
  */
-final class ShortCodeListResponse implements BaseModel, ResponseConverter
+final class ShortCodeListResponse implements BaseModel
 {
     /** @use SdkModel<ShortCodeListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ShortCode>|null $data */
     #[Api(list: ShortCode::class, optional: true)]

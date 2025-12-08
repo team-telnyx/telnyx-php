@@ -6,9 +6,7 @@ namespace Telnyx\Storage\MigrationSources;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
 
@@ -17,12 +15,10 @@ use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
  *   data?: MigrationSourceParams|null
  * }
  */
-final class MigrationSourceNewResponse implements BaseModel, ResponseConverter
+final class MigrationSourceNewResponse implements BaseModel
 {
     /** @use SdkModel<MigrationSourceNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MigrationSourceParams $data;

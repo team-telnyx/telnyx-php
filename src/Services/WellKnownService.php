@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WellKnownContract;
@@ -32,13 +33,15 @@ final class WellKnownService implements WellKnownContract
             ->client
             ->baseUrlOverridden ? '.well-known/oauth-authorization-server' : 'https://api.telnyx.com/.well-known/oauth-authorization-server';
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WellKnownGetAuthorizationServerMetadataResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: $path,
             options: $requestOptions,
             convert: WellKnownGetAuthorizationServerMetadataResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -55,12 +58,14 @@ final class WellKnownService implements WellKnownContract
             ->client
             ->baseUrlOverridden ? '.well-known/oauth-protected-resource' : 'https://api.telnyx.com/.well-known/oauth-protected-resource';
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WellKnownGetProtectedResourceMetadataResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: $path,
             options: $requestOptions,
             convert: WellKnownGetProtectedResourceMetadataResponse::class,
         );
+
+        return $response->parse();
     }
 }

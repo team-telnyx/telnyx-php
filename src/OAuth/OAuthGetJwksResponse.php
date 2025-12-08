@@ -6,20 +6,16 @@ namespace Telnyx\OAuth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthGetJwksResponse\Key;
 
 /**
  * @phpstan-type OAuthGetJwksResponseShape = array{keys?: list<Key>|null}
  */
-final class OAuthGetJwksResponse implements BaseModel, ResponseConverter
+final class OAuthGetJwksResponse implements BaseModel
 {
     /** @use SdkModel<OAuthGetJwksResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Key>|null $keys */
     #[Api(list: Key::class, optional: true)]

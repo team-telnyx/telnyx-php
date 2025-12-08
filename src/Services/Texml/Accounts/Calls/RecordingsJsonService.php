@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonContract;
@@ -50,8 +51,8 @@ final class RecordingsJsonService implements RecordingsJsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingsJsonRecordingsJsonResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Calls/%2$s/Recordings.json', $accountSid, $callSid,
@@ -61,6 +62,8 @@ final class RecordingsJsonService implements RecordingsJsonContract
             options: $options,
             convert: RecordingsJsonRecordingsJsonResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -86,8 +89,8 @@ final class RecordingsJsonService implements RecordingsJsonContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingsJsonGetRecordingsJsonResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'texml/Accounts/%1$s/Calls/%2$s/Recordings.json', $accountSid, $callSid,
@@ -95,5 +98,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
             options: $options,
             convert: RecordingsJsonGetRecordingsJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

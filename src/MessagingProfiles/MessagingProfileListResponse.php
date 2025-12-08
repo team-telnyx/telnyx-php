@@ -7,9 +7,7 @@ namespace Telnyx\MessagingProfiles;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
 use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
 
@@ -18,12 +16,10 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *   data?: list<MessagingProfile>|null, meta?: PaginationMeta|null
  * }
  */
-final class MessagingProfileListResponse implements BaseModel, ResponseConverter
+final class MessagingProfileListResponse implements BaseModel
 {
     /** @use SdkModel<MessagingProfileListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<MessagingProfile>|null $data */
     #[Api(list: MessagingProfile::class, optional: true)]

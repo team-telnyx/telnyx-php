@@ -6,20 +6,16 @@ namespace Telnyx\PortabilityChecks;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse\Data;
 
 /**
  * @phpstan-type PortabilityCheckRunResponseShape = array{data?: list<Data>|null}
  */
-final class PortabilityCheckRunResponse implements BaseModel, ResponseConverter
+final class PortabilityCheckRunResponse implements BaseModel
 {
     /** @use SdkModel<PortabilityCheckRunResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
@@ -57,14 +58,16 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberOrderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messaging_hosted_number_orders',
             body: (object) $parsed,
             options: $options,
             convert: MessagingHostedNumberOrderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,13 +81,15 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging_hosted_number_orders/%1$s', $id],
             options: $requestOptions,
             convert: MessagingHostedNumberOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -107,14 +112,16 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'messaging_hosted_number_orders',
             query: $parsed,
             options: $options,
             convert: MessagingHostedNumberOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -128,13 +135,15 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberOrderDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['messaging_hosted_number_orders/%1$s', $id],
             options: $requestOptions,
             convert: MessagingHostedNumberOrderDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -157,14 +166,16 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberOrderCheckEligibilityResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messaging_hosted_number_orders/eligibility_numbers_check',
             body: (object) $parsed,
             options: $options,
             convert: MessagingHostedNumberOrderCheckEligibilityResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -188,14 +199,16 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberOrderNewVerificationCodesResponse,> */
+        $response = $this->client->request(
             method: 'post',
             path: ['messaging_hosted_number_orders/%1$s/verification_codes', $id],
             body: (object) $parsed,
             options: $options,
             convert: MessagingHostedNumberOrderNewVerificationCodesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -219,13 +232,15 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberOrderValidateCodesResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['messaging_hosted_number_orders/%1$s/validation_codes', $id],
             body: (object) $parsed,
             options: $options,
             convert: MessagingHostedNumberOrderValidateCodesResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -8,6 +8,7 @@ use Telnyx\AI\FineTuning\Jobs\FineTuningJob;
 use Telnyx\AI\FineTuning\Jobs\JobCreateParams;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsContract;
@@ -42,14 +43,16 @@ final class JobsService implements JobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FineTuningJob> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/fine_tuning/jobs',
             body: (object) $parsed,
             options: $options,
             convert: FineTuningJob::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class JobsService implements JobsContract
         string $jobID,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FineTuningJob> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/fine_tuning/jobs/%1$s', $jobID],
             options: $requestOptions,
             convert: FineTuningJob::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -82,13 +87,15 @@ final class JobsService implements JobsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): JobListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<JobListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/fine_tuning/jobs',
             options: $requestOptions,
             convert: JobListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,12 +109,14 @@ final class JobsService implements JobsContract
         string $jobID,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FineTuningJob> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/fine_tuning/jobs/%1$s/cancel', $jobID],
             options: $requestOptions,
             convert: FineTuningJob::class,
         );
+
+        return $response->parse();
     }
 }

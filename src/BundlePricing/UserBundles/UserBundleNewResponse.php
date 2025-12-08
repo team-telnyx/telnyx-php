@@ -7,19 +7,15 @@ namespace Telnyx\BundlePricing\UserBundles;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UserBundleNewResponseShape = array{data: list<UserBundle>}
  */
-final class UserBundleNewResponse implements BaseModel, ResponseConverter
+final class UserBundleNewResponse implements BaseModel
 {
     /** @use SdkModel<UserBundleNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<UserBundle> $data */
     #[Api(list: UserBundle::class)]

@@ -8,21 +8,17 @@ use Telnyx\AccessIPAddress\CloudflareSyncStatus;
 use Telnyx\AccessIPAddress\PaginationMetaCloudflareIPListSync;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccessIPRangeListResponseShape = array{
  *   data: list<AccessIPRange>, meta: PaginationMetaCloudflareIPListSync
  * }
  */
-final class AccessIPRangeListResponse implements BaseModel, ResponseConverter
+final class AccessIPRangeListResponse implements BaseModel
 {
     /** @use SdkModel<AccessIPRangeListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<AccessIPRange> $data */
     #[Api(list: AccessIPRange::class)]

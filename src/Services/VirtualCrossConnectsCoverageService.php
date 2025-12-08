@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageContract;
@@ -47,13 +48,15 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VirtualCrossConnectsCoverageListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'virtual_cross_connects_coverage',
             query: $parsed,
             options: $options,
             convert: VirtualCrossConnectsCoverageListResponse::class,
         );
+
+        return $response->parse();
     }
 }

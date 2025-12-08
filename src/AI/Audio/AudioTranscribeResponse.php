@@ -7,21 +7,17 @@ namespace Telnyx\AI\Audio;
 use Telnyx\AI\Audio\AudioTranscribeResponse\Segment;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AudioTranscribeResponseShape = array{
  *   text: string, duration?: float|null, segments?: list<Segment>|null
  * }
  */
-final class AudioTranscribeResponse implements BaseModel, ResponseConverter
+final class AudioTranscribeResponse implements BaseModel
 {
     /** @use SdkModel<AudioTranscribeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The transcribed text for the audio file.

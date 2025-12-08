@@ -6,9 +6,7 @@ namespace Telnyx\Recordings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Recordings\RecordingResponseData\Channels;
 use Telnyx\Recordings\RecordingResponseData\DownloadURLs;
 use Telnyx\Recordings\RecordingResponseData\RecordType;
@@ -20,12 +18,10 @@ use Telnyx\Recordings\RecordingResponseData\Status;
  *   data?: RecordingResponseData|null
  * }
  */
-final class RecordingDeleteResponse implements BaseModel, ResponseConverter
+final class RecordingDeleteResponse implements BaseModel
 {
     /** @use SdkModel<RecordingDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?RecordingResponseData $data;

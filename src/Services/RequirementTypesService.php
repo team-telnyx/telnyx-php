@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
@@ -30,13 +31,15 @@ final class RequirementTypesService implements RequirementTypesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementTypeGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequirementTypeGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['requirement_types/%1$s', $id],
             options: $requestOptions,
             convert: RequirementTypeGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -60,13 +63,15 @@ final class RequirementTypesService implements RequirementTypesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RequirementTypeListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'requirement_types',
             query: $parsed,
             options: $options,
             convert: RequirementTypeListResponse::class,
         );
+
+        return $response->parse();
     }
 }

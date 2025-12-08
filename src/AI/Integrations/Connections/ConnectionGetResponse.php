@@ -7,19 +7,15 @@ namespace Telnyx\AI\Integrations\Connections;
 use Telnyx\AI\Integrations\Connections\ConnectionGetResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConnectionGetResponseShape = array{data: Data}
  */
-final class ConnectionGetResponse implements BaseModel, ResponseConverter
+final class ConnectionGetResponse implements BaseModel
 {
     /** @use SdkModel<ConnectionGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumberBlocksContract;
@@ -43,13 +44,15 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AvailablePhoneNumberBlockListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'available_phone_number_blocks',
             query: $parsed,
             options: $options,
             convert: AvailablePhoneNumberBlockListResponse::class,
         );
+
+        return $response->parse();
     }
 }

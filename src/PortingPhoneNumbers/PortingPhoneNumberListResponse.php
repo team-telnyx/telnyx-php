@@ -7,9 +7,7 @@ namespace Telnyx\PortingPhoneNumbers;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\ActivationStatus;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\PhoneNumberType;
@@ -22,12 +20,10 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\RequirementsS
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class PortingPhoneNumberListResponse implements BaseModel, ResponseConverter
+final class PortingPhoneNumberListResponse implements BaseModel
 {
     /** @use SdkModel<PortingPhoneNumberListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

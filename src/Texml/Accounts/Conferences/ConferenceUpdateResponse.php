@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Conferences;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\ReasonConferenceEnded;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
 
@@ -28,12 +26,10 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
  *   uri?: string|null,
  * }
  */
-final class ConferenceUpdateResponse implements BaseModel, ResponseConverter
+final class ConferenceUpdateResponse implements BaseModel
 {
     /** @use SdkModel<ConferenceUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.

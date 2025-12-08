@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
@@ -39,14 +40,16 @@ final class InvoicesService implements InvoicesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InvoiceGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['invoices/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: InvoiceGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -69,13 +72,15 @@ final class InvoicesService implements InvoicesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InvoiceListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'invoices',
             query: $parsed,
             options: $options,
             convert: InvoiceListResponse::class,
         );
+
+        return $response->parse();
     }
 }

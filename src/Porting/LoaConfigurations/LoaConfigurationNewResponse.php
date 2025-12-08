@@ -6,9 +6,7 @@ namespace Telnyx\Porting\LoaConfigurations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
@@ -18,12 +16,10 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
  *   data?: PortingLoaConfiguration|null
  * }
  */
-final class LoaConfigurationNewResponse implements BaseModel, ResponseConverter
+final class LoaConfigurationNewResponse implements BaseModel
 {
     /** @use SdkModel<LoaConfigurationNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingLoaConfiguration $data;

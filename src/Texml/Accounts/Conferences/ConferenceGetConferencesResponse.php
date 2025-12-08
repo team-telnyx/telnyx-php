@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Conferences;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference\ReasonConferenceEnded;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference\Status;
@@ -25,12 +23,10 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
  *   uri?: string|null,
  * }
  */
-final class ConferenceGetConferencesResponse implements BaseModel, ResponseConverter
+final class ConferenceGetConferencesResponse implements BaseModel
 {
     /** @use SdkModel<ConferenceGetConferencesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Conference>|null $conferences */
     #[Api(list: Conference::class, optional: true)]

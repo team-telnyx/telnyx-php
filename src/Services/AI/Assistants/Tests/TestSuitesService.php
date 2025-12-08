@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\TestSuiteListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuitesContract;
@@ -36,12 +37,14 @@ final class TestSuitesService implements TestSuitesContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): TestSuiteListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TestSuiteListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/assistants/tests/test-suites',
             options: $requestOptions,
             convert: TestSuiteListResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse\AnsweredBy;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse\Direction;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse\Status;
@@ -35,12 +33,10 @@ use Telnyx\Texml\Accounts\Calls\CallGetResponse\Status;
  *   uri?: string|null,
  * }
  */
-final class CallGetResponse implements BaseModel, ResponseConverter
+final class CallGetResponse implements BaseModel
 {
     /** @use SdkModel<CallGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
@@ -30,13 +31,15 @@ final class OtaUpdatesService implements OtaUpdatesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OtaUpdateGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OtaUpdateGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ota_updates/%1$s', $id],
             options: $requestOptions,
             convert: OtaUpdateGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -64,13 +67,15 @@ final class OtaUpdatesService implements OtaUpdatesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<OtaUpdateListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ota_updates',
             query: $parsed,
             options: $options,
             convert: OtaUpdateListResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -7,9 +7,7 @@ namespace Telnyx\MessagingProfiles;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 use Telnyx\ShortCode\RecordType;
 
@@ -18,12 +16,10 @@ use Telnyx\ShortCode\RecordType;
  *   data?: list<ShortCode>|null, meta?: PaginationMeta|null
  * }
  */
-final class MessagingProfileListShortCodesResponse implements BaseModel, ResponseConverter
+final class MessagingProfileListShortCodesResponse implements BaseModel
 {
     /** @use SdkModel<MessagingProfileListShortCodesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ShortCode>|null $data */
     #[Api(list: ShortCode::class, optional: true)]

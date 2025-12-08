@@ -6,20 +6,16 @@ namespace Telnyx\OAuthGrants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
 /**
  * @phpstan-type OAuthGrantDeleteResponseShape = array{data?: OAuthGrant|null}
  */
-final class OAuthGrantDeleteResponse implements BaseModel, ResponseConverter
+final class OAuthGrantDeleteResponse implements BaseModel
 {
     /** @use SdkModel<OAuthGrantDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?OAuthGrant $data;

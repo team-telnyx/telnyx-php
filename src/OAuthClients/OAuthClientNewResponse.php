@@ -6,9 +6,7 @@ namespace Telnyx\OAuthClients;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClient\ClientType;
 use Telnyx\OAuthClients\OAuthClient\RecordType;
@@ -16,12 +14,10 @@ use Telnyx\OAuthClients\OAuthClient\RecordType;
 /**
  * @phpstan-type OAuthClientNewResponseShape = array{data?: OAuthClient|null}
  */
-final class OAuthClientNewResponse implements BaseModel, ResponseConverter
+final class OAuthClientNewResponse implements BaseModel
 {
     /** @use SdkModel<OAuthClientNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?OAuthClient $data;

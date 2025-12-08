@@ -7,9 +7,7 @@ namespace Telnyx\Rooms\Sessions;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomParticipant;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\RoomParticipant;
  *   data?: list<RoomParticipant>|null, meta?: PaginationMeta|null
  * }
  */
-final class SessionGetParticipantsResponse implements BaseModel, ResponseConverter
+final class SessionGetParticipantsResponse implements BaseModel
 {
     /** @use SdkModel<SessionGetParticipantsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<RoomParticipant>|null $data */
     #[Api(list: RoomParticipant::class, optional: true)]

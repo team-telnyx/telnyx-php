@@ -6,21 +6,17 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type VoiceNewResponseShape = array{
  *   data?: CdrUsageReportResponseLegacy|null
  * }
  */
-final class VoiceNewResponse implements BaseModel, ResponseConverter
+final class VoiceNewResponse implements BaseModel
 {
     /** @use SdkModel<VoiceNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Legacy V2 CDR usage report response.

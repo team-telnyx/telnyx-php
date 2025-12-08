@@ -6,21 +6,17 @@ namespace Telnyx\Campaign;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignDeactivateResponseShape = array{
  *   time: float, message?: string|null, record_type?: string|null
  * }
  */
-final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
+final class CampaignDeactivateResponse implements BaseModel
 {
     /** @use SdkModel<CampaignDeactivateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public float $time;

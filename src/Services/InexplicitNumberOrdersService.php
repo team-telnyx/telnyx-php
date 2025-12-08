@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
@@ -59,14 +60,16 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InexplicitNumberOrderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'inexplicit_number_orders',
             body: (object) $parsed,
             options: $options,
             convert: InexplicitNumberOrderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -80,13 +83,15 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): InexplicitNumberOrderGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InexplicitNumberOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['inexplicit_number_orders/%1$s', $id],
             options: $requestOptions,
             convert: InexplicitNumberOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -109,13 +114,15 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InexplicitNumberOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'inexplicit_number_orders',
             query: $parsed,
             options: $options,
             convert: InexplicitNumberOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 }

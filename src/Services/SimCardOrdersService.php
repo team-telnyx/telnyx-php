@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrdersContract;
@@ -39,14 +40,16 @@ final class SimCardOrdersService implements SimCardOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardOrderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'sim_card_orders',
             body: (object) $parsed,
             options: $options,
             convert: SimCardOrderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -60,13 +63,15 @@ final class SimCardOrdersService implements SimCardOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_card_orders/%1$s', $id],
             options: $requestOptions,
             convert: SimCardOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,13 +109,15 @@ final class SimCardOrdersService implements SimCardOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'sim_card_orders',
             query: $parsed,
             options: $options,
             convert: SimCardOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 }

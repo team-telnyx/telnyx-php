@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Status;
 
@@ -25,12 +23,10 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Sta
  *   uri?: string|null,
  * }
  */
-final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseConverter
+final class AccountGetTranscriptionsJsonResponse implements BaseModel
 {
     /** @use SdkModel<AccountGetTranscriptionsJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The number of the last element on the page, zero-indexed.

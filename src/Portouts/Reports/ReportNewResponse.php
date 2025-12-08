@@ -6,21 +6,17 @@ namespace Telnyx\Portouts\Reports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\Reports\PortoutReport\ReportType;
 use Telnyx\Portouts\Reports\PortoutReport\Status;
 
 /**
  * @phpstan-type ReportNewResponseShape = array{data?: PortoutReport|null}
  */
-final class ReportNewResponse implements BaseModel, ResponseConverter
+final class ReportNewResponse implements BaseModel
 {
     /** @use SdkModel<ReportNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortoutReport $data;

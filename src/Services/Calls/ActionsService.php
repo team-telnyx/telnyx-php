@@ -83,6 +83,7 @@ use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Calls\ActionsContract;
@@ -155,14 +156,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionAnswerResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/answer', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionAnswerResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -208,14 +211,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionBridgeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/bridge', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionBridgeResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -244,14 +249,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionEnqueueResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/enqueue', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionEnqueueResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -291,14 +298,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGatherResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/gather', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionGatherResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -349,14 +358,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGatherUsingAIResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/gather_using_ai', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionGatherUsingAIResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -401,14 +412,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGatherUsingAudioResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/gather_using_audio', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionGatherUsingAudioResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -454,14 +467,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGatherUsingSpeakResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/gather_using_speak', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionGatherUsingSpeakResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -490,14 +505,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionHangupResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/hangup', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionHangupResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -521,14 +538,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionLeaveQueueResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/leave_queue', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionLeaveQueueResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -556,14 +575,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionPauseRecordingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/record_pause', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionPauseRecordingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -599,14 +620,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionReferResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/refer', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionReferResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -634,14 +657,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRejectResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/reject', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionRejectResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -669,14 +694,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionResumeRecordingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/record_resume', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionResumeRecordingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -707,14 +734,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSendDtmfResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/send_dtmf', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionSendDtmfResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -742,14 +771,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSendSipInfoResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/send_sip_info', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionSendSipInfoResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -786,14 +817,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSpeakResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/speak', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionSpeakResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -831,14 +864,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartAIAssistantResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/ai_assistant_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartAIAssistantResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -874,14 +909,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartForkingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/fork_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartForkingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -909,14 +946,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartNoiseSuppressionResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/suppression_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartNoiseSuppressionResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -961,14 +1000,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartPlaybackResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/playback_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartPlaybackResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1014,14 +1055,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartRecordingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/record_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartRecordingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1057,14 +1100,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartSiprecResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/siprec_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartSiprecResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1102,14 +1147,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartStreamingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/streaming_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartStreamingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1141,14 +1188,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStartTranscriptionResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/transcription_start', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStartTranscriptionResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1172,14 +1221,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopAIAssistantResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/ai_assistant_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopAIAssistantResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1207,14 +1258,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopForkingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/fork_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopForkingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1242,14 +1295,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopGatherResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/gather_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopGatherResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1273,14 +1328,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopNoiseSuppressionResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/suppression_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopNoiseSuppressionResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1308,14 +1365,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopPlaybackResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/playback_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopPlaybackResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1343,14 +1402,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopRecordingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/record_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopRecordingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1378,14 +1439,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopSiprecResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/siprec_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopSiprecResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1413,14 +1476,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopStreamingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/streaming_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopStreamingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1444,14 +1509,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopTranscriptionResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/transcription_stop', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopTranscriptionResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1475,14 +1542,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSwitchSupervisorRoleResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/switch_supervisor_role', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionSwitchSupervisorRoleResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1561,14 +1630,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionTransferResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['calls/%1$s/actions/transfer', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionTransferResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -1590,13 +1661,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionUpdateClientStateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['calls/%1$s/actions/client_state_update', $callControlID],
             body: (object) $parsed,
             options: $options,
             convert: ActionUpdateClientStateResponse::class,
         );
+
+        return $response->parse();
     }
 }

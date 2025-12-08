@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
@@ -52,14 +53,16 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifiedNumberNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'verified_numbers',
             body: (object) $parsed,
             options: $options,
             convert: VerifiedNumberNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -73,13 +76,15 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifiedNumberDataWrapper> */
+        $response = $this->client->request(
             method: 'get',
             path: ['verified_numbers/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: VerifiedNumberDataWrapper::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,14 +107,16 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifiedNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'verified_numbers',
             query: $parsed,
             options: $options,
             convert: VerifiedNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -123,12 +130,14 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifiedNumberDataWrapper> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['verified_numbers/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: VerifiedNumberDataWrapper::class,
         );
+
+        return $response->parse();
     }
 }

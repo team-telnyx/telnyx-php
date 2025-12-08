@@ -7,9 +7,7 @@ namespace Telnyx\ChannelZones;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ChannelZoneUpdateResponseShape = array{
@@ -22,12 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: string|null,
  * }
  */
-final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
+final class ChannelZoneUpdateResponse implements BaseModel
 {
     /** @use SdkModel<ChannelZoneUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

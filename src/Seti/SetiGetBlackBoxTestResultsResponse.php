@@ -6,9 +6,7 @@ namespace Telnyx\Seti;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
 
@@ -17,12 +15,10 @@ use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
  *   data?: list<Data>|null
  * }
  */
-final class SetiGetBlackBoxTestResultsResponse implements BaseModel, ResponseConverter
+final class SetiGetBlackBoxTestResultsResponse implements BaseModel
 {
     /** @use SdkModel<SetiGetBlackBoxTestResultsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

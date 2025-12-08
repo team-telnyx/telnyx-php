@@ -6,9 +6,7 @@ namespace Telnyx\Messaging\Rcs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
  *   data?: list<RcsCapabilities>|null
  * }
  */
-final class RcListBulkCapabilitiesResponse implements BaseModel, ResponseConverter
+final class RcListBulkCapabilitiesResponse implements BaseModel
 {
     /** @use SdkModel<RcListBulkCapabilitiesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<RcsCapabilities>|null $data */
     #[Api(list: RcsCapabilities::class, optional: true)]

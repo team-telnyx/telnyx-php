@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse;
 use Telnyx\RequestOptions;
@@ -27,12 +28,14 @@ final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): GlobalIPProtocolListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPProtocolListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'global_ip_protocols',
             options: $requestOptions,
             convert: GlobalIPProtocolListResponse::class,
         );
+
+        return $response->parse();
     }
 }

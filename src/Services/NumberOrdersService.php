@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
@@ -49,14 +50,16 @@ final class NumberOrdersService implements NumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'number_orders',
             body: (object) $parsed,
             options: $options,
             convert: NumberOrderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -70,13 +73,15 @@ final class NumberOrdersService implements NumberOrdersContract
         string $numberOrderID,
         ?RequestOptions $requestOptions = null
     ): NumberOrderGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['number_orders/%1$s', $numberOrderID],
             options: $requestOptions,
             convert: NumberOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -103,14 +108,16 @@ final class NumberOrdersService implements NumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['number_orders/%1$s', $numberOrderID],
             body: (object) $parsed,
             options: $options,
             convert: NumberOrderUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -140,13 +147,15 @@ final class NumberOrdersService implements NumberOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'number_orders',
             query: $parsed,
             options: $options,
             convert: NumberOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 }

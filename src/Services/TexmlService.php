@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
@@ -52,13 +53,15 @@ final class TexmlService implements TexmlContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TexmlSecretsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'texml/secrets',
             body: (object) $parsed,
             options: $options,
             convert: TexmlSecretsResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Telnyx\Documents;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Documents\DocServiceDocument\AvScanStatus;
 use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
@@ -18,12 +16,10 @@ use Telnyx\Documents\DocServiceDocument\Status;
  *   data?: DocServiceDocument|null
  * }
  */
-final class DocumentUploadJsonResponse implements BaseModel, ResponseConverter
+final class DocumentUploadJsonResponse implements BaseModel
 {
     /** @use SdkModel<DocumentUploadJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DocServiceDocument $data;

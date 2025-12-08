@@ -7,21 +7,17 @@ namespace Telnyx\AuthenticationProviders;
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthenticationProviderListResponseShape = array{
  *   data?: list<AuthenticationProvider>|null, meta?: PaginationMeta|null
  * }
  */
-final class AuthenticationProviderListResponse implements BaseModel, ResponseConverter
+final class AuthenticationProviderListResponse implements BaseModel
 {
     /** @use SdkModel<AuthenticationProviderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<AuthenticationProvider>|null $data */
     #[Api(list: AuthenticationProvider::class, optional: true)]

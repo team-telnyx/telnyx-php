@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\NumberReservations;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberReservations\Actions\ActionExtendResponse;
 use Telnyx\RequestOptions;
@@ -28,12 +29,14 @@ final class ActionsService implements ActionsContract
         string $numberReservationID,
         ?RequestOptions $requestOptions = null
     ): ActionExtendResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionExtendResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['number_reservations/%1$s/actions/extend', $numberReservationID],
             options: $requestOptions,
             convert: ActionExtendResponse::class,
         );
+
+        return $response->parse();
     }
 }

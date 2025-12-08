@@ -6,9 +6,7 @@ namespace Telnyx\ManagedAccounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
  *   data?: ManagedAccount|null
  * }
  */
-final class ManagedAccountUpdateResponse implements BaseModel, ResponseConverter
+final class ManagedAccountUpdateResponse implements BaseModel
 {
     /** @use SdkModel<ManagedAccountUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ManagedAccount $data;

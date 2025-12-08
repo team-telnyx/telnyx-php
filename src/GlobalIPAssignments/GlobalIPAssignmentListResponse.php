@@ -7,9 +7,7 @@ namespace Telnyx\GlobalIPAssignments;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\Networks\InterfaceStatus;
  *   data?: list<GlobalIPAssignment>|null, meta?: PaginationMeta|null
  * }
  */
-final class GlobalIPAssignmentListResponse implements BaseModel, ResponseConverter
+final class GlobalIPAssignmentListResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPAssignmentListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<GlobalIPAssignment>|null $data */
     #[Api(list: GlobalIPAssignment::class, optional: true)]

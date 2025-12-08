@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
@@ -50,13 +51,15 @@ final class MessagesService implements MessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessageGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messages/%1$s', $id],
             options: $requestOptions,
             convert: MessageGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -70,13 +73,15 @@ final class MessagesService implements MessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessageCancelScheduledResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageCancelScheduledResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['messages/%1$s', $id],
             options: $requestOptions,
             convert: MessageCancelScheduledResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -114,14 +119,16 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageScheduleResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messages/schedule',
             body: (object) $parsed,
             options: $options,
             convert: MessageScheduleResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -159,14 +166,16 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageSendResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messages',
             body: (object) $parsed,
             options: $options,
             convert: MessageSendResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -196,14 +205,16 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageSendGroupMmsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messages/group_mms',
             body: (object) $parsed,
             options: $options,
             convert: MessageSendGroupMmsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -235,14 +246,16 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageSendLongCodeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messages/long_code',
             body: (object) $parsed,
             options: $options,
             convert: MessageSendLongCodeResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -274,14 +287,16 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageSendNumberPoolResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messages/number_pool',
             body: (object) $parsed,
             options: $options,
             convert: MessageSendNumberPoolResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -313,13 +328,15 @@ final class MessagesService implements MessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessageSendShortCodeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messages/short_code',
             body: (object) $parsed,
             options: $options,
             convert: MessageSendShortCodeResponse::class,
         );
+
+        return $response->parse();
     }
 }

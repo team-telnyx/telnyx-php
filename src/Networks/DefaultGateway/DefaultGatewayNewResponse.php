@@ -7,9 +7,7 @@ namespace Telnyx\Networks\DefaultGateway;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse\Data;
 use Telnyx\Networks\InterfaceStatus;
 
@@ -18,12 +16,10 @@ use Telnyx\Networks\InterfaceStatus;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class DefaultGatewayNewResponse implements BaseModel, ResponseConverter
+final class DefaultGatewayNewResponse implements BaseModel
 {
     /** @use SdkModel<DefaultGatewayNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

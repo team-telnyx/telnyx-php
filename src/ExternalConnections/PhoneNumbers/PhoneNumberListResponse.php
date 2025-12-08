@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\AcquiredCapability;
 
@@ -18,12 +16,10 @@ use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\Acquir
  *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
  * }
  */
-final class PhoneNumberListResponse implements BaseModel, ResponseConverter
+final class PhoneNumberListResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ExternalConnectionPhoneNumber>|null $data */
     #[Api(list: ExternalConnectionPhoneNumber::class, optional: true)]
