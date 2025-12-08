@@ -15,10 +15,12 @@ interface ChatContract
      *
      * @param array<mixed>|ChatCreateCompletionParams $params
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function createCompletion(
         array|ChatCreateCompletionParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
+    ): array;
 }
