@@ -34,7 +34,7 @@ final class OsrService implements OsrContract
         /** @var BaseResponse<array<string,mixed>> */
         $response = $this->client->request(
             method: 'get',
-            path: ['campaign/%1$s/osr/attributes', $campaignID],
+            path: ['10dlc/campaign/%1$s/osr/attributes', $campaignID],
             options: $requestOptions,
             convert: new MapOf('mixed'),
         );

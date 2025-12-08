@@ -40,7 +40,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         /** @var BaseResponse<TelnyxDownstreamCampaign> */
         $response = $this->client->request(
             method: 'get',
-            path: ['partner_campaigns/%1$s', $campaignID],
+            path: ['10dlc/partner_campaigns/%1$s', $campaignID],
             options: $requestOptions,
             convert: TelnyxDownstreamCampaign::class,
         );
@@ -72,7 +72,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         /** @var BaseResponse<TelnyxDownstreamCampaign> */
         $response = $this->client->request(
             method: 'patch',
-            path: ['partner_campaigns/%1$s', $campaignID],
+            path: ['10dlc/partner_campaigns/%1$s', $campaignID],
             body: (object) $parsed,
             options: $options,
             convert: TelnyxDownstreamCampaign::class,
@@ -106,7 +106,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         /** @var BaseResponse<PartnerCampaignListResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: 'partner_campaigns',
+            path: '10dlc/partner_campaigns',
             query: $parsed,
             options: $options,
             convert: PartnerCampaignListResponse::class,
@@ -142,7 +142,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         /** @var BaseResponse<PartnerCampaignListSharedByMeResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: 'partnerCampaign/sharedByMe',
+            path: '10dlc/partnerCampaign/sharedByMe',
             query: $parsed,
             options: $options,
             convert: PartnerCampaignListSharedByMeResponse::class,
@@ -167,7 +167,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         /** @var BaseResponse<array<string,CampaignSharingStatus>> */
         $response = $this->client->request(
             method: 'get',
-            path: ['partnerCampaign/%1$s/sharing', $campaignID],
+            path: ['10dlc/partnerCampaign/%1$s/sharing', $campaignID],
             options: $requestOptions,
             convert: new MapOf(CampaignSharingStatus::class),
         );

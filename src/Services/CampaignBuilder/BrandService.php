@@ -43,7 +43,9 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<BrandQualifyByUsecaseResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: ['campaignBuilder/brand/%1$s/usecase/%2$s', $brandID, $usecase],
+            path: [
+                '10dlc/campaignBuilder/brand/%1$s/usecase/%2$s', $brandID, $usecase,
+            ],
             options: $options,
             convert: BrandQualifyByUsecaseResponse::class,
         );

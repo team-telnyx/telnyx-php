@@ -37,7 +37,7 @@ final class EnumService implements EnumContract
         /** @var BaseResponse<mixed|list<mixed|string>> */
         $response = $this->client->request(
             method: 'get',
-            path: ['enum/%1$s', $endpoint],
+            path: ['10dlc/enum/%1$s', $endpoint],
             options: $requestOptions,
             convert: EnumGetResponse::class,
         );

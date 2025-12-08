@@ -58,7 +58,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<TelnyxCampaignCsp> */
         $response = $this->client->request(
             method: 'get',
-            path: ['campaign/%1$s', $campaignID],
+            path: ['10dlc/campaign/%1$s', $campaignID],
             options: $requestOptions,
             convert: TelnyxCampaignCsp::class,
         );
@@ -100,7 +100,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<TelnyxCampaignCsp> */
         $response = $this->client->request(
             method: 'put',
-            path: ['campaign/%1$s', $campaignID],
+            path: ['10dlc/campaign/%1$s', $campaignID],
             body: (object) $parsed,
             options: $options,
             convert: TelnyxCampaignCsp::class,
@@ -132,7 +132,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<CampaignListResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: 'campaign',
+            path: '10dlc/campaign',
             query: $parsed,
             options: $options,
             convert: CampaignListResponse::class,
@@ -157,7 +157,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<array<string,mixed>> */
         $response = $this->client->request(
             method: 'post',
-            path: ['campaign/acceptSharing/%1$s', $campaignID],
+            path: ['10dlc/campaign/acceptSharing/%1$s', $campaignID],
             options: $requestOptions,
             convert: new MapOf('mixed'),
         );
@@ -179,7 +179,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<CampaignDeactivateResponse> */
         $response = $this->client->request(
             method: 'delete',
-            path: ['campaign/%1$s', $campaignID],
+            path: ['10dlc/campaign/%1$s', $campaignID],
             options: $requestOptions,
             convert: CampaignDeactivateResponse::class,
         );
@@ -201,7 +201,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<CampaignGetMnoMetadataResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: ['campaign/%1$s/mnoMetadata', $campaignID],
+            path: ['10dlc/campaign/%1$s/mnoMetadata', $campaignID],
             options: $requestOptions,
             convert: CampaignGetMnoMetadataResponse::class,
         );
@@ -225,7 +225,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<array<string,mixed>> */
         $response = $this->client->request(
             method: 'get',
-            path: ['campaign/%1$s/operationStatus', $campaignID],
+            path: ['10dlc/campaign/%1$s/operationStatus', $campaignID],
             options: $requestOptions,
             convert: new MapOf('mixed'),
         );
@@ -247,7 +247,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<CampaignGetSharingStatusResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: ['campaign/%1$s/sharing', $campaignID],
+            path: ['10dlc/campaign/%1$s/sharing', $campaignID],
             options: $requestOptions,
             convert: CampaignGetSharingStatusResponse::class,
         );
@@ -277,7 +277,7 @@ final class CampaignService implements CampaignContract
         /** @var BaseResponse<CampaignSubmitAppealResponse> */
         $response = $this->client->request(
             method: 'post',
-            path: ['campaign/%1$s/appeal', $campaignID],
+            path: ['10dlc/campaign/%1$s/appeal', $campaignID],
             body: (object) $parsed,
             options: $options,
             convert: CampaignSubmitAppealResponse::class,

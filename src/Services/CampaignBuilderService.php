@@ -85,7 +85,7 @@ final class CampaignBuilderService implements CampaignBuilderContract
         /** @var BaseResponse<TelnyxCampaignCsp> */
         $response = $this->client->request(
             method: 'post',
-            path: 'campaignBuilder',
+            path: '10dlc/campaignBuilder',
             body: (object) $parsed,
             options: $options,
             convert: TelnyxCampaignCsp::class,

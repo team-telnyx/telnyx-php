@@ -46,7 +46,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         /** @var BaseResponse<PhoneNumberCampaign> */
         $response = $this->client->request(
             method: 'post',
-            path: 'phone_number_campaigns',
+            path: '10dlc/phone_number_campaigns',
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberCampaign::class,
@@ -69,7 +69,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         /** @var BaseResponse<PhoneNumberCampaign> */
         $response = $this->client->request(
             method: 'get',
-            path: ['phone_number_campaigns/%1$s', $phoneNumber],
+            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: PhoneNumberCampaign::class,
         );
@@ -101,7 +101,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         /** @var BaseResponse<PhoneNumberCampaign> */
         $response = $this->client->request(
             method: 'put',
-            path: ['phone_number_campaigns/%1$s', $phoneNumber],
+            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberCampaign::class,
@@ -141,7 +141,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         /** @var BaseResponse<PhoneNumberCampaignListResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: 'phone_number_campaigns',
+            path: '10dlc/phone_number_campaigns',
             query: $parsed,
             options: $options,
             convert: PhoneNumberCampaignListResponse::class,
@@ -164,7 +164,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         /** @var BaseResponse<PhoneNumberCampaign> */
         $response = $this->client->request(
             method: 'delete',
-            path: ['phone_number_campaigns/%1$s', $phoneNumber],
+            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: PhoneNumberCampaign::class,
         );
