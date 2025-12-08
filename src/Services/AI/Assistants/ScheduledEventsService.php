@@ -14,6 +14,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventRetrieveParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
@@ -51,14 +52,16 @@ final class ScheduledEventsService implements ScheduledEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/scheduled_events', $assistantID],
             body: (object) $parsed,
             options: $options,
             convert: ScheduledEventResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -82,8 +85,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'ai/assistants/%1$s/scheduled_events/%2$s', $assistantID, $eventID,
@@ -91,6 +94,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
             options: $options,
             convert: ScheduledEventResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -117,14 +122,16 @@ final class ScheduledEventsService implements ScheduledEventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ScheduledEventListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/scheduled_events', $assistantID],
             query: $parsed,
             options: $options,
             convert: ScheduledEventListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -148,8 +155,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'ai/assistants/%1$s/scheduled_events/%2$s', $assistantID, $eventID,
@@ -157,5 +164,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

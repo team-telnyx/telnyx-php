@@ -6,20 +6,16 @@ namespace Telnyx\SimCards;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardGetActivationCodeResponse\Data;
 
 /**
  * @phpstan-type SimCardGetActivationCodeResponseShape = array{data?: Data|null}
  */
-final class SimCardGetActivationCodeResponse implements BaseModel, ResponseConverter
+final class SimCardGetActivationCodeResponse implements BaseModel
 {
     /** @use SdkModel<SimCardGetActivationCodeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

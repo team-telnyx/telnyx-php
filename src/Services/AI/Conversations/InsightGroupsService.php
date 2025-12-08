@@ -10,6 +10,7 @@ use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParam
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
@@ -41,13 +42,15 @@ final class InsightGroupsService implements InsightGroupsContract
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateGroupDetail {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightTemplateGroupDetail> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/conversations/insight-groups/%1$s', $groupID],
             options: $requestOptions,
             convert: InsightTemplateGroupDetail::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -71,14 +74,16 @@ final class InsightGroupsService implements InsightGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightTemplateGroupDetail> */
+        $response = $this->client->request(
             method: 'put',
             path: ['ai/conversations/insight-groups/%1$s', $groupID],
             body: (object) $parsed,
             options: $options,
             convert: InsightTemplateGroupDetail::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -92,13 +97,15 @@ final class InsightGroupsService implements InsightGroupsContract
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/conversations/insight-groups/%1$s', $groupID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,14 +128,16 @@ final class InsightGroupsService implements InsightGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightTemplateGroupDetail> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/conversations/insight-groups',
             body: (object) $parsed,
             options: $options,
             convert: InsightTemplateGroupDetail::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -151,13 +160,15 @@ final class InsightGroupsService implements InsightGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightGroupGetInsightGroupsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/conversations/insight-groups',
             query: $parsed,
             options: $options,
             convert: InsightGroupGetInsightGroupsResponse::class,
         );
+
+        return $response->parse();
     }
 }

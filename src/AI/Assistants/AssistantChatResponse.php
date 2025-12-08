@@ -6,19 +6,15 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AssistantChatResponseShape = array{content: string}
  */
-final class AssistantChatResponse implements BaseModel, ResponseConverter
+final class AssistantChatResponse implements BaseModel
 {
     /** @use SdkModel<AssistantChatResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The assistant's generated response based on the input message and context.

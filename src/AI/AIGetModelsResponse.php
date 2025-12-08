@@ -7,21 +7,17 @@ namespace Telnyx\AI;
 use Telnyx\AI\AIGetModelsResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AIGetModelsResponseShape = array{
  *   data: list<Data>, object?: string|null
  * }
  */
-final class AIGetModelsResponse implements BaseModel, ResponseConverter
+final class AIGetModelsResponse implements BaseModel
 {
     /** @use SdkModel<AIGetModelsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

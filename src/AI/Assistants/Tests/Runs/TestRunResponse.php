@@ -7,9 +7,7 @@ namespace Telnyx\AI\Assistants\Tests\Runs;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model containing test run execution details and results.
@@ -32,12 +30,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class TestRunResponse implements BaseModel, ResponseConverter
+final class TestRunResponse implements BaseModel
 {
     /** @use SdkModel<TestRunResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Timestamp when the test run was created and queued.

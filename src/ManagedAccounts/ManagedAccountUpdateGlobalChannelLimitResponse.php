@@ -6,9 +6,7 @@ namespace Telnyx\ManagedAccounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse\Data;
  *   data?: Data|null
  * }
  */
-final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel, ResponseConverter
+final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel
 {
     /** @use SdkModel<ManagedAccountUpdateGlobalChannelLimitResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

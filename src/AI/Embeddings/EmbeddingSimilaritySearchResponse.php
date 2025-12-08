@@ -8,19 +8,15 @@ use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data\Metadata;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type EmbeddingSimilaritySearchResponseShape = array{data: list<Data>}
  */
-final class EmbeddingSimilaritySearchResponse implements BaseModel, ResponseConverter
+final class EmbeddingSimilaritySearchResponse implements BaseModel
 {
     /** @use SdkModel<EmbeddingSimilaritySearchResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

@@ -10,21 +10,17 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\ActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\SimCardActionsSummary;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BulkSimCardActionListResponseShape = array{
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class BulkSimCardActionListResponse implements BaseModel, ResponseConverter
+final class BulkSimCardActionListResponse implements BaseModel
 {
     /** @use SdkModel<BulkSimCardActionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

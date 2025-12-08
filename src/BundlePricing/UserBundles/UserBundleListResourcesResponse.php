@@ -6,21 +6,17 @@ namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UserBundleListResourcesResponseShape = array{
  *   data: list<UserBundleResource>
  * }
  */
-final class UserBundleListResourcesResponse implements BaseModel, ResponseConverter
+final class UserBundleListResourcesResponse implements BaseModel
 {
     /** @use SdkModel<UserBundleListResourcesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<UserBundleResource> $data */
     #[Api(list: UserBundleResource::class)]

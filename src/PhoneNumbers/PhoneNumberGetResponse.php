@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\EmergencyStatus;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\InboundCallScreening;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\PhoneNumberType;
@@ -20,12 +18,10 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  *   data?: PhoneNumberDetailed|null
  * }
  */
-final class PhoneNumberGetResponse implements BaseModel, ResponseConverter
+final class PhoneNumberGetResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PhoneNumberDetailed $data;

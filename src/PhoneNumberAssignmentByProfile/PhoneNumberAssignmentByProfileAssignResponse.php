@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumberAssignmentByProfile;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PhoneNumberAssignmentByProfileAssignResponseShape = array{
@@ -18,12 +16,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   tcrCampaignId?: string|null,
  * }
  */
-final class PhoneNumberAssignmentByProfileAssignResponse implements BaseModel, ResponseConverter
+final class PhoneNumberAssignmentByProfileAssignResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberAssignmentByProfileAssignResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The ID of the messaging profile that you want to link to the specified campaign.

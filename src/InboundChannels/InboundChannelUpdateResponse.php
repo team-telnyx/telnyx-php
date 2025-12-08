@@ -6,20 +6,16 @@ namespace Telnyx\InboundChannels;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InboundChannels\InboundChannelUpdateResponse\Data;
 
 /**
  * @phpstan-type InboundChannelUpdateResponseShape = array{data?: Data|null}
  */
-final class InboundChannelUpdateResponse implements BaseModel, ResponseConverter
+final class InboundChannelUpdateResponse implements BaseModel
 {
     /** @use SdkModel<InboundChannelUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -6,21 +6,17 @@ namespace Telnyx\Campaign;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignSubmitAppealResponseShape = array{
  *   appealed_at?: \DateTimeInterface|null
  * }
  */
-final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
+final class CampaignSubmitAppealResponse implements BaseModel
 {
     /** @use SdkModel<CampaignSubmitAppealResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Timestamp when the appeal was submitted.

@@ -6,20 +6,16 @@ namespace Telnyx\PortingOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse\Data;
 
 /**
  * @phpstan-type PortingOrderGetSubRequestResponseShape = array{data?: Data|null}
  */
-final class PortingOrderGetSubRequestResponse implements BaseModel, ResponseConverter
+final class PortingOrderGetSubRequestResponse implements BaseModel
 {
     /** @use SdkModel<PortingOrderGetSubRequestResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

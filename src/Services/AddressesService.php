@@ -11,6 +11,7 @@ use Telnyx\Addresses\AddressListParams;
 use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
@@ -65,14 +66,16 @@ final class AddressesService implements AddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AddressNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'addresses',
             body: (object) $parsed,
             options: $options,
             convert: AddressNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -86,13 +89,15 @@ final class AddressesService implements AddressesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AddressGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AddressGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['addresses/%1$s', $id],
             options: $requestOptions,
             convert: AddressGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -122,14 +127,16 @@ final class AddressesService implements AddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AddressListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'addresses',
             query: $parsed,
             options: $options,
             convert: AddressListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -143,12 +150,14 @@ final class AddressesService implements AddressesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AddressDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AddressDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['addresses/%1$s', $id],
             options: $requestOptions,
             convert: AddressDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

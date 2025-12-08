@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
@@ -38,13 +39,15 @@ final class MessagingURLDomainsService implements MessagingURLDomainsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingURLDomainListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'messaging_url_domains',
             query: $parsed,
             options: $options,
             convert: MessagingURLDomainListResponse::class,
         );
+
+        return $response->parse();
     }
 }

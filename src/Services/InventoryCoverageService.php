@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse;
@@ -47,13 +48,15 @@ final class InventoryCoverageService implements InventoryCoverageContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InventoryCoverageListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'inventory_coverage',
             query: $parsed,
             options: $options,
             convert: InventoryCoverageListResponse::class,
         );
+
+        return $response->parse();
     }
 }

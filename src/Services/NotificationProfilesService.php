@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
@@ -42,14 +43,16 @@ final class NotificationProfilesService implements NotificationProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationProfileNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'notification_profiles',
             body: (object) $parsed,
             options: $options,
             convert: NotificationProfileNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class NotificationProfilesService implements NotificationProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationProfileGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['notification_profiles/%1$s', $id],
             options: $requestOptions,
             convert: NotificationProfileGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -91,14 +96,16 @@ final class NotificationProfilesService implements NotificationProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationProfileUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['notification_profiles/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: NotificationProfileUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,14 +128,16 @@ final class NotificationProfilesService implements NotificationProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationProfileListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'notification_profiles',
             query: $parsed,
             options: $options,
             convert: NotificationProfileListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -142,12 +151,14 @@ final class NotificationProfilesService implements NotificationProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationProfileDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['notification_profiles/%1$s', $id],
             options: $requestOptions,
             convert: NotificationProfileDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

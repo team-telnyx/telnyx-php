@@ -6,19 +6,15 @@ namespace Telnyx\ExternalConnections\LogMessages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type LogMessageDismissResponseShape = array{success?: bool|null}
  */
-final class LogMessageDismissResponse implements BaseModel, ResponseConverter
+final class LogMessageDismissResponse implements BaseModel
 {
     /** @use SdkModel<LogMessageDismissResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Describes wether or not the operation was successful.

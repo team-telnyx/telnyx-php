@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
@@ -44,14 +45,16 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPHealthCheckNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'global_ip_health_checks',
             body: (object) $parsed,
             options: $options,
             convert: GlobalIPHealthCheckNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPHealthCheckGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['global_ip_health_checks/%1$s', $id],
             options: $requestOptions,
             convert: GlobalIPHealthCheckGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -94,14 +99,16 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPHealthCheckListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'global_ip_health_checks',
             query: $parsed,
             options: $options,
             convert: GlobalIPHealthCheckListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -115,12 +122,14 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPHealthCheckDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['global_ip_health_checks/%1$s', $id],
             options: $requestOptions,
             convert: GlobalIPHealthCheckDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -9,6 +9,7 @@ use Telnyx\AccessIPRanges\AccessIPRangeCreateParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
@@ -40,14 +41,16 @@ final class AccessIPRangesService implements AccessIPRangesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccessIPRange> */
+        $response = $this->client->request(
             method: 'post',
             path: 'access_ip_ranges',
             body: (object) $parsed,
             options: $options,
             convert: AccessIPRange::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,14 +84,16 @@ final class AccessIPRangesService implements AccessIPRangesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccessIPRangeListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'access_ip_ranges',
             query: $parsed,
             options: $options,
             convert: AccessIPRangeListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,12 +107,14 @@ final class AccessIPRangesService implements AccessIPRangesContract
         string $accessIPRangeID,
         ?RequestOptions $requestOptions = null
     ): AccessIPRange {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccessIPRange> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['access_ip_ranges/%1$s', $accessIPRangeID],
             options: $requestOptions,
             convert: AccessIPRange::class,
         );
+
+        return $response->parse();
     }
 }

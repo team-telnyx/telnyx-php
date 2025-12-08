@@ -6,9 +6,7 @@ namespace Telnyx\OutboundVoiceProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
  *   data?: OutboundVoiceProfile|null
  * }
  */
-final class OutboundVoiceProfileUpdateResponse implements BaseModel, ResponseConverter
+final class OutboundVoiceProfileUpdateResponse implements BaseModel
 {
     /** @use SdkModel<OutboundVoiceProfileUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?OutboundVoiceProfile $data;

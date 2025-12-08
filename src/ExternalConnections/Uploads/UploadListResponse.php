@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
 use Telnyx\ExternalConnections\Uploads\Upload\Status;
@@ -18,12 +16,10 @@ use Telnyx\ExternalConnections\Uploads\Upload\Status;
  *   data?: list<Upload>|null, meta?: ExternalVoiceIntegrationsPaginationMeta|null
  * }
  */
-final class UploadListResponse implements BaseModel, ResponseConverter
+final class UploadListResponse implements BaseModel
 {
     /** @use SdkModel<UploadListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Upload>|null $data */
     #[Api(list: Upload::class, optional: true)]

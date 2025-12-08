@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Faxes;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Faxes\Actions\ActionCancelResponse;
 use Telnyx\Faxes\Actions\ActionRefreshResponse;
@@ -29,13 +30,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionCancelResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionCancelResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['faxes/%1$s/actions/cancel', $id],
             options: $requestOptions,
             convert: ActionCancelResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -49,12 +52,14 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionRefreshResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRefreshResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['faxes/%1$s/actions/refresh', $id],
             options: $requestOptions,
             convert: ActionRefreshResponse::class,
         );
+
+        return $response->parse();
     }
 }

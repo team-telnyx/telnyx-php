@@ -7,9 +7,7 @@ namespace Telnyx\Requirements;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocReqsRequirementType;
 use Telnyx\Requirements\RequirementListResponse\Data;
 use Telnyx\Requirements\RequirementListResponse\Data\Action;
@@ -20,12 +18,10 @@ use Telnyx\Requirements\RequirementListResponse\Data\PhoneNumberType;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class RequirementListResponse implements BaseModel, ResponseConverter
+final class RequirementListResponse implements BaseModel
 {
     /** @use SdkModel<RequirementListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

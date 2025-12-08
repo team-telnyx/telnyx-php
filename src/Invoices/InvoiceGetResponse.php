@@ -6,20 +6,16 @@ namespace Telnyx\Invoices;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Invoices\InvoiceGetResponse\Data;
 
 /**
  * @phpstan-type InvoiceGetResponseShape = array{data?: Data|null}
  */
-final class InvoiceGetResponse implements BaseModel, ResponseConverter
+final class InvoiceGetResponse implements BaseModel
 {
     /** @use SdkModel<InvoiceGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumberBlocks\Jobs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\Status;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\SuccessfulOperation;
@@ -17,12 +15,10 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\Type;
 /**
  * @phpstan-type JobDeletePhoneNumberBlockResponseShape = array{data?: Job|null}
  */
-final class JobDeletePhoneNumberBlockResponse implements BaseModel, ResponseConverter
+final class JobDeletePhoneNumberBlockResponse implements BaseModel
 {
     /** @use SdkModel<JobDeletePhoneNumberBlockResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Job $data;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MobilePhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams;
@@ -30,13 +31,15 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['mobile_phone_numbers/%1$s/messaging', $id],
             options: $requestOptions,
             convert: MessagingGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -57,13 +60,15 @@ final class MessagingService implements MessagingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'mobile_phone_numbers/messaging',
             query: $parsed,
             options: $options,
             convert: MessagingListResponse::class,
         );
+
+        return $response->parse();
     }
 }

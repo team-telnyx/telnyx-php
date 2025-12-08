@@ -7,9 +7,7 @@ namespace Telnyx\PhoneNumbers\Voice;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\InboundCallScreening;
@@ -20,12 +18,10 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\UsagePaymentMethod;
  *   data?: list<PhoneNumberWithVoiceSettings>|null, meta?: PaginationMeta|null
  * }
  */
-final class VoiceListResponse implements BaseModel, ResponseConverter
+final class VoiceListResponse implements BaseModel
 {
     /** @use SdkModel<VoiceListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PhoneNumberWithVoiceSettings>|null $data */
     #[Api(list: PhoneNumberWithVoiceSettings::class, optional: true)]

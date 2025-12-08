@@ -10,21 +10,17 @@ use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\Co
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConversationGetConversationsInsightsResponseShape = array{
  *   data: list<Data>, meta: Meta
  * }
  */
-final class ConversationGetConversationsInsightsResponse implements BaseModel, ResponseConverter
+final class ConversationGetConversationsInsightsResponse implements BaseModel
 {
     /** @use SdkModel<ConversationGetConversationsInsightsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

@@ -6,9 +6,7 @@ namespace Telnyx\NumberOrderPhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\RequirementsStatus;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\Status;
@@ -19,12 +17,10 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
  *   data?: NumberOrderPhoneNumber|null
  * }
  */
-final class NumberOrderPhoneNumberGetResponse implements BaseModel, ResponseConverter
+final class NumberOrderPhoneNumberGetResponse implements BaseModel
 {
     /** @use SdkModel<NumberOrderPhoneNumberGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?NumberOrderPhoneNumber $data;

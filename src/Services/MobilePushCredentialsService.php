@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
@@ -36,14 +37,16 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PushCredentialResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'mobile_push_credentials',
             body: (object) $parsed,
             options: $options,
             convert: PushCredentialResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -57,13 +60,15 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
     ): PushCredentialResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PushCredentialResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['mobile_push_credentials/%1$s', $pushCredentialID],
             options: $requestOptions,
             convert: PushCredentialResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -87,14 +92,16 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobilePushCredentialListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'mobile_push_credentials',
             query: $parsed,
             options: $options,
             convert: MobilePushCredentialListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -108,12 +115,14 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['mobile_push_credentials/%1$s', $pushCredentialID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

@@ -10,21 +10,17 @@ use Telnyx\Connections\ConnectionListActiveCallsResponse\Meta;
 use Telnyx\Connections\ConnectionListActiveCallsResponse\Meta\Cursors;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConnectionListActiveCallsResponseShape = array{
  *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
-final class ConnectionListActiveCallsResponse implements BaseModel, ResponseConverter
+final class ConnectionListActiveCallsResponse implements BaseModel
 {
     /** @use SdkModel<ConnectionListActiveCallsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -7,9 +7,7 @@ namespace Telnyx\WirelessBlocklists;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
  *   data?: list<WirelessBlocklist>|null, meta?: PaginationMeta|null
  * }
  */
-final class WirelessBlocklistListResponse implements BaseModel, ResponseConverter
+final class WirelessBlocklistListResponse implements BaseModel
 {
     /** @use SdkModel<WirelessBlocklistListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<WirelessBlocklist>|null $data */
     #[Api(list: WirelessBlocklist::class, optional: true)]

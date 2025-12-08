@@ -11,6 +11,7 @@ use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AdvancedOrdersContract;
@@ -49,14 +50,16 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AdvancedOrderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'advanced_orders',
             body: (object) $parsed,
             options: $options,
             convert: AdvancedOrderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -70,13 +73,15 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         string $orderID,
         ?RequestOptions $requestOptions = null
     ): AdvancedOrderGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AdvancedOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['advanced_orders/%1$s', $orderID],
             options: $requestOptions,
             convert: AdvancedOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -89,13 +94,15 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): AdvancedOrderListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AdvancedOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'advanced_orders',
             options: $requestOptions,
             convert: AdvancedOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,13 +133,15 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AdvancedOrderUpdateRequirementGroupResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['advanced_orders/%1$s/requirement_group', $advancedOrderID],
             body: (object) $parsed,
             options: $options,
             convert: AdvancedOrderUpdateRequirementGroupResponse::class,
         );
+
+        return $response->parse();
     }
 }

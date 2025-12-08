@@ -7,19 +7,15 @@ namespace Telnyx\AI\Conversations\Insights;
 use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InsightTemplateDetailShape = array{data: InsightTemplate}
  */
-final class InsightTemplateDetail implements BaseModel, ResponseConverter
+final class InsightTemplateDetail implements BaseModel
 {
     /** @use SdkModel<InsightTemplateDetailShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public InsightTemplate $data;

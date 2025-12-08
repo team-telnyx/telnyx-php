@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
@@ -42,14 +43,16 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberConfigurationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'porting_orders/phone_number_configurations',
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberConfigurationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -80,13 +83,15 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberConfigurationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'porting_orders/phone_number_configurations',
             query: $parsed,
             options: $options,
             convert: PhoneNumberConfigurationListResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Telnyx\UsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\UsageReports\UsageReportListResponse\Meta;
 
@@ -17,12 +15,10 @@ use Telnyx\UsageReports\UsageReportListResponse\Meta;
  *   data?: list<array<string,mixed>>|null, meta?: Meta|null
  * }
  */
-final class UsageReportListResponse implements BaseModel, ResponseConverter
+final class UsageReportListResponse implements BaseModel
 {
     /** @use SdkModel<UsageReportListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<array<string,mixed>>|null $data */
     #[Api(list: new MapOf('mixed'), optional: true)]

@@ -12,6 +12,7 @@ use Telnyx\AI\Clusters\ClusterListParams;
 use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\AI\Clusters\ClusterRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
@@ -44,14 +45,16 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ClusterGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/clusters/%1$s', $taskID],
             query: $parsed,
             options: $options,
             convert: ClusterGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,14 +75,16 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ClusterListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/clusters',
             query: $parsed,
             options: $options,
             convert: ClusterListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,13 +98,15 @@ final class ClustersService implements ClustersContract
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/clusters/%1$s', $taskID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,14 +133,16 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ClusterComputeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/clusters',
             body: (object) $parsed,
             options: $options,
             convert: ClusterComputeResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -155,8 +164,8 @@ final class ClustersService implements ClustersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/clusters/%1$s/graph', $taskID],
             query: $parsed,
@@ -164,5 +173,7 @@ final class ClustersService implements ClustersContract
             options: $options,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 }

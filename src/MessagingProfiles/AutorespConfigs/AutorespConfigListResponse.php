@@ -7,9 +7,7 @@ namespace Telnyx\MessagingProfiles\AutorespConfigs;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 
 /**
@@ -19,12 +17,10 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
  *   data: list<AutoRespConfig>, meta: PaginationMeta
  * }
  */
-final class AutorespConfigListResponse implements BaseModel, ResponseConverter
+final class AutorespConfigListResponse implements BaseModel
 {
     /** @use SdkModel<AutorespConfigListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<AutoRespConfig> $data */
     #[Api(list: AutoRespConfig::class)]

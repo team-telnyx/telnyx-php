@@ -7,9 +7,7 @@ namespace Telnyx\PhoneNumbersRegulatoryRequirements;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegionInformation;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
@@ -19,12 +17,10 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel, ResponseConverter
+final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumbersRegulatoryRequirementGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

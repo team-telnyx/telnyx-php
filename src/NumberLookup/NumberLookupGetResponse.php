@@ -6,9 +6,7 @@ namespace Telnyx\NumberLookup;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
@@ -17,12 +15,10 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
 /**
  * @phpstan-type NumberLookupGetResponseShape = array{data?: Data|null}
  */
-final class NumberLookupGetResponse implements BaseModel, ResponseConverter
+final class NumberLookupGetResponse implements BaseModel
 {
     /** @use SdkModel<NumberLookupGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

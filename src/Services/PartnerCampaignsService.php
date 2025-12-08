@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
@@ -36,13 +37,15 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): TelnyxDownstreamCampaign {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxDownstreamCampaign> */
+        $response = $this->client->request(
             method: 'get',
             path: ['partner_campaigns/%1$s', $campaignID],
             options: $requestOptions,
             convert: TelnyxDownstreamCampaign::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -66,14 +69,16 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxDownstreamCampaign> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['partner_campaigns/%1$s', $campaignID],
             body: (object) $parsed,
             options: $options,
             convert: TelnyxDownstreamCampaign::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,14 +103,16 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PartnerCampaignListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'partner_campaigns',
             query: $parsed,
             options: $options,
             convert: PartnerCampaignListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -132,14 +139,16 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PartnerCampaignListSharedByMeResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'partnerCampaign/sharedByMe',
             query: $parsed,
             options: $options,
             convert: PartnerCampaignListSharedByMeResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -155,12 +164,14 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<array<string,CampaignSharingStatus>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['partnerCampaign/%1$s/sharing', $campaignID],
             options: $requestOptions,
             convert: new MapOf(CampaignSharingStatus::class),
         );
+
+        return $response->parse();
     }
 }

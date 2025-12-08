@@ -6,9 +6,7 @@ namespace Telnyx\Messages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
 use Telnyx\Messages\OutboundMessagePayload\Cc;
 use Telnyx\Messages\OutboundMessagePayload\Cost;
@@ -25,12 +23,10 @@ use Telnyx\Messages\OutboundMessagePayload\Type;
  *   data?: null|OutboundMessagePayload|InboundMessagePayload
  * }
  */
-final class MessageGetResponse implements BaseModel, ResponseConverter
+final class MessageGetResponse implements BaseModel
 {
     /** @use SdkModel<MessageGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public OutboundMessagePayload|InboundMessagePayload|null $data;

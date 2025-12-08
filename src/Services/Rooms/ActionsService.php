@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenParams;
@@ -41,14 +42,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGenerateJoinClientTokenResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['rooms/%1$s/actions/generate_join_client_token', $roomID],
             body: (object) $parsed,
             options: $options,
             convert: ActionGenerateJoinClientTokenResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,13 +75,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRefreshClientTokenResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['rooms/%1$s/actions/refresh_client_token', $roomID],
             body: (object) $parsed,
             options: $options,
             convert: ActionRefreshClientTokenResponse::class,
         );
+
+        return $response->parse();
     }
 }

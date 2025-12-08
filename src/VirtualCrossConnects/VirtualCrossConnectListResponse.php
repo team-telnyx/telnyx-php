@@ -7,9 +7,7 @@ namespace Telnyx\VirtualCrossConnects;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse\Data;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse\Data\CloudProvider;
@@ -20,12 +18,10 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse\Data\Region;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class VirtualCrossConnectListResponse implements BaseModel, ResponseConverter
+final class VirtualCrossConnectListResponse implements BaseModel
 {
     /** @use SdkModel<VirtualCrossConnectListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

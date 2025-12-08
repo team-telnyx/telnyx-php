@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Networks;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayCreateParams;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse;
@@ -39,14 +40,16 @@ final class DefaultGatewayService implements DefaultGatewayContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DefaultGatewayNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['networks/%1$s/default_gateway', $id],
             body: (object) $parsed,
             options: $options,
             convert: DefaultGatewayNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -60,13 +63,15 @@ final class DefaultGatewayService implements DefaultGatewayContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DefaultGatewayGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DefaultGatewayGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['networks/%1$s/default_gateway', $id],
             options: $requestOptions,
             convert: DefaultGatewayGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -80,12 +85,14 @@ final class DefaultGatewayService implements DefaultGatewayContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DefaultGatewayDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DefaultGatewayDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['networks/%1$s/default_gateway', $id],
             options: $requestOptions,
             convert: DefaultGatewayDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

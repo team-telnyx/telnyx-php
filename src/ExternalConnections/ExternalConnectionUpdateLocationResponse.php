@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse\Data;
  *   data?: Data|null
  * }
  */
-final class ExternalConnectionUpdateLocationResponse implements BaseModel, ResponseConverter
+final class ExternalConnectionUpdateLocationResponse implements BaseModel
 {
     /** @use SdkModel<ExternalConnectionUpdateLocationResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

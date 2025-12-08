@@ -14,6 +14,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
@@ -54,14 +55,16 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthenticationProviderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'authentication_providers',
             body: (object) $parsed,
             options: $options,
             convert: AuthenticationProviderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,13 +78,15 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthenticationProviderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['authentication_providers/%1$s', $id],
             options: $requestOptions,
             convert: AuthenticationProviderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -114,14 +119,16 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthenticationProviderUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['authentication_providers/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: AuthenticationProviderUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -144,14 +151,16 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthenticationProviderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'authentication_providers',
             query: $parsed,
             options: $options,
             convert: AuthenticationProviderListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -165,12 +174,14 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AuthenticationProviderDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['authentication_providers/%1$s', $id],
             options: $requestOptions,
             convert: AuthenticationProviderDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

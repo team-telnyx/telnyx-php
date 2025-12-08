@@ -6,9 +6,7 @@ namespace Telnyx\MessagingHostedNumberOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\HostedNumber;
 use Telnyx\MessagingHostedNumberOrder;
 use Telnyx\MessagingHostedNumberOrder\Status;
@@ -18,12 +16,10 @@ use Telnyx\MessagingHostedNumberOrder\Status;
  *   data?: MessagingHostedNumberOrder|null
  * }
  */
-final class MessagingHostedNumberOrderNewResponse implements BaseModel, ResponseConverter
+final class MessagingHostedNumberOrderNewResponse implements BaseModel
 {
     /** @use SdkModel<MessagingHostedNumberOrderNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MessagingHostedNumberOrder $data;

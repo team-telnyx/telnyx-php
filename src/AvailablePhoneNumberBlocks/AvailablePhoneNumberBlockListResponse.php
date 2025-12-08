@@ -12,21 +12,17 @@ use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AvailablePhoneNumberBlockListResponseShape = array{
  *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
-final class AvailablePhoneNumberBlockListResponse implements BaseModel, ResponseConverter
+final class AvailablePhoneNumberBlockListResponse implements BaseModel
 {
     /** @use SdkModel<AvailablePhoneNumberBlockListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

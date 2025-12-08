@@ -7,9 +7,7 @@ namespace Telnyx\InexplicitNumberOrders;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse\Data;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse\Data\OrderingGroup;
 
@@ -18,12 +16,10 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse\Data\Orderin
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class InexplicitNumberOrderListResponse implements BaseModel, ResponseConverter
+final class InexplicitNumberOrderListResponse implements BaseModel
 {
     /** @use SdkModel<InexplicitNumberOrderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

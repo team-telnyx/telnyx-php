@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingHostedNumbers\MessagingHostedNumberDeleteResponse;
 use Telnyx\RequestOptions;
@@ -28,12 +29,14 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingHostedNumberDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['messaging_hosted_numbers/%1$s', $id],
             options: $requestOptions,
             convert: MessagingHostedNumberDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

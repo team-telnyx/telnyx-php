@@ -6,21 +6,17 @@ namespace Telnyx\ExternalConnections\CivicAddresses;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse\Data;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse\Data\Location;
 
 /**
  * @phpstan-type CivicAddressListResponseShape = array{data?: list<Data>|null}
  */
-final class CivicAddressListResponse implements BaseModel, ResponseConverter
+final class CivicAddressListResponse implements BaseModel
 {
     /** @use SdkModel<CivicAddressListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

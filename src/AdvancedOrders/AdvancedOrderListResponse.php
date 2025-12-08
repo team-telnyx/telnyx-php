@@ -10,19 +10,15 @@ use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AdvancedOrderListResponseShape = array{data?: list<Data>|null}
  */
-final class AdvancedOrderListResponse implements BaseModel, ResponseConverter
+final class AdvancedOrderListResponse implements BaseModel
 {
     /** @use SdkModel<AdvancedOrderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

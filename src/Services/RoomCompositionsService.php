@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
@@ -57,14 +58,16 @@ final class RoomCompositionsService implements RoomCompositionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomCompositionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'room_compositions',
             body: (object) $parsed,
             options: $options,
             convert: RoomCompositionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,13 +81,15 @@ final class RoomCompositionsService implements RoomCompositionsContract
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
     ): RoomCompositionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomCompositionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['room_compositions/%1$s', $roomCompositionID],
             options: $requestOptions,
             convert: RoomCompositionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -116,14 +121,16 @@ final class RoomCompositionsService implements RoomCompositionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomCompositionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'room_compositions',
             query: $parsed,
             options: $options,
             convert: RoomCompositionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -137,12 +144,14 @@ final class RoomCompositionsService implements RoomCompositionsContract
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['room_compositions/%1$s', $roomCompositionID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

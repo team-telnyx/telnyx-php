@@ -7,19 +7,15 @@ namespace Telnyx\AI\Integrations\Connections;
 use Telnyx\AI\Integrations\Connections\ConnectionListResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConnectionListResponseShape = array{data: list<Data>}
  */
-final class ConnectionListResponse implements BaseModel, ResponseConverter
+final class ConnectionListResponse implements BaseModel
 {
     /** @use SdkModel<ConnectionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

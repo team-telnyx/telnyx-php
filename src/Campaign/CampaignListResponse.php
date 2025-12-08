@@ -9,21 +9,17 @@ use Telnyx\Campaign\CampaignListResponse\Record\CampaignStatus;
 use Telnyx\Campaign\CampaignListResponse\Record\SubmissionStatus;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignListResponseShape = array{
  *   page?: int|null, records?: list<Record>|null, totalRecords?: int|null
  * }
  */
-final class CampaignListResponse implements BaseModel, ResponseConverter
+final class CampaignListResponse implements BaseModel
 {
     /** @use SdkModel<CampaignListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?int $page;

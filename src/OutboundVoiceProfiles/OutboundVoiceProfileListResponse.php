@@ -7,9 +7,7 @@ namespace Telnyx\OutboundVoiceProfiles;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
  *   data?: list<OutboundVoiceProfile>|null, meta?: PaginationMeta|null
  * }
  */
-final class OutboundVoiceProfileListResponse implements BaseModel, ResponseConverter
+final class OutboundVoiceProfileListResponse implements BaseModel
 {
     /** @use SdkModel<OutboundVoiceProfileListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<OutboundVoiceProfile>|null $data */
     #[Api(list: OutboundVoiceProfile::class, optional: true)]

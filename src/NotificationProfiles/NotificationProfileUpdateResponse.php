@@ -6,21 +6,17 @@ namespace Telnyx\NotificationProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NotificationProfileUpdateResponseShape = array{
  *   data?: NotificationProfile|null
  * }
  */
-final class NotificationProfileUpdateResponse implements BaseModel, ResponseConverter
+final class NotificationProfileUpdateResponse implements BaseModel
 {
     /** @use SdkModel<NotificationProfileUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A Collection of Notification Channels.

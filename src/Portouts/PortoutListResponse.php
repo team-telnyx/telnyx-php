@@ -6,9 +6,7 @@ namespace Telnyx\Portouts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Metadata;
 use Telnyx\Portouts\PortoutDetails\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\Portouts\PortoutDetails\Status;
  *   data?: list<PortoutDetails>|null, meta?: Metadata|null
  * }
  */
-final class PortoutListResponse implements BaseModel, ResponseConverter
+final class PortoutListResponse implements BaseModel
 {
     /** @use SdkModel<PortoutListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortoutDetails>|null $data */
     #[Api(list: PortoutDetails::class, optional: true)]

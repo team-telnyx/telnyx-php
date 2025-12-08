@@ -6,20 +6,16 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 
 /**
  * @phpstan-type VoiceNewResponseShape = array{data?: CdrDetailedReqResponse|null}
  */
-final class VoiceNewResponse implements BaseModel, ResponseConverter
+final class VoiceNewResponse implements BaseModel
 {
     /** @use SdkModel<VoiceNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Response object for CDR detailed report.

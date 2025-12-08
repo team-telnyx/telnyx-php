@@ -6,9 +6,7 @@ namespace Telnyx\VirtualCrossConnects;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse\Data;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse\Data\CloudProvider;
@@ -17,12 +15,10 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse\Data\Region;
 /**
  * @phpstan-type VirtualCrossConnectNewResponseShape = array{data?: Data|null}
  */
-final class VirtualCrossConnectNewResponse implements BaseModel, ResponseConverter
+final class VirtualCrossConnectNewResponse implements BaseModel
 {
     /** @use SdkModel<VirtualCrossConnectNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

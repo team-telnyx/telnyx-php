@@ -7,9 +7,7 @@ namespace Telnyx\DocumentLinks;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocumentLinks\DocumentLinkListResponse\Data;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\DocumentLinks\DocumentLinkListResponse\Data;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class DocumentLinkListResponse implements BaseModel, ResponseConverter
+final class DocumentLinkListResponse implements BaseModel
 {
     /** @use SdkModel<DocumentLinkListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

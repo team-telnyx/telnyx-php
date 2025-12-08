@@ -6,9 +6,7 @@ namespace Telnyx\Storage\MigrationSources;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
@@ -18,12 +16,10 @@ use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
  *   data?: list<MigrationSourceParams>|null, meta?: PaginationMetaSimple|null
  * }
  */
-final class MigrationSourceListResponse implements BaseModel, ResponseConverter
+final class MigrationSourceListResponse implements BaseModel
 {
     /** @use SdkModel<MigrationSourceListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<MigrationSourceParams>|null $data */
     #[Api(list: MigrationSourceParams::class, optional: true)]

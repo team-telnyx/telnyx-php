@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsContract;
@@ -79,13 +80,15 @@ final class CallsService implements CallsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Calls/%2$s', $accountSid, $callSid],
             options: $options,
             convert: CallGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -119,8 +122,8 @@ final class CallsService implements CallsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallUpdateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['texml/Accounts/%1$s/Calls/%2$s', $accountSid, $callSid],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
@@ -128,6 +131,8 @@ final class CallsService implements CallsContract
             options: $options,
             convert: CallUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -185,14 +190,16 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallCallsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['texml/Accounts/%1$s/Calls', $accountSid],
             body: (object) $parsed,
             options: $options,
             convert: CallCallsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -227,14 +234,16 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallGetCallsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Calls', $accountSid],
             query: $parsed,
             options: $options,
             convert: CallGetCallsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -269,8 +278,8 @@ final class CallsService implements CallsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallSiprecJsonResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Calls/%2$s/Siprec.json', $accountSid, $callSid,
@@ -280,6 +289,8 @@ final class CallsService implements CallsContract
             options: $options,
             convert: CallSiprecJsonResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -312,8 +323,8 @@ final class CallsService implements CallsContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallStreamsJsonResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Calls/%2$s/Streams.json', $accountSid, $callSid,
@@ -323,5 +334,7 @@ final class CallsService implements CallsContract
             options: $options,
             convert: CallStreamsJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

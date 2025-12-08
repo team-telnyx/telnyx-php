@@ -8,9 +8,7 @@ use Telnyx\AI\Assistants\Tests\AssistantTest\Rubric;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Paginated list of assistant tests with metadata.
@@ -22,12 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   data: list<AssistantTest>, meta: Meta
  * }
  */
-final class TestListResponse implements BaseModel, ResponseConverter
+final class TestListResponse implements BaseModel
 {
     /** @use SdkModel<TestListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Array of assistant test objects for the current page.

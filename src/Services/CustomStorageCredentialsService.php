@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
@@ -42,14 +43,16 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CustomStorageCredentialNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['custom_storage_credentials/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
             convert: CustomStorageCredentialNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): CustomStorageCredentialGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CustomStorageCredentialGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['custom_storage_credentials/%1$s', $connectionID],
             options: $requestOptions,
             convert: CustomStorageCredentialGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,14 +98,16 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CustomStorageCredentialUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['custom_storage_credentials/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
             convert: CustomStorageCredentialUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -114,12 +121,14 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         string $connectionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['custom_storage_credentials/%1$s', $connectionID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

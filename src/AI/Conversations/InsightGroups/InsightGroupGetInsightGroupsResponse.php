@@ -8,21 +8,17 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InsightGroupGetInsightGroupsResponseShape = array{
  *   data: list<InsightTemplateGroup>, meta: Meta
  * }
  */
-final class InsightGroupGetInsightGroupsResponse implements BaseModel, ResponseConverter
+final class InsightGroupGetInsightGroupsResponse implements BaseModel
 {
     /** @use SdkModel<InsightGroupGetInsightGroupsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<InsightTemplateGroup> $data */
     #[Api(list: InsightTemplateGroup::class)]

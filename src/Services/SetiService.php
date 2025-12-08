@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiContract;
@@ -38,13 +39,15 @@ final class SetiService implements SetiContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SetiGetBlackBoxTestResultsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'seti/black_box_test_results',
             query: $parsed,
             options: $options,
             convert: SetiGetBlackBoxTestResultsResponse::class,
         );
+
+        return $response->parse();
     }
 }

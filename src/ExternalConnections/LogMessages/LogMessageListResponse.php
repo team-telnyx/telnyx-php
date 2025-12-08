@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections\LogMessages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage\Meta;
@@ -20,12 +18,10 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage\Sou
  *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
  * }
  */
-final class LogMessageListResponse implements BaseModel, ResponseConverter
+final class LogMessageListResponse implements BaseModel
 {
     /** @use SdkModel<LogMessageListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<LogMessage>|null $log_messages */
     #[Api(list: LogMessage::class, optional: true)]

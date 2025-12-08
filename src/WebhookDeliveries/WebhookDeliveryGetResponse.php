@@ -6,9 +6,7 @@ namespace Telnyx\WebhookDeliveries;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Status;
@@ -17,12 +15,10 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook;
 /**
  * @phpstan-type WebhookDeliveryGetResponseShape = array{data?: Data|null}
  */
-final class WebhookDeliveryGetResponse implements BaseModel, ResponseConverter
+final class WebhookDeliveryGetResponse implements BaseModel
 {
     /** @use SdkModel<WebhookDeliveryGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Record of all attempts to deliver a webhook.

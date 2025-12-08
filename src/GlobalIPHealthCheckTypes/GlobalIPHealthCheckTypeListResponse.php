@@ -6,9 +6,7 @@ namespace Telnyx\GlobalIPHealthCheckTypes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse\Data;
  *   data?: list<Data>|null
  * }
  */
-final class GlobalIPHealthCheckTypeListResponse implements BaseModel, ResponseConverter
+final class GlobalIPHealthCheckTypeListResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPHealthCheckTypeListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

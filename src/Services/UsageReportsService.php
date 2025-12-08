@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsContract;
@@ -69,8 +70,8 @@ final class UsageReportsService implements UsageReportsContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UsageReportListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'usage_reports',
             query: array_intersect_key($parsed, $query_params),
@@ -78,6 +79,8 @@ final class UsageReportsService implements UsageReportsContract
             options: $options,
             convert: UsageReportListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,8 +107,8 @@ final class UsageReportsService implements UsageReportsContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UsageReportGetOptionsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'usage_reports/options',
             query: array_intersect_key($parsed, $query_params),
@@ -113,5 +116,7 @@ final class UsageReportsService implements UsageReportsContract
             options: $options,
             convert: UsageReportGetOptionsResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusParams;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
@@ -41,14 +42,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionChangeBundleStatusResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s/actions/bundle_status_change', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionChangeBundleStatusResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,14 +75,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionEnableEmergencyResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['phone_numbers/%1$s/actions/enable_emergency', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionEnableEmergencyResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,13 +105,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionVerifyOwnershipResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phone_numbers/actions/verify_ownership',
             body: (object) $parsed,
             options: $options,
             convert: ActionVerifyOwnershipResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,20 +6,16 @@ namespace Telnyx\WireguardPeers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse\Data;
 
 /**
  * @phpstan-type WireguardPeerUpdateResponseShape = array{data?: Data|null}
  */
-final class WireguardPeerUpdateResponse implements BaseModel, ResponseConverter
+final class WireguardPeerUpdateResponse implements BaseModel
 {
     /** @use SdkModel<WireguardPeerUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

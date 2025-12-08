@@ -7,19 +7,15 @@ namespace Telnyx\AI\Embeddings\Buckets;
 use Telnyx\AI\Embeddings\Buckets\BucketListResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BucketListResponseShape = array{data: Data}
  */
-final class BucketListResponse implements BaseModel, ResponseConverter
+final class BucketListResponse implements BaseModel
 {
     /** @use SdkModel<BucketListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

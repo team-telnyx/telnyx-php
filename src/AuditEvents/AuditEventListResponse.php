@@ -10,21 +10,17 @@ use Telnyx\AuditEvents\AuditEventListResponse\Data\ChangeMadeBy;
 use Telnyx\AuditEvents\AuditEventListResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuditEventListResponseShape = array{
  *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
-final class AuditEventListResponse implements BaseModel, ResponseConverter
+final class AuditEventListResponse implements BaseModel
 {
     /** @use SdkModel<AuditEventListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

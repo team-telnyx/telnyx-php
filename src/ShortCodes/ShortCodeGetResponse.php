@@ -6,21 +6,17 @@ namespace Telnyx\ShortCodes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 use Telnyx\ShortCode\RecordType;
 
 /**
  * @phpstan-type ShortCodeGetResponseShape = array{data?: ShortCode|null}
  */
-final class ShortCodeGetResponse implements BaseModel, ResponseConverter
+final class ShortCodeGetResponse implements BaseModel
 {
     /** @use SdkModel<ShortCodeGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ShortCode $data;

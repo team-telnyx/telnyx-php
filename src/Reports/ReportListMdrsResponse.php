@@ -6,9 +6,7 @@ namespace Telnyx\Reports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Reports\MdrUsageReports\PaginationMetaReporting;
 use Telnyx\Reports\ReportListMdrsResponse\Data;
 use Telnyx\Reports\ReportListMdrsResponse\Data\Currency;
@@ -20,12 +18,10 @@ use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
  *   data?: list<Data>|null, meta?: PaginationMetaReporting|null
  * }
  */
-final class ReportListMdrsResponse implements BaseModel, ResponseConverter
+final class ReportListMdrsResponse implements BaseModel
 {
     /** @use SdkModel<ReportListMdrsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

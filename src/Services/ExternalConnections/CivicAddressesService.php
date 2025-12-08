@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams;
@@ -41,13 +42,15 @@ final class CivicAddressesService implements CivicAddressesContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CivicAddressGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/civic_addresses/%2$s', $id, $addressID],
             options: $options,
             convert: CivicAddressGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -71,13 +74,15 @@ final class CivicAddressesService implements CivicAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CivicAddressListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/civic_addresses', $id],
             query: $parsed,
             options: $options,
             convert: CivicAddressListResponse::class,
         );
+
+        return $response->parse();
     }
 }

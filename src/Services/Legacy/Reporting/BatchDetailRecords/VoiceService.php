@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams;
@@ -63,14 +64,16 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'legacy/reporting/batch_detail_records/voice',
             body: (object) $parsed,
             options: $options,
             convert: VoiceNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -84,13 +87,15 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['legacy/reporting/batch_detail_records/voice/%1$s', $id],
             options: $requestOptions,
             convert: VoiceGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -103,13 +108,15 @@ final class VoiceService implements VoiceContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): VoiceListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/batch_detail_records/voice',
             options: $requestOptions,
             convert: VoiceListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -123,13 +130,15 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/batch_detail_records/voice/%1$s', $id],
             options: $requestOptions,
             convert: VoiceDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -142,12 +151,14 @@ final class VoiceService implements VoiceContract
     public function retrieveFields(
         ?RequestOptions $requestOptions = null
     ): VoiceGetFieldsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceGetFieldsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/batch_detail_records/voice/fields',
             options: $requestOptions,
             convert: VoiceGetFieldsResponse::class,
         );
+
+        return $response->parse();
     }
 }

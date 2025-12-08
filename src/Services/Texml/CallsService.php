@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\CallsContract;
@@ -48,14 +49,16 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallUpdateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['texml/calls/%1$s/update', $callSid],
             body: (object) $parsed,
             options: $options,
             convert: CallUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -109,13 +112,15 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallInitiateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['texml/calls/%1$s', $applicationID],
             body: (object) $parsed,
             options: $options,
             convert: CallInitiateResponse::class,
         );
+
+        return $response->parse();
     }
 }

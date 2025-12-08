@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
@@ -30,13 +31,15 @@ final class RoomParticipantsService implements RoomParticipantsContract
         string $roomParticipantID,
         ?RequestOptions $requestOptions = null
     ): RoomParticipantGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomParticipantGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['room_participants/%1$s', $roomParticipantID],
             options: $requestOptions,
             convert: RoomParticipantGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,13 +81,15 @@ final class RoomParticipantsService implements RoomParticipantsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomParticipantListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'room_participants',
             query: $parsed,
             options: $options,
             convert: RoomParticipantListResponse::class,
         );
+
+        return $response->parse();
     }
 }

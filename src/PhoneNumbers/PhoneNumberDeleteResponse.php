@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\PhoneNumberType;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\Status;
@@ -16,12 +14,10 @@ use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\Status;
 /**
  * @phpstan-type PhoneNumberDeleteResponseShape = array{data?: Data|null}
  */
-final class PhoneNumberDeleteResponse implements BaseModel, ResponseConverter
+final class PhoneNumberDeleteResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

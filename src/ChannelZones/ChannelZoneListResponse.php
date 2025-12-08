@@ -9,21 +9,17 @@ use Telnyx\ChannelZones\ChannelZoneListResponse\Data;
 use Telnyx\ChannelZones\ChannelZoneListResponse\Data\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ChannelZoneListResponseShape = array{
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class ChannelZoneListResponse implements BaseModel, ResponseConverter
+final class ChannelZoneListResponse implements BaseModel
 {
     /** @use SdkModel<ChannelZoneListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -6,9 +6,7 @@ namespace Telnyx\GlobalIPLatency;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\MeanLatency;
@@ -18,12 +16,10 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 /**
  * @phpstan-type GlobalIPLatencyGetResponseShape = array{data?: list<Data>|null}
  */
-final class GlobalIPLatencyGetResponse implements BaseModel, ResponseConverter
+final class GlobalIPLatencyGetResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPLatencyGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

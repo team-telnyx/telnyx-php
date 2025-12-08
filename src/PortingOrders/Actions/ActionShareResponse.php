@@ -6,21 +6,17 @@ namespace Telnyx\PortingOrders\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Actions\ActionShareResponse\Data;
 use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
 
 /**
  * @phpstan-type ActionShareResponseShape = array{data?: Data|null}
  */
-final class ActionShareResponse implements BaseModel, ResponseConverter
+final class ActionShareResponse implements BaseModel
 {
     /** @use SdkModel<ActionShareResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

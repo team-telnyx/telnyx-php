@@ -6,9 +6,7 @@ namespace Telnyx\GlobalIPAllowedPorts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data;
  *   data?: list<Data>|null
  * }
  */
-final class GlobalIPAllowedPortListResponse implements BaseModel, ResponseConverter
+final class GlobalIPAllowedPortListResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPAllowedPortListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

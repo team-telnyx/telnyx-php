@@ -7,21 +7,17 @@ namespace Telnyx\IPs;
 use Telnyx\ConnectionsPaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IPListResponseShape = array{
  *   data?: list<IP>|null, meta?: ConnectionsPaginationMeta|null
  * }
  */
-final class IPListResponse implements BaseModel, ResponseConverter
+final class IPListResponse implements BaseModel
 {
     /** @use SdkModel<IPListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<IP>|null $data */
     #[Api(list: IP::class, optional: true)]

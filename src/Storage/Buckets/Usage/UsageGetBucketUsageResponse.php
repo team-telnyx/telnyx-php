@@ -6,9 +6,7 @@ namespace Telnyx\Storage\Buckets\Usage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse\Data;
  *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
  * }
  */
-final class UsageGetBucketUsageResponse implements BaseModel, ResponseConverter
+final class UsageGetBucketUsageResponse implements BaseModel
 {
     /** @use SdkModel<UsageGetBucketUsageResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

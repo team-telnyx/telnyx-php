@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
@@ -45,8 +46,8 @@ final class RecordingsService implements RecordingsContract
         $callSid = $parsed['call_sid'];
         unset($parsed['call_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecordingRecordingSidJsonResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Calls/%2$s/Recordings/%3$s.json',
@@ -62,5 +63,7 @@ final class RecordingsService implements RecordingsContract
             options: $options,
             convert: RecordingRecordingSidJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

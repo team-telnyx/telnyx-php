@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders\PhoneNumberConfigurations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewRe
  *   data?: list<Data>|null
  * }
  */
-final class PhoneNumberConfigurationNewResponse implements BaseModel, ResponseConverter
+final class PhoneNumberConfigurationNewResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberConfigurationNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

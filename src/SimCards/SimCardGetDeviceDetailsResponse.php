@@ -6,20 +6,16 @@ namespace Telnyx\SimCards;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardGetDeviceDetailsResponse\Data;
 
 /**
  * @phpstan-type SimCardGetDeviceDetailsResponseShape = array{data?: Data|null}
  */
-final class SimCardGetDeviceDetailsResponse implements BaseModel, ResponseConverter
+final class SimCardGetDeviceDetailsResponse implements BaseModel
 {
     /** @use SdkModel<SimCardGetDeviceDetailsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

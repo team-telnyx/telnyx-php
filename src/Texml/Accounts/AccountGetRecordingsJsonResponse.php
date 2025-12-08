@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
@@ -25,12 +23,10 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
  *   uri?: string|null,
  * }
  */
-final class AccountGetRecordingsJsonResponse implements BaseModel, ResponseConverter
+final class AccountGetRecordingsJsonResponse implements BaseModel
 {
     /** @use SdkModel<AccountGetRecordingsJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The number of the last element on the page, zero-indexed.

@@ -7,9 +7,7 @@ namespace Telnyx\SimCards;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data\LogType;
 
@@ -18,12 +16,10 @@ use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data\LogType;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class SimCardListWirelessConnectivityLogsResponse implements BaseModel, ResponseConverter
+final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
 {
     /** @use SdkModel<SimCardListWirelessConnectivityLogsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

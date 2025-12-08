@@ -7,9 +7,7 @@ namespace Telnyx\NotificationChannels;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
  *   data?: list<NotificationChannel>|null, meta?: PaginationMeta|null
  * }
  */
-final class NotificationChannelListResponse implements BaseModel, ResponseConverter
+final class NotificationChannelListResponse implements BaseModel
 {
     /** @use SdkModel<NotificationChannelListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<NotificationChannel>|null $data */
     #[Api(list: NotificationChannel::class, optional: true)]

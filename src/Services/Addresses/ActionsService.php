@@ -9,6 +9,7 @@ use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
 use Telnyx\Addresses\Actions\ActionValidateParams;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsContract;
@@ -39,14 +40,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionAcceptSuggestionsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['addresses/%1$s/actions/accept_suggestions', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionAcceptSuggestionsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -74,13 +77,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionValidateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'addresses/actions/validate',
             body: (object) $parsed,
             options: $options,
             convert: ActionValidateResponse::class,
         );
+
+        return $response->parse();
     }
 }

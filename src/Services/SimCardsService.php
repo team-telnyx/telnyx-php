@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsContract;
@@ -60,14 +61,16 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: SimCardGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,14 +101,16 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['sim_cards/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: SimCardUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -136,14 +141,16 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'sim_cards',
             query: $parsed,
             options: $options,
             convert: SimCardListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -167,14 +174,16 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['sim_cards/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: SimCardDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -189,13 +198,15 @@ final class SimCardsService implements SimCardsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGetActivationCodeResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGetActivationCodeResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/activation_code', $id],
             options: $requestOptions,
             convert: SimCardGetActivationCodeResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -209,13 +220,15 @@ final class SimCardsService implements SimCardsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGetDeviceDetailsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGetDeviceDetailsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/device_details', $id],
             options: $requestOptions,
             convert: SimCardGetDeviceDetailsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -229,13 +242,15 @@ final class SimCardsService implements SimCardsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGetPublicIPResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGetPublicIPResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/public_ip', $id],
             options: $requestOptions,
             convert: SimCardGetPublicIPResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -259,13 +274,15 @@ final class SimCardsService implements SimCardsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardListWirelessConnectivityLogsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/wireless_connectivity_logs', $id],
             query: $parsed,
             options: $options,
             convert: SimCardListWirelessConnectivityLogsResponse::class,
         );
+
+        return $response->parse();
     }
 }

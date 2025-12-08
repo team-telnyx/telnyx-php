@@ -6,9 +6,7 @@ namespace Telnyx\MobileVoiceConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data\Inbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data\Outbound;
@@ -18,12 +16,10 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data\WebhookA
 /**
  * @phpstan-type MobileVoiceConnectionGetResponseShape = array{data?: Data|null}
  */
-final class MobileVoiceConnectionGetResponse implements BaseModel, ResponseConverter
+final class MobileVoiceConnectionGetResponse implements BaseModel
 {
     /** @use SdkModel<MobileVoiceConnectionGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

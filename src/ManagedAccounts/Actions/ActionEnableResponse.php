@@ -6,9 +6,7 @@ namespace Telnyx\ManagedAccounts\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccount;
 use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
 use Telnyx\ManagedAccounts\ManagedAccountBalance;
@@ -16,12 +14,10 @@ use Telnyx\ManagedAccounts\ManagedAccountBalance;
 /**
  * @phpstan-type ActionEnableResponseShape = array{data?: ManagedAccount|null}
  */
-final class ActionEnableResponse implements BaseModel, ResponseConverter
+final class ActionEnableResponse implements BaseModel
 {
     /** @use SdkModel<ActionEnableResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ManagedAccount $data;

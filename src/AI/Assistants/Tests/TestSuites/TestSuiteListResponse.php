@@ -6,9 +6,7 @@ namespace Telnyx\AI\Assistants\Tests\TestSuites;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response containing all available test suite names.
@@ -18,12 +16,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *
  * @phpstan-type TestSuiteListResponseShape = array{data: list<string>}
  */
-final class TestSuiteListResponse implements BaseModel, ResponseConverter
+final class TestSuiteListResponse implements BaseModel
 {
     /** @use SdkModel<TestSuiteListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Array of unique test suite names available to the user.

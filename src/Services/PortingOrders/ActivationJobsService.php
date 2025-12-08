@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
@@ -43,13 +44,15 @@ final class ActivationJobsService implements ActivationJobsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActivationJobGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
             options: $options,
             convert: ActivationJobGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,14 +78,16 @@ final class ActivationJobsService implements ActivationJobsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActivationJobUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
             body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: ActivationJobUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -106,13 +111,15 @@ final class ActivationJobsService implements ActivationJobsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActivationJobListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/activation_jobs', $id],
             query: $parsed,
             options: $options,
             convert: ActivationJobListResponse::class,
         );
+
+        return $response->parse();
     }
 }

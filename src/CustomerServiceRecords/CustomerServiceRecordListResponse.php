@@ -7,9 +7,7 @@ namespace Telnyx\CustomerServiceRecords;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
@@ -18,12 +16,10 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
  *   data?: list<CustomerServiceRecord>|null, meta?: PaginationMeta|null
  * }
  */
-final class CustomerServiceRecordListResponse implements BaseModel, ResponseConverter
+final class CustomerServiceRecordListResponse implements BaseModel
 {
     /** @use SdkModel<CustomerServiceRecordListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<CustomerServiceRecord>|null $data */
     #[Api(list: CustomerServiceRecord::class, optional: true)]

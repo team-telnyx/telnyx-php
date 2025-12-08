@@ -6,9 +6,7 @@ namespace Telnyx\IntegrationSecrets;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\IntegrationSecrets\IntegrationSecretListResponse\Meta;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListResponse\Meta;
  *   data: list<IntegrationSecret>, meta: Meta
  * }
  */
-final class IntegrationSecretListResponse implements BaseModel, ResponseConverter
+final class IntegrationSecretListResponse implements BaseModel
 {
     /** @use SdkModel<IntegrationSecretListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<IntegrationSecret> $data */
     #[Api(list: IntegrationSecret::class)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\VerifiedNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbers\ActionsContract;
@@ -39,13 +40,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerifiedNumberDataWrapper> */
+        $response = $this->client->request(
             method: 'post',
             path: ['verified_numbers/%1$s/actions/verify', $phoneNumber],
             body: (object) $parsed,
             options: $options,
             convert: VerifiedNumberDataWrapper::class,
         );
+
+        return $response->parse();
     }
 }

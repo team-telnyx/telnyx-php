@@ -9,19 +9,15 @@ use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AssistantsListShape = array{data: list<InferenceEmbedding>}
  */
-final class AssistantsList implements BaseModel, ResponseConverter
+final class AssistantsList implements BaseModel
 {
     /** @use SdkModel<AssistantsListShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<InferenceEmbedding> $data */
     #[Api(list: InferenceEmbedding::class)]

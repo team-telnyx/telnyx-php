@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams;
@@ -37,13 +38,15 @@ final class NumberLookupService implements NumberLookupContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberLookupGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['number_lookup/%1$s', $phoneNumber],
             query: $parsed,
             options: $options,
             convert: NumberLookupGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

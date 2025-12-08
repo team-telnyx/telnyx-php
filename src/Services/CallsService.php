@@ -10,6 +10,7 @@ use Telnyx\Calls\CallGetStatusResponse;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallsContract;
@@ -149,14 +150,16 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallDialResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'calls',
             body: (object) $parsed,
             options: $options,
             convert: CallDialResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -170,12 +173,14 @@ final class CallsService implements CallsContract
         string $callControlID,
         ?RequestOptions $requestOptions = null
     ): CallGetStatusResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallGetStatusResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['calls/%1$s', $callControlID],
             options: $requestOptions,
             convert: CallGetStatusResponse::class,
         );
+
+        return $response->parse();
     }
 }

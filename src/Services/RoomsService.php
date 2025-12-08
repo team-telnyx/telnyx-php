@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\RoomCreateParams;
@@ -65,14 +66,16 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'rooms',
             body: (object) $parsed,
             options: $options,
             convert: RoomNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -94,14 +97,16 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['rooms/%1$s', $roomID],
             query: $parsed,
             options: $options,
             convert: RoomGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -130,14 +135,16 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['rooms/%1$s', $roomID],
             body: (object) $parsed,
             options: $options,
             convert: RoomUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -174,14 +181,16 @@ final class RoomsService implements RoomsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'rooms',
             query: $parsed,
             options: $options,
             convert: RoomListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -195,12 +204,14 @@ final class RoomsService implements RoomsContract
         string $roomID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['rooms/%1$s', $roomID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

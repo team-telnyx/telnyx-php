@@ -7,9 +7,7 @@ namespace Telnyx\WireguardInterfaces;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse\Data;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse\Data\Region;
@@ -19,12 +17,10 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse\Data\Region;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class WireguardInterfaceListResponse implements BaseModel, ResponseConverter
+final class WireguardInterfaceListResponse implements BaseModel
 {
     /** @use SdkModel<WireguardInterfaceListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -7,9 +7,7 @@ namespace Telnyx\NotificationEventConditions;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Data;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Data\AssociatedRecordType;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Data\Parameter;
@@ -19,12 +17,10 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Da
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class NotificationEventConditionListResponse implements BaseModel, ResponseConverter
+final class NotificationEventConditionListResponse implements BaseModel
 {
     /** @use SdkModel<NotificationEventConditionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

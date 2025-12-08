@@ -7,9 +7,7 @@ namespace Telnyx\AI\Assistants\Tests;
 use Telnyx\AI\Assistants\Tests\AssistantTest\Rubric;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model containing complete assistant test information.
@@ -31,12 +29,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   test_suite?: string|null,
  * }
  */
-final class AssistantTest implements BaseModel, ResponseConverter
+final class AssistantTest implements BaseModel
 {
     /** @use SdkModel<AssistantTestShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Timestamp when the test was created.

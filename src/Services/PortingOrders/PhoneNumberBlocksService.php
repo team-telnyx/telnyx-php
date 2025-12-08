@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
@@ -44,14 +45,16 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberBlockNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/phone_number_blocks', $portingOrderID],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberBlockNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -84,14 +87,16 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberBlockListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/phone_number_blocks', $portingOrderID],
             query: $parsed,
             options: $options,
             convert: PhoneNumberBlockListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -115,8 +120,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
         $portingOrderID = $parsed['porting_order_id'];
         unset($parsed['porting_order_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberBlockDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'porting_orders/%1$s/phone_number_blocks/%2$s', $portingOrderID, $id,
@@ -124,5 +129,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
             options: $options,
             convert: PhoneNumberBlockDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

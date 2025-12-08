@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Queues;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
@@ -43,13 +44,15 @@ final class CallsService implements CallsContract
         $queueName = $parsed['queue_name'];
         unset($parsed['queue_name']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
             options: $options,
             convert: CallGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,14 +78,16 @@ final class CallsService implements CallsContract
         $queueName = $parsed['queue_name'];
         unset($parsed['queue_name']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
             body: (object) array_diff_key($parsed, ['queue_name']),
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -108,14 +113,16 @@ final class CallsService implements CallsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CallListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['queues/%1$s/calls', $queueName],
             query: $parsed,
             options: $options,
             convert: CallListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -139,12 +146,14 @@ final class CallsService implements CallsContract
         $queueName = $parsed['queue_name'];
         unset($parsed['queue_name']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

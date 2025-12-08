@@ -7,9 +7,7 @@ namespace Telnyx\MessagingHostedNumberOrders;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\HostedNumber;
 use Telnyx\MessagingHostedNumberOrder;
 use Telnyx\MessagingHostedNumberOrder\Status;
@@ -19,12 +17,10 @@ use Telnyx\MessagingHostedNumberOrder\Status;
  *   data?: list<MessagingHostedNumberOrder>|null, meta?: PaginationMeta|null
  * }
  */
-final class MessagingHostedNumberOrderListResponse implements BaseModel, ResponseConverter
+final class MessagingHostedNumberOrderListResponse implements BaseModel
 {
     /** @use SdkModel<MessagingHostedNumberOrderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<MessagingHostedNumberOrder>|null $data */
     #[Api(list: MessagingHostedNumberOrder::class, optional: true)]

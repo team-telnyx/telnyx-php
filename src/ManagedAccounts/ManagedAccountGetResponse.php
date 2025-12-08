@@ -6,20 +6,16 @@ namespace Telnyx\ManagedAccounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
 
 /**
  * @phpstan-type ManagedAccountGetResponseShape = array{data?: ManagedAccount|null}
  */
-final class ManagedAccountGetResponse implements BaseModel, ResponseConverter
+final class ManagedAccountGetResponse implements BaseModel
 {
     /** @use SdkModel<ManagedAccountGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ManagedAccount $data;

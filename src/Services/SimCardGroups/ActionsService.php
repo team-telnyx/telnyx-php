@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\SimCardGroups;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
@@ -37,13 +38,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_card_group_actions/%1$s', $id],
             options: $requestOptions,
             convert: ActionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -70,14 +73,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'sim_card_group_actions',
             query: $parsed,
             options: $options,
             convert: ActionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -91,8 +96,8 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionRemovePrivateWirelessGatewayResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRemovePrivateWirelessGatewayResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'sim_card_groups/%1$s/actions/remove_private_wireless_gateway', $id,
@@ -100,6 +105,8 @@ final class ActionsService implements ActionsContract
             options: $requestOptions,
             convert: ActionRemovePrivateWirelessGatewayResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -113,13 +120,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionRemoveWirelessBlocklistResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRemoveWirelessBlocklistResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_card_groups/%1$s/actions/remove_wireless_blocklist', $id],
             options: $requestOptions,
             convert: ActionRemoveWirelessBlocklistResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -143,14 +152,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSetPrivateWirelessGatewayResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_card_groups/%1$s/actions/set_private_wireless_gateway', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionSetPrivateWirelessGatewayResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -174,13 +185,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSetWirelessBlocklistResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['sim_card_groups/%1$s/actions/set_wireless_blocklist', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionSetWirelessBlocklistResponse::class,
         );
+
+        return $response->parse();
     }
 }

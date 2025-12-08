@@ -6,9 +6,7 @@ namespace Telnyx\IPConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
@@ -19,12 +17,10 @@ use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
 /**
  * @phpstan-type IPConnectionDeleteResponseShape = array{data?: IPConnection|null}
  */
-final class IPConnectionDeleteResponse implements BaseModel, ResponseConverter
+final class IPConnectionDeleteResponse implements BaseModel
 {
     /** @use SdkModel<IPConnectionDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?IPConnection $data;

@@ -7,9 +7,7 @@ namespace Telnyx\OtaUpdates;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OtaUpdates\OtaUpdateListResponse\Data;
 use Telnyx\OtaUpdates\OtaUpdateListResponse\Data\Status;
 use Telnyx\OtaUpdates\OtaUpdateListResponse\Data\Type;
@@ -19,12 +17,10 @@ use Telnyx\OtaUpdates\OtaUpdateListResponse\Data\Type;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class OtaUpdateListResponse implements BaseModel, ResponseConverter
+final class OtaUpdateListResponse implements BaseModel
 {
     /** @use SdkModel<OtaUpdateListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

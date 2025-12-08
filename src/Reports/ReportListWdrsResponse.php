@@ -6,9 +6,7 @@ namespace Telnyx\Reports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Reports\ReportListWdrsResponse\Data;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Cost;
 use Telnyx\Reports\ReportListWdrsResponse\Data\DownlinkData;
@@ -21,12 +19,10 @@ use Telnyx\Reports\ReportListWdrsResponse\Meta;
  *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
-final class ReportListWdrsResponse implements BaseModel, ResponseConverter
+final class ReportListWdrsResponse implements BaseModel
 {
     /** @use SdkModel<ReportListWdrsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

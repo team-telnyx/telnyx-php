@@ -6,21 +6,17 @@ namespace Telnyx\NotificationProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NotificationProfileDeleteResponseShape = array{
  *   data?: NotificationProfile|null
  * }
  */
-final class NotificationProfileDeleteResponse implements BaseModel, ResponseConverter
+final class NotificationProfileDeleteResponse implements BaseModel
 {
     /** @use SdkModel<NotificationProfileDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A Collection of Notification Channels.

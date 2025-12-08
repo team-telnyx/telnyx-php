@@ -7,9 +7,7 @@ namespace Telnyx\MobilePushCredentials;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Mobile mobile push credentials.
@@ -18,12 +16,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   data?: list<PushCredential>|null, meta?: PaginationMeta|null
  * }
  */
-final class MobilePushCredentialListResponse implements BaseModel, ResponseConverter
+final class MobilePushCredentialListResponse implements BaseModel
 {
     /** @use SdkModel<MobilePushCredentialListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PushCredential>|null $data */
     #[Api(list: PushCredential::class, optional: true)]

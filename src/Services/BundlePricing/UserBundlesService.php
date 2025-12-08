@@ -17,6 +17,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
@@ -51,8 +52,8 @@ final class UserBundlesService implements UserBundlesContract
         );
         $header_params = ['authorization_bearer' => 'authorization_bearer'];
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserBundleNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'bundle_pricing/user_bundles/bulk',
             headers: array_intersect_key($parsed, array_keys($header_params)),
@@ -60,6 +61,8 @@ final class UserBundlesService implements UserBundlesContract
             options: $options,
             convert: UserBundleNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,14 +84,16 @@ final class UserBundlesService implements UserBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserBundleGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
             headers: $parsed,
             options: $options,
             convert: UserBundleGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -117,8 +122,8 @@ final class UserBundlesService implements UserBundlesContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserBundleListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'bundle_pricing/user_bundles',
             query: array_intersect_key($parsed, $query_params),
@@ -126,6 +131,8 @@ final class UserBundlesService implements UserBundlesContract
             options: $options,
             convert: UserBundleListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,14 +154,16 @@ final class UserBundlesService implements UserBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserBundleDeactivateResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
             headers: $parsed,
             options: $options,
             convert: UserBundleDeactivateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -178,14 +187,16 @@ final class UserBundlesService implements UserBundlesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserBundleListResourcesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['bundle_pricing/user_bundles/%1$s/resources', $userBundleID],
             headers: $parsed,
             options: $options,
             convert: UserBundleListResourcesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -213,8 +224,8 @@ final class UserBundlesService implements UserBundlesContract
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserBundleListUnusedResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'bundle_pricing/user_bundles/unused',
             query: array_intersect_key($parsed, $query_params),
@@ -222,5 +233,7 @@ final class UserBundlesService implements UserBundlesContract
             options: $options,
             convert: UserBundleListUnusedResponse::class,
         );
+
+        return $response->parse();
     }
 }

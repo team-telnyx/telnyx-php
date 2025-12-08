@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
@@ -32,13 +33,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionActivateResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionActivateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/actions/activate', $id],
             options: $requestOptions,
             convert: ActionActivateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -52,13 +55,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionCancelResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionCancelResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/actions/cancel', $id],
             options: $requestOptions,
             convert: ActionCancelResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,13 +77,15 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionConfirmResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionConfirmResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/actions/confirm', $id],
             options: $requestOptions,
             convert: ActionConfirmResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -103,13 +110,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionShareResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/actions/share', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionShareResponse::class,
         );
+
+        return $response->parse();
     }
 }

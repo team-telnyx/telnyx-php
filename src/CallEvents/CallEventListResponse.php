@@ -10,21 +10,17 @@ use Telnyx\CallEvents\CallEventListResponse\Data\RecordType;
 use Telnyx\CallEvents\CallEventListResponse\Data\Type;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallEventListResponseShape = array{
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class CallEventListResponse implements BaseModel, ResponseConverter
+final class CallEventListResponse implements BaseModel
 {
     /** @use SdkModel<CallEventListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

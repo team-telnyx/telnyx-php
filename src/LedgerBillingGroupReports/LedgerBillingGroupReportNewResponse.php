@@ -6,9 +6,7 @@ namespace Telnyx\LedgerBillingGroupReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\RecordType;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
  *   data?: LedgerBillingGroupReport|null
  * }
  */
-final class LedgerBillingGroupReportNewResponse implements BaseModel, ResponseConverter
+final class LedgerBillingGroupReportNewResponse implements BaseModel
 {
     /** @use SdkModel<LedgerBillingGroupReportNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?LedgerBillingGroupReport $data;

@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta;
 
@@ -17,12 +15,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta;
  *   data?: list<CdrDetailedReqResponse>|null, meta?: BatchCsvPaginationMeta|null
  * }
  */
-final class VoiceListResponse implements BaseModel, ResponseConverter
+final class VoiceListResponse implements BaseModel
 {
     /** @use SdkModel<VoiceListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<CdrDetailedReqResponse>|null $data */
     #[Api(list: CdrDetailedReqResponse::class, optional: true)]

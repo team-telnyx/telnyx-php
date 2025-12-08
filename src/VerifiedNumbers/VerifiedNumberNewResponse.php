@@ -6,21 +6,17 @@ namespace Telnyx\VerifiedNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type VerifiedNumberNewResponseShape = array{
  *   phone_number?: string|null, verification_method?: string|null
  * }
  */
-final class VerifiedNumberNewResponse implements BaseModel, ResponseConverter
+final class VerifiedNumberNewResponse implements BaseModel
 {
     /** @use SdkModel<VerifiedNumberNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $phone_number;

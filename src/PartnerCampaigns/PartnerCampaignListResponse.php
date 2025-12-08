@@ -6,9 +6,7 @@ namespace Telnyx\PartnerCampaigns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
 
 /**
@@ -18,12 +16,10 @@ use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
  *   totalRecords?: int|null,
  * }
  */
-final class PartnerCampaignListResponse implements BaseModel, ResponseConverter
+final class PartnerCampaignListResponse implements BaseModel
 {
     /** @use SdkModel<PartnerCampaignListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?int $page;

@@ -7,9 +7,7 @@ namespace Telnyx\RoomRecordings;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomRecordings\RoomRecordingListResponse\Data;
 use Telnyx\RoomRecordings\RoomRecordingListResponse\Data\Status;
 use Telnyx\RoomRecordings\RoomRecordingListResponse\Data\Type;
@@ -19,12 +17,10 @@ use Telnyx\RoomRecordings\RoomRecordingListResponse\Data\Type;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class RoomRecordingListResponse implements BaseModel, ResponseConverter
+final class RoomRecordingListResponse implements BaseModel
 {
     /** @use SdkModel<RoomRecordingListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

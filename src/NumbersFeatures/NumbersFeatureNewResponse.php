@@ -6,20 +6,16 @@ namespace Telnyx\NumbersFeatures;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse\Data;
 
 /**
  * @phpstan-type NumbersFeatureNewResponseShape = array{data?: list<Data>|null}
  */
-final class NumbersFeatureNewResponse implements BaseModel, ResponseConverter
+final class NumbersFeatureNewResponse implements BaseModel
 {
     /** @use SdkModel<NumbersFeatureNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

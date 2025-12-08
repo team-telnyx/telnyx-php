@@ -6,19 +6,15 @@ namespace Telnyx\IntegrationSecrets;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IntegrationSecretNewResponseShape = array{data: IntegrationSecret}
  */
-final class IntegrationSecretNewResponse implements BaseModel, ResponseConverter
+final class IntegrationSecretNewResponse implements BaseModel
 {
     /** @use SdkModel<IntegrationSecretNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public IntegrationSecret $data;

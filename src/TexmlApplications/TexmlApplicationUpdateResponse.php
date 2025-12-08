@@ -6,9 +6,7 @@ namespace Telnyx\TexmlApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\TexmlApplications\TexmlApplication\Inbound;
@@ -21,12 +19,10 @@ use Telnyx\TexmlApplications\TexmlApplication\VoiceMethod;
  *   data?: TexmlApplication|null
  * }
  */
-final class TexmlApplicationUpdateResponse implements BaseModel, ResponseConverter
+final class TexmlApplicationUpdateResponse implements BaseModel
 {
     /** @use SdkModel<TexmlApplicationUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?TexmlApplication $data;

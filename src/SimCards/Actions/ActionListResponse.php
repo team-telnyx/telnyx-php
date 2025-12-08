@@ -7,9 +7,7 @@ namespace Telnyx\SimCards\Actions;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\SimCardAction\ActionType;
 use Telnyx\SimCards\Actions\SimCardAction\Status;
 
@@ -18,12 +16,10 @@ use Telnyx\SimCards\Actions\SimCardAction\Status;
  *   data?: list<SimCardAction>|null, meta?: PaginationMeta|null
  * }
  */
-final class ActionListResponse implements BaseModel, ResponseConverter
+final class ActionListResponse implements BaseModel
 {
     /** @use SdkModel<ActionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<SimCardAction>|null $data */
     #[Api(list: SimCardAction::class, optional: true)]

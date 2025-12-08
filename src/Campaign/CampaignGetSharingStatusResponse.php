@@ -6,9 +6,7 @@ namespace Telnyx\Campaign;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignGetSharingStatusResponseShape = array{
@@ -16,12 +14,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   sharedWithMe?: CampaignSharingStatus|null,
  * }
  */
-final class CampaignGetSharingStatusResponse implements BaseModel, ResponseConverter
+final class CampaignGetSharingStatusResponse implements BaseModel
 {
     /** @use SdkModel<CampaignGetSharingStatusResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CampaignSharingStatus $sharedByMe;

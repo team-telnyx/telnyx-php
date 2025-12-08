@@ -6,21 +6,17 @@ namespace Telnyx\Portouts\SupportingDocuments;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse\Data;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse\Data\Type;
 
 /**
  * @phpstan-type SupportingDocumentNewResponseShape = array{data?: list<Data>|null}
  */
-final class SupportingDocumentNewResponse implements BaseModel, ResponseConverter
+final class SupportingDocumentNewResponse implements BaseModel
 {
     /** @use SdkModel<SupportingDocumentNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

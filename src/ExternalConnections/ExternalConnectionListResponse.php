@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalConnection\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnection\Inbound;
 use Telnyx\ExternalConnections\ExternalConnection\Outbound;
@@ -20,12 +18,10 @@ use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
  *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
  * }
  */
-final class ExternalConnectionListResponse implements BaseModel, ResponseConverter
+final class ExternalConnectionListResponse implements BaseModel
 {
     /** @use SdkModel<ExternalConnectionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ExternalConnection>|null $data */
     #[Api(list: ExternalConnection::class, optional: true)]

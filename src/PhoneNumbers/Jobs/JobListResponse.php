@@ -7,9 +7,7 @@ namespace Telnyx\PhoneNumbers\Jobs;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PhoneNumber;
@@ -22,12 +20,10 @@ use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
  *   data?: list<PhoneNumbersJob>|null, meta?: PaginationMeta|null
  * }
  */
-final class JobListResponse implements BaseModel, ResponseConverter
+final class JobListResponse implements BaseModel
 {
     /** @use SdkModel<JobListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PhoneNumbersJob>|null $data */
     #[Api(list: PhoneNumbersJob::class, optional: true)]

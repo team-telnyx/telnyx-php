@@ -6,9 +6,7 @@ namespace Telnyx\CustomStorageCredentials;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse\RecordType;
 
@@ -19,12 +17,10 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse\Record
  *   record_type: value-of<RecordType>,
  * }
  */
-final class CustomStorageCredentialUpdateResponse implements BaseModel, ResponseConverter
+final class CustomStorageCredentialUpdateResponse implements BaseModel
 {
     /** @use SdkModel<CustomStorageCredentialUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource.

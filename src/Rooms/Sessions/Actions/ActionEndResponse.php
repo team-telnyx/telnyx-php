@@ -6,20 +6,16 @@ namespace Telnyx\Rooms\Sessions\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse\Data;
 
 /**
  * @phpstan-type ActionEndResponseShape = array{data?: Data|null}
  */
-final class ActionEndResponse implements BaseModel, ResponseConverter
+final class ActionEndResponse implements BaseModel
 {
     /** @use SdkModel<ActionEndResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

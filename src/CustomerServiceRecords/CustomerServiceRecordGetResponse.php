@@ -6,9 +6,7 @@ namespace Telnyx\CustomerServiceRecords;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
  *   data?: CustomerServiceRecord|null
  * }
  */
-final class CustomerServiceRecordGetResponse implements BaseModel, ResponseConverter
+final class CustomerServiceRecordGetResponse implements BaseModel
 {
     /** @use SdkModel<CustomerServiceRecordGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CustomerServiceRecord $data;

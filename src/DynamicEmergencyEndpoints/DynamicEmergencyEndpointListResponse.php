@@ -6,9 +6,7 @@ namespace Telnyx\DynamicEmergencyEndpoints;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
 use Telnyx\Metadata;
 
@@ -17,12 +15,10 @@ use Telnyx\Metadata;
  *   data?: list<DynamicEmergencyEndpoint>|null, meta?: Metadata|null
  * }
  */
-final class DynamicEmergencyEndpointListResponse implements BaseModel, ResponseConverter
+final class DynamicEmergencyEndpointListResponse implements BaseModel
 {
     /** @use SdkModel<DynamicEmergencyEndpointListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<DynamicEmergencyEndpoint>|null $data */
     #[Api(list: DynamicEmergencyEndpoint::class, optional: true)]

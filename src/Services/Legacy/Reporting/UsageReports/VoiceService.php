@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
@@ -48,8 +49,8 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'legacy/reporting/usage_reports/voice',
             headers: ['Content-Type' => '*/*'],
@@ -57,6 +58,8 @@ final class VoiceService implements VoiceContract
             options: $options,
             convert: VoiceNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -70,13 +73,15 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['legacy/reporting/usage_reports/voice/%1$s', $id],
             options: $requestOptions,
             convert: VoiceGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -97,14 +102,16 @@ final class VoiceService implements VoiceContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/voice',
             query: $parsed,
             options: $options,
             convert: VoiceListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -118,12 +125,14 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoiceDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['legacy/reporting/usage_reports/voice/%1$s', $id],
             options: $requestOptions,
             convert: VoiceDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

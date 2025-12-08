@@ -8,21 +8,17 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InsightListResponseShape = array{
  *   data: list<InsightTemplate>, meta: Meta
  * }
  */
-final class InsightListResponse implements BaseModel, ResponseConverter
+final class InsightListResponse implements BaseModel
 {
     /** @use SdkModel<InsightListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<InsightTemplate> $data */
     #[Api(list: InsightTemplate::class)]

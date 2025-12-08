@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Recordings;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Recordings\Actions\ActionDeleteParams;
 use Telnyx\RequestOptions;
@@ -35,13 +36,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: 'recordings/actions/delete',
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

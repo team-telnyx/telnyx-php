@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
@@ -41,13 +42,15 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingPhoneNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'porting_phone_numbers',
             query: $parsed,
             options: $options,
             convert: PortingPhoneNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 }

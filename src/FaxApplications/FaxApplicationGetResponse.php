@@ -6,9 +6,7 @@ namespace Telnyx\FaxApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplication\Inbound;
 use Telnyx\FaxApplications\FaxApplication\Outbound;
@@ -16,12 +14,10 @@ use Telnyx\FaxApplications\FaxApplication\Outbound;
 /**
  * @phpstan-type FaxApplicationGetResponseShape = array{data?: FaxApplication|null}
  */
-final class FaxApplicationGetResponse implements BaseModel, ResponseConverter
+final class FaxApplicationGetResponse implements BaseModel
 {
     /** @use SdkModel<FaxApplicationGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?FaxApplication $data;

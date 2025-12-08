@@ -10,6 +10,7 @@ use Telnyx\Connections\ConnectionListActiveCallsParams;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams;
 use Telnyx\Connections\ConnectionListResponse;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
@@ -32,13 +33,15 @@ final class ConnectionsService implements ConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['connections/%1$s', $id],
             options: $requestOptions,
             convert: ConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,14 +70,16 @@ final class ConnectionsService implements ConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConnectionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'connections',
             query: $parsed,
             options: $options,
             convert: ConnectionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,13 +105,15 @@ final class ConnectionsService implements ConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConnectionListActiveCallsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['connections/%1$s/active_calls', $connectionID],
             query: $parsed,
             options: $options,
             convert: ConnectionListActiveCallsResponse::class,
         );
+
+        return $response->parse();
     }
 }

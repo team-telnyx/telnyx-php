@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -111,14 +112,16 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnConnectionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'fqdn_connections',
             body: (object) $parsed,
             options: $options,
             convert: FqdnConnectionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -132,13 +135,15 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['fqdn_connections/%1$s', $id],
             options: $requestOptions,
             convert: FqdnConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -220,14 +225,16 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnConnectionUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['fqdn_connections/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: FqdnConnectionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -256,14 +263,16 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnConnectionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'fqdn_connections',
             query: $parsed,
             options: $options,
             convert: FqdnConnectionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -277,12 +286,14 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnConnectionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['fqdn_connections/%1$s', $id],
             options: $requestOptions,
             convert: FqdnConnectionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

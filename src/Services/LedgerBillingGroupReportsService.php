@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportCreateParams;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
@@ -39,14 +40,16 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LedgerBillingGroupReportNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ledger_billing_group_reports',
             body: (object) $parsed,
             options: $options,
             convert: LedgerBillingGroupReportNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -60,12 +63,14 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
         string $id,
         ?RequestOptions $requestOptions = null
     ): LedgerBillingGroupReportGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LedgerBillingGroupReportGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ledger_billing_group_reports/%1$s', $id],
             options: $requestOptions,
             convert: LedgerBillingGroupReportGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

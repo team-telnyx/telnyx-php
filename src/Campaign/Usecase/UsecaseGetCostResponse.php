@@ -6,9 +6,7 @@ namespace Telnyx\Campaign\Usecase;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UsecaseGetCostResponseShape = array{
@@ -18,12 +16,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   upFrontCost: string,
  * }
  */
-final class UsecaseGetCostResponse implements BaseModel, ResponseConverter
+final class UsecaseGetCostResponse implements BaseModel
 {
     /** @use SdkModel<UsecaseGetCostResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $campaignUsecase;

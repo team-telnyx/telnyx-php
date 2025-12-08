@@ -6,9 +6,7 @@ namespace Telnyx\FqdnConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
@@ -17,12 +15,10 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 /**
  * @phpstan-type FqdnConnectionNewResponseShape = array{data?: FqdnConnection|null}
  */
-final class FqdnConnectionNewResponse implements BaseModel, ResponseConverter
+final class FqdnConnectionNewResponse implements BaseModel
 {
     /** @use SdkModel<FqdnConnectionNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?FqdnConnection $data;

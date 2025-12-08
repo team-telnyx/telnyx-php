@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
@@ -44,14 +45,16 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyEndpointNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'dynamic_emergency_endpoints',
             body: (object) $parsed,
             options: $options,
             convert: DynamicEmergencyEndpointNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyEndpointGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['dynamic_emergency_endpoints/%1$s', $id],
             options: $requestOptions,
             convert: DynamicEmergencyEndpointGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -97,14 +102,16 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyEndpointListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'dynamic_emergency_endpoints',
             query: $parsed,
             options: $options,
             convert: DynamicEmergencyEndpointListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -118,12 +125,14 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DynamicEmergencyEndpointDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['dynamic_emergency_endpoints/%1$s', $id],
             options: $requestOptions,
             convert: DynamicEmergencyEndpointDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

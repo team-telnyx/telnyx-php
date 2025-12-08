@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Calls\Recordings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Source;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Track;
 
@@ -31,12 +29,10 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Tra
  *   uri?: string|null,
  * }
  */
-final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConverter
+final class RecordingRecordingSidJsonResponse implements BaseModel
 {
     /** @use SdkModel<RecordingRecordingSidJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $account_sid;

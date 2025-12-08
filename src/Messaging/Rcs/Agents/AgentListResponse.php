@@ -7,9 +7,7 @@ namespace Telnyx\Messaging\Rcs\Agents;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RcsAgents\RcsAgent;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\RcsAgents\RcsAgent;
  *   data?: list<RcsAgent>|null, meta?: PaginationMeta|null
  * }
  */
-final class AgentListResponse implements BaseModel, ResponseConverter
+final class AgentListResponse implements BaseModel
 {
     /** @use SdkModel<AgentListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<RcsAgent>|null $data */
     #[Api(list: RcsAgent::class, optional: true)]

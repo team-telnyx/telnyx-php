@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse;
 use Telnyx\RequestOptions;
@@ -27,12 +28,14 @@ final class GlobalIPAllowedPortsService implements GlobalIPAllowedPortsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): GlobalIPAllowedPortListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPAllowedPortListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'global_ip_allowed_ports',
             options: $requestOptions,
             convert: GlobalIPAllowedPortListResponse::class,
         );
+
+        return $response->parse();
     }
 }

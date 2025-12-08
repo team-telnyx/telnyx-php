@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
@@ -30,13 +31,15 @@ final class EventsService implements EventsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): EventGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EventGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['portouts/events/%1$s', $id],
             options: $requestOptions,
             convert: EventGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -66,14 +69,16 @@ final class EventsService implements EventsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EventListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'portouts/events',
             query: $parsed,
             options: $options,
             convert: EventListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -87,12 +92,14 @@ final class EventsService implements EventsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: ['portouts/events/%1$s/republish', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

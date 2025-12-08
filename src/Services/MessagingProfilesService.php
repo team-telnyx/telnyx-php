@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
@@ -83,14 +84,16 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingProfileNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messaging_profiles',
             body: (object) $parsed,
             options: $options,
             convert: MessagingProfileNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,13 +107,15 @@ final class MessagingProfilesService implements MessagingProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingProfileGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s', $id],
             options: $requestOptions,
             convert: MessagingProfileGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -159,14 +164,16 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingProfileUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['messaging_profiles/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: MessagingProfileUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -189,14 +196,16 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingProfileListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'messaging_profiles',
             query: $parsed,
             options: $options,
             convert: MessagingProfileListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -210,13 +219,15 @@ final class MessagingProfilesService implements MessagingProfilesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingProfileDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['messaging_profiles/%1$s', $id],
             options: $requestOptions,
             convert: MessagingProfileDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -240,14 +251,16 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingProfileListPhoneNumbersResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/phone_numbers', $id],
             query: $parsed,
             options: $options,
             convert: MessagingProfileListPhoneNumbersResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -271,13 +284,15 @@ final class MessagingProfilesService implements MessagingProfilesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingProfileListShortCodesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/short_codes', $id],
             query: $parsed,
             options: $options,
             convert: MessagingProfileListShortCodesResponse::class,
         );
+
+        return $response->parse();
     }
 }

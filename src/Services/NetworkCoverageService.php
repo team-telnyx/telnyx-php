@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NetworkCoverage\AvailableService;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
@@ -50,13 +51,15 @@ final class NetworkCoverageService implements NetworkCoverageContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NetworkCoverageListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'network_coverage',
             query: $parsed,
             options: $options,
             convert: NetworkCoverageListResponse::class,
         );
+
+        return $response->parse();
     }
 }

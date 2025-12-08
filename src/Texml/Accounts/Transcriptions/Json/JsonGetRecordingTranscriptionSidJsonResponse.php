@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Transcriptions\Json;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse\Status;
 
 /**
@@ -26,12 +24,10 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJs
  *   uri?: string|null,
  * }
  */
-final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, ResponseConverter
+final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
 {
     /** @use SdkModel<JsonGetRecordingTranscriptionSidJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $account_sid;

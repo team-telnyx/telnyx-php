@@ -6,9 +6,7 @@ namespace Telnyx\MessagingProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
 use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
 
@@ -17,12 +15,10 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *   data?: MessagingProfile|null
  * }
  */
-final class MessagingProfileUpdateResponse implements BaseModel, ResponseConverter
+final class MessagingProfileUpdateResponse implements BaseModel
 {
     /** @use SdkModel<MessagingProfileUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MessagingProfile $data;

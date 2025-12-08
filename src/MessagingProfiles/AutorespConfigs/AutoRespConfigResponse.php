@@ -6,20 +6,16 @@ namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 
 /**
  * @phpstan-type AutoRespConfigResponseShape = array{data: AutoRespConfig}
  */
-final class AutoRespConfigResponse implements BaseModel, ResponseConverter
+final class AutoRespConfigResponse implements BaseModel
 {
     /** @use SdkModel<AutoRespConfigResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public AutoRespConfig $data;

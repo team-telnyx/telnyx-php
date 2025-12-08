@@ -7,9 +7,7 @@ namespace Telnyx\FqdnConnections;
 use Telnyx\ConnectionsPaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
@@ -20,12 +18,10 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *   data?: list<FqdnConnection>|null, meta?: ConnectionsPaginationMeta|null
  * }
  */
-final class FqdnConnectionListResponse implements BaseModel, ResponseConverter
+final class FqdnConnectionListResponse implements BaseModel
 {
     /** @use SdkModel<FqdnConnectionListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<FqdnConnection>|null $data */
     #[Api(list: FqdnConnection::class, optional: true)]

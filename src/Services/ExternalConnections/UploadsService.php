@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
@@ -51,14 +52,16 @@ final class UploadsService implements UploadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UploadNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['external_connections/%1$s/uploads', $id],
             body: (object) $parsed,
             options: $options,
             convert: UploadNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -82,13 +85,15 @@ final class UploadsService implements UploadsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UploadGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/uploads/%2$s', $id, $ticketID],
             options: $options,
             convert: UploadGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -120,14 +125,16 @@ final class UploadsService implements UploadsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UploadListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/uploads', $id],
             query: $parsed,
             options: $options,
             convert: UploadListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -141,13 +148,15 @@ final class UploadsService implements UploadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UploadPendingCountResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UploadPendingCountResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/uploads/status', $id],
             options: $requestOptions,
             convert: UploadPendingCountResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -161,13 +170,15 @@ final class UploadsService implements UploadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UploadRefreshStatusResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UploadRefreshStatusResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['external_connections/%1$s/uploads/refresh', $id],
             options: $requestOptions,
             convert: UploadRefreshStatusResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -191,12 +202,14 @@ final class UploadsService implements UploadsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UploadRetryResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['external_connections/%1$s/uploads/%2$s/retry', $id, $ticketID],
             options: $options,
             convert: UploadRetryResponse::class,
         );
+
+        return $response->parse();
     }
 }

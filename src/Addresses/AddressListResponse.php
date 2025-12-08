@@ -7,21 +7,17 @@ namespace Telnyx\Addresses;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AddressListResponseShape = array{
  *   data?: list<Address>|null, meta?: PaginationMeta|null
  * }
  */
-final class AddressListResponse implements BaseModel, ResponseConverter
+final class AddressListResponse implements BaseModel
 {
     /** @use SdkModel<AddressListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Address>|null $data */
     #[Api(list: Address::class, optional: true)]

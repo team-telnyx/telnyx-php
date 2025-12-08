@@ -7,9 +7,7 @@ namespace Telnyx\RequirementTypes;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocReqsRequirementType;
 use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
 use Telnyx\DocReqsRequirementType\Type;
@@ -19,12 +17,10 @@ use Telnyx\DocReqsRequirementType\Type;
  *   data?: list<DocReqsRequirementType>|null, meta?: PaginationMeta|null
  * }
  */
-final class RequirementTypeListResponse implements BaseModel, ResponseConverter
+final class RequirementTypeListResponse implements BaseModel
 {
     /** @use SdkModel<RequirementTypeListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<DocReqsRequirementType>|null $data */
     #[Api(list: DocReqsRequirementType::class, optional: true)]

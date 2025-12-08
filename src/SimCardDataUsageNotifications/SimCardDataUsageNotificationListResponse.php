@@ -7,9 +7,7 @@ namespace Telnyx\SimCardDataUsageNotifications;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
  *   data?: list<SimCardDataUsageNotification>|null, meta?: PaginationMeta|null
  * }
  */
-final class SimCardDataUsageNotificationListResponse implements BaseModel, ResponseConverter
+final class SimCardDataUsageNotificationListResponse implements BaseModel
 {
     /** @use SdkModel<SimCardDataUsageNotificationListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<SimCardDataUsageNotification>|null $data */
     #[Api(list: SimCardDataUsageNotification::class, optional: true)]

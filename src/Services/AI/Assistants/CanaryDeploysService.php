@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams;
 use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
@@ -44,14 +45,16 @@ final class CanaryDeploysService implements CanaryDeploysContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CanaryDeployResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
             body: (object) $parsed,
             options: $options,
             convert: CanaryDeployResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -68,13 +71,15 @@ final class CanaryDeploysService implements CanaryDeploysContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CanaryDeployResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
             options: $requestOptions,
             convert: CanaryDeployResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -101,14 +106,16 @@ final class CanaryDeploysService implements CanaryDeploysContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CanaryDeployResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
             body: (object) $parsed,
             options: $options,
             convert: CanaryDeployResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -124,12 +131,14 @@ final class CanaryDeploysService implements CanaryDeploysContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

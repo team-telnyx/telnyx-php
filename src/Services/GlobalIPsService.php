@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
@@ -42,14 +43,16 @@ final class GlobalIPsService implements GlobalIPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'global_ips',
             body: (object) $parsed,
             options: $options,
             convert: GlobalIPNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class GlobalIPsService implements GlobalIPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['global_ips/%1$s', $id],
             options: $requestOptions,
             convert: GlobalIPGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -90,14 +95,16 @@ final class GlobalIPsService implements GlobalIPsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'global_ips',
             query: $parsed,
             options: $options,
             convert: GlobalIPListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -111,12 +118,14 @@ final class GlobalIPsService implements GlobalIPsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<GlobalIPDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['global_ips/%1$s', $id],
             options: $requestOptions,
             convert: GlobalIPDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

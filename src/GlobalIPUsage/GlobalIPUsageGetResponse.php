@@ -6,9 +6,7 @@ namespace Telnyx\GlobalIPUsage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\GlobalIP;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Received;
@@ -17,12 +15,10 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 /**
  * @phpstan-type GlobalIPUsageGetResponseShape = array{data?: list<Data>|null}
  */
-final class GlobalIPUsageGetResponse implements BaseModel, ResponseConverter
+final class GlobalIPUsageGetResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPUsageGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

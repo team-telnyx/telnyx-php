@@ -8,9 +8,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse\Data;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ScheduledEventListResponseShape = array{
@@ -18,12 +16,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   meta: Meta,
  * }
  */
-final class ScheduledEventListResponse implements BaseModel, ResponseConverter
+final class ScheduledEventListResponse implements BaseModel
 {
     /** @use SdkModel<ScheduledEventListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data */
     #[Api(list: Data::class)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
@@ -44,14 +45,16 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssociatedPhoneNumberNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/associated_phone_numbers', $portingOrderID],
             body: (object) $parsed,
             options: $options,
             convert: AssociatedPhoneNumberNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -77,14 +80,16 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssociatedPhoneNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/associated_phone_numbers', $portingOrderID],
             query: $parsed,
             options: $options,
             convert: AssociatedPhoneNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -108,8 +113,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         $portingOrderID = $parsed['porting_order_id'];
         unset($parsed['porting_order_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssociatedPhoneNumberDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'porting_orders/%1$s/associated_phone_numbers/%2$s',
@@ -119,5 +124,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
             options: $options,
             convert: AssociatedPhoneNumberDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

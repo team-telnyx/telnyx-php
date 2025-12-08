@@ -6,9 +6,7 @@ namespace Telnyx\NotificationChannels;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
  *   data?: NotificationChannel|null
  * }
  */
-final class NotificationChannelUpdateResponse implements BaseModel, ResponseConverter
+final class NotificationChannelUpdateResponse implements BaseModel
 {
     /** @use SdkModel<NotificationChannelUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A Notification Channel.

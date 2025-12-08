@@ -7,9 +7,7 @@ namespace Telnyx\Recordings;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Recordings\RecordingResponseData\Channels;
 use Telnyx\Recordings\RecordingResponseData\DownloadURLs;
 use Telnyx\Recordings\RecordingResponseData\RecordType;
@@ -21,12 +19,10 @@ use Telnyx\Recordings\RecordingResponseData\Status;
  *   data?: list<RecordingResponseData>|null, meta?: PaginationMeta|null
  * }
  */
-final class RecordingListResponse implements BaseModel, ResponseConverter
+final class RecordingListResponse implements BaseModel
 {
     /** @use SdkModel<RecordingListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<RecordingResponseData>|null $data */
     #[Api(list: RecordingResponseData::class, optional: true)]

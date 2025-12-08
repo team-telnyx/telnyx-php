@@ -10,6 +10,7 @@ use Telnyx\AI\Conversations\Insights\InsightListResponse;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\AI\Conversations\Insights\InsightUpdateParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsContract;
@@ -44,14 +45,16 @@ final class InsightsService implements InsightsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightTemplateDetail> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/conversations/insights',
             body: (object) $parsed,
             options: $options,
             convert: InsightTemplateDetail::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class InsightsService implements InsightsContract
         string $insightID,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateDetail {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightTemplateDetail> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/conversations/insights/%1$s', $insightID],
             options: $requestOptions,
             convert: InsightTemplateDetail::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,14 +103,16 @@ final class InsightsService implements InsightsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightTemplateDetail> */
+        $response = $this->client->request(
             method: 'put',
             path: ['ai/conversations/insights/%1$s', $insightID],
             body: (object) $parsed,
             options: $options,
             convert: InsightTemplateDetail::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -126,14 +133,16 @@ final class InsightsService implements InsightsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InsightListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/conversations/insights',
             query: $parsed,
             options: $options,
             convert: InsightListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,12 +156,14 @@ final class InsightsService implements InsightsContract
         string $insightID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/conversations/insights/%1$s', $insightID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

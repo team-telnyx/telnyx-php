@@ -6,20 +6,16 @@ namespace Telnyx\Wireless\DetailRecordsReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
 
 /**
  * @phpstan-type DetailRecordsReportGetResponseShape = array{data?: WdrReport|null}
  */
-final class DetailRecordsReportGetResponse implements BaseModel, ResponseConverter
+final class DetailRecordsReportGetResponse implements BaseModel
 {
     /** @use SdkModel<DetailRecordsReportGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?WdrReport $data;

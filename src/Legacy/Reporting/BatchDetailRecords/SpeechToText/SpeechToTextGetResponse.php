@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse\Status;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportRespo
  *   data?: SttDetailReportResponse|null
  * }
  */
-final class SpeechToTextGetResponse implements BaseModel, ResponseConverter
+final class SpeechToTextGetResponse implements BaseModel
 {
     /** @use SdkModel<SpeechToTextGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SttDetailReportResponse $data;

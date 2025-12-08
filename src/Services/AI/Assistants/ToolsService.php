@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Assistants;
 use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
@@ -43,13 +44,15 @@ final class ToolsService implements ToolsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ToolTestResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],
             body: (object) array_diff_key($parsed, ['assistant_id']),
             options: $options,
             convert: ToolTestResponse::class,
         );
+
+        return $response->parse();
     }
 }

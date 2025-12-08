@@ -9,19 +9,15 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\ActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\SimCardActionsSummary;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BulkSimCardActionGetResponseShape = array{data?: Data|null}
  */
-final class BulkSimCardActionGetResponse implements BaseModel, ResponseConverter
+final class BulkSimCardActionGetResponse implements BaseModel
 {
     /** @use SdkModel<BulkSimCardActionGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

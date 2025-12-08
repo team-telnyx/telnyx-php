@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardPeersContract;
@@ -44,14 +45,16 @@ final class WireguardPeersService implements WireguardPeersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardPeerNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'wireguard_peers',
             body: (object) $parsed,
             options: $options,
             convert: WireguardPeerNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class WireguardPeersService implements WireguardPeersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardPeerGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardPeerGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['wireguard_peers/%1$s', $id],
             options: $requestOptions,
             convert: WireguardPeerGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,14 +98,16 @@ final class WireguardPeersService implements WireguardPeersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardPeerUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['wireguard_peers/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: WireguardPeerUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -124,14 +131,16 @@ final class WireguardPeersService implements WireguardPeersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardPeerListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'wireguard_peers',
             query: $parsed,
             options: $options,
             convert: WireguardPeerListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -145,13 +154,15 @@ final class WireguardPeersService implements WireguardPeersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardPeerDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WireguardPeerDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['wireguard_peers/%1$s', $id],
             options: $requestOptions,
             convert: WireguardPeerDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -165,13 +176,15 @@ final class WireguardPeersService implements WireguardPeersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['wireguard_peers/%1$s/config', $id],
             headers: ['Accept' => 'text/plain'],
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 }

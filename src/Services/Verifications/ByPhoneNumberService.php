@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumberContract;
@@ -37,12 +38,14 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): ByPhoneNumberListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ByPhoneNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['verifications/by_phone_number/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: ByPhoneNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 }

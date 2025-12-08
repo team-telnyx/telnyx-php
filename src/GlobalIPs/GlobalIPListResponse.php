@@ -7,9 +7,7 @@ namespace Telnyx\GlobalIPs;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPs\GlobalIPListResponse\Data;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\GlobalIPs\GlobalIPListResponse\Data;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class GlobalIPListResponse implements BaseModel, ResponseConverter
+final class GlobalIPListResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

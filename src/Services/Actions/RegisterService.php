@@ -7,6 +7,7 @@ namespace Telnyx\Services\Actions;
 use Telnyx\Actions\Register\RegisterCreateParams;
 use Telnyx\Actions\Register\RegisterNewResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\RegisterContract;
@@ -42,13 +43,15 @@ final class RegisterService implements RegisterContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RegisterNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'actions/register/sim_cards',
             body: (object) $parsed,
             options: $options,
             convert: RegisterNewResponse::class,
         );
+
+        return $response->parse();
     }
 }

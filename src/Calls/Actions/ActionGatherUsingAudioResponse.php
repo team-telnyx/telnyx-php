@@ -6,21 +6,17 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionGatherUsingAudioResponseShape = array{
  *   data?: CallControlCommandResult|null
  * }
  */
-final class ActionGatherUsingAudioResponse implements BaseModel, ResponseConverter
+final class ActionGatherUsingAudioResponse implements BaseModel
 {
     /** @use SdkModel<ActionGatherUsingAudioResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CallControlCommandResult $data;

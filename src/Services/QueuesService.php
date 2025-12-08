@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Queues\QueueGetResponse;
 use Telnyx\RequestOptions;
@@ -37,12 +38,14 @@ final class QueuesService implements QueuesContract
         string $queueName,
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<QueueGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['queues/%1$s', $queueName],
             options: $requestOptions,
             convert: QueueGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

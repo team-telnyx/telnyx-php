@@ -6,21 +6,17 @@ namespace Telnyx\Texml;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\TexmlSecretsResponse\Data;
 use Telnyx\Texml\TexmlSecretsResponse\Data\Value;
 
 /**
  * @phpstan-type TexmlSecretsResponseShape = array{data?: Data|null}
  */
-final class TexmlSecretsResponse implements BaseModel, ResponseConverter
+final class TexmlSecretsResponse implements BaseModel
 {
     /** @use SdkModel<TexmlSecretsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

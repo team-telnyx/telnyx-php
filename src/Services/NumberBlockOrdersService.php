@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
@@ -45,14 +46,16 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberBlockOrderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'number_block_orders',
             body: (object) $parsed,
             options: $options,
             convert: NumberBlockOrderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -66,13 +69,15 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
         string $numberBlockOrderID,
         ?RequestOptions $requestOptions = null
     ): NumberBlockOrderGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberBlockOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['number_block_orders/%1$s', $numberBlockOrderID],
             options: $requestOptions,
             convert: NumberBlockOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,13 +105,15 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NumberBlockOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'number_block_orders',
             query: $parsed,
             options: $options,
             convert: NumberBlockOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -7,9 +7,7 @@ namespace Telnyx\SimCards;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardStatus;
 use Telnyx\SimpleSimCard;
 use Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData;
@@ -22,12 +20,10 @@ use Telnyx\SimpleSimCard\Type;
  *   data?: list<SimpleSimCard>|null, meta?: PaginationMeta|null
  * }
  */
-final class SimCardListResponse implements BaseModel, ResponseConverter
+final class SimCardListResponse implements BaseModel
 {
     /** @use SdkModel<SimCardListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<SimpleSimCard>|null $data */
     #[Api(list: SimpleSimCard::class, optional: true)]

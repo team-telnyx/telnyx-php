@@ -6,21 +6,17 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionStartSiprecResponseShape = array{
  *   data?: CallControlCommandResult|null
  * }
  */
-final class ActionStartSiprecResponse implements BaseModel, ResponseConverter
+final class ActionStartSiprecResponse implements BaseModel
 {
     /** @use SdkModel<ActionStartSiprecResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CallControlCommandResult $data;

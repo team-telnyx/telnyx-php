@@ -6,9 +6,7 @@ namespace Telnyx\MessagingHostedNumberOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber\EligibleStatus;
 
@@ -17,12 +15,10 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
  *   phone_numbers?: list<PhoneNumber>|null
  * }
  */
-final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel, ResponseConverter
+final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel
 {
     /** @use SdkModel<MessagingHostedNumberOrderCheckEligibilityResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * List of phone numbers with their eligibility status.

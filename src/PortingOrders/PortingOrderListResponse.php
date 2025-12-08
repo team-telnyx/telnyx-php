@@ -7,9 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
 use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrderStatus;
@@ -19,12 +17,10 @@ use Telnyx\PortingOrderStatus;
  *   data?: list<PortingOrder>|null, meta?: PaginationMeta|null
  * }
  */
-final class PortingOrderListResponse implements BaseModel, ResponseConverter
+final class PortingOrderListResponse implements BaseModel
 {
     /** @use SdkModel<PortingOrderListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortingOrder>|null $data */
     #[Api(list: PortingOrder::class, optional: true)]

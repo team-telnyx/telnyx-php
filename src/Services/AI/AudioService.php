@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Audio\AudioTranscribeParams;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
@@ -42,8 +43,8 @@ final class AudioService implements AudioContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AudioTranscribeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/audio/transcriptions',
             headers: ['Content-Type' => 'multipart/form-data'],
@@ -51,5 +52,7 @@ final class AudioService implements AudioContract
             options: $options,
             convert: AudioTranscribeResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
@@ -46,14 +47,16 @@ final class NotificationChannelsService implements NotificationChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationChannelNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'notification_channels',
             body: (object) $parsed,
             options: $options,
             convert: NotificationChannelNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,13 +70,15 @@ final class NotificationChannelsService implements NotificationChannelsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationChannelGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['notification_channels/%1$s', $id],
             options: $requestOptions,
             convert: NotificationChannelGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -99,14 +104,16 @@ final class NotificationChannelsService implements NotificationChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationChannelUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['notification_channels/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: NotificationChannelUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -139,14 +146,16 @@ final class NotificationChannelsService implements NotificationChannelsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationChannelListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'notification_channels',
             query: $parsed,
             options: $options,
             convert: NotificationChannelListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -160,12 +169,14 @@ final class NotificationChannelsService implements NotificationChannelsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<NotificationChannelDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['notification_channels/%1$s', $id],
             options: $requestOptions,
             convert: NotificationChannelDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

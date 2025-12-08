@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
 use Telnyx\Portouts\Reports\ReportCreateParams;
@@ -52,14 +53,16 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ReportNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'portouts/reports',
             body: (object) $parsed,
             options: $options,
             convert: ReportNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -73,13 +76,15 @@ final class ReportsService implements ReportsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ReportGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ReportGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['portouts/reports/%1$s', $id],
             options: $requestOptions,
             convert: ReportGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -105,13 +110,15 @@ final class ReportsService implements ReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ReportListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'portouts/reports',
             query: $parsed,
             options: $options,
             convert: ReportListResponse::class,
         );
+
+        return $response->parse();
     }
 }

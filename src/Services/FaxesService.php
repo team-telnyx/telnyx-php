@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Faxes\FaxCreateParams;
 use Telnyx\Faxes\FaxGetResponse;
@@ -71,14 +72,16 @@ final class FaxesService implements FaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'faxes',
             body: (object) $parsed,
             options: $options,
             convert: FaxNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -92,13 +95,15 @@ final class FaxesService implements FaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FaxGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['faxes/%1$s', $id],
             options: $requestOptions,
             convert: FaxGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -132,14 +137,16 @@ final class FaxesService implements FaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FaxListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'faxes',
             query: $parsed,
             options: $options,
             convert: FaxListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -153,12 +160,14 @@ final class FaxesService implements FaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['faxes/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

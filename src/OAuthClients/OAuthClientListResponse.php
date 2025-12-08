@@ -6,9 +6,7 @@ namespace Telnyx\OAuthClients;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClient\ClientType;
 use Telnyx\OAuthClients\OAuthClient\RecordType;
@@ -18,12 +16,10 @@ use Telnyx\OAuthClients\OAuthClient\RecordType;
  *   data?: list<OAuthClient>|null, meta?: PaginationMetaOAuth|null
  * }
  */
-final class OAuthClientListResponse implements BaseModel, ResponseConverter
+final class OAuthClientListResponse implements BaseModel
 {
     /** @use SdkModel<OAuthClientListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<OAuthClient>|null $data */
     #[Api(list: OAuthClient::class, optional: true)]

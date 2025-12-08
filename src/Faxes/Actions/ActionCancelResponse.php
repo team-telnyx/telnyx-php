@@ -6,19 +6,15 @@ namespace Telnyx\Faxes\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionCancelResponseShape = array{result?: string|null}
  */
-final class ActionCancelResponse implements BaseModel, ResponseConverter
+final class ActionCancelResponse implements BaseModel
 {
     /** @use SdkModel<ActionCancelResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $result;

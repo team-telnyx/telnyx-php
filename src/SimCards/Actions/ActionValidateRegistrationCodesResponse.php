@@ -6,9 +6,7 @@ namespace Telnyx\SimCards\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse\Data;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse\Data;
  *   data?: list<Data>|null
  * }
  */
-final class ActionValidateRegistrationCodesResponse implements BaseModel, ResponseConverter
+final class ActionValidateRegistrationCodesResponse implements BaseModel
 {
     /** @use SdkModel<ActionValidateRegistrationCodesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

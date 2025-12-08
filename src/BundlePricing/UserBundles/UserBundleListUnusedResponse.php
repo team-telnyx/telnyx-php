@@ -8,19 +8,15 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UserBundleListUnusedResponseShape = array{data: list<Data>}
  */
-final class UserBundleListUnusedResponse implements BaseModel, ResponseConverter
+final class UserBundleListUnusedResponse implements BaseModel
 {
     /** @use SdkModel<UserBundleListUnusedResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

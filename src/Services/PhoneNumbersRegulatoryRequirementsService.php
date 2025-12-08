@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
@@ -38,13 +39,15 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumbersRegulatoryRequirementGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_numbers_regulatory_requirements',
             query: $parsed,
             options: $options,
             convert: PhoneNumbersRegulatoryRequirementGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

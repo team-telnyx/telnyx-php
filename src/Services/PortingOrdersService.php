@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
@@ -132,14 +133,16 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'porting_orders',
             body: (object) $parsed,
             options: $options,
             convert: PortingOrderNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -161,14 +164,16 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: PortingOrderGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -226,14 +231,16 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['porting_orders/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: PortingOrderUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -278,14 +285,16 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'porting_orders',
             query: $parsed,
             options: $options,
             convert: PortingOrderListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -299,13 +308,15 @@ final class PortingOrdersService implements PortingOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['porting_orders/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -319,13 +330,15 @@ final class PortingOrdersService implements PortingOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetAllowedFocWindowsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderGetAllowedFocWindowsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/allowed_foc_windows', $id],
             options: $requestOptions,
             convert: PortingOrderGetAllowedFocWindowsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -338,13 +351,15 @@ final class PortingOrdersService implements PortingOrdersContract
     public function retrieveExceptionTypes(
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetExceptionTypesResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderGetExceptionTypesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'porting_orders/exception_types',
             options: $requestOptions,
             convert: PortingOrderGetExceptionTypesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -368,8 +383,8 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/loa_template', $id],
             query: $parsed,
@@ -377,6 +392,8 @@ final class PortingOrdersService implements PortingOrdersContract
             options: $options,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 
     /**
@@ -400,14 +417,16 @@ final class PortingOrdersService implements PortingOrdersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderGetRequirementsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/requirements', $id],
             query: $parsed,
             options: $options,
             convert: PortingOrderGetRequirementsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -421,12 +440,14 @@ final class PortingOrdersService implements PortingOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetSubRequestResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PortingOrderGetSubRequestResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/sub_request', $id],
             options: $requestOptions,
             convert: PortingOrderGetSubRequestResponse::class,
         );
+
+        return $response->parse();
     }
 }

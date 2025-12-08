@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\AnsweredBy;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Direction;
@@ -26,12 +24,10 @@ use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Status;
  *   uri?: string|null,
  * }
  */
-final class CallGetCallsResponse implements BaseModel, ResponseConverter
+final class CallGetCallsResponse implements BaseModel
 {
     /** @use SdkModel<CallGetCallsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Call>|null $calls */
     #[Api(list: Call::class, optional: true)]

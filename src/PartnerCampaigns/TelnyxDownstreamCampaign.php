@@ -6,9 +6,7 @@ namespace Telnyx\PartnerCampaigns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
 
 /**
@@ -54,12 +52,10 @@ use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
  *   webhookURL?: string|null,
  * }
  */
-final class TelnyxDownstreamCampaign implements BaseModel, ResponseConverter
+final class TelnyxDownstreamCampaign implements BaseModel
 {
     /** @use SdkModel<TelnyxDownstreamCampaignShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Unique identifier assigned to the brand by the registry.

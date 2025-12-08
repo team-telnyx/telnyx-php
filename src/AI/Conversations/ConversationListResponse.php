@@ -6,19 +6,15 @@ namespace Telnyx\AI\Conversations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConversationListResponseShape = array{data: list<Conversation>}
  */
-final class ConversationListResponse implements BaseModel, ResponseConverter
+final class ConversationListResponse implements BaseModel
 {
     /** @use SdkModel<ConversationListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Conversation> $data */
     #[Api(list: Conversation::class)]

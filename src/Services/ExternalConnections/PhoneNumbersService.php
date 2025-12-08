@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
@@ -43,8 +44,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
@@ -52,6 +53,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
             options: $options,
             convert: PhoneNumberGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,8 +78,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: [
                 'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
@@ -85,6 +88,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
             options: $options,
             convert: PhoneNumberUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -113,13 +118,15 @@ final class PhoneNumbersService implements PhoneNumbersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/phone_numbers', $id],
             query: $parsed,
             options: $options,
             convert: PhoneNumberListResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,20 +6,16 @@ namespace Telnyx\SimCardGroups;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardGroups\SimCardGroup\DataLimit;
 
 /**
  * @phpstan-type SimCardGroupGetResponseShape = array{data?: SimCardGroup|null}
  */
-final class SimCardGroupGetResponse implements BaseModel, ResponseConverter
+final class SimCardGroupGetResponse implements BaseModel
 {
     /** @use SdkModel<SimCardGroupGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SimCardGroup $data;

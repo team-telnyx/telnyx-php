@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsContract;
@@ -54,14 +55,16 @@ final class SimCardGroupsService implements SimCardGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGroupNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'sim_card_groups',
             body: (object) $parsed,
             options: $options,
             convert: SimCardGroupNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -83,14 +86,16 @@ final class SimCardGroupsService implements SimCardGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGroupGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_card_groups/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: SimCardGroupGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -114,14 +119,16 @@ final class SimCardGroupsService implements SimCardGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGroupUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['sim_card_groups/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: SimCardGroupUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -148,14 +155,16 @@ final class SimCardGroupsService implements SimCardGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGroupListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'sim_card_groups',
             query: $parsed,
             options: $options,
             convert: SimCardGroupListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -169,12 +178,14 @@ final class SimCardGroupsService implements SimCardGroupsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGroupDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardGroupDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['sim_card_groups/%1$s', $id],
             options: $requestOptions,
             convert: SimCardGroupDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

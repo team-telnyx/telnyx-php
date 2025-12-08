@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumberCampaigns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
 
 /**
@@ -25,12 +23,10 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
  *   telnyxCampaignId?: string|null,
  * }
  */
-final class PhoneNumberCampaign implements BaseModel, ResponseConverter
+final class PhoneNumberCampaign implements BaseModel
 {
     /** @use SdkModel<PhoneNumberCampaignShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * For shared campaigns, this is the TCR campaign ID, otherwise it is the campaign ID.

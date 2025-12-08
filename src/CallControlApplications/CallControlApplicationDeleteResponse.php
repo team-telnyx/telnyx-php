@@ -10,21 +10,17 @@ use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallControlApplicationDeleteResponseShape = array{
  *   data?: CallControlApplication|null
  * }
  */
-final class CallControlApplicationDeleteResponse implements BaseModel, ResponseConverter
+final class CallControlApplicationDeleteResponse implements BaseModel
 {
     /** @use SdkModel<CallControlApplicationDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CallControlApplication $data;

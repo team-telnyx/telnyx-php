@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messsages\MesssageRcsParams;
 use Telnyx\Messsages\MesssageRcsResponse;
@@ -59,13 +60,15 @@ final class MesssagesService implements MesssagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MesssageRcsResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messsages/rcs',
             body: (object) $parsed,
             options: $options,
             convert: MesssageRcsResponse::class,
         );
+
+        return $response->parse();
     }
 }

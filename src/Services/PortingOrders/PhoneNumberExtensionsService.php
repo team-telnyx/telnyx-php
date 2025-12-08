@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteParams;
@@ -45,14 +46,16 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberExtensionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['porting_orders/%1$s/phone_number_extensions', $portingOrderID],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberExtensionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,14 +81,16 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberExtensionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/phone_number_extensions', $portingOrderID],
             query: $parsed,
             options: $options,
             convert: PhoneNumberExtensionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -109,8 +114,8 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         $portingOrderID = $parsed['porting_order_id'];
         unset($parsed['porting_order_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberExtensionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'porting_orders/%1$s/phone_number_extensions/%2$s', $portingOrderID, $id,
@@ -118,5 +123,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
             options: $options,
             convert: PhoneNumberExtensionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

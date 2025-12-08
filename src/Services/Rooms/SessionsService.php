@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
@@ -52,14 +53,16 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SessionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['room_sessions/%1$s', $roomSessionID],
             query: $parsed,
             options: $options,
             convert: SessionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,14 +105,16 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SessionList0Response> */
+        $response = $this->client->request(
             method: 'get',
             path: 'room_sessions',
             query: $parsed,
             options: $options,
             convert: SessionList0Response::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -152,14 +157,16 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SessionList1Response> */
+        $response = $this->client->request(
             method: 'get',
             path: ['rooms/%1$s/sessions', $roomID],
             query: $parsed,
             options: $options,
             convert: SessionList1Response::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -201,13 +208,15 @@ final class SessionsService implements SessionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SessionGetParticipantsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['room_sessions/%1$s/participants', $roomSessionID],
             query: $parsed,
             options: $options,
             convert: SessionGetParticipantsResponse::class,
         );
+
+        return $response->parse();
     }
 }

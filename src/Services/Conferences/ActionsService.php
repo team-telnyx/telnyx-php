@@ -34,6 +34,7 @@ use Telnyx\Conferences\Actions\ActionUnmuteParams;
 use Telnyx\Conferences\Actions\ActionUnmuteResponse;
 use Telnyx\Conferences\Actions\ActionUpdateParams;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Conferences\ActionsContract;
@@ -70,14 +71,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionUpdateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/update', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,14 +107,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionHoldResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/hold', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionHoldResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -153,14 +158,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionJoinResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/join', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionJoinResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -191,14 +198,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionLeaveResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/leave', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionLeaveResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -223,14 +232,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionMuteResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/mute', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionMuteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -258,14 +269,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionPlayResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/play', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionPlayResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -291,14 +304,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRecordPauseResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/record_pause', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionRecordPauseResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -324,14 +339,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRecordResumeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/record_resume', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionRecordResumeResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -364,14 +381,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRecordStartResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/record_start', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionRecordStartResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -402,14 +421,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionRecordStopResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/record_stop', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionRecordStopResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -440,14 +461,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionSpeakResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/speak', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionSpeakResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -472,14 +495,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionStopResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/stop', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionStopResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -504,14 +529,16 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionUnholdResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/unhold', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionUnholdResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -536,13 +563,15 @@ final class ActionsService implements ActionsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionUnmuteResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['conferences/%1$s/actions/unmute', $id],
             body: (object) $parsed,
             options: $options,
             convert: ActionUnmuteResponse::class,
         );
+
+        return $response->parse();
     }
 }

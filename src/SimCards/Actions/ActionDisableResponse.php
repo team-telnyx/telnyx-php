@@ -6,21 +6,17 @@ namespace Telnyx\SimCards\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\SimCardAction\ActionType;
 use Telnyx\SimCards\Actions\SimCardAction\Status;
 
 /**
  * @phpstan-type ActionDisableResponseShape = array{data?: SimCardAction|null}
  */
-final class ActionDisableResponse implements BaseModel, ResponseConverter
+final class ActionDisableResponse implements BaseModel
 {
     /** @use SdkModel<ActionDisableResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.

@@ -6,20 +6,16 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse\Data;
 
 /**
  * @phpstan-type UploadPendingCountResponseShape = array{data?: Data|null}
  */
-final class UploadPendingCountResponse implements BaseModel, ResponseConverter
+final class UploadPendingCountResponse implements BaseModel
 {
     /** @use SdkModel<UploadPendingCountResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

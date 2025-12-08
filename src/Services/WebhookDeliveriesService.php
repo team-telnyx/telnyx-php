@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesContract;
@@ -30,13 +31,15 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WebhookDeliveryGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WebhookDeliveryGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['webhook_deliveries/%1$s', $id],
             options: $requestOptions,
             convert: WebhookDeliveryGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,13 +70,15 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WebhookDeliveryListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'webhook_deliveries',
             query: $parsed,
             options: $options,
             convert: WebhookDeliveryListResponse::class,
         );
+
+        return $response->parse();
     }
 }

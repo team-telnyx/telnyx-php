@@ -9,19 +9,15 @@ use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ChargesSummaryGetResponseShape = array{data: Data}
  */
-final class ChargesSummaryGetResponse implements BaseModel, ResponseConverter
+final class ChargesSummaryGetResponse implements BaseModel
 {
     /** @use SdkModel<ChargesSummaryGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

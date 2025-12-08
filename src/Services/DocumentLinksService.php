@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
@@ -39,13 +40,15 @@ final class DocumentLinksService implements DocumentLinksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentLinkListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'document_links',
             query: $parsed,
             options: $options,
             convert: DocumentLinkListResponse::class,
         );
+
+        return $response->parse();
     }
 }

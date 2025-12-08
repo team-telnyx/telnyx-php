@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse\Meta;
 use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
@@ -28,12 +26,10 @@ use Telnyx\PortingOrderStatus;
  *   data?: PortingOrder|null, meta?: Meta|null
  * }
  */
-final class ActionConfirmResponse implements BaseModel, ResponseConverter
+final class ActionConfirmResponse implements BaseModel
 {
     /** @use SdkModel<ActionConfirmResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingOrder $data;

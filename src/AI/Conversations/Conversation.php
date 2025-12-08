@@ -6,9 +6,7 @@ namespace Telnyx\AI\Conversations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConversationShape = array{
@@ -19,12 +17,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   name?: string|null,
  * }
  */
-final class Conversation implements BaseModel, ResponseConverter
+final class Conversation implements BaseModel
 {
     /** @use SdkModel<ConversationShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

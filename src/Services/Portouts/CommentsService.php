@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\Comments\CommentCreateParams;
 use Telnyx\Portouts\Comments\CommentListResponse;
@@ -38,14 +39,16 @@ final class CommentsService implements CommentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CommentNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['portouts/%1$s/comments', $id],
             body: (object) $parsed,
             options: $options,
             convert: CommentNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -59,12 +62,14 @@ final class CommentsService implements CommentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentListResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CommentListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['portouts/%1$s/comments', $id],
             options: $requestOptions,
             convert: CommentListResponse::class,
         );
+
+        return $response->parse();
     }
 }

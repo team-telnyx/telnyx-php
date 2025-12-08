@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams;
@@ -44,13 +45,15 @@ final class RegulatoryRequirementsService implements RegulatoryRequirementsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RegulatoryRequirementGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'regulatory_requirements',
             query: $parsed,
             options: $options,
             convert: RegulatoryRequirementGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

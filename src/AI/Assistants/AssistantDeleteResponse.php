@@ -6,9 +6,7 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Aligns with the OpenAI API:
@@ -18,12 +16,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   id: string, deleted: bool, object: string
  * }
  */
-final class AssistantDeleteResponse implements BaseModel, ResponseConverter
+final class AssistantDeleteResponse implements BaseModel
 {
     /** @use SdkModel<AssistantDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public string $id;

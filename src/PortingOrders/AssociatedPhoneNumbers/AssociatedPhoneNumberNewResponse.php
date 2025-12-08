@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberRange;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberType;
@@ -18,12 +16,10 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
  *   data?: PortingAssociatedPhoneNumber|null
  * }
  */
-final class AssociatedPhoneNumberNewResponse implements BaseModel, ResponseConverter
+final class AssociatedPhoneNumberNewResponse implements BaseModel
 {
     /** @use SdkModel<AssociatedPhoneNumberNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingAssociatedPhoneNumber $data;

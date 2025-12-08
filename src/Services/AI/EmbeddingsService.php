@@ -13,6 +13,7 @@ use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchParams;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\AI\Embeddings\EmbeddingURLParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
@@ -76,14 +77,16 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EmbeddingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/embeddings',
             body: (object) $parsed,
             options: $options,
             convert: EmbeddingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,13 +105,15 @@ final class EmbeddingsService implements EmbeddingsContract
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): EmbeddingGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EmbeddingGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/embeddings/%1$s', $taskID],
             options: $requestOptions,
             convert: EmbeddingGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -129,14 +134,16 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EmbeddingListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/embeddings',
             query: $parsed,
             options: $options,
             convert: EmbeddingListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -167,14 +174,16 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EmbeddingSimilaritySearchResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/embeddings/similarity-search',
             body: (object) $parsed,
             options: $options,
             convert: EmbeddingSimilaritySearchResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -195,13 +204,15 @@ final class EmbeddingsService implements EmbeddingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EmbeddingResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/embeddings/url',
             body: (object) $parsed,
             options: $options,
             convert: EmbeddingResponse::class,
         );
+
+        return $response->parse();
     }
 }

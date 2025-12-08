@@ -6,19 +6,15 @@ namespace Telnyx\Addresses;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AddressNewResponseShape = array{data?: Address|null}
  */
-final class AddressNewResponse implements BaseModel, ResponseConverter
+final class AddressNewResponse implements BaseModel
 {
     /** @use SdkModel<AddressNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Address $data;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
@@ -42,13 +43,15 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CdrUsageReportFetchSyncResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'reports/cdr_usage_reports/sync',
             query: $parsed,
             options: $options,
             convert: CdrUsageReportFetchSyncResponse::class,
         );
+
+        return $response->parse();
     }
 }

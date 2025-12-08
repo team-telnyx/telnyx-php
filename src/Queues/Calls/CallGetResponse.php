@@ -6,21 +6,17 @@ namespace Telnyx\Queues\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Queues\Calls\CallGetResponse\Data;
 use Telnyx\Queues\Calls\CallGetResponse\Data\RecordType;
 
 /**
  * @phpstan-type CallGetResponseShape = array{data?: Data|null}
  */
-final class CallGetResponse implements BaseModel, ResponseConverter
+final class CallGetResponse implements BaseModel
 {
     /** @use SdkModel<CallGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

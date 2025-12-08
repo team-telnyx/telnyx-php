@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ShortCodesContract;
@@ -32,13 +33,15 @@ final class ShortCodesService implements ShortCodesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ShortCodeGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ShortCodeGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['short_codes/%1$s', $id],
             options: $requestOptions,
             convert: ShortCodeGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,14 +66,16 @@ final class ShortCodesService implements ShortCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ShortCodeUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['short_codes/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: ShortCodeUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -94,13 +99,15 @@ final class ShortCodesService implements ShortCodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ShortCodeListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'short_codes',
             query: $parsed,
             options: $options,
             convert: ShortCodeListResponse::class,
         );
+
+        return $response->parse();
     }
 }

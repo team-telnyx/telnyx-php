@@ -6,21 +6,17 @@ namespace Telnyx\SimCards;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
 
 /**
  * @phpstan-type SimCardGetPublicIPResponseShape = array{data?: Data|null}
  */
-final class SimCardGetPublicIPResponse implements BaseModel, ResponseConverter
+final class SimCardGetPublicIPResponse implements BaseModel
 {
     /** @use SdkModel<SimCardGetPublicIPResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

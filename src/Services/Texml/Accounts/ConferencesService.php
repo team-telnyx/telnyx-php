@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
@@ -56,8 +57,8 @@ final class ConferencesService implements ConferencesContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
@@ -65,6 +66,8 @@ final class ConferencesService implements ConferencesContract
             options: $options,
             convert: ConferenceGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,8 +96,8 @@ final class ConferencesService implements ConferencesContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceUpdateResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
@@ -104,6 +107,8 @@ final class ConferencesService implements ConferencesContract
             options: $options,
             convert: ConferenceUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -133,14 +138,16 @@ final class ConferencesService implements ConferencesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceGetConferencesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Conferences', $accountSid],
             query: $parsed,
             options: $options,
             convert: ConferenceGetConferencesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -164,8 +171,8 @@ final class ConferencesService implements ConferencesContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceGetRecordingsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s/Recordings',
@@ -175,6 +182,8 @@ final class ConferencesService implements ConferencesContract
             options: $options,
             convert: ConferenceGetRecordingsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -198,8 +207,8 @@ final class ConferencesService implements ConferencesContract
         $accountSid = $parsed['account_sid'];
         unset($parsed['account_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ConferenceGetRecordingsJsonResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'texml/Accounts/%1$s/Conferences/%2$s/Recordings.json',
@@ -209,5 +218,7 @@ final class ConferencesService implements ConferencesContract
             options: $options,
             convert: ConferenceGetRecordingsJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

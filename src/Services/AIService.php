@@ -8,6 +8,7 @@ use Telnyx\AI\AIGetModelsResponse;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
@@ -94,13 +95,15 @@ final class AIService implements AIContract
     public function retrieveModels(
         ?RequestOptions $requestOptions = null
     ): AIGetModelsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AIGetModelsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ai/models',
             options: $requestOptions,
             convert: AIGetModelsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -130,13 +133,15 @@ final class AIService implements AIContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AISummarizeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/summarize',
             body: (object) $parsed,
             options: $options,
             convert: AISummarizeResponse::class,
         );
+
+        return $response->parse();
     }
 }

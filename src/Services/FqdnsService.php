@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Fqdns\FqdnCreateParams;
 use Telnyx\Fqdns\FqdnDeleteResponse;
@@ -44,14 +45,16 @@ final class FqdnsService implements FqdnsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'fqdns',
             body: (object) $parsed,
             options: $options,
             convert: FqdnNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class FqdnsService implements FqdnsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['fqdns/%1$s', $id],
             options: $requestOptions,
             convert: FqdnGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,14 +103,16 @@ final class FqdnsService implements FqdnsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['fqdns/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: FqdnUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -131,14 +138,16 @@ final class FqdnsService implements FqdnsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'fqdns',
             query: $parsed,
             options: $options,
             convert: FqdnListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -152,12 +161,14 @@ final class FqdnsService implements FqdnsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FqdnDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['fqdns/%1$s', $id],
             options: $requestOptions,
             convert: FqdnDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

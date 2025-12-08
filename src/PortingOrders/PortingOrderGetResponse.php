@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
 use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrders\PortingOrderGetResponse\Meta;
@@ -19,12 +17,10 @@ use Telnyx\PortingOrderStatus;
  *   data?: PortingOrder|null, meta?: Meta|null
  * }
  */
-final class PortingOrderGetResponse implements BaseModel, ResponseConverter
+final class PortingOrderGetResponse implements BaseModel
 {
     /** @use SdkModel<PortingOrderGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingOrder $data;

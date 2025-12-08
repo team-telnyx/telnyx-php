@@ -6,9 +6,7 @@ namespace Telnyx\DynamicEmergencyEndpoints;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
  *   data?: DynamicEmergencyEndpoint|null
  * }
  */
-final class DynamicEmergencyEndpointGetResponse implements BaseModel, ResponseConverter
+final class DynamicEmergencyEndpointGetResponse implements BaseModel
 {
     /** @use SdkModel<DynamicEmergencyEndpointGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DynamicEmergencyEndpoint $data;

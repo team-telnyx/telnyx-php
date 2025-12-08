@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
@@ -42,14 +43,16 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberCampaign> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phone_number_campaigns',
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberCampaign::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,13 +66,15 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberCampaign> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phone_number_campaigns/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: PhoneNumberCampaign::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,14 +98,16 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberCampaign> */
+        $response = $this->client->request(
             method: 'put',
             path: ['phone_number_campaigns/%1$s', $phoneNumber],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberCampaign::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -131,14 +138,16 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberCampaignListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'phone_number_campaigns',
             query: $parsed,
             options: $options,
             convert: PhoneNumberCampaignListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -152,12 +161,14 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberCampaign> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['phone_number_campaigns/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: PhoneNumberCampaign::class,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\UsageContract;
@@ -42,14 +43,16 @@ final class UsageService implements UsageContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UsageGetAPIUsageResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['storage/buckets/%1$s/usage/api', $bucketName],
             query: $parsed,
             options: $options,
             convert: UsageGetAPIUsageResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,12 +66,14 @@ final class UsageService implements UsageContract
         string $bucketName,
         ?RequestOptions $requestOptions = null
     ): UsageGetBucketUsageResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UsageGetBucketUsageResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['storage/buckets/%1$s/usage/storage', $bucketName],
             options: $requestOptions,
             convert: UsageGetBucketUsageResponse::class,
         );
+
+        return $response->parse();
     }
 }

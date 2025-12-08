@@ -6,9 +6,7 @@ namespace Telnyx\OAuth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type OAuthRegisterResponseShape = array{
@@ -26,12 +24,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   tos_uri?: string|null,
  * }
  */
-final class OAuthRegisterResponse implements BaseModel, ResponseConverter
+final class OAuthRegisterResponse implements BaseModel
 {
     /** @use SdkModel<OAuthRegisterResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Unique client identifier.

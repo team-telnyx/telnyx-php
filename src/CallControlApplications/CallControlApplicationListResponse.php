@@ -11,21 +11,17 @@ use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallControlApplicationListResponseShape = array{
  *   data?: list<CallControlApplication>|null, meta?: PaginationMeta|null
  * }
  */
-final class CallControlApplicationListResponse implements BaseModel, ResponseConverter
+final class CallControlApplicationListResponse implements BaseModel
 {
     /** @use SdkModel<CallControlApplicationListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<CallControlApplication>|null $data */
     #[Api(list: CallControlApplication::class, optional: true)]

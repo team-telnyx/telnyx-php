@@ -6,21 +6,17 @@ namespace Telnyx\SimCards\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data\ActionType;
 
 /**
  * @phpstan-type ActionBulkSetPublicIPsResponseShape = array{data?: Data|null}
  */
-final class ActionBulkSetPublicIPsResponse implements BaseModel, ResponseConverter
+final class ActionBulkSetPublicIPsResponse implements BaseModel
 {
     /** @use SdkModel<ActionBulkSetPublicIPsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.

@@ -6,9 +6,7 @@ namespace Telnyx\Wireless\DetailRecordsReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
  *   data?: list<WdrReport>|null
  * }
  */
-final class DetailRecordsReportListResponse implements BaseModel, ResponseConverter
+final class DetailRecordsReportListResponse implements BaseModel
 {
     /** @use SdkModel<DetailRecordsReportListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<WdrReport>|null $data */
     #[Api(list: WdrReport::class, optional: true)]

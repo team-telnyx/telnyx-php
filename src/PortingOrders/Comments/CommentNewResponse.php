@@ -6,21 +6,17 @@ namespace Telnyx\PortingOrders\Comments;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Comments\CommentNewResponse\Data;
 use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
 
 /**
  * @phpstan-type CommentNewResponseShape = array{data?: Data|null}
  */
-final class CommentNewResponse implements BaseModel, ResponseConverter
+final class CommentNewResponse implements BaseModel
 {
     /** @use SdkModel<CommentNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

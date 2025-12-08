@@ -6,21 +6,17 @@ namespace Telnyx\PhoneNumbers\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found;
 
 /**
  * @phpstan-type ActionVerifyOwnershipResponseShape = array{data?: Data|null}
  */
-final class ActionVerifyOwnershipResponse implements BaseModel, ResponseConverter
+final class ActionVerifyOwnershipResponse implements BaseModel
 {
     /** @use SdkModel<ActionVerifyOwnershipResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignParams;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
@@ -41,14 +42,16 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberAssignmentByProfileAssignResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'phoneNumberAssignmentByProfile',
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberAssignmentByProfileAssignResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,14 +75,16 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse,> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phoneNumberAssignmentByProfile/%1$s/phoneNumbers', $taskID],
             query: $parsed,
             options: $options,
             convert: PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,12 +98,14 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberAssignmentByProfileGetStatusResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PhoneNumberAssignmentByProfileGetStatusResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phoneNumberAssignmentByProfile/%1$s', $taskID],
             options: $requestOptions,
             convert: PhoneNumberAssignmentByProfileGetStatusResponse::class,
         );
+
+        return $response->parse();
     }
 }

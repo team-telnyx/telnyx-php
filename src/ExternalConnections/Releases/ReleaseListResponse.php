@@ -6,9 +6,7 @@ namespace Telnyx\ExternalConnections\Releases;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data\Status;
@@ -19,12 +17,10 @@ use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data\TelephoneNumber
  *   data?: list<Data>|null, meta?: ExternalVoiceIntegrationsPaginationMeta|null
  * }
  */
-final class ReleaseListResponse implements BaseModel, ResponseConverter
+final class ReleaseListResponse implements BaseModel
 {
     /** @use SdkModel<ReleaseListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

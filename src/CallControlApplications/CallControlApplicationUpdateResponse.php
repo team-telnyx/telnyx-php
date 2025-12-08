@@ -10,21 +10,17 @@ use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallControlApplicationUpdateResponseShape = array{
  *   data?: CallControlApplication|null
  * }
  */
-final class CallControlApplicationUpdateResponse implements BaseModel, ResponseConverter
+final class CallControlApplicationUpdateResponse implements BaseModel
 {
     /** @use SdkModel<CallControlApplicationUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CallControlApplication $data;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
@@ -65,14 +66,16 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TexmlApplicationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'texml_applications',
             body: (object) $parsed,
             options: $options,
             convert: TexmlApplicationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -86,13 +89,15 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TexmlApplicationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['texml_applications/%1$s', $id],
             options: $requestOptions,
             convert: TexmlApplicationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -135,14 +140,16 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TexmlApplicationUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['texml_applications/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: TexmlApplicationUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -167,14 +174,16 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TexmlApplicationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'texml_applications',
             query: $parsed,
             options: $options,
             convert: TexmlApplicationListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -188,12 +197,14 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TexmlApplicationDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['texml_applications/%1$s', $id],
             options: $requestOptions,
             convert: TexmlApplicationDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

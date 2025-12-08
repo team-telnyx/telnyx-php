@@ -7,9 +7,7 @@ namespace Telnyx\MobileNetworkOperators;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse\Data;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse\Data;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class MobileNetworkOperatorListResponse implements BaseModel, ResponseConverter
+final class MobileNetworkOperatorListResponse implements BaseModel
 {
     /** @use SdkModel<MobileNetworkOperatorListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

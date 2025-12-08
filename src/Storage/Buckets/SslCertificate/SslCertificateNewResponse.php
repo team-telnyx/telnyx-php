@@ -6,21 +6,17 @@ namespace Telnyx\Storage\Buckets\SslCertificate;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo;
 
 /**
  * @phpstan-type SslCertificateNewResponseShape = array{data?: SslCertificate|null}
  */
-final class SslCertificateNewResponse implements BaseModel, ResponseConverter
+final class SslCertificateNewResponse implements BaseModel
 {
     /** @use SdkModel<SslCertificateNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SslCertificate $data;

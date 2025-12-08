@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
@@ -40,14 +41,16 @@ final class VoicemailService implements VoicemailContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoicemailNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
             body: (object) $parsed,
             options: $options,
             convert: VoicemailNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -61,13 +64,15 @@ final class VoicemailService implements VoicemailContract
         string $phoneNumberID,
         ?RequestOptions $requestOptions = null
     ): VoicemailGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoicemailGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
             options: $requestOptions,
             convert: VoicemailGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -89,13 +94,15 @@ final class VoicemailService implements VoicemailContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VoicemailUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
             body: (object) $parsed,
             options: $options,
             convert: VoicemailUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 }

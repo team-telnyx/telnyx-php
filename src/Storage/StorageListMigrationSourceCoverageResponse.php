@@ -6,9 +6,7 @@ namespace Telnyx\Storage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
@@ -18,12 +16,10 @@ use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
  *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
  * }
  */
-final class StorageListMigrationSourceCoverageResponse implements BaseModel, ResponseConverter
+final class StorageListMigrationSourceCoverageResponse implements BaseModel
 {
     /** @use SdkModel<StorageListMigrationSourceCoverageResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

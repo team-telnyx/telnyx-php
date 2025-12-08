@@ -6,20 +6,16 @@ namespace Telnyx\Networks;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkNewResponse\Data;
 
 /**
  * @phpstan-type NetworkNewResponseShape = array{data?: Data|null}
  */
-final class NetworkNewResponse implements BaseModel, ResponseConverter
+final class NetworkNewResponse implements BaseModel
 {
     /** @use SdkModel<NetworkNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

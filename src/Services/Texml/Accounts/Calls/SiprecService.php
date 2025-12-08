@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\SiprecContract;
@@ -43,8 +44,8 @@ final class SiprecService implements SiprecContract
         $callSid = $parsed['call_sid'];
         unset($parsed['call_sid']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SiprecSiprecSidJsonResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'texml/Accounts/%1$s/Calls/%2$s/Siprec/%3$s.json',
@@ -60,5 +61,7 @@ final class SiprecService implements SiprecContract
             options: $options,
             convert: SiprecSiprecSidJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

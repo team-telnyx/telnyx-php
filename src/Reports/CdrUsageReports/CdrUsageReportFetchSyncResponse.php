@@ -6,9 +6,7 @@ namespace Telnyx\Reports\CdrUsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\ProductBreakdown;
@@ -17,12 +15,10 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\Status;
 /**
  * @phpstan-type CdrUsageReportFetchSyncResponseShape = array{data?: Data|null}
  */
-final class CdrUsageReportFetchSyncResponse implements BaseModel, ResponseConverter
+final class CdrUsageReportFetchSyncResponse implements BaseModel
 {
     /** @use SdkModel<CdrUsageReportFetchSyncResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

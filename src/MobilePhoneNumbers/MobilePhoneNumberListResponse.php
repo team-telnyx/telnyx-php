@@ -6,9 +6,7 @@ namespace Telnyx\MobilePhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse\Data;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse\Data\CallForwarding;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse\Data\CallRecording;
@@ -24,12 +22,10 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse\Meta;
  *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
-final class MobilePhoneNumberListResponse implements BaseModel, ResponseConverter
+final class MobilePhoneNumberListResponse implements BaseModel
 {
     /** @use SdkModel<MobilePhoneNumberListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

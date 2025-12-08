@@ -6,21 +6,17 @@ namespace Telnyx\Verifications\ByPhoneNumber\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data\ResponseCode;
 
 /**
  * @phpstan-type VerifyVerificationCodeResponseShape = array{data: Data}
  */
-final class VerifyVerificationCodeResponse implements BaseModel, ResponseConverter
+final class VerifyVerificationCodeResponse implements BaseModel
 {
     /** @use SdkModel<VerifyVerificationCodeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Data $data;

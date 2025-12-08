@@ -7,9 +7,7 @@ namespace Telnyx\List;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\List\ListGetByZoneResponse\Data;
 use Telnyx\List\ListGetByZoneResponse\Data\Number;
 
@@ -18,12 +16,10 @@ use Telnyx\List\ListGetByZoneResponse\Data\Number;
  *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
-final class ListGetByZoneResponse implements BaseModel, ResponseConverter
+final class ListGetByZoneResponse implements BaseModel
 {
     /** @use SdkModel<ListGetByZoneResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

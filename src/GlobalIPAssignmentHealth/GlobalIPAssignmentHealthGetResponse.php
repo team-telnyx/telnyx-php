@@ -6,9 +6,7 @@ namespace Telnyx\GlobalIPAssignmentHealth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment;
@@ -19,12 +17,10 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Hea
  *   data?: list<Data>|null
  * }
  */
-final class GlobalIPAssignmentHealthGetResponse implements BaseModel, ResponseConverter
+final class GlobalIPAssignmentHealthGetResponse implements BaseModel
 {
     /** @use SdkModel<GlobalIPAssignmentHealthGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

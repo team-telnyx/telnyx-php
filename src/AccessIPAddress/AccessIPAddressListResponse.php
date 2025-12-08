@@ -6,21 +6,17 @@ namespace Telnyx\AccessIPAddress;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccessIPAddressListResponseShape = array{
  *   data: list<AccessIPAddressResponse>, meta: PaginationMetaCloudflareIPListSync
  * }
  */
-final class AccessIPAddressListResponse implements BaseModel, ResponseConverter
+final class AccessIPAddressListResponse implements BaseModel
 {
     /** @use SdkModel<AccessIPAddressListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<AccessIPAddressResponse> $data */
     #[Api(list: AccessIPAddressResponse::class)]

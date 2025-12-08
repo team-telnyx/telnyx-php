@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
@@ -56,14 +57,16 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CustomerServiceRecordNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'customer_service_records',
             body: (object) $parsed,
             options: $options,
             convert: CustomerServiceRecordNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -77,13 +80,15 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
         string $customerServiceRecordID,
         ?RequestOptions $requestOptions = null
     ): CustomerServiceRecordGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CustomerServiceRecordGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['customer_service_records/%1$s', $customerServiceRecordID],
             options: $requestOptions,
             convert: CustomerServiceRecordGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -117,14 +122,16 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CustomerServiceRecordListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'customer_service_records',
             query: $parsed,
             options: $options,
             convert: CustomerServiceRecordListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,13 +154,15 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CustomerServiceRecordVerifyPhoneNumberCoverageResponse,> */
+        $response = $this->client->request(
             method: 'post',
             path: 'customer_service_records/phone_number_coverages',
             body: (object) $parsed,
             options: $options,
             convert: CustomerServiceRecordVerifyPhoneNumberCoverageResponse::class,
         );
+
+        return $response->parse();
     }
 }

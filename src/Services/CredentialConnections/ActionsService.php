@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\CredentialConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 use Telnyx\RequestOptions;
@@ -28,8 +29,8 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionCheckRegistrationStatusResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ActionCheckRegistrationStatusResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'credential_connections/%1$s/actions/check_registration_status', $id,
@@ -37,5 +38,7 @@ final class ActionsService implements ActionsContract
             options: $requestOptions,
             convert: ActionCheckRegistrationStatusResponse::class,
         );
+
+        return $response->parse();
     }
 }

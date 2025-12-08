@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -106,14 +107,16 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CredentialConnectionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'credential_connections',
             body: (object) $parsed,
             options: $options,
             convert: CredentialConnectionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -127,13 +130,15 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CredentialConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['credential_connections/%1$s', $id],
             options: $requestOptions,
             convert: CredentialConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -204,14 +209,16 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CredentialConnectionUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['credential_connections/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: CredentialConnectionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -240,14 +247,16 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CredentialConnectionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'credential_connections',
             query: $parsed,
             options: $options,
             convert: CredentialConnectionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -261,12 +270,14 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
         string $id,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CredentialConnectionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['credential_connections/%1$s', $id],
             options: $requestOptions,
             convert: CredentialConnectionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

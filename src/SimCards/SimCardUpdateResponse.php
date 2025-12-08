@@ -6,9 +6,7 @@ namespace Telnyx\SimCards;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimCards\SimCard\CurrentDeviceLocation;
 use Telnyx\SimCards\SimCard\DataLimit;
@@ -21,12 +19,10 @@ use Telnyx\SimCardStatus;
 /**
  * @phpstan-type SimCardUpdateResponseShape = array{data?: SimCard|null}
  */
-final class SimCardUpdateResponse implements BaseModel, ResponseConverter
+final class SimCardUpdateResponse implements BaseModel
 {
     /** @use SdkModel<SimCardUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SimCard $data;

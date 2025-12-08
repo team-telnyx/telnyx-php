@@ -7,9 +7,7 @@ namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberType;
@@ -19,12 +17,10 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberTy
  *   data?: list<PortingPhoneNumberBlock>|null, meta?: PaginationMeta|null
  * }
  */
-final class PhoneNumberBlockListResponse implements BaseModel, ResponseConverter
+final class PhoneNumberBlockListResponse implements BaseModel
 {
     /** @use SdkModel<PhoneNumberBlockListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortingPhoneNumberBlock>|null $data */
     #[Api(list: PortingPhoneNumberBlock::class, optional: true)]

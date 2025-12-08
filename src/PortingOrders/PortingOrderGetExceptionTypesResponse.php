@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrdersExceptionType;
 use Telnyx\PortingOrdersExceptionType\Code;
 
@@ -17,12 +15,10 @@ use Telnyx\PortingOrdersExceptionType\Code;
  *   data?: list<PortingOrdersExceptionType>|null
  * }
  */
-final class PortingOrderGetExceptionTypesResponse implements BaseModel, ResponseConverter
+final class PortingOrderGetExceptionTypesResponse implements BaseModel
 {
     /** @use SdkModel<PortingOrderGetExceptionTypesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortingOrdersExceptionType>|null $data */
     #[Api(list: PortingOrdersExceptionType::class, optional: true)]

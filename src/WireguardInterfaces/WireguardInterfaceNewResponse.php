@@ -6,9 +6,7 @@ namespace Telnyx\WireguardInterfaces;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse\Data;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse\Data\Region;
@@ -16,12 +14,10 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse\Data\Region;
 /**
  * @phpstan-type WireguardInterfaceNewResponseShape = array{data?: Data|null}
  */
-final class WireguardInterfaceNewResponse implements BaseModel, ResponseConverter
+final class WireguardInterfaceNewResponse implements BaseModel
 {
     /** @use SdkModel<WireguardInterfaceNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

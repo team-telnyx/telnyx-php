@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams;
@@ -34,13 +35,15 @@ final class MediaService implements MediaContract
         string $mediaName,
         ?RequestOptions $requestOptions = null
     ): MediaGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MediaGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['media/%1$s', $mediaName],
             options: $requestOptions,
             convert: MediaGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -62,14 +65,16 @@ final class MediaService implements MediaContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MediaUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['media/%1$s', $mediaName],
             body: (object) $parsed,
             options: $options,
             convert: MediaUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -92,14 +97,16 @@ final class MediaService implements MediaContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MediaListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'media',
             query: $parsed,
             options: $options,
             convert: MediaListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -113,13 +120,15 @@ final class MediaService implements MediaContract
         string $mediaName,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['media/%1$s', $mediaName],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -133,14 +142,16 @@ final class MediaService implements MediaContract
         string $mediaName,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['media/%1$s/download', $mediaName],
             headers: ['Accept' => 'application/octet-stream'],
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 
     /**
@@ -163,13 +174,15 @@ final class MediaService implements MediaContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MediaUploadResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'media',
             body: (object) $parsed,
             options: $options,
             convert: MediaUploadResponse::class,
         );
+
+        return $response->parse();
     }
 }

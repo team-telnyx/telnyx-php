@@ -10,19 +10,15 @@ use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
 use Telnyx\APIError;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionValidateResponseShape = array{data?: Data|null}
  */
-final class ActionValidateResponse implements BaseModel, ResponseConverter
+final class ActionValidateResponse implements BaseModel
 {
     /** @use SdkModel<ActionValidateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

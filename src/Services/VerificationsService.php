@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
@@ -48,13 +49,15 @@ final class VerificationsService implements VerificationsContract
         string $verificationID,
         ?RequestOptions $requestOptions = null
     ): VerificationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<VerificationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['verifications/%1$s', $verificationID],
             options: $requestOptions,
             convert: VerificationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,14 +84,16 @@ final class VerificationsService implements VerificationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CreateVerificationResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'verifications/call',
             body: (object) $parsed,
             options: $options,
             convert: CreateVerificationResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -111,14 +116,16 @@ final class VerificationsService implements VerificationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CreateVerificationResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'verifications/flashcall',
             body: (object) $parsed,
             options: $options,
             convert: CreateVerificationResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -144,13 +151,15 @@ final class VerificationsService implements VerificationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CreateVerificationResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'verifications/sms',
             body: (object) $parsed,
             options: $options,
             convert: CreateVerificationResponse::class,
         );
+
+        return $response->parse();
     }
 }

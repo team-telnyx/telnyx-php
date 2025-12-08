@@ -6,9 +6,7 @@ namespace Telnyx\OAuth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type OAuthIntrospectResponseShape = array{
@@ -21,12 +19,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   scope?: string|null,
  * }
  */
-final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
+final class OAuthIntrospectResponse implements BaseModel
 {
     /** @use SdkModel<OAuthIntrospectResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Whether the token is active.

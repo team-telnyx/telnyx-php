@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messaging\Rcs;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
 use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
@@ -31,13 +32,15 @@ final class AgentsService implements AgentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RcsAgentResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RcsAgentResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging/rcs/agents/%1$s', $id],
             options: $requestOptions,
             convert: RcsAgentResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,14 +66,16 @@ final class AgentsService implements AgentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RcsAgentResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['messaging/rcs/agents/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: RcsAgentResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -91,13 +96,15 @@ final class AgentsService implements AgentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AgentListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'messaging/rcs/agents',
             query: $parsed,
             options: $options,
             convert: AgentListResponse::class,
         );
+
+        return $response->parse();
     }
 }

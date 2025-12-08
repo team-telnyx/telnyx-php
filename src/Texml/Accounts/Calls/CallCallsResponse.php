@@ -6,21 +6,17 @@ namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallCallsResponseShape = array{
  *   from?: string|null, status?: string|null, to?: string|null
  * }
  */
-final class CallCallsResponse implements BaseModel, ResponseConverter
+final class CallCallsResponse implements BaseModel
 {
     /** @use SdkModel<CallCallsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $from;

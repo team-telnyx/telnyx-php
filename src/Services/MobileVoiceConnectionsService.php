@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
@@ -52,14 +53,16 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobileVoiceConnectionNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'v2/mobile_voice_connections',
             body: (object) $parsed,
             options: $options,
             convert: MobileVoiceConnectionNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -73,13 +76,15 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobileVoiceConnectionGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobileVoiceConnectionGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['v2/mobile_voice_connections/%1$s', $id],
             options: $requestOptions,
             convert: MobileVoiceConnectionGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -111,14 +116,16 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobileVoiceConnectionUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['v2/mobile_voice_connections/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: MobileVoiceConnectionUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -144,14 +151,16 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobileVoiceConnectionListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'v2/mobile_voice_connections',
             query: $parsed,
             options: $options,
             convert: MobileVoiceConnectionListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -165,12 +174,14 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobileVoiceConnectionDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MobileVoiceConnectionDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['v2/mobile_voice_connections/%1$s', $id],
             options: $requestOptions,
             convert: MobileVoiceConnectionDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

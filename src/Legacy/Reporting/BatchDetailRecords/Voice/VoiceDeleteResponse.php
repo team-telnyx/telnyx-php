@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 
 /**
@@ -16,12 +14,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *   data?: CdrDetailedReqResponse|null
  * }
  */
-final class VoiceDeleteResponse implements BaseModel, ResponseConverter
+final class VoiceDeleteResponse implements BaseModel
 {
     /** @use SdkModel<VoiceDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Response object for CDR detailed report.

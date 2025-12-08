@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
@@ -43,13 +44,15 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MessagingOptoutListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'messaging_optouts',
             query: $parsed,
             options: $options,
             convert: MessagingOptoutListResponse::class,
         );
+
+        return $response->parse();
     }
 }

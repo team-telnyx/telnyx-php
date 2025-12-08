@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
@@ -38,13 +39,15 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['documents/%1$s', $id],
             options: $requestOptions,
             convert: DocumentGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -68,14 +71,16 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['documents/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: DocumentUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -106,14 +111,16 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'documents',
             query: $parsed,
             options: $options,
             convert: DocumentListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -127,13 +134,15 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['documents/%1$s', $id],
             options: $requestOptions,
             convert: DocumentDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,14 +156,16 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'get',
             path: ['documents/%1$s/download', $id],
             headers: ['Accept' => '*'],
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 
     /**
@@ -168,13 +179,15 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentGenerateDownloadLinkResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentGenerateDownloadLinkResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['documents/%1$s/download_link', $id],
             options: $requestOptions,
             convert: DocumentGenerateDownloadLinkResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -193,14 +206,16 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentUploadResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'documents?content-type=multipart',
             body: (object) $parsed,
             options: $options,
             convert: DocumentUploadResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -219,13 +234,15 @@ final class DocumentsService implements DocumentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<DocumentUploadJsonResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'documents',
             body: (object) $parsed,
             options: $options,
             convert: DocumentUploadJsonResponse::class,
         );
+
+        return $response->parse();
     }
 }

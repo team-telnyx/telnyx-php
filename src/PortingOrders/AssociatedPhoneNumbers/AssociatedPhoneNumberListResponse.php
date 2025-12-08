@@ -7,9 +7,7 @@ namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberRange;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberType;
@@ -19,12 +17,10 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
  *   data?: list<PortingAssociatedPhoneNumber>|null, meta?: PaginationMeta|null
  * }
  */
-final class AssociatedPhoneNumberListResponse implements BaseModel, ResponseConverter
+final class AssociatedPhoneNumberListResponse implements BaseModel
 {
     /** @use SdkModel<AssociatedPhoneNumberListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortingAssociatedPhoneNumber>|null $data */
     #[Api(list: PortingAssociatedPhoneNumber::class, optional: true)]

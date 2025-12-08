@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -64,13 +65,15 @@ final class ChatService implements ChatContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<array<string,mixed>> */
+        $response = $this->client->request(
             method: 'post',
             path: 'ai/chat/completions',
             body: (object) $parsed,
             options: $options,
             convert: new MapOf('mixed'),
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Telnyx\RecordingTranscriptions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
  *   data?: RecordingTranscription|null
  * }
  */
-final class RecordingTranscriptionDeleteResponse implements BaseModel, ResponseConverter
+final class RecordingTranscriptionDeleteResponse implements BaseModel
 {
     /** @use SdkModel<RecordingTranscriptionDeleteResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?RecordingTranscription $data;

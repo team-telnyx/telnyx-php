@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
@@ -44,14 +45,16 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardDataUsageNotificationNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'sim_card_data_usage_notifications',
             body: (object) $parsed,
             options: $options,
             convert: SimCardDataUsageNotificationNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -65,13 +68,15 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardDataUsageNotificationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['sim_card_data_usage_notifications/%1$s', $id],
             options: $requestOptions,
             convert: SimCardDataUsageNotificationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -95,14 +100,16 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardDataUsageNotificationUpdateResponse> */
+        $response = $this->client->request(
             method: 'patch',
             path: ['sim_card_data_usage_notifications/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: SimCardDataUsageNotificationUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -125,14 +132,16 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardDataUsageNotificationListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'sim_card_data_usage_notifications',
             query: $parsed,
             options: $options,
             convert: SimCardDataUsageNotificationListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -146,12 +155,14 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationDeleteResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SimCardDataUsageNotificationDeleteResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['sim_card_data_usage_notifications/%1$s', $id],
             options: $requestOptions,
             convert: SimCardDataUsageNotificationDeleteResponse::class,
         );
+
+        return $response->parse();
     }
 }

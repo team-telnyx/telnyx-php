@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messaging;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberParams;
@@ -52,13 +53,15 @@ final class RcsService implements RcsContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RcInviteTestNumberResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['messaging/rcs/test_number_invite/%1$s/%2$s', $id, $phoneNumber],
             options: $options,
             convert: RcInviteTestNumberResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -81,14 +84,16 @@ final class RcsService implements RcsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RcListBulkCapabilitiesResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'messaging/rcs/bulk_capabilities',
             body: (object) $parsed,
             options: $options,
             convert: RcListBulkCapabilitiesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -112,12 +117,14 @@ final class RcsService implements RcsContract
         $agentID = $parsed['agent_id'];
         unset($parsed['agent_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RcGetCapabilitiesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging/rcs/capabilities/%1$s/%2$s', $agentID, $phoneNumber],
             options: $options,
             convert: RcGetCapabilitiesResponse::class,
         );
+
+        return $response->parse();
     }
 }

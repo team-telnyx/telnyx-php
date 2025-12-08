@@ -6,9 +6,7 @@ namespace Telnyx\TexmlApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\TexmlApplications\TexmlApplication\Inbound;
@@ -22,12 +20,10 @@ use Telnyx\TexmlApplications\TexmlApplicationListResponse\Meta;
  *   data?: list<TexmlApplication>|null, meta?: Meta|null
  * }
  */
-final class TexmlApplicationListResponse implements BaseModel, ResponseConverter
+final class TexmlApplicationListResponse implements BaseModel
 {
     /** @use SdkModel<TexmlApplicationListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<TexmlApplication>|null $data */
     #[Api(list: TexmlApplication::class, optional: true)]

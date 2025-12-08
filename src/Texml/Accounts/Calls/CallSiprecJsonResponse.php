@@ -6,9 +6,7 @@ namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Status;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
 
@@ -26,12 +24,10 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
  *   uri?: string|null,
  * }
  */
-final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
+final class CallSiprecJsonResponse implements BaseModel
 {
     /** @use SdkModel<CallSiprecJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.

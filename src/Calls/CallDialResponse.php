@@ -8,19 +8,15 @@ use Telnyx\Calls\CallDialResponse\Data;
 use Telnyx\Calls\CallDialResponse\Data\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallDialResponseShape = array{data?: Data|null}
  */
-final class CallDialResponse implements BaseModel, ResponseConverter
+final class CallDialResponse implements BaseModel
 {
     /** @use SdkModel<CallDialResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

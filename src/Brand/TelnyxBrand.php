@@ -9,9 +9,7 @@ use Telnyx\Brand\TelnyxBrand\OptionalAttributes;
 use Telnyx\Brand\TelnyxBrand\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Telnyx-specific extensions to The Campaign Registry's `Brand` type.
@@ -57,12 +55,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   website?: string|null,
  * }
  */
-final class TelnyxBrand implements BaseModel, ResponseConverter
+final class TelnyxBrand implements BaseModel
 {
     /** @use SdkModel<TelnyxBrandShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Brand relationship to the CSP.

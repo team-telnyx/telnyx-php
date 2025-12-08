@@ -6,20 +6,16 @@ namespace Telnyx\Storage\Migrations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Migrations\MigrationParams\Status;
 
 /**
  * @phpstan-type MigrationNewResponseShape = array{data?: MigrationParams|null}
  */
-final class MigrationNewResponse implements BaseModel, ResponseConverter
+final class MigrationNewResponse implements BaseModel
 {
     /** @use SdkModel<MigrationNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MigrationParams $data;

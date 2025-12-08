@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingProfiles;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigDeleteParams;
@@ -47,14 +48,16 @@ final class AutorespConfigsService implements AutorespConfigsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AutoRespConfigResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['messaging_profiles/%1$s/autoresp_configs', $profileID],
             body: (object) $parsed,
             options: $options,
             convert: AutoRespConfigResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,8 +81,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $profileID = $parsed['profile_id'];
         unset($parsed['profile_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AutoRespConfigResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'messaging_profiles/%1$s/autoresp_configs/%2$s',
@@ -89,6 +92,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
             options: $options,
             convert: AutoRespConfigResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -118,8 +123,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $profileID = $parsed['profile_id'];
         unset($parsed['profile_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AutoRespConfigResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: [
                 'messaging_profiles/%1$s/autoresp_configs/%2$s',
@@ -130,6 +135,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
             options: $options,
             convert: AutoRespConfigResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -155,14 +162,16 @@ final class AutorespConfigsService implements AutorespConfigsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AutorespConfigListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/autoresp_configs', $profileID],
             query: $parsed,
             options: $options,
             convert: AutorespConfigListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -186,8 +195,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $profileID = $parsed['profile_id'];
         unset($parsed['profile_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'delete',
             path: [
                 'messaging_profiles/%1$s/autoresp_configs/%2$s',
@@ -197,5 +206,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
             options: $options,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Telnyx\Verifications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\Verification\RecordType;
 use Telnyx\Verifications\Verification\Status;
 use Telnyx\Verifications\Verification\Type;
@@ -16,12 +14,10 @@ use Telnyx\Verifications\Verification\Type;
 /**
  * @phpstan-type CreateVerificationResponseShape = array{data: Verification}
  */
-final class CreateVerificationResponse implements BaseModel, ResponseConverter
+final class CreateVerificationResponse implements BaseModel
 {
     /** @use SdkModel<CreateVerificationResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Verification $data;

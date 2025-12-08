@@ -6,21 +6,17 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
 use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
 /**
  * @phpstan-type UploadGetResponseShape = array{data?: Upload|null}
  */
-final class UploadGetResponse implements BaseModel, ResponseConverter
+final class UploadGetResponse implements BaseModel
 {
     /** @use SdkModel<UploadGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Upload $data;

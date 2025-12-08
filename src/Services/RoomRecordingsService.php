@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
@@ -32,13 +33,15 @@ final class RoomRecordingsService implements RoomRecordingsContract
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
     ): RoomRecordingGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomRecordingGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['room_recordings/%1$s', $roomRecordingID],
             options: $requestOptions,
             convert: RoomRecordingGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,14 +82,16 @@ final class RoomRecordingsService implements RoomRecordingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomRecordingListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'room_recordings',
             query: $parsed,
             options: $options,
             convert: RoomRecordingListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,13 +105,15 @@ final class RoomRecordingsService implements RoomRecordingsContract
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['room_recordings/%1$s', $roomRecordingID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -147,13 +154,15 @@ final class RoomRecordingsService implements RoomRecordingsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RoomRecordingDeleteBulkResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: 'room_recordings',
             query: $parsed,
             options: $options,
             convert: RoomRecordingDeleteBulkResponse::class,
         );
+
+        return $response->parse();
     }
 }

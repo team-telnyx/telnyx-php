@@ -6,9 +6,7 @@ namespace Telnyx\RoomCompositions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomCompositions\RoomComposition\Format;
 use Telnyx\RoomCompositions\RoomComposition\Status;
 
@@ -17,12 +15,10 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
  *   data?: RoomComposition|null
  * }
  */
-final class RoomCompositionGetResponse implements BaseModel, ResponseConverter
+final class RoomCompositionGetResponse implements BaseModel
 {
     /** @use SdkModel<RoomCompositionGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?RoomComposition $data;

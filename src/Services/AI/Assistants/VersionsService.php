@@ -19,6 +19,7 @@ use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
@@ -53,14 +54,16 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InferenceEmbedding> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
             query: $parsed,
             options: $options,
             convert: InferenceEmbedding::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -121,14 +124,16 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InferenceEmbedding> */
+        $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
             body: (object) array_diff_key($parsed, ['assistant_id']),
             options: $options,
             convert: InferenceEmbedding::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -142,13 +147,15 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): AssistantsList {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AssistantsList> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/versions', $assistantID],
             options: $requestOptions,
             convert: AssistantsList::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -172,13 +179,15 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -202,8 +211,8 @@ final class VersionsService implements VersionsContract
         $assistantID = $parsed['assistant_id'];
         unset($parsed['assistant_id']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InferenceEmbedding> */
+        $response = $this->client->request(
             method: 'post',
             path: [
                 'ai/assistants/%1$s/versions/%2$s/promote', $assistantID, $versionID,
@@ -211,5 +220,7 @@ final class VersionsService implements VersionsContract
             options: $options,
             convert: InferenceEmbedding::class,
         );
+
+        return $response->parse();
     }
 }

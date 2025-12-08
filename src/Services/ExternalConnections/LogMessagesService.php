@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
@@ -31,13 +32,15 @@ final class LogMessagesService implements LogMessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): LogMessageGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LogMessageGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['external_connections/log_messages/%1$s', $id],
             options: $requestOptions,
             convert: LogMessageGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -64,14 +67,16 @@ final class LogMessagesService implements LogMessagesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LogMessageListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'external_connections/log_messages',
             query: $parsed,
             options: $options,
             convert: LogMessageListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -85,12 +90,14 @@ final class LogMessagesService implements LogMessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): LogMessageDismissResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LogMessageDismissResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['external_connections/log_messages/%1$s', $id],
             options: $requestOptions,
             convert: LogMessageDismissResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -7,21 +7,17 @@ namespace Telnyx\Campaign;
 use Telnyx\Campaign\CampaignGetMnoMetadataResponse\mno_10999;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignGetMnoMetadataResponseShape = array{
  *   _10999?: mno_10999|null
  * }
  */
-final class CampaignGetMnoMetadataResponse implements BaseModel, ResponseConverter
+final class CampaignGetMnoMetadataResponse implements BaseModel
 {
     /** @use SdkModel<CampaignGetMnoMetadataResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api('10999', optional: true)]
     public ?mno_10999 $_10999;

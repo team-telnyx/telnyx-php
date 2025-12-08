@@ -8,19 +8,15 @@ use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type JobListResponseShape = array{data: list<FineTuningJob>}
  */
-final class JobListResponse implements BaseModel, ResponseConverter
+final class JobListResponse implements BaseModel
 {
     /** @use SdkModel<JobListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<FineTuningJob> $data */
     #[Api(list: FineTuningJob::class)]

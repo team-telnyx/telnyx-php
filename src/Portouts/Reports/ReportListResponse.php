@@ -7,9 +7,7 @@ namespace Telnyx\Portouts\Reports;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\Reports\PortoutReport\ReportType;
 use Telnyx\Portouts\Reports\PortoutReport\Status;
 
@@ -18,12 +16,10 @@ use Telnyx\Portouts\Reports\PortoutReport\Status;
  *   data?: list<PortoutReport>|null, meta?: PaginationMeta|null
  * }
  */
-final class ReportListResponse implements BaseModel, ResponseConverter
+final class ReportListResponse implements BaseModel
 {
     /** @use SdkModel<ReportListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<PortoutReport>|null $data */
     #[Api(list: PortoutReport::class, optional: true)]

@@ -6,9 +6,7 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
 
 /**
@@ -17,12 +15,10 @@ use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
  *   meta?: StandardPaginationMeta|null,
  * }
  */
-final class VoiceListResponse implements BaseModel, ResponseConverter
+final class VoiceListResponse implements BaseModel
 {
     /** @use SdkModel<VoiceListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<CdrUsageReportResponseLegacy>|null $data */
     #[Api(list: CdrUsageReportResponseLegacy::class, optional: true)]

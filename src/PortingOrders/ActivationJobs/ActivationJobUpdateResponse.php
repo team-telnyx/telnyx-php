@@ -6,9 +6,7 @@ namespace Telnyx\PortingOrders\ActivationJobs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationType;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
@@ -19,12 +17,10 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
  *   data?: PortingOrdersActivationJob|null
  * }
  */
-final class ActivationJobUpdateResponse implements BaseModel, ResponseConverter
+final class ActivationJobUpdateResponse implements BaseModel
 {
     /** @use SdkModel<ActivationJobUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingOrdersActivationJob $data;

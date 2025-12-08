@@ -18,6 +18,7 @@ use Telnyx\Brand\StockExchange;
 use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Brand\Vertical;
 use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BrandContract;
@@ -81,14 +82,16 @@ final class BrandService implements BrandContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxBrand> */
+        $response = $this->client->request(
             method: 'post',
             path: 'brand',
             body: (object) $parsed,
             options: $options,
             convert: TelnyxBrand::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,13 +105,15 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): BrandGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BrandGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['brand/%1$s', $brandID],
             options: $requestOptions,
             convert: BrandGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -156,14 +161,16 @@ final class BrandService implements BrandContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxBrand> */
+        $response = $this->client->request(
             method: 'put',
             path: ['brand/%1$s', $brandID],
             body: (object) $parsed,
             options: $options,
             convert: TelnyxBrand::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -194,14 +201,16 @@ final class BrandService implements BrandContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BrandListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'brand',
             query: $parsed,
             options: $options,
             convert: BrandListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -215,13 +224,15 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['brand/%1$s', $brandID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -247,13 +258,15 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): BrandGetFeedbackResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BrandGetFeedbackResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['brand/feedback/%1$s', $brandID],
             options: $requestOptions,
             convert: BrandGetFeedbackResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -267,13 +280,15 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: ['brand/%1$s/2faEmail', $brandID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -287,12 +302,14 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): TelnyxBrand {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TelnyxBrand> */
+        $response = $this->client->request(
             method: 'put',
             path: ['brand/%1$s/revet', $brandID],
             options: $requestOptions,
             convert: TelnyxBrand::class,
         );
+
+        return $response->parse();
     }
 }
