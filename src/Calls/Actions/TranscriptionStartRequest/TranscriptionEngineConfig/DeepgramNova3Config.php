@@ -2,40 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
+namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig;
 
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Deepgram\Language;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Deepgram\TranscriptionModel;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config\Language;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config\TranscriptionModel;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DeepgramShape = array{
+ * @phpstan-type DeepgramNova3ConfigShape = array{
  *   transcription_engine: 'Deepgram',
  *   transcription_model: value-of<TranscriptionModel>,
  *   keywords_boosting?: array<string,float>|null,
  *   language?: value-of<Language>|null,
  * }
  */
-final class Deepgram implements BaseModel
+final class DeepgramNova3Config implements BaseModel
 {
-    /** @use SdkModel<DeepgramShape> */
+    /** @use SdkModel<DeepgramNova3ConfigShape> */
     use SdkModel;
 
-    /**
-     * Engine identifier for Deepgram transcription service.
-     *
-     * @var 'Deepgram' $transcription_engine
-     */
+    /** @var 'Deepgram' $transcription_engine */
     #[Api]
     public string $transcription_engine = 'Deepgram';
 
-    /**
-     * The model to use for transcription.
-     *
-     * @var value-of<TranscriptionModel> $transcription_model
-     */
+    /** @var value-of<TranscriptionModel> $transcription_model */
     #[Api(enum: TranscriptionModel::class)]
     public string $transcription_model;
 
@@ -48,7 +40,7 @@ final class Deepgram implements BaseModel
     public ?array $keywords_boosting;
 
     /**
-     * Language to use for speech recognition. Available languages depend on the selected model.
+     * Language to use for speech recognition with nova-3 model.
      *
      * @var value-of<Language>|null $language
      */
@@ -56,17 +48,17 @@ final class Deepgram implements BaseModel
     public ?string $language;
 
     /**
-     * `new Deepgram()` is missing required properties by the API.
+     * `new DeepgramNova3Config()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Deepgram::with(transcription_model: ...)
+     * DeepgramNova3Config::with(transcription_model: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Deepgram)->withTranscriptionModel(...)
+     * (new DeepgramNova3Config)->withTranscriptionModel(...)
      * ```
      */
     public function __construct()
@@ -84,7 +76,7 @@ final class Deepgram implements BaseModel
      * @param Language|value-of<Language> $language
      */
     public static function with(
-        TranscriptionModel|string $transcription_model = 'deepgram/nova-2',
+        TranscriptionModel|string $transcription_model,
         ?array $keywords_boosting = null,
         Language|string|null $language = null,
     ): self {
@@ -99,8 +91,6 @@ final class Deepgram implements BaseModel
     }
 
     /**
-     * The model to use for transcription.
-     *
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
      */
     public function withTranscriptionModel(
@@ -126,7 +116,7 @@ final class Deepgram implements BaseModel
     }
 
     /**
-     * Language to use for speech recognition. Available languages depend on the selected model.
+     * Language to use for speech recognition with nova-3 model.
      *
      * @param Language|value-of<Language> $language
      */

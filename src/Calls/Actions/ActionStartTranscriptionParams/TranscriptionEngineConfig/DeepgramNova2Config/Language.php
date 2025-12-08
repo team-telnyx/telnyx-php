@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Deepgram;
+namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
 
 /**
- * Language to use for speech recognition. Available languages depend on the selected model.
+ * Language to use for speech recognition with nova-2 model.
  */
 enum Language: string
 {
