@@ -92,6 +92,7 @@ final class TranscriptionStartRequest implements BaseModel
      * }|Deepgram|array{
      *   transcription_engine: 'Deepgram',
      *   transcription_model: value-of<Deepgram\TranscriptionModel>,
+     *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<Language>|null,
      * }|Azure|array{
      *   region: value-of<Region>,
@@ -190,6 +191,7 @@ final class TranscriptionStartRequest implements BaseModel
      * }|Deepgram|array{
      *   transcription_engine: 'Deepgram',
      *   transcription_model: value-of<Deepgram\TranscriptionModel>,
+     *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<Language>|null,
      * }|Azure|array{
      *   region: value-of<Region>,

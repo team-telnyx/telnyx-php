@@ -52,6 +52,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   }|Deepgram|array{
  *     transcription_engine: 'Deepgram',
  *     transcription_model: value-of<\Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Deepgram\TranscriptionModel>,
+ *     keywords_boosting?: array<string,float>|null,
  *     language?: value-of<Language>|null,
  *   }|Azure|array{
  *     region: value-of<Region>,
@@ -143,6 +144,7 @@ final class ActionStartTranscriptionParams implements BaseModel
      * }|Deepgram|array{
      *   transcription_engine: 'Deepgram',
      *   transcription_model: value-of<Deepgram\TranscriptionModel>,
+     *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<Language>|null,
      * }|Azure|array{
      *   region: value-of<Region>,
@@ -241,6 +243,7 @@ final class ActionStartTranscriptionParams implements BaseModel
      * }|Deepgram|array{
      *   transcription_engine: 'Deepgram',
      *   transcription_model: value-of<Deepgram\TranscriptionModel>,
+     *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<Language>|null,
      * }|Azure|array{
      *   region: value-of<Region>,

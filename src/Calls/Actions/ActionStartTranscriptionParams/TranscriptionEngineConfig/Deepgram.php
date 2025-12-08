@@ -14,6 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DeepgramShape = array{
  *   transcription_engine: 'Deepgram',
  *   transcription_model: value-of<TranscriptionModel>,
+ *   keywords_boosting?: array<string,float>|null,
  *   language?: value-of<Language>|null,
  * }
  */
@@ -37,6 +38,14 @@ final class Deepgram implements BaseModel
      */
     #[Api(enum: TranscriptionModel::class)]
     public string $transcription_model;
+
+    /**
+     * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
+     *
+     * @var array<string,float>|null $keywords_boosting
+     */
+    #[Api(map: 'float', optional: true)]
+    public ?array $keywords_boosting;
 
     /**
      * Language to use for speech recognition. Available languages depend on the selected model.
@@ -71,16 +80,19 @@ final class Deepgram implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcription_model
+     * @param array<string,float> $keywords_boosting
      * @param Language|value-of<Language> $language
      */
     public static function with(
         TranscriptionModel|string $transcription_model = 'deepgram/nova-2',
+        ?array $keywords_boosting = null,
         Language|string|null $language = null,
     ): self {
         $obj = new self;
 
         $obj['transcription_model'] = $transcription_model;
 
+        null !== $keywords_boosting && $obj['keywords_boosting'] = $keywords_boosting;
         null !== $language && $obj['language'] = $language;
 
         return $obj;
@@ -96,6 +108,19 @@ final class Deepgram implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['transcription_model'] = $transcriptionModel;
+
+        return $obj;
+    }
+
+    /**
+     * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
+     *
+     * @param array<string,float> $keywordsBoosting
+     */
+    public function withKeywordsBoosting(array $keywordsBoosting): self
+    {
+        $obj = clone $this;
+        $obj['keywords_boosting'] = $keywordsBoosting;
 
         return $obj;
     }
