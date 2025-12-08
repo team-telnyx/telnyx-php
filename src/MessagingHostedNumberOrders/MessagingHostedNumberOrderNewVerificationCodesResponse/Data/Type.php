@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeSuccess;
+namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data;
 
 /**
  * Type of verification method used.

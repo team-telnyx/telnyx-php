@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
 use Tests\UnsupportedMockTests;
@@ -40,7 +41,10 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNotNull($result);
+        $this->assertInstanceOf(
+            PhoneNumberAssignmentByProfileAssignResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -57,7 +61,10 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNotNull($result);
+        $this->assertInstanceOf(
+            PhoneNumberAssignmentByProfileAssignResponse::class,
+            $result
+        );
     }
 
     #[Test]
