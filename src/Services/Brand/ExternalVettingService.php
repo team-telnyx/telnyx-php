@@ -39,7 +39,7 @@ final class ExternalVettingService implements ExternalVettingContract
         /** @var BaseResponse<list<ExternalVettingListResponseItem>> */
         $response = $this->client->request(
             method: 'get',
-            path: ['brand/%1$s/externalVetting', $brandID],
+            path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             options: $requestOptions,
             convert: new ListOf(ExternalVettingListResponseItem::class),
         );
@@ -73,7 +73,7 @@ final class ExternalVettingService implements ExternalVettingContract
         /** @var BaseResponse<ExternalVettingImportResponse> */
         $response = $this->client->request(
             method: 'put',
-            path: ['brand/%1$s/externalVetting', $brandID],
+            path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
             convert: ExternalVettingImportResponse::class,
@@ -106,7 +106,7 @@ final class ExternalVettingService implements ExternalVettingContract
         /** @var BaseResponse<ExternalVettingOrderResponse> */
         $response = $this->client->request(
             method: 'post',
-            path: ['brand/%1$s/externalVetting', $brandID],
+            path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
             convert: ExternalVettingOrderResponse::class,

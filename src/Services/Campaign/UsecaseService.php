@@ -40,7 +40,7 @@ final class UsecaseService implements UsecaseContract
         /** @var BaseResponse<UsecaseGetCostResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: 'campaign/usecase/cost',
+            path: '10dlc/campaign/usecase/cost',
             query: $parsed,
             options: $options,
             convert: UsecaseGetCostResponse::class,

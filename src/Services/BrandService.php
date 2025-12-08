@@ -85,7 +85,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<TelnyxBrand> */
         $response = $this->client->request(
             method: 'post',
-            path: 'brand',
+            path: '10dlc/brand',
             body: (object) $parsed,
             options: $options,
             convert: TelnyxBrand::class,
@@ -108,7 +108,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<BrandGetResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: ['brand/%1$s', $brandID],
+            path: ['10dlc/brand/%1$s', $brandID],
             options: $requestOptions,
             convert: BrandGetResponse::class,
         );
@@ -164,7 +164,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<TelnyxBrand> */
         $response = $this->client->request(
             method: 'put',
-            path: ['brand/%1$s', $brandID],
+            path: ['10dlc/brand/%1$s', $brandID],
             body: (object) $parsed,
             options: $options,
             convert: TelnyxBrand::class,
@@ -204,7 +204,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<BrandListResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: 'brand',
+            path: '10dlc/brand',
             query: $parsed,
             options: $options,
             convert: BrandListResponse::class,
@@ -227,7 +227,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
             method: 'delete',
-            path: ['brand/%1$s', $brandID],
+            path: ['10dlc/brand/%1$s', $brandID],
             options: $requestOptions,
             convert: null,
         );
@@ -261,7 +261,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<BrandGetFeedbackResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: ['brand/feedback/%1$s', $brandID],
+            path: ['10dlc/brand/feedback/%1$s', $brandID],
             options: $requestOptions,
             convert: BrandGetFeedbackResponse::class,
         );
@@ -283,7 +283,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
             method: 'post',
-            path: ['brand/%1$s/2faEmail', $brandID],
+            path: ['10dlc/brand/%1$s/2faEmail', $brandID],
             options: $requestOptions,
             convert: null,
         );
@@ -305,7 +305,7 @@ final class BrandService implements BrandContract
         /** @var BaseResponse<TelnyxBrand> */
         $response = $this->client->request(
             method: 'put',
-            path: ['brand/%1$s/revet', $brandID],
+            path: ['10dlc/brand/%1$s/revet', $brandID],
             options: $requestOptions,
             convert: TelnyxBrand::class,
         );

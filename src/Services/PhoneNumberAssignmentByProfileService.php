@@ -45,7 +45,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         /** @var BaseResponse<PhoneNumberAssignmentByProfileAssignResponse> */
         $response = $this->client->request(
             method: 'post',
-            path: 'phoneNumberAssignmentByProfile',
+            path: '10dlc/phoneNumberAssignmentByProfile',
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberAssignmentByProfileAssignResponse::class,
@@ -78,7 +78,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         /** @var BaseResponse<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse,> */
         $response = $this->client->request(
             method: 'get',
-            path: ['phoneNumberAssignmentByProfile/%1$s/phoneNumbers', $taskID],
+            path: ['10dlc/phoneNumberAssignmentByProfile/%1$s/phoneNumbers', $taskID],
             query: $parsed,
             options: $options,
             convert: PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse::class,
@@ -101,7 +101,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         /** @var BaseResponse<PhoneNumberAssignmentByProfileGetStatusResponse> */
         $response = $this->client->request(
             method: 'get',
-            path: ['phoneNumberAssignmentByProfile/%1$s', $taskID],
+            path: ['10dlc/phoneNumberAssignmentByProfile/%1$s', $taskID],
             options: $requestOptions,
             convert: PhoneNumberAssignmentByProfileGetStatusResponse::class,
         );
