@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\TelephoneNumber;
@@ -24,13 +24,13 @@ final class Filter implements BaseModel
     /**
      * The external connection ID to filter by or "null" to filter for logs without an external connection ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $external_connection_id;
 
     /**
      * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TelephoneNumber $telephone_number;
 
     public function __construct()

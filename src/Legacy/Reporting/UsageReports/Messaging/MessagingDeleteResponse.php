@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class MessagingDeleteResponse implements BaseModel
     /**
      * Legacy V2 MDR usage report response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?MdrUsageReportResponseLegacy $data;
 
     public function __construct()

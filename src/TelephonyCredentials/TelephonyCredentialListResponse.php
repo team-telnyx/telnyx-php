@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\TelephonyCredentials;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,10 +20,10 @@ final class TelephonyCredentialListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<TelephonyCredential>|null $data */
-    #[Api(list: TelephonyCredential::class, optional: true)]
+    #[Optional(list: TelephonyCredential::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

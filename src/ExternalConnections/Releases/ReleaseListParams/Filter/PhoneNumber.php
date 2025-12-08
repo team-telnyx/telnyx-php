@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class PhoneNumber implements BaseModel
     /**
      * The partial phone number to filter by. Requires 3-15 digits.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * The phone number to filter by.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()

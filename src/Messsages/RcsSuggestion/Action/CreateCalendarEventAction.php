@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsSuggestion\Action;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,19 +26,19 @@ final class CreateCalendarEventAction implements BaseModel
     /**
      * Event description. Maximum 500 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_time;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_time;
 
     /**
      * Event title. Maximum 100 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $title;
 
     public function __construct()

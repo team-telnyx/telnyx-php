@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,31 +32,31 @@ final class VerificationTriggerCallParams implements BaseModel
     /**
      * +E164 formatted phone number.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Api]
+    #[Required]
     public string $verify_profile_id;
 
     /**
      * Send a self-generated numeric code to the end-user.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $custom_code;
 
     /**
      * Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $extension;
 
     /**
      * The number of seconds the verification code is valid for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_secs;
 
     /**

@@ -7,7 +7,7 @@ namespace Telnyx\AI\Assistants;
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,7 +20,7 @@ final class AssistantsList implements BaseModel
     use SdkModel;
 
     /** @var list<InferenceEmbedding> $data */
-    #[Api(list: InferenceEmbedding::class)]
+    #[Required(list: InferenceEmbedding::class)]
     public array $data;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -51,13 +52,13 @@ final class VoiceCreateParams implements BaseModel
     /**
      * End time in ISO format.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_time;
 
     /**
      * Start time in ISO format.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_time;
 
     /**
@@ -65,7 +66,7 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<int>|null $call_types
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $call_types;
 
     /**
@@ -73,7 +74,7 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<int>|null $connections
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
     /**
@@ -81,7 +82,7 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<string>|null $fields
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $fields;
 
     /**
@@ -89,13 +90,13 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<Filter>|null $filters
      */
-    #[Api(list: Filter::class, optional: true)]
+    #[Optional(list: Filter::class)]
     public ?array $filters;
 
     /**
      * Whether to include all metadata.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_all_metadata;
 
     /**
@@ -103,7 +104,7 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<string>|null $managed_accounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managed_accounts;
 
     /**
@@ -111,31 +112,31 @@ final class VoiceCreateParams implements BaseModel
      *
      * @var list<int>|null $record_types
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $record_types;
 
     /**
      * Name of the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_name;
 
     /**
      * Whether to select all managed accounts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $select_all_managed_accounts;
 
     /**
      * Source of the report. Valid values: calls (default), call-control, fax-api, webrtc.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $source;
 
     /**
      * Timezone for the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $timezone;
 
     /**

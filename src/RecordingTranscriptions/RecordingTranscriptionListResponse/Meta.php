@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors;
@@ -19,19 +19,19 @@ final class Meta implements BaseModel
     /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cursors $cursors;
 
     /**
      * Path to next page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next;
 
     /**
      * Path to previous page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $previous;
 
     public function __construct()

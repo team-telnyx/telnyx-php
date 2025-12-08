@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnects;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,37 +32,37 @@ final class VirtualCrossConnectUpdateParams implements BaseModel
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value can not be patched once the VXC has bene provisioned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $primary_cloud_ip;
 
     /**
      * Indicates whether the primary circuit is enabled. Setting this to `false` will disable the circuit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $primary_enabled;
 
     /**
      * Whether the primary BGP route is being announced.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $primary_routing_announcement;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value can not be patched once the VXC has bene provisioned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $secondary_cloud_ip;
 
     /**
      * Indicates whether the secondary circuit is enabled. Setting this to `false` will disable the circuit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $secondary_enabled;
 
     /**
      * Whether the secondary BGP route is being announced.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $secondary_routing_announcement;
 
     public function __construct()

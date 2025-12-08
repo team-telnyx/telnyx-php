@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
@@ -25,13 +25,13 @@ final class Data implements BaseModel
     /**
      * RCS agent ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $agent_id;
 
     /**
      * Phone number that was invited for testing.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -39,13 +39,13 @@ final class Data implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * Status of the test number invitation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()

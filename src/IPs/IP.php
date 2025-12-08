@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class IP implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ID of the IP Connection to which this IP should be attached.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * IP adddress represented by this resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_address;
 
     /**
      * Port to use when connecting to this IP.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

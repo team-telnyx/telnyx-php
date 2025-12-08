@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data\AdditionalDataRequired;
@@ -28,31 +28,31 @@ final class Data implements BaseModel
      *
      * @var list<value-of<AdditionalDataRequired>>|null $additional_data_required
      */
-    #[Api(list: AdditionalDataRequired::class, optional: true)]
+    #[Optional(list: AdditionalDataRequired::class)]
     public ?array $additional_data_required;
 
     /**
      * Indicates whether the phone number is covered or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $has_csr_coverage;
 
     /**
      * The phone number that is being verified.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * The reason why the phone number is not covered. Only returned if `has_csr_coverage` is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reason;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

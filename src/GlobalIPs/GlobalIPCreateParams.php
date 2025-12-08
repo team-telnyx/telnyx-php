@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class GlobalIPCreateParams implements BaseModel
     /**
      * A user specified description for the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * A user specified name for the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -41,7 +41,7 @@ final class GlobalIPCreateParams implements BaseModel
      *
      * @var array<string,mixed>|null $ports
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $ports;
 
     public function __construct()

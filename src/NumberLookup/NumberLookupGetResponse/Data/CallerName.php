@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class CallerName implements BaseModel
     /**
      * The name of the requested phone number's owner as per the CNAM database.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $caller_name;
 
     /**
      * A caller-name lookup specific error code, expressed as a stringified 5-digit integer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_code;
 
     public function __construct()

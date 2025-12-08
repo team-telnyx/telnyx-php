@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\MessagingHostedNumberOrders;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\HostedNumber;
@@ -23,10 +23,10 @@ final class MessagingHostedNumberOrderListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<MessagingHostedNumberOrder>|null $data */
-    #[Api(list: MessagingHostedNumberOrder::class, optional: true)]
+    #[Optional(list: MessagingHostedNumberOrder::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

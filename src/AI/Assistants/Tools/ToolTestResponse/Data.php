@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tools\ToolTestResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,20 +24,20 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $content_type;
 
     /** @var array<string,mixed> $request */
-    #[Api(map: 'mixed')]
+    #[Required(map: 'mixed')]
     public array $request;
 
-    #[Api]
+    #[Required]
     public string $response;
 
-    #[Api]
+    #[Required]
     public int $status_code;
 
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,37 +34,37 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     /**
      * Filters conferences by the creation date. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $DateCreated;
 
     /**
      * Filters conferences by the time they were last updated. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateUpdated>=2023-05-22.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $DateUpdated;
 
     /**
      * Filters conferences by their friendly name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $FriendlyName;
 
     /**
      * The number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $Page;
 
     /**
      * The number of records to be displayed on a page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $PageSize;
 
     /**
      * Used to request the next page of results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $PageToken;
 
     /**
@@ -72,9 +72,8 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      *
      * @var value-of<Status>|null $Status
      */
-    #[Api(
+    #[Optional(
         enum: Status::class,
-        optional: true,
     )]
     public ?string $Status;
 

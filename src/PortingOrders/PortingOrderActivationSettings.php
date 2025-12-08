@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderActivationSettings\ActivationStatus;
@@ -27,25 +27,25 @@ final class PortingOrderActivationSettings implements BaseModel
      *
      * @var value-of<ActivationStatus>|null $activation_status
      */
-    #[Api(enum: ActivationStatus::class, nullable: true, optional: true)]
+    #[Optional(enum: ActivationStatus::class, nullable: true)]
     public ?string $activation_status;
 
     /**
      * Indicates whether this porting order is eligible for FastPort.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $fast_port_eligible;
 
     /**
      * ISO 8601 formatted Date/Time of the FOC date.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $foc_datetime_actual;
 
     /**
      * ISO 8601 formatted Date/Time requested for the FOC date.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $foc_datetime_requested;
 
     public function __construct()

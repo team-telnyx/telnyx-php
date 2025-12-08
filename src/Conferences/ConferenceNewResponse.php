@@ -8,7 +8,7 @@ use Telnyx\Conferences\Conference\EndedBy;
 use Telnyx\Conferences\Conference\EndReason;
 use Telnyx\Conferences\Conference\RecordType;
 use Telnyx\Conferences\Conference\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,7 +20,7 @@ final class ConferenceNewResponse implements BaseModel
     /** @use SdkModel<ConferenceNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Conference $data;
 
     public function __construct()

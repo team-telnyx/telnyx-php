@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class Record implements BaseModel
     /**
      * The phone number that the status is being checked for.
      */
-    #[Api]
+    #[Required]
     public string $phoneNumber;
 
     /**
      * The status of the associated phone number assignment.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
     /**
      * The ID of the task associated with the phone number.
      */
-    #[Api]
+    #[Required]
     public string $taskId;
 
     /**

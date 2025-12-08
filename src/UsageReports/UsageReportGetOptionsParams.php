@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class UsageReportGetOptionsParams implements BaseModel
     /**
      * Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorization_bearer;
 
     public function __construct()

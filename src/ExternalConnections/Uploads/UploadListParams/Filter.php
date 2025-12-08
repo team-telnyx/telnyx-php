@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads\UploadListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\CivicAddressID;
@@ -28,16 +28,16 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CivicAddressID $civic_address_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?LocationID $location_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumber $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
     public function __construct()

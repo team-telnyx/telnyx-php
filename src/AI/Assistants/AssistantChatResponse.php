@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class AssistantChatResponse implements BaseModel
     /**
      * The assistant's generated response based on the input message and context.
      */
-    #[Api]
+    #[Required]
     public string $content;
 
     /**

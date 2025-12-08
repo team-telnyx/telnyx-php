@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\PortoutListRejectionCodesParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code;
@@ -24,7 +24,7 @@ final class Filter implements BaseModel
      *
      * @var int|list<int>|null $code
      */
-    #[Api(union: Code::class, optional: true)]
+    #[Optional(union: Code::class)]
     public int|array|null $code;
 
     public function __construct()

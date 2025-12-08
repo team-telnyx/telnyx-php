@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class SubNumberOrderUpdateRequirementGroupParams implements BaseModel
     /**
      * The ID of the requirement group to associate.
      */
-    #[Api]
+    #[Required]
     public string $requirement_group_id;
 
     /**

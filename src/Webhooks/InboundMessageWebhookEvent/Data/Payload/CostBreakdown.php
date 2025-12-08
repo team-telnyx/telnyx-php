@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\CostBreakdown\CarrierFee;
@@ -22,10 +22,10 @@ final class CostBreakdown implements BaseModel
     /** @use SdkModel<CostBreakdownShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CarrierFee $carrier_fee;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Rate $rate;
 
     public function __construct()

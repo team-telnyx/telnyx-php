@@ -8,7 +8,7 @@ use Telnyx\Connections\ConnectionListParams\Filter;
 use Telnyx\Connections\ConnectionListParams\Filter\ConnectionName;
 use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,13 +37,13 @@ final class ConnectionListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -62,7 +62,7 @@ final class ConnectionListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()

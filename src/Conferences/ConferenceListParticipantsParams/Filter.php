@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\ConferenceListParticipantsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class Filter implements BaseModel
     /**
      * If present, participants will be filtered to those who are/are not muted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $muted;
 
     /**
      * If present, participants will be filtered to those who are/are not put on hold.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $on_hold;
 
     /**
      * If present, participants will be filtered to those who are whispering or are not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $whispering;
 
     public function __construct()

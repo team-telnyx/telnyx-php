@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\MesssageRcsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class From implements BaseModel
     /**
      * agent ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $agent_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $agent_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PublicInternetGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +27,19 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The id of the network associated with the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $network_id;
 
     /**
      * The region interface is deployed to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_code;
 
     public function __construct()

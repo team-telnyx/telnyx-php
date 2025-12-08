@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortabilityChecks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,7 +29,7 @@ final class PortabilityCheckRunParams implements BaseModel
      *
      * @var list<string>|null $phone_numbers
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_numbers;
 
     public function __construct()

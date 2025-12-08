@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria;
@@ -24,22 +24,22 @@ final class RegulatoryRequirement implements BaseModel
     /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?AcceptanceCriteria $acceptance_criteria;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $example;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

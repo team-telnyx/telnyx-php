@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
@@ -31,7 +31,7 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -39,52 +39,52 @@ final class PrivateWirelessGateway implements BaseModel
      *
      * @var list<PwgAssignedResourcesSummary>|null $assigned_resources
      */
-    #[Api(list: PwgAssignedResourcesSummary::class, optional: true)]
+    #[Optional(list: PwgAssignedResourcesSummary::class)]
     public ?array $assigned_resources;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * IP block used to assign IPs to the SIM cards in the Private Wireless Gateway.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_range;
 
     /**
      * The private wireless gateway name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The identification of the related network resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $network_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The name of the region where the Private Wireless Gateway is deployed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_code;
 
     /**
      * The current status or failure details of the Private Wireless Gateway.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PrivateWirelessGatewayStatus $status;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

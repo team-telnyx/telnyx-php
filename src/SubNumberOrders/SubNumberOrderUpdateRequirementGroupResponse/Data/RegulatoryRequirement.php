@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,13 +20,13 @@ final class RegulatoryRequirement implements BaseModel
     /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_id;
 
     public function __construct()

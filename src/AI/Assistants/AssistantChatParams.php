@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +28,19 @@ final class AssistantChatParams implements BaseModel
     /**
      * The message content sent by the client to the assistant.
      */
-    #[Api]
+    #[Required]
     public string $content;
 
     /**
      * A unique identifier for the conversation thread, used to maintain context.
      */
-    #[Api]
+    #[Required]
     public string $conversation_id;
 
     /**
      * The optional display name of the user sending the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**

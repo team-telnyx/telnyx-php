@@ -7,7 +7,7 @@ namespace Telnyx\Comments;
 use Telnyx\Comments\CommentGetResponse\Data;
 use Telnyx\Comments\CommentGetResponse\Data\CommenterType;
 use Telnyx\Comments\CommentGetResponse\Data\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class CommentGetResponse implements BaseModel
     /** @use SdkModel<CommentGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

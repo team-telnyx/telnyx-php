@@ -7,7 +7,8 @@ namespace Telnyx\Brand;
 use Telnyx\Brand\TelnyxBrand\BrandRelationship;
 use Telnyx\Brand\TelnyxBrand\OptionalAttributes;
 use Telnyx\Brand\TelnyxBrand\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -66,25 +67,25 @@ final class BrandGetResponse implements BaseModel
      *
      * @var value-of<BrandRelationship> $brandRelationship
      */
-    #[Api(enum: BrandRelationship::class)]
+    #[Required(enum: BrandRelationship::class)]
     public string $brandRelationship;
 
     /**
      * ISO2 2 characters country code. Example: US - United States.
      */
-    #[Api]
+    #[Required]
     public string $country;
 
     /**
      * Display or marketing name of the brand.
      */
-    #[Api]
+    #[Required]
     public string $displayName;
 
     /**
      * Valid email address of brand support contact.
      */
-    #[Api]
+    #[Required]
     public string $email;
 
     /**
@@ -92,19 +93,19 @@ final class BrandGetResponse implements BaseModel
      *
      * @var value-of<EntityType> $entityType
      */
-    #[Api(enum: EntityType::class)]
+    #[Required(enum: EntityType::class)]
     public string $entityType;
 
     /**
      * Vertical or industry segment of the brand.
      */
-    #[Api]
+    #[Required]
     public string $vertical;
 
     /**
      * Alternate business identifier such as DUNS, LEI, or GIIN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $altBusinessId;
 
     /**
@@ -112,13 +113,13 @@ final class BrandGetResponse implements BaseModel
      *
      * @var value-of<AltBusinessIDType>|null $altBusinessIdType
      */
-    #[Api(enum: AltBusinessIDType::class, optional: true)]
+    #[Optional(enum: AltBusinessIDType::class)]
     public ?string $altBusinessIdType;
 
     /**
      * Unique identifier assigned to the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $brandId;
 
     /**
@@ -126,49 +127,49 @@ final class BrandGetResponse implements BaseModel
      *
      * Required if `entityType` is `PUBLIC_PROFIT`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessContactEmail;
 
     /**
      * City name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * (Required for Non-profit/private/public) Legal company name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $companyName;
 
     /**
      * Date and time that the brand was created at.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $createdAt;
 
     /**
      * Unique identifier assigned to the csp by the registry.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cspId;
 
     /**
      * (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ein;
 
     /**
      * Failure reasons for brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $failureReasons;
 
     /**
      * First name of business contact.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $firstName;
 
     /**
@@ -176,64 +177,64 @@ final class BrandGetResponse implements BaseModel
      *
      * @var value-of<BrandIdentityStatus>|null $identityStatus
      */
-    #[Api(enum: BrandIdentityStatus::class, optional: true)]
+    #[Optional(enum: BrandIdentityStatus::class)]
     public ?string $identityStatus;
 
     /**
      * IP address of the browser requesting to create brand identity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ipAddress;
 
     /**
      * Indicates whether this brand is known to be a reseller.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isReseller;
 
     /**
      * Last name of business contact.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastName;
 
     /**
      * Valid mobile phone number in e.164 international format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobilePhone;
 
     /**
      * Mock brand for testing purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mock;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OptionalAttributes $optionalAttributes;
 
     /**
      * Valid phone number in e.164 international format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone;
 
     /**
      * Postal codes. Use 5 digit zipcode for United States.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postalCode;
 
     /**
      * Unique identifier Telnyx assigned to the brand - the brandId.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $referenceId;
 
     /**
      * State. Must be 2 letters code for United States.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
@@ -241,7 +242,7 @@ final class BrandGetResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -249,61 +250,61 @@ final class BrandGetResponse implements BaseModel
      *
      * @var value-of<StockExchange>|null $stockExchange
      */
-    #[Api(enum: StockExchange::class, optional: true)]
+    #[Optional(enum: StockExchange::class)]
     public ?string $stockExchange;
 
     /**
      * (Required for public company) stock symbol.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stockSymbol;
 
     /**
      * Street number and name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street;
 
     /**
      * Unique identifier assigned to the brand by the registry.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcrBrandId;
 
     /**
      * Universal EIN of Brand, Read Only.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $universalEin;
 
     /**
      * Date and time that the brand was last updated at.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updatedAt;
 
     /**
      * Failover webhook to which brand status updates are sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookFailoverURL;
 
     /**
      * Webhook to which brand status updates are sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookURL;
 
     /**
      * Brand website URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $website;
 
     /**
      * Number of campaigns associated with the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $assignedCampaignsCount;
 
     /**

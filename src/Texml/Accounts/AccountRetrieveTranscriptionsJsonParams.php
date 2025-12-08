@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     /**
      * The number of records to be displayed on a page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $PageSize;
 
     /**
      * Used to request the next page of results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $PageToken;
 
     public function __construct()

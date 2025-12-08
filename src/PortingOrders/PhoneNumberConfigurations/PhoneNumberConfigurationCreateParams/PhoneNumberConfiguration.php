@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class PhoneNumberConfiguration implements BaseModel
     /**
      * Identifies the porting phone number to be configured.
      */
-    #[Api]
+    #[Required]
     public string $porting_phone_number_id;
 
     /**
      * Identifies the user bundle to be associated with the porting phone number.
      */
-    #[Api]
+    #[Required]
     public string $user_bundle_id;
 
     /**

@@ -6,7 +6,8 @@ namespace Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\AIAssistant;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\VoiceMode;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,7 +26,7 @@ final class Handoff implements BaseModel
      *
      * @var list<AIAssistant> $ai_assistants
      */
-    #[Api(list: AIAssistant::class)]
+    #[Required(list: AIAssistant::class)]
     public array $ai_assistants;
 
     /**
@@ -33,7 +34,7 @@ final class Handoff implements BaseModel
      *
      * @var value-of<VoiceMode>|null $voice_mode
      */
-    #[Api(enum: VoiceMode::class, optional: true)]
+    #[Optional(enum: VoiceMode::class)]
     public ?string $voice_mode;
 
     /**

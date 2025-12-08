@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
@@ -23,10 +23,10 @@ final class VerifiedNumberListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<VerifiedNumber> $data */
-    #[Api(list: VerifiedNumber::class)]
+    #[Required(list: VerifiedNumber::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

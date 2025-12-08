@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservation;
@@ -19,7 +19,7 @@ final class ActionExtendResponse implements BaseModel
     /** @use SdkModel<ActionExtendResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?NumberReservation $data;
 
     public function __construct()

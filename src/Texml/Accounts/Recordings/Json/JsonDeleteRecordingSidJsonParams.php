@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Recordings\Json;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -22,7 +22,7 @@ final class JsonDeleteRecordingSidJsonParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $account_sid;
 
     /**

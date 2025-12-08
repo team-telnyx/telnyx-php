@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrdersExceptionType\Code;
@@ -24,13 +24,13 @@ final class PortingOrdersExceptionType implements BaseModel
      *
      * @var value-of<Code>|null $code
      */
-    #[Api(enum: Code::class, optional: true)]
+    #[Optional(enum: Code::class)]
     public ?string $code;
 
     /**
      * Description of an exception type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     public function __construct()

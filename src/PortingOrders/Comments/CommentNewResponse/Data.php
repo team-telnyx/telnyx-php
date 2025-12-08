@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Comments\CommentNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
@@ -24,28 +24,28 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Body of comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -53,7 +53,7 @@ final class Data implements BaseModel
      *
      * @var value-of<UserType>|null $user_type
      */
-    #[Api(enum: UserType::class, optional: true)]
+    #[Optional(enum: UserType::class)]
     public ?string $user_type;
 
     public function __construct()

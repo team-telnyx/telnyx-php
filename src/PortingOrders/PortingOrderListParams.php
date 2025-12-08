@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -46,25 +46,25 @@ final class PortingOrderListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Include the first 50 phone number objects in the results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_phone_numbers;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Sort $sort;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class UserBundleListResourcesResponse implements BaseModel
     use SdkModel;
 
     /** @var list<UserBundleResource> $data */
-    #[Api(list: UserBundleResource::class)]
+    #[Required(list: UserBundleResource::class)]
     public array $data;
 
     /**

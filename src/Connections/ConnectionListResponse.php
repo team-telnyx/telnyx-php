@@ -7,7 +7,7 @@ namespace Telnyx\Connections;
 use Telnyx\Connections\ConnectionListResponse\Data;
 use Telnyx\Connections\ConnectionListResponse\Data\WebhookAPIVersion;
 use Telnyx\ConnectionsPaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -23,10 +23,10 @@ final class ConnectionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionsPaginationMeta $meta;
 
     public function __construct()

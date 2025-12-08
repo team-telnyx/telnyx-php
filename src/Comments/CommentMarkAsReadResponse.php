@@ -7,7 +7,7 @@ namespace Telnyx\Comments;
 use Telnyx\Comments\CommentMarkAsReadResponse\Data;
 use Telnyx\Comments\CommentMarkAsReadResponse\Data\CommenterType;
 use Telnyx\Comments\CommentMarkAsReadResponse\Data\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class CommentMarkAsReadResponse implements BaseModel
     /** @use SdkModel<CommentMarkAsReadResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PublicInternetGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
@@ -24,13 +24,13 @@ final class Interface1 implements BaseModel
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The id of the network associated with the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $network_id;
 
     /**
@@ -38,7 +38,7 @@ final class Interface1 implements BaseModel
      *
      * @var value-of<InterfaceStatus>|null $status
      */
-    #[Api(enum: InterfaceStatus::class, optional: true)]
+    #[Optional(enum: InterfaceStatus::class)]
     public ?string $status;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyEndpoints;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
@@ -27,34 +28,34 @@ final class DynamicEmergencyEndpoint implements BaseModel
     /** @use SdkModel<DynamicEmergencyEndpointShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $callback_number;
 
-    #[Api]
+    #[Required]
     public string $caller_name;
 
     /**
      * An id of a currently active dynamic emergency location.
      */
-    #[Api]
+    #[Required]
     public string $dynamic_emergency_address_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date of when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_from_id;
 
     /**
@@ -62,13 +63,13 @@ final class DynamicEmergencyEndpoint implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date of when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**

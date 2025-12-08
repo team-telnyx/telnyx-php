@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -52,7 +53,7 @@ final class MessagingProfileCreateParams implements BaseModel
     /**
      * A user friendly name for the messaging profile.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -60,49 +61,49 @@ final class MessagingProfileCreateParams implements BaseModel
      *
      * @var list<string> $whitelisted_destinations
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $whitelisted_destinations;
 
     /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $alpha_sender;
 
     /**
      * The maximum amount of money (in USD) that can be spent by this profile before midnight UTC.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $daily_spend_limit;
 
     /**
      * Whether to enforce the value configured by `daily_spend_limit`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $daily_spend_limit_enabled;
 
     /**
      * Specifies whether the messaging profile is enabled or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * enables SMS fallback for MMS messages.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mms_fall_back_to_sms;
 
     /**
      * enables automated resizing of MMS media.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mms_transcoding;
 
     /**
      * Send messages only to mobile phone numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mobile_only;
 
     /**
@@ -112,7 +113,7 @@ final class MessagingProfileCreateParams implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?NumberPoolSettings $number_pool_settings;
 
     /**
@@ -124,7 +125,7 @@ final class MessagingProfileCreateParams implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?URLShortenerSettings $url_shortener_settings;
 
     /**
@@ -132,19 +133,19 @@ final class MessagingProfileCreateParams implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_failover_url;
 
     /**
      * The URL where webhooks related to this messaging profile will be sent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_url;
 
     /**

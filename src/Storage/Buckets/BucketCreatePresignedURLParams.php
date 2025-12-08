@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -26,13 +27,13 @@ final class BucketCreatePresignedURLParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $bucketName;
 
     /**
      * The time to live of the token in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $ttl;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices\InvoiceListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,22 +23,22 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $file_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $invoice_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $paid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $period_end;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $period_start;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions\SimCardGroupAction;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Settings implements BaseModel
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $private_wireless_gateway_id;
 
     public function __construct()

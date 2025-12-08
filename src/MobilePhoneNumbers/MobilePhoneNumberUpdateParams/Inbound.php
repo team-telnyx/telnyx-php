@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Inbound implements BaseModel
     /**
      * The ID of the CallControl or TeXML Application that will intercept inbound calls.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $interception_app_id;
 
     public function __construct()

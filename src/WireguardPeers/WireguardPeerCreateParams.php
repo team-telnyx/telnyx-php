@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardPeers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +28,13 @@ final class WireguardPeerCreateParams implements BaseModel
     /**
      * The id of the wireguard interface associated with the peer.
      */
-    #[Api]
+    #[Required]
     public string $wireguard_interface_id;
 
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $public_key;
 
     /**

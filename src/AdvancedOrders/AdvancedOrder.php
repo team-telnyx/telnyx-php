@@ -6,7 +6,7 @@ namespace Telnyx\AdvancedOrders;
 
 use Telnyx\AdvancedOrders\AdvancedOrder\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrder\PhoneNumberType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,33 +27,33 @@ final class AdvancedOrder implements BaseModel
     /** @use SdkModel<AdvancedOrderShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $area_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comments;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /** @var list<value-of<Feature>>|null $features */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
     /** @var value-of<PhoneNumberType>|null $phone_number_type */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $quantity;
 
     /**
      * The ID of the requirement group to associate with this advanced order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_group_id;
 
     public function __construct()

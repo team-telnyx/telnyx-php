@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters\ClusterListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
@@ -25,26 +25,26 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $bucket;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $finished_at;
 
-    #[Api]
+    #[Required]
     public int $min_cluster_size;
 
-    #[Api]
+    #[Required]
     public int $min_subcluster_size;
 
     /** @var value-of<TaskStatus> $status */
-    #[Api(enum: TaskStatus::class)]
+    #[Required(enum: TaskStatus::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public string $task_id;
 
     /**

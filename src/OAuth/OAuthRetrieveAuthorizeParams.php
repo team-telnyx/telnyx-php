@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,13 +36,13 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     /**
      * OAuth client identifier.
      */
-    #[Api]
+    #[Required]
     public string $client_id;
 
     /**
      * Redirect URI.
      */
-    #[Api]
+    #[Required]
     public string $redirect_uri;
 
     /**
@@ -49,13 +50,13 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      *
      * @var value-of<ResponseType> $response_type
      */
-    #[Api(enum: ResponseType::class)]
+    #[Required(enum: ResponseType::class)]
     public string $response_type;
 
     /**
      * PKCE code challenge.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code_challenge;
 
     /**
@@ -63,19 +64,19 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      *
      * @var value-of<CodeChallengeMethod>|null $code_challenge_method
      */
-    #[Api(enum: CodeChallengeMethod::class, optional: true)]
+    #[Optional(enum: CodeChallengeMethod::class)]
     public ?string $code_challenge_method;
 
     /**
      * Space-separated list of requested scopes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**
      * State parameter for CSRF protection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**

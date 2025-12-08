@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,11 +37,11 @@ final class NumberReservationCreateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /** @var list<ReservedPhoneNumber>|null $phone_numbers */
-    #[Api(list: ReservedPhoneNumber::class, optional: true)]
+    #[Optional(list: ReservedPhoneNumber::class)]
     public ?array $phone_numbers;
 
     public function __construct()

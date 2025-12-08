@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -34,23 +34,23 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $aggregation_type;
 
     /** @var list<string>|null $connections */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $connections;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_time;
 
     /**
@@ -58,28 +58,28 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      *
      * @var list<string>|null $profiles
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $profiles;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public mixed $result;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_time;
 
     /**
      * Status of the report (Pending = 1, Complete = 2, Failed = 3, Expired = 4).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

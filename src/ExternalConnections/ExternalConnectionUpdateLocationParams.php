@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,13 +24,13 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * A new static emergency address ID to update the location with.
      */
-    #[Api]
+    #[Required]
     public string $static_emergency_address_id;
 
     /**

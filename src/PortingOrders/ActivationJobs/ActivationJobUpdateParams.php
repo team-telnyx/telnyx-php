@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActivationJobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,13 +25,13 @@ final class ActivationJobUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The desired activation time. The activation time should be between any of the activation windows.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $activate_at;
 
     /**

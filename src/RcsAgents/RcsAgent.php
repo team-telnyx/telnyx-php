@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RcsAgents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -29,55 +29,55 @@ final class RcsAgent implements BaseModel
     /**
      * RCS Agent ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $agent_id;
 
     /**
      * Human readable agent name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $agent_name;
 
     /**
      * Date and time when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Specifies whether the agent is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * Messaging profile ID associated with the RCS Agent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $profile_id;
 
     /**
      * Date and time when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * User ID associated with the RCS Agent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**
      * Failover URL to receive RCS events.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_failover_url;
 
     /**
      * URL to receive RCS events.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_url;
 
     public function __construct()

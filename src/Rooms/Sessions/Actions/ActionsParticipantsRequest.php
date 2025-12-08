@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Sessions\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants;
@@ -26,7 +26,7 @@ final class ActionsParticipantsRequest implements BaseModel
      *
      * @var list<string>|null $exclude
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $exclude;
 
     /**
@@ -34,7 +34,7 @@ final class ActionsParticipantsRequest implements BaseModel
      *
      * @var list<string>|value-of<UnionMember0>|null $participants
      */
-    #[Api(union: Participants::class, optional: true)]
+    #[Optional(union: Participants::class)]
     public array|string|null $participants;
 
     public function __construct()

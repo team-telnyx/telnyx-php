@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
@@ -20,7 +20,7 @@ final class CustomerServiceRecordGetResponse implements BaseModel
     /** @use SdkModel<CustomerServiceRecordGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CustomerServiceRecord $data;
 
     public function __construct()

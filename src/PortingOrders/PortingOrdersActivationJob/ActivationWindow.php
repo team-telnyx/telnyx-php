@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrdersActivationJob;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class ActivationWindow implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the activation window ends.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_at;
 
     /**
      * ISO 8601 formatted date indicating when the activation window starts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_at;
 
     public function __construct()

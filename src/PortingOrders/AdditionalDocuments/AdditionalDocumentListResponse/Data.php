@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse\Data\DocumentType;
@@ -30,25 +30,25 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies this additional document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The content type of the related document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $content_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Identifies the associated document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $document_id;
 
     /**
@@ -56,31 +56,31 @@ final class Data implements BaseModel
      *
      * @var value-of<DocumentType>|null $document_type
      */
-    #[Api(enum: DocumentType::class, optional: true)]
+    #[Optional(enum: DocumentType::class)]
     public ?string $document_type;
 
     /**
      * The filename of the related document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filename;
 
     /**
      * Identifies the associated porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

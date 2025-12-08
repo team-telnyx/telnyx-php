@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Transmitted implements BaseModel
     /**
      * The amount of data transmitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $amount;
 
     /**
      * The unit of the amount of data transmitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     public function __construct()

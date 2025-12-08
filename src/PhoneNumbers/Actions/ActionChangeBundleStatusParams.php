@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class ActionChangeBundleStatusParams implements BaseModel
     /**
      * The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
      */
-    #[Api]
+    #[Required]
     public string $bundle_id;
 
     /**

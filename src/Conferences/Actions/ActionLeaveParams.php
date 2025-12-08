@@ -6,7 +6,8 @@ namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled;
 use Telnyx\Conferences\Actions\ActionLeaveParams\Region;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -36,7 +37,7 @@ final class ActionLeaveParams implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
@@ -44,13 +45,13 @@ final class ActionLeaveParams implements BaseModel
      *
      * @var value-of<BeepEnabled>|null $beep_enabled
      */
-    #[Api(enum: BeepEnabled::class, optional: true)]
+    #[Optional(enum: BeepEnabled::class)]
     public ?string $beep_enabled;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -58,7 +59,7 @@ final class ActionLeaveParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**

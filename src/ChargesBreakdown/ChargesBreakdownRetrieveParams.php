@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,13 +31,13 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
     /**
      * Start date for the charges breakdown in ISO date format (YYYY-MM-DD).
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_date;
 
     /**
      * End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_date;
 
     /**
@@ -44,7 +45,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      *
      * @var value-of<Format>|null $format
      */
-    #[Api(enum: Format::class, optional: true)]
+    #[Optional(enum: Format::class)]
     public ?string $format;
 
     /**

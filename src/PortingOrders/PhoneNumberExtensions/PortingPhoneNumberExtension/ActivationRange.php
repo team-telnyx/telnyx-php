@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class ActivationRange implements BaseModel
     /**
      * Specifies the end of the activation range. It must be no more than the end of the extension range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $end_at;
 
     /**
      * Specifies the start of the activation range. Must be greater or equal the start of the extension range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $start_at;
 
     public function __construct()

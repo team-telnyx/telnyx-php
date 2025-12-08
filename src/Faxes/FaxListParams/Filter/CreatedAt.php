@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes\FaxListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class CreatedAt implements BaseModel
     /**
      * ISO 8601 date time for filtering faxes created after that date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gt;
 
     /**
      * ISO 8601 date time for filtering faxes created after or on that date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gte;
 
     /**
      * ISO 8601 formatted date time for filtering faxes created before that date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lt;
 
     /**
      * ISO 8601 formatted date time for filtering faxes created on or before that date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lte;
 
     public function __construct()

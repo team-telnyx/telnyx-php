@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Cost implements BaseModel
     /**
      * The total monetary amount of the order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
      * Filter by ISO 4217 currency string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     public function __construct()

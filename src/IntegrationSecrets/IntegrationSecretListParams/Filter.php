@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IntegrationSecrets\IntegrationSecretListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter\Type;
@@ -20,7 +20,7 @@ final class Filter implements BaseModel
     use SdkModel;
 
     /** @var value-of<Type>|null $type */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()

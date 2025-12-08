@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Reports\PortoutReport\ReportType;
@@ -18,7 +18,7 @@ final class ReportNewResponse implements BaseModel
     /** @use SdkModel<ReportNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortoutReport $data;
 
     public function __construct()

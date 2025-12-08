@@ -7,7 +7,7 @@ namespace Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter\Feature;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter\PhoneNumber;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter\PhoneNumberType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -38,25 +38,25 @@ final class Filter implements BaseModel
     /**
      * Find numbers in a particular US state or CA province.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * Filter to determine if best effort results should be included. Only available in USA/CANADA.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $best_effort;
 
     /**
      * Filter phone numbers by country.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Filter to exclude phone numbers that are currently on hold/reserved for your account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $exclude_held_numbers;
 
     /**
@@ -64,31 +64,31 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<Feature>>|null $features
      */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
     /**
      * Limits the number of results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
      * Filter phone numbers by city.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * Filter by the national destination code of the number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $national_destination_code;
 
     /**
      * Filter phone numbers by pattern matching.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumber $phone_number;
 
     /**
@@ -96,25 +96,25 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
     /**
      * Filter phone numbers by rate center. This filter is only applicable to USA and Canada numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate_center;
 
     /**
      * Filter to ensure only numbers that can be reserved are included in the results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $reservable;
 
     public function __construct()

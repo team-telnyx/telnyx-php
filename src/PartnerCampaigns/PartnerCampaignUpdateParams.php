@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PartnerCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class PartnerCampaignUpdateParams implements BaseModel
     /**
      * Webhook failover to which campaign status updates are sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookFailoverURL;
 
     /**
      * Webhook to which campaign status updates are sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookURL;
 
     public function __construct()

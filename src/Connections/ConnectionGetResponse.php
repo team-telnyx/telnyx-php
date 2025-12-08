@@ -6,7 +6,7 @@ namespace Telnyx\Connections;
 
 use Telnyx\Connections\ConnectionGetResponse\Data;
 use Telnyx\Connections\ConnectionGetResponse\Data\WebhookAPIVersion;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -19,7 +19,7 @@ final class ConnectionGetResponse implements BaseModel
     /** @use SdkModel<ConnectionGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

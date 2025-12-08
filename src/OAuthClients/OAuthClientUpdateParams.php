@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,7 +37,7 @@ final class OAuthClientUpdateParams implements BaseModel
      *
      * @var list<value-of<AllowedGrantType>>|null $allowed_grant_types
      */
-    #[Api(list: AllowedGrantType::class, optional: true)]
+    #[Optional(list: AllowedGrantType::class)]
     public ?array $allowed_grant_types;
 
     /**
@@ -45,25 +45,25 @@ final class OAuthClientUpdateParams implements BaseModel
      *
      * @var list<string>|null $allowed_scopes
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $allowed_scopes;
 
     /**
      * URL of the client logo.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $logo_uri;
 
     /**
      * The name of the OAuth client.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $policy_uri;
 
     /**
@@ -71,19 +71,19 @@ final class OAuthClientUpdateParams implements BaseModel
      *
      * @var list<string>|null $redirect_uris
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $redirect_uris;
 
     /**
      * Whether PKCE (Proof Key for Code Exchange) is required for this client.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $require_pkce;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tos_uri;
 
     public function __construct()

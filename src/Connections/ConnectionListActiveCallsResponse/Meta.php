@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Connections\ConnectionListActiveCallsResponse;
 
 use Telnyx\Connections\ConnectionListActiveCallsResponse\Meta\Cursors;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,22 +22,22 @@ final class Meta implements BaseModel
     /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cursors $cursors;
 
     /**
      * Path to next page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next;
 
     /**
      * Path to previous page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $previous;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_items;
 
     public function __construct()

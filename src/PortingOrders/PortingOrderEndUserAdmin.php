@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * The authorized person's account number with the current service provider.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $account_number;
 
     /**
      * Name of person authorizing the porting order.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $auth_person_name;
 
     /**
      * Billing phone number associated with these phone numbers.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $billing_phone_number;
 
     /**
      * European business identification number. Applicable only in the European Union.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $business_identifier;
 
     /**
      * Person Name or Company name requesting the port.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $entity_name;
 
     /**
      * PIN/passcode possibly required by the old service provider for extra verification.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $pin_passcode;
 
     /**
      * European tax identification number. Applicable only in the European Union.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $tax_identifier;
 
     public function __construct()

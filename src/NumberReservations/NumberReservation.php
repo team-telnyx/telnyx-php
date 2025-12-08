@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservation\Status;
@@ -25,26 +25,26 @@ final class NumberReservation implements BaseModel
     /** @use SdkModel<NumberReservationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * An ISO 8901 datetime string denoting when the numbers reservation was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /** @var list<ReservedPhoneNumber>|null $phone_numbers */
-    #[Api(list: ReservedPhoneNumber::class, optional: true)]
+    #[Optional(list: ReservedPhoneNumber::class)]
     public ?array $phone_numbers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -52,13 +52,13 @@ final class NumberReservation implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * An ISO 8901 datetime string for when the number reservation was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

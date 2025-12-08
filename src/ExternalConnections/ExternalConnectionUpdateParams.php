@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,16 +35,16 @@ final class ExternalConnectionUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public Outbound $outbound;
 
     /**
      * Specifies whether the connection can be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
     /**
@@ -51,25 +52,25 @@ final class ExternalConnectionUpdateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     /**

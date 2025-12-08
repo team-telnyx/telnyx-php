@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class DocumentUpdateParams implements BaseModel
     /**
      * Optional reference string for customer tracking.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * The filename of the document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filename;
 
     public function __construct()

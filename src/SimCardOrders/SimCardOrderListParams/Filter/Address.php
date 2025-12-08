@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class Address implements BaseModel
     /**
      * Uniquely identifies the address for the order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Filter by state or province where the address is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * Filter by the mobile operator two-character (ISO 3166-1 alpha-2) origin country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Returns entries with matching name of the supplemental field for address information.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $extended_address;
 
     /**
      * Filter by the name of the city where the address is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * Filter by postal code for the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postal_code;
 
     /**
      * Returns entries with matching name of the street where the address is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_address;
 
     public function __construct()

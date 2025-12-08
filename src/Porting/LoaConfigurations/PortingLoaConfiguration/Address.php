@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,37 +28,37 @@ final class Address implements BaseModel
     /**
      * The locality of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * The country code of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * The extended address of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $extended_address;
 
     /**
      * The administrative area of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
      * The street address of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_address;
 
     /**
      * The postal code of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $zip_code;
 
     public function __construct()

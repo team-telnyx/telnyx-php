@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Reports\ReportListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\ReportListParams\Filter\ReportType;
@@ -27,7 +27,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<ReportType>|null $report_type
      */
-    #[Api(enum: ReportType::class, optional: true)]
+    #[Optional(enum: ReportType::class)]
     public ?string $report_type;
 
     /**
@@ -35,7 +35,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

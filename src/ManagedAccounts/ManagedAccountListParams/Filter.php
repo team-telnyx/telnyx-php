@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\ManagedAccountListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\Email;
@@ -22,10 +22,10 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Email $email;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OrganizationName $organization_name;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Name implements BaseModel
     /**
      * Optional filter on outbound voice profile name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()

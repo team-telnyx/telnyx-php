@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\InexplicitNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -49,31 +50,31 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      *
      * @var list<OrderingGroup> $ordering_groups
      */
-    #[Api(list: OrderingGroup::class)]
+    #[Required(list: OrderingGroup::class)]
     public array $ordering_groups;
 
     /**
      * Billing group id to apply to phone numbers that are purchased.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Connection id to apply to phone numbers that are purchased.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Reference label for the customer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Messaging profile id to apply to phone numbers that are purchased.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     /**

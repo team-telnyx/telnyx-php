@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class Data implements BaseModel
     /**
      * The number of objects in the bucket.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $num_objects;
 
     /**
      * The size of the bucket in bytes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     /**
      * The size of the bucket in kilobytes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size_kb;
 
     /**
      * The time the snapshot was taken.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
     public function __construct()

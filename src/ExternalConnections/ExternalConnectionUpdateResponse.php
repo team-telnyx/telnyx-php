@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnection\ExternalSipConnection;
@@ -22,7 +22,7 @@ final class ExternalConnectionUpdateResponse implements BaseModel
     /** @use SdkModel<ExternalConnectionUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalConnection $data;
 
     public function __construct()

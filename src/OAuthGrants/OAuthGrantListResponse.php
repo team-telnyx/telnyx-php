@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthGrants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthClients\PaginationMetaOAuth;
@@ -21,10 +21,10 @@ final class OAuthGrantListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<OAuthGrant>|null $data */
-    #[Api(list: OAuthGrant::class, optional: true)]
+    #[Optional(list: OAuthGrant::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMetaOAuth $meta;
 
     public function __construct()

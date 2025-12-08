@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage\NetworkCoverageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NetworkCoverage\AvailableService;
@@ -28,7 +28,7 @@ final class Filters implements BaseModel
      *
      * @var Contains|value-of<AvailableService>|null $available_services
      */
-    #[Api(union: AvailableServices::class, optional: true)]
+    #[Optional(union: AvailableServices::class)]
     public Contains|string|null $available_services;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,37 +26,37 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies this phone number configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Identifies the associated porting phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_phone_number_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * Identifies the associated user bundle.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_bundle_id;
 
     public function __construct()

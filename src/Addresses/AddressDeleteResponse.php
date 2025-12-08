@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class AddressDeleteResponse implements BaseModel
     /** @use SdkModel<AddressDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Address $data;
 
     public function __construct()

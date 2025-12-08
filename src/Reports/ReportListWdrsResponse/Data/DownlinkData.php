@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\ReportListWdrsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\DownlinkData\Unit;
@@ -22,7 +22,7 @@ final class DownlinkData implements BaseModel
     /**
      * Downlink data.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $amount;
 
     /**
@@ -30,7 +30,7 @@ final class DownlinkData implements BaseModel
      *
      * @var value-of<Unit>|null $unit
      */
-    #[Api(enum: Unit::class, optional: true)]
+    #[Optional(enum: Unit::class)]
     public ?string $unit;
 
     public function __construct()

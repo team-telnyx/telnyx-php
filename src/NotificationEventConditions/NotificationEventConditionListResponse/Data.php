@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Data\AssociatedRecordType;
@@ -34,45 +34,45 @@ final class Data implements BaseModel
     /**
      * A UUID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Dictates whether a notification channel id needs to be provided when creating a notficiation setting.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $allow_multiple_channels;
 
     /** @var value-of<AssociatedRecordType>|null $associated_record_type */
-    #[Api(enum: AssociatedRecordType::class, optional: true)]
+    #[Optional(enum: AssociatedRecordType::class)]
     public ?string $associated_record_type;
 
     /**
      * Dictates whether a notification setting will take effect immediately.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $asynchronous;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_event_id;
 
     /** @var list<Parameter>|null $parameters */
-    #[Api(list: Parameter::class, optional: true)]
+    #[Optional(list: Parameter::class)]
     public ?array $parameters;
 
     /**
@@ -80,13 +80,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $supported_channels
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $supported_channels;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

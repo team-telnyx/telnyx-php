@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections\IPConnectionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IPConnections\IPConnectionListParams\Filter\ConnectionName;
@@ -26,19 +26,19 @@ final class Filter implements BaseModel
     /**
      * Filter by connection_name using nested operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ConnectionName $connection_name;
 
     /**
      * If present, connections with an `fqdn` that equals the given value will be returned. Matching is case-sensitive, and the full string must match.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $outbound_voice_profile_id;
 
     public function __construct()

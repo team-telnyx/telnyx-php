@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -40,19 +40,19 @@ final class CustomerServiceRecordListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Sort $sort;
 
     public function __construct()

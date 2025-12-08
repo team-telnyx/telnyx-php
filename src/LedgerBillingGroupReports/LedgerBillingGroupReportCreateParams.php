@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\LedgerBillingGroupReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class LedgerBillingGroupReportCreateParams implements BaseModel
     /**
      * Month of the ledger billing group report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $month;
 
     /**
      * Year of the ledger billing group report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $year;
 
     public function __construct()

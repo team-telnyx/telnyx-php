@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,17 +30,17 @@ final class UserBundleCreateParams implements BaseModel
     /**
      * Idempotency key for the request. Can be any UUID, but should always be unique for each request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $idempotency_key;
 
     /** @var list<Item>|null $items */
-    #[Api(list: Item::class, optional: true)]
+    #[Optional(list: Item::class)]
     public ?array $items;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorization_bearer;
 
     public function __construct()

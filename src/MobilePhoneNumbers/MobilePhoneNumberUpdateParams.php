@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -53,39 +53,39 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallForwarding $call_forwarding;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallRecording $call_recording;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $caller_id_name_enabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CnamListing $cnam_listing;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $connection_id;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $customer_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
     /** @var value-of<InboundCallScreening>|null $inbound_call_screening */
-    #[Api(enum: InboundCallScreening::class, optional: true)]
+    #[Optional(enum: InboundCallScreening::class)]
     public ?string $inbound_call_screening;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $noise_suppression;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     /** @var list<string>|null $tags */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     public function __construct()

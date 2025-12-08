@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TexmlApplications\TexmlApplicationListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class Filter implements BaseModel
     /**
      * If present, applications with <code>friendly_name</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $friendly_name;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $outbound_voice_profile_id;
 
     public function __construct()

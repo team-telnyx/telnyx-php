@@ -6,7 +6,7 @@ namespace Telnyx\Comments\CommentListResponse;
 
 use Telnyx\Comments\CommentListResponse\Data\CommenterType;
 use Telnyx\Comments\CommentListResponse\Data\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,42 +28,42 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment_record_id;
 
     /** @var value-of<CommentRecordType>|null $comment_record_type */
-    #[Api(enum: CommentRecordType::class, optional: true)]
+    #[Optional(enum: CommentRecordType::class)]
     public ?string $comment_record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $commenter;
 
     /** @var value-of<CommenterType>|null $commenter_type */
-    #[Api(enum: CommenterType::class, optional: true)]
+    #[Optional(enum: CommenterType::class)]
     public ?string $commenter_type;
 
     /**
      * An ISO 8901 datetime string denoting when the comment was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * An ISO 8901 datetime string for when the comment was read.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $read_at;
 
     /**
      * An ISO 8901 datetime string for when the comment was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

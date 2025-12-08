@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
@@ -22,10 +22,10 @@ final class PhoneNumberListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<ExternalConnectionPhoneNumber>|null $data */
-    #[Api(list: ExternalConnectionPhoneNumber::class, optional: true)]
+    #[Optional(list: ExternalConnectionPhoneNumber::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalVoiceIntegrationsPaginationMeta $meta;
 
     public function __construct()

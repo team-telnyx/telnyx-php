@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class NumberHealthMetrics implements BaseModel
     /**
      * The ratio of messages received to the number of messages sent.
      */
-    #[Api]
+    #[Required]
     public float $inbound_outbound_ratio;
 
     /**
      * The number of messages analyzed for the health metrics.
      */
-    #[Api]
+    #[Required]
     public int $message_count;
 
     /**
      * The ratio of messages blocked for spam to the number of messages attempted.
      */
-    #[Api]
+    #[Required]
     public float $spam_ratio;
 
     /**
      * The ratio of messages sucessfully delivered to the number of messages attempted.
      */
-    #[Api]
+    #[Required]
     public float $success_ratio;
 
     /**

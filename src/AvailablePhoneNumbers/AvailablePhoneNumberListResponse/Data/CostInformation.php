@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class CostInformation implements BaseModel
     /**
      * The ISO 4217 code for the currency.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $monthly_cost;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $upfront_cost;
 
     public function __construct()

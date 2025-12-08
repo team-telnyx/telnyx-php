@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Status;
@@ -32,43 +32,43 @@ final class CallSiprecJsonResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
      * The id of the call the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
     /**
      * The date and time the siprec session was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_created;
 
     /**
      * The date and time the siprec session was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_updated;
 
     /**
      * The error code of the siprec session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_code;
 
     /**
      * The SID of the siprec session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
      * The date and time the siprec session was started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     /**
@@ -76,7 +76,7 @@ final class CallSiprecJsonResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -84,13 +84,13 @@ final class CallSiprecJsonResponse implements BaseModel
      *
      * @var value-of<Track>|null $track
      */
-    #[Api(enum: Track::class, optional: true)]
+    #[Optional(enum: Track::class)]
     public ?string $track;
 
     /**
      * The URI of the siprec session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

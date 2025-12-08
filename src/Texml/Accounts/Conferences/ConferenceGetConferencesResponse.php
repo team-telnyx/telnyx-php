@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference;
@@ -29,49 +29,49 @@ final class ConferenceGetConferencesResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Conference>|null $conferences */
-    #[Api(list: Conference::class, optional: true)]
+    #[Optional(list: Conference::class)]
     public ?array $conferences;
 
     /**
      * The number of the last element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $end;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences.json?Page=0&PageSize=1.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $first_page_uri;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next_page_uri;
 
     /**
      * Current page number, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * The number of items on the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size;
 
     /**
      * The number of the first element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $start;
 
     /**
      * The URI of the current page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

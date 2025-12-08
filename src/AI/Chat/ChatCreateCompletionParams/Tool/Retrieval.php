@@ -6,7 +6,7 @@ namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
 use Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,11 +20,11 @@ final class Retrieval implements BaseModel
     /** @use SdkModel<RetrievalShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public InferenceEmbeddingBucketIDs $retrieval;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

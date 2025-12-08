@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
@@ -21,10 +21,10 @@ final class VoiceListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<CdrDetailedReqResponse>|null $data */
-    #[Api(list: CdrDetailedReqResponse::class, optional: true)]
+    #[Optional(list: CdrDetailedReqResponse::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?BatchCsvPaginationMeta $meta;
 
     public function __construct()

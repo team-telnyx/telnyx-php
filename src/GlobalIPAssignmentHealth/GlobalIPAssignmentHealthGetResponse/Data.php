@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP;
@@ -25,19 +25,19 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?GlobalIP $global_ip;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?GlobalIPAssignment $global_ip_assignment;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Health $health;
 
     /**
      * The timestamp of the metric.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardInterfaces;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,25 +31,25 @@ final class WireguardInterfaceCreateParams implements BaseModel
     /**
      * The id of the network associated with the interface.
      */
-    #[Api]
+    #[Required]
     public string $network_id;
 
     /**
      * The region the interface should be deployed to.
      */
-    #[Api]
+    #[Required]
     public string $region_code;
 
     /**
      * Enable SIP traffic forwarding over VPN interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable_sip_trunking;
 
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**

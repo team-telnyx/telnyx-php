@@ -8,7 +8,7 @@ use Telnyx\AI\Assistants\Assistant\Tool;
 use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
 use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
 use Telnyx\AI\Assistants\WebhookTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -30,19 +30,19 @@ final class Assistant implements BaseModel
     /**
      * The system instructions that the voice assistant uses during the gather command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * The model to be used by the voice assistant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model;
 
     /**
      * This is necessary only if the model selected is from OpenAI. You would pass the `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your OpenAI API Key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $openai_api_key_ref;
 
     /**
@@ -50,7 +50,7 @@ final class Assistant implements BaseModel
      *
      * @var list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null $tools
      */
-    #[Api(list: Tool::class, optional: true)]
+    #[Optional(list: Tool::class)]
     public ?array $tools;
 
     public function __construct()

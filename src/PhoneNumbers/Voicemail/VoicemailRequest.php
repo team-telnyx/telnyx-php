@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voicemail;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class VoicemailRequest implements BaseModel
     /**
      * Whether voicemail is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * The pin used for voicemail.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pin;
 
     public function __construct()

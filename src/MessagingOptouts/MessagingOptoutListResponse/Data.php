@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class Data implements BaseModel
     /**
      * The timestamp when the opt-out was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The keyword that triggered the opt-out.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $keyword;
 
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $messaging_profile_id;
 
     /**
      * Receiving address (+E.164 formatted phone number or short code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class TotalCost implements BaseModel
     /**
      * A string representing the cost amount.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
      * ISO 4217 currency string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     public function __construct()

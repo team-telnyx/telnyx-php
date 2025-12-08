@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\AssistantTest\Rubric;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -37,13 +38,13 @@ final class AssistantTest implements BaseModel
     /**
      * Timestamp when the test was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * Human-readable name of the test.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -51,7 +52,7 @@ final class AssistantTest implements BaseModel
      *
      * @var list<Rubric> $rubric
      */
-    #[Api(list: Rubric::class)]
+    #[Required(list: Rubric::class)]
     public array $rubric;
 
     /**
@@ -59,43 +60,43 @@ final class AssistantTest implements BaseModel
      *
      * @var value-of<TelnyxConversationChannel> $telnyx_conversation_channel
      */
-    #[Api(enum: TelnyxConversationChannel::class)]
+    #[Required(enum: TelnyxConversationChannel::class)]
     public string $telnyx_conversation_channel;
 
     /**
      * Unique identifier for the assistant test.
      */
-    #[Api]
+    #[Required]
     public string $test_id;
 
     /**
      * Detailed description of the test's purpose and scope.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Target destination for test conversations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination;
 
     /**
      * Detailed test scenario instructions and objectives.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * Maximum allowed duration for test execution in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_duration_seconds;
 
     /**
      * Test suite grouping for organizational purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $test_suite;
 
     /**

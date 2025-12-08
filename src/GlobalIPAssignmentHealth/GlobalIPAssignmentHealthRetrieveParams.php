@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,7 +32,7 @@ final class GlobalIPAssignmentHealthRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()

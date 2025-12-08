@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Params implements BaseModel
     /**
      * The first name of the person that will perform the verification flow.
      */
-    #[Api]
+    #[Required]
     public string $first_name;
 
     /**
      * The last name of the person that will perform the verification flow.
      */
-    #[Api]
+    #[Required]
     public string $last_name;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class Region implements BaseModel
     /**
      * Region code of the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
      * Region name of the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

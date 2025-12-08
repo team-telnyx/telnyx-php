@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result\Service;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,19 +26,19 @@ final class Result implements BaseModel
     /**
      * Type of charge for the number.
      */
-    #[Api]
+    #[Required]
     public string $charge_type;
 
     /**
      * Email address of the service owner.
      */
-    #[Api]
+    #[Required]
     public string $service_owner_email;
 
     /**
      * User ID of the service owner.
      */
-    #[Api]
+    #[Required]
     public string $service_owner_user_id;
 
     /**
@@ -46,13 +46,13 @@ final class Result implements BaseModel
      *
      * @var list<Service> $services
      */
-    #[Api(list: Service::class)]
+    #[Required(list: Service::class)]
     public array $services;
 
     /**
      * Phone number.
      */
-    #[Api]
+    #[Required]
     public string $tn;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
@@ -18,7 +18,7 @@ final class UploadGetResponse implements BaseModel
     /** @use SdkModel<UploadGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Upload $data;
 
     public function __construct()

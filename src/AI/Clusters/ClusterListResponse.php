@@ -6,7 +6,7 @@ namespace Telnyx\AI\Clusters;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Clusters\ClusterListResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
@@ -20,10 +20,10 @@ final class ClusterListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

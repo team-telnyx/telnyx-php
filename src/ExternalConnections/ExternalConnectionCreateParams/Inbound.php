@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\ExternalConnectionCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +22,13 @@ final class Inbound implements BaseModel
     /**
      * The ID of the outbound voice profile to use for inbound calls.
      */
-    #[Api]
+    #[Required]
     public string $outbound_voice_profile_id;
 
     /**
      * When set, this will limit the number of concurrent inbound calls to phone numbers associated with this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     /**

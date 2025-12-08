@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementTypes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocReqsRequirementType;
@@ -21,7 +21,7 @@ final class RequirementTypeGetResponse implements BaseModel
     /** @use SdkModel<RequirementTypeGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DocReqsRequirementType $data;
 
     public function __construct()

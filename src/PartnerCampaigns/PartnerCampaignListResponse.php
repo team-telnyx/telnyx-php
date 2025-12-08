@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PartnerCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
@@ -21,14 +21,14 @@ final class PartnerCampaignListResponse implements BaseModel
     /** @use SdkModel<PartnerCampaignListResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /** @var list<TelnyxDownstreamCampaign>|null $records */
-    #[Api(list: TelnyxDownstreamCampaign::class, optional: true)]
+    #[Optional(list: TelnyxDownstreamCampaign::class)]
     public ?array $records;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $totalRecords;
 
     public function __construct()

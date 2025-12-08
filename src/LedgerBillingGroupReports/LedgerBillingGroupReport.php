@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\LedgerBillingGroupReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\RecordType;
@@ -29,19 +29,19 @@ final class LedgerBillingGroupReport implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Uniquely identifies the organization that owns the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_id;
 
     /**
@@ -49,13 +49,13 @@ final class LedgerBillingGroupReport implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * External url of the ledger billing group report, if the status is complete.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $report_url;
 
     /**
@@ -63,13 +63,13 @@ final class LedgerBillingGroupReport implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

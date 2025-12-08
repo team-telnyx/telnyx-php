@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference\ReasonConferenceEnded;
@@ -34,37 +34,37 @@ final class Conference implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
      * The version of the API that was used to make the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $api_version;
 
     /**
      * Caller ID, if present.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid_ending_conference;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_created;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_updated;
 
     /**
      * A string that you assigned to describe this conference room.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $friendly_name;
 
     /**
@@ -72,19 +72,19 @@ final class Conference implements BaseModel
      *
      * @var value-of<ReasonConferenceEnded>|null $reason_conference_ended
      */
-    #[Api(enum: ReasonConferenceEnded::class, optional: true)]
+    #[Optional(enum: ReasonConferenceEnded::class)]
     public ?string $reason_conference_ended;
 
     /**
      * A string representing the region where the conference is hosted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
     /**
      * The unique identifier of the conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -92,7 +92,7 @@ final class Conference implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -100,13 +100,13 @@ final class Conference implements BaseModel
      *
      * @var array<string,mixed>|null $subresource_uris
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $subresource_uris;
 
     /**
      * The relative URI for this conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

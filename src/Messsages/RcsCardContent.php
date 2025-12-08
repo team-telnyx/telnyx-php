@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsCardContent\Media;
@@ -28,13 +28,13 @@ final class RcsCardContent implements BaseModel
     /**
      * Description of the card (at most 2000 characters).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * A media file within a rich card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Media $media;
 
     /**
@@ -42,13 +42,13 @@ final class RcsCardContent implements BaseModel
      *
      * @var list<RcsSuggestion>|null $suggestions
      */
-    #[Api(list: RcsSuggestion::class, optional: true)]
+    #[Optional(list: RcsSuggestion::class)]
     public ?array $suggestions;
 
     /**
      * Title of the card (at most 200 characters).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $title;
 
     public function __construct()

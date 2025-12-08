@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Recordings;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Recordings\RecordingResponseData\Channels;
@@ -25,10 +25,10 @@ final class RecordingListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<RecordingResponseData>|null $data */
-    #[Api(list: RecordingResponseData::class, optional: true)]
+    #[Optional(list: RecordingResponseData::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

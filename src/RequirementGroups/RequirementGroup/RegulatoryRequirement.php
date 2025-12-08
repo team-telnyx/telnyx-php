@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups\RequirementGroup;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status;
@@ -25,31 +25,30 @@ final class RegulatoryRequirement implements BaseModel
     /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $expires_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_value;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_id;
 
     /**
      * @var value-of<Status>|null $status
      */
-    #[Api(
+    #[Optional(
         enum: Status::class,
-        optional: true,
     )]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

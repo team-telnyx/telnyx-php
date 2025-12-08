@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantImportParams\Provider;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class AssistantImportParams implements BaseModel
     /**
      * Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      */
-    #[Api]
+    #[Required]
     public string $api_key_ref;
 
     /**
@@ -36,7 +36,7 @@ final class AssistantImportParams implements BaseModel
      *
      * @var value-of<Provider> $provider
      */
-    #[Api(enum: Provider::class)]
+    #[Required(enum: Provider::class)]
     public string $provider;
 
     /**

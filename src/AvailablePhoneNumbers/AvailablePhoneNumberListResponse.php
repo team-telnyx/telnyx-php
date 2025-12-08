@@ -11,7 +11,7 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RecordTyp
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Meta;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Metadata;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,13 +26,13 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Metadata $metadata;
 
     public function __construct()

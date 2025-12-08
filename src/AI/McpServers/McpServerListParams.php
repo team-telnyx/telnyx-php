@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\McpServers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,16 +24,16 @@ final class McpServerListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()

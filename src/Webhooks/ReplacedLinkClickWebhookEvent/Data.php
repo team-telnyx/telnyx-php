@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\ReplacedLinkClickWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class Data implements BaseModel
     /**
      * The message ID associated with the clicked link.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $message_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the message request was received.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $time_clicked;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * The original link that was sent in the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()

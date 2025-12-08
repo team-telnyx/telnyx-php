@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tools;
 
 use Telnyx\AI\Assistants\Tools\ToolTestResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,7 +22,7 @@ final class ToolTestResponse implements BaseModel
     /**
      * Response model for webhook tool test results.
      */
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

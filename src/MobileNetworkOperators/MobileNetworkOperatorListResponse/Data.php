@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,51 +28,51 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The mobile operator two-character (ISO 3166-1 alpha-2) origin country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * MCC stands for Mobile Country Code. It's a three decimal digit that identifies a country.<br/><br/>
      * This code is commonly seen joined with a Mobile Network Code (MNC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mcc;
 
     /**
      * MNC stands for Mobile Network Code. It's a two to three decimal digits that identify a network.<br/><br/>
      *  This code is commonly seen joined with a Mobile Country Code (MCC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mnc;
 
     /**
      * The network operator name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Indicate whether the mobile network operator can be set as preferred in the Network Preferences API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $network_preferences_enabled;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * TADIG stands for Transferred Account Data Interchange Group. The TADIG code is a unique identifier for network operators in GSM mobile networks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tadig;
 
     public function __construct()

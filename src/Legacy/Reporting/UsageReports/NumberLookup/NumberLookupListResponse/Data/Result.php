@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse\Data\Result\Aggregation;
@@ -26,19 +26,19 @@ final class Result implements BaseModel
      *
      * @var list<Aggregation>|null $aggregations
      */
-    #[Api(list: Aggregation::class, optional: true)]
+    #[Optional(list: Aggregation::class)]
     public ?array $aggregations;
 
     /**
      * Record type identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * User ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     public function __construct()

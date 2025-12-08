@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\MesssageRcsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class SMSFallback implements BaseModel
     /**
      * Phone number in +E.164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * Text (maximum 3072 characters).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     public function __construct()

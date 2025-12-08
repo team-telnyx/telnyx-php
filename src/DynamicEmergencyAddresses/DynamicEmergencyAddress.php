@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\CountryCode;
@@ -36,50 +37,50 @@ final class DynamicEmergencyAddress implements BaseModel
     /** @use SdkModel<DynamicEmergencyAddressShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $administrative_area;
 
     /** @var value-of<CountryCode> $country_code */
-    #[Api(enum: CountryCode::class)]
+    #[Required(enum: CountryCode::class)]
     public string $country_code;
 
-    #[Api]
+    #[Required]
     public string $house_number;
 
-    #[Api]
+    #[Required]
     public string $locality;
 
-    #[Api]
+    #[Required]
     public string $postal_code;
 
-    #[Api]
+    #[Required]
     public string $street_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date of when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $extended_address;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $house_suffix;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Unique location reference string to be used in SIP INVITE from / p-asserted headers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_geolocation_id;
 
     /**
@@ -87,22 +88,22 @@ final class DynamicEmergencyAddress implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_post_directional;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_pre_directional;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_suffix;
 
     /**
      * ISO 8601 formatted date of when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**

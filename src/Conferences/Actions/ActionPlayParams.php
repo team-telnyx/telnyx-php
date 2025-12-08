@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionPlayParams\Region;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,7 +32,7 @@ final class ActionPlayParams implements BaseModel
     /**
      * The URL of a file to be played back in the conference. media_name and audio_url cannot be used together in one request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $audio_url;
 
     /**
@@ -40,19 +40,19 @@ final class ActionPlayParams implements BaseModel
      *
      * @var list<string>|null $call_control_ids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $call_control_ids;
 
     /**
      * The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public string|int|null $loop;
 
     /**
      * The media_name of a file to be played back in the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
@@ -60,7 +60,7 @@ final class ActionPlayParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     public function __construct()

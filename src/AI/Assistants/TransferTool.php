@@ -7,7 +7,7 @@ namespace Telnyx\AI\Assistants;
 use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\CustomHeader;
 use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\Target;
 use Telnyx\AI\Assistants\TransferTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,11 +21,11 @@ final class TransferTool implements BaseModel
     /** @use SdkModel<TransferToolShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public InferenceEmbeddingTransferToolParams $transfer;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

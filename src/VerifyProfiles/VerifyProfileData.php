@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifyProfiles\VerifyProfile\Call;
@@ -20,7 +20,7 @@ final class VerifyProfileData implements BaseModel
     /** @use SdkModel<VerifyProfileDataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?VerifyProfile $data;
 
     public function __construct()

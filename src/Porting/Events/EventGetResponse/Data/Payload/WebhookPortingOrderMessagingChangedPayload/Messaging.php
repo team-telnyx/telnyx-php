@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderMessagingChangedPayload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderMessagingChangedPayload\Messaging\MessagingPortStatus;
@@ -27,19 +27,19 @@ final class Messaging implements BaseModel
     /**
      * Indicates whether Telnyx will port messaging capabilities from the losing carrier. If false, any messaging capabilities will stay with their current provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable_messaging;
 
     /**
      * Indicates whether the porting order is messaging capable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $messaging_capable;
 
     /**
      * Indicates whether the messaging port is completed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $messaging_port_completed;
 
     /**
@@ -47,7 +47,7 @@ final class Messaging implements BaseModel
      *
      * @var value-of<MessagingPortStatus>|null $messaging_port_status
      */
-    #[Api(enum: MessagingPortStatus::class, optional: true)]
+    #[Optional(enum: MessagingPortStatus::class)]
     public ?string $messaging_port_status;
 
     public function __construct()

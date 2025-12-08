@@ -7,7 +7,7 @@ namespace Telnyx\ChargesSummary;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class ChargesSummaryGetResponse implements BaseModel
     /** @use SdkModel<ChargesSummaryGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

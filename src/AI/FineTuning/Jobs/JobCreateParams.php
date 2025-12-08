@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\FineTuning\Jobs;
 
 use Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,25 +32,25 @@ final class JobCreateParams implements BaseModel
     /**
      * The base model that is being fine-tuned.
      */
-    #[Api]
+    #[Required]
     public string $model;
 
     /**
      * The storage bucket or object used for training.
      */
-    #[Api]
+    #[Required]
     public string $training_file;
 
     /**
      * The hyperparameters used for the fine-tuning job.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Hyperparameters $hyperparameters;
 
     /**
      * Optional suffix to append to the fine tuned model's name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $suffix;
 
     /**

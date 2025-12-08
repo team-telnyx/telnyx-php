@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class RoomNewResponse implements BaseModel
     /** @use SdkModel<RoomNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Room $data;
 
     public function __construct()

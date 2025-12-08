@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,13 +25,13 @@ final class VoiceListParams implements BaseModel
     /**
      * Page number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * Size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $per_page;
 
     public function __construct()

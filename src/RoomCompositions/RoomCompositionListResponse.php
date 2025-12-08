@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\RoomCompositions;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomCompositions\RoomComposition\Format;
@@ -22,10 +22,10 @@ final class RoomCompositionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<RoomComposition>|null $data */
-    #[Api(list: RoomComposition::class, optional: true)]
+    #[Optional(list: RoomComposition::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

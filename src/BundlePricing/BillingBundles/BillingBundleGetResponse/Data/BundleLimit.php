@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit\Direction;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,22 +32,22 @@ final class BundleLimit implements BaseModel
     /** @use SdkModel<BundleLimitShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
-    #[Api]
+    #[Required]
     public string $metric;
 
-    #[Api]
+    #[Required]
     public string $service;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $updated_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_service;
 
     /**
@@ -54,13 +55,13 @@ final class BundleLimit implements BaseModel
      *
      * Use country_iso instead
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_iso;
 
     /**
@@ -68,17 +69,17 @@ final class BundleLimit implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
     /** @var list<string>|null $types */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $types;
 
     /**

@@ -6,7 +6,8 @@ namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\UpdateConference\Region;
 use Telnyx\Conferences\Actions\UpdateConference\SupervisorRole;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,7 +28,7 @@ final class UpdateConference implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
@@ -35,13 +36,13 @@ final class UpdateConference implements BaseModel
      *
      * @var value-of<SupervisorRole> $supervisor_role
      */
-    #[Api(enum: SupervisorRole::class)]
+    #[Required(enum: SupervisorRole::class)]
     public string $supervisor_role;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -49,7 +50,7 @@ final class UpdateConference implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
@@ -57,7 +58,7 @@ final class UpdateConference implements BaseModel
      *
      * @var list<string>|null $whisper_call_control_ids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $whisper_call_control_ids;
 
     /**

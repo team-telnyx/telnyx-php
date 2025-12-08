@@ -6,7 +6,7 @@ namespace Telnyx\Addresses\Actions;
 
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data;
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class ActionAcceptSuggestionsResponse implements BaseModel
     /** @use SdkModel<ActionAcceptSuggestionsResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

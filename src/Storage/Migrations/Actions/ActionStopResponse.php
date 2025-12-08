@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Migrations\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Migrations\MigrationParams;
@@ -18,7 +18,7 @@ final class ActionStopResponse implements BaseModel
     /** @use SdkModel<ActionStopResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MigrationParams $data;
 
     public function __construct()

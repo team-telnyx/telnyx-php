@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Found implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The phone number in E.164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $number_val_e164;
 
     public function __construct()

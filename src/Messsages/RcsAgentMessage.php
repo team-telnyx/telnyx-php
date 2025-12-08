@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage;
@@ -25,25 +25,25 @@ final class RcsAgentMessage implements BaseModel
     /** @use SdkModel<RcsAgentMessageShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ContentMessage $content_message;
 
     /**
      * RCS Event to send to the recipient.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Event $event;
 
     /**
      * Timestamp in UTC of when this message is considered expired.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $expire_time;
 
     /**
      * Duration in seconds ending with 's'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ttl;
 
     public function __construct()

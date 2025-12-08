@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cc;
@@ -61,26 +61,26 @@ final class MessageCancelScheduledResponse implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /** @var list<Cc>|null $cc */
-    #[Api(list: Cc::class, optional: true)]
+    #[Optional(list: Cc::class)]
     public ?array $cc;
 
     /**
      * ISO 8601 formatted date indicating when the message was finalized.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $completed_at;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?Cost $cost;
 
     /**
      * Detailed breakdown of the message cost components.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?CostBreakdown $cost_breakdown;
 
     /**
@@ -88,13 +88,13 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * Encoding scheme used for the message body.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $encoding;
 
     /**
@@ -102,38 +102,38 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * @var list<MessagingError>|null $errors
      */
-    #[Api(list: MessagingError::class, optional: true)]
+    #[Optional(list: MessagingError::class)]
     public ?array $errors;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?From $from;
 
     /** @var list<Media>|null $media */
-    #[Api(list: Media::class, optional: true)]
+    #[Optional(list: Media::class)]
     public ?array $media;
 
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     /**
      * The id of the organization the messaging profile belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_id;
 
     /**
      * Number of parts into which the message's body must be split.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $parts;
 
     /**
      * ISO 8601 formatted date indicating when the message request was received.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $received_at;
 
     /**
@@ -141,19 +141,19 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the message was sent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $sent_at;
 
     /**
      * Subject of multimedia message.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $subject;
 
     /**
@@ -161,25 +161,25 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Indicates whether the TCR campaign is billable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $tcr_campaign_billable;
 
     /**
      * The Campaign Registry (TCR) campaign ID associated with the message.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $tcr_campaign_id;
 
     /**
      * The registration status of the TCR campaign.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $tcr_campaign_registered;
 
     /**
@@ -187,11 +187,11 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * **Required for SMS**
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /** @var list<To>|null $to */
-    #[Api(list: To::class, optional: true)]
+    #[Optional(list: To::class)]
     public ?array $to;
 
     /**
@@ -199,25 +199,25 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * Message must be out of the queue by this time or else it will be discarded and marked as 'sending_failed'. Once the message moves out of the queue, this field will be nulled.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?\DateTimeInterface $valid_until;
 
     /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_failover_url;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_url;
 
     public function __construct()

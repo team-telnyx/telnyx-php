@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CallEvents\CallEventListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +27,31 @@ final class OccurredAt implements BaseModel
     /**
      * Event occurred_at: equal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     /**
      * Event occurred_at: greater than.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gt;
 
     /**
      * Event occurred_at: greater than or equal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gte;
 
     /**
      * Event occurred_at: lower than.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lt;
 
     /**
      * Event occurred_at: lower than or equal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lte;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePhoneNumbers\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingGetResponse\Data;
@@ -20,7 +20,7 @@ final class MessagingGetResponse implements BaseModel
     /** @use SdkModel<MessagingGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\IntegrationSecrets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,19 +23,19 @@ final class IntegrationSecret implements BaseModel
     /** @use SdkModel<IntegrationSecretShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
-    #[Api]
+    #[Required]
     public string $identifier;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**

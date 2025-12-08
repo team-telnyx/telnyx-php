@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
@@ -24,7 +24,7 @@ final class Filter implements BaseModel
     /**
      * Unique mobile push credential alias.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $alias;
 
     /**
@@ -32,7 +32,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()

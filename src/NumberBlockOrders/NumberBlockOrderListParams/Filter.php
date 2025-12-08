@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt;
@@ -26,19 +26,19 @@ final class Filter implements BaseModel
     /**
      * Filter number block orders by date range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
      * Filter number block  orders having these phone numbers.
      */
-    #[Api('phone_numbers.starting_number', optional: true)]
+    #[Optional('phone_numbers.starting_number')]
     public ?string $phone_numbers_starting_number;
 
     /**
      * Filter number block orders by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()

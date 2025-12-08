@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\MessagingProfiles;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberHealthMetrics;
@@ -25,10 +25,10 @@ final class MessagingProfileListPhoneNumbersResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PhoneNumberWithMessagingSettings>|null $data */
-    #[Api(list: PhoneNumberWithMessagingSettings::class, optional: true)]
+    #[Optional(list: PhoneNumberWithMessagingSettings::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

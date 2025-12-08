@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes\FaxListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Page implements BaseModel
     /**
      * Number of the page to be retrieved.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number;
 
     /**
      * Number of fax resources for the single page returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     public function __construct()

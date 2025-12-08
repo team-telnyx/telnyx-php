@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse\AnsweredBy;
@@ -41,7 +41,7 @@ final class CallGetResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
@@ -49,25 +49,25 @@ final class CallGetResponse implements BaseModel
      *
      * @var value-of<AnsweredBy>|null $answered_by
      */
-    #[Api(enum: AnsweredBy::class, optional: true)]
+    #[Optional(enum: AnsweredBy::class)]
     public ?string $answered_by;
 
     /**
      * Caller ID, if present.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $caller_name;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_created;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_updated;
 
     /**
@@ -75,55 +75,55 @@ final class CallGetResponse implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * The duration of this call, given in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $duration;
 
     /**
      * The end time of this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_time;
 
     /**
      * The phone number or SIP address that made this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The from number formatted for display.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from_formatted;
 
     /**
      * The price of this call, the currency is specified in the price_unit field. Only populated when the call cost feature is enabled for the account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $price;
 
     /**
      * The unit in which the price is given.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $price_unit;
 
     /**
      * The identifier of this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
      * The start time of this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     /**
@@ -131,25 +131,25 @@ final class CallGetResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The phone number or SIP address that received this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * The to number formatted for display.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to_formatted;
 
     /**
      * The relative URI for this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data;
@@ -21,7 +21,7 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
     use SdkModel;
 
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
     /**

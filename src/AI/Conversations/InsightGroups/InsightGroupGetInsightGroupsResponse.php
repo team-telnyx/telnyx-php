@@ -6,7 +6,7 @@ namespace Telnyx\AI\Conversations\InsightGroups;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class InsightGroupGetInsightGroupsResponse implements BaseModel
     use SdkModel;
 
     /** @var list<InsightTemplateGroup> $data */
-    #[Api(list: InsightTemplateGroup::class)]
+    #[Required(list: InsightTemplateGroup::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

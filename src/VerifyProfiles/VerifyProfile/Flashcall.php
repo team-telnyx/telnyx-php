@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles\VerifyProfile;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Flashcall implements BaseModel
     /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $default_verification_timeout_secs;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyEndpoints;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -26,16 +26,16 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $callback_number;
 
-    #[Api]
+    #[Required]
     public string $caller_name;
 
     /**
      * An id of a currently active dynamic emergency location.
      */
-    #[Api]
+    #[Required]
     public string $dynamic_emergency_address_id;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +27,19 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     /**
      * Filters recording by the creation date. Expected format is ISO8601 date or date-time, ie. {YYYY}-{MM}-{DD} or {YYYY}-{MM}-{DD}T{hh}:{mm}:{ss}Z. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $DateCreated;
 
     /**
      * The number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $Page;
 
     /**
      * The number of records to be displayed on a page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $PageSize;
 
     public function __construct()

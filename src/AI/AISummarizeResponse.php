@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI;
 
 use Telnyx\AI\AISummarizeResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class AISummarizeResponse implements BaseModel
     /** @use SdkModel<AISummarizeResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

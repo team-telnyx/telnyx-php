@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Contact implements BaseModel
     /**
      * The email address of the contact.
      */
-    #[Api]
+    #[Required]
     public string $email;
 
     /**
      * The phone number of the contact.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**

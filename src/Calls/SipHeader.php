@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls;
 
 use Telnyx\Calls\SipHeader\Name;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,13 +22,13 @@ final class SipHeader implements BaseModel
      *
      * @var value-of<Name> $name
      */
-    #[Api(enum: Name::class)]
+    #[Required(enum: Name::class)]
     public string $name;
 
     /**
      * The value of the header.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**

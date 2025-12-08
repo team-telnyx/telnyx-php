@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Documents;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocServiceDocument\AvScanStatus;
@@ -23,10 +23,10 @@ final class DocumentListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<DocServiceDocument>|null $data */
-    #[Api(list: DocServiceDocument::class, optional: true)]
+    #[Optional(list: DocServiceDocument::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

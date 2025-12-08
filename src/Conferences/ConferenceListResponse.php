@@ -9,7 +9,7 @@ use Telnyx\Conferences\Conference\EndedBy;
 use Telnyx\Conferences\Conference\EndReason;
 use Telnyx\Conferences\Conference\RecordType;
 use Telnyx\Conferences\Conference\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,10 +24,10 @@ final class ConferenceListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Conference>|null $data */
-    #[Api(list: Conference::class, optional: true)]
+    #[Optional(list: Conference::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardDataUsageNotifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,13 +30,13 @@ final class SimCardDataUsageNotificationUpdateParams implements BaseModel
     /**
      * The identification UUID of the related SIM card resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
      * Data usage threshold that will trigger the notification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Threshold $threshold;
 
     public function __construct()

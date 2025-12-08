@@ -11,7 +11,7 @@ use Telnyx\CallEvents\CallEventListParams\Filter\Product;
 use Telnyx\CallEvents\CallEventListParams\Filter\Status;
 use Telnyx\CallEvents\CallEventListParams\Filter\Type;
 use Telnyx\CallEvents\CallEventListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -57,13 +57,13 @@ final class CallEventListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()

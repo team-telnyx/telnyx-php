@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Actions\Register;
 
 use Telnyx\Actions\Register\RegisterCreateParams\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,13 +31,13 @@ final class RegisterCreateParams implements BaseModel
     use SdkParams;
 
     /** @var list<string> $registration_codes */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $registration_codes;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_group_id;
 
     /**
@@ -44,7 +45,7 @@ final class RegisterCreateParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -52,7 +53,7 @@ final class RegisterCreateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**

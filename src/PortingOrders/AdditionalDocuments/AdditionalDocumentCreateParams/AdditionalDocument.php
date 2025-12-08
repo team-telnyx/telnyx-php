@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument\DocumentType;
@@ -22,7 +22,7 @@ final class AdditionalDocument implements BaseModel
     /**
      * The document identification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $document_id;
 
     /**
@@ -30,7 +30,7 @@ final class AdditionalDocument implements BaseModel
      *
      * @var value-of<DocumentType>|null $document_type
      */
-    #[Api(enum: DocumentType::class, optional: true)]
+    #[Optional(enum: DocumentType::class)]
     public ?string $document_type;
 
     public function __construct()

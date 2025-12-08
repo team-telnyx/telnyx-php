@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class WireguardPeer implements BaseModel
     /**
      * The IP address of the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_address;
 
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

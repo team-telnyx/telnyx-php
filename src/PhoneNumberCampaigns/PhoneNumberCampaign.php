@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
@@ -31,16 +32,16 @@ final class PhoneNumberCampaign implements BaseModel
     /**
      * For shared campaigns, this is the TCR campaign ID, otherwise it is the campaign ID.
      */
-    #[Api]
+    #[Required]
     public string $campaignId;
 
-    #[Api]
+    #[Required]
     public string $createdAt;
 
-    #[Api]
+    #[Required]
     public string $phoneNumber;
 
-    #[Api]
+    #[Required]
     public string $updatedAt;
 
     /**
@@ -48,37 +49,37 @@ final class PhoneNumberCampaign implements BaseModel
      *
      * @var value-of<AssignmentStatus>|null $assignmentStatus
      */
-    #[Api(enum: AssignmentStatus::class, optional: true)]
+    #[Optional(enum: AssignmentStatus::class)]
     public ?string $assignmentStatus;
 
     /**
      * Brand ID. Empty if the number is associated to a shared campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $brandId;
 
     /**
      * Extra info about a failure to assign/unassign a number. Relevant only if the assignmentStatus is either FAILED_ASSIGNMENT or FAILED_UNASSIGNMENT.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $failureReasons;
 
     /**
      * TCR's alphanumeric ID for the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcrBrandId;
 
     /**
      * TCR's alphanumeric ID for the campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tcrCampaignId;
 
     /**
      * Campaign ID. Empty if the number is associated to a shared campaign.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $telnyxCampaignId;
 
     /**

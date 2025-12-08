@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class ManagedAccountUpdateParams implements BaseModel
     /**
      * Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $managed_account_allow_custom_pricing;
 
     public function __construct()

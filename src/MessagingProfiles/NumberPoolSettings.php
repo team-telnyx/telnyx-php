@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -34,7 +35,7 @@ final class NumberPoolSettings implements BaseModel
      * does not necessarily need to add to 100.  Weight must be a non-negative number, and when equal
      * to zero it will remove the number type from the pool.
      */
-    #[Api]
+    #[Required]
     public float $long_code_weight;
 
     /**
@@ -43,7 +44,7 @@ final class NumberPoolSettings implements BaseModel
      * rate and the amount of messages marked as spam by upstream carriers.
      * Numbers with a deliverability rate below 25% or spam ratio over 75% will be considered unhealthy.
      */
-    #[Api]
+    #[Required]
     public bool $skip_unhealthy;
 
     /**
@@ -52,7 +53,7 @@ final class NumberPoolSettings implements BaseModel
      * does not necessarily need to add to 100. Weight must be a non-negative number, and when equal
      * to zero it will remove the number type from the pool.
      */
-    #[Api]
+    #[Required]
     public float $toll_free_weight;
 
     /**
@@ -60,7 +61,7 @@ final class NumberPoolSettings implements BaseModel
      * number. If there are no such numbers available, a nunber with a different area code will be chosen. Currently
      * only NANP numbers are supported.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $geomatch;
 
     /**
@@ -68,7 +69,7 @@ final class NumberPoolSettings implements BaseModel
      * recipient. If the sending number becomes unhealthy and `skip_unhealthy` is set to true, a new
      * number will be chosen.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $sticky_sender;
 
     /**

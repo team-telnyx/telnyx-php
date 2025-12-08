@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement;
@@ -29,36 +29,36 @@ final class RequirementGroup implements BaseModel
     /** @use SdkModel<RequirementGroupShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $action;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    #[Optional(list: RegulatoryRequirement::class)]
     public ?array $regulatory_requirements;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

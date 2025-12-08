@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class CallingWindow implements BaseModel
     /**
      * (BETA) The maximum number of calls that can be initiated to a single called party (CLD) within the calling window. A null value means no limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $calls_per_cld;
 
     /**
      * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are no longer allowed to start.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_time;
 
     /**
      * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are allowed to start.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     public function __construct()

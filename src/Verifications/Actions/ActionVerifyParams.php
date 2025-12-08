@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class ActionVerifyParams implements BaseModel
     /**
      * This is the code the user submits for verification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
@@ -36,7 +36,7 @@ final class ActionVerifyParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

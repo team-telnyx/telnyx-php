@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrders\SimCardOrder\Cost;
@@ -32,37 +32,37 @@ final class SimCardOrder implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * An object representing the total cost of the order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cost $cost;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was last created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * An object representing the address information from when the order was submitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?OrderAddress $order_address;
 
     /**
      * The amount of SIM cards requested in the SIM card order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $quantity;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -70,19 +70,19 @@ final class SimCardOrder implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The URL used to get tracking information about the order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tracking_url;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

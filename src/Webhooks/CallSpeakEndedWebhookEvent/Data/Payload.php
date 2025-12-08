@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\Payload\Status;
@@ -27,31 +27,31 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
@@ -59,7 +59,7 @@ final class Payload implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

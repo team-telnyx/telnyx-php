@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SiprecConnectors;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SiprecConnectors\SiprecConnectorNewResponse\Data;
@@ -17,7 +17,7 @@ final class SiprecConnectorNewResponse implements BaseModel
     /** @use SdkModel<SiprecConnectorNewResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
@@ -32,13 +32,13 @@ final class Filter implements BaseModel
     /**
      * Billing group UUID to filter by.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group;
 
     /**
      * Called line identification (destination number).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cld;
 
     /**
@@ -46,13 +46,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<CldFilter>|null $cld_filter
      */
-    #[Api(enum: CldFilter::class, optional: true)]
+    #[Optional(enum: CldFilter::class)]
     public ?string $cld_filter;
 
     /**
      * Calling line identification (caller ID).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cli;
 
     /**
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<CliFilter>|null $cli_filter
      */
-    #[Api(enum: CliFilter::class, optional: true)]
+    #[Optional(enum: CliFilter::class)]
     public ?string $cli_filter;
 
     /**
@@ -68,13 +68,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<FilterType>|null $filter_type
      */
-    #[Api(enum: FilterType::class, optional: true)]
+    #[Optional(enum: FilterType::class)]
     public ?string $filter_type;
 
     /**
      * Tag name to filter by.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tags_list;
 
     public function __construct()

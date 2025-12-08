@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,13 +35,13 @@ final class FqdnListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()

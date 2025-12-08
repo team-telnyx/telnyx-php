@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +25,25 @@ final class Target implements BaseModel
     /**
      * The name of the target.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The SIP URI to which the call will be referred.
      */
-    #[Api]
+    #[Required]
     public string $sip_address;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_password;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_username;
 
     /**

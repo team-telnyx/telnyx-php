@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,19 +28,19 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
     /**
      * The private wireless gateway name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The identification of the related network resource.
      */
-    #[Api]
+    #[Required]
     public string $network_id;
 
     /**
      * The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_code;
 
     /**

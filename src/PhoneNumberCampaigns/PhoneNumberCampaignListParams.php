@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,13 +37,13 @@ final class PhoneNumberCampaignListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $recordsPerPage;
 
     /**
@@ -51,7 +51,7 @@ final class PhoneNumberCampaignListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()

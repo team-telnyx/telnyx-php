@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class CreatedAt implements BaseModel
     /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gte;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lte;
 
     public function __construct()

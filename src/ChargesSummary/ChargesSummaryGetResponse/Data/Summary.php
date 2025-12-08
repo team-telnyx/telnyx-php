@@ -9,7 +9,7 @@ use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
 use Telnyx\ChargesSummary\MonthDetail;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,7 +28,7 @@ final class Summary implements BaseModel
      *
      * @var list<Adjustment> $adjustments
      */
-    #[Api(list: Adjustment::class)]
+    #[Required(list: Adjustment::class)]
     public array $adjustments;
 
     /**
@@ -36,7 +36,7 @@ final class Summary implements BaseModel
      *
      * @var list<Comparative|Simple> $lines
      */
-    #[Api(list: Line::class)]
+    #[Required(list: Line::class)]
     public array $lines;
 
     /**

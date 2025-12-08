@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class SubNumberOrderRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()

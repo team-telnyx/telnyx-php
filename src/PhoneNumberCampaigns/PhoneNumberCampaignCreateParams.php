@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class PhoneNumberCampaignCreateParams implements BaseModel
     /**
      * The ID of the campaign you want to link to the specified phone number.
      */
-    #[Api]
+    #[Required]
     public string $campaignId;
 
     /**
      * The phone number you want to link to a specified campaign.
      */
-    #[Api]
+    #[Required]
     public string $phoneNumber;
 
     /**

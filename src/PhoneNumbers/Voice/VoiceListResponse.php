@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PhoneNumbers\Voice;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
@@ -24,10 +24,10 @@ final class VoiceListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PhoneNumberWithVoiceSettings>|null $data */
-    #[Api(list: PhoneNumberWithVoiceSettings::class, optional: true)]
+    #[Optional(list: PhoneNumberWithVoiceSettings::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

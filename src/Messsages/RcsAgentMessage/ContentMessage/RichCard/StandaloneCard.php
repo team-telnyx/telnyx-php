@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\CardOrientation;
@@ -27,7 +27,7 @@ final class StandaloneCard implements BaseModel
     /** @use SdkModel<StandaloneCardShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public RcsCardContent $card_content;
 
     /**
@@ -35,7 +35,7 @@ final class StandaloneCard implements BaseModel
      *
      * @var value-of<CardOrientation> $card_orientation
      */
-    #[Api(enum: CardOrientation::class)]
+    #[Required(enum: CardOrientation::class)]
     public string $card_orientation;
 
     /**
@@ -43,7 +43,7 @@ final class StandaloneCard implements BaseModel
      *
      * @var value-of<ThumbnailImageAlignment> $thumbnail_image_alignment
      */
-    #[Api(enum: ThumbnailImageAlignment::class)]
+    #[Required(enum: ThumbnailImageAlignment::class)]
     public string $thumbnail_image_alignment;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse\Status;
@@ -35,73 +35,73 @@ final class ParticipantGetResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
      * The version of the API that was used to make the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $api_version;
 
     /**
      * The identifier of this participant's call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
     /**
      * The identifier of this participant's call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid_legacy;
 
     /**
      * Whether the participant is coaching another call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $coaching;
 
     /**
      * The identifier of the coached participant's call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $coaching_call_sid;
 
     /**
      * The identifier of the coached participant's call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $coaching_call_sid_legacy;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_created;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_updated;
 
     /**
      * Whether the conference ends when the participant leaves.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $end_conference_on_exit;
 
     /**
      * Whether the participant is on hold.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hold;
 
     /**
      * Whether the participant is muted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $muted;
 
     /**
@@ -109,13 +109,13 @@ final class ParticipantGetResponse implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The relative URI for this participant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

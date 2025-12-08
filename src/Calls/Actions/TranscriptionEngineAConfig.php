@@ -7,7 +7,7 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig\Model;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig\SpeechContext;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig\TranscriptionEngine;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -34,7 +34,7 @@ final class TranscriptionEngineAConfig implements BaseModel
     /**
      * Enables speaker diarization.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable_speaker_diarization;
 
     /**
@@ -42,13 +42,13 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var list<string>|null $hints
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $hints;
 
     /**
      * Whether to send also interim results. If set to false, only final results will be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $interim_results;
 
     /**
@@ -56,19 +56,19 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var value-of<GoogleTranscriptionLanguage>|null $language
      */
-    #[Api(enum: GoogleTranscriptionLanguage::class, optional: true)]
+    #[Optional(enum: GoogleTranscriptionLanguage::class)]
     public ?string $language;
 
     /**
      * Defines maximum number of speakers in the conversation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_speaker_count;
 
     /**
      * Defines minimum number of speakers in the conversation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $min_speaker_count;
 
     /**
@@ -76,13 +76,13 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var value-of<Model>|null $model
      */
-    #[Api(enum: Model::class, optional: true)]
+    #[Optional(enum: Model::class)]
     public ?string $model;
 
     /**
      * Enables profanity_filter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $profanity_filter;
 
     /**
@@ -90,7 +90,7 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var list<SpeechContext>|null $speech_context
      */
-    #[Api(list: SpeechContext::class, optional: true)]
+    #[Optional(list: SpeechContext::class)]
     public ?array $speech_context;
 
     /**
@@ -98,13 +98,13 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var value-of<TranscriptionEngine>|null $transcription_engine
      */
-    #[Api(enum: TranscriptionEngine::class, optional: true)]
+    #[Optional(enum: TranscriptionEngine::class)]
     public ?string $transcription_engine;
 
     /**
      * Enables enhanced transcription, this works for models `phone_call` and `video`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $use_enhanced;
 
     public function __construct()

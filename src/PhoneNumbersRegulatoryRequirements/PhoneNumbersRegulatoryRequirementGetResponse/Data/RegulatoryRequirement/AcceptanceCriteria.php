@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,13 +20,13 @@ final class AcceptanceCriteria implements BaseModel
     /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_value;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality_limit;
 
     public function __construct()

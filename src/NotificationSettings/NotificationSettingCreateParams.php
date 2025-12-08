@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,23 +31,23 @@ final class NotificationSettingCreateParams implements BaseModel
     /**
      * A UUID reference to the associated Notification Channel.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_channel_id;
 
     /**
      * A UUID reference to the associated Notification Event Condition.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_event_condition_id;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_profile_id;
 
     /** @var list<Parameter>|null $parameters */
-    #[Api(list: Parameter::class, optional: true)]
+    #[Optional(list: Parameter::class)]
     public ?array $parameters;
 
     public function __construct()

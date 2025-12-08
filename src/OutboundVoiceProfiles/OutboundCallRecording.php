@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
@@ -29,7 +29,7 @@ final class OutboundCallRecording implements BaseModel
      *
      * @var list<string>|null $call_recording_caller_phone_numbers
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $call_recording_caller_phone_numbers;
 
     /**
@@ -37,7 +37,7 @@ final class OutboundCallRecording implements BaseModel
      *
      * @var value-of<CallRecordingChannels>|null $call_recording_channels
      */
-    #[Api(enum: CallRecordingChannels::class, optional: true)]
+    #[Optional(enum: CallRecordingChannels::class)]
     public ?string $call_recording_channels;
 
     /**
@@ -45,7 +45,7 @@ final class OutboundCallRecording implements BaseModel
      *
      * @var value-of<CallRecordingFormat>|null $call_recording_format
      */
-    #[Api(enum: CallRecordingFormat::class, optional: true)]
+    #[Optional(enum: CallRecordingFormat::class)]
     public ?string $call_recording_format;
 
     /**
@@ -53,7 +53,7 @@ final class OutboundCallRecording implements BaseModel
      *
      * @var value-of<CallRecordingType>|null $call_recording_type
      */
-    #[Api(enum: CallRecordingType::class, optional: true)]
+    #[Optional(enum: CallRecordingType::class)]
     public ?string $call_recording_type;
 
     public function __construct()

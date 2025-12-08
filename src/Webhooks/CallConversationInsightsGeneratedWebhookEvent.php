@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data;
@@ -22,7 +22,7 @@ final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel
     /** @use SdkModel<CallConversationInsightsGeneratedWebhookEventShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

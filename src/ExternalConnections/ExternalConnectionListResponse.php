@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnection\ExternalSipConnection;
@@ -24,10 +24,10 @@ final class ExternalConnectionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<ExternalConnection>|null $data */
-    #[Api(list: ExternalConnection::class, optional: true)]
+    #[Optional(list: ExternalConnection::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalVoiceIntegrationsPaginationMeta $meta;
 
     public function __construct()

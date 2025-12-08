@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,11 +31,11 @@ final class RequirementGroupUpdateParams implements BaseModel
     /**
      * Reference for the customer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    #[Optional(list: RegulatoryRequirement::class)]
     public ?array $regulatory_requirements;
 
     public function __construct()

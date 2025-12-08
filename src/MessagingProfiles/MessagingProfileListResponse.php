@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\MessagingProfiles;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
@@ -22,10 +22,10 @@ final class MessagingProfileListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<MessagingProfile>|null $data */
-    #[Api(list: MessagingProfile::class, optional: true)]
+    #[Optional(list: MessagingProfile::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

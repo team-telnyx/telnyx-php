@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomParticipant;
@@ -33,68 +33,68 @@ final class Room implements BaseModel
     /**
      * A unique identifier for the room.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The identifier of the active room session if any.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $active_session_id;
 
     /**
      * ISO 8601 timestamp when the room was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Enable or disable recording for that room.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable_recording;
 
     /**
      * Maximum participants allowed in the room.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_participants;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var list<RoomSession>|null $sessions */
-    #[Api(list: RoomSession::class, optional: true)]
+    #[Optional(list: RoomSession::class)]
     public ?array $sessions;
 
     /**
      * The unique (within the Telnyx account scope) name of the room.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unique_name;
 
     /**
      * ISO 8601 timestamp when the room was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     public function __construct()

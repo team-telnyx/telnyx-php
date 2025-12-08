@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\QueueGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\QueueGetResponse\Data\RecordType;
@@ -29,47 +29,47 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies the queue.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The average time that the calls currently in the queue have spent waiting, given in seconds.
      */
-    #[Api]
+    #[Required]
     public int $average_wait_time_secs;
 
     /**
      * ISO 8601 formatted date of when the queue was created.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * The number of calls currently in the queue.
      */
-    #[Api]
+    #[Required]
     public int $current_size;
 
     /**
      * The maximum number of calls allowed in the queue.
      */
-    #[Api]
+    #[Required]
     public int $max_size;
 
     /**
      * Name of the queue.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * ISO 8601 formatted date of when the queue was last updated.
      */
-    #[Api]
+    #[Required]
     public string $updated_at;
 
     /**

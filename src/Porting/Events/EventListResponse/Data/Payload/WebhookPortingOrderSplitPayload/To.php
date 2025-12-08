@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderSplitPayload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class To implements BaseModel
     /**
      * Identifies the porting order that was split.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     public function __construct()

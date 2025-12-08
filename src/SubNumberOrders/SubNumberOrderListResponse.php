@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\SubNumberOrders;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrder\PhoneNumberType;
@@ -22,10 +22,10 @@ final class SubNumberOrderListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<SubNumberOrder>|null $data */
-    #[Api(list: SubNumberOrder::class, optional: true)]
+    #[Optional(list: SubNumberOrder::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

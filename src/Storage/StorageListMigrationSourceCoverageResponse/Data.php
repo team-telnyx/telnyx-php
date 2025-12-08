@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
@@ -24,13 +24,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Provider>|null $provider
      */
-    #[Api(enum: Provider::class, optional: true)]
+    #[Optional(enum: Provider::class)]
     public ?string $provider;
 
     /**
      * Provider region from which to migrate data.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $source_region;
 
     public function __construct()

@@ -8,7 +8,7 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\ConversationInsight;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,10 +23,10 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

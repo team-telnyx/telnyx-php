@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,14 +19,14 @@ final class Function1 implements BaseModel
     /** @use SdkModel<Function1Shape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /** @var array<string,mixed>|null $parameters */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $parameters;
 
     /**

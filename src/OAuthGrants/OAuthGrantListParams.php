@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthGrants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class OAuthGrantListParams implements BaseModel
     /**
      * Page number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * Number of results per page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

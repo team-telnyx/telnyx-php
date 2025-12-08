@@ -6,7 +6,7 @@ namespace Telnyx\CallEvents\CallEventListResponse;
 
 use Telnyx\CallEvents\CallEventListResponse\Data\RecordType;
 use Telnyx\CallEvents\CallEventListResponse\Data\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -29,35 +29,35 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies an individual call leg.
      */
-    #[Api]
+    #[Required]
     public string $call_leg_id;
 
     /**
      * Uniquely identifies the call control session. A session may include multiple call leg events.
      */
-    #[Api]
+    #[Required]
     public string $call_session_id;
 
     /**
      * Event timestamp.
      */
-    #[Api]
+    #[Required]
     public string $event_timestamp;
 
     /**
      * Event metadata, which includes raw event, and extra information based on event type.
      */
-    #[Api]
+    #[Required]
     public mixed $metadata;
 
     /**
      * Event name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
@@ -65,7 +65,7 @@ final class Data implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

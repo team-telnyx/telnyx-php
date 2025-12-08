@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class PortingOrderDocuments implements BaseModel
     /**
      * Returned ID of the submitted Invoice via the Documents endpoint.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $invoice;
 
     /**
      * Returned ID of the submitted LOA via the Documents endpoint.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $loa;
 
     public function __construct()

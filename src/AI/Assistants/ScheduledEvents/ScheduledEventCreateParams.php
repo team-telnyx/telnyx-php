@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,23 +34,23 @@ final class ScheduledEventCreateParams implements BaseModel
     /**
      * The datetime at which the event should be scheduled. Formatted as ISO 8601.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $scheduled_at_fixed_datetime;
 
     /**
      * The phone number, SIP URI, to schedule the call or text from.
      */
-    #[Api]
+    #[Required]
     public string $telnyx_agent_target;
 
     /** @var value-of<ConversationChannelType> $telnyx_conversation_channel */
-    #[Api(enum: ConversationChannelType::class)]
+    #[Required(enum: ConversationChannelType::class)]
     public string $telnyx_conversation_channel;
 
     /**
      * The phone number, SIP URI, to schedule the call or text to.
      */
-    #[Api]
+    #[Required]
     public string $telnyx_end_user_target;
 
     /**
@@ -57,13 +58,13 @@ final class ScheduledEventCreateParams implements BaseModel
      *
      * @var array<string,string|int|bool>|null $conversation_metadata
      */
-    #[Api(map: ConversationMetadata::class, optional: true)]
+    #[Optional(map: ConversationMetadata::class)]
     public ?array $conversation_metadata;
 
     /**
      * Required for sms scheduled events. The text to be sent to the end user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /**

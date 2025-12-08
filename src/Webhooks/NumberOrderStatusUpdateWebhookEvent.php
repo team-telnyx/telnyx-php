@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
@@ -21,10 +21,10 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
     /** @use SdkModel<NumberOrderStatusUpdateWebhookEventShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**

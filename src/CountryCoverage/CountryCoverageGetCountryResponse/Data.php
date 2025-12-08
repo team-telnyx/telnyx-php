@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CountryCoverage\CountryCoverageGetCountryResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\Local;
@@ -37,7 +37,7 @@ final class Data implements BaseModel
     /**
      * Country ISO code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
@@ -45,33 +45,33 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $features
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $features;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $international_sms;
 
     /**
      * Indicates whether country can be queried with inventory coverage endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $inventory_coverage;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Local $local;
 
     /** @var array<string,mixed>|null $mobile */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $mobile;
 
     /** @var array<string,mixed>|null $national */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $national;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $numbers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $p2p;
 
     /**
@@ -79,32 +79,32 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $phone_number_type
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_number_type;
 
     /**
      * Supports quickship.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
     /**
      * Geographic region (e.g., AMER, EMEA, APAC).
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $region;
 
     /**
      * Supports reservable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $reservable;
 
     /** @var array<string,mixed>|null $shared_cost */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $shared_cost;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TollFree $toll_free;
 
     public function __construct()

@@ -8,7 +8,7 @@ use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\ActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\SimCardActionsSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,10 +23,10 @@ final class BulkSimCardActionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

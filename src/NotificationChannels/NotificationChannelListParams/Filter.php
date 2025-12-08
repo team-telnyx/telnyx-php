@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationChannels\NotificationChannelListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType;
@@ -32,22 +32,22 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?AssociatedRecordType $associated_record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ChannelTypeID $channel_type_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?NotificationChannel $notification_channel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?NotificationEventConditionID $notification_event_condition_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?NotificationProfileID $notification_profile_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
     public function __construct()

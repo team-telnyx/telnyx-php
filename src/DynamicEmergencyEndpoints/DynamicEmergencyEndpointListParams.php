@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyEndpoints;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,13 +33,13 @@ final class DynamicEmergencyEndpointListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()

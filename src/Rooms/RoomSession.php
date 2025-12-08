@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomParticipant;
@@ -29,44 +29,44 @@ final class RoomSession implements BaseModel
     /**
      * A unique identifier for the room session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Shows if the room session is active or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * ISO 8601 timestamp when the room session was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * ISO 8601 timestamp when the room session has ended.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $ended_at;
 
     /** @var list<RoomParticipant>|null $participants */
-    #[Api(list: RoomParticipant::class, optional: true)]
+    #[Optional(list: RoomParticipant::class)]
     public ?array $participants;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Identify the room hosting that room session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $room_id;
 
     /**
      * ISO 8601 timestamp when the room session was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,31 +19,31 @@ final class Simple implements BaseModel
     use SdkModel;
 
     /** @var 'simple' $type */
-    #[Api]
+    #[Required]
     public string $type = 'simple';
 
     /**
      * Service alias.
      */
-    #[Api]
+    #[Required]
     public string $alias;
 
     /**
      * Total amount as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $amount;
 
     /**
      * Service name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Number of items.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**

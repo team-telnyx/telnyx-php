@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\TexmlSecretsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\TexmlSecretsResponse\Data\Value;
@@ -19,11 +19,11 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /** @var value-of<Value>|null $value */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()

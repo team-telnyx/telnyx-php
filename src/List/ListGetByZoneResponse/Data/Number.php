@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\List\ListGetByZoneResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,10 +16,10 @@ final class Number implements BaseModel
     /** @use SdkModel<NumberShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $number;
 
     public function __construct()

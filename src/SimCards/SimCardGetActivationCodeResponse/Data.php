@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardGetActivationCodeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class Data implements BaseModel
     /**
      * Contents of the eSIM activation QR code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $activation_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

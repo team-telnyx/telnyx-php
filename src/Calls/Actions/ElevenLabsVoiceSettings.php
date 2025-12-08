@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,13 +25,13 @@ final class ElevenLabsVoiceSettings implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $api_key_ref;
 
     /**

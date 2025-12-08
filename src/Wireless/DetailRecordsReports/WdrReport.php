@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless\DetailRecordsReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
@@ -29,34 +29,34 @@ final class WdrReport implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * ISO 8601 formatted date-time indicating the end time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_time;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The URL where the report content, when generated, will be published to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
     /**
      * ISO 8601 formatted date-time indicating the start time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     /**
@@ -64,13 +64,13 @@ final class WdrReport implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

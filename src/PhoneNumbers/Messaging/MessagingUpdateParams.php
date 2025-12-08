@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class MessagingUpdateParams implements BaseModel
      * * Omit this field or set its value to `null` to keep the current value.
      * * Set this field to a quoted product ID to set this phone number to that product
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_product;
 
     /**
@@ -40,7 +40,7 @@ final class MessagingUpdateParams implements BaseModel
      * * Set this field to `""` to unassign the number from its messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     public function __construct()

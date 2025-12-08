@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,22 +25,22 @@ final class Filters implements BaseModel
     /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at_gt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at_lt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order_request_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()

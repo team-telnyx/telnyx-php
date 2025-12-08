@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Audio;
 
 use Telnyx\AI\Audio\AudioTranscribeResponse\Segment;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,13 +23,13 @@ final class AudioTranscribeResponse implements BaseModel
     /**
      * The transcribed text for the audio file.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
      * The duration of the audio file in seconds. This is only included if `response_format` is set to `verbose_json`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
 
     /**
@@ -36,7 +37,7 @@ final class AudioTranscribeResponse implements BaseModel
      *
      * @var list<Segment>|null $segments
      */
-    #[Api(list: Segment::class, optional: true)]
+    #[Optional(list: Segment::class)]
     public ?array $segments;
 
     /**

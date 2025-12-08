@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class Data implements BaseModel
     /**
      * The user ID of the managed account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Integer value that indicates the number of allocatable global outbound channels that are allocated to the managed account. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     /**
      * The email of the managed account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
      * The user ID of the manager of the account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $manager_account_id;
 
     /**
      * The name of the type of data in the response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

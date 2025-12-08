@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions\SimCardAction;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\SimCardAction\Status\Value;
@@ -22,7 +22,7 @@ final class Status implements BaseModel
     /**
      * It describes why the SIM card action is in the current status. This will be <code>null</code> for self-explanatory statuses, such as <code>in-progress</code> and <code>completed</code> but will include further information on statuses like <code>interrupted</code> and <code>failed</code>.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reason;
 
     /**
@@ -30,7 +30,7 @@ final class Status implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()

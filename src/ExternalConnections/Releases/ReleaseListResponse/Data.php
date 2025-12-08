@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data\Status;
@@ -28,13 +28,13 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * A message set if there is an error with the upload process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_message;
 
     /**
@@ -42,20 +42,20 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /** @var list<TelephoneNumber>|null $telephone_numbers */
-    #[Api(list: TelephoneNumber::class, optional: true)]
+    #[Optional(list: TelephoneNumber::class)]
     public ?array $telephone_numbers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tenant_id;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ticket_id;
 
     public function __construct()

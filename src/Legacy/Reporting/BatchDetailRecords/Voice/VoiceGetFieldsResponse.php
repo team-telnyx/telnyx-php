@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,7 +28,7 @@ final class VoiceGetFieldsResponse implements BaseModel
      *
      * @var list<string>|null $Billing
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $Billing;
 
     /**
@@ -36,7 +36,7 @@ final class VoiceGetFieldsResponse implements BaseModel
      *
      * @var list<string>|null $Interaction_Data
      */
-    #[Api('Interaction Data', list: 'string', optional: true)]
+    #[Optional('Interaction Data', list: 'string')]
     public ?array $Interaction_Data;
 
     /**
@@ -44,7 +44,7 @@ final class VoiceGetFieldsResponse implements BaseModel
      *
      * @var list<string>|null $Number_Information
      */
-    #[Api('Number Information', list: 'string', optional: true)]
+    #[Optional('Number Information', list: 'string')]
     public ?array $Number_Information;
 
     /**
@@ -52,7 +52,7 @@ final class VoiceGetFieldsResponse implements BaseModel
      *
      * @var list<string>|null $Telephony_Data
      */
-    #[Api('Telephony Data', list: 'string', optional: true)]
+    #[Optional('Telephony Data', list: 'string')]
     public ?array $Telephony_Data;
 
     public function __construct()

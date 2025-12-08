@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData\Backend;
@@ -24,19 +25,19 @@ final class GcsConfigurationData implements BaseModel
      *
      * @var value-of<Backend> $backend
      */
-    #[Api(enum: Backend::class)]
+    #[Required(enum: Backend::class)]
     public string $backend;
 
     /**
      * Name of the bucket to be used to store recording files.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bucket;
 
     /**
      * Opaque credential token used to authenticate and authorize with storage provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $credentials;
 
     /**

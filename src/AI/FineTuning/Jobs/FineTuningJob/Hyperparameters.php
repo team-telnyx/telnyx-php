@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\FineTuning\Jobs\FineTuningJob;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Hyperparameters implements BaseModel
     /**
      * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
      */
-    #[Api]
+    #[Required]
     public int $n_epochs;
 
     /**

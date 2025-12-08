@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
@@ -54,10 +54,10 @@ final class PortingOrder implements BaseModel
     /**
      * Uniquely identifies this porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderActivationSettings $activation_settings;
 
     /**
@@ -65,64 +65,64 @@ final class PortingOrder implements BaseModel
      *
      * @var list<value-of<AdditionalStep>>|null $additional_steps
      */
-    #[Api(list: AdditionalStep::class, optional: true)]
+    #[Optional(list: AdditionalStep::class)]
     public ?array $additional_steps;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * A customer-specified group reference for customer bookkeeping purposes.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $customer_group_reference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $customer_reference;
 
     /**
      * A description of the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderDocuments $documents;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderEndUser $end_user;
 
     /**
      * Information about messaging porting process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderMessaging $messaging;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?PortingOrderMisc $misc;
 
     /**
      * Identifies the old service provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $old_service_provider_ocn;
 
     /**
      * A key to reference for the porting order group when contacting Telnyx customer support. This information is not available for porting orders in `draft` state.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $parent_support_key;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderPhoneNumberConfiguration $phone_number_configuration;
 
     /**
@@ -130,19 +130,19 @@ final class PortingOrder implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * Count of phone numbers associated with this porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $porting_phone_numbers_count;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -150,43 +150,43 @@ final class PortingOrder implements BaseModel
      *
      * @var list<PortingOrderRequirement>|null $requirements
      */
-    #[Api(list: PortingOrderRequirement::class, optional: true)]
+    #[Optional(list: PortingOrderRequirement::class)]
     public ?array $requirements;
 
     /**
      * Is true when the required documentation is met.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $requirements_met;
 
     /**
      * Porting order status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderStatus $status;
 
     /**
      * A key to reference this porting order when contacting Telnyx customer support. This information is not available in draft porting orders.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $support_key;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderUserFeedback $user_feedback;
 
     /**
      * Identifies the user (or organization) who requested the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_url;
 
     public function __construct()

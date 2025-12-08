@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\SslCertificate;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy;
@@ -28,31 +28,31 @@ final class SslCertificate implements BaseModel
     /**
      * Unique identifier for the SSL certificate.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Time when SSL certificate was uploaded.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?IssuedBy $issued_by;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?IssuedTo $issued_to;
 
     /**
      * The time the certificate is valid from.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $valid_from;
 
     /**
      * The time the certificate is valid to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $valid_to;
 
     public function __construct()

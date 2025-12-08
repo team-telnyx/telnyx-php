@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class Payload implements BaseModel
     /**
      * Call Control ID of the new speaker.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * Call Leg ID of the new speaker.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * Call Session ID of the new speaker.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Conference ID that had a speaker change event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conference_id;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $occurred_at;
 
     public function __construct()

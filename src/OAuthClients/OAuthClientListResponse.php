@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
@@ -22,10 +22,10 @@ final class OAuthClientListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<OAuthClient>|null $data */
-    #[Api(list: OAuthClient::class, optional: true)]
+    #[Optional(list: OAuthClient::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMetaOAuth $meta;
 
     public function __construct()

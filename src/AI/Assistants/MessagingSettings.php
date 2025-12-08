@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,13 +22,13 @@ final class MessagingSettings implements BaseModel
     /**
      * Default Messaging Profile used for messaging exchanges with your assistant. This will be created automatically on assistant creation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $default_messaging_profile_id;
 
     /**
      * The URL where webhooks related to delivery statused for assistant messages will be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivery_status_webhook_url;
 
     public function __construct()

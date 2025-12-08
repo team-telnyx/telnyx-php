@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TexmlApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,13 +34,13 @@ final class TexmlApplicationListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -59,7 +59,7 @@ final class TexmlApplicationListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()

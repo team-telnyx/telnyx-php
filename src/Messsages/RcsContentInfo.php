@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +22,19 @@ final class RcsContentInfo implements BaseModel
     /**
      * Publicly reachable URL of the file.
      */
-    #[Api]
+    #[Required]
     public string $file_url;
 
     /**
      * If set the URL content will not be cached.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $force_refresh;
 
     /**
      * Publicly reachable URL of the thumbnail. Maximum size of 100 kB.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $thumbnail_url;
 
     /**

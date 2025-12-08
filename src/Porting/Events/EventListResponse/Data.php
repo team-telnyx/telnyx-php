@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventListResponse\Data\AvailableNotificationMethod;
@@ -43,7 +43,7 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies the event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -51,13 +51,13 @@ final class Data implements BaseModel
      *
      * @var list<value-of<AvailableNotificationMethod>>|null $available_notification_methods
      */
-    #[Api(list: AvailableNotificationMethod::class, optional: true)]
+    #[Optional(list: AvailableNotificationMethod::class)]
     public ?array $available_notification_methods;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
@@ -65,13 +65,13 @@ final class Data implements BaseModel
      *
      * @var value-of<EventType>|null $event_type
      */
-    #[Api(enum: EventType::class, optional: true)]
+    #[Optional(enum: EventType::class)]
     public ?string $event_type;
 
     /**
      * The webhook payload for the porting_order.deleted event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public WebhookPortingOrderDeletedPayload|WebhookPortingOrderMessagingChangedPayload|WebhookPortingOrderStatusChangedPayload|WebhookPortingOrderNewCommentPayload|WebhookPortingOrderSplitPayload|null $payload;
 
     /**
@@ -79,25 +79,25 @@ final class Data implements BaseModel
      *
      * @var value-of<PayloadStatus>|null $payload_status
      */
-    #[Api(enum: PayloadStatus::class, optional: true)]
+    #[Optional(enum: PayloadStatus::class)]
     public ?string $payload_status;
 
     /**
      * Identifies the porting order associated with the event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

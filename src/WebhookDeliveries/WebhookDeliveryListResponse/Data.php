@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Attempt;
@@ -35,7 +35,7 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies the webhook_delivery record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -43,25 +43,25 @@ final class Data implements BaseModel
      *
      * @var list<Attempt>|null $attempts
      */
-    #[Api(list: Attempt::class, optional: true)]
+    #[Optional(list: Attempt::class)]
     public ?array $attempts;
 
     /**
      * ISO 8601 timestamp indicating when the last webhook response has been received.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $finished_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 timestamp indicating when the first request attempt was initiated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $started_at;
 
     /**
@@ -69,19 +69,19 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Uniquely identifies the user that owns the webhook_delivery record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**
      * Original webhook JSON data. Payload fields vary according to event type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Webhook $webhook;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Metadata;
@@ -21,10 +21,10 @@ final class PortoutListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PortoutDetails>|null $data */
-    #[Api(list: PortoutDetails::class, optional: true)]
+    #[Optional(list: PortoutDetails::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Metadata $meta;
 
     public function __construct()

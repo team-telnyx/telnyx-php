@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
@@ -22,10 +22,10 @@ final class UploadListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Upload>|null $data */
-    #[Api(list: Upload::class, optional: true)]
+    #[Optional(list: Upload::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalVoiceIntegrationsPaginationMeta $meta;
 
     public function __construct()

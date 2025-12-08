@@ -8,7 +8,7 @@ use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock\CidrBlockPatternFilter;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt\DateRangeFilter;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,13 +35,13 @@ final class AccessIPRangeListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()

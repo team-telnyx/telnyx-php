@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,13 +18,13 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * ISO 8601 timestamp when the token expires.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $token_expires_at;
 
     public function __construct()

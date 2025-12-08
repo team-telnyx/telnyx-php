@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Embeddings\EmbeddingListResponse;
 
 use Telnyx\AI\Embeddings\BackgroundTaskStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,7 +26,7 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
@@ -33,22 +34,22 @@ final class Data implements BaseModel
      *
      * @var value-of<BackgroundTaskStatus> $status
      */
-    #[Api(enum: BackgroundTaskStatus::class)]
+    #[Required(enum: BackgroundTaskStatus::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public string $task_id;
 
-    #[Api]
+    #[Required]
     public string $task_name;
 
-    #[Api]
+    #[Required]
     public string $user_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bucket;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $finished_at;
 
     /**

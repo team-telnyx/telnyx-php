@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
@@ -25,10 +25,10 @@ final class CustomStorageCredentialUpdateResponse implements BaseModel
     /**
      * Uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource.
      */
-    #[Api]
+    #[Required]
     public string $connection_id;
 
-    #[Api]
+    #[Required]
     public CustomStorageConfiguration $data;
 
     /**
@@ -36,7 +36,7 @@ final class CustomStorageCredentialUpdateResponse implements BaseModel
      *
      * @var value-of<RecordType> $record_type
      */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**

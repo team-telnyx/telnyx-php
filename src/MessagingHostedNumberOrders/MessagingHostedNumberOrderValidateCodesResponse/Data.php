@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber;
@@ -20,11 +20,11 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $order_id;
 
     /** @var list<PhoneNumber> $phone_numbers */
-    #[Api(list: PhoneNumber::class)]
+    #[Required(list: PhoneNumber::class)]
     public array $phone_numbers;
 
     /**

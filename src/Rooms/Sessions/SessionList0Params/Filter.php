@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Sessions\SessionList0Params;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\SessionList0Params\Filter\DateCreatedAt;
@@ -30,22 +30,22 @@ final class Filter implements BaseModel
     /**
      * Filter active or inactive room sessions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateCreatedAt $date_created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateEndedAt $date_ended_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateUpdatedAt $date_updated_at;
 
     /**
      * Room_id for filtering room sessions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $room_id;
 
     public function __construct()

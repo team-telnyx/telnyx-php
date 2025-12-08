@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend;
@@ -28,31 +29,31 @@ final class S3ConfigurationData implements BaseModel
      *
      * @var value-of<Backend> $backend
      */
-    #[Api(enum: Backend::class)]
+    #[Required(enum: Backend::class)]
     public string $backend;
 
     /**
      * AWS credentials access key id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $aws_access_key_id;
 
     /**
      * AWS secret access key.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $aws_secret_access_key;
 
     /**
      * Name of the bucket to be used to store recording files.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bucket;
 
     /**
      * Region where the bucket is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\SslCertificate\SslCertificate;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class IssuedTo implements BaseModel
     /**
      * The common name of the entity the certificate was issued to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $common_name;
 
     /**
      * The organization the certificate was issued to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization;
 
     /**
      * The organizational unit the certificate was issued to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_unit;
 
     public function __construct()

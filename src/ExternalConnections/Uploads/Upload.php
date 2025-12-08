@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Uploads\TnUploadEntry\ErrorCode;
@@ -30,22 +30,22 @@ final class Upload implements BaseModel
     use SdkModel;
 
     /** @var list<value-of<AvailableUsage>>|null $available_usages */
-    #[Api(list: AvailableUsage::class, optional: true)]
+    #[Optional(list: AvailableUsage::class)]
     public ?array $available_usages;
 
     /**
      * A code returned by Microsoft Teams if there is an error with the upload process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_code;
 
     /**
      * A message set if there is an error with the upload process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_message;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location_id;
 
     /**
@@ -53,20 +53,20 @@ final class Upload implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tenant_id;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ticket_id;
 
     /** @var list<TnUploadEntry>|null $tn_upload_entries */
-    #[Api(list: TnUploadEntry::class, optional: true)]
+    #[Optional(list: TnUploadEntry::class)]
     public ?array $tn_upload_entries;
 
     public function __construct()

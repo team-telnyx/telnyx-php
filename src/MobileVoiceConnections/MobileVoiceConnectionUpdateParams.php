@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileVoiceConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,33 +37,33 @@ final class MobileVoiceConnectionUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     /** @var list<string>|null $tags */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /** @var value-of<WebhookAPIVersion>|null $webhook_api_version */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $webhook_timeout_secs;
 
     public function __construct()

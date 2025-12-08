@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Comments\CommentListParams;
 
 use Telnyx\Comments\CommentListParams\Filter\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,7 +25,7 @@ final class Filter implements BaseModel
     /**
      * ID of the record the comments relate to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment_record_id;
 
     /**
@@ -33,7 +33,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<CommentRecordType>|null $comment_record_type
      */
-    #[Api(enum: CommentRecordType::class, optional: true)]
+    #[Optional(enum: CommentRecordType::class)]
     public ?string $comment_record_type;
 
     public function __construct()

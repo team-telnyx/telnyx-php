@@ -7,7 +7,7 @@ namespace Telnyx\BulkSimCardActions;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\ActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\SimCardActionsSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class BulkSimCardActionGetResponse implements BaseModel
     /** @use SdkModel<BulkSimCardActionGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

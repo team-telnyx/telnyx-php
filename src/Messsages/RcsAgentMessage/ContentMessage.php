@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsAgentMessage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard;
@@ -28,10 +28,10 @@ final class ContentMessage implements BaseModel
     /** @use SdkModel<ContentMessageShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RcsContentInfo $content_info;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RichCard $rich_card;
 
     /**
@@ -39,13 +39,13 @@ final class ContentMessage implements BaseModel
      *
      * @var list<RcsSuggestion>|null $suggestions
      */
-    #[Api(list: RcsSuggestion::class, optional: true)]
+    #[Optional(list: RcsSuggestion::class)]
     public ?array $suggestions;
 
     /**
      * Text (maximum 3072 characters).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     public function __construct()

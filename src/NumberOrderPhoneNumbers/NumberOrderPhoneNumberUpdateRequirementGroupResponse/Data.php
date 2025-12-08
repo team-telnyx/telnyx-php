@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse\Data\RegulatoryRequirement;
@@ -33,50 +33,50 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $bundle_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $deadline;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_block_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order_request_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    #[Optional(list: RegulatoryRequirement::class)]
     public ?array $regulatory_requirements;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $requirements_met;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirements_status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sub_number_order_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Audio\AudioTranscribeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,25 +21,25 @@ final class Segment implements BaseModel
     /**
      * Unique identifier of the segment.
      */
-    #[Api]
+    #[Required]
     public float $id;
 
     /**
      * End time of the segment in seconds.
      */
-    #[Api]
+    #[Required]
     public float $end;
 
     /**
      * Start time of the segment in seconds.
      */
-    #[Api]
+    #[Required]
     public float $start;
 
     /**
      * Text content of the segment.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**

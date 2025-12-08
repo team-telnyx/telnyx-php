@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsAgentMessage\ContentMessage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard;
@@ -27,13 +27,13 @@ final class RichCard implements BaseModel
     /**
      * Carousel of cards.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CarouselCard $carousel_card;
 
     /**
      * Standalone card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?StandaloneCard $standalone_card;
 
     public function __construct()

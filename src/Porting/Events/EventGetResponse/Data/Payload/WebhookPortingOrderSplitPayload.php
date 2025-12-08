@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventGetResponse\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderSplitPayload\From;
@@ -28,7 +28,7 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
     /**
      * The porting order that was split.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?From $from;
 
     /**
@@ -36,13 +36,13 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
      *
      * @var list<PortingPhoneNumber>|null $porting_phone_numbers
      */
-    #[Api(list: PortingPhoneNumber::class, optional: true)]
+    #[Optional(list: PortingPhoneNumber::class)]
     public ?array $porting_phone_numbers;
 
     /**
      * The new porting order that the phone numbers was moved to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?To $to;
 
     public function __construct()

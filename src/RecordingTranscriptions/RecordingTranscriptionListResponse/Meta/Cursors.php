@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Cursors implements BaseModel
     /**
      * Opaque identifier of next page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $after;
 
     /**
      * Opaque identifier of previous page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $before;
 
     public function __construct()

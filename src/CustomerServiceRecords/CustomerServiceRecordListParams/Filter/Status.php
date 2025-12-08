@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\Eq;
@@ -25,7 +25,7 @@ final class Status implements BaseModel
      *
      * @var value-of<Eq>|null $eq
      */
-    #[Api(enum: Eq::class, optional: true)]
+    #[Optional(enum: Eq::class)]
     public ?string $eq;
 
     /**
@@ -33,7 +33,7 @@ final class Status implements BaseModel
      *
      * @var list<value-of<In>>|null $in
      */
-    #[Api(list: In::class, optional: true)]
+    #[Optional(list: In::class)]
     public ?array $in;
 
     public function __construct()

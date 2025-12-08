@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\NumberBlockOrders;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
@@ -21,10 +21,10 @@ final class NumberBlockOrderListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<NumberBlockOrder>|null $data */
-    #[Api(list: NumberBlockOrder::class, optional: true)]
+    #[Optional(list: NumberBlockOrder::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

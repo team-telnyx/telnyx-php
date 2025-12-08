@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse\Data\Result;
@@ -35,25 +35,25 @@ final class Data implements BaseModel
     /**
      * Unique identifier for the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Type of aggregation used in the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $aggregation_type;
 
     /**
      * Timestamp when the report was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * End date of the report period.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_date;
 
     /**
@@ -61,19 +61,19 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $managed_accounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managed_accounts;
 
     /**
      * Record type identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * URL to download the complete report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
     /**
@@ -81,25 +81,25 @@ final class Data implements BaseModel
      *
      * @var list<Result>|null $result
      */
-    #[Api(list: Result::class, optional: true)]
+    #[Optional(list: Result::class)]
     public ?array $result;
 
     /**
      * Start date of the report period.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_date;
 
     /**
      * Current status of the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * Timestamp when the report was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

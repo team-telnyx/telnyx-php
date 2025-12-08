@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data;
@@ -36,10 +36,10 @@ final class DetailRecordListResponse implements BaseModel
     /**
      * @var list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord>|null $data
      */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()

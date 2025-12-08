@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -39,61 +39,61 @@ final class ReportListWdrsParams implements BaseModel
     /**
      * WDR uuid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * End date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $end_date;
 
     /**
      * International mobile subscriber identity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $imsi;
 
     /**
      * Mobile country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mcc;
 
     /**
      * Mobile network code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mnc;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Sim card unique identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
      * Sim group unique identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_group_id;
 
     /**
      * Sim group name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_group_name;
 
     /**
@@ -101,13 +101,13 @@ final class ReportListWdrsParams implements BaseModel
      *
      * @var list<string>|null $sort
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $sort;
 
     /**
      * Start date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_date;
 
     public function __construct()

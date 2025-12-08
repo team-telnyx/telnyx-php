@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSetting\Parameter;
@@ -32,41 +32,41 @@ final class NotificationSetting implements BaseModel
     /**
      * A UUID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $associated_record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $associated_record_type_value;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * A UUID reference to the associated Notification Channel.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_channel_id;
 
     /**
      * A UUID reference to the associated Notification Event Condition.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_event_condition_id;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $notification_profile_id;
 
     /** @var list<Parameter>|null $parameters */
-    #[Api(list: Parameter::class, optional: true)]
+    #[Optional(list: Parameter::class)]
     public ?array $parameters;
 
     /**
@@ -74,13 +74,13 @@ final class NotificationSetting implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

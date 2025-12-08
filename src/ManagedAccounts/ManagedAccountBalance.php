@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountBalance\RecordType;
@@ -26,25 +26,25 @@ final class ManagedAccountBalance implements BaseModel
     /**
      * Available amount to spend (balance + credit limit).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $available_credit;
 
     /**
      * The account's current balance.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $balance;
 
     /**
      * The account's credit limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $credit_limit;
 
     /**
      * The ISO 4217 currency identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
@@ -52,7 +52,7 @@ final class ManagedAccountBalance implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     public function __construct()

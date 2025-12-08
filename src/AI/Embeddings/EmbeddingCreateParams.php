@@ -6,7 +6,8 @@ namespace Telnyx\AI\Embeddings;
 
 use Telnyx\AI\Embeddings\EmbeddingCreateParams\EmbeddingModel;
 use Telnyx\AI\Embeddings\EmbeddingCreateParams\Loader;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -49,13 +50,13 @@ final class EmbeddingCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $bucket_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $document_chunk_overlap_size;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $document_chunk_size;
 
     /**
@@ -63,7 +64,7 @@ final class EmbeddingCreateParams implements BaseModel
      *
      * @var value-of<EmbeddingModel>|null $embedding_model
      */
-    #[Api(enum: EmbeddingModel::class, optional: true)]
+    #[Optional(enum: EmbeddingModel::class)]
     public ?string $embedding_model;
 
     /**
@@ -71,7 +72,7 @@ final class EmbeddingCreateParams implements BaseModel
      *
      * @var value-of<Loader>|null $loader
      */
-    #[Api(enum: Loader::class, optional: true)]
+    #[Optional(enum: Loader::class)]
     public ?string $loader;
 
     /**

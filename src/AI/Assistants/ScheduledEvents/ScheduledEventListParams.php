@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,19 +29,19 @@ final class ScheduledEventListParams implements BaseModel
     use SdkParams;
 
     /** @var value-of<ConversationChannelType>|null $conversation_channel */
-    #[Api(enum: ConversationChannelType::class, optional: true)]
+    #[Optional(enum: ConversationChannelType::class)]
     public ?string $conversation_channel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $from_date;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $to_date;
 
     public function __construct()

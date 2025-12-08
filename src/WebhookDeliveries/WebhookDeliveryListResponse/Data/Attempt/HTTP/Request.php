@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Attempt\HTTP;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\ListOf;
@@ -26,10 +26,10 @@ final class Request implements BaseModel
      *
      * @var list<list<string>>|null $headers
      */
-    #[Api(list: new ListOf('string'), optional: true)]
+    #[Optional(list: new ListOf('string'))]
     public ?array $headers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()

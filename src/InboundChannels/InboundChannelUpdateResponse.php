@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InboundChannels;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InboundChannels\InboundChannelUpdateResponse\Data;
@@ -17,7 +17,7 @@ final class InboundChannelUpdateResponse implements BaseModel
     /** @use SdkModel<InboundChannelUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

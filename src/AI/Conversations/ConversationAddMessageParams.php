@@ -6,7 +6,8 @@ namespace Telnyx\AI\Conversations;
 
 use Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata;
 use Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,31 +35,31 @@ final class ConversationAddMessageParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $role;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $content;
 
     /** @var array<string,string|int|bool|list<string|int|bool>>|null $metadata */
-    #[Api(map: Metadata::class, optional: true)]
+    #[Optional(map: Metadata::class)]
     public ?array $metadata;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $sent_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tool_call_id;
 
     /** @var list<array<string,mixed>>|null $tool_calls */
-    #[Api(list: new MapOf('mixed'), optional: true)]
+    #[Optional(list: new MapOf('mixed'))]
     public ?array $tool_calls;
 
     /** @var mixed|string|null $tool_choice */
-    #[Api(union: ToolChoice::class, optional: true)]
+    #[Optional(union: ToolChoice::class)]
     public mixed $tool_choice;
 
     /**

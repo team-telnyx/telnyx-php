@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class CnamListing implements BaseModel
     /** @use SdkModel<CnamListingShape> */
     use SdkModel;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $cnam_listing_details;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $cnam_listing_enabled;
 
     public function __construct()

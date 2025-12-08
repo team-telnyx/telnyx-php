@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Versions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -22,7 +22,7 @@ final class VersionDeleteParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $assistant_id;
 
     /**

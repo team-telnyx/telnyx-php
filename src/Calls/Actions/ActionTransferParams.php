@@ -20,7 +20,8 @@ use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Calls\SoundModifications;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -101,7 +102,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * The DID or SIP URI to dial out to.
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**
@@ -109,31 +110,31 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<AnsweringMachineDetection>|null $answering_machine_detection
      */
-    #[Api(enum: AnsweringMachineDetection::class, optional: true)]
+    #[Optional(enum: AnsweringMachineDetection::class)]
     public ?string $answering_machine_detection;
 
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?AnsweringMachineDetectionConfig $answering_machine_detection_config;
 
     /**
      * The URL of a file to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $audio_url;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -141,25 +142,25 @@ final class ActionTransferParams implements BaseModel
      *
      * @var list<CustomSipHeader>|null $custom_headers
      */
-    #[Api(list: CustomSipHeader::class, optional: true)]
+    #[Optional(list: CustomSipHeader::class)]
     public ?array $custom_headers;
 
     /**
      * If set to false, early media will not be passed to the originating leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $early_media;
 
     /**
      * The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `to` number of the original call if omitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from_display_name;
 
     /**
@@ -167,13 +168,13 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<MediaEncryption>|null $media_encryption
      */
-    #[Api(enum: MediaEncryption::class, optional: true)]
+    #[Optional(enum: MediaEncryption::class)]
     public ?string $media_encryption;
 
     /**
      * The media_name of a file to be played back when the transfer destination answers before bridging the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
@@ -181,13 +182,13 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<MuteDtmf>|null $mute_dtmf
      */
-    #[Api(enum: MuteDtmf::class, optional: true)]
+    #[Optional(enum: MuteDtmf::class)]
     public ?string $mute_dtmf;
 
     /**
      * Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $park_after_unbridge;
 
     /**
@@ -195,7 +196,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<Record>|null $record
      */
-    #[Api(enum: Record::class, optional: true)]
+    #[Optional(enum: Record::class)]
     public ?string $record;
 
     /**
@@ -203,13 +204,13 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordChannels>|null $record_channels
      */
-    #[Api(enum: RecordChannels::class, optional: true)]
+    #[Optional(enum: RecordChannels::class)]
     public ?string $record_channels;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_custom_file_name;
 
     /**
@@ -217,19 +218,19 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordFormat>|null $record_format
      */
-    #[Api(enum: RecordFormat::class, optional: true)]
+    #[Optional(enum: RecordFormat::class)]
     public ?string $record_format;
 
     /**
      * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_max_length;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_timeout_secs;
 
     /**
@@ -237,7 +238,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordTrack>|null $record_track
      */
-    #[Api(enum: RecordTrack::class, optional: true)]
+    #[Optional(enum: RecordTrack::class)]
     public ?string $record_track;
 
     /**
@@ -245,19 +246,19 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordTrim>|null $record_trim
      */
-    #[Api(enum: RecordTrim::class, optional: true)]
+    #[Optional(enum: RecordTrim::class)]
     public ?string $record_trim;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_password;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_auth_username;
 
     /**
@@ -265,7 +266,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var list<SipHeader>|null $sip_headers
      */
-    #[Api(list: SipHeader::class, optional: true)]
+    #[Optional(list: SipHeader::class)]
     public ?array $sip_headers;
 
     /**
@@ -273,7 +274,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<SipRegion>|null $sip_region
      */
-    #[Api(enum: SipRegion::class, optional: true)]
+    #[Optional(enum: SipRegion::class)]
     public ?string $sip_region;
 
     /**
@@ -281,37 +282,37 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<SipTransportProtocol>|null $sip_transport_protocol
      */
-    #[Api(enum: SipTransportProtocol::class, optional: true)]
+    #[Optional(enum: SipTransportProtocol::class)]
     public ?string $sip_transport_protocol;
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?SoundModifications $sound_modifications;
 
     /**
      * Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $target_leg_client_state;
 
     /**
      * Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $time_limit_secs;
 
     /**
      * The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_secs;
 
     /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**
@@ -319,7 +320,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<WebhookURLMethod>|null $webhook_url_method
      */
-    #[Api(enum: WebhookURLMethod::class, optional: true)]
+    #[Optional(enum: WebhookURLMethod::class)]
     public ?string $webhook_url_method;
 
     /**

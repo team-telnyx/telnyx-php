@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomRecordings\RoomRecordingListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingListResponse\Data\Status;
@@ -38,76 +38,76 @@ final class Data implements BaseModel
     /**
      * A unique identifier for the room recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Shows the codec used for the room recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $codec;
 
     /**
      * ISO 8601 timestamp when the room recording has completed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $completed_at;
 
     /**
      * ISO 8601 timestamp when the room recording was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Url to download the recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $download_url;
 
     /**
      * Shows the room recording duration in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration_secs;
 
     /**
      * ISO 8601 timestamp when the room recording has ended.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $ended_at;
 
     /**
      * Identify the room participant associated with the room recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $participant_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Identify the room associated with the room recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $room_id;
 
     /**
      * Identify the room session associated with the room recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $session_id;
 
     /**
      * Shows the room recording size in MB.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $size_mb;
 
     /**
      * ISO 8601 timestamp when the room recording has stated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $started_at;
 
     /**
@@ -115,7 +115,7 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -123,13 +123,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 timestamp when the room recording was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

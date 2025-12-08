@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class ConversationGetResponse implements BaseModel
     /** @use SdkModel<ConversationGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Conversation $data;
 
     public function __construct()

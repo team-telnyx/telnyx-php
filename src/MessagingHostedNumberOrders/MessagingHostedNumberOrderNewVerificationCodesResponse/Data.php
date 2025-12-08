@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\Type;
@@ -27,13 +28,13 @@ final class Data implements BaseModel
     /**
      * Phone number for which the verification code was created.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**
      * Error message describing why the verification code creation failed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error;
 
     /**
@@ -41,13 +42,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * Unique identifier for the verification code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verification_code_id;
 
     /**

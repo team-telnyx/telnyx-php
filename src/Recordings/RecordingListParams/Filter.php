@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Recordings\RecordingListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
@@ -31,46 +31,46 @@ final class Filter implements BaseModel
     /**
      * If present, recordings will be filtered to those with a matching call_leg_id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * If present, recordings will be filtered to those with a matching call_session_id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * Returns only recordings associated with a given conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conference_id;
 
     /**
      * If present, recordings will be filtered to those with a matching `connection_id` attribute (case-sensitive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
      * If present, recordings will be filtered to those with a matching `from` attribute (case-sensitive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * If present, recordings will be filtered to those with a matching `sip_call_id` attribute. Matching is case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_call_id;
 
     /**
      * If present, recordings will be filtered to those with a matching `to` attribute (case-sensitive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()

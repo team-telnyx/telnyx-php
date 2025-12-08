@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -49,28 +50,28 @@ final class MesssageRcsParams implements BaseModel
     /**
      * RCS Agent ID.
      */
-    #[Api]
+    #[Required]
     public string $agent_id;
 
-    #[Api]
+    #[Required]
     public RcsAgentMessage $agent_message;
 
     /**
      * A valid messaging profile ID.
      */
-    #[Api]
+    #[Required]
     public string $messaging_profile_id;
 
     /**
      * Phone number in +E.164 format.
      */
-    #[Api]
+    #[Required]
     public string $to;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MmsFallback $mms_fallback;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SMSFallback $sms_fallback;
 
     /**
@@ -78,13 +79,13 @@ final class MesssageRcsParams implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AuthenticationProviders\AuthenticationProvider;
 
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings\IdpCertFingerprintAlgorithm;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -30,13 +30,13 @@ final class Settings implements BaseModel
     /**
      * The Assertion Consumer Service URL for the service provider (Telnyx).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $assertion_consumer_service_url;
 
     /**
      * The certificate fingerprint for the identity provider (IdP).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $idp_cert_fingerprint;
 
     /**
@@ -44,31 +44,31 @@ final class Settings implements BaseModel
      *
      * @var value-of<IdpCertFingerprintAlgorithm>|null $idp_cert_fingerprint_algorithm
      */
-    #[Api(enum: IdpCertFingerprintAlgorithm::class, optional: true)]
+    #[Optional(enum: IdpCertFingerprintAlgorithm::class)]
     public ?string $idp_cert_fingerprint_algorithm;
 
     /**
      * The Entity ID for the identity provider (IdP).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $idp_entity_id;
 
     /**
      * The SSO target url for the identity provider (IdP).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $idp_sso_target_url;
 
     /**
      * The name identifier format associated with the authentication provider. This must be the same for both the Identity Provider (IdP) and the service provider (Telnyx).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name_identifier_format;
 
     /**
      * The Entity ID for the service provider (Telnyx).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $service_provider_entity_id;
 
     public function __construct()

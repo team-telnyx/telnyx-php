@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies this porting verification code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * E164 formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Identifies the associated porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * Indicates whether the verification code has been verified.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $verified;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams;
 
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParameters\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,7 +28,7 @@ final class QueryParameters implements BaseModel
      *
      * @var array<string,mixed>|null $properties
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $properties;
 
     /**
@@ -36,11 +36,11 @@ final class QueryParameters implements BaseModel
      *
      * @var list<string>|null $required
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $required;
 
     /** @var value-of<Type>|null $type */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()

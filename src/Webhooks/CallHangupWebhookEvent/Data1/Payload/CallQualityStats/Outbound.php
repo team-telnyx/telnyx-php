@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data1\Payload\CallQualityStats;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class Outbound implements BaseModel
     /**
      * Total number of outbound audio packets.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $packet_count;
 
     /**
      * Number of skipped outbound packets (packet loss).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $skip_packet_count;
 
     public function __construct()

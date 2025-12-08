@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser\Admin;
@@ -17,7 +17,7 @@ final class EndUser implements BaseModel
     /** @use SdkModel<EndUserShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Admin $admin;
 
     public function __construct()

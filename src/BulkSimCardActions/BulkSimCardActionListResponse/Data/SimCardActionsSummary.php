@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data\SimCardActionsSummary\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,11 +19,11 @@ final class SimCardActionsSummary implements BaseModel
     /** @use SdkModel<SimCardActionsSummaryShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $count;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

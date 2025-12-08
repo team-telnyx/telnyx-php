@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class SpeechToTextCreateParams implements BaseModel
     /**
      * End date in ISO format with timezone (date range must be up to one month).
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_date;
 
     /**
      * Start date in ISO format with timezone.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_date;
 
     /**

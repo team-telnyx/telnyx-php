@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class ActionSetPublicIPParams implements BaseModel
     /**
      * The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_code;
 
     public function __construct()

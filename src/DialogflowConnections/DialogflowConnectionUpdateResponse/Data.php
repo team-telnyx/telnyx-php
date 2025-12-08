@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,28 +25,28 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies a Telnyx application (Call Control).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversation_profile_id;
 
     /**
      * Which Dialogflow environment will be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $environment;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The JSON map to connect your Dialoglow account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $service_account;
 
     public function __construct()

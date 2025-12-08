@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PhoneNumbers;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\EmergencyStatus;
@@ -25,10 +25,10 @@ final class PhoneNumberListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PhoneNumberDetailed>|null $data */
-    #[Api(list: PhoneNumberDetailed::class, optional: true)]
+    #[Optional(list: PhoneNumberDetailed::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\Calls\CallListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\Calls\CallListResponse\Data\RecordType;
@@ -32,65 +32,65 @@ final class Data implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api]
+    #[Required]
     public string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api]
+    #[Required]
     public string $call_session_id;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api]
+    #[Required]
     public string $connection_id;
 
     /**
      * ISO 8601 formatted date of when the call was put in the queue.
      */
-    #[Api]
+    #[Required]
     public string $enqueued_at;
 
     /**
      * Number or SIP URI placing the call.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * Unique identifier of the queue the call is in.
      */
-    #[Api]
+    #[Required]
     public string $queue_id;
 
     /**
      * Current position of the call in the queue.
      */
-    #[Api]
+    #[Required]
     public int $queue_position;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * Destination number or SIP URI of the call.
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**
      * The time the call has been waiting in the queue, given in seconds.
      */
-    #[Api]
+    #[Required]
     public int $wait_time_secs;
 
     /**

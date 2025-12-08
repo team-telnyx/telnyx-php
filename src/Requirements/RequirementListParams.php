@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Requirements;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -38,13 +38,13 @@ final class RequirementListParams implements BaseModel
     /**
      * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -52,7 +52,7 @@ final class RequirementListParams implements BaseModel
      *
      * @var list<value-of<Sort>>|null $sort
      */
-    #[Api(list: Sort::class, optional: true)]
+    #[Optional(list: Sort::class)]
     public ?array $sort;
 
     public function __construct()

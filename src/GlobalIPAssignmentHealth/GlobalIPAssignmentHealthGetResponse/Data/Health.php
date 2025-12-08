@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Health implements BaseModel
     /**
      * The number of failed health checks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $fail;
 
     /**
      * The number of successful health checks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pass;
 
     public function __construct()

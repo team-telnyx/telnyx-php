@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
@@ -39,7 +40,7 @@ final class OAuthClient implements BaseModel
     /**
      * OAuth client identifier.
      */
-    #[Api]
+    #[Required]
     public string $client_id;
 
     /**
@@ -47,25 +48,25 @@ final class OAuthClient implements BaseModel
      *
      * @var value-of<ClientType> $client_type
      */
-    #[Api(enum: ClientType::class)]
+    #[Required(enum: ClientType::class)]
     public string $client_type;
 
     /**
      * Timestamp when the client was created.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
     /**
      * Human-readable name for the OAuth client.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Organization ID that owns this OAuth client.
      */
-    #[Api]
+    #[Required]
     public string $org_id;
 
     /**
@@ -73,25 +74,25 @@ final class OAuthClient implements BaseModel
      *
      * @var value-of<RecordType> $record_type
      */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * Whether PKCE (Proof Key for Code Exchange) is required for this client.
      */
-    #[Api]
+    #[Required]
     public bool $require_pkce;
 
     /**
      * Timestamp when the client was last updated.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $updated_at;
 
     /**
      * User ID that created this OAuth client.
      */
-    #[Api]
+    #[Required]
     public string $user_id;
 
     /**
@@ -99,7 +100,7 @@ final class OAuthClient implements BaseModel
      *
      * @var list<value-of<AllowedGrantType>>|null $allowed_grant_types
      */
-    #[Api(list: AllowedGrantType::class, optional: true)]
+    #[Optional(list: AllowedGrantType::class)]
     public ?array $allowed_grant_types;
 
     /**
@@ -107,25 +108,25 @@ final class OAuthClient implements BaseModel
      *
      * @var list<string>|null $allowed_scopes
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $allowed_scopes;
 
     /**
      * Client secret (only included when available, for confidential clients).
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $client_secret;
 
     /**
      * URL of the client logo.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $logo_uri;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $policy_uri;
 
     /**
@@ -133,13 +134,13 @@ final class OAuthClient implements BaseModel
      *
      * @var list<string>|null $redirect_uris
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $redirect_uris;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $tos_uri;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,10 +34,10 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      *
      * @var list<ActivationRange> $activation_ranges
      */
-    #[Api(list: ActivationRange::class)]
+    #[Required(list: ActivationRange::class)]
     public array $activation_ranges;
 
-    #[Api]
+    #[Required]
     public PhoneNumberRange $phone_number_range;
 
     /**

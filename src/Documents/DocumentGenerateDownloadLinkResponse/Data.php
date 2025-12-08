@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Data implements BaseModel
     /**
      * Pre-signed temporary URL for downloading the document.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

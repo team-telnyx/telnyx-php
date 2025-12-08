@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
@@ -22,16 +22,16 @@ final class Data implements BaseModel
     use SdkModel;
 
     /** @var list<BlackBoxTest>|null $black_box_tests */
-    #[Api(list: BlackBoxTest::class, optional: true)]
+    #[Optional(list: BlackBoxTest::class)]
     public ?array $black_box_tests;
 
     /**
      * The product associated with the black box test group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

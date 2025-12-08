@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data1;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data1\Payload\Channels;
@@ -32,13 +32,13 @@ final class Payload implements BaseModel
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
@@ -46,43 +46,43 @@ final class Payload implements BaseModel
      *
      * @var value-of<Channels>|null $channels
      */
-    #[Api(enum: Channels::class, optional: true)]
+    #[Optional(enum: Channels::class)]
     public ?string $channels;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Recording URLs in requested format. The URL is valid for as long as the file exists. For security purposes, this feature is activated on a per request basis.  Please contact customer support with your Account ID to request activation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PublicRecordingURLs $public_recording_urls;
 
     /**
      * ISO 8601 datetime of when recording ended.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $recording_ended_at;
 
     /**
      * ISO 8601 datetime of when recording started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $recording_started_at;
 
     /**
      * Recording URLs in requested format. These URLs are valid for 10 minutes. After 10 minutes, you may retrieve recordings via API using Reports -> Call Recordings documentation, or via Mission Control under Reporting -> Recordings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?RecordingURLs $recording_urls;
 
     public function __construct()

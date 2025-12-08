@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
@@ -17,7 +17,7 @@ final class AutoRespConfigResponse implements BaseModel
     /** @use SdkModel<AutoRespConfigResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public AutoRespConfig $data;
 
     /**

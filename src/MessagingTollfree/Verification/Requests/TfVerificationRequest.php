@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -54,73 +55,73 @@ final class TfVerificationRequest implements BaseModel
     /**
      * Any additional information.
      */
-    #[Api]
+    #[Required]
     public string $additionalInformation;
 
     /**
      * Line 1 of the business address.
      */
-    #[Api]
+    #[Required]
     public string $businessAddr1;
 
     /**
      * The city of the business address; the first letter should be capitalized.
      */
-    #[Api]
+    #[Required]
     public string $businessCity;
 
     /**
      * The email address of the business contact.
      */
-    #[Api]
+    #[Required]
     public string $businessContactEmail;
 
     /**
      * First name of the business contact; there are no specific requirements on formatting.
      */
-    #[Api]
+    #[Required]
     public string $businessContactFirstName;
 
     /**
      * Last name of the business contact; there are no specific requirements on formatting.
      */
-    #[Api]
+    #[Required]
     public string $businessContactLastName;
 
     /**
      * The phone number of the business contact in E.164 format.
      */
-    #[Api]
+    #[Required]
     public string $businessContactPhone;
 
     /**
      * Name of the business; there are no specific formatting requirements.
      */
-    #[Api]
+    #[Required]
     public string $businessName;
 
     /**
      * The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized.
      */
-    #[Api]
+    #[Required]
     public string $businessState;
 
     /**
      * The ZIP code of the business address.
      */
-    #[Api]
+    #[Required]
     public string $businessZip;
 
     /**
      * A URL, including the scheme, pointing to the corporate website.
      */
-    #[Api]
+    #[Required]
     public string $corporateWebsite;
 
     /**
      * ISV name.
      */
-    #[Api]
+    #[Required]
     public string $isvReseller;
 
     /**
@@ -128,13 +129,13 @@ final class TfVerificationRequest implements BaseModel
      *
      * @var value-of<Volume> $messageVolume
      */
-    #[Api(enum: Volume::class)]
+    #[Required(enum: Volume::class)]
     public string $messageVolume;
 
     /**
      * Human-readable description of how end users will opt into receiving messages from the given phone numbers.
      */
-    #[Api]
+    #[Required]
     public string $optInWorkflow;
 
     /**
@@ -142,7 +143,7 @@ final class TfVerificationRequest implements BaseModel
      *
      * @var list<URL> $optInWorkflowImageURLs
      */
-    #[Api(list: URL::class)]
+    #[Required(list: URL::class)]
     public array $optInWorkflowImageURLs;
 
     /**
@@ -150,13 +151,13 @@ final class TfVerificationRequest implements BaseModel
      *
      * @var list<TfPhoneNumber> $phoneNumbers
      */
-    #[Api(list: TfPhoneNumber::class)]
+    #[Required(list: TfPhoneNumber::class)]
     public array $phoneNumbers;
 
     /**
      * An example of a message that will be sent from the given phone numbers.
      */
-    #[Api]
+    #[Required]
     public string $productionMessageContent;
 
     /**
@@ -164,49 +165,49 @@ final class TfVerificationRequest implements BaseModel
      *
      * @var value-of<UseCaseCategories> $useCase
      */
-    #[Api(enum: UseCaseCategories::class)]
+    #[Required(enum: UseCaseCategories::class)]
     public string $useCase;
 
     /**
      * Human-readable summary of the desired use-case.
      */
-    #[Api]
+    #[Required]
     public string $useCaseSummary;
 
     /**
      * Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $ageGatedContent;
 
     /**
      * Line 2 of the business address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessAddr2;
 
     /**
      * ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $businessRegistrationCountry;
 
     /**
      * Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $businessRegistrationNumber;
 
     /**
      * Type of business registration being provided. Required from January 2026.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $businessRegistrationType;
 
     /**
      * Doing Business As (DBA) name if different from legal name.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $doingBusinessAs;
 
     /**
@@ -214,47 +215,43 @@ final class TfVerificationRequest implements BaseModel
      *
      * @var value-of<TollFreeVerificationEntityType>|null $entityType
      */
-    #[Api(
-        enum: TollFreeVerificationEntityType::class,
-        nullable: true,
-        optional: true
-    )]
+    #[Optional(enum: TollFreeVerificationEntityType::class, nullable: true)]
     public ?string $entityType;
 
     /**
      * The message returned when users text 'HELP'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $helpMessageResponse;
 
     /**
      * Message sent to users confirming their opt-in to receive messages.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $optInConfirmationResponse;
 
     /**
      * Keywords used to collect and process consumer opt-ins.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $optInKeywords;
 
     /**
      * URL pointing to the business's privacy policy. Plain string, no URL format validation.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $privacyPolicyURL;
 
     /**
      * URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $termsAndConditionURL;
 
     /**
      * URL that should receive webhooks relating to this verification request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhookUrl;
 
     /**

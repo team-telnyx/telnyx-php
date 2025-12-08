@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,20 +35,20 @@ final class AssistantSendSMSParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $from;
 
-    #[Api]
+    #[Required]
     public string $text;
 
-    #[Api]
+    #[Required]
     public string $to;
 
     /** @var array<string,string|int|bool>|null $conversation_metadata */
-    #[Api(map: ConversationMetadata::class, optional: true)]
+    #[Optional(map: ConversationMetadata::class)]
     public ?array $conversation_metadata;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $should_create_conversation;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccount;
@@ -19,7 +19,7 @@ final class ActionDisableResponse implements BaseModel
     /** @use SdkModel<ActionDisableResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ManagedAccount $data;
 
     public function __construct()

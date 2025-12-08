@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,13 +25,13 @@ final class EmbeddingURLParams implements BaseModel
     /**
      * Name of the bucket to store the embeddings. This bucket must already exist.
      */
-    #[Api]
+    #[Required]
     public string $bucket_name;
 
     /**
      * The URL of the webpage to embed.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

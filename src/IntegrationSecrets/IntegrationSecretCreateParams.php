@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\IntegrationSecrets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,7 +33,7 @@ final class IntegrationSecretCreateParams implements BaseModel
     /**
      * The unique identifier of the secret.
      */
-    #[Api]
+    #[Required]
     public string $identifier;
 
     /**
@@ -40,25 +41,25 @@ final class IntegrationSecretCreateParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * The token for the secret. Required for bearer type secrets, ignored otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * The password for the secret. Required for basic type secrets, ignored otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $password;
 
     /**
      * The username for the secret. Required for basic type secrets, ignored otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $username;
 
     /**

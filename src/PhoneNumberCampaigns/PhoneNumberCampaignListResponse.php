@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberCampaigns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
@@ -19,14 +19,14 @@ final class PhoneNumberCampaignListResponse implements BaseModel
     /** @use SdkModel<PhoneNumberCampaignListResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public int $page;
 
     /** @var list<PhoneNumberCampaign> $records */
-    #[Api(list: PhoneNumberCampaign::class)]
+    #[Required(list: PhoneNumberCampaign::class)]
     public array $records;
 
-    #[Api]
+    #[Required]
     public int $totalRecords;
 
     /**

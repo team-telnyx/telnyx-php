@@ -7,7 +7,7 @@ namespace Telnyx\Addresses\AddressListParams;
 use Telnyx\Addresses\AddressListParams\Filter\AddressBook;
 use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\UnionMember1;
 use Telnyx\Addresses\AddressListParams\Filter\StreetAddress;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,22 +26,22 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?AddressBook $address_book;
 
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public string|UnionMember1|null $customer_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?StreetAddress $street_address;
 
     /**
      * If set as 'true', only addresses used as the emergency address for at least one active phone-number will be returned. When set to 'false', the opposite happens: only addresses not used as the emergency address from phone-numbers will be returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $used_as_emergency;
 
     public function __construct()

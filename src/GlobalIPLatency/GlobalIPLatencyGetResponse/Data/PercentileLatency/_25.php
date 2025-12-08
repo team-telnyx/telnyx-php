@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class _25 implements BaseModel
     /**
      * The 25th percentile latency.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $amount;
 
     /**
      * The unit of the 25th percentile latency.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,7 +28,7 @@ final class RequirementType implements BaseModel
     /**
      * Identifies the requirement type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -36,31 +36,31 @@ final class RequirementType implements BaseModel
      *
      * @var array<string,mixed>|null $acceptance_criteria
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $acceptance_criteria;
 
     /**
      * A description of the requirement type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * An example of the requirement type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $example;
 
     /**
      * The name of the requirement type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The type of the requirement type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\ActivationRange;
@@ -31,7 +31,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     /**
      * Uniquely identifies this porting phone number block.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -39,25 +39,25 @@ final class PortingPhoneNumberBlock implements BaseModel
      *
      * @var list<ActivationRange>|null $activation_ranges
      */
-    #[Api(list: ActivationRange::class, optional: true)]
+    #[Optional(list: ActivationRange::class)]
     public ?array $activation_ranges;
 
     /**
      * Specifies the country code for this porting phone number block. It is a two-letter ISO 3166-1 alpha-2 country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Specifies the phone number range for this porting phone number block.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumberRange $phone_number_range;
 
     /**
@@ -65,19 +65,19 @@ final class PortingPhoneNumberBlock implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

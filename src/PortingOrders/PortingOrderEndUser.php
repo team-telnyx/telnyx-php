@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,10 +19,10 @@ final class PortingOrderEndUser implements BaseModel
     /** @use SdkModel<PortingOrderEndUserShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderEndUserAdmin $admin;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderEndUserLocation $location;
 
     public function __construct()

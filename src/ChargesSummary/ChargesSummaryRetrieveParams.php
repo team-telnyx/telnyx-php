@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class ChargesSummaryRetrieveParams implements BaseModel
     /**
      * End date for the charges summary in ISO date format (YYYY-MM-DD). The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_date;
 
     /**
      * Start date for the charges summary in ISO date format (YYYY-MM-DD).
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_date;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class SimCardRetrieveParams implements BaseModel
     /**
      * When set to true, includes the PIN and PUK codes in the response. These codes are used for SIM card security and unlocking purposes. Available for both physical SIM cards and eSIMs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_pin_puk_codes;
 
     /**
      * It includes the associated SIM card group object in the response when present.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_sim_card_group;
 
     public function __construct()

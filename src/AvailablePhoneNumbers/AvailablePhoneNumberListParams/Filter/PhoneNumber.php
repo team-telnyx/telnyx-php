@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class PhoneNumber implements BaseModel
     /**
      * Filter numbers containing a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Filter numbers ending with a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ends_with;
 
     /**
      * Filter numbers starting with a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $starts_with;
 
     public function __construct()

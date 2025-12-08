@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Networks\NetworkListInterfacesParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
@@ -26,7 +26,7 @@ final class Filter implements BaseModel
     /**
      * The interface name to filter on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -34,13 +34,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<InterfaceStatus>|null $status
      */
-    #[Api(enum: InterfaceStatus::class, optional: true)]
+    #[Optional(enum: InterfaceStatus::class)]
     public ?string $status;
 
     /**
      * The interface type to filter on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -36,115 +37,115 @@ final class SimCardUsageDetailRecord implements BaseModel
     /** @use SdkModel<SimCardUsageDetailRecordShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Unique identifier for this SIM Card Usage.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Event close time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $closed_at;
 
     /**
      * Event creation time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * Data cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $data_cost;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $data_rate;
 
     /**
      * Unit of wireless link consumption.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $data_unit;
 
     /**
      * Number of megabytes downloaded.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $downlink_data;
 
     /**
      * International Mobile Subscriber Identity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $imsi;
 
     /**
      * Ip address that generated the event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_address;
 
     /**
      * Mobile country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mcc;
 
     /**
      * Mobile network code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mnc;
 
     /**
      * Telephone number associated to SIM card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Unique identifier for SIM card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
      * User-provided tags.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_tags;
 
     /**
      * Unique identifier for SIM group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_group_id;
 
     /**
      * Sim group name for sim card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_group_name;
 
     /**
      * Number of megabytes uploaded.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $uplink_data;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\ActivationStatus;
@@ -36,13 +36,13 @@ final class Data implements BaseModel
      *
      * @var value-of<ActivationStatus>|null $activation_status
      */
-    #[Api(enum: ActivationStatus::class, optional: true)]
+    #[Optional(enum: ActivationStatus::class)]
     public ?string $activation_status;
 
     /**
      * E164 formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -50,7 +50,7 @@ final class Data implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
@@ -58,13 +58,13 @@ final class Data implements BaseModel
      *
      * @var value-of<PortabilityStatus>|null $portability_status
      */
-    #[Api(enum: PortabilityStatus::class, optional: true)]
+    #[Optional(enum: PortabilityStatus::class)]
     public ?string $portability_status;
 
     /**
      * Identifies the associated port request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
@@ -72,13 +72,13 @@ final class Data implements BaseModel
      *
      * @var value-of<PortingOrderStatus>|null $porting_order_status
      */
-    #[Api(enum: PortingOrderStatus::class, optional: true)]
+    #[Optional(enum: PortingOrderStatus::class)]
     public ?string $porting_order_status;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -86,13 +86,13 @@ final class Data implements BaseModel
      *
      * @var value-of<RequirementsStatus>|null $requirements_status
      */
-    #[Api(enum: RequirementsStatus::class, optional: true)]
+    #[Optional(enum: RequirementsStatus::class)]
     public ?string $requirements_status;
 
     /**
      * A key to reference this porting order when contacting Telnyx customer support.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $support_key;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\CreatedAt;
@@ -27,13 +27,13 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumber $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
     public function __construct()

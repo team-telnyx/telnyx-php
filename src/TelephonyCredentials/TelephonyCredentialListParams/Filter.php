@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +27,31 @@ final class Filter implements BaseModel
     /**
      * Filter by name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Filter by resource_id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $resource_id;
 
     /**
      * Filter by sip_username.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_username;
 
     /**
      * Filter by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * Filter by tag.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tag;
 
     public function __construct()

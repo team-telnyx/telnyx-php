@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data;
@@ -23,7 +23,7 @@ final class WebhookDeliveryGetResponse implements BaseModel
     /**
      * Record of all attempts to deliver a webhook.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

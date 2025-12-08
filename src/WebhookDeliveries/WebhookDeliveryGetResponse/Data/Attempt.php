@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP;
@@ -33,33 +33,32 @@ final class Attempt implements BaseModel
      *
      * @var list<int>|null $errors
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $errors;
 
     /**
      * ISO 8601 timestamp indicating when the attempt has finished.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $finished_at;
 
     /**
      * HTTP request and response information.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?HTTP $http;
 
     /**
      * ISO 8601 timestamp indicating when the attempt was initiated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $started_at;
 
     /**
      * @var value-of<Status>|null $status
      */
-    #[Api(
+    #[Optional(
         enum: Status::class,
-        optional: true,
     )]
     public ?string $status;
 

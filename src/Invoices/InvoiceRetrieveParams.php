@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class InvoiceRetrieveParams implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     public function __construct()

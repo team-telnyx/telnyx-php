@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -41,91 +42,91 @@ final class AddressCreateParams implements BaseModel
     /**
      * The business name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Api]
+    #[Required]
     public string $business_name;
 
     /**
      * The two-character (ISO 3166-1 alpha-2) country code of the address.
      */
-    #[Api]
+    #[Required]
     public string $country_code;
 
     /**
      * The first name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Api]
+    #[Required]
     public string $first_name;
 
     /**
      * The last name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Api]
+    #[Required]
     public string $last_name;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the city of the address.
      */
-    #[Api]
+    #[Required]
     public string $locality;
 
     /**
      * The primary street address information about the address.
      */
-    #[Api]
+    #[Required]
     public string $street_address;
 
     /**
      * Indicates whether or not the address should be considered part of your list of addresses that appear for regular use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $address_book;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the state of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * The borough of the address. This field is not used for addresses in the US but is used for some international addresses.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $borough;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Additional street address information about the address such as, but not limited to, unit number or apartment number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $extended_address;
 
     /**
      * The neighborhood of the address. This field is not used for addresses in the US but is used for some international addresses.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $neighborhood;
 
     /**
      * The phone number associated with the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * The postal code of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postal_code;
 
     /**
      * Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $validate_address;
 
     /**

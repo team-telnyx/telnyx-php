@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Status;
@@ -29,40 +29,40 @@ final class Transcription implements BaseModel
     /** @use SdkModel<TranscriptionShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
      * The version of the API that was used to make the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $api_version;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_created;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_updated;
 
     /**
      * The duration of this recording, given in seconds.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $duration;
 
     /**
      * Identifier of a resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_sid;
 
     /**
      * Identifier of a resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -70,19 +70,19 @@ final class Transcription implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The recording's transcribed text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transcription_text;
 
     /**
      * The relative URI for the recording transcription resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

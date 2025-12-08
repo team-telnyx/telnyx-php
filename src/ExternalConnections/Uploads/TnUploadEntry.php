@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Uploads\TnUploadEntry\ErrorCode;
@@ -31,7 +31,7 @@ final class TnUploadEntry implements BaseModel
     /**
      * Identifies the civic address assigned to the phone number entry.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $civic_address_id;
 
     /**
@@ -39,13 +39,13 @@ final class TnUploadEntry implements BaseModel
      *
      * @var value-of<ErrorCode>|null $error_code
      */
-    #[Api(enum: ErrorCode::class, optional: true)]
+    #[Optional(enum: ErrorCode::class)]
     public ?string $error_code;
 
     /**
      * A message returned by Microsoft Teams if there is an error with the upload process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_message;
 
     /**
@@ -53,25 +53,25 @@ final class TnUploadEntry implements BaseModel
      *
      * @var value-of<InternalStatus>|null $internal_status
      */
-    #[Api(enum: InternalStatus::class, optional: true)]
+    #[Optional(enum: InternalStatus::class)]
     public ?string $internal_status;
 
     /**
      * Identifies the location assigned to the phone number entry.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location_id;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $number_id;
 
     /**
      * Phone number in E164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -79,7 +79,7 @@ final class TnUploadEntry implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

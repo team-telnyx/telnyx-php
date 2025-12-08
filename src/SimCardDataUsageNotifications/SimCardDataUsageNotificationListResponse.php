@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\SimCardDataUsageNotifications;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
@@ -21,10 +21,10 @@ final class SimCardDataUsageNotificationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<SimCardDataUsageNotification>|null $data */
-    #[Api(list: SimCardDataUsageNotification::class, optional: true)]
+    #[Optional(list: SimCardDataUsageNotification::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

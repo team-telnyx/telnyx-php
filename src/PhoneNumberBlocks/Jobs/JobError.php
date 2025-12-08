@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta;
@@ -24,19 +25,19 @@ final class JobError implements BaseModel
     /** @use SdkModel<JobErrorShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $code;
 
-    #[Api]
+    #[Required]
     public string $title;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detail;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Source $source;
 
     /**

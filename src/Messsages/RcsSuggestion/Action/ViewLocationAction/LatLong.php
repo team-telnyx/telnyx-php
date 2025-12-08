@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class LatLong implements BaseModel
     /**
      * The latitude in degrees. It must be in the range [-90.0, +90.0].
      */
-    #[Api]
+    #[Required]
     public float $latitude;
 
     /**
      * The longitude in degrees. It must be in the range [-180.0, +180.0].
      */
-    #[Api]
+    #[Required]
     public float $longitude;
 
     /**

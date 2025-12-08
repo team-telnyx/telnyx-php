@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Regions\RegionListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class Data implements BaseModel
     /**
      * A code for the region.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * A name for the region.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -52,13 +52,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $supported_interfaces
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $supported_interfaces;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

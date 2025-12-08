@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,11 +21,11 @@ final class SpeechContext implements BaseModel
     /**
      * Boost factor for the speech context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $boost;
 
     /** @var list<string>|null $phrases */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phrases;
 
     public function __construct()

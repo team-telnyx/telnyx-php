@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\QueueGetResponse\Data;
@@ -18,7 +18,7 @@ final class QueueGetResponse implements BaseModel
     /** @use SdkModel<QueueGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

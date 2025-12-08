@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class Content implements BaseModel
     /**
      * The token for the object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * The expiration time of the token.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $expires_at;
 
     /**
      * The presigned URL for the object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $presigned_url;
 
     public function __construct()

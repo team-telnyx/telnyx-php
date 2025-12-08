@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UserAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class UserAddressNewResponse implements BaseModel
     /** @use SdkModel<UserAddressNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?UserAddress $data;
 
     public function __construct()

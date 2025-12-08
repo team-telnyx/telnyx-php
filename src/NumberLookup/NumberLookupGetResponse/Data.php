@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup\NumberLookupGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
@@ -30,43 +30,43 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallerName $caller_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Carrier $carrier;
 
     /**
      * Region code that matches the specific country calling code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Unused.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $fraud;
 
     /**
      * Hyphen-separated national number, preceded by the national destination code (NDC), with a 0 prefix, if an NDC is found.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $national_format;
 
     /**
      * E164-formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Portability $portability;
 
     /**
      * Identifies the type of record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

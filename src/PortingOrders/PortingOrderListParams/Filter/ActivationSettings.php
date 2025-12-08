@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings\FocDatetimeRequested;
@@ -23,13 +23,13 @@ final class ActivationSettings implements BaseModel
     /**
      * Filter results by fast port eligible.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $fast_port_eligible;
 
     /**
      * FOC datetime range filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?FocDatetimeRequested $foc_datetime_requested;
 
     public function __construct()

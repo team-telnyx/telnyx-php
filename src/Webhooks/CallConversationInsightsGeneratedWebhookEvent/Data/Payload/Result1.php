@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result;
@@ -22,7 +22,7 @@ final class Result1 implements BaseModel
     /**
      * ID that is unique to the insight result being generated for the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $insight_id;
 
     /**
@@ -30,7 +30,7 @@ final class Result1 implements BaseModel
      *
      * @var mixed|string|null $result
      */
-    #[Api(union: Result::class, optional: true)]
+    #[Optional(union: Result::class)]
     public mixed $result;
 
     public function __construct()

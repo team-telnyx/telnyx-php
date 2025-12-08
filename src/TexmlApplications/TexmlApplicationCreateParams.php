@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\TexmlApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -55,19 +56,19 @@ final class TexmlApplicationCreateParams implements BaseModel
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Api]
+    #[Required]
     public string $friendly_name;
 
     /**
      * URL to which Telnyx will deliver your XML Translator webhooks.
      */
-    #[Api]
+    #[Required]
     public string $voice_url;
 
     /**
      * Specifies whether the connection can be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -75,13 +76,13 @@ final class TexmlApplicationCreateParams implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional(enum: AnchorsiteOverride::class)]
     public ?string $anchorsite_override;
 
     /**
      * Specifies if call cost webhooks should be sent for this TeXML Application.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_cost_in_webhooks;
 
     /**
@@ -89,31 +90,31 @@ final class TexmlApplicationCreateParams implements BaseModel
      *
      * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api(enum: DtmfType::class, optional: true)]
+    #[Optional(enum: DtmfType::class)]
     public ?string $dtmf_type;
 
     /**
      * Specifies whether calls to phone numbers associated with this connection should hangup after timing out.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $first_command_timeout;
 
     /**
      * Specifies how many seconds to wait before timing out a dial command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $first_command_timeout_secs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     /**
      * URL for Telnyx to send requests to containing information about call progress events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status_callback;
 
     /**
@@ -121,7 +122,7 @@ final class TexmlApplicationCreateParams implements BaseModel
      *
      * @var value-of<StatusCallbackMethod>|null $status_callback_method
      */
-    #[Api(enum: StatusCallbackMethod::class, optional: true)]
+    #[Optional(enum: StatusCallbackMethod::class)]
     public ?string $status_callback_method;
 
     /**
@@ -129,13 +130,13 @@ final class TexmlApplicationCreateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $voice_fallback_url;
 
     /**
@@ -143,7 +144,7 @@ final class TexmlApplicationCreateParams implements BaseModel
      *
      * @var value-of<VoiceMethod>|null $voice_method
      */
-    #[Api(enum: VoiceMethod::class, optional: true)]
+    #[Optional(enum: VoiceMethod::class)]
     public ?string $voice_method;
 
     /**

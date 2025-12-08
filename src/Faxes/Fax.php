@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\Fax\Direction;
@@ -43,25 +43,25 @@ final class Fax implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * The ID of the connection used to send the fax.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ISO 8601 timestamp when resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
@@ -69,37 +69,37 @@ final class Fax implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * The phone number, in E.164 format, the fax will be sent from.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The string used as the caller id name (SIP From Display Name) presented to the destination (`to` number).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from_display_name;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
      * The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_url;
 
     /**
      * If `store_preview` was set to `true`, this is a link to temporary location. Link expires after 10 minutes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $preview_url;
 
     /**
@@ -107,7 +107,7 @@ final class Fax implements BaseModel
      *
      * @var value-of<Quality>|null $quality
      */
-    #[Api(enum: Quality::class, optional: true)]
+    #[Optional(enum: Quality::class)]
     public ?string $quality;
 
     /**
@@ -115,7 +115,7 @@ final class Fax implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
@@ -123,43 +123,43 @@ final class Fax implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Should fax media be stored on temporary URL. It does not support media_name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $store_media;
 
     /**
      * If store_media was set to true, this is a link to temporary location. Link expires after 10 minutes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stored_media_url;
 
     /**
      * The phone number, in E.164 format, the fax will be sent to or SIP URI.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * ISO 8601 timestamp when resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * Optional failover URL that will receive fax webhooks if webhook_url doesn't return a 2XX response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_failover_url;
 
     /**
      * URL that will receive fax webhooks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     public function __construct()

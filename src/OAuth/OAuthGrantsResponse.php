@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class OAuthGrantsResponse implements BaseModel
     /**
      * Redirect URI with authorization code or error.
      */
-    #[Api]
+    #[Required]
     public string $redirect_uri;
 
     /**

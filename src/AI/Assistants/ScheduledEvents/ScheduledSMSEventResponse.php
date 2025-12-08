@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse\ConversationMetadata;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,47 +32,47 @@ final class ScheduledSMSEventResponse implements BaseModel
     /** @use SdkModel<ScheduledSMSEventResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $assistant_id;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $scheduled_at_fixed_datetime;
 
-    #[Api]
+    #[Required]
     public string $telnyx_agent_target;
 
     /** @var value-of<ConversationChannelType> $telnyx_conversation_channel */
-    #[Api(enum: ConversationChannelType::class)]
+    #[Required(enum: ConversationChannelType::class)]
     public string $telnyx_conversation_channel;
 
-    #[Api]
+    #[Required]
     public string $telnyx_end_user_target;
 
-    #[Api]
+    #[Required]
     public string $text;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversation_id;
 
     /** @var array<string,string|int|bool>|null $conversation_metadata */
-    #[Api(map: ConversationMetadata::class, optional: true)]
+    #[Optional(map: ConversationMetadata::class)]
     public ?array $conversation_metadata;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /** @var list<string>|null $errors */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $errors;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $retry_count;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scheduled_event_id;
 
     /** @var value-of<EventStatus>|null $status */
-    #[Api(enum: EventStatus::class, optional: true)]
+    #[Optional(enum: EventStatus::class)]
     public ?string $status;
 
     /**

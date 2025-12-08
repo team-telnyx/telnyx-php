@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class VerifiedNumberNewResponse implements BaseModel
     /** @use SdkModel<VerifiedNumberNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verification_method;
 
     public function __construct()

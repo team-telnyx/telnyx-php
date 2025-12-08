@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingOptouts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,25 +35,25 @@ final class MessagingOptoutListParams implements BaseModel
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * If receiving address (+E.164 formatted phone number) should be redacted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $redaction_enabled;
 
     public function __construct()

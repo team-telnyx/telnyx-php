@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsSuggestion;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Reply implements BaseModel
     /**
      * Payload (base64 encoded) that will be sent to the agent in the user event that results when the user taps the suggested action. Maximum 2048 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postback_data;
 
     /**
      * Text that is shown in the suggested reply (maximum 25 characters).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     public function __construct()

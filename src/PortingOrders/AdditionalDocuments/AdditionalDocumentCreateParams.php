@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,7 +29,7 @@ final class AdditionalDocumentCreateParams implements BaseModel
     use SdkParams;
 
     /** @var list<AdditionalDocument>|null $additional_documents */
-    #[Api(list: AdditionalDocument::class, optional: true)]
+    #[Optional(list: AdditionalDocument::class)]
     public ?array $additional_documents;
 
     public function __construct()

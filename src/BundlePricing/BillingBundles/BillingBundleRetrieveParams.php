@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\BillingBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class BillingBundleRetrieveParams implements BaseModel
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorization_bearer;
 
     public function __construct()

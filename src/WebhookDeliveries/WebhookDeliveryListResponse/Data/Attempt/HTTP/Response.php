@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Attempt\HTTP;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\ListOf;
@@ -24,7 +24,7 @@ final class Response implements BaseModel
     /**
      * Raw response body, limited to 10kB.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     /**
@@ -32,10 +32,10 @@ final class Response implements BaseModel
      *
      * @var list<list<string>>|null $headers
      */
-    #[Api(list: new ListOf('string'), optional: true)]
+    #[Optional(list: new ListOf('string'))]
     public ?array $headers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $status;
 
     public function __construct()

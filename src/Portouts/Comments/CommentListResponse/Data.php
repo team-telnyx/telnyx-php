@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Comments\CommentListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,37 +24,37 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Comment body.
      */
-    #[Api]
+    #[Required]
     public string $body;
 
     /**
      * Comment creation timestamp in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * Identifies the user who created the comment. Will be null if created by Telnyx Admin.
      */
-    #[Api]
+    #[Required]
     public string $user_id;
 
     /**
      * Identifies the associated port request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $portout_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**

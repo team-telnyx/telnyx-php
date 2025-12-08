@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderType;
@@ -22,7 +22,7 @@ final class Misc implements BaseModel
      *
      * @var value-of<PortingOrderType>|null $type
      */
-    #[Api(enum: PortingOrderType::class, optional: true)]
+    #[Optional(enum: PortingOrderType::class)]
     public ?string $type;
 
     public function __construct()

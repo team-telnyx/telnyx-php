@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
@@ -34,41 +34,41 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     /** @use SdkModel<TexmlGetCallRecordingResponseBodyShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
     /** @var 1|2|null $channels */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channels;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $conference_sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_created;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $date_updated;
 
     /**
      * The duration of this recording, given in seconds.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $duration;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $error_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_url;
 
     /**
      * Identifier of a resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -76,26 +76,26 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      *
      * @var value-of<Source>|null $source
      */
-    #[Api(enum: Source::class, optional: true)]
+    #[Optional(enum: Source::class)]
     public ?string $source;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_time;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Subresources details for a recording if available.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TexmlRecordingSubresourcesUris $subresources_uris;
 
     /**
      * The relative URI for this recording resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

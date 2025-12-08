@@ -6,7 +6,7 @@ namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
 
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function1;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,10 +23,10 @@ final class ToolCall implements BaseModel
     /**
      * Unique identifier for the tool call.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public Function1 $function;
 
     /**
@@ -34,7 +34,7 @@ final class ToolCall implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

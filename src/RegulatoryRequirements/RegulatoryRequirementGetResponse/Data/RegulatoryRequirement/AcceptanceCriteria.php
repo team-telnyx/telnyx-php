@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,29 +25,29 @@ final class AcceptanceCriteria implements BaseModel
     /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $acceptable_characters;
 
     /** @var list<string>|null $acceptable_values */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $acceptable_values;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $case_sensitive;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality_limit;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $max_length;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $min_length;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $regex;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $time_limit;
 
     public function __construct()

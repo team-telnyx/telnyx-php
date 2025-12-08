@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data;
@@ -21,7 +21,7 @@ final class ActionBulkSetPublicIPsResponse implements BaseModel
     /**
      * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

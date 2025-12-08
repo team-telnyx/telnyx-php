@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse\Data\CallForwarding;
@@ -52,61 +52,61 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallForwarding $call_forwarding;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallRecording $call_recording;
 
     /**
      * Indicates if caller ID name is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $caller_id_name_enabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CnamListing $cnam_listing;
 
     /**
      * The ID of the connection associated with this number.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $connection_id;
 
     /**
      * The name of the connection.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $connection_name;
 
     /**
      * The type of the connection.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $connection_type;
 
     /**
      * The ISO 3166-1 alpha-2 country code of the number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_iso_alpha2;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * A customer reference string.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $customer_reference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
     /**
@@ -114,13 +114,13 @@ final class Data implements BaseModel
      *
      * @var value-of<InboundCallScreening>|null $inbound_call_screening
      */
-    #[Api(enum: InboundCallScreening::class, nullable: true, optional: true)]
+    #[Optional(enum: InboundCallScreening::class, nullable: true)]
     public ?string $inbound_call_screening;
 
     /**
      * Indicates if mobile voice is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mobile_voice_enabled;
 
     /**
@@ -128,34 +128,34 @@ final class Data implements BaseModel
      *
      * @var value-of<NoiseSuppression>|null $noise_suppression
      */
-    #[Api(enum: NoiseSuppression::class, optional: true)]
+    #[Optional(enum: NoiseSuppression::class)]
     public ?string $noise_suppression;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     /**
      * The +E.164-formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The ID of the SIM card associated with this number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
      * The status of the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
@@ -163,13 +163,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

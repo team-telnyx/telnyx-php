@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data\CloudProvider;
@@ -29,7 +29,7 @@ final class Data implements BaseModel
      *
      * @var list<float>|null $available_bandwidth
      */
-    #[Api(list: 'float', optional: true)]
+    #[Optional(list: 'float')]
     public ?array $available_bandwidth;
 
     /**
@@ -37,22 +37,22 @@ final class Data implements BaseModel
      *
      * @var value-of<CloudProvider>|null $cloud_provider
      */
-    #[Api(enum: CloudProvider::class, optional: true)]
+    #[Optional(enum: CloudProvider::class)]
     public ?string $cloud_provider;
 
     /**
      * The region where your Virtual Private Cloud hosts are located. Should be identical to how the cloud provider names region, i.e. us-east-1 for AWS but Frankfurt for Azure.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cloud_provider_region;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Location $location;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

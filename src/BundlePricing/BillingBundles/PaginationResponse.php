@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\BillingBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,25 +21,25 @@ final class PaginationResponse implements BaseModel
     /**
      * The current page number.
      */
-    #[Api]
+    #[Required]
     public int $page_number;
 
     /**
      * The number of results per page.
      */
-    #[Api]
+    #[Required]
     public int $page_size;
 
     /**
      * Total number of pages from the results.
      */
-    #[Api]
+    #[Required]
     public int $total_pages;
 
     /**
      * Total number of results returned.
      */
-    #[Api]
+    #[Required]
     public int $total_results;
 
     /**

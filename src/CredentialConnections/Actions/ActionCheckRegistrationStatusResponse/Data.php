@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data\Status;
@@ -29,31 +29,31 @@ final class Data implements BaseModel
     /**
      * The ip used during the SIP connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip_address;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $last_registration;
 
     /**
      * The port of the SIP connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * The user name of the SIP connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_username;
 
     /**
@@ -61,19 +61,19 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The protocol of the SIP connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transport;
 
     /**
      * The user agent of the SIP connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_agent;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Migrations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Migrations\MigrationParams\Status;
@@ -33,67 +34,67 @@ final class MigrationParams implements BaseModel
     /**
      * ID of the Migration Source from which to migrate data.
      */
-    #[Api]
+    #[Required]
     public string $source_id;
 
     /**
      * Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      */
-    #[Api]
+    #[Required]
     public string $target_bucket_name;
 
     /**
      * Telnyx Cloud Storage region to migrate the data to.
      */
-    #[Api]
+    #[Required]
     public string $target_region;
 
     /**
      * Unique identifier for the data migration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Total amount of data that has been succesfully migrated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $bytes_migrated;
 
     /**
      * Total amount of data found in source bucket to migrate.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $bytes_to_migrate;
 
     /**
      * Time when data migration was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Estimated time the migration will complete.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $eta;
 
     /**
      * Time when data migration was last copied from the source.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $last_copy;
 
     /**
      * If true, will continue to poll the source bucket to ensure new data is continually migrated over.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $refresh;
 
     /**
      * Current speed of the migration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $speed;
 
     /**
@@ -101,7 +102,7 @@ final class MigrationParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**

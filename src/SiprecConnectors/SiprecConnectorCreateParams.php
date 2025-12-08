@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\SiprecConnectors;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,25 +28,25 @@ final class SiprecConnectorCreateParams implements BaseModel
     /**
      * Hostname/IPv4 address of the SIPREC SRS.
      */
-    #[Api]
+    #[Required]
     public string $host;
 
     /**
      * Name for the SIPREC connector resource.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Port for the SIPREC SRS.
      */
-    #[Api]
+    #[Required]
     public int $port;
 
     /**
      * Subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $app_subdomain;
 
     /**

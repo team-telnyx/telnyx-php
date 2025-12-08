@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsSuggestion\Action;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction\Application;
@@ -30,20 +31,20 @@ final class OpenURLAction implements BaseModel
      *
      * @var value-of<Application> $application
      */
-    #[Api(enum: Application::class)]
+    #[Required(enum: Application::class)]
     public string $application;
 
-    #[Api]
+    #[Required]
     public string $url;
 
     /** @var value-of<WebviewViewMode> $webview_view_mode */
-    #[Api(enum: WebviewViewMode::class)]
+    #[Required(enum: WebviewViewMode::class)]
     public string $webview_view_mode;
 
     /**
      * Accessbility description for webview.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**

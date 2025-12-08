@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class PhoneNumber implements BaseModel
     /**
      * Filter for phone numbers that contain the digits specified.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Filter by the ending digits of the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ends_with;
 
     /**
      * Filter by the starting digits of the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $starts_with;
 
     public function __construct()

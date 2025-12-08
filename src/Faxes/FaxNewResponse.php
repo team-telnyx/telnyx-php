@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\Fax\Direction;
@@ -20,7 +20,7 @@ final class FaxNewResponse implements BaseModel
     /** @use SdkModel<FaxNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Fax $data;
 
     public function __construct()

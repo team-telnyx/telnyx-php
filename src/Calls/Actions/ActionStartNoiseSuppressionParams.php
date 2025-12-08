@@ -7,7 +7,7 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\Direction;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngine;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -36,13 +36,13 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -50,7 +50,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
@@ -61,13 +61,13 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      *
      * @var value-of<NoiseSuppressionEngine>|null $noise_suppression_engine
      */
-    #[Api(enum: NoiseSuppressionEngine::class, optional: true)]
+    #[Optional(enum: NoiseSuppressionEngine::class)]
     public ?string $noise_suppression_engine;
 
     /**
      * Configuration parameters for noise suppression engines.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?NoiseSuppressionEngineConfig $noise_suppression_engine_config;
 
     public function __construct()

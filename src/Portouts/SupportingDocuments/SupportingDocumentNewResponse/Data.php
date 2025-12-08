@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse\Data\Type;
@@ -25,31 +25,31 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Supporting document creation timestamp in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * Identifies the associated document.
      */
-    #[Api]
+    #[Required]
     public string $document_id;
 
     /**
      * Identifies the associated port request.
      */
-    #[Api]
+    #[Required]
     public string $portout_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
@@ -57,13 +57,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * Supporting document last changed timestamp in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $updated_at;
 
     /**

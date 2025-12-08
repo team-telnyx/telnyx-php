@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles\VerifyProfileListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Filter implements BaseModel
     /**
      * Optional filter for profile names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

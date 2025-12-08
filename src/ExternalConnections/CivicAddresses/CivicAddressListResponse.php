@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\CivicAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse\Data;
@@ -19,7 +19,7 @@ final class CivicAddressListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     public function __construct()

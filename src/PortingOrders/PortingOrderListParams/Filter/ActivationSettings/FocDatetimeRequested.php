@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class FocDatetimeRequested implements BaseModel
     /**
      * Filter results by foc date later than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gt;
 
     /**
      * Filter results by foc date earlier than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lt;
 
     public function __construct()

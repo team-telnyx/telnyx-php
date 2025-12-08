@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content;
@@ -17,7 +17,7 @@ final class BucketNewPresignedURLResponse implements BaseModel
     /** @use SdkModel<BucketNewPresignedURLResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Content $content;
 
     public function __construct()

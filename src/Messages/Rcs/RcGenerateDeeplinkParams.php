@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class RcGenerateDeeplinkParams implements BaseModel
     /**
      * Pre-filled message body (URL encoded).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     /**
      * Phone number in E164 format (URL encoded).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     public function __construct()

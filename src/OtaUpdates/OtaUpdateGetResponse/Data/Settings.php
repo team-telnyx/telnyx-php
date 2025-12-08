@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OtaUpdates\OtaUpdateGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsPreference;
@@ -26,7 +26,7 @@ final class Settings implements BaseModel
      *
      * @var list<MobileNetworkOperatorsPreference>|null $mobile_network_operators_preferences
      */
-    #[Api(list: MobileNetworkOperatorsPreference::class, optional: true)]
+    #[Optional(list: MobileNetworkOperatorsPreference::class)]
     public ?array $mobile_network_operators_preferences;
 
     public function __construct()

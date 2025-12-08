@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\Insights;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class InsightTemplateDetail implements BaseModel
     /** @use SdkModel<InsightTemplateDetailShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public InsightTemplate $data;
 
     /**

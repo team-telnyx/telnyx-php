@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -41,22 +41,22 @@ final class SimCardUpdateParams implements BaseModel
      *
      * @var list<string>|null $authorized_imeis
      */
-    #[Api(list: 'string', nullable: true, optional: true)]
+    #[Optional(list: 'string', nullable: true)]
     public ?array $authorized_imeis;
 
     /**
      * The SIM card individual data limit configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?DataLimit $data_limit;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_group_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardStatus $status;
 
     /**
@@ -64,7 +64,7 @@ final class SimCardUpdateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     public function __construct()

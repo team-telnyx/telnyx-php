@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\StreamingFailedWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\StreamingFailedWebhookEvent\Data1\EventType;
@@ -30,7 +30,7 @@ final class Data1 implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -38,16 +38,16 @@ final class Data1 implements BaseModel
      *
      * @var value-of<EventType>|null $event_type
      */
-    #[Api(enum: EventType::class, optional: true)]
+    #[Optional(enum: EventType::class)]
     public ?string $event_type;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $occurred_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Payload $payload;
 
     /**
@@ -55,7 +55,7 @@ final class Data1 implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     public function __construct()

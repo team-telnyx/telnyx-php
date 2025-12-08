@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class ActionEnableEmergencyParams implements BaseModel
     /**
      * Identifies the address to be used with emergency services.
      */
-    #[Api]
+    #[Required]
     public string $emergency_address_id;
 
     /**
      * Indicates whether to enable emergency services on this number.
      */
-    #[Api]
+    #[Required]
     public bool $emergency_enabled;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data\FieldType;
@@ -29,31 +29,31 @@ final class Data implements BaseModel
      *
      * @var value-of<FieldType>|null $field_type
      */
-    #[Api(enum: FieldType::class, optional: true)]
+    #[Optional(enum: FieldType::class)]
     public ?string $field_type;
 
     /**
      * Identifies the document that satisfies this requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_value;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Status of the requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_status;
 
     /**
      * Identifies the requirement type that meets this requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?RequirementType $requirement_type;
 
     public function __construct()

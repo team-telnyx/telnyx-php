@@ -8,7 +8,7 @@ use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray\Type;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,11 +23,11 @@ final class Message implements BaseModel
     use SdkModel;
 
     /** @var string|list<TextAndImageArray> $content */
-    #[Api(union: Content::class)]
+    #[Required(union: Content::class)]
     public string|array $content;
 
     /** @var value-of<Role> $role */
-    #[Api(enum: Role::class)]
+    #[Required(enum: Role::class)]
     public string $role;
 
     /**

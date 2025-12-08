@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Action;
@@ -32,7 +32,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     /**
      * Uniquely identifies this associated phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -40,25 +40,25 @@ final class PortingAssociatedPhoneNumber implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     /**
      * Specifies the country code for this associated phone number. It is a two-letter ISO 3166-1 alpha-2 country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Specifies the phone number range for this associated phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumberRange $phone_number_range;
 
     /**
@@ -66,25 +66,25 @@ final class PortingAssociatedPhoneNumber implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * Identifies the porting order associated with this phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

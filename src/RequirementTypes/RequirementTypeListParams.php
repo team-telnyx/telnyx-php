@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementTypes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class RequirementTypeListParams implements BaseModel
     /**
      * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
@@ -38,7 +38,7 @@ final class RequirementTypeListParams implements BaseModel
      *
      * @var list<value-of<Sort>>|null $sort
      */
-    #[Api(list: Sort::class, optional: true)]
+    #[Optional(list: Sort::class)]
     public ?array $sort;
 
     public function __construct()

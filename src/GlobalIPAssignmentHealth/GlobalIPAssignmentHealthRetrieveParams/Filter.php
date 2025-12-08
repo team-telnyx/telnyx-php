@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPAssignmentID\In;
@@ -25,13 +25,13 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP Assignment ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public string|In|null $global_ip_assignment_id;
 
     /**
      * Filter by exact Global IP ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public string|Filter\GlobalIPID\In|null $global_ip_id;
 
     public function __construct()

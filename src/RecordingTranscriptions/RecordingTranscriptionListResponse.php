@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
@@ -23,10 +23,10 @@ final class RecordingTranscriptionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<RecordingTranscription>|null $data */
-    #[Api(list: RecordingTranscription::class, optional: true)]
+    #[Optional(list: RecordingTranscription::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()

@@ -6,7 +6,7 @@ namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class UserBundleListUnusedResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
     /**

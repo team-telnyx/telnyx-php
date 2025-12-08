@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
@@ -20,7 +20,7 @@ final class MessagingProfileDeleteResponse implements BaseModel
     /** @use SdkModel<MessagingProfileDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MessagingProfile $data;
 
     public function __construct()

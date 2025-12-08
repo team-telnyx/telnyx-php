@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Portouts\Reports;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Reports\PortoutReport\ReportType;
@@ -22,10 +22,10 @@ final class ReportListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PortoutReport>|null $data */
-    #[Api(list: PortoutReport::class, optional: true)]
+    #[Optional(list: PortoutReport::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

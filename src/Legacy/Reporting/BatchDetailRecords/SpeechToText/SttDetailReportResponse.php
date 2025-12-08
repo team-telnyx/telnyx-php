@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse\Status;
@@ -28,29 +28,29 @@ final class SttDetailReportResponse implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * URL to download the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $download_link;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_date;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_date;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

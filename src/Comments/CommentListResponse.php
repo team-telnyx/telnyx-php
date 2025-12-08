@@ -8,7 +8,7 @@ use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Comments\CommentListResponse\Data;
 use Telnyx\Comments\CommentListResponse\Data\CommenterType;
 use Telnyx\Comments\CommentListResponse\Data\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,10 +23,10 @@ final class CommentListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

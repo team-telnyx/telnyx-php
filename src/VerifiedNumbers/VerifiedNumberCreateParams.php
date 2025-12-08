@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +28,7 @@ final class VerifiedNumberCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**
@@ -35,13 +36,13 @@ final class VerifiedNumberCreateParams implements BaseModel
      *
      * @var value-of<VerificationMethod> $verification_method
      */
-    #[Api(enum: VerificationMethod::class)]
+    #[Required(enum: VerificationMethod::class)]
     public string $verification_method;
 
     /**
      * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $extension;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessagingError\Source;
@@ -23,19 +24,19 @@ final class MessagingError implements BaseModel
     /** @use SdkModel<MessagingErrorShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $code;
 
-    #[Api]
+    #[Required]
     public string $title;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detail;
 
-    #[Api(optional: true)]
+    #[Optional]
     public mixed $meta;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Source $source;
 
     /**

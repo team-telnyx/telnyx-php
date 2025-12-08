@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -38,73 +38,73 @@ final class ConversationListParams implements BaseModel
     /**
      * Filter by conversation ID (e.g. id=eq.123).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Filter by creation datetime (e.g., `created_at=gte.2025-01-01`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Filter by last message datetime (e.g., `last_message_at=lte.2025-06-01`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $last_message_at;
 
     /**
      * Limit the number of returned conversations (e.g., `limit=10`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
      * Filter by assistant ID (e.g., `metadata->assistant_id=eq.assistant-123`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $metadata__assistant_id;
 
     /**
      * Filter by call control ID (e.g., `metadata->call_control_id=eq.v3:123`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $metadata__call_control_id;
 
     /**
      * Filter by the phone number, SIP URI, or other identifier for the agent (e.g., `metadata->telnyx_agent_target=eq.+13128675309`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $metadata__telnyx_agent_target;
 
     /**
      * Filter by conversation channel (e.g., `metadata->telnyx_conversation_channel=eq.phone_call`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $metadata__telnyx_conversation_channel;
 
     /**
      * Filter by the phone number, SIP URI, or other identifier for the end user (e.g., `metadata->telnyx_end_user_target=eq.+13128675309`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $metadata__telnyx_end_user_target;
 
     /**
      * Filter by conversation Name (e.g. `name=like.Voice%`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Apply OR conditions using PostgREST syntax (e.g., `or=(created_at.gte.2025-04-01,last_message_at.gte.2025-04-01)`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $or;
 
     /**
      * Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order;
 
     public function __construct()

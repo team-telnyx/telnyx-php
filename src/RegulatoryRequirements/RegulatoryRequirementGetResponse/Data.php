@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
@@ -23,17 +23,17 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $action;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number_type;
 
     /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    #[Optional(list: RegulatoryRequirement::class)]
     public ?array $regulatory_requirements;
 
     public function __construct()

@@ -8,7 +8,8 @@ use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainRec
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -52,19 +53,19 @@ final class CallControlApplicationUpdateParams implements BaseModel
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Api]
+    #[Required]
     public string $application_name;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api]
+    #[Required]
     public string $webhook_event_url;
 
     /**
      * Specifies whether the connection can be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -72,13 +73,13 @@ final class CallControlApplicationUpdateParams implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional(enum: AnchorsiteOverride::class)]
     public ?string $anchorsite_override;
 
     /**
      * Specifies if call cost webhooks should be sent for this Call Control Application.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_cost_in_webhooks;
 
     /**
@@ -86,31 +87,31 @@ final class CallControlApplicationUpdateParams implements BaseModel
      *
      * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api(enum: DtmfType::class, optional: true)]
+    #[Optional(enum: DtmfType::class)]
     public ?string $dtmf_type;
 
     /**
      * Specifies whether calls to phone numbers associated with this connection should hangup after timing out.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $first_command_timeout;
 
     /**
      * Specifies how many seconds to wait before timing out a dial command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $first_command_timeout_secs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallControlApplicationInbound $inbound;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallControlApplicationOutbound $outbound;
 
     /**
      * When enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $redact_dtmf_debug_logging;
 
     /**
@@ -118,7 +119,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
@@ -126,19 +127,19 @@ final class CallControlApplicationUpdateParams implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional(enum: WebhookAPIVersion::class)]
     public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_event_failover_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $webhook_timeout_secs;
 
     /**

@@ -6,7 +6,7 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig\TranscriptionEngine;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig\TranscriptionModel;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,7 +27,7 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * @var value-of<TelnyxTranscriptionLanguage>|null $language
      */
-    #[Api(enum: TelnyxTranscriptionLanguage::class, optional: true)]
+    #[Optional(enum: TelnyxTranscriptionLanguage::class)]
     public ?string $language;
 
     /**
@@ -35,7 +35,7 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * @var value-of<TranscriptionEngine>|null $transcription_engine
      */
-    #[Api(enum: TranscriptionEngine::class, optional: true)]
+    #[Optional(enum: TranscriptionEngine::class)]
     public ?string $transcription_engine;
 
     /**
@@ -43,7 +43,7 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * @var value-of<TranscriptionModel>|null $transcription_model
      */
-    #[Api(enum: TranscriptionModel::class, optional: true)]
+    #[Optional(enum: TranscriptionModel::class)]
     public ?string $transcription_model;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,38 +36,38 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $administrative_area;
 
     /** @var value-of<CountryCode> $country_code */
-    #[Api(enum: CountryCode::class)]
+    #[Required(enum: CountryCode::class)]
     public string $country_code;
 
-    #[Api]
+    #[Required]
     public string $house_number;
 
-    #[Api]
+    #[Required]
     public string $locality;
 
-    #[Api]
+    #[Required]
     public string $postal_code;
 
-    #[Api]
+    #[Required]
     public string $street_name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $extended_address;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $house_suffix;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_post_directional;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_pre_directional;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_suffix;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\TranscriptionSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,19 +24,19 @@ final class Settings implements BaseModel
     /**
      * Available only for deepgram/flux. Confidence required to trigger an end of turn. Higher values = more reliable turn detection but slightly increased latency.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $eot_threshold;
 
     /**
      * Available only for deepgram/flux. Maximum milliseconds of silence before forcing an end of turn, regardless of confidence.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $eot_timeout_ms;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $numerals;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $smart_format;
 
     public function __construct()

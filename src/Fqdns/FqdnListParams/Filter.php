@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns\FqdnListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class Filter implements BaseModel
     /**
      * ID of the FQDN connection to which the FQDN belongs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * DNS record type used by the FQDN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $dns_record_type;
 
     /**
      * FQDN represented by the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Port to use when connecting to the FQDN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     public function __construct()

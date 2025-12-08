@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Clusters;
 
 use Telnyx\AI\Clusters\ClusterGetResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
@@ -18,7 +18,7 @@ final class ClusterGetResponse implements BaseModel
     /** @use SdkModel<ClusterGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

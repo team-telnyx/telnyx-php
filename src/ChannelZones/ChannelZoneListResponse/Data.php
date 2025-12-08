@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ChannelZones\ChannelZoneListResponse;
 
 use Telnyx\ChannelZones\ChannelZoneListResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,10 +26,10 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public int $channels;
 
     /**
@@ -36,26 +37,26 @@ final class Data implements BaseModel
      *
      * @var list<string> $countries
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $countries;
 
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
+    #[Required(enum: RecordType::class)]
     public string $record_type;
 
     /**
      * ISO 8601 formatted date of when the channel zone was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * ISO 8601 formatted date of when the channel zone was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**

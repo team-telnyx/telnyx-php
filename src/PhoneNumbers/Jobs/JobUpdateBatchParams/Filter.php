@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\Status;
@@ -35,38 +35,38 @@ final class Filter implements BaseModel
     /**
      * Filter by the billing_group_id associated with phone numbers. To filter to only phone numbers that have no billing group associated them, set the value of this filter to the string 'null'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Filter by connection_id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Filter numbers via the customer_reference set.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Filter by the emergency_address_id associated with phone numbers. To filter only phone numbers that have no emergency address associated with them, set the value of this filter to the string 'null'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $emergency_address_id;
 
     /**
      * Filter by phone number that have bundles.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $has_bundle;
 
     /**
      * Filter by phone number. Requires at least three digits.
      *              Non-numerical characters will result in no values being returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -74,19 +74,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Filter by phone number tags.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tag;
 
     /**
      * Filter by voice connection name pattern matching.
      */
-    #[Api('voice.connection_name', optional: true)]
+    #[Optional('voice.connection_name')]
     public ?VoiceConnectionName $voice_connection_name;
 
     /**
@@ -94,10 +94,9 @@ final class Filter implements BaseModel
      *
      * @var value-of<VoiceUsagePaymentMethod>|null $voice_usage_payment_method
      */
-    #[Api(
+    #[Optional(
         'voice.usage_payment_method',
-        enum: VoiceUsagePaymentMethod::class,
-        optional: true,
+        enum: VoiceUsagePaymentMethod::class
     )]
     public ?string $voice_usage_payment_method;
 

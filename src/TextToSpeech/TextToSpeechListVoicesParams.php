@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class TextToSpeechListVoicesParams implements BaseModel
     /**
      * Reference to your ElevenLabs API key stored in the Telnyx Portal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $elevenlabs_api_key_ref;
 
     /**
@@ -36,7 +36,7 @@ final class TextToSpeechListVoicesParams implements BaseModel
      *
      * @var value-of<Provider>|null $provider
      */
-    #[Api(enum: Provider::class, optional: true)]
+    #[Optional(enum: Provider::class)]
     public ?string $provider;
 
     public function __construct()

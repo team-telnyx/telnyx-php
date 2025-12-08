@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
@@ -23,10 +23,10 @@ final class MessagingListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<MdrDetailReportResponse>|null $data */
-    #[Api(list: MdrDetailReportResponse::class, optional: true)]
+    #[Optional(list: MdrDetailReportResponse::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?BatchCsvPaginationMeta $meta;
 
     public function __construct()

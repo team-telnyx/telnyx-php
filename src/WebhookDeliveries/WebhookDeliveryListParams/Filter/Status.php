@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status\Eq;
@@ -22,7 +22,7 @@ final class Status implements BaseModel
      *
      * @var value-of<Eq>|null $eq
      */
-    #[Api(enum: Eq::class, optional: true)]
+    #[Optional(enum: Eq::class)]
     public ?string $eq;
 
     public function __construct()

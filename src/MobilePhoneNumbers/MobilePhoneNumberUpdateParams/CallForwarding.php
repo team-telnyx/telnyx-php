@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
@@ -21,14 +21,14 @@ final class CallForwarding implements BaseModel
     /** @use SdkModel<CallForwardingShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_forwarding_enabled;
 
     /** @var value-of<ForwardingType>|null $forwarding_type */
-    #[Api(enum: ForwardingType::class, nullable: true, optional: true)]
+    #[Optional(enum: ForwardingType::class, nullable: true)]
     public ?string $forwarding_type;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $forwards_to;
 
     public function __construct()

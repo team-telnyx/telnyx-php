@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\AggregationType;
@@ -35,44 +35,44 @@ final class MdrUsageReport implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /** @var value-of<AggregationType>|null $aggregation_type */
-    #[Api(enum: AggregationType::class, optional: true)]
+    #[Optional(enum: AggregationType::class)]
     public ?string $aggregation_type;
 
     /** @var list<int>|null $connections */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_date;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profiles;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $report_url;
 
     /** @var list<Result>|null $result */
-    #[Api(list: Result::class, optional: true)]
+    #[Optional(list: Result::class)]
     public ?array $result;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_date;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes\FaxListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Direction implements BaseModel
     /**
      * The direction, inbound or outbound, for filtering faxes sent from this account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()

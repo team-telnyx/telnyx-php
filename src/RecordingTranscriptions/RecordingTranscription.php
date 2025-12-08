@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
@@ -30,29 +30,29 @@ final class RecordingTranscription implements BaseModel
     /**
      * Uniquely identifies the recording transcription.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * The duration of the recording transcription in milliseconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration_millis;
 
     /** @var value-of<RecordType>|null $record_type */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * Uniquely identifies the recording associated with this transcription.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $recording_id;
 
     /**
@@ -60,19 +60,19 @@ final class RecordingTranscription implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The recording's transcribed text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transcription_text;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Balance\BalanceGetResponse;
 
 use Telnyx\Balance\BalanceGetResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +27,31 @@ final class Data implements BaseModel
     /**
      * Available amount to spend (balance + credit limit).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $available_credit;
 
     /**
      * The account's current balance.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $balance;
 
     /**
      * The account's credit limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $credit_limit;
 
     /**
      * The ISO 4217 currency identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * The account’s pending amount.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pending;
 
     /**
@@ -59,7 +59,7 @@ final class Data implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     public function __construct()

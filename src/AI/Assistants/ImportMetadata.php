@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\ImportMetadata\ImportProvider;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,7 +22,7 @@ final class ImportMetadata implements BaseModel
     /**
      * ID of the assistant in the provider's system.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $import_id;
 
     /**
@@ -30,7 +30,7 @@ final class ImportMetadata implements BaseModel
      *
      * @var value-of<ImportProvider>|null $import_provider
      */
-    #[Api(enum: ImportProvider::class, optional: true)]
+    #[Optional(enum: ImportProvider::class)]
     public ?string $import_provider;
 
     public function __construct()

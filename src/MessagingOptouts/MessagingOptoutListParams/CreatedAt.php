@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingOptouts\MessagingOptoutListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class CreatedAt implements BaseModel
     /**
      * Filter opt-outs created after this date (ISO-8601 format).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gte;
 
     /**
      * Filter opt-outs created before this date (ISO-8601 format).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lte;
 
     public function __construct()

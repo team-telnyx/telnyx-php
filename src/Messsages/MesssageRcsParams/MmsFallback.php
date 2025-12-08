@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\MesssageRcsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,7 +24,7 @@ final class MmsFallback implements BaseModel
     /**
      * Phone number in +E.164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
@@ -32,19 +32,19 @@ final class MmsFallback implements BaseModel
      *
      * @var list<string>|null $media_urls
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $media_urls;
 
     /**
      * Subject of the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subject;
 
     /**
      * Text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     public function __construct()

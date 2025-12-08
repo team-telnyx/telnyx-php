@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class PhoneNumber implements BaseModel
     /**
      * The phone number's ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The phone number in e164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     public function __construct()

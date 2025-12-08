@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class IPDeleteResponse implements BaseModel
     /** @use SdkModel<IPDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?IP $data;
 
     public function __construct()

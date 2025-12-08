@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations\NumberReservationListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
@@ -27,25 +27,25 @@ final class Filter implements BaseModel
     /**
      * Filter number reservations by date range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
      * Filter number reservations via the customer reference set.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Filter number reservations having these phone numbers.
      */
-    #[Api('phone_numbers.phone_number', optional: true)]
+    #[Optional('phone_numbers.phone_number')]
     public ?string $phone_numbers_phone_number;
 
     /**
      * Filter number reservations by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()

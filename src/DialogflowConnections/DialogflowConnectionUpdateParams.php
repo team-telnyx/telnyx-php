@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DialogflowConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,13 +35,13 @@ final class DialogflowConnectionUpdateParams implements BaseModel
      *
      * @var array<string,mixed> $service_account
      */
-    #[Api(map: 'mixed')]
+    #[Required(map: 'mixed')]
     public array $service_account;
 
     /**
      * The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversation_profile_id;
 
     /**
@@ -48,19 +49,19 @@ final class DialogflowConnectionUpdateParams implements BaseModel
      *
      * @var value-of<DialogflowAPI>|null $dialogflow_api
      */
-    #[Api(enum: DialogflowAPI::class, optional: true)]
+    #[Optional(enum: DialogflowAPI::class)]
     public ?string $dialogflow_api;
 
     /**
      * Which Dialogflow environment will be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $environment;
 
     /**
      * The region of your agent is. (If you use Dialogflow CX, this param is required).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location;
 
     /**

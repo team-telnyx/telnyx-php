@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\WirelessBlocklists;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
@@ -21,10 +21,10 @@ final class WirelessBlocklistListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<WirelessBlocklist>|null $data */
-    #[Api(list: WirelessBlocklist::class, optional: true)]
+    #[Optional(list: WirelessBlocklist::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

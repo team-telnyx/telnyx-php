@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class RoomRetrieveParams implements BaseModel
     /**
      * To decide if room sessions should be included in the response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_sessions;
 
     public function __construct()

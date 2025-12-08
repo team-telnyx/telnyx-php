@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class Name implements BaseModel
     /**
      * Filter by name containing match.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Filter by name ending with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ends_with;
 
     /**
      * Filter by name starting with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $starts_with;
 
     public function __construct()

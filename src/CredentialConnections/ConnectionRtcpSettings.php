@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
@@ -24,7 +24,7 @@ final class ConnectionRtcpSettings implements BaseModel
     /**
      * BETA - Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $capture_enabled;
 
     /**
@@ -32,13 +32,13 @@ final class ConnectionRtcpSettings implements BaseModel
      *
      * @var value-of<Port>|null $port
      */
-    #[Api(enum: Port::class, optional: true)]
+    #[Optional(enum: Port::class)]
     public ?string $port;
 
     /**
      * RTCP reports are sent to customers based on the frequency set. Frequency is in seconds and it can be set to values from 5 to 3000 seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $report_frequency_secs;
 
     public function __construct()

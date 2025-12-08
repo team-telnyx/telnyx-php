@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
@@ -19,7 +19,7 @@ final class NumberOrderUpdateResponse implements BaseModel
     /** @use SdkModel<NumberOrderUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?NumberOrderWithPhoneNumbers $data;
 
     public function __construct()

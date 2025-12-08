@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter\Action;
@@ -26,13 +26,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     /**
      * Filter results by a phone number. It should be in E.164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     public function __construct()

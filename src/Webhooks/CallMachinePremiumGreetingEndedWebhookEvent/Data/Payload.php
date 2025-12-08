@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallMachinePremiumGreetingEndedWebhookEvent\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallMachinePremiumGreetingEndedWebhookEvent\Data\Payload\Result;
@@ -29,37 +29,37 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Number or SIP URI placing the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
@@ -67,13 +67,13 @@ final class Payload implements BaseModel
      *
      * @var value-of<Result>|null $result
      */
-    #[Api(enum: Result::class, optional: true)]
+    #[Optional(enum: Result::class)]
     public ?string $result;
 
     /**
      * Destination number or SIP URI of the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()

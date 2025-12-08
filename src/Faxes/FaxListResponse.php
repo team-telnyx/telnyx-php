@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\Fax\Direction;
@@ -21,10 +21,10 @@ final class FaxListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Fax>|null $data */
-    #[Api(list: Fax::class, optional: true)]
+    #[Optional(list: Fax::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public mixed $meta;
 
     public function __construct()

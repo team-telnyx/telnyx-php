@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data1\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data1\Payload\StreamParams\Track;
@@ -24,7 +24,7 @@ final class StreamParams implements BaseModel
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stream_url;
 
     /**
@@ -32,7 +32,7 @@ final class StreamParams implements BaseModel
      *
      * @var value-of<Track>|null $track
      */
-    #[Api(enum: Track::class, optional: true)]
+    #[Optional(enum: Track::class)]
     public ?string $track;
 
     public function __construct()

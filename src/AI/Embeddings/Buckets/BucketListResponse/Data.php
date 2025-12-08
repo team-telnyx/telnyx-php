@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings\Buckets\BucketListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class Data implements BaseModel
     use SdkModel;
 
     /** @var list<string> $buckets */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $buckets;
 
     /**

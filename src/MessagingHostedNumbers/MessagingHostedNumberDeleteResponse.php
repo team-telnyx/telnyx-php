@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\HostedNumber;
@@ -21,7 +21,7 @@ final class MessagingHostedNumberDeleteResponse implements BaseModel
     /** @use SdkModel<MessagingHostedNumberDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MessagingHostedNumberOrder $data;
 
     public function __construct()

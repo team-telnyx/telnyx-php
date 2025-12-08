@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     /**
      * The mobile network operator resource identification UUID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobile_network_operator_id;
 
     /**
      * The mobile network operator resource name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobile_network_operator_name;
 
     /**
      * It determines what is the priority of a specific network operator that should be assumed by a SIM card when connecting to a network. The highest priority is 0, the second highest is 1 and so on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $priority;
 
     public function __construct()

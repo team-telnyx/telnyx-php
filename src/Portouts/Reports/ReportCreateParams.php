@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class ReportCreateParams implements BaseModel
     /**
      * The parameters for generating a port-outs CSV report.
      */
-    #[Api]
+    #[Required]
     public ExportPortoutsCsvReport $params;
 
     /**
@@ -38,7 +38,7 @@ final class ReportCreateParams implements BaseModel
      *
      * @var value-of<ReportType> $report_type
      */
-    #[Api(enum: ReportType::class)]
+    #[Required(enum: ReportType::class)]
     public string $report_type;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Action;
@@ -21,7 +21,7 @@ final class AssociatedPhoneNumberNewResponse implements BaseModel
     /** @use SdkModel<AssociatedPhoneNumberNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingAssociatedPhoneNumber $data;
 
     public function __construct()

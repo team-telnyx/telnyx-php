@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\Verification\RecordType;
@@ -30,22 +30,22 @@ final class Verification implements BaseModel
     /** @use SdkModel<VerificationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Send a self-generated numeric code to the end-user.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $custom_code;
 
     /**
      * +E164 formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -53,7 +53,7 @@ final class Verification implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
@@ -61,13 +61,13 @@ final class Verification implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_verification_timeout_secs` on the Verify profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_secs;
 
     /**
@@ -75,16 +75,16 @@ final class Verification implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $verify_profile_id;
 
     public function __construct()

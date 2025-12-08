@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\FaxApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -19,7 +19,7 @@ final class FaxApplicationGetResponse implements BaseModel
     /** @use SdkModel<FaxApplicationGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?FaxApplication $data;
 
     public function __construct()

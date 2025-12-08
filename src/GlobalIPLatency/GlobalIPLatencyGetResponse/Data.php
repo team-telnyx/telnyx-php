@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP;
@@ -33,22 +33,22 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?GlobalIP $global_ip;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?MeanLatency $mean_latency;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PercentileLatency $percentile_latency;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ProberLocation $prober_location;
 
     /**
      * The timestamp of the metric.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
     public function __construct()

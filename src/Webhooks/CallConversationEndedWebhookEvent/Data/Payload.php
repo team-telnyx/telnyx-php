@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload\CallingPartyType;
@@ -37,25 +37,25 @@ final class Payload implements BaseModel
     /**
      * Unique identifier of the assistant involved in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $assistant_id;
 
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_control_id;
 
     /**
      * ID that is unique to the call leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session (group of related call legs).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
@@ -63,73 +63,73 @@ final class Payload implements BaseModel
      *
      * @var value-of<CallingPartyType>|null $calling_party_type
      */
-    #[Api(enum: CallingPartyType::class, optional: true)]
+    #[Optional(enum: CallingPartyType::class)]
     public ?string $calling_party_type;
 
     /**
      * Base64-encoded state received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ID unique to the conversation or insight group generated for the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversation_id;
 
     /**
      * Duration of the conversation in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration_sec;
 
     /**
      * The caller's number or identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The large language model used during the conversation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $llm_model;
 
     /**
      * The speech-to-text model used in the conversation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stt_model;
 
     /**
      * The callee's number or SIP address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * The model ID used for text-to-speech synthesis.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tts_model_id;
 
     /**
      * The text-to-speech provider used in the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tts_provider;
 
     /**
      * Voice ID used for TTS.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tts_voice_id;
 
     public function __construct()

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AccessIPRanges;
 
 use Telnyx\AccessIPAddress\CloudflareSyncStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,10 +26,10 @@ final class AccessIPRange implements BaseModel
     /** @use SdkModel<AccessIPRangeShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public string $cidr_block;
 
     /**
@@ -36,19 +37,19 @@ final class AccessIPRange implements BaseModel
      *
      * @var value-of<CloudflareSyncStatus> $status
      */
-    #[Api(enum: CloudflareSyncStatus::class)]
+    #[Required(enum: CloudflareSyncStatus::class)]
     public string $status;
 
-    #[Api]
+    #[Required]
     public string $user_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**

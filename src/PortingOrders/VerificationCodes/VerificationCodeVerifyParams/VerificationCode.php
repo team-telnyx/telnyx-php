@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class VerificationCode implements BaseModel
     /** @use SdkModel<VerificationCodeShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     public function __construct()

@@ -6,7 +6,7 @@ namespace Telnyx\Calls\CallDialParams;
 
 use Telnyx\Calls\CallDialParams\ConferenceConfig\BeepEnabled;
 use Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -38,7 +38,7 @@ final class ConferenceConfig implements BaseModel
     /**
      * Conference ID to be joined.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -46,67 +46,67 @@ final class ConferenceConfig implements BaseModel
      *
      * @var value-of<BeepEnabled>|null $beep_enabled
      */
-    #[Api(enum: BeepEnabled::class, optional: true)]
+    #[Optional(enum: BeepEnabled::class)]
     public ?string $beep_enabled;
 
     /**
      * Conference name to be joined.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conference_name;
 
     /**
      * Controls the moment when dialled call is joined into conference. If set to `true` user will be joined as soon as media is available (ringback). If `false` user will be joined when call is answered. Defaults to `true`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $early_media;
 
     /**
      * Whether the conference should end and all remaining participants be hung up after the participant leaves the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $end_conference_on_exit;
 
     /**
      * Whether the participant should be put on hold immediately after joining the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hold;
 
     /**
      * The URL of a file to be played to the participant when they are put on hold after joining the conference. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $hold_audio_url;
 
     /**
      * The media_name of a file to be played to the participant when they are put on hold after joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $hold_media_name;
 
     /**
      * Whether the participant should be muted immediately after joining the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $mute;
 
     /**
      * Whether the conference should end after the participant leaves the conference. NOTE this doesn't hang up the other participants. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $soft_end_conference_on_exit;
 
     /**
      * Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $start_conference_on_create;
 
     /**
      * Whether the conference should be started after the participant joins the conference. Defaults to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $start_conference_on_enter;
 
     /**
@@ -114,9 +114,8 @@ final class ConferenceConfig implements BaseModel
      *
      * @var value-of<SupervisorRole>|null $supervisor_role
      */
-    #[Api(
-        enum: SupervisorRole::class,
-        optional: true,
+    #[Optional(
+        enum: SupervisorRole::class
     )]
     public ?string $supervisor_role;
 
@@ -125,7 +124,7 @@ final class ConferenceConfig implements BaseModel
      *
      * @var list<string>|null $whisper_call_control_ids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $whisper_call_control_ids;
 
     public function __construct()

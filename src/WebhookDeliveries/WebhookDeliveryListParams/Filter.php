@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Attempts;
@@ -31,25 +31,25 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Attempts $attempts;
 
     /**
      * Return only webhook_deliveries matching the given value of `event_type`. Accepts multiple values separated by a `,`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $event_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?FinishedAt $finished_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?StartedAt $started_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Webhook $webhook;
 
     public function __construct()

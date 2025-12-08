@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
@@ -27,13 +27,13 @@ final class Filters implements BaseModel
     /**
      * The date and time the porting order was created after.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at__gt;
 
     /**
      * The date and time the porting order was created before.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at__lt;
 
     /**
@@ -41,7 +41,7 @@ final class Filters implements BaseModel
      *
      * @var list<string>|null $customer_reference__in
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $customer_reference__in;
 
     /**
@@ -49,7 +49,7 @@ final class Filters implements BaseModel
      *
      * @var list<value-of<StatusIn>>|null $status__in
      */
-    #[Api(list: StatusIn::class, optional: true)]
+    #[Optional(list: StatusIn::class)]
     public ?array $status__in;
 
     public function __construct()

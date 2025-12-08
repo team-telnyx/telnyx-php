@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionAnswerResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class ActionAnswerResponse implements BaseModel
     /** @use SdkModel<ActionAnswerResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

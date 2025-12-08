@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse\Data\OrderingGroup;
@@ -32,47 +32,47 @@ final class Data implements BaseModel
     /**
      * Unique identifier for the inexplicit number order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Billing group id to apply to phone numbers that are purchased.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Connection id to apply to phone numbers that are purchased.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Reference label for the customer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Messaging profile id to apply to phone numbers that are purchased.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_profile_id;
 
     /** @var list<OrderingGroup>|null $ordering_groups */
-    #[Api(list: OrderingGroup::class, optional: true)]
+    #[Optional(list: OrderingGroup::class)]
     public ?array $ordering_groups;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

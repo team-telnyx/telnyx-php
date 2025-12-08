@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Settings;
@@ -24,7 +24,7 @@ final class ActionSetPrivateWirelessGatewayResponse implements BaseModel
     /**
      * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardGroupAction $data;
 
     public function __construct()

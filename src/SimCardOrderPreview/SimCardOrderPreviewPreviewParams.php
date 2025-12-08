@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrderPreview;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
     /**
      * Uniquely identifies the address for the order.
      */
-    #[Api]
+    #[Required]
     public string $address_id;
 
     /**
      * The amount of SIM cards that the user would like to purchase in the SIM card order.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**

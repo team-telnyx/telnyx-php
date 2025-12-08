@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -67,25 +68,25 @@ final class CallInitiateParams implements BaseModel
     /**
      * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      */
-    #[Api]
+    #[Required]
     public string $From;
 
     /**
      * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      */
-    #[Api]
+    #[Required]
     public string $To;
 
     /**
      * Select whether to perform answering machine detection in the background. By default execution is blocked until Answering Machine Detection is completed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $AsyncAmd;
 
     /**
      * URL destination for Telnyx to send AMD callback events to for the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $AsyncAmdStatusCallback;
 
     /**
@@ -93,28 +94,27 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<AsyncAmdStatusCallbackMethod>|null $AsyncAmdStatusCallbackMethod
      */
-    #[Api(
+    #[Optional(
         enum: AsyncAmdStatusCallbackMethod::class,
-        optional: true,
     )]
     public ?string $AsyncAmdStatusCallbackMethod;
 
     /**
      * To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If ommited, the display name will be the same as the number in the `From` field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $CallerId;
 
     /**
      * Whether to cancel ongoing playback on `greeting ended` detection. Defaults to `true`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $CancelPlaybackOnDetectMessageEnd;
 
     /**
      * Whether to cancel ongoing playback on `machine` detection. Defaults to `true`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $CancelPlaybackOnMachineDetection;
 
     /**
@@ -122,16 +122,13 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<DetectionMode>|null $DetectionMode
      */
-    #[Api(
-        enum: DetectionMode::class,
-        optional: true,
-    )]
+    #[Optional(enum: DetectionMode::class)]
     public ?string $DetectionMode;
 
     /**
      * A failover URL for which Telnyx will retrieve the TeXML call instructions if the `Url` is not responding.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $FallbackUrl;
 
     /**
@@ -139,46 +136,45 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<MachineDetection>|null $MachineDetection
      */
-    #[Api(
-        enum: MachineDetection::class,
-        optional: true,
+    #[Optional(
+        enum: MachineDetection::class
     )]
     public ?string $MachineDetection;
 
     /**
      * If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $MachineDetectionSilenceTimeout;
 
     /**
      * Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $MachineDetectionSpeechEndThreshold;
 
     /**
      * Maximum threshold of a human greeting. If greeting longer than this value, considered machine. Ignored when `premium` detection is used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $MachineDetectionSpeechThreshold;
 
     /**
      * Maximum timeout threshold in milliseconds for overall detection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $MachineDetectionTimeout;
 
     /**
      * The list of comma-separated codecs to be offered on a call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $PreferredCodecs;
 
     /**
      * Whether to record the entire participant's call leg. Defaults to `false`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $Record;
 
     /**
@@ -186,22 +182,21 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<RecordingChannels>|null $RecordingChannels
      */
-    #[Api(
-        enum: RecordingChannels::class,
-        optional: true,
+    #[Optional(
+        enum: RecordingChannels::class
     )]
     public ?string $RecordingChannels;
 
     /**
      * The URL the recording callbacks will be sent to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $RecordingStatusCallback;
 
     /**
      * The changes to the recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $RecordingStatusCallbackEvent;
 
     /**
@@ -209,16 +204,15 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<RecordingStatusCallbackMethod>|null $RecordingStatusCallbackMethod
      */
-    #[Api(
+    #[Optional(
         enum: RecordingStatusCallbackMethod::class,
-        optional: true,
     )]
     public ?string $RecordingStatusCallbackMethod;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that the transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $RecordingTimeout;
 
     /**
@@ -226,28 +220,27 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<RecordingTrack>|null $RecordingTrack
      */
-    #[Api(
-        enum: RecordingTrack::class,
-        optional: true,
+    #[Optional(
+        enum: RecordingTrack::class
     )]
     public ?string $RecordingTrack;
 
     /**
      * The password to use for SIP authentication.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $SipAuthPassword;
 
     /**
      * The username to use for SIP authentication.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $SipAuthUsername;
 
     /**
      * URL destination for Telnyx to send status callback events to for the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $StatusCallback;
 
     /**
@@ -255,9 +248,8 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<StatusCallbackEvent>|null $StatusCallbackEvent
      */
-    #[Api(
-        enum: StatusCallbackEvent::class,
-        optional: true,
+    #[Optional(
+        enum: StatusCallbackEvent::class
     )]
     public ?string $StatusCallbackEvent;
 
@@ -266,9 +258,8 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
      */
-    #[Api(
-        enum: StatusCallbackMethod::class,
-        optional: true,
+    #[Optional(
+        enum: StatusCallbackMethod::class
     )]
     public ?string $StatusCallbackMethod;
 
@@ -277,16 +268,13 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<Trim>|null $Trim
      */
-    #[Api(
-        enum: Trim::class,
-        optional: true
-    )]
+    #[Optional(enum: Trim::class)]
     public ?string $Trim;
 
     /**
      * The URL from which Telnyx will retrieve the TeXML call instructions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Url;
 
     /**
@@ -294,7 +282,7 @@ final class CallInitiateParams implements BaseModel
      *
      * @var value-of<URLMethod>|null $UrlMethod
      */
-    #[Api(enum: URLMethod::class, optional: true)]
+    #[Optional(enum: URLMethod::class)]
     public ?string $UrlMethod;
 
     /**

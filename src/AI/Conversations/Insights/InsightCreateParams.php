@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\Insights;
 
 use Telnyx\AI\Conversations\Insights\InsightCreateParams\JsonSchema;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,10 +29,10 @@ final class InsightCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $instructions;
 
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -39,10 +40,10 @@ final class InsightCreateParams implements BaseModel
      *
      * @var mixed|string|null $json_schema
      */
-    #[Api(union: JsonSchema::class, optional: true)]
+    #[Optional(union: JsonSchema::class)]
     public mixed $json_schema;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook;
 
     /**

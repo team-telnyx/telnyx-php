@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\CountryCode;
@@ -22,10 +22,10 @@ final class DynamicEmergencyAddressListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<DynamicEmergencyAddress>|null $data */
-    #[Api(list: DynamicEmergencyAddress::class, optional: true)]
+    #[Optional(list: DynamicEmergencyAddress::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Metadata $meta;
 
     public function __construct()

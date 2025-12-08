@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\TranscriptionTrack;
@@ -25,19 +25,19 @@ final class TranscriptionData implements BaseModel
     /**
      * Speech recognition confidence level.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $confidence;
 
     /**
      * When false, it means that this is an interim result.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_final;
 
     /**
      * Recognized text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transcript;
 
     /**
@@ -45,7 +45,7 @@ final class TranscriptionData implements BaseModel
      *
      * @var value-of<TranscriptionTrack>|null $transcription_track
      */
-    #[Api(enum: TranscriptionTrack::class, optional: true)]
+    #[Optional(enum: TranscriptionTrack::class)]
     public ?string $transcription_track;
 
     public function __construct()

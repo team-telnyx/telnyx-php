@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberAssignmentByProfile;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record;
@@ -20,7 +20,7 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
     use SdkModel;
 
     /** @var list<Record> $records */
-    #[Api(list: Record::class)]
+    #[Required(list: Record::class)]
     public array $records;
 
     /**

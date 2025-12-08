@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
@@ -31,31 +31,31 @@ final class PortoutReport implements BaseModel
     /**
      * Uniquely identifies the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Identifies the document that was uploaded when report was generated. This field is only populated when the report is under completed status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $document_id;
 
     /**
      * The parameters for generating a port-outs CSV report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExportPortoutsCsvReport $params;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -63,7 +63,7 @@ final class PortoutReport implements BaseModel
      *
      * @var value-of<ReportType>|null $report_type
      */
-    #[Api(enum: ReportType::class, optional: true)]
+    #[Optional(enum: ReportType::class)]
     public ?string $report_type;
 
     /**
@@ -71,13 +71,13 @@ final class PortoutReport implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

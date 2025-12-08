@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomParticipants\RoomParticipantListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class DateLeftAt implements BaseModel
     /**
      * ISO 8601 date for filtering room participants that left on that date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $eq;
 
     /**
      * ISO 8601 date for filtering room participants that left on or after that date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gte;
 
     /**
      * ISO 8601 date for filtering room participants that left on or before that date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lte;
 
     public function __construct()

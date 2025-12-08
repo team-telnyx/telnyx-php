@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Comments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class CommentCreateParams implements BaseModel
     /**
      * Comment to post on this portout request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     public function __construct()

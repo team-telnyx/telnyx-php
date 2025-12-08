@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     /**
      * The text to convert to speech.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
@@ -41,7 +41,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
      */
-    #[Api]
+    #[Required]
     public string $voice;
 
     /**

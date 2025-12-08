@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter\CloudProvider;
@@ -31,37 +31,37 @@ final class Filter implements BaseModel
      *
      * @var value-of<CloudProvider>|null $cloud_provider
      */
-    #[Api(enum: CloudProvider::class, optional: true)]
+    #[Optional(enum: CloudProvider::class)]
     public ?string $cloud_provider;
 
     /**
      * The region of specific cloud provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cloud_provider_region;
 
     /**
      * The code of associated location to filter on.
      */
-    #[Api('location.code', optional: true)]
+    #[Optional('location.code')]
     public ?string $location_code;
 
     /**
      * The POP of associated location to filter on.
      */
-    #[Api('location.pop', optional: true)]
+    #[Optional('location.pop')]
     public ?string $location_pop;
 
     /**
      * The region of associated location to filter on.
      */
-    #[Api('location.region', optional: true)]
+    #[Optional('location.region')]
     public ?string $location_region;
 
     /**
      * The site of associated location to filter on.
      */
-    #[Api('location.site', optional: true)]
+    #[Optional('location.site')]
     public ?string $location_site;
 
     public function __construct()

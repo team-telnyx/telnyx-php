@@ -6,7 +6,8 @@ namespace Telnyx\AI\Conversations\InsightGroups;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,23 +26,23 @@ final class InsightTemplateGroup implements BaseModel
     /** @use SdkModel<InsightTemplateGroupShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /** @var list<InsightTemplate>|null $insights */
-    #[Api(list: InsightTemplate::class, optional: true)]
+    #[Optional(list: InsightTemplate::class)]
     public ?array $insights;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook;
 
     /**

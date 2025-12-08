@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PortingOrders\PhoneNumberExtensions;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange;
@@ -22,10 +22,10 @@ final class PhoneNumberExtensionListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<PortingPhoneNumberExtension>|null $data */
-    #[Api(list: PortingPhoneNumberExtension::class, optional: true)]
+    #[Optional(list: PortingPhoneNumberExtension::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

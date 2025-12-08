@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,19 +24,19 @@ final class Location implements BaseModel
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $additional_info;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Represents whether the location is the default or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_default;
 
     public function __construct()

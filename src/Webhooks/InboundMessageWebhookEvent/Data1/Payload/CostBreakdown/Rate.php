@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\InboundMessageWebhookEvent\Data1\Payload\CostBreakdown;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Rate implements BaseModel
     /**
      * The rate amount applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
      * The ISO 4217 currency identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     public function __construct()

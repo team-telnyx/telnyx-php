@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -43,61 +43,61 @@ final class ActionGatherParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * An id that will be sent back in the corresponding `call.gather.ended` webhook. Will be randomly generated if not specified.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gather_id;
 
     /**
      * The number of milliseconds to wait for the first DTMF.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $initial_timeout_millis;
 
     /**
      * The number of milliseconds to wait for input between digits.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $inter_digit_timeout_millis;
 
     /**
      * The maximum number of digits to fetch. This parameter has a maximum value of 128.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maximum_digits;
 
     /**
      * The minimum number of digits to fetch. This parameter has a minimum value of 1.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $minimum_digits;
 
     /**
      * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $terminating_digit;
 
     /**
      * The number of milliseconds to wait to complete the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_millis;
 
     /**
      * A list of all digits accepted as valid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $valid_digits;
 
     public function __construct()

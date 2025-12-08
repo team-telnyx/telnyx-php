@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
@@ -22,7 +22,7 @@ final class PortingOrder implements BaseModel
      *
      * @var list<value-of<Status>>|null $status
      */
-    #[Api(list: Status::class, optional: true)]
+    #[Optional(list: Status::class)]
     public ?array $status;
 
     public function __construct()

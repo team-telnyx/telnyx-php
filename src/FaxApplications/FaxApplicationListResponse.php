@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\FaxApplications;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -23,10 +23,10 @@ final class FaxApplicationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<FaxApplication>|null $data */
-    #[Api(list: FaxApplication::class, optional: true)]
+    #[Optional(list: FaxApplication::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

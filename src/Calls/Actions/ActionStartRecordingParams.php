@@ -9,7 +9,8 @@ use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -56,7 +57,7 @@ final class ActionStartRecordingParams implements BaseModel
      *
      * @var value-of<Channels> $channels
      */
-    #[Api(enum: Channels::class)]
+    #[Required(enum: Channels::class)]
     public string $channels;
 
     /**
@@ -64,37 +65,37 @@ final class ActionStartRecordingParams implements BaseModel
      *
      * @var value-of<Format> $format
      */
-    #[Api(enum: Format::class)]
+    #[Required(enum: Format::class)]
     public string $format;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $custom_file_name;
 
     /**
      * Defines the maximum length for the recording in seconds. The minimum value is 0. The maximum value is 14400. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_length;
 
     /**
      * If enabled, a beep sound will be played at the start of a recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $play_beep;
 
     /**
@@ -102,25 +103,25 @@ final class ActionStartRecordingParams implements BaseModel
      *
      * @var value-of<RecordingTrack>|null $recording_track
      */
-    #[Api(enum: RecordingTrack::class, optional: true)]
+    #[Optional(enum: RecordingTrack::class)]
     public ?string $recording_track;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timeout_secs;
 
     /**
      * Enable post recording transcription. The default value is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $transcription;
 
     /**
      * Engine to use for speech recognition. `A` - `Google`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transcription_engine;
 
     /**
@@ -128,31 +129,31 @@ final class ActionStartRecordingParams implements BaseModel
      *
      * @var value-of<TranscriptionLanguage>|null $transcription_language
      */
-    #[Api(enum: TranscriptionLanguage::class, optional: true)]
+    #[Optional(enum: TranscriptionLanguage::class)]
     public ?string $transcription_language;
 
     /**
      * Defines maximum number of speakers in the conversation. Applies to `google` engine only.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $transcription_max_speaker_count;
 
     /**
      * Defines minimum number of speakers in the conversation. Applies to `google` engine only.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $transcription_min_speaker_count;
 
     /**
      * Enables profanity_filter. Applies to `google` engine only.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $transcription_profanity_filter;
 
     /**
      * Enables speaker diarization. Applies to `google` engine only.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $transcription_speaker_diarization;
 
     /**
@@ -160,7 +161,7 @@ final class ActionStartRecordingParams implements BaseModel
      *
      * @var value-of<Trim>|null $trim
      */
-    #[Api(enum: Trim::class, optional: true)]
+    #[Optional(enum: Trim::class)]
     public ?string $trim;
 
     /**

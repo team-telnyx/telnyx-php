@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberWithMessagingSettings\Features;
@@ -36,19 +36,19 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
@@ -56,34 +56,34 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * @var list<string>|null $eligible_messaging_products
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $eligible_messaging_products;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Features $features;
 
     /**
      * High level health metrics about the number and it's messaging sending patterns.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?NumberHealthMetrics $health;
 
     /**
      * The messaging product that the number is registered to use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $messaging_product;
 
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $messaging_profile_id;
 
     /**
      * +E.164 formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -91,13 +91,13 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
      * The messaging traffic or use case for which the number is currently configured.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $traffic_type;
 
     /**
@@ -105,13 +105,13 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

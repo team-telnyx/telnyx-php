@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class Total implements BaseModel
     /**
      * The number of bytes received.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $bytes_received;
 
     /**
      * The number of bytes sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $bytes_sent;
 
     /**
      * The number of operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $ops;
 
     /**
      * The number of successful operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $successful_ops;
 
     public function __construct()

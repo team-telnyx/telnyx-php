@@ -6,7 +6,7 @@ namespace Telnyx\AccessIPRanges;
 
 use Telnyx\AccessIPAddress\CloudflareSyncStatus;
 use Telnyx\AccessIPAddress\PaginationMetaCloudflareIPListSync;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class AccessIPRangeListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<AccessIPRange> $data */
-    #[Api(list: AccessIPRange::class)]
+    #[Required(list: AccessIPRange::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public PaginationMetaCloudflareIPListSync $meta;
 
     /**

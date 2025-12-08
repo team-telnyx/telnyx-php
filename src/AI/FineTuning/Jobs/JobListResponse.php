@@ -6,7 +6,7 @@ namespace Telnyx\AI\FineTuning\Jobs;
 
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class JobListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<FineTuningJob> $data */
-    #[Api(list: FineTuningJob::class)]
+    #[Required(list: FineTuningJob::class)]
     public array $data;
 
     /**

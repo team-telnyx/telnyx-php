@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,43 +33,43 @@ final class PrivateWirelessGatewayListParams implements BaseModel
     /**
      * Private Wireless Gateway resource creation date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_created_at_;
 
     /**
      * The IP address range of the Private Wireless Gateway.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_ip_range_;
 
     /**
      * The name of the Private Wireless Gateway.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_name_;
 
     /**
      * The name of the region where the Private Wireless Gateway is deployed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_region_code_;
 
     /**
      * When the Private Wireless Gateway was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter_updated_at_;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

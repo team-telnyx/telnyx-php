@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklists;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class WirelessBlocklistUpdateParams implements BaseModel
     /**
      * The name of the Wireless Blocklist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -36,7 +36,7 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
@@ -44,7 +44,7 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      *
      * @var list<string>|null $values
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $values;
 
     public function __construct()

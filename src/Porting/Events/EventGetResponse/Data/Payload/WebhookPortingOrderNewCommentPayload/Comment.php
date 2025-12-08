@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderNewCommentPayload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderNewCommentPayload\Comment\UserType;
@@ -28,25 +28,25 @@ final class Comment implements BaseModel
     /**
      * Identifies the comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The body of the comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     /**
      * ISO 8601 formatted date indicating when the comment was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $inserted_at;
 
     /**
      * Identifies the user that create the comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**
@@ -54,7 +54,7 @@ final class Comment implements BaseModel
      *
      * @var value-of<UserType>|null $user_type
      */
-    #[Api(enum: UserType::class, optional: true)]
+    #[Optional(enum: UserType::class)]
     public ?string $user_type;
 
     public function __construct()

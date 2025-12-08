@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
@@ -26,7 +26,7 @@ final class CallForwarding implements BaseModel
     /**
      * Indicates if call forwarding will be enabled for this number if forwards_to and forwarding_type are filled in. Defaults to true for backwards compatibility with APIV1 use of numbers endpoints.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $call_forwarding_enabled;
 
     /**
@@ -34,13 +34,13 @@ final class CallForwarding implements BaseModel
      *
      * @var value-of<ForwardingType>|null $forwarding_type
      */
-    #[Api(enum: ForwardingType::class, optional: true)]
+    #[Optional(enum: ForwardingType::class)]
     public ?string $forwarding_type;
 
     /**
      * The phone number to which inbound calls to this number are forwarded. Inbound calls will not be forwarded if this field is left blank. If set, must be a +E.164-formatted phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $forwards_to;
 
     public function __construct()

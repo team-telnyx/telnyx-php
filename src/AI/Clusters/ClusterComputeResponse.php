@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Clusters;
 
 use Telnyx\AI\Clusters\ClusterComputeResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class ClusterComputeResponse implements BaseModel
     /** @use SdkModel<ClusterComputeResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

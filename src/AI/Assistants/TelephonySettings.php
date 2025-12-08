@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -22,13 +22,13 @@ final class TelephonySettings implements BaseModel
     /**
      * Default Texml App used for voice calls with your assistant. This will be created automatically on assistant creation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $default_texml_app_id;
 
     /**
      * When enabled, allows users to interact with your AI assistant directly from your website without requiring authentication. This is required for FE widgets that work with assistants that have telephony enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $supports_unauthenticated_web_calls;
 
     public function __construct()

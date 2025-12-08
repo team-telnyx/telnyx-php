@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,16 +30,16 @@ final class MdrUsageReportCreateParams implements BaseModel
     use SdkParams;
 
     /** @var value-of<AggregationType> $aggregation_type */
-    #[Api(enum: AggregationType::class)]
+    #[Required(enum: AggregationType::class)]
     public string $aggregation_type;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_date;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_date;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profiles;
 
     /**

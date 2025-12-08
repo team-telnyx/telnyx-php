@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment\WireguardPeer;
@@ -24,16 +24,16 @@ final class GlobalIPAssignment implements BaseModel
     /**
      * Global IP assignment ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?WireguardPeer $wireguard_peer;
 
     /**
      * Wireguard peer ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wireguard_peer_id;
 
     public function __construct()

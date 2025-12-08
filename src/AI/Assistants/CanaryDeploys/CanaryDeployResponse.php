@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,17 +23,17 @@ final class CanaryDeployResponse implements BaseModel
     /** @use SdkModel<CanaryDeployResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $assistant_id;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $created_at;
 
-    #[Api]
+    #[Required]
     public \DateTimeInterface $updated_at;
 
     /** @var list<VersionConfig> $versions */
-    #[Api(list: VersionConfig::class)]
+    #[Required(list: VersionConfig::class)]
     public array $versions;
 
     /**

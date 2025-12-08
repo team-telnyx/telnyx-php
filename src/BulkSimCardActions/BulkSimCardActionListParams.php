@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BulkSimCardActions;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,19 +32,19 @@ final class BulkSimCardActionListParams implements BaseModel
      *
      * @var value-of<FilterActionType>|null $filter_action_type_
      */
-    #[Api(enum: FilterActionType::class, optional: true)]
+    #[Optional(enum: FilterActionType::class)]
     public ?string $filter_action_type_;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number_;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size_;
 
     public function __construct()

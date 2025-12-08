@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Integrations\Connections\ConnectionListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,14 +18,14 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /** @var list<string> $allowed_tools */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $allowed_tools;
 
-    #[Api]
+    #[Required]
     public string $integration_id;
 
     /**

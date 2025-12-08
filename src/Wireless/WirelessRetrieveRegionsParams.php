@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class WirelessRetrieveRegionsParams implements BaseModel
     /**
      * The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
      */
-    #[Api]
+    #[Required]
     public string $product;
 
     /**

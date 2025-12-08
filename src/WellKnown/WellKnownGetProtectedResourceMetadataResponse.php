@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WellKnown;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
      *
      * @var list<string>|null $authorization_servers
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $authorization_servers;
 
     /**
      * Protected resource URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $resource;
 
     public function __construct()

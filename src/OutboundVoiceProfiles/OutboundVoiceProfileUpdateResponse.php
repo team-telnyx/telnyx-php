@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
@@ -19,7 +19,7 @@ final class OutboundVoiceProfileUpdateResponse implements BaseModel
     /** @use SdkModel<OutboundVoiceProfileUpdateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundVoiceProfile $data;
 
     public function __construct()

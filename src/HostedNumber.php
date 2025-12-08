@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\HostedNumber\Status;
@@ -25,20 +25,20 @@ final class HostedNumber implements BaseModel
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The messaging hosted phone number (+E.164 format).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

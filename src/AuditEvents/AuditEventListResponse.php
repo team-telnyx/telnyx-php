@@ -8,7 +8,7 @@ use Telnyx\AuditEvents\AuditEventListResponse\Data;
 use Telnyx\AuditEvents\AuditEventListResponse\Data\Change;
 use Telnyx\AuditEvents\AuditEventListResponse\Data\ChangeMadeBy;
 use Telnyx\AuditEvents\AuditEventListResponse\Meta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,10 +23,10 @@ final class AuditEventListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()

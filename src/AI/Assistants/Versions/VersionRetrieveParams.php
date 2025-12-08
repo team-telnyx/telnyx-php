@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Versions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,10 +25,10 @@ final class VersionRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $assistant_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_mcp_servers;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign\Usecase;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,16 +21,16 @@ final class UsecaseGetCostResponse implements BaseModel
     /** @use SdkModel<UsecaseGetCostResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $campaignUsecase;
 
-    #[Api]
+    #[Required]
     public string $description;
 
-    #[Api]
+    #[Required]
     public string $monthlyCost;
 
-    #[Api]
+    #[Required]
     public string $upFrontCost;
 
     /**

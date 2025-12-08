@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\FaxFailedWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload1\Direction;
@@ -34,13 +34,13 @@ final class Payload1 implements BaseModel
     /**
      * State received from a command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * The ID of the connection used to send the fax.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
@@ -48,7 +48,7 @@ final class Payload1 implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
@@ -56,31 +56,31 @@ final class Payload1 implements BaseModel
      *
      * @var value-of<FailureReason>|null $failure_reason
      */
-    #[Api(enum: FailureReason::class, optional: true)]
+    #[Optional(enum: FailureReason::class)]
     public ?string $failure_reason;
 
     /**
      * Identifies the fax.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fax_id;
 
     /**
      * The phone number, in E.164 format, the fax will be sent from.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_name;
 
     /**
      * The original URL to the PDF used for the fax's media. If media_name was supplied, this is omitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $original_media_url;
 
     /**
@@ -88,19 +88,19 @@ final class Payload1 implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The phone number, in E.164 format, the fax will be sent to or SIP URI.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * Identifier of the user to whom the fax belongs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     public function __construct()

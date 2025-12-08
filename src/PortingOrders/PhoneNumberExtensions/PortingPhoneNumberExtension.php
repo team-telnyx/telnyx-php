@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange;
@@ -29,7 +29,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     /**
      * Uniquely identifies this porting phone number extension.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -37,37 +37,37 @@ final class PortingPhoneNumberExtension implements BaseModel
      *
      * @var list<ActivationRange>|null $activation_ranges
      */
-    #[Api(list: ActivationRange::class, optional: true)]
+    #[Optional(list: ActivationRange::class)]
     public ?array $activation_ranges;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Specifies the extension range for this porting phone number extension.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExtensionRange $extension_range;
 
     /**
      * Identifies the porting phone number associated with this porting phone number extension.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_phone_number_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

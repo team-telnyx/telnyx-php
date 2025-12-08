@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData;
@@ -57,13 +57,13 @@ final class SimCard implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Indicate whether the SIM card has any pending (in-progress) actions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $actions_in_progress;
 
     /**
@@ -71,57 +71,57 @@ final class SimCard implements BaseModel
      *
      * @var list<string>|null $authorized_imeis
      */
-    #[Api(list: 'string', nullable: true, optional: true)]
+    #[Optional(list: 'string', nullable: true)]
     public ?array $authorized_imeis;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * The SIM card consumption so far in the current billing cycle.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CurrentBillingPeriodConsumedData $current_billing_period_consumed_data;
 
     /**
      * Current physical location data of a given SIM card. Accuracy is given in meters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CurrentDeviceLocation $current_device_location;
 
     /**
      * IMEI of the device where a given SIM card is currently being used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $current_imei;
 
     /**
      * Mobile Country Code of the current network to which the SIM card is connected. It's a three decimal digit that identifies a country.<br/><br/>
      * This code is commonly seen joined with a Mobile Network Code (MNC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $current_mcc;
 
     /**
      * Mobile Network Code of the current network to which the SIM card is connected. It's a two to three decimal digits that identify a network.<br/><br/>
      *  This code is commonly seen joined with a Mobile Country Code (MCC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $current_mnc;
 
     /**
      * The SIM card individual data limit configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?DataLimit $data_limit;
 
     /**
      * The Embedded Identity Document (eID) for eSIM cards.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $eid;
 
     /**
@@ -129,32 +129,32 @@ final class SimCard implements BaseModel
      *
      * @var value-of<EsimInstallationStatus>|null $esim_installation_status
      */
-    #[Api(enum: EsimInstallationStatus::class, nullable: true, optional: true)]
+    #[Optional(enum: EsimInstallationStatus::class, nullable: true)]
     public ?string $esim_installation_status;
 
     /**
      * The ICCID is the identifier of the specific SIM card/chip. Each SIM is internationally identified by its integrated circuit card identifier (ICCID). ICCIDs are stored in the SIM card's memory and are also engraved or printed on the SIM card body during a process called personalization.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $iccid;
 
     /**
      * SIM cards are identified on their individual network operators by a unique International Mobile Subscriber Identity (IMSI). <br/>
      * Mobile network operators connect mobile phone calls and communicate with their market SIM cards using their IMSIs. The IMSI is stored in the Subscriber  Identity Module (SIM) inside the device and is sent by the device to the appropriate network. It is used to acquire the details of the device in the Home  Location Register (HLR) or the Visitor Location Register (VLR).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $imsi;
 
     /**
      * The SIM's address in the currently connected network. This IPv4 address is usually obtained dynamically, so it may vary according to the location or new connections.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ipv4;
 
     /**
      * The SIM's address in the currently connected network. This IPv6 address is usually obtained dynamically, so it may vary according to the location or new connections.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ipv6;
 
     /**
@@ -162,23 +162,23 @@ final class SimCard implements BaseModel
      *
      * @var value-of<LiveDataSession>|null $live_data_session
      */
-    #[Api(enum: LiveDataSession::class, optional: true)]
+    #[Optional(enum: LiveDataSession::class)]
     public ?string $live_data_session;
 
     /**
      * Mobile Station International Subscriber Directory Number (MSISDN) is a number used to identify a mobile phone number internationally. <br/>
      * MSISDN is defined by the E.164 numbering plan. It includes a country code and a National Destination Code which identifies the subscriber's operator.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $msisdn;
 
     /**
      * PIN and PUK codes for the SIM card. Only available when include_pin_puk_codes=true is set in the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PinPukCodes $pin_puk_codes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -186,16 +186,16 @@ final class SimCard implements BaseModel
      *
      * @var list<mixed>|null $resources_with_in_progress_actions
      */
-    #[Api(list: 'mixed', optional: true)]
+    #[Optional(list: 'mixed')]
     public ?array $resources_with_in_progress_actions;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_group_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardStatus $status;
 
     /**
@@ -203,7 +203,7 @@ final class SimCard implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
@@ -211,19 +211,19 @@ final class SimCard implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
      * The version of the SIM card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $version;
 
     public function __construct()

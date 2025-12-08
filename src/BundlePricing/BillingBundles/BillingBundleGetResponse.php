@@ -6,7 +6,7 @@ namespace Telnyx\BundlePricing\BillingBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class BillingBundleGetResponse implements BaseModel
     /** @use SdkModel<BillingBundleGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

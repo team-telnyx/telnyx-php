@@ -6,7 +6,7 @@ namespace Telnyx\AI\Integrations;
 
 use Telnyx\AI\Integrations\IntegrationListResponse\Data;
 use Telnyx\AI\Integrations\IntegrationListResponse\Data\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class IntegrationListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
     /**

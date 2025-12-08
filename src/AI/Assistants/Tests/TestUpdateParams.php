@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -35,31 +35,31 @@ final class TestUpdateParams implements BaseModel
     /**
      * Updated description of the test's purpose and evaluation criteria.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Updated target destination for test conversations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination;
 
     /**
      * Updated test scenario instructions and objectives.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * Updated maximum test duration in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_duration_seconds;
 
     /**
      * Updated name for the assistant test. Must be unique and descriptive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -67,7 +67,7 @@ final class TestUpdateParams implements BaseModel
      *
      * @var list<Rubric>|null $rubric
      */
-    #[Api(list: Rubric::class, optional: true)]
+    #[Optional(list: Rubric::class)]
     public ?array $rubric;
 
     /**
@@ -75,13 +75,13 @@ final class TestUpdateParams implements BaseModel
      *
      * @var value-of<TelnyxConversationChannel>|null $telnyx_conversation_channel
      */
-    #[Api(enum: TelnyxConversationChannel::class, optional: true)]
+    #[Optional(enum: TelnyxConversationChannel::class)]
     public ?string $telnyx_conversation_channel;
 
     /**
      * Updated test suite assignment for better organization.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $test_suite;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrders\NumberOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderListParams\Filter\CreatedAt;
@@ -28,31 +28,31 @@ final class Filter implements BaseModel
     /**
      * Filter number orders by date range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
      * Filter number orders via the customer reference set.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Filter number order with this amount of numbers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_numbers_count;
 
     /**
      * Filter number orders by requirements met.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $requirements_met;
 
     /**
      * Filter number orders by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()

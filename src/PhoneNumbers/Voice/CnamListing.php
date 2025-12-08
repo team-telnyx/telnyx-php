@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class CnamListing implements BaseModel
     /**
      * The CNAM listing details for this number. Must be alphanumeric characters or spaces with a maximum length of 15. Requires cnam_listing_enabled to also be set to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cnam_listing_details;
 
     /**
      * Enables CNAM listings for this number. Requires cnam_listing_details to also be set.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $cnam_listing_enabled;
 
     public function __construct()

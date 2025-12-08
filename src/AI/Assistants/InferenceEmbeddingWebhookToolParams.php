@@ -10,7 +10,8 @@ use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Header;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Method;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameters;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParameters;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -34,25 +35,25 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The description of the tool.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * The name of the tool.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The URL of the external tool to be called. This URL is going to be used by the assistant. The URL can be templated like: `https://example.com/api/v1/{id}`, where `{id}` is a placeholder for a value that will be provided by the assistant if `path_parameters` are provided with the `id` attribute.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?BodyParameters $body_parameters;
 
     /**
@@ -60,7 +61,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      *
      * @var list<Header>|null $headers
      */
-    #[Api(list: Header::class, optional: true)]
+    #[Optional(list: Header::class)]
     public ?array $headers;
 
     /**
@@ -68,19 +69,19 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      *
      * @var value-of<Method>|null $method
      */
-    #[Api(enum: Method::class, optional: true)]
+    #[Optional(enum: Method::class)]
     public ?string $method;
 
     /**
      * The path parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the path of the request if the URL contains a placeholder for a value. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PathParameters $path_parameters;
 
     /**
      * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?QueryParameters $query_parameters;
 
     /**

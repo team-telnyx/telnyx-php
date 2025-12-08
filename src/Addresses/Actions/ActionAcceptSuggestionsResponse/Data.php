@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
 
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,17 +24,17 @@ final class Data implements BaseModel
     /**
      * The UUID of the location.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Indicates if the address suggestions are accepted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $accepted;
 
     /** @var value-of<RecordType>|null $record_type */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     public function __construct()

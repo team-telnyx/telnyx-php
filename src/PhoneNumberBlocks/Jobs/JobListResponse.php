@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PhoneNumberBlocks\Jobs;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation;
@@ -24,10 +24,10 @@ final class JobListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Job>|null $data */
-    #[Api(list: Job::class, optional: true)]
+    #[Optional(list: Job::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

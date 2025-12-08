@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\CustomerServiceRecords;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
@@ -22,10 +22,10 @@ final class CustomerServiceRecordListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<CustomerServiceRecord>|null $data */
-    #[Api(list: CustomerServiceRecord::class, optional: true)]
+    #[Optional(list: CustomerServiceRecord::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()

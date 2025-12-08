@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class StartedAt implements BaseModel
     /**
      * Return only webhook_deliveries whose delivery started later than or at given ISO 8601 datetime.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gte;
 
     /**
      * Return only webhook_deliveries whose delivery started earlier than or at given ISO 8601 datetime.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lte;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\OutboundMessagePayload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\OutboundMessagePayload\From\LineType;
@@ -24,7 +24,7 @@ final class From implements BaseModel
     /**
      * The carrier of the receiver.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier;
 
     /**
@@ -32,13 +32,13 @@ final class From implements BaseModel
      *
      * @var value-of<LineType>|null $line_type
      */
-    #[Api(enum: LineType::class, optional: true)]
+    #[Optional(enum: LineType::class)]
     public ?string $line_type;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     public function __construct()

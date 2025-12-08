@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\MessageDetailRecord\Direction;
@@ -54,79 +55,79 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Identifies the record schema.
      */
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Country-specific carrier used to send or receive the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier;
 
     /**
      * Fee charged by certain carriers in order to deliver certain message types. Telnyx passes this fee on to the customer according to our pricing table.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier_fee;
 
     /**
      * The recipient of the message (to parameter in the Messaging API).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cld;
 
     /**
      * The sender of the message (from parameter in the Messaging API). For Alphanumeric ID messages, this is the sender ID value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cli;
 
     /**
      * Message completion time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $completed_at;
 
     /**
      * Amount, in the user currency, for the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
     /**
      * Two-letter representation of the country of the cld property using the ISO 3166-1 alpha-2 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Message creation time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * Final webhook delivery status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivery_status;
 
     /**
      * Failover customer-provided URL which Telnyx posts delivery status webhooks to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivery_status_failover_url;
 
     /**
      * Primary customer-provided URL which Telnyx posts delivery status webhooks to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivery_status_webhook_url;
 
     /**
@@ -134,7 +135,7 @@ final class MessageDetailRecord implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
@@ -142,19 +143,19 @@ final class MessageDetailRecord implements BaseModel
      *
      * @var list<string>|null $errors
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $errors;
 
     /**
      * Indicates whether this is a Free-To-End-User (FTEU) short code message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $fteu;
 
     /**
      * Mobile country code. Only available for certain products, such as Global Outbound-Only from Alphanumeric Sender ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mcc;
 
     /**
@@ -162,55 +163,55 @@ final class MessageDetailRecord implements BaseModel
      *
      * @var value-of<MessageType>|null $message_type
      */
-    #[Api(enum: MessageType::class, optional: true)]
+    #[Optional(enum: MessageType::class)]
     public ?string $message_type;
 
     /**
      * Mobile network code. Only available for certain products, such as Global Outbound-Only from Alphanumeric Sender ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mnc;
 
     /**
      * Indicates whether both sender and recipient numbers are Telnyx-managed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $on_net;
 
     /**
      * Number of message parts. The message is broken down in multiple parts when its length surpasses the limit of 160 characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $parts;
 
     /**
      * Unique identifier of the Messaging Profile used to send or receive the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profile_id;
 
     /**
      * Name of the Messaging Profile used to send or receive the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profile_name;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
     /**
      * Time when the message was sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $sent_at;
 
     /**
      * Two-letter representation of the country of the cli property using the ISO 3166-1 alpha-2 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $source_country_code;
 
     /**
@@ -218,31 +219,31 @@ final class MessageDetailRecord implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Comma-separated tags assigned to the Telnyx number associated with the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tags;
 
     /**
      * Message updated time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**
      * Identifier of the Telnyx account who owns the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     /**
      * Unique identifier of the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uuid;
 
     /**

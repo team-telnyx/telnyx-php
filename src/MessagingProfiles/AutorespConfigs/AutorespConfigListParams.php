@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,19 +28,19 @@ final class AutorespConfigListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $created_at;
 
     /**
      * Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?UpdatedAt $updated_at;
 
     public function __construct()

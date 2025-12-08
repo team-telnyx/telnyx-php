@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OtaUpdates\OtaUpdateListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Status;
@@ -27,7 +27,7 @@ final class Filter implements BaseModel
     /**
      * The SIM card identification UUID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /**
@@ -35,7 +35,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -43,7 +43,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()

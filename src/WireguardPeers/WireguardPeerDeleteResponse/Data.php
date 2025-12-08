@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -28,49 +28,49 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $public_key;
 
     /**
      * ISO 8601 formatted date-time indicating when peer sent traffic last time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $last_seen;
 
     /**
      * Your WireGuard `Interface.PrivateKey`.<br /><br />This attribute is only ever utlised if, on POST, you do NOT provide your own `public_key`. In which case, a new Public and Private key pair will be generated for you. When your `private_key` is returned, you must save this immediately as we do not save it within Telnyx. If you lose your Private Key, it can not be recovered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $private_key;
 
     /**
      * The id of the wireguard interface associated with the peer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wireguard_interface_id;
 
     public function __construct()

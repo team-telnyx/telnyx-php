@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class ActivationRange implements BaseModel
     /**
      * Specifies the end of the activation range. It must be no more than the end of the extension range.
      */
-    #[Api]
+    #[Required]
     public string $end_at;
 
     /**
      * Specifies the start of the activation range. Must be greater or equal the start of the extension range.
      */
-    #[Api]
+    #[Required]
     public string $start_at;
 
     /**

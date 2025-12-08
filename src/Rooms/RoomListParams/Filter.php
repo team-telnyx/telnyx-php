@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\RoomListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\RoomListParams\Filter\DateCreatedAt;
@@ -24,16 +24,16 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateCreatedAt $date_created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateUpdatedAt $date_updated_at;
 
     /**
      * Unique_name for filtering rooms.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unique_name;
 
     public function __construct()

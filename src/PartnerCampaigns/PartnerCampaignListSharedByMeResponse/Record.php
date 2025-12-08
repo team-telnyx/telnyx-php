@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,31 +28,31 @@ final class Record implements BaseModel
     /**
      * Alphanumeric identifier of the brand associated with this campaign.
      */
-    #[Api]
+    #[Required]
     public string $brandId;
 
     /**
      * Alphanumeric identifier assigned by the registry for a campaign. This identifier is required by the NetNumber OSR SMS enabling process of 10DLC.
      */
-    #[Api]
+    #[Required]
     public string $campaignId;
 
     /**
      * Campaign usecase. Must be of defined valid types. Use `/registry/enum/usecase` operation to retrieve usecases available for given brand.
      */
-    #[Api]
+    #[Required]
     public string $usecase;
 
     /**
      * Unix timestamp when campaign was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $createDate;
 
     /**
      * Current campaign status. Possible values: ACTIVE, EXPIRED. A newly created campaign defaults to ACTIVE status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events\EventListResponse\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,25 +26,25 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     /**
      * Identifies the comment that was added to the port-out order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The body of the comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment;
 
     /**
      * Identifies the port-out order that the comment was added to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $portout_id;
 
     /**
      * Identifies the user that added the comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     public function __construct()

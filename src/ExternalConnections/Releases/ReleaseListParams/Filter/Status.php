@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status\Eq;
@@ -22,7 +22,7 @@ final class Status implements BaseModel
      *
      * @var list<value-of<Eq>>|null $eq
      */
-    #[Api(list: Eq::class, optional: true)]
+    #[Optional(list: Eq::class)]
     public ?array $eq;
 
     public function __construct()

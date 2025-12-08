@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,13 +27,13 @@ final class OAuthGrantsParams implements BaseModel
     /**
      * Whether the grant is allowed.
      */
-    #[Api]
+    #[Required]
     public bool $allowed;
 
     /**
      * Consent token.
      */
-    #[Api]
+    #[Required]
     public string $consent_token;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardGetPublicIPResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
@@ -28,32 +28,32 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * The provisioned IP address. This attribute will only be available when underlying resource status is in a "provisioned" status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sim_card_id;
 
     /** @var value-of<Type>|null $type */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

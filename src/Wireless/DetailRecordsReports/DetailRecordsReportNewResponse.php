@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless\DetailRecordsReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
@@ -17,7 +17,7 @@ final class DetailRecordsReportNewResponse implements BaseModel
     /** @use SdkModel<DetailRecordsReportNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?WdrReport $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,10 +21,10 @@ final class Data implements BaseModel
     /**
      * The ID of the conversation created by the command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conversation_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $result;
 
     public function __construct()

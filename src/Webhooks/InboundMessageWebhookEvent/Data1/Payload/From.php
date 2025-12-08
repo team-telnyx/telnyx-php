@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\InboundMessageWebhookEvent\Data1\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data1\Payload\From\LineType;
@@ -26,7 +26,7 @@ final class From implements BaseModel
     /**
      * The carrier of the sender.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier;
 
     /**
@@ -34,17 +34,17 @@ final class From implements BaseModel
      *
      * @var value-of<LineType>|null $line_type
      */
-    #[Api(enum: LineType::class, optional: true)]
+    #[Optional(enum: LineType::class)]
     public ?string $line_type;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

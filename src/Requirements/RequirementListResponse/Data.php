@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Requirements\RequirementListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocReqsRequirementType;
@@ -34,7 +34,7 @@ final class Data implements BaseModel
     /**
      * Identifies the associated document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -42,25 +42,25 @@ final class Data implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     /**
      * The 2-character (ISO 3166-1 alpha-2) country code where this requirement applies.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
     /**
      * The locality where this requirement applies.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
@@ -68,13 +68,13 @@ final class Data implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
@@ -82,13 +82,13 @@ final class Data implements BaseModel
      *
      * @var list<DocReqsRequirementType>|null $requirements_types
      */
-    #[Api(list: DocReqsRequirementType::class, optional: true)]
+    #[Optional(list: DocReqsRequirementType::class)]
     public ?array $requirements_types;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class ActivationSettings implements BaseModel
     /**
      * ISO 8601 formatted Date/Time requested for the FOC date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $foc_datetime_requested;
 
     public function __construct()

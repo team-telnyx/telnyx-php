@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class CustomSipHeader implements BaseModel
     /**
      * The name of the header to add.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The value of the header.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**

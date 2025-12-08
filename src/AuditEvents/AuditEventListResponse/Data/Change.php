@@ -6,7 +6,7 @@ namespace Telnyx\AuditEvents\AuditEventListResponse\Data;
 
 use Telnyx\AuditEvents\AuditEventListResponse\Data\Change\From;
 use Telnyx\AuditEvents\AuditEventListResponse\Data\Change\To;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,7 +27,7 @@ final class Change implements BaseModel
     /**
      * The name of the field that was changed. May use the dot notation to indicate nested fields.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field;
 
     /**
@@ -35,7 +35,7 @@ final class Change implements BaseModel
      *
      * @var string|float|bool|list<mixed>|array<string,mixed>|null $from
      */
-    #[Api(union: From::class, nullable: true, optional: true)]
+    #[Optional(union: From::class, nullable: true)]
     public string|float|bool|array|null $from;
 
     /**
@@ -43,7 +43,7 @@ final class Change implements BaseModel
      *
      * @var string|float|bool|list<mixed>|array<string,mixed>|null $to
      */
-    #[Api(union: To::class, nullable: true, optional: true)]
+    #[Optional(union: To::class, nullable: true)]
     public string|float|bool|array|null $to;
 
     public function __construct()

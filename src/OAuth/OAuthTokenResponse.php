@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthTokenResponse\TokenType;
@@ -26,13 +27,13 @@ final class OAuthTokenResponse implements BaseModel
     /**
      * The access token.
      */
-    #[Api]
+    #[Required]
     public string $access_token;
 
     /**
      * Token lifetime in seconds.
      */
-    #[Api]
+    #[Required]
     public int $expires_in;
 
     /**
@@ -40,19 +41,19 @@ final class OAuthTokenResponse implements BaseModel
      *
      * @var value-of<TokenType> $token_type
      */
-    #[Api(enum: TokenType::class)]
+    #[Required(enum: TokenType::class)]
     public string $token_type;
 
     /**
      * Refresh token (if applicable).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $refresh_token;
 
     /**
      * Space-separated list of granted scopes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**

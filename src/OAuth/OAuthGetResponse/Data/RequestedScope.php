@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth\OAuthGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class RequestedScope implements BaseModel
     /**
      * Scope ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Scope description.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Scope name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

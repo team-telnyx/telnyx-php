@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls\RecordingsJson;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -34,13 +35,13 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $account_sid;
 
     /**
      * Whether to play a beep when recording is started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $PlayBeep;
 
     /**
@@ -48,22 +49,21 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      *
      * @var value-of<RecordingChannels>|null $RecordingChannels
      */
-    #[Api(
+    #[Optional(
         enum: RecordingChannels::class,
-        optional: true,
     )]
     public ?string $RecordingChannels;
 
     /**
      * Url where status callbacks will be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $RecordingStatusCallback;
 
     /**
      * The changes to the recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $RecordingStatusCallbackEvent;
 
     /**
@@ -71,9 +71,8 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      *
      * @var value-of<RecordingStatusCallbackMethod>|null $RecordingStatusCallbackMethod
      */
-    #[Api(
+    #[Optional(
         enum: RecordingStatusCallbackMethod::class,
-        optional: true,
     )]
     public ?string $RecordingStatusCallbackMethod;
 
@@ -82,16 +81,15 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      *
      * @var value-of<RecordingTrack>|null $RecordingTrack
      */
-    #[Api(
+    #[Optional(
         enum: RecordingTrack::class,
-        optional: true,
     )]
     public ?string $RecordingTrack;
 
     /**
      * Whether to send RecordingUrl in webhooks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $SendRecordingUrl;
 
     /**

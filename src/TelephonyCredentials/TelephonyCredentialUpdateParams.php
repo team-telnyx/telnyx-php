@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TelephonyCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,22 +27,22 @@ final class TelephonyCredentialUpdateParams implements BaseModel
     /**
      * Identifies the Credential Connection this credential is associated with.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * ISO-8601 formatted date indicating when the credential will expire.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $expires_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Tags a credential. A single tag can hold at maximum 1000 credentials.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tag;
 
     public function __construct()

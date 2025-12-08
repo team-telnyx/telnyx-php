@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\AIGetModelsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,16 +19,16 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public int $created;
 
-    #[Api]
+    #[Required]
     public string $owned_by;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $object;
 
     /**

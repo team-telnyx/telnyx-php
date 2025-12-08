@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
@@ -23,22 +23,22 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
     use SdkModel;
 
     /** @var value-of<FieldType>|null $field_type */
-    #[Api(enum: FieldType::class, optional: true)]
+    #[Optional(enum: FieldType::class)]
     public ?string $field_type;
 
     /**
      * The value of the requirement, this could be an id to a resource or a string value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $field_value;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Unique id for a requirement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_id;
 
     public function __construct()

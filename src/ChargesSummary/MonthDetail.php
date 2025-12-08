@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,19 +22,19 @@ final class MonthDetail implements BaseModel
     /**
      * Monthly recurring charge amount as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $mrc;
 
     /**
      * Number of items.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**
      * One-time charge amount as decimal string.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $otc;
 
     /**

@@ -9,7 +9,7 @@ use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,11 +21,11 @@ final class SipReferTool implements BaseModel
     /** @use SdkModel<SipReferToolShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Refer $refer;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

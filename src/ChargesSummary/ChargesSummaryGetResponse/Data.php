@@ -9,7 +9,7 @@ use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,37 +32,37 @@ final class Data implements BaseModel
     /**
      * Currency code.
      */
-    #[Api]
+    #[Required]
     public string $currency;
 
     /**
      * End date of the summary period.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $end_date;
 
     /**
      * Start date of the summary period.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $start_date;
 
-    #[Api]
+    #[Required]
     public Summary $summary;
 
-    #[Api]
+    #[Required]
     public Total $total;
 
     /**
      * User email address.
      */
-    #[Api]
+    #[Required]
     public string $user_email;
 
     /**
      * User identifier.
      */
-    #[Api]
+    #[Required]
     public string $user_id;
 
     /**

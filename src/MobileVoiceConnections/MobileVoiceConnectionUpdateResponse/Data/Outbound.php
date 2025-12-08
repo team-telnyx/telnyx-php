@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class Outbound implements BaseModel
     /** @use SdkModel<OutboundShape> */
     use SdkModel;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $channel_limit;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $outbound_voice_profile_id;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Filter implements BaseModel
     /**
      * Filter results by porting phone number id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $porting_phone_number_id;
 
     public function __construct()

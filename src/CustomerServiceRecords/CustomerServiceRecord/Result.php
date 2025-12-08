@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Address;
@@ -28,13 +28,13 @@ final class Result implements BaseModel
     /**
      * The address of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Address $address;
 
     /**
      * The admin of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Admin $admin;
 
     /**
@@ -42,13 +42,13 @@ final class Result implements BaseModel
      *
      * @var list<string>|null $associated_phone_numbers
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $associated_phone_numbers;
 
     /**
      * The name of the carrier that the customer service record is for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier_name;
 
     public function __construct()

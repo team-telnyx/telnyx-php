@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\CallControlApplications;
 
 use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,19 +25,19 @@ final class CallControlApplicationInbound implements BaseModel
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     /**
      * When enabled Telnyx will include Shaken/Stir data in the Webhook for new inbound calls.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $shaken_stir_enabled;
 
     /**
      * Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sip_subdomain;
 
     /**
@@ -45,7 +45,7 @@ final class CallControlApplicationInbound implements BaseModel
      *
      * @var value-of<SipSubdomainReceiveSettings>|null $sip_subdomain_receive_settings
      */
-    #[Api(enum: SipSubdomainReceiveSettings::class, optional: true)]
+    #[Optional(enum: SipSubdomainReceiveSettings::class)]
     public ?string $sip_subdomain_receive_settings;
 
     public function __construct()

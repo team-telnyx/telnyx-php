@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,13 +25,13 @@ final class TexmlSecretsParams implements BaseModel
     /**
      * Name used as a reference for the secret, if the name already exists within the account its value will be replaced.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Secret value which will be used when rendering the TeXML template.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**

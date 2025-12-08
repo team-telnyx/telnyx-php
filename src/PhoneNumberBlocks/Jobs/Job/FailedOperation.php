@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs\Job;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError;
@@ -24,17 +24,17 @@ final class FailedOperation implements BaseModel
     /**
      * The phone number's ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /** @var list<JobError>|null $errors */
-    #[Api(list: JobError::class, optional: true)]
+    #[Optional(list: JobError::class)]
     public ?array $errors;
 
     /**
      * The phone number in e164 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TexmlApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -24,7 +24,7 @@ final class TexmlApplicationDeleteResponse implements BaseModel
     /** @use SdkModel<TexmlApplicationDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TexmlApplication $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrders\SimCardOrder;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,61 +32,61 @@ final class OrderAddress implements BaseModel
     /**
      * Uniquely identifies the address for the order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * State or province where the address is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $administrative_area;
 
     /**
      * The name of the business where the address is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $business_name;
 
     /**
      * The mobile operator two-character (ISO 3166-1 alpha-2) origin country code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Supplemental field for address information.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $extended_address;
 
     /**
      * The first name of the shipping recipient.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $first_name;
 
     /**
      * The last name of the shipping recipient.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $last_name;
 
     /**
      * The name of the city where the address is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * Postal code for the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $postal_code;
 
     /**
      * The name of the street where the address is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $street_address;
 
     public function __construct()

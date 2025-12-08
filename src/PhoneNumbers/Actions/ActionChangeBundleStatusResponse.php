@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency;
@@ -25,7 +25,7 @@ final class ActionChangeBundleStatusResponse implements BaseModel
     /** @use SdkModel<ActionChangeBundleStatusResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumberWithVoiceSettings $data;
 
     public function __construct()

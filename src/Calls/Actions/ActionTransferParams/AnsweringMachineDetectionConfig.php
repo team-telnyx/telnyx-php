@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionTransferParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,61 +32,61 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     /**
      * Silence duration threshold after a greeting message or voice for it be considered human.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $after_greeting_silence_millis;
 
     /**
      * Maximum threshold for silence between words.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $between_words_silence_millis;
 
     /**
      * Maximum threshold of a human greeting. If greeting longer than this value, considered machine.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $greeting_duration_millis;
 
     /**
      * If machine already detected, maximum threshold for silence between words. If exceeded, the greeting is considered ended.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $greeting_silence_duration_millis;
 
     /**
      * If machine already detected, maximum timeout threshold to determine the end of the machine greeting.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $greeting_total_analysis_time_millis;
 
     /**
      * If initial silence duration is greater than this value, consider it a machine.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $initial_silence_millis;
 
     /**
      * If number of detected words is greater than this value, consder it a machine.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maximum_number_of_words;
 
     /**
      * If a single word lasts longer than this threshold, consider it a machine.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maximum_word_length_millis;
 
     /**
      * Minimum noise threshold for any analysis.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $silence_threshold;
 
     /**
      * Maximum timeout threshold for overall detection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_analysis_time_millis;
 
     public function __construct()

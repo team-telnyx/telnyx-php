@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class HangupToolParams implements BaseModel
     /**
      * The description of the function that will be passed to the assistant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     public function __construct()

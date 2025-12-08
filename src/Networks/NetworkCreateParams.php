@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Networks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class NetworkCreateParams implements BaseModel
     /**
      * A user specified name for the network.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

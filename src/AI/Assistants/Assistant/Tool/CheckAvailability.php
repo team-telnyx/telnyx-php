@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Assistant\Tool;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,10 +20,10 @@ final class CheckAvailability implements BaseModel
     use SdkModel;
 
     /** @var 'check_availability' $type */
-    #[Api]
+    #[Required]
     public string $type = 'check_availability';
 
-    #[Api]
+    #[Required]
     public CheckAvailability\CheckAvailability $check_availability;
 
     /**

@@ -6,7 +6,7 @@ namespace Telnyx\BundlePricing\BillingBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,19 +33,19 @@ final class BillingBundleListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorization_bearer;
 
     public function __construct()

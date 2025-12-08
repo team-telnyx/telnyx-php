@@ -7,7 +7,7 @@ namespace Telnyx\Campaign;
 use Telnyx\Campaign\CampaignListResponse\Record;
 use Telnyx\Campaign\CampaignListResponse\Record\CampaignStatus;
 use Telnyx\Campaign\CampaignListResponse\Record\SubmissionStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,14 +21,14 @@ final class CampaignListResponse implements BaseModel
     /** @use SdkModel<CampaignListResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /** @var list<Record>|null $records */
-    #[Api(list: Record::class, optional: true)]
+    #[Optional(list: Record::class)]
     public ?array $records;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $totalRecords;
 
     public function __construct()

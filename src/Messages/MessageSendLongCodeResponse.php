@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\OutboundMessagePayload\Cc;
@@ -27,7 +27,7 @@ final class MessageSendLongCodeResponse implements BaseModel
     /** @use SdkModel<MessageSendLongCodeResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundMessagePayload $data;
 
     public function __construct()

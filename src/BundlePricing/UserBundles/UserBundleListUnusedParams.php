@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,13 +31,13 @@ final class UserBundleListUnusedParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorization_bearer;
 
     public function __construct()

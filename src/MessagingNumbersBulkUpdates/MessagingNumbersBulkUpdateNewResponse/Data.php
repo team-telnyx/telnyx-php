@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Data\RecordType;
@@ -28,13 +28,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $failed
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $failed;
 
     /**
      * Order ID to verify bulk update status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order_id;
 
     /**
@@ -42,7 +42,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $pending
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $pending;
 
     /**
@@ -50,7 +50,7 @@ final class Data implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
     /**
@@ -58,7 +58,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $success
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $success;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -37,7 +37,7 @@ final class OAuthRegisterParams implements BaseModel
     /**
      * Human-readable string name of the client to be presented to the end-user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_name;
 
     /**
@@ -45,19 +45,19 @@ final class OAuthRegisterParams implements BaseModel
      *
      * @var list<value-of<GrantType>>|null $grant_types
      */
-    #[Api(list: GrantType::class, optional: true)]
+    #[Optional(list: GrantType::class)]
     public ?array $grant_types;
 
     /**
      * URL of the client logo.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $logo_uri;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $policy_uri;
 
     /**
@@ -65,7 +65,7 @@ final class OAuthRegisterParams implements BaseModel
      *
      * @var list<string>|null $redirect_uris
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $redirect_uris;
 
     /**
@@ -73,13 +73,13 @@ final class OAuthRegisterParams implements BaseModel
      *
      * @var list<string>|null $response_types
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $response_types;
 
     /**
      * Space-separated string of scope values that the client may use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**
@@ -87,13 +87,13 @@ final class OAuthRegisterParams implements BaseModel
      *
      * @var value-of<TokenEndpointAuthMethod>|null $token_endpoint_auth_method
      */
-    #[Api(enum: TokenEndpointAuthMethod::class, optional: true)]
+    #[Optional(enum: TokenEndpointAuthMethod::class)]
     public ?string $token_endpoint_auth_method;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tos_uri;
 
     public function __construct()

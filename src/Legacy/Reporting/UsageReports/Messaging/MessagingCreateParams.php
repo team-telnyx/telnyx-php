@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,10 +33,10 @@ final class MessagingCreateParams implements BaseModel
     /**
      * Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2.
      */
-    #[Api]
+    #[Required]
     public int $aggregation_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $end_time;
 
     /**
@@ -43,7 +44,7 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<string>|null $managed_accounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managed_accounts;
 
     /**
@@ -51,13 +52,13 @@ final class MessagingCreateParams implements BaseModel
      *
      * @var list<string>|null $profiles
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $profiles;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $select_all_managed_accounts;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $start_time;
 
     /**

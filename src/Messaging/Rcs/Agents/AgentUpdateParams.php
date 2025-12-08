@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs\Agents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -29,19 +29,19 @@ final class AgentUpdateParams implements BaseModel
     /**
      * Messaging profile ID associated with the RCS Agent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $profile_id;
 
     /**
      * Failover URL to receive RCS events.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_failover_url;
 
     /**
      * URL to receive RCS events.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $webhook_url;
 
     public function __construct()

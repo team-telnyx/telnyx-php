@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RegulatoryRequirements;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -36,7 +36,7 @@ final class RegulatoryRequirementRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[requirement_group_id], filter[country_code], filter[phone_number_type], filter[action].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams;
 
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter\PhoneNumberType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,19 +27,19 @@ final class Filter implements BaseModel
     /**
      * Filter phone numbers by country.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Filter phone numbers by city.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * Filter by the national destination code of the number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $national_destination_code;
 
     /**
@@ -47,7 +47,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class Meta implements BaseModel
     /**
      * The external connection the log message is associated with, if any.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $external_connection_id;
 
     /**
      * The telephone number the log message is associated with, if any.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $telephone_number;
 
     /**
      * The ticket ID for an operation that generated the log message, if any.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ticket_id;
 
     public function __construct()

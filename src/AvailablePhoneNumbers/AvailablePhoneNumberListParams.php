@@ -8,7 +8,7 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter\Feature;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter\PhoneNumber;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter\PhoneNumberType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -45,7 +45,7 @@ final class AvailablePhoneNumberListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()

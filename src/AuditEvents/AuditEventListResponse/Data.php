@@ -6,7 +6,7 @@ namespace Telnyx\AuditEvents\AuditEventListResponse;
 
 use Telnyx\AuditEvents\AuditEventListResponse\Data\Change;
 use Telnyx\AuditEvents\AuditEventListResponse\Data\ChangeMadeBy;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,13 +32,13 @@ final class Data implements BaseModel
     /**
      * Unique identifier for the audit log entry.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * An alternate identifier for a resource which may be considered unique enough to identify the resource but is not the primary identifier for the resource. For example, this field could be used to store the phone number value for a phone number when the primary database identifier is a separate distinct value.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $alternate_resource_id;
 
     /**
@@ -46,13 +46,13 @@ final class Data implements BaseModel
      *
      * @var value-of<ChangeMadeBy>|null $change_made_by
      */
-    #[Api(enum: ChangeMadeBy::class, optional: true)]
+    #[Optional(enum: ChangeMadeBy::class)]
     public ?string $change_made_by;
 
     /**
      * The type of change that occurred.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $change_type;
 
     /**
@@ -60,37 +60,37 @@ final class Data implements BaseModel
      *
      * @var list<Change>|null $changes
      */
-    #[Api(list: Change::class, nullable: true, optional: true)]
+    #[Optional(list: Change::class, nullable: true)]
     public ?array $changes;
 
     /**
      * ISO 8601 formatted date indicating when the change occurred.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
     /**
      * Unique identifier for the organization that owns the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization_id;
 
     /**
      * The type of the resource being audited.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     /**
      * Unique identifier for the resource that was changed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $resource_id;
 
     /**
      * Unique identifier for the user who made the change.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $user_id;
 
     public function __construct()

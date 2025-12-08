@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,7 +29,7 @@ final class ConferenceUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $account_sid;
 
     /**
@@ -36,22 +37,21 @@ final class ConferenceUpdateParams implements BaseModel
      *
      * @var value-of<AnnounceMethod>|null $AnnounceMethod
      */
-    #[Api(
+    #[Optional(
         enum: AnnounceMethod::class,
-        optional: true,
     )]
     public ?string $AnnounceMethod;
 
     /**
      * The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $AnnounceUrl;
 
     /**
      * The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $Status;
 
     /**

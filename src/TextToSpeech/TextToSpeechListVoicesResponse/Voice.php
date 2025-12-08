@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -25,28 +25,28 @@ final class Voice implements BaseModel
     /** @use SdkModel<VoiceShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $accent;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $age;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gender;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $label;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $provider;
 
     public function __construct()

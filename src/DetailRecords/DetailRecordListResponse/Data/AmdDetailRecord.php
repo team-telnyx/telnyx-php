@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\AmdDetailRecord\Feature;
@@ -34,61 +35,61 @@ final class AmdDetailRecord implements BaseModel
     /** @use SdkModel<AmdDetailRecordShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $record_type;
 
     /**
      * Feature invocation id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Billing Group id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Name of the Billing Group specified in billing_group_id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_name;
 
     /**
      * Telnyx UUID that identifies the related call leg.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_leg_id;
 
     /**
      * Telnyx UUID that identifies the related call session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_session_id;
 
     /**
      * Connection id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
      * Connection name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_name;
 
     /**
      * Currency amount for Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
@@ -96,37 +97,37 @@ final class AmdDetailRecord implements BaseModel
      *
      * @var value-of<Feature>|null $feature
      */
-    #[Api(enum: Feature::class, optional: true)]
+    #[Optional(enum: Feature::class)]
     public ?string $feature;
 
     /**
      * Feature invocation time.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $invoked_at;
 
     /**
      * Indicates whether Telnyx billing charges might be applicable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_telnyx_billable;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
     /**
      * Billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate_measured_in;
 
     /**
      * User-provided tags.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tags;
 
     /**

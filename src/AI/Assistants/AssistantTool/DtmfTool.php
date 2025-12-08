@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -20,11 +20,11 @@ final class DtmfTool implements BaseModel
     use SdkModel;
 
     /** @var array<string,mixed> $send_dtmf */
-    #[Api(map: 'mixed')]
+    #[Required(map: 'mixed')]
     public array $send_dtmf;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**

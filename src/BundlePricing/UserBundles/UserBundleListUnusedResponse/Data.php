@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public BillingBundleSummary $billing_bundle;
 
     /**
@@ -27,7 +27,7 @@ final class Data implements BaseModel
      *
      * @var list<string> $user_bundle_ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $user_bundle_ids;
 
     /**

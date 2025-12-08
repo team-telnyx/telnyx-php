@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Source;
@@ -37,61 +37,61 @@ final class Recording implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_sid;
 
     /**
      * The identifier of the related participant's call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $call_sid;
 
     /**
      * The number of channels in the recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channels;
 
     /**
      * The identifier of the related conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $conference_sid;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_created;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $date_updated;
 
     /**
      * Duratin of the recording in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration;
 
     /**
      * The recording error, if any.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error_code;
 
     /**
      * The URL to use to download the recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $media_url;
 
     /**
      * The unique identifier of the recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -99,13 +99,13 @@ final class Recording implements BaseModel
      *
      * @var value-of<Source>|null $source
      */
-    #[Api(enum: Source::class, optional: true)]
+    #[Optional(enum: Source::class)]
     public ?string $source;
 
     /**
      * The timestamp of when the recording was started.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $start_time;
 
     /**
@@ -113,7 +113,7 @@ final class Recording implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -121,13 +121,13 @@ final class Recording implements BaseModel
      *
      * @var array<string,mixed>|null $subresource_uris
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $subresource_uris;
 
     /**
      * The relative URI for this recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

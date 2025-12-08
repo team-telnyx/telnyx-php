@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -30,61 +30,61 @@ final class AdditionalData implements BaseModel
     /**
      * The account number of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $account_number;
 
     /**
      * The first line of the address of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $address_line_1;
 
     /**
      * The name of the authorized person.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorized_person_name;
 
     /**
      * The billing phone number of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_phone_number;
 
     /**
      * The city of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * The customer code of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_code;
 
     /**
      * The name of the administrator of CSR.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The PIN of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pin;
 
     /**
      * The state of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
      * The zip code of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $zip_code;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ final class Inbound implements BaseModel
     /** @use SdkModel<InboundShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channel_limit;
 
     public function __construct()

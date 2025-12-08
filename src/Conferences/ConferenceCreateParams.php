@@ -6,7 +6,8 @@ namespace Telnyx\Conferences;
 
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -49,13 +50,13 @@ final class ConferenceCreateParams implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api]
+    #[Required]
     public string $call_control_id;
 
     /**
      * Name of the conference.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -63,49 +64,49 @@ final class ConferenceCreateParams implements BaseModel
      *
      * @var value-of<BeepEnabled>|null $beep_enabled
      */
-    #[Api(enum: BeepEnabled::class, optional: true)]
+    #[Optional(enum: BeepEnabled::class)]
     public ?string $beep_enabled;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string. The client_state will be updated for the creator call leg and will be used for all webhooks related to the created conference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Toggle background comfort noise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $comfort_noise;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
      * Time length (minutes) after which the conference will end.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration_minutes;
 
     /**
      * The URL of a file to be played to participants joining the conference. The URL can point to either a WAV or MP3 file. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $hold_audio_url;
 
     /**
      * The media_name of a file to be played to participants joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $hold_media_name;
 
     /**
      * The maximum number of active conference participants to allow. Must be between 2 and 800. Defaults to 250.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_participants;
 
     /**
@@ -113,13 +114,13 @@ final class ConferenceCreateParams implements BaseModel
      *
      * @var value-of<Region>|null $region
      */
-    #[Api(enum: Region::class, optional: true)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
      * Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $start_conference_on_create;
 
     /**

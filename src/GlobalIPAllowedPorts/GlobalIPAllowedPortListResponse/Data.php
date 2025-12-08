@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -26,37 +26,37 @@ final class Data implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * First port of a range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $first_port;
 
     /**
      * Last port of a range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $last_port;
 
     /**
      * A name for the Global IP ports range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The Global IP Protocol code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $protocol_code;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_type;
 
     public function __construct()

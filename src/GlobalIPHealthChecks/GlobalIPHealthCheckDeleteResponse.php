@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPHealthChecks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse\Data;
@@ -17,7 +17,7 @@ final class GlobalIPHealthCheckDeleteResponse implements BaseModel
     /** @use SdkModel<GlobalIPHealthCheckDeleteResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifyProfiles\VerifyProfile\Call;
@@ -32,22 +32,22 @@ final class VerifyProfile implements BaseModel
     /** @use SdkModel<VerifyProfileShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Call $call;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Flashcall $flashcall;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -55,19 +55,19 @@ final class VerifyProfile implements BaseModel
      *
      * @var value-of<RecordType>|null $record_type
      */
-    #[Api(enum: RecordType::class, optional: true)]
+    #[Optional(enum: RecordType::class)]
     public ?string $record_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SMS $sms;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $updated_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_failover_url;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     public function __construct()

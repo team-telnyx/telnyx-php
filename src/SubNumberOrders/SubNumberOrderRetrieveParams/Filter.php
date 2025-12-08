@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class Filter implements BaseModel
     /**
      * Include the first 50 phone number objects in the results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $include_phone_numbers;
 
     public function __construct()

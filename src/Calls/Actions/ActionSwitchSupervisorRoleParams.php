@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams\Role;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class ActionSwitchSupervisorRoleParams implements BaseModel
      *
      * @var value-of<Role> $role
      */
-    #[Api(enum: Role::class)]
+    #[Required(enum: Role::class)]
     public string $role;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -26,7 +26,7 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
     use SdkParams;
 
     /** @var list<string> $sim_card_ids */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $sim_card_ids;
 
     /**

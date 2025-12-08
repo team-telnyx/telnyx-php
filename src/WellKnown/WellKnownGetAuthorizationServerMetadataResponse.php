@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WellKnown;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,7 +31,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     /**
      * Authorization endpoint URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorization_endpoint;
 
     /**
@@ -39,7 +39,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $code_challenge_methods_supported
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $code_challenge_methods_supported;
 
     /**
@@ -47,31 +47,31 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $grant_types_supported
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $grant_types_supported;
 
     /**
      * Token introspection endpoint URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $introspection_endpoint;
 
     /**
      * Authorization server issuer URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $issuer;
 
     /**
      * JWK Set endpoint URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $jwks_uri;
 
     /**
      * Dynamic client registration endpoint URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $registration_endpoint;
 
     /**
@@ -79,7 +79,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $response_types_supported
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $response_types_supported;
 
     /**
@@ -87,13 +87,13 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $scopes_supported
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $scopes_supported;
 
     /**
      * Token endpoint URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token_endpoint;
 
     /**
@@ -101,7 +101,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $token_endpoint_auth_methods_supported
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $token_endpoint_auth_methods_supported;
 
     public function __construct()

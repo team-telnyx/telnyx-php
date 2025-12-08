@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
 
 use Telnyx\ChargesSummary\MonthDetail;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class Comparative implements BaseModel
     use SdkModel;
 
     /** @var 'comparative' $type */
-    #[Api]
+    #[Required]
     public string $type = 'comparative';
 
     /**
      * Service alias.
      */
-    #[Api]
+    #[Required]
     public string $alias;
 
-    #[Api]
+    #[Required]
     public MonthDetail $existing_this_month;
 
     /**
      * Service name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api]
+    #[Required]
     public MonthDetail $new_this_month;
 
     /**

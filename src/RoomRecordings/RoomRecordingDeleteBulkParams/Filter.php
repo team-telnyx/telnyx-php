@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateEndedAt;
@@ -29,46 +29,46 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateEndedAt $date_ended_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?DateStartedAt $date_started_at;
 
     /**
      * duration_secs greater or equal for filtering room recordings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $duration_secs;
 
     /**
      * participant_id for filtering room recordings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $participant_id;
 
     /**
      * room_id for filtering room recordings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $room_id;
 
     /**
      * session_id for filtering room recordings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $session_id;
 
     /**
      * status for filtering room recordings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * type for filtering room recordings.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()

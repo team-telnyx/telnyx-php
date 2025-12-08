@@ -7,7 +7,7 @@ namespace Telnyx\AdvancedOrders\AdvancedOrderListResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,44 +31,44 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $area_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comments;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /** @var list<value-of<Feature>>|null $features */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
     /** @var list<string>|null $orders */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $orders;
 
     /** @var list<value-of<PhoneNumberType>>|null $phone_number_type */
-    #[Api(list: PhoneNumberType::class, optional: true)]
+    #[Optional(list: PhoneNumberType::class)]
     public ?array $phone_number_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $quantity;
 
     /**
      * The ID of the requirement group associated with this advanced order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $requirement_group_id;
 
     /** @var list<value-of<Status>>|null $status */
-    #[Api(list: Status::class, optional: true)]
+    #[Optional(list: Status::class)]
     public ?array $status;
 
     public function __construct()

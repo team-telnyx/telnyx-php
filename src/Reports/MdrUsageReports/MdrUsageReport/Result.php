@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -31,46 +31,46 @@ final class Result implements BaseModel
     /** @use SdkModel<ResultShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier_passthrough_fee;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivered;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $direction;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $message_type;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $parts;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profile_id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $received;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sent;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tags;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tn_type;
 
     public function __construct()

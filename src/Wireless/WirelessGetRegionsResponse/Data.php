@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless\WirelessGetRegionsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,25 +25,25 @@ final class Data implements BaseModel
     /**
      * The unique code of the region.
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * The name of the region.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Timestamp when the region was inserted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $inserted_at;
 
     /**
      * Timestamp when the region was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     /**

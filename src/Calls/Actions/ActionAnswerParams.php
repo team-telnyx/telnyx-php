@@ -26,7 +26,7 @@ use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -92,19 +92,19 @@ final class ActionAnswerParams implements BaseModel
     /**
      * Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $command_id;
 
     /**
@@ -112,7 +112,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var list<CustomSipHeader>|null $custom_headers
      */
-    #[Api(list: CustomSipHeader::class, optional: true)]
+    #[Optional(list: CustomSipHeader::class)]
     public ?array $custom_headers;
 
     /**
@@ -120,7 +120,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<PreferredCodecs>|null $preferred_codecs
      */
-    #[Api(enum: PreferredCodecs::class, optional: true)]
+    #[Optional(enum: PreferredCodecs::class)]
     public ?string $preferred_codecs;
 
     /**
@@ -128,7 +128,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<Record>|null $record
      */
-    #[Api(enum: Record::class, optional: true)]
+    #[Optional(enum: Record::class)]
     public ?string $record;
 
     /**
@@ -136,13 +136,13 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<RecordChannels>|null $record_channels
      */
-    #[Api(enum: RecordChannels::class, optional: true)]
+    #[Optional(enum: RecordChannels::class)]
     public ?string $record_channels;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $record_custom_file_name;
 
     /**
@@ -150,19 +150,19 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<RecordFormat>|null $record_format
      */
-    #[Api(enum: RecordFormat::class, optional: true)]
+    #[Optional(enum: RecordFormat::class)]
     public ?string $record_format;
 
     /**
      * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_max_length;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $record_timeout_secs;
 
     /**
@@ -170,7 +170,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<RecordTrack>|null $record_track
      */
-    #[Api(enum: RecordTrack::class, optional: true)]
+    #[Optional(enum: RecordTrack::class)]
     public ?string $record_track;
 
     /**
@@ -178,13 +178,13 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<RecordTrim>|null $record_trim
      */
-    #[Api(enum: RecordTrim::class, optional: true)]
+    #[Optional(enum: RecordTrim::class)]
     public ?string $record_trim;
 
     /**
      * Generate silence RTP packets when no transmission available.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $send_silence_when_idle;
 
     /**
@@ -192,13 +192,13 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var list<SipHeader>|null $sip_headers
      */
-    #[Api(list: SipHeader::class, optional: true)]
+    #[Optional(list: SipHeader::class)]
     public ?array $sip_headers;
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?SoundModifications $sound_modifications;
 
     /**
@@ -206,7 +206,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalCodec>|null $stream_bidirectional_codec
      */
-    #[Api(enum: StreamBidirectionalCodec::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalCodec::class)]
     public ?string $stream_bidirectional_codec;
 
     /**
@@ -214,7 +214,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalMode>|null $stream_bidirectional_mode
      */
-    #[Api(enum: StreamBidirectionalMode::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalMode::class)]
     public ?string $stream_bidirectional_mode;
 
     /**
@@ -222,7 +222,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalTargetLegs>|null $stream_bidirectional_target_legs
      */
-    #[Api(enum: StreamBidirectionalTargetLegs::class, optional: true)]
+    #[Optional(enum: StreamBidirectionalTargetLegs::class)]
     public ?string $stream_bidirectional_target_legs;
 
     /**
@@ -230,7 +230,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<StreamCodec>|null $stream_codec
      */
-    #[Api(enum: StreamCodec::class, optional: true)]
+    #[Optional(enum: StreamCodec::class)]
     public ?string $stream_codec;
 
     /**
@@ -238,28 +238,28 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<StreamTrack>|null $stream_track
      */
-    #[Api(enum: StreamTrack::class, optional: true)]
+    #[Optional(enum: StreamTrack::class)]
     public ?string $stream_track;
 
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stream_url;
 
     /**
      * Enable transcription upon call answer. The default value is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $transcription;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionStartRequest $transcription_config;
 
     /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook_url;
 
     /**
@@ -267,7 +267,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @var value-of<WebhookURLMethod>|null $webhook_url_method
      */
-    #[Api(enum: WebhookURLMethod::class, optional: true)]
+    #[Optional(enum: WebhookURLMethod::class)]
     public ?string $webhook_url_method;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class CreatedAt implements BaseModel
     /**
      * Filters records to those created after a specific date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gt;
 
     /**
      * Filters records to those created before a specific date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lt;
 
     public function __construct()

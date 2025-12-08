@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Item implements BaseModel
     /**
      * Quantity of user bundles to order.
      */
-    #[Api]
+    #[Required]
     public string $billing_bundle_id;
 
     /**
      * Quantity of user bundles to order.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**

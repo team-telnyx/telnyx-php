@@ -6,7 +6,7 @@ namespace Telnyx\AI\FineTuning\Jobs;
 
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -33,37 +33,37 @@ final class FineTuningJob implements BaseModel
     /**
      * The name of the fine-tuned model that is being created.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The Unix timestamp (in seconds) for when the fine-tuning job was created.
      */
-    #[Api]
+    #[Required]
     public int $created_at;
 
     /**
      * The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.
      */
-    #[Api]
+    #[Required]
     public ?int $finished_at;
 
     /**
      * The hyperparameters used for the fine-tuning job.
      */
-    #[Api]
+    #[Required]
     public Hyperparameters $hyperparameters;
 
     /**
      * The base model that is being fine-tuned.
      */
-    #[Api]
+    #[Required]
     public string $model;
 
     /**
      * The organization that owns the fine-tuning job.
      */
-    #[Api]
+    #[Required]
     public string $organization_id;
 
     /**
@@ -71,19 +71,19 @@ final class FineTuningJob implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.
      */
-    #[Api]
+    #[Required]
     public ?int $trained_tokens;
 
     /**
      * The storage bucket or object used for training.
      */
-    #[Api]
+    #[Required]
     public string $training_file;
 
     /**

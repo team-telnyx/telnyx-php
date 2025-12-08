@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OtaUpdates;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data;
@@ -23,7 +23,7 @@ final class OtaUpdateGetResponse implements BaseModel
     /**
      * This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

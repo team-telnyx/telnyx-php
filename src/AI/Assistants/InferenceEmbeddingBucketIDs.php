@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,13 +24,13 @@ final class InferenceEmbeddingBucketIDs implements BaseModel
      *
      * @var list<string> $bucket_ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $bucket_ids;
 
     /**
      * The maximum number of results to retrieve as context for the language model.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $max_num_results;
 
     /**

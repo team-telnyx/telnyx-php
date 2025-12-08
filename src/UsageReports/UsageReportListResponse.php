@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
@@ -21,10 +21,10 @@ final class UsageReportListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<array<string,mixed>>|null $data */
-    #[Api(list: new MapOf('mixed'), optional: true)]
+    #[Optional(list: new MapOf('mixed'))]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -22,7 +22,7 @@ final class IPConnectionGetResponse implements BaseModel
     /** @use SdkModel<IPConnectionGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?IPConnection $data;
 
     public function __construct()

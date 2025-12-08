@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\CsvDownloads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -46,13 +46,13 @@ final class CsvDownloadCreateParams implements BaseModel
      *
      * @var value-of<CsvFormat>|null $csv_format
      */
-    #[Api(enum: CsvFormat::class, optional: true)]
+    #[Optional(enum: CsvFormat::class)]
     public ?string $csv_format;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()

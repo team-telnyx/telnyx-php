@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse\Data;
@@ -17,7 +17,7 @@ final class RcGenerateDeeplinkResponse implements BaseModel
     /** @use SdkModel<RcGenerateDeeplinkResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**

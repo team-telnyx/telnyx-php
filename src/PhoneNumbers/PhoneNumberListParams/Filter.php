@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\PhoneNumberListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\CountryISOAlpha2;
@@ -43,13 +43,13 @@ final class Filter implements BaseModel
     /**
      * Filter by the billing_group_id associated with phone numbers. To filter to only phone numbers that have no billing group associated them, set the value of this filter to the string 'null'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $billing_group_id;
 
     /**
      * Filter by connection_id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection_id;
 
     /**
@@ -57,32 +57,32 @@ final class Filter implements BaseModel
      *
      * @var string|list<string>|null $country_iso_alpha2
      */
-    #[Api(union: CountryISOAlpha2::class, optional: true)]
+    #[Optional(union: CountryISOAlpha2::class)]
     public string|array|null $country_iso_alpha2;
 
     /**
      * Filter numbers via the customer_reference set.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
      * Filter by the emergency_address_id associated with phone numbers. To filter only phone numbers that have no emergency address associated with them, set the value of this filter to the string 'null'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $emergency_address_id;
 
     /**
      * Filter phone numbers by phone number type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?NumberType $number_type;
 
     /**
      * Filter by phone number. Requires at least three digits.
      *              Non-numerical characters will result in no values being returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Source>|null $source
      */
-    #[Api(enum: Source::class, optional: true)]
+    #[Optional(enum: Source::class)]
     public ?string $source;
 
     /**
@@ -98,19 +98,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Filter by phone number tags.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tag;
 
     /**
      * Filter by voice connection name pattern matching.
      */
-    #[Api('voice.connection_name', optional: true)]
+    #[Optional('voice.connection_name')]
     public ?VoiceConnectionName $voice_connection_name;
 
     /**
@@ -118,10 +118,9 @@ final class Filter implements BaseModel
      *
      * @var value-of<VoiceUsagePaymentMethod>|null $voice_usage_payment_method
      */
-    #[Api(
+    #[Optional(
         'voice.usage_payment_method',
-        enum: VoiceUsagePaymentMethod::class,
-        optional: true,
+        enum: VoiceUsagePaymentMethod::class
     )]
     public ?string $voice_usage_payment_method;
 
@@ -130,7 +129,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<WithoutTags>|null $without_tags
      */
-    #[Api(enum: WithoutTags::class, optional: true)]
+    #[Optional(enum: WithoutTags::class)]
     public ?string $without_tags;
 
     public function __construct()

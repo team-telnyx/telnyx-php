@@ -7,7 +7,8 @@ namespace Telnyx\AI\Audio;
 use Telnyx\AI\Audio\AudioTranscribeParams\Model;
 use Telnyx\AI\Audio\AudioTranscribeParams\ResponseFormat;
 use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -36,19 +37,19 @@ final class AudioTranscribeParams implements BaseModel
      *
      * @var value-of<Model> $model
      */
-    #[Api(enum: Model::class)]
+    #[Required(enum: Model::class)]
     public string $model;
 
     /**
      * The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $file;
 
     /**
      * Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $file_url;
 
     /**
@@ -56,7 +57,7 @@ final class AudioTranscribeParams implements BaseModel
      *
      * @var value-of<ResponseFormat>|null $response_format
      */
-    #[Api(enum: ResponseFormat::class, optional: true)]
+    #[Optional(enum: ResponseFormat::class)]
     public ?string $response_format;
 
     /**
@@ -64,11 +65,7 @@ final class AudioTranscribeParams implements BaseModel
      *
      * @var value-of<TimestampGranularities>|null $timestamp_granularities__
      */
-    #[Api(
-        'timestamp_granularities[]',
-        enum: TimestampGranularities::class,
-        optional: true,
-    )]
+    #[Optional('timestamp_granularities[]', enum: TimestampGranularities::class)]
     public ?string $timestamp_granularities__;
 
     /**

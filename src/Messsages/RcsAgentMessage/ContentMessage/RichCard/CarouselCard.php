@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard\CardWidth;
@@ -29,7 +29,7 @@ final class CarouselCard implements BaseModel
      *
      * @var list<RcsCardContent> $card_contents
      */
-    #[Api(list: RcsCardContent::class)]
+    #[Required(list: RcsCardContent::class)]
     public array $card_contents;
 
     /**
@@ -37,7 +37,7 @@ final class CarouselCard implements BaseModel
      *
      * @var value-of<CardWidth> $card_width
      */
-    #[Api(enum: CardWidth::class)]
+    #[Required(enum: CardWidth::class)]
     public string $card_width;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
@@ -36,7 +36,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<ActivationStatus>|null $activation_status
      */
-    #[Api(enum: ActivationStatus::class, optional: true)]
+    #[Optional(enum: ActivationStatus::class)]
     public ?string $activation_status;
 
     /**
@@ -44,7 +44,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $phone_number
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phone_number;
 
     /**
@@ -52,7 +52,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PortabilityStatus>|null $portability_status
      */
-    #[Api(enum: PortabilityStatus::class, optional: true)]
+    #[Optional(enum: PortabilityStatus::class)]
     public ?string $portability_status;
 
     /**
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $porting_order_id
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $porting_order_id;
 
     /**
@@ -68,7 +68,7 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<UnionMember1>>|value-of<UnionMember0>|null $status
      */
-    #[Api(union: Status::class, optional: true)]
+    #[Optional(union: Status::class)]
     public array|string|null $status;
 
     /**
@@ -76,7 +76,7 @@ final class Filter implements BaseModel
      *
      * @var string|list<string>|null $support_key
      */
-    #[Api(union: SupportKey::class, optional: true)]
+    #[Optional(union: SupportKey::class)]
     public string|array|null $support_key;
 
     public function __construct()

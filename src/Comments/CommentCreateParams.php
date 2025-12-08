@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Comments;
 
 use Telnyx\Comments\CommentCreateParams\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,14 +27,14 @@ final class CommentCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comment_record_id;
 
     /** @var value-of<CommentRecordType>|null $comment_record_type */
-    #[Api(enum: CommentRecordType::class, optional: true)]
+    #[Optional(enum: CommentRecordType::class)]
     public ?string $comment_record_type;
 
     public function __construct()

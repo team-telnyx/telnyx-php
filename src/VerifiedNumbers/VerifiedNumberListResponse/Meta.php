@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,16 +21,16 @@ final class Meta implements BaseModel
     /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_number;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page_size;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_pages;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total_results;
 
     public function __construct()

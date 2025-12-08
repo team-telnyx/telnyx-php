@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -23,23 +24,23 @@ final class Metadata implements BaseModel
     /** @use SdkModel<MetadataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $checksum;
 
-    #[Api]
+    #[Required]
     public string $embedding;
 
-    #[Api]
+    #[Required]
     public string $filename;
 
-    #[Api]
+    #[Required]
     public string $source;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $certainty;
 
     /** @var array<string,mixed>|null $loader_metadata */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $loader_metadata;
 
     /**

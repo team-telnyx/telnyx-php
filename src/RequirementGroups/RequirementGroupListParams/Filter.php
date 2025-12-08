@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups\RequirementGroupListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Action;
@@ -32,19 +32,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     /**
      * Filter requirement groups by country code (iso alpha 2).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_code;
 
     /**
      * Filter requirement groups by customer reference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_reference;
 
     /**
@@ -52,7 +52,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api(enum: PhoneNumberType::class, optional: true)]
+    #[Optional(enum: PhoneNumberType::class)]
     public ?string $phone_number_type;
 
     /**
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()

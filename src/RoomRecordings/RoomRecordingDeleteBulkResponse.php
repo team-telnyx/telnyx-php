@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomRecordings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse\Data;
@@ -17,7 +17,7 @@ final class RoomRecordingDeleteBulkResponse implements BaseModel
     /** @use SdkModel<RoomRecordingDeleteBulkResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()

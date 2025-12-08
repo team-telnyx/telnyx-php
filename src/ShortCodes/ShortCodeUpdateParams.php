@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ShortCodes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -28,11 +29,11 @@ final class ShortCodeUpdateParams implements BaseModel
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Api]
+    #[Required]
     public string $messaging_profile_id;
 
     /** @var list<string>|null $tags */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**

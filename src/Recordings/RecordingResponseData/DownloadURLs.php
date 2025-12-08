@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Recordings\RecordingResponseData;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class DownloadURLs implements BaseModel
     /**
      * Link to download the recording in mp3 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mp3;
 
     /**
      * Link to download the recording in wav format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wav;
 
     public function __construct()

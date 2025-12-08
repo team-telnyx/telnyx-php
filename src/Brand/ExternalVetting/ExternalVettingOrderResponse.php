@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Brand\ExternalVetting;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class ExternalVettingOrderResponse implements BaseModel
     /**
      * Vetting submission date. This is the date when the vetting request is generated in ISO 8601 format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $createDate;
 
     /**
      * External vetting provider ID for the brand.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $evpId;
 
     /**
      * Vetting effective date. This is the date when vetting was completed, or the starting effective date in ISO 8601 format. If this date is missing, then the vetting was not complete or not valid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vettedDate;
 
     /**
      * Identifies the vetting classification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vettingClass;
 
     /**
      * Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vettingId;
 
     /**
      * Vetting score ranging from 0-100.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $vettingScore;
 
     /**
      * Required by some providers for vetting record confirmation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vettingToken;
 
     public function __construct()

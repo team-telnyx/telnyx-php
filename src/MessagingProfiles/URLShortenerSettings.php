@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -32,25 +33,25 @@ final class URLShortenerSettings implements BaseModel
     /**
      * One of the domains provided by the Telnyx URL shortener service.
      */
-    #[Api]
+    #[Required]
     public string $domain;
 
     /**
      * Optional prefix that can be used to identify your brand, and will appear in the Telnyx generated URLs after the domain name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $prefix;
 
     /**
      * Use the link replacement tool only for links that are specifically blacklisted by Telnyx.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $replace_blacklist_only;
 
     /**
      * Receive webhooks for when your replaced links are clicked. Webhooks are sent to the webhooks on the messaging profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $send_webhooks;
 
     /**

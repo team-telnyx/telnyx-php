@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Recordings\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class ActionDeleteParams implements BaseModel
      *
      * @var list<string> $ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $ids;
 
     /**
