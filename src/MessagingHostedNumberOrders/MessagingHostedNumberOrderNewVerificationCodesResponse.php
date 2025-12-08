@@ -10,13 +10,11 @@ use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeError;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeSuccess;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeSuccess\Type;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\Type;
 
 /**
  * @phpstan-type MessagingHostedNumberOrderNewVerificationCodesResponseShape = array{
- *   data: list<VerificationCodeSuccess|VerificationCodeError>
+ *   data: list<Data>
  * }
  */
 final class MessagingHostedNumberOrderNewVerificationCodesResponse implements BaseModel, ResponseConverter
@@ -26,7 +24,7 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
 
     use SdkResponse;
 
-    /** @var list<VerificationCodeSuccess|VerificationCodeError> $data */
+    /** @var list<Data> $data */
     #[Api(list: Data::class)]
     public array $data;
 
@@ -54,9 +52,12 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCodeSuccess|array{
-     *   phone_number: string, type: value-of<Type>, verification_code_id: string
-     * }|VerificationCodeError|array{error: string, phone_number: string}> $data
+     * @param list<Data|array{
+     *   phone_number: string,
+     *   error?: string|null,
+     *   type?: value-of<Type>|null,
+     *   verification_code_id?: string|null,
+     * }> $data
      */
     public static function with(array $data): self
     {
@@ -68,9 +69,12 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
     }
 
     /**
-     * @param list<VerificationCodeSuccess|array{
-     *   phone_number: string, type: value-of<Type>, verification_code_id: string
-     * }|VerificationCodeError|array{error: string, phone_number: string}> $data
+     * @param list<Data|array{
+     *   phone_number: string,
+     *   error?: string|null,
+     *   type?: value-of<Type>|null,
+     *   verification_code_id?: string|null,
+     * }> $data
      */
     public function withData(array $data): self
     {
