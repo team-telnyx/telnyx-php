@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PartnerCampaign\PartnerCampaignGetSharedByMeResponse;
+namespace Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;

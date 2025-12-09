@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PartnerCampaigns\PartnerCampaignListParams;
+namespace Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 
 /**
  * Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.

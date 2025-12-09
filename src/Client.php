@@ -105,6 +105,7 @@ use Telnyx\Services\OAuthService;
 use Telnyx\Services\OperatorConnectService;
 use Telnyx\Services\OtaUpdatesService;
 use Telnyx\Services\OutboundVoiceProfilesService;
+use Telnyx\Services\PartnerCampaignService;
 use Telnyx\Services\PartnerCampaignsService;
 use Telnyx\Services\PaymentService;
 use Telnyx\Services\PhoneNumberAssignmentByProfileService;
@@ -956,6 +957,11 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public PartnerCampaignService $partnerCampaign;
+
+    /**
+     * @api
+     */
     public Number10dlcService $number10dlc;
 
     public function __construct(
@@ -1151,6 +1157,7 @@ class Client extends BaseClient
         $this->inexplicitNumberOrders = new InexplicitNumberOrdersService($this);
         $this->mobilePhoneNumbers = new MobilePhoneNumbersService($this);
         $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
+        $this->partnerCampaign = new PartnerCampaignService($this);
         $this->number10dlc = new Number10dlcService($this);
     }
 

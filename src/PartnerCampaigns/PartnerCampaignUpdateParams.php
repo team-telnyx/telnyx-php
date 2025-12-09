@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PartnerCampaigns;
+namespace Telnyx\PartnerCampaigns;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update campaign details by `campaignId`. **Please note:** Only webhook urls are editable.
  *
- * @see Telnyx\Services\Number10dlc\PartnerCampaignsService::update()
+ * @see Telnyx\Services\PartnerCampaignsService::update()
  *
  * @phpstan-type PartnerCampaignUpdateParamsShape = array{
  *   webhookFailoverURL?: string, webhookURL?: string

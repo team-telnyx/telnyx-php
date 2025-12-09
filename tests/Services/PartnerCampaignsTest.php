@@ -1,12 +1,13 @@
 <?php
 
-namespace Tests\Services\Number10dlc;
+namespace Tests\Services;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Number10dlc\PartnerCampaigns\PartnerCampaignListResponse;
+use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
+use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Tests\UnsupportedMockTests;
 
@@ -35,9 +36,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->partnerCampaigns->retrieve(
-            'campaignId'
-        );
+        $result = $this->client->partnerCampaigns->retrieve('campaignId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxDownstreamCampaign::class, $result);
@@ -50,9 +49,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->partnerCampaigns->update(
-            'campaignId'
-        );
+        $result = $this->client->partnerCampaigns->update('campaignId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxDownstreamCampaign::class, $result);
@@ -65,9 +62,40 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->partnerCampaigns->list();
+        $result = $this->client->partnerCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PartnerCampaignListResponse::class, $result);
+    }
+
+    #[Test]
+    public function testListSharedByMe(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->partnerCampaigns->listSharedByMe();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PartnerCampaignListSharedByMeResponse::class,
+            $result
+        );
+    }
+
+    #[Test]
+    public function testRetrieveSharingStatus(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->partnerCampaigns->retrieveSharingStatus(
+            'campaignId'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsArray($result);
     }
 }

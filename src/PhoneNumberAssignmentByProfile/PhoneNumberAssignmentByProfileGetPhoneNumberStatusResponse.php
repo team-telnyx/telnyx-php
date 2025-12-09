@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PhoneNumberAssignmentByProfile;
+namespace Telnyx\PhoneNumberAssignmentByProfile;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record;
 
 /**
  * @phpstan-type PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape = array{

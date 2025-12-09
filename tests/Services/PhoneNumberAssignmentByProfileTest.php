@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Services\Number10dlc;
+namespace Tests\Services;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
-use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
-use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetTaskStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,12 +36,9 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->number10dlc
-            ->phoneNumberAssignmentByProfile
-            ->assign(messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809')
-        ;
+        $result = $this->client->phoneNumberAssignmentByProfile->assign(
+            messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -57,16 +54,11 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->number10dlc
-            ->phoneNumberAssignmentByProfile
-            ->assign(
-                messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
-                campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
-                tcrCampaignID: 'CWZTFH1',
-            )
-        ;
+        $result = $this->client->phoneNumberAssignmentByProfile->assign(
+            messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
+            campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
+            tcrCampaignID: 'CWZTFH1',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -76,7 +68,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     }
 
     #[Test]
-    public function testGetPhoneNumberStatus(): void
+    public function testRetrievePhoneNumberStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
@@ -84,9 +76,8 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
 
         $result = $this
             ->client
-            ->number10dlc
             ->phoneNumberAssignmentByProfile
-            ->getPhoneNumberStatus('taskId')
+            ->retrievePhoneNumberStatus('taskId')
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -97,22 +88,19 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     }
 
     #[Test]
-    public function testGetTaskStatus(): void
+    public function testRetrieveStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->number10dlc
-            ->phoneNumberAssignmentByProfile
-            ->getTaskStatus('taskId')
-        ;
+        $result = $this->client->phoneNumberAssignmentByProfile->retrieveStatus(
+            'taskId'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
-            PhoneNumberAssignmentByProfileGetTaskStatusResponse::class,
+            PhoneNumberAssignmentByProfileGetStatusResponse::class,
             $result
         );
     }

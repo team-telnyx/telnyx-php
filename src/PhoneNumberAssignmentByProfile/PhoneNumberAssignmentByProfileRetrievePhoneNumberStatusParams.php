@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PhoneNumberAssignmentByProfile;
+namespace Telnyx\PhoneNumberAssignmentByProfile;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -12,15 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
  *
- * @see Telnyx\Services\Number10dlc\PhoneNumberAssignmentByProfileService::getPhoneNumberStatus()
+ * @see Telnyx\Services\PhoneNumberAssignmentByProfileService::retrievePhoneNumberStatus()
  *
- * @phpstan-type PhoneNumberAssignmentByProfileGetPhoneNumberStatusParamsShape = array{
+ * @phpstan-type PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape = array{
  *   page?: int, recordsPerPage?: int
  * }
  */
-final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusParams implements BaseModel
+final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implements BaseModel
 {
-    /** @use SdkModel<PhoneNumberAssignmentByProfileGetPhoneNumberStatusParamsShape> */
+    /**
+     * @use SdkModel<PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape,>
+     */
     use SdkModel;
     use SdkParams;
 
