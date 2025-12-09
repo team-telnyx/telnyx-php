@@ -38,10 +38,10 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->create([
-            'applicationName' => 'call-router',
-            'webhookEventURL' => 'https://example.com',
-        ]);
+        $result = $this->client->callControlApplications->create(
+            applicationName: 'call-router',
+            webhookEventURL: 'https://example.com'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallControlApplicationNewResponse::class, $result);
@@ -54,30 +54,30 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->create([
-            'applicationName' => 'call-router',
-            'webhookEventURL' => 'https://example.com',
-            'active' => false,
-            'anchorsiteOverride' => 'Latency',
-            'callCostInWebhooks' => true,
-            'dtmfType' => 'Inband',
-            'firstCommandTimeout' => true,
-            'firstCommandTimeoutSecs' => 10,
-            'inbound' => [
+        $result = $this->client->callControlApplications->create(
+            applicationName: 'call-router',
+            webhookEventURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: 'Latency',
+            callCostInWebhooks: true,
+            dtmfType: 'Inband',
+            firstCommandTimeout: true,
+            firstCommandTimeoutSecs: 10,
+            inbound: [
                 'channelLimit' => 10,
                 'shakenStirEnabled' => true,
                 'sipSubdomain' => 'example',
                 'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
-            'outbound' => [
+            outbound: [
                 'channelLimit' => 10,
                 'outboundVoiceProfileID' => 'outbound_voice_profile_id',
             ],
-            'redactDtmfDebugLogging' => true,
-            'webhookAPIVersion' => '1',
-            'webhookEventFailoverURL' => 'https://failover.example.com',
-            'webhookTimeoutSecs' => 25,
-        ]);
+            redactDtmfDebugLogging: true,
+            webhookAPIVersion: '1',
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookTimeoutSecs: 25,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallControlApplicationNewResponse::class, $result);
@@ -105,10 +105,8 @@ final class CallControlApplicationsTest extends TestCase
 
         $result = $this->client->callControlApplications->update(
             'id',
-            [
-                'applicationName' => 'call-router',
-                'webhookEventURL' => 'https://example.com',
-            ],
+            applicationName: 'call-router',
+            webhookEventURL: 'https://example.com',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -127,31 +125,29 @@ final class CallControlApplicationsTest extends TestCase
 
         $result = $this->client->callControlApplications->update(
             'id',
-            [
-                'applicationName' => 'call-router',
-                'webhookEventURL' => 'https://example.com',
-                'active' => false,
-                'anchorsiteOverride' => 'Latency',
-                'callCostInWebhooks' => true,
-                'dtmfType' => 'Inband',
-                'firstCommandTimeout' => true,
-                'firstCommandTimeoutSecs' => 10,
-                'inbound' => [
-                    'channelLimit' => 10,
-                    'shakenStirEnabled' => true,
-                    'sipSubdomain' => 'example',
-                    'sipSubdomainReceiveSettings' => 'only_my_connections',
-                ],
-                'outbound' => [
-                    'channelLimit' => 10,
-                    'outboundVoiceProfileID' => 'outbound_voice_profile_id',
-                ],
-                'redactDtmfDebugLogging' => true,
-                'tags' => ['tag1', 'tag2'],
-                'webhookAPIVersion' => '1',
-                'webhookEventFailoverURL' => 'https://failover.example.com',
-                'webhookTimeoutSecs' => 25,
+            applicationName: 'call-router',
+            webhookEventURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: 'Latency',
+            callCostInWebhooks: true,
+            dtmfType: 'Inband',
+            firstCommandTimeout: true,
+            firstCommandTimeoutSecs: 10,
+            inbound: [
+                'channelLimit' => 10,
+                'shakenStirEnabled' => true,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
+            outbound: [
+                'channelLimit' => 10,
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+            ],
+            redactDtmfDebugLogging: true,
+            tags: ['tag1', 'tag2'],
+            webhookAPIVersion: '1',
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookTimeoutSecs: 25,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -168,7 +164,7 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->list([]);
+        $result = $this->client->callControlApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallControlApplicationListResponse::class, $result);

@@ -37,7 +37,7 @@ final class NumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberOrders->create([]);
+        $result = $this->client->numberOrders->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberOrderNewResponse::class, $result);
@@ -63,7 +63,7 @@ final class NumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberOrders->update('number_order_id', []);
+        $result = $this->client->numberOrders->update('number_order_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberOrderUpdateResponse::class, $result);
@@ -76,7 +76,7 @@ final class NumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberOrders->list([]);
+        $result = $this->client->numberOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberOrderListResponse::class, $result);

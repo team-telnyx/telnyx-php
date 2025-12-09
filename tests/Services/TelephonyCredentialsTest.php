@@ -38,9 +38,9 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->create([
-            'connectionID' => '1234567890',
-        ]);
+        $result = $this->client->telephonyCredentials->create(
+            connectionID: '1234567890'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelephonyCredentialNewResponse::class, $result);
@@ -53,12 +53,12 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->create([
-            'connectionID' => '1234567890',
-            'expiresAt' => '2018-02-02T22:25:27.521Z',
-            'name' => 'My-new-credential',
-            'tag' => 'some_tag',
-        ]);
+        $result = $this->client->telephonyCredentials->create(
+            connectionID: '1234567890',
+            expiresAt: '2018-02-02T22:25:27.521Z',
+            name: 'My-new-credential',
+            tag: 'some_tag',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelephonyCredentialNewResponse::class, $result);
@@ -84,7 +84,7 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->update('id', []);
+        $result = $this->client->telephonyCredentials->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelephonyCredentialUpdateResponse::class, $result);
@@ -97,7 +97,7 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->list([]);
+        $result = $this->client->telephonyCredentials->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelephonyCredentialListResponse::class, $result);

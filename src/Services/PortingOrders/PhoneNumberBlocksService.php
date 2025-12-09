@@ -5,12 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember0;
@@ -24,40 +20,44 @@ use Telnyx\ServiceContracts\PortingOrders\PhoneNumberBlocksContract;
 final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
 {
     /**
+     * @api
+     */
+    public PhoneNumberBlocksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PhoneNumberBlocksRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a new phone number block.
      *
-     * @param array{
-     *   activationRanges: list<array{endAt: string, startAt: string}>,
-     *   phoneNumberRange: array{endAt: string, startAt: string},
-     * }|PhoneNumberBlockCreateParams $params
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone number block
+     * @param list<array{
+     *   endAt: string, startAt: string
+     * }> $activationRanges Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
+     * @param array{endAt: string, startAt: string} $phoneNumberRange
      *
      * @throws APIException
      */
     public function create(
         string $portingOrderID,
-        array|PhoneNumberBlockCreateParams $params,
+        array $activationRanges,
+        array $phoneNumberRange,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberBlockNewResponse {
-        [$parsed, $options] = PhoneNumberBlockCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'activationRanges' => $activationRanges,
+            'phoneNumberRange' => $phoneNumberRange,
+        ];
 
-        /** @var BaseResponse<PhoneNumberBlockNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['porting_orders/%1$s/phone_number_blocks', $portingOrderID],
-            body: (object) $parsed,
-            options: $options,
-            convert: PhoneNumberBlockNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($portingOrderID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -67,39 +67,37 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *
      * Returns a list of all phone number blocks of a porting order.
      *
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone number blocks
      * @param array{
-     *   filter?: array{
-     *     activationStatus?: 'New'|'Pending'|'Conflict'|'Cancel Pending'|'Failed'|'Concurred'|'Activate RDY'|'Disconnect Pending'|'Concurrence Sent'|'Old'|'Sending'|'Active'|'Cancelled'|ActivationStatus,
-     *     phoneNumber?: list<string>,
-     *     portabilityStatus?: 'pending'|'confirmed'|'provisional'|PortabilityStatus,
-     *     portingOrderID?: list<string>,
-     *     status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember0|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
-     *     supportKey?: string|list<string>,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: '-created_at'|'created_at'|Value},
-     * }|PhoneNumberBlockListParams $params
+     *   activationStatus?: 'New'|'Pending'|'Conflict'|'Cancel Pending'|'Failed'|'Concurred'|'Activate RDY'|'Disconnect Pending'|'Concurrence Sent'|'Old'|'Sending'|'Active'|'Cancelled'|ActivationStatus,
+     *   phoneNumber?: list<string>,
+     *   portabilityStatus?: 'pending'|'confirmed'|'provisional'|PortabilityStatus,
+     *   portingOrderID?: list<string>,
+     *   status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember0|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
+     *   supportKey?: string|list<string>,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   value?: '-created_at'|'created_at'|Value
+     * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
-        array|PhoneNumberBlockListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
+        ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberBlockListResponse {
-        [$parsed, $options] = PhoneNumberBlockListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumberBlockListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/phone_number_blocks', $portingOrderID],
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberBlockListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($portingOrderID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -109,31 +107,20 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *
      * Deletes a phone number block.
      *
-     * @param array{portingOrderID: string}|PhoneNumberBlockDeleteParams $params
+     * @param string $id Identifies the phone number block to be deleted
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone number block
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        array|PhoneNumberBlockDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $portingOrderID,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumberBlockDeleteResponse {
-        [$parsed, $options] = PhoneNumberBlockDeleteParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $portingOrderID = $parsed['portingOrderID'];
-        unset($parsed['portingOrderID']);
+        $params = ['portingOrderID' => $portingOrderID];
 
-        /** @var BaseResponse<PhoneNumberBlockDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: [
-                'porting_orders/%1$s/phone_number_blocks/%2$s', $portingOrderID, $id,
-            ],
-            options: $options,
-            convert: PhoneNumberBlockDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
@@ -13,12 +12,14 @@ use Telnyx\Services\Verifications\ActionsService;
 use Telnyx\Services\Verifications\ByPhoneNumberService;
 use Telnyx\Verifications\CreateVerificationResponse;
 use Telnyx\Verifications\VerificationGetResponse;
-use Telnyx\Verifications\VerificationTriggerCallParams;
-use Telnyx\Verifications\VerificationTriggerFlashcallParams;
-use Telnyx\Verifications\VerificationTriggerSMSParams;
 
 final class VerificationsService implements VerificationsContract
 {
+    /**
+     * @api
+     */
+    public VerificationsRawService $raw;
+
     /**
      * @api
      */
@@ -34,6 +35,7 @@ final class VerificationsService implements VerificationsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new VerificationsRawService($client);
         $this->byPhoneNumber = new ByPhoneNumberService($client);
         $this->actions = new ActionsService($client);
     }
@@ -43,19 +45,16 @@ final class VerificationsService implements VerificationsContract
      *
      * Retrieve verification
      *
+     * @param string $verificationID the identifier of the verification to retrieve
+     *
      * @throws APIException
      */
     public function retrieve(
         string $verificationID,
         ?RequestOptions $requestOptions = null
     ): VerificationGetResponse {
-        /** @var BaseResponse<VerificationGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['verifications/%1$s', $verificationID],
-            options: $requestOptions,
-            convert: VerificationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($verificationID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -65,33 +64,34 @@ final class VerificationsService implements VerificationsContract
      *
      * Trigger Call verification
      *
-     * @param array{
-     *   phoneNumber: string,
-     *   verifyProfileID: string,
-     *   customCode?: string|null,
-     *   extension?: string|null,
-     *   timeoutSecs?: int,
-     * }|VerificationTriggerCallParams $params
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param string|null $customCode Send a self-generated numeric code to the end-user
+     * @param string|null $extension Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
+     * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
      * @throws APIException
      */
     public function triggerCall(
-        array|VerificationTriggerCallParams $params,
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?string $customCode = null,
+        ?string $extension = null,
+        ?int $timeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
-        [$parsed, $options] = VerificationTriggerCallParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'phoneNumber' => $phoneNumber,
+            'verifyProfileID' => $verifyProfileID,
+            'customCode' => $customCode,
+            'extension' => $extension,
+            'timeoutSecs' => $timeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CreateVerificationResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'verifications/call',
-            body: (object) $parsed,
-            options: $options,
-            convert: CreateVerificationResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerCall(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -101,29 +101,28 @@ final class VerificationsService implements VerificationsContract
      *
      * Trigger Flash call verification
      *
-     * @param array{
-     *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int
-     * }|VerificationTriggerFlashcallParams $params
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
      * @throws APIException
      */
     public function triggerFlashcall(
-        array|VerificationTriggerFlashcallParams $params,
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?int $timeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
-        [$parsed, $options] = VerificationTriggerFlashcallParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'phoneNumber' => $phoneNumber,
+            'verifyProfileID' => $verifyProfileID,
+            'timeoutSecs' => $timeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CreateVerificationResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'verifications/flashcall',
-            body: (object) $parsed,
-            options: $options,
-            convert: CreateVerificationResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerFlashcall(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -133,32 +132,31 @@ final class VerificationsService implements VerificationsContract
      *
      * Trigger SMS verification
      *
-     * @param array{
-     *   phoneNumber: string,
-     *   verifyProfileID: string,
-     *   customCode?: string|null,
-     *   timeoutSecs?: int,
-     * }|VerificationTriggerSMSParams $params
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param string|null $customCode Send a self-generated numeric code to the end-user
+     * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
      * @throws APIException
      */
     public function triggerSMS(
-        array|VerificationTriggerSMSParams $params,
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?string $customCode = null,
+        ?int $timeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
-        [$parsed, $options] = VerificationTriggerSMSParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'phoneNumber' => $phoneNumber,
+            'verifyProfileID' => $verifyProfileID,
+            'customCode' => $customCode,
+            'timeoutSecs' => $timeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CreateVerificationResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'verifications/sms',
-            body: (object) $parsed,
-            options: $options,
-            convert: CreateVerificationResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerSMS(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

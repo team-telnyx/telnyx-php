@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\ChannelZones\ChannelZoneListParams;
 use Telnyx\ChannelZones\ChannelZoneListResponse;
-use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesContract;
@@ -17,37 +14,37 @@ use Telnyx\ServiceContracts\ChannelZonesContract;
 final class ChannelZonesService implements ChannelZonesContract
 {
     /**
+     * @api
+     */
+    public ChannelZonesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ChannelZonesRawService($client);
+    }
 
     /**
      * @api
      *
      * Update the number of Voice Channels for the Non-US Zones. This allows your account to handle multiple simultaneous inbound calls to Non-US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
      *
-     * @param array{channels: int}|ChannelZoneUpdateParams $params
+     * @param string $channelZoneID Channel zone identifier
+     * @param int $channels The number of reserved channels
      *
      * @throws APIException
      */
     public function update(
         string $channelZoneID,
-        array|ChannelZoneUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $channels,
+        ?RequestOptions $requestOptions = null
     ): ChannelZoneUpdateResponse {
-        [$parsed, $options] = ChannelZoneUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['channels' => $channels];
 
-        /** @var BaseResponse<ChannelZoneUpdateResponse> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['channel_zones/%1$s', $channelZoneID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ChannelZoneUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($channelZoneID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -58,28 +55,21 @@ final class ChannelZonesService implements ChannelZonesContract
      * Returns the non-US voice channels for your account. voice channels allow you to use Channel Billing for calls to your Telnyx phone numbers. Please check the <a href="https://support.telnyx.com/en/articles/8428806-global-channel-billing">Telnyx Support Articles</a> section for full information and examples of how to utilize Channel Billing.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|ChannelZoneListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|ChannelZoneListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): ChannelZoneListResponse {
-        [$parsed, $options] = ChannelZoneListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ChannelZoneListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'channel_zones',
-            query: $parsed,
-            options: $options,
-            convert: ChannelZoneListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,56 +5,52 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
-use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
-use Telnyx\WirelessBlocklists\WirelessBlocklistListParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistListResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
-use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 
 final class WirelessBlocklistsService implements WirelessBlocklistsContract
 {
     /**
+     * @api
+     */
+    public WirelessBlocklistsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new WirelessBlocklistsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a Wireless Blocklist to prevent SIMs from connecting to certain networks.
      *
-     * @param array{
-     *   name: string, type: 'country'|'mcc'|'plmn'|Type, values: list<string>
-     * }|WirelessBlocklistCreateParams $params
+     * @param string $name the name of the Wireless Blocklist
+     * @param 'country'|'mcc'|'plmn'|Type $type the type of wireless blocklist
+     * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
      * @throws APIException
      */
     public function create(
-        array|WirelessBlocklistCreateParams $params,
+        string $name,
+        string|Type $type,
+        array $values,
         ?RequestOptions $requestOptions = null,
     ): WirelessBlocklistNewResponse {
-        [$parsed, $options] = WirelessBlocklistCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name, 'type' => $type, 'values' => $values];
 
-        /** @var BaseResponse<WirelessBlocklistNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'wireless_blocklists',
-            body: (object) $parsed,
-            options: $options,
-            convert: WirelessBlocklistNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -64,19 +60,16 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Retrieve information about a Wireless Blocklist.
      *
+     * @param string $id identifies the wireless blocklist
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistGetResponse {
-        /** @var BaseResponse<WirelessBlocklistGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['wireless_blocklists/%1$s', $id],
-            options: $requestOptions,
-            convert: WirelessBlocklistGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -86,31 +79,24 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Update a Wireless Blocklist.
      *
-     * @param array{
-     *   name?: string,
-     *   type?: 'country'|'mcc'|'plmn'|WirelessBlocklistUpdateParams\Type,
-     *   values?: list<string>,
-     * }|WirelessBlocklistUpdateParams $params
+     * @param string $name the name of the Wireless Blocklist
+     * @param 'country'|'mcc'|'plmn'|\Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type $type the type of wireless blocklist
+     * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
      * @throws APIException
      */
     public function update(
-        array|WirelessBlocklistUpdateParams $params,
+        ?string $name = null,
+        string|\Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|null $type = null,
+        ?array $values = null,
         ?RequestOptions $requestOptions = null,
     ): WirelessBlocklistUpdateResponse {
-        [$parsed, $options] = WirelessBlocklistUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name, 'type' => $type, 'values' => $values];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<WirelessBlocklistUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: 'wireless_blocklists',
-            body: (object) $parsed,
-            options: $options,
-            convert: WirelessBlocklistUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -120,42 +106,34 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Get all Wireless Blocklists belonging to the user.
      *
-     * @param array{
-     *   filterName?: string,
-     *   filterType?: string,
-     *   filterValues?: string,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     * }|WirelessBlocklistListParams $params
+     * @param string $filterName the name of the Wireless Blocklist
+     * @param string $filterType when the Private Wireless Gateway was last updated
+     * @param string $filterValues values to filter on (inclusive)
+     * @param int $pageNumber the page number to load
+     * @param int $pageSize the size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|WirelessBlocklistListParams $params,
+        ?string $filterName = null,
+        ?string $filterType = null,
+        ?string $filterValues = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): WirelessBlocklistListResponse {
-        [$parsed, $options] = WirelessBlocklistListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'filterName' => $filterName,
+            'filterType' => $filterType,
+            'filterValues' => $filterValues,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<WirelessBlocklistListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'wireless_blocklists',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'filterName' => 'filter[name]',
-                    'filterType' => 'filter[type]',
-                    'filterValues' => 'filter[values]',
-                    'pageNumber' => 'page[number]',
-                    'pageSize' => 'page[size]',
-                ],
-            ),
-            options: $options,
-            convert: WirelessBlocklistListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -165,19 +143,16 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Deletes the Wireless Blocklist.
      *
+     * @param string $id identifies the wireless blocklist
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistDeleteResponse {
-        /** @var BaseResponse<WirelessBlocklistDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['wireless_blocklists/%1$s', $id],
-            options: $requestOptions,
-            convert: WirelessBlocklistDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

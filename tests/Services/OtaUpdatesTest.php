@@ -50,7 +50,7 @@ final class OtaUpdatesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->otaUpdates->list([]);
+        $result = $this->client->otaUpdates->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OtaUpdateListResponse::class, $result);

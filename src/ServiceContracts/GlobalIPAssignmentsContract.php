@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
+use Telnyx\Networks\InterfaceStatus;
 use Telnyx\RequestOptions;
 
 interface GlobalIPAssignmentsContract
@@ -20,17 +18,23 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentCreateParams $params
+     * @param string $globalIPID global IP ID
+     * @param bool $isInMaintenance enable/disable BGP announcement
+     * @param string $wireguardPeerID wireguard peer ID
      *
      * @throws APIException
      */
     public function create(
-        array|GlobalIPAssignmentCreateParams $params,
+        ?string $globalIPID = null,
+        ?bool $isInMaintenance = null,
+        ?string $wireguardPeerID = null,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -42,30 +46,46 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentUpdateParams $params
+     * @param string $id identifies the resource
+     * @param array{
+     *   id?: string,
+     *   createdAt?: string,
+     *   recordType?: string,
+     *   updatedAt?: string,
+     *   globalIPID?: string,
+     *   isAnnounced?: bool,
+     *   isConnected?: bool,
+     *   isInMaintenance?: bool,
+     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
+     *   wireguardPeerID?: string,
+     * } $body
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|GlobalIPAssignmentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $body,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|GlobalIPAssignmentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */

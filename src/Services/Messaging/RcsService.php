@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messaging;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
-use Telnyx\Messaging\Rcs\RcInviteTestNumberParams;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
-use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesParams;
 use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesResponse;
-use Telnyx\Messaging\Rcs\RcRetrieveCapabilitiesParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\RcsContract;
 use Telnyx\Services\Messaging\Rcs\AgentsService;
 
 final class RcsService implements RcsContract
 {
+    /**
+     * @api
+     */
+    public RcsRawService $raw;
+
     /**
      * @api
      */
@@ -29,6 +30,7 @@ final class RcsService implements RcsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RcsRawService($client);
         $this->agents = new AgentsService($client);
     }
 
@@ -37,29 +39,20 @@ final class RcsService implements RcsContract
      *
      * Adds a test phone number to an RCS agent for testing purposes.
      *
-     * @param array{id: string}|RcInviteTestNumberParams $params
+     * @param string $phoneNumber Phone number in E164 format to invite for testing
+     * @param string $id RCS agent ID
      *
      * @throws APIException
      */
     public function inviteTestNumber(
         string $phoneNumber,
-        array|RcInviteTestNumberParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): RcInviteTestNumberResponse {
-        [$parsed, $options] = RcInviteTestNumberParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id];
 
-        /** @var BaseResponse<RcInviteTestNumberResponse> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['messaging/rcs/test_number_invite/%1$s/%2$s', $id, $phoneNumber],
-            options: $options,
-            convert: RcInviteTestNumberResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->inviteTestNumber($phoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -69,29 +62,20 @@ final class RcsService implements RcsContract
      *
      * List RCS capabilities of a given batch of phone numbers
      *
-     * @param array{
-     *   agentID: string, phoneNumbers: list<string>
-     * }|RcListBulkCapabilitiesParams $params
+     * @param string $agentID RCS Agent ID
+     * @param list<string> $phoneNumbers List of phone numbers to check
      *
      * @throws APIException
      */
     public function listBulkCapabilities(
-        array|RcListBulkCapabilitiesParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $agentID,
+        array $phoneNumbers,
+        ?RequestOptions $requestOptions = null
     ): RcListBulkCapabilitiesResponse {
-        [$parsed, $options] = RcListBulkCapabilitiesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['agentID' => $agentID, 'phoneNumbers' => $phoneNumbers];
 
-        /** @var BaseResponse<RcListBulkCapabilitiesResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messaging/rcs/bulk_capabilities',
-            body: (object) $parsed,
-            options: $options,
-            convert: RcListBulkCapabilitiesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listBulkCapabilities(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -101,29 +85,20 @@ final class RcsService implements RcsContract
      *
      * List RCS capabilities of a phone number
      *
-     * @param array{agentID: string}|RcRetrieveCapabilitiesParams $params
+     * @param string $phoneNumber Phone number in E164 format
+     * @param string $agentID RCS agent ID
      *
      * @throws APIException
      */
     public function retrieveCapabilities(
         string $phoneNumber,
-        array|RcRetrieveCapabilitiesParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $agentID,
+        ?RequestOptions $requestOptions = null
     ): RcGetCapabilitiesResponse {
-        [$parsed, $options] = RcRetrieveCapabilitiesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $agentID = $parsed['agentID'];
-        unset($parsed['agentID']);
+        $params = ['agentID' => $agentID];
 
-        /** @var BaseResponse<RcGetCapabilitiesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['messaging/rcs/capabilities/%1$s/%2$s', $agentID, $phoneNumber],
-            options: $options,
-            convert: RcGetCapabilitiesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveCapabilities($phoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

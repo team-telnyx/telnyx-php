@@ -34,10 +34,10 @@ final class ChargesSummaryTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chargesSummary->retrieve([
-            'endDate' => new \DateTimeImmutable('2025-06-01'),
-            'startDate' => new \DateTimeImmutable('2025-05-01'),
-        ]);
+        $result = $this->client->chargesSummary->retrieve(
+            endDate: new \DateTimeImmutable('2025-06-01'),
+            startDate: new \DateTimeImmutable('2025-05-01'),
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ChargesSummaryGetResponse::class, $result);
@@ -50,10 +50,10 @@ final class ChargesSummaryTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chargesSummary->retrieve([
-            'endDate' => new \DateTimeImmutable('2025-06-01'),
-            'startDate' => new \DateTimeImmutable('2025-05-01'),
-        ]);
+        $result = $this->client->chargesSummary->retrieve(
+            endDate: new \DateTimeImmutable('2025-06-01'),
+            startDate: new \DateTimeImmutable('2025-05-01'),
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ChargesSummaryGetResponse::class, $result);

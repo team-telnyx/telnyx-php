@@ -13,6 +13,8 @@ interface ActionsContract
     /**
      * @api
      *
+     * @param string $id unique identifier for the data migration
+     *
      * @throws APIException
      */
     public function stop(

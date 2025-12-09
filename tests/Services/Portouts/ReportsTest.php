@@ -36,9 +36,10 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->create([
-            'params' => ['filters' => []], 'reportType' => 'export_portouts_csv',
-        ]);
+        $result = $this->client->portouts->reports->create(
+            params: ['filters' => []],
+            reportType: 'export_portouts_csv'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ReportNewResponse::class, $result);
@@ -51,8 +52,8 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->create([
-            'params' => [
+        $result = $this->client->portouts->reports->create(
+            params: [
                 'filters' => [
                     'createdAtGt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
                     'createdAtLt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
@@ -62,8 +63,8 @@ final class ReportsTest extends TestCase
                     'statusIn' => ['pending'],
                 ],
             ],
-            'reportType' => 'export_portouts_csv',
-        ]);
+            reportType: 'export_portouts_csv',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ReportNewResponse::class, $result);
@@ -91,7 +92,7 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->list([]);
+        $result = $this->client->portouts->reports->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ReportListResponse::class, $result);

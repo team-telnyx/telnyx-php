@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportCreateParams;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
@@ -15,17 +14,21 @@ interface LedgerBillingGroupReportsContract
     /**
      * @api
      *
-     * @param array<mixed>|LedgerBillingGroupReportCreateParams $params
+     * @param int $month Month of the ledger billing group report
+     * @param int $year Year of the ledger billing group report
      *
      * @throws APIException
      */
     public function create(
-        array|LedgerBillingGroupReportCreateParams $params,
+        ?int $month = null,
+        ?int $year = null,
         ?RequestOptions $requestOptions = null,
     ): LedgerBillingGroupReportNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id The id of the ledger billing group report
      *
      * @throws APIException
      */

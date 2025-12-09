@@ -38,13 +38,11 @@ final class PhoneNumberBlocksTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberBlocks->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            [
-                'activationRanges' => [
-                    ['endAt' => '+4930244999910', 'startAt' => '+4930244999901'],
-                ],
-                'phoneNumberRange' => [
-                    'endAt' => '+4930244999910', 'startAt' => '+4930244999901',
-                ],
+            activationRanges: [
+                ['endAt' => '+4930244999910', 'startAt' => '+4930244999901'],
+            ],
+            phoneNumberRange: [
+                'endAt' => '+4930244999910', 'startAt' => '+4930244999901',
             ],
         );
 
@@ -61,13 +59,11 @@ final class PhoneNumberBlocksTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberBlocks->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            [
-                'activationRanges' => [
-                    ['endAt' => '+4930244999910', 'startAt' => '+4930244999901'],
-                ],
-                'phoneNumberRange' => [
-                    'endAt' => '+4930244999910', 'startAt' => '+4930244999901',
-                ],
+            activationRanges: [
+                ['endAt' => '+4930244999910', 'startAt' => '+4930244999901'],
+            ],
+            phoneNumberRange: [
+                'endAt' => '+4930244999910', 'startAt' => '+4930244999901',
             ],
         );
 
@@ -83,8 +79,7 @@ final class PhoneNumberBlocksTest extends TestCase
         }
 
         $result = $this->client->portingOrders->phoneNumberBlocks->list(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -100,7 +95,7 @@ final class PhoneNumberBlocksTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberBlocks->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['portingOrderID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            portingOrderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -116,7 +111,7 @@ final class PhoneNumberBlocksTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberBlocks->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['portingOrderID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            portingOrderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse;
-use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams;
 use Telnyx\RequestOptions;
 
 interface GlobalIPUsageContract
@@ -14,12 +13,14 @@ interface GlobalIPUsageContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPUsageRetrieveParams $params
+     * @param array{
+     *   globalIPID?: string|array{in?: string}
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|GlobalIPUsageRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPUsageGetResponse;
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WellKnownContract;
@@ -15,9 +14,17 @@ use Telnyx\WellKnown\WellKnownGetProtectedResourceMetadataResponse;
 final class WellKnownService implements WellKnownContract
 {
     /**
+     * @api
+     */
+    public WellKnownRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new WellKnownRawService($client);
+    }
 
     /**
      * @api
@@ -29,17 +36,8 @@ final class WellKnownService implements WellKnownContract
     public function retrieveAuthorizationServerMetadata(
         ?RequestOptions $requestOptions = null
     ): WellKnownGetAuthorizationServerMetadataResponse {
-        $path = $this
-            ->client
-            ->baseUrlOverridden ? '.well-known/oauth-authorization-server' : 'https://api.telnyx.com/.well-known/oauth-authorization-server';
-
-        /** @var BaseResponse<WellKnownGetAuthorizationServerMetadataResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: $path,
-            options: $requestOptions,
-            convert: WellKnownGetAuthorizationServerMetadataResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveAuthorizationServerMetadata(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -54,17 +52,8 @@ final class WellKnownService implements WellKnownContract
     public function retrieveProtectedResourceMetadata(
         ?RequestOptions $requestOptions = null
     ): WellKnownGetProtectedResourceMetadataResponse {
-        $path = $this
-            ->client
-            ->baseUrlOverridden ? '.well-known/oauth-protected-resource' : 'https://api.telnyx.com/.well-known/oauth-protected-resource';
-
-        /** @var BaseResponse<WellKnownGetProtectedResourceMetadataResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: $path,
-            options: $requestOptions,
-            convert: WellKnownGetProtectedResourceMetadataResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveProtectedResourceMetadata(requestOptions: $requestOptions);
 
         return $response->parse();
     }

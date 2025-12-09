@@ -36,14 +36,14 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->create([
-            'businessName' => 'Toy-O\'Kon',
-            'countryCode' => 'US',
-            'firstName' => 'Alfred',
-            'lastName' => 'Foster',
-            'locality' => 'Austin',
-            'streetAddress' => '600 Congress Avenue',
-        ]);
+        $result = $this->client->userAddresses->create(
+            businessName: 'Toy-O\'Kon',
+            countryCode: 'US',
+            firstName: 'Alfred',
+            lastName: 'Foster',
+            locality: 'Austin',
+            streetAddress: '600 Congress Avenue',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UserAddressNewResponse::class, $result);
@@ -56,22 +56,22 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->create([
-            'businessName' => 'Toy-O\'Kon',
-            'countryCode' => 'US',
-            'firstName' => 'Alfred',
-            'lastName' => 'Foster',
-            'locality' => 'Austin',
-            'streetAddress' => '600 Congress Avenue',
-            'administrativeArea' => 'TX',
-            'borough' => 'Guadalajara',
-            'customerReference' => 'MY REF 001',
-            'extendedAddress' => '14th Floor',
-            'neighborhood' => 'Ciudad de los deportes',
-            'phoneNumber' => '+12125559000',
-            'postalCode' => '78701',
-            'skipAddressVerification' => 'skip_address_verification',
-        ]);
+        $result = $this->client->userAddresses->create(
+            businessName: 'Toy-O\'Kon',
+            countryCode: 'US',
+            firstName: 'Alfred',
+            lastName: 'Foster',
+            locality: 'Austin',
+            streetAddress: '600 Congress Avenue',
+            administrativeArea: 'TX',
+            borough: 'Guadalajara',
+            customerReference: 'MY REF 001',
+            extendedAddress: '14th Floor',
+            neighborhood: 'Ciudad de los deportes',
+            phoneNumber: '+12125559000',
+            postalCode: '78701',
+            skipAddressVerification: 'skip_address_verification',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UserAddressNewResponse::class, $result);
@@ -97,7 +97,7 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->list([]);
+        $result = $this->client->userAddresses->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UserAddressListResponse::class, $result);

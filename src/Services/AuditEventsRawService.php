@@ -1,0 +1,60 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Services;
+
+use Telnyx\AuditEvents\AuditEventListParams;
+use Telnyx\AuditEvents\AuditEventListParams\Sort;
+use Telnyx\AuditEvents\AuditEventListResponse;
+use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\RequestOptions;
+use Telnyx\ServiceContracts\AuditEventsRawContract;
+
+final class AuditEventsRawService implements AuditEventsRawContract
+{
+    // @phpstan-ignore-next-line
+    /**
+     * @internal
+     */
+    public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Retrieve a list of audit log entries. Audit logs are a best-effort, eventually consistent record of significant account-related changes.
+     *
+     * @param array{
+     *   filter?: array{
+     *     createdAfter?: string|\DateTimeInterface,
+     *     createdBefore?: string|\DateTimeInterface,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: 'asc'|'desc'|Sort,
+     * }|AuditEventListParams $params
+     *
+     * @return BaseResponse<AuditEventListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|AuditEventListParams $params,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse {
+        [$parsed, $options] = AuditEventListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'audit_events',
+            query: $parsed,
+            options: $options,
+            convert: AuditEventListResponse::class,
+        );
+    }
+}

@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
-use Telnyx\NumberOrders\NumberOrderListParams;
 use Telnyx\NumberOrders\NumberOrderListResponse;
 use Telnyx\NumberOrders\NumberOrderNewResponse;
-use Telnyx\NumberOrders\NumberOrderUpdateParams;
 use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -19,17 +16,29 @@ interface NumberOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderCreateParams $params
+     * @param string $billingGroupID identifies the billing group associated with the phone number
+     * @param string $connectionID identifies the connection associated with this phone number
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $messagingProfileID identifies the messaging profile associated with the phone number
+     * @param list<array{
+     *   phoneNumber: string, bundleID?: string, requirementGroupID?: string
+     * }> $phoneNumbers
      *
      * @throws APIException
      */
     public function create(
-        array|NumberOrderCreateParams $params,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
+        ?array $phoneNumbers = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderNewResponse;
 
     /**
      * @api
+     *
+     * @param string $numberOrderID the number order ID
      *
      * @throws APIException
      */
@@ -41,25 +50,40 @@ interface NumberOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderUpdateParams $params
+     * @param string $numberOrderID the number order ID
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param list<array{
+     *   fieldValue?: string, requirementID?: string
+     * }> $regulatoryRequirements
      *
      * @throws APIException
      */
     public function update(
         string $numberOrderID,
-        array|NumberOrderUpdateParams $params,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderListParams $params
+     * @param array{
+     *   createdAt?: array{gt?: string, lt?: string},
+     *   customerReference?: string,
+     *   phoneNumbersCount?: string,
+     *   requirementsMet?: bool,
+     *   status?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|NumberOrderListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderListResponse;
 }

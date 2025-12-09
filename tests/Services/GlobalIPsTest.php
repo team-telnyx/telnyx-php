@@ -37,7 +37,7 @@ final class GlobalIPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPs->create([]);
+        $result = $this->client->globalIPs->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(GlobalIPNewResponse::class, $result);
@@ -65,7 +65,7 @@ final class GlobalIPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPs->list([]);
+        $result = $this->client->globalIPs->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(GlobalIPListResponse::class, $result);

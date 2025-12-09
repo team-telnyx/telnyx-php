@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
-use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
 use Telnyx\RequestOptions;
 
 interface PhoneNumbersRegulatoryRequirementsContract
@@ -14,12 +13,14 @@ interface PhoneNumbersRegulatoryRequirementsContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumbersRegulatoryRequirementRetrieveParams $params
+     * @param array{
+     *   phoneNumber?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|PhoneNumbersRegulatoryRequirementRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumbersRegulatoryRequirementGetResponse;
 }

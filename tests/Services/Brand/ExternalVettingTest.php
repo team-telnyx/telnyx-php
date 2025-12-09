@@ -50,7 +50,8 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->import(
             'brandId',
-            ['evpID' => 'evpId', 'vettingID' => 'vettingId']
+            evpID: 'evpId',
+            vettingID: 'vettingId'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -66,11 +67,9 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->import(
             'brandId',
-            [
-                'evpID' => 'evpId',
-                'vettingID' => 'vettingId',
-                'vettingToken' => 'vettingToken',
-            ],
+            evpID: 'evpId',
+            vettingID: 'vettingId',
+            vettingToken: 'vettingToken',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -86,7 +85,8 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->order(
             'brandId',
-            ['evpID' => 'evpId', 'vettingClass' => 'vettingClass']
+            evpID: 'evpId',
+            vettingClass: 'vettingClass'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -102,7 +102,8 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->order(
             'brandId',
-            ['evpID' => 'evpId', 'vettingClass' => 'vettingClass']
+            evpID: 'evpId',
+            vettingClass: 'vettingClass'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

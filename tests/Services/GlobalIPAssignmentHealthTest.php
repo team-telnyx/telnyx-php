@@ -34,7 +34,7 @@ final class GlobalIPAssignmentHealthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPAssignmentHealth->retrieve([]);
+        $result = $this->client->globalIPAssignmentHealth->retrieve();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

@@ -50,10 +50,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerCall([
-            'phoneNumber' => '+13035551234',
-            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-        ]);
+        $result = $this->client->verifications->triggerCall(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CreateVerificationResponse::class, $result);
@@ -66,13 +66,13 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerCall([
-            'phoneNumber' => '+13035551234',
-            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'customCode' => '43612',
-            'extension' => '1www2WABCDw9',
-            'timeoutSecs' => 300,
-        ]);
+        $result = $this->client->verifications->triggerCall(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+            customCode: '43612',
+            extension: '1www2WABCDw9',
+            timeoutSecs: 300,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CreateVerificationResponse::class, $result);
@@ -85,10 +85,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerFlashcall([
-            'phoneNumber' => '+13035551234',
-            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-        ]);
+        $result = $this->client->verifications->triggerFlashcall(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CreateVerificationResponse::class, $result);
@@ -101,11 +101,11 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerFlashcall([
-            'phoneNumber' => '+13035551234',
-            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'timeoutSecs' => 300,
-        ]);
+        $result = $this->client->verifications->triggerFlashcall(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+            timeoutSecs: 300,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CreateVerificationResponse::class, $result);
@@ -118,10 +118,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerSMS([
-            'phoneNumber' => '+13035551234',
-            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-        ]);
+        $result = $this->client->verifications->triggerSMS(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CreateVerificationResponse::class, $result);
@@ -134,12 +134,12 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerSMS([
-            'phoneNumber' => '+13035551234',
-            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'customCode' => '43612',
-            'timeoutSecs' => 300,
-        ]);
+        $result = $this->client->verifications->triggerSMS(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+            customCode: '43612',
+            timeoutSecs: 300,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CreateVerificationResponse::class, $result);

@@ -13,6 +13,11 @@ final class OperatorConnectService implements OperatorConnectContract
     /**
      * @api
      */
+    public OperatorConnectRawService $raw;
+
+    /**
+     * @api
+     */
     public ActionsService $actions;
 
     /**
@@ -20,6 +25,7 @@ final class OperatorConnectService implements OperatorConnectContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new OperatorConnectRawService($client);
         $this->actions = new ActionsService($client);
     }
 }

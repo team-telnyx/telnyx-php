@@ -47,12 +47,12 @@ use Telnyx\Client;
 
 $client = new Client(apiKey: getenv('TELNYX_API_KEY') ?: 'My API Key');
 
-$response = $client->calls->dial([
-  'connectionID' => 'conn12345',
-  'from' => '+15557654321',
-  'to' => '+15551234567',
-  'webhookURL' => 'https://your-webhook.url/events',
-]);
+$response = $client->calls->dial(
+  connectionID: 'conn12345',
+  from: '+15557654321',
+  to: '+15551234567',
+  webhookURL: 'https://your-webhook.url/events',
+);
 
 var_dump($response->data);
 ```
@@ -74,11 +74,11 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Telnyx\Core\Exceptions\APIConnectionException;
 
 try {
-  $numberOrder = $client->numberOrders->create([]);
+  $numberOrder = $client->numberOrders->create();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitError $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
@@ -121,8 +121,8 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->numberOrders->create(
-  ['phoneNumbers' => [['phoneNumber' => '+15558675309']]],
-  RequestOptions::with(maxRetries: 5),
+  phoneNumbers: [['phoneNumber' => '+15558675309']],
+  requestOptions: RequestOptions::with(maxRetries: 5),
 );
 ```
 
@@ -142,8 +142,8 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use Telnyx\RequestOptions;
 
 $numberOrder = $client->numberOrders->create(
-  ['phoneNumbers' => [['phoneNumber' => '+15558675309']]],
-  RequestOptions::with(
+  phoneNumbers: [['phoneNumber' => '+15558675309']],
+  requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],
     extraHeaders: ['my-header' => 'value'],

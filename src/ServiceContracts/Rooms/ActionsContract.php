@@ -6,9 +6,7 @@ namespace Telnyx\ServiceContracts\Rooms;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenParams;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse;
-use Telnyx\Rooms\Actions\ActionRefreshClientTokenParams;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 
 interface ActionsContract
@@ -16,26 +14,31 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionGenerateJoinClientTokenParams $params
+     * @param string $roomID the unique identifier of a room
+     * @param int $refreshTokenTtlSecs the time to live in seconds of the Refresh Token, after that time the Refresh Token is invalid and can't be used to refresh Client Token
+     * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
      *
      * @throws APIException
      */
     public function generateJoinClientToken(
         string $roomID,
-        array|ActionGenerateJoinClientTokenParams $params,
+        int $refreshTokenTtlSecs = 3600,
+        int $tokenTtlSecs = 600,
         ?RequestOptions $requestOptions = null,
     ): ActionGenerateJoinClientTokenResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|ActionRefreshClientTokenParams $params
+     * @param string $roomID the unique identifier of a room
+     * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
      *
      * @throws APIException
      */
     public function refreshClientToken(
         string $roomID,
-        array|ActionRefreshClientTokenParams $params,
+        string $refreshToken,
+        int $tokenTtlSecs = 600,
         ?RequestOptions $requestOptions = null,
     ): ActionRefreshClientTokenResponse;
 }

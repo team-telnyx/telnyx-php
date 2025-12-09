@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\List\ListGetAllResponse;
 use Telnyx\List\ListGetByZoneResponse;
@@ -15,9 +14,17 @@ use Telnyx\ServiceContracts\ListContract;
 final class ListService implements ListContract
 {
     /**
+     * @api
+     */
+    public ListRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ListRawService($client);
+    }
 
     /**
      * @api
@@ -29,13 +36,8 @@ final class ListService implements ListContract
     public function retrieveAll(
         ?RequestOptions $requestOptions = null
     ): ListGetAllResponse {
-        /** @var BaseResponse<ListGetAllResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'list',
-            options: $requestOptions,
-            convert: ListGetAllResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveAll(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -45,19 +47,16 @@ final class ListService implements ListContract
      *
      * Retrieve a list of phone numbers using Channel Billing for a specific Zone.
      *
+     * @param string $channelZoneID Channel zone identifier
+     *
      * @throws APIException
      */
     public function retrieveByZone(
         string $channelZoneID,
         ?RequestOptions $requestOptions = null
     ): ListGetByZoneResponse {
-        /** @var BaseResponse<ListGetByZoneResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['list/%1$s', $channelZoneID],
-            options: $requestOptions,
-            convert: ListGetByZoneResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveByZone($channelZoneID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

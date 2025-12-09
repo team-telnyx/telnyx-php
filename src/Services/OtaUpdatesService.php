@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
-use Telnyx\OtaUpdates\OtaUpdateListParams;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Status;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Type;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
@@ -18,14 +16,24 @@ use Telnyx\ServiceContracts\OtaUpdatesContract;
 final class OtaUpdatesService implements OtaUpdatesContract
 {
     /**
+     * @api
+     */
+    public OtaUpdatesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new OtaUpdatesRawService($client);
+    }
 
     /**
      * @api
      *
      * This API returns the details of an Over the Air (OTA) update.
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -33,13 +41,8 @@ final class OtaUpdatesService implements OtaUpdatesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OtaUpdateGetResponse {
-        /** @var BaseResponse<OtaUpdateGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ota_updates/%1$s', $id],
-            options: $requestOptions,
-            convert: OtaUpdateGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -50,33 +53,27 @@ final class OtaUpdatesService implements OtaUpdatesContract
      * List OTA updates
      *
      * @param array{
-     *   filter?: array{
-     *     simCardID?: string,
-     *     status?: 'in-progress'|'completed'|'failed'|Status,
-     *     type?: 'sim_card_network_preferences'|Type,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|OtaUpdateListParams $params
+     *   simCardID?: string,
+     *   status?: 'in-progress'|'completed'|'failed'|Status,
+     *   type?: 'sim_card_network_preferences'|Type,
+     * } $filter Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|OtaUpdateListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): OtaUpdateListResponse {
-        [$parsed, $options] = OtaUpdateListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<OtaUpdateListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ota_updates',
-            query: $parsed,
-            options: $options,
-            convert: OtaUpdateListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

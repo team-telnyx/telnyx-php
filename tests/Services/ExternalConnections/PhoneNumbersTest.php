@@ -38,7 +38,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
-            ['id' => 'id']
+            id: 'id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,7 +54,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
-            ['id' => 'id']
+            id: 'id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -70,7 +70,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
-            ['id' => 'id']
+            id: 'id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -86,7 +86,8 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
-            ['id' => 'id', 'locationID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            id: 'id',
+            locationID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -100,7 +101,7 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->phoneNumbers->list('id', []);
+        $result = $this->client->externalConnections->phoneNumbers->list('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PhoneNumberListResponse::class, $result);

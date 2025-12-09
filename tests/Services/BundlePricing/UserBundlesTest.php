@@ -39,7 +39,7 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->userBundles->create([]);
+        $result = $this->client->bundlePricing->userBundles->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UserBundleNewResponse::class, $result);
@@ -53,8 +53,7 @@ final class UserBundlesTest extends TestCase
         }
 
         $result = $this->client->bundlePricing->userBundles->retrieve(
-            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a',
-            []
+            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -68,7 +67,7 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->userBundles->list([]);
+        $result = $this->client->bundlePricing->userBundles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UserBundleListResponse::class, $result);
@@ -82,8 +81,7 @@ final class UserBundlesTest extends TestCase
         }
 
         $result = $this->client->bundlePricing->userBundles->deactivate(
-            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a',
-            []
+            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -98,8 +96,7 @@ final class UserBundlesTest extends TestCase
         }
 
         $result = $this->client->bundlePricing->userBundles->listResources(
-            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a',
-            []
+            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -113,7 +110,7 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->userBundles->listUnused([]);
+        $result = $this->client->bundlePricing->userBundles->listUnused();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UserBundleListUnusedResponse::class, $result);

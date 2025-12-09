@@ -6,10 +6,7 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -18,39 +15,52 @@ interface PhoneNumbersContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberRetrieveParams $params
+     * @param string $phoneNumberID A phone number's ID via the Telnyx API
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        array|PhoneNumberRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumberGetResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberUpdateParams $params
+     * @param string $phoneNumberID Path param: A phone number's ID via the Telnyx API
+     * @param string $id path param: Identifies the resource
+     * @param string $locationID body param: Identifies the location to assign the phone number to
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        array|PhoneNumberUpdateParams $params,
+        string $id,
+        ?string $locationID = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberListParams $params
+     * @param string $id identifies the resource
+     * @param array{
+     *   civicAddressID?: array{eq?: string},
+     *   locationID?: array{eq?: string},
+     *   phoneNumber?: array{contains?: string, eq?: string},
+     * } $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|PhoneNumberListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberListResponse;
 }

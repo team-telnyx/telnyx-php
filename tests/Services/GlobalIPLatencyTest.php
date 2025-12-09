@@ -34,7 +34,7 @@ final class GlobalIPLatencyTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPLatency->retrieve([]);
+        $result = $this->client->globalIPLatency->retrieve();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(GlobalIPLatencyGetResponse::class, $result);

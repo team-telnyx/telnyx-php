@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\StorageContract;
@@ -16,6 +15,11 @@ use Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 
 final class StorageService implements StorageContract
 {
+    /**
+     * @api
+     */
+    public StorageRawService $raw;
+
     /**
      * @api
      */
@@ -36,6 +40,7 @@ final class StorageService implements StorageContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new StorageRawService($client);
         $this->buckets = new BucketsService($client);
         $this->migrationSources = new MigrationSourcesService($client);
         $this->migrations = new MigrationsService($client);
@@ -51,13 +56,8 @@ final class StorageService implements StorageContract
     public function listMigrationSourceCoverage(
         ?RequestOptions $requestOptions = null
     ): StorageListMigrationSourceCoverageResponse {
-        /** @var BaseResponse<StorageListMigrationSourceCoverageResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'storage/migration_source_coverage',
-            options: $requestOptions,
-            convert: StorageListMigrationSourceCoverageResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listMigrationSourceCoverage(requestOptions: $requestOptions);
 
         return $response->parse();
     }

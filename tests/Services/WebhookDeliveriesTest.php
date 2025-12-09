@@ -50,7 +50,7 @@ final class WebhookDeliveriesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->webhookDeliveries->list([]);
+        $result = $this->client->webhookDeliveries->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WebhookDeliveryListResponse::class, $result);

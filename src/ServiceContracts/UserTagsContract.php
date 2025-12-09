@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\UserTags\UserTagListParams;
 use Telnyx\UserTags\UserTagListResponse;
 
 interface UserTagsContract
@@ -14,12 +13,14 @@ interface UserTagsContract
     /**
      * @api
      *
-     * @param array<mixed>|UserTagListParams $params
+     * @param array{
+     *   startsWith?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
      *
      * @throws APIException
      */
     public function list(
-        array|UserTagListParams $params,
+        ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): UserTagListResponse;
 }

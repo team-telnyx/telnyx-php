@@ -5,19 +5,25 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
-use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbersRegulatoryRequirementsContract;
 
 final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersRegulatoryRequirementsContract
 {
     /**
+     * @api
+     */
+    public PhoneNumbersRegulatoryRequirementsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PhoneNumbersRegulatoryRequirementsRawService($client);
+    }
 
     /**
      * @api
@@ -25,28 +31,21 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
      * Retrieve regulatory requirements for a list of phone numbers
      *
      * @param array{
-     *   filter?: array{phoneNumber?: string}
-     * }|PhoneNumbersRegulatoryRequirementRetrieveParams $params
+     *   phoneNumber?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|PhoneNumbersRegulatoryRequirementRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumbersRegulatoryRequirementGetResponse {
-        [$parsed, $options] = PhoneNumbersRegulatoryRequirementRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumbersRegulatoryRequirementGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'phone_numbers_regulatory_requirements',
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumbersRegulatoryRequirementGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

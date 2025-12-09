@@ -14,6 +14,11 @@ final class ReportingService implements ReportingContract
     /**
      * @api
      */
+    public ReportingRawService $raw;
+
+    /**
+     * @api
+     */
     public BatchDetailRecordsService $batchDetailRecords;
 
     /**
@@ -26,6 +31,7 @@ final class ReportingService implements ReportingContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ReportingRawService($client);
         $this->batchDetailRecords = new BatchDetailRecordsService($client);
         $this->usageReports = new UsageReportsService($client);
     }

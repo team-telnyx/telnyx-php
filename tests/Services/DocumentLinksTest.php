@@ -34,7 +34,7 @@ final class DocumentLinksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documentLinks->list([]);
+        $result = $this->client->documentLinks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentLinkListResponse::class, $result);

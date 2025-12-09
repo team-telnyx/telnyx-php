@@ -6,15 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
 use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
-use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
-use Telnyx\PartnerCampaigns\PartnerCampaignUpdateParams;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PartnerCampaignsContract;
@@ -22,9 +17,17 @@ use Telnyx\ServiceContracts\PartnerCampaignsContract;
 final class PartnerCampaignsService implements PartnerCampaignsContract
 {
     /**
+     * @api
+     */
+    public PartnerCampaignsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PartnerCampaignsRawService($client);
+    }
 
     /**
      * @api
@@ -37,13 +40,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): TelnyxDownstreamCampaign {
-        /** @var BaseResponse<TelnyxDownstreamCampaign> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['10dlc/partner_campaigns/%1$s', $campaignID],
-            options: $requestOptions,
-            convert: TelnyxDownstreamCampaign::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -53,30 +51,25 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Update campaign details by `campaignId`. **Please note:** Only webhook urls are editable.
      *
-     * @param array{
-     *   webhookFailoverURL?: string, webhookURL?: string
-     * }|PartnerCampaignUpdateParams $params
+     * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
+     * @param string $webhookURL webhook to which campaign status updates are sent
      *
      * @throws APIException
      */
     public function update(
         string $campaignID,
-        array|PartnerCampaignUpdateParams $params,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): TelnyxDownstreamCampaign {
-        [$parsed, $options] = PartnerCampaignUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<TelnyxDownstreamCampaign> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['10dlc/partner_campaigns/%1$s', $campaignID],
-            body: (object) $parsed,
-            options: $options,
-            convert: TelnyxDownstreamCampaign::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($campaignID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -88,29 +81,26 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * This endpoint is currently limited to only returning shared campaigns that Telnyx has accepted. In other words, shared but pending campaigns are currently omitted from the response from this endpoint.
      *
-     * @param array{
-     *   page?: int, recordsPerPage?: int, sort?: value-of<Sort>
-     * }|PartnerCampaignListParams $params
+     * @param int $page The 1-indexed page number to get. The default value is `1`.
+     * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'brandDisplayName'|'-brandDisplayName'|'tcrBrandId'|'-tcrBranId'|'tcrCampaignId'|'-tcrCampaignId'|'createdAt'|'-createdAt'|'campaignStatus'|'-campaignStatus'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|PartnerCampaignListParams $params,
+        int $page = 1,
+        int $recordsPerPage = 10,
+        string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
     ): PartnerCampaignListResponse {
-        [$parsed, $options] = PartnerCampaignListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PartnerCampaignListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: '10dlc/partner_campaigns',
-            query: $parsed,
-            options: $options,
-            convert: PartnerCampaignListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -124,29 +114,22 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * has accepted. In other words, shared but pending campaigns are currently omitted
      * from the response from this endpoint.
      *
-     * @param array{
-     *   page?: int, recordsPerPage?: int
-     * }|PartnerCampaignListSharedByMeParams $params
+     * @param int $page The 1-indexed page number to get. The default value is `1`.
+     * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      *
      * @throws APIException
      */
     public function listSharedByMe(
-        array|PartnerCampaignListSharedByMeParams $params,
+        int $page = 1,
+        int $recordsPerPage = 10,
         ?RequestOptions $requestOptions = null,
     ): PartnerCampaignListSharedByMeResponse {
-        [$parsed, $options] = PartnerCampaignListSharedByMeParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PartnerCampaignListSharedByMeResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: '10dlc/partnerCampaign/sharedByMe',
-            query: $parsed,
-            options: $options,
-            convert: PartnerCampaignListSharedByMeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listSharedByMe(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -156,6 +139,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Get Sharing Status
      *
+     * @param string $campaignID ID of the campaign in question
+     *
      * @return array<string,CampaignSharingStatus>
      *
      * @throws APIException
@@ -164,13 +149,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        /** @var BaseResponse<array<string,CampaignSharingStatus>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['10dlc/partnerCampaign/%1$s/sharing', $campaignID],
-            options: $requestOptions,
-            convert: new MapOf(CampaignSharingStatus::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveSharingStatus($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,53 +5,50 @@ declare(strict_types=1);
 namespace Telnyx\Services\Wireless;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Wireless\DetailRecordsReportsContract;
-use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportCreateParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportDeleteResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportGetResponse;
-use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
 
 final class DetailRecordsReportsService implements DetailRecordsReportsContract
 {
     /**
+     * @api
+     */
+    public DetailRecordsReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new DetailRecordsReportsRawService($client);
+    }
 
     /**
      * @api
      *
      * Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period.
      *
-     * @param array{
-     *   endTime?: string, startTime?: string
-     * }|DetailRecordsReportCreateParams $params
+     * @param string $endTime ISO 8601 formatted date-time indicating the end time
+     * @param string $startTime ISO 8601 formatted date-time indicating the start time
      *
      * @throws APIException
      */
     public function create(
-        array|DetailRecordsReportCreateParams $params,
+        ?string $endTime = null,
+        ?string $startTime = null,
         ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportNewResponse {
-        [$parsed, $options] = DetailRecordsReportCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['endTime' => $endTime, 'startTime' => $startTime];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<DetailRecordsReportNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'wireless/detail_records_reports',
-            body: (object) $parsed,
-            options: $options,
-            convert: DetailRecordsReportNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -61,19 +58,16 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * Returns one specific WDR report
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportGetResponse {
-        /** @var BaseResponse<DetailRecordsReportGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['wireless/detail_records_reports/%1$s', $id],
-            options: $requestOptions,
-            convert: DetailRecordsReportGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -83,32 +77,22 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * Returns the WDR Reports that match the given parameters.
      *
-     * @param array{
-     *   pageNumber?: int, pageSize?: int
-     * }|DetailRecordsReportListParams $params
+     * @param int $pageNumber the page number to load
+     * @param int $pageSize the size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|DetailRecordsReportListParams $params,
+        int $pageNumber = 1,
+        int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportListResponse {
-        [$parsed, $options] = DetailRecordsReportListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<DetailRecordsReportListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'wireless/detail_records_reports',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
-            options: $options,
-            convert: DetailRecordsReportListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -118,19 +102,16 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * Deletes one specific WDR report.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportDeleteResponse {
-        /** @var BaseResponse<DetailRecordsReportDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['wireless/detail_records_reports/%1$s', $id],
-            options: $requestOptions,
-            convert: DetailRecordsReportDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

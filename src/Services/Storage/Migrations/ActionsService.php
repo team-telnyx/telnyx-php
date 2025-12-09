@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage\Migrations;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Migrations\ActionsContract;
@@ -14,14 +13,24 @@ use Telnyx\Storage\Migrations\Actions\ActionStopResponse;
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Stop a Migration
+     *
+     * @param string $id unique identifier for the data migration
      *
      * @throws APIException
      */
@@ -29,13 +38,8 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionStopResponse {
-        /** @var BaseResponse<ActionStopResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['storage/migrations/%1$s/actions/stop', $id],
-            options: $requestOptions,
-            convert: ActionStopResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stop($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -37,10 +37,10 @@ final class PrivateWirelessGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->privateWirelessGateways->create([
-            'name' => 'My private wireless gateway',
-            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-        ]);
+        $result = $this->client->privateWirelessGateways->create(
+            name: 'My private wireless gateway',
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PrivateWirelessGatewayNewResponse::class, $result);
@@ -53,11 +53,11 @@ final class PrivateWirelessGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->privateWirelessGateways->create([
-            'name' => 'My private wireless gateway',
-            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'regionCode' => 'dc2',
-        ]);
+        $result = $this->client->privateWirelessGateways->create(
+            name: 'My private wireless gateway',
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            regionCode: 'dc2',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PrivateWirelessGatewayNewResponse::class, $result);
@@ -85,7 +85,7 @@ final class PrivateWirelessGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->privateWirelessGateways->list([]);
+        $result = $this->client->privateWirelessGateways->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PrivateWirelessGatewayListResponse::class, $result);

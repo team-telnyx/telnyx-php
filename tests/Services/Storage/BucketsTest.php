@@ -36,7 +36,7 @@ final class BucketsTest extends TestCase
 
         $result = $this->client->storage->buckets->createPresignedURL(
             '',
-            ['bucketName' => '']
+            bucketName: ''
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,7 +52,8 @@ final class BucketsTest extends TestCase
 
         $result = $this->client->storage->buckets->createPresignedURL(
             '',
-            ['bucketName' => '', 'ttl' => 60]
+            bucketName: '',
+            ttl: 60
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

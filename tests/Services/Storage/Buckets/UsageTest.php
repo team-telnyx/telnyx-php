@@ -37,11 +37,9 @@ final class UsageTest extends TestCase
 
         $result = $this->client->storage->buckets->usage->getAPIUsage(
             '',
-            [
-                'filter' => [
-                    'endTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                    'startTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                ],
+            filter: [
+                'endTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                'startTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
             ],
         );
 
@@ -58,11 +56,9 @@ final class UsageTest extends TestCase
 
         $result = $this->client->storage->buckets->usage->getAPIUsage(
             '',
-            [
-                'filter' => [
-                    'endTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                    'startTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                ],
+            filter: [
+                'endTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                'startTime' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
             ],
         );
 

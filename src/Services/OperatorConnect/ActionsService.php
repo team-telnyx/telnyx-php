@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\OperatorConnect;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OperatorConnect\Actions\ActionRefreshResponse;
 use Telnyx\RequestOptions;
@@ -14,9 +13,17 @@ use Telnyx\ServiceContracts\OperatorConnect\ActionsContract;
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
@@ -28,13 +35,8 @@ final class ActionsService implements ActionsContract
     public function refresh(
         ?RequestOptions $requestOptions = null
     ): ActionRefreshResponse {
-        /** @var BaseResponse<ActionRefreshResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'operator_connect/actions/refresh',
-            options: $requestOptions,
-            convert: ActionRefreshResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->refresh(requestOptions: $requestOptions);
 
         return $response->parse();
     }

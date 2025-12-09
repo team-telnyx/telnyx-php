@@ -34,9 +34,9 @@ final class AudioTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->audio->transcribe([
-            'model' => 'distil-whisper/distil-large-v2',
-        ]);
+        $result = $this->client->ai->audio->transcribe(
+            model: 'distil-whisper/distil-large-v2'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AudioTranscribeResponse::class, $result);
@@ -49,13 +49,13 @@ final class AudioTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->audio->transcribe([
-            'model' => 'distil-whisper/distil-large-v2',
-            'file' => 'file',
-            'fileURL' => 'https://example.com/file.mp3',
-            'responseFormat' => 'json',
-            'timestampGranularities' => 'segment',
-        ]);
+        $result = $this->client->ai->audio->transcribe(
+            model: 'distil-whisper/distil-large-v2',
+            file: 'file',
+            fileURL: 'https://example.com/file.mp3',
+            responseFormat: 'json',
+            timestampGranularities: 'segment',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AudioTranscribeResponse::class, $result);

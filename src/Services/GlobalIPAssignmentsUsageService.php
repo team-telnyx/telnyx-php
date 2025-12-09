@@ -5,19 +5,25 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsUsageContract;
 
 final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageContract
 {
     /**
+     * @api
+     */
+    public GlobalIPAssignmentsUsageRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPAssignmentsUsageRawService($client);
+    }
 
     /**
      * @api
@@ -25,31 +31,22 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
      * Global IP Assignment Usage Metrics
      *
      * @param array{
-     *   filter?: array{
-     *     globalIPAssignmentID?: string|array{in?: string},
-     *     globalIPID?: string|array{in?: string},
-     *   },
-     * }|GlobalIPAssignmentsUsageRetrieveParams $params
+     *   globalIPAssignmentID?: string|array{in?: string},
+     *   globalIPID?: string|array{in?: string},
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|GlobalIPAssignmentsUsageRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentsUsageGetResponse {
-        [$parsed, $options] = GlobalIPAssignmentsUsageRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPAssignmentsUsageGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'global_ip_assignments_usage',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPAssignmentsUsageGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

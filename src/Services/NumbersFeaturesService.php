@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumbersFeatures\NumbersFeatureCreateParams;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumbersFeaturesContract;
@@ -15,36 +13,35 @@ use Telnyx\ServiceContracts\NumbersFeaturesContract;
 final class NumbersFeaturesService implements NumbersFeaturesContract
 {
     /**
+     * @api
+     */
+    public NumbersFeaturesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumbersFeaturesRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve the features for a list of numbers
      *
-     * @param array{phoneNumbers: list<string>}|NumbersFeatureCreateParams $params
+     * @param list<string> $phoneNumbers
      *
      * @throws APIException
      */
     public function create(
-        array|NumbersFeatureCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $phoneNumbers,
+        ?RequestOptions $requestOptions = null
     ): NumbersFeatureNewResponse {
-        [$parsed, $options] = NumbersFeatureCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['phoneNumbers' => $phoneNumbers];
 
-        /** @var BaseResponse<NumbersFeatureNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'numbers_features',
-            body: (object) $parsed,
-            options: $options,
-            convert: NumbersFeatureNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

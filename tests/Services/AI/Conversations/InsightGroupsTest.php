@@ -51,8 +51,7 @@ final class InsightGroupsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insightGroups->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -81,9 +80,9 @@ final class InsightGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insightGroups->insightGroups([
-            'name' => 'name',
-        ]);
+        $result = $this->client->ai->conversations->insightGroups->insightGroups(
+            name: 'name'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InsightTemplateGroupDetail::class, $result);
@@ -96,9 +95,11 @@ final class InsightGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insightGroups->insightGroups([
-            'name' => 'name', 'description' => 'description', 'webhook' => 'webhook',
-        ]);
+        $result = $this->client->ai->conversations->insightGroups->insightGroups(
+            name: 'name',
+            description: 'description',
+            webhook: 'webhook'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InsightTemplateGroupDetail::class, $result);
@@ -116,7 +117,7 @@ final class InsightGroupsTest extends TestCase
             ->ai
             ->conversations
             ->insightGroups
-            ->retrieveInsightGroups([])
+            ->retrieveInsightGroups()
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messages;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\Messages\Rcs\RcGenerateDeeplinkParams;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messages\RcsContract;
@@ -16,42 +13,41 @@ use Telnyx\ServiceContracts\Messages\RcsContract;
 final class RcsService implements RcsContract
 {
     /**
+     * @api
+     */
+    public RcsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RcsRawService($client);
+    }
 
     /**
      * @api
      *
      * Generate a deeplink URL that can be used to start an RCS conversation with a specific agent.
      *
-     * @param array{
-     *   body?: string, phoneNumber?: string
-     * }|RcGenerateDeeplinkParams $params
+     * @param string $agentID RCS agent ID
+     * @param string $body Pre-filled message body (URL encoded)
+     * @param string $phoneNumber Phone number in E164 format (URL encoded)
      *
      * @throws APIException
      */
     public function generateDeeplink(
         string $agentID,
-        array|RcGenerateDeeplinkParams $params,
+        ?string $body = null,
+        ?string $phoneNumber = null,
         ?RequestOptions $requestOptions = null,
     ): RcGenerateDeeplinkResponse {
-        [$parsed, $options] = RcGenerateDeeplinkParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['body' => $body, 'phoneNumber' => $phoneNumber];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RcGenerateDeeplinkResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['messages/rcs/deeplinks/%1$s', $agentID],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['phoneNumber' => 'phone_number']
-            ),
-            options: $options,
-            convert: RcGenerateDeeplinkResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->generateDeeplink($agentID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

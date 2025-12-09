@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
-use Telnyx\Recordings\RecordingListParams;
 use Telnyx\Recordings\RecordingListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsContract;
@@ -20,6 +18,11 @@ final class RecordingsService implements RecordingsContract
     /**
      * @api
      */
+    public RecordingsRawService $raw;
+
+    /**
+     * @api
+     */
     public ActionsService $actions;
 
     /**
@@ -27,6 +30,7 @@ final class RecordingsService implements RecordingsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RecordingsRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -35,19 +39,16 @@ final class RecordingsService implements RecordingsContract
      *
      * Retrieves the details of an existing call recording.
      *
+     * @param string $recordingID uniquely identifies the recording by id
+     *
      * @throws APIException
      */
     public function retrieve(
         string $recordingID,
         ?RequestOptions $requestOptions = null
     ): RecordingGetResponse {
-        /** @var BaseResponse<RecordingGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['recordings/%1$s', $recordingID],
-            options: $requestOptions,
-            convert: RecordingGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($recordingID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -58,38 +59,32 @@ final class RecordingsService implements RecordingsContract
      * Returns a list of your call recordings.
      *
      * @param array{
-     *   filter?: array{
-     *     callLegID?: string,
-     *     callSessionID?: string,
-     *     conferenceID?: string,
-     *     connectionID?: string,
-     *     createdAt?: array{gte?: string, lte?: string},
-     *     from?: string,
-     *     sipCallID?: string,
-     *     to?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|RecordingListParams $params
+     *   callLegID?: string,
+     *   callSessionID?: string,
+     *   conferenceID?: string,
+     *   connectionID?: string,
+     *   createdAt?: array{gte?: string, lte?: string},
+     *   from?: string,
+     *   sipCallID?: string,
+     *   to?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|RecordingListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): RecordingListResponse {
-        [$parsed, $options] = RecordingListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RecordingListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'recordings',
-            query: $parsed,
-            options: $options,
-            convert: RecordingListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -99,19 +94,16 @@ final class RecordingsService implements RecordingsContract
      *
      * Permanently deletes a call recording.
      *
+     * @param string $recordingID uniquely identifies the recording by id
+     *
      * @throws APIException
      */
     public function delete(
         string $recordingID,
         ?RequestOptions $requestOptions = null
     ): RecordingDeleteResponse {
-        /** @var BaseResponse<RecordingDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['recordings/%1$s', $recordingID],
-            options: $requestOptions,
-            convert: RecordingDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($recordingID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

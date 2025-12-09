@@ -36,8 +36,7 @@ final class ActionRequirementsTest extends TestCase
         }
 
         $result = $this->client->portingOrders->actionRequirements->list(
-            'porting_order_id',
-            []
+            'porting_order_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,10 +52,8 @@ final class ActionRequirementsTest extends TestCase
 
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
-            [
-                'portingOrderID' => 'porting_order_id',
-                'params' => ['firstName' => 'John', 'lastName' => 'Doe'],
-            ],
+            portingOrderID: 'porting_order_id',
+            params: ['firstName' => 'John', 'lastName' => 'Doe'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -72,10 +69,8 @@ final class ActionRequirementsTest extends TestCase
 
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
-            [
-                'portingOrderID' => 'porting_order_id',
-                'params' => ['firstName' => 'John', 'lastName' => 'Doe'],
-            ],
+            portingOrderID: 'porting_order_id',
+            params: ['firstName' => 'John', 'lastName' => 'Doe'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

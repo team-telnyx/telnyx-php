@@ -49,7 +49,7 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberBlocks->jobs->list([]);
+        $result = $this->client->phoneNumberBlocks->jobs->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobListResponse::class, $result);
@@ -62,9 +62,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock([
-            'phoneNumberBlockID' => 'f3946371-7199-4261-9c3d-81a0d7935146',
-        ]);
+        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
+            phoneNumberBlockID: 'f3946371-7199-4261-9c3d-81a0d7935146'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobDeletePhoneNumberBlockResponse::class, $result);
@@ -77,9 +77,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock([
-            'phoneNumberBlockID' => 'f3946371-7199-4261-9c3d-81a0d7935146',
-        ]);
+        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
+            phoneNumberBlockID: 'f3946371-7199-4261-9c3d-81a0d7935146'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobDeletePhoneNumberBlockResponse::class, $result);

@@ -14,6 +14,8 @@ interface ConnectionsContract
     /**
      * @api
      *
+     * @param string $userConnectionID The connection id
+     *
      * @throws APIException
      */
     public function retrieve(
@@ -32,6 +34,8 @@ interface ConnectionsContract
 
     /**
      * @api
+     *
+     * @param string $userConnectionID The user integration connection identifier
      *
      * @throws APIException
      */

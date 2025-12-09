@@ -42,13 +42,13 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->create([
-            'country' => 'US',
-            'displayName' => 'ABC Mobile',
-            'email' => 'email',
-            'entityType' => EntityType::PRIVATE_PROFIT,
-            'vertical' => Vertical::TECHNOLOGY,
-        ]);
+        $result = $this->client->brand->create(
+            country: 'US',
+            displayName: 'ABC Mobile',
+            email: 'email',
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxBrand::class, $result);
@@ -61,32 +61,32 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->create([
-            'country' => 'US',
-            'displayName' => 'ABC Mobile',
-            'email' => 'email',
-            'entityType' => EntityType::PRIVATE_PROFIT,
-            'vertical' => Vertical::TECHNOLOGY,
-            'businessContactEmail' => 'name@example.com',
-            'city' => 'New York',
-            'companyName' => 'ABC Inc.',
-            'ein' => '111111111',
-            'firstName' => 'John',
-            'ipAddress' => 'ipAddress',
-            'isReseller' => true,
-            'lastName' => 'Smith',
-            'mobilePhone' => '+12024567890',
-            'mock' => true,
-            'phone' => '+12024567890',
-            'postalCode' => '10001',
-            'state' => 'NY',
-            'stockExchange' => StockExchange::NASDAQ,
-            'stockSymbol' => 'ABC',
-            'street' => '123',
-            'webhookFailoverURL' => 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',
-            'webhookURL' => 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
-            'website' => 'http://www.abcmobile.com',
-        ]);
+        $result = $this->client->brand->create(
+            country: 'US',
+            displayName: 'ABC Mobile',
+            email: 'email',
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
+            businessContactEmail: 'name@example.com',
+            city: 'New York',
+            companyName: 'ABC Inc.',
+            ein: '111111111',
+            firstName: 'John',
+            ipAddress: 'ipAddress',
+            isReseller: true,
+            lastName: 'Smith',
+            mobilePhone: '+12024567890',
+            mock: true,
+            phone: '+12024567890',
+            postalCode: '10001',
+            state: 'NY',
+            stockExchange: StockExchange::NASDAQ,
+            stockSymbol: 'ABC',
+            street: '123',
+            webhookFailoverURL: 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',
+            webhookURL: 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
+            website: 'http://www.abcmobile.com',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxBrand::class, $result);
@@ -114,13 +114,11 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->update(
             'brandId',
-            [
-                'country' => 'US',
-                'displayName' => 'ABC Mobile',
-                'email' => 'email',
-                'entityType' => EntityType::PRIVATE_PROFIT,
-                'vertical' => Vertical::TECHNOLOGY,
-            ],
+            country: 'US',
+            displayName: 'ABC Mobile',
+            email: 'email',
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -136,33 +134,31 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->update(
             'brandId',
-            [
-                'country' => 'US',
-                'displayName' => 'ABC Mobile',
-                'email' => 'email',
-                'entityType' => EntityType::PRIVATE_PROFIT,
-                'vertical' => Vertical::TECHNOLOGY,
-                'altBusinessID' => 'altBusiness_id',
-                'altBusinessIDType' => AltBusinessIDType::NONE,
-                'businessContactEmail' => 'name@example.com',
-                'city' => 'New York',
-                'companyName' => 'ABC Inc.',
-                'ein' => '111111111',
-                'firstName' => 'John',
-                'identityStatus' => BrandIdentityStatus::VERIFIED,
-                'ipAddress' => 'ipAddress',
-                'isReseller' => true,
-                'lastName' => 'Smith',
-                'phone' => '+12024567890',
-                'postalCode' => '10001',
-                'state' => 'NY',
-                'stockExchange' => StockExchange::NASDAQ,
-                'stockSymbol' => 'ABC',
-                'street' => '123',
-                'webhookFailoverURL' => 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',
-                'webhookURL' => 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
-                'website' => 'http://www.abcmobile.com',
-            ],
+            country: 'US',
+            displayName: 'ABC Mobile',
+            email: 'email',
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
+            altBusinessID: 'altBusiness_id',
+            altBusinessIDType: AltBusinessIDType::NONE,
+            businessContactEmail: 'name@example.com',
+            city: 'New York',
+            companyName: 'ABC Inc.',
+            ein: '111111111',
+            firstName: 'John',
+            identityStatus: BrandIdentityStatus::VERIFIED,
+            ipAddress: 'ipAddress',
+            isReseller: true,
+            lastName: 'Smith',
+            phone: '+12024567890',
+            postalCode: '10001',
+            state: 'NY',
+            stockExchange: StockExchange::NASDAQ,
+            stockSymbol: 'ABC',
+            street: '123',
+            webhookFailoverURL: 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',
+            webhookURL: 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
+            website: 'http://www.abcmobile.com',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -176,7 +172,7 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->list([]);
+        $result = $this->client->brand->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(BrandListResponse::class, $result);

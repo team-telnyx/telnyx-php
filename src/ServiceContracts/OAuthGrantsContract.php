@@ -7,7 +7,6 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
-use Telnyx\OAuthGrants\OAuthGrantListParams;
 use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 
@@ -15,6 +14,8 @@ interface OAuthGrantsContract
 {
     /**
      * @api
+     *
+     * @param string $id OAuth grant ID
      *
      * @throws APIException
      */
@@ -26,17 +27,21 @@ interface OAuthGrantsContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthGrantListParams $params
+     * @param int $pageNumber Page number
+     * @param int $pageSize Number of results per page
      *
      * @throws APIException
      */
     public function list(
-        array|OAuthGrantListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        ?RequestOptions $requestOptions = null,
     ): OAuthGrantListResponse;
 
     /**
      * @api
+     *
+     * @param string $id OAuth grant ID
      *
      * @throws APIException
      */

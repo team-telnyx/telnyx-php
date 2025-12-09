@@ -7,7 +7,6 @@ namespace Telnyx\Services\AI\Integrations;
 use Telnyx\AI\Integrations\Connections\ConnectionGetResponse;
 use Telnyx\AI\Integrations\Connections\ConnectionListResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Integrations\ConnectionsContract;
@@ -15,14 +14,24 @@ use Telnyx\ServiceContracts\AI\Integrations\ConnectionsContract;
 final class ConnectionsService implements ConnectionsContract
 {
     /**
+     * @api
+     */
+    public ConnectionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ConnectionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Get user setup integrations
+     *
+     * @param string $userConnectionID The connection id
      *
      * @throws APIException
      */
@@ -30,13 +39,8 @@ final class ConnectionsService implements ConnectionsContract
         string $userConnectionID,
         ?RequestOptions $requestOptions = null
     ): ConnectionGetResponse {
-        /** @var BaseResponse<ConnectionGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/integrations/connections/%1$s', $userConnectionID],
-            options: $requestOptions,
-            convert: ConnectionGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($userConnectionID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -51,13 +55,8 @@ final class ConnectionsService implements ConnectionsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): ConnectionListResponse {
-        /** @var BaseResponse<ConnectionListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/integrations/connections',
-            options: $requestOptions,
-            convert: ConnectionListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -67,19 +66,16 @@ final class ConnectionsService implements ConnectionsContract
      *
      * Delete a specific integration connection.
      *
+     * @param string $userConnectionID The user integration connection identifier
+     *
      * @throws APIException
      */
     public function delete(
         string $userConnectionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['ai/integrations/connections/%1$s', $userConnectionID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($userConnectionID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

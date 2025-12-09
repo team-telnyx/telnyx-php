@@ -1,0 +1,138 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Services;
+
+use Telnyx\Client;
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\RequestOptions;
+use Telnyx\ServiceContracts\WireguardInterfacesRawContract;
+use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
+use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
+
+final class WireguardInterfacesRawService implements WireguardInterfacesRawContract
+{
+    // @phpstan-ignore-next-line
+    /**
+     * @internal
+     */
+    public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
+     *
+     * @param array{
+     *   networkID: string, regionCode: string, enableSipTrunking?: bool, name?: string
+     * }|WireguardInterfaceCreateParams $params
+     *
+     * @return BaseResponse<WireguardInterfaceNewResponse>
+     *
+     * @throws APIException
+     */
+    public function create(
+        array|WireguardInterfaceCreateParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = WireguardInterfaceCreateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'wireguard_interfaces',
+            body: (object) $parsed,
+            options: $options,
+            convert: WireguardInterfaceNewResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve a WireGuard Interfaces.
+     *
+     * @param string $id identifies the resource
+     *
+     * @return BaseResponse<WireguardInterfaceGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $id,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['wireguard_interfaces/%1$s', $id],
+            options: $requestOptions,
+            convert: WireguardInterfaceGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * List all WireGuard Interfaces.
+     *
+     * @param array{
+     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
+     * }|WireguardInterfaceListParams $params
+     *
+     * @return BaseResponse<WireguardInterfaceListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|WireguardInterfaceListParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = WireguardInterfaceListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'wireguard_interfaces',
+            query: $parsed,
+            options: $options,
+            convert: WireguardInterfaceListResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Delete a WireGuard Interface.
+     *
+     * @param string $id identifies the resource
+     *
+     * @return BaseResponse<WireguardInterfaceDeleteResponse>
+     *
+     * @throws APIException
+     */
+    public function delete(
+        string $id,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'delete',
+            path: ['wireguard_interfaces/%1$s', $id],
+            options: $requestOptions,
+            convert: WireguardInterfaceDeleteResponse::class,
+        );
+    }
+}

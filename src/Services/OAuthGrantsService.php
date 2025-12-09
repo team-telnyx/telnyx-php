@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
-use Telnyx\OAuthGrants\OAuthGrantListParams;
 use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsContract;
@@ -18,14 +15,24 @@ use Telnyx\ServiceContracts\OAuthGrantsContract;
 final class OAuthGrantsService implements OAuthGrantsContract
 {
     /**
+     * @api
+     */
+    public OAuthGrantsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new OAuthGrantsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a single OAuth grant by ID
+     *
+     * @param string $id OAuth grant ID
      *
      * @throws APIException
      */
@@ -33,13 +40,8 @@ final class OAuthGrantsService implements OAuthGrantsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantGetResponse {
-        /** @var BaseResponse<OAuthGrantGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['oauth_grants/%1$s', $id],
-            options: $requestOptions,
-            convert: OAuthGrantGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -49,30 +51,22 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * Retrieve a paginated list of OAuth grants for the authenticated user
      *
-     * @param array{pageNumber?: int, pageSize?: int}|OAuthGrantListParams $params
+     * @param int $pageNumber Page number
+     * @param int $pageSize Number of results per page
      *
      * @throws APIException
      */
     public function list(
-        array|OAuthGrantListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        ?RequestOptions $requestOptions = null,
     ): OAuthGrantListResponse {
-        [$parsed, $options] = OAuthGrantListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<OAuthGrantListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'oauth_grants',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
-            options: $options,
-            convert: OAuthGrantListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -82,19 +76,16 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * Revoke an OAuth grant
      *
+     * @param string $id OAuth grant ID
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantDeleteResponse {
-        /** @var BaseResponse<OAuthGrantDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['oauth_grants/%1$s', $id],
-            options: $requestOptions,
-            convert: OAuthGrantDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

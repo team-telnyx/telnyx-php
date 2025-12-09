@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
-use Telnyx\RoomCompositions\RoomCompositionListParams;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
 use Telnyx\RoomCompositions\RoomCompositionListResponse;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
@@ -20,53 +17,66 @@ use Telnyx\ServiceContracts\RoomCompositionsContract;
 final class RoomCompositionsService implements RoomCompositionsContract
 {
     /**
+     * @api
+     */
+    public RoomCompositionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RoomCompositionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Asynchronously create a room composition.
      *
-     * @param array{
-     *   format?: string|null,
-     *   resolution?: string|null,
-     *   sessionID?: string|null,
-     *   videoLayout?: array<string,array{
-     *     height?: int|null,
-     *     maxColumns?: int|null,
-     *     maxRows?: int|null,
-     *     videoSources?: list<string>,
-     *     width?: int|null,
-     *     xPos?: int|null,
-     *     yPos?: int|null,
-     *     zPos?: int|null,
-     *   }|VideoRegion>,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string,
-     *   webhookTimeoutSecs?: int|null,
-     * }|RoomCompositionCreateParams $params
+     * @param string|null $format the desired format of the room composition
+     * @param string|null $resolution The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720
+     * @param string|null $sessionID id of the room session associated with the room composition
+     * @param array<string,array{
+     *   height?: int|null,
+     *   maxColumns?: int|null,
+     *   maxRows?: int|null,
+     *   videoSources?: list<string>,
+     *   width?: int|null,
+     *   xPos?: int|null,
+     *   yPos?: int|null,
+     *   zPos?: int|null,
+     * }|VideoRegion> $videoLayout Describes the video layout of the room composition in terms of regions
+     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventURL The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
+     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
     public function create(
-        array|RoomCompositionCreateParams $params,
+        ?string $format = 'mp4',
+        ?string $resolution = '1280x720',
+        ?string $sessionID = null,
+        ?array $videoLayout = null,
+        ?string $webhookEventFailoverURL = '',
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): RoomCompositionNewResponse {
-        [$parsed, $options] = RoomCompositionCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'format' => $format,
+            'resolution' => $resolution,
+            'sessionID' => $sessionID,
+            'videoLayout' => $videoLayout,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RoomCompositionNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'room_compositions',
-            body: (object) $parsed,
-            options: $options,
-            convert: RoomCompositionNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -76,19 +86,16 @@ final class RoomCompositionsService implements RoomCompositionsContract
      *
      * View a room composition.
      *
+     * @param string $roomCompositionID the unique identifier of a room composition
+     *
      * @throws APIException
      */
     public function retrieve(
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
     ): RoomCompositionGetResponse {
-        /** @var BaseResponse<RoomCompositionGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['room_compositions/%1$s', $roomCompositionID],
-            options: $requestOptions,
-            convert: RoomCompositionGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($roomCompositionID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -99,37 +106,31 @@ final class RoomCompositionsService implements RoomCompositionsContract
      * View a list of room compositions.
      *
      * @param array{
-     *   filter?: array{
-     *     dateCreatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     sessionID?: string,
-     *     status?: 'completed'|'processing'|'enqueued'|Status,
+     *   dateCreatedAt?: array{
+     *     eq?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
      *   },
-     *   page?: array{number?: int, size?: int},
-     * }|RoomCompositionListParams $params
+     *   sessionID?: string,
+     *   status?: 'completed'|'processing'|'enqueued'|Status,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|RoomCompositionListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): RoomCompositionListResponse {
-        [$parsed, $options] = RoomCompositionListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RoomCompositionListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'room_compositions',
-            query: $parsed,
-            options: $options,
-            convert: RoomCompositionListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -139,19 +140,16 @@ final class RoomCompositionsService implements RoomCompositionsContract
      *
      * Synchronously delete a room composition.
      *
+     * @param string $roomCompositionID the unique identifier of a room composition
+     *
      * @throws APIException
      */
     public function delete(
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['room_compositions/%1$s', $roomCompositionID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($roomCompositionID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

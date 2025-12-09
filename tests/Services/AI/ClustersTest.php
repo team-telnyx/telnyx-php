@@ -36,7 +36,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->retrieve('task_id', []);
+        $result = $this->client->ai->clusters->retrieve('task_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ClusterGetResponse::class, $result);
@@ -49,7 +49,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->list([]);
+        $result = $this->client->ai->clusters->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ClusterListResponse::class, $result);
@@ -75,7 +75,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->compute(['bucket' => 'bucket']);
+        $result = $this->client->ai->clusters->compute(bucket: 'bucket');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ClusterComputeResponse::class, $result);
@@ -88,13 +88,13 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->compute([
-            'bucket' => 'bucket',
-            'files' => ['string'],
-            'minClusterSize' => 0,
-            'minSubclusterSize' => 0,
-            'prefix' => 'prefix',
-        ]);
+        $result = $this->client->ai->clusters->compute(
+            bucket: 'bucket',
+            files: ['string'],
+            minClusterSize: 0,
+            minSubclusterSize: 0,
+            prefix: 'prefix',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ClusterComputeResponse::class, $result);
@@ -107,7 +107,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism doesn\'t support image/png responses');
         }
 
-        $result = $this->client->ai->clusters->fetchGraph('task_id', []);
+        $result = $this->client->ai->clusters->fetchGraph('task_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsString($result);

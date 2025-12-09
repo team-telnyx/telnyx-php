@@ -37,7 +37,7 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->create(['name' => 'Test Profile']);
+        $result = $this->client->verifyProfiles->create(name: 'Test Profile');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VerifyProfileData::class, $result);
@@ -50,21 +50,21 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->create([
-            'name' => 'Test Profile',
-            'call' => [
+        $result = $this->client->verifyProfiles->create(
+            name: 'Test Profile',
+            call: [
                 'appName' => 'Example Secure App',
                 'codeLength' => 6,
                 'defaultVerificationTimeoutSecs' => 300,
                 'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
-            'flashcall' => [
+            flashcall: [
                 'defaultVerificationTimeoutSecs' => 300,
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
-            'language' => 'en-US',
-            'sms' => [
+            language: 'en-US',
+            sms: [
                 'whitelistedDestinations' => ['US', 'CA'],
                 'alphaSender' => 'sqF',
                 'appName' => 'Example Secure App',
@@ -72,9 +72,9 @@ final class VerifyProfilesTest extends TestCase
                 'defaultVerificationTimeoutSecs' => 300,
                 'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
             ],
-            'webhookFailoverURL' => 'http://example.com/webhook/failover',
-            'webhookURL' => 'http://example.com/webhook',
-        ]);
+            webhookFailoverURL: 'http://example.com/webhook/failover',
+            webhookURL: 'http://example.com/webhook',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VerifyProfileData::class, $result);
@@ -103,8 +103,7 @@ final class VerifyProfilesTest extends TestCase
         }
 
         $result = $this->client->verifyProfiles->update(
-            '12ade33a-21c0-473b-b055-b3c836e1c292',
-            []
+            '12ade33a-21c0-473b-b055-b3c836e1c292'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -118,7 +117,7 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->list([]);
+        $result = $this->client->verifyProfiles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VerifyProfileListResponse::class, $result);
@@ -146,9 +145,9 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->createTemplate([
-            'text' => 'Your {{app_name}} verification code is: {{code}}.',
-        ]);
+        $result = $this->client->verifyProfiles->createTemplate(
+            text: 'Your {{app_name}} verification code is: {{code}}.'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageTemplate::class, $result);
@@ -161,9 +160,9 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->createTemplate([
-            'text' => 'Your {{app_name}} verification code is: {{code}}.',
-        ]);
+        $result = $this->client->verifyProfiles->createTemplate(
+            text: 'Your {{app_name}} verification code is: {{code}}.'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageTemplate::class, $result);
@@ -191,7 +190,7 @@ final class VerifyProfilesTest extends TestCase
 
         $result = $this->client->verifyProfiles->updateTemplate(
             '12ade33a-21c0-473b-b055-b3c836e1c292',
-            ['text' => 'Your {{app_name}} verification code is: {{code}}.'],
+            text: 'Your {{app_name}} verification code is: {{code}}.',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -207,7 +206,7 @@ final class VerifyProfilesTest extends TestCase
 
         $result = $this->client->verifyProfiles->updateTemplate(
             '12ade33a-21c0-473b-b055-b3c836e1c292',
-            ['text' => 'Your {{app_name}} verification code is: {{code}}.'],
+            text: 'Your {{app_name}} verification code is: {{code}}.',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Balance\BalanceGetResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BalanceContract;
@@ -14,9 +13,17 @@ use Telnyx\ServiceContracts\BalanceContract;
 final class BalanceService implements BalanceContract
 {
     /**
+     * @api
+     */
+    public BalanceRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new BalanceRawService($client);
+    }
 
     /**
      * @api
@@ -28,13 +35,8 @@ final class BalanceService implements BalanceContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): BalanceGetResponse {
-        /** @var BaseResponse<BalanceGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'balance',
-            options: $requestOptions,
-            convert: BalanceGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(requestOptions: $requestOptions);
 
         return $response->parse();
     }

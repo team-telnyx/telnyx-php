@@ -5,26 +5,28 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
 use Telnyx\VerifyProfiles\MessageTemplate;
-use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
-use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
-use Telnyx\VerifyProfiles\VerifyProfileListParams;
 use Telnyx\VerifyProfiles\VerifyProfileListResponse;
-use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
-use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 
 final class VerifyProfilesService implements VerifyProfilesContract
 {
     /**
+     * @api
+     */
+    public VerifyProfilesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new VerifyProfilesRawService($client);
+    }
 
     /**
      * @api
@@ -32,49 +34,50 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * Creates a new Verify profile to associate verifications with.
      *
      * @param array{
-     *   name: string,
-     *   call?: array{
-     *     appName?: string,
-     *     codeLength?: int,
-     *     defaultVerificationTimeoutSecs?: int,
-     *     messagingTemplateID?: string,
-     *     whitelistedDestinations?: list<string>,
-     *   },
-     *   flashcall?: array{
-     *     defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
-     *   },
-     *   language?: string,
-     *   sms?: array{
-     *     whitelistedDestinations: list<string>,
-     *     alphaSender?: string|null,
-     *     appName?: string,
-     *     codeLength?: int,
-     *     defaultVerificationTimeoutSecs?: int,
-     *     messagingTemplateID?: string,
-     *   },
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|VerifyProfileCreateParams $params
+     *   appName?: string,
+     *   codeLength?: int,
+     *   defaultVerificationTimeoutSecs?: int,
+     *   messagingTemplateID?: string,
+     *   whitelistedDestinations?: list<string>,
+     * } $call
+     * @param array{
+     *   defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
+     * } $flashcall
+     * @param array{
+     *   whitelistedDestinations: list<string>,
+     *   alphaSender?: string|null,
+     *   appName?: string,
+     *   codeLength?: int,
+     *   defaultVerificationTimeoutSecs?: int,
+     *   messagingTemplateID?: string,
+     * } $sms
      *
      * @throws APIException
      */
     public function create(
-        array|VerifyProfileCreateParams $params,
+        string $name,
+        ?array $call = null,
+        ?array $flashcall = null,
+        ?string $language = null,
+        ?array $sms = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
-        [$parsed, $options] = VerifyProfileCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'name' => $name,
+            'call' => $call,
+            'flashcall' => $flashcall,
+            'language' => $language,
+            'sms' => $sms,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerifyProfileData> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'verify_profiles',
-            body: (object) $parsed,
-            options: $options,
-            convert: VerifyProfileData::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -84,19 +87,16 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Gets a single Verify profile.
      *
+     * @param string $verifyProfileID the identifier of the Verify profile to retrieve
+     *
      * @throws APIException
      */
     public function retrieve(
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileData {
-        /** @var BaseResponse<VerifyProfileData> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['verify_profiles/%1$s', $verifyProfileID],
-            options: $requestOptions,
-            convert: VerifyProfileData::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($verifyProfileID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -106,51 +106,53 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Update Verify profile
      *
+     * @param string $verifyProfileID the identifier of the Verify profile to update
      * @param array{
-     *   call?: array{
-     *     appName?: string,
-     *     codeLength?: int,
-     *     defaultVerificationTimeoutSecs?: int,
-     *     messagingTemplateID?: string,
-     *     whitelistedDestinations?: list<string>,
-     *   },
-     *   flashcall?: array{
-     *     defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
-     *   },
-     *   language?: string,
-     *   name?: string,
-     *   sms?: array{
-     *     alphaSender?: string|null,
-     *     appName?: string,
-     *     codeLength?: int,
-     *     defaultVerificationTimeoutSecs?: int,
-     *     messagingTemplateID?: string,
-     *     whitelistedDestinations?: list<string>,
-     *   },
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|VerifyProfileUpdateParams $params
+     *   appName?: string,
+     *   codeLength?: int,
+     *   defaultVerificationTimeoutSecs?: int,
+     *   messagingTemplateID?: string,
+     *   whitelistedDestinations?: list<string>,
+     * } $call
+     * @param array{
+     *   defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
+     * } $flashcall
+     * @param array{
+     *   alphaSender?: string|null,
+     *   appName?: string,
+     *   codeLength?: int,
+     *   defaultVerificationTimeoutSecs?: int,
+     *   messagingTemplateID?: string,
+     *   whitelistedDestinations?: list<string>,
+     * } $sms
      *
      * @throws APIException
      */
     public function update(
         string $verifyProfileID,
-        array|VerifyProfileUpdateParams $params,
+        ?array $call = null,
+        ?array $flashcall = null,
+        ?string $language = null,
+        ?string $name = null,
+        ?array $sms = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
-        [$parsed, $options] = VerifyProfileUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'call' => $call,
+            'flashcall' => $flashcall,
+            'language' => $language,
+            'name' => $name,
+            'sms' => $sms,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerifyProfileData> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['verify_profiles/%1$s', $verifyProfileID],
-            body: (object) $parsed,
-            options: $options,
-            convert: VerifyProfileData::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($verifyProfileID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -161,28 +163,25 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * Gets a paginated list of Verify profiles.
      *
      * @param array{
-     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
-     * }|VerifyProfileListParams $params
+     *   name?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|VerifyProfileListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): VerifyProfileListResponse {
-        [$parsed, $options] = VerifyProfileListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerifyProfileListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'verify_profiles',
-            query: $parsed,
-            options: $options,
-            convert: VerifyProfileListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -192,19 +191,16 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Delete Verify profile
      *
+     * @param string $verifyProfileID the identifier of the Verify profile to delete
+     *
      * @throws APIException
      */
     public function delete(
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileData {
-        /** @var BaseResponse<VerifyProfileData> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['verify_profiles/%1$s', $verifyProfileID],
-            options: $requestOptions,
-            convert: VerifyProfileData::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($verifyProfileID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -214,27 +210,18 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Create a new Verify profile message template.
      *
-     * @param array{text: string}|VerifyProfileCreateTemplateParams $params
+     * @param string $text the text content of the message template
      *
      * @throws APIException
      */
     public function createTemplate(
-        array|VerifyProfileCreateTemplateParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $text,
+        ?RequestOptions $requestOptions = null
     ): MessageTemplate {
-        [$parsed, $options] = VerifyProfileCreateTemplateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['text' => $text];
 
-        /** @var BaseResponse<MessageTemplate> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'verify_profiles/templates',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageTemplate::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createTemplate(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -249,13 +236,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
     public function retrieveTemplates(
         ?RequestOptions $requestOptions = null
     ): VerifyProfileGetTemplatesResponse {
-        /** @var BaseResponse<VerifyProfileGetTemplatesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'verify_profiles/templates',
-            options: $requestOptions,
-            convert: VerifyProfileGetTemplatesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveTemplates(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -265,28 +247,20 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Update an existing Verify profile message template.
      *
-     * @param array{text: string}|VerifyProfileUpdateTemplateParams $params
+     * @param string $templateID the identifier of the message template to update
+     * @param string $text the text content of the message template
      *
      * @throws APIException
      */
     public function updateTemplate(
         string $templateID,
-        array|VerifyProfileUpdateTemplateParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $text,
+        ?RequestOptions $requestOptions = null
     ): MessageTemplate {
-        [$parsed, $options] = VerifyProfileUpdateTemplateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['text' => $text];
 
-        /** @var BaseResponse<MessageTemplate> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['verify_profiles/templates/%1$s', $templateID],
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageTemplate::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateTemplate($templateID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

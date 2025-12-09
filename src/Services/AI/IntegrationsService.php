@@ -7,7 +7,6 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Integrations\IntegrationGetResponse;
 use Telnyx\AI\Integrations\IntegrationListResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\IntegrationsContract;
@@ -18,6 +17,11 @@ final class IntegrationsService implements IntegrationsContract
     /**
      * @api
      */
+    public IntegrationsRawService $raw;
+
+    /**
+     * @api
+     */
     public ConnectionsService $connections;
 
     /**
@@ -25,6 +29,7 @@ final class IntegrationsService implements IntegrationsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new IntegrationsRawService($client);
         $this->connections = new ConnectionsService($client);
     }
 
@@ -33,19 +38,16 @@ final class IntegrationsService implements IntegrationsContract
      *
      * Retrieve integration details
      *
+     * @param string $integrationID The integration id
+     *
      * @throws APIException
      */
     public function retrieve(
         string $integrationID,
         ?RequestOptions $requestOptions = null
     ): IntegrationGetResponse {
-        /** @var BaseResponse<IntegrationGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/integrations/%1$s', $integrationID],
-            options: $requestOptions,
-            convert: IntegrationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($integrationID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,13 +62,8 @@ final class IntegrationsService implements IntegrationsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): IntegrationListResponse {
-        /** @var BaseResponse<IntegrationListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/integrations',
-            options: $requestOptions,
-            convert: IntegrationListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }

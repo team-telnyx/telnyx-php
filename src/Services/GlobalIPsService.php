@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
-use Telnyx\GlobalIPs\GlobalIPListParams;
 use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
@@ -19,38 +16,43 @@ use Telnyx\ServiceContracts\GlobalIPsContract;
 final class GlobalIPsService implements GlobalIPsContract
 {
     /**
+     * @api
+     */
+    public GlobalIPsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a Global IP.
      *
-     * @param array{
-     *   description?: string, name?: string, ports?: array<string,mixed>
-     * }|GlobalIPCreateParams $params
+     * @param string $description a user specified description for the address
+     * @param string $name a user specified name for the address
+     * @param array<string,mixed> $ports a Global IP ports grouped by protocol code
      *
      * @throws APIException
      */
     public function create(
-        array|GlobalIPCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $description = null,
+        ?string $name = null,
+        ?array $ports = null,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPNewResponse {
-        [$parsed, $options] = GlobalIPCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'description' => $description, 'name' => $name, 'ports' => $ports,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'global_ips',
-            body: (object) $parsed,
-            options: $options,
-            convert: GlobalIPNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,19 +62,16 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * Retrieve a Global IP.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPGetResponse {
-        /** @var BaseResponse<GlobalIPGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['global_ips/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -82,27 +81,22 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * List all Global IPs.
      *
-     * @param array{page?: array{number?: int, size?: int}}|GlobalIPListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|GlobalIPListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): GlobalIPListResponse {
-        [$parsed, $options] = GlobalIPListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'global_ips',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -112,19 +106,16 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * Delete a Global IP.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPDeleteResponse {
-        /** @var BaseResponse<GlobalIPDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['global_ips/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,60 +5,63 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
-use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
-use Telnyx\RequirementGroups\RequirementGroupCreateParams;
-use Telnyx\RequirementGroups\RequirementGroupCreateParams\Action;
-use Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType;
-use Telnyx\RequirementGroups\RequirementGroupListParams;
+use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Action;
+use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\PhoneNumberType;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
-use Telnyx\RequirementGroups\RequirementGroupUpdateParams;
 use Telnyx\ServiceContracts\RequirementGroupsContract;
 
 final class RequirementGroupsService implements RequirementGroupsContract
 {
     /**
+     * @api
+     */
+    public RequirementGroupsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RequirementGroupsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new requirement group
      *
-     * @param array{
-     *   action: 'ordering'|'porting'|Action,
-     *   countryCode: string,
-     *   phoneNumberType: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     *   customerReference?: string,
-     *   regulatoryRequirements?: list<array{
-     *     fieldValue?: string, requirementID?: string
-     *   }>,
-     * }|RequirementGroupCreateParams $params
+     * @param 'ordering'|'porting'|\Telnyx\RequirementGroups\RequirementGroupCreateParams\Action $action
+     * @param string $countryCode ISO alpha 2 country code
+     * @param 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|\Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType $phoneNumberType
+     * @param list<array{
+     *   fieldValue?: string, requirementID?: string
+     * }> $regulatoryRequirements
      *
      * @throws APIException
      */
     public function create(
-        array|RequirementGroupCreateParams $params,
+        string|\Telnyx\RequirementGroups\RequirementGroupCreateParams\Action $action,
+        string $countryCode,
+        string|\Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType $phoneNumberType,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): RequirementGroup {
-        [$parsed, $options] = RequirementGroupCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'action' => $action,
+            'countryCode' => $countryCode,
+            'phoneNumberType' => $phoneNumberType,
+            'customerReference' => $customerReference,
+            'regulatoryRequirements' => $regulatoryRequirements,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RequirementGroup> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'requirement_groups',
-            body: (object) $parsed,
-            options: $options,
-            convert: RequirementGroup::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -68,19 +71,16 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * Get a single requirement group by ID
      *
+     * @param string $id ID of the requirement group to retrieve
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        /** @var BaseResponse<RequirementGroup> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['requirement_groups/%1$s', $id],
-            options: $requestOptions,
-            convert: RequirementGroup::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -90,33 +90,29 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * Update requirement values in requirement group
      *
-     * @param array{
-     *   customerReference?: string,
-     *   regulatoryRequirements?: list<array{
-     *     fieldValue?: string, requirementID?: string
-     *   }>,
-     * }|RequirementGroupUpdateParams $params
+     * @param string $id ID of the requirement group
+     * @param string $customerReference Reference for the customer
+     * @param list<array{
+     *   fieldValue?: string, requirementID?: string
+     * }> $regulatoryRequirements
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|RequirementGroupUpdateParams $params,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): RequirementGroup {
-        [$parsed, $options] = RequirementGroupUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'customerReference' => $customerReference,
+            'regulatoryRequirements' => $regulatoryRequirements,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RequirementGroup> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['requirement_groups/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: RequirementGroup::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -127,36 +123,27 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * List requirement groups
      *
      * @param array{
-     *   filter?: array{
-     *     action?: 'ordering'|'porting'|'action'|RequirementGroupListParams\Filter\Action,
-     *     countryCode?: string,
-     *     customerReference?: string,
-     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|RequirementGroupListParams\Filter\PhoneNumberType,
-     *     status?: 'approved'|'unapproved'|'pending-approval'|'declined'|'expired'|Status,
-     *   },
-     * }|RequirementGroupListParams $params
+     *   action?: 'ordering'|'porting'|'action'|Action,
+     *   countryCode?: string,
+     *   customerReference?: string,
+     *   phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
+     *   status?: 'approved'|'unapproved'|'pending-approval'|'declined'|'expired'|Status,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference]
      *
      * @return list<RequirementGroup>
      *
      * @throws APIException
      */
     public function list(
-        array|RequirementGroupListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): array {
-        [$parsed, $options] = RequirementGroupListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<RequirementGroup>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'requirement_groups',
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(RequirementGroup::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -166,19 +153,16 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * Delete a requirement group by ID
      *
+     * @param string $id ID of the requirement group
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        /** @var BaseResponse<RequirementGroup> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['requirement_groups/%1$s', $id],
-            options: $requestOptions,
-            convert: RequirementGroup::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -188,19 +172,16 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * Submit a Requirement Group for Approval
      *
+     * @param string $id ID of the requirement group to submit
+     *
      * @throws APIException
      */
     public function submitForApproval(
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
-        /** @var BaseResponse<RequirementGroup> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['requirement_groups/%1$s/submit_for_approval', $id],
-            options: $requestOptions,
-            convert: RequirementGroup::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->submitForApproval($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

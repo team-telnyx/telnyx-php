@@ -34,7 +34,7 @@ final class AvailablePhoneNumberBlocksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->availablePhoneNumberBlocks->list([]);
+        $result = $this->client->availablePhoneNumberBlocks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

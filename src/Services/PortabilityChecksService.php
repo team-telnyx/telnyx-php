@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortabilityChecks\PortabilityCheckRunParams;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortabilityChecksContract;
@@ -15,36 +13,37 @@ use Telnyx\ServiceContracts\PortabilityChecksContract;
 final class PortabilityChecksService implements PortabilityChecksContract
 {
     /**
+     * @api
+     */
+    public PortabilityChecksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PortabilityChecksRawService($client);
+    }
 
     /**
      * @api
      *
      * Runs a portability check, returning the results immediately.
      *
-     * @param array{phoneNumbers?: list<string>}|PortabilityCheckRunParams $params
+     * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers to check for portability
      *
      * @throws APIException
      */
     public function run(
-        array|PortabilityCheckRunParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $phoneNumbers = null,
+        ?RequestOptions $requestOptions = null
     ): PortabilityCheckRunResponse {
-        [$parsed, $options] = PortabilityCheckRunParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['phoneNumbers' => $phoneNumbers];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PortabilityCheckRunResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'portability_checks',
-            body: (object) $parsed,
-            options: $options,
-            convert: PortabilityCheckRunResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->run(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\Payment;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
-use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
 use Telnyx\RequestOptions;
@@ -17,42 +15,50 @@ use Telnyx\ServiceContracts\Payment\AutoRechargePrefsContract;
 final class AutoRechargePrefsService implements AutoRechargePrefsContract
 {
     /**
+     * @api
+     */
+    public AutoRechargePrefsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AutoRechargePrefsRawService($client);
+    }
 
     /**
      * @api
      *
      * Update payment auto recharge preferences.
      *
-     * @param array{
-     *   enabled?: bool,
-     *   invoiceEnabled?: bool,
-     *   preference?: 'credit_paypal'|'ach'|Preference,
-     *   rechargeAmount?: string,
-     *   thresholdAmount?: string,
-     * }|AutoRechargePrefUpdateParams $params
+     * @param bool $enabled whether auto recharge is enabled
+     * @param 'credit_paypal'|'ach'|Preference $preference the payment preference for auto recharge
+     * @param string $rechargeAmount the amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount
+     * @param string $thresholdAmount the threshold amount at which the account will be recharged
      *
      * @throws APIException
      */
     public function update(
-        array|AutoRechargePrefUpdateParams $params,
+        ?bool $enabled = null,
+        ?bool $invoiceEnabled = null,
+        string|Preference|null $preference = null,
+        ?string $rechargeAmount = null,
+        ?string $thresholdAmount = null,
         ?RequestOptions $requestOptions = null,
     ): AutoRechargePrefUpdateResponse {
-        [$parsed, $options] = AutoRechargePrefUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'enabled' => $enabled,
+            'invoiceEnabled' => $invoiceEnabled,
+            'preference' => $preference,
+            'rechargeAmount' => $rechargeAmount,
+            'thresholdAmount' => $thresholdAmount,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AutoRechargePrefUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: 'payment/auto_recharge_prefs',
-            body: (object) $parsed,
-            options: $options,
-            convert: AutoRechargePrefUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -67,13 +73,8 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): AutoRechargePrefListResponse {
-        /** @var BaseResponse<AutoRechargePrefListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'payment/auto_recharge_prefs',
-            options: $requestOptions,
-            convert: AutoRechargePrefListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }

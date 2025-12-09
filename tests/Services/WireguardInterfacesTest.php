@@ -37,10 +37,10 @@ final class WireguardInterfacesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireguardInterfaces->create([
-            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'regionCode' => 'ashburn-va',
-        ]);
+        $result = $this->client->wireguardInterfaces->create(
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            regionCode: 'ashburn-va',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WireguardInterfaceNewResponse::class, $result);
@@ -53,12 +53,12 @@ final class WireguardInterfacesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireguardInterfaces->create([
-            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'regionCode' => 'ashburn-va',
-            'enableSipTrunking' => false,
-            'name' => 'test interface',
-        ]);
+        $result = $this->client->wireguardInterfaces->create(
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            regionCode: 'ashburn-va',
+            enableSipTrunking: false,
+            name: 'test interface',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WireguardInterfaceNewResponse::class, $result);
@@ -86,7 +86,7 @@ final class WireguardInterfacesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireguardInterfaces->list([]);
+        $result = $this->client->wireguardInterfaces->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WireguardInterfaceListResponse::class, $result);

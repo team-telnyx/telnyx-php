@@ -6,13 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\WireguardPeers\WireguardPeerCreateParams;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
-use Telnyx\WireguardPeers\WireguardPeerListParams;
 use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
-use Telnyx\WireguardPeers\WireguardPeerUpdateParams;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 
 interface WireguardPeersContract
@@ -20,17 +17,21 @@ interface WireguardPeersContract
     /**
      * @api
      *
-     * @param array<mixed>|WireguardPeerCreateParams $params
+     * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
+     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      *
      * @throws APIException
      */
     public function create(
-        array|WireguardPeerCreateParams $params,
+        string $wireguardInterfaceID,
+        ?string $publicKey = null,
         ?RequestOptions $requestOptions = null,
     ): WireguardPeerNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -42,30 +43,39 @@ interface WireguardPeersContract
     /**
      * @api
      *
-     * @param array<mixed>|WireguardPeerUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|WireguardPeerUpdateParams $params,
+        ?string $publicKey = null,
         ?RequestOptions $requestOptions = null,
     ): WireguardPeerUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|WireguardPeerListParams $params
+     * @param array{
+     *   wireguardInterfaceID?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|WireguardPeerListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): WireguardPeerListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -76,6 +86,8 @@ interface WireguardPeersContract
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */

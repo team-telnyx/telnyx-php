@@ -35,8 +35,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->messagingHostedNumberOrders->actions->uploadFile(
-            'id',
-            []
+            'id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

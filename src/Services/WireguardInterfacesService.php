@@ -5,52 +5,59 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesContract;
-use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
 
 final class WireguardInterfacesService implements WireguardInterfacesContract
 {
     /**
+     * @api
+     */
+    public WireguardInterfacesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new WireguardInterfacesRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
      *
-     * @param array{
-     *   networkID: string, regionCode: string, enableSipTrunking?: bool, name?: string
-     * }|WireguardInterfaceCreateParams $params
+     * @param string $networkID the id of the network associated with the interface
+     * @param string $regionCode the region the interface should be deployed to
+     * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
+     * @param string $name a user specified name for the interface
      *
      * @throws APIException
      */
     public function create(
-        array|WireguardInterfaceCreateParams $params,
+        string $networkID,
+        string $regionCode,
+        ?bool $enableSipTrunking = null,
+        ?string $name = null,
         ?RequestOptions $requestOptions = null,
     ): WireguardInterfaceNewResponse {
-        [$parsed, $options] = WireguardInterfaceCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'networkID' => $networkID,
+            'regionCode' => $regionCode,
+            'enableSipTrunking' => $enableSipTrunking,
+            'name' => $name,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<WireguardInterfaceNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'wireguard_interfaces',
-            body: (object) $parsed,
-            options: $options,
-            convert: WireguardInterfaceNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,19 +67,16 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * Retrieve a WireGuard Interfaces.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceGetResponse {
-        /** @var BaseResponse<WireguardInterfaceGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['wireguard_interfaces/%1$s', $id],
-            options: $requestOptions,
-            convert: WireguardInterfaceGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -83,28 +87,25 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * List all WireGuard Interfaces.
      *
      * @param array{
-     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
-     * }|WireguardInterfaceListParams $params
+     *   networkID?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|WireguardInterfaceListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): WireguardInterfaceListResponse {
-        [$parsed, $options] = WireguardInterfaceListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<WireguardInterfaceListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'wireguard_interfaces',
-            query: $parsed,
-            options: $options,
-            convert: WireguardInterfaceListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -114,19 +115,16 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * Delete a WireGuard Interface.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceDeleteResponse {
-        /** @var BaseResponse<WireguardInterfaceDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['wireguard_interfaces/%1$s', $id],
-            options: $requestOptions,
-            convert: WireguardInterfaceDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

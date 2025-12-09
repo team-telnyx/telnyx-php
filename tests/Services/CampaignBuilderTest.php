@@ -34,11 +34,11 @@ final class CampaignBuilderTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaignBuilder->create([
-            'brandID' => 'brandId',
-            'description' => 'description',
-            'usecase' => 'usecase',
-        ]);
+        $result = $this->client->campaignBuilder->create(
+            brandID: 'brandId',
+            description: 'description',
+            usecase: 'usecase'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxCampaignCsp::class, $result);
@@ -51,43 +51,43 @@ final class CampaignBuilderTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaignBuilder->create([
-            'brandID' => 'brandId',
-            'description' => 'description',
-            'usecase' => 'usecase',
-            'ageGated' => true,
-            'autoRenewal' => true,
-            'directLending' => true,
-            'embeddedLink' => true,
-            'embeddedLinkSample' => 'embeddedLinkSample',
-            'embeddedPhone' => true,
-            'helpKeywords' => 'helpKeywords',
-            'helpMessage' => 'helpMessage',
-            'messageFlow' => 'messageFlow',
-            'mnoIDs' => [0],
-            'numberPool' => true,
-            'optinKeywords' => 'optinKeywords',
-            'optinMessage' => 'optinMessage',
-            'optoutKeywords' => 'optoutKeywords',
-            'optoutMessage' => 'optoutMessage',
-            'privacyPolicyLink' => 'privacyPolicyLink',
-            'referenceID' => 'referenceId',
-            'resellerID' => 'resellerId',
-            'sample1' => 'sample1',
-            'sample2' => 'sample2',
-            'sample3' => 'sample3',
-            'sample4' => 'sample4',
-            'sample5' => 'sample5',
-            'subscriberHelp' => true,
-            'subscriberOptin' => true,
-            'subscriberOptout' => true,
-            'subUsecases' => ['string'],
-            'tag' => ['string'],
-            'termsAndConditions' => true,
-            'termsAndConditionsLink' => 'termsAndConditionsLink',
-            'webhookFailoverURL' => 'https://webhook.com/93711262-23e5-4048-a966-c0b2a16d5963',
-            'webhookURL' => 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
-        ]);
+        $result = $this->client->campaignBuilder->create(
+            brandID: 'brandId',
+            description: 'description',
+            usecase: 'usecase',
+            ageGated: true,
+            autoRenewal: true,
+            directLending: true,
+            embeddedLink: true,
+            embeddedLinkSample: 'embeddedLinkSample',
+            embeddedPhone: true,
+            helpKeywords: 'helpKeywords',
+            helpMessage: 'helpMessage',
+            messageFlow: 'messageFlow',
+            mnoIDs: [0],
+            numberPool: true,
+            optinKeywords: 'optinKeywords',
+            optinMessage: 'optinMessage',
+            optoutKeywords: 'optoutKeywords',
+            optoutMessage: 'optoutMessage',
+            privacyPolicyLink: 'privacyPolicyLink',
+            referenceID: 'referenceId',
+            resellerID: 'resellerId',
+            sample1: 'sample1',
+            sample2: 'sample2',
+            sample3: 'sample3',
+            sample4: 'sample4',
+            sample5: 'sample5',
+            subscriberHelp: true,
+            subscriberOptin: true,
+            subscriberOptout: true,
+            subUsecases: ['string'],
+            tag: ['string'],
+            termsAndConditions: true,
+            termsAndConditionsLink: 'termsAndConditionsLink',
+            webhookFailoverURL: 'https://webhook.com/93711262-23e5-4048-a966-c0b2a16d5963',
+            webhookURL: 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxCampaignCsp::class, $result);

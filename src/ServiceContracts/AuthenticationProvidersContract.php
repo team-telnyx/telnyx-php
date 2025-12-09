@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
+use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
-use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
+use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
@@ -20,17 +19,32 @@ interface AuthenticationProvidersContract
     /**
      * @api
      *
-     * @param array<mixed>|AuthenticationProviderCreateParams $params
+     * @param string $name the name associated with the authentication provider
+     * @param array{
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
+     * } $settings The settings associated with the authentication provider
+     * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
+     * @param bool $active The active status of the authentication provider
+     * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      *
      * @throws APIException
      */
     public function create(
-        array|AuthenticationProviderCreateParams $params,
+        string $name,
+        array $settings,
+        string $shortName,
+        bool $active = true,
+        ?string $settingsURL = null,
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id authentication provider ID
      *
      * @throws APIException
      */
@@ -42,30 +56,60 @@ interface AuthenticationProvidersContract
     /**
      * @api
      *
-     * @param array<mixed>|AuthenticationProviderUpdateParams $params
+     * @param string $id identifies the resource
+     * @param bool $active The active status of the authentication provider
+     * @param string $name the name associated with the authentication provider
+     * @param array{
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
+     * } $settings The settings associated with the authentication provider
+     * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
+     * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|AuthenticationProviderUpdateParams $params,
+        bool $active = true,
+        ?string $name = null,
+        ?array $settings = null,
+        ?string $settingsURL = null,
+        ?string $shortName = null,
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|AuthenticationProviderListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param 'name'|'-name'|'short_name'|'-short_name'|'active'|'-active'|'created_at'|'-created_at'|'updated_at'|'-updated_at'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
+     * That is: <ul>
+     *   <li>
+     *     <code>name</code>: sorts the result by the
+     *     <code>name</code> field in ascending order.
+     *   </li>
+     *   <li>
+     *     <code>-name</code>: sorts the result by the
+     *     <code>name</code> field in descending order.
+     *   </li>
+     * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|AuthenticationProviderListParams $params,
+        ?array $page = null,
+        string|Sort $sort = '-created_at',
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderListResponse;
 
     /**
      * @api
+     *
+     * @param string $id authentication provider ID
      *
      * @throws APIException
      */

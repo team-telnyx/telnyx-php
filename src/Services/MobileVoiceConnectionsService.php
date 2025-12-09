@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionNewResponse;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobileVoiceConnectionsContract;
@@ -23,46 +18,58 @@ use Telnyx\ServiceContracts\MobileVoiceConnectionsContract;
 final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContract
 {
     /**
+     * @api
+     */
+    public MobileVoiceConnectionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MobileVoiceConnectionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a Mobile Voice Connection
      *
-     * @param array{
-     *   active?: bool,
-     *   connectionName?: string,
-     *   inbound?: array{channelLimit?: int},
-     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
-     *   tags?: list<string>,
-     *   webhookAPIVersion?: '1'|'2'|WebhookAPIVersion,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * }|MobileVoiceConnectionCreateParams $params
+     * @param array{channelLimit?: int} $inbound
+     * @param array{channelLimit?: int, outboundVoiceProfileID?: string} $outbound
+     * @param list<string> $tags
+     * @param '1'|'2'|WebhookAPIVersion $webhookAPIVersion
      *
      * @throws APIException
      */
     public function create(
-        array|MobileVoiceConnectionCreateParams $params,
+        bool $active = true,
+        string $connectionName = 'Telnyx Mobile Voice IMS',
+        ?array $inbound = null,
+        ?array $outbound = null,
+        ?array $tags = null,
+        string|WebhookAPIVersion $webhookAPIVersion = '2',
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): MobileVoiceConnectionNewResponse {
-        [$parsed, $options] = MobileVoiceConnectionCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'active' => $active,
+            'connectionName' => $connectionName,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'tags' => $tags,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MobileVoiceConnectionNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'v2/mobile_voice_connections',
-            body: (object) $parsed,
-            options: $options,
-            convert: MobileVoiceConnectionNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -72,19 +79,16 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *
      * Retrieve a Mobile Voice Connection
      *
+     * @param string $id The ID of the mobile voice connection
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobileVoiceConnectionGetResponse {
-        /** @var BaseResponse<MobileVoiceConnectionGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['v2/mobile_voice_connections/%1$s', $id],
-            options: $requestOptions,
-            convert: MobileVoiceConnectionGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -94,38 +98,43 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *
      * Update a Mobile Voice Connection
      *
-     * @param array{
-     *   active?: bool,
-     *   connectionName?: string,
-     *   inbound?: array{channelLimit?: int},
-     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
-     *   tags?: list<string>,
-     *   webhookAPIVersion?: '1'|'2'|MobileVoiceConnectionUpdateParams\WebhookAPIVersion,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int,
-     * }|MobileVoiceConnectionUpdateParams $params
+     * @param string $id The ID of the mobile voice connection
+     * @param array{channelLimit?: int} $inbound
+     * @param array{channelLimit?: int, outboundVoiceProfileID?: string} $outbound
+     * @param list<string> $tags
+     * @param '1'|'2'|\Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion $webhookAPIVersion
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|MobileVoiceConnectionUpdateParams $params,
+        ?bool $active = null,
+        ?string $connectionName = null,
+        ?array $inbound = null,
+        ?array $outbound = null,
+        ?array $tags = null,
+        string|\Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion|null $webhookAPIVersion = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): MobileVoiceConnectionUpdateResponse {
-        [$parsed, $options] = MobileVoiceConnectionUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'active' => $active,
+            'connectionName' => $connectionName,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'tags' => $tags,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MobileVoiceConnectionUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['v2/mobile_voice_connections/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: MobileVoiceConnectionUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -135,39 +144,31 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *
      * List Mobile Voice Connections
      *
-     * @param array{
-     *   filterConnectionNameContains?: string,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: string,
-     * }|MobileVoiceConnectionListParams $params
+     * @param string $filterConnectionNameContains Filter by connection name containing the given string
+     * @param int $pageNumber The page number to load
+     * @param int $pageSize The size of the page
+     * @param string $sort Sort by field (e.g., created_at, connection_name, active). Prefix with - for descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|MobileVoiceConnectionListParams $params,
+        ?string $filterConnectionNameContains = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?string $sort = null,
         ?RequestOptions $requestOptions = null,
     ): MobileVoiceConnectionListResponse {
-        [$parsed, $options] = MobileVoiceConnectionListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'filterConnectionNameContains' => $filterConnectionNameContains,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+            'sort' => $sort,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MobileVoiceConnectionListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'v2/mobile_voice_connections',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'filterConnectionNameContains' => 'filter[connection_name][contains]',
-                    'pageNumber' => 'page[number]',
-                    'pageSize' => 'page[size]',
-                ],
-            ),
-            options: $options,
-            convert: MobileVoiceConnectionListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -177,19 +178,16 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *
      * Delete a Mobile Voice Connection
      *
+     * @param string $id The ID of the mobile voice connection
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobileVoiceConnectionDeleteResponse {
-        /** @var BaseResponse<MobileVoiceConnectionDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['v2/mobile_voice_connections/%1$s', $id],
-            options: $requestOptions,
-            convert: MobileVoiceConnectionDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

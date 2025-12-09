@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\Comments\CommentCreateParams;
-use Telnyx\PortingOrders\Comments\CommentListParams;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
@@ -17,37 +14,38 @@ use Telnyx\ServiceContracts\PortingOrders\CommentsContract;
 final class CommentsService implements CommentsContract
 {
     /**
+     * @api
+     */
+    public CommentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CommentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a new comment for a porting order.
      *
-     * @param array{body?: string}|CommentCreateParams $params
+     * @param string $id Porting Order id
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $body = null,
+        ?RequestOptions $requestOptions = null
     ): CommentNewResponse {
-        [$parsed, $options] = CommentCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['body' => $body];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CommentNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['porting_orders/%1$s/comments', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: CommentNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -57,28 +55,24 @@ final class CommentsService implements CommentsContract
      *
      * Returns a list of all comments of a porting order.
      *
-     * @param array{page?: array{number?: int, size?: int}}|CommentListParams $params
+     * @param string $id Porting Order id
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|CommentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): CommentListResponse {
-        [$parsed, $options] = CommentListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CommentListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/comments', $id],
-            query: $parsed,
-            options: $options,
-            convert: CommentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

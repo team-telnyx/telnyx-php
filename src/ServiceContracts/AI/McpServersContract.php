@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
-use Telnyx\AI\McpServers\McpServerCreateParams;
 use Telnyx\AI\McpServers\McpServerGetResponse;
-use Telnyx\AI\McpServers\McpServerListParams;
 use Telnyx\AI\McpServers\McpServerListResponseItem;
 use Telnyx\AI\McpServers\McpServerNewResponse;
-use Telnyx\AI\McpServers\McpServerUpdateParams;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -19,12 +16,16 @@ interface McpServersContract
     /**
      * @api
      *
-     * @param array<mixed>|McpServerCreateParams $params
+     * @param list<string>|null $allowedTools
      *
      * @throws APIException
      */
     public function create(
-        array|McpServerCreateParams $params,
+        string $name,
+        string $type,
+        string $url,
+        ?array $allowedTools = null,
+        ?string $apiKeyRef = null,
         ?RequestOptions $requestOptions = null,
     ): McpServerNewResponse;
 
@@ -41,28 +42,35 @@ interface McpServersContract
     /**
      * @api
      *
-     * @param array<mixed>|McpServerUpdateParams $params
+     * @param list<string>|null $allowedTools
      *
      * @throws APIException
      */
     public function update(
         string $mcpServerID,
-        array|McpServerUpdateParams $params,
+        ?string $id = null,
+        ?array $allowedTools = null,
+        ?string $apiKeyRef = null,
+        string|\DateTimeInterface|null $createdAt = null,
+        ?string $name = null,
+        ?string $type = null,
+        ?string $url = null,
         ?RequestOptions $requestOptions = null,
     ): McpServerUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|McpServerListParams $params
-     *
      * @return list<McpServerListResponseItem>
      *
      * @throws APIException
      */
     public function list(
-        array|McpServerListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        ?string $type = null,
+        ?string $url = null,
+        ?RequestOptions $requestOptions = null,
     ): array;
 
     /**

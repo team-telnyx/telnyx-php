@@ -57,7 +57,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCards->actions->list([]);
+        $result = $this->client->simCards->actions->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionListResponse::class, $result);
@@ -70,9 +70,9 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCards->actions->bulkSetPublicIPs([
-            'simCardIDs' => ['6b14e151-8493-4fa1-8664-1cc4e6d14158'],
-        ]);
+        $result = $this->client->simCards->actions->bulkSetPublicIPs(
+            simCardIDs: ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionBulkSetPublicIPsResponse::class, $result);
@@ -85,9 +85,9 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCards->actions->bulkSetPublicIPs([
-            'simCardIDs' => ['6b14e151-8493-4fa1-8664-1cc4e6d14158'],
-        ]);
+        $result = $this->client->simCards->actions->bulkSetPublicIPs(
+            simCardIDs: ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionBulkSetPublicIPsResponse::class, $result);
@@ -146,8 +146,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->simCards->actions->setPublicIP(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            []
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -176,7 +175,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCards->actions->validateRegistrationCodes([]);
+        $result = $this->client->simCards->actions->validateRegistrationCodes();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

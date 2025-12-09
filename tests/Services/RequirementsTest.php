@@ -50,7 +50,7 @@ final class RequirementsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirements->list([]);
+        $result = $this->client->requirements->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RequirementListResponse::class, $result);

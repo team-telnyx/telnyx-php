@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
@@ -18,17 +16,23 @@ interface GlobalIPHealthChecksContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPHealthCheckCreateParams $params
+     * @param string $globalIPID global IP ID
+     * @param array<string,mixed> $healthCheckParams a Global IP health check params
+     * @param string $healthCheckType the Global IP health check type
      *
      * @throws APIException
      */
     public function create(
-        array|GlobalIPHealthCheckCreateParams $params,
+        ?string $globalIPID = null,
+        ?array $healthCheckParams = null,
+        ?string $healthCheckType = null,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPHealthCheckNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -40,17 +44,21 @@ interface GlobalIPHealthChecksContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPHealthCheckListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|GlobalIPHealthCheckListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */

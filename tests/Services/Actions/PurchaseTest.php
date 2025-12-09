@@ -34,7 +34,7 @@ final class PurchaseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->purchase->create(['amount' => 10]);
+        $result = $this->client->actions->purchase->create(amount: 10);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PurchaseNewResponse::class, $result);
@@ -47,14 +47,14 @@ final class PurchaseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->purchase->create([
-            'amount' => 10,
-            'product' => 'whitelabel',
-            'simCardGroupID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'status' => 'standby',
-            'tags' => ['personal', 'customers', 'active-customers'],
-            'whitelabelName' => 'Custom SPN',
-        ]);
+        $result = $this->client->actions->purchase->create(
+            amount: 10,
+            product: 'whitelabel',
+            simCardGroupID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            status: 'standby',
+            tags: ['personal', 'customers', 'active-customers'],
+            whitelabelName: 'Custom SPN',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PurchaseNewResponse::class, $result);

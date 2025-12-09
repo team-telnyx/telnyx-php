@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -20,17 +16,36 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param array<mixed>|LoaConfigurationCreateParams $params
+     * @param array{
+     *   city: string,
+     *   countryCode: string,
+     *   state: string,
+     *   streetAddress: string,
+     *   zipCode: string,
+     *   extendedAddress?: string,
+     * } $address The address of the company
+     * @param string $companyName The name of the company
+     * @param array{
+     *   email: string, phoneNumber: string
+     * } $contact The contact information of the company
+     * @param array{documentID: string} $logo The logo of the LOA configuration
+     * @param string $name The name of the LOA configuration
      *
      * @throws APIException
      */
     public function create(
-        array|LoaConfigurationCreateParams $params,
+        array $address,
+        string $companyName,
+        array $contact,
+        array $logo,
+        string $name,
         ?RequestOptions $requestOptions = null,
     ): LoaConfigurationNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies a LOA configuration
      *
      * @throws APIException
      */
@@ -42,30 +57,52 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param array<mixed>|LoaConfigurationUpdateParams $params
+     * @param string $id identifies a LOA configuration
+     * @param array{
+     *   city: string,
+     *   countryCode: string,
+     *   state: string,
+     *   streetAddress: string,
+     *   zipCode: string,
+     *   extendedAddress?: string,
+     * } $address The address of the company
+     * @param string $companyName The name of the company
+     * @param array{
+     *   email: string, phoneNumber: string
+     * } $contact The contact information of the company
+     * @param array{documentID: string} $logo The logo of the LOA configuration
+     * @param string $name The name of the LOA configuration
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|LoaConfigurationUpdateParams $params,
+        array $address,
+        string $companyName,
+        array $contact,
+        array $logo,
+        string $name,
         ?RequestOptions $requestOptions = null,
     ): LoaConfigurationUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|LoaConfigurationListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|LoaConfigurationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): LoaConfigurationListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies a LOA configuration
      *
      * @throws APIException
      */
@@ -77,17 +114,36 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param array<mixed>|LoaConfigurationPreview0Params $params
+     * @param array{
+     *   city: string,
+     *   countryCode: string,
+     *   state: string,
+     *   streetAddress: string,
+     *   zipCode: string,
+     *   extendedAddress?: string,
+     * } $address The address of the company
+     * @param string $companyName The name of the company
+     * @param array{
+     *   email: string, phoneNumber: string
+     * } $contact The contact information of the company
+     * @param array{documentID: string} $logo The logo of the LOA configuration
+     * @param string $name The name of the LOA configuration
      *
      * @throws APIException
      */
     public function preview0(
-        array|LoaConfigurationPreview0Params $params,
+        array $address,
+        string $companyName,
+        array $contact,
+        array $logo,
+        string $name,
         ?RequestOptions $requestOptions = null,
     ): string;
 
     /**
      * @api
+     *
+     * @param string $id identifies a LOA configuration
      *
      * @throws APIException
      */

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
@@ -24,6 +22,11 @@ use Telnyx\Services\AI\McpServersService;
 
 final class AIService implements AIContract
 {
+    /**
+     * @api
+     */
+    public AIRawService $raw;
+
     /**
      * @api
      */
@@ -74,6 +77,7 @@ final class AIService implements AIContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new AIRawService($client);
         $this->assistants = new AssistantsService($client);
         $this->audio = new AudioService($client);
         $this->chat = new ChatService($client);
@@ -95,13 +99,8 @@ final class AIService implements AIContract
     public function retrieveModels(
         ?RequestOptions $requestOptions = null
     ): AIGetModelsResponse {
-        /** @var BaseResponse<AIGetModelsResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/models',
-            options: $requestOptions,
-            convert: AIGetModelsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveModels(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -118,29 +117,28 @@ final class AIService implements AIContract
      * - flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm
      * - Up to 100 MB
      *
-     * @param array{
-     *   bucket: string, filename: string, systemPrompt?: string
-     * }|AISummarizeParams $params
+     * @param string $bucket the name of the bucket that contains the file to be summarized
+     * @param string $filename the name of the file to be summarized
+     * @param string $systemPrompt a system prompt to guide the summary generation
      *
      * @throws APIException
      */
     public function summarize(
-        array|AISummarizeParams $params,
-        ?RequestOptions $requestOptions = null
+        string $bucket,
+        string $filename,
+        ?string $systemPrompt = null,
+        ?RequestOptions $requestOptions = null,
     ): AISummarizeResponse {
-        [$parsed, $options] = AISummarizeParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'bucket' => $bucket,
+            'filename' => $filename,
+            'systemPrompt' => $systemPrompt,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AISummarizeResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/summarize',
-            body: (object) $parsed,
-            options: $options,
-            convert: AISummarizeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->summarize(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -34,11 +34,11 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->create([
-            'action' => 'ordering',
-            'countryCode' => 'US',
-            'phoneNumberType' => 'local',
-        ]);
+        $result = $this->client->requirementGroups->create(
+            action: 'ordering',
+            countryCode: 'US',
+            phoneNumberType: 'local'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RequirementGroup::class, $result);
@@ -51,15 +51,15 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->create([
-            'action' => 'ordering',
-            'countryCode' => 'US',
-            'phoneNumberType' => 'local',
-            'customerReference' => 'My Requirement Group',
-            'regulatoryRequirements' => [
+        $result = $this->client->requirementGroups->create(
+            action: 'ordering',
+            countryCode: 'US',
+            phoneNumberType: 'local',
+            customerReference: 'My Requirement Group',
+            regulatoryRequirements: [
                 ['fieldValue' => 'field_value', 'requirementID' => 'requirement_id'],
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RequirementGroup::class, $result);
@@ -85,7 +85,7 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->update('id', []);
+        $result = $this->client->requirementGroups->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RequirementGroup::class, $result);
@@ -98,7 +98,7 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->list([]);
+        $result = $this->client->requirementGroups->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

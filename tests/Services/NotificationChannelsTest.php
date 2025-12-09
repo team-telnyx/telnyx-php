@@ -38,7 +38,7 @@ final class NotificationChannelsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->notificationChannels->create([]);
+        $result = $this->client->notificationChannels->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NotificationChannelNewResponse::class, $result);
@@ -67,8 +67,7 @@ final class NotificationChannelsTest extends TestCase
         }
 
         $result = $this->client->notificationChannels->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -82,7 +81,7 @@ final class NotificationChannelsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->notificationChannels->list([]);
+        $result = $this->client->notificationChannels->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NotificationChannelListResponse::class, $result);

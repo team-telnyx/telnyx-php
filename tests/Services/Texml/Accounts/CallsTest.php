@@ -41,7 +41,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
-            ['accountSid' => 'account_sid']
+            accountSid: 'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,7 +57,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
-            ['accountSid' => 'account_sid']
+            accountSid: 'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -73,7 +73,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
-            ['accountSid' => 'account_sid']
+            accountSid: 'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -89,17 +89,15 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
-            [
-                'accountSid' => 'account_sid',
-                'fallbackMethod' => 'GET',
-                'fallbackURL' => 'https://www.example.com/intruction-c.xml',
-                'method' => 'GET',
-                'status' => 'completed',
-                'statusCallback' => 'https://www.example.com/callback',
-                'statusCallbackMethod' => 'GET',
-                'texml' => '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello</Say></Response>',
-                'url' => 'https://www.example.com/intruction-b.xml',
-            ],
+            accountSid: 'account_sid',
+            fallbackMethod: 'GET',
+            fallbackURL: 'https://www.example.com/intruction-c.xml',
+            method: 'GET',
+            status: 'completed',
+            statusCallback: 'https://www.example.com/callback',
+            statusCallbackMethod: 'GET',
+            texml: '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello</Say></Response>',
+            url: 'https://www.example.com/intruction-b.xml',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -115,11 +113,9 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
-            [
-                'applicationSid' => 'ApplicationSid',
-                'from' => '+13120001234',
-                'to' => '+13121230000',
-            ],
+            applicationSid: 'ApplicationSid',
+            from: '+13120001234',
+            to: '+13121230000',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -135,45 +131,41 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
-            [
-                'applicationSid' => 'ApplicationSid',
-                'from' => '+13120001234',
-                'to' => '+13121230000',
-                'asyncAmd' => true,
-                'asyncAmdStatusCallback' => 'https://www.example.com/callback',
-                'asyncAmdStatusCallbackMethod' => 'GET',
-                'callerID' => 'Info',
-                'cancelPlaybackOnDetectMessageEnd' => false,
-                'cancelPlaybackOnMachineDetection' => false,
-                'customHeaders' => [
-                    ['name' => 'X-Custom-Header', 'value' => 'custom-value'],
-                ],
-                'detectionMode' => 'Premium',
-                'fallbackURL' => 'https://www.example.com/instructions-fallback.xml',
-                'machineDetection' => 'Enable',
-                'machineDetectionSilenceTimeout' => 2000,
-                'machineDetectionSpeechEndThreshold' => 2000,
-                'machineDetectionSpeechThreshold' => 2000,
-                'machineDetectionTimeout' => 5000,
-                'preferredCodecs' => 'PCMA,PCMU',
-                'record' => false,
-                'recordingChannels' => 'dual',
-                'recordingStatusCallback' => 'https://example.com/recording_status_callback',
-                'recordingStatusCallbackEvent' => 'in-progress completed absent',
-                'recordingStatusCallbackMethod' => 'GET',
-                'recordingTimeout' => 5,
-                'recordingTrack' => 'inbound',
-                'sendRecordingURL' => false,
-                'sipAuthPassword' => '1234',
-                'sipAuthUsername' => 'user',
-                'sipRegion' => 'Canada',
-                'statusCallback' => 'https://www.example.com/statuscallback-listener',
-                'statusCallbackEvent' => 'initiated',
-                'statusCallbackMethod' => 'GET',
-                'trim' => 'trim-silence',
-                'url' => 'https://www.example.com/texml.xml',
-                'urlMethod' => 'GET',
-            ],
+            applicationSid: 'ApplicationSid',
+            from: '+13120001234',
+            to: '+13121230000',
+            asyncAmd: true,
+            asyncAmdStatusCallback: 'https://www.example.com/callback',
+            asyncAmdStatusCallbackMethod: 'GET',
+            callerID: 'Info',
+            cancelPlaybackOnDetectMessageEnd: false,
+            cancelPlaybackOnMachineDetection: false,
+            customHeaders: [['name' => 'X-Custom-Header', 'value' => 'custom-value']],
+            detectionMode: 'Premium',
+            fallbackURL: 'https://www.example.com/instructions-fallback.xml',
+            machineDetection: 'Enable',
+            machineDetectionSilenceTimeout: 2000,
+            machineDetectionSpeechEndThreshold: 2000,
+            machineDetectionSpeechThreshold: 2000,
+            machineDetectionTimeout: 5000,
+            preferredCodecs: 'PCMA,PCMU',
+            record: false,
+            recordingChannels: 'dual',
+            recordingStatusCallback: 'https://example.com/recording_status_callback',
+            recordingStatusCallbackEvent: 'in-progress completed absent',
+            recordingStatusCallbackMethod: 'GET',
+            recordingTimeout: 5,
+            recordingTrack: 'inbound',
+            sendRecordingURL: false,
+            sipAuthPassword: '1234',
+            sipAuthUsername: 'user',
+            sipRegion: 'Canada',
+            statusCallback: 'https://www.example.com/statuscallback-listener',
+            statusCallbackEvent: 'initiated',
+            statusCallbackMethod: 'GET',
+            trim: 'trim-silence',
+            url: 'https://www.example.com/texml.xml',
+            urlMethod: 'GET',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -188,8 +180,7 @@ final class CallsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->calls->retrieveCalls(
-            'account_sid',
-            []
+            'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -205,7 +196,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
-            ['accountSid' => 'account_sid']
+            accountSid: 'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -221,18 +212,16 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
-            [
-                'accountSid' => 'account_sid',
-                'connectorName' => 'my_connector',
-                'includeMetadataCustomHeaders' => true,
-                'name' => 'my_siprec_session',
-                'secure' => true,
-                'sessionTimeoutSecs' => 900,
-                'sipTransport' => 'tcp',
-                'statusCallback' => 'https://www.example.com/callback',
-                'statusCallbackMethod' => 'GET',
-                'track' => 'both_tracks',
-            ],
+            accountSid: 'account_sid',
+            connectorName: 'my_connector',
+            includeMetadataCustomHeaders: true,
+            name: 'my_siprec_session',
+            secure: true,
+            sessionTimeoutSecs: 900,
+            sipTransport: 'tcp',
+            statusCallback: 'https://www.example.com/callback',
+            statusCallbackMethod: 'GET',
+            track: 'both_tracks',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -248,7 +237,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
-            ['accountSid' => 'account_sid']
+            accountSid: 'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -264,16 +253,14 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
-            [
-                'accountSid' => 'account_sid',
-                'bidirectionalCodec' => 'G722',
-                'bidirectionalMode' => 'rtp',
-                'name' => 'My stream',
-                'statusCallback' => 'http://webhook.com/callback',
-                'statusCallbackMethod' => 'GET',
-                'track' => 'both_tracks',
-                'url' => 'wss://www.example.com/websocket',
-            ],
+            accountSid: 'account_sid',
+            bidirectionalCodec: 'G722',
+            bidirectionalMode: 'rtp',
+            name: 'My stream',
+            statusCallback: 'http://webhook.com/callback',
+            statusCallbackMethod: 'GET',
+            track: 'both_tracks',
+            url: 'wss://www.example.com/websocket',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

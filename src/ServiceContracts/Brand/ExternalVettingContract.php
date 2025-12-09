@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Brand;
 
-use Telnyx\Brand\ExternalVetting\ExternalVettingImportParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
 use Telnyx\Brand\ExternalVetting\ExternalVettingListResponseItem;
-use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -29,26 +27,32 @@ interface ExternalVettingContract
     /**
      * @api
      *
-     * @param array<mixed>|ExternalVettingImportParams $params
+     * @param string $evpID external vetting provider ID for the brand
+     * @param string $vettingID Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
+     * @param string $vettingToken required by some providers for vetting record confirmation
      *
      * @throws APIException
      */
     public function import(
         string $brandID,
-        array|ExternalVettingImportParams $params,
+        string $evpID,
+        string $vettingID,
+        ?string $vettingToken = null,
         ?RequestOptions $requestOptions = null,
     ): ExternalVettingImportResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|ExternalVettingOrderParams $params
+     * @param string $evpID external vetting provider ID for the brand
+     * @param string $vettingClass identifies the vetting classification
      *
      * @throws APIException
      */
     public function order(
         string $brandID,
-        array|ExternalVettingOrderParams $params,
+        string $evpID,
+        string $vettingClass,
         ?RequestOptions $requestOptions = null,
     ): ExternalVettingOrderResponse;
 }

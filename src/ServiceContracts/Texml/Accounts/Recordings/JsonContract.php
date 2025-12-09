@@ -6,8 +6,6 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Recordings;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Recordings\Json\JsonDeleteRecordingSidJsonParams;
-use Telnyx\Texml\Accounts\Recordings\Json\JsonRetrieveRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
 
 interface JsonContract
@@ -15,26 +13,28 @@ interface JsonContract
     /**
      * @api
      *
-     * @param array<mixed>|JsonDeleteRecordingSidJsonParams $params
+     * @param string $recordingSid uniquely identifies the recording by id
+     * @param string $accountSid the id of the account the resource belongs to
      *
      * @throws APIException
      */
     public function deleteRecordingSidJson(
         string $recordingSid,
-        array|JsonDeleteRecordingSidJsonParams $params,
+        string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|JsonRetrieveRecordingSidJsonParams $params
+     * @param string $recordingSid uniquely identifies the recording by id
+     * @param string $accountSid the id of the account the resource belongs to
      *
      * @throws APIException
      */
     public function retrieveRecordingSidJson(
         string $recordingSid,
-        array|JsonRetrieveRecordingSidJsonParams $params,
+        string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): TexmlGetCallRecordingResponseBody;
 }

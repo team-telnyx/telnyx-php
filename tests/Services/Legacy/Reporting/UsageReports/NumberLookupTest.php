@@ -42,7 +42,7 @@ final class NumberLookupTest extends TestCase
             ->reporting
             ->usageReports
             ->numberLookup
-            ->create([])
+            ->create()
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

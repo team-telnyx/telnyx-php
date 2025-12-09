@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Reports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
@@ -20,12 +18,15 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param array<mixed>|MdrUsageReportCreateParams $params
+     * @param 'NO_AGGREGATION'|'PROFILE'|'TAGS'|AggregationType $aggregationType
      *
      * @throws APIException
      */
     public function create(
-        array|MdrUsageReportCreateParams $params,
+        string|AggregationType $aggregationType,
+        string|\DateTimeInterface $endDate,
+        string|\DateTimeInterface $startDate,
+        ?string $profiles = null,
         ?RequestOptions $requestOptions = null,
     ): MdrUsageReportNewResponse;
 
@@ -42,13 +43,15 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param array<mixed>|MdrUsageReportListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|MdrUsageReportListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): MdrUsageReportListResponse;
 
     /**
@@ -64,12 +67,16 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param array<mixed>|MdrUsageReportFetchSyncParams $params
+     * @param 'NO_AGGREGATION'|'PROFILE'|'TAGS'|\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType $aggregationType
+     * @param list<string> $profiles
      *
      * @throws APIException
      */
     public function fetchSync(
-        array|MdrUsageReportFetchSyncParams $params,
+        string|\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType $aggregationType,
+        string|\DateTimeInterface|null $endDate = null,
+        ?array $profiles = null,
+        string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): MdrUsageReportFetchSyncResponse;
 }

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
-use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
@@ -15,43 +13,47 @@ use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 final class ToolsService implements ToolsContract
 {
     /**
+     * @api
+     */
+    public ToolsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ToolsRawService($client);
+    }
 
     /**
      * @api
      *
      * Test a webhook tool for an assistant
      *
-     * @param array{
-     *   assistantID: string,
-     *   arguments?: array<string,mixed>,
-     *   dynamicVariables?: array<string,mixed>,
-     * }|ToolTestParams $params
+     * @param string $toolID Path param:
+     * @param string $assistantID Path param:
+     * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test
+     * @param array<string,mixed> $dynamicVariables Body param: Key-value dynamic variables to use for the webhook test
      *
      * @throws APIException
      */
     public function test(
         string $toolID,
-        array|ToolTestParams $params,
+        string $assistantID,
+        ?array $arguments = null,
+        ?array $dynamicVariables = null,
         ?RequestOptions $requestOptions = null,
     ): ToolTestResponse {
-        [$parsed, $options] = ToolTestParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $assistantID = $parsed['assistantID'];
-        unset($parsed['assistantID']);
+        $params = [
+            'assistantID' => $assistantID,
+            'arguments' => $arguments,
+            'dynamicVariables' => $dynamicVariables,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ToolTestResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],
-            body: (object) array_diff_key($parsed, ['assistantID']),
-            options: $options,
-            convert: ToolTestResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->test($toolID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

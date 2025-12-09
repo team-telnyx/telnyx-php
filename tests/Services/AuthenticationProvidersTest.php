@@ -38,15 +38,15 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->create([
-            'name' => 'Okta',
-            'settings' => [
+        $result = $this->client->authenticationProviders->create(
+            name: 'Okta',
+            settings: [
                 'idpCertFingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
                 'idpEntityID' => 'https://myorg.myidp.com/saml/metadata',
                 'idpSSOTargetURL' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
             ],
-            'shortName' => 'myorg',
-        ]);
+            shortName: 'myorg',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthenticationProviderNewResponse::class, $result);
@@ -59,18 +59,18 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->create([
-            'name' => 'Okta',
-            'settings' => [
+        $result = $this->client->authenticationProviders->create(
+            name: 'Okta',
+            settings: [
                 'idpCertFingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
                 'idpEntityID' => 'https://myorg.myidp.com/saml/metadata',
                 'idpSSOTargetURL' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
                 'idpCertFingerprintAlgorithm' => 'sha256',
             ],
-            'shortName' => 'myorg',
-            'active' => true,
-            'settingsURL' => 'https://myorg.myidp.com/saml/metadata',
-        ]);
+            shortName: 'myorg',
+            active: true,
+            settingsURL: 'https://myorg.myidp.com/saml/metadata',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthenticationProviderNewResponse::class, $result);
@@ -96,7 +96,7 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->update('id', []);
+        $result = $this->client->authenticationProviders->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -112,7 +112,7 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->list([]);
+        $result = $this->client->authenticationProviders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AuthenticationProviderListResponse::class, $result);

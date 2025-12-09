@@ -5,12 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort\Value;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionNewResponse;
@@ -20,41 +16,47 @@ use Telnyx\ServiceContracts\PortingOrders\PhoneNumberExtensionsContract;
 final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContract
 {
     /**
+     * @api
+     */
+    public PhoneNumberExtensionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PhoneNumberExtensionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a new phone number extension.
      *
-     * @param array{
-     *   activationRanges: list<array{endAt: int, startAt: int}>,
-     *   extensionRange: array{endAt: int, startAt: int},
-     *   portingPhoneNumberID: string,
-     * }|PhoneNumberExtensionCreateParams $params
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension
+     * @param list<array{
+     *   endAt: int, startAt: int
+     * }> $activationRanges Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
+     * @param array{endAt: int, startAt: int} $extensionRange
+     * @param string $portingPhoneNumberID identifies the porting phone number associated with this porting phone number extension
      *
      * @throws APIException
      */
     public function create(
         string $portingOrderID,
-        array|PhoneNumberExtensionCreateParams $params,
+        array $activationRanges,
+        array $extensionRange,
+        string $portingPhoneNumberID,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberExtensionNewResponse {
-        [$parsed, $options] = PhoneNumberExtensionCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'activationRanges' => $activationRanges,
+            'extensionRange' => $extensionRange,
+            'portingPhoneNumberID' => $portingPhoneNumberID,
+        ];
 
-        /** @var BaseResponse<PhoneNumberExtensionNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['porting_orders/%1$s/phone_number_extensions', $portingOrderID],
-            body: (object) $parsed,
-            options: $options,
-            convert: PhoneNumberExtensionNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($portingOrderID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -64,32 +66,32 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      *
      * Returns a list of all phone number extensions of a porting order.
      *
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone number extensions
      * @param array{
-     *   filter?: array{portingPhoneNumberID?: string},
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: '-created_at'|'created_at'|Value},
-     * }|PhoneNumberExtensionListParams $params
+     *   portingPhoneNumberID?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   value?: '-created_at'|'created_at'|Value
+     * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
-        array|PhoneNumberExtensionListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
+        ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberExtensionListResponse {
-        [$parsed, $options] = PhoneNumberExtensionListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumberExtensionListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/phone_number_extensions', $portingOrderID],
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberExtensionListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($portingOrderID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -99,31 +101,20 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      *
      * Deletes a phone number extension.
      *
-     * @param array{portingOrderID: string}|PhoneNumberExtensionDeleteParams $params
+     * @param string $id Identifies the phone number extension to be deleted
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        array|PhoneNumberExtensionDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $portingOrderID,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumberExtensionDeleteResponse {
-        [$parsed, $options] = PhoneNumberExtensionDeleteParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $portingOrderID = $parsed['portingOrderID'];
-        unset($parsed['portingOrderID']);
+        $params = ['portingOrderID' => $portingOrderID];
 
-        /** @var BaseResponse<PhoneNumberExtensionDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: [
-                'porting_orders/%1$s/phone_number_extensions/%2$s', $portingOrderID, $id,
-            ],
-            options: $options,
-            convert: PhoneNumberExtensionDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

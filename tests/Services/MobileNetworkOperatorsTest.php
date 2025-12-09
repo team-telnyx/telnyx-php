@@ -34,7 +34,7 @@ final class MobileNetworkOperatorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobileNetworkOperators->list([]);
+        $result = $this->client->mobileNetworkOperators->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MobileNetworkOperatorListResponse::class, $result);

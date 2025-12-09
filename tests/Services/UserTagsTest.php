@@ -34,7 +34,7 @@ final class UserTagsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userTags->list([]);
+        $result = $this->client->userTags->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UserTagListResponse::class, $result);

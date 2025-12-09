@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
@@ -18,50 +15,49 @@ use Telnyx\ServiceContracts\Reports\CdrUsageReportsContract;
 final class CdrUsageReportsService implements CdrUsageReportsContract
 {
     /**
+     * @api
+     */
+    public CdrUsageReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CdrUsageReportsRawService($client);
+    }
 
     /**
      * @api
      *
      * Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
-     * @param array{
-     *   aggregationType: 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP'|AggregationType,
-     *   productBreakdown: 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY'|ProductBreakdown,
-     *   connections?: list<float>,
-     *   endDate?: string|\DateTimeInterface,
-     *   startDate?: string|\DateTimeInterface,
-     * }|CdrUsageReportFetchSyncParams $params
+     * @param 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP'|AggregationType $aggregationType
+     * @param 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY'|ProductBreakdown $productBreakdown
+     * @param list<float> $connections
      *
      * @throws APIException
      */
     public function fetchSync(
-        array|CdrUsageReportFetchSyncParams $params,
+        string|AggregationType $aggregationType,
+        string|ProductBreakdown $productBreakdown,
+        ?array $connections = null,
+        string|\DateTimeInterface|null $endDate = null,
+        string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): CdrUsageReportFetchSyncResponse {
-        [$parsed, $options] = CdrUsageReportFetchSyncParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'aggregationType' => $aggregationType,
+            'productBreakdown' => $productBreakdown,
+            'connections' => $connections,
+            'endDate' => $endDate,
+            'startDate' => $startDate,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CdrUsageReportFetchSyncResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'reports/cdr_usage_reports/sync',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'aggregationType' => 'aggregation_type',
-                    'productBreakdown' => 'product_breakdown',
-                    'endDate' => 'end_date',
-                    'startDate' => 'start_date',
-                ],
-            ),
-            options: $options,
-            convert: CdrUsageReportFetchSyncResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->fetchSync(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

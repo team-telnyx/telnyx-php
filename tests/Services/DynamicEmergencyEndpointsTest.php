@@ -37,11 +37,11 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyEndpoints->create([
-            'callbackNumber' => '+13125550000',
-            'callerName' => 'Jane Doe Desk Phone',
-            'dynamicEmergencyAddressID' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
-        ]);
+        $result = $this->client->dynamicEmergencyEndpoints->create(
+            callbackNumber: '+13125550000',
+            callerName: 'Jane Doe Desk Phone',
+            dynamicEmergencyAddressID: '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -57,11 +57,11 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyEndpoints->create([
-            'callbackNumber' => '+13125550000',
-            'callerName' => 'Jane Doe Desk Phone',
-            'dynamicEmergencyAddressID' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
-        ]);
+        $result = $this->client->dynamicEmergencyEndpoints->create(
+            callbackNumber: '+13125550000',
+            callerName: 'Jane Doe Desk Phone',
+            dynamicEmergencyAddressID: '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -95,7 +95,7 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyEndpoints->list([]);
+        $result = $this->client->dynamicEmergencyEndpoints->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

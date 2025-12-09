@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrderPhoneNumbersContract;
@@ -20,14 +16,24 @@ use Telnyx\ServiceContracts\NumberOrderPhoneNumbersContract;
 final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersContract
 {
     /**
+     * @api
+     */
+    public NumberOrderPhoneNumbersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumberOrderPhoneNumbersRawService($client);
+    }
 
     /**
      * @api
      *
      * Get an existing phone number in number order.
+     *
+     * @param string $numberOrderPhoneNumberID the number order phone number ID
      *
      * @throws APIException
      */
@@ -35,13 +41,8 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         string $numberOrderPhoneNumberID,
         ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberGetResponse {
-        /** @var BaseResponse<NumberOrderPhoneNumberGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['number_order_phone_numbers/%1$s', $numberOrderPhoneNumberID],
-            options: $requestOptions,
-            convert: NumberOrderPhoneNumberGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($numberOrderPhoneNumberID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -52,28 +53,21 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Get a list of phone numbers associated to orders.
      *
      * @param array{
-     *   filter?: array{countryCode?: string}
-     * }|NumberOrderPhoneNumberListParams $params
+     *   countryCode?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
      *
      * @throws APIException
      */
     public function list(
-        array|NumberOrderPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberListResponse {
-        [$parsed, $options] = NumberOrderPhoneNumberListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberOrderPhoneNumberListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'number_order_phone_numbers',
-            query: $parsed,
-            options: $options,
-            convert: NumberOrderPhoneNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -83,30 +77,20 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * Update requirement group for a phone number order
      *
-     * @param array{
-     *   requirementGroupID: string
-     * }|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
+     * @param string $id The unique identifier of the number order phone number
+     * @param string $requirementGroupID The ID of the requirement group to associate
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
-        array|NumberOrderPhoneNumberUpdateRequirementGroupParams $params,
+        string $requirementGroupID,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse {
-        [$parsed, $options] = NumberOrderPhoneNumberUpdateRequirementGroupParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['requirementGroupID' => $requirementGroupID];
 
-        /** @var BaseResponse<NumberOrderPhoneNumberUpdateRequirementGroupResponse,> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['number_order_phone_numbers/%1$s/requirement_group', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: NumberOrderPhoneNumberUpdateRequirementGroupResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateRequirementGroup($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -116,32 +100,24 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * Updates requirements for a single phone number within a number order.
      *
-     * @param array{
-     *   regulatoryRequirements?: list<array{
-     *     fieldValue?: string, requirementID?: string
-     *   }>,
-     * }|NumberOrderPhoneNumberUpdateRequirementsParams $params
+     * @param string $numberOrderPhoneNumberID the number order phone number ID
+     * @param list<array{
+     *   fieldValue?: string, requirementID?: string
+     * }> $regulatoryRequirements
      *
      * @throws APIException
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
-        array|NumberOrderPhoneNumberUpdateRequirementsParams $params,
+        ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse {
-        [$parsed, $options] = NumberOrderPhoneNumberUpdateRequirementsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['regulatoryRequirements' => $regulatoryRequirements];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberOrderPhoneNumberUpdateRequirementsResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['number_order_phone_numbers/%1$s', $numberOrderPhoneNumberID],
-            body: (object) $parsed,
-            options: $options,
-            convert: NumberOrderPhoneNumberUpdateRequirementsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateRequirements($numberOrderPhoneNumberID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

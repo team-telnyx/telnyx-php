@@ -34,12 +34,12 @@ final class MesssagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messsages->rcs([
-            'agentID' => 'Agent007',
-            'agentMessage' => [],
-            'messagingProfileID' => 'messaging_profile_id',
-            'to' => '+13125551234',
-        ]);
+        $result = $this->client->messsages->rcs(
+            agentID: 'Agent007',
+            agentMessage: [],
+            messagingProfileID: 'messaging_profile_id',
+            to: '+13125551234',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MesssageRcsResponse::class, $result);
@@ -52,9 +52,9 @@ final class MesssagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messsages->rcs([
-            'agentID' => 'Agent007',
-            'agentMessage' => [
+        $result = $this->client->messsages->rcs(
+            agentID: 'Agent007',
+            agentMessage: [
                 'contentMessage' => [
                     'contentInfo' => [
                         'fileURL' => 'https://example.com/elephant.jpg',
@@ -203,18 +203,18 @@ final class MesssagesTest extends TestCase
                 'expireTime' => new \DateTimeImmutable('2024-10-02T15:01:23Z'),
                 'ttl' => '10.5s',
             ],
-            'messagingProfileID' => 'messaging_profile_id',
-            'to' => '+13125551234',
-            'mmsFallback' => [
-            'from' => '+13125551234',
-            'mediaURLs' => ['string'],
-            'subject' => 'Test Message',
-            'text' => 'Hello world!',
-        ],
-            'smsFallback' => ['from' => '+13125551234', 'text' => 'Hello world!'],
-            'type' => 'RCS',
-            'webhookURL' => 'webhook_url',
-        ]);
+            messagingProfileID: 'messaging_profile_id',
+            to: '+13125551234',
+            mmsFallback: [
+                'from' => '+13125551234',
+                'mediaURLs' => ['string'],
+                'subject' => 'Test Message',
+                'text' => 'Hello world!',
+            ],
+            smsFallback: ['from' => '+13125551234', 'text' => 'Hello world!'],
+            type: 'RCS',
+            webhookURL: 'webhook_url',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MesssageRcsResponse::class, $result);

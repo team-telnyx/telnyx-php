@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\MessagingProfiles;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigDeleteParams;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigRetrieveParams;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams;
 use Telnyx\RequestOptions;
 
 interface AutorespConfigsContract
@@ -19,65 +15,81 @@ interface AutorespConfigsContract
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigCreateParams $params
+     * @param list<string> $keywords
+     * @param 'start'|'stop'|'info'|Op $op
      *
      * @throws APIException
      */
     public function create(
         string $profileID,
-        array|AutorespConfigCreateParams $params,
+        string $countryCode,
+        array $keywords,
+        string|Op $op,
+        ?string $respText = null,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse;
 
     /**
      * @api
-     *
-     * @param array<mixed>|AutorespConfigRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $autorespCfgID,
-        array|AutorespConfigRetrieveParams $params,
+        string $profileID,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigUpdateParams $params
+     * @param string $autorespCfgID Path param:
+     * @param string $profileID Path param:
+     * @param string $countryCode Body param:
+     * @param list<string> $keywords Body param:
+     * @param 'start'|'stop'|'info'|\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op $op Body param:
+     * @param string $respText Body param:
      *
      * @throws APIException
      */
     public function update(
         string $autorespCfgID,
-        array|AutorespConfigUpdateParams $params,
+        string $profileID,
+        string $countryCode,
+        array $keywords,
+        string|\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op $op,
+        ?string $respText = null,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigListParams $params
+     * @param array{
+     *   gte?: string, lte?: string
+     * } $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
+     * @param array{
+     *   gte?: string, lte?: string
+     * } $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
      *
      * @throws APIException
      */
     public function list(
         string $profileID,
-        array|AutorespConfigListParams $params,
+        ?string $countryCode = null,
+        ?array $createdAt = null,
+        ?array $updatedAt = null,
         ?RequestOptions $requestOptions = null,
     ): AutorespConfigListResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigDeleteParams $params
-     *
      * @throws APIException
      */
     public function delete(
         string $autorespCfgID,
-        array|AutorespConfigDeleteParams $params,
+        string $profileID,
         ?RequestOptions $requestOptions = null,
     ): string;
 }

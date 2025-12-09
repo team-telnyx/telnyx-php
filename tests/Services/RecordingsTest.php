@@ -49,7 +49,7 @@ final class RecordingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->recordings->list([]);
+        $result = $this->client->recordings->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RecordingListResponse::class, $result);

@@ -51,7 +51,7 @@ final class OAuthGrantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthGrants->list([]);
+        $result = $this->client->oauthGrants->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthGrantListResponse::class, $result);

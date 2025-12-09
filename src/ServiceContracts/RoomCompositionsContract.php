@@ -6,28 +6,51 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
-use Telnyx\RoomCompositions\RoomCompositionListParams;
+use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
 use Telnyx\RoomCompositions\RoomCompositionListResponse;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
+use Telnyx\RoomCompositions\VideoRegion;
 
 interface RoomCompositionsContract
 {
     /**
      * @api
      *
-     * @param array<mixed>|RoomCompositionCreateParams $params
+     * @param string|null $format the desired format of the room composition
+     * @param string|null $resolution The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720
+     * @param string|null $sessionID id of the room session associated with the room composition
+     * @param array<string,array{
+     *   height?: int|null,
+     *   maxColumns?: int|null,
+     *   maxRows?: int|null,
+     *   videoSources?: list<string>,
+     *   width?: int|null,
+     *   xPos?: int|null,
+     *   yPos?: int|null,
+     *   zPos?: int|null,
+     * }|VideoRegion> $videoLayout Describes the video layout of the room composition in terms of regions
+     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventURL The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
+     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
     public function create(
-        array|RoomCompositionCreateParams $params,
+        ?string $format = 'mp4',
+        ?string $resolution = '1280x720',
+        ?string $sessionID = null,
+        ?array $videoLayout = null,
+        ?string $webhookEventFailoverURL = '',
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): RoomCompositionNewResponse;
 
     /**
      * @api
+     *
+     * @param string $roomCompositionID the unique identifier of a room composition
      *
      * @throws APIException
      */
@@ -39,17 +62,31 @@ interface RoomCompositionsContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomCompositionListParams $params
+     * @param array{
+     *   dateCreatedAt?: array{
+     *     eq?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
+     *   },
+     *   sessionID?: string,
+     *   status?: 'completed'|'processing'|'enqueued'|Status,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|RoomCompositionListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): RoomCompositionListResponse;
 
     /**
      * @api
+     *
+     * @param string $roomCompositionID the unique identifier of a room composition
      *
      * @throws APIException
      */

@@ -38,11 +38,9 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            [
-                'activationRanges' => [['endAt' => 10, 'startAt' => 1]],
-                'extensionRange' => ['endAt' => 10, 'startAt' => 1],
-                'portingPhoneNumberID' => 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
-            ],
+            activationRanges: [['endAt' => 10, 'startAt' => 1]],
+            extensionRange: ['endAt' => 10, 'startAt' => 1],
+            portingPhoneNumberID: 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -58,11 +56,9 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            [
-                'activationRanges' => [['endAt' => 10, 'startAt' => 1]],
-                'extensionRange' => ['endAt' => 10, 'startAt' => 1],
-                'portingPhoneNumberID' => 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
-            ],
+            activationRanges: [['endAt' => 10, 'startAt' => 1]],
+            extensionRange: ['endAt' => 10, 'startAt' => 1],
+            portingPhoneNumberID: 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -77,8 +73,7 @@ final class PhoneNumberExtensionsTest extends TestCase
         }
 
         $result = $this->client->portingOrders->phoneNumberExtensions->list(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -94,7 +89,7 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['portingOrderID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            portingOrderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -110,7 +105,7 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['portingOrderID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            portingOrderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

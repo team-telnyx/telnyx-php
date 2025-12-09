@@ -13,6 +13,8 @@ interface ActionsContract
     /**
      * @api
      *
+     * @param string $numberReservationID the number reservation ID
+     *
      * @throws APIException
      */
     public function extend(

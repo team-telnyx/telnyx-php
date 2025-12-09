@@ -13,6 +13,11 @@ final class MessagingTollfreeService implements MessagingTollfreeContract
     /**
      * @api
      */
+    public MessagingTollfreeRawService $raw;
+
+    /**
+     * @api
+     */
     public VerificationService $verification;
 
     /**
@@ -20,6 +25,7 @@ final class MessagingTollfreeService implements MessagingTollfreeContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MessagingTollfreeRawService($client);
         $this->verification = new VerificationService($client);
     }
 }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
+use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
+use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -18,12 +18,21 @@ interface AdvancedOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|AdvancedOrderCreateParams $params
+     * @param list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature> $features
+     * @param 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType $phoneNumberType
+     * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
      *
      * @throws APIException
      */
     public function create(
-        array|AdvancedOrderCreateParams $params,
+        string $areaCode = '',
+        string $comments = '',
+        string $countryCode = 'US',
+        string $customerReference = '',
+        ?array $features = null,
+        string|PhoneNumberType $phoneNumberType = 'local',
+        int $quantity = 1,
+        ?string $requirementGroupID = null,
         ?RequestOptions $requestOptions = null,
     ): AdvancedOrderNewResponse;
 
@@ -49,13 +58,22 @@ interface AdvancedOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|AdvancedOrderUpdateRequirementGroupParams $params
+     * @param list<'sms'|'mms'|'voice'|'fax'|'emergency'|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature> $features
+     * @param 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType $phoneNumberType
+     * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $advancedOrderID,
-        array|AdvancedOrderUpdateRequirementGroupParams $params,
+        string $areaCode = '',
+        string $comments = '',
+        string $countryCode = 'US',
+        string $customerReference = '',
+        ?array $features = null,
+        string|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType $phoneNumberType = 'local',
+        int $quantity = 1,
+        ?string $requirementGroupID = null,
         ?RequestOptions $requestOptions = null,
     ): AdvancedOrderUpdateRequirementGroupResponse;
 }

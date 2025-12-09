@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\Events\EventGetResponse;
-use Telnyx\Porting\Events\EventListParams;
 use Telnyx\Porting\Events\EventListParams\Filter\Type;
 use Telnyx\Porting\Events\EventListResponse;
 use Telnyx\RequestOptions;
@@ -17,14 +15,24 @@ use Telnyx\ServiceContracts\Porting\EventsContract;
 final class EventsService implements EventsContract
 {
     /**
+     * @api
+     */
+    public EventsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new EventsRawService($client);
+    }
 
     /**
      * @api
      *
      * Show a specific porting event.
+     *
+     * @param string $id identifies the porting event
      *
      * @throws APIException
      */
@@ -32,13 +40,8 @@ final class EventsService implements EventsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): EventGetResponse {
-        /** @var BaseResponse<EventGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['porting/events/%1$s', $id],
-            options: $requestOptions,
-            convert: EventGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -49,35 +52,29 @@ final class EventsService implements EventsContract
      * Returns a list of all porting events.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{
-     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *     },
-     *     portingOrderID?: string,
-     *     type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split'|Type,
+     *   createdAt?: array{
+     *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *   },
-     *   page?: array{number?: int, size?: int},
-     * }|EventListParams $params
+     *   portingOrderID?: string,
+     *   type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split'|Type,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|EventListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): EventListResponse {
-        [$parsed, $options] = EventListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<EventListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'porting/events',
-            query: $parsed,
-            options: $options,
-            convert: EventListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -87,19 +84,16 @@ final class EventsService implements EventsContract
      *
      * Republish a specific porting event.
      *
+     * @param string $id identifies the porting event
+     *
      * @throws APIException
      */
     public function republish(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['porting/events/%1$s/republish', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->republish($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

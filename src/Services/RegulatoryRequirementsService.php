@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
-use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Action;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\PhoneNumberType;
 use Telnyx\RequestOptions;
@@ -17,9 +15,17 @@ use Telnyx\ServiceContracts\RegulatoryRequirementsContract;
 final class RegulatoryRequirementsService implements RegulatoryRequirementsContract
 {
     /**
+     * @api
+     */
+    public RegulatoryRequirementsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RegulatoryRequirementsRawService($client);
+    }
 
     /**
      * @api
@@ -27,34 +33,25 @@ final class RegulatoryRequirementsService implements RegulatoryRequirementsContr
      * Retrieve regulatory requirements
      *
      * @param array{
-     *   filter?: array{
-     *     action?: 'ordering'|'porting'|'action'|Action,
-     *     countryCode?: string,
-     *     phoneNumber?: string,
-     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     *     requirementGroupID?: string,
-     *   },
-     * }|RegulatoryRequirementRetrieveParams $params
+     *   action?: 'ordering'|'porting'|'action'|Action,
+     *   countryCode?: string,
+     *   phoneNumber?: string,
+     *   phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
+     *   requirementGroupID?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[requirement_group_id], filter[country_code], filter[phone_number_type], filter[action]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|RegulatoryRequirementRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): RegulatoryRequirementGetResponse {
-        [$parsed, $options] = RegulatoryRequirementRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RegulatoryRequirementGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'regulatory_requirements',
-            query: $parsed,
-            options: $options,
-            convert: RegulatoryRequirementGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

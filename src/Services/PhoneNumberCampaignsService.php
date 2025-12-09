@@ -5,52 +5,47 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberCampaignsContract;
 
 final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
 {
     /**
+     * @api
+     */
+    public PhoneNumberCampaignsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PhoneNumberCampaignsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create New Phone Number Campaign
      *
-     * @param array{
-     *   campaignID: string, phoneNumber: string
-     * }|PhoneNumberCampaignCreateParams $params
+     * @param string $campaignID the ID of the campaign you want to link to the specified phone number
+     * @param string $phoneNumber the phone number you want to link to a specified campaign
      *
      * @throws APIException
      */
     public function create(
-        array|PhoneNumberCampaignCreateParams $params,
+        string $campaignID,
+        string $phoneNumber,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
-        [$parsed, $options] = PhoneNumberCampaignCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
 
-        /** @var BaseResponse<PhoneNumberCampaign> */
-        $response = $this->client->request(
-            method: 'post',
-            path: '10dlc/phone_number_campaigns',
-            body: (object) $parsed,
-            options: $options,
-            convert: PhoneNumberCampaign::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -66,13 +61,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
-        /** @var BaseResponse<PhoneNumberCampaign> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber],
-            options: $requestOptions,
-            convert: PhoneNumberCampaign::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($phoneNumber, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -82,30 +72,21 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *
      * Create New Phone Number Campaign
      *
-     * @param array{
-     *   campaignID: string, phoneNumber: string
-     * }|PhoneNumberCampaignUpdateParams $params
+     * @param string $campaignID the ID of the campaign you want to link to the specified phone number
+     * @param string $phoneNumber1 the phone number you want to link to a specified campaign
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumber,
-        array|PhoneNumberCampaignUpdateParams $params,
+        string $campaignID,
+        string $phoneNumber1,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
-        [$parsed, $options] = PhoneNumberCampaignUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber1];
 
-        /** @var BaseResponse<PhoneNumberCampaign> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber],
-            body: (object) $parsed,
-            options: $options,
-            convert: PhoneNumberCampaign::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($phoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -116,36 +97,33 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * Retrieve All Phone Number Campaigns
      *
      * @param array{
-     *   filter?: array{
-     *     tcrBrandID?: string,
-     *     tcrCampaignID?: string,
-     *     telnyxBrandID?: string,
-     *     telnyxCampaignID?: string,
-     *   },
-     *   page?: int,
-     *   recordsPerPage?: int,
-     *   sort?: value-of<Sort>,
-     * }|PhoneNumberCampaignListParams $params
+     *   tcrBrandID?: string,
+     *   tcrCampaignID?: string,
+     *   telnyxBrandID?: string,
+     *   telnyxCampaignID?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id]
+     * @param 'assignmentStatus'|'-assignmentStatus'|'createdAt'|'-createdAt'|'phoneNumber'|'-phoneNumber'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|PhoneNumberCampaignListParams $params,
+        ?array $filter = null,
+        int $page = 1,
+        int $recordsPerPage = 20,
+        string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaignListResponse {
-        [$parsed, $options] = PhoneNumberCampaignListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'filter' => $filter,
+            'page' => $page,
+            'recordsPerPage' => $recordsPerPage,
+            'sort' => $sort,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumberCampaignListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: '10dlc/phone_number_campaigns',
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberCampaignListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -161,13 +139,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
-        /** @var BaseResponse<PhoneNumberCampaign> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber],
-            options: $requestOptions,
-            convert: PhoneNumberCampaign::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($phoneNumber, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -34,10 +34,10 @@ final class CdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->cdrUsageReports->fetchSync([
-            'aggregationType' => 'NO_AGGREGATION',
-            'productBreakdown' => 'NO_BREAKDOWN',
-        ]);
+        $result = $this->client->reports->cdrUsageReports->fetchSync(
+            aggregationType: 'NO_AGGREGATION',
+            productBreakdown: 'NO_BREAKDOWN'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CdrUsageReportFetchSyncResponse::class, $result);
@@ -50,13 +50,13 @@ final class CdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->cdrUsageReports->fetchSync([
-            'aggregationType' => 'NO_AGGREGATION',
-            'productBreakdown' => 'NO_BREAKDOWN',
-            'connections' => [1234567890123],
-            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-        ]);
+        $result = $this->client->reports->cdrUsageReports->fetchSync(
+            aggregationType: 'NO_AGGREGATION',
+            productBreakdown: 'NO_BREAKDOWN',
+            connections: [1234567890123],
+            endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CdrUsageReportFetchSyncResponse::class, $result);

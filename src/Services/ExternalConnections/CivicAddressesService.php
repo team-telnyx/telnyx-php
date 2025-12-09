@@ -5,50 +5,46 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
-use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
-use Telnyx\ExternalConnections\CivicAddresses\CivicAddressRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\CivicAddressesContract;
 
 final class CivicAddressesService implements CivicAddressesContract
 {
     /**
+     * @api
+     */
+    public CivicAddressesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CivicAddressesRawService($client);
+    }
 
     /**
      * @api
      *
      * Return the details of an existing Civic Address with its Locations inside the 'data' attribute of the response.
      *
-     * @param array{id: string}|CivicAddressRetrieveParams $params
+     * @param string $addressID identifies a civic address or a location
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
     public function retrieve(
         string $addressID,
-        array|CivicAddressRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): CivicAddressGetResponse {
-        [$parsed, $options] = CivicAddressRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id];
 
-        /** @var BaseResponse<CivicAddressGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['external_connections/%1$s/civic_addresses/%2$s', $id, $addressID],
-            options: $options,
-            convert: CivicAddressGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($addressID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -58,30 +54,24 @@ final class CivicAddressesService implements CivicAddressesContract
      *
      * Returns the civic addresses and locations from Microsoft Teams.
      *
+     * @param string $id identifies the resource
      * @param array{
-     *   filter?: array{country?: list<string>}
-     * }|CivicAddressListParams $params
+     *   country?: list<string>
+     * } $filter Filter parameter for civic addresses (deepObject style). Supports filtering by country.
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|CivicAddressListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): CivicAddressListResponse {
-        [$parsed, $options] = CivicAddressListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CivicAddressListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['external_connections/%1$s/civic_addresses', $id],
-            query: $parsed,
-            options: $options,
-            convert: CivicAddressListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

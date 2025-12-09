@@ -38,11 +38,11 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->create([
-            'aggregationType' => 'NO_AGGREGATION',
-            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-        ]);
+        $result = $this->client->reports->mdrUsageReports->create(
+            aggregationType: 'NO_AGGREGATION',
+            endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MdrUsageReportNewResponse::class, $result);
@@ -55,12 +55,12 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->create([
-            'aggregationType' => 'NO_AGGREGATION',
-            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'profiles' => 'My profile',
-        ]);
+        $result = $this->client->reports->mdrUsageReports->create(
+            aggregationType: 'NO_AGGREGATION',
+            endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            profiles: 'My profile',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MdrUsageReportNewResponse::class, $result);
@@ -88,7 +88,7 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->list([]);
+        $result = $this->client->reports->mdrUsageReports->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MdrUsageReportListResponse::class, $result);
@@ -116,9 +116,9 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->fetchSync([
-            'aggregationType' => 'PROFILE',
-        ]);
+        $result = $this->client->reports->mdrUsageReports->fetchSync(
+            aggregationType: 'PROFILE'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MdrUsageReportFetchSyncResponse::class, $result);
@@ -131,12 +131,12 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->fetchSync([
-            'aggregationType' => 'PROFILE',
-            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'profiles' => ['My profile'],
-            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-        ]);
+        $result = $this->client->reports->mdrUsageReports->fetchSync(
+            aggregationType: 'PROFILE',
+            endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            profiles: ['My profile'],
+            startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MdrUsageReportFetchSyncResponse::class, $result);

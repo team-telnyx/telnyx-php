@@ -14,6 +14,11 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      */
+    public ActionsRawService $raw;
+
+    /**
+     * @api
+     */
     public PurchaseService $purchase;
 
     /**
@@ -26,6 +31,7 @@ final class ActionsService implements ActionsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ActionsRawService($client);
         $this->purchase = new PurchaseService($client);
         $this->register = new RegisterService($client);
     }

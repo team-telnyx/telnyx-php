@@ -5,53 +5,48 @@ declare(strict_types=1);
 namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
 
 final class BillingBundlesService implements BillingBundlesContract
 {
     /**
+     * @api
+     */
+    public BillingBundlesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new BillingBundlesRawService($client);
+    }
 
     /**
      * @api
      *
      * Get a single bundle by ID.
      *
-     * @param array{authorizationBearer?: string}|BillingBundleRetrieveParams $params
+     * @param string $bundleID billing bundle's ID, this is used to identify the billing bundle in the API
+     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function retrieve(
         string $bundleID,
-        array|BillingBundleRetrieveParams $params,
+        ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): BillingBundleGetResponse {
-        [$parsed, $options] = BillingBundleRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['authorizationBearer' => $authorizationBearer];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<BillingBundleGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['bundle_pricing/billing_bundles/%1$s', $bundleID],
-            headers: Util::array_transform_keys(
-                $parsed,
-                ['authorizationBearer' => 'authorization_bearer']
-            ),
-            options: $options,
-            convert: BillingBundleGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($bundleID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -62,38 +57,31 @@ final class BillingBundlesService implements BillingBundlesContract
      * Get all allowed bundles.
      *
      * @param array{
-     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
-     *   page?: array{number?: int, size?: int},
-     *   authorizationBearer?: string,
-     * }|BillingBundleListParams $params
+     *   countryISO?: list<string>, resource?: list<string>
+     * } $filter Query param: Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Query param: Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function list(
-        array|BillingBundleListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
+        ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): BillingBundleListResponse {
-        [$parsed, $options] = BillingBundleListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $query_params = array_flip(['filter', 'page']);
+        $params = [
+            'filter' => $filter,
+            'page' => $page,
+            'authorizationBearer' => $authorizationBearer,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var array<string,string> */
-        $header_params = array_diff_key($parsed, $query_params);
-
-        /** @var BaseResponse<BillingBundleListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'bundle_pricing/billing_bundles',
-            query: array_intersect_key($parsed, $query_params),
-            headers: Util::array_transform_keys(
-                $header_params,
-                ['authorizationBearer' => 'authorization_bearer']
-            ),
-            options: $options,
-            convert: BillingBundleListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

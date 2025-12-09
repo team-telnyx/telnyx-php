@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateParams;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
 use Telnyx\RequestOptions;
 
@@ -24,17 +20,21 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderCreateParams $params
+     * @param string $messagingProfileID automatically associate the number with this messaging profile ID when the order is complete
+     * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
      *
      * @throws APIException
      */
     public function create(
-        array|MessagingHostedNumberOrderCreateParams $params,
+        ?string $messagingProfileID = null,
+        ?array $phoneNumbers = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the type of resource
      *
      * @throws APIException
      */
@@ -46,17 +46,21 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingHostedNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the messaging hosted number order to delete
      *
      * @throws APIException
      */
@@ -68,38 +72,42 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderCheckEligibilityParams $params
+     * @param list<string> $phoneNumbers List of phone numbers to check eligibility
      *
      * @throws APIException
      */
     public function checkEligibility(
-        array|MessagingHostedNumberOrderCheckEligibilityParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $phoneNumbers,
+        ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderCheckEligibilityResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderCreateVerificationCodesParams $params
+     * @param string $id order ID to have a verification code created
+     * @param list<string> $phoneNumbers
+     * @param 'sms'|'call'|'flashcall'|VerificationMethod $verificationMethod
      *
      * @throws APIException
      */
     public function createVerificationCodes(
         string $id,
-        array|MessagingHostedNumberOrderCreateVerificationCodesParams $params,
+        array $phoneNumbers,
+        string|VerificationMethod $verificationMethod,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewVerificationCodesResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderValidateCodesParams $params
+     * @param string $id order ID related to the validation codes
+     * @param list<array{code: string, phoneNumber: string}> $verificationCodes
      *
      * @throws APIException
      */
     public function validateCodes(
         string $id,
-        array|MessagingHostedNumberOrderValidateCodesParams $params,
+        array $verificationCodes,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderValidateCodesResponse;
 }

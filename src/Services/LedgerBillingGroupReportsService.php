@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportCreateParams;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
@@ -16,38 +14,39 @@ use Telnyx\ServiceContracts\LedgerBillingGroupReportsContract;
 final class LedgerBillingGroupReportsService implements LedgerBillingGroupReportsContract
 {
     /**
+     * @api
+     */
+    public LedgerBillingGroupReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new LedgerBillingGroupReportsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a ledger billing group report
      *
-     * @param array{
-     *   month?: int, year?: int
-     * }|LedgerBillingGroupReportCreateParams $params
+     * @param int $month Month of the ledger billing group report
+     * @param int $year Year of the ledger billing group report
      *
      * @throws APIException
      */
     public function create(
-        array|LedgerBillingGroupReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?int $month = null,
+        ?int $year = null,
+        ?RequestOptions $requestOptions = null
     ): LedgerBillingGroupReportNewResponse {
-        [$parsed, $options] = LedgerBillingGroupReportCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['month' => $month, 'year' => $year];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<LedgerBillingGroupReportNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ledger_billing_group_reports',
-            body: (object) $parsed,
-            options: $options,
-            convert: LedgerBillingGroupReportNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -57,19 +56,16 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      *
      * Get a ledger billing group report
      *
+     * @param string $id The id of the ledger billing group report
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): LedgerBillingGroupReportGetResponse {
-        /** @var BaseResponse<LedgerBillingGroupReportGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ledger_billing_group_reports/%1$s', $id],
-            options: $requestOptions,
-            convert: LedgerBillingGroupReportGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

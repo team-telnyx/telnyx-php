@@ -34,7 +34,7 @@ final class RegulatoryRequirementsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->regulatoryRequirements->retrieve([]);
+        $result = $this->client->regulatoryRequirements->retrieve();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RegulatoryRequirementGetResponse::class, $result);

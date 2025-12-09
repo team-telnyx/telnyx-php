@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
-use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
@@ -23,47 +19,56 @@ use Telnyx\ServiceContracts\AuthenticationProvidersContract;
 final class AuthenticationProvidersService implements AuthenticationProvidersContract
 {
     /**
+     * @api
+     */
+    public AuthenticationProvidersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AuthenticationProvidersRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates an authentication provider.
      *
+     * @param string $name the name associated with the authentication provider
      * @param array{
-     *   name: string,
-     *   settings: array{
-     *     idpCertFingerprint: string,
-     *     idpEntityID: string,
-     *     idpSSOTargetURL: string,
-     *     idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
-     *   },
-     *   shortName: string,
-     *   active?: bool,
-     *   settingsURL?: string,
-     * }|AuthenticationProviderCreateParams $params
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
+     * } $settings The settings associated with the authentication provider
+     * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
+     * @param bool $active The active status of the authentication provider
+     * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      *
      * @throws APIException
      */
     public function create(
-        array|AuthenticationProviderCreateParams $params,
+        string $name,
+        array $settings,
+        string $shortName,
+        bool $active = true,
+        ?string $settingsURL = null,
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderNewResponse {
-        [$parsed, $options] = AuthenticationProviderCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'name' => $name,
+            'settings' => $settings,
+            'shortName' => $shortName,
+            'active' => $active,
+            'settingsURL' => $settingsURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AuthenticationProviderNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'authentication_providers',
-            body: (object) $parsed,
-            options: $options,
-            convert: AuthenticationProviderNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -73,19 +78,16 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Retrieves the details of an existing authentication provider.
      *
+     * @param string $id authentication provider ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderGetResponse {
-        /** @var BaseResponse<AuthenticationProviderGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['authentication_providers/%1$s', $id],
-            options: $requestOptions,
-            convert: AuthenticationProviderGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -95,39 +97,41 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Updates settings of an existing authentication provider.
      *
+     * @param string $id identifies the resource
+     * @param bool $active The active status of the authentication provider
+     * @param string $name the name associated with the authentication provider
      * @param array{
-     *   active?: bool,
-     *   name?: string,
-     *   settings?: array{
-     *     idpCertFingerprint: string,
-     *     idpEntityID: string,
-     *     idpSSOTargetURL: string,
-     *     idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
-     *   },
-     *   settingsURL?: string,
-     *   shortName?: string,
-     * }|AuthenticationProviderUpdateParams $params
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
+     * } $settings The settings associated with the authentication provider
+     * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
+     * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|AuthenticationProviderUpdateParams $params,
+        bool $active = true,
+        ?string $name = null,
+        ?array $settings = null,
+        ?string $settingsURL = null,
+        ?string $shortName = null,
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderUpdateResponse {
-        [$parsed, $options] = AuthenticationProviderUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'active' => $active,
+            'name' => $name,
+            'settings' => $settings,
+            'settingsURL' => $settingsURL,
+            'shortName' => $shortName,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AuthenticationProviderUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['authentication_providers/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: AuthenticationProviderUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -138,28 +142,33 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * Returns a list of your SSO authentication providers.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}, sort?: value-of<Sort>
-     * }|AuthenticationProviderListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param 'name'|'-name'|'short_name'|'-short_name'|'active'|'-active'|'created_at'|'-created_at'|'updated_at'|'-updated_at'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
+     * That is: <ul>
+     *   <li>
+     *     <code>name</code>: sorts the result by the
+     *     <code>name</code> field in ascending order.
+     *   </li>
+     *   <li>
+     *     <code>-name</code>: sorts the result by the
+     *     <code>name</code> field in descending order.
+     *   </li>
+     * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|AuthenticationProviderListParams $params,
+        ?array $page = null,
+        string|Sort $sort = '-created_at',
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderListResponse {
-        [$parsed, $options] = AuthenticationProviderListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AuthenticationProviderListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'authentication_providers',
-            query: $parsed,
-            options: $options,
-            convert: AuthenticationProviderListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -169,19 +178,16 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Deletes an existing authentication provider.
      *
+     * @param string $id authentication provider ID
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderDeleteResponse {
-        /** @var BaseResponse<AuthenticationProviderDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['authentication_providers/%1$s', $id],
-            options: $requestOptions,
-            convert: AuthenticationProviderDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

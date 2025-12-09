@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -17,18 +16,23 @@ interface CustomStorageCredentialsContract
     /**
      * @api
      *
-     * @param array<mixed>|CustomStorageCredentialCreateParams $params
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param 'gcs'|'s3'|'azure'|Backend $backend
+     * @param array<string,mixed> $configuration
      *
      * @throws APIException
      */
     public function create(
         string $connectionID,
-        array|CustomStorageCredentialCreateParams $params,
+        string|Backend $backend,
+        array $configuration,
         ?RequestOptions $requestOptions = null,
     ): CustomStorageCredentialNewResponse;
 
     /**
      * @api
+     *
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      *
      * @throws APIException
      */
@@ -40,18 +44,23 @@ interface CustomStorageCredentialsContract
     /**
      * @api
      *
-     * @param array<mixed>|CustomStorageCredentialUpdateParams $params
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param 'gcs'|'s3'|'azure'|\Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend $backend
+     * @param array<string,mixed> $configuration
      *
      * @throws APIException
      */
     public function update(
         string $connectionID,
-        array|CustomStorageCredentialUpdateParams $params,
+        string|\Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend $backend,
+        array $configuration,
         ?RequestOptions $requestOptions = null,
     ): CustomStorageCredentialUpdateResponse;
 
     /**
      * @api
+     *
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      *
      * @throws APIException
      */

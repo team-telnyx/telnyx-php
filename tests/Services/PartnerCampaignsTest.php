@@ -49,7 +49,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->update('campaignId', []);
+        $result = $this->client->partnerCampaigns->update('campaignId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxDownstreamCampaign::class, $result);
@@ -62,7 +62,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->list([]);
+        $result = $this->client->partnerCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PartnerCampaignListResponse::class, $result);
@@ -75,7 +75,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->listSharedByMe([]);
+        $result = $this->client->partnerCampaigns->listSharedByMe();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

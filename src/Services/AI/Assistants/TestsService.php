@@ -6,14 +6,9 @@ namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
-use Telnyx\AI\Assistants\Tests\TestCreateParams;
-use Telnyx\AI\Assistants\Tests\TestListParams;
 use Telnyx\AI\Assistants\Tests\TestListResponse;
-use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
 use Telnyx\Services\AI\Assistants\Tests\RunsService;
@@ -21,6 +16,11 @@ use Telnyx\Services\AI\Assistants\Tests\TestSuitesService;
 
 final class TestsService implements TestsContract
 {
+    /**
+     * @api
+     */
+    public TestsRawService $raw;
+
     /**
      * @api
      */
@@ -36,6 +36,7 @@ final class TestsService implements TestsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new TestsRawService($client);
         $this->testSuites = new TestSuitesService($client);
         $this->runs = new RunsService($client);
     }
@@ -45,36 +46,45 @@ final class TestsService implements TestsContract
      *
      * Creates a comprehensive test configuration for evaluating AI assistant performance
      *
-     * @param array{
-     *   destination: string,
-     *   instructions: string,
-     *   name: string,
-     *   rubric: list<array{criteria: string, name: string}>,
-     *   description?: string,
-     *   maxDurationSeconds?: int,
-     *   telnyxConversationChannel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
-     *   testSuite?: string,
-     * }|TestCreateParams $params
+     * @param string $destination The target destination for the test conversation. Format depends on the channel: phone number for SMS/voice, webhook URL for web chat, etc.
+     * @param string $instructions Detailed instructions that define the test scenario and what the assistant should accomplish. This guides the test execution and evaluation.
+     * @param string $name A descriptive name for the assistant test. This will be used to identify the test in the UI and reports.
+     * @param list<array{
+     *   criteria: string, name: string
+     * }> $rubric Evaluation criteria used to assess the assistant's performance. Each rubric item contains a name and specific criteria for evaluation.
+     * @param string $description Optional detailed description of what this test evaluates and its purpose. Helps team members understand the test's objectives.
+     * @param int $maxDurationSeconds Maximum duration in seconds that the test conversation should run before timing out. If not specified, uses system default timeout.
+     * @param 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel $telnyxConversationChannel The communication channel through which the test will be conducted. Determines how the assistant will receive and respond to test messages.
+     * @param string $testSuite Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
      *
      * @throws APIException
      */
     public function create(
-        array|TestCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $destination,
+        string $instructions,
+        string $name,
+        array $rubric,
+        ?string $description = null,
+        ?int $maxDurationSeconds = null,
+        string|TelnyxConversationChannel|null $telnyxConversationChannel = null,
+        ?string $testSuite = null,
+        ?RequestOptions $requestOptions = null,
     ): AssistantTest {
-        [$parsed, $options] = TestCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'destination' => $destination,
+            'instructions' => $instructions,
+            'name' => $name,
+            'rubric' => $rubric,
+            'description' => $description,
+            'maxDurationSeconds' => $maxDurationSeconds,
+            'telnyxConversationChannel' => $telnyxConversationChannel,
+            'testSuite' => $testSuite,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AssistantTest> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/assistants/tests',
-            body: (object) $parsed,
-            options: $options,
-            convert: AssistantTest::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -90,13 +100,8 @@ final class TestsService implements TestsContract
         string $testID,
         ?RequestOptions $requestOptions = null
     ): AssistantTest {
-        /** @var BaseResponse<AssistantTest> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/tests/%1$s', $testID],
-            options: $requestOptions,
-            convert: AssistantTest::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($testID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -106,37 +111,46 @@ final class TestsService implements TestsContract
      *
      * Updates an existing assistant test configuration with new settings
      *
-     * @param array{
-     *   description?: string,
-     *   destination?: string,
-     *   instructions?: string,
-     *   maxDurationSeconds?: int,
-     *   name?: string,
-     *   rubric?: list<array{criteria: string, name: string}>,
-     *   telnyxConversationChannel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
-     *   testSuite?: string,
-     * }|TestUpdateParams $params
+     * @param string $description updated description of the test's purpose and evaluation criteria
+     * @param string $destination updated target destination for test conversations
+     * @param string $instructions updated test scenario instructions and objectives
+     * @param int $maxDurationSeconds updated maximum test duration in seconds
+     * @param string $name Updated name for the assistant test. Must be unique and descriptive.
+     * @param list<array{
+     *   criteria: string, name: string
+     * }> $rubric Updated evaluation criteria for assessing assistant performance
+     * @param 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel $telnyxConversationChannel updated communication channel for the test execution
+     * @param string $testSuite updated test suite assignment for better organization
      *
      * @throws APIException
      */
     public function update(
         string $testID,
-        array|TestUpdateParams $params,
+        ?string $description = null,
+        ?string $destination = null,
+        ?string $instructions = null,
+        ?int $maxDurationSeconds = null,
+        ?string $name = null,
+        ?array $rubric = null,
+        string|TelnyxConversationChannel|null $telnyxConversationChannel = null,
+        ?string $testSuite = null,
         ?RequestOptions $requestOptions = null,
     ): AssistantTest {
-        [$parsed, $options] = TestUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'description' => $description,
+            'destination' => $destination,
+            'instructions' => $instructions,
+            'maxDurationSeconds' => $maxDurationSeconds,
+            'name' => $name,
+            'rubric' => $rubric,
+            'telnyxConversationChannel' => $telnyxConversationChannel,
+            'testSuite' => $testSuite,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AssistantTest> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['ai/assistants/tests/%1$s', $testID],
-            body: (object) $parsed,
-            options: $options,
-            convert: AssistantTest::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($testID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -146,38 +160,33 @@ final class TestsService implements TestsContract
      *
      * Retrieves a paginated list of assistant tests with optional filtering capabilities
      *
+     * @param string $destination Filter tests by destination (phone number, webhook URL, etc.)
      * @param array{
-     *   destination?: string,
-     *   page?: array{number?: int, size?: int},
-     *   telnyxConversationChannel?: string,
-     *   testSuite?: string,
-     * }|TestListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
+     * @param string $testSuite Filter tests by test suite name
      *
      * @throws APIException
      */
     public function list(
-        array|TestListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $destination = null,
+        ?array $page = null,
+        ?string $telnyxConversationChannel = null,
+        ?string $testSuite = null,
+        ?RequestOptions $requestOptions = null,
     ): TestListResponse {
-        [$parsed, $options] = TestListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'destination' => $destination,
+            'page' => $page,
+            'telnyxConversationChannel' => $telnyxConversationChannel,
+            'testSuite' => $testSuite,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<TestListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/assistants/tests',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'telnyxConversationChannel' => 'telnyx_conversation_channel',
-                    'testSuite' => 'test_suite',
-                ],
-            ),
-            options: $options,
-            convert: TestListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -193,13 +202,8 @@ final class TestsService implements TestsContract
         string $testID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['ai/assistants/tests/%1$s', $testID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($testID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

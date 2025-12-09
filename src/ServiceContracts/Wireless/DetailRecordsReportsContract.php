@@ -6,10 +6,8 @@ namespace Telnyx\ServiceContracts\Wireless;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportCreateParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportDeleteResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportGetResponse;
-use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
 
@@ -18,17 +16,21 @@ interface DetailRecordsReportsContract
     /**
      * @api
      *
-     * @param array<mixed>|DetailRecordsReportCreateParams $params
+     * @param string $endTime ISO 8601 formatted date-time indicating the end time
+     * @param string $startTime ISO 8601 formatted date-time indicating the start time
      *
      * @throws APIException
      */
     public function create(
-        array|DetailRecordsReportCreateParams $params,
+        ?string $endTime = null,
+        ?string $startTime = null,
         ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -40,17 +42,21 @@ interface DetailRecordsReportsContract
     /**
      * @api
      *
-     * @param array<mixed>|DetailRecordsReportListParams $params
+     * @param int $pageNumber the page number to load
+     * @param int $pageSize the size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|DetailRecordsReportListParams $params,
+        int $pageNumber = 1,
+        int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */

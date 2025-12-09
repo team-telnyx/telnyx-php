@@ -37,7 +37,7 @@ final class GlobalIPHealthChecksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPHealthChecks->create([]);
+        $result = $this->client->globalIPHealthChecks->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(GlobalIPHealthCheckNewResponse::class, $result);
@@ -65,7 +65,7 @@ final class GlobalIPHealthChecksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPHealthChecks->list([]);
+        $result = $this->client->globalIPHealthChecks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(GlobalIPHealthCheckListResponse::class, $result);

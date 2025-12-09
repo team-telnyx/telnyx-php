@@ -37,9 +37,11 @@ final class MigrationSourcesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrationSources->create([
-            'bucketName' => 'bucket_name', 'provider' => 'aws', 'providerAuth' => [],
-        ]);
+        $result = $this->client->storage->migrationSources->create(
+            bucketName: 'bucket_name',
+            provider: 'aws',
+            providerAuth: []
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MigrationSourceNewResponse::class, $result);
@@ -52,14 +54,14 @@ final class MigrationSourcesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrationSources->create([
-            'bucketName' => 'bucket_name',
-            'provider' => 'aws',
-            'providerAuth' => [
+        $result = $this->client->storage->migrationSources->create(
+            bucketName: 'bucket_name',
+            provider: 'aws',
+            providerAuth: [
                 'accessKey' => 'access_key', 'secretAccessKey' => 'secret_access_key',
             ],
-            'sourceRegion' => 'source_region',
-        ]);
+            sourceRegion: 'source_region',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MigrationSourceNewResponse::class, $result);

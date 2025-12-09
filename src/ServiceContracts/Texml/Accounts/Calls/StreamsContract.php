@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams;
+use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
 
 interface StreamsContract
@@ -14,13 +14,18 @@ interface StreamsContract
     /**
      * @api
      *
-     * @param array<mixed>|StreamStreamingSidJsonParams $params
+     * @param string $streamingSid path param: Uniquely identifies the streaming by id
+     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $callSid path param: The CallSid that identifies the call to update
+     * @param 'stopped'|Status $status body param: The status of the Stream you wish to update
      *
      * @throws APIException
      */
     public function streamingSidJson(
         string $streamingSid,
-        array|StreamStreamingSidJsonParams $params,
+        string $accountSid,
+        string $callSid,
+        string|Status $status = 'stopped',
         ?RequestOptions $requestOptions = null,
     ): StreamStreamingSidJsonResponse;
 }

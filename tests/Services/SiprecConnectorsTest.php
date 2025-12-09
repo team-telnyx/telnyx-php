@@ -36,11 +36,11 @@ final class SiprecConnectorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->siprecConnectors->create([
-            'host' => 'siprec.telnyx.com',
-            'name' => 'my-siprec-connector',
-            'port' => 5060,
-        ]);
+        $result = $this->client->siprecConnectors->create(
+            host: 'siprec.telnyx.com',
+            name: 'my-siprec-connector',
+            port: 5060
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SiprecConnectorNewResponse::class, $result);
@@ -53,12 +53,12 @@ final class SiprecConnectorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->siprecConnectors->create([
-            'host' => 'siprec.telnyx.com',
-            'name' => 'my-siprec-connector',
-            'port' => 5060,
-            'appSubdomain' => 'my-app',
-        ]);
+        $result = $this->client->siprecConnectors->create(
+            host: 'siprec.telnyx.com',
+            name: 'my-siprec-connector',
+            port: 5060,
+            appSubdomain: 'my-app',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SiprecConnectorNewResponse::class, $result);
@@ -86,11 +86,9 @@ final class SiprecConnectorsTest extends TestCase
 
         $result = $this->client->siprecConnectors->update(
             'connector_name',
-            [
-                'host' => 'siprec.telnyx.com',
-                'name' => 'my-siprec-connector',
-                'port' => 5060,
-            ],
+            host: 'siprec.telnyx.com',
+            name: 'my-siprec-connector',
+            port: 5060,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -106,12 +104,10 @@ final class SiprecConnectorsTest extends TestCase
 
         $result = $this->client->siprecConnectors->update(
             'connector_name',
-            [
-                'host' => 'siprec.telnyx.com',
-                'name' => 'my-siprec-connector',
-                'port' => 5060,
-                'appSubdomain' => 'my-app',
-            ],
+            host: 'siprec.telnyx.com',
+            name: 'my-siprec-connector',
+            port: 5060,
+            appSubdomain: 'my-app',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

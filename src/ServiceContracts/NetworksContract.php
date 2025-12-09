@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Networks\NetworkCreateParams;
+use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
-use Telnyx\Networks\NetworkListInterfacesParams;
 use Telnyx\Networks\NetworkListInterfacesResponse;
-use Telnyx\Networks\NetworkListParams;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
-use Telnyx\Networks\NetworkUpdateParams;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -22,17 +19,19 @@ interface NetworksContract
     /**
      * @api
      *
-     * @param array<mixed>|NetworkCreateParams $params
+     * @param string $name a user specified name for the network
      *
      * @throws APIException
      */
     public function create(
-        array|NetworkCreateParams $params,
+        string $name,
         ?RequestOptions $requestOptions = null
     ): NetworkNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -44,30 +43,39 @@ interface NetworksContract
     /**
      * @api
      *
-     * @param array<mixed>|NetworkUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $name a user specified name for the network
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|NetworkUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $name,
+        ?RequestOptions $requestOptions = null
     ): NetworkUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|NetworkListParams $params
+     * @param array{
+     *   name?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|NetworkListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): NetworkListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -79,13 +87,22 @@ interface NetworksContract
     /**
      * @api
      *
-     * @param array<mixed>|NetworkListInterfacesParams $params
+     * @param string $id identifies the resource
+     * @param array{
+     *   name?: string,
+     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
+     *   type?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
-        array|NetworkListInterfacesParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): NetworkListInterfacesResponse;
 }

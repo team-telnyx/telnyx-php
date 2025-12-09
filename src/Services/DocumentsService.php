@@ -5,19 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
-use Telnyx\Documents\DocumentListParams;
 use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentListResponse;
-use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
-use Telnyx\Documents\DocumentUploadJsonParams;
 use Telnyx\Documents\DocumentUploadJsonResponse;
-use Telnyx\Documents\DocumentUploadParams;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentsContract;
@@ -25,14 +20,24 @@ use Telnyx\ServiceContracts\DocumentsContract;
 final class DocumentsService implements DocumentsContract
 {
     /**
+     * @api
+     */
+    public DocumentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new DocumentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a document.
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -40,13 +45,8 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentGetResponse {
-        /** @var BaseResponse<DocumentGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['documents/%1$s', $id],
-            options: $requestOptions,
-            convert: DocumentGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -56,30 +56,26 @@ final class DocumentsService implements DocumentsContract
      *
      * Update a document.
      *
-     * @param array{
-     *   customerReference?: string, filename?: string
-     * }|DocumentUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $customerReference optional reference string for customer tracking
+     * @param string $filename the filename of the document
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|DocumentUpdateParams $params,
+        ?string $customerReference = null,
+        ?string $filename = null,
         ?RequestOptions $requestOptions = null,
     ): DocumentUpdateResponse {
-        [$parsed, $options] = DocumentUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'customerReference' => $customerReference, 'filename' => $filename,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<DocumentUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['documents/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: DocumentUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -90,36 +86,31 @@ final class DocumentsService implements DocumentsContract
      * List all documents ordered by created_at descending.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{
-     *       gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
-     *     },
-     *     customerReference?: array{eq?: string, in?: list<string>},
-     *     filename?: array{contains?: string},
+     *   createdAt?: array{
+     *     gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
      *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'|Sort>,
-     * }|DocumentListParams $params
+     *   customerReference?: array{eq?: string, in?: list<string>},
+     *   filename?: array{contains?: string},
+     * } $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'|Sort> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      *
      * @throws APIException
      */
     public function list(
-        array|DocumentListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?array $sort = null,
+        ?RequestOptions $requestOptions = null,
     ): DocumentListResponse {
-        [$parsed, $options] = DocumentListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<DocumentListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'documents',
-            query: $parsed,
-            options: $options,
-            convert: DocumentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -129,19 +120,16 @@ final class DocumentsService implements DocumentsContract
      *
      * Delete a document.<br /><br />A document can only be deleted if it's not linked to a service. If it is linked to a service, it must be unlinked prior to deleting.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentDeleteResponse {
-        /** @var BaseResponse<DocumentDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['documents/%1$s', $id],
-            options: $requestOptions,
-            convert: DocumentDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -151,20 +139,16 @@ final class DocumentsService implements DocumentsContract
      *
      * Download a document.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function download(
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        /** @var BaseResponse<string> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['documents/%1$s/download', $id],
-            headers: ['Accept' => '*'],
-            options: $requestOptions,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->download($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -174,19 +158,16 @@ final class DocumentsService implements DocumentsContract
      *
      * Generates a temporary pre-signed URL that can be used to download the document directly from the storage backend without authentication.
      *
+     * @param string $id Uniquely identifies the document
+     *
      * @throws APIException
      */
     public function generateDownloadLink(
         string $id,
         ?RequestOptions $requestOptions = null
     ): DocumentGenerateDownloadLinkResponse {
-        /** @var BaseResponse<DocumentGenerateDownloadLinkResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['documents/%1$s/download_link', $id],
-            options: $requestOptions,
-            convert: DocumentGenerateDownloadLinkResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->generateDownloadLink($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -196,29 +177,31 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array{
-     *   url: string, customerReference?: string, filename?: string, file: string
-     * }|DocumentUploadParams $params
+     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $filename the filename of the document
      *
      * @throws APIException
      */
     public function upload(
-        array|DocumentUploadParams $params,
-        ?RequestOptions $requestOptions = null
+        string $url,
+        string $file,
+        ?string $customerReference = null,
+        ?string $filename = null,
+        ?RequestOptions $requestOptions = null,
     ): DocumentUploadResponse {
-        [$parsed, $options] = DocumentUploadParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'url' => $url,
+            'customerReference' => $customerReference,
+            'filename' => $filename,
+            'file' => $file,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<DocumentUploadResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'documents?content-type=multipart',
-            body: (object) $parsed,
-            options: $options,
-            convert: DocumentUploadResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->upload(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -228,29 +211,31 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array{
-     *   url: string, customerReference?: string, filename?: string, file: string
-     * }|DocumentUploadJsonParams $params
+     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $filename the filename of the document
      *
      * @throws APIException
      */
     public function uploadJson(
-        array|DocumentUploadJsonParams $params,
+        string $url,
+        string $file,
+        ?string $customerReference = null,
+        ?string $filename = null,
         ?RequestOptions $requestOptions = null,
     ): DocumentUploadJsonResponse {
-        [$parsed, $options] = DocumentUploadJsonParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'url' => $url,
+            'customerReference' => $customerReference,
+            'filename' => $filename,
+            'file' => $file,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<DocumentUploadJsonResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'documents',
-            body: (object) $parsed,
-            options: $options,
-            convert: DocumentUploadJsonResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->uploadJson(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

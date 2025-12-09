@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\ManagedAccounts;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
-use Telnyx\ManagedAccounts\Actions\ActionEnableParams;
 use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccounts\ActionsContract;
@@ -16,14 +14,24 @@ use Telnyx\ServiceContracts\ManagedAccounts\ActionsContract;
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Disables a managed account, forbidding it to use Telnyx services, including sending or receiving phone calls and SMS messages. Ongoing phone calls will not be affected. The managed account and its sub-users will no longer be able to log in via the mission control portal.
+     *
+     * @param string $id Managed Account User ID
      *
      * @throws APIException
      */
@@ -31,13 +39,8 @@ final class ActionsService implements ActionsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActionDisableResponse {
-        /** @var BaseResponse<ActionDisableResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['managed_accounts/%1$s/actions/disable', $id],
-            options: $requestOptions,
-            convert: ActionDisableResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->disable($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -47,28 +50,22 @@ final class ActionsService implements ActionsContract
      *
      * Enables a managed account and its sub-users to use Telnyx services.
      *
-     * @param array{reenableAllConnections?: bool}|ActionEnableParams $params
+     * @param string $id Managed Account User ID
+     * @param bool $reenableAllConnections When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
      *
      * @throws APIException
      */
     public function enable(
         string $id,
-        array|ActionEnableParams $params,
+        bool $reenableAllConnections = false,
         ?RequestOptions $requestOptions = null,
     ): ActionEnableResponse {
-        [$parsed, $options] = ActionEnableParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['reenableAllConnections' => $reenableAllConnections];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ActionEnableResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['managed_accounts/%1$s/actions/enable', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionEnableResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->enable($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

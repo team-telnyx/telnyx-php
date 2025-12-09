@@ -6,11 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsResponse;
 use Telnyx\RequestOptions;
 
@@ -18,6 +15,8 @@ interface NumberOrderPhoneNumbersContract
 {
     /**
      * @api
+     *
+     * @param string $numberOrderPhoneNumberID the number order phone number ID
      *
      * @throws APIException
      */
@@ -29,38 +28,44 @@ interface NumberOrderPhoneNumbersContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderPhoneNumberListParams $params
+     * @param array{
+     *   countryCode?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
      *
      * @throws APIException
      */
     public function list(
-        array|NumberOrderPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberListResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
+     * @param string $id The unique identifier of the number order phone number
+     * @param string $requirementGroupID The ID of the requirement group to associate
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
-        array|NumberOrderPhoneNumberUpdateRequirementGroupParams $params,
+        string $requirementGroupID,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderPhoneNumberUpdateRequirementsParams $params
+     * @param string $numberOrderPhoneNumberID the number order phone number ID
+     * @param list<array{
+     *   fieldValue?: string, requirementID?: string
+     * }> $regulatoryRequirements
      *
      * @throws APIException
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
-        array|NumberOrderPhoneNumberUpdateRequirementsParams $params,
+        ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse;
 }

@@ -13,6 +13,8 @@ interface ByPhoneNumberContract
     /**
      * @api
      *
+     * @param string $phoneNumber +E164 formatted phone number
+     *
      * @throws APIException
      */
     public function list(

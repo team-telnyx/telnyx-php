@@ -35,9 +35,7 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->create([
-            'cidrBlock' => 'cidr_block',
-        ]);
+        $result = $this->client->accessIPRanges->create(cidrBlock: 'cidr_block');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AccessIPRange::class, $result);
@@ -50,9 +48,10 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->create([
-            'cidrBlock' => 'cidr_block', 'description' => 'description',
-        ]);
+        $result = $this->client->accessIPRanges->create(
+            cidrBlock: 'cidr_block',
+            description: 'description'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AccessIPRange::class, $result);
@@ -65,7 +64,7 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->list([]);
+        $result = $this->client->accessIPRanges->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AccessIPRangeListResponse::class, $result);

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\Events\EventGetResponse;
-use Telnyx\Porting\Events\EventListParams;
+use Telnyx\Porting\Events\EventListParams\Filter\Type;
 use Telnyx\Porting\Events\EventListResponse;
 use Telnyx\RequestOptions;
 
@@ -14,6 +14,8 @@ interface EventsContract
 {
     /**
      * @api
+     *
+     * @param string $id identifies the porting event
      *
      * @throws APIException
      */
@@ -25,17 +27,29 @@ interface EventsContract
     /**
      * @api
      *
-     * @param array<mixed>|EventListParams $params
+     * @param array{
+     *   createdAt?: array{
+     *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
+     *   },
+     *   portingOrderID?: string,
+     *   type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split'|Type,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|EventListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): EventListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the porting event
      *
      * @throws APIException
      */

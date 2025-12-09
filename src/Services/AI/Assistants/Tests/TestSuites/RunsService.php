@@ -6,22 +6,25 @@ namespace Telnyx\Services\AI\Assistants\Tests\TestSuites;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunTriggerParams;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
-use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
 
 final class RunsService implements RunsContract
 {
     /**
+     * @api
+     */
+    public RunsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RunsRawService($client);
+    }
 
     /**
      * @api
@@ -29,34 +32,28 @@ final class RunsService implements RunsContract
      * Retrieves paginated history of test runs for a specific test suite with filtering options
      *
      * @param array{
-     *   page?: array{number?: int, size?: int},
-     *   status?: string,
-     *   testSuiteRunID?: string,
-     * }|RunListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
+     * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
      *
      * @throws APIException
      */
     public function list(
         string $suiteName,
-        array|RunListParams $params,
+        ?array $page = null,
+        ?string $status = null,
+        ?string $testSuiteRunID = null,
         ?RequestOptions $requestOptions = null,
     ): PaginatedTestRunList {
-        [$parsed, $options] = RunListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'page' => $page, 'status' => $status, 'testSuiteRunID' => $testSuiteRunID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PaginatedTestRunList> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['testSuiteRunID' => 'test_suite_run_id']
-            ),
-            options: $options,
-            convert: PaginatedTestRunList::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($suiteName, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -66,7 +63,7 @@ final class RunsService implements RunsContract
      *
      * Executes all tests within a specific test suite as a batch operation
      *
-     * @param array{destinationVersionID?: string}|RunTriggerParams $params
+     * @param string $destinationVersionID Optional assistant version ID to use for all test runs in this suite. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      *
      * @return list<TestRunResponse>
      *
@@ -74,22 +71,15 @@ final class RunsService implements RunsContract
      */
     public function trigger(
         string $suiteName,
-        array|RunTriggerParams $params,
+        ?string $destinationVersionID = null,
         ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = RunTriggerParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['destinationVersionID' => $destinationVersionID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<TestRunResponse>> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
-            body: (object) $parsed,
-            options: $options,
-            convert: new ListOf(TestRunResponse::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->trigger($suiteName, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

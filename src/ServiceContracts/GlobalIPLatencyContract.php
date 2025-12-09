@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams;
 use Telnyx\RequestOptions;
 
 interface GlobalIPLatencyContract
@@ -14,12 +13,14 @@ interface GlobalIPLatencyContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPLatencyRetrieveParams $params
+     * @param array{
+     *   globalIPID?: string|array{in?: string}
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|GlobalIPLatencyRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPLatencyGetResponse;
 }

@@ -37,7 +37,7 @@ final class CommentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->comments->create([]);
+        $result = $this->client->comments->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CommentNewResponse::class, $result);
@@ -63,7 +63,7 @@ final class CommentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->comments->list([]);
+        $result = $this->client->comments->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CommentListResponse::class, $result);

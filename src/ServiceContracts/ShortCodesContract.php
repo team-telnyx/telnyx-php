@@ -7,15 +7,15 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
-use Telnyx\ShortCodes\ShortCodeListParams;
 use Telnyx\ShortCodes\ShortCodeListResponse;
-use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
 interface ShortCodesContract
 {
     /**
      * @api
+     *
+     * @param string $id The id of the short code
      *
      * @throws APIException
      */
@@ -27,25 +27,34 @@ interface ShortCodesContract
     /**
      * @api
      *
-     * @param array<mixed>|ShortCodeUpdateParams $params
+     * @param string $id The id of the short code
+     * @param string $messagingProfileID unique identifier for a messaging profile
+     * @param list<string> $tags
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|ShortCodeUpdateParams $params,
+        string $messagingProfileID,
+        ?array $tags = null,
         ?RequestOptions $requestOptions = null,
     ): ShortCodeUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|ShortCodeListParams $params
+     * @param array{
+     *   messagingProfileID?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|ShortCodeListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): ShortCodeListResponse;
 }

@@ -51,7 +51,7 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->update('1293384261075731499', []);
+        $result = $this->client->phoneNumbers->update('1293384261075731499');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PhoneNumberUpdateResponse::class, $result);
@@ -64,7 +64,7 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->list([]);
+        $result = $this->client->phoneNumbers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PhoneNumberListResponse::class, $result);
@@ -90,7 +90,7 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->slimList([]);
+        $result = $this->client->phoneNumbers->slimList();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PhoneNumberSlimListResponse::class, $result);

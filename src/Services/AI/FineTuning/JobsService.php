@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\FineTuning;
 
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob;
-use Telnyx\AI\FineTuning\Jobs\JobCreateParams;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsContract;
@@ -16,41 +14,50 @@ use Telnyx\ServiceContracts\AI\FineTuning\JobsContract;
 final class JobsService implements JobsContract
 {
     /**
+     * @api
+     */
+    public JobsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new JobsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new fine tuning job.
      *
+     * @param string $model the base model that is being fine-tuned
+     * @param string $trainingFile the storage bucket or object used for training
      * @param array{
-     *   model: string,
-     *   trainingFile: string,
-     *   hyperparameters?: array{nEpochs?: int},
-     *   suffix?: string,
-     * }|JobCreateParams $params
+     *   nEpochs?: int
+     * } $hyperparameters The hyperparameters used for the fine-tuning job
+     * @param string $suffix optional suffix to append to the fine tuned model's name
      *
      * @throws APIException
      */
     public function create(
-        array|JobCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $model,
+        string $trainingFile,
+        ?array $hyperparameters = null,
+        ?string $suffix = null,
+        ?RequestOptions $requestOptions = null,
     ): FineTuningJob {
-        [$parsed, $options] = JobCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'model' => $model,
+            'trainingFile' => $trainingFile,
+            'hyperparameters' => $hyperparameters,
+            'suffix' => $suffix,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<FineTuningJob> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/fine_tuning/jobs',
-            body: (object) $parsed,
-            options: $options,
-            convert: FineTuningJob::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -66,13 +73,8 @@ final class JobsService implements JobsContract
         string $jobID,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob {
-        /** @var BaseResponse<FineTuningJob> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/fine_tuning/jobs/%1$s', $jobID],
-            options: $requestOptions,
-            convert: FineTuningJob::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($jobID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -87,13 +89,8 @@ final class JobsService implements JobsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): JobListResponse {
-        /** @var BaseResponse<JobListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/fine_tuning/jobs',
-            options: $requestOptions,
-            convert: JobListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -109,13 +106,8 @@ final class JobsService implements JobsContract
         string $jobID,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob {
-        /** @var BaseResponse<FineTuningJob> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['ai/fine_tuning/jobs/%1$s/cancel', $jobID],
-            options: $requestOptions,
-            convert: FineTuningJob::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->cancel($jobID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

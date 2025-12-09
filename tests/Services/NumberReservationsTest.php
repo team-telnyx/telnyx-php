@@ -36,7 +36,7 @@ final class NumberReservationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberReservations->create([]);
+        $result = $this->client->numberReservations->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberReservationNewResponse::class, $result);
@@ -64,7 +64,7 @@ final class NumberReservationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberReservations->list([]);
+        $result = $this->client->numberReservations->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberReservationListResponse::class, $result);

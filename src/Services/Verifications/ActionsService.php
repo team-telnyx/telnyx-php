@@ -5,50 +5,50 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ActionsContract;
-use Telnyx\Verifications\Actions\ActionVerifyParams;
 use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Verify verification code by ID
      *
-     * @param array{
-     *   code?: string, status?: 'accepted'|'rejected'|Status
-     * }|ActionVerifyParams $params
+     * @param string $verificationID the identifier of the verification to retrieve
+     * @param string $code this is the code the user submits for verification
+     * @param 'accepted'|'rejected'|Status $status Identifies if the verification code has been accepted or rejected. Only permitted if custom_code was used for the verification.
      *
      * @throws APIException
      */
     public function verify(
         string $verificationID,
-        array|ActionVerifyParams $params,
+        ?string $code = null,
+        string|Status|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): VerifyVerificationCodeResponse {
-        [$parsed, $options] = ActionVerifyParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['code' => $code, 'status' => $status];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerifyVerificationCodeResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['verifications/%1$s/actions/verify', $verificationID],
-            body: (object) $parsed,
-            options: $options,
-            convert: VerifyVerificationCodeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->verify($verificationID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

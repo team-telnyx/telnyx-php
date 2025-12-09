@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
+
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\RequestOptions;
+use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams;
+use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
+
+interface StreamsRawContract
+{
+    /**
+     * @api
+     *
+     * @param string $streamingSid path param: Uniquely identifies the streaming by id
+     * @param array<mixed>|StreamStreamingSidJsonParams $params
+     *
+     * @return BaseResponse<StreamStreamingSidJsonResponse>
+     *
+     * @throws APIException
+     */
+    public function streamingSidJson(
+        string $streamingSid,
+        array|StreamStreamingSidJsonParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+}

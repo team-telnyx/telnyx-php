@@ -36,15 +36,15 @@ final class InexplicitNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inexplicitNumberOrders->create([
-            'orderingGroups' => [
+        $result = $this->client->inexplicitNumberOrders->create(
+            orderingGroups: [
                 [
                     'countRequested' => 'count_requested',
                     'countryISO' => 'US',
                     'phoneNumberType' => 'phone_number_type',
                 ],
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InexplicitNumberOrderNewResponse::class, $result);
@@ -57,8 +57,8 @@ final class InexplicitNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inexplicitNumberOrders->create([
-            'orderingGroups' => [
+        $result = $this->client->inexplicitNumberOrders->create(
+            orderingGroups: [
                 [
                     'countRequested' => 'count_requested',
                     'countryISO' => 'US',
@@ -77,11 +77,11 @@ final class InexplicitNumberOrdersTest extends TestCase
                     'strategy' => 'always',
                 ],
             ],
-            'billingGroupID' => 'billing_group_id',
-            'connectionID' => 'connection_id',
-            'customerReference' => 'customer_reference',
-            'messagingProfileID' => 'messaging_profile_id',
-        ]);
+            billingGroupID: 'billing_group_id',
+            connectionID: 'connection_id',
+            customerReference: 'customer_reference',
+            messagingProfileID: 'messaging_profile_id',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InexplicitNumberOrderNewResponse::class, $result);
@@ -109,7 +109,7 @@ final class InexplicitNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inexplicitNumberOrders->list([]);
+        $result = $this->client->inexplicitNumberOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InexplicitNumberOrderListResponse::class, $result);

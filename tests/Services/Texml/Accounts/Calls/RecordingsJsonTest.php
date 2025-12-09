@@ -41,7 +41,7 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->recordingsJson('call_sid', ['accountSid' => 'account_sid'])
+            ->recordingsJson('call_sid', accountSid: 'account_sid')
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -66,16 +66,14 @@ final class RecordingsJsonTest extends TestCase
             ->recordingsJson
             ->recordingsJson(
                 'call_sid',
-                [
-                    'accountSid' => 'account_sid',
-                    'playBeep' => false,
-                    'recordingChannels' => 'single',
-                    'recordingStatusCallback' => 'http://webhook.com/callback',
-                    'recordingStatusCallbackEvent' => 'in-progress completed absent',
-                    'recordingStatusCallbackMethod' => 'GET',
-                    'recordingTrack' => 'inbound',
-                    'sendRecordingURL' => false,
-                ],
+                accountSid: 'account_sid',
+                playBeep: false,
+                recordingChannels: 'single',
+                recordingStatusCallback: 'http://webhook.com/callback',
+                recordingStatusCallbackEvent: 'in-progress completed absent',
+                recordingStatusCallbackMethod: 'GET',
+                recordingTrack: 'inbound',
+                sendRecordingURL: false,
             )
         ;
 
@@ -99,7 +97,7 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', ['accountSid' => 'account_sid'])
+            ->retrieveRecordingsJson('call_sid', accountSid: 'account_sid')
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -122,7 +120,7 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', ['accountSid' => 'account_sid'])
+            ->retrieveRecordingsJson('call_sid', accountSid: 'account_sid')
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -39,9 +39,9 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->create([
-            'businessName' => 'Larry\'s Cat Food Inc',
-        ]);
+        $result = $this->client->managedAccounts->create(
+            businessName: 'Larry\'s Cat Food Inc'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ManagedAccountNewResponse::class, $result);
@@ -54,13 +54,13 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->create([
-            'businessName' => 'Larry\'s Cat Food Inc',
-            'email' => 'larry_cat_food@customer.org',
-            'managedAccountAllowCustomPricing' => false,
-            'password' => '3jVjLq!tMuWKyWx4NN*CvhnB',
-            'rollupBilling' => false,
-        ]);
+        $result = $this->client->managedAccounts->create(
+            businessName: 'Larry\'s Cat Food Inc',
+            email: 'larry_cat_food@customer.org',
+            managedAccountAllowCustomPricing: false,
+            password: '3jVjLq!tMuWKyWx4NN*CvhnB',
+            rollupBilling: false,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ManagedAccountNewResponse::class, $result);
@@ -86,7 +86,7 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->update('id', []);
+        $result = $this->client->managedAccounts->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ManagedAccountUpdateResponse::class, $result);
@@ -99,7 +99,7 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->list([]);
+        $result = $this->client->managedAccounts->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ManagedAccountListResponse::class, $result);
@@ -132,10 +132,7 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->updateGlobalChannelLimit(
-            'id',
-            []
-        );
+        $result = $this->client->managedAccounts->updateGlobalChannelLimit('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

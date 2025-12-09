@@ -34,7 +34,7 @@ final class GlobalIPUsageTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPUsage->retrieve([]);
+        $result = $this->client->globalIPUsage->retrieve();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(GlobalIPUsageGetResponse::class, $result);

@@ -36,7 +36,7 @@ final class SslCertificateTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->buckets->sslCertificate->create('', []);
+        $result = $this->client->storage->buckets->sslCertificate->create('');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SslCertificateNewResponse::class, $result);

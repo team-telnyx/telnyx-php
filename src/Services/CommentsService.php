@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Comments\CommentCreateParams;
-use Telnyx\Comments\CommentCreateParams\CommentRecordType;
 use Telnyx\Comments\CommentGetResponse;
-use Telnyx\Comments\CommentListParams;
+use Telnyx\Comments\CommentListParams\Filter\CommentRecordType;
 use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CommentsContract;
@@ -20,40 +17,43 @@ use Telnyx\ServiceContracts\CommentsContract;
 final class CommentsService implements CommentsContract
 {
     /**
+     * @api
+     */
+    public CommentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CommentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a comment
      *
-     * @param array{
-     *   body?: string,
-     *   commentRecordID?: string,
-     *   commentRecordType?: 'sub_number_order'|'requirement_group'|CommentRecordType,
-     * }|CommentCreateParams $params
+     * @param 'sub_number_order'|'requirement_group'|\Telnyx\Comments\CommentCreateParams\CommentRecordType $commentRecordType
      *
      * @throws APIException
      */
     public function create(
-        array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $body = null,
+        ?string $commentRecordID = null,
+        string|\Telnyx\Comments\CommentCreateParams\CommentRecordType|null $commentRecordType = null,
+        ?RequestOptions $requestOptions = null,
     ): CommentNewResponse {
-        [$parsed, $options] = CommentCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'body' => $body,
+            'commentRecordID' => $commentRecordID,
+            'commentRecordType' => $commentRecordType,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CommentNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'comments',
-            body: (object) $parsed,
-            options: $options,
-            convert: CommentNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -63,19 +63,16 @@ final class CommentsService implements CommentsContract
      *
      * Retrieve a comment
      *
+     * @param string $id the comment ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentGetResponse {
-        /** @var BaseResponse<CommentGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['comments/%1$s', $id],
-            options: $requestOptions,
-            convert: CommentGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -86,31 +83,22 @@ final class CommentsService implements CommentsContract
      * Retrieve all comments
      *
      * @param array{
-     *   filter?: array{
-     *     commentRecordID?: string,
-     *     commentRecordType?: 'sub_number_order'|'requirement_group'|CommentListParams\Filter\CommentRecordType,
-     *   },
-     * }|CommentListParams $params
+     *   commentRecordID?: string,
+     *   commentRecordType?: 'sub_number_order'|'requirement_group'|CommentRecordType,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
      *
      * @throws APIException
      */
     public function list(
-        array|CommentListParams $params,
+        ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): CommentListResponse {
-        [$parsed, $options] = CommentListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CommentListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'comments',
-            query: $parsed,
-            options: $options,
-            convert: CommentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -120,19 +108,16 @@ final class CommentsService implements CommentsContract
      *
      * Mark a comment as read
      *
+     * @param string $id the comment ID
+     *
      * @throws APIException
      */
     public function markAsRead(
         string $id,
         ?RequestOptions $requestOptions = null
     ): CommentMarkAsReadResponse {
-        /** @var BaseResponse<CommentMarkAsReadResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['comments/%1$s/read', $id],
-            options: $requestOptions,
-            convert: CommentMarkAsReadResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->markAsRead($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

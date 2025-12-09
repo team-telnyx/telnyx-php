@@ -38,14 +38,14 @@ final class VirtualCrossConnectsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->virtualCrossConnects->create([
-            'bgpAsn' => 1234,
-            'cloudProvider' => 'aws',
-            'cloudProviderRegion' => 'us-east-1',
-            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'primaryCloudAccountID' => '123456789012',
-            'regionCode' => 'ashburn-va',
-        ]);
+        $result = $this->client->virtualCrossConnects->create(
+            bgpAsn: 1234,
+            cloudProvider: 'aws',
+            cloudProviderRegion: 'us-east-1',
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            primaryCloudAccountID: '123456789012',
+            regionCode: 'ashburn-va',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);
@@ -58,23 +58,23 @@ final class VirtualCrossConnectsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->virtualCrossConnects->create([
-            'bgpAsn' => 1234,
-            'cloudProvider' => 'aws',
-            'cloudProviderRegion' => 'us-east-1',
-            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'primaryCloudAccountID' => '123456789012',
-            'regionCode' => 'ashburn-va',
-            'bandwidthMbps' => 50,
-            'name' => 'test interface',
-            'primaryBgpKey' => 'yFV4wEPtPVPfDUGLWiyQzwga',
-            'primaryCloudIP' => '169.254.0.2',
-            'primaryTelnyxIP' => '169.254.0.1',
-            'secondaryBgpKey' => 'ge1lONeK9RcA83uuWaw9DvZy',
-            'secondaryCloudAccountID' => '',
-            'secondaryCloudIP' => '169.254.0.4',
-            'secondaryTelnyxIP' => '169.254.0.3',
-        ]);
+        $result = $this->client->virtualCrossConnects->create(
+            bgpAsn: 1234,
+            cloudProvider: 'aws',
+            cloudProviderRegion: 'us-east-1',
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            primaryCloudAccountID: '123456789012',
+            regionCode: 'ashburn-va',
+            bandwidthMbps: 50,
+            name: 'test interface',
+            primaryBgpKey: 'yFV4wEPtPVPfDUGLWiyQzwga',
+            primaryCloudIP: '169.254.0.2',
+            primaryTelnyxIP: '169.254.0.1',
+            secondaryBgpKey: 'ge1lONeK9RcA83uuWaw9DvZy',
+            secondaryCloudAccountID: '',
+            secondaryCloudIP: '169.254.0.4',
+            secondaryTelnyxIP: '169.254.0.3',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);
@@ -103,8 +103,7 @@ final class VirtualCrossConnectsTest extends TestCase
         }
 
         $result = $this->client->virtualCrossConnects->update(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            []
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -118,7 +117,7 @@ final class VirtualCrossConnectsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->virtualCrossConnects->list([]);
+        $result = $this->client->virtualCrossConnects->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VirtualCrossConnectListResponse::class, $result);

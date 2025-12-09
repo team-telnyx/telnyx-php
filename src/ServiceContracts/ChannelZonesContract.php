@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\ChannelZones\ChannelZoneListParams;
 use Telnyx\ChannelZones\ChannelZoneListResponse;
-use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -16,25 +14,28 @@ interface ChannelZonesContract
     /**
      * @api
      *
-     * @param array<mixed>|ChannelZoneUpdateParams $params
+     * @param string $channelZoneID Channel zone identifier
+     * @param int $channels The number of reserved channels
      *
      * @throws APIException
      */
     public function update(
         string $channelZoneID,
-        array|ChannelZoneUpdateParams $params,
+        int $channels,
         ?RequestOptions $requestOptions = null,
     ): ChannelZoneUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|ChannelZoneListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|ChannelZoneListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): ChannelZoneListResponse;
 }

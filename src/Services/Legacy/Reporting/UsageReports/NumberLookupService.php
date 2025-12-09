@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
@@ -18,42 +16,48 @@ use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\NumberLookupContract;
 final class NumberLookupService implements NumberLookupContract
 {
     /**
+     * @api
+     */
+    public NumberLookupRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumberLookupRawService($client);
+    }
 
     /**
      * @api
      *
      * Submit a new telco data usage report
      *
-     * @param array{
-     *   aggregationType?: 'ALL'|'BY_ORGANIZATION_MEMBER'|AggregationType,
-     *   endDate?: string|\DateTimeInterface,
-     *   managedAccounts?: list<string>,
-     *   startDate?: string|\DateTimeInterface,
-     * }|NumberLookupCreateParams $params
+     * @param 'ALL'|'BY_ORGANIZATION_MEMBER'|AggregationType $aggregationType Type of aggregation for the report
+     * @param string|\DateTimeInterface $endDate End date for the usage report
+     * @param list<string> $managedAccounts List of managed accounts to include in the report
+     * @param string|\DateTimeInterface $startDate Start date for the usage report
      *
      * @throws APIException
      */
     public function create(
-        array|NumberLookupCreateParams $params,
+        string|AggregationType|null $aggregationType = null,
+        string|\DateTimeInterface|null $endDate = null,
+        ?array $managedAccounts = null,
+        string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): NumberLookupNewResponse {
-        [$parsed, $options] = NumberLookupCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'aggregationType' => $aggregationType,
+            'endDate' => $endDate,
+            'managedAccounts' => $managedAccounts,
+            'startDate' => $startDate,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberLookupNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'legacy/reporting/usage_reports/number_lookup',
-            headers: ['Content-Type' => '*/*'],
-            body: (object) $parsed,
-            options: $options,
-            convert: NumberLookupNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -69,13 +73,8 @@ final class NumberLookupService implements NumberLookupContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): NumberLookupGetResponse {
-        /** @var BaseResponse<NumberLookupGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
-            options: $requestOptions,
-            convert: NumberLookupGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -90,13 +89,8 @@ final class NumberLookupService implements NumberLookupContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): NumberLookupListResponse {
-        /** @var BaseResponse<NumberLookupListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/usage_reports/number_lookup',
-            options: $requestOptions,
-            convert: NumberLookupListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -112,13 +106,8 @@ final class NumberLookupService implements NumberLookupContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

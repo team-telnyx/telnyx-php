@@ -38,7 +38,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->inviteTestNumber(
             'phone_number',
-            ['id' => 'id']
+            id: 'id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,7 +54,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->inviteTestNumber(
             'phone_number',
-            ['id' => 'id']
+            id: 'id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -68,9 +68,10 @@ final class RcsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->listBulkCapabilities([
-            'agentID' => 'TestAgent', 'phoneNumbers' => ['+13125551234'],
-        ]);
+        $result = $this->client->messaging->rcs->listBulkCapabilities(
+            agentID: 'TestAgent',
+            phoneNumbers: ['+13125551234']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RcListBulkCapabilitiesResponse::class, $result);
@@ -83,9 +84,10 @@ final class RcsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->listBulkCapabilities([
-            'agentID' => 'TestAgent', 'phoneNumbers' => ['+13125551234'],
-        ]);
+        $result = $this->client->messaging->rcs->listBulkCapabilities(
+            agentID: 'TestAgent',
+            phoneNumbers: ['+13125551234']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RcListBulkCapabilitiesResponse::class, $result);
@@ -100,7 +102,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
-            ['agentID' => 'agent_id']
+            agentID: 'agent_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -116,7 +118,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
-            ['agentID' => 'agent_id']
+            agentID: 'agent_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

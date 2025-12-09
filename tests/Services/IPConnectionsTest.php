@@ -38,7 +38,7 @@ final class IPConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ipConnections->create([]);
+        $result = $this->client->ipConnections->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(IPConnectionNewResponse::class, $result);
@@ -64,7 +64,7 @@ final class IPConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ipConnections->update('id', []);
+        $result = $this->client->ipConnections->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(IPConnectionUpdateResponse::class, $result);
@@ -77,7 +77,7 @@ final class IPConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ipConnections->list([]);
+        $result = $this->client->ipConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(IPConnectionListResponse::class, $result);

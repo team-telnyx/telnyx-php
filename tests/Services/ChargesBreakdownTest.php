@@ -34,9 +34,9 @@ final class ChargesBreakdownTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chargesBreakdown->retrieve([
-            'startDate' => new \DateTimeImmutable('2025-05-01'),
-        ]);
+        $result = $this->client->chargesBreakdown->retrieve(
+            startDate: new \DateTimeImmutable('2025-05-01')
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ChargesBreakdownGetResponse::class, $result);
@@ -49,11 +49,11 @@ final class ChargesBreakdownTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chargesBreakdown->retrieve([
-            'startDate' => new \DateTimeImmutable('2025-05-01'),
-            'endDate' => new \DateTimeImmutable('2025-06-01'),
-            'format' => 'json',
-        ]);
+        $result = $this->client->chargesBreakdown->retrieve(
+            startDate: new \DateTimeImmutable('2025-05-01'),
+            endDate: new \DateTimeImmutable('2025-06-01'),
+            format: 'json',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ChargesBreakdownGetResponse::class, $result);

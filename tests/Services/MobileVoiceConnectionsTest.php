@@ -38,7 +38,7 @@ final class MobileVoiceConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobileVoiceConnections->create([]);
+        $result = $this->client->mobileVoiceConnections->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MobileVoiceConnectionNewResponse::class, $result);
@@ -64,7 +64,7 @@ final class MobileVoiceConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobileVoiceConnections->update('id', []);
+        $result = $this->client->mobileVoiceConnections->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -80,7 +80,7 @@ final class MobileVoiceConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobileVoiceConnections->list([]);
+        $result = $this->client->mobileVoiceConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MobileVoiceConnectionListResponse::class, $result);

@@ -41,9 +41,7 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->create([
-            'name' => 'office',
-        ]);
+        $result = $this->client->outboundVoiceProfiles->create(name: 'office');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OutboundVoiceProfileNewResponse::class, $result);
@@ -56,31 +54,31 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->create([
-            'name' => 'office',
-            'billingGroupID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'callRecording' => [
+        $result = $this->client->outboundVoiceProfiles->create(
+            name: 'office',
+            billingGroupID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            callRecording: [
                 'callRecordingCallerPhoneNumbers' => ['+19705555098'],
                 'callRecordingChannels' => 'dual',
                 'callRecordingFormat' => 'mp3',
                 'callRecordingType' => 'by_caller_phone_number',
             ],
-            'callingWindow' => [
+            callingWindow: [
                 'callsPerCld' => 5,
                 'endTime' => '18:11:19.117Z',
                 'startTime' => '18:11:19.117Z',
             ],
-            'concurrentCallLimit' => 10,
-            'dailySpendLimit' => '100.00',
-            'dailySpendLimitEnabled' => true,
-            'enabled' => true,
-            'maxDestinationRate' => 10,
-            'servicePlan' => ServicePlan::GLOBAL,
-            'tags' => ['office-profile'],
-            'trafficType' => TrafficType::CONVERSATIONAL,
-            'usagePaymentMethod' => UsagePaymentMethod::RATE_DECK,
-            'whitelistedDestinations' => ['US', 'BR', 'AU'],
-        ]);
+            concurrentCallLimit: 10,
+            dailySpendLimit: '100.00',
+            dailySpendLimitEnabled: true,
+            enabled: true,
+            maxDestinationRate: 10,
+            servicePlan: ServicePlan::GLOBAL,
+            tags: ['office-profile'],
+            trafficType: TrafficType::CONVERSATIONAL,
+            usagePaymentMethod: UsagePaymentMethod::RATE_DECK,
+            whitelistedDestinations: ['US', 'BR', 'AU'],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OutboundVoiceProfileNewResponse::class, $result);
@@ -110,7 +108,7 @@ final class OutboundVoiceProfilesTest extends TestCase
 
         $result = $this->client->outboundVoiceProfiles->update(
             '1293384261075731499',
-            ['name' => 'office']
+            name: 'office'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -126,31 +124,29 @@ final class OutboundVoiceProfilesTest extends TestCase
 
         $result = $this->client->outboundVoiceProfiles->update(
             '1293384261075731499',
-            [
-                'name' => 'office',
-                'billingGroupID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'callRecording' => [
-                    'callRecordingCallerPhoneNumbers' => ['+19705555098'],
-                    'callRecordingChannels' => 'dual',
-                    'callRecordingFormat' => 'mp3',
-                    'callRecordingType' => 'by_caller_phone_number',
-                ],
-                'callingWindow' => [
-                    'callsPerCld' => 5,
-                    'endTime' => '18:11:19.117Z',
-                    'startTime' => '18:11:19.117Z',
-                ],
-                'concurrentCallLimit' => 10,
-                'dailySpendLimit' => '100.00',
-                'dailySpendLimitEnabled' => true,
-                'enabled' => true,
-                'maxDestinationRate' => 10,
-                'servicePlan' => ServicePlan::GLOBAL,
-                'tags' => ['office-profile'],
-                'trafficType' => TrafficType::CONVERSATIONAL,
-                'usagePaymentMethod' => UsagePaymentMethod::RATE_DECK,
-                'whitelistedDestinations' => ['US', 'BR', 'AU'],
+            name: 'office',
+            billingGroupID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            callRecording: [
+                'callRecordingCallerPhoneNumbers' => ['+19705555098'],
+                'callRecordingChannels' => 'dual',
+                'callRecordingFormat' => 'mp3',
+                'callRecordingType' => 'by_caller_phone_number',
             ],
+            callingWindow: [
+                'callsPerCld' => 5,
+                'endTime' => '18:11:19.117Z',
+                'startTime' => '18:11:19.117Z',
+            ],
+            concurrentCallLimit: 10,
+            dailySpendLimit: '100.00',
+            dailySpendLimitEnabled: true,
+            enabled: true,
+            maxDestinationRate: 10,
+            servicePlan: ServicePlan::GLOBAL,
+            tags: ['office-profile'],
+            trafficType: TrafficType::CONVERSATIONAL,
+            usagePaymentMethod: UsagePaymentMethod::RATE_DECK,
+            whitelistedDestinations: ['US', 'BR', 'AU'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -164,7 +160,7 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->list([]);
+        $result = $this->client->outboundVoiceProfiles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OutboundVoiceProfileListResponse::class, $result);

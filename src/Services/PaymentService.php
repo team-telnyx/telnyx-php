@@ -13,6 +13,11 @@ final class PaymentService implements PaymentContract
     /**
      * @api
      */
+    public PaymentRawService $raw;
+
+    /**
+     * @api
+     */
     public AutoRechargePrefsService $autoRechargePrefs;
 
     /**
@@ -20,6 +25,7 @@ final class PaymentService implements PaymentContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new PaymentRawService($client);
         $this->autoRechargePrefs = new AutoRechargePrefsService($client);
     }
 }

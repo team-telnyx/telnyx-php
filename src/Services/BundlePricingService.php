@@ -14,6 +14,11 @@ final class BundlePricingService implements BundlePricingContract
     /**
      * @api
      */
+    public BundlePricingRawService $raw;
+
+    /**
+     * @api
+     */
     public BillingBundlesService $billingBundles;
 
     /**
@@ -26,6 +31,7 @@ final class BundlePricingService implements BundlePricingContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new BundlePricingRawService($client);
         $this->billingBundles = new BillingBundlesService($client);
         $this->userBundles = new UserBundlesService($client);
     }

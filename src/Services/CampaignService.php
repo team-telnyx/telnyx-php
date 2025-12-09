@@ -7,18 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Campaign\CampaignDeactivateResponse;
 use Telnyx\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Campaign\CampaignGetSharingStatusResponse;
-use Telnyx\Campaign\CampaignListParams;
 use Telnyx\Campaign\CampaignListParams\Sort;
 use Telnyx\Campaign\CampaignListResponse;
-use Telnyx\Campaign\CampaignSubmitAppealParams;
 use Telnyx\Campaign\CampaignSubmitAppealResponse;
-use Telnyx\Campaign\CampaignUpdateParams;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignContract;
 use Telnyx\Services\Campaign\OsrService;
@@ -26,6 +20,11 @@ use Telnyx\Services\Campaign\UsecaseService;
 
 final class CampaignService implements CampaignContract
 {
+    /**
+     * @api
+     */
+    public CampaignRawService $raw;
+
     /**
      * @api
      */
@@ -41,6 +40,7 @@ final class CampaignService implements CampaignContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new CampaignRawService($client);
         $this->usecase = new UsecaseService($client);
         $this->osr = new OsrService($client);
     }
@@ -56,13 +56,8 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): TelnyxCampaignCsp {
-        /** @var BaseResponse<TelnyxCampaignCsp> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['10dlc/campaign/%1$s', $campaignID],
-            options: $requestOptions,
-            convert: TelnyxCampaignCsp::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -72,40 +67,53 @@ final class CampaignService implements CampaignContract
      *
      * Update a campaign's properties by `campaignId`. **Please note:** only sample messages are editable.
      *
-     * @param array{
-     *   autoRenewal?: bool,
-     *   helpMessage?: string,
-     *   messageFlow?: string,
-     *   resellerID?: string,
-     *   sample1?: string,
-     *   sample2?: string,
-     *   sample3?: string,
-     *   sample4?: string,
-     *   sample5?: string,
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|CampaignUpdateParams $params
+     * @param bool $autoRenewal help message of the campaign
+     * @param string $helpMessage help message of the campaign
+     * @param string $messageFlow message flow description
+     * @param string $resellerID alphanumeric identifier of the reseller that you want to associate with this campaign
+     * @param string $sample1 Message sample. Some campaign tiers require 1 or more message samples.
+     * @param string $sample2 Message sample. Some campaign tiers require 2 or more message samples.
+     * @param string $sample3 Message sample. Some campaign tiers require 3 or more message samples.
+     * @param string $sample4 Message sample. Some campaign tiers require 4 or more message samples.
+     * @param string $sample5 Message sample. Some campaign tiers require 5 or more message samples.
+     * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
+     * @param string $webhookURL webhook to which campaign status updates are sent
      *
      * @throws APIException
      */
     public function update(
         string $campaignID,
-        array|CampaignUpdateParams $params,
+        bool $autoRenewal = true,
+        ?string $helpMessage = null,
+        ?string $messageFlow = null,
+        ?string $resellerID = null,
+        ?string $sample1 = null,
+        ?string $sample2 = null,
+        ?string $sample3 = null,
+        ?string $sample4 = null,
+        ?string $sample5 = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): TelnyxCampaignCsp {
-        [$parsed, $options] = CampaignUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'autoRenewal' => $autoRenewal,
+            'helpMessage' => $helpMessage,
+            'messageFlow' => $messageFlow,
+            'resellerID' => $resellerID,
+            'sample1' => $sample1,
+            'sample2' => $sample2,
+            'sample3' => $sample3,
+            'sample4' => $sample4,
+            'sample5' => $sample5,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<TelnyxCampaignCsp> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['10dlc/campaign/%1$s', $campaignID],
-            body: (object) $parsed,
-            options: $options,
-            convert: TelnyxCampaignCsp::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($campaignID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -115,29 +123,30 @@ final class CampaignService implements CampaignContract
      *
      * Retrieve a list of campaigns associated with a supplied `brandId`.
      *
-     * @param array{
-     *   brandID: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
-     * }|CampaignListParams $params
+     * @param int $page The 1-indexed page number to get. The default value is `1`.
+     * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'campaignId'|'-campaignId'|'createdAt'|'-createdAt'|'status'|'-status'|'tcrCampaignId'|'-tcrCampaignId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|CampaignListParams $params,
-        ?RequestOptions $requestOptions = null
+        string $brandID,
+        int $page = 1,
+        int $recordsPerPage = 10,
+        string|Sort $sort = '-createdAt',
+        ?RequestOptions $requestOptions = null,
     ): CampaignListResponse {
-        [$parsed, $options] = CampaignListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'brandID' => $brandID,
+            'page' => $page,
+            'recordsPerPage' => $recordsPerPage,
+            'sort' => $sort,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CampaignListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: '10dlc/campaign',
-            query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
-            options: $options,
-            convert: CampaignListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -147,6 +156,8 @@ final class CampaignService implements CampaignContract
      *
      * Manually accept a campaign shared with Telnyx
      *
+     * @param string $campaignID TCR's ID for the campaign to import
+     *
      * @return array<string,mixed>
      *
      * @throws APIException
@@ -155,13 +166,8 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        /** @var BaseResponse<array<string,mixed>> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['10dlc/campaign/acceptSharing/%1$s', $campaignID],
-            options: $requestOptions,
-            convert: new MapOf('mixed'),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->acceptSharing($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -177,13 +183,8 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignDeactivateResponse {
-        /** @var BaseResponse<CampaignDeactivateResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['10dlc/campaign/%1$s', $campaignID],
-            options: $requestOptions,
-            convert: CampaignDeactivateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deactivate($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -193,19 +194,16 @@ final class CampaignService implements CampaignContract
      *
      * Get the campaign metadata for each MNO it was submitted to.
      *
+     * @param string $campaignID ID of the campaign in question
+     *
      * @throws APIException
      */
     public function getMnoMetadata(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignGetMnoMetadataResponse {
-        /** @var BaseResponse<CampaignGetMnoMetadataResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['10dlc/campaign/%1$s/mnoMetadata', $campaignID],
-            options: $requestOptions,
-            convert: CampaignGetMnoMetadataResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getMnoMetadata($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -223,13 +221,8 @@ final class CampaignService implements CampaignContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
-        /** @var BaseResponse<array<string,mixed>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['10dlc/campaign/%1$s/operationStatus', $campaignID],
-            options: $requestOptions,
-            convert: new MapOf('mixed'),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getOperationStatus($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -239,19 +232,16 @@ final class CampaignService implements CampaignContract
      *
      * Get Sharing Status
      *
+     * @param string $campaignID ID of the campaign in question
+     *
      * @throws APIException
      */
     public function getSharingStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): CampaignGetSharingStatusResponse {
-        /** @var BaseResponse<CampaignGetSharingStatusResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['10dlc/campaign/%1$s/sharing', $campaignID],
-            options: $requestOptions,
-            convert: CampaignGetSharingStatusResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getSharingStatus($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -261,28 +251,20 @@ final class CampaignService implements CampaignContract
      *
      * Submits an appeal for rejected native campaigns in TELNYX_FAILED or MNO_REJECTED status. The appeal is recorded for manual compliance team review and the campaign status is reset to TCR_ACCEPTED. Note: Appeal forwarding is handled manually to allow proper review before incurring upstream charges.
      *
-     * @param array{appealReason: string}|CampaignSubmitAppealParams $params
+     * @param string $campaignID The Telnyx campaign identifier
+     * @param string $appealReason detailed explanation of why the campaign should be reconsidered and what changes have been made to address the rejection reason
      *
      * @throws APIException
      */
     public function submitAppeal(
         string $campaignID,
-        array|CampaignSubmitAppealParams $params,
+        string $appealReason,
         ?RequestOptions $requestOptions = null,
     ): CampaignSubmitAppealResponse {
-        [$parsed, $options] = CampaignSubmitAppealParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['appealReason' => $appealReason];
 
-        /** @var BaseResponse<CampaignSubmitAppealResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['10dlc/campaign/%1$s/appeal', $campaignID],
-            body: (object) $parsed,
-            options: $options,
-            convert: CampaignSubmitAppealResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->submitAppeal($campaignID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

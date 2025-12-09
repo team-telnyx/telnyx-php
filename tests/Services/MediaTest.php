@@ -50,7 +50,7 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->update('media_name', []);
+        $result = $this->client->media->update('media_name');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MediaUpdateResponse::class, $result);
@@ -63,7 +63,7 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->list([]);
+        $result = $this->client->media->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MediaListResponse::class, $result);
@@ -102,9 +102,9 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->upload([
-            'mediaURL' => 'http://www.example.com/audio.mp3',
-        ]);
+        $result = $this->client->media->upload(
+            mediaURL: 'http://www.example.com/audio.mp3'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MediaUploadResponse::class, $result);
@@ -117,11 +117,11 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->upload([
-            'mediaURL' => 'http://www.example.com/audio.mp3',
-            'mediaName' => 'my-file',
-            'ttlSecs' => 86400,
-        ]);
+        $result = $this->client->media->upload(
+            mediaURL: 'http://www.example.com/audio.mp3',
+            mediaName: 'my-file',
+            ttlSecs: 86400,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MediaUploadResponse::class, $result);

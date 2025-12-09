@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\Storage\Buckets;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Storage\Buckets\SslCertificate\SslCertificateCreateParams;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
@@ -16,18 +15,23 @@ interface SslCertificateContract
     /**
      * @api
      *
-     * @param array<mixed>|SslCertificateCreateParams $params
+     * @param string $bucketName The name of the bucket
+     * @param string $certificate The SSL certificate file
+     * @param string $privateKey The private key file
      *
      * @throws APIException
      */
     public function create(
         string $bucketName,
-        array|SslCertificateCreateParams $params,
+        ?string $certificate = null,
+        ?string $privateKey = null,
         ?RequestOptions $requestOptions = null,
     ): SslCertificateNewResponse;
 
     /**
      * @api
+     *
+     * @param string $bucketName The name of the bucket
      *
      * @throws APIException
      */
@@ -38,6 +42,8 @@ interface SslCertificateContract
 
     /**
      * @api
+     *
+     * @param string $bucketName Bucket Name
      *
      * @throws APIException
      */

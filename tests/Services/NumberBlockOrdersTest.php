@@ -36,9 +36,10 @@ final class NumberBlockOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberBlockOrders->create([
-            'range' => 10, 'startingNumber' => '+19705555000',
-        ]);
+        $result = $this->client->numberBlockOrders->create(
+            range: 10,
+            startingNumber: '+19705555000'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberBlockOrderNewResponse::class, $result);
@@ -51,13 +52,13 @@ final class NumberBlockOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberBlockOrders->create([
-            'range' => 10,
-            'startingNumber' => '+19705555000',
-            'connectionID' => '346789098765567',
-            'customerReference' => 'MY REF 001',
-            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600',
-        ]);
+        $result = $this->client->numberBlockOrders->create(
+            range: 10,
+            startingNumber: '+19705555000',
+            connectionID: '346789098765567',
+            customerReference: 'MY REF 001',
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberBlockOrderNewResponse::class, $result);
@@ -85,7 +86,7 @@ final class NumberBlockOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberBlockOrders->list([]);
+        $result = $this->client->numberBlockOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberBlockOrderListResponse::class, $result);

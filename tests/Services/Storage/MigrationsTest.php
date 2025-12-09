@@ -36,11 +36,11 @@ final class MigrationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrations->create([
-            'sourceID' => 'source_id',
-            'targetBucketName' => 'target_bucket_name',
-            'targetRegion' => 'target_region',
-        ]);
+        $result = $this->client->storage->migrations->create(
+            sourceID: 'source_id',
+            targetBucketName: 'target_bucket_name',
+            targetRegion: 'target_region',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MigrationNewResponse::class, $result);
@@ -53,12 +53,12 @@ final class MigrationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrations->create([
-            'sourceID' => 'source_id',
-            'targetBucketName' => 'target_bucket_name',
-            'targetRegion' => 'target_region',
-            'refresh' => true,
-        ]);
+        $result = $this->client->storage->migrations->create(
+            sourceID: 'source_id',
+            targetBucketName: 'target_bucket_name',
+            targetRegion: 'target_region',
+            refresh: true,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MigrationNewResponse::class, $result);

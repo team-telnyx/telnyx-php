@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\CallControlApplications\CallControlApplicationCreateParams;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\WebhookAPIVersion;
@@ -12,7 +11,6 @@ use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
 use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationInbound;
 use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
-use Telnyx\CallControlApplications\CallControlApplicationListParams;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Product;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Status;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Type;
@@ -20,10 +18,8 @@ use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
 use Telnyx\CallControlApplications\CallControlApplicationListResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
-use Telnyx\CallControlApplications\CallControlApplicationUpdateParams;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
@@ -31,58 +27,85 @@ use Telnyx\ServiceContracts\CallControlApplicationsContract;
 final class CallControlApplicationsService implements CallControlApplicationsContract
 {
     /**
+     * @api
+     */
+    public CallControlApplicationsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CallControlApplicationsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a call control application.
      *
+     * @param string $applicationName a user-assigned name to help manage the application
+     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+     * @param bool $active specifies whether the connection can be used
+     * @param 'Latency'|'Chicago, IL'|'Ashburn, VA'|'San Jose, CA'|'London, UK'|'Chennai, IN'|'Amsterdam, Netherlands'|'Toronto, Canada'|'Sydney, Australia'|AnchorsiteOverride $anchorsiteOverride <code>Latency</code> directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
+     * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this Call Control Application
+     * @param 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
+     * @param bool $firstCommandTimeout specifies whether calls to phone numbers associated with this connection should hangup after timing out
+     * @param int $firstCommandTimeoutSecs specifies how many seconds to wait before timing out a dial command
      * @param array{
-     *   applicationName: string,
-     *   webhookEventURL: string,
-     *   active?: bool,
-     *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
-     *   callCostInWebhooks?: bool,
-     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
-     *   firstCommandTimeout?: bool,
-     *   firstCommandTimeoutSecs?: int,
-     *   inbound?: array{
-     *     channelLimit?: int,
-     *     shakenStirEnabled?: bool,
-     *     sipSubdomain?: string,
-     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
-     *   }|CallControlApplicationInbound,
-     *   outbound?: array{
-     *     channelLimit?: int, outboundVoiceProfileID?: string
-     *   }|CallControlApplicationOutbound,
-     *   redactDtmfDebugLogging?: bool,
-     *   webhookAPIVersion?: '1'|'2'|WebhookAPIVersion,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * }|CallControlApplicationCreateParams $params
+     *   channelLimit?: int,
+     *   shakenStirEnabled?: bool,
+     *   sipSubdomain?: string,
+     *   sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
+     * }|CallControlApplicationInbound $inbound
+     * @param array{
+     *   channelLimit?: int, outboundVoiceProfileID?: string
+     * }|CallControlApplicationOutbound $outbound
+     * @param bool $redactDtmfDebugLogging when enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions
+     * @param '1'|'2'|WebhookAPIVersion $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
+     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
     public function create(
-        array|CallControlApplicationCreateParams $params,
+        string $applicationName,
+        string $webhookEventURL,
+        bool $active = true,
+        string|AnchorsiteOverride $anchorsiteOverride = 'Latency',
+        bool $callCostInWebhooks = false,
+        string|DtmfType $dtmfType = 'RFC 2833',
+        bool $firstCommandTimeout = false,
+        int $firstCommandTimeoutSecs = 30,
+        array|CallControlApplicationInbound|null $inbound = null,
+        array|CallControlApplicationOutbound|null $outbound = null,
+        bool $redactDtmfDebugLogging = false,
+        string|WebhookAPIVersion $webhookAPIVersion = '1',
+        ?string $webhookEventFailoverURL = '',
+        ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationNewResponse {
-        [$parsed, $options] = CallControlApplicationCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'applicationName' => $applicationName,
+            'webhookEventURL' => $webhookEventURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'callCostInWebhooks' => $callCostInWebhooks,
+            'dtmfType' => $dtmfType,
+            'firstCommandTimeout' => $firstCommandTimeout,
+            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CallControlApplicationNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'call_control_applications',
-            body: (object) $parsed,
-            options: $options,
-            convert: CallControlApplicationNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -92,19 +115,16 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * Retrieves the details of an existing call control application.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationGetResponse {
-        /** @var BaseResponse<CallControlApplicationGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['call_control_applications/%1$s', $id],
-            options: $requestOptions,
-            convert: CallControlApplicationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -114,51 +134,73 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * Updates settings of an existing call control application.
      *
+     * @param string $id identifies the resource
+     * @param string $applicationName a user-assigned name to help manage the application
+     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+     * @param bool $active specifies whether the connection can be used
+     * @param 'Latency'|'Chicago, IL'|'Ashburn, VA'|'San Jose, CA'|'London, UK'|'Chennai, IN'|'Amsterdam, Netherlands'|'Toronto, Canada'|'Sydney, Australia'|\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\AnchorsiteOverride $anchorsiteOverride <code>Latency</code> directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
+     * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this Call Control Application
+     * @param 'RFC 2833'|'Inband'|'SIP INFO'|\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
+     * @param bool $firstCommandTimeout specifies whether calls to phone numbers associated with this connection should hangup after timing out
+     * @param int $firstCommandTimeoutSecs specifies how many seconds to wait before timing out a dial command
      * @param array{
-     *   applicationName: string,
-     *   webhookEventURL: string,
-     *   active?: bool,
-     *   anchorsiteOverride?: value-of<CallControlApplicationUpdateParams\AnchorsiteOverride>,
-     *   callCostInWebhooks?: bool,
-     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|CallControlApplicationUpdateParams\DtmfType,
-     *   firstCommandTimeout?: bool,
-     *   firstCommandTimeoutSecs?: int,
-     *   inbound?: array{
-     *     channelLimit?: int,
-     *     shakenStirEnabled?: bool,
-     *     sipSubdomain?: string,
-     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
-     *   }|CallControlApplicationInbound,
-     *   outbound?: array{
-     *     channelLimit?: int, outboundVoiceProfileID?: string
-     *   }|CallControlApplicationOutbound,
-     *   redactDtmfDebugLogging?: bool,
-     *   tags?: list<string>,
-     *   webhookAPIVersion?: '1'|'2'|CallControlApplicationUpdateParams\WebhookAPIVersion,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * }|CallControlApplicationUpdateParams $params
+     *   channelLimit?: int,
+     *   shakenStirEnabled?: bool,
+     *   sipSubdomain?: string,
+     *   sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
+     * }|CallControlApplicationInbound $inbound
+     * @param array{
+     *   channelLimit?: int, outboundVoiceProfileID?: string
+     * }|CallControlApplicationOutbound $outbound
+     * @param bool $redactDtmfDebugLogging when enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions
+     * @param list<string> $tags tags assigned to the Call Control Application
+     * @param '1'|'2'|\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
+     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|CallControlApplicationUpdateParams $params,
+        string $applicationName,
+        string $webhookEventURL,
+        bool $active = true,
+        string|\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\AnchorsiteOverride $anchorsiteOverride = 'Latency',
+        bool $callCostInWebhooks = false,
+        string|\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType $dtmfType = 'RFC 2833',
+        bool $firstCommandTimeout = false,
+        int $firstCommandTimeoutSecs = 30,
+        array|CallControlApplicationInbound|null $inbound = null,
+        array|CallControlApplicationOutbound|null $outbound = null,
+        bool $redactDtmfDebugLogging = false,
+        ?array $tags = null,
+        string|\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion $webhookAPIVersion = '1',
+        ?string $webhookEventFailoverURL = '',
+        ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationUpdateResponse {
-        [$parsed, $options] = CallControlApplicationUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'applicationName' => $applicationName,
+            'webhookEventURL' => $webhookEventURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'callCostInWebhooks' => $callCostInWebhooks,
+            'dtmfType' => $dtmfType,
+            'firstCommandTimeout' => $firstCommandTimeout,
+            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
+            'tags' => $tags,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CallControlApplicationUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['call_control_applications/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: CallControlApplicationUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -169,48 +211,52 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * Return a list of call control applications.
      *
      * @param array{
-     *   filter?: array{
-     *     applicationName?: array{contains?: string},
-     *     applicationSessionID?: string,
-     *     connectionID?: string,
-     *     failed?: bool,
-     *     from?: string,
-     *     legID?: string,
-     *     name?: string,
-     *     occurredAt?: array{
-     *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
-     *     },
-     *     outboundOutboundVoiceProfileID?: string,
-     *     product?: 'call_control'|'fax'|'texml'|Product,
-     *     status?: 'init'|'in_progress'|'completed'|Status,
-     *     to?: string,
-     *     type?: 'command'|'webhook'|Type,
+     *   applicationName?: array{contains?: string},
+     *   applicationSessionID?: string,
+     *   connectionID?: string,
+     *   failed?: bool,
+     *   from?: string,
+     *   legID?: string,
+     *   name?: string,
+     *   occurredAt?: array{
+     *     eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *   },
-     *   page?: array{
-     *     after?: string, before?: string, limit?: int, number?: int, size?: int
-     *   },
-     *   sort?: 'created_at'|'connection_name'|'active'|Sort,
-     * }|CallControlApplicationListParams $params
+     *   outboundOutboundVoiceProfileID?: string,
+     *   product?: 'call_control'|'fax'|'texml'|Product,
+     *   status?: 'init'|'in_progress'|'completed'|Status,
+     *   to?: string,
+     *   type?: 'command'|'webhook'|Type,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
+     * @param array{
+     *   after?: string, before?: string, limit?: int, number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param 'created_at'|'connection_name'|'active'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+     * That is: <ul>
+     *   <li>
+     *     <code>connection_name</code>: sorts the result by the
+     *     <code>connection_name</code> field in ascending order.
+     *   </li>
+     *
+     *   <li>
+     *     <code>-connection_name</code>: sorts the result by the
+     *     <code>connection_name</code> field in descending order.
+     *   </li>
+     * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|CallControlApplicationListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
+        string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationListResponse {
-        [$parsed, $options] = CallControlApplicationListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CallControlApplicationListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'call_control_applications',
-            query: $parsed,
-            options: $options,
-            convert: CallControlApplicationListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -220,19 +266,16 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * Deletes a call control application.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationDeleteResponse {
-        /** @var BaseResponse<CallControlApplicationDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['call_control_applications/%1$s', $id],
-            options: $requestOptions,
-            convert: CallControlApplicationDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

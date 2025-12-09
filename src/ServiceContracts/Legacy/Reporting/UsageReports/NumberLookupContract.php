@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
@@ -16,12 +16,18 @@ interface NumberLookupContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberLookupCreateParams $params
+     * @param 'ALL'|'BY_ORGANIZATION_MEMBER'|AggregationType $aggregationType Type of aggregation for the report
+     * @param string|\DateTimeInterface $endDate End date for the usage report
+     * @param list<string> $managedAccounts List of managed accounts to include in the report
+     * @param string|\DateTimeInterface $startDate Start date for the usage report
      *
      * @throws APIException
      */
     public function create(
-        array|NumberLookupCreateParams $params,
+        string|AggregationType|null $aggregationType = null,
+        string|\DateTimeInterface|null $endDate = null,
+        ?array $managedAccounts = null,
+        string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): NumberLookupNewResponse;
 

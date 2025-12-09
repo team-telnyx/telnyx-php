@@ -13,6 +13,8 @@ interface QueuesContract
     /**
      * @api
      *
+     * @param string $queueName Uniquely identifies the queue by name
+     *
      * @throws APIException
      */
     public function retrieve(

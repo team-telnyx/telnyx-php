@@ -34,7 +34,7 @@ final class NetworkCoverageTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->networkCoverage->list([]);
+        $result = $this->client->networkCoverage->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NetworkCoverageListResponse::class, $result);

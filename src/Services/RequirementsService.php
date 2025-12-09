@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
-use Telnyx\Requirements\RequirementListParams;
 use Telnyx\Requirements\RequirementListParams\Filter\Action;
 use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
 use Telnyx\Requirements\RequirementListParams\Sort;
@@ -19,14 +17,24 @@ use Telnyx\ServiceContracts\RequirementsContract;
 final class RequirementsService implements RequirementsContract
 {
     /**
+     * @api
+     */
+    public RequirementsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RequirementsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a document requirement record
+     *
+     * @param string $id Uniquely identifies the requirement_type record
      *
      * @throws APIException
      */
@@ -34,13 +42,8 @@ final class RequirementsService implements RequirementsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RequirementGetResponse {
-        /** @var BaseResponse<RequirementGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['requirements/%1$s', $id],
-            options: $requestOptions,
-            convert: RequirementGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -51,34 +54,29 @@ final class RequirementsService implements RequirementsContract
      * List all requirements with filtering, sorting, and pagination
      *
      * @param array{
-     *   filter?: array{
-     *     action?: 'branded_calling'|'ordering'|'porting'|Action,
-     *     countryCode?: string,
-     *     phoneNumberType?: 'local'|'national'|'toll_free'|PhoneNumberType,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'|Sort>,
-     * }|RequirementListParams $params
+     *   action?: 'branded_calling'|'ordering'|'porting'|Action,
+     *   countryCode?: string,
+     *   phoneNumberType?: 'local'|'national'|'toll_free'|PhoneNumberType,
+     * } $filter Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'|Sort> $sort Consolidated sort parameter for requirements (deepObject style). Originally: sort[]
      *
      * @throws APIException
      */
     public function list(
-        array|RequirementListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?array $sort = null,
+        ?RequestOptions $requestOptions = null,
     ): RequirementListResponse {
-        [$parsed, $options] = RequirementListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RequirementListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'requirements',
-            query: $parsed,
-            options: $options,
-            convert: RequirementListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

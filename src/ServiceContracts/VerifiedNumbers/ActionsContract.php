@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\VerifiedNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\VerifiedNumbers\Actions\ActionSubmitVerificationCodeParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 
 interface ActionsContract
@@ -14,13 +13,13 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionSubmitVerificationCodeParams $params
+     * @param string $phoneNumber +E164 formatted phone number
      *
      * @throws APIException
      */
     public function submitVerificationCode(
         string $phoneNumber,
-        array|ActionSubmitVerificationCodeParams $params,
+        string $verificationCode,
         ?RequestOptions $requestOptions = null,
     ): VerifiedNumberDataWrapper;
 }

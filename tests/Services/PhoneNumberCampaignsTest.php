@@ -35,10 +35,10 @@ final class PhoneNumberCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberCampaigns->create([
-            'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
-            'phoneNumber' => '+18005550199',
-        ]);
+        $result = $this->client->phoneNumberCampaigns->create(
+            campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
+            phoneNumber: '+18005550199',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
@@ -51,10 +51,10 @@ final class PhoneNumberCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberCampaigns->create([
-            'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
-            'phoneNumber' => '+18005550199',
-        ]);
+        $result = $this->client->phoneNumberCampaigns->create(
+            campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
+            phoneNumber: '+18005550199',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
@@ -82,10 +82,8 @@ final class PhoneNumberCampaignsTest extends TestCase
 
         $result = $this->client->phoneNumberCampaigns->update(
             'phoneNumber',
-            [
-                'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
-                'phoneNumber' => '+18005550199',
-            ],
+            campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
+            phoneNumber: '+18005550199',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -101,10 +99,8 @@ final class PhoneNumberCampaignsTest extends TestCase
 
         $result = $this->client->phoneNumberCampaigns->update(
             'phoneNumber',
-            [
-                'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
-                'phoneNumber' => '+18005550199',
-            ],
+            campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
+            phoneNumber: '+18005550199',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -118,7 +114,7 @@ final class PhoneNumberCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberCampaigns->list([]);
+        $result = $this->client->phoneNumberCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PhoneNumberCampaignListResponse::class, $result);

@@ -35,9 +35,10 @@ final class InsightsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insights->create([
-            'instructions' => 'instructions', 'name' => 'name',
-        ]);
+        $result = $this->client->ai->conversations->insights->create(
+            instructions: 'instructions',
+            name: 'name'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InsightTemplateDetail::class, $result);
@@ -50,12 +51,12 @@ final class InsightsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insights->create([
-            'instructions' => 'instructions',
-            'name' => 'name',
-            'jsonSchema' => 'string',
-            'webhook' => 'webhook',
-        ]);
+        $result = $this->client->ai->conversations->insights->create(
+            instructions: 'instructions',
+            name: 'name',
+            jsonSchema: 'string',
+            webhook: 'webhook',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InsightTemplateDetail::class, $result);
@@ -84,8 +85,7 @@ final class InsightsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insights->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -99,7 +99,7 @@ final class InsightsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insights->list([]);
+        $result = $this->client->ai->conversations->insights->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InsightListResponse::class, $result);

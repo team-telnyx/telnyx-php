@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingHostedNumbers\MessagingHostedNumberDeleteResponse;
 use Telnyx\RequestOptions;
@@ -14,14 +13,24 @@ use Telnyx\ServiceContracts\MessagingHostedNumbersContract;
 final class MessagingHostedNumbersService implements MessagingHostedNumbersContract
 {
     /**
+     * @api
+     */
+    public MessagingHostedNumbersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MessagingHostedNumbersRawService($client);
+    }
 
     /**
      * @api
      *
      * Delete a messaging hosted number
+     *
+     * @param string $id identifies the type of resource
      *
      * @throws APIException
      */
@@ -29,13 +38,8 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberDeleteResponse {
-        /** @var BaseResponse<MessagingHostedNumberDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['messaging_hosted_numbers/%1$s', $id],
-            options: $requestOptions,
-            convert: MessagingHostedNumberDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
-use Telnyx\NumberOrders\NumberOrderListParams;
 use Telnyx\NumberOrders\NumberOrderListResponse;
 use Telnyx\NumberOrders\NumberOrderNewResponse;
-use Telnyx\NumberOrders\NumberOrderUpdateParams;
 use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrdersContract;
@@ -20,44 +16,53 @@ use Telnyx\ServiceContracts\NumberOrdersContract;
 final class NumberOrdersService implements NumberOrdersContract
 {
     /**
+     * @api
+     */
+    public NumberOrdersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumberOrdersRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a phone number order.
      *
-     * @param array{
-     *   billingGroupID?: string,
-     *   connectionID?: string,
-     *   customerReference?: string,
-     *   messagingProfileID?: string,
-     *   phoneNumbers?: list<array{
-     *     phoneNumber: string, bundleID?: string, requirementGroupID?: string
-     *   }>,
-     * }|NumberOrderCreateParams $params
+     * @param string $billingGroupID identifies the billing group associated with the phone number
+     * @param string $connectionID identifies the connection associated with this phone number
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $messagingProfileID identifies the messaging profile associated with the phone number
+     * @param list<array{
+     *   phoneNumber: string, bundleID?: string, requirementGroupID?: string
+     * }> $phoneNumbers
      *
      * @throws APIException
      */
     public function create(
-        array|NumberOrderCreateParams $params,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
+        ?array $phoneNumbers = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderNewResponse {
-        [$parsed, $options] = NumberOrderCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'billingGroupID' => $billingGroupID,
+            'connectionID' => $connectionID,
+            'customerReference' => $customerReference,
+            'messagingProfileID' => $messagingProfileID,
+            'phoneNumbers' => $phoneNumbers,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberOrderNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'number_orders',
-            body: (object) $parsed,
-            options: $options,
-            convert: NumberOrderNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -67,19 +72,16 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * Get an existing phone number order.
      *
+     * @param string $numberOrderID the number order ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $numberOrderID,
         ?RequestOptions $requestOptions = null
     ): NumberOrderGetResponse {
-        /** @var BaseResponse<NumberOrderGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['number_orders/%1$s', $numberOrderID],
-            options: $requestOptions,
-            convert: NumberOrderGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($numberOrderID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -89,33 +91,29 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * Updates a phone number order.
      *
-     * @param array{
-     *   customerReference?: string,
-     *   regulatoryRequirements?: list<array{
-     *     fieldValue?: string, requirementID?: string
-     *   }>,
-     * }|NumberOrderUpdateParams $params
+     * @param string $numberOrderID the number order ID
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param list<array{
+     *   fieldValue?: string, requirementID?: string
+     * }> $regulatoryRequirements
      *
      * @throws APIException
      */
     public function update(
         string $numberOrderID,
-        array|NumberOrderUpdateParams $params,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderUpdateResponse {
-        [$parsed, $options] = NumberOrderUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'customerReference' => $customerReference,
+            'regulatoryRequirements' => $regulatoryRequirements,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberOrderUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['number_orders/%1$s', $numberOrderID],
-            body: (object) $parsed,
-            options: $options,
-            convert: NumberOrderUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($numberOrderID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -126,35 +124,29 @@ final class NumberOrdersService implements NumberOrdersContract
      * Get a paginated list of number orders.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{gt?: string, lt?: string},
-     *     customerReference?: string,
-     *     phoneNumbersCount?: string,
-     *     requirementsMet?: bool,
-     *     status?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|NumberOrderListParams $params
+     *   createdAt?: array{gt?: string, lt?: string},
+     *   customerReference?: string,
+     *   phoneNumbersCount?: string,
+     *   requirementsMet?: bool,
+     *   status?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|NumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): NumberOrderListResponse {
-        [$parsed, $options] = NumberOrderListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberOrderListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'number_orders',
-            query: $parsed,
-            options: $options,
-            convert: NumberOrderListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

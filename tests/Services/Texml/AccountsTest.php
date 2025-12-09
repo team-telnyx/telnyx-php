@@ -36,8 +36,7 @@ final class AccountsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->retrieveRecordingsJson(
-            'account_sid',
-            []
+            'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,8 +51,7 @@ final class AccountsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->retrieveTranscriptionsJson(
-            'account_sid',
-            []
+            'account_sid'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

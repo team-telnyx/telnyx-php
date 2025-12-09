@@ -43,10 +43,10 @@ final class SpeechToTextTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->speechToText
-            ->create([
-                'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-                'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            ])
+            ->create(
+                endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+                startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -66,10 +66,10 @@ final class SpeechToTextTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->speechToText
-            ->create([
-                'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-                'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            ])
+            ->create(
+                endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+                startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

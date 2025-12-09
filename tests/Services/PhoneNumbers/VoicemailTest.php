@@ -36,10 +36,7 @@ final class VoicemailTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voicemail->create(
-            '123455678900',
-            []
-        );
+        $result = $this->client->phoneNumbers->voicemail->create('123455678900');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VoicemailNewResponse::class, $result);
@@ -65,10 +62,7 @@ final class VoicemailTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voicemail->update(
-            '123455678900',
-            []
-        );
+        $result = $this->client->phoneNumbers->voicemail->update('123455678900');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VoicemailUpdateResponse::class, $result);
