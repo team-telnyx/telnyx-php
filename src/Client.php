@@ -92,6 +92,7 @@ use Telnyx\Services\NotificationEventConditionsService;
 use Telnyx\Services\NotificationEventsService;
 use Telnyx\Services\NotificationProfilesService;
 use Telnyx\Services\NotificationSettingsService;
+use Telnyx\Services\Number10dlcService;
 use Telnyx\Services\NumberBlockOrdersService;
 use Telnyx\Services\NumberLookupService;
 use Telnyx\Services\NumberOrderPhoneNumbersService;
@@ -952,6 +953,11 @@ class Client extends BaseClient
      */
     public MobileVoiceConnectionsService $mobileVoiceConnections;
 
+    /**
+     * @api
+     */
+    public Number10dlcService $number10dlc;
+
     public function __construct(
         ?string $apiKey = null,
         ?string $publicKey = null,
@@ -1145,6 +1151,7 @@ class Client extends BaseClient
         $this->inexplicitNumberOrders = new InexplicitNumberOrdersService($this);
         $this->mobilePhoneNumbers = new MobilePhoneNumbersService($this);
         $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
+        $this->number10dlc = new Number10dlcService($this);
     }
 
     /** @return array<string,string> */
