@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\Reports\ReportGetResponse;
-use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -93,6 +93,6 @@ final class ReportsTest extends TestCase
         $result = $this->client->porting->reports->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReportListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 }

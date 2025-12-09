@@ -6,9 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
-use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Telnyx\RequestOptions;
@@ -76,22 +77,22 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Update a notification profile.
      *
-     * @param string $id the id of the resource
+     * @param string $notificationProfileID the id of the resource
      * @param string $name a human readable name
      *
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $notificationProfileID,
         ?string $name = null,
-        ?RequestOptions $requestOptions = null
+        ?RequestOptions $requestOptions = null,
     ): NotificationProfileUpdateResponse {
         $params = ['name' => $name];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($notificationProfileID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -105,12 +106,14 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<NotificationProfile>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): NotificationProfileListResponse {
+    ): DefaultPagination {
         $params = ['page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

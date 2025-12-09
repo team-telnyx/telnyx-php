@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,6 +37,6 @@ final class NetworkCoverageTest extends TestCase
         $result = $this->client->networkCoverage->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NetworkCoverageListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 }

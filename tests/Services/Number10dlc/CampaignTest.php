@@ -5,13 +5,13 @@ namespace Tests\Services\Number10dlc;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
-use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -68,7 +68,7 @@ final class CampaignTest extends TestCase
         $result = $this->client->number10dlc->campaign->list(brandID: 'brandId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
     }
 
     #[Test]
@@ -86,7 +86,7 @@ final class CampaignTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
     }
 
     #[Test]

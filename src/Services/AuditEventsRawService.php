@@ -10,6 +10,7 @@ use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsRawContract;
 
@@ -35,7 +36,7 @@ final class AuditEventsRawService implements AuditEventsRawContract
      *   sort?: 'asc'|'desc'|Sort,
      * }|AuditEventListParams $params
      *
-     * @return BaseResponse<AuditEventListResponse>
+     * @return BaseResponse<DefaultPagination<AuditEventListResponse>>
      *
      * @throws APIException
      */
@@ -55,6 +56,7 @@ final class AuditEventsRawService implements AuditEventsRawContract
             query: $parsed,
             options: $options,
             convert: AuditEventListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

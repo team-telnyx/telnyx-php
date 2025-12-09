@@ -11,6 +11,8 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignPa
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusParams;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberAssignmentByProfileRawContract;
@@ -52,6 +54,39 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberAssignmentByProfileAssignResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
+     *
+     * @param array{
+     *   page?: int, recordsPerPage?: int
+     * }|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
+     *
+     * @return BaseResponse<PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse,>
+     *
+     * @throws APIException
+     */
+    public function listPhoneNumberStatus(
+        string $taskID,
+        array|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = PhoneNumberAssignmentByProfileListPhoneNumberStatusParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['10dlc/phoneNumberAssignmentByProfile/%1$s/phoneNumbers', $taskID],
+            query: $parsed,
+            options: $options,
+            convert: PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse::class,
         );
     }
 

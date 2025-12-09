@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -83,20 +84,20 @@ final class NetworksService implements NetworksContract
      *
      * Update a Network.
      *
-     * @param string $id identifies the resource
+     * @param string $networkID identifies the resource
      * @param string $name a user specified name for the network
      *
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $networkID,
         string $name,
         ?RequestOptions $requestOptions = null
     ): NetworkUpdateResponse {
         $params = ['name' => $name];
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($networkID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -113,13 +114,15 @@ final class NetworksService implements NetworksContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<NetworkListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): NetworkListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
@@ -164,6 +167,8 @@ final class NetworksService implements NetworksContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<NetworkListInterfacesResponse>
+     *
      * @throws APIException
      */
     public function listInterfaces(
@@ -171,7 +176,7 @@ final class NetworksService implements NetworksContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): NetworkListInterfacesResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

@@ -6,6 +6,7 @@ namespace Telnyx\Services\Queues;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\RequestOptions;
@@ -88,13 +89,15 @@ final class CallsService implements CallsContract
      *   after?: string, before?: string, limit?: int, number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
+     * @return DefaultPagination<CallListResponse>
+     *
      * @throws APIException
      */
     public function list(
         string $queueName,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): CallListResponse {
+    ): DefaultPagination {
         $params = ['page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

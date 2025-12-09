@@ -8,9 +8,9 @@ use Telnyx\AI\Assistants\Tests\Runs\RunListParams;
 use Telnyx\AI\Assistants\Tests\Runs\RunRetrieveParams;
 use Telnyx\AI\Assistants\Tests\Runs\RunTriggerParams;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface RunsRawContract
@@ -35,7 +35,7 @@ interface RunsRawContract
      *
      * @param array<mixed>|RunListParams $params
      *
-     * @return BaseResponse<PaginatedTestRunList>
+     * @return BaseResponse<DefaultFlatPagination<TestRunResponse>>
      *
      * @throws APIException
      */

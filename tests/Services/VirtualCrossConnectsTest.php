@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -39,12 +39,7 @@ final class VirtualCrossConnectsTest extends TestCase
         }
 
         $result = $this->client->virtualCrossConnects->create(
-            bgpAsn: 1234,
-            cloudProvider: 'aws',
-            cloudProviderRegion: 'us-east-1',
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            primaryCloudAccountID: '123456789012',
-            regionCode: 'ashburn-va',
+            regionCode: 'ashburn-va'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -59,15 +54,15 @@ final class VirtualCrossConnectsTest extends TestCase
         }
 
         $result = $this->client->virtualCrossConnects->create(
+            regionCode: 'ashburn-va',
+            bandwidthMbps: 50,
             bgpAsn: 1234,
             cloudProvider: 'aws',
             cloudProviderRegion: 'us-east-1',
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            primaryCloudAccountID: '123456789012',
-            regionCode: 'ashburn-va',
-            bandwidthMbps: 50,
             name: 'test interface',
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             primaryBgpKey: 'yFV4wEPtPVPfDUGLWiyQzwga',
+            primaryCloudAccountID: '123456789012',
             primaryCloudIP: '169.254.0.2',
             primaryTelnyxIP: '169.254.0.1',
             secondaryBgpKey: 'ge1lONeK9RcA83uuWaw9DvZy',
@@ -120,7 +115,7 @@ final class VirtualCrossConnectsTest extends TestCase
         $result = $this->client->virtualCrossConnects->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VirtualCrossConnectListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Tests\UnsupportedMockTests;
 
@@ -44,30 +44,30 @@ final class ExternalVettingTest extends TestCase
     }
 
     #[Test]
-    public function testImport(): void
+    public function testImports(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->brand->externalVetting->import(
+        $result = $this->client->number10dlc->brand->externalVetting->imports(
             'brandId',
             evpID: 'evpId',
             vettingID: 'vettingId'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingImportResponse::class, $result);
+        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
     }
 
     #[Test]
-    public function testImportWithOptionalParams(): void
+    public function testImportsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->brand->externalVetting->import(
+        $result = $this->client->number10dlc->brand->externalVetting->imports(
             'brandId',
             evpID: 'evpId',
             vettingID: 'vettingId',
@@ -75,7 +75,7 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingImportResponse::class, $result);
+        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
     }
 
     #[Test]

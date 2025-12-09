@@ -6,15 +6,16 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsRawContract;
 use Telnyx\UsageReports\UsageReportGetOptionsParams;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
 use Telnyx\UsageReports\UsageReportListParams;
 use Telnyx\UsageReports\UsageReportListParams\Format;
-use Telnyx\UsageReports\UsageReportListResponse;
 
 final class UsageReportsRawService implements UsageReportsRawContract
 {
@@ -38,13 +39,14 @@ final class UsageReportsRawService implements UsageReportsRawContract
      *   filter?: string,
      *   format?: 'csv'|'json'|Format,
      *   managedAccounts?: bool,
-     *   page?: array{number?: int, size?: int},
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   sort?: list<string>,
      *   startDate?: string,
      *   authorizationBearer?: string,
      * }|UsageReportListParams $params
      *
-     * @return BaseResponse<UsageReportListResponse>
+     * @return BaseResponse<DefaultFlatPagination<array<string,mixed>>>
      *
      * @throws APIException
      */
@@ -66,7 +68,8 @@ final class UsageReportsRawService implements UsageReportsRawContract
                 'filter',
                 'format',
                 'managed_accounts',
-                'page',
+                'page[number]',
+                'page[size]',
                 'sort',
                 'start_date',
             ],
@@ -85,6 +88,8 @@ final class UsageReportsRawService implements UsageReportsRawContract
                     'dateRange' => 'date_range',
                     'endDate' => 'end_date',
                     'managedAccounts' => 'managed_accounts',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
                     'startDate' => 'start_date',
                 ],
             ),
@@ -93,7 +98,8 @@ final class UsageReportsRawService implements UsageReportsRawContract
                 ['authorizationBearer' => 'authorization_bearer']
             ),
             options: $options,
-            convert: UsageReportListResponse::class,
+            convert: new MapOf('mixed'),
+            page: DefaultFlatPagination::class,
         );
     }
 

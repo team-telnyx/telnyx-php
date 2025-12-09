@@ -32,13 +32,13 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Create Default Gateway.
      *
-     * @param string $id identifies the resource
+     * @param string $networkIdentifier identifies the resource
      * @param string $wireguardPeerID wireguard peer ID
      *
      * @throws APIException
      */
     public function create(
-        string $id,
+        string $networkIdentifier,
         ?string $wireguardPeerID = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultGatewayNewResponse {
@@ -47,7 +47,7 @@ final class DefaultGatewayService implements DefaultGatewayContract
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->create($networkIdentifier, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

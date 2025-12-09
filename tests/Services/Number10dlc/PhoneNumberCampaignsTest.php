@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
+use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
+use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -119,7 +119,7 @@ final class PhoneNumberCampaignsTest extends TestCase
         $result = $this->client->number10dlc->phoneNumberCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PhoneNumberCampaignListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
     }
 
     #[Test]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\Status;
@@ -31,6 +32,8 @@ interface ActionRequirementsContract
      *   value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'|Value
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
+     * @return DefaultPagination<ActionRequirementListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -39,7 +42,7 @@ interface ActionRequirementsContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): ActionRequirementListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams;
-use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
@@ -49,7 +50,7 @@ interface NotificationChannelsRawContract
     /**
      * @api
      *
-     * @param string $id the id of the resource
+     * @param string $notificationChannelID the id of the resource
      * @param array<mixed>|NotificationChannelUpdateParams $params
      *
      * @return BaseResponse<NotificationChannelUpdateResponse>
@@ -57,7 +58,7 @@ interface NotificationChannelsRawContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $notificationChannelID,
         array|NotificationChannelUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -67,7 +68,7 @@ interface NotificationChannelsRawContract
      *
      * @param array<mixed>|NotificationChannelListParams $params
      *
-     * @return BaseResponse<NotificationChannelListResponse>
+     * @return BaseResponse<DefaultPagination<NotificationChannel>>
      *
      * @throws APIException
      */

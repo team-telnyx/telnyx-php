@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
 use Tests\UnsupportedMockTests;
 
@@ -40,7 +40,7 @@ final class VerificationCodesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerificationCodeListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

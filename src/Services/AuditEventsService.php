@@ -8,6 +8,7 @@ use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsContract;
 
@@ -40,6 +41,8 @@ final class AuditEventsService implements AuditEventsContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param 'asc'|'desc'|Sort $sort set the order of the results by the creation date
      *
+     * @return DefaultPagination<AuditEventListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -47,7 +50,7 @@ final class AuditEventsService implements AuditEventsContract
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): AuditEventListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

@@ -6,13 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\SimCards\SimCardDeleteResponse;
 use Telnyx\SimCards\SimCardGetActivationCodeResponse;
 use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
-use Telnyx\SimCards\SimCardListResponse;
-use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Tests\UnsupportedMockTests;
 
@@ -74,7 +74,7 @@ final class SimCardsTest extends TestCase
         $result = $this->client->simCards->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SimCardListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]
@@ -149,9 +149,6 @@ final class SimCardsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            SimCardListWirelessConnectivityLogsResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 }

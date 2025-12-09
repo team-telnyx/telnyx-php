@@ -8,9 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
-use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
@@ -194,7 +194,7 @@ final class RequestsRawService implements RequestsRawContract
      *   status?: value-of<TfVerificationStatus>,
      * }|RequestListParams $params
      *
-     * @return BaseResponse<RequestListResponse>
+     * @return BaseResponse<DefaultPaginationForMessagingTollfree<VerificationRequestStatus,>,>
      *
      * @throws APIException
      */
@@ -221,7 +221,8 @@ final class RequestsRawService implements RequestsRawContract
                 ],
             ),
             options: $options,
-            convert: RequestListResponse::class,
+            convert: VerificationRequestStatus::class,
+            page: DefaultPaginationForMessagingTollfree::class,
         );
     }
 

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants\Tests\TestSuites;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
 
@@ -31,23 +31,26 @@ final class RunsService implements RunsContract
      *
      * Retrieves paginated history of test runs for a specific test suite with filtering options
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
+     *
+     * @return DefaultFlatPagination<TestRunResponse>
      *
      * @throws APIException
      */
     public function list(
         string $suiteName,
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $status = null,
         ?string $testSuiteRunID = null,
         ?RequestOptions $requestOptions = null,
-    ): PaginatedTestRunList {
+    ): DefaultFlatPagination {
         $params = [
-            'page' => $page, 'status' => $status, 'testSuiteRunID' => $testSuiteRunID,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+            'status' => $status,
+            'testSuiteRunID' => $testSuiteRunID,
         ];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
@@ -15,11 +16,11 @@ use Telnyx\Conferences\ConferenceListParams\Filter\Status;
 use Telnyx\Conferences\ConferenceListParams\Filter\Type;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
-use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Conferences\ConferenceRetrieveParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesRawContract;
 
@@ -146,7 +147,7 @@ final class ConferencesRawService implements ConferencesRawContract
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceListParams\Region,
      * }|ConferenceListParams $params
      *
-     * @return BaseResponse<ConferenceListResponse>
+     * @return BaseResponse<DefaultPagination<Conference>>
      *
      * @throws APIException
      */
@@ -165,7 +166,8 @@ final class ConferencesRawService implements ConferencesRawContract
             path: 'conferences',
             query: $parsed,
             options: $options,
-            convert: ConferenceListResponse::class,
+            convert: Conference::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -183,7 +185,7 @@ final class ConferencesRawService implements ConferencesRawContract
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceListParticipantsParams\Region,
      * }|ConferenceListParticipantsParams $params
      *
-     * @return BaseResponse<ConferenceListParticipantsResponse>
+     * @return BaseResponse<DefaultPagination<ConferenceListParticipantsResponse>>
      *
      * @throws APIException
      */
@@ -204,6 +206,7 @@ final class ConferencesRawService implements ConferencesRawContract
             query: $parsed,
             options: $options,
             convert: ConferenceListParticipantsResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

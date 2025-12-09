@@ -7,16 +7,17 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\Eq;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\In;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort\Value;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomerServiceRecordsRawContract;
 
@@ -117,7 +118,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      *   sort?: array{value?: 'created_at'|'-created_at'|Value},
      * }|CustomerServiceRecordListParams $params
      *
-     * @return BaseResponse<CustomerServiceRecordListResponse>
+     * @return BaseResponse<DefaultPagination<CustomerServiceRecord>>
      *
      * @throws APIException
      */
@@ -136,7 +137,8 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
             path: 'customer_service_records',
             query: $parsed,
             options: $options,
-            convert: CustomerServiceRecordListResponse::class,
+            convert: CustomerServiceRecord::class,
+            page: DefaultPagination::class,
         );
     }
 

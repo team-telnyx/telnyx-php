@@ -8,6 +8,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 use Telnyx\RequestOptions;
 
 interface PhoneNumberAssignmentByProfileContract
@@ -27,6 +28,18 @@ interface PhoneNumberAssignmentByProfileContract
         ?string $tcrCampaignID = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberAssignmentByProfileAssignResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function listPhoneNumberStatus(
+        string $taskID,
+        int $page = 1,
+        int $recordsPerPage = 20,
+        ?RequestOptions $requestOptions = null,
+    ): PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 
     /**
      * @api

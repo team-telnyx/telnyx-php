@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data;
-use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data\FieldType;
-use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data\RequirementType;
+use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\FieldType;
+use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\RequirementType;
 
 /**
  * @phpstan-type PortingOrderGetRequirementsResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   fieldType?: value-of<FieldType>|null,
+ *   fieldValue?: string|null,
+ *   recordType?: string|null,
+ *   requirementStatus?: string|null,
+ *   requirementType?: RequirementType|null,
  * }
  */
 final class PortingOrderGetRequirementsResponse implements BaseModel
@@ -22,12 +24,37 @@ final class PortingOrderGetRequirementsResponse implements BaseModel
     /** @use SdkModel<PortingOrderGetRequirementsResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
+    /**
+     * Type of value expected on field_value field.
+     *
+     * @var value-of<FieldType>|null $fieldType
+     */
+    #[Optional('field_type', enum: FieldType::class)]
+    public ?string $fieldType;
 
-    #[Optional]
-    public ?PaginationMeta $meta;
+    /**
+     * Identifies the document that satisfies this requirement.
+     */
+    #[Optional('field_value')]
+    public ?string $fieldValue;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * Status of the requirement.
+     */
+    #[Optional('requirement_status')]
+    public ?string $requirementStatus;
+
+    /**
+     * Identifies the requirement type that meets this requirement.
+     */
+    #[Optional('requirement_type')]
+    public ?RequirementType $requirementType;
 
     public function __construct()
     {
@@ -39,61 +66,97 @@ final class PortingOrderGetRequirementsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   fieldType?: value-of<FieldType>|null,
-     *   fieldValue?: string|null,
-     *   recordType?: string|null,
-     *   requirementStatus?: string|null,
-     *   requirementType?: RequirementType|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * @param FieldType|value-of<FieldType> $fieldType
+     * @param RequirementType|array{
+     *   id?: string|null,
+     *   acceptanceCriteria?: array<string,mixed>|null,
+     *   description?: string|null,
+     *   example?: string|null,
+     *   name?: string|null,
+     *   type?: string|null,
+     * } $requirementType
      */
     public static function with(
-        ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        FieldType|string|null $fieldType = null,
+        ?string $fieldValue = null,
+        ?string $recordType = null,
+        ?string $requirementStatus = null,
+        RequirementType|array|null $requirementType = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementStatus && $self['requirementStatus'] = $requirementStatus;
+        null !== $requirementType && $self['requirementType'] = $requirementType;
 
         return $self;
     }
 
     /**
-     * @param list<Data|array{
-     *   fieldType?: value-of<FieldType>|null,
-     *   fieldValue?: string|null,
-     *   recordType?: string|null,
-     *   requirementStatus?: string|null,
-     *   requirementType?: RequirementType|null,
-     * }> $data
+     * Type of value expected on field_value field.
+     *
+     * @param FieldType|value-of<FieldType> $fieldType
      */
-    public function withData(array $data): self
+    public function withFieldType(FieldType|string $fieldType): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['fieldType'] = $fieldType;
 
         return $self;
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * Identifies the document that satisfies this requirement.
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withFieldValue(string $fieldValue): self
     {
         $self = clone $this;
-        $self['meta'] = $meta;
+        $self['fieldValue'] = $fieldValue;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Status of the requirement.
+     */
+    public function withRequirementStatus(string $requirementStatus): self
+    {
+        $self = clone $this;
+        $self['requirementStatus'] = $requirementStatus;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the requirement type that meets this requirement.
+     *
+     * @param RequirementType|array{
+     *   id?: string|null,
+     *   acceptanceCriteria?: array<string,mixed>|null,
+     *   description?: string|null,
+     *   example?: string|null,
+     *   name?: string|null,
+     *   type?: string|null,
+     * } $requirementType
+     */
+    public function withRequirementType(
+        RequirementType|array $requirementType
+    ): self {
+        $self = clone $this;
+        $self['requirementType'] = $requirementType;
 
         return $self;
     }

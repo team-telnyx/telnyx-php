@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
@@ -12,6 +11,8 @@ use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListParams\Sort;
 use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface CampaignContract
@@ -66,6 +67,8 @@ interface CampaignContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'campaignId'|'-campaignId'|'createdAt'|'-createdAt'|'status'|'-status'|'tcrCampaignId'|'-tcrCampaignId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
+     * @return PerPagePaginationV2<CampaignListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -74,7 +77,7 @@ interface CampaignContract
         int $recordsPerPage = 10,
         string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
-    ): CampaignListResponse;
+    ): PerPagePaginationV2;
 
     /**
      * @api

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\Campaign\CampaignSharingStatus;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
-use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface PartnerCampaignsContract
@@ -46,6 +46,8 @@ interface PartnerCampaignsContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'brandDisplayName'|'-brandDisplayName'|'tcrBrandId'|'-tcrBranId'|'tcrCampaignId'|'-tcrCampaignId'|'createdAt'|'-createdAt'|'campaignStatus'|'-campaignStatus'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
+     * @return PerPagePaginationV2<TelnyxDownstreamCampaign>
+     *
      * @throws APIException
      */
     public function list(
@@ -53,7 +55,7 @@ interface PartnerCampaignsContract
         int $recordsPerPage = 10,
         string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
-    ): PartnerCampaignListResponse;
+    ): PerPagePaginationV2;
 
     /**
      * @api
@@ -61,13 +63,15 @@ interface PartnerCampaignsContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      *
+     * @return PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>
+     *
      * @throws APIException
      */
     public function listSharedByMe(
         int $page = 1,
         int $recordsPerPage = 10,
         ?RequestOptions $requestOptions = null,
-    ): PartnerCampaignListSharedByMeResponse;
+    ): PerPagePaginationV2;
 
     /**
      * @api

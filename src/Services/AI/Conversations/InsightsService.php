@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Conversations;
 
-use Telnyx\AI\Conversations\Insights\InsightListResponse;
+use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsContract;
 
@@ -31,14 +32,14 @@ final class InsightsService implements InsightsContract
      *
      * Create a new insight
      *
-     * @param mixed|string $jsonSchema if specified, the output will follow the JSON schema
+     * @param string|array<string,mixed> $jsonSchema if specified, the output will follow the JSON schema
      *
      * @throws APIException
      */
     public function create(
         string $instructions,
         string $name,
-        mixed $jsonSchema = null,
+        string|array|null $jsonSchema = null,
         string $webhook = '',
         ?RequestOptions $requestOptions = null,
     ): InsightTemplateDetail {
@@ -82,14 +83,14 @@ final class InsightsService implements InsightsContract
      * Update an insight template
      *
      * @param string $insightID The ID of the insight
-     * @param mixed|string $jsonSchema
+     * @param string|array<string,mixed> $jsonSchema
      *
      * @throws APIException
      */
     public function update(
         string $insightID,
         ?string $instructions = null,
-        mixed $jsonSchema = null,
+        string|array|null $jsonSchema = null,
         ?string $name = null,
         ?string $webhook = null,
         ?RequestOptions $requestOptions = null,
@@ -114,17 +115,16 @@ final class InsightsService implements InsightsContract
      *
      * Get all insights
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultFlatPagination<InsightTemplate>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
-    ): InsightListResponse {
-        $params = ['page' => $page];
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?RequestOptions $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 

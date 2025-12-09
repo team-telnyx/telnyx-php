@@ -9,7 +9,7 @@ namespace Telnyx\FqdnConnections;
  */
 enum WebhookAPIVersion: string
 {
-    case _1 = '1';
+    case V1 = '1';
 
-    case _2 = '2';
+    case V2 = '2';
 }

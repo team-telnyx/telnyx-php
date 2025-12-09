@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AccessIPRanges\AccessIPRange;
-use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -67,7 +67,7 @@ final class AccessIPRangesTest extends TestCase
         $result = $this->client->accessIPRanges->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AccessIPRangeListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 
     #[Test]

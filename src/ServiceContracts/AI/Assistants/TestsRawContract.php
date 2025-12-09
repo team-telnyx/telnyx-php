@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts\AI\Assistants;
 use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TestCreateParams;
 use Telnyx\AI\Assistants\Tests\TestListParams;
-use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface TestsRawContract
@@ -61,7 +61,7 @@ interface TestsRawContract
      *
      * @param array<mixed>|TestListParams $params
      *
-     * @return BaseResponse<TestListResponse>
+     * @return BaseResponse<DefaultFlatPagination<AssistantTest>>
      *
      * @throws APIException
      */

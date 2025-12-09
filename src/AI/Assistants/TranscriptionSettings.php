@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettings\Settings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   language?: string|null,
  *   model?: value-of<Model>|null,
  *   region?: string|null,
- *   settings?: Settings|null,
+ *   settings?: TranscriptionSettingsConfig|null,
  * }
  */
 final class TranscriptionSettings implements BaseModel
@@ -47,7 +46,7 @@ final class TranscriptionSettings implements BaseModel
     public ?string $region;
 
     #[Optional]
-    public ?Settings $settings;
+    public ?TranscriptionSettingsConfig $settings;
 
     public function __construct()
     {
@@ -60,7 +59,7 @@ final class TranscriptionSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Model|value-of<Model> $model
-     * @param Settings|array{
+     * @param TranscriptionSettingsConfig|array{
      *   eotThreshold?: float|null,
      *   eotTimeoutMs?: int|null,
      *   numerals?: bool|null,
@@ -71,7 +70,7 @@ final class TranscriptionSettings implements BaseModel
         ?string $language = null,
         Model|string|null $model = null,
         ?string $region = null,
-        Settings|array|null $settings = null,
+        TranscriptionSettingsConfig|array|null $settings = null,
     ): self {
         $self = new self;
 
@@ -122,15 +121,16 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * @param Settings|array{
+     * @param TranscriptionSettingsConfig|array{
      *   eotThreshold?: float|null,
      *   eotTimeoutMs?: int|null,
      *   numerals?: bool|null,
      *   smartFormat?: bool|null,
      * } $settings
      */
-    public function withSettings(Settings|array $settings): self
-    {
+    public function withSettings(
+        TranscriptionSettingsConfig|array $settings
+    ): self {
         $self = clone $this;
         $self['settings'] = $settings;
 

@@ -6,9 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
-use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
+use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -65,7 +64,7 @@ final class PartnerCampaignsTest extends TestCase
         $result = $this->client->partnerCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PartnerCampaignListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
     }
 
     #[Test]
@@ -78,10 +77,7 @@ final class PartnerCampaignsTest extends TestCase
         $result = $this->client->partnerCampaigns->listSharedByMe();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            PartnerCampaignListSharedByMeResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
     }
 
     #[Test]

@@ -12,6 +12,7 @@ use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallEventsRawContract;
 
@@ -53,7 +54,7 @@ final class CallEventsRawService implements CallEventsRawContract
      *   },
      * }|CallEventListParams $params
      *
-     * @return BaseResponse<CallEventListResponse>
+     * @return BaseResponse<DefaultPagination<CallEventListResponse>>
      *
      * @throws APIException
      */
@@ -73,6 +74,7 @@ final class CallEventsRawService implements CallEventsRawContract
             query: $parsed,
             options: $options,
             convert: CallEventListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

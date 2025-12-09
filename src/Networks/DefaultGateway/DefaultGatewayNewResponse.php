@@ -48,10 +48,7 @@ final class DefaultGatewayNewResponse implements BaseModel
      *   wireguardPeerID?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
      * } $meta
      */
     public static function with(
@@ -87,10 +84,7 @@ final class DefaultGatewayNewResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

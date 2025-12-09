@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\Campaign\CampaignSharingStatus;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
-use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignUpdateParams;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PartnerCampaignsRawContract;
 
@@ -93,7 +93,7 @@ final class PartnerCampaignsRawService implements PartnerCampaignsRawContract
      *   page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|PartnerCampaignListParams $params
      *
-     * @return BaseResponse<PartnerCampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<TelnyxDownstreamCampaign>>
      *
      * @throws APIException
      */
@@ -112,7 +112,8 @@ final class PartnerCampaignsRawService implements PartnerCampaignsRawContract
             path: '10dlc/partner_campaigns',
             query: $parsed,
             options: $options,
-            convert: PartnerCampaignListResponse::class,
+            convert: TelnyxDownstreamCampaign::class,
+            page: PerPagePaginationV2::class,
         );
     }
 
@@ -129,7 +130,7 @@ final class PartnerCampaignsRawService implements PartnerCampaignsRawContract
      *   page?: int, recordsPerPage?: int
      * }|PartnerCampaignListSharedByMeParams $params
      *
-     * @return BaseResponse<PartnerCampaignListSharedByMeResponse>
+     * @return BaseResponse<PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>>
      *
      * @throws APIException
      */
@@ -149,6 +150,7 @@ final class PartnerCampaignsRawService implements PartnerCampaignsRawContract
             query: $parsed,
             options: $options,
             convert: PartnerCampaignListSharedByMeResponse::class,
+            page: PerPagePaginationV2::class,
         );
     }
 

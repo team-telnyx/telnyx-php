@@ -7,6 +7,8 @@ namespace Telnyx\Services\PhoneNumberBlocks;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
@@ -14,7 +16,6 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobListParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Status;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Type;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Sort;
-use Telnyx\PhoneNumberBlocks\Jobs\JobListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberBlocks\JobsRawContract;
 
@@ -64,7 +65,7 @@ final class JobsRawService implements JobsRawContract
      *   sort?: 'created_at'|Sort,
      * }|JobListParams $params
      *
-     * @return BaseResponse<JobListResponse>
+     * @return BaseResponse<DefaultPagination<Job>>
      *
      * @throws APIException
      */
@@ -83,7 +84,8 @@ final class JobsRawService implements JobsRawContract
             path: 'phone_number_blocks/jobs',
             query: $parsed,
             options: $options,
-            convert: JobListResponse::class,
+            convert: Job::class,
+            page: DefaultPagination::class,
         );
     }
 

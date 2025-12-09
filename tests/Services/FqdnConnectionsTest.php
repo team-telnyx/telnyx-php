@@ -9,9 +9,9 @@ use Telnyx\Client;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
-use Telnyx\FqdnConnections\FqdnConnectionListResponse;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
 use Telnyx\FqdnConnections\TransportProtocol;
@@ -113,7 +113,7 @@ final class FqdnConnectionsTest extends TestCase
             ],
             tags: ['tag1', 'tag2'],
             transportProtocol: TransportProtocol::UDP,
-            webhookAPIVersion: WebhookAPIVersion::_1,
+            webhookAPIVersion: WebhookAPIVersion::V1,
             webhookEventFailoverURL: 'https://failover.example.com',
             webhookEventURL: 'https://example.com',
             webhookTimeoutSecs: 25,
@@ -159,7 +159,7 @@ final class FqdnConnectionsTest extends TestCase
         $result = $this->client->fqdnConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(FqdnConnectionListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
@@ -15,6 +14,8 @@ use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealParams;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Number10dlc\Campaign\CampaignUpdateParams;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface CampaignRawContract
@@ -51,7 +52,7 @@ interface CampaignRawContract
      *
      * @param array<mixed>|CampaignListParams $params
      *
-     * @return BaseResponse<CampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
      * @throws APIException
      */

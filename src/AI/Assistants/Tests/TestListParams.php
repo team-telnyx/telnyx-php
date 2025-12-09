@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests;
 
-use Telnyx\AI\Assistants\Tests\TestListParams\Page;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -17,7 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type TestListParamsShape = array{
  *   destination?: string,
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   pageNumber?: int,
+ *   pageSize?: int,
  *   telnyxConversationChannel?: string,
  *   testSuite?: string,
  * }
@@ -34,11 +34,11 @@ final class TestListParams implements BaseModel
     #[Optional]
     public ?string $destination;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Filter tests by communication channel (e.g., 'web_chat', 'sms').
@@ -61,19 +61,19 @@ final class TestListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
         ?string $destination = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $telnyxConversationChannel = null,
         ?string $testSuite = null,
     ): self {
         $self = new self;
 
         null !== $destination && $self['destination'] = $destination;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $telnyxConversationChannel && $self['telnyxConversationChannel'] = $telnyxConversationChannel;
         null !== $testSuite && $self['testSuite'] = $testSuite;
 
@@ -91,15 +91,18 @@ final class TestListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

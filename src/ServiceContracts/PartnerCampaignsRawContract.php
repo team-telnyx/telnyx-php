@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\Campaign\CampaignSharingStatus;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
-use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignUpdateParams;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface PartnerCampaignsRawContract
@@ -49,7 +49,7 @@ interface PartnerCampaignsRawContract
      *
      * @param array<mixed>|PartnerCampaignListParams $params
      *
-     * @return BaseResponse<PartnerCampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<TelnyxDownstreamCampaign>>
      *
      * @throws APIException
      */
@@ -63,7 +63,7 @@ interface PartnerCampaignsRawContract
      *
      * @param array<mixed>|PartnerCampaignListSharedByMeParams $params
      *
-     * @return BaseResponse<PartnerCampaignListSharedByMeResponse>
+     * @return BaseResponse<PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>>
      *
      * @throws APIException
      */

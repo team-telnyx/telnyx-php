@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Status;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Type;
@@ -61,13 +62,15 @@ final class OtaUpdatesService implements OtaUpdatesContract
      *   number?: int, size?: int
      * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<OtaUpdateListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): OtaUpdateListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

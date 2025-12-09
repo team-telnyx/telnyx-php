@@ -6,12 +6,13 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\OAuthClients\OAuthClient;
 use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterAllowedGrantTypesContains;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
-use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Telnyx\RequestOptions;
@@ -162,6 +163,8 @@ final class OAuthClientsService implements OAuthClientsContract
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
      *
+     * @return DefaultFlatPagination<OAuthClient>
+     *
      * @throws APIException
      */
     public function list(
@@ -174,7 +177,7 @@ final class OAuthClientsService implements OAuthClientsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): OAuthClientListResponse {
+    ): DefaultFlatPagination {
         $params = [
             'filterAllowedGrantTypesContains' => $filterAllowedGrantTypesContains,
             'filterClientID' => $filterClientID,

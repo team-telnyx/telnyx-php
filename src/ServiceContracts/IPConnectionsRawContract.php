@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
 use Telnyx\IPConnections\IPConnectionListParams;
-use Telnyx\IPConnections\IPConnectionListResponse;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateParams;
 use Telnyx\IPConnections\IPConnectionUpdateResponse;
@@ -67,7 +68,7 @@ interface IPConnectionsRawContract
      *
      * @param array<mixed>|IPConnectionListParams $params
      *
-     * @return BaseResponse<IPConnectionListResponse>
+     * @return BaseResponse<DefaultPagination<IPConnection>>
      *
      * @throws APIException
      */

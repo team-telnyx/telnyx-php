@@ -9,6 +9,7 @@ use Telnyx\AI\Clusters\ClusterGetResponse;
 use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
 
@@ -60,17 +61,16 @@ final class ClustersService implements ClustersContract
      *
      * List all clusters
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultFlatPagination<ClusterListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
-    ): ClusterListResponse {
-        $params = ['page' => $page];
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?RequestOptions $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 

@@ -6,12 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
-use Telnyx\Networks\InterfaceStatus;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsContract;
 
@@ -35,28 +35,13 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Create a Global IP assignment.
      *
-     * @param string $globalIPID global IP ID
-     * @param bool $isInMaintenance enable/disable BGP announcement
-     * @param string $wireguardPeerID wireguard peer ID
-     *
      * @throws APIException
      */
     public function create(
-        ?string $globalIPID = null,
-        ?bool $isInMaintenance = null,
-        ?string $wireguardPeerID = null,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentNewResponse {
-        $params = [
-            'globalIPID' => $globalIPID,
-            'isInMaintenance' => $isInMaintenance,
-            'wireguardPeerID' => $wireguardPeerID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
-
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->create(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -85,31 +70,29 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Update a Global IP assignment.
      *
-     * @param string $id identifies the resource
+     * @param string $globalIPAssignmentID identifies the resource
      * @param array{
      *   id?: string,
      *   createdAt?: string,
      *   recordType?: string,
      *   updatedAt?: string,
      *   globalIPID?: string,
-     *   isAnnounced?: bool,
-     *   isConnected?: bool,
-     *   isInMaintenance?: bool,
-     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
      *   wireguardPeerID?: string,
-     * } $body
+     * } $globalIPAssignmentUpdateRequest
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        array $body,
-        ?RequestOptions $requestOptions = null
+        string $globalIPAssignmentID,
+        array $globalIPAssignmentUpdateRequest,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentUpdateResponse {
-        $params = ['body' => $body];
+        $params = [
+            'globalIPAssignmentUpdateRequest' => $globalIPAssignmentUpdateRequest,
+        ];
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($globalIPAssignmentID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -123,12 +106,14 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<GlobalIPAssignment>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentListResponse {
+    ): DefaultPagination {
         $params = ['page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

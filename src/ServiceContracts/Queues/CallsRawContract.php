@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Queues;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListResponse;
@@ -54,7 +55,7 @@ interface CallsRawContract
      * @param string $queueName Uniquely identifies the queue by name
      * @param array<mixed>|CallListParams $params
      *
-     * @return BaseResponse<CallListResponse>
+     * @return BaseResponse<DefaultPagination<CallListResponse>>
      *
      * @throws APIException
      */

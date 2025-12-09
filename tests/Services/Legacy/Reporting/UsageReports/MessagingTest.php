@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
+use Telnyx\PerPagePagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -101,7 +101,7 @@ final class MessagingTest extends TestCase
         $result = $this->client->legacy->reporting->usageReports->messaging->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MessagingListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePagination::class, $result);
     }
 
     #[Test]

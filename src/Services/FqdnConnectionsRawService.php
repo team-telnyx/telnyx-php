@@ -12,12 +12,13 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
+use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
-use Telnyx\FqdnConnections\FqdnConnectionListResponse;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateParams;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
@@ -266,7 +267,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|FqdnConnectionListParams $params
      *
-     * @return BaseResponse<FqdnConnectionListResponse>
+     * @return BaseResponse<DefaultPagination<FqdnConnection>>
      *
      * @throws APIException
      */
@@ -285,7 +286,8 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
             path: 'fqdn_connections',
             query: $parsed,
             options: $options,
-            convert: FqdnConnectionListResponse::class,
+            convert: FqdnConnection::class,
+            page: DefaultPagination::class,
         );
     }
 

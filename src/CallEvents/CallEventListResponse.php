@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\CallEvents;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\CallEvents\CallEventListResponse\Data;
-use Telnyx\CallEvents\CallEventListResponse\Data\RecordType;
-use Telnyx\CallEvents\CallEventListResponse\Data\Type;
-use Telnyx\Core\Attributes\Optional;
+use Telnyx\CallEvents\CallEventListResponse\RecordType;
+use Telnyx\CallEvents\CallEventListResponse\Type;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CallEventListResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   callLegID: string,
+ *   callSessionID: string,
+ *   eventTimestamp: string,
+ *   metadata: array<string,mixed>,
+ *   name: string,
+ *   recordType: value-of<RecordType>,
+ *   type: value-of<Type>,
  * }
  */
 final class CallEventListResponse implements BaseModel
@@ -22,13 +26,79 @@ final class CallEventListResponse implements BaseModel
     /** @use SdkModel<CallEventListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
+    /**
+     * Uniquely identifies an individual call leg.
+     */
+    #[Required('call_leg_id')]
+    public string $callLegID;
 
-    #[Optional]
-    public ?PaginationMeta $meta;
+    /**
+     * Uniquely identifies the call control session. A session may include multiple call leg events.
+     */
+    #[Required('call_session_id')]
+    public string $callSessionID;
 
+    /**
+     * Event timestamp.
+     */
+    #[Required('event_timestamp')]
+    public string $eventTimestamp;
+
+    /**
+     * Event metadata, which includes raw event, and extra information based on event type.
+     *
+     * @var array<string,mixed> $metadata
+     */
+    #[Required(map: 'mixed')]
+    public array $metadata;
+
+    /**
+     * Event name.
+     */
+    #[Required]
+    public string $name;
+
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
+
+    /**
+     * Event type.
+     *
+     * @var value-of<Type> $type
+     */
+    #[Required(enum: Type::class)]
+    public string $type;
+
+    /**
+     * `new CallEventListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * CallEventListResponse::with(
+     *   callLegID: ...,
+     *   callSessionID: ...,
+     *   eventTimestamp: ...,
+     *   metadata: ...,
+     *   name: ...,
+     *   recordType: ...,
+     *   type: ...,
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new CallEventListResponse)
+     *   ->withCallLegID(...)
+     *   ->withCallSessionID(...)
+     *   ->withEventTimestamp(...)
+     *   ->withMetadata(...)
+     *   ->withName(...)
+     *   ->withRecordType(...)
+     *   ->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -39,65 +109,109 @@ final class CallEventListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   callLegID: string,
-     *   callSessionID: string,
-     *   eventTimestamp: string,
-     *   metadata: mixed,
-     *   name: string,
-     *   recordType: value-of<RecordType>,
-     *   type: value-of<Type>,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * @param array<string,mixed> $metadata
+     * @param RecordType|value-of<RecordType> $recordType
+     * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        string $callLegID,
+        string $callSessionID,
+        string $eventTimestamp,
+        array $metadata,
+        string $name,
+        RecordType|string $recordType,
+        Type|string $type,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        $self['callLegID'] = $callLegID;
+        $self['callSessionID'] = $callSessionID;
+        $self['eventTimestamp'] = $eventTimestamp;
+        $self['metadata'] = $metadata;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
+        $self['type'] = $type;
 
         return $self;
     }
 
     /**
-     * @param list<Data|array{
-     *   callLegID: string,
-     *   callSessionID: string,
-     *   eventTimestamp: string,
-     *   metadata: mixed,
-     *   name: string,
-     *   recordType: value-of<RecordType>,
-     *   type: value-of<Type>,
-     * }> $data
+     * Uniquely identifies an individual call leg.
      */
-    public function withData(array $data): self
+    public function withCallLegID(string $callLegID): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['callLegID'] = $callLegID;
 
         return $self;
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * Uniquely identifies the call control session. A session may include multiple call leg events.
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withCallSessionID(string $callSessionID): self
     {
         $self = clone $this;
-        $self['meta'] = $meta;
+        $self['callSessionID'] = $callSessionID;
+
+        return $self;
+    }
+
+    /**
+     * Event timestamp.
+     */
+    public function withEventTimestamp(string $eventTimestamp): self
+    {
+        $self = clone $this;
+        $self['eventTimestamp'] = $eventTimestamp;
+
+        return $self;
+    }
+
+    /**
+     * Event metadata, which includes raw event, and extra information based on event type.
+     *
+     * @param array<string,mixed> $metadata
+     */
+    public function withMetadata(array $metadata): self
+    {
+        $self = clone $this;
+        $self['metadata'] = $metadata;
+
+        return $self;
+    }
+
+    /**
+     * Event name.
+     */
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * @param RecordType|value-of<RecordType> $recordType
+     */
+    public function withRecordType(RecordType|string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Event type.
+     *
+     * @param Type|value-of<Type> $type
+     */
+    public function withType(Type|string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
 
         return $self;
     }

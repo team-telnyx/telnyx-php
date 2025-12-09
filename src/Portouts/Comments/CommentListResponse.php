@@ -46,9 +46,9 @@ final class CommentListResponse implements BaseModel
      *   recordType?: string|null,
      * }> $data
      * @param Metadata|array{
-     *   pageNumber?: float|null,
+     *   pageNumber: float,
+     *   totalPages: float,
      *   pageSize?: float|null,
-     *   totalPages?: float|null,
      *   totalResults?: float|null,
      * } $meta
      */
@@ -84,9 +84,9 @@ final class CommentListResponse implements BaseModel
 
     /**
      * @param Metadata|array{
-     *   pageNumber?: float|null,
+     *   pageNumber: float,
+     *   totalPages: float,
      *   pageSize?: float|null,
-     *   totalPages?: float|null,
      *   totalResults?: float|null,
      * } $meta
      */

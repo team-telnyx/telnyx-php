@@ -9,6 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberAssignmentByProfileContract;
 
@@ -54,6 +55,29 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->assign(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
+     *
+     * @throws APIException
+     */
+    public function listPhoneNumberStatus(
+        string $taskID,
+        int $page = 1,
+        int $recordsPerPage = 20,
+        ?RequestOptions $requestOptions = null,
+    ): PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse {
+        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listPhoneNumberStatus($taskID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -6,11 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesContract;
+use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
-use Telnyx\UserAddresses\UserAddressListResponse;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
 final class UserAddressesService implements UserAddressesContract
@@ -136,6 +137,8 @@ final class UserAddressesService implements UserAddressesContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultPagination<UserAddress>
+     *
      * @throws APIException
      */
     public function list(
@@ -143,7 +146,7 @@ final class UserAddressesService implements UserAddressesContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): UserAddressListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

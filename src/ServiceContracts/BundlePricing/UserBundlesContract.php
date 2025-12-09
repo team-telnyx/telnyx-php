@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\BundlePricing;
 
+use Telnyx\BundlePricing\UserBundles\UserBundle;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
-use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface UserBundlesContract
@@ -56,6 +57,8 @@ interface UserBundlesContract
      * } $page Query param: Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      *
+     * @return DefaultPagination<UserBundle>
+     *
      * @throws APIException
      */
     public function list(
@@ -63,7 +66,7 @@ interface UserBundlesContract
         ?array $page = null,
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
-    ): UserBundleListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

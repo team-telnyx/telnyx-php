@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageContract;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter\CloudProvider;
@@ -46,6 +47,8 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<VirtualCrossConnectsCoverageListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -53,7 +56,7 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
         ?array $filters = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): VirtualCrossConnectsCoverageListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'filters' => $filters, 'page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
