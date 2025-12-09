@@ -11,15 +11,24 @@ use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
 use Telnyx\PhoneNumbers\Jobs\JobListParams;
+use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter\Type;
+use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 use Telnyx\PhoneNumbers\Jobs\JobListResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
+use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\Status;
+use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
+use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
+use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingChannels;
+use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingFormat;
 use Telnyx\PhoneNumbers\Voice\CnamListing;
 use Telnyx\PhoneNumbers\Voice\MediaFeatures;
+use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\InboundCallScreening;
+use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\UsagePaymentMethod;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\JobsContract;
 
@@ -59,10 +68,10 @@ final class JobsService implements JobsContract
      *
      * @param array{
      *   filter?: array{
-     *     type?: 'update_emergency_settings'|'delete_phone_numbers'|'update_phone_numbers',
+     *     type?: 'update_emergency_settings'|'delete_phone_numbers'|'update_phone_numbers'|Type,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at',
+     *   sort?: 'created_at'|Sort,
      * }|JobListParams $params
      *
      * @throws APIException
@@ -132,12 +141,12 @@ final class JobsService implements JobsContract
      *     emergency_address_id?: string,
      *     has_bundle?: string,
      *     phone_number?: string,
-     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
+     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
      *   },
      *   billing_group_id?: string,
      *   connection_id?: string,
@@ -149,19 +158,19 @@ final class JobsService implements JobsContract
      *   voice?: array{
      *     call_forwarding?: array{
      *       call_forwarding_enabled?: bool,
-     *       forwarding_type?: 'always'|'on-failure',
+     *       forwarding_type?: 'always'|'on-failure'|ForwardingType,
      *       forwards_to?: string,
      *     }|CallForwarding,
      *     call_recording?: array{
-     *       inbound_call_recording_channels?: 'single'|'dual',
+     *       inbound_call_recording_channels?: 'single'|'dual'|InboundCallRecordingChannels,
      *       inbound_call_recording_enabled?: bool,
-     *       inbound_call_recording_format?: 'wav'|'mp3',
+     *       inbound_call_recording_format?: 'wav'|'mp3'|InboundCallRecordingFormat,
      *     }|CallRecording,
      *     caller_id_name_enabled?: bool,
      *     cnam_listing?: array{
      *       cnam_listing_details?: string, cnam_listing_enabled?: bool
      *     }|CnamListing,
-     *     inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls',
+     *     inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
      *     media_features?: array{
      *       accept_any_rtp_packets_enabled?: bool,
      *       rtp_auto_adjust_enabled?: bool,
@@ -169,7 +178,7 @@ final class JobsService implements JobsContract
      *     }|MediaFeatures,
      *     tech_prefix_enabled?: bool,
      *     translated_number?: string,
-     *     usage_payment_method?: 'pay-per-minute'|'channel',
+     *     usage_payment_method?: 'pay-per-minute'|'channel'|UsagePaymentMethod,
      *   },
      * }|JobUpdateBatchParams $params
      *

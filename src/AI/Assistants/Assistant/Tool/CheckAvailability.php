@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type CheckAvailabilityShape = array{
  *   check_availability: \Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability\CheckAvailability,
- *   type: 'check_availability',
+ *   type?: 'check_availability',
  * }
  */
 final class CheckAvailability implements BaseModel

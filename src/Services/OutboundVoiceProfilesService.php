@@ -8,6 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
+use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
+use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
+use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
@@ -40,9 +43,9 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   billing_group_id?: string|null,
      *   call_recording?: array{
      *     call_recording_caller_phone_numbers?: list<string>,
-     *     call_recording_channels?: 'single'|'dual',
-     *     call_recording_format?: 'wav'|'mp3',
-     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number',
+     *     call_recording_channels?: 'single'|'dual'|CallRecordingChannels,
+     *     call_recording_format?: 'wav'|'mp3'|CallRecordingFormat,
+     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
      *   }|OutboundCallRecording,
      *   calling_window?: array{
      *     calls_per_cld?: int, end_time?: string, start_time?: string
@@ -114,9 +117,9 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   billing_group_id?: string|null,
      *   call_recording?: array{
      *     call_recording_caller_phone_numbers?: list<string>,
-     *     call_recording_channels?: 'single'|'dual',
-     *     call_recording_format?: 'wav'|'mp3',
-     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number',
+     *     call_recording_channels?: 'single'|'dual'|CallRecordingChannels,
+     *     call_recording_format?: 'wav'|'mp3'|CallRecordingFormat,
+     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
      *   }|OutboundCallRecording,
      *   calling_window?: array{
      *     calls_per_cld?: int, end_time?: string, start_time?: string

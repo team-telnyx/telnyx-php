@@ -8,8 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
+use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
+use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams;
+use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
 use Telnyx\ExternalConnections\Uploads\UploadListResponse;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
@@ -34,10 +37,10 @@ final class UploadsService implements UploadsContract
      *
      * @param array{
      *   number_ids: list<string>,
-     *   additional_usages?: list<'calling_user_assignment'|'first_party_app_assignment'>,
+     *   additional_usages?: list<'calling_user_assignment'|'first_party_app_assignment'|AdditionalUsage>,
      *   civic_address_id?: string,
      *   location_id?: string,
-     *   usage?: 'calling_user_assignment'|'first_party_app_assignment',
+     *   usage?: 'calling_user_assignment'|'first_party_app_assignment'|Usage,
      * }|UploadCreateParams $params
      *
      * @throws APIException
@@ -107,7 +110,7 @@ final class UploadsService implements UploadsContract
      *     location_id?: array{eq?: string},
      *     phone_number?: array{contains?: string, eq?: string},
      *     status?: array{
-     *       eq?: list<'pending_upload'|'pending'|'in_progress'|'success'|'error'>
+     *       eq?: list<'pending_upload'|'pending'|'in_progress'|'success'|'error'|Eq>
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\CountryISO;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\Strategy;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
@@ -30,7 +32,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      * @param array{
      *   ordering_groups: list<array{
      *     count_requested: string,
-     *     country_iso: 'US'|'CA',
+     *     country_iso: 'US'|'CA'|CountryISO,
      *     phone_number_type: string,
      *     administrative_area?: string,
      *     exclude_held_numbers?: bool,
@@ -41,7 +43,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      *       contains?: string, ends_with?: string, starts_with?: string
      *     },
      *     quickship?: bool,
-     *     strategy?: 'always'|'never',
+     *     strategy?: 'always'|'never'|Strategy,
      *   }>,
      *   billing_group_id?: string,
      *   connection_id?: string,

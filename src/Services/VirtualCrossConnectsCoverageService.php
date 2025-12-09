@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageContract;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter\CloudProvider;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
 
 final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsCoverageContract
@@ -26,7 +27,7 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
      *
      * @param array{
      *   filter?: array{
-     *     cloud_provider?: 'aws'|'azure'|'gce',
+     *     cloud_provider?: 'aws'|'azure'|'gce'|CloudProvider,
      *     cloud_provider_region?: string,
      *     'location.code'?: string,
      *     'location.pop'?: string,

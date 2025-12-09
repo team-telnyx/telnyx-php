@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DeepgramNova2ConfigShape = array{
- *   transcription_engine: 'Deepgram',
+ *   transcription_engine?: 'Deepgram',
  *   transcription_model: value-of<TranscriptionModel>,
  *   keywords_boosting?: array<string,float>|null,
  *   language?: value-of<Language>|null,

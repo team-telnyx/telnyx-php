@@ -55,8 +55,12 @@ final class ReportsTest extends TestCase
         $result = $this->client->porting->reports->create([
             'params' => [
                 'filters' => [
-                    'created_at__gt' => '2019-12-27T18:11:19.117Z',
-                    'created_at__lt' => '2019-12-27T18:11:19.117Z',
+                    'created_at__gt' => new \DateTimeImmutable(
+                        '2019-12-27T18:11:19.117Z'
+                    ),
+                    'created_at__lt' => new \DateTimeImmutable(
+                        '2019-12-27T18:11:19.117Z'
+                    ),
                     'customer_reference__in' => ['my-customer-reference'],
                     'status__in' => ['draft'],
                 ],

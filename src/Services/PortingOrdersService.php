@@ -18,8 +18,10 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
+use Telnyx\PortingOrders\PortingOrderListParams\Sort\Value;
 use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderMisc;
+use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration;
 use Telnyx\PortingOrders\PortingOrderRetrieveLoaTemplateParams;
@@ -201,7 +203,7 @@ final class PortingOrdersService implements PortingOrdersContract
      *   messaging?: array{enable_messaging?: bool},
      *   misc?: array{
      *     new_billing_phone_number?: string|null,
-     *     remaining_numbers_action?: 'keep'|'disconnect'|null,
+     *     remaining_numbers_action?: 'keep'|'disconnect'|RemainingNumbersAction|null,
      *     type?: 'full'|'partial'|PortingOrderType,
      *   }|PortingOrderMisc|null,
      *   phone_number_configuration?: array{
@@ -270,7 +272,7 @@ final class PortingOrdersService implements PortingOrdersContract
      *   include_phone_numbers?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: array{
-     *     value?: 'created_at'|'-created_at'|'activation_settings.foc_datetime_requested'|'-activation_settings.foc_datetime_requested',
+     *     value?: 'created_at'|'-created_at'|'activation_settings.foc_datetime_requested'|'-activation_settings.foc_datetime_requested'|Value,
      *   },
      * }|PortingOrderListParams $params
      *

@@ -10,6 +10,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\Eq;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\In;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort\Value;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
@@ -103,12 +106,12 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *     },
      *     phone_number?: array{eq?: string, in?: list<string>},
      *     status?: array{
-     *       eq?: 'pending'|'completed'|'failed',
-     *       in?: list<'pending'|'completed'|'failed'>,
+     *       eq?: 'pending'|'completed'|'failed'|Eq,
+     *       in?: list<'pending'|'completed'|'failed'|In>,
      *     },
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'},
+     *   sort?: array{value?: 'created_at'|'-created_at'|Value},
      * }|CustomerServiceRecordListParams $params
      *
      * @throws APIException

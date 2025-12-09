@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
+use Telnyx\Porting\Events\EventListParams\Filter\Type;
 use Telnyx\Porting\Events\EventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\EventsContract;
@@ -53,7 +54,7 @@ final class EventsService implements EventsContract
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
      *     porting_order_id?: string,
-     *     type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split',
+     *     type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split'|Type,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|EventListParams $params

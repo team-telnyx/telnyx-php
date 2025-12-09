@@ -8,6 +8,7 @@ use Telnyx\Addresses\AddressCreateParams;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams;
+use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
@@ -113,7 +114,7 @@ final class AddressesService implements AddressesContract
      *     used_as_emergency?: string,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address',
+     *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort,
      * }|AddressListParams $params
      *
      * @throws APIException

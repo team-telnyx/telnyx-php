@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\CallEvents\CallEventListParams;
+use Telnyx\CallEvents\CallEventListParams\Filter\Product;
+use Telnyx\CallEvents\CallEventListParams\Filter\Status;
+use Telnyx\CallEvents\CallEventListParams\Filter\Type;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -39,10 +42,10 @@ final class CallEventsService implements CallEventsContract
      *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *     },
      *     'outbound.outbound_voice_profile_id'?: string,
-     *     product?: 'call_control'|'fax'|'texml',
-     *     status?: 'init'|'in_progress'|'completed',
+     *     product?: 'call_control'|'fax'|'texml'|Product,
+     *     status?: 'init'|'in_progress'|'completed'|Status,
      *     to?: string,
-     *     type?: 'command'|'webhook',
+     *     type?: 'command'|'webhook'|Type,
      *   },
      *   page?: array{
      *     after?: string, before?: string, limit?: int, number?: int, size?: int

@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
+use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
@@ -60,7 +61,7 @@ final class AssistantsTest extends TestCase
             'description' => 'description',
             'dynamic_variables' => ['foo' => 'bar'],
             'dynamic_variables_webhook_url' => 'dynamic_variables_webhook_url',
-            'enabled_features' => ['telephony'],
+            'enabled_features' => [EnabledFeatures::TELEPHONY],
             'greeting' => 'greeting',
             'insight_settings' => ['insight_group_id' => 'insight_group_id'],
             'llm_api_key_ref' => 'llm_api_key_ref',

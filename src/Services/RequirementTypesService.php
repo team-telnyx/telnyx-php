@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
 use Telnyx\RequirementTypes\RequirementTypeListParams;
+use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 use Telnyx\RequirementTypes\RequirementTypeListResponse;
 use Telnyx\ServiceContracts\RequirementTypesContract;
 
@@ -49,7 +50,7 @@ final class RequirementTypesService implements RequirementTypesContract
      *
      * @param array{
      *   filter?: array{name?: array{contains?: string}},
-     *   sort?: list<'name'|'created_at'|'updated_at'|'-name'|'-created_at'|'-updated_at'>,
+     *   sort?: list<'name'|'created_at'|'updated_at'|'-name'|'-created_at'|'-updated_at'|Sort>,
      * }|RequirementTypeListParams $params
      *
      * @throws APIException

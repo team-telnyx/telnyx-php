@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportContract;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams;
+use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse;
 
@@ -31,7 +32,7 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      *   created_at_lt?: string|\DateTimeInterface,
      *   customer_reference?: string,
      *   order_request_id?: string,
-     *   status?: 'pending'|'success'|'failure',
+     *   status?: 'pending'|'success'|'failure'|Status,
      * }|SubNumberOrdersReportCreateParams $params
      *
      * @throws APIException

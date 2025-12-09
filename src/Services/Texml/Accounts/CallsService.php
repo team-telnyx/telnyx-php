@@ -14,16 +14,34 @@ use Telnyx\Services\Texml\Accounts\Calls\RecordingsService;
 use Telnyx\Services\Texml\Accounts\Calls\SiprecService;
 use Telnyx\Services\Texml\Accounts\Calls\StreamsService;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams;
+use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveParams;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams;
+use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\SipTransport;
+use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams;
+use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalCodec;
+use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalMode;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams;
+use Telnyx\Texml\Accounts\Calls\CallUpdateParams\FallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallUpdateParams\Method;
+use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 
 final class CallsService implements CallsContract
@@ -98,12 +116,12 @@ final class CallsService implements CallsContract
      *
      * @param array{
      *   account_sid: string,
-     *   FallbackMethod?: 'GET'|'POST',
+     *   FallbackMethod?: 'GET'|'POST'|FallbackMethod,
      *   FallbackUrl?: string,
-     *   Method?: 'GET'|'POST',
+     *   Method?: 'GET'|'POST'|Method,
      *   Status?: string,
      *   StatusCallback?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST',
+     *   StatusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
      *   Texml?: string,
      *   Url?: string,
      * }|CallUpdateParams $params
@@ -146,36 +164,36 @@ final class CallsService implements CallsContract
      *   To: string,
      *   AsyncAmd?: bool,
      *   AsyncAmdStatusCallback?: string,
-     *   AsyncAmdStatusCallbackMethod?: 'GET'|'POST',
+     *   AsyncAmdStatusCallbackMethod?: 'GET'|'POST'|AsyncAmdStatusCallbackMethod,
      *   CallerId?: string,
      *   CancelPlaybackOnDetectMessageEnd?: bool,
      *   CancelPlaybackOnMachineDetection?: bool,
      *   CustomHeaders?: list<array{name: string, value: string}>,
-     *   DetectionMode?: 'Premium'|'Regular',
+     *   DetectionMode?: 'Premium'|'Regular'|DetectionMode,
      *   FallbackUrl?: string,
-     *   MachineDetection?: 'Enable'|'Disable'|'DetectMessageEnd',
+     *   MachineDetection?: 'Enable'|'Disable'|'DetectMessageEnd'|MachineDetection,
      *   MachineDetectionSilenceTimeout?: int,
      *   MachineDetectionSpeechEndThreshold?: int,
      *   MachineDetectionSpeechThreshold?: int,
      *   MachineDetectionTimeout?: int,
      *   PreferredCodecs?: string,
      *   Record?: bool,
-     *   RecordingChannels?: 'mono'|'dual',
+     *   RecordingChannels?: 'mono'|'dual'|RecordingChannels,
      *   RecordingStatusCallback?: string,
      *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: 'GET'|'POST',
+     *   RecordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
      *   RecordingTimeout?: int,
-     *   RecordingTrack?: 'inbound'|'outbound'|'both',
+     *   RecordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
      *   SendRecordingUrl?: bool,
      *   SipAuthPassword?: string,
      *   SipAuthUsername?: string,
-     *   SipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East',
+     *   SipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
      *   StatusCallback?: string,
-     *   StatusCallbackEvent?: 'initiated'|'ringing'|'answered'|'completed',
-     *   StatusCallbackMethod?: 'GET'|'POST',
-     *   Trim?: 'trim-silence'|'do-not-trim',
+     *   StatusCallbackEvent?: 'initiated'|'ringing'|'answered'|'completed'|StatusCallbackEvent,
+     *   StatusCallbackMethod?: 'GET'|'POST'|CallCallsParams\StatusCallbackMethod,
+     *   Trim?: 'trim-silence'|'do-not-trim'|Trim,
      *   Url?: string,
-     *   UrlMethod?: 'GET'|'POST',
+     *   UrlMethod?: 'GET'|'POST'|URLMethod,
      * }|CallCallsParams $params
      *
      * @throws APIException
@@ -218,7 +236,7 @@ final class CallsService implements CallsContract
      *   StartTime?: string,
      *   StartTime_gt?: string,
      *   StartTime_lt?: string,
-     *   Status?: 'canceled'|'completed'|'failed'|'busy'|'no-answer',
+     *   Status?: 'canceled'|'completed'|'failed'|'busy'|'no-answer'|Status,
      *   To?: string,
      * }|CallRetrieveCallsParams $params
      *
@@ -258,10 +276,10 @@ final class CallsService implements CallsContract
      *   Name?: string,
      *   Secure?: bool,
      *   SessionTimeoutSecs?: int,
-     *   SipTransport?: 'udp'|'tcp'|'tls',
+     *   SipTransport?: 'udp'|'tcp'|'tls'|SipTransport,
      *   StatusCallback?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST',
-     *   Track?: 'both_tracks'|'inbound_track'|'outbound_track',
+     *   StatusCallbackMethod?: 'GET'|'POST'|CallSiprecJsonParams\StatusCallbackMethod,
+     *   Track?: 'both_tracks'|'inbound_track'|'outbound_track'|Track,
      * }|CallSiprecJsonParams $params
      *
      * @throws APIException
@@ -300,12 +318,12 @@ final class CallsService implements CallsContract
      *
      * @param array{
      *   account_sid: string,
-     *   BidirectionalCodec?: 'PCMU'|'PCMA'|'G722',
-     *   BidirectionalMode?: 'mp3'|'rtp',
+     *   BidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|BidirectionalCodec,
+     *   BidirectionalMode?: 'mp3'|'rtp'|BidirectionalMode,
      *   Name?: string,
      *   StatusCallback?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST',
-     *   Track?: 'inbound_track'|'outbound_track'|'both_tracks',
+     *   StatusCallbackMethod?: 'GET'|'POST'|CallStreamsJsonParams\StatusCallbackMethod,
+     *   Track?: 'inbound_track'|'outbound_track'|'both_tracks'|CallStreamsJsonParams\Track,
      *   Url?: string,
      * }|CallStreamsJsonParams $params
      *

@@ -8,8 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort\Value;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
 use Telnyx\RequestOptions;
@@ -30,7 +32,7 @@ final class VerificationCodesService implements VerificationCodesContract
      * @param array{
      *   filter?: array{verified?: bool},
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'},
+     *   sort?: array{value?: 'created_at'|'-created_at'|Value},
      * }|VerificationCodeListParams $params
      *
      * @throws APIException
@@ -63,7 +65,8 @@ final class VerificationCodesService implements VerificationCodesContract
      * Send the verification code for all porting phone numbers.
      *
      * @param array{
-     *   phone_numbers?: list<string>, verification_method?: 'sms'|'call'
+     *   phone_numbers?: list<string>,
+     *   verification_method?: 'sms'|'call'|VerificationMethod,
      * }|VerificationCodeSendParams $params
      *
      * @throws APIException

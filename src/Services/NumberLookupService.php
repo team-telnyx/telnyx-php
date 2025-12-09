@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams;
+use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberLookupContract;
 
@@ -24,7 +25,9 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Returns information about the provided phone number.
      *
-     * @param array{type?: 'carrier'|'caller-name'}|NumberLookupRetrieveParams $params
+     * @param array{
+     *   type?: 'carrier'|'caller-name'|Type
+     * }|NumberLookupRetrieveParams $params
      *
      * @throws APIException
      */

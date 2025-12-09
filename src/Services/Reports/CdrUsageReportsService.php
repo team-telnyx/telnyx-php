@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
+use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
+use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\CdrUsageReportsContract;
@@ -25,8 +27,8 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      * Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
      * @param array{
-     *   aggregation_type: 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP',
-     *   product_breakdown: 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY',
+     *   aggregation_type: 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP'|AggregationType,
+     *   product_breakdown: 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY'|ProductBreakdown,
      *   connections?: list<float>,
      *   end_date?: string|\DateTimeInterface,
      *   start_date?: string|\DateTimeInterface,

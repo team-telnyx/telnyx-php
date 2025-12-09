@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace Telnyx\Services\Calls;
 
 use Telnyx\Calls\Actions\ActionAnswerParams;
+use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
+use Telnyx\Calls\Actions\ActionAnswerParams\Record;
+use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
+use Telnyx\Calls\Actions\ActionAnswerParams\RecordFormat;
+use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
+use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
+use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
+use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
 use Telnyx\Calls\Actions\ActionAnswerResponse;
 use Telnyx\Calls\Actions\ActionBridgeParams;
+use Telnyx\Calls\Actions\ActionBridgeParams\MuteDtmf;
 use Telnyx\Calls\Actions\ActionBridgeParams\Ringtone;
 use Telnyx\Calls\Actions\ActionBridgeResponse;
 use Telnyx\Calls\Actions\ActionEnqueueParams;
@@ -14,11 +23,14 @@ use Telnyx\Calls\Actions\ActionEnqueueResponse;
 use Telnyx\Calls\Actions\ActionGatherParams;
 use Telnyx\Calls\Actions\ActionGatherResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory\Role;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioParams;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
+use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
+use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupParams;
 use Telnyx\Calls\Actions\ActionHangupResponse;
@@ -29,6 +41,7 @@ use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
 use Telnyx\Calls\Actions\ActionReferParams;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectParams;
+use Telnyx\Calls\Actions\ActionRejectParams\Cause;
 use Telnyx\Calls\Actions\ActionRejectResponse;
 use Telnyx\Calls\Actions\ActionResumeRecordingParams;
 use Telnyx\Calls\Actions\ActionResumeRecordingResponse;
@@ -41,15 +54,25 @@ use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams;
+use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
 use Telnyx\Calls\Actions\ActionStartForkingResponse;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams;
+use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\Direction;
+use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngine;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionResponse;
 use Telnyx\Calls\Actions\ActionStartPlaybackParams;
+use Telnyx\Calls\Actions\ActionStartPlaybackParams\AudioType;
 use Telnyx\Calls\Actions\ActionStartPlaybackResponse;
 use Telnyx\Calls\Actions\ActionStartRecordingParams;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Calls\Actions\ActionStartRecordingResponse;
 use Telnyx\Calls\Actions\ActionStartSiprecParams;
+use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
+use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
@@ -76,12 +99,23 @@ use Telnyx\Calls\Actions\ActionStopTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams;
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleResponse;
 use Telnyx\Calls\Actions\ActionTransferParams;
+use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
+use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
+use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
+use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
+use Telnyx\Calls\SipHeader\Name;
+use Telnyx\Calls\StreamBidirectionalCodec;
+use Telnyx\Calls\StreamBidirectionalMode;
+use Telnyx\Calls\StreamBidirectionalSamplingRate;
+use Telnyx\Calls\StreamBidirectionalTargetLegs;
+use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -112,36 +146,36 @@ final class ActionsService implements ActionsContract
      *   client_state?: string,
      *   command_id?: string,
      *   custom_headers?: list<array{name: string, value: string}|CustomSipHeader>,
-     *   preferred_codecs?: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264',
-     *   record?: 'record-from-answer',
-     *   record_channels?: 'single'|'dual',
+     *   preferred_codecs?: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264'|PreferredCodecs,
+     *   record?: 'record-from-answer'|Record,
+     *   record_channels?: 'single'|'dual'|RecordChannels,
      *   record_custom_file_name?: string,
-     *   record_format?: 'wav'|'mp3',
+     *   record_format?: 'wav'|'mp3'|RecordFormat,
      *   record_max_length?: int,
      *   record_timeout_secs?: int,
-     *   record_track?: 'both'|'inbound'|'outbound',
-     *   record_trim?: 'trim-silence',
+     *   record_track?: 'both'|'inbound'|'outbound'|RecordTrack,
+     *   record_trim?: 'trim-silence'|RecordTrim,
      *   send_silence_when_idle?: bool,
-     *   sip_headers?: list<array{name: 'User-to-User', value: string}|SipHeader>,
+     *   sip_headers?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
      *   sound_modifications?: array{
      *     octaves?: float, pitch?: float, semitone?: float, track?: string
      *   },
-     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16',
-     *   stream_bidirectional_mode?: 'mp3'|'rtp',
-     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite',
-     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default',
-     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks',
+     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
+     *   stream_bidirectional_mode?: 'mp3'|'rtp'|StreamBidirectionalMode,
+     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
+     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
+     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks'|StreamTrack,
      *   stream_url?: string,
      *   transcription?: bool,
      *   transcription_config?: array{
      *     client_state?: string,
      *     command_id?: string,
-     *     transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B',
+     *     transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|TranscriptionEngine,
      *     transcription_engine_config?: array<string,mixed>,
      *     transcription_tracks?: string,
      *   },
      *   webhook_url?: string,
-     *   webhook_url_method?: 'POST'|'GET',
+     *   webhook_url_method?: 'POST'|'GET'|WebhookURLMethod,
      * }|ActionAnswerParams $params
      *
      * @throws APIException
@@ -182,18 +216,18 @@ final class ActionsService implements ActionsContract
      *   call_control_id: string,
      *   client_state?: string,
      *   command_id?: string,
-     *   mute_dtmf?: 'none'|'both'|'self'|'opposite',
+     *   mute_dtmf?: 'none'|'both'|'self'|'opposite'|MuteDtmf,
      *   park_after_unbridge?: string,
      *   play_ringtone?: bool,
      *   queue?: string,
-     *   record?: 'record-from-answer',
-     *   record_channels?: 'single'|'dual',
+     *   record?: 'record-from-answer'|ActionBridgeParams\Record,
+     *   record_channels?: 'single'|'dual'|ActionBridgeParams\RecordChannels,
      *   record_custom_file_name?: string,
-     *   record_format?: 'wav'|'mp3',
+     *   record_format?: 'wav'|'mp3'|ActionBridgeParams\RecordFormat,
      *   record_max_length?: int,
      *   record_timeout_secs?: int,
-     *   record_track?: 'both'|'inbound'|'outbound',
-     *   record_trim?: 'trim-silence',
+     *   record_track?: 'both'|'inbound'|'outbound'|ActionBridgeParams\RecordTrack,
+     *   record_trim?: 'trim-silence'|ActionBridgeParams\RecordTrim,
      *   ringtone?: value-of<Ringtone>,
      *   video_room_context?: string,
      *   video_room_id?: string,
@@ -337,7 +371,9 @@ final class ActionsService implements ActionsContract
      *   greeting?: string,
      *   interruption_settings?: array{enable?: bool},
      *   language?: value-of<GoogleTranscriptionLanguage>,
-     *   message_history?: list<array{content?: string, role?: 'assistant'|'user'}>,
+     *   message_history?: list<array{
+     *     content?: string, role?: 'assistant'|'user'|Role
+     *   }>,
      *   send_message_history_updates?: bool,
      *   send_partial_results?: bool,
      *   transcription?: array{model?: string},
@@ -447,8 +483,8 @@ final class ActionsService implements ActionsContract
      *   maximum_digits?: int,
      *   maximum_tries?: int,
      *   minimum_digits?: int,
-     *   payload_type?: 'text'|'ssml',
-     *   service_level?: 'basic'|'premium',
+     *   payload_type?: 'text'|'ssml'|PayloadType,
+     *   service_level?: 'basic'|'premium'|ServiceLevel,
      *   terminating_digit?: string,
      *   timeout_millis?: int,
      *   valid_digits?: string,
@@ -605,7 +641,7 @@ final class ActionsService implements ActionsContract
      *   custom_headers?: list<array{name: string, value: string}|CustomSipHeader>,
      *   sip_auth_password?: string,
      *   sip_auth_username?: string,
-     *   sip_headers?: list<array{name: 'User-to-User', value: string}|SipHeader>,
+     *   sip_headers?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
      * }|ActionReferParams $params
      *
      * @throws APIException
@@ -642,7 +678,9 @@ final class ActionsService implements ActionsContract
      * - `call.hangup`
      *
      * @param array{
-     *   cause: 'CALL_REJECTED'|'USER_BUSY', client_state?: string, command_id?: string
+     *   cause: 'CALL_REJECTED'|'USER_BUSY'|Cause,
+     *   client_state?: string,
+     *   command_id?: string,
      * }|ActionRejectParams $params
      *
      * @throws APIException
@@ -799,8 +837,8 @@ final class ActionsService implements ActionsContract
      *   client_state?: string,
      *   command_id?: string,
      *   language?: value-of<ActionSpeakParams\Language>,
-     *   payload_type?: 'text'|'ssml',
-     *   service_level?: 'basic'|'premium',
+     *   payload_type?: 'text'|'ssml'|ActionSpeakParams\PayloadType,
+     *   service_level?: 'basic'|'premium'|ActionSpeakParams\ServiceLevel,
      *   stop?: string,
      *   voice_settings?: array<string,mixed>,
      * }|ActionSpeakParams $params
@@ -893,7 +931,7 @@ final class ActionsService implements ActionsContract
      *   client_state?: string,
      *   command_id?: string,
      *   rx?: string,
-     *   stream_type?: 'decrypted',
+     *   stream_type?: 'decrypted'|StreamType,
      *   tx?: string,
      * }|ActionStartForkingParams $params
      *
@@ -929,8 +967,8 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   client_state?: string,
      *   command_id?: string,
-     *   direction?: 'inbound'|'outbound'|'both',
-     *   noise_suppression_engine?: 'Denoiser'|'DeepFilterNet',
+     *   direction?: 'inbound'|'outbound'|'both'|Direction,
+     *   noise_suppression_engine?: 'Denoiser'|'DeepFilterNet'|NoiseSuppressionEngine,
      *   noise_suppression_engine_config?: array{attenuation_limit?: int},
      * }|ActionStartNoiseSuppressionParams $params
      *
@@ -975,7 +1013,7 @@ final class ActionsService implements ActionsContract
      * - `call.playback.ended`
      *
      * @param array{
-     *   audio_type?: 'mp3'|'wav',
+     *   audio_type?: 'mp3'|'wav'|AudioType,
      *   audio_url?: string,
      *   cache_audio?: bool,
      *   client_state?: string,
@@ -1024,14 +1062,14 @@ final class ActionsService implements ActionsContract
      * - `call.recording.error`
      *
      * @param array{
-     *   channels: 'single'|'dual',
-     *   format: 'wav'|'mp3',
+     *   channels: 'single'|'dual'|Channels,
+     *   format: 'wav'|'mp3'|Format,
      *   client_state?: string,
      *   command_id?: string,
      *   custom_file_name?: string,
      *   max_length?: int,
      *   play_beep?: bool,
-     *   recording_track?: 'both'|'inbound'|'outbound',
+     *   recording_track?: 'both'|'inbound'|'outbound'|RecordingTrack,
      *   timeout_secs?: int,
      *   transcription?: bool,
      *   transcription_engine?: string,
@@ -1040,7 +1078,7 @@ final class ActionsService implements ActionsContract
      *   transcription_min_speaker_count?: int,
      *   transcription_profanity_filter?: bool,
      *   transcription_speaker_diarization?: bool,
-     *   trim?: 'trim-silence',
+     *   trim?: 'trim-silence'|Trim,
      * }|ActionStartRecordingParams $params
      *
      * @throws APIException
@@ -1084,8 +1122,8 @@ final class ActionsService implements ActionsContract
      *   include_metadata_custom_headers?: bool,
      *   secure?: bool,
      *   session_timeout_secs?: int,
-     *   sip_transport?: 'udp'|'tcp'|'tls',
-     *   siprec_track?: 'inbound_track'|'outbound_track'|'both_tracks',
+     *   sip_transport?: 'udp'|'tcp'|'tls'|SipTransport,
+     *   siprec_track?: 'inbound_track'|'outbound_track'|'both_tracks'|SiprecTrack,
      * }|ActionStartSiprecParams $params
      *
      * @throws APIException
@@ -1126,12 +1164,12 @@ final class ActionsService implements ActionsContract
      *     analyze_sentiment?: bool, partial_automated_agent_reply?: bool
      *   },
      *   enable_dialogflow?: bool,
-     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16',
-     *   stream_bidirectional_mode?: 'mp3'|'rtp',
-     *   stream_bidirectional_sampling_rate?: 8000|16000|22050|24000|48000,
-     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite',
-     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default',
-     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks',
+     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
+     *   stream_bidirectional_mode?: 'mp3'|'rtp'|StreamBidirectionalMode,
+     *   stream_bidirectional_sampling_rate?: 8000|16000|22050|24000|48000|StreamBidirectionalSamplingRate,
+     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
+     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
+     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks'|ActionStartStreamingParams\StreamTrack,
      *   stream_url?: string,
      * }|ActionStartStreamingParams $params
      *
@@ -1171,7 +1209,7 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   client_state?: string,
      *   command_id?: string,
-     *   transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B',
+     *   transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|ActionStartTranscriptionParams\TranscriptionEngine,
      *   transcription_engine_config?: array<string,mixed>,
      *   transcription_tracks?: string,
      * }|ActionStartTranscriptionParams $params
@@ -1243,7 +1281,9 @@ final class ActionsService implements ActionsContract
      * - `call.fork.stopped`
      *
      * @param array{
-     *   client_state?: string, command_id?: string, stream_type?: 'raw'|'decrypted'
+     *   client_state?: string,
+     *   command_id?: string,
+     *   stream_type?: 'raw'|'decrypted'|ActionStopForkingParams\StreamType,
      * }|ActionStopForkingParams $params
      *
      * @throws APIException
@@ -1527,7 +1567,7 @@ final class ActionsService implements ActionsContract
      * Switch the supervisor role for a bridged call. This allows switching between different supervisor modes during an active call
      *
      * @param array{
-     *   role: 'barge'|'whisper'|'monitor'
+     *   role: 'barge'|'whisper'|'monitor'|ActionSwitchSupervisorRoleParams\Role,
      * }|ActionSwitchSupervisorRoleParams $params
      *
      * @throws APIException
@@ -1571,7 +1611,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   to: string,
-     *   answering_machine_detection?: 'premium'|'detect'|'detect_beep'|'detect_words'|'greeting_end'|'disabled',
+     *   answering_machine_detection?: 'premium'|'detect'|'detect_beep'|'detect_words'|'greeting_end'|'disabled'|AnsweringMachineDetection,
      *   answering_machine_detection_config?: array{
      *     after_greeting_silence_millis?: int,
      *     between_words_silence_millis?: int,
@@ -1591,23 +1631,23 @@ final class ActionsService implements ActionsContract
      *   early_media?: bool,
      *   from?: string,
      *   from_display_name?: string,
-     *   media_encryption?: 'disabled'|'SRTP'|'DTLS',
+     *   media_encryption?: 'disabled'|'SRTP'|'DTLS'|MediaEncryption,
      *   media_name?: string,
-     *   mute_dtmf?: 'none'|'both'|'self'|'opposite',
+     *   mute_dtmf?: 'none'|'both'|'self'|'opposite'|ActionTransferParams\MuteDtmf,
      *   park_after_unbridge?: string,
-     *   record?: 'record-from-answer',
-     *   record_channels?: 'single'|'dual',
+     *   record?: 'record-from-answer'|ActionTransferParams\Record,
+     *   record_channels?: 'single'|'dual'|ActionTransferParams\RecordChannels,
      *   record_custom_file_name?: string,
-     *   record_format?: 'wav'|'mp3',
+     *   record_format?: 'wav'|'mp3'|ActionTransferParams\RecordFormat,
      *   record_max_length?: int,
      *   record_timeout_secs?: int,
-     *   record_track?: 'both'|'inbound'|'outbound',
-     *   record_trim?: 'trim-silence',
+     *   record_track?: 'both'|'inbound'|'outbound'|ActionTransferParams\RecordTrack,
+     *   record_trim?: 'trim-silence'|ActionTransferParams\RecordTrim,
      *   sip_auth_password?: string,
      *   sip_auth_username?: string,
-     *   sip_headers?: list<array{name: 'User-to-User', value: string}|SipHeader>,
-     *   sip_region?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East',
-     *   sip_transport_protocol?: 'UDP'|'TCP'|'TLS',
+     *   sip_headers?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
+     *   sip_region?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
+     *   sip_transport_protocol?: 'UDP'|'TCP'|'TLS'|SipTransportProtocol,
      *   sound_modifications?: array{
      *     octaves?: float, pitch?: float, semitone?: float, track?: string
      *   },
@@ -1615,7 +1655,7 @@ final class ActionsService implements ActionsContract
      *   time_limit_secs?: int,
      *   timeout_secs?: int,
      *   webhook_url?: string,
-     *   webhook_url_method?: 'POST'|'GET',
+     *   webhook_url_method?: 'POST'|'GET'|ActionTransferParams\WebhookURLMethod,
      * }|ActionTransferParams $params
      *
      * @throws APIException

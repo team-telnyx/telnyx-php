@@ -79,8 +79,12 @@ final class MesssagesTest extends TestCase
                                             'action' => [
                                                 'create_calendar_event_action' => [
                                                     'description' => 'description',
-                                                    'end_time' => '2024-10-02T15:02:31Z',
-                                                    'start_time' => '2024-10-02T15:01:23Z',
+                                                    'end_time' => new \DateTimeImmutable(
+                                                        '2024-10-02T15:02:31Z'
+                                                    ),
+                                                    'start_time' => new \DateTimeImmutable(
+                                                        '2024-10-02T15:01:23Z'
+                                                    ),
                                                     'title' => 'title',
                                                 ],
                                                 'dial_action' => ['phone_number' => '+13125551234'],
@@ -90,7 +94,7 @@ final class MesssagesTest extends TestCase
                                                     'url' => 'http://example.com',
                                                     'webview_view_mode' => 'HALF',
                                                     'description' => 'description',
-                                                ],
+                                            ],
                                                 'postback_data' => 'postback_data',
                                                 'share_location_action' => [],
                                                 'text' => 'Hello world',
@@ -100,11 +104,11 @@ final class MesssagesTest extends TestCase
                                                         'latitude' => 41.8, 'longitude' => -87.6,
                                                     ],
                                                     'query' => 'query',
-                                                ],
+                                            ],
                                             ],
                                             'reply' => [
-                                                'postback_data' => 'postback_data', 'text' => 'text',
-                                            ],
+                                            'postback_data' => 'postback_data', 'text' => 'text',
+                                        ],
                                         ],
                                     ],
                                     'title' => 'Elephant',
@@ -113,98 +117,104 @@ final class MesssagesTest extends TestCase
                             'card_width' => 'SMALL',
                         ],
                         'standalone_card' => [
-                            'card_content' => [
-                                'description' => 'description',
-                                'media' => [
-                                    'content_info' => [
-                                        'file_url' => 'https://example.com/elephant.jpg',
-                                        'force_refresh' => true,
-                                        'thumbnail_url' => 'thumbnail_url',
-                                    ],
-                                    'height' => 'MEDIUM',
+                        'card_content' => [
+                            'description' => 'description',
+                            'media' => [
+                                'content_info' => [
+                                    'file_url' => 'https://example.com/elephant.jpg',
+                                    'force_refresh' => true,
+                                    'thumbnail_url' => 'thumbnail_url',
                                 ],
-                                'suggestions' => [
-                                    [
-                                        'action' => [
-                                            'create_calendar_event_action' => [
-                                                'description' => 'description',
-                                                'end_time' => '2024-10-02T15:02:31Z',
-                                                'start_time' => '2024-10-02T15:01:23Z',
-                                                'title' => 'title',
-                                            ],
-                                            'dial_action' => ['phone_number' => '+13125551234'],
-                                            'fallback_url' => 'fallback_url',
-                                            'open_url_action' => [
-                                                'application' => 'BROWSER',
-                                                'url' => 'http://example.com',
-                                                'webview_view_mode' => 'HALF',
-                                                'description' => 'description',
-                                            ],
-                                            'postback_data' => 'postback_data',
-                                            'share_location_action' => [],
-                                            'text' => 'Hello world',
-                                            'view_location_action' => [
-                                                'label' => 'label',
-                                                'lat_long' => [
-                                                    'latitude' => 41.8, 'longitude' => -87.6,
-                                                ],
-                                                'query' => 'query',
-                                            ],
-                                        ],
-                                        'reply' => [
-                                            'postback_data' => 'postback_data', 'text' => 'text',
-                                        ],
-                                    ],
-                                ],
-                                'title' => 'Elephant',
+                                'height' => 'MEDIUM',
                             ],
-                            'card_orientation' => 'HORIZONTAL',
-                            'thumbnail_image_alignment' => 'LEFT',
+                            'suggestions' => [
+                                [
+                                    'action' => [
+                                        'create_calendar_event_action' => [
+                                            'description' => 'description',
+                                            'end_time' => new \DateTimeImmutable(
+                                                '2024-10-02T15:02:31Z'
+                                            ),
+                                            'start_time' => new \DateTimeImmutable(
+                                                '2024-10-02T15:01:23Z'
+                                            ),
+                                            'title' => 'title',
+                                        ],
+                                        'dial_action' => ['phone_number' => '+13125551234'],
+                                        'fallback_url' => 'fallback_url',
+                                        'open_url_action' => [
+                                            'application' => 'BROWSER',
+                                            'url' => 'http://example.com',
+                                            'webview_view_mode' => 'HALF',
+                                            'description' => 'description',
+                                        ],
+                                        'postback_data' => 'postback_data',
+                                        'share_location_action' => [],
+                                        'text' => 'Hello world',
+                                        'view_location_action' => [
+                                            'label' => 'label',
+                                            'lat_long' => [
+                                                'latitude' => 41.8, 'longitude' => -87.6,
+                                            ],
+                                            'query' => 'query',
+                                        ],
+                                    ],
+                                    'reply' => [
+                                        'postback_data' => 'postback_data', 'text' => 'text',
+                                    ],
+                                ],
+                            ],
+                            'title' => 'Elephant',
                         ],
+                        'card_orientation' => 'HORIZONTAL',
+                        'thumbnail_image_alignment' => 'LEFT',
+                    ],
                     ],
                     'suggestions' => [
-                        [
-                            'action' => [
-                                'create_calendar_event_action' => [
-                                    'description' => 'description',
-                                    'end_time' => '2024-10-02T15:02:31Z',
-                                    'start_time' => '2024-10-02T15:01:23Z',
-                                    'title' => 'title',
-                                ],
-                                'dial_action' => ['phone_number' => '+13125551234'],
-                                'fallback_url' => 'fallback_url',
-                                'open_url_action' => [
-                                    'application' => 'BROWSER',
-                                    'url' => 'http://example.com',
-                                    'webview_view_mode' => 'HALF',
-                                    'description' => 'description',
-                                ],
-                                'postback_data' => 'postback_data',
-                                'share_location_action' => [],
-                                'text' => 'Hello world',
-                                'view_location_action' => [
-                                    'label' => 'label',
-                                    'lat_long' => ['latitude' => 41.8, 'longitude' => -87.6],
-                                    'query' => 'query',
-                                ],
+                    [
+                        'action' => [
+                            'create_calendar_event_action' => [
+                                'description' => 'description',
+                                'end_time' => new \DateTimeImmutable('2024-10-02T15:02:31Z'),
+                                'start_time' => new \DateTimeImmutable(
+                                    '2024-10-02T15:01:23Z'
+                                ),
+                                'title' => 'title',
                             ],
-                            'reply' => ['postback_data' => 'postback_data', 'text' => 'text'],
+                            'dial_action' => ['phone_number' => '+13125551234'],
+                            'fallback_url' => 'fallback_url',
+                            'open_url_action' => [
+                                'application' => 'BROWSER',
+                                'url' => 'http://example.com',
+                                'webview_view_mode' => 'HALF',
+                                'description' => 'description',
+                            ],
+                            'postback_data' => 'postback_data',
+                            'share_location_action' => [],
+                            'text' => 'Hello world',
+                            'view_location_action' => [
+                                'label' => 'label',
+                                'lat_long' => ['latitude' => 41.8, 'longitude' => -87.6],
+                                'query' => 'query',
+                            ],
                         ],
+                        'reply' => ['postback_data' => 'postback_data', 'text' => 'text'],
                     ],
+                ],
                     'text' => 'Hello world!',
                 ],
                 'event' => ['event_type' => 'IS_TYPING'],
-                'expire_time' => '2024-10-02T15:01:23Z',
+                'expire_time' => new \DateTimeImmutable('2024-10-02T15:01:23Z'),
                 'ttl' => '10.5s',
             ],
             'messaging_profile_id' => 'messaging_profile_id',
             'to' => '+13125551234',
             'mms_fallback' => [
-                'from' => '+13125551234',
-                'media_urls' => ['string'],
-                'subject' => 'Test Message',
-                'text' => 'Hello world!',
-            ],
+            'from' => '+13125551234',
+            'media_urls' => ['string'],
+            'subject' => 'Test Message',
+            'text' => 'Hello world!',
+        ],
             'sms_fallback' => ['from' => '+13125551234', 'text' => 'Hello world!'],
             'type' => 'RCS',
             'webhook_url' => 'webhook_url',

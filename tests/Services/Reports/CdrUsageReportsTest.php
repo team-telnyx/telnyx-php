@@ -54,8 +54,8 @@ final class CdrUsageReportsTest extends TestCase
             'aggregation_type' => 'NO_AGGREGATION',
             'product_breakdown' => 'NO_BREAKDOWN',
             'connections' => [1234567890123],
-            'end_date' => '2020-07-01T00:00:00-06:00',
-            'start_date' => '2020-07-01T00:00:00-06:00',
+            'end_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'start_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

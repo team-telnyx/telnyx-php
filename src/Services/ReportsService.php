@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Reports\ReportListMdrsParams;
+use Telnyx\Reports\ReportListMdrsParams\Direction;
+use Telnyx\Reports\ReportListMdrsParams\MessageType;
 use Telnyx\Reports\ReportListMdrsParams\Status;
 use Telnyx\Reports\ReportListMdrsResponse;
 use Telnyx\Reports\ReportListWdrsParams;
@@ -47,9 +49,9 @@ final class ReportsService implements ReportsContract
      *   id?: string,
      *   cld?: string,
      *   cli?: string,
-     *   direction?: 'INBOUND'|'OUTBOUND',
+     *   direction?: 'INBOUND'|'OUTBOUND'|Direction,
      *   end_date?: string,
-     *   message_type?: 'SMS'|'MMS',
+     *   message_type?: 'SMS'|'MMS'|MessageType,
      *   profile?: string,
      *   start_date?: string,
      *   status?: value-of<Status>,

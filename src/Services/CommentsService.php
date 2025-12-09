@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Comments\CommentCreateParams;
+use Telnyx\Comments\CommentCreateParams\CommentRecordType;
 use Telnyx\Comments\CommentGetResponse;
 use Telnyx\Comments\CommentListParams;
 use Telnyx\Comments\CommentListResponse;
@@ -31,7 +32,7 @@ final class CommentsService implements CommentsContract
      * @param array{
      *   body?: string,
      *   comment_record_id?: string,
-     *   comment_record_type?: 'sub_number_order'|'requirement_group',
+     *   comment_record_type?: 'sub_number_order'|'requirement_group'|CommentRecordType,
      * }|CommentCreateParams $params
      *
      * @throws APIException
@@ -87,7 +88,7 @@ final class CommentsService implements CommentsContract
      * @param array{
      *   filter?: array{
      *     comment_record_id?: string,
-     *     comment_record_type?: 'sub_number_order'|'requirement_group',
+     *     comment_record_type?: 'sub_number_order'|'requirement_group'|CommentListParams\Filter\CommentRecordType,
      *   },
      * }|CommentListParams $params
      *

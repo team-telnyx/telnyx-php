@@ -9,16 +9,24 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
+use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListParams;
+use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
 use Telnyx\CredentialConnections\CredentialConnectionListResponse;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
 use Telnyx\CredentialConnections\CredentialInbound;
+use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
+use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
 use Telnyx\CredentialConnections\CredentialOutbound;
+use Telnyx\CredentialConnections\CredentialOutbound\AniOverrideType;
+use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\RequestOptions;
@@ -58,10 +66,10 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *   encode_contact_header_enabled?: bool,
      *   encrypted_media?: 'SRTP'|EncryptedMedia|null,
      *   inbound?: array{
-     *     ani_number_format?: '+E.164'|'E.164'|'+E.164-national'|'E.164-national',
+     *     ani_number_format?: '+E.164'|'E.164'|'+E.164-national'|'E.164-national'|AniNumberFormat,
      *     channel_limit?: int,
      *     codecs?: list<string>,
-     *     dnis_number_format?: '+e164'|'e164'|'national'|'sip_username',
+     *     dnis_number_format?: '+e164'|'e164'|'national'|'sip_username'|DnisNumberFormat,
      *     generate_ringback_tone?: bool,
      *     isup_headers_enabled?: bool,
      *     prack_enabled?: bool,
@@ -74,23 +82,23 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *   onnet_t38_passthrough_enabled?: bool,
      *   outbound?: array{
      *     ani_override?: string,
-     *     ani_override_type?: 'always'|'normal'|'emergency',
+     *     ani_override_type?: 'always'|'normal'|'emergency'|AniOverrideType,
      *     call_parking_enabled?: bool|null,
      *     channel_limit?: int,
      *     generate_ringback_tone?: bool,
      *     instant_ringback_enabled?: bool,
      *     localization?: string,
      *     outbound_voice_profile_id?: string,
-     *     t38_reinvite_source?: 'telnyx'|'customer'|'disabled'|'passthru'|'caller-passthru'|'callee-passthru',
+     *     t38_reinvite_source?: 'telnyx'|'customer'|'disabled'|'passthru'|'caller-passthru'|'callee-passthru'|T38ReinviteSource,
      *   }|CredentialOutbound,
      *   rtcp_settings?: array{
      *     capture_enabled?: bool,
-     *     port?: 'rtcp-mux'|'rtp+1',
+     *     port?: 'rtcp-mux'|'rtp+1'|Port,
      *     report_frequency_secs?: int,
      *   }|ConnectionRtcpSettings,
-     *   sip_uri_calling_preference?: 'disabled'|'unrestricted'|'internal',
+     *   sip_uri_calling_preference?: 'disabled'|'unrestricted'|'internal'|SipUriCallingPreference,
      *   tags?: list<string>,
-     *   webhook_api_version?: '1'|'2'|'texml',
+     *   webhook_api_version?: '1'|'2'|'texml'|WebhookAPIVersion,
      *   webhook_event_failover_url?: string|null,
      *   webhook_event_url?: string,
      *   webhook_timeout_secs?: int|null,
@@ -157,10 +165,10 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *   encode_contact_header_enabled?: bool,
      *   encrypted_media?: 'SRTP'|EncryptedMedia|null,
      *   inbound?: array{
-     *     ani_number_format?: '+E.164'|'E.164'|'+E.164-national'|'E.164-national',
+     *     ani_number_format?: '+E.164'|'E.164'|'+E.164-national'|'E.164-national'|AniNumberFormat,
      *     channel_limit?: int,
      *     codecs?: list<string>,
-     *     dnis_number_format?: '+e164'|'e164'|'national'|'sip_username',
+     *     dnis_number_format?: '+e164'|'e164'|'national'|'sip_username'|DnisNumberFormat,
      *     generate_ringback_tone?: bool,
      *     isup_headers_enabled?: bool,
      *     prack_enabled?: bool,
@@ -173,25 +181,25 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *   onnet_t38_passthrough_enabled?: bool,
      *   outbound?: array{
      *     ani_override?: string,
-     *     ani_override_type?: 'always'|'normal'|'emergency',
+     *     ani_override_type?: 'always'|'normal'|'emergency'|AniOverrideType,
      *     call_parking_enabled?: bool|null,
      *     channel_limit?: int,
      *     generate_ringback_tone?: bool,
      *     instant_ringback_enabled?: bool,
      *     localization?: string,
      *     outbound_voice_profile_id?: string,
-     *     t38_reinvite_source?: 'telnyx'|'customer'|'disabled'|'passthru'|'caller-passthru'|'callee-passthru',
+     *     t38_reinvite_source?: 'telnyx'|'customer'|'disabled'|'passthru'|'caller-passthru'|'callee-passthru'|T38ReinviteSource,
      *   }|CredentialOutbound,
      *   password?: string,
      *   rtcp_settings?: array{
      *     capture_enabled?: bool,
-     *     port?: 'rtcp-mux'|'rtp+1',
+     *     port?: 'rtcp-mux'|'rtp+1'|Port,
      *     report_frequency_secs?: int,
      *   }|ConnectionRtcpSettings,
-     *   sip_uri_calling_preference?: 'disabled'|'unrestricted'|'internal',
+     *   sip_uri_calling_preference?: 'disabled'|'unrestricted'|'internal'|CredentialConnectionUpdateParams\SipUriCallingPreference,
      *   tags?: list<string>,
      *   user_name?: string,
-     *   webhook_api_version?: '1'|'2',
+     *   webhook_api_version?: '1'|'2'|CredentialConnectionUpdateParams\WebhookAPIVersion,
      *   webhook_event_failover_url?: string|null,
      *   webhook_event_url?: string,
      *   webhook_timeout_secs?: int|null,
@@ -233,7 +241,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *     outbound_voice_profile_id?: string,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'connection_name'|'active',
+     *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|CredentialConnectionListParams $params
      *
      * @throws APIException

@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderStatus;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingPhoneNumbersContract;
@@ -26,7 +27,7 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      *
      * @param array{
      *   filter?: array{
-     *     porting_order_status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled',
+     *     porting_order_status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderStatus,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|PortingPhoneNumberListParams $params

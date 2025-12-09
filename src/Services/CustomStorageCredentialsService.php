@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams;
@@ -28,7 +29,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * Creates a custom storage credentials configuration.
      *
      * @param array{
-     *   backend: 'gcs'|'s3'|'azure', configuration: array<string,mixed>
+     *   backend: 'gcs'|'s3'|'azure'|Backend, configuration: array<string,mixed>
      * }|CustomStorageCredentialCreateParams $params
      *
      * @throws APIException
@@ -83,7 +84,8 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * Updates a stored custom credentials configuration.
      *
      * @param array{
-     *   backend: 'gcs'|'s3'|'azure', configuration: array<string,mixed>
+     *   backend: 'gcs'|'s3'|'azure'|CustomStorageCredentialUpdateParams\Backend,
+     *   configuration: array<string,mixed>,
      * }|CustomStorageCredentialUpdateParams $params
      *
      * @throws APIException

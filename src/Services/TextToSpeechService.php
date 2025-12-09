@@ -11,6 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
+use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
 final class TextToSpeechService implements TextToSpeechContract
@@ -60,7 +61,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * @param array{
      *   elevenlabs_api_key_ref?: string,
-     *   provider?: 'aws'|'azure'|'elevenlabs'|'telnyx',
+     *   provider?: 'aws'|'azure'|'elevenlabs'|'telnyx'|Provider,
      * }|TextToSpeechListVoicesParams $params
      *
      * @throws APIException

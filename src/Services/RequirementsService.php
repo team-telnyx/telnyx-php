@@ -10,6 +10,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
+use Telnyx\Requirements\RequirementListParams\Filter\Action;
+use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
+use Telnyx\Requirements\RequirementListParams\Sort;
 use Telnyx\Requirements\RequirementListResponse;
 use Telnyx\ServiceContracts\RequirementsContract;
 
@@ -49,12 +52,12 @@ final class RequirementsService implements RequirementsContract
      *
      * @param array{
      *   filter?: array{
-     *     action?: 'branded_calling'|'ordering'|'porting',
+     *     action?: 'branded_calling'|'ordering'|'porting'|Action,
      *     country_code?: string,
-     *     phone_number_type?: 'local'|'national'|'toll_free',
+     *     phone_number_type?: 'local'|'national'|'toll_free'|PhoneNumberType,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'>,
+     *   sort?: list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'|Sort>,
      * }|RequirementListParams $params
      *
      * @throws APIException

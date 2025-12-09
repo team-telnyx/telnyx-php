@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\SiprecContract;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams;
+use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse;
 
 final class SiprecService implements SiprecContract
@@ -25,7 +26,7 @@ final class SiprecService implements SiprecContract
      * Updates siprec session identified by siprec_sid.
      *
      * @param array{
-     *   account_sid: string, call_sid: string, Status?: 'stopped'
+     *   account_sid: string, call_sid: string, Status?: 'stopped'|Status
      * }|SiprecSiprecSidJsonParams $params
      *
      * @throws APIException

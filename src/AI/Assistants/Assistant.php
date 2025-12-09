@@ -65,10 +65,10 @@ final class Assistant implements BaseModel
      *
      * @param list<BookAppointment|array{
      *   book_appointment: BookAppointment\BookAppointment,
-     *   type: 'book_appointment',
+     *   type?: 'book_appointment',
      * }|CheckAvailability|array{
      *   check_availability: CheckAvailability\CheckAvailability,
-     *   type: 'check_availability',
+     *   type?: 'check_availability',
      * }|WebhookTool|array{
      *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
      * }|HangupTool|array{
@@ -136,10 +136,10 @@ final class Assistant implements BaseModel
      *
      * @param list<BookAppointment|array{
      *   book_appointment: BookAppointment\BookAppointment,
-     *   type: 'book_appointment',
+     *   type?: 'book_appointment',
      * }|CheckAvailability|array{
      *   check_availability: CheckAvailability\CheckAvailability,
-     *   type: 'check_availability',
+     *   type?: 'check_availability',
      * }|WebhookTool|array{
      *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
      * }|HangupTool|array{

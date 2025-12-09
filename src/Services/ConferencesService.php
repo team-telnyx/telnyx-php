@@ -6,8 +6,13 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Conferences\ConferenceCreateParams;
+use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
+use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams;
+use Telnyx\Conferences\ConferenceListParams\Filter\Product;
+use Telnyx\Conferences\ConferenceListParams\Filter\Status;
+use Telnyx\Conferences\ConferenceListParams\Filter\Type;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListResponse;
@@ -51,7 +56,7 @@ final class ConferencesService implements ConferencesContract
      * @param array{
      *   call_control_id: string,
      *   name: string,
-     *   beep_enabled?: 'always'|'never'|'on_enter'|'on_exit',
+     *   beep_enabled?: 'always'|'never'|'on_enter'|'on_exit'|BeepEnabled,
      *   client_state?: string,
      *   comfort_noise?: bool,
      *   command_id?: string,
@@ -59,7 +64,7 @@ final class ConferencesService implements ConferencesContract
      *   hold_audio_url?: string,
      *   hold_media_name?: string,
      *   max_participants?: int,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|Region,
      *   start_conference_on_create?: bool,
      * }|ConferenceCreateParams $params
      *
@@ -92,7 +97,7 @@ final class ConferencesService implements ConferencesContract
      * Retrieve an existing conference
      *
      * @param array{
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceRetrieveParams\Region,
      * }|ConferenceRetrieveParams $params
      *
      * @throws APIException
@@ -137,15 +142,15 @@ final class ConferencesService implements ConferencesContract
      *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *     },
      *     'outbound.outbound_voice_profile_id'?: string,
-     *     product?: 'call_control'|'fax'|'texml',
-     *     status?: 'init'|'in_progress'|'completed',
+     *     product?: 'call_control'|'fax'|'texml'|Product,
+     *     status?: 'init'|'in_progress'|'completed'|Status,
      *     to?: string,
-     *     type?: 'command'|'webhook',
+     *     type?: 'command'|'webhook'|Type,
      *   },
      *   page?: array{
      *     after?: string, before?: string, limit?: int, number?: int, size?: int
      *   },
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceListParams\Region,
      * }|ConferenceListParams $params
      *
      * @throws APIException
@@ -181,7 +186,7 @@ final class ConferencesService implements ConferencesContract
      *   page?: array{
      *     after?: string, before?: string, limit?: int, number?: int, size?: int
      *   },
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceListParticipantsParams\Region,
      * }|ConferenceListParticipantsParams $params
      *
      * @throws APIException

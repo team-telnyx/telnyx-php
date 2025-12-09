@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SimpleShape = array{
- *   alias: string, amount: string, name: string, quantity: int, type: 'simple'
+ *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
  * }
  */
 final class Simple implements BaseModel

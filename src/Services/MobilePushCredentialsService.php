@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
@@ -77,7 +78,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * List mobile push credentials
      *
      * @param array{
-     *   filter?: array{alias?: string, type?: 'ios'|'android'},
+     *   filter?: array{alias?: string, type?: 'ios'|'android'|Type},
      *   page?: array{number?: int, size?: int},
      * }|MobilePushCredentialListParams $params
      *

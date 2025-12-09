@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListResponse;
@@ -58,7 +59,7 @@ final class FaxApplicationsTest extends TestCase
             'application_name' => 'fax-router',
             'webhook_event_url' => 'https://example.com',
             'active' => false,
-            'anchorsite_override' => 'Amsterdam, Netherlands',
+            'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
             'inbound' => [
                 'channel_limit' => 10,
                 'sip_subdomain' => 'example',
@@ -122,7 +123,7 @@ final class FaxApplicationsTest extends TestCase
                 'application_name' => 'fax-router',
                 'webhook_event_url' => 'https://example.com',
                 'active' => false,
-                'anchorsite_override' => 'Amsterdam, Netherlands',
+                'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
                 'fax_email_recipient' => 'user@example.com',
                 'inbound' => [
                     'channel_limit' => 10,

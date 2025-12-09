@@ -11,6 +11,10 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingChannels;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingFormat;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\InboundCallScreening;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbersContract;
@@ -61,13 +65,13 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      * @param array{
      *   call_forwarding?: array{
      *     call_forwarding_enabled?: bool,
-     *     forwarding_type?: 'always'|'on-failure'|null,
+     *     forwarding_type?: 'always'|'on-failure'|ForwardingType|null,
      *     forwards_to?: string|null,
      *   },
      *   call_recording?: array{
-     *     inbound_call_recording_channels?: 'single'|'dual',
+     *     inbound_call_recording_channels?: 'single'|'dual'|InboundCallRecordingChannels,
      *     inbound_call_recording_enabled?: bool,
-     *     inbound_call_recording_format?: 'wav'|'mp3',
+     *     inbound_call_recording_format?: 'wav'|'mp3'|InboundCallRecordingFormat,
      *   },
      *   caller_id_name_enabled?: bool,
      *   cnam_listing?: array{
@@ -76,7 +80,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      *   connection_id?: string|null,
      *   customer_reference?: string|null,
      *   inbound?: array{interception_app_id?: string|null},
-     *   inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls',
+     *   inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
      *   noise_suppression?: bool,
      *   outbound?: array{interception_app_id?: string|null},
      *   tags?: list<string>,

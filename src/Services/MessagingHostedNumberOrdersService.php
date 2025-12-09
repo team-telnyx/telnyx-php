@@ -11,6 +11,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams;
@@ -184,7 +185,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Create verification codes to validate numbers of the hosted order. The verification codes will be sent to the numbers of the hosted order.
      *
      * @param array{
-     *   phone_numbers: list<string>, verification_method: 'sms'|'call'|'flashcall'
+     *   phone_numbers: list<string>,
+     *   verification_method: 'sms'|'call'|'flashcall'|VerificationMethod,
      * }|MessagingHostedNumberOrderCreateVerificationCodesParams $params
      *
      * @throws APIException

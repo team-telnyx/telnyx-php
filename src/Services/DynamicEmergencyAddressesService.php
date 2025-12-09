@@ -8,9 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter\Status;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
@@ -30,7 +32,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * @param array{
      *   administrative_area: string,
-     *   country_code: 'US'|'CA'|'PR',
+     *   country_code: 'US'|'CA'|'PR'|CountryCode,
      *   house_number: string,
      *   locality: string,
      *   postal_code: string,
@@ -94,7 +96,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string, status?: 'pending'|'activated'|'rejected'
+     *     country_code?: string, status?: 'pending'|'activated'|'rejected'|Status
      *   },
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyAddressListParams $params

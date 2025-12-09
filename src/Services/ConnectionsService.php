@@ -9,6 +9,7 @@ use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsParams;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams;
+use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -56,7 +57,7 @@ final class ConnectionsService implements ConnectionsContract
      *     outbound_voice_profile_id?: string,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'connection_name'|'active',
+     *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|ConnectionListParams $params
      *
      * @throws APIException

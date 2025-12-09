@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Actions;
 
 use Telnyx\Actions\Purchase\PurchaseCreateParams;
+use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
 use Telnyx\Actions\Purchase\PurchaseNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -29,7 +30,7 @@ final class PurchaseService implements PurchaseContract
      *   amount: int,
      *   product?: string,
      *   sim_card_group_id?: string,
-     *   status?: 'enabled'|'disabled'|'standby',
+     *   status?: 'enabled'|'disabled'|'standby'|Status,
      *   tags?: list<string>,
      *   whitelabel_name?: string,
      * }|PurchaseCreateParams $params

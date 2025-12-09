@@ -71,9 +71,9 @@ final class Summary implements BaseModel
      *   existing_this_month: MonthDetail,
      *   name: string,
      *   new_this_month: MonthDetail,
-     *   type: 'comparative',
+     *   type?: 'comparative',
      * }|Simple|array{
-     *   alias: string, amount: string, name: string, quantity: int, type: 'simple'
+     *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
      * }> $lines
      */
     public static function with(array $adjustments, array $lines): self
@@ -109,9 +109,9 @@ final class Summary implements BaseModel
      *   existing_this_month: MonthDetail,
      *   name: string,
      *   new_this_month: MonthDetail,
-     *   type: 'comparative',
+     *   type?: 'comparative',
      * }|Simple|array{
-     *   alias: string, amount: string, name: string, quantity: int, type: 'simple'
+     *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
      * }> $lines
      */
     public function withLines(array $lines): self

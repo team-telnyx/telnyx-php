@@ -15,6 +15,8 @@ use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams;
+use Telnyx\SimCards\Actions\ActionListParams\Filter\ActionType;
+use Telnyx\SimCards\Actions\ActionListParams\Filter\Status;
 use Telnyx\SimCards\Actions\ActionListResponse;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPParams;
@@ -59,10 +61,10 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   filter?: array{
-     *     action_type?: 'enable'|'enable_standby_sim_card'|'disable'|'set_standby'|'remove_public_ip'|'set_public_ip',
+     *     action_type?: 'enable'|'enable_standby_sim_card'|'disable'|'set_standby'|'remove_public_ip'|'set_public_ip'|ActionType,
      *     bulk_sim_card_action_id?: string,
      *     sim_card_id?: string,
-     *     status?: 'in-progress'|'completed'|'failed',
+     *     status?: 'in-progress'|'completed'|'failed'|Status,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|ActionListParams $params

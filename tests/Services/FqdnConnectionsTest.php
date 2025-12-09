@@ -6,11 +6,16 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\CredentialConnections\DtmfType;
+use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListResponse;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
+use Telnyx\FqdnConnections\TransportProtocol;
+use Telnyx\FqdnConnections\WebhookAPIVersion;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -56,13 +61,13 @@ final class FqdnConnectionsTest extends TestCase
         $result = $this->client->fqdnConnections->create([
             'connection_name' => 'string',
             'active' => true,
-            'anchorsite_override' => 'Latency',
+            'anchorsite_override' => AnchorsiteOverride::LATENCY,
             'android_push_credential_id' => '06b09dfd-7154-4980-8b75-cebf7a9d4f8e',
             'call_cost_in_webhooks' => false,
             'default_on_hold_comfort_noise_enabled' => true,
-            'dtmf_type' => 'RFC 2833',
+            'dtmf_type' => DtmfType::RFC_2833,
             'encode_contact_header_enabled' => true,
-            'encrypted_media' => 'SRTP',
+            'encrypted_media' => EncryptedMedia::SRTP,
             'inbound' => [
                 'ani_number_format' => '+E.164',
                 'channel_limit' => 10,
@@ -91,7 +96,7 @@ final class FqdnConnectionsTest extends TestCase
                 'ani_override_type' => 'always',
                 'call_parking_enabled' => true,
                 'channel_limit' => 10,
-                'encrypted_media' => 'SRTP',
+                'encrypted_media' => EncryptedMedia::SRTP,
                 'generate_ringback_tone' => true,
                 'instant_ringback_enabled' => true,
                 'ip_authentication_method' => 'credential-authentication',
@@ -109,8 +114,8 @@ final class FqdnConnectionsTest extends TestCase
                 'report_frequency_secs' => 10,
             ],
             'tags' => ['tag1', 'tag2'],
-            'transport_protocol' => 'UDP',
-            'webhook_api_version' => '1',
+            'transport_protocol' => TransportProtocol::UDP,
+            'webhook_api_version' => WebhookAPIVersion::_1,
             'webhook_event_failover_url' => 'https://failover.example.com',
             'webhook_event_url' => 'https://example.com',
             'webhook_timeout_secs' => 25,

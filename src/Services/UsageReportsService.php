@@ -12,6 +12,7 @@ use Telnyx\ServiceContracts\UsageReportsContract;
 use Telnyx\UsageReports\UsageReportGetOptionsParams;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
 use Telnyx\UsageReports\UsageReportListParams;
+use Telnyx\UsageReports\UsageReportListParams\Format;
 use Telnyx\UsageReports\UsageReportListResponse;
 
 final class UsageReportsService implements UsageReportsContract
@@ -33,7 +34,7 @@ final class UsageReportsService implements UsageReportsContract
      *   date_range?: string,
      *   end_date?: string,
      *   filter?: string,
-     *   format?: 'csv'|'json',
+     *   format?: 'csv'|'json'|Format,
      *   managed_accounts?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: list<string>,

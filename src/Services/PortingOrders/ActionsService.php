@@ -11,6 +11,7 @@ use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
 use Telnyx\PortingOrders\Actions\ActionShareParams;
+use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
 use Telnyx\PortingOrders\Actions\ActionShareResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActionsContract;
@@ -95,7 +96,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   expires_in_seconds?: int,
-     *   permissions?: 'porting_order.document.read'|'porting_order.document.update',
+     *   permissions?: 'porting_order.document.read'|'porting_order.document.update'|Permissions,
      * }|ActionShareParams $params
      *
      * @throws APIException

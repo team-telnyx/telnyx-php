@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
+use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams;
@@ -70,7 +71,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
      *
      * @param array{
-     *   external_sip_connection?: 'zoom',
+     *   external_sip_connection: 'zoom'|ExternalSipConnection,
      *   outbound: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   active?: bool,
      *   inbound?: array{outbound_voice_profile_id: string, channel_limit?: int},
@@ -174,7 +175,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *     id?: string,
      *     connection_name?: array{contains?: string},
      *     created_at?: string,
-     *     external_sip_connection?: 'zoom'|'operator_connect',
+     *     external_sip_connection?: 'zoom'|'operator_connect'|ExternalConnectionListParams\Filter\ExternalSipConnection,
      *     phone_number?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},

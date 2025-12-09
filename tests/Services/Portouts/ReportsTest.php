@@ -54,8 +54,12 @@ final class ReportsTest extends TestCase
         $result = $this->client->portouts->reports->create([
             'params' => [
                 'filters' => [
-                    'created_at__gt' => '2019-12-27T18:11:19.117Z',
-                    'created_at__lt' => '2019-12-27T18:11:19.117Z',
+                    'created_at__gt' => new \DateTimeImmutable(
+                        '2019-12-27T18:11:19.117Z'
+                    ),
+                    'created_at__lt' => new \DateTimeImmutable(
+                        '2019-12-27T18:11:19.117Z'
+                    ),
                     'customer_reference__in' => ['my-customer-reference'],
                     'end_user_name' => 'McPortersen',
                     'phone_numbers__overlaps' => ['+1234567890'],

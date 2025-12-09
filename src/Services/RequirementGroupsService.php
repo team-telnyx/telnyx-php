@@ -11,7 +11,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams;
+use Telnyx\RequirementGroups\RequirementGroupCreateParams\Action;
+use Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType;
 use Telnyx\RequirementGroups\RequirementGroupListParams;
+use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
 use Telnyx\RequirementGroups\RequirementGroupUpdateParams;
 use Telnyx\ServiceContracts\RequirementGroupsContract;
 
@@ -28,9 +31,9 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Create a new requirement group
      *
      * @param array{
-     *   action: 'ordering'|'porting',
+     *   action: 'ordering'|'porting'|Action,
      *   country_code: string,
-     *   phone_number_type: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
+     *   phone_number_type: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
      *   customer_reference?: string,
      *   regulatory_requirements?: list<array{
      *     field_value?: string, requirement_id?: string
@@ -125,11 +128,11 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * @param array{
      *   filter?: array{
-     *     action?: 'ordering'|'porting'|'action',
+     *     action?: 'ordering'|'porting'|'action'|RequirementGroupListParams\Filter\Action,
      *     country_code?: string,
      *     customer_reference?: string,
-     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
-     *     status?: 'approved'|'unapproved'|'pending-approval'|'declined'|'expired',
+     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|RequirementGroupListParams\Filter\PhoneNumberType,
+     *     status?: 'approved'|'unapproved'|'pending-approval'|'declined'|'expired'|Status,
      *   },
      * }|RequirementGroupListParams $params
      *

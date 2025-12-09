@@ -8,9 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
+use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams;
+use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType\Eq;
 use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
@@ -32,7 +34,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * @param array{
      *   channel_destination?: string,
-     *   channel_type_id?: 'sms'|'voice'|'email'|'webhook',
+     *   channel_type_id?: 'sms'|'voice'|'email'|'webhook'|ChannelTypeID,
      *   notification_profile_id?: string,
      * }|NotificationChannelCreateParams $params
      *
@@ -88,7 +90,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * @param array{
      *   channel_destination?: string,
-     *   channel_type_id?: 'sms'|'voice'|'email'|'webhook',
+     *   channel_type_id?: 'sms'|'voice'|'email'|'webhook'|NotificationChannelUpdateParams\ChannelTypeID,
      *   notification_profile_id?: string,
      * }|NotificationChannelUpdateParams $params
      *
@@ -123,13 +125,15 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * @param array{
      *   filter?: array{
-     *     associated_record_type?: array{eq?: 'account'|'phone_number'},
-     *     channel_type_id?: array{eq?: 'webhook'|'sms'|'email'|'voice'},
+     *     associated_record_type?: array{eq?: 'account'|'phone_number'|Eq},
+     *     channel_type_id?: array{
+     *       eq?: 'webhook'|'sms'|'email'|'voice'|NotificationChannelListParams\Filter\ChannelTypeID\Eq,
+     *     },
      *     notification_channel?: array{eq?: string},
      *     notification_event_condition_id?: array{eq?: string},
      *     notification_profile_id?: array{eq?: string},
      *     status?: array{
-     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted',
+     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted'|NotificationChannelListParams\Filter\Status\Eq,
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

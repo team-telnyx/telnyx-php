@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistValuesContract;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
+use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
 final class WirelessBlocklistValuesService implements WirelessBlocklistValuesContract
@@ -25,7 +26,7 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
      * Retrieve all wireless blocklist values for a given blocklist type.
      *
      * @param array{
-     *   type: 'country'|'mcc'|'plmn'
+     *   type: 'country'|'mcc'|'plmn'|Type
      * }|WirelessBlocklistValueListParams $params
      *
      * @throws APIException

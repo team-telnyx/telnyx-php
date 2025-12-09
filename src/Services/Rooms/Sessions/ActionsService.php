@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
+use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
@@ -52,7 +53,7 @@ final class ActionsService implements ActionsContract
      * Kick participants from a room session.
      *
      * @param array{
-     *   exclude?: list<string>, participants?: 'all'|list<string>
+     *   exclude?: list<string>, participants?: 'all'|UnionMember0|list<string>
      * }|ActionKickParams $params
      *
      * @throws APIException
@@ -85,7 +86,8 @@ final class ActionsService implements ActionsContract
      * Mute participants in room session.
      *
      * @param array{
-     *   exclude?: list<string>, participants?: 'all'|list<string>
+     *   exclude?: list<string>,
+     *   participants?: 'all'|ActionMuteParams\Participants\UnionMember0|list<string>,
      * }|ActionMuteParams $params
      *
      * @throws APIException
@@ -118,7 +120,8 @@ final class ActionsService implements ActionsContract
      * Unmute participants in room session.
      *
      * @param array{
-     *   exclude?: list<string>, participants?: 'all'|list<string>
+     *   exclude?: list<string>,
+     *   participants?: 'all'|ActionUnmuteParams\Participants\UnionMember0|list<string>,
      * }|ActionUnmuteParams $params
      *
      * @throws APIException

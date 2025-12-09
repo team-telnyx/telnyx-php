@@ -8,8 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messsages\MesssageRcsParams;
+use Telnyx\Messsages\MesssageRcsParams\Type;
 use Telnyx\Messsages\MesssageRcsResponse;
 use Telnyx\Messsages\RcsAgentMessage;
+use Telnyx\Messsages\RcsAgentMessage\Event\EventType;
 use Telnyx\Messsages\RcsContentInfo;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MesssagesContract;
@@ -35,7 +37,7 @@ final class MesssagesService implements MesssagesContract
      *       suggestions?: list<mixed>,
      *       text?: string,
      *     },
-     *     event?: array{event_type?: 'TYPE_UNSPECIFIED'|'IS_TYPING'|'READ'},
+     *     event?: array{event_type?: 'TYPE_UNSPECIFIED'|'IS_TYPING'|'READ'|EventType},
      *     expire_time?: string|\DateTimeInterface,
      *     ttl?: string,
      *   }|RcsAgentMessage,
@@ -45,7 +47,7 @@ final class MesssagesService implements MesssagesContract
      *     from?: string, media_urls?: list<string>, subject?: string, text?: string
      *   },
      *   sms_fallback?: array{from?: string, text?: string},
-     *   type?: 'RCS',
+     *   type?: 'RCS'|Type,
      *   webhook_url?: string,
      * }|MesssageRcsParams $params
      *

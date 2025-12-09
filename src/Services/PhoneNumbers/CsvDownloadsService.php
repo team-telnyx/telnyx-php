@@ -8,6 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\Status;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListResponse;
@@ -28,7 +31,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
      * Create a CSV download
      *
      * @param array{
-     *   csv_format?: 'V1'|'V2',
+     *   csv_format?: 'V1'|'V2'|CsvFormat,
      *   filter?: array{
      *     billing_group_id?: string,
      *     connection_id?: string,
@@ -36,12 +39,12 @@ final class CsvDownloadsService implements CsvDownloadsContract
      *     emergency_address_id?: string,
      *     has_bundle?: string,
      *     phone_number?: string,
-     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
+     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
      *   },
      * }|CsvDownloadCreateParams $params
      *

@@ -9,9 +9,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
+use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
+use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
@@ -39,7 +41,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *   inbound?: array{
      *     channel_limit?: int,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   tags?: list<string>,
@@ -106,7 +108,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *   inbound?: array{
      *     channel_limit?: int,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|FaxApplicationUpdateParams\Inbound\SipSubdomainReceiveSettings,
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   tags?: list<string>,
@@ -149,7 +151,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *     outbound_voice_profile_id?: string,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'application_name'|'active',
+     *   sort?: 'created_at'|'application_name'|'active'|Sort,
      * }|FaxApplicationListParams $params
      *
      * @throws APIException

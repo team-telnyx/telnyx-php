@@ -9,8 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
+use Telnyx\Invoices\InvoiceListParams\Sort;
 use Telnyx\Invoices\InvoiceListResponse;
 use Telnyx\Invoices\InvoiceRetrieveParams;
+use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InvoicesContract;
 
@@ -26,7 +28,7 @@ final class InvoicesService implements InvoicesContract
      *
      * Retrieve a single invoice by its unique identifier.
      *
-     * @param array{action?: 'json'|'link'}|InvoiceRetrieveParams $params
+     * @param array{action?: 'json'|'link'|Action}|InvoiceRetrieveParams $params
      *
      * @throws APIException
      */
@@ -58,7 +60,8 @@ final class InvoicesService implements InvoicesContract
      * Retrieve a paginated list of invoices.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}, sort?: 'period_start'|'-period_start'
+     *   page?: array{number?: int, size?: int},
+     *   sort?: 'period_start'|'-period_start'|Sort,
      * }|InvoiceListParams $params
      *
      * @throws APIException

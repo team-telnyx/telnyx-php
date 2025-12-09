@@ -11,6 +11,7 @@ use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
+use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
@@ -97,7 +98,7 @@ final class DocumentsService implements DocumentsContract
      *     filename?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'>,
+     *   sort?: list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'|Sort>,
      * }|DocumentListParams $params
      *
      * @throws APIException

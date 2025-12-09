@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter\PhoneNumberType;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -29,7 +30,7 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
      *     country_code?: string,
      *     locality?: string,
      *     national_destination_code?: string,
-     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
+     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
      *   },
      * }|AvailablePhoneNumberBlockListParams $params
      *

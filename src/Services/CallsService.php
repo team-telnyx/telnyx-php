@@ -4,11 +4,31 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
 use Telnyx\Calls\CallDialParams;
+use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
+use Telnyx\Calls\CallDialParams\ConferenceConfig\BeepEnabled;
+use Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole;
+use Telnyx\Calls\CallDialParams\MediaEncryption;
+use Telnyx\Calls\CallDialParams\Record;
+use Telnyx\Calls\CallDialParams\RecordChannels;
+use Telnyx\Calls\CallDialParams\RecordFormat;
+use Telnyx\Calls\CallDialParams\RecordTrack;
+use Telnyx\Calls\CallDialParams\RecordTrim;
+use Telnyx\Calls\CallDialParams\SipRegion;
+use Telnyx\Calls\CallDialParams\SipTransportProtocol;
+use Telnyx\Calls\CallDialParams\StreamTrack;
+use Telnyx\Calls\CallDialParams\WebhookURLMethod;
 use Telnyx\Calls\CallDialResponse;
 use Telnyx\Calls\CallGetStatusResponse;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
+use Telnyx\Calls\SipHeader\Name;
+use Telnyx\Calls\StreamBidirectionalCodec;
+use Telnyx\Calls\StreamBidirectionalMode;
+use Telnyx\Calls\StreamBidirectionalSamplingRate;
+use Telnyx\Calls\StreamBidirectionalTargetLegs;
+use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -52,7 +72,7 @@ final class CallsService implements CallsContract
      *   connection_id: string,
      *   from: string,
      *   to: string|list<string>,
-     *   answering_machine_detection?: 'premium'|'detect'|'detect_beep'|'detect_words'|'greeting_end'|'disabled',
+     *   answering_machine_detection?: 'premium'|'detect'|'detect_beep'|'detect_words'|'greeting_end'|'disabled'|AnsweringMachineDetection,
      *   answering_machine_detection_config?: array{
      *     after_greeting_silence_millis?: int,
      *     between_words_silence_millis?: int,
@@ -73,7 +93,7 @@ final class CallsService implements CallsContract
      *   command_id?: string,
      *   conference_config?: array{
      *     id?: string,
-     *     beep_enabled?: 'always'|'never'|'on_enter'|'on_exit',
+     *     beep_enabled?: 'always'|'never'|'on_enter'|'on_exit'|BeepEnabled,
      *     conference_name?: string,
      *     early_media?: bool,
      *     end_conference_on_exit?: bool,
@@ -84,7 +104,7 @@ final class CallsService implements CallsContract
      *     soft_end_conference_on_exit?: bool,
      *     start_conference_on_create?: bool,
      *     start_conference_on_enter?: bool,
-     *     supervisor_role?: 'barge'|'monitor'|'none'|'whisper',
+     *     supervisor_role?: 'barge'|'monitor'|'none'|'whisper'|SupervisorRole,
      *     whisper_call_control_ids?: list<string>,
      *   },
      *   custom_headers?: list<array{name: string, value: string}|CustomSipHeader>,
@@ -94,49 +114,49 @@ final class CallsService implements CallsContract
      *   enable_dialogflow?: bool,
      *   from_display_name?: string,
      *   link_to?: string,
-     *   media_encryption?: 'disabled'|'SRTP'|'DTLS',
+     *   media_encryption?: 'disabled'|'SRTP'|'DTLS'|MediaEncryption,
      *   media_name?: string,
      *   park_after_unbridge?: string,
      *   preferred_codecs?: string,
-     *   record?: 'record-from-answer',
-     *   record_channels?: 'single'|'dual',
+     *   record?: 'record-from-answer'|Record,
+     *   record_channels?: 'single'|'dual'|RecordChannels,
      *   record_custom_file_name?: string,
-     *   record_format?: 'wav'|'mp3',
+     *   record_format?: 'wav'|'mp3'|RecordFormat,
      *   record_max_length?: int,
      *   record_timeout_secs?: int,
-     *   record_track?: 'both'|'inbound'|'outbound',
-     *   record_trim?: 'trim-silence',
+     *   record_track?: 'both'|'inbound'|'outbound'|RecordTrack,
+     *   record_trim?: 'trim-silence'|RecordTrim,
      *   send_silence_when_idle?: bool,
      *   sip_auth_password?: string,
      *   sip_auth_username?: string,
-     *   sip_headers?: list<array{name: 'User-to-User', value: string}|SipHeader>,
-     *   sip_region?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East',
-     *   sip_transport_protocol?: 'UDP'|'TCP'|'TLS',
+     *   sip_headers?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
+     *   sip_region?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
+     *   sip_transport_protocol?: 'UDP'|'TCP'|'TLS'|SipTransportProtocol,
      *   sound_modifications?: array{
      *     octaves?: float, pitch?: float, semitone?: float, track?: string
      *   },
-     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16',
-     *   stream_bidirectional_mode?: 'mp3'|'rtp',
-     *   stream_bidirectional_sampling_rate?: 8000|16000|22050|24000|48000,
-     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite',
-     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default',
+     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
+     *   stream_bidirectional_mode?: 'mp3'|'rtp'|StreamBidirectionalMode,
+     *   stream_bidirectional_sampling_rate?: 8000|16000|22050|24000|48000|StreamBidirectionalSamplingRate,
+     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
+     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
      *   stream_establish_before_call_originate?: bool,
-     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks',
+     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks'|StreamTrack,
      *   stream_url?: string,
      *   supervise_call_control_id?: string,
-     *   supervisor_role?: 'barge'|'whisper'|'monitor',
+     *   supervisor_role?: 'barge'|'whisper'|'monitor'|CallDialParams\SupervisorRole,
      *   time_limit_secs?: int,
      *   timeout_secs?: int,
      *   transcription?: bool,
      *   transcription_config?: array{
      *     client_state?: string,
      *     command_id?: string,
-     *     transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B',
+     *     transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|TranscriptionEngine,
      *     transcription_engine_config?: array<string,mixed>,
      *     transcription_tracks?: string,
      *   },
      *   webhook_url?: string,
-     *   webhook_url_method?: 'POST'|'GET',
+     *   webhook_url_method?: 'POST'|'GET'|WebhookURLMethod,
      * }|CallDialParams $params
      *
      * @throws APIException

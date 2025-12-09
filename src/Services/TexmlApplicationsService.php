@@ -12,9 +12,13 @@ use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlApplicationsContract;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams;
+use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
+use Telnyx\TexmlApplications\TexmlApplicationCreateParams\StatusCallbackMethod;
+use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListParams;
+use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
 use Telnyx\TexmlApplications\TexmlApplicationListResponse;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateParams;
@@ -45,14 +49,14 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   status_callback?: string,
-     *   status_callback_method?: 'get'|'post',
+     *   status_callback_method?: 'get'|'post'|StatusCallbackMethod,
      *   tags?: list<string>,
      *   voice_fallback_url?: string,
-     *   voice_method?: 'get'|'post',
+     *   voice_method?: 'get'|'post'|VoiceMethod,
      * }|TexmlApplicationCreateParams $params
      *
      * @throws APIException
@@ -118,14 +122,14 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|TexmlApplicationUpdateParams\Inbound\SipSubdomainReceiveSettings,
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   status_callback?: string,
-     *   status_callback_method?: 'get'|'post',
+     *   status_callback_method?: 'get'|'post'|TexmlApplicationUpdateParams\StatusCallbackMethod,
      *   tags?: list<string>,
      *   voice_fallback_url?: string,
-     *   voice_method?: 'get'|'post',
+     *   voice_method?: 'get'|'post'|TexmlApplicationUpdateParams\VoiceMethod,
      * }|TexmlApplicationUpdateParams $params
      *
      * @throws APIException
@@ -160,7 +164,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @param array{
      *   filter?: array{friendly_name?: string, outbound_voice_profile_id?: string},
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'friendly_name'|'active',
+     *   sort?: 'created_at'|'friendly_name'|'active'|Sort,
      * }|TexmlApplicationListParams $params
      *
      * @throws APIException

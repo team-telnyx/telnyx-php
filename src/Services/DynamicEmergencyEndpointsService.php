@@ -11,6 +11,7 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\Status;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
@@ -86,7 +87,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string, status?: 'pending'|'activated'|'rejected'
+     *     country_code?: string, status?: 'pending'|'activated'|'rejected'|Status
      *   },
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyEndpointListParams $params

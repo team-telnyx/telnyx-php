@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\StreamsContract;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams;
+use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
 
 final class StreamsService implements StreamsContract
@@ -25,7 +26,7 @@ final class StreamsService implements StreamsContract
      * Updates streaming resource for particular call.
      *
      * @param array{
-     *   account_sid: string, call_sid: string, Status?: 'stopped'
+     *   account_sid: string, call_sid: string, Status?: 'stopped'|Status
      * }|StreamStreamingSidJsonParams $params
      *
      * @throws APIException

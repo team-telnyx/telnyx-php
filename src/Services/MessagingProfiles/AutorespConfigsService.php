@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigDeleteParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
@@ -32,7 +33,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param array{
      *   country_code: string,
      *   keywords: list<string>,
-     *   op: 'start'|'stop'|'info',
+     *   op: 'start'|'stop'|'info'|Op,
      *   resp_text?: string,
      * }|AutorespConfigCreateParams $params
      *
@@ -105,7 +106,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *   profile_id: string,
      *   country_code: string,
      *   keywords: list<string>,
-     *   op: 'start'|'stop'|'info',
+     *   op: 'start'|'stop'|'info'|AutorespConfigUpdateParams\Op,
      *   resp_text?: string,
      * }|AutorespConfigUpdateParams $params
      *

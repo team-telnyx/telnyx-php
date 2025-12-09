@@ -41,6 +41,7 @@ use Telnyx\Calls\Actions\ActionStopTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleResponse;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
+use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -253,7 +254,7 @@ final class ActionsTest extends TestCase
                 'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'greeting' => 'Hello, can you tell me your age and where you live?',
                 'interruption_settings' => ['enable' => true],
-                'language' => 'en',
+                'language' => GoogleTranscriptionLanguage::EN,
                 'message_history' => [
                     ['content' => 'Hello, what\'s your name?', 'role' => 'assistant'],
                     ['content' => 'Hello, I\'m John.', 'role' => 'user'],

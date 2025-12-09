@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat\Type;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
@@ -26,7 +29,8 @@ final class ChatService implements ChatContract
      *
      * @param array{
      *   messages: list<array{
-     *     content: string|list<array<mixed>>, role: 'system'|'user'|'assistant'|'tool'
+     *     content: string|list<array<mixed>>,
+     *     role: 'system'|'user'|'assistant'|'tool'|Role,
      *   }>,
      *   api_key_ref?: string,
      *   best_of?: int,
@@ -42,10 +46,10 @@ final class ChatService implements ChatContract
      *   model?: string,
      *   n?: float,
      *   presence_penalty?: float,
-     *   response_format?: array{type: 'text'|'json_object'},
+     *   response_format?: array{type: 'text'|'json_object'|Type},
      *   stream?: bool,
      *   temperature?: float,
-     *   tool_choice?: 'none'|'auto'|'required',
+     *   tool_choice?: 'none'|'auto'|'required'|ToolChoice,
      *   tools?: list<array<string,mixed>>,
      *   top_logprobs?: int,
      *   top_p?: float,
