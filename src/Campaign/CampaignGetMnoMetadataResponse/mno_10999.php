@@ -114,99 +114,99 @@ final class mno_10999 implements BaseModel
         bool $reqSubscriberOptin,
         bool $reqSubscriberOptout,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['minMsgSamples'] = $minMsgSamples;
-        $obj['mno'] = $mno;
-        $obj['mnoReview'] = $mnoReview;
-        $obj['mnoSupport'] = $mnoSupport;
-        $obj['noEmbeddedLink'] = $noEmbeddedLink;
-        $obj['noEmbeddedPhone'] = $noEmbeddedPhone;
-        $obj['qualify'] = $qualify;
-        $obj['reqSubscriberHelp'] = $reqSubscriberHelp;
-        $obj['reqSubscriberOptin'] = $reqSubscriberOptin;
-        $obj['reqSubscriberOptout'] = $reqSubscriberOptout;
+        $self['minMsgSamples'] = $minMsgSamples;
+        $self['mno'] = $mno;
+        $self['mnoReview'] = $mnoReview;
+        $self['mnoSupport'] = $mnoSupport;
+        $self['noEmbeddedLink'] = $noEmbeddedLink;
+        $self['noEmbeddedPhone'] = $noEmbeddedPhone;
+        $self['qualify'] = $qualify;
+        $self['reqSubscriberHelp'] = $reqSubscriberHelp;
+        $self['reqSubscriberOptin'] = $reqSubscriberOptin;
+        $self['reqSubscriberOptout'] = $reqSubscriberOptout;
 
-        return $obj;
+        return $self;
     }
 
     public function withMinMsgSamples(int $minMsgSamples): self
     {
-        $obj = clone $this;
-        $obj['minMsgSamples'] = $minMsgSamples;
+        $self = clone $this;
+        $self['minMsgSamples'] = $minMsgSamples;
 
-        return $obj;
+        return $self;
     }
 
     public function withMno(string $mno): self
     {
-        $obj = clone $this;
-        $obj['mno'] = $mno;
+        $self = clone $this;
+        $self['mno'] = $mno;
 
-        return $obj;
+        return $self;
     }
 
     public function withMnoReview(bool $mnoReview): self
     {
-        $obj = clone $this;
-        $obj['mnoReview'] = $mnoReview;
+        $self = clone $this;
+        $self['mnoReview'] = $mnoReview;
 
-        return $obj;
+        return $self;
     }
 
     public function withMnoSupport(bool $mnoSupport): self
     {
-        $obj = clone $this;
-        $obj['mnoSupport'] = $mnoSupport;
+        $self = clone $this;
+        $self['mnoSupport'] = $mnoSupport;
 
-        return $obj;
+        return $self;
     }
 
     public function withNoEmbeddedLink(bool $noEmbeddedLink): self
     {
-        $obj = clone $this;
-        $obj['noEmbeddedLink'] = $noEmbeddedLink;
+        $self = clone $this;
+        $self['noEmbeddedLink'] = $noEmbeddedLink;
 
-        return $obj;
+        return $self;
     }
 
     public function withNoEmbeddedPhone(bool $noEmbeddedPhone): self
     {
-        $obj = clone $this;
-        $obj['noEmbeddedPhone'] = $noEmbeddedPhone;
+        $self = clone $this;
+        $self['noEmbeddedPhone'] = $noEmbeddedPhone;
 
-        return $obj;
+        return $self;
     }
 
     public function withQualify(bool $qualify): self
     {
-        $obj = clone $this;
-        $obj['qualify'] = $qualify;
+        $self = clone $this;
+        $self['qualify'] = $qualify;
 
-        return $obj;
+        return $self;
     }
 
     public function withReqSubscriberHelp(bool $reqSubscriberHelp): self
     {
-        $obj = clone $this;
-        $obj['reqSubscriberHelp'] = $reqSubscriberHelp;
+        $self = clone $this;
+        $self['reqSubscriberHelp'] = $reqSubscriberHelp;
 
-        return $obj;
+        return $self;
     }
 
     public function withReqSubscriberOptin(bool $reqSubscriberOptin): self
     {
-        $obj = clone $this;
-        $obj['reqSubscriberOptin'] = $reqSubscriberOptin;
+        $self = clone $this;
+        $self['reqSubscriberOptin'] = $reqSubscriberOptin;
 
-        return $obj;
+        return $self;
     }
 
     public function withReqSubscriberOptout(bool $reqSubscriberOptout): self
     {
-        $obj = clone $this;
-        $obj['reqSubscriberOptout'] = $reqSubscriberOptout;
+        $self = clone $this;
+        $self['reqSubscriberOptout'] = $reqSubscriberOptout;
 
-        return $obj;
+        return $self;
     }
 }

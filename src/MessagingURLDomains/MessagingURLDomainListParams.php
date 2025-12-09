@@ -45,11 +45,11 @@ final class MessagingURLDomainListParams implements BaseModel
      */
     public static function with(Page|array|null $page = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj['page'] = $page;
+        null !== $page && $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,9 +59,9 @@ final class MessagingURLDomainListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 }

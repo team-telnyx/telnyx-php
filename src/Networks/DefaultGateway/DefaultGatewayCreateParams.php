@@ -40,11 +40,11 @@ final class DefaultGatewayCreateParams implements BaseModel
      */
     public static function with(?string $wireguardPeerID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $wireguardPeerID && $obj['wireguardPeerID'] = $wireguardPeerID;
+        null !== $wireguardPeerID && $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class DefaultGatewayCreateParams implements BaseModel
      */
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
-        $obj = clone $this;
-        $obj['wireguardPeerID'] = $wireguardPeerID;
+        $self = clone $this;
+        $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 }

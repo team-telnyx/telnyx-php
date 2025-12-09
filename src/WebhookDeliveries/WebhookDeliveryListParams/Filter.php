@@ -76,16 +76,16 @@ final class Filter implements BaseModel
         Status|array|null $status = null,
         Webhook|array|null $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $attempts && $obj['attempts'] = $attempts;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $finishedAt && $obj['finishedAt'] = $finishedAt;
-        null !== $startedAt && $obj['startedAt'] = $startedAt;
-        null !== $status && $obj['status'] = $status;
-        null !== $webhook && $obj['webhook'] = $webhook;
+        null !== $attempts && $self['attempts'] = $attempts;
+        null !== $eventType && $self['eventType'] = $eventType;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $status && $self['status'] = $status;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class Filter implements BaseModel
      */
     public function withAttempts(Attempts|array $attempts): self
     {
-        $obj = clone $this;
-        $obj['attempts'] = $attempts;
+        $self = clone $this;
+        $self['attempts'] = $attempts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class Filter implements BaseModel
      */
     public function withEventType(string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class Filter implements BaseModel
      */
     public function withFinishedAt(FinishedAt|array $finishedAt): self
     {
-        $obj = clone $this;
-        $obj['finishedAt'] = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class Filter implements BaseModel
      */
     public function withStartedAt(StartedAt|array $startedAt): self
     {
-        $obj = clone $this;
-        $obj['startedAt'] = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,9 +148,9 @@ final class Filter implements BaseModel
      */
     public function withWebhook(Webhook|array $webhook): self
     {
-        $obj = clone $this;
-        $obj['webhook'] = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

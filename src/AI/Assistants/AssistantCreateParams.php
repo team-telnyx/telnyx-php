@@ -250,27 +250,27 @@ final class AssistantCreateParams implements BaseModel
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['instructions'] = $instructions;
-        $obj['model'] = $model;
-        $obj['name'] = $name;
+        $self['instructions'] = $instructions;
+        $self['model'] = $model;
+        $self['name'] = $name;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $dynamicVariables && $obj['dynamicVariables'] = $dynamicVariables;
-        null !== $dynamicVariablesWebhookURL && $obj['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
-        null !== $enabledFeatures && $obj['enabledFeatures'] = $enabledFeatures;
-        null !== $greeting && $obj['greeting'] = $greeting;
-        null !== $insightSettings && $obj['insightSettings'] = $insightSettings;
-        null !== $llmAPIKeyRef && $obj['llmAPIKeyRef'] = $llmAPIKeyRef;
-        null !== $messagingSettings && $obj['messagingSettings'] = $messagingSettings;
-        null !== $privacySettings && $obj['privacySettings'] = $privacySettings;
-        null !== $telephonySettings && $obj['telephonySettings'] = $telephonySettings;
-        null !== $tools && $obj['tools'] = $tools;
-        null !== $transcription && $obj['transcription'] = $transcription;
-        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
+        null !== $description && $self['description'] = $description;
+        null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
+        null !== $dynamicVariablesWebhookURL && $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
+        null !== $enabledFeatures && $self['enabledFeatures'] = $enabledFeatures;
+        null !== $greeting && $self['greeting'] = $greeting;
+        null !== $insightSettings && $self['insightSettings'] = $insightSettings;
+        null !== $llmAPIKeyRef && $self['llmAPIKeyRef'] = $llmAPIKeyRef;
+        null !== $messagingSettings && $self['messagingSettings'] = $messagingSettings;
+        null !== $privacySettings && $self['privacySettings'] = $privacySettings;
+        null !== $telephonySettings && $self['telephonySettings'] = $telephonySettings;
+        null !== $tools && $self['tools'] = $tools;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +278,10 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj['instructions'] = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,26 +289,26 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +318,10 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withDynamicVariables(array $dynamicVariables): self
     {
-        $obj = clone $this;
-        $obj['dynamicVariables'] = $dynamicVariables;
+        $self = clone $this;
+        $self['dynamicVariables'] = $dynamicVariables;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -330,10 +330,10 @@ final class AssistantCreateParams implements BaseModel
     public function withDynamicVariablesWebhookURL(
         string $dynamicVariablesWebhookURL
     ): self {
-        $obj = clone $this;
-        $obj['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
+        $self = clone $this;
+        $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -341,10 +341,10 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withEnabledFeatures(array $enabledFeatures): self
     {
-        $obj = clone $this;
-        $obj['enabledFeatures'] = $enabledFeatures;
+        $self = clone $this;
+        $self['enabledFeatures'] = $enabledFeatures;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -352,10 +352,10 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withGreeting(string $greeting): self
     {
-        $obj = clone $this;
-        $obj['greeting'] = $greeting;
+        $self = clone $this;
+        $self['greeting'] = $greeting;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -364,10 +364,10 @@ final class AssistantCreateParams implements BaseModel
     public function withInsightSettings(
         InsightSettings|array $insightSettings
     ): self {
-        $obj = clone $this;
-        $obj['insightSettings'] = $insightSettings;
+        $self = clone $this;
+        $self['insightSettings'] = $insightSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -375,10 +375,10 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
-        $obj = clone $this;
-        $obj['llmAPIKeyRef'] = $llmAPIKeyRef;
+        $self = clone $this;
+        $self['llmAPIKeyRef'] = $llmAPIKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -390,10 +390,10 @@ final class AssistantCreateParams implements BaseModel
     public function withMessagingSettings(
         MessagingSettings|array $messagingSettings
     ): self {
-        $obj = clone $this;
-        $obj['messagingSettings'] = $messagingSettings;
+        $self = clone $this;
+        $self['messagingSettings'] = $messagingSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -402,10 +402,10 @@ final class AssistantCreateParams implements BaseModel
     public function withPrivacySettings(
         PrivacySettings|array $privacySettings
     ): self {
-        $obj = clone $this;
-        $obj['privacySettings'] = $privacySettings;
+        $self = clone $this;
+        $self['privacySettings'] = $privacySettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -416,10 +416,10 @@ final class AssistantCreateParams implements BaseModel
     public function withTelephonySettings(
         TelephonySettings|array $telephonySettings
     ): self {
-        $obj = clone $this;
-        $obj['telephonySettings'] = $telephonySettings;
+        $self = clone $this;
+        $self['telephonySettings'] = $telephonySettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -449,10 +449,10 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withTools(array $tools): self
     {
-        $obj = clone $this;
-        $obj['tools'] = $tools;
+        $self = clone $this;
+        $self['tools'] = $tools;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -466,10 +466,10 @@ final class AssistantCreateParams implements BaseModel
     public function withTranscription(
         TranscriptionSettings|array $transcription
     ): self {
-        $obj = clone $this;
-        $obj['transcription'] = $transcription;
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -482,9 +482,9 @@ final class AssistantCreateParams implements BaseModel
      */
     public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
     {
-        $obj = clone $this;
-        $obj['voiceSettings'] = $voiceSettings;
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

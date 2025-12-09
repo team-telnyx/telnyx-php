@@ -85,49 +85,49 @@ final class RecursiveCluster implements BaseModel
         ?array $nodes = null,
         ?array $subclusters = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['clusterID'] = $clusterID;
-        $obj['clusterSummary'] = $clusterSummary;
-        $obj['totalNumberOfNodes'] = $totalNumberOfNodes;
+        $self['clusterID'] = $clusterID;
+        $self['clusterSummary'] = $clusterSummary;
+        $self['totalNumberOfNodes'] = $totalNumberOfNodes;
 
-        null !== $clusterHeader && $obj['clusterHeader'] = $clusterHeader;
-        null !== $nodes && $obj['nodes'] = $nodes;
-        null !== $subclusters && $obj['subclusters'] = $subclusters;
+        null !== $clusterHeader && $self['clusterHeader'] = $clusterHeader;
+        null !== $nodes && $self['nodes'] = $nodes;
+        null !== $subclusters && $self['subclusters'] = $subclusters;
 
-        return $obj;
+        return $self;
     }
 
     public function withClusterID(string $clusterID): self
     {
-        $obj = clone $this;
-        $obj['clusterID'] = $clusterID;
+        $self = clone $this;
+        $self['clusterID'] = $clusterID;
 
-        return $obj;
+        return $self;
     }
 
     public function withClusterSummary(string $clusterSummary): self
     {
-        $obj = clone $this;
-        $obj['clusterSummary'] = $clusterSummary;
+        $self = clone $this;
+        $self['clusterSummary'] = $clusterSummary;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalNumberOfNodes(int $totalNumberOfNodes): self
     {
-        $obj = clone $this;
-        $obj['totalNumberOfNodes'] = $totalNumberOfNodes;
+        $self = clone $this;
+        $self['totalNumberOfNodes'] = $totalNumberOfNodes;
 
-        return $obj;
+        return $self;
     }
 
     public function withClusterHeader(string $clusterHeader): self
     {
-        $obj = clone $this;
-        $obj['clusterHeader'] = $clusterHeader;
+        $self = clone $this;
+        $self['clusterHeader'] = $clusterHeader;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class RecursiveCluster implements BaseModel
      */
     public function withNodes(array $nodes): self
     {
-        $obj = clone $this;
-        $obj['nodes'] = $nodes;
+        $self = clone $this;
+        $self['nodes'] = $nodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,9 +146,9 @@ final class RecursiveCluster implements BaseModel
      */
     public function withSubclusters(array $subclusters): self
     {
-        $obj = clone $this;
-        $obj['subclusters'] = $subclusters;
+        $self = clone $this;
+        $self['subclusters'] = $subclusters;
 
-        return $obj;
+        return $self;
     }
 }

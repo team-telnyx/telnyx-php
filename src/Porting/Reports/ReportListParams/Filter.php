@@ -55,12 +55,12 @@ final class Filter implements BaseModel
         ReportType|string|null $reportType = null,
         Status|string|null $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reportType && $obj['reportType'] = $reportType;
-        null !== $status && $obj['status'] = $status;
+        null !== $reportType && $self['reportType'] = $reportType;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,10 +70,10 @@ final class Filter implements BaseModel
      */
     public function withReportType(ReportType|string $reportType): self
     {
-        $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $self = clone $this;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,9 +83,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

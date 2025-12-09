@@ -109,21 +109,21 @@ final class Data implements BaseModel
         ?array $to = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $body && $obj['body'] = $body;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $encoding && $obj['encoding'] = $encoding;
-        null !== $from && $obj['from'] = $from;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $organizationID && $obj['organizationID'] = $organizationID;
-        null !== $receivedAt && $obj['receivedAt'] = $receivedAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $to && $obj['to'] = $to;
-        null !== $type && $obj['type'] = $type;
+        null !== $id && $self['id'] = $id;
+        null !== $body && $self['body'] = $body;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $encoding && $self['encoding'] = $encoding;
+        null !== $from && $self['from'] = $from;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $receivedAt && $self['receivedAt'] = $receivedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $to && $self['to'] = $to;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,26 +147,26 @@ final class Data implements BaseModel
      */
     public function withBody(RcsAgentMessage|array $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     public function withDirection(string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     public function withEncoding(string $encoding): self
     {
-        $obj = clone $this;
-        $obj['encoding'] = $encoding;
+        $self = clone $this;
+        $self['encoding'] = $encoding;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,42 +176,42 @@ final class Data implements BaseModel
      */
     public function withFrom(From|array $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationID'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     public function withReceivedAt(\DateTimeInterface $receivedAt): self
     {
-        $obj = clone $this;
-        $obj['receivedAt'] = $receivedAt;
+        $self = clone $this;
+        $self['receivedAt'] = $receivedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,17 +224,17 @@ final class Data implements BaseModel
      */
     public function withTo(array $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

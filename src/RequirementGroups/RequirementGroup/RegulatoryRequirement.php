@@ -72,57 +72,57 @@ final class RegulatoryRequirement implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
-        null !== $requirementID && $obj['requirementID'] = $requirementID;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $requirementID && $self['requirementID'] = $requirementID;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldType(string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj['fieldValue'] = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementID(string $requirementID): self
     {
-        $obj = clone $this;
-        $obj['requirementID'] = $requirementID;
+        $self = clone $this;
+        $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,17 +131,17 @@ final class RegulatoryRequirement implements BaseModel
     public function withStatus(
         Status|string $status,
     ): self {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

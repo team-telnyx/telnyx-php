@@ -152,21 +152,21 @@ final class AssistantTest implements BaseModel
         ?int $maxDurationSeconds = null,
         ?string $testSuite = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['createdAt'] = $createdAt;
-        $obj['name'] = $name;
-        $obj['rubric'] = $rubric;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj['testID'] = $testID;
+        $self['createdAt'] = $createdAt;
+        $self['name'] = $name;
+        $self['rubric'] = $rubric;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self['testID'] = $testID;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $destination && $obj['destination'] = $destination;
-        null !== $instructions && $obj['instructions'] = $instructions;
-        null !== $maxDurationSeconds && $obj['maxDurationSeconds'] = $maxDurationSeconds;
-        null !== $testSuite && $obj['testSuite'] = $testSuite;
+        null !== $description && $self['description'] = $description;
+        null !== $destination && $self['destination'] = $destination;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $maxDurationSeconds && $self['maxDurationSeconds'] = $maxDurationSeconds;
+        null !== $testSuite && $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class AssistantTest implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class AssistantTest implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class AssistantTest implements BaseModel
      */
     public function withRubric(array $rubric): self
     {
-        $obj = clone $this;
-        $obj['rubric'] = $rubric;
+        $self = clone $this;
+        $self['rubric'] = $rubric;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class AssistantTest implements BaseModel
     public function withTelnyxConversationChannel(
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +223,10 @@ final class AssistantTest implements BaseModel
      */
     public function withTestID(string $testID): self
     {
-        $obj = clone $this;
-        $obj['testID'] = $testID;
+        $self = clone $this;
+        $self['testID'] = $testID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class AssistantTest implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +245,10 @@ final class AssistantTest implements BaseModel
      */
     public function withDestination(string $destination): self
     {
-        $obj = clone $this;
-        $obj['destination'] = $destination;
+        $self = clone $this;
+        $self['destination'] = $destination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +256,10 @@ final class AssistantTest implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj['instructions'] = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +267,10 @@ final class AssistantTest implements BaseModel
      */
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
-        $obj = clone $this;
-        $obj['maxDurationSeconds'] = $maxDurationSeconds;
+        $self = clone $this;
+        $self['maxDurationSeconds'] = $maxDurationSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,9 +278,9 @@ final class AssistantTest implements BaseModel
      */
     public function withTestSuite(string $testSuite): self
     {
-        $obj = clone $this;
-        $obj['testSuite'] = $testSuite;
+        $self = clone $this;
+        $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 }

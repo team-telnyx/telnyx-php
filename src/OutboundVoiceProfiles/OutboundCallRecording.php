@@ -77,14 +77,14 @@ final class OutboundCallRecording implements BaseModel
         CallRecordingFormat|string|null $callRecordingFormat = null,
         CallRecordingType|string|null $callRecordingType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callRecordingCallerPhoneNumbers && $obj['callRecordingCallerPhoneNumbers'] = $callRecordingCallerPhoneNumbers;
-        null !== $callRecordingChannels && $obj['callRecordingChannels'] = $callRecordingChannels;
-        null !== $callRecordingFormat && $obj['callRecordingFormat'] = $callRecordingFormat;
-        null !== $callRecordingType && $obj['callRecordingType'] = $callRecordingType;
+        null !== $callRecordingCallerPhoneNumbers && $self['callRecordingCallerPhoneNumbers'] = $callRecordingCallerPhoneNumbers;
+        null !== $callRecordingChannels && $self['callRecordingChannels'] = $callRecordingChannels;
+        null !== $callRecordingFormat && $self['callRecordingFormat'] = $callRecordingFormat;
+        null !== $callRecordingType && $self['callRecordingType'] = $callRecordingType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class OutboundCallRecording implements BaseModel
     public function withCallRecordingCallerPhoneNumbers(
         array $callRecordingCallerPhoneNumbers
     ): self {
-        $obj = clone $this;
-        $obj['callRecordingCallerPhoneNumbers'] = $callRecordingCallerPhoneNumbers;
+        $self = clone $this;
+        $self['callRecordingCallerPhoneNumbers'] = $callRecordingCallerPhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class OutboundCallRecording implements BaseModel
     public function withCallRecordingChannels(
         CallRecordingChannels|string $callRecordingChannels
     ): self {
-        $obj = clone $this;
-        $obj['callRecordingChannels'] = $callRecordingChannels;
+        $self = clone $this;
+        $self['callRecordingChannels'] = $callRecordingChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class OutboundCallRecording implements BaseModel
     public function withCallRecordingFormat(
         CallRecordingFormat|string $callRecordingFormat
     ): self {
-        $obj = clone $this;
-        $obj['callRecordingFormat'] = $callRecordingFormat;
+        $self = clone $this;
+        $self['callRecordingFormat'] = $callRecordingFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class OutboundCallRecording implements BaseModel
     public function withCallRecordingType(
         CallRecordingType|string $callRecordingType
     ): self {
-        $obj = clone $this;
-        $obj['callRecordingType'] = $callRecordingType;
+        $self = clone $this;
+        $self['callRecordingType'] = $callRecordingType;
 
-        return $obj;
+        return $self;
     }
 }

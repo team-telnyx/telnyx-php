@@ -87,15 +87,15 @@ final class MigrationCreateParams implements BaseModel
         string $targetRegion,
         ?bool $refresh = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['sourceID'] = $sourceID;
-        $obj['targetBucketName'] = $targetBucketName;
-        $obj['targetRegion'] = $targetRegion;
+        $self['sourceID'] = $sourceID;
+        $self['targetBucketName'] = $targetBucketName;
+        $self['targetRegion'] = $targetRegion;
 
-        null !== $refresh && $obj['refresh'] = $refresh;
+        null !== $refresh && $self['refresh'] = $refresh;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withSourceID(string $sourceID): self
     {
-        $obj = clone $this;
-        $obj['sourceID'] = $sourceID;
+        $self = clone $this;
+        $self['sourceID'] = $sourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withTargetBucketName(string $targetBucketName): self
     {
-        $obj = clone $this;
-        $obj['targetBucketName'] = $targetBucketName;
+        $self = clone $this;
+        $self['targetBucketName'] = $targetBucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withTargetRegion(string $targetRegion): self
     {
-        $obj = clone $this;
-        $obj['targetRegion'] = $targetRegion;
+        $self = clone $this;
+        $self['targetRegion'] = $targetRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,9 +136,9 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withRefresh(bool $refresh): self
     {
-        $obj = clone $this;
-        $obj['refresh'] = $refresh;
+        $self = clone $this;
+        $self['refresh'] = $refresh;
 
-        return $obj;
+        return $self;
     }
 }

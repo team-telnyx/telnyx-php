@@ -199,25 +199,25 @@ final class MessagingProfileUpdateParams implements BaseModel
         ?string $webhookURL = null,
         ?array $whitelistedDestinations = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $alphaSender && $obj['alphaSender'] = $alphaSender;
-        null !== $dailySpendLimit && $obj['dailySpendLimit'] = $dailySpendLimit;
-        null !== $dailySpendLimitEnabled && $obj['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
-        null !== $enabled && $obj['enabled'] = $enabled;
-        null !== $mmsFallBackToSMS && $obj['mmsFallBackToSMS'] = $mmsFallBackToSMS;
-        null !== $mmsTranscoding && $obj['mmsTranscoding'] = $mmsTranscoding;
-        null !== $mobileOnly && $obj['mobileOnly'] = $mobileOnly;
-        null !== $name && $obj['name'] = $name;
-        null !== $numberPoolSettings && $obj['numberPoolSettings'] = $numberPoolSettings;
-        null !== $urlShortenerSettings && $obj['urlShortenerSettings'] = $urlShortenerSettings;
-        null !== $v1Secret && $obj['v1Secret'] = $v1Secret;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
-        null !== $whitelistedDestinations && $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        null !== $alphaSender && $self['alphaSender'] = $alphaSender;
+        null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
+        null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $mmsFallBackToSMS && $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
+        null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
+        null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
+        null !== $name && $self['name'] = $name;
+        null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
+        null !== $v1Secret && $self['v1Secret'] = $v1Secret;
+        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withAlphaSender(?string $alphaSender): self
     {
-        $obj = clone $this;
-        $obj['alphaSender'] = $alphaSender;
+        $self = clone $this;
+        $self['alphaSender'] = $alphaSender;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +236,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withDailySpendLimit(string $dailySpendLimit): self
     {
-        $obj = clone $this;
-        $obj['dailySpendLimit'] = $dailySpendLimit;
+        $self = clone $this;
+        $self['dailySpendLimit'] = $dailySpendLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class MessagingProfileUpdateParams implements BaseModel
     public function withDailySpendLimitEnabled(
         bool $dailySpendLimitEnabled
     ): self {
-        $obj = clone $this;
-        $obj['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
+        $self = clone $this;
+        $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +259,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj['enabled'] = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +270,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withMmsFallBackToSMS(bool $mmsFallBackToSMS): self
     {
-        $obj = clone $this;
-        $obj['mmsFallBackToSMS'] = $mmsFallBackToSMS;
+        $self = clone $this;
+        $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +281,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withMmsTranscoding(bool $mmsTranscoding): self
     {
-        $obj = clone $this;
-        $obj['mmsTranscoding'] = $mmsTranscoding;
+        $self = clone $this;
+        $self['mmsTranscoding'] = $mmsTranscoding;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withMobileOnly(bool $mobileOnly): self
     {
-        $obj = clone $this;
-        $obj['mobileOnly'] = $mobileOnly;
+        $self = clone $this;
+        $self['mobileOnly'] = $mobileOnly;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -303,10 +303,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +327,10 @@ final class MessagingProfileUpdateParams implements BaseModel
     public function withNumberPoolSettings(
         NumberPoolSettings|array|null $numberPoolSettings
     ): self {
-        $obj = clone $this;
-        $obj['numberPoolSettings'] = $numberPoolSettings;
+        $self = clone $this;
+        $self['numberPoolSettings'] = $numberPoolSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -352,10 +352,10 @@ final class MessagingProfileUpdateParams implements BaseModel
     public function withURLShortenerSettings(
         URLShortenerSettings|array|null $urlShortenerSettings
     ): self {
-        $obj = clone $this;
-        $obj['urlShortenerSettings'] = $urlShortenerSettings;
+        $self = clone $this;
+        $self['urlShortenerSettings'] = $urlShortenerSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -363,10 +363,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withV1Secret(string $v1Secret): self
     {
-        $obj = clone $this;
-        $obj['v1Secret'] = $v1Secret;
+        $self = clone $this;
+        $self['v1Secret'] = $v1Secret;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -377,10 +377,10 @@ final class MessagingProfileUpdateParams implements BaseModel
     public function withWebhookAPIVersion(
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
-        $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $self = clone $this;
+        $self['webhookAPIVersion'] = $webhookAPIVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -388,10 +388,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -399,10 +399,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     public function withWebhookURL(?string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -415,9 +415,9 @@ final class MessagingProfileUpdateParams implements BaseModel
     public function withWhitelistedDestinations(
         array $whitelistedDestinations
     ): self {
-        $obj = clone $this;
-        $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 }

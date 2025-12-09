@@ -109,17 +109,17 @@ final class VerifyProfileUpdateParams implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $call && $obj['call'] = $call;
-        null !== $flashcall && $obj['flashcall'] = $flashcall;
-        null !== $language && $obj['language'] = $language;
-        null !== $name && $obj['name'] = $name;
-        null !== $sms && $obj['sms'] = $sms;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $call && $self['call'] = $call;
+        null !== $flashcall && $self['flashcall'] = $flashcall;
+        null !== $language && $self['language'] = $language;
+        null !== $name && $self['name'] = $name;
+        null !== $sms && $self['sms'] = $sms;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class VerifyProfileUpdateParams implements BaseModel
      */
     public function withCall(Call|array $call): self
     {
-        $obj = clone $this;
-        $obj['call'] = $call;
+        $self = clone $this;
+        $self['call'] = $call;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,26 +147,26 @@ final class VerifyProfileUpdateParams implements BaseModel
      */
     public function withFlashcall(Flashcall|array $flashcall): self
     {
-        $obj = clone $this;
-        $obj['flashcall'] = $flashcall;
+        $self = clone $this;
+        $self['flashcall'] = $flashcall;
 
-        return $obj;
+        return $self;
     }
 
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,25 +181,25 @@ final class VerifyProfileUpdateParams implements BaseModel
      */
     public function withSMS(SMS|array $sms): self
     {
-        $obj = clone $this;
-        $obj['sms'] = $sms;
+        $self = clone $this;
+        $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

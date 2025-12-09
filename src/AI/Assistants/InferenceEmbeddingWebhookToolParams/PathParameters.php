@@ -62,13 +62,13 @@ final class PathParameters implements BaseModel
         ?array $required = null,
         Type|string|null $type = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $properties && $obj['properties'] = $properties;
-        null !== $required && $obj['required'] = $required;
-        null !== $type && $obj['type'] = $type;
+        null !== $properties && $self['properties'] = $properties;
+        null !== $required && $self['required'] = $required;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class PathParameters implements BaseModel
      */
     public function withProperties(array $properties): self
     {
-        $obj = clone $this;
-        $obj['properties'] = $properties;
+        $self = clone $this;
+        $self['properties'] = $properties;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class PathParameters implements BaseModel
      */
     public function withRequired(array $required): self
     {
-        $obj = clone $this;
-        $obj['required'] = $required;
+        $self = clone $this;
+        $self['required'] = $required;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class PathParameters implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

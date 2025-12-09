@@ -72,12 +72,12 @@ final class ReportCreateParams implements BaseModel
         ExportPortoutsCsvReport|array $params,
         ReportType|string $reportType
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['params'] = $params;
-        $obj['reportType'] = $reportType;
+        $self['params'] = $params;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class ReportCreateParams implements BaseModel
      */
     public function withParams(ExportPortoutsCsvReport|array $params): self
     {
-        $obj = clone $this;
-        $obj['params'] = $params;
+        $self = clone $this;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,9 +100,9 @@ final class ReportCreateParams implements BaseModel
      */
     public function withReportType(ReportType|string $reportType): self
     {
-        $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $self = clone $this;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 }

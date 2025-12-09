@@ -82,15 +82,15 @@ final class Data implements BaseModel
         Location|array|null $location = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableBandwidth && $obj['availableBandwidth'] = $availableBandwidth;
-        null !== $cloudProvider && $obj['cloudProvider'] = $cloudProvider;
-        null !== $cloudProviderRegion && $obj['cloudProviderRegion'] = $cloudProviderRegion;
-        null !== $location && $obj['location'] = $location;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $availableBandwidth && $self['availableBandwidth'] = $availableBandwidth;
+        null !== $cloudProvider && $self['cloudProvider'] = $cloudProvider;
+        null !== $cloudProviderRegion && $self['cloudProviderRegion'] = $cloudProviderRegion;
+        null !== $location && $self['location'] = $location;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Data implements BaseModel
      */
     public function withAvailableBandwidth(array $availableBandwidth): self
     {
-        $obj = clone $this;
-        $obj['availableBandwidth'] = $availableBandwidth;
+        $self = clone $this;
+        $self['availableBandwidth'] = $availableBandwidth;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class Data implements BaseModel
      */
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
-        $obj = clone $this;
-        $obj['cloudProvider'] = $cloudProvider;
+        $self = clone $this;
+        $self['cloudProvider'] = $cloudProvider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Data implements BaseModel
      */
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
-        $obj = clone $this;
-        $obj['cloudProviderRegion'] = $cloudProviderRegion;
+        $self = clone $this;
+        $self['cloudProviderRegion'] = $cloudProviderRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class Data implements BaseModel
      */
     public function withLocation(Location|array $location): self
     {
-        $obj = clone $this;
-        $obj['location'] = $location;
+        $self = clone $this;
+        $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,9 +152,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

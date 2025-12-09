@@ -50,12 +50,12 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
         ?int $pageSize = null,
         ?string $pageToken = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $pageToken && $obj['pageToken'] = $pageToken;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $pageToken && $self['pageToken'] = $pageToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      */
     public function withPageToken(string $pageToken): self
     {
-        $obj = clone $this;
-        $obj['pageToken'] = $pageToken;
+        $self = clone $this;
+        $self['pageToken'] = $pageToken;
 
-        return $obj;
+        return $self;
     }
 }

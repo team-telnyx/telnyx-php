@@ -58,13 +58,13 @@ final class Filter implements BaseModel
         ?string $fqdn = null,
         ?string $outboundVoiceProfileID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $fqdn && $obj['fqdn'] = $fqdn;
-        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $fqdn && $self['fqdn'] = $fqdn;
+        null !== $outboundVoiceProfileID && $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class Filter implements BaseModel
     public function withConnectionName(
         ConnectionName|array $connectionName
     ): self {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class Filter implements BaseModel
      */
     public function withFqdn(string $fqdn): self
     {
-        $obj = clone $this;
-        $obj['fqdn'] = $fqdn;
+        $self = clone $this;
+        $self['fqdn'] = $fqdn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,9 +98,9 @@ final class Filter implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 }

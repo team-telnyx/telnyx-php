@@ -57,20 +57,20 @@ final class Data implements BaseModel
      */
     public static function with(string $orderID, array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['orderID'] = $orderID;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self['orderID'] = $orderID;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withOrderID(string $orderID): self
     {
-        $obj = clone $this;
-        $obj['orderID'] = $orderID;
+        $self = clone $this;
+        $self['orderID'] = $orderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Data implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

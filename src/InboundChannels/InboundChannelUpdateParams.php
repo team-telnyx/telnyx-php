@@ -54,11 +54,11 @@ final class InboundChannelUpdateParams implements BaseModel
      */
     public static function with(int $channels): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['channels'] = $channels;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class InboundChannelUpdateParams implements BaseModel
      */
     public function withChannels(int $channels): self
     {
-        $obj = clone $this;
-        $obj['channels'] = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 }

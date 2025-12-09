@@ -46,12 +46,12 @@ final class Request implements BaseModel
      */
     public static function with(?array $headers = null, ?string $url = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $headers && $obj['headers'] = $headers;
-        null !== $url && $obj['url'] = $url;
+        null !== $headers && $self['headers'] = $headers;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,17 +61,17 @@ final class Request implements BaseModel
      */
     public function withHeaders(array $headers): self
     {
-        $obj = clone $this;
-        $obj['headers'] = $headers;
+        $self = clone $this;
+        $self['headers'] = $headers;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

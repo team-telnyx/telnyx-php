@@ -31,18 +31,18 @@ final class Meta implements BaseModel
      */
     public static function with(?int $totalResults = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $totalResults && $obj['totalResults'] = $totalResults;
+        null !== $totalResults && $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj['totalResults'] = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

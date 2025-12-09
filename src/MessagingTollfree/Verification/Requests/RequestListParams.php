@@ -92,25 +92,25 @@ final class RequestListParams implements BaseModel
         ?string $phoneNumber = null,
         TfVerificationStatus|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['page'] = $page;
-        $obj['pageSize'] = $pageSize;
+        $self['page'] = $page;
+        $self['pageSize'] = $pageSize;
 
-        null !== $dateEnd && $obj['dateEnd'] = $dateEnd;
-        null !== $dateStart && $obj['dateStart'] = $dateStart;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $dateEnd && $self['dateEnd'] = $dateEnd;
+        null !== $dateStart && $self['dateStart'] = $dateStart;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,34 +120,34 @@ final class RequestListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateEnd(\DateTimeInterface $dateEnd): self
     {
-        $obj = clone $this;
-        $obj['dateEnd'] = $dateEnd;
+        $self = clone $this;
+        $self['dateEnd'] = $dateEnd;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateStart(\DateTimeInterface $dateStart): self
     {
-        $obj = clone $this;
-        $obj['dateStart'] = $dateStart;
+        $self = clone $this;
+        $self['dateStart'] = $dateStart;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,9 +157,9 @@ final class RequestListParams implements BaseModel
      */
     public function withStatus(TfVerificationStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

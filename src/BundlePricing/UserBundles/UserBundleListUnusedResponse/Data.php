@@ -71,12 +71,12 @@ final class Data implements BaseModel
         BillingBundleSummary|array $billingBundle,
         array $userBundleIDs
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['billingBundle'] = $billingBundle;
-        $obj['userBundleIDs'] = $userBundleIDs;
+        $self['billingBundle'] = $billingBundle;
+        $self['userBundleIDs'] = $userBundleIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Data implements BaseModel
     public function withBillingBundle(
         BillingBundleSummary|array $billingBundle
     ): self {
-        $obj = clone $this;
-        $obj['billingBundle'] = $billingBundle;
+        $self = clone $this;
+        $self['billingBundle'] = $billingBundle;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +108,9 @@ final class Data implements BaseModel
      */
     public function withUserBundleIDs(array $userBundleIDs): self
     {
-        $obj = clone $this;
-        $obj['userBundleIDs'] = $userBundleIDs;
+        $self = clone $this;
+        $self['userBundleIDs'] = $userBundleIDs;
 
-        return $obj;
+        return $self;
     }
 }

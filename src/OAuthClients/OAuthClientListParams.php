@@ -108,18 +108,18 @@ final class OAuthClientListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterAllowedGrantTypesContains && $obj['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
-        null !== $filterClientID && $obj['filterClientID'] = $filterClientID;
-        null !== $filterClientType && $obj['filterClientType'] = $filterClientType;
-        null !== $filterName && $obj['filterName'] = $filterName;
-        null !== $filterNameContains && $obj['filterNameContains'] = $filterNameContains;
-        null !== $filterVerified && $obj['filterVerified'] = $filterVerified;
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
+        null !== $filterAllowedGrantTypesContains && $self['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
+        null !== $filterClientID && $self['filterClientID'] = $filterClientID;
+        null !== $filterClientType && $self['filterClientType'] = $filterClientType;
+        null !== $filterName && $self['filterName'] = $filterName;
+        null !== $filterNameContains && $self['filterNameContains'] = $filterNameContains;
+        null !== $filterVerified && $self['filterVerified'] = $filterVerified;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class OAuthClientListParams implements BaseModel
     public function withFilterAllowedGrantTypesContains(
         FilterAllowedGrantTypesContains|string $filterAllowedGrantTypesContains
     ): self {
-        $obj = clone $this;
-        $obj['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
+        $self = clone $this;
+        $self['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class OAuthClientListParams implements BaseModel
      */
     public function withFilterClientID(string $filterClientID): self
     {
-        $obj = clone $this;
-        $obj['filterClientID'] = $filterClientID;
+        $self = clone $this;
+        $self['filterClientID'] = $filterClientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class OAuthClientListParams implements BaseModel
     public function withFilterClientType(
         FilterClientType|string $filterClientType
     ): self {
-        $obj = clone $this;
-        $obj['filterClientType'] = $filterClientType;
+        $self = clone $this;
+        $self['filterClientType'] = $filterClientType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class OAuthClientListParams implements BaseModel
      */
     public function withFilterName(string $filterName): self
     {
-        $obj = clone $this;
-        $obj['filterName'] = $filterName;
+        $self = clone $this;
+        $self['filterName'] = $filterName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class OAuthClientListParams implements BaseModel
      */
     public function withFilterNameContains(string $filterNameContains): self
     {
-        $obj = clone $this;
-        $obj['filterNameContains'] = $filterNameContains;
+        $self = clone $this;
+        $self['filterNameContains'] = $filterNameContains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class OAuthClientListParams implements BaseModel
      */
     public function withFilterVerified(bool $filterVerified): self
     {
-        $obj = clone $this;
-        $obj['filterVerified'] = $filterVerified;
+        $self = clone $this;
+        $self['filterVerified'] = $filterVerified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class OAuthClientListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,9 +210,9 @@ final class OAuthClientListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

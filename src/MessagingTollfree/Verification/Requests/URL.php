@@ -45,18 +45,18 @@ final class URL implements BaseModel
      */
     public static function with(string $url): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['url'] = $url;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

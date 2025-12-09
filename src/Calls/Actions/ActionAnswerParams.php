@@ -342,36 +342,36 @@ final class ActionAnswerParams implements BaseModel
         ?string $webhookURL = null,
         WebhookURLMethod|string|null $webhookURLMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
-        null !== $preferredCodecs && $obj['preferredCodecs'] = $preferredCodecs;
-        null !== $record && $obj['record'] = $record;
-        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
-        null !== $recordCustomFileName && $obj['recordCustomFileName'] = $recordCustomFileName;
-        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
-        null !== $recordMaxLength && $obj['recordMaxLength'] = $recordMaxLength;
-        null !== $recordTimeoutSecs && $obj['recordTimeoutSecs'] = $recordTimeoutSecs;
-        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
-        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
-        null !== $sendSilenceWhenIdle && $obj['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
-        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
-        null !== $soundModifications && $obj['soundModifications'] = $soundModifications;
-        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
-        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
-        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
-        null !== $streamURL && $obj['streamURL'] = $streamURL;
-        null !== $transcription && $obj['transcription'] = $transcription;
-        null !== $transcriptionConfig && $obj['transcriptionConfig'] = $transcriptionConfig;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
-        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
+        null !== $record && $self['record'] = $record;
+        null !== $recordChannels && $self['recordChannels'] = $recordChannels;
+        null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
+        null !== $recordFormat && $self['recordFormat'] = $recordFormat;
+        null !== $recordMaxLength && $self['recordMaxLength'] = $recordMaxLength;
+        null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
+        null !== $recordTrack && $self['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $sendSilenceWhenIdle && $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
+        null !== $soundModifications && $self['soundModifications'] = $soundModifications;
+        null !== $streamBidirectionalCodec && $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $self['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalTargetLegs && $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        null !== $streamCodec && $self['streamCodec'] = $streamCodec;
+        null !== $streamTrack && $self['streamTrack'] = $streamTrack;
+        null !== $streamURL && $self['streamURL'] = $streamURL;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $transcriptionConfig && $self['transcriptionConfig'] = $transcriptionConfig;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $webhookURLMethod && $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -379,10 +379,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -390,10 +390,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -401,10 +401,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -414,10 +414,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj['customHeaders'] = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -428,10 +428,10 @@ final class ActionAnswerParams implements BaseModel
     public function withPreferredCodecs(
         PreferredCodecs|string $preferredCodecs
     ): self {
-        $obj = clone $this;
-        $obj['preferredCodecs'] = $preferredCodecs;
+        $self = clone $this;
+        $self['preferredCodecs'] = $preferredCodecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -441,10 +441,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withRecord(Record|string $record): self
     {
-        $obj = clone $this;
-        $obj['record'] = $record;
+        $self = clone $this;
+        $self['record'] = $record;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -455,10 +455,10 @@ final class ActionAnswerParams implements BaseModel
     public function withRecordChannels(
         RecordChannels|string $recordChannels
     ): self {
-        $obj = clone $this;
-        $obj['recordChannels'] = $recordChannels;
+        $self = clone $this;
+        $self['recordChannels'] = $recordChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -466,10 +466,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
-        $obj = clone $this;
-        $obj['recordCustomFileName'] = $recordCustomFileName;
+        $self = clone $this;
+        $self['recordCustomFileName'] = $recordCustomFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -479,10 +479,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
-        $obj = clone $this;
-        $obj['recordFormat'] = $recordFormat;
+        $self = clone $this;
+        $self['recordFormat'] = $recordFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -490,10 +490,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withRecordMaxLength(int $recordMaxLength): self
     {
-        $obj = clone $this;
-        $obj['recordMaxLength'] = $recordMaxLength;
+        $self = clone $this;
+        $self['recordMaxLength'] = $recordMaxLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -501,10 +501,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['recordTimeoutSecs'] = $recordTimeoutSecs;
+        $self = clone $this;
+        $self['recordTimeoutSecs'] = $recordTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -514,10 +514,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
-        $obj = clone $this;
-        $obj['recordTrack'] = $recordTrack;
+        $self = clone $this;
+        $self['recordTrack'] = $recordTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -527,10 +527,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
-        $obj = clone $this;
-        $obj['recordTrim'] = $recordTrim;
+        $self = clone $this;
+        $self['recordTrim'] = $recordTrim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -538,10 +538,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withSendSilenceWhenIdle(bool $sendSilenceWhenIdle): self
     {
-        $obj = clone $this;
-        $obj['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
+        $self = clone $this;
+        $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -551,10 +551,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj['sipHeaders'] = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -570,10 +570,10 @@ final class ActionAnswerParams implements BaseModel
     public function withSoundModifications(
         SoundModifications|array $soundModifications
     ): self {
-        $obj = clone $this;
-        $obj['soundModifications'] = $soundModifications;
+        $self = clone $this;
+        $self['soundModifications'] = $soundModifications;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -584,10 +584,10 @@ final class ActionAnswerParams implements BaseModel
     public function withStreamBidirectionalCodec(
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        $self = clone $this;
+        $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -598,10 +598,10 @@ final class ActionAnswerParams implements BaseModel
     public function withStreamBidirectionalMode(
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        $self = clone $this;
+        $self['streamBidirectionalMode'] = $streamBidirectionalMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -612,10 +612,10 @@ final class ActionAnswerParams implements BaseModel
     public function withStreamBidirectionalTargetLegs(
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        $self = clone $this;
+        $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -625,10 +625,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
-        $obj = clone $this;
-        $obj['streamCodec'] = $streamCodec;
+        $self = clone $this;
+        $self['streamCodec'] = $streamCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -638,10 +638,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
-        $obj = clone $this;
-        $obj['streamTrack'] = $streamTrack;
+        $self = clone $this;
+        $self['streamTrack'] = $streamTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -649,10 +649,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withStreamURL(string $streamURL): self
     {
-        $obj = clone $this;
-        $obj['streamURL'] = $streamURL;
+        $self = clone $this;
+        $self['streamURL'] = $streamURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -660,10 +660,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withTranscription(bool $transcription): self
     {
-        $obj = clone $this;
-        $obj['transcription'] = $transcription;
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -678,10 +678,10 @@ final class ActionAnswerParams implements BaseModel
     public function withTranscriptionConfig(
         TranscriptionStartRequest|array $transcriptionConfig
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionConfig'] = $transcriptionConfig;
+        $self = clone $this;
+        $self['transcriptionConfig'] = $transcriptionConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -689,10 +689,10 @@ final class ActionAnswerParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -703,9 +703,9 @@ final class ActionAnswerParams implements BaseModel
     public function withWebhookURLMethod(
         WebhookURLMethod|string $webhookURLMethod
     ): self {
-        $obj = clone $this;
-        $obj['webhookURLMethod'] = $webhookURLMethod;
+        $self = clone $this;
+        $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 }

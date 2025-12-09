@@ -56,27 +56,27 @@ final class ParticipantRetrieveParams implements BaseModel
      */
     public static function with(string $accountSid, string $conferenceSid): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['accountSid'] = $accountSid;
-        $obj['conferenceSid'] = $conferenceSid;
+        $self['accountSid'] = $accountSid;
+        $self['conferenceSid'] = $conferenceSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withConferenceSid(string $conferenceSid): self
     {
-        $obj = clone $this;
-        $obj['conferenceSid'] = $conferenceSid;
+        $self = clone $this;
+        $self['conferenceSid'] = $conferenceSid;
 
-        return $obj;
+        return $self;
     }
 }

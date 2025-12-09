@@ -124,30 +124,30 @@ final class NumberBlockOrder implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $phoneNumbersCount && $obj['phoneNumbersCount'] = $phoneNumbersCount;
-        null !== $range && $obj['range'] = $range;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirementsMet && $obj['requirementsMet'] = $requirementsMet;
-        null !== $startingNumber && $obj['startingNumber'] = $startingNumber;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbersCount && $self['phoneNumbersCount'] = $phoneNumbersCount;
+        null !== $range && $self['range'] = $range;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $startingNumber && $self['startingNumber'] = $startingNumber;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbersCount'] = $phoneNumbersCount;
+        $self = clone $this;
+        $self['phoneNumbersCount'] = $phoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,18 +210,18 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withRange(int $range): self
     {
-        $obj = clone $this;
-        $obj['range'] = $range;
+        $self = clone $this;
+        $self['range'] = $range;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj['requirementsMet'] = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withStartingNumber(string $startingNumber): self
     {
-        $obj = clone $this;
-        $obj['startingNumber'] = $startingNumber;
+        $self = clone $this;
+        $self['startingNumber'] = $startingNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +253,10 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -264,9 +264,9 @@ final class NumberBlockOrder implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

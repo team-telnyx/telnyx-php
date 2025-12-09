@@ -79,11 +79,11 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      */
     public static function with(Body|array $body): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['body'] = $body;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      */
     public function withBody(Body|array $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 }

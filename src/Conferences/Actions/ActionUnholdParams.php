@@ -73,13 +73,13 @@ final class ActionUnholdParams implements BaseModel
         array $callControlIDs,
         Region|string|null $region = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['callControlIDs'] = $callControlIDs;
+        $self['callControlIDs'] = $callControlIDs;
 
-        null !== $region && $obj['region'] = $region;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class ActionUnholdParams implements BaseModel
      */
     public function withCallControlIDs(array $callControlIDs): self
     {
-        $obj = clone $this;
-        $obj['callControlIDs'] = $callControlIDs;
+        $self = clone $this;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class ActionUnholdParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 }

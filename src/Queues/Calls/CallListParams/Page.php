@@ -71,15 +71,15 @@ final class Page implements BaseModel
         ?int $number = null,
         ?int $size = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $after && $obj['after'] = $after;
-        null !== $before && $obj['before'] = $before;
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $number && $obj['number'] = $number;
-        null !== $size && $obj['size'] = $size;
+        null !== $after && $self['after'] = $after;
+        null !== $before && $self['before'] = $before;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $number && $self['number'] = $number;
+        null !== $size && $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Page implements BaseModel
      */
     public function withAfter(string $after): self
     {
-        $obj = clone $this;
-        $obj['after'] = $after;
+        $self = clone $this;
+        $self['after'] = $after;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Page implements BaseModel
      */
     public function withBefore(string $before): self
     {
-        $obj = clone $this;
-        $obj['before'] = $before;
+        $self = clone $this;
+        $self['before'] = $before;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Page implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Page implements BaseModel
      */
     public function withNumber(int $number): self
     {
-        $obj = clone $this;
-        $obj['number'] = $number;
+        $self = clone $this;
+        $self['number'] = $number;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class Page implements BaseModel
      */
     public function withSize(int $size): self
     {
-        $obj = clone $this;
-        $obj['size'] = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 }

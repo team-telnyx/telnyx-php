@@ -96,18 +96,18 @@ final class Data implements BaseModel
         ?string $tosUri = null,
         ?bool $verified = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientID && $obj['clientID'] = $clientID;
-        null !== $logoUri && $obj['logoUri'] = $logoUri;
-        null !== $name && $obj['name'] = $name;
-        null !== $policyUri && $obj['policyUri'] = $policyUri;
-        null !== $redirectUri && $obj['redirectUri'] = $redirectUri;
-        null !== $requestedScopes && $obj['requestedScopes'] = $requestedScopes;
-        null !== $tosUri && $obj['tosUri'] = $tosUri;
-        null !== $verified && $obj['verified'] = $verified;
+        null !== $clientID && $self['clientID'] = $clientID;
+        null !== $logoUri && $self['logoUri'] = $logoUri;
+        null !== $name && $self['name'] = $name;
+        null !== $policyUri && $self['policyUri'] = $policyUri;
+        null !== $redirectUri && $self['redirectUri'] = $redirectUri;
+        null !== $requestedScopes && $self['requestedScopes'] = $requestedScopes;
+        null !== $tosUri && $self['tosUri'] = $tosUri;
+        null !== $verified && $self['verified'] = $verified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class Data implements BaseModel
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj['clientID'] = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class Data implements BaseModel
      */
     public function withLogoUri(?string $logoUri): self
     {
-        $obj = clone $this;
-        $obj['logoUri'] = $logoUri;
+        $self = clone $this;
+        $self['logoUri'] = $logoUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class Data implements BaseModel
      */
     public function withPolicyUri(?string $policyUri): self
     {
-        $obj = clone $this;
-        $obj['policyUri'] = $policyUri;
+        $self = clone $this;
+        $self['policyUri'] = $policyUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Data implements BaseModel
      */
     public function withRedirectUri(string $redirectUri): self
     {
-        $obj = clone $this;
-        $obj['redirectUri'] = $redirectUri;
+        $self = clone $this;
+        $self['redirectUri'] = $redirectUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class Data implements BaseModel
      */
     public function withRequestedScopes(array $requestedScopes): self
     {
-        $obj = clone $this;
-        $obj['requestedScopes'] = $requestedScopes;
+        $self = clone $this;
+        $self['requestedScopes'] = $requestedScopes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Data implements BaseModel
      */
     public function withTosUri(?string $tosUri): self
     {
-        $obj = clone $this;
-        $obj['tosUri'] = $tosUri;
+        $self = clone $this;
+        $self['tosUri'] = $tosUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,9 +194,9 @@ final class Data implements BaseModel
      */
     public function withVerified(bool $verified): self
     {
-        $obj = clone $this;
-        $obj['verified'] = $verified;
+        $self = clone $this;
+        $self['verified'] = $verified;
 
-        return $obj;
+        return $self;
     }
 }

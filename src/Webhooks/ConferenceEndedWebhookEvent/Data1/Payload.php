@@ -98,18 +98,18 @@ final class Payload implements BaseModel
         ?\DateTimeInterface $occurredAt = null,
         Reason|string|null $reason = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $conferenceID && $obj['conferenceID'] = $conferenceID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
-        null !== $reason && $obj['reason'] = $reason;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $conferenceID && $self['conferenceID'] = $conferenceID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $occurredAt && $self['occurredAt'] = $occurredAt;
+        null !== $reason && $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Payload implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Payload implements BaseModel
      */
     public function withConferenceID(string $conferenceID): self
     {
-        $obj = clone $this;
-        $obj['conferenceID'] = $conferenceID;
+        $self = clone $this;
+        $self['conferenceID'] = $conferenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Payload implements BaseModel
      */
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
-        $obj = clone $this;
-        $obj['occurredAt'] = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class Payload implements BaseModel
      */
     public function withReason(Reason|string $reason): self
     {
-        $obj = clone $this;
-        $obj['reason'] = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 }

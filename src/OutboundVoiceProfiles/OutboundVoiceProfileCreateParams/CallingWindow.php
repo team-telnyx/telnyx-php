@@ -53,13 +53,13 @@ final class CallingWindow implements BaseModel
         ?string $endTime = null,
         ?string $startTime = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callsPerCld && $obj['callsPerCld'] = $callsPerCld;
-        null !== $endTime && $obj['endTime'] = $endTime;
-        null !== $startTime && $obj['startTime'] = $startTime;
+        null !== $callsPerCld && $self['callsPerCld'] = $callsPerCld;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $startTime && $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class CallingWindow implements BaseModel
      */
     public function withCallsPerCld(int $callsPerCld): self
     {
-        $obj = clone $this;
-        $obj['callsPerCld'] = $callsPerCld;
+        $self = clone $this;
+        $self['callsPerCld'] = $callsPerCld;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class CallingWindow implements BaseModel
      */
     public function withEndTime(string $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class CallingWindow implements BaseModel
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 }

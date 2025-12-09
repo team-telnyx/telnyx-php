@@ -136,18 +136,18 @@ final class ActionStartAIAssistantParams implements BaseModel
         ?string $voice = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $assistant && $obj['assistant'] = $assistant;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $greeting && $obj['greeting'] = $greeting;
-        null !== $interruptionSettings && $obj['interruptionSettings'] = $interruptionSettings;
-        null !== $transcription && $obj['transcription'] = $transcription;
-        null !== $voice && $obj['voice'] = $voice;
-        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
+        null !== $assistant && $self['assistant'] = $assistant;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $greeting && $self['greeting'] = $greeting;
+        null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $voice && $self['voice'] = $voice;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withAssistant(Assistant|array $assistant): self
     {
-        $obj = clone $this;
-        $obj['assistant'] = $assistant;
+        $self = clone $this;
+        $self['assistant'] = $assistant;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withGreeting(string $greeting): self
     {
-        $obj = clone $this;
-        $obj['greeting'] = $greeting;
+        $self = clone $this;
+        $self['greeting'] = $greeting;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withInterruptionSettings(
         InterruptionSettings|array $interruptionSettings
     ): self {
-        $obj = clone $this;
-        $obj['interruptionSettings'] = $interruptionSettings;
+        $self = clone $this;
+        $self['interruptionSettings'] = $interruptionSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withTranscription(
         TranscriptionConfig|array $transcription
     ): self {
-        $obj = clone $this;
-        $obj['transcription'] = $transcription;
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +237,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj['voice'] = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,9 +258,9 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
-        $obj = clone $this;
-        $obj['voiceSettings'] = $voiceSettings;
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

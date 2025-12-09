@@ -109,41 +109,41 @@ final class EmbeddingCreateParams implements BaseModel
         EmbeddingModel|string|null $embeddingModel = null,
         Loader|string|null $loader = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucketName'] = $bucketName;
+        $self['bucketName'] = $bucketName;
 
-        null !== $documentChunkOverlapSize && $obj['documentChunkOverlapSize'] = $documentChunkOverlapSize;
-        null !== $documentChunkSize && $obj['documentChunkSize'] = $documentChunkSize;
-        null !== $embeddingModel && $obj['embeddingModel'] = $embeddingModel;
-        null !== $loader && $obj['loader'] = $loader;
+        null !== $documentChunkOverlapSize && $self['documentChunkOverlapSize'] = $documentChunkOverlapSize;
+        null !== $documentChunkSize && $self['documentChunkSize'] = $documentChunkSize;
+        null !== $embeddingModel && $self['embeddingModel'] = $embeddingModel;
+        null !== $loader && $self['loader'] = $loader;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj['bucketName'] = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     public function withDocumentChunkOverlapSize(
         int $documentChunkOverlapSize
     ): self {
-        $obj = clone $this;
-        $obj['documentChunkOverlapSize'] = $documentChunkOverlapSize;
+        $self = clone $this;
+        $self['documentChunkOverlapSize'] = $documentChunkOverlapSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withDocumentChunkSize(int $documentChunkSize): self
     {
-        $obj = clone $this;
-        $obj['documentChunkSize'] = $documentChunkSize;
+        $self = clone $this;
+        $self['documentChunkSize'] = $documentChunkSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class EmbeddingCreateParams implements BaseModel
     public function withEmbeddingModel(
         EmbeddingModel|string $embeddingModel
     ): self {
-        $obj = clone $this;
-        $obj['embeddingModel'] = $embeddingModel;
+        $self = clone $this;
+        $self['embeddingModel'] = $embeddingModel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,9 +167,9 @@ final class EmbeddingCreateParams implements BaseModel
      */
     public function withLoader(Loader|string $loader): self
     {
-        $obj = clone $this;
-        $obj['loader'] = $loader;
+        $self = clone $this;
+        $self['loader'] = $loader;
 
-        return $obj;
+        return $self;
     }
 }

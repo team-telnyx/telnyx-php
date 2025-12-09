@@ -66,14 +66,14 @@ final class TranscriptionData implements BaseModel
         ?string $transcript = null,
         TranscriptionTrack|string|null $transcriptionTrack = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $confidence && $obj['confidence'] = $confidence;
-        null !== $isFinal && $obj['isFinal'] = $isFinal;
-        null !== $transcript && $obj['transcript'] = $transcript;
-        null !== $transcriptionTrack && $obj['transcriptionTrack'] = $transcriptionTrack;
+        null !== $confidence && $self['confidence'] = $confidence;
+        null !== $isFinal && $self['isFinal'] = $isFinal;
+        null !== $transcript && $self['transcript'] = $transcript;
+        null !== $transcriptionTrack && $self['transcriptionTrack'] = $transcriptionTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class TranscriptionData implements BaseModel
      */
     public function withConfidence(float $confidence): self
     {
-        $obj = clone $this;
-        $obj['confidence'] = $confidence;
+        $self = clone $this;
+        $self['confidence'] = $confidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class TranscriptionData implements BaseModel
      */
     public function withIsFinal(bool $isFinal): self
     {
-        $obj = clone $this;
-        $obj['isFinal'] = $isFinal;
+        $self = clone $this;
+        $self['isFinal'] = $isFinal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class TranscriptionData implements BaseModel
      */
     public function withTranscript(string $transcript): self
     {
-        $obj = clone $this;
-        $obj['transcript'] = $transcript;
+        $self = clone $this;
+        $self['transcript'] = $transcript;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class TranscriptionData implements BaseModel
     public function withTranscriptionTrack(
         TranscriptionTrack|string $transcriptionTrack
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionTrack'] = $transcriptionTrack;
+        $self = clone $this;
+        $self['transcriptionTrack'] = $transcriptionTrack;
 
-        return $obj;
+        return $self;
     }
 }

@@ -54,11 +54,11 @@ final class CampaignSubmitAppealParams implements BaseModel
      */
     public static function with(string $appealReason): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['appealReason'] = $appealReason;
+        $self['appealReason'] = $appealReason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class CampaignSubmitAppealParams implements BaseModel
      */
     public function withAppealReason(string $appealReason): self
     {
-        $obj = clone $this;
-        $obj['appealReason'] = $appealReason;
+        $self = clone $this;
+        $self['appealReason'] = $appealReason;
 
-        return $obj;
+        return $self;
     }
 }

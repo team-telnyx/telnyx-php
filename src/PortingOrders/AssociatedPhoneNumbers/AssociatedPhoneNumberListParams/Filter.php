@@ -51,12 +51,12 @@ final class Filter implements BaseModel
         Action|string|null $action = null,
         ?string $phoneNumber = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $action && $obj['action'] = $action;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $action && $self['action'] = $action;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +66,10 @@ final class Filter implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

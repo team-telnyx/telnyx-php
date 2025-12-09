@@ -60,12 +60,12 @@ final class PhoneNumberConfiguration implements BaseModel
         string $portingPhoneNumberID,
         string $userBundleID
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
-        $obj['userBundleID'] = $userBundleID;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
+        $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class PhoneNumberConfiguration implements BaseModel
      */
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
-        $obj = clone $this;
-        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
+        $self = clone $this;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class PhoneNumberConfiguration implements BaseModel
      */
     public function withUserBundleID(string $userBundleID): self
     {
-        $obj = clone $this;
-        $obj['userBundleID'] = $userBundleID;
+        $self = clone $this;
+        $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 }

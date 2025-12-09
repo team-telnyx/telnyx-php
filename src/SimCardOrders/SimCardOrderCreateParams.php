@@ -62,12 +62,12 @@ final class SimCardOrderCreateParams implements BaseModel
      */
     public static function with(string $addressID, int $quantity): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['addressID'] = $addressID;
-        $obj['quantity'] = $quantity;
+        $self['addressID'] = $addressID;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class SimCardOrderCreateParams implements BaseModel
      */
     public function withAddressID(string $addressID): self
     {
-        $obj = clone $this;
-        $obj['addressID'] = $addressID;
+        $self = clone $this;
+        $self['addressID'] = $addressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class SimCardOrderCreateParams implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 }

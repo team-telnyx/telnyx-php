@@ -137,22 +137,22 @@ final class Conference implements BaseModel
         ?array $subresourceUris = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj['accountSid'] = $accountSid;
-        null !== $apiVersion && $obj['apiVersion'] = $apiVersion;
-        null !== $callSidEndingConference && $obj['callSidEndingConference'] = $callSidEndingConference;
-        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
-        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
-        null !== $friendlyName && $obj['friendlyName'] = $friendlyName;
-        null !== $reasonConferenceEnded && $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
-        null !== $region && $obj['region'] = $region;
-        null !== $sid && $obj['sid'] = $sid;
-        null !== $status && $obj['status'] = $status;
-        null !== $subresourceUris && $obj['subresourceUris'] = $subresourceUris;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $apiVersion && $self['apiVersion'] = $apiVersion;
+        null !== $callSidEndingConference && $self['callSidEndingConference'] = $callSidEndingConference;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $friendlyName && $self['friendlyName'] = $friendlyName;
+        null !== $reasonConferenceEnded && $self['reasonConferenceEnded'] = $reasonConferenceEnded;
+        null !== $region && $self['region'] = $region;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $status && $self['status'] = $status;
+        null !== $subresourceUris && $self['subresourceUris'] = $subresourceUris;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class Conference implements BaseModel
      */
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +171,10 @@ final class Conference implements BaseModel
      */
     public function withAPIVersion(string $apiVersion): self
     {
-        $obj = clone $this;
-        $obj['apiVersion'] = $apiVersion;
+        $self = clone $this;
+        $self['apiVersion'] = $apiVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Conference implements BaseModel
     public function withCallSidEndingConference(
         string $callSidEndingConference
     ): self {
-        $obj = clone $this;
-        $obj['callSidEndingConference'] = $callSidEndingConference;
+        $self = clone $this;
+        $self['callSidEndingConference'] = $callSidEndingConference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class Conference implements BaseModel
      */
     public function withDateCreated(string $dateCreated): self
     {
-        $obj = clone $this;
-        $obj['dateCreated'] = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class Conference implements BaseModel
      */
     public function withDateUpdated(string $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj['dateUpdated'] = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,10 +216,10 @@ final class Conference implements BaseModel
      */
     public function withFriendlyName(string $friendlyName): self
     {
-        $obj = clone $this;
-        $obj['friendlyName'] = $friendlyName;
+        $self = clone $this;
+        $self['friendlyName'] = $friendlyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class Conference implements BaseModel
     public function withReasonConferenceEnded(
         ReasonConferenceEnded|string $reasonConferenceEnded
     ): self {
-        $obj = clone $this;
-        $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
+        $self = clone $this;
+        $self['reasonConferenceEnded'] = $reasonConferenceEnded;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,10 +241,10 @@ final class Conference implements BaseModel
      */
     public function withRegion(string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,10 +252,10 @@ final class Conference implements BaseModel
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj['sid'] = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class Conference implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +278,10 @@ final class Conference implements BaseModel
      */
     public function withSubresourceUris(array $subresourceUris): self
     {
-        $obj = clone $this;
-        $obj['subresourceUris'] = $subresourceUris;
+        $self = clone $this;
+        $self['subresourceUris'] = $subresourceUris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,9 +289,9 @@ final class Conference implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

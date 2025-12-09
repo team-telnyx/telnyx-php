@@ -54,12 +54,12 @@ final class Item implements BaseModel
      */
     public static function with(string $billingBundleID, int $quantity): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['billingBundleID'] = $billingBundleID;
-        $obj['quantity'] = $quantity;
+        $self['billingBundleID'] = $billingBundleID;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Item implements BaseModel
      */
     public function withBillingBundleID(string $billingBundleID): self
     {
-        $obj = clone $this;
-        $obj['billingBundleID'] = $billingBundleID;
+        $self = clone $this;
+        $self['billingBundleID'] = $billingBundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Item implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 }

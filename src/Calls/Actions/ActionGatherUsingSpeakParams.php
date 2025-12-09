@@ -225,27 +225,27 @@ final class ActionGatherUsingSpeakParams implements BaseModel
         ?string $validDigits = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['payload'] = $payload;
-        $obj['voice'] = $voice;
+        $self['payload'] = $payload;
+        $self['voice'] = $voice;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $interDigitTimeoutMillis && $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
-        null !== $invalidPayload && $obj['invalidPayload'] = $invalidPayload;
-        null !== $language && $obj['language'] = $language;
-        null !== $maximumDigits && $obj['maximumDigits'] = $maximumDigits;
-        null !== $maximumTries && $obj['maximumTries'] = $maximumTries;
-        null !== $minimumDigits && $obj['minimumDigits'] = $minimumDigits;
-        null !== $payloadType && $obj['payloadType'] = $payloadType;
-        null !== $serviceLevel && $obj['serviceLevel'] = $serviceLevel;
-        null !== $terminatingDigit && $obj['terminatingDigit'] = $terminatingDigit;
-        null !== $timeoutMillis && $obj['timeoutMillis'] = $timeoutMillis;
-        null !== $validDigits && $obj['validDigits'] = $validDigits;
-        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $interDigitTimeoutMillis && $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        null !== $invalidPayload && $self['invalidPayload'] = $invalidPayload;
+        null !== $language && $self['language'] = $language;
+        null !== $maximumDigits && $self['maximumDigits'] = $maximumDigits;
+        null !== $maximumTries && $self['maximumTries'] = $maximumTries;
+        null !== $minimumDigits && $self['minimumDigits'] = $minimumDigits;
+        null !== $payloadType && $self['payloadType'] = $payloadType;
+        null !== $serviceLevel && $self['serviceLevel'] = $serviceLevel;
+        null !== $terminatingDigit && $self['terminatingDigit'] = $terminatingDigit;
+        null !== $timeoutMillis && $self['timeoutMillis'] = $timeoutMillis;
+        null !== $validDigits && $self['validDigits'] = $validDigits;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +253,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withPayload(string $payload): self
     {
-        $obj = clone $this;
-        $obj['payload'] = $payload;
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj['voice'] = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,10 +285,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -296,10 +296,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withInterDigitTimeoutMillis(
         int $interDigitTimeoutMillis
     ): self {
-        $obj = clone $this;
-        $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        $self = clone $this;
+        $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -319,10 +319,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withInvalidPayload(string $invalidPayload): self
     {
-        $obj = clone $this;
-        $obj['invalidPayload'] = $invalidPayload;
+        $self = clone $this;
+        $self['invalidPayload'] = $invalidPayload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +332,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withLanguage(Language|string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -343,10 +343,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withMaximumDigits(int $maximumDigits): self
     {
-        $obj = clone $this;
-        $obj['maximumDigits'] = $maximumDigits;
+        $self = clone $this;
+        $self['maximumDigits'] = $maximumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -354,10 +354,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withMaximumTries(int $maximumTries): self
     {
-        $obj = clone $this;
-        $obj['maximumTries'] = $maximumTries;
+        $self = clone $this;
+        $self['maximumTries'] = $maximumTries;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -365,10 +365,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withMinimumDigits(int $minimumDigits): self
     {
-        $obj = clone $this;
-        $obj['minimumDigits'] = $minimumDigits;
+        $self = clone $this;
+        $self['minimumDigits'] = $minimumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -378,10 +378,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withPayloadType(PayloadType|string $payloadType): self
     {
-        $obj = clone $this;
-        $obj['payloadType'] = $payloadType;
+        $self = clone $this;
+        $self['payloadType'] = $payloadType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -391,10 +391,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withServiceLevel(ServiceLevel|string $serviceLevel): self
     {
-        $obj = clone $this;
-        $obj['serviceLevel'] = $serviceLevel;
+        $self = clone $this;
+        $self['serviceLevel'] = $serviceLevel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -402,10 +402,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withTerminatingDigit(string $terminatingDigit): self
     {
-        $obj = clone $this;
-        $obj['terminatingDigit'] = $terminatingDigit;
+        $self = clone $this;
+        $self['terminatingDigit'] = $terminatingDigit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -413,10 +413,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withTimeoutMillis(int $timeoutMillis): self
     {
-        $obj = clone $this;
-        $obj['timeoutMillis'] = $timeoutMillis;
+        $self = clone $this;
+        $self['timeoutMillis'] = $timeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -424,10 +424,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withValidDigits(string $validDigits): self
     {
-        $obj = clone $this;
-        $obj['validDigits'] = $validDigits;
+        $self = clone $this;
+        $self['validDigits'] = $validDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -445,9 +445,9 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
-        $obj = clone $this;
-        $obj['voiceSettings'] = $voiceSettings;
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

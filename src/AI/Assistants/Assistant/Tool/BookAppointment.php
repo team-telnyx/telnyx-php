@@ -60,11 +60,11 @@ final class BookAppointment implements BaseModel
     public static function with(
         BookAppointment\BookAppointment|array $bookAppointment,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bookAppointment'] = $bookAppointment;
+        $self['bookAppointment'] = $bookAppointment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class BookAppointment implements BaseModel
     public function withBookAppointment(
         BookAppointment\BookAppointment|array $bookAppointment,
     ): self {
-        $obj = clone $this;
-        $obj['bookAppointment'] = $bookAppointment;
+        $self = clone $this;
+        $self['bookAppointment'] = $bookAppointment;
 
-        return $obj;
+        return $self;
     }
 }

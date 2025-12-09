@@ -174,35 +174,35 @@ final class AmdDetailRecord implements BaseModel
         ?string $rateMeasuredIn = null,
         ?string $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $billingGroupName && $obj['billingGroupName'] = $billingGroupName;
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $feature && $obj['feature'] = $feature;
-        null !== $invokedAt && $obj['invokedAt'] = $invokedAt;
-        null !== $isTelnyxBillable && $obj['isTelnyxBillable'] = $isTelnyxBillable;
-        null !== $rate && $obj['rate'] = $rate;
-        null !== $rateMeasuredIn && $obj['rateMeasuredIn'] = $rateMeasuredIn;
-        null !== $tags && $obj['tags'] = $tags;
+        null !== $id && $self['id'] = $id;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $billingGroupName && $self['billingGroupName'] = $billingGroupName;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $feature && $self['feature'] = $feature;
+        null !== $invokedAt && $self['invokedAt'] = $invokedAt;
+        null !== $isTelnyxBillable && $self['isTelnyxBillable'] = $isTelnyxBillable;
+        null !== $rate && $self['rate'] = $rate;
+        null !== $rateMeasuredIn && $self['rateMeasuredIn'] = $rateMeasuredIn;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withBillingGroupName(string $billingGroupName): self
     {
-        $obj = clone $this;
-        $obj['billingGroupName'] = $billingGroupName;
+        $self = clone $this;
+        $self['billingGroupName'] = $billingGroupName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +254,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withConnectionName(string $connectionName): self
     {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,10 +298,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -311,10 +311,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withFeature(Feature|string $feature): self
     {
-        $obj = clone $this;
-        $obj['feature'] = $feature;
+        $self = clone $this;
+        $self['feature'] = $feature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +322,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withInvokedAt(\DateTimeInterface $invokedAt): self
     {
-        $obj = clone $this;
-        $obj['invokedAt'] = $invokedAt;
+        $self = clone $this;
+        $self['invokedAt'] = $invokedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,10 +333,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withIsTelnyxBillable(bool $isTelnyxBillable): self
     {
-        $obj = clone $this;
-        $obj['isTelnyxBillable'] = $isTelnyxBillable;
+        $self = clone $this;
+        $self['isTelnyxBillable'] = $isTelnyxBillable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,10 +344,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withRate(string $rate): self
     {
-        $obj = clone $this;
-        $obj['rate'] = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -355,10 +355,10 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
-        $obj = clone $this;
-        $obj['rateMeasuredIn'] = $rateMeasuredIn;
+        $self = clone $this;
+        $self['rateMeasuredIn'] = $rateMeasuredIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -366,9 +366,9 @@ final class AmdDetailRecord implements BaseModel
      */
     public function withTags(string $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

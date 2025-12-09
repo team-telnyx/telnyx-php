@@ -63,12 +63,12 @@ final class BrandGetFeedbackResponse implements BaseModel
      */
     public static function with(string $brandID, array $category): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['brandID'] = $brandID;
-        $obj['category'] = $category;
+        $self['brandID'] = $brandID;
+        $self['category'] = $category;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class BrandGetFeedbackResponse implements BaseModel
      */
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +91,9 @@ final class BrandGetFeedbackResponse implements BaseModel
      */
     public function withCategory(array $category): self
     {
-        $obj = clone $this;
-        $obj['category'] = $category;
+        $self = clone $this;
+        $self['category'] = $category;
 
-        return $obj;
+        return $self;
     }
 }

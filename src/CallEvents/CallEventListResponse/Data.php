@@ -119,17 +119,17 @@ final class Data implements BaseModel
         RecordType|string $recordType,
         Type|string $type,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['callLegID'] = $callLegID;
-        $obj['callSessionID'] = $callSessionID;
-        $obj['eventTimestamp'] = $eventTimestamp;
-        $obj['metadata'] = $metadata;
-        $obj['name'] = $name;
-        $obj['recordType'] = $recordType;
-        $obj['type'] = $type;
+        $self['callLegID'] = $callLegID;
+        $self['callSessionID'] = $callSessionID;
+        $self['eventTimestamp'] = $eventTimestamp;
+        $self['metadata'] = $metadata;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Data implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class Data implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Data implements BaseModel
      */
     public function withEventTimestamp(string $eventTimestamp): self
     {
-        $obj = clone $this;
-        $obj['eventTimestamp'] = $eventTimestamp;
+        $self = clone $this;
+        $self['eventTimestamp'] = $eventTimestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Data implements BaseModel
      */
     public function withMetadata(mixed $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,9 +205,9 @@ final class Data implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

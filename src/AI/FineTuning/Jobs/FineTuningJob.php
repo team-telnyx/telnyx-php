@@ -143,19 +143,19 @@ final class FineTuningJob implements BaseModel
         ?int $trainedTokens,
         string $trainingFile,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['finishedAt'] = $finishedAt;
-        $obj['hyperparameters'] = $hyperparameters;
-        $obj['model'] = $model;
-        $obj['organizationID'] = $organizationID;
-        $obj['status'] = $status;
-        $obj['trainedTokens'] = $trainedTokens;
-        $obj['trainingFile'] = $trainingFile;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['finishedAt'] = $finishedAt;
+        $self['hyperparameters'] = $hyperparameters;
+        $self['model'] = $model;
+        $self['organizationID'] = $organizationID;
+        $self['status'] = $status;
+        $self['trainedTokens'] = $trainedTokens;
+        $self['trainingFile'] = $trainingFile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class FineTuningJob implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class FineTuningJob implements BaseModel
      */
     public function withCreatedAt(int $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class FineTuningJob implements BaseModel
      */
     public function withFinishedAt(?int $finishedAt): self
     {
-        $obj = clone $this;
-        $obj['finishedAt'] = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class FineTuningJob implements BaseModel
     public function withHyperparameters(
         Hyperparameters|array $hyperparameters
     ): self {
-        $obj = clone $this;
-        $obj['hyperparameters'] = $hyperparameters;
+        $self = clone $this;
+        $self['hyperparameters'] = $hyperparameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class FineTuningJob implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class FineTuningJob implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationID'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class FineTuningJob implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +245,10 @@ final class FineTuningJob implements BaseModel
      */
     public function withTrainedTokens(?int $trainedTokens): self
     {
-        $obj = clone $this;
-        $obj['trainedTokens'] = $trainedTokens;
+        $self = clone $this;
+        $self['trainedTokens'] = $trainedTokens;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,9 +256,9 @@ final class FineTuningJob implements BaseModel
      */
     public function withTrainingFile(string $trainingFile): self
     {
-        $obj = clone $this;
-        $obj['trainingFile'] = $trainingFile;
+        $self = clone $this;
+        $self['trainingFile'] = $trainingFile;
 
-        return $obj;
+        return $self;
     }
 }

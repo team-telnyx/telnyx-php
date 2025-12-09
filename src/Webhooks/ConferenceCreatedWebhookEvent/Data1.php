@@ -77,14 +77,14 @@ final class Data1 implements BaseModel
         Payload|array|null $payload = null,
         RecordType|string|null $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $payload && $obj['payload'] = $payload;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $eventType && $self['eventType'] = $eventType;
+        null !== $payload && $self['payload'] = $payload;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Data1 implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Data1 implements BaseModel
      */
     public function withEventType(EventType|string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Data1 implements BaseModel
      */
     public function withPayload(Payload|array $payload): self
     {
-        $obj = clone $this;
-        $obj['payload'] = $payload;
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class Data1 implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $startsWith = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $startsWith && $obj['startsWith'] = $startsWith;
+        null !== $startsWith && $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withStartsWith(string $startsWith): self
     {
-        $obj = clone $this;
-        $obj['startsWith'] = $startsWith;
+        $self = clone $this;
+        $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 }

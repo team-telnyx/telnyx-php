@@ -53,22 +53,22 @@ final class Data implements BaseModel
         ?string $zoneID = null,
         ?string $zoneName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $numberOfChannels && $obj['numberOfChannels'] = $numberOfChannels;
-        null !== $numbers && $obj['numbers'] = $numbers;
-        null !== $zoneID && $obj['zoneID'] = $zoneID;
-        null !== $zoneName && $obj['zoneName'] = $zoneName;
+        null !== $numberOfChannels && $self['numberOfChannels'] = $numberOfChannels;
+        null !== $numbers && $self['numbers'] = $numbers;
+        null !== $zoneID && $self['zoneID'] = $zoneID;
+        null !== $zoneName && $self['zoneName'] = $zoneName;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumberOfChannels(int $numberOfChannels): self
     {
-        $obj = clone $this;
-        $obj['numberOfChannels'] = $numberOfChannels;
+        $self = clone $this;
+        $self['numberOfChannels'] = $numberOfChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,25 +76,25 @@ final class Data implements BaseModel
      */
     public function withNumbers(array $numbers): self
     {
-        $obj = clone $this;
-        $obj['numbers'] = $numbers;
+        $self = clone $this;
+        $self['numbers'] = $numbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withZoneID(string $zoneID): self
     {
-        $obj = clone $this;
-        $obj['zoneID'] = $zoneID;
+        $self = clone $this;
+        $self['zoneID'] = $zoneID;
 
-        return $obj;
+        return $self;
     }
 
     public function withZoneName(string $zoneName): self
     {
-        $obj = clone $this;
-        $obj['zoneName'] = $zoneName;
+        $self = clone $this;
+        $self['zoneName'] = $zoneName;
 
-        return $obj;
+        return $self;
     }
 }

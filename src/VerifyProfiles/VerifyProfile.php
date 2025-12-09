@@ -111,29 +111,29 @@ final class VerifyProfile implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $call && $obj['call'] = $call;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $flashcall && $obj['flashcall'] = $flashcall;
-        null !== $language && $obj['language'] = $language;
-        null !== $name && $obj['name'] = $name;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $sms && $obj['sms'] = $sms;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $id && $self['id'] = $id;
+        null !== $call && $self['call'] = $call;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $flashcall && $self['flashcall'] = $flashcall;
+        null !== $language && $self['language'] = $language;
+        null !== $name && $self['name'] = $name;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sms && $self['sms'] = $sms;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,18 +147,18 @@ final class VerifyProfile implements BaseModel
      */
     public function withCall(Call|array $call): self
     {
-        $obj = clone $this;
-        $obj['call'] = $call;
+        $self = clone $this;
+        $self['call'] = $call;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,26 +166,26 @@ final class VerifyProfile implements BaseModel
      */
     public function withFlashcall(Flashcall|array $flashcall): self
     {
-        $obj = clone $this;
-        $obj['flashcall'] = $flashcall;
+        $self = clone $this;
+        $self['flashcall'] = $flashcall;
 
-        return $obj;
+        return $self;
     }
 
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class VerifyProfile implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,33 +213,33 @@ final class VerifyProfile implements BaseModel
      */
     public function withSMS(SMS|array $sms): self
     {
-        $obj = clone $this;
-        $obj['sms'] = $sms;
+        $self = clone $this;
+        $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

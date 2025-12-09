@@ -99,136 +99,136 @@ final class Result implements BaseModel
         ?string $tags = null,
         ?string $tnType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierPassthroughFee && $obj['carrierPassthroughFee'] = $carrierPassthroughFee;
-        null !== $connection && $obj['connection'] = $connection;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $delivered && $obj['delivered'] = $delivered;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $messageType && $obj['messageType'] = $messageType;
-        null !== $parts && $obj['parts'] = $parts;
-        null !== $product && $obj['product'] = $product;
-        null !== $profileID && $obj['profileID'] = $profileID;
-        null !== $received && $obj['received'] = $received;
-        null !== $sent && $obj['sent'] = $sent;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $tnType && $obj['tnType'] = $tnType;
+        null !== $carrierPassthroughFee && $self['carrierPassthroughFee'] = $carrierPassthroughFee;
+        null !== $connection && $self['connection'] = $connection;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $delivered && $self['delivered'] = $delivered;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $messageType && $self['messageType'] = $messageType;
+        null !== $parts && $self['parts'] = $parts;
+        null !== $product && $self['product'] = $product;
+        null !== $profileID && $self['profileID'] = $profileID;
+        null !== $received && $self['received'] = $received;
+        null !== $sent && $self['sent'] = $sent;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $tnType && $self['tnType'] = $tnType;
 
-        return $obj;
+        return $self;
     }
 
     public function withCarrierPassthroughFee(
         string $carrierPassthroughFee
     ): self {
-        $obj = clone $this;
-        $obj['carrierPassthroughFee'] = $carrierPassthroughFee;
+        $self = clone $this;
+        $self['carrierPassthroughFee'] = $carrierPassthroughFee;
 
-        return $obj;
+        return $self;
     }
 
     public function withConnection(string $connection): self
     {
-        $obj = clone $this;
-        $obj['connection'] = $connection;
+        $self = clone $this;
+        $self['connection'] = $connection;
 
-        return $obj;
+        return $self;
     }
 
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     public function withDelivered(string $delivered): self
     {
-        $obj = clone $this;
-        $obj['delivered'] = $delivered;
+        $self = clone $this;
+        $self['delivered'] = $delivered;
 
-        return $obj;
+        return $self;
     }
 
     public function withDirection(string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     public function withMessageType(string $messageType): self
     {
-        $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $self = clone $this;
+        $self['messageType'] = $messageType;
 
-        return $obj;
+        return $self;
     }
 
     public function withParts(string $parts): self
     {
-        $obj = clone $this;
-        $obj['parts'] = $parts;
+        $self = clone $this;
+        $self['parts'] = $parts;
 
-        return $obj;
+        return $self;
     }
 
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     public function withProfileID(string $profileID): self
     {
-        $obj = clone $this;
-        $obj['profileID'] = $profileID;
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withReceived(string $received): self
     {
-        $obj = clone $this;
-        $obj['received'] = $received;
+        $self = clone $this;
+        $self['received'] = $received;
 
-        return $obj;
+        return $self;
     }
 
     public function withSent(string $sent): self
     {
-        $obj = clone $this;
-        $obj['sent'] = $sent;
+        $self = clone $this;
+        $self['sent'] = $sent;
 
-        return $obj;
+        return $self;
     }
 
     public function withTags(string $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     public function withTnType(string $tnType): self
     {
-        $obj = clone $this;
-        $obj['tnType'] = $tnType;
+        $self = clone $this;
+        $self['tnType'] = $tnType;
 
-        return $obj;
+        return $self;
     }
 }

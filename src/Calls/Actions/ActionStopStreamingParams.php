@@ -61,13 +61,13 @@ final class ActionStopStreamingParams implements BaseModel
         ?string $commandID = null,
         ?string $streamID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $streamID && $obj['streamID'] = $streamID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $streamID && $self['streamID'] = $streamID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class ActionStopStreamingParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class ActionStopStreamingParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +97,9 @@ final class ActionStopStreamingParams implements BaseModel
      */
     public function withStreamID(string $streamID): self
     {
-        $obj = clone $this;
-        $obj['streamID'] = $streamID;
+        $self = clone $this;
+        $self['streamID'] = $streamID;
 
-        return $obj;
+        return $self;
     }
 }

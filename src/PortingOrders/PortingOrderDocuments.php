@@ -46,12 +46,12 @@ final class PortingOrderDocuments implements BaseModel
         ?string $invoice = null,
         ?string $loa = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $invoice && $obj['invoice'] = $invoice;
-        null !== $loa && $obj['loa'] = $loa;
+        null !== $invoice && $self['invoice'] = $invoice;
+        null !== $loa && $self['loa'] = $loa;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class PortingOrderDocuments implements BaseModel
      */
     public function withInvoice(?string $invoice): self
     {
-        $obj = clone $this;
-        $obj['invoice'] = $invoice;
+        $self = clone $this;
+        $self['invoice'] = $invoice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class PortingOrderDocuments implements BaseModel
      */
     public function withLoa(?string $loa): self
     {
-        $obj = clone $this;
-        $obj['loa'] = $loa;
+        $self = clone $this;
+        $self['loa'] = $loa;
 
-        return $obj;
+        return $self;
     }
 }

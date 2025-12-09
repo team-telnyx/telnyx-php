@@ -125,18 +125,18 @@ final class Data implements BaseModel
         RecordType|string $recordType,
         string $updatedAt,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['averageWaitTimeSecs'] = $averageWaitTimeSecs;
-        $obj['createdAt'] = $createdAt;
-        $obj['currentSize'] = $currentSize;
-        $obj['maxSize'] = $maxSize;
-        $obj['name'] = $name;
-        $obj['recordType'] = $recordType;
-        $obj['updatedAt'] = $updatedAt;
+        $self['id'] = $id;
+        $self['averageWaitTimeSecs'] = $averageWaitTimeSecs;
+        $self['createdAt'] = $createdAt;
+        $self['currentSize'] = $currentSize;
+        $self['maxSize'] = $maxSize;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class Data implements BaseModel
      */
     public function withAverageWaitTimeSecs(int $averageWaitTimeSecs): self
     {
-        $obj = clone $this;
-        $obj['averageWaitTimeSecs'] = $averageWaitTimeSecs;
+        $self = clone $this;
+        $self['averageWaitTimeSecs'] = $averageWaitTimeSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class Data implements BaseModel
      */
     public function withCurrentSize(int $currentSize): self
     {
-        $obj = clone $this;
-        $obj['currentSize'] = $currentSize;
+        $self = clone $this;
+        $self['currentSize'] = $currentSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Data implements BaseModel
      */
     public function withMaxSize(int $maxSize): self
     {
-        $obj = clone $this;
-        $obj['maxSize'] = $maxSize;
+        $self = clone $this;
+        $self['maxSize'] = $maxSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,9 +221,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

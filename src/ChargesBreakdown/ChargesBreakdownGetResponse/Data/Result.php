@@ -101,15 +101,15 @@ final class Result implements BaseModel
         array $services,
         string $tn,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['chargeType'] = $chargeType;
-        $obj['serviceOwnerEmail'] = $serviceOwnerEmail;
-        $obj['serviceOwnerUserID'] = $serviceOwnerUserID;
-        $obj['services'] = $services;
-        $obj['tn'] = $tn;
+        $self['chargeType'] = $chargeType;
+        $self['serviceOwnerEmail'] = $serviceOwnerEmail;
+        $self['serviceOwnerUserID'] = $serviceOwnerUserID;
+        $self['services'] = $services;
+        $self['tn'] = $tn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Result implements BaseModel
      */
     public function withChargeType(string $chargeType): self
     {
-        $obj = clone $this;
-        $obj['chargeType'] = $chargeType;
+        $self = clone $this;
+        $self['chargeType'] = $chargeType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Result implements BaseModel
      */
     public function withServiceOwnerEmail(string $serviceOwnerEmail): self
     {
-        $obj = clone $this;
-        $obj['serviceOwnerEmail'] = $serviceOwnerEmail;
+        $self = clone $this;
+        $self['serviceOwnerEmail'] = $serviceOwnerEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Result implements BaseModel
      */
     public function withServiceOwnerUserID(string $serviceOwnerUserID): self
     {
-        $obj = clone $this;
-        $obj['serviceOwnerUserID'] = $serviceOwnerUserID;
+        $self = clone $this;
+        $self['serviceOwnerUserID'] = $serviceOwnerUserID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Result implements BaseModel
      */
     public function withServices(array $services): self
     {
-        $obj = clone $this;
-        $obj['services'] = $services;
+        $self = clone $this;
+        $self['services'] = $services;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,9 +165,9 @@ final class Result implements BaseModel
      */
     public function withTn(string $tn): self
     {
-        $obj = clone $this;
-        $obj['tn'] = $tn;
+        $self = clone $this;
+        $self['tn'] = $tn;
 
-        return $obj;
+        return $self;
     }
 }

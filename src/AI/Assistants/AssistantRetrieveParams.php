@@ -55,46 +55,46 @@ final class AssistantRetrieveParams implements BaseModel
         ?string $from = null,
         ?string $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $fetchDynamicVariablesFromWebhook && $obj['fetchDynamicVariablesFromWebhook'] = $fetchDynamicVariablesFromWebhook;
-        null !== $from && $obj['from'] = $from;
-        null !== $to && $obj['to'] = $to;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $fetchDynamicVariablesFromWebhook && $self['fetchDynamicVariablesFromWebhook'] = $fetchDynamicVariablesFromWebhook;
+        null !== $from && $self['from'] = $from;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     public function withFetchDynamicVariablesFromWebhook(
         bool $fetchDynamicVariablesFromWebhook
     ): self {
-        $obj = clone $this;
-        $obj['fetchDynamicVariablesFromWebhook'] = $fetchDynamicVariablesFromWebhook;
+        $self = clone $this;
+        $self['fetchDynamicVariablesFromWebhook'] = $fetchDynamicVariablesFromWebhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

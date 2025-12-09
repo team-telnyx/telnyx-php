@@ -44,12 +44,12 @@ final class TelephoneNumber implements BaseModel
         ?string $numberID = null,
         ?string $phoneNumber = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $numberID && $obj['numberID'] = $numberID;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $numberID && $self['numberID'] = $numberID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class TelephoneNumber implements BaseModel
      */
     public function withNumberID(string $numberID): self
     {
-        $obj = clone $this;
-        $obj['numberID'] = $numberID;
+        $self = clone $this;
+        $self['numberID'] = $numberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class TelephoneNumber implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

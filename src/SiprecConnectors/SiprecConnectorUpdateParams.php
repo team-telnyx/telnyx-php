@@ -79,15 +79,15 @@ final class SiprecConnectorUpdateParams implements BaseModel
         int $port,
         ?string $appSubdomain = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['host'] = $host;
-        $obj['name'] = $name;
-        $obj['port'] = $port;
+        $self['host'] = $host;
+        $self['name'] = $name;
+        $self['port'] = $port;
 
-        null !== $appSubdomain && $obj['appSubdomain'] = $appSubdomain;
+        null !== $appSubdomain && $self['appSubdomain'] = $appSubdomain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class SiprecConnectorUpdateParams implements BaseModel
      */
     public function withHost(string $host): self
     {
-        $obj = clone $this;
-        $obj['host'] = $host;
+        $self = clone $this;
+        $self['host'] = $host;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class SiprecConnectorUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class SiprecConnectorUpdateParams implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj['port'] = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,9 +128,9 @@ final class SiprecConnectorUpdateParams implements BaseModel
      */
     public function withAppSubdomain(string $appSubdomain): self
     {
-        $obj = clone $this;
-        $obj['appSubdomain'] = $appSubdomain;
+        $self = clone $this;
+        $self['appSubdomain'] = $appSubdomain;
 
-        return $obj;
+        return $self;
     }
 }

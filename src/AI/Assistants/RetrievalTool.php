@@ -59,12 +59,12 @@ final class RetrievalTool implements BaseModel
         InferenceEmbeddingBucketIDs|array $retrieval,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['retrieval'] = $retrieval;
-        $obj['type'] = $type;
+        $self['retrieval'] = $retrieval;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class RetrievalTool implements BaseModel
     public function withRetrieval(
         InferenceEmbeddingBucketIDs|array $retrieval
     ): self {
-        $obj = clone $this;
-        $obj['retrieval'] = $retrieval;
+        $self = clone $this;
+        $self['retrieval'] = $retrieval;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class RetrievalTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

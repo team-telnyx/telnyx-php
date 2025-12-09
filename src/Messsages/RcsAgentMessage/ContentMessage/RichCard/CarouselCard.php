@@ -76,12 +76,12 @@ final class CarouselCard implements BaseModel
         array $cardContents,
         CardWidth|string $cardWidth
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['cardContents'] = $cardContents;
-        $obj['cardWidth'] = $cardWidth;
+        $self['cardContents'] = $cardContents;
+        $self['cardWidth'] = $cardWidth;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class CarouselCard implements BaseModel
      */
     public function withCardContents(array $cardContents): self
     {
-        $obj = clone $this;
-        $obj['cardContents'] = $cardContents;
+        $self = clone $this;
+        $self['cardContents'] = $cardContents;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class CarouselCard implements BaseModel
      */
     public function withCardWidth(CardWidth|string $cardWidth): self
     {
-        $obj = clone $this;
-        $obj['cardWidth'] = $cardWidth;
+        $self = clone $this;
+        $self['cardWidth'] = $cardWidth;
 
-        return $obj;
+        return $self;
     }
 }

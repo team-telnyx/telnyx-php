@@ -65,13 +65,13 @@ final class TranscriptionEngineBConfig implements BaseModel
         TranscriptionEngine|string|null $transcriptionEngine = null,
         TranscriptionModel|string|null $transcriptionModel = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $language && $obj['language'] = $language;
-        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
-        null !== $transcriptionModel && $obj['transcriptionModel'] = $transcriptionModel;
+        null !== $language && $self['language'] = $language;
+        null !== $transcriptionEngine && $self['transcriptionEngine'] = $transcriptionEngine;
+        null !== $transcriptionModel && $self['transcriptionModel'] = $transcriptionModel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class TranscriptionEngineBConfig implements BaseModel
     public function withLanguage(
         TelnyxTranscriptionLanguage|string $language
     ): self {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class TranscriptionEngineBConfig implements BaseModel
     public function withTranscriptionEngine(
         TranscriptionEngine|string $transcriptionEngine
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionEngine'] = $transcriptionEngine;
+        $self = clone $this;
+        $self['transcriptionEngine'] = $transcriptionEngine;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class TranscriptionEngineBConfig implements BaseModel
     public function withTranscriptionModel(
         TranscriptionModel|string $transcriptionModel
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionModel'] = $transcriptionModel;
+        $self = clone $this;
+        $self['transcriptionModel'] = $transcriptionModel;
 
-        return $obj;
+        return $self;
     }
 }

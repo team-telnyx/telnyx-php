@@ -51,18 +51,18 @@ final class BrandQualifyByUsecaseParams implements BaseModel
      */
     public static function with(string $brandID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['brandID'] = $brandID;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 }

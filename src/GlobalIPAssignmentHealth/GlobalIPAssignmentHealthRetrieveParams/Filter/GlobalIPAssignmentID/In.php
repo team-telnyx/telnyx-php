@@ -36,11 +36,11 @@ final class In implements BaseModel
      */
     public static function with(?string $in = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $in && $obj['in'] = $in;
+        null !== $in && $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class In implements BaseModel
      */
     public function withIn(string $in): self
     {
-        $obj = clone $this;
-        $obj['in'] = $in;
+        $self = clone $this;
+        $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 }

@@ -42,11 +42,11 @@ final class PortingOrderRetrieveParams implements BaseModel
      */
     public static function with(?bool $includePhoneNumbers = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includePhoneNumbers && $obj['includePhoneNumbers'] = $includePhoneNumbers;
+        null !== $includePhoneNumbers && $self['includePhoneNumbers'] = $includePhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class PortingOrderRetrieveParams implements BaseModel
      */
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['includePhoneNumbers'] = $includePhoneNumbers;
+        $self = clone $this;
+        $self['includePhoneNumbers'] = $includePhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

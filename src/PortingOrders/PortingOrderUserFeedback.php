@@ -44,12 +44,12 @@ final class PortingOrderUserFeedback implements BaseModel
         ?string $userComment = null,
         ?int $userRating = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $userComment && $obj['userComment'] = $userComment;
-        null !== $userRating && $obj['userRating'] = $userRating;
+        null !== $userComment && $self['userComment'] = $userComment;
+        null !== $userRating && $self['userRating'] = $userRating;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class PortingOrderUserFeedback implements BaseModel
      */
     public function withUserComment(?string $userComment): self
     {
-        $obj = clone $this;
-        $obj['userComment'] = $userComment;
+        $self = clone $this;
+        $self['userComment'] = $userComment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class PortingOrderUserFeedback implements BaseModel
      */
     public function withUserRating(?int $userRating): self
     {
-        $obj = clone $this;
-        $obj['userRating'] = $userRating;
+        $self = clone $this;
+        $self['userRating'] = $userRating;
 
-        return $obj;
+        return $self;
     }
 }

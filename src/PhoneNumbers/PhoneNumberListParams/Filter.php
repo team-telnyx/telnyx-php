@@ -170,23 +170,23 @@ final class Filter implements BaseModel
         VoiceUsagePaymentMethod|string|null $voiceUsagePaymentMethod = null,
         WithoutTags|string|null $withoutTags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $countryISOAlpha2 && $obj['countryISOAlpha2'] = $countryISOAlpha2;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $emergencyAddressID && $obj['emergencyAddressID'] = $emergencyAddressID;
-        null !== $numberType && $obj['numberType'] = $numberType;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $source && $obj['source'] = $source;
-        null !== $status && $obj['status'] = $status;
-        null !== $tag && $obj['tag'] = $tag;
-        null !== $voiceConnectionName && $obj['voiceConnectionName'] = $voiceConnectionName;
-        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
-        null !== $withoutTags && $obj['withoutTags'] = $withoutTags;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $countryISOAlpha2 && $self['countryISOAlpha2'] = $countryISOAlpha2;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $numberType && $self['numberType'] = $numberType;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $source && $self['source'] = $source;
+        null !== $status && $self['status'] = $status;
+        null !== $tag && $self['tag'] = $tag;
+        null !== $voiceConnectionName && $self['voiceConnectionName'] = $voiceConnectionName;
+        null !== $voiceUsagePaymentMethod && $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        null !== $withoutTags && $self['withoutTags'] = $withoutTags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class Filter implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class Filter implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class Filter implements BaseModel
      */
     public function withCountryISOAlpha2(string|array $countryISOAlpha2): self
     {
-        $obj = clone $this;
-        $obj['countryISOAlpha2'] = $countryISOAlpha2;
+        $self = clone $this;
+        $self['countryISOAlpha2'] = $countryISOAlpha2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class Filter implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj['emergencyAddressID'] = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +253,10 @@ final class Filter implements BaseModel
      */
     public function withNumberType(NumberType|array $numberType): self
     {
-        $obj = clone $this;
-        $obj['numberType'] = $numberType;
+        $self = clone $this;
+        $self['numberType'] = $numberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +278,10 @@ final class Filter implements BaseModel
      */
     public function withSource(Source|string $source): self
     {
-        $obj = clone $this;
-        $obj['source'] = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,10 +291,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,10 +302,10 @@ final class Filter implements BaseModel
      */
     public function withTag(string $tag): self
     {
-        $obj = clone $this;
-        $obj['tag'] = $tag;
+        $self = clone $this;
+        $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -321,10 +321,10 @@ final class Filter implements BaseModel
     public function withVoiceConnectionName(
         VoiceConnectionName|array $voiceConnectionName
     ): self {
-        $obj = clone $this;
-        $obj['voiceConnectionName'] = $voiceConnectionName;
+        $self = clone $this;
+        $self['voiceConnectionName'] = $voiceConnectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -335,10 +335,10 @@ final class Filter implements BaseModel
     public function withVoiceUsagePaymentMethod(
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        $self = clone $this;
+        $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -348,9 +348,9 @@ final class Filter implements BaseModel
      */
     public function withWithoutTags(WithoutTags|string $withoutTags): self
     {
-        $obj = clone $this;
-        $obj['withoutTags'] = $withoutTags;
+        $self = clone $this;
+        $self['withoutTags'] = $withoutTags;
 
-        return $obj;
+        return $self;
     }
 }

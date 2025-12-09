@@ -85,15 +85,15 @@ final class JobCreateParams implements BaseModel
         Hyperparameters|array|null $hyperparameters = null,
         ?string $suffix = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['model'] = $model;
-        $obj['trainingFile'] = $trainingFile;
+        $self['model'] = $model;
+        $self['trainingFile'] = $trainingFile;
 
-        null !== $hyperparameters && $obj['hyperparameters'] = $hyperparameters;
-        null !== $suffix && $obj['suffix'] = $suffix;
+        null !== $hyperparameters && $self['hyperparameters'] = $hyperparameters;
+        null !== $suffix && $self['suffix'] = $suffix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class JobCreateParams implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class JobCreateParams implements BaseModel
      */
     public function withTrainingFile(string $trainingFile): self
     {
-        $obj = clone $this;
-        $obj['trainingFile'] = $trainingFile;
+        $self = clone $this;
+        $self['trainingFile'] = $trainingFile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class JobCreateParams implements BaseModel
     public function withHyperparameters(
         Hyperparameters|array $hyperparameters
     ): self {
-        $obj = clone $this;
-        $obj['hyperparameters'] = $hyperparameters;
+        $self = clone $this;
+        $self['hyperparameters'] = $hyperparameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class JobCreateParams implements BaseModel
      */
     public function withSuffix(string $suffix): self
     {
-        $obj = clone $this;
-        $obj['suffix'] = $suffix;
+        $self = clone $this;
+        $self['suffix'] = $suffix;
 
-        return $obj;
+        return $self;
     }
 }

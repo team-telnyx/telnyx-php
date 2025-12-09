@@ -148,23 +148,23 @@ final class ActionGatherUsingAudioParams implements BaseModel
         ?int $timeoutMillis = null,
         ?string $validDigits = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $audioURL && $obj['audioURL'] = $audioURL;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $interDigitTimeoutMillis && $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
-        null !== $invalidAudioURL && $obj['invalidAudioURL'] = $invalidAudioURL;
-        null !== $invalidMediaName && $obj['invalidMediaName'] = $invalidMediaName;
-        null !== $maximumDigits && $obj['maximumDigits'] = $maximumDigits;
-        null !== $maximumTries && $obj['maximumTries'] = $maximumTries;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $minimumDigits && $obj['minimumDigits'] = $minimumDigits;
-        null !== $terminatingDigit && $obj['terminatingDigit'] = $terminatingDigit;
-        null !== $timeoutMillis && $obj['timeoutMillis'] = $timeoutMillis;
-        null !== $validDigits && $obj['validDigits'] = $validDigits;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $interDigitTimeoutMillis && $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        null !== $invalidAudioURL && $self['invalidAudioURL'] = $invalidAudioURL;
+        null !== $invalidMediaName && $self['invalidMediaName'] = $invalidMediaName;
+        null !== $maximumDigits && $self['maximumDigits'] = $maximumDigits;
+        null !== $maximumTries && $self['maximumTries'] = $maximumTries;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $minimumDigits && $self['minimumDigits'] = $minimumDigits;
+        null !== $terminatingDigit && $self['terminatingDigit'] = $terminatingDigit;
+        null !== $timeoutMillis && $self['timeoutMillis'] = $timeoutMillis;
+        null !== $validDigits && $self['validDigits'] = $validDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj['audioURL'] = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withInterDigitTimeoutMillis(
         int $interDigitTimeoutMillis
     ): self {
-        $obj = clone $this;
-        $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        $self = clone $this;
+        $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withInvalidAudioURL(string $invalidAudioURL): self
     {
-        $obj = clone $this;
-        $obj['invalidAudioURL'] = $invalidAudioURL;
+        $self = clone $this;
+        $self['invalidAudioURL'] = $invalidAudioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withInvalidMediaName(string $invalidMediaName): self
     {
-        $obj = clone $this;
-        $obj['invalidMediaName'] = $invalidMediaName;
+        $self = clone $this;
+        $self['invalidMediaName'] = $invalidMediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withMaximumDigits(int $maximumDigits): self
     {
-        $obj = clone $this;
-        $obj['maximumDigits'] = $maximumDigits;
+        $self = clone $this;
+        $self['maximumDigits'] = $maximumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withMaximumTries(int $maximumTries): self
     {
-        $obj = clone $this;
-        $obj['maximumTries'] = $maximumTries;
+        $self = clone $this;
+        $self['maximumTries'] = $maximumTries;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -272,10 +272,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withMinimumDigits(int $minimumDigits): self
     {
-        $obj = clone $this;
-        $obj['minimumDigits'] = $minimumDigits;
+        $self = clone $this;
+        $self['minimumDigits'] = $minimumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -283,10 +283,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withTerminatingDigit(string $terminatingDigit): self
     {
-        $obj = clone $this;
-        $obj['terminatingDigit'] = $terminatingDigit;
+        $self = clone $this;
+        $self['terminatingDigit'] = $terminatingDigit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +294,10 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withTimeoutMillis(int $timeoutMillis): self
     {
-        $obj = clone $this;
-        $obj['timeoutMillis'] = $timeoutMillis;
+        $self = clone $this;
+        $self['timeoutMillis'] = $timeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,9 +305,9 @@ final class ActionGatherUsingAudioParams implements BaseModel
      */
     public function withValidDigits(string $validDigits): self
     {
-        $obj = clone $this;
-        $obj['validDigits'] = $validDigits;
+        $self = clone $this;
+        $self['validDigits'] = $validDigits;
 
-        return $obj;
+        return $self;
     }
 }

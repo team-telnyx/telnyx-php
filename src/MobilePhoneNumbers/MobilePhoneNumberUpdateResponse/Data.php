@@ -233,32 +233,32 @@ final class Data implements BaseModel
         ?array $tags = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $callForwarding && $obj['callForwarding'] = $callForwarding;
-        null !== $callRecording && $obj['callRecording'] = $callRecording;
-        null !== $callerIDNameEnabled && $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
-        null !== $cnamListing && $obj['cnamListing'] = $cnamListing;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $connectionType && $obj['connectionType'] = $connectionType;
-        null !== $countryISOAlpha2 && $obj['countryISOAlpha2'] = $countryISOAlpha2;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
-        null !== $mobileVoiceEnabled && $obj['mobileVoiceEnabled'] = $mobileVoiceEnabled;
-        null !== $noiseSuppression && $obj['noiseSuppression'] = $noiseSuppression;
-        null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $simCardID && $obj['simCardID'] = $simCardID;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $callForwarding && $self['callForwarding'] = $callForwarding;
+        null !== $callRecording && $self['callRecording'] = $callRecording;
+        null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
+        null !== $cnamListing && $self['cnamListing'] = $cnamListing;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $connectionType && $self['connectionType'] = $connectionType;
+        null !== $countryISOAlpha2 && $self['countryISOAlpha2'] = $countryISOAlpha2;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
+        null !== $mobileVoiceEnabled && $self['mobileVoiceEnabled'] = $mobileVoiceEnabled;
+        null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $simCardID && $self['simCardID'] = $simCardID;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,10 +266,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class Data implements BaseModel
     public function withCallForwarding(
         CallForwarding|array $callForwarding
     ): self {
-        $obj = clone $this;
-        $obj['callForwarding'] = $callForwarding;
+        $self = clone $this;
+        $self['callForwarding'] = $callForwarding;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,10 +297,10 @@ final class Data implements BaseModel
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
-        $obj = clone $this;
-        $obj['callRecording'] = $callRecording;
+        $self = clone $this;
+        $self['callRecording'] = $callRecording;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class Data implements BaseModel
      */
     public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
     {
-        $obj = clone $this;
-        $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
+        $self = clone $this;
+        $self['callerIDNameEnabled'] = $callerIDNameEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -321,10 +321,10 @@ final class Data implements BaseModel
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
-        $obj = clone $this;
-        $obj['cnamListing'] = $cnamListing;
+        $self = clone $this;
+        $self['cnamListing'] = $cnamListing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +332,10 @@ final class Data implements BaseModel
      */
     public function withConnectionID(?string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -343,10 +343,10 @@ final class Data implements BaseModel
      */
     public function withConnectionName(?string $connectionName): self
     {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -354,10 +354,10 @@ final class Data implements BaseModel
      */
     public function withConnectionType(?string $connectionType): self
     {
-        $obj = clone $this;
-        $obj['connectionType'] = $connectionType;
+        $self = clone $this;
+        $self['connectionType'] = $connectionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -365,10 +365,10 @@ final class Data implements BaseModel
      */
     public function withCountryISOAlpha2(string $countryISOAlpha2): self
     {
-        $obj = clone $this;
-        $obj['countryISOAlpha2'] = $countryISOAlpha2;
+        $self = clone $this;
+        $self['countryISOAlpha2'] = $countryISOAlpha2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -376,10 +376,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -387,10 +387,10 @@ final class Data implements BaseModel
      */
     public function withCustomerReference(?string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -400,10 +400,10 @@ final class Data implements BaseModel
      */
     public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -414,10 +414,10 @@ final class Data implements BaseModel
     public function withInboundCallScreening(
         InboundCallScreening|string|null $inboundCallScreening
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallScreening'] = $inboundCallScreening;
+        $self = clone $this;
+        $self['inboundCallScreening'] = $inboundCallScreening;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -425,10 +425,10 @@ final class Data implements BaseModel
      */
     public function withMobileVoiceEnabled(bool $mobileVoiceEnabled): self
     {
-        $obj = clone $this;
-        $obj['mobileVoiceEnabled'] = $mobileVoiceEnabled;
+        $self = clone $this;
+        $self['mobileVoiceEnabled'] = $mobileVoiceEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,10 +439,10 @@ final class Data implements BaseModel
     public function withNoiseSuppression(
         NoiseSuppression|string $noiseSuppression
     ): self {
-        $obj = clone $this;
-        $obj['noiseSuppression'] = $noiseSuppression;
+        $self = clone $this;
+        $self['noiseSuppression'] = $noiseSuppression;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -452,10 +452,10 @@ final class Data implements BaseModel
      */
     public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -463,10 +463,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -474,10 +474,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -485,10 +485,10 @@ final class Data implements BaseModel
      */
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj['simCardID'] = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -496,10 +496,10 @@ final class Data implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -509,10 +509,10 @@ final class Data implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -520,9 +520,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

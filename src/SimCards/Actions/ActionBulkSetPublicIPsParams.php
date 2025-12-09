@@ -57,11 +57,11 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
      */
     public static function with(array $simCardIDs): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['simCardIDs'] = $simCardIDs;
+        $self['simCardIDs'] = $simCardIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
      */
     public function withSimCardIDs(array $simCardIDs): self
     {
-        $obj = clone $this;
-        $obj['simCardIDs'] = $simCardIDs;
+        $self = clone $this;
+        $self['simCardIDs'] = $simCardIDs;
 
-        return $obj;
+        return $self;
     }
 }

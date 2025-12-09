@@ -51,12 +51,12 @@ final class Data implements BaseModel
      */
     public static function with(array $features, string $phoneNumber): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['features'] = $features;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self['features'] = $features;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,17 +64,17 @@ final class Data implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

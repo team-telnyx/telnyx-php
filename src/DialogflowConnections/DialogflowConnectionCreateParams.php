@@ -98,16 +98,16 @@ final class DialogflowConnectionCreateParams implements BaseModel
         ?string $environment = null,
         ?string $location = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['serviceAccount'] = $serviceAccount;
+        $self['serviceAccount'] = $serviceAccount;
 
-        null !== $conversationProfileID && $obj['conversationProfileID'] = $conversationProfileID;
-        null !== $dialogflowAPI && $obj['dialogflowAPI'] = $dialogflowAPI;
-        null !== $environment && $obj['environment'] = $environment;
-        null !== $location && $obj['location'] = $location;
+        null !== $conversationProfileID && $self['conversationProfileID'] = $conversationProfileID;
+        null !== $dialogflowAPI && $self['dialogflowAPI'] = $dialogflowAPI;
+        null !== $environment && $self['environment'] = $environment;
+        null !== $location && $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class DialogflowConnectionCreateParams implements BaseModel
      */
     public function withServiceAccount(array $serviceAccount): self
     {
-        $obj = clone $this;
-        $obj['serviceAccount'] = $serviceAccount;
+        $self = clone $this;
+        $self['serviceAccount'] = $serviceAccount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class DialogflowConnectionCreateParams implements BaseModel
     public function withConversationProfileID(
         string $conversationProfileID
     ): self {
-        $obj = clone $this;
-        $obj['conversationProfileID'] = $conversationProfileID;
+        $self = clone $this;
+        $self['conversationProfileID'] = $conversationProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class DialogflowConnectionCreateParams implements BaseModel
      */
     public function withDialogflowAPI(DialogflowAPI|string $dialogflowAPI): self
     {
-        $obj = clone $this;
-        $obj['dialogflowAPI'] = $dialogflowAPI;
+        $self = clone $this;
+        $self['dialogflowAPI'] = $dialogflowAPI;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class DialogflowConnectionCreateParams implements BaseModel
      */
     public function withEnvironment(string $environment): self
     {
-        $obj = clone $this;
-        $obj['environment'] = $environment;
+        $self = clone $this;
+        $self['environment'] = $environment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,9 +164,9 @@ final class DialogflowConnectionCreateParams implements BaseModel
      */
     public function withLocation(string $location): self
     {
-        $obj = clone $this;
-        $obj['location'] = $location;
+        $self = clone $this;
+        $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 }

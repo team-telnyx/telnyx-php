@@ -76,14 +76,14 @@ final class VoiceGetFieldsResponse implements BaseModel
         ?array $numberInformation = null,
         ?array $telephonyData = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $billing && $obj['billing'] = $billing;
-        null !== $interactionData && $obj['interactionData'] = $interactionData;
-        null !== $numberInformation && $obj['numberInformation'] = $numberInformation;
-        null !== $telephonyData && $obj['telephonyData'] = $telephonyData;
+        null !== $billing && $self['billing'] = $billing;
+        null !== $interactionData && $self['interactionData'] = $interactionData;
+        null !== $numberInformation && $self['numberInformation'] = $numberInformation;
+        null !== $telephonyData && $self['telephonyData'] = $telephonyData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class VoiceGetFieldsResponse implements BaseModel
      */
     public function withBilling(array $billing): self
     {
-        $obj = clone $this;
-        $obj['billing'] = $billing;
+        $self = clone $this;
+        $self['billing'] = $billing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class VoiceGetFieldsResponse implements BaseModel
      */
     public function withInteractionData(array $interactionData): self
     {
-        $obj = clone $this;
-        $obj['interactionData'] = $interactionData;
+        $self = clone $this;
+        $self['interactionData'] = $interactionData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class VoiceGetFieldsResponse implements BaseModel
      */
     public function withNumberInformation(array $numberInformation): self
     {
-        $obj = clone $this;
-        $obj['numberInformation'] = $numberInformation;
+        $self = clone $this;
+        $self['numberInformation'] = $numberInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +132,9 @@ final class VoiceGetFieldsResponse implements BaseModel
      */
     public function withTelephonyData(array $telephonyData): self
     {
-        $obj = clone $this;
-        $obj['telephonyData'] = $telephonyData;
+        $self = clone $this;
+        $self['telephonyData'] = $telephonyData;
 
-        return $obj;
+        return $self;
     }
 }

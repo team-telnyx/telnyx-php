@@ -56,36 +56,36 @@ final class AssistantDeleteResponse implements BaseModel
      */
     public static function with(string $id, bool $deleted, string $object): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['deleted'] = $deleted;
-        $obj['object'] = $object;
+        $self['id'] = $id;
+        $self['deleted'] = $deleted;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withDeleted(bool $deleted): self
     {
-        $obj = clone $this;
-        $obj['deleted'] = $deleted;
+        $self = clone $this;
+        $self['deleted'] = $deleted;
 
-        return $obj;
+        return $self;
     }
 
     public function withObject(string $object): self
     {
-        $obj = clone $this;
-        $obj['object'] = $object;
+        $self = clone $this;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 }

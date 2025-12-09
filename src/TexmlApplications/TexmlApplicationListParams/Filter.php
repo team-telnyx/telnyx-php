@@ -46,12 +46,12 @@ final class Filter implements BaseModel
         ?string $friendlyName = null,
         ?string $outboundVoiceProfileID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $friendlyName && $obj['friendlyName'] = $friendlyName;
-        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        null !== $friendlyName && $self['friendlyName'] = $friendlyName;
+        null !== $outboundVoiceProfileID && $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class Filter implements BaseModel
      */
     public function withFriendlyName(string $friendlyName): self
     {
-        $obj = clone $this;
-        $obj['friendlyName'] = $friendlyName;
+        $self = clone $this;
+        $self['friendlyName'] = $friendlyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,9 +71,9 @@ final class Filter implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 }

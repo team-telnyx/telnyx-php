@@ -34,11 +34,11 @@ final class PrivacySettings implements BaseModel
      */
     public static function with(?bool $dataRetention = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dataRetention && $obj['dataRetention'] = $dataRetention;
+        null !== $dataRetention && $self['dataRetention'] = $dataRetention;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class PrivacySettings implements BaseModel
      */
     public function withDataRetention(bool $dataRetention): self
     {
-        $obj = clone $this;
-        $obj['dataRetention'] = $dataRetention;
+        $self = clone $this;
+        $self['dataRetention'] = $dataRetention;
 
-        return $obj;
+        return $self;
     }
 }

@@ -119,22 +119,22 @@ final class Data implements BaseModel
         ?array $supportedChannels = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $allowMultipleChannels && $obj['allowMultipleChannels'] = $allowMultipleChannels;
-        null !== $associatedRecordType && $obj['associatedRecordType'] = $associatedRecordType;
-        null !== $asynchronous && $obj['asynchronous'] = $asynchronous;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $description && $obj['description'] = $description;
-        null !== $enabled && $obj['enabled'] = $enabled;
-        null !== $name && $obj['name'] = $name;
-        null !== $notificationEventID && $obj['notificationEventID'] = $notificationEventID;
-        null !== $parameters && $obj['parameters'] = $parameters;
-        null !== $supportedChannels && $obj['supportedChannels'] = $supportedChannels;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $allowMultipleChannels && $self['allowMultipleChannels'] = $allowMultipleChannels;
+        null !== $associatedRecordType && $self['associatedRecordType'] = $associatedRecordType;
+        null !== $asynchronous && $self['asynchronous'] = $asynchronous;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $description && $self['description'] = $description;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $name && $self['name'] = $name;
+        null !== $notificationEventID && $self['notificationEventID'] = $notificationEventID;
+        null !== $parameters && $self['parameters'] = $parameters;
+        null !== $supportedChannels && $self['supportedChannels'] = $supportedChannels;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class Data implements BaseModel
      */
     public function withAllowMultipleChannels(bool $allowMultipleChannels): self
     {
-        $obj = clone $this;
-        $obj['allowMultipleChannels'] = $allowMultipleChannels;
+        $self = clone $this;
+        $self['allowMultipleChannels'] = $allowMultipleChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class Data implements BaseModel
     public function withAssociatedRecordType(
         AssociatedRecordType|string $associatedRecordType
     ): self {
-        $obj = clone $this;
-        $obj['associatedRecordType'] = $associatedRecordType;
+        $self = clone $this;
+        $self['associatedRecordType'] = $associatedRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class Data implements BaseModel
      */
     public function withAsynchronous(bool $asynchronous): self
     {
-        $obj = clone $this;
-        $obj['asynchronous'] = $asynchronous;
+        $self = clone $this;
+        $self['asynchronous'] = $asynchronous;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,42 +187,42 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj['enabled'] = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withNotificationEventID(string $notificationEventID): self
     {
-        $obj = clone $this;
-        $obj['notificationEventID'] = $notificationEventID;
+        $self = clone $this;
+        $self['notificationEventID'] = $notificationEventID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class Data implements BaseModel
      */
     public function withParameters(array $parameters): self
     {
-        $obj = clone $this;
-        $obj['parameters'] = $parameters;
+        $self = clone $this;
+        $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +245,10 @@ final class Data implements BaseModel
      */
     public function withSupportedChannels(array $supportedChannels): self
     {
-        $obj = clone $this;
-        $obj['supportedChannels'] = $supportedChannels;
+        $self = clone $this;
+        $self['supportedChannels'] = $supportedChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,9 +256,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

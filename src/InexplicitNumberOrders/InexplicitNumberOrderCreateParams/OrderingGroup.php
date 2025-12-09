@@ -151,22 +151,22 @@ final class OrderingGroup implements BaseModel
         ?bool $quickship = null,
         Strategy|string|null $strategy = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['countRequested'] = $countRequested;
-        $obj['countryISO'] = $countryISO;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self['countRequested'] = $countRequested;
+        $self['countryISO'] = $countryISO;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
-        null !== $excludeHeldNumbers && $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
-        null !== $features && $obj['features'] = $features;
-        null !== $locality && $obj['locality'] = $locality;
-        null !== $nationalDestinationCode && $obj['nationalDestinationCode'] = $nationalDestinationCode;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $strategy && $obj['strategy'] = $strategy;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $excludeHeldNumbers && $self['excludeHeldNumbers'] = $excludeHeldNumbers;
+        null !== $features && $self['features'] = $features;
+        null !== $locality && $self['locality'] = $locality;
+        null !== $nationalDestinationCode && $self['nationalDestinationCode'] = $nationalDestinationCode;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $strategy && $self['strategy'] = $strategy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withCountRequested(string $countRequested): self
     {
-        $obj = clone $this;
-        $obj['countRequested'] = $countRequested;
+        $self = clone $this;
+        $self['countRequested'] = $countRequested;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withCountryISO(CountryISO|string $countryISO): self
     {
-        $obj = clone $this;
-        $obj['countryISO'] = $countryISO;
+        $self = clone $this;
+        $self['countryISO'] = $countryISO;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
     {
-        $obj = clone $this;
-        $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
+        $self = clone $this;
+        $self['excludeHeldNumbers'] = $excludeHeldNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj['locality'] = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +256,10 @@ final class OrderingGroup implements BaseModel
     public function withNationalDestinationCode(
         string $nationalDestinationCode
     ): self {
-        $obj = clone $this;
-        $obj['nationalDestinationCode'] = $nationalDestinationCode;
+        $self = clone $this;
+        $self['nationalDestinationCode'] = $nationalDestinationCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj['quickship'] = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,9 +295,9 @@ final class OrderingGroup implements BaseModel
      */
     public function withStrategy(Strategy|string $strategy): self
     {
-        $obj = clone $this;
-        $obj['strategy'] = $strategy;
+        $self = clone $this;
+        $self['strategy'] = $strategy;
 
-        return $obj;
+        return $self;
     }
 }

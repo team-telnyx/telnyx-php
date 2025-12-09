@@ -68,14 +68,14 @@ final class ActionStopPlaybackParams implements BaseModel
         ?bool $overlay = null,
         ?string $stop = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $overlay && $obj['overlay'] = $overlay;
-        null !== $stop && $obj['stop'] = $stop;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $overlay && $self['overlay'] = $overlay;
+        null !== $stop && $self['stop'] = $stop;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withOverlay(bool $overlay): self
     {
-        $obj = clone $this;
-        $obj['overlay'] = $overlay;
+        $self = clone $this;
+        $self['overlay'] = $overlay;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withStop(string $stop): self
     {
-        $obj = clone $this;
-        $obj['stop'] = $stop;
+        $self = clone $this;
+        $self['stop'] = $stop;
 
-        return $obj;
+        return $self;
     }
 }

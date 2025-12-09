@@ -99,25 +99,25 @@ final class IntegrationGetResponse implements BaseModel
         string $name,
         Status|string $status,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['availableTools'] = $availableTools;
-        $obj['description'] = $description;
-        $obj['displayName'] = $displayName;
-        $obj['logoURL'] = $logoURL;
-        $obj['name'] = $name;
-        $obj['status'] = $status;
+        $self['id'] = $id;
+        $self['availableTools'] = $availableTools;
+        $self['description'] = $description;
+        $self['displayName'] = $displayName;
+        $self['logoURL'] = $logoURL;
+        $self['name'] = $name;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,42 +125,42 @@ final class IntegrationGetResponse implements BaseModel
      */
     public function withAvailableTools(array $availableTools): self
     {
-        $obj = clone $this;
-        $obj['availableTools'] = $availableTools;
+        $self = clone $this;
+        $self['availableTools'] = $availableTools;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withDisplayName(string $displayName): self
     {
-        $obj = clone $this;
-        $obj['displayName'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     public function withLogoURL(string $logoURL): self
     {
-        $obj = clone $this;
-        $obj['logoURL'] = $logoURL;
+        $self = clone $this;
+        $self['logoURL'] = $logoURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,9 +168,9 @@ final class IntegrationGetResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

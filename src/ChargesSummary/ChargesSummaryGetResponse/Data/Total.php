@@ -114,17 +114,17 @@ final class Total implements BaseModel
         string $newOtc,
         string $other,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['credits'] = $credits;
-        $obj['existingMrc'] = $existingMrc;
-        $obj['grandTotal'] = $grandTotal;
-        $obj['ledgerAdjustments'] = $ledgerAdjustments;
-        $obj['newMrc'] = $newMrc;
-        $obj['newOtc'] = $newOtc;
-        $obj['other'] = $other;
+        $self['credits'] = $credits;
+        $self['existingMrc'] = $existingMrc;
+        $self['grandTotal'] = $grandTotal;
+        $self['ledgerAdjustments'] = $ledgerAdjustments;
+        $self['newMrc'] = $newMrc;
+        $self['newOtc'] = $newOtc;
+        $self['other'] = $other;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class Total implements BaseModel
      */
     public function withCredits(string $credits): self
     {
-        $obj = clone $this;
-        $obj['credits'] = $credits;
+        $self = clone $this;
+        $self['credits'] = $credits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class Total implements BaseModel
      */
     public function withExistingMrc(string $existingMrc): self
     {
-        $obj = clone $this;
-        $obj['existingMrc'] = $existingMrc;
+        $self = clone $this;
+        $self['existingMrc'] = $existingMrc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Total implements BaseModel
      */
     public function withGrandTotal(string $grandTotal): self
     {
-        $obj = clone $this;
-        $obj['grandTotal'] = $grandTotal;
+        $self = clone $this;
+        $self['grandTotal'] = $grandTotal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class Total implements BaseModel
      */
     public function withLedgerAdjustments(string $ledgerAdjustments): self
     {
-        $obj = clone $this;
-        $obj['ledgerAdjustments'] = $ledgerAdjustments;
+        $self = clone $this;
+        $self['ledgerAdjustments'] = $ledgerAdjustments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class Total implements BaseModel
      */
     public function withNewMrc(string $newMrc): self
     {
-        $obj = clone $this;
-        $obj['newMrc'] = $newMrc;
+        $self = clone $this;
+        $self['newMrc'] = $newMrc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class Total implements BaseModel
      */
     public function withNewOtc(string $newOtc): self
     {
-        $obj = clone $this;
-        $obj['newOtc'] = $newOtc;
+        $self = clone $this;
+        $self['newOtc'] = $newOtc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,9 +198,9 @@ final class Total implements BaseModel
      */
     public function withOther(string $other): self
     {
-        $obj = clone $this;
-        $obj['other'] = $other;
+        $self = clone $this;
+        $self['other'] = $other;
 
-        return $obj;
+        return $self;
     }
 }

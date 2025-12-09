@@ -78,12 +78,12 @@ final class Summary implements BaseModel
      */
     public static function with(array $adjustments, array $lines): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['adjustments'] = $adjustments;
-        $obj['lines'] = $lines;
+        $self['adjustments'] = $adjustments;
+        $self['lines'] = $lines;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Summary implements BaseModel
      */
     public function withAdjustments(array $adjustments): self
     {
-        $obj = clone $this;
-        $obj['adjustments'] = $adjustments;
+        $self = clone $this;
+        $self['adjustments'] = $adjustments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class Summary implements BaseModel
      */
     public function withLines(array $lines): self
     {
-        $obj = clone $this;
-        $obj['lines'] = $lines;
+        $self = clone $this;
+        $self['lines'] = $lines;
 
-        return $obj;
+        return $self;
     }
 }

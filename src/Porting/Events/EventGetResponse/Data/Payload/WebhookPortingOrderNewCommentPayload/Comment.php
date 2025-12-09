@@ -76,15 +76,15 @@ final class Comment implements BaseModel
         ?string $userID = null,
         UserType|string|null $userType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $body && $obj['body'] = $body;
-        null !== $insertedAt && $obj['insertedAt'] = $insertedAt;
-        null !== $userID && $obj['userID'] = $userID;
-        null !== $userType && $obj['userType'] = $userType;
+        null !== $id && $self['id'] = $id;
+        null !== $body && $self['body'] = $body;
+        null !== $insertedAt && $self['insertedAt'] = $insertedAt;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $userType && $self['userType'] = $userType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Comment implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Comment implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Comment implements BaseModel
      */
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
-        $obj = clone $this;
-        $obj['insertedAt'] = $insertedAt;
+        $self = clone $this;
+        $self['insertedAt'] = $insertedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Comment implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,9 +138,9 @@ final class Comment implements BaseModel
      */
     public function withUserType(UserType|string $userType): self
     {
-        $obj = clone $this;
-        $obj['userType'] = $userType;
+        $self = clone $this;
+        $self['userType'] = $userType;
 
-        return $obj;
+        return $self;
     }
 }

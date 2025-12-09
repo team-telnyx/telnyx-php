@@ -92,28 +92,28 @@ final class Data implements BaseModel
         PhoneNumberType|string|null $phoneNumberType = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
-        null !== $advanceRequirements && $obj['advanceRequirements'] = $advanceRequirements;
-        null !== $count && $obj['count'] = $count;
-        null !== $coverageType && $obj['coverageType'] = $coverageType;
-        null !== $group && $obj['group'] = $group;
-        null !== $groupType && $obj['groupType'] = $groupType;
-        null !== $numberRange && $obj['numberRange'] = $numberRange;
-        null !== $numberType && $obj['numberType'] = $numberType;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $advanceRequirements && $self['advanceRequirements'] = $advanceRequirements;
+        null !== $count && $self['count'] = $count;
+        null !== $coverageType && $self['coverageType'] = $coverageType;
+        null !== $group && $self['group'] = $group;
+        null !== $groupType && $self['groupType'] = $groupType;
+        null !== $numberRange && $self['numberRange'] = $numberRange;
+        null !== $numberType && $self['numberType'] = $numberType;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,18 +121,18 @@ final class Data implements BaseModel
      */
     public function withAdvanceRequirements(bool $advanceRequirements): self
     {
-        $obj = clone $this;
-        $obj['advanceRequirements'] = $advanceRequirements;
+        $self = clone $this;
+        $self['advanceRequirements'] = $advanceRequirements;
 
-        return $obj;
+        return $self;
     }
 
     public function withCount(int $count): self
     {
-        $obj = clone $this;
-        $obj['count'] = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,34 +140,34 @@ final class Data implements BaseModel
      */
     public function withCoverageType(CoverageType|string $coverageType): self
     {
-        $obj = clone $this;
-        $obj['coverageType'] = $coverageType;
+        $self = clone $this;
+        $self['coverageType'] = $coverageType;
 
-        return $obj;
+        return $self;
     }
 
     public function withGroup(string $group): self
     {
-        $obj = clone $this;
-        $obj['group'] = $group;
+        $self = clone $this;
+        $self['group'] = $group;
 
-        return $obj;
+        return $self;
     }
 
     public function withGroupType(string $groupType): self
     {
-        $obj = clone $this;
-        $obj['groupType'] = $groupType;
+        $self = clone $this;
+        $self['groupType'] = $groupType;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumberRange(int $numberRange): self
     {
-        $obj = clone $this;
-        $obj['numberRange'] = $numberRange;
+        $self = clone $this;
+        $self['numberRange'] = $numberRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class Data implements BaseModel
      */
     public function withNumberType(NumberType|string $numberType): self
     {
-        $obj = clone $this;
-        $obj['numberType'] = $numberType;
+        $self = clone $this;
+        $self['numberType'] = $numberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,17 +187,17 @@ final class Data implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -56,12 +56,12 @@ final class DtmfTool implements BaseModel
      */
     public static function with(array $sendDtmf, Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['sendDtmf'] = $sendDtmf;
-        $obj['type'] = $type;
+        $self['sendDtmf'] = $sendDtmf;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class DtmfTool implements BaseModel
      */
     public function withSendDtmf(array $sendDtmf): self
     {
-        $obj = clone $this;
-        $obj['sendDtmf'] = $sendDtmf;
+        $self = clone $this;
+        $self['sendDtmf'] = $sendDtmf;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class DtmfTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

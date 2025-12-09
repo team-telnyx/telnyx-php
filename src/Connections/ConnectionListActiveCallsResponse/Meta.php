@@ -58,14 +58,14 @@ final class Meta implements BaseModel
         ?string $previous = null,
         ?int $totalItems = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cursors && $obj['cursors'] = $cursors;
-        null !== $next && $obj['next'] = $next;
-        null !== $previous && $obj['previous'] = $previous;
-        null !== $totalItems && $obj['totalItems'] = $totalItems;
+        null !== $cursors && $self['cursors'] = $cursors;
+        null !== $next && $self['next'] = $next;
+        null !== $previous && $self['previous'] = $previous;
+        null !== $totalItems && $self['totalItems'] = $totalItems;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class Meta implements BaseModel
      */
     public function withCursors(Cursors|array $cursors): self
     {
-        $obj = clone $this;
-        $obj['cursors'] = $cursors;
+        $self = clone $this;
+        $self['cursors'] = $cursors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class Meta implements BaseModel
      */
     public function withNext(string $next): self
     {
-        $obj = clone $this;
-        $obj['next'] = $next;
+        $self = clone $this;
+        $self['next'] = $next;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,17 +95,17 @@ final class Meta implements BaseModel
      */
     public function withPrevious(string $previous): self
     {
-        $obj = clone $this;
-        $obj['previous'] = $previous;
+        $self = clone $this;
+        $self['previous'] = $previous;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalItems(int $totalItems): self
     {
-        $obj = clone $this;
-        $obj['totalItems'] = $totalItems;
+        $self = clone $this;
+        $self['totalItems'] = $totalItems;
 
-        return $obj;
+        return $self;
     }
 }

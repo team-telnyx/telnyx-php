@@ -272,36 +272,36 @@ final class BrandUpdateParams implements BaseModel
         ?string $webhookURL = null,
         ?string $website = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['country'] = $country;
-        $obj['displayName'] = $displayName;
-        $obj['email'] = $email;
-        $obj['entityType'] = $entityType;
-        $obj['vertical'] = $vertical;
+        $self['country'] = $country;
+        $self['displayName'] = $displayName;
+        $self['email'] = $email;
+        $self['entityType'] = $entityType;
+        $self['vertical'] = $vertical;
 
-        null !== $altBusinessID && $obj['altBusinessID'] = $altBusinessID;
-        null !== $altBusinessIDType && $obj['altBusinessIDType'] = $altBusinessIDType;
-        null !== $businessContactEmail && $obj['businessContactEmail'] = $businessContactEmail;
-        null !== $city && $obj['city'] = $city;
-        null !== $companyName && $obj['companyName'] = $companyName;
-        null !== $ein && $obj['ein'] = $ein;
-        null !== $firstName && $obj['firstName'] = $firstName;
-        null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
-        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
-        null !== $isReseller && $obj['isReseller'] = $isReseller;
-        null !== $lastName && $obj['lastName'] = $lastName;
-        null !== $phone && $obj['phone'] = $phone;
-        null !== $postalCode && $obj['postalCode'] = $postalCode;
-        null !== $state && $obj['state'] = $state;
-        null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
-        null !== $stockSymbol && $obj['stockSymbol'] = $stockSymbol;
-        null !== $street && $obj['street'] = $street;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
-        null !== $website && $obj['website'] = $website;
+        null !== $altBusinessID && $self['altBusinessID'] = $altBusinessID;
+        null !== $altBusinessIDType && $self['altBusinessIDType'] = $altBusinessIDType;
+        null !== $businessContactEmail && $self['businessContactEmail'] = $businessContactEmail;
+        null !== $city && $self['city'] = $city;
+        null !== $companyName && $self['companyName'] = $companyName;
+        null !== $ein && $self['ein'] = $ein;
+        null !== $firstName && $self['firstName'] = $firstName;
+        null !== $identityStatus && $self['identityStatus'] = $identityStatus;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $isReseller && $self['isReseller'] = $isReseller;
+        null !== $lastName && $self['lastName'] = $lastName;
+        null !== $phone && $self['phone'] = $phone;
+        null !== $postalCode && $self['postalCode'] = $postalCode;
+        null !== $state && $self['state'] = $state;
+        null !== $stockExchange && $self['stockExchange'] = $stockExchange;
+        null !== $stockSymbol && $self['stockSymbol'] = $stockSymbol;
+        null !== $street && $self['street'] = $street;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $website && $self['website'] = $website;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -309,10 +309,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withCountry(string $country): self
     {
-        $obj = clone $this;
-        $obj['country'] = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -320,10 +320,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withDisplayName(string $displayName): self
     {
-        $obj = clone $this;
-        $obj['displayName'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -331,10 +331,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,10 +344,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withEntityType(EntityType|string $entityType): self
     {
-        $obj = clone $this;
-        $obj['entityType'] = $entityType;
+        $self = clone $this;
+        $self['entityType'] = $entityType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -357,10 +357,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withVertical(Vertical|string $vertical): self
     {
-        $obj = clone $this;
-        $obj['vertical'] = $vertical;
+        $self = clone $this;
+        $self['vertical'] = $vertical;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -368,10 +368,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withAltBusinessID(string $altBusinessID): self
     {
-        $obj = clone $this;
-        $obj['altBusinessID'] = $altBusinessID;
+        $self = clone $this;
+        $self['altBusinessID'] = $altBusinessID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -382,10 +382,10 @@ final class BrandUpdateParams implements BaseModel
     public function withAltBusinessIDType(
         AltBusinessIDType|string $altBusinessIDType
     ): self {
-        $obj = clone $this;
-        $obj['altBusinessIDType'] = $altBusinessIDType;
+        $self = clone $this;
+        $self['altBusinessIDType'] = $altBusinessIDType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -395,10 +395,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withBusinessContactEmail(string $businessContactEmail): self
     {
-        $obj = clone $this;
-        $obj['businessContactEmail'] = $businessContactEmail;
+        $self = clone $this;
+        $self['businessContactEmail'] = $businessContactEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,10 +406,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withCity(string $city): self
     {
-        $obj = clone $this;
-        $obj['city'] = $city;
+        $self = clone $this;
+        $self['city'] = $city;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -417,10 +417,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withCompanyName(string $companyName): self
     {
-        $obj = clone $this;
-        $obj['companyName'] = $companyName;
+        $self = clone $this;
+        $self['companyName'] = $companyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -428,10 +428,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withEin(string $ein): self
     {
-        $obj = clone $this;
-        $obj['ein'] = $ein;
+        $self = clone $this;
+        $self['ein'] = $ein;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,10 +439,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj['firstName'] = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -453,10 +453,10 @@ final class BrandUpdateParams implements BaseModel
     public function withIdentityStatus(
         BrandIdentityStatus|string $identityStatus
     ): self {
-        $obj = clone $this;
-        $obj['identityStatus'] = $identityStatus;
+        $self = clone $this;
+        $self['identityStatus'] = $identityStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -464,18 +464,18 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     public function withIsReseller(bool $isReseller): self
     {
-        $obj = clone $this;
-        $obj['isReseller'] = $isReseller;
+        $self = clone $this;
+        $self['isReseller'] = $isReseller;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -483,10 +483,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj['lastName'] = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -494,10 +494,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withPhone(string $phone): self
     {
-        $obj = clone $this;
-        $obj['phone'] = $phone;
+        $self = clone $this;
+        $self['phone'] = $phone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -505,10 +505,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withPostalCode(string $postalCode): self
     {
-        $obj = clone $this;
-        $obj['postalCode'] = $postalCode;
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -516,10 +516,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj['state'] = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -529,10 +529,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withStockExchange(StockExchange|string $stockExchange): self
     {
-        $obj = clone $this;
-        $obj['stockExchange'] = $stockExchange;
+        $self = clone $this;
+        $self['stockExchange'] = $stockExchange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -540,10 +540,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withStockSymbol(string $stockSymbol): self
     {
-        $obj = clone $this;
-        $obj['stockSymbol'] = $stockSymbol;
+        $self = clone $this;
+        $self['stockSymbol'] = $stockSymbol;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -551,10 +551,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withStreet(string $street): self
     {
-        $obj = clone $this;
-        $obj['street'] = $street;
+        $self = clone $this;
+        $self['street'] = $street;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -562,10 +562,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -573,10 +573,10 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -584,9 +584,9 @@ final class BrandUpdateParams implements BaseModel
      */
     public function withWebsite(string $website): self
     {
-        $obj = clone $this;
-        $obj['website'] = $website;
+        $self = clone $this;
+        $self['website'] = $website;
 
-        return $obj;
+        return $self;
     }
 }

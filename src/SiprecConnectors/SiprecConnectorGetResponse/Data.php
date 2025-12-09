@@ -82,17 +82,17 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $appSubdomain && $obj['appSubdomain'] = $appSubdomain;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $host && $obj['host'] = $host;
-        null !== $name && $obj['name'] = $name;
-        null !== $port && $obj['port'] = $port;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $appSubdomain && $self['appSubdomain'] = $appSubdomain;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $host && $self['host'] = $host;
+        null !== $name && $self['name'] = $name;
+        null !== $port && $self['port'] = $port;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Data implements BaseModel
      */
     public function withAppSubdomain(string $appSubdomain): self
     {
-        $obj = clone $this;
-        $obj['appSubdomain'] = $appSubdomain;
+        $self = clone $this;
+        $self['appSubdomain'] = $appSubdomain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class Data implements BaseModel
      */
     public function withHost(string $host): self
     {
-        $obj = clone $this;
-        $obj['host'] = $host;
+        $self = clone $this;
+        $self['host'] = $host;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,18 +144,18 @@ final class Data implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj['port'] = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +163,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

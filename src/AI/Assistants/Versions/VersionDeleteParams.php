@@ -51,18 +51,18 @@ final class VersionDeleteParams implements BaseModel
      */
     public static function with(string $assistantID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['assistantID'] = $assistantID;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj['assistantID'] = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 }

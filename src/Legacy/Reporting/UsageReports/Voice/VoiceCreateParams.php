@@ -113,18 +113,18 @@ final class VoiceCreateParams implements BaseModel
         ?int $productBreakdown = null,
         ?bool $selectAllManagedAccounts = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['endTime'] = $endTime;
-        $obj['startTime'] = $startTime;
+        $self['endTime'] = $endTime;
+        $self['startTime'] = $startTime;
 
-        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
-        null !== $connections && $obj['connections'] = $connections;
-        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
-        null !== $productBreakdown && $obj['productBreakdown'] = $productBreakdown;
-        null !== $selectAllManagedAccounts && $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        null !== $aggregationType && $self['aggregationType'] = $aggregationType;
+        null !== $connections && $self['connections'] = $connections;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $productBreakdown && $self['productBreakdown'] = $productBreakdown;
+        null !== $selectAllManagedAccounts && $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withEndTime(\DateTimeInterface $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withAggregationType(int $aggregationType): self
     {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withConnections(array $connections): self
     {
-        $obj = clone $this;
-        $obj['connections'] = $connections;
+        $self = clone $this;
+        $self['connections'] = $connections;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withManagedAccounts(array $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj['managedAccounts'] = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +191,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withProductBreakdown(int $productBreakdown): self
     {
-        $obj = clone $this;
-        $obj['productBreakdown'] = $productBreakdown;
+        $self = clone $this;
+        $self['productBreakdown'] = $productBreakdown;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,9 +203,9 @@ final class VoiceCreateParams implements BaseModel
     public function withSelectAllManagedAccounts(
         bool $selectAllManagedAccounts
     ): self {
-        $obj = clone $this;
-        $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        $self = clone $this;
+        $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
-        return $obj;
+        return $self;
     }
 }

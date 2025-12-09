@@ -59,63 +59,63 @@ final class Data implements BaseModel
         ?string $taskName = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $finishedAt && $obj['finishedAt'] = $finishedAt;
-        null !== $status && $obj['status'] = $status;
-        null !== $taskID && $obj['taskID'] = $taskID;
-        null !== $taskName && $obj['taskName'] = $taskName;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        null !== $status && $self['status'] = $status;
+        null !== $taskID && $self['taskID'] = $taskID;
+        null !== $taskName && $self['taskName'] = $taskName;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withFinishedAt(?string $finishedAt): self
     {
-        $obj = clone $this;
-        $obj['finishedAt'] = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj['taskID'] = $taskID;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskName(string $taskName): self
     {
-        $obj = clone $this;
-        $obj['taskName'] = $taskName;
+        $self = clone $this;
+        $self['taskName'] = $taskName;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

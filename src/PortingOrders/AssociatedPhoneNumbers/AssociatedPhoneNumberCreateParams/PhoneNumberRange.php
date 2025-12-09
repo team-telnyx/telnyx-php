@@ -44,12 +44,12 @@ final class PhoneNumberRange implements BaseModel
         ?string $endAt = null,
         ?string $startAt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endAt && $obj['endAt'] = $endAt;
-        null !== $startAt && $obj['startAt'] = $startAt;
+        null !== $endAt && $self['endAt'] = $endAt;
+        null !== $startAt && $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class PhoneNumberRange implements BaseModel
      */
     public function withEndAt(string $endAt): self
     {
-        $obj = clone $this;
-        $obj['endAt'] = $endAt;
+        $self = clone $this;
+        $self['endAt'] = $endAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class PhoneNumberRange implements BaseModel
      */
     public function withStartAt(string $startAt): self
     {
-        $obj = clone $this;
-        $obj['startAt'] = $startAt;
+        $self = clone $this;
+        $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 }

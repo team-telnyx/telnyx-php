@@ -136,21 +136,21 @@ final class Data implements BaseModel
         ?string $recordingID = null,
         ?string $startTime = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['callControlID'] = $callControlID;
-        $obj['callLegID'] = $callLegID;
-        $obj['callSessionID'] = $callSessionID;
-        $obj['isAlive'] = $isAlive;
-        $obj['recordType'] = $recordType;
+        $self['callControlID'] = $callControlID;
+        $self['callLegID'] = $callLegID;
+        $self['callSessionID'] = $callSessionID;
+        $self['isAlive'] = $isAlive;
+        $self['recordType'] = $recordType;
 
-        null !== $callDuration && $obj['callDuration'] = $callDuration;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $endTime && $obj['endTime'] = $endTime;
-        null !== $recordingID && $obj['recordingID'] = $recordingID;
-        null !== $startTime && $obj['startTime'] = $startTime;
+        null !== $callDuration && $self['callDuration'] = $callDuration;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $recordingID && $self['recordingID'] = $recordingID;
+        null !== $startTime && $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class Data implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class Data implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class Data implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +191,10 @@ final class Data implements BaseModel
      */
     public function withIsAlive(bool $isAlive): self
     {
-        $obj = clone $this;
-        $obj['isAlive'] = $isAlive;
+        $self = clone $this;
+        $self['isAlive'] = $isAlive;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,10 +202,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,10 +213,10 @@ final class Data implements BaseModel
      */
     public function withCallDuration(int $callDuration): self
     {
-        $obj = clone $this;
-        $obj['callDuration'] = $callDuration;
+        $self = clone $this;
+        $self['callDuration'] = $callDuration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class Data implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +235,10 @@ final class Data implements BaseModel
      */
     public function withEndTime(string $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +246,10 @@ final class Data implements BaseModel
      */
     public function withRecordingID(string $recordingID): self
     {
-        $obj = clone $this;
-        $obj['recordingID'] = $recordingID;
+        $self = clone $this;
+        $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -257,9 +257,9 @@ final class Data implements BaseModel
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 }

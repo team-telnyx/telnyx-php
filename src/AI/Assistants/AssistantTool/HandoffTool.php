@@ -60,12 +60,12 @@ final class HandoffTool implements BaseModel
      */
     public static function with(Handoff|array $handoff, Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['handoff'] = $handoff;
-        $obj['type'] = $type;
+        $self['handoff'] = $handoff;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class HandoffTool implements BaseModel
      */
     public function withHandoff(Handoff|array $handoff): self
     {
-        $obj = clone $this;
-        $obj['handoff'] = $handoff;
+        $self = clone $this;
+        $self['handoff'] = $handoff;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class HandoffTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

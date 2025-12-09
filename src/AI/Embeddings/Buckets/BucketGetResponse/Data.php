@@ -74,64 +74,64 @@ final class Data implements BaseModel
         ?\DateTimeInterface $lastEmbeddedAt = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['createdAt'] = $createdAt;
-        $obj['filename'] = $filename;
-        $obj['status'] = $status;
+        $self['createdAt'] = $createdAt;
+        $self['filename'] = $filename;
+        $self['status'] = $status;
 
-        null !== $errorReason && $obj['errorReason'] = $errorReason;
-        null !== $lastEmbeddedAt && $obj['lastEmbeddedAt'] = $lastEmbeddedAt;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $errorReason && $self['errorReason'] = $errorReason;
+        null !== $lastEmbeddedAt && $self['lastEmbeddedAt'] = $lastEmbeddedAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj['filename'] = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withErrorReason(string $errorReason): self
     {
-        $obj = clone $this;
-        $obj['errorReason'] = $errorReason;
+        $self = clone $this;
+        $self['errorReason'] = $errorReason;
 
-        return $obj;
+        return $self;
     }
 
     public function withLastEmbeddedAt(\DateTimeInterface $lastEmbeddedAt): self
     {
-        $obj = clone $this;
-        $obj['lastEmbeddedAt'] = $lastEmbeddedAt;
+        $self = clone $this;
+        $self['lastEmbeddedAt'] = $lastEmbeddedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

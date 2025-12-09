@@ -76,16 +76,16 @@ final class Data implements BaseModel
         ?array $regionInformation = null,
         ?string $startingNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $costInformation && $obj['costInformation'] = $costInformation;
-        null !== $features && $obj['features'] = $features;
-        null !== $range && $obj['range'] = $range;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regionInformation && $obj['regionInformation'] = $regionInformation;
-        null !== $startingNumber && $obj['startingNumber'] = $startingNumber;
+        null !== $costInformation && $self['costInformation'] = $costInformation;
+        null !== $features && $self['features'] = $features;
+        null !== $range && $self['range'] = $range;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionInformation && $self['regionInformation'] = $regionInformation;
+        null !== $startingNumber && $self['startingNumber'] = $startingNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
     public function withCostInformation(
         CostInformation|array $costInformation
     ): self {
-        $obj = clone $this;
-        $obj['costInformation'] = $costInformation;
+        $self = clone $this;
+        $self['costInformation'] = $costInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,18 +107,18 @@ final class Data implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withRange(int $range): self
     {
-        $obj = clone $this;
-        $obj['range'] = $range;
+        $self = clone $this;
+        $self['range'] = $range;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,17 +139,17 @@ final class Data implements BaseModel
      */
     public function withRegionInformation(array $regionInformation): self
     {
-        $obj = clone $this;
-        $obj['regionInformation'] = $regionInformation;
+        $self = clone $this;
+        $self['regionInformation'] = $regionInformation;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartingNumber(string $startingNumber): self
     {
-        $obj = clone $this;
-        $obj['startingNumber'] = $startingNumber;
+        $self = clone $this;
+        $self['startingNumber'] = $startingNumber;
 
-        return $obj;
+        return $self;
     }
 }

@@ -94,76 +94,76 @@ final class RequirementGroup implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $action && $obj['action'] = $action;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $action && $self['action'] = $action;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withAction(string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class RequirementGroup implements BaseModel
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj['regulatoryRequirements'] = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,17 +191,17 @@ final class RequirementGroup implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

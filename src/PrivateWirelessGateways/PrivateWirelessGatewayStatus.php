@@ -66,13 +66,13 @@ final class PrivateWirelessGatewayStatus implements BaseModel
         ?string $errorDescription = null,
         Value|string|null $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $errorCode && $obj['errorCode'] = $errorCode;
-        null !== $errorDescription && $obj['errorDescription'] = $errorDescription;
-        null !== $value && $obj['value'] = $value;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $errorDescription && $self['errorDescription'] = $errorDescription;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      */
     public function withErrorCode(string $errorCode): self
     {
-        $obj = clone $this;
-        $obj['errorCode'] = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      */
     public function withErrorDescription(string $errorDescription): self
     {
-        $obj = clone $this;
-        $obj['errorDescription'] = $errorDescription;
+        $self = clone $this;
+        $self['errorDescription'] = $errorDescription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

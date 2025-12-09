@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $product = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $product && $obj['product'] = $product;
+        null !== $product && $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 }

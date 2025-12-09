@@ -77,15 +77,15 @@ final class RcsCapabilities implements BaseModel
         ?string $phoneNumber = null,
         RecordType|string|null $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $agentID && $obj['agentID'] = $agentID;
-        null !== $agentName && $obj['agentName'] = $agentName;
-        null !== $features && $obj['features'] = $features;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $agentID && $self['agentID'] = $agentID;
+        null !== $agentName && $self['agentName'] = $agentName;
+        null !== $features && $self['features'] = $features;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class RcsCapabilities implements BaseModel
      */
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj['agentID'] = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class RcsCapabilities implements BaseModel
      */
     public function withAgentName(string $agentName): self
     {
-        $obj = clone $this;
-        $obj['agentName'] = $agentName;
+        $self = clone $this;
+        $self['agentName'] = $agentName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class RcsCapabilities implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class RcsCapabilities implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +141,9 @@ final class RcsCapabilities implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

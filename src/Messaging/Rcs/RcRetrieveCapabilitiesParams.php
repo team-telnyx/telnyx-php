@@ -51,18 +51,18 @@ final class RcRetrieveCapabilitiesParams implements BaseModel
      */
     public static function with(string $agentID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['agentID'] = $agentID;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj['agentID'] = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 }

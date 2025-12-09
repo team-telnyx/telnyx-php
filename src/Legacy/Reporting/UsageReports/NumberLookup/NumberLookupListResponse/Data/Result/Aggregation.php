@@ -61,14 +61,14 @@ final class Aggregation implements BaseModel
         ?int $totalDips = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $totalCost && $obj['totalCost'] = $totalCost;
-        null !== $totalDips && $obj['totalDips'] = $totalDips;
-        null !== $type && $obj['type'] = $type;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $totalCost && $self['totalCost'] = $totalCost;
+        null !== $totalDips && $self['totalDips'] = $totalDips;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Aggregation implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Aggregation implements BaseModel
      */
     public function withTotalCost(float $totalCost): self
     {
-        $obj = clone $this;
-        $obj['totalCost'] = $totalCost;
+        $self = clone $this;
+        $self['totalCost'] = $totalCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Aggregation implements BaseModel
      */
     public function withTotalDips(int $totalDips): self
     {
-        $obj = clone $this;
-        $obj['totalDips'] = $totalDips;
+        $self = clone $this;
+        $self['totalDips'] = $totalDips;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class Aggregation implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

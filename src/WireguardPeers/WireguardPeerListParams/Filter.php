@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $wireguardInterfaceID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $wireguardInterfaceID && $obj['wireguardInterfaceID'] = $wireguardInterfaceID;
+        null !== $wireguardInterfaceID && $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
-        $obj = clone $this;
-        $obj['wireguardInterfaceID'] = $wireguardInterfaceID;
+        $self = clone $this;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
-        return $obj;
+        return $self;
     }
 }

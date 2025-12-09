@@ -48,12 +48,12 @@ final class LedgerBillingGroupReportCreateParams implements BaseModel
      */
     public static function with(?int $month = null, ?int $year = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $month && $obj['month'] = $month;
-        null !== $year && $obj['year'] = $year;
+        null !== $month && $self['month'] = $month;
+        null !== $year && $self['year'] = $year;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,10 +61,10 @@ final class LedgerBillingGroupReportCreateParams implements BaseModel
      */
     public function withMonth(int $month): self
     {
-        $obj = clone $this;
-        $obj['month'] = $month;
+        $self = clone $this;
+        $self['month'] = $month;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,9 +72,9 @@ final class LedgerBillingGroupReportCreateParams implements BaseModel
      */
     public function withYear(int $year): self
     {
-        $obj = clone $this;
-        $obj['year'] = $year;
+        $self = clone $this;
+        $self['year'] = $year;
 
-        return $obj;
+        return $self;
     }
 }

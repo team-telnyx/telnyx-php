@@ -63,14 +63,14 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
         ?string $portoutID = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $comment && $obj['comment'] = $comment;
-        null !== $portoutID && $obj['portoutID'] = $portoutID;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $id && $self['id'] = $id;
+        null !== $comment && $self['comment'] = $comment;
+        null !== $portoutID && $self['portoutID'] = $portoutID;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
      */
     public function withComment(string $comment): self
     {
-        $obj = clone $this;
-        $obj['comment'] = $comment;
+        $self = clone $this;
+        $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
      */
     public function withPortoutID(string $portoutID): self
     {
-        $obj = clone $this;
-        $obj['portoutID'] = $portoutID;
+        $self = clone $this;
+        $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

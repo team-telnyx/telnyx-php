@@ -54,54 +54,54 @@ final class CampaignSharingStatus implements BaseModel
         ?string $statusDate = null,
         ?string $upstreamCnpID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $downstreamCnpID && $obj['downstreamCnpID'] = $downstreamCnpID;
-        null !== $sharedDate && $obj['sharedDate'] = $sharedDate;
-        null !== $sharingStatus && $obj['sharingStatus'] = $sharingStatus;
-        null !== $statusDate && $obj['statusDate'] = $statusDate;
-        null !== $upstreamCnpID && $obj['upstreamCnpID'] = $upstreamCnpID;
+        null !== $downstreamCnpID && $self['downstreamCnpID'] = $downstreamCnpID;
+        null !== $sharedDate && $self['sharedDate'] = $sharedDate;
+        null !== $sharingStatus && $self['sharingStatus'] = $sharingStatus;
+        null !== $statusDate && $self['statusDate'] = $statusDate;
+        null !== $upstreamCnpID && $self['upstreamCnpID'] = $upstreamCnpID;
 
-        return $obj;
+        return $self;
     }
 
     public function withDownstreamCnpID(string $downstreamCnpID): self
     {
-        $obj = clone $this;
-        $obj['downstreamCnpID'] = $downstreamCnpID;
+        $self = clone $this;
+        $self['downstreamCnpID'] = $downstreamCnpID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSharedDate(string $sharedDate): self
     {
-        $obj = clone $this;
-        $obj['sharedDate'] = $sharedDate;
+        $self = clone $this;
+        $self['sharedDate'] = $sharedDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withSharingStatus(string $sharingStatus): self
     {
-        $obj = clone $this;
-        $obj['sharingStatus'] = $sharingStatus;
+        $self = clone $this;
+        $self['sharingStatus'] = $sharingStatus;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatusDate(string $statusDate): self
     {
-        $obj = clone $this;
-        $obj['statusDate'] = $statusDate;
+        $self = clone $this;
+        $self['statusDate'] = $statusDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpstreamCnpID(string $upstreamCnpID): self
     {
-        $obj = clone $this;
-        $obj['upstreamCnpID'] = $upstreamCnpID;
+        $self = clone $this;
+        $self['upstreamCnpID'] = $upstreamCnpID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -59,13 +59,13 @@ final class BucketIDs implements BaseModel
         array $bucketIDs,
         ?int $maxNumResults = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucketIDs'] = $bucketIDs;
+        $self['bucketIDs'] = $bucketIDs;
 
-        null !== $maxNumResults && $obj['maxNumResults'] = $maxNumResults;
+        null !== $maxNumResults && $self['maxNumResults'] = $maxNumResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class BucketIDs implements BaseModel
      */
     public function withBucketIDs(array $bucketIDs): self
     {
-        $obj = clone $this;
-        $obj['bucketIDs'] = $bucketIDs;
+        $self = clone $this;
+        $self['bucketIDs'] = $bucketIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class BucketIDs implements BaseModel
      */
     public function withMaxNumResults(int $maxNumResults): self
     {
-        $obj = clone $this;
-        $obj['maxNumResults'] = $maxNumResults;
+        $self = clone $this;
+        $self['maxNumResults'] = $maxNumResults;
 
-        return $obj;
+        return $self;
     }
 }

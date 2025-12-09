@@ -45,13 +45,13 @@ final class From implements BaseModel
         ?string $agentName = null,
         ?string $carrier = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $agentID && $obj['agentID'] = $agentID;
-        null !== $agentName && $obj['agentName'] = $agentName;
-        null !== $carrier && $obj['carrier'] = $carrier;
+        null !== $agentID && $self['agentID'] = $agentID;
+        null !== $agentName && $self['agentName'] = $agentName;
+        null !== $carrier && $self['carrier'] = $carrier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,25 +59,25 @@ final class From implements BaseModel
      */
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj['agentID'] = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAgentName(string $agentName): self
     {
-        $obj = clone $this;
-        $obj['agentName'] = $agentName;
+        $self = clone $this;
+        $self['agentName'] = $agentName;
 
-        return $obj;
+        return $self;
     }
 
     public function withCarrier(string $carrier): self
     {
-        $obj = clone $this;
-        $obj['carrier'] = $carrier;
+        $self = clone $this;
+        $self['carrier'] = $carrier;
 
-        return $obj;
+        return $self;
     }
 }

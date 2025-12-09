@@ -308,42 +308,42 @@ final class MessageDetailRecord implements BaseModel
         ?string $userID = null,
         ?string $uuid = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $carrier && $obj['carrier'] = $carrier;
-        null !== $carrierFee && $obj['carrierFee'] = $carrierFee;
-        null !== $cld && $obj['cld'] = $cld;
-        null !== $cli && $obj['cli'] = $cli;
-        null !== $completedAt && $obj['completedAt'] = $completedAt;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $deliveryStatus && $obj['deliveryStatus'] = $deliveryStatus;
-        null !== $deliveryStatusFailoverURL && $obj['deliveryStatusFailoverURL'] = $deliveryStatusFailoverURL;
-        null !== $deliveryStatusWebhookURL && $obj['deliveryStatusWebhookURL'] = $deliveryStatusWebhookURL;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $errors && $obj['errors'] = $errors;
-        null !== $fteu && $obj['fteu'] = $fteu;
-        null !== $mcc && $obj['mcc'] = $mcc;
-        null !== $messageType && $obj['messageType'] = $messageType;
-        null !== $mnc && $obj['mnc'] = $mnc;
-        null !== $onNet && $obj['onNet'] = $onNet;
-        null !== $parts && $obj['parts'] = $parts;
-        null !== $profileID && $obj['profileID'] = $profileID;
-        null !== $profileName && $obj['profileName'] = $profileName;
-        null !== $rate && $obj['rate'] = $rate;
-        null !== $sentAt && $obj['sentAt'] = $sentAt;
-        null !== $sourceCountryCode && $obj['sourceCountryCode'] = $sourceCountryCode;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $userID && $obj['userID'] = $userID;
-        null !== $uuid && $obj['uuid'] = $uuid;
+        null !== $carrier && $self['carrier'] = $carrier;
+        null !== $carrierFee && $self['carrierFee'] = $carrierFee;
+        null !== $cld && $self['cld'] = $cld;
+        null !== $cli && $self['cli'] = $cli;
+        null !== $completedAt && $self['completedAt'] = $completedAt;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $deliveryStatus && $self['deliveryStatus'] = $deliveryStatus;
+        null !== $deliveryStatusFailoverURL && $self['deliveryStatusFailoverURL'] = $deliveryStatusFailoverURL;
+        null !== $deliveryStatusWebhookURL && $self['deliveryStatusWebhookURL'] = $deliveryStatusWebhookURL;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $fteu && $self['fteu'] = $fteu;
+        null !== $mcc && $self['mcc'] = $mcc;
+        null !== $messageType && $self['messageType'] = $messageType;
+        null !== $mnc && $self['mnc'] = $mnc;
+        null !== $onNet && $self['onNet'] = $onNet;
+        null !== $parts && $self['parts'] = $parts;
+        null !== $profileID && $self['profileID'] = $profileID;
+        null !== $profileName && $self['profileName'] = $profileName;
+        null !== $rate && $self['rate'] = $rate;
+        null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $sourceCountryCode && $self['sourceCountryCode'] = $sourceCountryCode;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $uuid && $self['uuid'] = $uuid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,10 +351,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -362,10 +362,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCarrier(string $carrier): self
     {
-        $obj = clone $this;
-        $obj['carrier'] = $carrier;
+        $self = clone $this;
+        $self['carrier'] = $carrier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -373,10 +373,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCarrierFee(string $carrierFee): self
     {
-        $obj = clone $this;
-        $obj['carrierFee'] = $carrierFee;
+        $self = clone $this;
+        $self['carrierFee'] = $carrierFee;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -384,10 +384,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCld(string $cld): self
     {
-        $obj = clone $this;
-        $obj['cld'] = $cld;
+        $self = clone $this;
+        $self['cld'] = $cld;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -395,10 +395,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCli(string $cli): self
     {
-        $obj = clone $this;
-        $obj['cli'] = $cli;
+        $self = clone $this;
+        $self['cli'] = $cli;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,10 +406,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
-        $obj = clone $this;
-        $obj['completedAt'] = $completedAt;
+        $self = clone $this;
+        $self['completedAt'] = $completedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -417,10 +417,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -428,10 +428,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,10 +439,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -450,10 +450,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -461,10 +461,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withDeliveryStatus(string $deliveryStatus): self
     {
-        $obj = clone $this;
-        $obj['deliveryStatus'] = $deliveryStatus;
+        $self = clone $this;
+        $self['deliveryStatus'] = $deliveryStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -473,10 +473,10 @@ final class MessageDetailRecord implements BaseModel
     public function withDeliveryStatusFailoverURL(
         string $deliveryStatusFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['deliveryStatusFailoverURL'] = $deliveryStatusFailoverURL;
+        $self = clone $this;
+        $self['deliveryStatusFailoverURL'] = $deliveryStatusFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -485,10 +485,10 @@ final class MessageDetailRecord implements BaseModel
     public function withDeliveryStatusWebhookURL(
         string $deliveryStatusWebhookURL
     ): self {
-        $obj = clone $this;
-        $obj['deliveryStatusWebhookURL'] = $deliveryStatusWebhookURL;
+        $self = clone $this;
+        $self['deliveryStatusWebhookURL'] = $deliveryStatusWebhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -498,10 +498,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -511,10 +511,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -522,10 +522,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withFteu(bool $fteu): self
     {
-        $obj = clone $this;
-        $obj['fteu'] = $fteu;
+        $self = clone $this;
+        $self['fteu'] = $fteu;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -533,10 +533,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withMcc(string $mcc): self
     {
-        $obj = clone $this;
-        $obj['mcc'] = $mcc;
+        $self = clone $this;
+        $self['mcc'] = $mcc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -546,10 +546,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withMessageType(MessageType|string $messageType): self
     {
-        $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $self = clone $this;
+        $self['messageType'] = $messageType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -557,10 +557,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withMnc(string $mnc): self
     {
-        $obj = clone $this;
-        $obj['mnc'] = $mnc;
+        $self = clone $this;
+        $self['mnc'] = $mnc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -568,10 +568,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withOnNet(bool $onNet): self
     {
-        $obj = clone $this;
-        $obj['onNet'] = $onNet;
+        $self = clone $this;
+        $self['onNet'] = $onNet;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -579,10 +579,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withParts(int $parts): self
     {
-        $obj = clone $this;
-        $obj['parts'] = $parts;
+        $self = clone $this;
+        $self['parts'] = $parts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -590,10 +590,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withProfileID(string $profileID): self
     {
-        $obj = clone $this;
-        $obj['profileID'] = $profileID;
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -601,10 +601,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withProfileName(string $profileName): self
     {
-        $obj = clone $this;
-        $obj['profileName'] = $profileName;
+        $self = clone $this;
+        $self['profileName'] = $profileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -612,10 +612,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withRate(string $rate): self
     {
-        $obj = clone $this;
-        $obj['rate'] = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -623,10 +623,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
-        $obj = clone $this;
-        $obj['sentAt'] = $sentAt;
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -634,10 +634,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withSourceCountryCode(string $sourceCountryCode): self
     {
-        $obj = clone $this;
-        $obj['sourceCountryCode'] = $sourceCountryCode;
+        $self = clone $this;
+        $self['sourceCountryCode'] = $sourceCountryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -647,10 +647,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -658,10 +658,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withTags(string $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -669,10 +669,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -680,10 +680,10 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -691,9 +691,9 @@ final class MessageDetailRecord implements BaseModel
      */
     public function withUuid(string $uuid): self
     {
-        $obj = clone $this;
-        $obj['uuid'] = $uuid;
+        $self = clone $this;
+        $self['uuid'] = $uuid;
 
-        return $obj;
+        return $self;
     }
 }

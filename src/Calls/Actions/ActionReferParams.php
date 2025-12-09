@@ -122,18 +122,18 @@ final class ActionReferParams implements BaseModel
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['sipAddress'] = $sipAddress;
+        $self['sipAddress'] = $sipAddress;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
-        null !== $sipAuthPassword && $obj['sipAuthPassword'] = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj['sipAuthUsername'] = $sipAuthUsername;
-        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class ActionReferParams implements BaseModel
      */
     public function withSipAddress(string $sipAddress): self
     {
-        $obj = clone $this;
-        $obj['sipAddress'] = $sipAddress;
+        $self = clone $this;
+        $self['sipAddress'] = $sipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class ActionReferParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class ActionReferParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class ActionReferParams implements BaseModel
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj['customHeaders'] = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class ActionReferParams implements BaseModel
      */
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
-        $obj = clone $this;
-        $obj['sipAuthPassword'] = $sipAuthPassword;
+        $self = clone $this;
+        $self['sipAuthPassword'] = $sipAuthPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class ActionReferParams implements BaseModel
      */
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
-        $obj = clone $this;
-        $obj['sipAuthUsername'] = $sipAuthUsername;
+        $self = clone $this;
+        $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,9 +211,9 @@ final class ActionReferParams implements BaseModel
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj['sipHeaders'] = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 }

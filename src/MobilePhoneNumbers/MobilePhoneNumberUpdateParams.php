@@ -129,21 +129,21 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
         Outbound|array|null $outbound = null,
         ?array $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callForwarding && $obj['callForwarding'] = $callForwarding;
-        null !== $callRecording && $obj['callRecording'] = $callRecording;
-        null !== $callerIDNameEnabled && $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
-        null !== $cnamListing && $obj['cnamListing'] = $cnamListing;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
-        null !== $noiseSuppression && $obj['noiseSuppression'] = $noiseSuppression;
-        null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $tags && $obj['tags'] = $tags;
+        null !== $callForwarding && $self['callForwarding'] = $callForwarding;
+        null !== $callRecording && $self['callRecording'] = $callRecording;
+        null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
+        null !== $cnamListing && $self['cnamListing'] = $cnamListing;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
+        null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     public function withCallForwarding(
         CallForwarding|array $callForwarding
     ): self {
-        $obj = clone $this;
-        $obj['callForwarding'] = $callForwarding;
+        $self = clone $this;
+        $self['callForwarding'] = $callForwarding;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,18 +171,18 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
-        $obj = clone $this;
-        $obj['callRecording'] = $callRecording;
+        $self = clone $this;
+        $self['callRecording'] = $callRecording;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
     {
-        $obj = clone $this;
-        $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
+        $self = clone $this;
+        $self['callerIDNameEnabled'] = $callerIDNameEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,26 +192,26 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
-        $obj = clone $this;
-        $obj['cnamListing'] = $cnamListing;
+        $self = clone $this;
+        $self['cnamListing'] = $cnamListing;
 
-        return $obj;
+        return $self;
     }
 
     public function withConnectionID(?string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerReference(?string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      */
     public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,18 +231,18 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     public function withInboundCallScreening(
         InboundCallScreening|string $inboundCallScreening
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallScreening'] = $inboundCallScreening;
+        $self = clone $this;
+        $self['inboundCallScreening'] = $inboundCallScreening;
 
-        return $obj;
+        return $self;
     }
 
     public function withNoiseSuppression(bool $noiseSuppression): self
     {
-        $obj = clone $this;
-        $obj['noiseSuppression'] = $noiseSuppression;
+        $self = clone $this;
+        $self['noiseSuppression'] = $noiseSuppression;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      */
     public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,9 +261,9 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

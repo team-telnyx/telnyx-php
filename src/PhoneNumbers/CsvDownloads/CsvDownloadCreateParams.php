@@ -83,12 +83,12 @@ final class CsvDownloadCreateParams implements BaseModel
         CsvFormat|string|null $csvFormat = null,
         Filter|array|null $filter = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $csvFormat && $obj['csvFormat'] = $csvFormat;
-        null !== $filter && $obj['filter'] = $filter;
+        null !== $csvFormat && $self['csvFormat'] = $csvFormat;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class CsvDownloadCreateParams implements BaseModel
      */
     public function withCsvFormat(CsvFormat|string $csvFormat): self
     {
-        $obj = clone $this;
-        $obj['csvFormat'] = $csvFormat;
+        $self = clone $this;
+        $self['csvFormat'] = $csvFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,9 +122,9 @@ final class CsvDownloadCreateParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

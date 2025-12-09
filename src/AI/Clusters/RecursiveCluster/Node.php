@@ -54,12 +54,12 @@ final class Node implements BaseModel
      */
     public static function with(string $filename, string $text): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['filename'] = $filename;
-        $obj['text'] = $text;
+        $self['filename'] = $filename;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Node implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj['filename'] = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Node implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

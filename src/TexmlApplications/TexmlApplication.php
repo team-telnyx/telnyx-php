@@ -207,29 +207,29 @@ final class TexmlApplication implements BaseModel
         VoiceMethod|string|null $voiceMethod = null,
         ?string $voiceURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $active && $obj['active'] = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $callCostInWebhooks && $obj['callCostInWebhooks'] = $callCostInWebhooks;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $firstCommandTimeout && $obj['firstCommandTimeout'] = $firstCommandTimeout;
-        null !== $firstCommandTimeoutSecs && $obj['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
-        null !== $friendlyName && $obj['friendlyName'] = $friendlyName;
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $statusCallback && $obj['statusCallback'] = $statusCallback;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $voiceFallbackURL && $obj['voiceFallbackURL'] = $voiceFallbackURL;
-        null !== $voiceMethod && $obj['voiceMethod'] = $voiceMethod;
-        null !== $voiceURL && $obj['voiceURL'] = $voiceURL;
+        null !== $id && $self['id'] = $id;
+        null !== $active && $self['active'] = $active;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $dtmfType && $self['dtmfType'] = $dtmfType;
+        null !== $firstCommandTimeout && $self['firstCommandTimeout'] = $firstCommandTimeout;
+        null !== $firstCommandTimeoutSecs && $self['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
+        null !== $friendlyName && $self['friendlyName'] = $friendlyName;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $statusCallback && $self['statusCallback'] = $statusCallback;
+        null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $voiceFallbackURL && $self['voiceFallbackURL'] = $voiceFallbackURL;
+        null !== $voiceMethod && $self['voiceMethod'] = $voiceMethod;
+        null !== $voiceURL && $self['voiceURL'] = $voiceURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +237,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class TexmlApplication implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,10 +273,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
-        $obj = clone $this;
-        $obj['callCostInWebhooks'] = $callCostInWebhooks;
+        $self = clone $this;
+        $self['callCostInWebhooks'] = $callCostInWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +284,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,10 +297,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
-        $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $self = clone $this;
+        $self['dtmfType'] = $dtmfType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withFirstCommandTimeout(bool $firstCommandTimeout): self
     {
-        $obj = clone $this;
-        $obj['firstCommandTimeout'] = $firstCommandTimeout;
+        $self = clone $this;
+        $self['firstCommandTimeout'] = $firstCommandTimeout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -320,10 +320,10 @@ final class TexmlApplication implements BaseModel
     public function withFirstCommandTimeoutSecs(
         int $firstCommandTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
+        $self = clone $this;
+        $self['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -331,10 +331,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withFriendlyName(string $friendlyName): self
     {
-        $obj = clone $this;
-        $obj['friendlyName'] = $friendlyName;
+        $self = clone $this;
+        $self['friendlyName'] = $friendlyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -347,10 +347,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -360,10 +360,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -371,10 +371,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -382,10 +382,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withStatusCallback(string $statusCallback): self
     {
-        $obj = clone $this;
-        $obj['statusCallback'] = $statusCallback;
+        $self = clone $this;
+        $self['statusCallback'] = $statusCallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -396,10 +396,10 @@ final class TexmlApplication implements BaseModel
     public function withStatusCallbackMethod(
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $self = clone $this;
+        $self['statusCallbackMethod'] = $statusCallbackMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -409,10 +409,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -420,10 +420,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -431,10 +431,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withVoiceFallbackURL(string $voiceFallbackURL): self
     {
-        $obj = clone $this;
-        $obj['voiceFallbackURL'] = $voiceFallbackURL;
+        $self = clone $this;
+        $self['voiceFallbackURL'] = $voiceFallbackURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -444,10 +444,10 @@ final class TexmlApplication implements BaseModel
      */
     public function withVoiceMethod(VoiceMethod|string $voiceMethod): self
     {
-        $obj = clone $this;
-        $obj['voiceMethod'] = $voiceMethod;
+        $self = clone $this;
+        $self['voiceMethod'] = $voiceMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -455,9 +455,9 @@ final class TexmlApplication implements BaseModel
      */
     public function withVoiceURL(string $voiceURL): self
     {
-        $obj = clone $this;
-        $obj['voiceURL'] = $voiceURL;
+        $self = clone $this;
+        $self['voiceURL'] = $voiceURL;
 
-        return $obj;
+        return $self;
     }
 }

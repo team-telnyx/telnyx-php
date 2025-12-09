@@ -62,12 +62,12 @@ final class OAuthGrantsParams implements BaseModel
      */
     public static function with(bool $allowed, string $consentToken): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['allowed'] = $allowed;
-        $obj['consentToken'] = $consentToken;
+        $self['allowed'] = $allowed;
+        $self['consentToken'] = $consentToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class OAuthGrantsParams implements BaseModel
      */
     public function withAllowed(bool $allowed): self
     {
-        $obj = clone $this;
-        $obj['allowed'] = $allowed;
+        $self = clone $this;
+        $self['allowed'] = $allowed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class OAuthGrantsParams implements BaseModel
      */
     public function withConsentToken(string $consentToken): self
     {
-        $obj = clone $this;
-        $obj['consentToken'] = $consentToken;
+        $self = clone $this;
+        $self['consentToken'] = $consentToken;
 
-        return $obj;
+        return $self;
     }
 }

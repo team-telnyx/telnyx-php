@@ -84,40 +84,40 @@ final class AssistantSendSMSParams implements BaseModel
         ?array $conversationMetadata = null,
         ?bool $shouldCreateConversation = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['from'] = $from;
-        $obj['text'] = $text;
-        $obj['to'] = $to;
+        $self['from'] = $from;
+        $self['text'] = $text;
+        $self['to'] = $to;
 
-        null !== $conversationMetadata && $obj['conversationMetadata'] = $conversationMetadata;
-        null !== $shouldCreateConversation && $obj['shouldCreateConversation'] = $shouldCreateConversation;
+        null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
+        null !== $shouldCreateConversation && $self['shouldCreateConversation'] = $shouldCreateConversation;
 
-        return $obj;
+        return $self;
     }
 
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,18 +125,18 @@ final class AssistantSendSMSParams implements BaseModel
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {
-        $obj = clone $this;
-        $obj['conversationMetadata'] = $conversationMetadata;
+        $self = clone $this;
+        $self['conversationMetadata'] = $conversationMetadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withShouldCreateConversation(
         bool $shouldCreateConversation
     ): self {
-        $obj = clone $this;
-        $obj['shouldCreateConversation'] = $shouldCreateConversation;
+        $self = clone $this;
+        $self['shouldCreateConversation'] = $shouldCreateConversation;
 
-        return $obj;
+        return $self;
     }
 }

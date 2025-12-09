@@ -72,13 +72,13 @@ final class AssociatedPhoneNumberListParams implements BaseModel
         Page|array|null $page = null,
         Sort|array|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $page && $obj['page'] = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class AssociatedPhoneNumberListParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class AssociatedPhoneNumberListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class AssociatedPhoneNumberListParams implements BaseModel
      */
     public function withSort(Sort|array $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

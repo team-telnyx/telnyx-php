@@ -39,11 +39,11 @@ final class PortingOrder implements BaseModel
      */
     public static function with(?array $status = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $status && $obj['status'] = $status;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,9 +53,9 @@ final class PortingOrder implements BaseModel
      */
     public function withStatus(array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

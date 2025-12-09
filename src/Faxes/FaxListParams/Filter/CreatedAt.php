@@ -63,14 +63,14 @@ final class CreatedAt implements BaseModel
         ?\DateTimeInterface $lt = null,
         ?\DateTimeInterface $lte = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gt && $obj['gt'] = $gt;
-        null !== $gte && $obj['gte'] = $gte;
-        null !== $lt && $obj['lt'] = $lt;
-        null !== $lte && $obj['lte'] = $lte;
+        null !== $gt && $self['gt'] = $gt;
+        null !== $gte && $self['gte'] = $gte;
+        null !== $lt && $self['lt'] = $lt;
+        null !== $lte && $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class CreatedAt implements BaseModel
      */
     public function withGt(\DateTimeInterface $gt): self
     {
-        $obj = clone $this;
-        $obj['gt'] = $gt;
+        $self = clone $this;
+        $self['gt'] = $gt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class CreatedAt implements BaseModel
      */
     public function withGte(\DateTimeInterface $gte): self
     {
-        $obj = clone $this;
-        $obj['gte'] = $gte;
+        $self = clone $this;
+        $self['gte'] = $gte;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class CreatedAt implements BaseModel
      */
     public function withLt(\DateTimeInterface $lt): self
     {
-        $obj = clone $this;
-        $obj['lt'] = $lt;
+        $self = clone $this;
+        $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class CreatedAt implements BaseModel
      */
     public function withLte(\DateTimeInterface $lte): self
     {
-        $obj = clone $this;
-        $obj['lte'] = $lte;
+        $self = clone $this;
+        $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 }

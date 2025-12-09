@@ -56,12 +56,12 @@ final class Contact implements BaseModel
      */
     public static function with(string $email, string $phoneNumber): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['email'] = $email;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self['email'] = $email;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Contact implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Contact implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

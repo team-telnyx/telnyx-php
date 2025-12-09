@@ -64,13 +64,13 @@ final class Filter implements BaseModel
         ?string $portingOrderID = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
-        null !== $type && $obj['type'] = $type;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class Filter implements BaseModel
      */
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj['portingOrderID'] = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class Filter implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

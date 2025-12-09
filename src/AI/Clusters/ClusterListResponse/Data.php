@@ -97,57 +97,57 @@ final class Data implements BaseModel
         TaskStatus|string $status,
         string $taskID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucket'] = $bucket;
-        $obj['createdAt'] = $createdAt;
-        $obj['finishedAt'] = $finishedAt;
-        $obj['minClusterSize'] = $minClusterSize;
-        $obj['minSubclusterSize'] = $minSubclusterSize;
-        $obj['status'] = $status;
-        $obj['taskID'] = $taskID;
+        $self['bucket'] = $bucket;
+        $self['createdAt'] = $createdAt;
+        $self['finishedAt'] = $finishedAt;
+        $self['minClusterSize'] = $minClusterSize;
+        $self['minSubclusterSize'] = $minSubclusterSize;
+        $self['status'] = $status;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj['bucket'] = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
-        $obj = clone $this;
-        $obj['finishedAt'] = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withMinClusterSize(int $minClusterSize): self
     {
-        $obj = clone $this;
-        $obj['minClusterSize'] = $minClusterSize;
+        $self = clone $this;
+        $self['minClusterSize'] = $minClusterSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withMinSubclusterSize(int $minSubclusterSize): self
     {
-        $obj = clone $this;
-        $obj['minSubclusterSize'] = $minSubclusterSize;
+        $self = clone $this;
+        $self['minSubclusterSize'] = $minSubclusterSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,17 +155,17 @@ final class Data implements BaseModel
      */
     public function withStatus(TaskStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj['taskID'] = $taskID;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 }

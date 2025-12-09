@@ -72,39 +72,39 @@ final class Data implements BaseModel
         ?array $regionInformation = null,
         ?array $regulatoryRequirements = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regionInformation && $obj['regionInformation'] = $regionInformation;
-        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionInformation && $self['regionInformation'] = $regionInformation;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Data implements BaseModel
      */
     public function withRegionInformation(array $regionInformation): self
     {
-        $obj = clone $this;
-        $obj['regionInformation'] = $regionInformation;
+        $self = clone $this;
+        $self['regionInformation'] = $regionInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,9 +134,9 @@ final class Data implements BaseModel
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj['regulatoryRequirements'] = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 }

@@ -45,18 +45,18 @@ final class Data implements BaseModel
      */
     public static function with(string $summary): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['summary'] = $summary;
+        $self['summary'] = $summary;
 
-        return $obj;
+        return $self;
     }
 
     public function withSummary(string $summary): self
     {
-        $obj = clone $this;
-        $obj['summary'] = $summary;
+        $self = clone $this;
+        $self['summary'] = $summary;
 
-        return $obj;
+        return $self;
     }
 }

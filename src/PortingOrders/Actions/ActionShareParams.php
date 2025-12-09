@@ -55,12 +55,12 @@ final class ActionShareParams implements BaseModel
         ?int $expiresInSeconds = null,
         Permissions|string|null $permissions = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $expiresInSeconds && $obj['expiresInSeconds'] = $expiresInSeconds;
-        null !== $permissions && $obj['permissions'] = $permissions;
+        null !== $expiresInSeconds && $self['expiresInSeconds'] = $expiresInSeconds;
+        null !== $permissions && $self['permissions'] = $permissions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class ActionShareParams implements BaseModel
      */
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
-        $obj = clone $this;
-        $obj['expiresInSeconds'] = $expiresInSeconds;
+        $self = clone $this;
+        $self['expiresInSeconds'] = $expiresInSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class ActionShareParams implements BaseModel
      */
     public function withPermissions(Permissions|string $permissions): self
     {
-        $obj = clone $this;
-        $obj['permissions'] = $permissions;
+        $self = clone $this;
+        $self['permissions'] = $permissions;
 
-        return $obj;
+        return $self;
     }
 }

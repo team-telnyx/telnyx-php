@@ -88,15 +88,15 @@ final class ActionStartForkingParams implements BaseModel
         StreamType|string|null $streamType = null,
         ?string $tx = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $rx && $obj['rx'] = $rx;
-        null !== $streamType && $obj['streamType'] = $streamType;
-        null !== $tx && $obj['tx'] = $tx;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $rx && $self['rx'] = $rx;
+        null !== $streamType && $self['streamType'] = $streamType;
+        null !== $tx && $self['tx'] = $tx;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withRx(string $rx): self
     {
-        $obj = clone $this;
-        $obj['rx'] = $rx;
+        $self = clone $this;
+        $self['rx'] = $rx;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withStreamType(StreamType|string $streamType): self
     {
-        $obj = clone $this;
-        $obj['streamType'] = $streamType;
+        $self = clone $this;
+        $self['streamType'] = $streamType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,9 +150,9 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withTx(string $tx): self
     {
-        $obj = clone $this;
-        $obj['tx'] = $tx;
+        $self = clone $this;
+        $self['tx'] = $tx;
 
-        return $obj;
+        return $self;
     }
 }

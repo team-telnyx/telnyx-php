@@ -165,22 +165,22 @@ final class PortingOrderUpdateParams implements BaseModel
         PortingOrderUserFeedback|array|null $userFeedback = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationSettings && $obj['activationSettings'] = $activationSettings;
-        null !== $customerGroupReference && $obj['customerGroupReference'] = $customerGroupReference;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $documents && $obj['documents'] = $documents;
-        null !== $endUser && $obj['endUser'] = $endUser;
-        null !== $messaging && $obj['messaging'] = $messaging;
-        null !== $misc && $obj['misc'] = $misc;
-        null !== $phoneNumberConfiguration && $obj['phoneNumberConfiguration'] = $phoneNumberConfiguration;
-        null !== $requirementGroupID && $obj['requirementGroupID'] = $requirementGroupID;
-        null !== $requirements && $obj['requirements'] = $requirements;
-        null !== $userFeedback && $obj['userFeedback'] = $userFeedback;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $activationSettings && $self['activationSettings'] = $activationSettings;
+        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $documents && $self['documents'] = $documents;
+        null !== $endUser && $self['endUser'] = $endUser;
+        null !== $messaging && $self['messaging'] = $messaging;
+        null !== $misc && $self['misc'] = $misc;
+        null !== $phoneNumberConfiguration && $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
+        null !== $requirementGroupID && $self['requirementGroupID'] = $requirementGroupID;
+        null !== $requirements && $self['requirements'] = $requirements;
+        null !== $userFeedback && $self['userFeedback'] = $userFeedback;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,27 +191,27 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withActivationSettings(
         ActivationSettings|array $activationSettings
     ): self {
-        $obj = clone $this;
-        $obj['activationSettings'] = $activationSettings;
+        $self = clone $this;
+        $self['activationSettings'] = $activationSettings;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerGroupReference(
         string $customerGroupReference
     ): self {
-        $obj = clone $this;
-        $obj['customerGroupReference'] = $customerGroupReference;
+        $self = clone $this;
+        $self['customerGroupReference'] = $customerGroupReference;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +223,10 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public function withDocuments(PortingOrderDocuments|array $documents): self
     {
-        $obj = clone $this;
-        $obj['documents'] = $documents;
+        $self = clone $this;
+        $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +237,10 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public function withEndUser(PortingOrderEndUser|array $endUser): self
     {
-        $obj = clone $this;
-        $obj['endUser'] = $endUser;
+        $self = clone $this;
+        $self['endUser'] = $endUser;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public function withMessaging(Messaging|array $messaging): self
     {
-        $obj = clone $this;
-        $obj['messaging'] = $messaging;
+        $self = clone $this;
+        $self['messaging'] = $messaging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,10 +263,10 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public function withMisc(PortingOrderMisc|array|null $misc): self
     {
-        $obj = clone $this;
-        $obj['misc'] = $misc;
+        $self = clone $this;
+        $self['misc'] = $misc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +281,10 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withPhoneNumberConfiguration(
         PortingOrderPhoneNumberConfiguration|array $phoneNumberConfiguration
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberConfiguration'] = $phoneNumberConfiguration;
+        $self = clone $this;
+        $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public function withRequirementGroupID(string $requirementGroupID): self
     {
-        $obj = clone $this;
-        $obj['requirementGroupID'] = $requirementGroupID;
+        $self = clone $this;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +307,10 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public function withRequirements(array $requirements): self
     {
-        $obj = clone $this;
-        $obj['requirements'] = $requirements;
+        $self = clone $this;
+        $self['requirements'] = $requirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -321,17 +321,17 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withUserFeedback(
         PortingOrderUserFeedback|array $userFeedback
     ): self {
-        $obj = clone $this;
-        $obj['userFeedback'] = $userFeedback;
+        $self = clone $this;
+        $self['userFeedback'] = $userFeedback;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

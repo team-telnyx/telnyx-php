@@ -60,30 +60,30 @@ final class Function1 implements BaseModel
         ?string $description = null,
         ?array $parameters = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
+        $self['name'] = $name;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $parameters && $obj['parameters'] = $parameters;
+        null !== $description && $self['description'] = $description;
+        null !== $parameters && $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +91,9 @@ final class Function1 implements BaseModel
      */
     public function withParameters(array $parameters): self
     {
-        $obj = clone $this;
-        $obj['parameters'] = $parameters;
+        $self = clone $this;
+        $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 }

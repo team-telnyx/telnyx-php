@@ -45,12 +45,12 @@ final class SipHeader implements BaseModel
         Name|string|null $name = null,
         ?string $value = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj['name'] = $name;
-        null !== $value && $obj['value'] = $value;
+        null !== $name && $self['name'] = $name;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -58,10 +58,10 @@ final class SipHeader implements BaseModel
      */
     public function withName(Name|string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class SipHeader implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

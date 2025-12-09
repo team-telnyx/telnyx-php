@@ -59,12 +59,12 @@ final class CallQualityStats implements BaseModel
         Inbound|array|null $inbound = null,
         Outbound|array|null $outbound = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $outbound && $obj['outbound'] = $outbound;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $outbound && $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class CallQualityStats implements BaseModel
      */
     public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +95,9 @@ final class CallQualityStats implements BaseModel
      */
     public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 }

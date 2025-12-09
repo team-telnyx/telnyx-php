@@ -57,13 +57,13 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
         ?bool $isInMaintenance = null,
         ?string $wireguardPeerID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
-        null !== $isInMaintenance && $obj['isInMaintenance'] = $isInMaintenance;
-        null !== $wireguardPeerID && $obj['wireguardPeerID'] = $wireguardPeerID;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
+        null !== $isInMaintenance && $self['isInMaintenance'] = $isInMaintenance;
+        null !== $wireguardPeerID && $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +71,10 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
      */
     public function withGlobalIpid(string $globalIPID): self
     {
-        $obj = clone $this;
-        $obj['globalIPID'] = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
      */
     public function withIsInMaintenance(bool $isInMaintenance): self
     {
-        $obj = clone $this;
-        $obj['isInMaintenance'] = $isInMaintenance;
+        $self = clone $this;
+        $self['isInMaintenance'] = $isInMaintenance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +93,9 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
      */
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
-        $obj = clone $this;
-        $obj['wireguardPeerID'] = $wireguardPeerID;
+        $self = clone $this;
+        $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 }

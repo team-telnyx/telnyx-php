@@ -40,12 +40,12 @@ final class ActivationRange implements BaseModel
      */
     public static function with(?int $endAt = null, ?int $startAt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endAt && $obj['endAt'] = $endAt;
-        null !== $startAt && $obj['startAt'] = $startAt;
+        null !== $endAt && $self['endAt'] = $endAt;
+        null !== $startAt && $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class ActivationRange implements BaseModel
      */
     public function withEndAt(int $endAt): self
     {
-        $obj = clone $this;
-        $obj['endAt'] = $endAt;
+        $self = clone $this;
+        $self['endAt'] = $endAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class ActivationRange implements BaseModel
      */
     public function withStartAt(int $startAt): self
     {
-        $obj = clone $this;
-        $obj['startAt'] = $startAt;
+        $self = clone $this;
+        $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 }

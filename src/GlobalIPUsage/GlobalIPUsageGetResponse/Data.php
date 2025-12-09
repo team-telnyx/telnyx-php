@@ -59,14 +59,14 @@ final class Data implements BaseModel
         ?\DateTimeInterface $timestamp = null,
         Transmitted|array|null $transmitted = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIP && $obj['globalIP'] = $globalIP;
-        null !== $received && $obj['received'] = $received;
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
-        null !== $transmitted && $obj['transmitted'] = $transmitted;
+        null !== $globalIP && $self['globalIP'] = $globalIP;
+        null !== $received && $self['received'] = $received;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
+        null !== $transmitted && $self['transmitted'] = $transmitted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class Data implements BaseModel
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
-        $obj = clone $this;
-        $obj['globalIP'] = $globalIP;
+        $self = clone $this;
+        $self['globalIP'] = $globalIP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withReceived(Received|array $received): self
     {
-        $obj = clone $this;
-        $obj['received'] = $received;
+        $self = clone $this;
+        $self['received'] = $received;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class Data implements BaseModel
      */
     public function withTransmitted(Transmitted|array $transmitted): self
     {
-        $obj = clone $this;
-        $obj['transmitted'] = $transmitted;
+        $self = clone $this;
+        $self['transmitted'] = $transmitted;
 
-        return $obj;
+        return $self;
     }
 }

@@ -48,21 +48,21 @@ final class CallForwarding implements BaseModel
         ForwardingType|string|null $forwardingType = null,
         ?string $forwardsTo = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callForwardingEnabled && $obj['callForwardingEnabled'] = $callForwardingEnabled;
-        null !== $forwardingType && $obj['forwardingType'] = $forwardingType;
-        null !== $forwardsTo && $obj['forwardsTo'] = $forwardsTo;
+        null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
+        null !== $forwardingType && $self['forwardingType'] = $forwardingType;
+        null !== $forwardsTo && $self['forwardsTo'] = $forwardsTo;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallForwardingEnabled(bool $callForwardingEnabled): self
     {
-        $obj = clone $this;
-        $obj['callForwardingEnabled'] = $callForwardingEnabled;
+        $self = clone $this;
+        $self['callForwardingEnabled'] = $callForwardingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,17 +71,17 @@ final class CallForwarding implements BaseModel
     public function withForwardingType(
         ForwardingType|string|null $forwardingType
     ): self {
-        $obj = clone $this;
-        $obj['forwardingType'] = $forwardingType;
+        $self = clone $this;
+        $self['forwardingType'] = $forwardingType;
 
-        return $obj;
+        return $self;
     }
 
     public function withForwardsTo(?string $forwardsTo): self
     {
-        $obj = clone $this;
-        $obj['forwardsTo'] = $forwardsTo;
+        $self = clone $this;
+        $self['forwardsTo'] = $forwardsTo;
 
-        return $obj;
+        return $self;
     }
 }

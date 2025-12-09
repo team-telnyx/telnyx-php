@@ -135,19 +135,19 @@ final class PushCredential implements BaseModel
         string $type,
         \DateTimeInterface $updatedAt,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['alias'] = $alias;
-        $obj['certificate'] = $certificate;
-        $obj['createdAt'] = $createdAt;
-        $obj['privateKey'] = $privateKey;
-        $obj['projectAccountJsonFile'] = $projectAccountJsonFile;
-        $obj['recordType'] = $recordType;
-        $obj['type'] = $type;
-        $obj['updatedAt'] = $updatedAt;
+        $self['id'] = $id;
+        $self['alias'] = $alias;
+        $self['certificate'] = $certificate;
+        $self['createdAt'] = $createdAt;
+        $self['privateKey'] = $privateKey;
+        $self['projectAccountJsonFile'] = $projectAccountJsonFile;
+        $self['recordType'] = $recordType;
+        $self['type'] = $type;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class PushCredential implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class PushCredential implements BaseModel
      */
     public function withAlias(string $alias): self
     {
-        $obj = clone $this;
-        $obj['alias'] = $alias;
+        $self = clone $this;
+        $self['alias'] = $alias;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class PushCredential implements BaseModel
      */
     public function withCertificate(string $certificate): self
     {
-        $obj = clone $this;
-        $obj['certificate'] = $certificate;
+        $self = clone $this;
+        $self['certificate'] = $certificate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class PushCredential implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class PushCredential implements BaseModel
      */
     public function withPrivateKey(string $privateKey): self
     {
-        $obj = clone $this;
-        $obj['privateKey'] = $privateKey;
+        $self = clone $this;
+        $self['privateKey'] = $privateKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,18 +213,18 @@ final class PushCredential implements BaseModel
     public function withProjectAccountJsonFile(
         array $projectAccountJsonFile
     ): self {
-        $obj = clone $this;
-        $obj['projectAccountJsonFile'] = $projectAccountJsonFile;
+        $self = clone $this;
+        $self['projectAccountJsonFile'] = $projectAccountJsonFile;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class PushCredential implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,9 +243,9 @@ final class PushCredential implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

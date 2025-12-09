@@ -59,11 +59,11 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
      */
     public static function with(string $requirementGroupID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['requirementGroupID'] = $requirementGroupID;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,9 +71,9 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
      */
     public function withRequirementGroupID(string $requirementGroupID): self
     {
-        $obj = clone $this;
-        $obj['requirementGroupID'] = $requirementGroupID;
+        $self = clone $this;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 }

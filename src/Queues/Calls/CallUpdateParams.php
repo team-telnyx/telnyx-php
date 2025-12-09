@@ -62,21 +62,21 @@ final class CallUpdateParams implements BaseModel
         string $queueName,
         ?bool $keepAfterHangup = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['queueName'] = $queueName;
+        $self['queueName'] = $queueName;
 
-        null !== $keepAfterHangup && $obj['keepAfterHangup'] = $keepAfterHangup;
+        null !== $keepAfterHangup && $self['keepAfterHangup'] = $keepAfterHangup;
 
-        return $obj;
+        return $self;
     }
 
     public function withQueueName(string $queueName): self
     {
-        $obj = clone $this;
-        $obj['queueName'] = $queueName;
+        $self = clone $this;
+        $self['queueName'] = $queueName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class CallUpdateParams implements BaseModel
      */
     public function withKeepAfterHangup(bool $keepAfterHangup): self
     {
-        $obj = clone $this;
-        $obj['keepAfterHangup'] = $keepAfterHangup;
+        $self = clone $this;
+        $self['keepAfterHangup'] = $keepAfterHangup;
 
-        return $obj;
+        return $self;
     }
 }

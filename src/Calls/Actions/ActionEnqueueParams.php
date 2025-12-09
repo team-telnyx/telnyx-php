@@ -98,17 +98,17 @@ final class ActionEnqueueParams implements BaseModel
         ?int $maxSize = null,
         ?int $maxWaitTimeSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['queueName'] = $queueName;
+        $self['queueName'] = $queueName;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $keepAfterHangup && $obj['keepAfterHangup'] = $keepAfterHangup;
-        null !== $maxSize && $obj['maxSize'] = $maxSize;
-        null !== $maxWaitTimeSecs && $obj['maxWaitTimeSecs'] = $maxWaitTimeSecs;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $keepAfterHangup && $self['keepAfterHangup'] = $keepAfterHangup;
+        null !== $maxSize && $self['maxSize'] = $maxSize;
+        null !== $maxWaitTimeSecs && $self['maxWaitTimeSecs'] = $maxWaitTimeSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class ActionEnqueueParams implements BaseModel
      */
     public function withQueueName(string $queueName): self
     {
-        $obj = clone $this;
-        $obj['queueName'] = $queueName;
+        $self = clone $this;
+        $self['queueName'] = $queueName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class ActionEnqueueParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class ActionEnqueueParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class ActionEnqueueParams implements BaseModel
      */
     public function withKeepAfterHangup(bool $keepAfterHangup): self
     {
-        $obj = clone $this;
-        $obj['keepAfterHangup'] = $keepAfterHangup;
+        $self = clone $this;
+        $self['keepAfterHangup'] = $keepAfterHangup;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class ActionEnqueueParams implements BaseModel
      */
     public function withMaxSize(int $maxSize): self
     {
-        $obj = clone $this;
-        $obj['maxSize'] = $maxSize;
+        $self = clone $this;
+        $self['maxSize'] = $maxSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,9 +171,9 @@ final class ActionEnqueueParams implements BaseModel
      */
     public function withMaxWaitTimeSecs(int $maxWaitTimeSecs): self
     {
-        $obj = clone $this;
-        $obj['maxWaitTimeSecs'] = $maxWaitTimeSecs;
+        $self = clone $this;
+        $self['maxWaitTimeSecs'] = $maxWaitTimeSecs;
 
-        return $obj;
+        return $self;
     }
 }

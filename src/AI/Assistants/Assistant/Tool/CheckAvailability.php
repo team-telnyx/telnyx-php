@@ -57,11 +57,11 @@ final class CheckAvailability implements BaseModel
     public static function with(
         CheckAvailability\CheckAvailability|array $checkAvailability,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['checkAvailability'] = $checkAvailability;
+        $self['checkAvailability'] = $checkAvailability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,9 +72,9 @@ final class CheckAvailability implements BaseModel
     public function withCheckAvailability(
         CheckAvailability\CheckAvailability|array $checkAvailability,
     ): self {
-        $obj = clone $this;
-        $obj['checkAvailability'] = $checkAvailability;
+        $self = clone $this;
+        $self['checkAvailability'] = $checkAvailability;
 
-        return $obj;
+        return $self;
     }
 }

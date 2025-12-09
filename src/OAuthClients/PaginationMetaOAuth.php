@@ -61,14 +61,14 @@ final class PaginationMetaOAuth implements BaseModel
         ?int $totalPages = null,
         ?int $totalResults = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $totalPages && $obj['totalPages'] = $totalPages;
-        null !== $totalResults && $obj['totalResults'] = $totalResults;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $totalPages && $self['totalPages'] = $totalPages;
+        null !== $totalResults && $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class PaginationMetaOAuth implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class PaginationMetaOAuth implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class PaginationMetaOAuth implements BaseModel
      */
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj['totalPages'] = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class PaginationMetaOAuth implements BaseModel
      */
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj['totalResults'] = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

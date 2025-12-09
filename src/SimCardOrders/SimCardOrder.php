@@ -121,19 +121,19 @@ final class SimCardOrder implements BaseModel
         ?string $trackingURL = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $orderAddress && $obj['orderAddress'] = $orderAddress;
-        null !== $quantity && $obj['quantity'] = $quantity;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $trackingURL && $obj['trackingURL'] = $trackingURL;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $orderAddress && $self['orderAddress'] = $orderAddress;
+        null !== $quantity && $self['quantity'] = $quantity;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $trackingURL && $self['trackingURL'] = $trackingURL;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withCost(Cost|array $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withOrderAddress(OrderAddress|array $orderAddress): self
     {
-        $obj = clone $this;
-        $obj['orderAddress'] = $orderAddress;
+        $self = clone $this;
+        $self['orderAddress'] = $orderAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +235,10 @@ final class SimCardOrder implements BaseModel
      */
     public function withTrackingURL(string $trackingURL): self
     {
-        $obj = clone $this;
-        $obj['trackingURL'] = $trackingURL;
+        $self = clone $this;
+        $self['trackingURL'] = $trackingURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,9 +246,9 @@ final class SimCardOrder implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

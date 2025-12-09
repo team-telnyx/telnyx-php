@@ -90,43 +90,43 @@ final class Data implements BaseModel
         ?\DateTimeInterface $readAt = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $body && $obj['body'] = $body;
-        null !== $commentRecordID && $obj['commentRecordID'] = $commentRecordID;
-        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
-        null !== $commenter && $obj['commenter'] = $commenter;
-        null !== $commenterType && $obj['commenterType'] = $commenterType;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $readAt && $obj['readAt'] = $readAt;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $body && $self['body'] = $body;
+        null !== $commentRecordID && $self['commentRecordID'] = $commentRecordID;
+        null !== $commentRecordType && $self['commentRecordType'] = $commentRecordType;
+        null !== $commenter && $self['commenter'] = $commenter;
+        null !== $commenterType && $self['commenterType'] = $commenterType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $readAt && $self['readAt'] = $readAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     public function withCommentRecordID(string $commentRecordID): self
     {
-        $obj = clone $this;
-        $obj['commentRecordID'] = $commentRecordID;
+        $self = clone $this;
+        $self['commentRecordID'] = $commentRecordID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,18 +135,18 @@ final class Data implements BaseModel
     public function withCommentRecordType(
         CommentRecordType|string $commentRecordType
     ): self {
-        $obj = clone $this;
-        $obj['commentRecordType'] = $commentRecordType;
+        $self = clone $this;
+        $self['commentRecordType'] = $commentRecordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withCommenter(string $commenter): self
     {
-        $obj = clone $this;
-        $obj['commenter'] = $commenter;
+        $self = clone $this;
+        $self['commenter'] = $commenter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Data implements BaseModel
      */
     public function withCommenterType(CommenterType|string $commenterType): self
     {
-        $obj = clone $this;
-        $obj['commenterType'] = $commenterType;
+        $self = clone $this;
+        $self['commenterType'] = $commenterType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class Data implements BaseModel
      */
     public function withReadAt(\DateTimeInterface $readAt): self
     {
-        $obj = clone $this;
-        $obj['readAt'] = $readAt;
+        $self = clone $this;
+        $self['readAt'] = $readAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,9 +187,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

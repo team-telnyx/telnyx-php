@@ -128,18 +128,18 @@ final class UserBundle implements BaseModel
         string $userID,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['active'] = $active;
-        $obj['billingBundle'] = $billingBundle;
-        $obj['createdAt'] = $createdAt;
-        $obj['resources'] = $resources;
-        $obj['userID'] = $userID;
+        $self['id'] = $id;
+        $self['active'] = $active;
+        $self['billingBundle'] = $billingBundle;
+        $self['createdAt'] = $createdAt;
+        $self['resources'] = $resources;
+        $self['userID'] = $userID;
 
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class UserBundle implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class UserBundle implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class UserBundle implements BaseModel
     public function withBillingBundle(
         BillingBundleSummary|array $billingBundle
     ): self {
-        $obj = clone $this;
-        $obj['billingBundle'] = $billingBundle;
+        $self = clone $this;
+        $self['billingBundle'] = $billingBundle;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +191,10 @@ final class UserBundle implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class UserBundle implements BaseModel
      */
     public function withResources(array $resources): self
     {
-        $obj = clone $this;
-        $obj['resources'] = $resources;
+        $self = clone $this;
+        $self['resources'] = $resources;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class UserBundle implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,9 +230,9 @@ final class UserBundle implements BaseModel
      */
     public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

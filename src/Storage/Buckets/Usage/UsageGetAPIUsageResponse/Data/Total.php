@@ -61,14 +61,14 @@ final class Total implements BaseModel
         ?int $ops = null,
         ?int $successfulOps = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bytesReceived && $obj['bytesReceived'] = $bytesReceived;
-        null !== $bytesSent && $obj['bytesSent'] = $bytesSent;
-        null !== $ops && $obj['ops'] = $ops;
-        null !== $successfulOps && $obj['successfulOps'] = $successfulOps;
+        null !== $bytesReceived && $self['bytesReceived'] = $bytesReceived;
+        null !== $bytesSent && $self['bytesSent'] = $bytesSent;
+        null !== $ops && $self['ops'] = $ops;
+        null !== $successfulOps && $self['successfulOps'] = $successfulOps;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Total implements BaseModel
      */
     public function withBytesReceived(int $bytesReceived): self
     {
-        $obj = clone $this;
-        $obj['bytesReceived'] = $bytesReceived;
+        $self = clone $this;
+        $self['bytesReceived'] = $bytesReceived;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Total implements BaseModel
      */
     public function withBytesSent(int $bytesSent): self
     {
-        $obj = clone $this;
-        $obj['bytesSent'] = $bytesSent;
+        $self = clone $this;
+        $self['bytesSent'] = $bytesSent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Total implements BaseModel
      */
     public function withOps(int $ops): self
     {
-        $obj = clone $this;
-        $obj['ops'] = $ops;
+        $self = clone $this;
+        $self['ops'] = $ops;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class Total implements BaseModel
      */
     public function withSuccessfulOps(int $successfulOps): self
     {
-        $obj = clone $this;
-        $obj['successfulOps'] = $successfulOps;
+        $self = clone $this;
+        $self['successfulOps'] = $successfulOps;
 
-        return $obj;
+        return $self;
     }
 }

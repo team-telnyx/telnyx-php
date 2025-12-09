@@ -58,12 +58,12 @@ final class ActionUnmuteParams implements BaseModel
         ?array $callControlIDs = null,
         Region|string|null $region = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlIDs && $obj['callControlIDs'] = $callControlIDs;
-        null !== $region && $obj['region'] = $region;
+        null !== $callControlIDs && $self['callControlIDs'] = $callControlIDs;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class ActionUnmuteParams implements BaseModel
      */
     public function withCallControlIDs(array $callControlIDs): self
     {
-        $obj = clone $this;
-        $obj['callControlIDs'] = $callControlIDs;
+        $self = clone $this;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class ActionUnmuteParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 }

@@ -99,17 +99,17 @@ final class Data implements BaseModel
         ?\DateTimeInterface $updatedAt = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $filters && $obj['filters'] = $filters;
-        null !== $orderType && $obj['orderType'] = $orderType;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $filters && $self['filters'] = $filters;
+        null !== $orderType && $self['orderType'] = $orderType;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class Data implements BaseModel
      */
     public function withFilters(Filters|array $filters): self
     {
-        $obj = clone $this;
-        $obj['filters'] = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Data implements BaseModel
      */
     public function withOrderType(string $orderType): self
     {
-        $obj = clone $this;
-        $obj['orderType'] = $orderType;
+        $self = clone $this;
+        $self['orderType'] = $orderType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,9 +194,9 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

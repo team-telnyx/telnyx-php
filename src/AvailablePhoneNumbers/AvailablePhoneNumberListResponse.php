@@ -66,13 +66,13 @@ final class AvailablePhoneNumberListResponse implements BaseModel
         Meta|array|null $meta = null,
         Metadata|array|null $metadata = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj['data'] = $data;
-        null !== $meta && $obj['meta'] = $meta;
-        null !== $metadata && $obj['metadata'] = $metadata;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $metadata && $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class AvailablePhoneNumberListResponse implements BaseModel
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class AvailablePhoneNumberListResponse implements BaseModel
      */
     public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj['meta'] = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,9 +114,9 @@ final class AvailablePhoneNumberListResponse implements BaseModel
      */
     public function withMetadata(Metadata|array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 }

@@ -120,18 +120,18 @@ final class Data implements BaseModel
         ?string $userID = null,
         Webhook|array|null $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $attempts && $obj['attempts'] = $attempts;
-        null !== $finishedAt && $obj['finishedAt'] = $finishedAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $startedAt && $obj['startedAt'] = $startedAt;
-        null !== $status && $obj['status'] = $status;
-        null !== $userID && $obj['userID'] = $userID;
-        null !== $webhook && $obj['webhook'] = $webhook;
+        null !== $id && $self['id'] = $id;
+        null !== $attempts && $self['attempts'] = $attempts;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $status && $self['status'] = $status;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class Data implements BaseModel
      */
     public function withAttempts(array $attempts): self
     {
-        $obj = clone $this;
-        $obj['attempts'] = $attempts;
+        $self = clone $this;
+        $self['attempts'] = $attempts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class Data implements BaseModel
      */
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
-        $obj = clone $this;
-        $obj['finishedAt'] = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +191,10 @@ final class Data implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj['startedAt'] = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,10 +204,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +215,10 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,9 +234,9 @@ final class Data implements BaseModel
      */
     public function withWebhook(Webhook|array $webhook): self
     {
-        $obj = clone $this;
-        $obj['webhook'] = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

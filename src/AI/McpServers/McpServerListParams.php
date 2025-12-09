@@ -52,45 +52,45 @@ final class McpServerListParams implements BaseModel
         ?string $type = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $type && $obj['type'] = $type;
-        null !== $url && $obj['url'] = $url;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $type && $self['type'] = $type;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

@@ -156,25 +156,25 @@ final class Data implements BaseModel
         ?array $sharedCost = null,
         TollFree|array|null $tollFree = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $features && $obj['features'] = $features;
-        null !== $internationalSMS && $obj['internationalSMS'] = $internationalSMS;
-        null !== $inventoryCoverage && $obj['inventoryCoverage'] = $inventoryCoverage;
-        null !== $local && $obj['local'] = $local;
-        null !== $mobile && $obj['mobile'] = $mobile;
-        null !== $national && $obj['national'] = $national;
-        null !== $numbers && $obj['numbers'] = $numbers;
-        null !== $p2p && $obj['p2p'] = $p2p;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $region && $obj['region'] = $region;
-        null !== $reservable && $obj['reservable'] = $reservable;
-        null !== $sharedCost && $obj['sharedCost'] = $sharedCost;
-        null !== $tollFree && $obj['tollFree'] = $tollFree;
+        null !== $code && $self['code'] = $code;
+        null !== $features && $self['features'] = $features;
+        null !== $internationalSMS && $self['internationalSMS'] = $internationalSMS;
+        null !== $inventoryCoverage && $self['inventoryCoverage'] = $inventoryCoverage;
+        null !== $local && $self['local'] = $local;
+        null !== $mobile && $self['mobile'] = $mobile;
+        null !== $national && $self['national'] = $national;
+        null !== $numbers && $self['numbers'] = $numbers;
+        null !== $p2p && $self['p2p'] = $p2p;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $region && $self['region'] = $region;
+        null !== $reservable && $self['reservable'] = $reservable;
+        null !== $sharedCost && $self['sharedCost'] = $sharedCost;
+        null !== $tollFree && $self['tollFree'] = $tollFree;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +182,10 @@ final class Data implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,18 +195,18 @@ final class Data implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withInternationalSMS(bool $internationalSMS): self
     {
-        $obj = clone $this;
-        $obj['internationalSMS'] = $internationalSMS;
+        $self = clone $this;
+        $self['internationalSMS'] = $internationalSMS;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +214,10 @@ final class Data implements BaseModel
      */
     public function withInventoryCoverage(bool $inventoryCoverage): self
     {
-        $obj = clone $this;
-        $obj['inventoryCoverage'] = $inventoryCoverage;
+        $self = clone $this;
+        $self['inventoryCoverage'] = $inventoryCoverage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class Data implements BaseModel
      */
     public function withLocal(Local|array $local): self
     {
-        $obj = clone $this;
-        $obj['local'] = $local;
+        $self = clone $this;
+        $self['local'] = $local;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class Data implements BaseModel
      */
     public function withMobile(array $mobile): self
     {
-        $obj = clone $this;
-        $obj['mobile'] = $mobile;
+        $self = clone $this;
+        $self['mobile'] = $mobile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,26 +254,26 @@ final class Data implements BaseModel
      */
     public function withNational(array $national): self
     {
-        $obj = clone $this;
-        $obj['national'] = $national;
+        $self = clone $this;
+        $self['national'] = $national;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumbers(bool $numbers): self
     {
-        $obj = clone $this;
-        $obj['numbers'] = $numbers;
+        $self = clone $this;
+        $self['numbers'] = $numbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withP2p(bool $p2p): self
     {
-        $obj = clone $this;
-        $obj['p2p'] = $p2p;
+        $self = clone $this;
+        $self['p2p'] = $p2p;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -283,10 +283,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumberType(array $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +294,10 @@ final class Data implements BaseModel
      */
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj['quickship'] = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,10 +305,10 @@ final class Data implements BaseModel
      */
     public function withRegion(?string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +316,10 @@ final class Data implements BaseModel
      */
     public function withReservable(bool $reservable): self
     {
-        $obj = clone $this;
-        $obj['reservable'] = $reservable;
+        $self = clone $this;
+        $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +327,10 @@ final class Data implements BaseModel
      */
     public function withSharedCost(array $sharedCost): self
     {
-        $obj = clone $this;
-        $obj['sharedCost'] = $sharedCost;
+        $self = clone $this;
+        $self['sharedCost'] = $sharedCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -345,9 +345,9 @@ final class Data implements BaseModel
      */
     public function withTollFree(TollFree|array $tollFree): self
     {
-        $obj = clone $this;
-        $obj['tollFree'] = $tollFree;
+        $self = clone $this;
+        $self['tollFree'] = $tollFree;
 
-        return $obj;
+        return $self;
     }
 }

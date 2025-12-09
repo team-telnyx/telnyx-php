@@ -58,12 +58,12 @@ final class LogMessageListResponse implements BaseModel
         ?array $logMessages = null,
         ExternalVoiceIntegrationsPaginationMeta|array|null $meta = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $logMessages && $obj['logMessages'] = $logMessages;
-        null !== $meta && $obj['meta'] = $meta;
+        null !== $logMessages && $self['logMessages'] = $logMessages;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class LogMessageListResponse implements BaseModel
      */
     public function withLogMessages(array $logMessages): self
     {
-        $obj = clone $this;
-        $obj['logMessages'] = $logMessages;
+        $self = clone $this;
+        $self['logMessages'] = $logMessages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +94,9 @@ final class LogMessageListResponse implements BaseModel
     public function withMeta(
         ExternalVoiceIntegrationsPaginationMeta|array $meta
     ): self {
-        $obj = clone $this;
-        $obj['meta'] = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

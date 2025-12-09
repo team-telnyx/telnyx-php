@@ -70,14 +70,14 @@ final class TestListParams implements BaseModel
         ?string $telnyxConversationChannel = null,
         ?string $testSuite = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $destination && $obj['destination'] = $destination;
-        null !== $page && $obj['page'] = $page;
-        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        null !== $testSuite && $obj['testSuite'] = $testSuite;
+        null !== $destination && $self['destination'] = $destination;
+        null !== $page && $self['page'] = $page;
+        null !== $telnyxConversationChannel && $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        null !== $testSuite && $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class TestListParams implements BaseModel
      */
     public function withDestination(string $destination): self
     {
-        $obj = clone $this;
-        $obj['destination'] = $destination;
+        $self = clone $this;
+        $self['destination'] = $destination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class TestListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class TestListParams implements BaseModel
     public function withTelnyxConversationChannel(
         string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,9 +121,9 @@ final class TestListParams implements BaseModel
      */
     public function withTestSuite(string $testSuite): self
     {
-        $obj = clone $this;
-        $obj['testSuite'] = $testSuite;
+        $self = clone $this;
+        $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 }

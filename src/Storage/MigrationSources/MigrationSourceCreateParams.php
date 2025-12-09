@@ -95,15 +95,15 @@ final class MigrationSourceCreateParams implements BaseModel
         ProviderAuth|array $providerAuth,
         ?string $sourceRegion = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucketName'] = $bucketName;
-        $obj['provider'] = $provider;
-        $obj['providerAuth'] = $providerAuth;
+        $self['bucketName'] = $bucketName;
+        $self['provider'] = $provider;
+        $self['providerAuth'] = $providerAuth;
 
-        null !== $sourceRegion && $obj['sourceRegion'] = $sourceRegion;
+        null !== $sourceRegion && $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class MigrationSourceCreateParams implements BaseModel
      */
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj['bucketName'] = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class MigrationSourceCreateParams implements BaseModel
      */
     public function withProvider(Provider|string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class MigrationSourceCreateParams implements BaseModel
      */
     public function withProviderAuth(ProviderAuth|array $providerAuth): self
     {
-        $obj = clone $this;
-        $obj['providerAuth'] = $providerAuth;
+        $self = clone $this;
+        $self['providerAuth'] = $providerAuth;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,9 +148,9 @@ final class MigrationSourceCreateParams implements BaseModel
      */
     public function withSourceRegion(string $sourceRegion): self
     {
-        $obj = clone $this;
-        $obj['sourceRegion'] = $sourceRegion;
+        $self = clone $this;
+        $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 }

@@ -53,12 +53,12 @@ final class RunListParams implements BaseModel
         Page|array|null $page = null,
         ?string $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj['page'] = $page;
-        null !== $status && $obj['status'] = $status;
+        null !== $page && $self['page'] = $page;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class RunListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,9 +79,9 @@ final class RunListParams implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

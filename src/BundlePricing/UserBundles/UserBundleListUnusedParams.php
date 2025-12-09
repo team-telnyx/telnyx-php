@@ -58,12 +58,12 @@ final class UserBundleListUnusedParams implements BaseModel
         Filter|array|null $filter = null,
         ?string $authorizationBearer = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class UserBundleListUnusedParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class UserBundleListUnusedParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj['authorizationBearer'] = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

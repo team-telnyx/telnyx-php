@@ -97,12 +97,12 @@ final class CustomStorageCredentialCreateParams implements BaseModel
         Backend|string $backend,
         GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['backend'] = $backend;
-        $obj['configuration'] = $configuration;
+        $self['backend'] = $backend;
+        $self['configuration'] = $configuration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class CustomStorageCredentialCreateParams implements BaseModel
      */
     public function withBackend(Backend|string $backend): self
     {
-        $obj = clone $this;
-        $obj['backend'] = $backend;
+        $self = clone $this;
+        $self['backend'] = $backend;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class CustomStorageCredentialCreateParams implements BaseModel
     public function withConfiguration(
         GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
     ): self {
-        $obj = clone $this;
-        $obj['configuration'] = $configuration;
+        $self = clone $this;
+        $self['configuration'] = $configuration;
 
-        return $obj;
+        return $self;
     }
 }

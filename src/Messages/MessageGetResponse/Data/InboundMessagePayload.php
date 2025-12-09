@@ -300,37 +300,37 @@ final class InboundMessagePayload implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $cc && $obj['cc'] = $cc;
-        null !== $completedAt && $obj['completedAt'] = $completedAt;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $costBreakdown && $obj['costBreakdown'] = $costBreakdown;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $encoding && $obj['encoding'] = $encoding;
-        null !== $errors && $obj['errors'] = $errors;
-        null !== $from && $obj['from'] = $from;
-        null !== $media && $obj['media'] = $media;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $organizationID && $obj['organizationID'] = $organizationID;
-        null !== $parts && $obj['parts'] = $parts;
-        null !== $receivedAt && $obj['receivedAt'] = $receivedAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $sentAt && $obj['sentAt'] = $sentAt;
-        null !== $subject && $obj['subject'] = $subject;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $tcrCampaignBillable && $obj['tcrCampaignBillable'] = $tcrCampaignBillable;
-        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
-        null !== $tcrCampaignRegistered && $obj['tcrCampaignRegistered'] = $tcrCampaignRegistered;
-        null !== $text && $obj['text'] = $text;
-        null !== $to && $obj['to'] = $to;
-        null !== $type && $obj['type'] = $type;
-        null !== $validUntil && $obj['validUntil'] = $validUntil;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $id && $self['id'] = $id;
+        null !== $cc && $self['cc'] = $cc;
+        null !== $completedAt && $self['completedAt'] = $completedAt;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $costBreakdown && $self['costBreakdown'] = $costBreakdown;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $encoding && $self['encoding'] = $encoding;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $from && $self['from'] = $from;
+        null !== $media && $self['media'] = $media;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $parts && $self['parts'] = $parts;
+        null !== $receivedAt && $self['receivedAt'] = $receivedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $subject && $self['subject'] = $subject;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $tcrCampaignBillable && $self['tcrCampaignBillable'] = $tcrCampaignBillable;
+        null !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
+        null !== $tcrCampaignRegistered && $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
+        null !== $text && $self['text'] = $text;
+        null !== $to && $self['to'] = $to;
+        null !== $type && $self['type'] = $type;
+        null !== $validUntil && $self['validUntil'] = $validUntil;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +338,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -354,10 +354,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withCc(array $cc): self
     {
-        $obj = clone $this;
-        $obj['cc'] = $cc;
+        $self = clone $this;
+        $self['cc'] = $cc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -365,10 +365,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withCompletedAt(?\DateTimeInterface $completedAt): self
     {
-        $obj = clone $this;
-        $obj['completedAt'] = $completedAt;
+        $self = clone $this;
+        $self['completedAt'] = $completedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -376,10 +376,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withCost(Cost|array|null $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -392,10 +392,10 @@ final class InboundMessagePayload implements BaseModel
     public function withCostBreakdown(
         CostBreakdown|array|null $costBreakdown
     ): self {
-        $obj = clone $this;
-        $obj['costBreakdown'] = $costBreakdown;
+        $self = clone $this;
+        $self['costBreakdown'] = $costBreakdown;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -405,10 +405,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -416,10 +416,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withEncoding(string $encoding): self
     {
-        $obj = clone $this;
-        $obj['encoding'] = $encoding;
+        $self = clone $this;
+        $self['encoding'] = $encoding;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -435,10 +435,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -451,10 +451,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withFrom(From|array $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -467,10 +467,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withMedia(array $media): self
     {
-        $obj = clone $this;
-        $obj['media'] = $media;
+        $self = clone $this;
+        $self['media'] = $media;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -478,10 +478,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -489,10 +489,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationID'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -500,10 +500,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withParts(int $parts): self
     {
-        $obj = clone $this;
-        $obj['parts'] = $parts;
+        $self = clone $this;
+        $self['parts'] = $parts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -511,10 +511,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withReceivedAt(\DateTimeInterface $receivedAt): self
     {
-        $obj = clone $this;
-        $obj['receivedAt'] = $receivedAt;
+        $self = clone $this;
+        $self['receivedAt'] = $receivedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -524,10 +524,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -535,10 +535,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withSentAt(?\DateTimeInterface $sentAt): self
     {
-        $obj = clone $this;
-        $obj['sentAt'] = $sentAt;
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -546,10 +546,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withSubject(?string $subject): self
     {
-        $obj = clone $this;
-        $obj['subject'] = $subject;
+        $self = clone $this;
+        $self['subject'] = $subject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -559,10 +559,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -570,10 +570,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withTcrCampaignBillable(bool $tcrCampaignBillable): self
     {
-        $obj = clone $this;
-        $obj['tcrCampaignBillable'] = $tcrCampaignBillable;
+        $self = clone $this;
+        $self['tcrCampaignBillable'] = $tcrCampaignBillable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -581,10 +581,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withTcrCampaignID(?string $tcrCampaignID): self
     {
-        $obj = clone $this;
-        $obj['tcrCampaignID'] = $tcrCampaignID;
+        $self = clone $this;
+        $self['tcrCampaignID'] = $tcrCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -593,10 +593,10 @@ final class InboundMessagePayload implements BaseModel
     public function withTcrCampaignRegistered(
         ?string $tcrCampaignRegistered
     ): self {
-        $obj = clone $this;
-        $obj['tcrCampaignRegistered'] = $tcrCampaignRegistered;
+        $self = clone $this;
+        $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -606,10 +606,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -622,10 +622,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withTo(array $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -635,10 +635,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -646,10 +646,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withValidUntil(?\DateTimeInterface $validUntil): self
     {
-        $obj = clone $this;
-        $obj['validUntil'] = $validUntil;
+        $self = clone $this;
+        $self['validUntil'] = $validUntil;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -657,10 +657,10 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -668,9 +668,9 @@ final class InboundMessagePayload implements BaseModel
      */
     public function withWebhookURL(?string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

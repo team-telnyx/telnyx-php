@@ -148,23 +148,23 @@ final class MigrationParams implements BaseModel
         ?int $speed = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['sourceID'] = $sourceID;
-        $obj['targetBucketName'] = $targetBucketName;
-        $obj['targetRegion'] = $targetRegion;
+        $self['sourceID'] = $sourceID;
+        $self['targetBucketName'] = $targetBucketName;
+        $self['targetRegion'] = $targetRegion;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $bytesMigrated && $obj['bytesMigrated'] = $bytesMigrated;
-        null !== $bytesToMigrate && $obj['bytesToMigrate'] = $bytesToMigrate;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $eta && $obj['eta'] = $eta;
-        null !== $lastCopy && $obj['lastCopy'] = $lastCopy;
-        null !== $refresh && $obj['refresh'] = $refresh;
-        null !== $speed && $obj['speed'] = $speed;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $bytesMigrated && $self['bytesMigrated'] = $bytesMigrated;
+        null !== $bytesToMigrate && $self['bytesToMigrate'] = $bytesToMigrate;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $eta && $self['eta'] = $eta;
+        null !== $lastCopy && $self['lastCopy'] = $lastCopy;
+        null !== $refresh && $self['refresh'] = $refresh;
+        null !== $speed && $self['speed'] = $speed;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class MigrationParams implements BaseModel
      */
     public function withSourceID(string $sourceID): self
     {
-        $obj = clone $this;
-        $obj['sourceID'] = $sourceID;
+        $self = clone $this;
+        $self['sourceID'] = $sourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class MigrationParams implements BaseModel
      */
     public function withTargetBucketName(string $targetBucketName): self
     {
-        $obj = clone $this;
-        $obj['targetBucketName'] = $targetBucketName;
+        $self = clone $this;
+        $self['targetBucketName'] = $targetBucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class MigrationParams implements BaseModel
      */
     public function withTargetRegion(string $targetRegion): self
     {
-        $obj = clone $this;
-        $obj['targetRegion'] = $targetRegion;
+        $self = clone $this;
+        $self['targetRegion'] = $targetRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class MigrationParams implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,10 +216,10 @@ final class MigrationParams implements BaseModel
      */
     public function withBytesMigrated(int $bytesMigrated): self
     {
-        $obj = clone $this;
-        $obj['bytesMigrated'] = $bytesMigrated;
+        $self = clone $this;
+        $self['bytesMigrated'] = $bytesMigrated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -227,10 +227,10 @@ final class MigrationParams implements BaseModel
      */
     public function withBytesToMigrate(int $bytesToMigrate): self
     {
-        $obj = clone $this;
-        $obj['bytesToMigrate'] = $bytesToMigrate;
+        $self = clone $this;
+        $self['bytesToMigrate'] = $bytesToMigrate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +238,10 @@ final class MigrationParams implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -249,10 +249,10 @@ final class MigrationParams implements BaseModel
      */
     public function withEta(\DateTimeInterface $eta): self
     {
-        $obj = clone $this;
-        $obj['eta'] = $eta;
+        $self = clone $this;
+        $self['eta'] = $eta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +260,10 @@ final class MigrationParams implements BaseModel
      */
     public function withLastCopy(\DateTimeInterface $lastCopy): self
     {
-        $obj = clone $this;
-        $obj['lastCopy'] = $lastCopy;
+        $self = clone $this;
+        $self['lastCopy'] = $lastCopy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class MigrationParams implements BaseModel
      */
     public function withRefresh(bool $refresh): self
     {
-        $obj = clone $this;
-        $obj['refresh'] = $refresh;
+        $self = clone $this;
+        $self['refresh'] = $refresh;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class MigrationParams implements BaseModel
      */
     public function withSpeed(int $speed): self
     {
-        $obj = clone $this;
-        $obj['speed'] = $speed;
+        $self = clone $this;
+        $self['speed'] = $speed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,9 +295,9 @@ final class MigrationParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

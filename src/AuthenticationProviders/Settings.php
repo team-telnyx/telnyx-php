@@ -89,15 +89,15 @@ final class Settings implements BaseModel
         string $idpSSOTargetURL,
         IdpCertFingerprintAlgorithm|string|null $idpCertFingerprintAlgorithm = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['idpCertFingerprint'] = $idpCertFingerprint;
-        $obj['idpEntityID'] = $idpEntityID;
-        $obj['idpSSOTargetURL'] = $idpSSOTargetURL;
+        $self['idpCertFingerprint'] = $idpCertFingerprint;
+        $self['idpEntityID'] = $idpEntityID;
+        $self['idpSSOTargetURL'] = $idpSSOTargetURL;
 
-        null !== $idpCertFingerprintAlgorithm && $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
+        null !== $idpCertFingerprintAlgorithm && $self['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Settings implements BaseModel
      */
     public function withIdpCertFingerprint(string $idpCertFingerprint): self
     {
-        $obj = clone $this;
-        $obj['idpCertFingerprint'] = $idpCertFingerprint;
+        $self = clone $this;
+        $self['idpCertFingerprint'] = $idpCertFingerprint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Settings implements BaseModel
      */
     public function withIdpEntityID(string $idpEntityID): self
     {
-        $obj = clone $this;
-        $obj['idpEntityID'] = $idpEntityID;
+        $self = clone $this;
+        $self['idpEntityID'] = $idpEntityID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class Settings implements BaseModel
      */
     public function withIdpSSOTargetURL(string $idpSSOTargetURL): self
     {
-        $obj = clone $this;
-        $obj['idpSSOTargetURL'] = $idpSSOTargetURL;
+        $self = clone $this;
+        $self['idpSSOTargetURL'] = $idpSSOTargetURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +141,9 @@ final class Settings implements BaseModel
     public function withIdpCertFingerprintAlgorithm(
         IdpCertFingerprintAlgorithm|string $idpCertFingerprintAlgorithm
     ): self {
-        $obj = clone $this;
-        $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
+        $self = clone $this;
+        $self['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
 
-        return $obj;
+        return $self;
     }
 }

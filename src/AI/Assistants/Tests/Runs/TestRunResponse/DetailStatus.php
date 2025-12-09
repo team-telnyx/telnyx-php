@@ -64,20 +64,20 @@ final class DetailStatus implements BaseModel
      */
     public static function with(string $name, TestStatus|string $status): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj['status'] = $status;
+        $self['name'] = $name;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +93,9 @@ final class DetailStatus implements BaseModel
      */
     public function withStatus(TestStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

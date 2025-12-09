@@ -75,15 +75,15 @@ final class SimCardGroupListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterName && $obj['filterName'] = $filterName;
-        null !== $filterPrivateWirelessGatewayID && $obj['filterPrivateWirelessGatewayID'] = $filterPrivateWirelessGatewayID;
-        null !== $filterWirelessBlocklistID && $obj['filterWirelessBlocklistID'] = $filterWirelessBlocklistID;
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
+        null !== $filterName && $self['filterName'] = $filterName;
+        null !== $filterPrivateWirelessGatewayID && $self['filterPrivateWirelessGatewayID'] = $filterPrivateWirelessGatewayID;
+        null !== $filterWirelessBlocklistID && $self['filterWirelessBlocklistID'] = $filterWirelessBlocklistID;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class SimCardGroupListParams implements BaseModel
      */
     public function withFilterName(string $filterName): self
     {
-        $obj = clone $this;
-        $obj['filterName'] = $filterName;
+        $self = clone $this;
+        $self['filterName'] = $filterName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class SimCardGroupListParams implements BaseModel
     public function withFilterPrivateWirelessGatewayID(
         string $filterPrivateWirelessGatewayID
     ): self {
-        $obj = clone $this;
-        $obj['filterPrivateWirelessGatewayID'] = $filterPrivateWirelessGatewayID;
+        $self = clone $this;
+        $self['filterPrivateWirelessGatewayID'] = $filterPrivateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class SimCardGroupListParams implements BaseModel
     public function withFilterWirelessBlocklistID(
         string $filterWirelessBlocklistID
     ): self {
-        $obj = clone $this;
-        $obj['filterWirelessBlocklistID'] = $filterWirelessBlocklistID;
+        $self = clone $this;
+        $self['filterWirelessBlocklistID'] = $filterWirelessBlocklistID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class SimCardGroupListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class SimCardGroupListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

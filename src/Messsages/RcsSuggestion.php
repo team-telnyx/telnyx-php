@@ -59,12 +59,12 @@ final class RcsSuggestion implements BaseModel
         Action|array|null $action = null,
         Reply|array|null $reply = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $action && $obj['action'] = $action;
-        null !== $reply && $obj['reply'] = $reply;
+        null !== $action && $self['action'] = $action;
+        null !== $reply && $self['reply'] = $reply;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class RcsSuggestion implements BaseModel
      */
     public function withAction(Action|array $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +94,9 @@ final class RcsSuggestion implements BaseModel
      */
     public function withReply(Reply|array $reply): self
     {
-        $obj = clone $this;
-        $obj['reply'] = $reply;
+        $self = clone $this;
+        $self['reply'] = $reply;
 
-        return $obj;
+        return $self;
     }
 }

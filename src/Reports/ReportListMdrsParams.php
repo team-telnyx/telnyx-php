@@ -120,19 +120,19 @@ final class ReportListMdrsParams implements BaseModel
         ?string $startDate = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $cld && $obj['cld'] = $cld;
-        null !== $cli && $obj['cli'] = $cli;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $endDate && $obj['endDate'] = $endDate;
-        null !== $messageType && $obj['messageType'] = $messageType;
-        null !== $profile && $obj['profile'] = $profile;
-        null !== $startDate && $obj['startDate'] = $startDate;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $cld && $self['cld'] = $cld;
+        null !== $cli && $self['cli'] = $cli;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $messageType && $self['messageType'] = $messageType;
+        null !== $profile && $self['profile'] = $profile;
+        null !== $startDate && $self['startDate'] = $startDate;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withCld(string $cld): self
     {
-        $obj = clone $this;
-        $obj['cld'] = $cld;
+        $self = clone $this;
+        $self['cld'] = $cld;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +162,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withCli(string $cli): self
     {
-        $obj = clone $this;
-        $obj['cli'] = $cli;
+        $self = clone $this;
+        $self['cli'] = $cli;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj['endDate'] = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withMessageType(MessageType|string $messageType): self
     {
-        $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $self = clone $this;
+        $self['messageType'] = $messageType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withProfile(string $profile): self
     {
-        $obj = clone $this;
-        $obj['profile'] = $profile;
+        $self = clone $this;
+        $self['profile'] = $profile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj['startDate'] = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,9 +234,9 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

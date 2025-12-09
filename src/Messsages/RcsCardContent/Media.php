@@ -52,12 +52,12 @@ final class Media implements BaseModel
         RcsContentInfo|array|null $contentInfo = null,
         Height|string|null $height = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentInfo && $obj['contentInfo'] = $contentInfo;
-        null !== $height && $obj['height'] = $height;
+        null !== $contentInfo && $self['contentInfo'] = $contentInfo;
+        null !== $height && $self['height'] = $height;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Media implements BaseModel
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {
-        $obj = clone $this;
-        $obj['contentInfo'] = $contentInfo;
+        $self = clone $this;
+        $self['contentInfo'] = $contentInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Media implements BaseModel
      */
     public function withHeight(Height|string $height): self
     {
-        $obj = clone $this;
-        $obj['height'] = $height;
+        $self = clone $this;
+        $self['height'] = $height;
 
-        return $obj;
+        return $self;
     }
 }

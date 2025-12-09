@@ -60,13 +60,13 @@ final class Emergency implements BaseModel
         ?bool $emergencyEnabled = null,
         EmergencyStatus|string|null $emergencyStatus = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $emergencyAddressID && $obj['emergencyAddressID'] = $emergencyAddressID;
-        null !== $emergencyEnabled && $obj['emergencyEnabled'] = $emergencyEnabled;
-        null !== $emergencyStatus && $obj['emergencyStatus'] = $emergencyStatus;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
+        null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class Emergency implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj['emergencyAddressID'] = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Emergency implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj['emergencyEnabled'] = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +99,9 @@ final class Emergency implements BaseModel
     public function withEmergencyStatus(
         EmergencyStatus|string $emergencyStatus
     ): self {
-        $obj = clone $this;
-        $obj['emergencyStatus'] = $emergencyStatus;
+        $self = clone $this;
+        $self['emergencyStatus'] = $emergencyStatus;
 
-        return $obj;
+        return $self;
     }
 }

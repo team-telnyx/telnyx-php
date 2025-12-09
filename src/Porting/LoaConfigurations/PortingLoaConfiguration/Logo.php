@@ -51,12 +51,12 @@ final class Logo implements BaseModel
         ContentType|string|null $contentType = null,
         ?string $documentID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentType && $obj['contentType'] = $contentType;
-        null !== $documentID && $obj['documentID'] = $documentID;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $documentID && $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +66,10 @@ final class Logo implements BaseModel
      */
     public function withContentType(ContentType|string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class Logo implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj['documentID'] = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 }

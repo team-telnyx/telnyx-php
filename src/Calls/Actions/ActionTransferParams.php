@@ -417,44 +417,44 @@ final class ActionTransferParams implements BaseModel
         ?string $webhookURL = null,
         WebhookURLMethod|string|null $webhookURLMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['to'] = $to;
+        $self['to'] = $to;
 
-        null !== $answeringMachineDetection && $obj['answeringMachineDetection'] = $answeringMachineDetection;
-        null !== $answeringMachineDetectionConfig && $obj['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
-        null !== $audioURL && $obj['audioURL'] = $audioURL;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
-        null !== $earlyMedia && $obj['earlyMedia'] = $earlyMedia;
-        null !== $from && $obj['from'] = $from;
-        null !== $fromDisplayName && $obj['fromDisplayName'] = $fromDisplayName;
-        null !== $mediaEncryption && $obj['mediaEncryption'] = $mediaEncryption;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $muteDtmf && $obj['muteDtmf'] = $muteDtmf;
-        null !== $parkAfterUnbridge && $obj['parkAfterUnbridge'] = $parkAfterUnbridge;
-        null !== $record && $obj['record'] = $record;
-        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
-        null !== $recordCustomFileName && $obj['recordCustomFileName'] = $recordCustomFileName;
-        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
-        null !== $recordMaxLength && $obj['recordMaxLength'] = $recordMaxLength;
-        null !== $recordTimeoutSecs && $obj['recordTimeoutSecs'] = $recordTimeoutSecs;
-        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
-        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
-        null !== $sipAuthPassword && $obj['sipAuthPassword'] = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj['sipAuthUsername'] = $sipAuthUsername;
-        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
-        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
-        null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
-        null !== $soundModifications && $obj['soundModifications'] = $soundModifications;
-        null !== $targetLegClientState && $obj['targetLegClientState'] = $targetLegClientState;
-        null !== $timeLimitSecs && $obj['timeLimitSecs'] = $timeLimitSecs;
-        null !== $timeoutSecs && $obj['timeoutSecs'] = $timeoutSecs;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
-        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
+        null !== $answeringMachineDetection && $self['answeringMachineDetection'] = $answeringMachineDetection;
+        null !== $answeringMachineDetectionConfig && $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $earlyMedia && $self['earlyMedia'] = $earlyMedia;
+        null !== $from && $self['from'] = $from;
+        null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
+        null !== $mediaEncryption && $self['mediaEncryption'] = $mediaEncryption;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $muteDtmf && $self['muteDtmf'] = $muteDtmf;
+        null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
+        null !== $record && $self['record'] = $record;
+        null !== $recordChannels && $self['recordChannels'] = $recordChannels;
+        null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
+        null !== $recordFormat && $self['recordFormat'] = $recordFormat;
+        null !== $recordMaxLength && $self['recordMaxLength'] = $recordMaxLength;
+        null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
+        null !== $recordTrack && $self['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
+        null !== $sipRegion && $self['sipRegion'] = $sipRegion;
+        null !== $sipTransportProtocol && $self['sipTransportProtocol'] = $sipTransportProtocol;
+        null !== $soundModifications && $self['soundModifications'] = $soundModifications;
+        null !== $targetLegClientState && $self['targetLegClientState'] = $targetLegClientState;
+        null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $webhookURLMethod && $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -462,10 +462,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -476,10 +476,10 @@ final class ActionTransferParams implements BaseModel
     public function withAnsweringMachineDetection(
         AnsweringMachineDetection|string $answeringMachineDetection
     ): self {
-        $obj = clone $this;
-        $obj['answeringMachineDetection'] = $answeringMachineDetection;
+        $self = clone $this;
+        $self['answeringMachineDetection'] = $answeringMachineDetection;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -501,10 +501,10 @@ final class ActionTransferParams implements BaseModel
     public function withAnsweringMachineDetectionConfig(
         AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
     ): self {
-        $obj = clone $this;
-        $obj['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
+        $self = clone $this;
+        $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -512,10 +512,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj['audioURL'] = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -523,10 +523,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -534,10 +534,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -547,10 +547,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj['customHeaders'] = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -558,10 +558,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withEarlyMedia(bool $earlyMedia): self
     {
-        $obj = clone $this;
-        $obj['earlyMedia'] = $earlyMedia;
+        $self = clone $this;
+        $self['earlyMedia'] = $earlyMedia;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -569,10 +569,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -580,10 +580,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withFromDisplayName(string $fromDisplayName): self
     {
-        $obj = clone $this;
-        $obj['fromDisplayName'] = $fromDisplayName;
+        $self = clone $this;
+        $self['fromDisplayName'] = $fromDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -594,10 +594,10 @@ final class ActionTransferParams implements BaseModel
     public function withMediaEncryption(
         MediaEncryption|string $mediaEncryption
     ): self {
-        $obj = clone $this;
-        $obj['mediaEncryption'] = $mediaEncryption;
+        $self = clone $this;
+        $self['mediaEncryption'] = $mediaEncryption;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -605,10 +605,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -618,10 +618,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withMuteDtmf(MuteDtmf|string $muteDtmf): self
     {
-        $obj = clone $this;
-        $obj['muteDtmf'] = $muteDtmf;
+        $self = clone $this;
+        $self['muteDtmf'] = $muteDtmf;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -629,10 +629,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withParkAfterUnbridge(string $parkAfterUnbridge): self
     {
-        $obj = clone $this;
-        $obj['parkAfterUnbridge'] = $parkAfterUnbridge;
+        $self = clone $this;
+        $self['parkAfterUnbridge'] = $parkAfterUnbridge;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -642,10 +642,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecord(Record|string $record): self
     {
-        $obj = clone $this;
-        $obj['record'] = $record;
+        $self = clone $this;
+        $self['record'] = $record;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -656,10 +656,10 @@ final class ActionTransferParams implements BaseModel
     public function withRecordChannels(
         RecordChannels|string $recordChannels
     ): self {
-        $obj = clone $this;
-        $obj['recordChannels'] = $recordChannels;
+        $self = clone $this;
+        $self['recordChannels'] = $recordChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -667,10 +667,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
-        $obj = clone $this;
-        $obj['recordCustomFileName'] = $recordCustomFileName;
+        $self = clone $this;
+        $self['recordCustomFileName'] = $recordCustomFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -680,10 +680,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
-        $obj = clone $this;
-        $obj['recordFormat'] = $recordFormat;
+        $self = clone $this;
+        $self['recordFormat'] = $recordFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -691,10 +691,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordMaxLength(int $recordMaxLength): self
     {
-        $obj = clone $this;
-        $obj['recordMaxLength'] = $recordMaxLength;
+        $self = clone $this;
+        $self['recordMaxLength'] = $recordMaxLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -702,10 +702,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['recordTimeoutSecs'] = $recordTimeoutSecs;
+        $self = clone $this;
+        $self['recordTimeoutSecs'] = $recordTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -715,10 +715,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
-        $obj = clone $this;
-        $obj['recordTrack'] = $recordTrack;
+        $self = clone $this;
+        $self['recordTrack'] = $recordTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -728,10 +728,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
-        $obj = clone $this;
-        $obj['recordTrim'] = $recordTrim;
+        $self = clone $this;
+        $self['recordTrim'] = $recordTrim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -739,10 +739,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
-        $obj = clone $this;
-        $obj['sipAuthPassword'] = $sipAuthPassword;
+        $self = clone $this;
+        $self['sipAuthPassword'] = $sipAuthPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -750,10 +750,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
-        $obj = clone $this;
-        $obj['sipAuthUsername'] = $sipAuthUsername;
+        $self = clone $this;
+        $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -763,10 +763,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj['sipHeaders'] = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -776,10 +776,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withSipRegion(SipRegion|string $sipRegion): self
     {
-        $obj = clone $this;
-        $obj['sipRegion'] = $sipRegion;
+        $self = clone $this;
+        $self['sipRegion'] = $sipRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -790,10 +790,10 @@ final class ActionTransferParams implements BaseModel
     public function withSipTransportProtocol(
         SipTransportProtocol|string $sipTransportProtocol
     ): self {
-        $obj = clone $this;
-        $obj['sipTransportProtocol'] = $sipTransportProtocol;
+        $self = clone $this;
+        $self['sipTransportProtocol'] = $sipTransportProtocol;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -809,10 +809,10 @@ final class ActionTransferParams implements BaseModel
     public function withSoundModifications(
         SoundModifications|array $soundModifications
     ): self {
-        $obj = clone $this;
-        $obj['soundModifications'] = $soundModifications;
+        $self = clone $this;
+        $self['soundModifications'] = $soundModifications;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -820,10 +820,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTargetLegClientState(string $targetLegClientState): self
     {
-        $obj = clone $this;
-        $obj['targetLegClientState'] = $targetLegClientState;
+        $self = clone $this;
+        $self['targetLegClientState'] = $targetLegClientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -831,10 +831,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTimeLimitSecs(int $timeLimitSecs): self
     {
-        $obj = clone $this;
-        $obj['timeLimitSecs'] = $timeLimitSecs;
+        $self = clone $this;
+        $self['timeLimitSecs'] = $timeLimitSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -842,10 +842,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['timeoutSecs'] = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -853,10 +853,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -867,9 +867,9 @@ final class ActionTransferParams implements BaseModel
     public function withWebhookURLMethod(
         WebhookURLMethod|string $webhookURLMethod
     ): self {
-        $obj = clone $this;
-        $obj['webhookURLMethod'] = $webhookURLMethod;
+        $self = clone $this;
+        $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 }

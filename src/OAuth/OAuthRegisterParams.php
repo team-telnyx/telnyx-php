@@ -125,19 +125,19 @@ final class OAuthRegisterParams implements BaseModel
         TokenEndpointAuthMethod|string|null $tokenEndpointAuthMethod = null,
         ?string $tosUri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientName && $obj['clientName'] = $clientName;
-        null !== $grantTypes && $obj['grantTypes'] = $grantTypes;
-        null !== $logoUri && $obj['logoUri'] = $logoUri;
-        null !== $policyUri && $obj['policyUri'] = $policyUri;
-        null !== $redirectUris && $obj['redirectUris'] = $redirectUris;
-        null !== $responseTypes && $obj['responseTypes'] = $responseTypes;
-        null !== $scope && $obj['scope'] = $scope;
-        null !== $tokenEndpointAuthMethod && $obj['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
-        null !== $tosUri && $obj['tosUri'] = $tosUri;
+        null !== $clientName && $self['clientName'] = $clientName;
+        null !== $grantTypes && $self['grantTypes'] = $grantTypes;
+        null !== $logoUri && $self['logoUri'] = $logoUri;
+        null !== $policyUri && $self['policyUri'] = $policyUri;
+        null !== $redirectUris && $self['redirectUris'] = $redirectUris;
+        null !== $responseTypes && $self['responseTypes'] = $responseTypes;
+        null !== $scope && $self['scope'] = $scope;
+        null !== $tokenEndpointAuthMethod && $self['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
+        null !== $tosUri && $self['tosUri'] = $tosUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withClientName(string $clientName): self
     {
-        $obj = clone $this;
-        $obj['clientName'] = $clientName;
+        $self = clone $this;
+        $self['clientName'] = $clientName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withGrantTypes(array $grantTypes): self
     {
-        $obj = clone $this;
-        $obj['grantTypes'] = $grantTypes;
+        $self = clone $this;
+        $self['grantTypes'] = $grantTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withLogoUri(string $logoUri): self
     {
-        $obj = clone $this;
-        $obj['logoUri'] = $logoUri;
+        $self = clone $this;
+        $self['logoUri'] = $logoUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withPolicyUri(string $policyUri): self
     {
-        $obj = clone $this;
-        $obj['policyUri'] = $policyUri;
+        $self = clone $this;
+        $self['policyUri'] = $policyUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -193,10 +193,10 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withRedirectUris(array $redirectUris): self
     {
-        $obj = clone $this;
-        $obj['redirectUris'] = $redirectUris;
+        $self = clone $this;
+        $self['redirectUris'] = $redirectUris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withResponseTypes(array $responseTypes): self
     {
-        $obj = clone $this;
-        $obj['responseTypes'] = $responseTypes;
+        $self = clone $this;
+        $self['responseTypes'] = $responseTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj['scope'] = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,10 +231,10 @@ final class OAuthRegisterParams implements BaseModel
     public function withTokenEndpointAuthMethod(
         TokenEndpointAuthMethod|string $tokenEndpointAuthMethod
     ): self {
-        $obj = clone $this;
-        $obj['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
+        $self = clone $this;
+        $self['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,9 +242,9 @@ final class OAuthRegisterParams implements BaseModel
      */
     public function withTosUri(string $tosUri): self
     {
-        $obj = clone $this;
-        $obj['tosUri'] = $tosUri;
+        $self = clone $this;
+        $self['tosUri'] = $tosUri;
 
-        return $obj;
+        return $self;
     }
 }

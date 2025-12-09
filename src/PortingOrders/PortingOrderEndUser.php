@@ -57,12 +57,12 @@ final class PortingOrderEndUser implements BaseModel
         PortingOrderEndUserAdmin|array|null $admin = null,
         PortingOrderEndUserLocation|array|null $location = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $admin && $obj['admin'] = $admin;
-        null !== $location && $obj['location'] = $location;
+        null !== $admin && $self['admin'] = $admin;
+        null !== $location && $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class PortingOrderEndUser implements BaseModel
      */
     public function withAdmin(PortingOrderEndUserAdmin|array $admin): self
     {
-        $obj = clone $this;
-        $obj['admin'] = $admin;
+        $self = clone $this;
+        $self['admin'] = $admin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +97,9 @@ final class PortingOrderEndUser implements BaseModel
     public function withLocation(
         PortingOrderEndUserLocation|array $location
     ): self {
-        $obj = clone $this;
-        $obj['location'] = $location;
+        $self = clone $this;
+        $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 }

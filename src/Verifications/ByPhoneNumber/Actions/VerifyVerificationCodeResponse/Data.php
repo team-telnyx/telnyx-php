@@ -63,12 +63,12 @@ final class Data implements BaseModel
         string $phoneNumber,
         ResponseCode|string $responseCode
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['responseCode'] = $responseCode;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['responseCode'] = $responseCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Data implements BaseModel
      */
     public function withResponseCode(ResponseCode|string $responseCode): self
     {
-        $obj = clone $this;
-        $obj['responseCode'] = $responseCode;
+        $self = clone $this;
+        $self['responseCode'] = $responseCode;
 
-        return $obj;
+        return $self;
     }
 }

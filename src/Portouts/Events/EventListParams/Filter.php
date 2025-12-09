@@ -64,13 +64,13 @@ final class Filter implements BaseModel
         EventType|string|null $eventType = null,
         ?string $portoutID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $portoutID && $obj['portoutID'] = $portoutID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $eventType && $self['eventType'] = $eventType;
+        null !== $portoutID && $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Filter implements BaseModel
      */
     public function withEventType(EventType|string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class Filter implements BaseModel
      */
     public function withPortoutID(string $portoutID): self
     {
-        $obj = clone $this;
-        $obj['portoutID'] = $portoutID;
+        $self = clone $this;
+        $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 }

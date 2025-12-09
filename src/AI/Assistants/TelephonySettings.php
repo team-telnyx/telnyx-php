@@ -44,12 +44,12 @@ final class TelephonySettings implements BaseModel
         ?string $defaultTexmlAppID = null,
         ?bool $supportsUnauthenticatedWebCalls = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $defaultTexmlAppID && $obj['defaultTexmlAppID'] = $defaultTexmlAppID;
-        null !== $supportsUnauthenticatedWebCalls && $obj['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
+        null !== $defaultTexmlAppID && $self['defaultTexmlAppID'] = $defaultTexmlAppID;
+        null !== $supportsUnauthenticatedWebCalls && $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class TelephonySettings implements BaseModel
      */
     public function withDefaultTexmlAppID(string $defaultTexmlAppID): self
     {
-        $obj = clone $this;
-        $obj['defaultTexmlAppID'] = $defaultTexmlAppID;
+        $self = clone $this;
+        $self['defaultTexmlAppID'] = $defaultTexmlAppID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class TelephonySettings implements BaseModel
     public function withSupportsUnauthenticatedWebCalls(
         bool $supportsUnauthenticatedWebCalls
     ): self {
-        $obj = clone $this;
-        $obj['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
+        $self = clone $this;
+        $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
 
-        return $obj;
+        return $self;
     }
 }

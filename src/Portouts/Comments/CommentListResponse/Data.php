@@ -89,25 +89,25 @@ final class Data implements BaseModel
         ?string $portoutID = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['body'] = $body;
-        $obj['createdAt'] = $createdAt;
-        $obj['userID'] = $userID;
+        $self['id'] = $id;
+        $self['body'] = $body;
+        $self['createdAt'] = $createdAt;
+        $self['userID'] = $userID;
 
-        null !== $portoutID && $obj['portoutID'] = $portoutID;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $portoutID && $self['portoutID'] = $portoutID;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class Data implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class Data implements BaseModel
      */
     public function withPortoutID(string $portoutID): self
     {
-        $obj = clone $this;
-        $obj['portoutID'] = $portoutID;
+        $self = clone $this;
+        $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,9 +159,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

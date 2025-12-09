@@ -64,13 +64,13 @@ final class ElevenLabsVoiceSettings implements BaseModel
         Type|string $type,
         ?string $apiKeyRef = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
+        $self['type'] = $type;
 
-        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class ElevenLabsVoiceSettings implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +91,9 @@ final class ElevenLabsVoiceSettings implements BaseModel
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 }

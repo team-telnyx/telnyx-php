@@ -54,12 +54,12 @@ final class CampaignGetSharingStatusResponse implements BaseModel
         CampaignSharingStatus|array|null $sharedByMe = null,
         CampaignSharingStatus|array|null $sharedWithMe = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $sharedByMe && $obj['sharedByMe'] = $sharedByMe;
-        null !== $sharedWithMe && $obj['sharedWithMe'] = $sharedWithMe;
+        null !== $sharedByMe && $self['sharedByMe'] = $sharedByMe;
+        null !== $sharedWithMe && $self['sharedWithMe'] = $sharedWithMe;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class CampaignGetSharingStatusResponse implements BaseModel
     public function withSharedByMe(
         CampaignSharingStatus|array $sharedByMe
     ): self {
-        $obj = clone $this;
-        $obj['sharedByMe'] = $sharedByMe;
+        $self = clone $this;
+        $self['sharedByMe'] = $sharedByMe;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,9 +92,9 @@ final class CampaignGetSharingStatusResponse implements BaseModel
     public function withSharedWithMe(
         CampaignSharingStatus|array $sharedWithMe
     ): self {
-        $obj = clone $this;
-        $obj['sharedWithMe'] = $sharedWithMe;
+        $self = clone $this;
+        $self['sharedWithMe'] = $sharedWithMe;
 
-        return $obj;
+        return $self;
     }
 }

@@ -109,20 +109,20 @@ final class Payload implements BaseModel
         ?string $mediaURL = null,
         ?\DateTimeInterface $occurredAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $conferenceID && $obj['conferenceID'] = $conferenceID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $creatorCallSessionID && $obj['creatorCallSessionID'] = $creatorCallSessionID;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $mediaURL && $obj['mediaURL'] = $mediaURL;
-        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $conferenceID && $self['conferenceID'] = $conferenceID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $creatorCallSessionID && $self['creatorCallSessionID'] = $creatorCallSessionID;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $mediaURL && $self['mediaURL'] = $mediaURL;
+        null !== $occurredAt && $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class Payload implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class Payload implements BaseModel
      */
     public function withConferenceID(string $conferenceID): self
     {
-        $obj = clone $this;
-        $obj['conferenceID'] = $conferenceID;
+        $self = clone $this;
+        $self['conferenceID'] = $conferenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class Payload implements BaseModel
      */
     public function withCreatorCallSessionID(string $creatorCallSessionID): self
     {
-        $obj = clone $this;
-        $obj['creatorCallSessionID'] = $creatorCallSessionID;
+        $self = clone $this;
+        $self['creatorCallSessionID'] = $creatorCallSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class Payload implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class Payload implements BaseModel
      */
     public function withMediaURL(string $mediaURL): self
     {
-        $obj = clone $this;
-        $obj['mediaURL'] = $mediaURL;
+        $self = clone $this;
+        $self['mediaURL'] = $mediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,9 +229,9 @@ final class Payload implements BaseModel
      */
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
-        $obj = clone $this;
-        $obj['occurredAt'] = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 }

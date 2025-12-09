@@ -51,11 +51,11 @@ final class NumberOrderUpdateResponse implements BaseModel
     public static function with(
         NumberOrderWithPhoneNumbers|array|null $data = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj['data'] = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class NumberOrderUpdateResponse implements BaseModel
      */
     public function withData(NumberOrderWithPhoneNumbers|array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

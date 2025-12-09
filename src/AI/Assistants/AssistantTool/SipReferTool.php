@@ -61,12 +61,12 @@ final class SipReferTool implements BaseModel
      */
     public static function with(Refer|array $refer, Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['refer'] = $refer;
-        $obj['type'] = $type;
+        $self['refer'] = $refer;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class SipReferTool implements BaseModel
      */
     public function withRefer(Refer|array $refer): self
     {
-        $obj = clone $this;
-        $obj['refer'] = $refer;
+        $self = clone $this;
+        $self['refer'] = $refer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class SipReferTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

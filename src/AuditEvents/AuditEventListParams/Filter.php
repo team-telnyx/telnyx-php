@@ -47,12 +47,12 @@ final class Filter implements BaseModel
         ?\DateTimeInterface $createdAfter = null,
         ?\DateTimeInterface $createdBefore = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAfter && $obj['createdAfter'] = $createdAfter;
-        null !== $createdBefore && $obj['createdBefore'] = $createdBefore;
+        null !== $createdAfter && $self['createdAfter'] = $createdAfter;
+        null !== $createdBefore && $self['createdBefore'] = $createdBefore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,10 +60,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAfter(\DateTimeInterface $createdAfter): self
     {
-        $obj = clone $this;
-        $obj['createdAfter'] = $createdAfter;
+        $self = clone $this;
+        $self['createdAfter'] = $createdAfter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,9 +71,9 @@ final class Filter implements BaseModel
      */
     public function withCreatedBefore(\DateTimeInterface $createdBefore): self
     {
-        $obj = clone $this;
-        $obj['createdBefore'] = $createdBefore;
+        $self = clone $this;
+        $self['createdBefore'] = $createdBefore;
 
-        return $obj;
+        return $self;
     }
 }

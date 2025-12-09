@@ -113,17 +113,17 @@ final class RoomCompositionCreateParams implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $format && $obj['format'] = $format;
-        null !== $resolution && $obj['resolution'] = $resolution;
-        null !== $sessionID && $obj['sessionID'] = $sessionID;
-        null !== $videoLayout && $obj['videoLayout'] = $videoLayout;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        null !== $format && $self['format'] = $format;
+        null !== $resolution && $self['resolution'] = $resolution;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
+        null !== $videoLayout && $self['videoLayout'] = $videoLayout;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class RoomCompositionCreateParams implements BaseModel
      */
     public function withFormat(?string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class RoomCompositionCreateParams implements BaseModel
      */
     public function withResolution(?string $resolution): self
     {
-        $obj = clone $this;
-        $obj['resolution'] = $resolution;
+        $self = clone $this;
+        $self['resolution'] = $resolution;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class RoomCompositionCreateParams implements BaseModel
      */
     public function withSessionID(?string $sessionID): self
     {
-        $obj = clone $this;
-        $obj['sessionID'] = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class RoomCompositionCreateParams implements BaseModel
      */
     public function withVideoLayout(array $videoLayout): self
     {
-        $obj = clone $this;
-        $obj['videoLayout'] = $videoLayout;
+        $self = clone $this;
+        $self['videoLayout'] = $videoLayout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class RoomCompositionCreateParams implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class RoomCompositionCreateParams implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,9 +209,9 @@ final class RoomCompositionCreateParams implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

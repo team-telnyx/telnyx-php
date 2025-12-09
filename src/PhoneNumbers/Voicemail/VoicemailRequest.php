@@ -42,12 +42,12 @@ final class VoicemailRequest implements BaseModel
      */
     public static function with(?bool $enabled = null, ?string $pin = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enabled && $obj['enabled'] = $enabled;
-        null !== $pin && $obj['pin'] = $pin;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $pin && $self['pin'] = $pin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class VoicemailRequest implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj['enabled'] = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class VoicemailRequest implements BaseModel
      */
     public function withPin(string $pin): self
     {
-        $obj = clone $this;
-        $obj['pin'] = $pin;
+        $self = clone $this;
+        $self['pin'] = $pin;
 
-        return $obj;
+        return $self;
     }
 }

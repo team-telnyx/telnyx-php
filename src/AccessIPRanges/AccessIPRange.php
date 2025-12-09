@@ -91,34 +91,34 @@ final class AccessIPRange implements BaseModel
         ?string $description = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['cidrBlock'] = $cidrBlock;
-        $obj['status'] = $status;
-        $obj['userID'] = $userID;
+        $self['id'] = $id;
+        $self['cidrBlock'] = $cidrBlock;
+        $self['status'] = $status;
+        $self['userID'] = $userID;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $description && $obj['description'] = $description;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $description && $self['description'] = $description;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCidrBlock(string $cidrBlock): self
     {
-        $obj = clone $this;
-        $obj['cidrBlock'] = $cidrBlock;
+        $self = clone $this;
+        $self['cidrBlock'] = $cidrBlock;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,41 +128,41 @@ final class AccessIPRange implements BaseModel
      */
     public function withStatus(CloudflareSyncStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

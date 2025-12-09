@@ -111,20 +111,20 @@ final class OrderAddress implements BaseModel
         ?string $postalCode = null,
         ?string $streetAddress = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
-        null !== $businessName && $obj['businessName'] = $businessName;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
-        null !== $firstName && $obj['firstName'] = $firstName;
-        null !== $lastName && $obj['lastName'] = $lastName;
-        null !== $locality && $obj['locality'] = $locality;
-        null !== $postalCode && $obj['postalCode'] = $postalCode;
-        null !== $streetAddress && $obj['streetAddress'] = $streetAddress;
+        null !== $id && $self['id'] = $id;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $businessName && $self['businessName'] = $businessName;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        null !== $firstName && $self['firstName'] = $firstName;
+        null !== $lastName && $self['lastName'] = $lastName;
+        null !== $locality && $self['locality'] = $locality;
+        null !== $postalCode && $self['postalCode'] = $postalCode;
+        null !== $streetAddress && $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class OrderAddress implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class OrderAddress implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class OrderAddress implements BaseModel
      */
     public function withBusinessName(string $businessName): self
     {
-        $obj = clone $this;
-        $obj['businessName'] = $businessName;
+        $self = clone $this;
+        $self['businessName'] = $businessName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class OrderAddress implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class OrderAddress implements BaseModel
      */
     public function withExtendedAddress(string $extendedAddress): self
     {
-        $obj = clone $this;
-        $obj['extendedAddress'] = $extendedAddress;
+        $self = clone $this;
+        $self['extendedAddress'] = $extendedAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class OrderAddress implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj['firstName'] = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class OrderAddress implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj['lastName'] = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class OrderAddress implements BaseModel
      */
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj['locality'] = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class OrderAddress implements BaseModel
      */
     public function withPostalCode(string $postalCode): self
     {
-        $obj = clone $this;
-        $obj['postalCode'] = $postalCode;
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,9 +231,9 @@ final class OrderAddress implements BaseModel
      */
     public function withStreetAddress(string $streetAddress): self
     {
-        $obj = clone $this;
-        $obj['streetAddress'] = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 }

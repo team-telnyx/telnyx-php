@@ -96,17 +96,17 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
         ?string $pageToken = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
-        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
-        null !== $friendlyName && $obj['friendlyName'] = $friendlyName;
-        null !== $page && $obj['page'] = $page;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $pageToken && $obj['pageToken'] = $pageToken;
-        null !== $status && $obj['status'] = $status;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $friendlyName && $self['friendlyName'] = $friendlyName;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $pageToken && $self['pageToken'] = $pageToken;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      */
     public function withDateCreated(string $dateCreated): self
     {
-        $obj = clone $this;
-        $obj['dateCreated'] = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      */
     public function withDateUpdated(string $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj['dateUpdated'] = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      */
     public function withFriendlyName(string $friendlyName): self
     {
-        $obj = clone $this;
-        $obj['friendlyName'] = $friendlyName;
+        $self = clone $this;
+        $self['friendlyName'] = $friendlyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      */
     public function withPageToken(string $pageToken): self
     {
-        $obj = clone $this;
-        $obj['pageToken'] = $pageToken;
+        $self = clone $this;
+        $self['pageToken'] = $pageToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,9 +182,9 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -77,15 +77,15 @@ final class Filter implements BaseModel
         ExternalSipConnection|string|null $externalSipConnection = null,
         PhoneNumber|array|null $phoneNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $externalSipConnection && $obj['externalSipConnection'] = $externalSipConnection;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $id && $self['id'] = $id;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $externalSipConnection && $self['externalSipConnection'] = $externalSipConnection;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class Filter implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Filter implements BaseModel
     public function withConnectionName(
         ConnectionName|array $connectionName
     ): self {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class Filter implements BaseModel
     public function withExternalSipConnection(
         ExternalSipConnection|string $externalSipConnection
     ): self {
-        $obj = clone $this;
-        $obj['externalSipConnection'] = $externalSipConnection;
+        $self = clone $this;
+        $self['externalSipConnection'] = $externalSipConnection;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,9 +143,9 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

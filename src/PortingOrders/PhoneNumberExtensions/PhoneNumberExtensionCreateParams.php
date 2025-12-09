@@ -82,13 +82,13 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
         ExtensionRange|array $extensionRange,
         string $portingPhoneNumberID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['activationRanges'] = $activationRanges;
-        $obj['extensionRange'] = $extensionRange;
-        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
+        $self['activationRanges'] = $activationRanges;
+        $self['extensionRange'] = $extensionRange;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
      */
     public function withActivationRanges(array $activationRanges): self
     {
-        $obj = clone $this;
-        $obj['activationRanges'] = $activationRanges;
+        $self = clone $this;
+        $self['activationRanges'] = $activationRanges;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     public function withExtensionRange(
         ExtensionRange|array $extensionRange
     ): self {
-        $obj = clone $this;
-        $obj['extensionRange'] = $extensionRange;
+        $self = clone $this;
+        $self['extensionRange'] = $extensionRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,9 +121,9 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
      */
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
-        $obj = clone $this;
-        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
+        $self = clone $this;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 }

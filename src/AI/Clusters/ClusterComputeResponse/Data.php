@@ -45,18 +45,18 @@ final class Data implements BaseModel
      */
     public static function with(string $taskID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['taskID'] = $taskID;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj['taskID'] = $taskID;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 }

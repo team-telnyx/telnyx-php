@@ -43,11 +43,11 @@ final class Filter implements BaseModel
      */
     public static function with(?array $documentType = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $documentType && $obj['documentType'] = $documentType;
+        null !== $documentType && $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,9 +57,9 @@ final class Filter implements BaseModel
      */
     public function withDocumentType(array $documentType): self
     {
-        $obj = clone $this;
-        $obj['documentType'] = $documentType;
+        $self = clone $this;
+        $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -84,23 +84,23 @@ final class ConferenceUpdateParams implements BaseModel
         ?string $announceURL = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['accountSid'] = $accountSid;
+        $self['accountSid'] = $accountSid;
 
-        null !== $announceMethod && $obj['announceMethod'] = $announceMethod;
-        null !== $announceURL && $obj['announceURL'] = $announceURL;
-        null !== $status && $obj['status'] = $status;
+        null !== $announceMethod && $self['announceMethod'] = $announceMethod;
+        null !== $announceURL && $self['announceURL'] = $announceURL;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class ConferenceUpdateParams implements BaseModel
     public function withAnnounceMethod(
         AnnounceMethod|string $announceMethod
     ): self {
-        $obj = clone $this;
-        $obj['announceMethod'] = $announceMethod;
+        $self = clone $this;
+        $self['announceMethod'] = $announceMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class ConferenceUpdateParams implements BaseModel
      */
     public function withAnnounceURL(string $announceURL): self
     {
-        $obj = clone $this;
-        $obj['announceURL'] = $announceURL;
+        $self = clone $this;
+        $self['announceURL'] = $announceURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,9 +133,9 @@ final class ConferenceUpdateParams implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

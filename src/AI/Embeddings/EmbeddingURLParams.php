@@ -60,12 +60,12 @@ final class EmbeddingURLParams implements BaseModel
      */
     public static function with(string $bucketName, string $url): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucketName'] = $bucketName;
-        $obj['url'] = $url;
+        $self['bucketName'] = $bucketName;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class EmbeddingURLParams implements BaseModel
      */
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj['bucketName'] = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class EmbeddingURLParams implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

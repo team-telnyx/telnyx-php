@@ -56,11 +56,11 @@ final class AutoRespConfigResponse implements BaseModel
      */
     public static function with(AutoRespConfig|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['data'] = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,9 +76,9 @@ final class AutoRespConfigResponse implements BaseModel
      */
     public function withData(AutoRespConfig|array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

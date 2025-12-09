@@ -35,11 +35,11 @@ final class Flashcall implements BaseModel
     public static function with(
         ?int $defaultVerificationTimeoutSecs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $defaultVerificationTimeoutSecs && $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Flashcall implements BaseModel
     public function withDefaultVerificationTimeoutSecs(
         int $defaultVerificationTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        $self = clone $this;
+        $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

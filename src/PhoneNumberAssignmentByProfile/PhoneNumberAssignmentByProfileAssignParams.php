@@ -72,14 +72,14 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
         ?string $campaignID = null,
         ?string $tcrCampaignID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        null !== $campaignID && $obj['campaignID'] = $campaignID;
-        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
+        null !== $campaignID && $self['campaignID'] = $campaignID;
+        null !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
      */
     public function withCampaignID(string $campaignID): self
     {
-        $obj = clone $this;
-        $obj['campaignID'] = $campaignID;
+        $self = clone $this;
+        $self['campaignID'] = $campaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
      */
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
-        $obj = clone $this;
-        $obj['tcrCampaignID'] = $tcrCampaignID;
+        $self = clone $this;
+        $self['tcrCampaignID'] = $tcrCampaignID;
 
-        return $obj;
+        return $self;
     }
 }

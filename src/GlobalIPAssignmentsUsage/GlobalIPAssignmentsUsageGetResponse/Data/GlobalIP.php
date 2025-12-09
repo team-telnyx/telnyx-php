@@ -42,12 +42,12 @@ final class GlobalIP implements BaseModel
         ?string $id = null,
         ?string $ipAddress = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
+        null !== $id && $self['id'] = $id;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class GlobalIP implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class GlobalIP implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 }

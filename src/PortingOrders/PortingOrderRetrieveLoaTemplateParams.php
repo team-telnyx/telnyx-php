@@ -42,11 +42,11 @@ final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
      */
     public static function with(?string $loaConfigurationID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $loaConfigurationID && $obj['loaConfigurationID'] = $loaConfigurationID;
+        null !== $loaConfigurationID && $self['loaConfigurationID'] = $loaConfigurationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
      */
     public function withLoaConfigurationID(string $loaConfigurationID): self
     {
-        $obj = clone $this;
-        $obj['loaConfigurationID'] = $loaConfigurationID;
+        $self = clone $this;
+        $self['loaConfigurationID'] = $loaConfigurationID;
 
-        return $obj;
+        return $self;
     }
 }

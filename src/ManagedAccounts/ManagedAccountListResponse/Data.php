@@ -144,21 +144,21 @@ final class Data implements BaseModel
         ?string $organizationName = null,
         ?bool $rollupBilling = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['apiUser'] = $apiUser;
-        $obj['createdAt'] = $createdAt;
-        $obj['email'] = $email;
-        $obj['managerAccountID'] = $managerAccountID;
-        $obj['recordType'] = $recordType;
-        $obj['updatedAt'] = $updatedAt;
+        $self['id'] = $id;
+        $self['apiUser'] = $apiUser;
+        $self['createdAt'] = $createdAt;
+        $self['email'] = $email;
+        $self['managerAccountID'] = $managerAccountID;
+        $self['recordType'] = $recordType;
+        $self['updatedAt'] = $updatedAt;
 
-        null !== $managedAccountAllowCustomPricing && $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
-        null !== $organizationName && $obj['organizationName'] = $organizationName;
-        null !== $rollupBilling && $obj['rollupBilling'] = $rollupBilling;
+        null !== $managedAccountAllowCustomPricing && $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        null !== $organizationName && $self['organizationName'] = $organizationName;
+        null !== $rollupBilling && $self['rollupBilling'] = $rollupBilling;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class Data implements BaseModel
      */
     public function withAPIUser(string $apiUser): self
     {
-        $obj = clone $this;
-        $obj['apiUser'] = $apiUser;
+        $self = clone $this;
+        $self['apiUser'] = $apiUser;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class Data implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class Data implements BaseModel
      */
     public function withManagerAccountID(string $managerAccountID): self
     {
-        $obj = clone $this;
-        $obj['managerAccountID'] = $managerAccountID;
+        $self = clone $this;
+        $self['managerAccountID'] = $managerAccountID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +223,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +246,10 @@ final class Data implements BaseModel
     public function withManagedAccountAllowCustomPricing(
         bool $managedAccountAllowCustomPricing
     ): self {
-        $obj = clone $this;
-        $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        $self = clone $this;
+        $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -257,10 +257,10 @@ final class Data implements BaseModel
      */
     public function withOrganizationName(string $organizationName): self
     {
-        $obj = clone $this;
-        $obj['organizationName'] = $organizationName;
+        $self = clone $this;
+        $self['organizationName'] = $organizationName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,9 +268,9 @@ final class Data implements BaseModel
      */
     public function withRollupBilling(bool $rollupBilling): self
     {
-        $obj = clone $this;
-        $obj['rollupBilling'] = $rollupBilling;
+        $self = clone $this;
+        $self['rollupBilling'] = $rollupBilling;
 
-        return $obj;
+        return $self;
     }
 }

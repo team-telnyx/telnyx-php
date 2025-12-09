@@ -40,11 +40,11 @@ final class Filters implements BaseModel
     public static function with(
         int|Contains|array|null $availableBandwidth = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableBandwidth && $obj['availableBandwidth'] = $availableBandwidth;
+        null !== $availableBandwidth && $self['availableBandwidth'] = $availableBandwidth;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,9 +55,9 @@ final class Filters implements BaseModel
     public function withAvailableBandwidth(
         int|Contains|array $availableBandwidth
     ): self {
-        $obj = clone $this;
-        $obj['availableBandwidth'] = $availableBandwidth;
+        $self = clone $this;
+        $self['availableBandwidth'] = $availableBandwidth;
 
-        return $obj;
+        return $self;
     }
 }

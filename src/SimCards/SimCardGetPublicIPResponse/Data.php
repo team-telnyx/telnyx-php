@@ -77,17 +77,17 @@ final class Data implements BaseModel
         Type|string|null $type = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $ip && $obj['ip'] = $ip;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regionCode && $obj['regionCode'] = $regionCode;
-        null !== $simCardID && $obj['simCardID'] = $simCardID;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $ip && $self['ip'] = $ip;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
+        null !== $simCardID && $self['simCardID'] = $simCardID;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,34 +106,34 @@ final class Data implements BaseModel
      */
     public function withIP(string $ip): self
     {
-        $obj = clone $this;
-        $obj['ip'] = $ip;
+        $self = clone $this;
+        $self['ip'] = $ip;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj['simCardID'] = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class Data implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,9 +152,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

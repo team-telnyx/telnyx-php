@@ -69,15 +69,15 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
         ?string $messagingProfileID = null,
         ?array $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $emergencyAddressID && $obj['emergencyAddressID'] = $emergencyAddressID;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $tags && $obj['tags'] = $tags;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      */
     public function withBillingGroupID(?string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      */
     public function withConnectionID(?string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      */
     public function withEmergencyAddressID(?string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj['emergencyAddressID'] = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      */
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

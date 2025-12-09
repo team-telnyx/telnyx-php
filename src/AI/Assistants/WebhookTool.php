@@ -71,12 +71,12 @@ final class WebhookTool implements BaseModel
         Type|string $type,
         InferenceEmbeddingWebhookToolParams|array $webhook
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
-        $obj['webhook'] = $webhook;
+        $self['type'] = $type;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class WebhookTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,9 +105,9 @@ final class WebhookTool implements BaseModel
     public function withWebhook(
         InferenceEmbeddingWebhookToolParams|array $webhook
     ): self {
-        $obj = clone $this;
-        $obj['webhook'] = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

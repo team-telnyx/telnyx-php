@@ -132,21 +132,21 @@ final class Data implements BaseModel
         ?string $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $endDate && $obj['endDate'] = $endDate;
-        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $reportURL && $obj['reportURL'] = $reportURL;
-        null !== $result && $obj['result'] = $result;
-        null !== $startDate && $obj['startDate'] = $startDate;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $aggregationType && $self['aggregationType'] = $aggregationType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $reportURL && $self['reportURL'] = $reportURL;
+        null !== $result && $self['result'] = $result;
+        null !== $startDate && $self['startDate'] = $startDate;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class Data implements BaseModel
      */
     public function withAggregationType(string $aggregationType): self
     {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class Data implements BaseModel
      */
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj['endDate'] = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class Data implements BaseModel
      */
     public function withManagedAccounts(array $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj['managedAccounts'] = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class Data implements BaseModel
      */
     public function withReportURL(string $reportURL): self
     {
-        $obj = clone $this;
-        $obj['reportURL'] = $reportURL;
+        $self = clone $this;
+        $self['reportURL'] = $reportURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class Data implements BaseModel
      */
     public function withResult(array $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class Data implements BaseModel
      */
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj['startDate'] = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class Data implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -272,9 +272,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

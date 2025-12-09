@@ -100,34 +100,34 @@ final class Data implements BaseModel
         ?string $createdAt = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['channels'] = $channels;
-        $obj['countries'] = $countries;
-        $obj['name'] = $name;
-        $obj['recordType'] = $recordType;
+        $self['id'] = $id;
+        $self['channels'] = $channels;
+        $self['countries'] = $countries;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withChannels(int $channels): self
     {
-        $obj = clone $this;
-        $obj['channels'] = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,18 +137,18 @@ final class Data implements BaseModel
      */
     public function withCountries(array $countries): self
     {
-        $obj = clone $this;
-        $obj['countries'] = $countries;
+        $self = clone $this;
+        $self['countries'] = $countries;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,9 +178,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

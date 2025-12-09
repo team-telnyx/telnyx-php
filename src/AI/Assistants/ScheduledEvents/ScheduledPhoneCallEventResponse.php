@@ -133,49 +133,49 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
         ?string $scheduledEventID = null,
         EventStatus|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['assistantID'] = $assistantID;
-        $obj['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
-        $obj['telnyxAgentTarget'] = $telnyxAgentTarget;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj['telnyxEndUserTarget'] = $telnyxEndUserTarget;
+        $self['assistantID'] = $assistantID;
+        $self['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
+        $self['telnyxAgentTarget'] = $telnyxAgentTarget;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self['telnyxEndUserTarget'] = $telnyxEndUserTarget;
 
-        null !== $conversationID && $obj['conversationID'] = $conversationID;
-        null !== $conversationMetadata && $obj['conversationMetadata'] = $conversationMetadata;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $errors && $obj['errors'] = $errors;
-        null !== $retryAttempts && $obj['retryAttempts'] = $retryAttempts;
-        null !== $retryCount && $obj['retryCount'] = $retryCount;
-        null !== $scheduledEventID && $obj['scheduledEventID'] = $scheduledEventID;
-        null !== $status && $obj['status'] = $status;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $retryAttempts && $self['retryAttempts'] = $retryAttempts;
+        null !== $retryCount && $self['retryCount'] = $retryCount;
+        null !== $scheduledEventID && $self['scheduledEventID'] = $scheduledEventID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj['assistantID'] = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withScheduledAtFixedDatetime(
         \DateTimeInterface $scheduledAtFixedDatetime
     ): self {
-        $obj = clone $this;
-        $obj['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
+        $self = clone $this;
+        $self['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
 
-        return $obj;
+        return $self;
     }
 
     public function withTelnyxAgentTarget(string $telnyxAgentTarget): self
     {
-        $obj = clone $this;
-        $obj['telnyxAgentTarget'] = $telnyxAgentTarget;
+        $self = clone $this;
+        $self['telnyxAgentTarget'] = $telnyxAgentTarget;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,26 +184,26 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withTelnyxConversationChannel(
         ConversationChannelType|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     public function withTelnyxEndUserTarget(string $telnyxEndUserTarget): self
     {
-        $obj = clone $this;
-        $obj['telnyxEndUserTarget'] = $telnyxEndUserTarget;
+        $self = clone $this;
+        $self['telnyxEndUserTarget'] = $telnyxEndUserTarget;
 
-        return $obj;
+        return $self;
     }
 
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj['conversationID'] = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,18 +211,18 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {
-        $obj = clone $this;
-        $obj['conversationMetadata'] = $conversationMetadata;
+        $self = clone $this;
+        $self['conversationMetadata'] = $conversationMetadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,34 +230,34 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     public function withRetryAttempts(int $retryAttempts): self
     {
-        $obj = clone $this;
-        $obj['retryAttempts'] = $retryAttempts;
+        $self = clone $this;
+        $self['retryAttempts'] = $retryAttempts;
 
-        return $obj;
+        return $self;
     }
 
     public function withRetryCount(int $retryCount): self
     {
-        $obj = clone $this;
-        $obj['retryCount'] = $retryCount;
+        $self = clone $this;
+        $self['retryCount'] = $retryCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withScheduledEventID(string $scheduledEventID): self
     {
-        $obj = clone $this;
-        $obj['scheduledEventID'] = $scheduledEventID;
+        $self = clone $this;
+        $self['scheduledEventID'] = $scheduledEventID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,9 +265,9 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      */
     public function withStatus(EventStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -125,21 +125,21 @@ final class CredentialInbound implements BaseModel
         ?int $timeout1xxSecs = null,
         ?int $timeout2xxSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $aniNumberFormat && $obj['aniNumberFormat'] = $aniNumberFormat;
-        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
-        null !== $codecs && $obj['codecs'] = $codecs;
-        null !== $dnisNumberFormat && $obj['dnisNumberFormat'] = $dnisNumberFormat;
-        null !== $generateRingbackTone && $obj['generateRingbackTone'] = $generateRingbackTone;
-        null !== $isupHeadersEnabled && $obj['isupHeadersEnabled'] = $isupHeadersEnabled;
-        null !== $prackEnabled && $obj['prackEnabled'] = $prackEnabled;
-        null !== $shakenStirEnabled && $obj['shakenStirEnabled'] = $shakenStirEnabled;
-        null !== $sipCompactHeadersEnabled && $obj['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
-        null !== $timeout1xxSecs && $obj['timeout1xxSecs'] = $timeout1xxSecs;
-        null !== $timeout2xxSecs && $obj['timeout2xxSecs'] = $timeout2xxSecs;
+        null !== $aniNumberFormat && $self['aniNumberFormat'] = $aniNumberFormat;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        null !== $codecs && $self['codecs'] = $codecs;
+        null !== $dnisNumberFormat && $self['dnisNumberFormat'] = $dnisNumberFormat;
+        null !== $generateRingbackTone && $self['generateRingbackTone'] = $generateRingbackTone;
+        null !== $isupHeadersEnabled && $self['isupHeadersEnabled'] = $isupHeadersEnabled;
+        null !== $prackEnabled && $self['prackEnabled'] = $prackEnabled;
+        null !== $shakenStirEnabled && $self['shakenStirEnabled'] = $shakenStirEnabled;
+        null !== $sipCompactHeadersEnabled && $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
+        null !== $timeout1xxSecs && $self['timeout1xxSecs'] = $timeout1xxSecs;
+        null !== $timeout2xxSecs && $self['timeout2xxSecs'] = $timeout2xxSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class CredentialInbound implements BaseModel
     public function withAniNumberFormat(
         AniNumberFormat|string $aniNumberFormat
     ): self {
-        $obj = clone $this;
-        $obj['aniNumberFormat'] = $aniNumberFormat;
+        $self = clone $this;
+        $self['aniNumberFormat'] = $aniNumberFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class CredentialInbound implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj['channelLimit'] = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class CredentialInbound implements BaseModel
      */
     public function withCodecs(array $codecs): self
     {
-        $obj = clone $this;
-        $obj['codecs'] = $codecs;
+        $self = clone $this;
+        $self['codecs'] = $codecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class CredentialInbound implements BaseModel
     public function withDnisNumberFormat(
         DnisNumberFormat|string $dnisNumberFormat
     ): self {
-        $obj = clone $this;
-        $obj['dnisNumberFormat'] = $dnisNumberFormat;
+        $self = clone $this;
+        $self['dnisNumberFormat'] = $dnisNumberFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,10 +197,10 @@ final class CredentialInbound implements BaseModel
      */
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
-        $obj = clone $this;
-        $obj['generateRingbackTone'] = $generateRingbackTone;
+        $self = clone $this;
+        $self['generateRingbackTone'] = $generateRingbackTone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class CredentialInbound implements BaseModel
      */
     public function withIsupHeadersEnabled(bool $isupHeadersEnabled): self
     {
-        $obj = clone $this;
-        $obj['isupHeadersEnabled'] = $isupHeadersEnabled;
+        $self = clone $this;
+        $self['isupHeadersEnabled'] = $isupHeadersEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class CredentialInbound implements BaseModel
      */
     public function withPrackEnabled(bool $prackEnabled): self
     {
-        $obj = clone $this;
-        $obj['prackEnabled'] = $prackEnabled;
+        $self = clone $this;
+        $self['prackEnabled'] = $prackEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class CredentialInbound implements BaseModel
      */
     public function withShakenStirEnabled(bool $shakenStirEnabled): self
     {
-        $obj = clone $this;
-        $obj['shakenStirEnabled'] = $shakenStirEnabled;
+        $self = clone $this;
+        $self['shakenStirEnabled'] = $shakenStirEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,10 +242,10 @@ final class CredentialInbound implements BaseModel
     public function withSipCompactHeadersEnabled(
         bool $sipCompactHeadersEnabled
     ): self {
-        $obj = clone $this;
-        $obj['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
+        $self = clone $this;
+        $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +253,10 @@ final class CredentialInbound implements BaseModel
      */
     public function withTimeout1xxSecs(int $timeout1xxSecs): self
     {
-        $obj = clone $this;
-        $obj['timeout1xxSecs'] = $timeout1xxSecs;
+        $self = clone $this;
+        $self['timeout1xxSecs'] = $timeout1xxSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -264,9 +264,9 @@ final class CredentialInbound implements BaseModel
      */
     public function withTimeout2xxSecs(int $timeout2xxSecs): self
     {
-        $obj = clone $this;
-        $obj['timeout2xxSecs'] = $timeout2xxSecs;
+        $self = clone $this;
+        $self['timeout2xxSecs'] = $timeout2xxSecs;
 
-        return $obj;
+        return $self;
     }
 }

@@ -54,12 +54,12 @@ final class LatLong implements BaseModel
      */
     public static function with(float $latitude, float $longitude): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['latitude'] = $latitude;
-        $obj['longitude'] = $longitude;
+        $self['latitude'] = $latitude;
+        $self['longitude'] = $longitude;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class LatLong implements BaseModel
      */
     public function withLatitude(float $latitude): self
     {
-        $obj = clone $this;
-        $obj['latitude'] = $latitude;
+        $self = clone $this;
+        $self['latitude'] = $latitude;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class LatLong implements BaseModel
      */
     public function withLongitude(float $longitude): self
     {
-        $obj = clone $this;
-        $obj['longitude'] = $longitude;
+        $self = clone $this;
+        $self['longitude'] = $longitude;
 
-        return $obj;
+        return $self;
     }
 }

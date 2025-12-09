@@ -191,25 +191,25 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
         UsagePaymentMethod|string|null $usagePaymentMethod = null,
         ?array $whitelistedDestinations = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
+        $self['name'] = $name;
 
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $callRecording && $obj['callRecording'] = $callRecording;
-        null !== $callingWindow && $obj['callingWindow'] = $callingWindow;
-        null !== $concurrentCallLimit && $obj['concurrentCallLimit'] = $concurrentCallLimit;
-        null !== $dailySpendLimit && $obj['dailySpendLimit'] = $dailySpendLimit;
-        null !== $dailySpendLimitEnabled && $obj['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
-        null !== $enabled && $obj['enabled'] = $enabled;
-        null !== $maxDestinationRate && $obj['maxDestinationRate'] = $maxDestinationRate;
-        null !== $servicePlan && $obj['servicePlan'] = $servicePlan;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $trafficType && $obj['trafficType'] = $trafficType;
-        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
-        null !== $whitelistedDestinations && $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $callRecording && $self['callRecording'] = $callRecording;
+        null !== $callingWindow && $self['callingWindow'] = $callingWindow;
+        null !== $concurrentCallLimit && $self['concurrentCallLimit'] = $concurrentCallLimit;
+        null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
+        null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $maxDestinationRate && $self['maxDestinationRate'] = $maxDestinationRate;
+        null !== $servicePlan && $self['servicePlan'] = $servicePlan;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $trafficType && $self['trafficType'] = $trafficType;
+        null !== $usagePaymentMethod && $self['usagePaymentMethod'] = $usagePaymentMethod;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withBillingGroupID(?string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +245,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public function withCallRecording(
         OutboundCallRecording|array $callRecording
     ): self {
-        $obj = clone $this;
-        $obj['callRecording'] = $callRecording;
+        $self = clone $this;
+        $self['callRecording'] = $callRecording;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +260,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withCallingWindow(CallingWindow|array $callingWindow): self
     {
-        $obj = clone $this;
-        $obj['callingWindow'] = $callingWindow;
+        $self = clone $this;
+        $self['callingWindow'] = $callingWindow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withConcurrentCallLimit(?int $concurrentCallLimit): self
     {
-        $obj = clone $this;
-        $obj['concurrentCallLimit'] = $concurrentCallLimit;
+        $self = clone $this;
+        $self['concurrentCallLimit'] = $concurrentCallLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withDailySpendLimit(string $dailySpendLimit): self
     {
-        $obj = clone $this;
-        $obj['dailySpendLimit'] = $dailySpendLimit;
+        $self = clone $this;
+        $self['dailySpendLimit'] = $dailySpendLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +294,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public function withDailySpendLimitEnabled(
         bool $dailySpendLimitEnabled
     ): self {
-        $obj = clone $this;
-        $obj['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
+        $self = clone $this;
+        $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,10 +305,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj['enabled'] = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +316,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withMaxDestinationRate(float $maxDestinationRate): self
     {
-        $obj = clone $this;
-        $obj['maxDestinationRate'] = $maxDestinationRate;
+        $self = clone $this;
+        $self['maxDestinationRate'] = $maxDestinationRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,10 +329,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withServicePlan(ServicePlan|string $servicePlan): self
     {
-        $obj = clone $this;
-        $obj['servicePlan'] = $servicePlan;
+        $self = clone $this;
+        $self['servicePlan'] = $servicePlan;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +340,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -353,10 +353,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withTrafficType(TrafficType|string $trafficType): self
     {
-        $obj = clone $this;
-        $obj['trafficType'] = $trafficType;
+        $self = clone $this;
+        $self['trafficType'] = $trafficType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -367,10 +367,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public function withUsagePaymentMethod(
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['usagePaymentMethod'] = $usagePaymentMethod;
+        $self = clone $this;
+        $self['usagePaymentMethod'] = $usagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -381,9 +381,9 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public function withWhitelistedDestinations(
         array $whitelistedDestinations
     ): self {
-        $obj = clone $this;
-        $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 }

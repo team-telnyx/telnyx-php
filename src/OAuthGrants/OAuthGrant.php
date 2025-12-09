@@ -107,17 +107,17 @@ final class OAuthGrant implements BaseModel
         array $scopes,
         ?\DateTimeInterface $lastUsedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['clientID'] = $clientID;
-        $obj['createdAt'] = $createdAt;
-        $obj['recordType'] = $recordType;
-        $obj['scopes'] = $scopes;
+        $self['id'] = $id;
+        $self['clientID'] = $clientID;
+        $self['createdAt'] = $createdAt;
+        $self['recordType'] = $recordType;
+        $self['scopes'] = $scopes;
 
-        null !== $lastUsedAt && $obj['lastUsedAt'] = $lastUsedAt;
+        null !== $lastUsedAt && $self['lastUsedAt'] = $lastUsedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class OAuthGrant implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class OAuthGrant implements BaseModel
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj['clientID'] = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class OAuthGrant implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class OAuthGrant implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +173,10 @@ final class OAuthGrant implements BaseModel
      */
     public function withScopes(array $scopes): self
     {
-        $obj = clone $this;
-        $obj['scopes'] = $scopes;
+        $self = clone $this;
+        $self['scopes'] = $scopes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,9 +184,9 @@ final class OAuthGrant implements BaseModel
      */
     public function withLastUsedAt(?\DateTimeInterface $lastUsedAt): self
     {
-        $obj = clone $this;
-        $obj['lastUsedAt'] = $lastUsedAt;
+        $self = clone $this;
+        $self['lastUsedAt'] = $lastUsedAt;
 
-        return $obj;
+        return $self;
     }
 }

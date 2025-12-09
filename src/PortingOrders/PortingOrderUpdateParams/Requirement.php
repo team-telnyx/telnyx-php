@@ -60,12 +60,12 @@ final class Requirement implements BaseModel
         string $fieldValue,
         string $requirementTypeID
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['fieldValue'] = $fieldValue;
-        $obj['requirementTypeID'] = $requirementTypeID;
+        $self['fieldValue'] = $fieldValue;
+        $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class Requirement implements BaseModel
      */
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj['fieldValue'] = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class Requirement implements BaseModel
      */
     public function withRequirementTypeID(string $requirementTypeID): self
     {
-        $obj = clone $this;
-        $obj['requirementTypeID'] = $requirementTypeID;
+        $self = clone $this;
+        $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 }

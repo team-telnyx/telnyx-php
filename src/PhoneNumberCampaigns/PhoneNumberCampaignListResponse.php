@@ -76,21 +76,21 @@ final class PhoneNumberCampaignListResponse implements BaseModel
         array $records,
         int $totalRecords
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['page'] = $page;
-        $obj['records'] = $records;
-        $obj['totalRecords'] = $totalRecords;
+        $self['page'] = $page;
+        $self['records'] = $records;
+        $self['totalRecords'] = $totalRecords;
 
-        return $obj;
+        return $self;
     }
 
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,17 +109,17 @@ final class PhoneNumberCampaignListResponse implements BaseModel
      */
     public function withRecords(array $records): self
     {
-        $obj = clone $this;
-        $obj['records'] = $records;
+        $self = clone $this;
+        $self['records'] = $records;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalRecords(int $totalRecords): self
     {
-        $obj = clone $this;
-        $obj['totalRecords'] = $totalRecords;
+        $self = clone $this;
+        $self['totalRecords'] = $totalRecords;
 
-        return $obj;
+        return $self;
     }
 }

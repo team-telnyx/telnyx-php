@@ -106,18 +106,18 @@ final class TnUploadEntry implements BaseModel
         ?string $phoneNumber = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $civicAddressID && $obj['civicAddressID'] = $civicAddressID;
-        null !== $errorCode && $obj['errorCode'] = $errorCode;
-        null !== $errorMessage && $obj['errorMessage'] = $errorMessage;
-        null !== $internalStatus && $obj['internalStatus'] = $internalStatus;
-        null !== $locationID && $obj['locationID'] = $locationID;
-        null !== $numberID && $obj['numberID'] = $numberID;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $civicAddressID && $self['civicAddressID'] = $civicAddressID;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        null !== $internalStatus && $self['internalStatus'] = $internalStatus;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $numberID && $self['numberID'] = $numberID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withCivicAddressID(string $civicAddressID): self
     {
-        $obj = clone $this;
-        $obj['civicAddressID'] = $civicAddressID;
+        $self = clone $this;
+        $self['civicAddressID'] = $civicAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withErrorCode(ErrorCode|string $errorCode): self
     {
-        $obj = clone $this;
-        $obj['errorCode'] = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withErrorMessage(string $errorMessage): self
     {
-        $obj = clone $this;
-        $obj['errorMessage'] = $errorMessage;
+        $self = clone $this;
+        $self['errorMessage'] = $errorMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class TnUploadEntry implements BaseModel
     public function withInternalStatus(
         InternalStatus|string $internalStatus
     ): self {
-        $obj = clone $this;
-        $obj['internalStatus'] = $internalStatus;
+        $self = clone $this;
+        $self['internalStatus'] = $internalStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withLocationID(string $locationID): self
     {
-        $obj = clone $this;
-        $obj['locationID'] = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withNumberID(string $numberID): self
     {
-        $obj = clone $this;
-        $obj['numberID'] = $numberID;
+        $self = clone $this;
+        $self['numberID'] = $numberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,9 +209,9 @@ final class TnUploadEntry implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

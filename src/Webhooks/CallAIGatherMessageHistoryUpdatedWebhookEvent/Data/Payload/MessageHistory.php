@@ -49,12 +49,12 @@ final class MessageHistory implements BaseModel
         ?string $content = null,
         Role|string|null $role = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $content && $obj['content'] = $content;
-        null !== $role && $obj['role'] = $role;
+        null !== $content && $self['content'] = $content;
+        null !== $role && $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +62,10 @@ final class MessageHistory implements BaseModel
      */
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class MessageHistory implements BaseModel
      */
     public function withRole(Role|string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 }

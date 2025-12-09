@@ -148,23 +148,23 @@ final class Filter implements BaseModel
         ?string $rateCenter = null,
         ?bool $reservable = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
-        null !== $bestEffort && $obj['bestEffort'] = $bestEffort;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $excludeHeldNumbers && $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
-        null !== $features && $obj['features'] = $features;
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $locality && $obj['locality'] = $locality;
-        null !== $nationalDestinationCode && $obj['nationalDestinationCode'] = $nationalDestinationCode;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $rateCenter && $obj['rateCenter'] = $rateCenter;
-        null !== $reservable && $obj['reservable'] = $reservable;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $bestEffort && $self['bestEffort'] = $bestEffort;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $excludeHeldNumbers && $self['excludeHeldNumbers'] = $excludeHeldNumbers;
+        null !== $features && $self['features'] = $features;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $locality && $self['locality'] = $locality;
+        null !== $nationalDestinationCode && $self['nationalDestinationCode'] = $nationalDestinationCode;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $rateCenter && $self['rateCenter'] = $rateCenter;
+        null !== $reservable && $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class Filter implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Filter implements BaseModel
      */
     public function withBestEffort(bool $bestEffort): self
     {
-        $obj = clone $this;
-        $obj['bestEffort'] = $bestEffort;
+        $self = clone $this;
+        $self['bestEffort'] = $bestEffort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class Filter implements BaseModel
      */
     public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
     {
-        $obj = clone $this;
-        $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
+        $self = clone $this;
+        $self['excludeHeldNumbers'] = $excludeHeldNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class Filter implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class Filter implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class Filter implements BaseModel
      */
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj['locality'] = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,10 +252,10 @@ final class Filter implements BaseModel
     public function withNationalDestinationCode(
         string $nationalDestinationCode
     ): self {
-        $obj = clone $this;
-        $obj['nationalDestinationCode'] = $nationalDestinationCode;
+        $self = clone $this;
+        $self['nationalDestinationCode'] = $nationalDestinationCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +267,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +281,10 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class Filter implements BaseModel
      */
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj['quickship'] = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -303,10 +303,10 @@ final class Filter implements BaseModel
      */
     public function withRateCenter(string $rateCenter): self
     {
-        $obj = clone $this;
-        $obj['rateCenter'] = $rateCenter;
+        $self = clone $this;
+        $self['rateCenter'] = $rateCenter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -314,9 +314,9 @@ final class Filter implements BaseModel
      */
     public function withReservable(bool $reservable): self
     {
-        $obj = clone $this;
-        $obj['reservable'] = $reservable;
+        $self = clone $this;
+        $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 }

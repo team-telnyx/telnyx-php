@@ -50,12 +50,12 @@ final class RcGenerateDeeplinkParams implements BaseModel
         ?string $body = null,
         ?string $phoneNumber = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $body && $obj['body'] = $body;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $body && $self['body'] = $body;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class RcGenerateDeeplinkParams implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class RcGenerateDeeplinkParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

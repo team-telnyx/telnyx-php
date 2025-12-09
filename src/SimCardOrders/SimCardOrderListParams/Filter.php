@@ -78,15 +78,15 @@ final class Filter implements BaseModel
         ?int $quantity = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $address && $obj['address'] = $address;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $quantity && $obj['quantity'] = $quantity;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $address && $self['address'] = $address;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $quantity && $self['quantity'] = $quantity;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +102,10 @@ final class Filter implements BaseModel
      */
     public function withAddress(Address|array $address): self
     {
-        $obj = clone $this;
-        $obj['address'] = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class Filter implements BaseModel
      */
     public function withCost(Cost|array $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class Filter implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,9 +146,9 @@ final class Filter implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

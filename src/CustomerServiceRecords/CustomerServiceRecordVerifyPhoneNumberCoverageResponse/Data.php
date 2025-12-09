@@ -74,15 +74,15 @@ final class Data implements BaseModel
         ?string $reason = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additionalDataRequired && $obj['additionalDataRequired'] = $additionalDataRequired;
-        null !== $hasCsrCoverage && $obj['hasCsrCoverage'] = $hasCsrCoverage;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $reason && $obj['reason'] = $reason;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $additionalDataRequired && $self['additionalDataRequired'] = $additionalDataRequired;
+        null !== $hasCsrCoverage && $self['hasCsrCoverage'] = $hasCsrCoverage;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $reason && $self['reason'] = $reason;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class Data implements BaseModel
     public function withAdditionalDataRequired(
         array $additionalDataRequired
     ): self {
-        $obj = clone $this;
-        $obj['additionalDataRequired'] = $additionalDataRequired;
+        $self = clone $this;
+        $self['additionalDataRequired'] = $additionalDataRequired;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class Data implements BaseModel
      */
     public function withHasCsrCoverage(bool $hasCsrCoverage): self
     {
-        $obj = clone $this;
-        $obj['hasCsrCoverage'] = $hasCsrCoverage;
+        $self = clone $this;
+        $self['hasCsrCoverage'] = $hasCsrCoverage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class Data implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj['reason'] = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

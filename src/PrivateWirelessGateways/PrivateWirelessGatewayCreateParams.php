@@ -72,14 +72,14 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
         string $networkID,
         ?string $regionCode = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj['networkID'] = $networkID;
+        $self['name'] = $name;
+        $self['networkID'] = $networkID;
 
-        null !== $regionCode && $obj['regionCode'] = $regionCode;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj['networkID'] = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 }

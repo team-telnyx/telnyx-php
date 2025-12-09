@@ -63,14 +63,14 @@ final class VoiceConnectionName implements BaseModel
         ?string $eq = null,
         ?string $startsWith = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj['contains'] = $contains;
-        null !== $endsWith && $obj['endsWith'] = $endsWith;
-        null !== $eq && $obj['eq'] = $eq;
-        null !== $startsWith && $obj['startsWith'] = $startsWith;
+        null !== $contains && $self['contains'] = $contains;
+        null !== $endsWith && $self['endsWith'] = $endsWith;
+        null !== $eq && $self['eq'] = $eq;
+        null !== $startsWith && $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class VoiceConnectionName implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj['contains'] = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class VoiceConnectionName implements BaseModel
      */
     public function withEndsWith(string $endsWith): self
     {
-        $obj = clone $this;
-        $obj['endsWith'] = $endsWith;
+        $self = clone $this;
+        $self['endsWith'] = $endsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class VoiceConnectionName implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj['eq'] = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class VoiceConnectionName implements BaseModel
      */
     public function withStartsWith(string $startsWith): self
     {
-        $obj = clone $this;
-        $obj['startsWith'] = $startsWith;
+        $self = clone $this;
+        $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 }

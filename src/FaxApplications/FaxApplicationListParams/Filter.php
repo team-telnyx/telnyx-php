@@ -49,12 +49,12 @@ final class Filter implements BaseModel
         ApplicationName|array|null $applicationName = null,
         ?string $outboundVoiceProfileID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $applicationName && $obj['applicationName'] = $applicationName;
-        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        null !== $applicationName && $self['applicationName'] = $applicationName;
+        null !== $outboundVoiceProfileID && $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class Filter implements BaseModel
     public function withApplicationName(
         ApplicationName|array $applicationName
     ): self {
-        $obj = clone $this;
-        $obj['applicationName'] = $applicationName;
+        $self = clone $this;
+        $self['applicationName'] = $applicationName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class Filter implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -65,13 +65,13 @@ final class Record implements BaseModel
         string $status,
         string $taskID
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['status'] = $status;
-        $obj['taskID'] = $taskID;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['status'] = $status;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class Record implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class Record implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class Record implements BaseModel
      */
     public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj['taskID'] = $taskID;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 }

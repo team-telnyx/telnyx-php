@@ -73,14 +73,14 @@ final class TranscriptionSettings implements BaseModel
         ?string $region = null,
         Settings|array|null $settings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $language && $obj['language'] = $language;
-        null !== $model && $obj['model'] = $model;
-        null !== $region && $obj['region'] = $region;
-        null !== $settings && $obj['settings'] = $settings;
+        null !== $language && $self['language'] = $language;
+        null !== $model && $self['model'] = $model;
+        null !== $region && $self['region'] = $region;
+        null !== $settings && $self['settings'] = $settings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class TranscriptionSettings implements BaseModel
      */
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class TranscriptionSettings implements BaseModel
      */
     public function withModel(Model|string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class TranscriptionSettings implements BaseModel
      */
     public function withRegion(string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class TranscriptionSettings implements BaseModel
      */
     public function withSettings(Settings|array $settings): self
     {
-        $obj = clone $this;
-        $obj['settings'] = $settings;
+        $self = clone $this;
+        $self['settings'] = $settings;
 
-        return $obj;
+        return $self;
     }
 }

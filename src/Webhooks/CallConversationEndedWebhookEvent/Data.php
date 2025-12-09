@@ -103,16 +103,16 @@ final class Data implements BaseModel
         Payload|array|null $payload = null,
         RecordType|string|null $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
-        null !== $payload && $obj['payload'] = $payload;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $eventType && $self['eventType'] = $eventType;
+        null !== $occurredAt && $self['occurredAt'] = $occurredAt;
+        null !== $payload && $self['payload'] = $payload;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data implements BaseModel
      */
     public function withEventType(EventType|string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class Data implements BaseModel
      */
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
-        $obj = clone $this;
-        $obj['occurredAt'] = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Data implements BaseModel
      */
     public function withPayload(Payload|array $payload): self
     {
-        $obj = clone $this;
-        $obj['payload'] = $payload;
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -81,23 +81,23 @@ final class CampaignListParams implements BaseModel
         ?int $recordsPerPage = null,
         Sort|string|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['brandID'] = $brandID;
+        $self['brandID'] = $brandID;
 
-        null !== $page && $obj['page'] = $page;
-        null !== $recordsPerPage && $obj['recordsPerPage'] = $recordsPerPage;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $page && $self['page'] = $page;
+        null !== $recordsPerPage && $self['recordsPerPage'] = $recordsPerPage;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class CampaignListParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class CampaignListParams implements BaseModel
      */
     public function withRecordsPerPage(int $recordsPerPage): self
     {
-        $obj = clone $this;
-        $obj['recordsPerPage'] = $recordsPerPage;
+        $self = clone $this;
+        $self['recordsPerPage'] = $recordsPerPage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class CampaignListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

@@ -34,27 +34,27 @@ final class Data implements BaseModel
      */
     public static function with(?string $sid = null, ?string $status = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $sid && $obj['sid'] = $sid;
-        null !== $status && $obj['status'] = $status;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj['sid'] = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

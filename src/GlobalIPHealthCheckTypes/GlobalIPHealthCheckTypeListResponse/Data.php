@@ -57,13 +57,13 @@ final class Data implements BaseModel
         ?string $healthCheckType = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $healthCheckParams && $obj['healthCheckParams'] = $healthCheckParams;
-        null !== $healthCheckType && $obj['healthCheckType'] = $healthCheckType;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $healthCheckParams && $self['healthCheckParams'] = $healthCheckParams;
+        null !== $healthCheckType && $self['healthCheckType'] = $healthCheckType;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class Data implements BaseModel
      */
     public function withHealthCheckParams(array $healthCheckParams): self
     {
-        $obj = clone $this;
-        $obj['healthCheckParams'] = $healthCheckParams;
+        $self = clone $this;
+        $self['healthCheckParams'] = $healthCheckParams;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class Data implements BaseModel
      */
     public function withHealthCheckType(string $healthCheckType): self
     {
-        $obj = clone $this;
-        $obj['healthCheckType'] = $healthCheckType;
+        $self = clone $this;
+        $self['healthCheckType'] = $healthCheckType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +95,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -63,13 +63,13 @@ final class Filter implements BaseModel
         ?string $ipAddress = null,
         ?string $ipSource = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
-        null !== $ipSource && $obj['ipSource'] = $ipSource;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $ipSource && $self['ipSource'] = $ipSource;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Filter implements BaseModel
     public function withCreatedAt(
         \DateTimeInterface|DateRangeFilter|array $createdAt
     ): self {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Filter implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class Filter implements BaseModel
      */
     public function withIPSource(string $ipSource): self
     {
-        $obj = clone $this;
-        $obj['ipSource'] = $ipSource;
+        $self = clone $this;
+        $self['ipSource'] = $ipSource;
 
-        return $obj;
+        return $self;
     }
 }

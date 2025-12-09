@@ -82,13 +82,13 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
         Filters|array|null $filters = null,
         Page|array|null $page = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $filters && $obj['filters'] = $filters;
-        null !== $page && $obj['page'] = $page;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $filters && $self['filters'] = $filters;
+        null !== $page && $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      */
     public function withFilters(Filters|array $filters): self
     {
-        $obj = clone $this;
-        $obj['filters'] = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 }

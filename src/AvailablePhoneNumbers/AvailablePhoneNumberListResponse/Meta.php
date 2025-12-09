@@ -38,27 +38,27 @@ final class Meta implements BaseModel
         ?int $bestEffortResults = null,
         ?int $totalResults = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bestEffortResults && $obj['bestEffortResults'] = $bestEffortResults;
-        null !== $totalResults && $obj['totalResults'] = $totalResults;
+        null !== $bestEffortResults && $self['bestEffortResults'] = $bestEffortResults;
+        null !== $totalResults && $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 
     public function withBestEffortResults(int $bestEffortResults): self
     {
-        $obj = clone $this;
-        $obj['bestEffortResults'] = $bestEffortResults;
+        $self = clone $this;
+        $self['bestEffortResults'] = $bestEffortResults;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj['totalResults'] = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

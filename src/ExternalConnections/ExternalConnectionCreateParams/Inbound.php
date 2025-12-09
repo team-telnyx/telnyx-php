@@ -59,13 +59,13 @@ final class Inbound implements BaseModel
         string $outboundVoiceProfileID,
         ?int $channelLimit = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class Inbound implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class Inbound implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj['channelLimit'] = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 }

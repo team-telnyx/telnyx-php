@@ -61,11 +61,11 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
      */
     public static function with(array $verificationCodes): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['verificationCodes'] = $verificationCodes;
+        $self['verificationCodes'] = $verificationCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
      */
     public function withVerificationCodes(array $verificationCodes): self
     {
-        $obj = clone $this;
-        $obj['verificationCodes'] = $verificationCodes;
+        $self = clone $this;
+        $self['verificationCodes'] = $verificationCodes;
 
-        return $obj;
+        return $self;
     }
 }

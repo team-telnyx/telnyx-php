@@ -57,37 +57,37 @@ final class CampaignDeactivateResponse implements BaseModel
         ?string $message = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['time'] = $time;
+        $self['time'] = $time;
 
-        null !== $message && $obj['message'] = $message;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $message && $self['message'] = $message;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withTime(float $time): self
     {
-        $obj = clone $this;
-        $obj['time'] = $time;
+        $self = clone $this;
+        $self['time'] = $time;
 
-        return $obj;
+        return $self;
     }
 
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj['message'] = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -38,27 +38,27 @@ final class VerificationCode implements BaseModel
         ?string $code = null,
         ?string $phoneNumber = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $code && $self['code'] = $code;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

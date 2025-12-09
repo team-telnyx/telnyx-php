@@ -53,13 +53,13 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
         ?\DateTimeInterface $focDate = null,
         ?string $userID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $focDate && $obj['focDate'] = $focDate;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $id && $self['id'] = $id;
+        null !== $focDate && $self['focDate'] = $focDate;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
      */
     public function withFocDate(\DateTimeInterface $focDate): self
     {
-        $obj = clone $this;
-        $obj['focDate'] = $focDate;
+        $self = clone $this;
+        $self['focDate'] = $focDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

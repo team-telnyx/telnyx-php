@@ -46,11 +46,11 @@ final class PortabilityCheckRunParams implements BaseModel
      */
     public static function with(?array $phoneNumbers = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class PortabilityCheckRunParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

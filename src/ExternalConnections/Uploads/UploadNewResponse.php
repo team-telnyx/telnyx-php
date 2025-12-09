@@ -44,12 +44,12 @@ final class UploadNewResponse implements BaseModel
         ?bool $success = null,
         ?string $ticketID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $success && $obj['success'] = $success;
-        null !== $ticketID && $obj['ticketID'] = $ticketID;
+        null !== $success && $self['success'] = $success;
+        null !== $ticketID && $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class UploadNewResponse implements BaseModel
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class UploadNewResponse implements BaseModel
      */
     public function withTicketID(string $ticketID): self
     {
-        $obj = clone $this;
-        $obj['ticketID'] = $ticketID;
+        $self = clone $this;
+        $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 }

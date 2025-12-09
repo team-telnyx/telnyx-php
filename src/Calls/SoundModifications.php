@@ -63,14 +63,14 @@ final class SoundModifications implements BaseModel
         ?float $semitone = null,
         ?string $track = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $octaves && $obj['octaves'] = $octaves;
-        null !== $pitch && $obj['pitch'] = $pitch;
-        null !== $semitone && $obj['semitone'] = $semitone;
-        null !== $track && $obj['track'] = $track;
+        null !== $octaves && $self['octaves'] = $octaves;
+        null !== $pitch && $self['pitch'] = $pitch;
+        null !== $semitone && $self['semitone'] = $semitone;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class SoundModifications implements BaseModel
      */
     public function withOctaves(float $octaves): self
     {
-        $obj = clone $this;
-        $obj['octaves'] = $octaves;
+        $self = clone $this;
+        $self['octaves'] = $octaves;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class SoundModifications implements BaseModel
      */
     public function withPitch(float $pitch): self
     {
-        $obj = clone $this;
-        $obj['pitch'] = $pitch;
+        $self = clone $this;
+        $self['pitch'] = $pitch;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class SoundModifications implements BaseModel
      */
     public function withSemitone(float $semitone): self
     {
-        $obj = clone $this;
-        $obj['semitone'] = $semitone;
+        $self = clone $this;
+        $self['semitone'] = $semitone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class SoundModifications implements BaseModel
      */
     public function withTrack(string $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }

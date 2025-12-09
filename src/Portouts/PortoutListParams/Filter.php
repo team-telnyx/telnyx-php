@@ -147,22 +147,22 @@ final class Filter implements BaseModel
         ?array $statusIn = null,
         ?string $supportKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierName && $obj['carrierName'] = $carrierName;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $countryCodeIn && $obj['countryCodeIn'] = $countryCodeIn;
-        null !== $focDate && $obj['focDate'] = $focDate;
-        null !== $insertedAt && $obj['insertedAt'] = $insertedAt;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $pon && $obj['pon'] = $pon;
-        null !== $portedOutAt && $obj['portedOutAt'] = $portedOutAt;
-        null !== $spid && $obj['spid'] = $spid;
-        null !== $status && $obj['status'] = $status;
-        null !== $statusIn && $obj['statusIn'] = $statusIn;
-        null !== $supportKey && $obj['supportKey'] = $supportKey;
+        null !== $carrierName && $self['carrierName'] = $carrierName;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $countryCodeIn && $self['countryCodeIn'] = $countryCodeIn;
+        null !== $focDate && $self['focDate'] = $focDate;
+        null !== $insertedAt && $self['insertedAt'] = $insertedAt;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $pon && $self['pon'] = $pon;
+        null !== $portedOutAt && $self['portedOutAt'] = $portedOutAt;
+        null !== $spid && $self['spid'] = $spid;
+        null !== $status && $self['status'] = $status;
+        null !== $statusIn && $self['statusIn'] = $statusIn;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Filter implements BaseModel
      */
     public function withCarrierName(string $carrierName): self
     {
-        $obj = clone $this;
-        $obj['carrierName'] = $carrierName;
+        $self = clone $this;
+        $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCodeIn(array $countryCodeIn): self
     {
-        $obj = clone $this;
-        $obj['countryCodeIn'] = $countryCodeIn;
+        $self = clone $this;
+        $self['countryCodeIn'] = $countryCodeIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class Filter implements BaseModel
      */
     public function withFocDate(\DateTimeInterface $focDate): self
     {
-        $obj = clone $this;
-        $obj['focDate'] = $focDate;
+        $self = clone $this;
+        $self['focDate'] = $focDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class Filter implements BaseModel
      */
     public function withInsertedAt(InsertedAt|array $insertedAt): self
     {
-        $obj = clone $this;
-        $obj['insertedAt'] = $insertedAt;
+        $self = clone $this;
+        $self['insertedAt'] = $insertedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,10 +231,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,10 +242,10 @@ final class Filter implements BaseModel
      */
     public function withPon(string $pon): self
     {
-        $obj = clone $this;
-        $obj['pon'] = $pon;
+        $self = clone $this;
+        $self['pon'] = $pon;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -257,10 +257,10 @@ final class Filter implements BaseModel
      */
     public function withPortedOutAt(PortedOutAt|array $portedOutAt): self
     {
-        $obj = clone $this;
-        $obj['portedOutAt'] = $portedOutAt;
+        $self = clone $this;
+        $self['portedOutAt'] = $portedOutAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +268,10 @@ final class Filter implements BaseModel
      */
     public function withSpid(string $spid): self
     {
-        $obj = clone $this;
-        $obj['spid'] = $spid;
+        $self = clone $this;
+        $self['spid'] = $spid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +281,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +294,10 @@ final class Filter implements BaseModel
      */
     public function withStatusIn(array $statusIn): self
     {
-        $obj = clone $this;
-        $obj['statusIn'] = $statusIn;
+        $self = clone $this;
+        $self['statusIn'] = $statusIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,9 +305,9 @@ final class Filter implements BaseModel
      */
     public function withSupportKey(string $supportKey): self
     {
-        $obj = clone $this;
-        $obj['supportKey'] = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 }

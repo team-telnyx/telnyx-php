@@ -50,12 +50,12 @@ final class SslCertificateCreateParams implements BaseModel
         ?string $certificate = null,
         ?string $privateKey = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $certificate && $obj['certificate'] = $certificate;
-        null !== $privateKey && $obj['privateKey'] = $privateKey;
+        null !== $certificate && $self['certificate'] = $certificate;
+        null !== $privateKey && $self['privateKey'] = $privateKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class SslCertificateCreateParams implements BaseModel
      */
     public function withCertificate(string $certificate): self
     {
-        $obj = clone $this;
-        $obj['certificate'] = $certificate;
+        $self = clone $this;
+        $self['certificate'] = $certificate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class SslCertificateCreateParams implements BaseModel
      */
     public function withPrivateKey(string $privateKey): self
     {
-        $obj = clone $this;
-        $obj['privateKey'] = $privateKey;
+        $self = clone $this;
+        $self['privateKey'] = $privateKey;
 
-        return $obj;
+        return $self;
     }
 }

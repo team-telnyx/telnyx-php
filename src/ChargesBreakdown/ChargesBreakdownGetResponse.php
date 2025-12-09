@@ -56,11 +56,11 @@ final class ChargesBreakdownGetResponse implements BaseModel
      */
     public static function with(Data|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['data'] = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class ChargesBreakdownGetResponse implements BaseModel
      */
     public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

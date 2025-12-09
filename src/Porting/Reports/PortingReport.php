@@ -104,18 +104,18 @@ final class PortingReport implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $documentID && $obj['documentID'] = $documentID;
-        null !== $params && $obj['params'] = $params;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $reportType && $obj['reportType'] = $reportType;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $documentID && $self['documentID'] = $documentID;
+        null !== $params && $self['params'] = $params;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $reportType && $self['reportType'] = $reportType;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class PortingReport implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class PortingReport implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class PortingReport implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj['documentID'] = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class PortingReport implements BaseModel
      */
     public function withParams(ExportPortingOrdersCsvReport|array $params): self
     {
-        $obj = clone $this;
-        $obj['params'] = $params;
+        $self = clone $this;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class PortingReport implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +182,10 @@ final class PortingReport implements BaseModel
      */
     public function withReportType(ReportType|string $reportType): self
     {
-        $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $self = clone $this;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class PortingReport implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,9 +206,9 @@ final class PortingReport implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

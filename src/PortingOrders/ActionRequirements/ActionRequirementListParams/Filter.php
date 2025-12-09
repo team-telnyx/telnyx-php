@@ -75,14 +75,14 @@ final class Filter implements BaseModel
         ?string $requirementTypeID = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $requirementTypeID && $obj['requirementTypeID'] = $requirementTypeID;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $actionType && $self['actionType'] = $actionType;
+        null !== $requirementTypeID && $self['requirementTypeID'] = $requirementTypeID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Filter implements BaseModel
      */
     public function withID(array $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Filter implements BaseModel
      */
     public function withActionType(ActionType|string $actionType): self
     {
-        $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $self = clone $this;
+        $self['actionType'] = $actionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Filter implements BaseModel
      */
     public function withRequirementTypeID(string $requirementTypeID): self
     {
-        $obj = clone $this;
-        $obj['requirementTypeID'] = $requirementTypeID;
+        $self = clone $this;
+        $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

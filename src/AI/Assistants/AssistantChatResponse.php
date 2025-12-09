@@ -48,11 +48,11 @@ final class AssistantChatResponse implements BaseModel
      */
     public static function with(string $content): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['content'] = $content;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class AssistantChatResponse implements BaseModel
      */
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 }

@@ -67,12 +67,12 @@ final class UnionMember0 implements BaseModel
         Type|string $type,
         Value|string $value = 'silence'
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
-        $obj['value'] = $value;
+        $self['type'] = $type;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class UnionMember0 implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +95,9 @@ final class UnionMember0 implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

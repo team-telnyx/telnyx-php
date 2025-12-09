@@ -69,15 +69,15 @@ final class Data implements BaseModel
         ?string $messagingProfileID = null,
         ?string $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $from && $obj['from'] = $from;
-        null !== $keyword && $obj['keyword'] = $keyword;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $to && $obj['to'] = $to;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $from && $self['from'] = $from;
+        null !== $keyword && $self['keyword'] = $keyword;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Data implements BaseModel
      */
     public function withKeyword(?string $keyword): self
     {
-        $obj = clone $this;
-        $obj['keyword'] = $keyword;
+        $self = clone $this;
+        $self['keyword'] = $keyword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Data implements BaseModel
      */
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Data implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

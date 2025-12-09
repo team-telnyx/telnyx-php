@@ -83,15 +83,15 @@ final class ActionPlayParams implements BaseModel
         ?string $mediaName = null,
         Region|string|null $region = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $audioURL && $obj['audioURL'] = $audioURL;
-        null !== $callControlIDs && $obj['callControlIDs'] = $callControlIDs;
-        null !== $loop && $obj['loop'] = $loop;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $region && $obj['region'] = $region;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $callControlIDs && $self['callControlIDs'] = $callControlIDs;
+        null !== $loop && $self['loop'] = $loop;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class ActionPlayParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj['audioURL'] = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class ActionPlayParams implements BaseModel
      */
     public function withCallControlIDs(array $callControlIDs): self
     {
-        $obj = clone $this;
-        $obj['callControlIDs'] = $callControlIDs;
+        $self = clone $this;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class ActionPlayParams implements BaseModel
      */
     public function withLoop(string|int $loop): self
     {
-        $obj = clone $this;
-        $obj['loop'] = $loop;
+        $self = clone $this;
+        $self['loop'] = $loop;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class ActionPlayParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,9 +147,9 @@ final class ActionPlayParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 }

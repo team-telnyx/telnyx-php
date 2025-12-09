@@ -49,12 +49,12 @@ final class ImportMetadata implements BaseModel
         ?string $importID = null,
         ImportProvider|string|null $importProvider = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $importID && $obj['importID'] = $importID;
-        null !== $importProvider && $obj['importProvider'] = $importProvider;
+        null !== $importID && $self['importID'] = $importID;
+        null !== $importProvider && $self['importProvider'] = $importProvider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +62,10 @@ final class ImportMetadata implements BaseModel
      */
     public function withImportID(string $importID): self
     {
-        $obj = clone $this;
-        $obj['importID'] = $importID;
+        $self = clone $this;
+        $self['importID'] = $importID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,9 +76,9 @@ final class ImportMetadata implements BaseModel
     public function withImportProvider(
         ImportProvider|string $importProvider
     ): self {
-        $obj = clone $this;
-        $obj['importProvider'] = $importProvider;
+        $self = clone $this;
+        $self['importProvider'] = $importProvider;
 
-        return $obj;
+        return $self;
     }
 }

@@ -56,12 +56,12 @@ final class Params implements BaseModel
      */
     public static function with(string $firstName, string $lastName): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['firstName'] = $firstName;
-        $obj['lastName'] = $lastName;
+        $self['firstName'] = $firstName;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Params implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj['firstName'] = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Params implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj['lastName'] = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 }

@@ -90,16 +90,16 @@ final class ManagedAccountCreateParams implements BaseModel
         ?string $password = null,
         ?bool $rollupBilling = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['businessName'] = $businessName;
+        $self['businessName'] = $businessName;
 
-        null !== $email && $obj['email'] = $email;
-        null !== $managedAccountAllowCustomPricing && $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
-        null !== $password && $obj['password'] = $password;
-        null !== $rollupBilling && $obj['rollupBilling'] = $rollupBilling;
+        null !== $email && $self['email'] = $email;
+        null !== $managedAccountAllowCustomPricing && $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        null !== $password && $self['password'] = $password;
+        null !== $rollupBilling && $self['rollupBilling'] = $rollupBilling;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class ManagedAccountCreateParams implements BaseModel
      */
     public function withBusinessName(string $businessName): self
     {
-        $obj = clone $this;
-        $obj['businessName'] = $businessName;
+        $self = clone $this;
+        $self['businessName'] = $businessName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class ManagedAccountCreateParams implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class ManagedAccountCreateParams implements BaseModel
     public function withManagedAccountAllowCustomPricing(
         bool $managedAccountAllowCustomPricing
     ): self {
-        $obj = clone $this;
-        $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        $self = clone $this;
+        $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class ManagedAccountCreateParams implements BaseModel
      */
     public function withPassword(string $password): self
     {
-        $obj = clone $this;
-        $obj['password'] = $password;
+        $self = clone $this;
+        $self['password'] = $password;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,9 +152,9 @@ final class ManagedAccountCreateParams implements BaseModel
      */
     public function withRollupBilling(bool $rollupBilling): self
     {
-        $obj = clone $this;
-        $obj['rollupBilling'] = $rollupBilling;
+        $self = clone $this;
+        $self['rollupBilling'] = $rollupBilling;
 
-        return $obj;
+        return $self;
     }
 }

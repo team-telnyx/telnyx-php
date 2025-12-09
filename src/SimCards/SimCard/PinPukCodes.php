@@ -60,14 +60,14 @@ final class PinPukCodes implements BaseModel
         ?string $puk1 = null,
         ?string $puk2 = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pin1 && $obj['pin1'] = $pin1;
-        null !== $pin2 && $obj['pin2'] = $pin2;
-        null !== $puk1 && $obj['puk1'] = $puk1;
-        null !== $puk2 && $obj['puk2'] = $puk2;
+        null !== $pin1 && $self['pin1'] = $pin1;
+        null !== $pin2 && $self['pin2'] = $pin2;
+        null !== $puk1 && $self['puk1'] = $puk1;
+        null !== $puk2 && $self['puk2'] = $puk2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class PinPukCodes implements BaseModel
      */
     public function withPin1(string $pin1): self
     {
-        $obj = clone $this;
-        $obj['pin1'] = $pin1;
+        $self = clone $this;
+        $self['pin1'] = $pin1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class PinPukCodes implements BaseModel
      */
     public function withPin2(string $pin2): self
     {
-        $obj = clone $this;
-        $obj['pin2'] = $pin2;
+        $self = clone $this;
+        $self['pin2'] = $pin2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class PinPukCodes implements BaseModel
      */
     public function withPuk1(string $puk1): self
     {
-        $obj = clone $this;
-        $obj['puk1'] = $puk1;
+        $self = clone $this;
+        $self['puk1'] = $puk1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +108,9 @@ final class PinPukCodes implements BaseModel
      */
     public function withPuk2(string $puk2): self
     {
-        $obj = clone $this;
-        $obj['puk2'] = $puk2;
+        $self = clone $this;
+        $self['puk2'] = $puk2;
 
-        return $obj;
+        return $self;
     }
 }

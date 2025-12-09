@@ -55,12 +55,12 @@ final class ActionVerifyParams implements BaseModel
         ?string $code = null,
         Status|string|null $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $status && $obj['status'] = $status;
+        null !== $code && $self['code'] = $code;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -106,17 +106,17 @@ final class ActionStartSiprecParams implements BaseModel
         SipTransport|string|null $sipTransport = null,
         SiprecTrack|string|null $siprecTrack = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $connectorName && $obj['connectorName'] = $connectorName;
-        null !== $includeMetadataCustomHeaders && $obj['includeMetadataCustomHeaders'] = $includeMetadataCustomHeaders;
-        null !== $secure && $obj['secure'] = $secure;
-        null !== $sessionTimeoutSecs && $obj['sessionTimeoutSecs'] = $sessionTimeoutSecs;
-        null !== $sipTransport && $obj['sipTransport'] = $sipTransport;
-        null !== $siprecTrack && $obj['siprecTrack'] = $siprecTrack;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectorName && $self['connectorName'] = $connectorName;
+        null !== $includeMetadataCustomHeaders && $self['includeMetadataCustomHeaders'] = $includeMetadataCustomHeaders;
+        null !== $secure && $self['secure'] = $secure;
+        null !== $sessionTimeoutSecs && $self['sessionTimeoutSecs'] = $sessionTimeoutSecs;
+        null !== $sipTransport && $self['sipTransport'] = $sipTransport;
+        null !== $siprecTrack && $self['siprecTrack'] = $siprecTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withConnectorName(string $connectorName): self
     {
-        $obj = clone $this;
-        $obj['connectorName'] = $connectorName;
+        $self = clone $this;
+        $self['connectorName'] = $connectorName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class ActionStartSiprecParams implements BaseModel
     public function withIncludeMetadataCustomHeaders(
         bool $includeMetadataCustomHeaders
     ): self {
-        $obj = clone $this;
-        $obj['includeMetadataCustomHeaders'] = $includeMetadataCustomHeaders;
+        $self = clone $this;
+        $self['includeMetadataCustomHeaders'] = $includeMetadataCustomHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSecure(bool $secure): self
     {
-        $obj = clone $this;
-        $obj['secure'] = $secure;
+        $self = clone $this;
+        $self['secure'] = $secure;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSessionTimeoutSecs(int $sessionTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['sessionTimeoutSecs'] = $sessionTimeoutSecs;
+        $self = clone $this;
+        $self['sessionTimeoutSecs'] = $sessionTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +182,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSipTransport(SipTransport|string $sipTransport): self
     {
-        $obj = clone $this;
-        $obj['sipTransport'] = $sipTransport;
+        $self = clone $this;
+        $self['sipTransport'] = $sipTransport;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,9 +195,9 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSiprecTrack(SiprecTrack|string $siprecTrack): self
     {
-        $obj = clone $this;
-        $obj['siprecTrack'] = $siprecTrack;
+        $self = clone $this;
+        $self['siprecTrack'] = $siprecTrack;
 
-        return $obj;
+        return $self;
     }
 }

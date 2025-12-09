@@ -37,11 +37,11 @@ final class Event implements BaseModel
      */
     public static function with(EventType|string|null $eventType = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eventType && $obj['eventType'] = $eventType;
+        null !== $eventType && $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -49,9 +49,9 @@ final class Event implements BaseModel
      */
     public function withEventType(EventType|string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 }

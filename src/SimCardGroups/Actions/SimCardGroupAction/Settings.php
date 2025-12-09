@@ -36,11 +36,11 @@ final class Settings implements BaseModel
      */
     public static function with(?string $privateWirelessGatewayID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $privateWirelessGatewayID && $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        null !== $privateWirelessGatewayID && $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -49,9 +49,9 @@ final class Settings implements BaseModel
     public function withPrivateWirelessGatewayID(
         string $privateWirelessGatewayID
     ): self {
-        $obj = clone $this;
-        $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        $self = clone $this;
+        $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 }

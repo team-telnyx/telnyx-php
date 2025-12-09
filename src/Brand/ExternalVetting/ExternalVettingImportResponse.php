@@ -85,17 +85,17 @@ final class ExternalVettingImportResponse implements BaseModel
         ?int $vettingScore = null,
         ?string $vettingToken = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createDate && $obj['createDate'] = $createDate;
-        null !== $evpID && $obj['evpID'] = $evpID;
-        null !== $vettedDate && $obj['vettedDate'] = $vettedDate;
-        null !== $vettingClass && $obj['vettingClass'] = $vettingClass;
-        null !== $vettingID && $obj['vettingID'] = $vettingID;
-        null !== $vettingScore && $obj['vettingScore'] = $vettingScore;
-        null !== $vettingToken && $obj['vettingToken'] = $vettingToken;
+        null !== $createDate && $self['createDate'] = $createDate;
+        null !== $evpID && $self['evpID'] = $evpID;
+        null !== $vettedDate && $self['vettedDate'] = $vettedDate;
+        null !== $vettingClass && $self['vettingClass'] = $vettingClass;
+        null !== $vettingID && $self['vettingID'] = $vettingID;
+        null !== $vettingScore && $self['vettingScore'] = $vettingScore;
+        null !== $vettingToken && $self['vettingToken'] = $vettingToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public function withCreateDate(string $createDate): self
     {
-        $obj = clone $this;
-        $obj['createDate'] = $createDate;
+        $self = clone $this;
+        $self['createDate'] = $createDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public function withEvpID(string $evpID): self
     {
-        $obj = clone $this;
-        $obj['evpID'] = $evpID;
+        $self = clone $this;
+        $self['evpID'] = $evpID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public function withVettedDate(string $vettedDate): self
     {
-        $obj = clone $this;
-        $obj['vettedDate'] = $vettedDate;
+        $self = clone $this;
+        $self['vettedDate'] = $vettedDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public function withVettingClass(string $vettingClass): self
     {
-        $obj = clone $this;
-        $obj['vettingClass'] = $vettingClass;
+        $self = clone $this;
+        $self['vettingClass'] = $vettingClass;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public function withVettingID(string $vettingID): self
     {
-        $obj = clone $this;
-        $obj['vettingID'] = $vettingID;
+        $self = clone $this;
+        $self['vettingID'] = $vettingID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public function withVettingScore(int $vettingScore): self
     {
-        $obj = clone $this;
-        $obj['vettingScore'] = $vettingScore;
+        $self = clone $this;
+        $self['vettingScore'] = $vettingScore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,9 +169,9 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public function withVettingToken(string $vettingToken): self
     {
-        $obj = clone $this;
-        $obj['vettingToken'] = $vettingToken;
+        $self = clone $this;
+        $self['vettingToken'] = $vettingToken;
 
-        return $obj;
+        return $self;
     }
 }

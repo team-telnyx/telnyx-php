@@ -119,18 +119,18 @@ final class Action implements BaseModel
         ?string $text = null,
         ViewLocationAction|array|null $viewLocationAction = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createCalendarEventAction && $obj['createCalendarEventAction'] = $createCalendarEventAction;
-        null !== $dialAction && $obj['dialAction'] = $dialAction;
-        null !== $fallbackURL && $obj['fallbackURL'] = $fallbackURL;
-        null !== $openURLAction && $obj['openURLAction'] = $openURLAction;
-        null !== $postbackData && $obj['postbackData'] = $postbackData;
-        null !== $shareLocationAction && $obj['shareLocationAction'] = $shareLocationAction;
-        null !== $text && $obj['text'] = $text;
-        null !== $viewLocationAction && $obj['viewLocationAction'] = $viewLocationAction;
+        null !== $createCalendarEventAction && $self['createCalendarEventAction'] = $createCalendarEventAction;
+        null !== $dialAction && $self['dialAction'] = $dialAction;
+        null !== $fallbackURL && $self['fallbackURL'] = $fallbackURL;
+        null !== $openURLAction && $self['openURLAction'] = $openURLAction;
+        null !== $postbackData && $self['postbackData'] = $postbackData;
+        null !== $shareLocationAction && $self['shareLocationAction'] = $shareLocationAction;
+        null !== $text && $self['text'] = $text;
+        null !== $viewLocationAction && $self['viewLocationAction'] = $viewLocationAction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class Action implements BaseModel
     public function withCreateCalendarEventAction(
         CreateCalendarEventAction|array $createCalendarEventAction
     ): self {
-        $obj = clone $this;
-        $obj['createCalendarEventAction'] = $createCalendarEventAction;
+        $self = clone $this;
+        $self['createCalendarEventAction'] = $createCalendarEventAction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Action implements BaseModel
      */
     public function withDialAction(DialAction|array $dialAction): self
     {
-        $obj = clone $this;
-        $obj['dialAction'] = $dialAction;
+        $self = clone $this;
+        $self['dialAction'] = $dialAction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Action implements BaseModel
      */
     public function withFallbackURL(string $fallbackURL): self
     {
-        $obj = clone $this;
-        $obj['fallbackURL'] = $fallbackURL;
+        $self = clone $this;
+        $self['fallbackURL'] = $fallbackURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Action implements BaseModel
      */
     public function withOpenURLAction(OpenURLAction|array $openURLAction): self
     {
-        $obj = clone $this;
-        $obj['openURLAction'] = $openURLAction;
+        $self = clone $this;
+        $self['openURLAction'] = $openURLAction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class Action implements BaseModel
      */
     public function withPostbackData(string $postbackData): self
     {
-        $obj = clone $this;
-        $obj['postbackData'] = $postbackData;
+        $self = clone $this;
+        $self['postbackData'] = $postbackData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class Action implements BaseModel
      */
     public function withShareLocationAction(mixed $shareLocationAction): self
     {
-        $obj = clone $this;
-        $obj['shareLocationAction'] = $shareLocationAction;
+        $self = clone $this;
+        $self['shareLocationAction'] = $shareLocationAction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class Action implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,9 +237,9 @@ final class Action implements BaseModel
     public function withViewLocationAction(
         ViewLocationAction|array $viewLocationAction
     ): self {
-        $obj = clone $this;
-        $obj['viewLocationAction'] = $viewLocationAction;
+        $self = clone $this;
+        $self['viewLocationAction'] = $viewLocationAction;
 
-        return $obj;
+        return $self;
     }
 }

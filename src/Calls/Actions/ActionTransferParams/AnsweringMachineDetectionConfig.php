@@ -111,20 +111,20 @@ final class AnsweringMachineDetectionConfig implements BaseModel
         ?int $silenceThreshold = null,
         ?int $totalAnalysisTimeMillis = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $afterGreetingSilenceMillis && $obj['afterGreetingSilenceMillis'] = $afterGreetingSilenceMillis;
-        null !== $betweenWordsSilenceMillis && $obj['betweenWordsSilenceMillis'] = $betweenWordsSilenceMillis;
-        null !== $greetingDurationMillis && $obj['greetingDurationMillis'] = $greetingDurationMillis;
-        null !== $greetingSilenceDurationMillis && $obj['greetingSilenceDurationMillis'] = $greetingSilenceDurationMillis;
-        null !== $greetingTotalAnalysisTimeMillis && $obj['greetingTotalAnalysisTimeMillis'] = $greetingTotalAnalysisTimeMillis;
-        null !== $initialSilenceMillis && $obj['initialSilenceMillis'] = $initialSilenceMillis;
-        null !== $maximumNumberOfWords && $obj['maximumNumberOfWords'] = $maximumNumberOfWords;
-        null !== $maximumWordLengthMillis && $obj['maximumWordLengthMillis'] = $maximumWordLengthMillis;
-        null !== $silenceThreshold && $obj['silenceThreshold'] = $silenceThreshold;
-        null !== $totalAnalysisTimeMillis && $obj['totalAnalysisTimeMillis'] = $totalAnalysisTimeMillis;
+        null !== $afterGreetingSilenceMillis && $self['afterGreetingSilenceMillis'] = $afterGreetingSilenceMillis;
+        null !== $betweenWordsSilenceMillis && $self['betweenWordsSilenceMillis'] = $betweenWordsSilenceMillis;
+        null !== $greetingDurationMillis && $self['greetingDurationMillis'] = $greetingDurationMillis;
+        null !== $greetingSilenceDurationMillis && $self['greetingSilenceDurationMillis'] = $greetingSilenceDurationMillis;
+        null !== $greetingTotalAnalysisTimeMillis && $self['greetingTotalAnalysisTimeMillis'] = $greetingTotalAnalysisTimeMillis;
+        null !== $initialSilenceMillis && $self['initialSilenceMillis'] = $initialSilenceMillis;
+        null !== $maximumNumberOfWords && $self['maximumNumberOfWords'] = $maximumNumberOfWords;
+        null !== $maximumWordLengthMillis && $self['maximumWordLengthMillis'] = $maximumWordLengthMillis;
+        null !== $silenceThreshold && $self['silenceThreshold'] = $silenceThreshold;
+        null !== $totalAnalysisTimeMillis && $self['totalAnalysisTimeMillis'] = $totalAnalysisTimeMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public function withAfterGreetingSilenceMillis(
         int $afterGreetingSilenceMillis
     ): self {
-        $obj = clone $this;
-        $obj['afterGreetingSilenceMillis'] = $afterGreetingSilenceMillis;
+        $self = clone $this;
+        $self['afterGreetingSilenceMillis'] = $afterGreetingSilenceMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public function withBetweenWordsSilenceMillis(
         int $betweenWordsSilenceMillis
     ): self {
-        $obj = clone $this;
-        $obj['betweenWordsSilenceMillis'] = $betweenWordsSilenceMillis;
+        $self = clone $this;
+        $self['betweenWordsSilenceMillis'] = $betweenWordsSilenceMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public function withGreetingDurationMillis(
         int $greetingDurationMillis
     ): self {
-        $obj = clone $this;
-        $obj['greetingDurationMillis'] = $greetingDurationMillis;
+        $self = clone $this;
+        $self['greetingDurationMillis'] = $greetingDurationMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public function withGreetingSilenceDurationMillis(
         int $greetingSilenceDurationMillis
     ): self {
-        $obj = clone $this;
-        $obj['greetingSilenceDurationMillis'] = $greetingSilenceDurationMillis;
+        $self = clone $this;
+        $self['greetingSilenceDurationMillis'] = $greetingSilenceDurationMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public function withGreetingTotalAnalysisTimeMillis(
         int $greetingTotalAnalysisTimeMillis
     ): self {
-        $obj = clone $this;
-        $obj['greetingTotalAnalysisTimeMillis'] = $greetingTotalAnalysisTimeMillis;
+        $self = clone $this;
+        $self['greetingTotalAnalysisTimeMillis'] = $greetingTotalAnalysisTimeMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
      */
     public function withInitialSilenceMillis(int $initialSilenceMillis): self
     {
-        $obj = clone $this;
-        $obj['initialSilenceMillis'] = $initialSilenceMillis;
+        $self = clone $this;
+        $self['initialSilenceMillis'] = $initialSilenceMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +203,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
      */
     public function withMaximumNumberOfWords(int $maximumNumberOfWords): self
     {
-        $obj = clone $this;
-        $obj['maximumNumberOfWords'] = $maximumNumberOfWords;
+        $self = clone $this;
+        $self['maximumNumberOfWords'] = $maximumNumberOfWords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +215,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public function withMaximumWordLengthMillis(
         int $maximumWordLengthMillis
     ): self {
-        $obj = clone $this;
-        $obj['maximumWordLengthMillis'] = $maximumWordLengthMillis;
+        $self = clone $this;
+        $self['maximumWordLengthMillis'] = $maximumWordLengthMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +226,10 @@ final class AnsweringMachineDetectionConfig implements BaseModel
      */
     public function withSilenceThreshold(int $silenceThreshold): self
     {
-        $obj = clone $this;
-        $obj['silenceThreshold'] = $silenceThreshold;
+        $self = clone $this;
+        $self['silenceThreshold'] = $silenceThreshold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,9 +238,9 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public function withTotalAnalysisTimeMillis(
         int $totalAnalysisTimeMillis
     ): self {
-        $obj = clone $this;
-        $obj['totalAnalysisTimeMillis'] = $totalAnalysisTimeMillis;
+        $self = clone $this;
+        $self['totalAnalysisTimeMillis'] = $totalAnalysisTimeMillis;
 
-        return $obj;
+        return $self;
     }
 }

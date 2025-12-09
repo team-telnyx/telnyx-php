@@ -63,13 +63,13 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
         ?string $portingOrderID = null,
         ?string $supportKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $comment && $obj['comment'] = $comment;
-        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
-        null !== $supportKey && $obj['supportKey'] = $supportKey;
+        null !== $comment && $self['comment'] = $comment;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
      */
     public function withComment(Comment|array $comment): self
     {
-        $obj = clone $this;
-        $obj['comment'] = $comment;
+        $self = clone $this;
+        $self['comment'] = $comment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
      */
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj['portingOrderID'] = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
      */
     public function withSupportKey(string $supportKey): self
     {
-        $obj = clone $this;
-        $obj['supportKey'] = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 }

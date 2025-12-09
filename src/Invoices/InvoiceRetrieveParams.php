@@ -47,11 +47,11 @@ final class InvoiceRetrieveParams implements BaseModel
      */
     public static function with(Action|string|null $action = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $action && $obj['action'] = $action;
+        null !== $action && $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,9 +61,9 @@ final class InvoiceRetrieveParams implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 }

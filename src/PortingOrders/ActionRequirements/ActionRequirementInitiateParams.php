@@ -65,20 +65,20 @@ final class ActionRequirementInitiateParams implements BaseModel
         string $portingOrderID,
         Params|array $params
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['portingOrderID'] = $portingOrderID;
-        $obj['params'] = $params;
+        $self['portingOrderID'] = $portingOrderID;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj['portingOrderID'] = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,9 +88,9 @@ final class ActionRequirementInitiateParams implements BaseModel
      */
     public function withParams(Params|array $params): self
     {
-        $obj = clone $this;
-        $obj['params'] = $params;
+        $self = clone $this;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 }

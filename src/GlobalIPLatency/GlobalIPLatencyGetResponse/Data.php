@@ -83,15 +83,15 @@ final class Data implements BaseModel
         ProberLocation|array|null $proberLocation = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIP && $obj['globalIP'] = $globalIP;
-        null !== $meanLatency && $obj['meanLatency'] = $meanLatency;
-        null !== $percentileLatency && $obj['percentileLatency'] = $percentileLatency;
-        null !== $proberLocation && $obj['proberLocation'] = $proberLocation;
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $globalIP && $self['globalIP'] = $globalIP;
+        null !== $meanLatency && $self['meanLatency'] = $meanLatency;
+        null !== $percentileLatency && $self['percentileLatency'] = $percentileLatency;
+        null !== $proberLocation && $self['proberLocation'] = $proberLocation;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Data implements BaseModel
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
-        $obj = clone $this;
-        $obj['globalIP'] = $globalIP;
+        $self = clone $this;
+        $self['globalIP'] = $globalIP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class Data implements BaseModel
      */
     public function withMeanLatency(MeanLatency|array $meanLatency): self
     {
-        $obj = clone $this;
-        $obj['meanLatency'] = $meanLatency;
+        $self = clone $this;
+        $self['meanLatency'] = $meanLatency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class Data implements BaseModel
     public function withPercentileLatency(
         PercentileLatency|array $percentileLatency
     ): self {
-        $obj = clone $this;
-        $obj['percentileLatency'] = $percentileLatency;
+        $self = clone $this;
+        $self['percentileLatency'] = $percentileLatency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data implements BaseModel
     public function withProberLocation(
         ProberLocation|array $proberLocation
     ): self {
-        $obj = clone $this;
-        $obj['proberLocation'] = $proberLocation;
+        $self = clone $this;
+        $self['proberLocation'] = $proberLocation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

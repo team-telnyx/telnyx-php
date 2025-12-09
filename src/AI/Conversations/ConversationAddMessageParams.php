@@ -100,35 +100,35 @@ final class ConversationAddMessageParams implements BaseModel
         ?array $toolCalls = null,
         mixed $toolChoice = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['role'] = $role;
+        $self['role'] = $role;
 
-        null !== $content && $obj['content'] = $content;
-        null !== $metadata && $obj['metadata'] = $metadata;
-        null !== $name && $obj['name'] = $name;
-        null !== $sentAt && $obj['sentAt'] = $sentAt;
-        null !== $toolCallID && $obj['toolCallID'] = $toolCallID;
-        null !== $toolCalls && $obj['toolCalls'] = $toolCalls;
-        null !== $toolChoice && $obj['toolChoice'] = $toolChoice;
+        null !== $content && $self['content'] = $content;
+        null !== $metadata && $self['metadata'] = $metadata;
+        null !== $name && $self['name'] = $name;
+        null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $toolCallID && $self['toolCallID'] = $toolCallID;
+        null !== $toolCalls && $self['toolCalls'] = $toolCalls;
+        null !== $toolChoice && $self['toolChoice'] = $toolChoice;
 
-        return $obj;
+        return $self;
     }
 
     public function withRole(string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,34 +136,34 @@ final class ConversationAddMessageParams implements BaseModel
      */
     public function withMetadata(array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
-        $obj = clone $this;
-        $obj['sentAt'] = $sentAt;
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withToolCallID(string $toolCallID): self
     {
-        $obj = clone $this;
-        $obj['toolCallID'] = $toolCallID;
+        $self = clone $this;
+        $self['toolCallID'] = $toolCallID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +171,10 @@ final class ConversationAddMessageParams implements BaseModel
      */
     public function withToolCalls(array $toolCalls): self
     {
-        $obj = clone $this;
-        $obj['toolCalls'] = $toolCalls;
+        $self = clone $this;
+        $self['toolCalls'] = $toolCalls;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,9 +182,9 @@ final class ConversationAddMessageParams implements BaseModel
      */
     public function withToolChoice(mixed $toolChoice): self
     {
-        $obj = clone $this;
-        $obj['toolChoice'] = $toolChoice;
+        $self = clone $this;
+        $self['toolChoice'] = $toolChoice;
 
-        return $obj;
+        return $self;
     }
 }

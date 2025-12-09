@@ -54,29 +54,29 @@ final class CommentCreateParams implements BaseModel
         ?string $commentRecordID = null,
         CommentRecordType|string|null $commentRecordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $body && $obj['body'] = $body;
-        null !== $commentRecordID && $obj['commentRecordID'] = $commentRecordID;
-        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
+        null !== $body && $self['body'] = $body;
+        null !== $commentRecordID && $self['commentRecordID'] = $commentRecordID;
+        null !== $commentRecordType && $self['commentRecordType'] = $commentRecordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     public function withCommentRecordID(string $commentRecordID): self
     {
-        $obj = clone $this;
-        $obj['commentRecordID'] = $commentRecordID;
+        $self = clone $this;
+        $self['commentRecordID'] = $commentRecordID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class CommentCreateParams implements BaseModel
     public function withCommentRecordType(
         CommentRecordType|string $commentRecordType
     ): self {
-        $obj = clone $this;
-        $obj['commentRecordType'] = $commentRecordType;
+        $self = clone $this;
+        $self['commentRecordType'] = $commentRecordType;
 
-        return $obj;
+        return $self;
     }
 }

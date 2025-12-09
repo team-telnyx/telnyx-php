@@ -68,13 +68,13 @@ final class Handoff implements BaseModel
         array $aiAssistants,
         VoiceMode|string|null $voiceMode = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['aiAssistants'] = $aiAssistants;
+        $self['aiAssistants'] = $aiAssistants;
 
-        null !== $voiceMode && $obj['voiceMode'] = $voiceMode;
+        null !== $voiceMode && $self['voiceMode'] = $voiceMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class Handoff implements BaseModel
      */
     public function withAIAssistants(array $aiAssistants): self
     {
-        $obj = clone $this;
-        $obj['aiAssistants'] = $aiAssistants;
+        $self = clone $this;
+        $self['aiAssistants'] = $aiAssistants;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +97,9 @@ final class Handoff implements BaseModel
      */
     public function withVoiceMode(VoiceMode|string $voiceMode): self
     {
-        $obj = clone $this;
-        $obj['voiceMode'] = $voiceMode;
+        $self = clone $this;
+        $self['voiceMode'] = $voiceMode;
 
-        return $obj;
+        return $self;
     }
 }

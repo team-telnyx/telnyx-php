@@ -44,20 +44,20 @@ final class DataLimit implements BaseModel
         ?string $amount = null,
         Unit|string|null $unit = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj['amount'] = $amount;
-        null !== $unit && $obj['unit'] = $unit;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $unit && $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,9 +65,9 @@ final class DataLimit implements BaseModel
      */
     public function withUnit(Unit|string $unit): self
     {
-        $obj = clone $this;
-        $obj['unit'] = $unit;
+        $self = clone $this;
+        $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 }

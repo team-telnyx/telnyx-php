@@ -75,12 +75,12 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
         Action|string $action,
         PhoneNumberRange|array $phoneNumberRange
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['action'] = $action;
-        $obj['phoneNumberRange'] = $phoneNumberRange;
+        $self['action'] = $action;
+        $self['phoneNumberRange'] = $phoneNumberRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,9 +104,9 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberRange'] = $phoneNumberRange;
+        $self = clone $this;
+        $self['phoneNumberRange'] = $phoneNumberRange;
 
-        return $obj;
+        return $self;
     }
 }

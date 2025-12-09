@@ -162,21 +162,21 @@ final class ActionStartStreamingParams implements BaseModel
         StreamTrack|string|null $streamTrack = null,
         ?string $streamURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $dialogflowConfig && $obj['dialogflowConfig'] = $dialogflowConfig;
-        null !== $enableDialogflow && $obj['enableDialogflow'] = $enableDialogflow;
-        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
-        null !== $streamBidirectionalSamplingRate && $obj['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
-        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
-        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
-        null !== $streamURL && $obj['streamURL'] = $streamURL;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $dialogflowConfig && $self['dialogflowConfig'] = $dialogflowConfig;
+        null !== $enableDialogflow && $self['enableDialogflow'] = $enableDialogflow;
+        null !== $streamBidirectionalCodec && $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $self['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalSamplingRate && $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
+        null !== $streamBidirectionalTargetLegs && $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        null !== $streamCodec && $self['streamCodec'] = $streamCodec;
+        null !== $streamTrack && $self['streamTrack'] = $streamTrack;
+        null !== $streamURL && $self['streamURL'] = $streamURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +184,10 @@ final class ActionStartStreamingParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class ActionStartStreamingParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class ActionStartStreamingParams implements BaseModel
     public function withDialogflowConfig(
         DialogflowConfig|array $dialogflowConfig
     ): self {
-        $obj = clone $this;
-        $obj['dialogflowConfig'] = $dialogflowConfig;
+        $self = clone $this;
+        $self['dialogflowConfig'] = $dialogflowConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class ActionStartStreamingParams implements BaseModel
      */
     public function withEnableDialogflow(bool $enableDialogflow): self
     {
-        $obj = clone $this;
-        $obj['enableDialogflow'] = $enableDialogflow;
+        $self = clone $this;
+        $self['enableDialogflow'] = $enableDialogflow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamBidirectionalCodec(
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        $self = clone $this;
+        $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamBidirectionalMode(
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        $self = clone $this;
+        $self['streamBidirectionalMode'] = $streamBidirectionalMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamBidirectionalSamplingRate(
         int $streamBidirectionalSamplingRate
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
+        $self = clone $this;
+        $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamBidirectionalTargetLegs(
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        $self = clone $this;
+        $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +289,10 @@ final class ActionStartStreamingParams implements BaseModel
      */
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
-        $obj = clone $this;
-        $obj['streamCodec'] = $streamCodec;
+        $self = clone $this;
+        $self['streamCodec'] = $streamCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,10 +302,10 @@ final class ActionStartStreamingParams implements BaseModel
      */
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
-        $obj = clone $this;
-        $obj['streamTrack'] = $streamTrack;
+        $self = clone $this;
+        $self['streamTrack'] = $streamTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,9 +313,9 @@ final class ActionStartStreamingParams implements BaseModel
      */
     public function withStreamURL(string $streamURL): self
     {
-        $obj = clone $this;
-        $obj['streamURL'] = $streamURL;
+        $self = clone $this;
+        $self['streamURL'] = $streamURL;
 
-        return $obj;
+        return $self;
     }
 }

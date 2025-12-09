@@ -46,12 +46,12 @@ final class EndedBy implements BaseModel
         ?string $callControlID = null,
         ?string $callSessionID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class EndedBy implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class EndedBy implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -50,11 +50,11 @@ final class SubNumberOrderUpdateParams implements BaseModel
      */
     public static function with(?array $regulatoryRequirements = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,9 +65,9 @@ final class SubNumberOrderUpdateParams implements BaseModel
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj['regulatoryRequirements'] = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 }

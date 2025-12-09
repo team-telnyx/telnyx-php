@@ -83,15 +83,15 @@ final class Data implements BaseModel
         ?string $requirementStatus = null,
         RequirementType|array|null $requirementType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirementStatus && $obj['requirementStatus'] = $requirementStatus;
-        null !== $requirementType && $obj['requirementType'] = $requirementType;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementStatus && $self['requirementStatus'] = $requirementStatus;
+        null !== $requirementType && $self['requirementType'] = $requirementType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class Data implements BaseModel
      */
     public function withFieldType(FieldType|string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Data implements BaseModel
      */
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj['fieldValue'] = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class Data implements BaseModel
      */
     public function withRequirementStatus(string $requirementStatus): self
     {
-        $obj = clone $this;
-        $obj['requirementStatus'] = $requirementStatus;
+        $self = clone $this;
+        $self['requirementStatus'] = $requirementStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class Data implements BaseModel
     public function withRequirementType(
         RequirementType|array $requirementType
     ): self {
-        $obj = clone $this;
-        $obj['requirementType'] = $requirementType;
+        $self = clone $this;
+        $self['requirementType'] = $requirementType;
 
-        return $obj;
+        return $self;
     }
 }

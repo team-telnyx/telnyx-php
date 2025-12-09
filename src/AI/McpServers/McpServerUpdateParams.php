@@ -73,25 +73,25 @@ final class McpServerUpdateParams implements BaseModel
         ?string $type = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $allowedTools && $obj['allowedTools'] = $allowedTools;
-        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $name && $obj['name'] = $name;
-        null !== $type && $obj['type'] = $type;
-        null !== $url && $obj['url'] = $url;
+        null !== $id && $self['id'] = $id;
+        null !== $allowedTools && $self['allowedTools'] = $allowedTools;
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $name && $self['name'] = $name;
+        null !== $type && $self['type'] = $type;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,49 +99,49 @@ final class McpServerUpdateParams implements BaseModel
      */
     public function withAllowedTools(?array $allowedTools): self
     {
-        $obj = clone $this;
-        $obj['allowedTools'] = $allowedTools;
+        $self = clone $this;
+        $self['allowedTools'] = $allowedTools;
 
-        return $obj;
+        return $self;
     }
 
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

@@ -72,14 +72,14 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
         Messaging|array|null $messaging = null,
         ?string $supportKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $messaging && $obj['messaging'] = $messaging;
-        null !== $supportKey && $obj['supportKey'] = $supportKey;
+        null !== $id && $self['id'] = $id;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $messaging && $self['messaging'] = $messaging;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
      */
     public function withMessaging(Messaging|array $messaging): self
     {
-        $obj = clone $this;
-        $obj['messaging'] = $messaging;
+        $self = clone $this;
+        $self['messaging'] = $messaging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,9 +127,9 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
      */
     public function withSupportKey(string $supportKey): self
     {
-        $obj = clone $this;
-        $obj['supportKey'] = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 }

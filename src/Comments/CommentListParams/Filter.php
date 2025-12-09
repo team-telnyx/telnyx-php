@@ -52,12 +52,12 @@ final class Filter implements BaseModel
         ?string $commentRecordID = null,
         CommentRecordType|string|null $commentRecordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $commentRecordID && $obj['commentRecordID'] = $commentRecordID;
-        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
+        null !== $commentRecordID && $self['commentRecordID'] = $commentRecordID;
+        null !== $commentRecordType && $self['commentRecordType'] = $commentRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class Filter implements BaseModel
      */
     public function withCommentRecordID(string $commentRecordID): self
     {
-        $obj = clone $this;
-        $obj['commentRecordID'] = $commentRecordID;
+        $self = clone $this;
+        $self['commentRecordID'] = $commentRecordID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,9 +79,9 @@ final class Filter implements BaseModel
     public function withCommentRecordType(
         CommentRecordType|string $commentRecordType
     ): self {
-        $obj = clone $this;
-        $obj['commentRecordType'] = $commentRecordType;
+        $self = clone $this;
+        $self['commentRecordType'] = $commentRecordType;
 
-        return $obj;
+        return $self;
     }
 }

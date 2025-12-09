@@ -79,12 +79,12 @@ final class PurchaseNewResponse implements BaseModel
      */
     public static function with(?array $data = null, ?array $errors = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj['data'] = $data;
-        null !== $errors && $obj['errors'] = $errors;
+        null !== $data && $self['data'] = $data;
+        null !== $errors && $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class PurchaseNewResponse implements BaseModel
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class PurchaseNewResponse implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 }

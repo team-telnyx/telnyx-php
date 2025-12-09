@@ -94,16 +94,16 @@ final class UploadCreateParams implements BaseModel
         ?string $locationID = null,
         Usage|string|null $usage = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['numberIDs'] = $numberIDs;
+        $self['numberIDs'] = $numberIDs;
 
-        null !== $additionalUsages && $obj['additionalUsages'] = $additionalUsages;
-        null !== $civicAddressID && $obj['civicAddressID'] = $civicAddressID;
-        null !== $locationID && $obj['locationID'] = $locationID;
-        null !== $usage && $obj['usage'] = $usage;
+        null !== $additionalUsages && $self['additionalUsages'] = $additionalUsages;
+        null !== $civicAddressID && $self['civicAddressID'] = $civicAddressID;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $usage && $self['usage'] = $usage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class UploadCreateParams implements BaseModel
      */
     public function withNumberIDs(array $numberIDs): self
     {
-        $obj = clone $this;
-        $obj['numberIDs'] = $numberIDs;
+        $self = clone $this;
+        $self['numberIDs'] = $numberIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class UploadCreateParams implements BaseModel
      */
     public function withAdditionalUsages(array $additionalUsages): self
     {
-        $obj = clone $this;
-        $obj['additionalUsages'] = $additionalUsages;
+        $self = clone $this;
+        $self['additionalUsages'] = $additionalUsages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class UploadCreateParams implements BaseModel
      */
     public function withCivicAddressID(string $civicAddressID): self
     {
-        $obj = clone $this;
-        $obj['civicAddressID'] = $civicAddressID;
+        $self = clone $this;
+        $self['civicAddressID'] = $civicAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class UploadCreateParams implements BaseModel
      */
     public function withLocationID(string $locationID): self
     {
-        $obj = clone $this;
-        $obj['locationID'] = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,9 +157,9 @@ final class UploadCreateParams implements BaseModel
      */
     public function withUsage(Usage|string $usage): self
     {
-        $obj = clone $this;
-        $obj['usage'] = $usage;
+        $self = clone $this;
+        $self['usage'] = $usage;
 
-        return $obj;
+        return $self;
     }
 }

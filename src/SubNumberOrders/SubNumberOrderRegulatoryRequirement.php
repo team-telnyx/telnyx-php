@@ -51,13 +51,13 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
         ?string $recordType = null,
         ?string $requirementID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirementID && $obj['requirementID'] = $requirementID;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementID && $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,18 +65,18 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
      */
     public function withFieldType(FieldType|string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
      */
     public function withRequirementID(string $requirementID): self
     {
-        $obj = clone $this;
-        $obj['requirementID'] = $requirementID;
+        $self = clone $this;
+        $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -84,15 +84,15 @@ final class VerificationTriggerSMSParams implements BaseModel
         ?string $customCode = null,
         ?int $timeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        null !== $customCode && $obj['customCode'] = $customCode;
-        null !== $timeoutSecs && $obj['timeoutSecs'] = $timeoutSecs;
+        null !== $customCode && $self['customCode'] = $customCode;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withCustomCode(?string $customCode): self
     {
-        $obj = clone $this;
-        $obj['customCode'] = $customCode;
+        $self = clone $this;
+        $self['customCode'] = $customCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,9 +133,9 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['timeoutSecs'] = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

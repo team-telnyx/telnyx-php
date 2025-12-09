@@ -266,32 +266,32 @@ final class IPConnection implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $active && $obj['active'] = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $callCostInWebhooks && $obj['callCostInWebhooks'] = $callCostInWebhooks;
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $defaultOnHoldComfortNoiseEnabled && $obj['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $encodeContactHeaderEnabled && $obj['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
-        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $onnetT38PassthroughEnabled && $obj['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
-        null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $rtcpSettings && $obj['rtcpSettings'] = $rtcpSettings;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $transportProtocol && $obj['transportProtocol'] = $transportProtocol;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        null !== $id && $self['id'] = $id;
+        null !== $active && $self['active'] = $active;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
+        null !== $dtmfType && $self['dtmfType'] = $dtmfType;
+        null !== $encodeContactHeaderEnabled && $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
+        null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $onnetT38PassthroughEnabled && $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $rtcpSettings && $self['rtcpSettings'] = $rtcpSettings;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $transportProtocol && $self['transportProtocol'] = $transportProtocol;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -299,10 +299,10 @@ final class IPConnection implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,10 +310,10 @@ final class IPConnection implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -324,10 +324,10 @@ final class IPConnection implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -335,18 +335,18 @@ final class IPConnection implements BaseModel
      */
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
-        $obj = clone $this;
-        $obj['callCostInWebhooks'] = $callCostInWebhooks;
+        $self = clone $this;
+        $self['callCostInWebhooks'] = $callCostInWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     public function withConnectionName(string $connectionName): self
     {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -354,10 +354,10 @@ final class IPConnection implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -366,10 +366,10 @@ final class IPConnection implements BaseModel
     public function withDefaultOnHoldComfortNoiseEnabled(
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
-        $obj = clone $this;
-        $obj['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
+        $self = clone $this;
+        $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -379,10 +379,10 @@ final class IPConnection implements BaseModel
      */
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
-        $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $self = clone $this;
+        $self['dtmfType'] = $dtmfType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -391,10 +391,10 @@ final class IPConnection implements BaseModel
     public function withEncodeContactHeaderEnabled(
         bool $encodeContactHeaderEnabled
     ): self {
-        $obj = clone $this;
-        $obj['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
+        $self = clone $this;
+        $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -405,10 +405,10 @@ final class IPConnection implements BaseModel
     public function withEncryptedMedia(
         EncryptedMedia|string|null $encryptedMedia
     ): self {
-        $obj = clone $this;
-        $obj['encryptedMedia'] = $encryptedMedia;
+        $self = clone $this;
+        $self['encryptedMedia'] = $encryptedMedia;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -435,10 +435,10 @@ final class IPConnection implements BaseModel
      */
     public function withInbound(InboundIP|array $inbound): self
     {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -447,10 +447,10 @@ final class IPConnection implements BaseModel
     public function withOnnetT38PassthroughEnabled(
         bool $onnetT38PassthroughEnabled
     ): self {
-        $obj = clone $this;
-        $obj['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
+        $self = clone $this;
+        $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -471,10 +471,10 @@ final class IPConnection implements BaseModel
      */
     public function withOutbound(OutboundIP|array $outbound): self
     {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -482,10 +482,10 @@ final class IPConnection implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -498,10 +498,10 @@ final class IPConnection implements BaseModel
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings
     ): self {
-        $obj = clone $this;
-        $obj['rtcpSettings'] = $rtcpSettings;
+        $self = clone $this;
+        $self['rtcpSettings'] = $rtcpSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -511,10 +511,10 @@ final class IPConnection implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -525,10 +525,10 @@ final class IPConnection implements BaseModel
     public function withTransportProtocol(
         TransportProtocol|string $transportProtocol
     ): self {
-        $obj = clone $this;
-        $obj['transportProtocol'] = $transportProtocol;
+        $self = clone $this;
+        $self['transportProtocol'] = $transportProtocol;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -536,10 +536,10 @@ final class IPConnection implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -550,10 +550,10 @@ final class IPConnection implements BaseModel
     public function withWebhookAPIVersion(
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
-        $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $self = clone $this;
+        $self['webhookAPIVersion'] = $webhookAPIVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -562,10 +562,10 @@ final class IPConnection implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -573,10 +573,10 @@ final class IPConnection implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -584,9 +584,9 @@ final class IPConnection implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

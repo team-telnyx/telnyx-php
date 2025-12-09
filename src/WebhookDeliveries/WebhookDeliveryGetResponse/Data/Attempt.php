@@ -83,15 +83,15 @@ final class Attempt implements BaseModel
         ?\DateTimeInterface $startedAt = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $errors && $obj['errors'] = $errors;
-        null !== $finishedAt && $obj['finishedAt'] = $finishedAt;
-        null !== $http && $obj['http'] = $http;
-        null !== $startedAt && $obj['startedAt'] = $startedAt;
-        null !== $status && $obj['status'] = $status;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        null !== $http && $self['http'] = $http;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class Attempt implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Attempt implements BaseModel
      */
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
-        $obj = clone $this;
-        $obj['finishedAt'] = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Attempt implements BaseModel
      */
     public function withHTTP(HTTP|array $http): self
     {
-        $obj = clone $this;
-        $obj['http'] = $http;
+        $self = clone $this;
+        $self['http'] = $http;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class Attempt implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj['startedAt'] = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,9 +148,9 @@ final class Attempt implements BaseModel
     public function withStatus(
         Status|string $status,
     ): self {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

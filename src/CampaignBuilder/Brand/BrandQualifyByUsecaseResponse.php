@@ -89,17 +89,17 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
         ?float $quarterlyFee = null,
         ?string $usecase = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $annualFee && $obj['annualFee'] = $annualFee;
-        null !== $maxSubUsecases && $obj['maxSubUsecases'] = $maxSubUsecases;
-        null !== $minSubUsecases && $obj['minSubUsecases'] = $minSubUsecases;
-        null !== $mnoMetadata && $obj['mnoMetadata'] = $mnoMetadata;
-        null !== $monthlyFee && $obj['monthlyFee'] = $monthlyFee;
-        null !== $quarterlyFee && $obj['quarterlyFee'] = $quarterlyFee;
-        null !== $usecase && $obj['usecase'] = $usecase;
+        null !== $annualFee && $self['annualFee'] = $annualFee;
+        null !== $maxSubUsecases && $self['maxSubUsecases'] = $maxSubUsecases;
+        null !== $minSubUsecases && $self['minSubUsecases'] = $minSubUsecases;
+        null !== $mnoMetadata && $self['mnoMetadata'] = $mnoMetadata;
+        null !== $monthlyFee && $self['monthlyFee'] = $monthlyFee;
+        null !== $quarterlyFee && $self['quarterlyFee'] = $quarterlyFee;
+        null !== $usecase && $self['usecase'] = $usecase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      */
     public function withAnnualFee(float $annualFee): self
     {
-        $obj = clone $this;
-        $obj['annualFee'] = $annualFee;
+        $self = clone $this;
+        $self['annualFee'] = $annualFee;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      */
     public function withMaxSubUsecases(int $maxSubUsecases): self
     {
-        $obj = clone $this;
-        $obj['maxSubUsecases'] = $maxSubUsecases;
+        $self = clone $this;
+        $self['maxSubUsecases'] = $maxSubUsecases;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      */
     public function withMinSubUsecases(int $minSubUsecases): self
     {
-        $obj = clone $this;
-        $obj['minSubUsecases'] = $minSubUsecases;
+        $self = clone $this;
+        $self['minSubUsecases'] = $minSubUsecases;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      */
     public function withMnoMetadata(array $mnoMetadata): self
     {
-        $obj = clone $this;
-        $obj['mnoMetadata'] = $mnoMetadata;
+        $self = clone $this;
+        $self['mnoMetadata'] = $mnoMetadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      */
     public function withMonthlyFee(float $monthlyFee): self
     {
-        $obj = clone $this;
-        $obj['monthlyFee'] = $monthlyFee;
+        $self = clone $this;
+        $self['monthlyFee'] = $monthlyFee;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      */
     public function withQuarterlyFee(float $quarterlyFee): self
     {
-        $obj = clone $this;
-        $obj['quarterlyFee'] = $quarterlyFee;
+        $self = clone $this;
+        $self['quarterlyFee'] = $quarterlyFee;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,9 +175,9 @@ final class BrandQualifyByUsecaseResponse implements BaseModel
      */
     public function withUsecase(string $usecase): self
     {
-        $obj = clone $this;
-        $obj['usecase'] = $usecase;
+        $self = clone $this;
+        $self['usecase'] = $usecase;
 
-        return $obj;
+        return $self;
     }
 }

@@ -71,14 +71,14 @@ final class Filters implements BaseModel
         ?array $customerReferenceIn = null,
         ?array $statusIn = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAtGt && $obj['createdAtGt'] = $createdAtGt;
-        null !== $createdAtLt && $obj['createdAtLt'] = $createdAtLt;
-        null !== $customerReferenceIn && $obj['customerReferenceIn'] = $customerReferenceIn;
-        null !== $statusIn && $obj['statusIn'] = $statusIn;
+        null !== $createdAtGt && $self['createdAtGt'] = $createdAtGt;
+        null !== $createdAtLt && $self['createdAtLt'] = $createdAtLt;
+        null !== $customerReferenceIn && $self['customerReferenceIn'] = $customerReferenceIn;
+        null !== $statusIn && $self['statusIn'] = $statusIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class Filters implements BaseModel
      */
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
-        $obj = clone $this;
-        $obj['createdAtGt'] = $createdAtGt;
+        $self = clone $this;
+        $self['createdAtGt'] = $createdAtGt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class Filters implements BaseModel
      */
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
-        $obj = clone $this;
-        $obj['createdAtLt'] = $createdAtLt;
+        $self = clone $this;
+        $self['createdAtLt'] = $createdAtLt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class Filters implements BaseModel
      */
     public function withCustomerReferenceIn(array $customerReferenceIn): self
     {
-        $obj = clone $this;
-        $obj['customerReferenceIn'] = $customerReferenceIn;
+        $self = clone $this;
+        $self['customerReferenceIn'] = $customerReferenceIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class Filters implements BaseModel
      */
     public function withStatusIn(array $statusIn): self
     {
-        $obj = clone $this;
-        $obj['statusIn'] = $statusIn;
+        $self = clone $this;
+        $self['statusIn'] = $statusIn;
 
-        return $obj;
+        return $self;
     }
 }

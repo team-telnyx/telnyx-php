@@ -165,23 +165,23 @@ final class UsageReportListParams implements BaseModel
         ?string $startDate = null,
         ?string $authorizationBearer = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['dimensions'] = $dimensions;
-        $obj['metrics'] = $metrics;
-        $obj['product'] = $product;
+        $self['dimensions'] = $dimensions;
+        $self['metrics'] = $metrics;
+        $self['product'] = $product;
 
-        null !== $dateRange && $obj['dateRange'] = $dateRange;
-        null !== $endDate && $obj['endDate'] = $endDate;
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $format && $obj['format'] = $format;
-        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
-        null !== $page && $obj['page'] = $page;
-        null !== $sort && $obj['sort'] = $sort;
-        null !== $startDate && $obj['startDate'] = $startDate;
-        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
+        null !== $dateRange && $self['dateRange'] = $dateRange;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $format && $self['format'] = $format;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
+        null !== $startDate && $self['startDate'] = $startDate;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +191,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withDimensions(array $dimensions): self
     {
-        $obj = clone $this;
-        $obj['dimensions'] = $dimensions;
+        $self = clone $this;
+        $self['dimensions'] = $dimensions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,10 +204,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withMetrics(array $metrics): self
     {
-        $obj = clone $this;
-        $obj['metrics'] = $metrics;
+        $self = clone $this;
+        $self['metrics'] = $metrics;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +215,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +226,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withDateRange(string $dateRange): self
     {
-        $obj = clone $this;
-        $obj['dateRange'] = $dateRange;
+        $self = clone $this;
+        $self['dateRange'] = $dateRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +237,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj['endDate'] = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withFilter(string $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withFormat(Format|string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -272,10 +272,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withManagedAccounts(bool $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj['managedAccounts'] = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,10 +285,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,10 +298,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withSort(array $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -309,10 +309,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj['startDate'] = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -320,9 +320,9 @@ final class UsageReportListParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj['authorizationBearer'] = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

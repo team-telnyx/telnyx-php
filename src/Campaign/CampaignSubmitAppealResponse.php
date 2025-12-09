@@ -36,11 +36,11 @@ final class CampaignSubmitAppealResponse implements BaseModel
      */
     public static function with(?\DateTimeInterface $appealedAt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $appealedAt && $obj['appealedAt'] = $appealedAt;
+        null !== $appealedAt && $self['appealedAt'] = $appealedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class CampaignSubmitAppealResponse implements BaseModel
      */
     public function withAppealedAt(\DateTimeInterface $appealedAt): self
     {
-        $obj = clone $this;
-        $obj['appealedAt'] = $appealedAt;
+        $self = clone $this;
+        $self['appealedAt'] = $appealedAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -53,13 +53,13 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?\DateTimeInterface $startedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endedAt && $obj['endedAt'] = $endedAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $startedAt && $obj['startedAt'] = $startedAt;
+        null !== $endedAt && $self['endedAt'] = $endedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Data implements BaseModel
      */
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
-        $obj = clone $this;
-        $obj['endedAt'] = $endedAt;
+        $self = clone $this;
+        $self['endedAt'] = $endedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Data implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj['startedAt'] = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 }

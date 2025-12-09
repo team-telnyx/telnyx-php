@@ -73,12 +73,12 @@ final class PhoneNumberBlockCreateParams implements BaseModel
         array $activationRanges,
         PhoneNumberRange|array $phoneNumberRange
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['activationRanges'] = $activationRanges;
-        $obj['phoneNumberRange'] = $phoneNumberRange;
+        $self['activationRanges'] = $activationRanges;
+        $self['phoneNumberRange'] = $phoneNumberRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      */
     public function withActivationRanges(array $activationRanges): self
     {
-        $obj = clone $this;
-        $obj['activationRanges'] = $activationRanges;
+        $self = clone $this;
+        $self['activationRanges'] = $activationRanges;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberRange'] = $phoneNumberRange;
+        $self = clone $this;
+        $self['phoneNumberRange'] = $phoneNumberRange;
 
-        return $obj;
+        return $self;
     }
 }

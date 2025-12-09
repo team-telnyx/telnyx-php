@@ -85,17 +85,17 @@ final class PortingOrderEndUserAdmin implements BaseModel
         ?string $pinPasscode = null,
         ?string $taxIdentifier = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountNumber && $obj['accountNumber'] = $accountNumber;
-        null !== $authPersonName && $obj['authPersonName'] = $authPersonName;
-        null !== $billingPhoneNumber && $obj['billingPhoneNumber'] = $billingPhoneNumber;
-        null !== $businessIdentifier && $obj['businessIdentifier'] = $businessIdentifier;
-        null !== $entityName && $obj['entityName'] = $entityName;
-        null !== $pinPasscode && $obj['pinPasscode'] = $pinPasscode;
-        null !== $taxIdentifier && $obj['taxIdentifier'] = $taxIdentifier;
+        null !== $accountNumber && $self['accountNumber'] = $accountNumber;
+        null !== $authPersonName && $self['authPersonName'] = $authPersonName;
+        null !== $billingPhoneNumber && $self['billingPhoneNumber'] = $billingPhoneNumber;
+        null !== $businessIdentifier && $self['businessIdentifier'] = $businessIdentifier;
+        null !== $entityName && $self['entityName'] = $entityName;
+        null !== $pinPasscode && $self['pinPasscode'] = $pinPasscode;
+        null !== $taxIdentifier && $self['taxIdentifier'] = $taxIdentifier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class PortingOrderEndUserAdmin implements BaseModel
      */
     public function withAccountNumber(?string $accountNumber): self
     {
-        $obj = clone $this;
-        $obj['accountNumber'] = $accountNumber;
+        $self = clone $this;
+        $self['accountNumber'] = $accountNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class PortingOrderEndUserAdmin implements BaseModel
      */
     public function withAuthPersonName(?string $authPersonName): self
     {
-        $obj = clone $this;
-        $obj['authPersonName'] = $authPersonName;
+        $self = clone $this;
+        $self['authPersonName'] = $authPersonName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class PortingOrderEndUserAdmin implements BaseModel
      */
     public function withBillingPhoneNumber(?string $billingPhoneNumber): self
     {
-        $obj = clone $this;
-        $obj['billingPhoneNumber'] = $billingPhoneNumber;
+        $self = clone $this;
+        $self['billingPhoneNumber'] = $billingPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class PortingOrderEndUserAdmin implements BaseModel
      */
     public function withBusinessIdentifier(?string $businessIdentifier): self
     {
-        $obj = clone $this;
-        $obj['businessIdentifier'] = $businessIdentifier;
+        $self = clone $this;
+        $self['businessIdentifier'] = $businessIdentifier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class PortingOrderEndUserAdmin implements BaseModel
      */
     public function withEntityName(?string $entityName): self
     {
-        $obj = clone $this;
-        $obj['entityName'] = $entityName;
+        $self = clone $this;
+        $self['entityName'] = $entityName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class PortingOrderEndUserAdmin implements BaseModel
      */
     public function withPinPasscode(?string $pinPasscode): self
     {
-        $obj = clone $this;
-        $obj['pinPasscode'] = $pinPasscode;
+        $self = clone $this;
+        $self['pinPasscode'] = $pinPasscode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,9 +169,9 @@ final class PortingOrderEndUserAdmin implements BaseModel
      */
     public function withTaxIdentifier(?string $taxIdentifier): self
     {
-        $obj = clone $this;
-        $obj['taxIdentifier'] = $taxIdentifier;
+        $self = clone $this;
+        $self['taxIdentifier'] = $taxIdentifier;
 
-        return $obj;
+        return $self;
     }
 }

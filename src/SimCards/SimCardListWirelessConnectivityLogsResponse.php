@@ -69,12 +69,12 @@ final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
         ?array $data = null,
         PaginationMeta|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj['data'] = $data;
-        null !== $meta && $obj['meta'] = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
      */
     public function withMeta(PaginationMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj['meta'] = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

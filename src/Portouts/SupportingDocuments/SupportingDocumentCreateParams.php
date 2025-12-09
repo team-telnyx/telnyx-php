@@ -48,11 +48,11 @@ final class SupportingDocumentCreateParams implements BaseModel
      */
     public static function with(?array $documents = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $documents && $obj['documents'] = $documents;
+        null !== $documents && $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,9 +62,9 @@ final class SupportingDocumentCreateParams implements BaseModel
      */
     public function withDocuments(array $documents): self
     {
-        $obj = clone $this;
-        $obj['documents'] = $documents;
+        $self = clone $this;
+        $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 }

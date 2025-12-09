@@ -361,43 +361,43 @@ final class RequestUpdateParams implements BaseModel
         ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['additionalInformation'] = $additionalInformation;
-        $obj['businessAddr1'] = $businessAddr1;
-        $obj['businessCity'] = $businessCity;
-        $obj['businessContactEmail'] = $businessContactEmail;
-        $obj['businessContactFirstName'] = $businessContactFirstName;
-        $obj['businessContactLastName'] = $businessContactLastName;
-        $obj['businessContactPhone'] = $businessContactPhone;
-        $obj['businessName'] = $businessName;
-        $obj['businessState'] = $businessState;
-        $obj['businessZip'] = $businessZip;
-        $obj['corporateWebsite'] = $corporateWebsite;
-        $obj['isvReseller'] = $isvReseller;
-        $obj['messageVolume'] = $messageVolume;
-        $obj['optInWorkflow'] = $optInWorkflow;
-        $obj['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
-        $obj['phoneNumbers'] = $phoneNumbers;
-        $obj['productionMessageContent'] = $productionMessageContent;
-        $obj['useCase'] = $useCase;
-        $obj['useCaseSummary'] = $useCaseSummary;
+        $self['additionalInformation'] = $additionalInformation;
+        $self['businessAddr1'] = $businessAddr1;
+        $self['businessCity'] = $businessCity;
+        $self['businessContactEmail'] = $businessContactEmail;
+        $self['businessContactFirstName'] = $businessContactFirstName;
+        $self['businessContactLastName'] = $businessContactLastName;
+        $self['businessContactPhone'] = $businessContactPhone;
+        $self['businessName'] = $businessName;
+        $self['businessState'] = $businessState;
+        $self['businessZip'] = $businessZip;
+        $self['corporateWebsite'] = $corporateWebsite;
+        $self['isvReseller'] = $isvReseller;
+        $self['messageVolume'] = $messageVolume;
+        $self['optInWorkflow'] = $optInWorkflow;
+        $self['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
+        $self['phoneNumbers'] = $phoneNumbers;
+        $self['productionMessageContent'] = $productionMessageContent;
+        $self['useCase'] = $useCase;
+        $self['useCaseSummary'] = $useCaseSummary;
 
-        null !== $ageGatedContent && $obj['ageGatedContent'] = $ageGatedContent;
-        null !== $businessAddr2 && $obj['businessAddr2'] = $businessAddr2;
-        null !== $businessRegistrationCountry && $obj['businessRegistrationCountry'] = $businessRegistrationCountry;
-        null !== $businessRegistrationNumber && $obj['businessRegistrationNumber'] = $businessRegistrationNumber;
-        null !== $businessRegistrationType && $obj['businessRegistrationType'] = $businessRegistrationType;
-        null !== $doingBusinessAs && $obj['doingBusinessAs'] = $doingBusinessAs;
-        null !== $entityType && $obj['entityType'] = $entityType;
-        null !== $helpMessageResponse && $obj['helpMessageResponse'] = $helpMessageResponse;
-        null !== $optInConfirmationResponse && $obj['optInConfirmationResponse'] = $optInConfirmationResponse;
-        null !== $optInKeywords && $obj['optInKeywords'] = $optInKeywords;
-        null !== $privacyPolicyURL && $obj['privacyPolicyURL'] = $privacyPolicyURL;
-        null !== $termsAndConditionURL && $obj['termsAndConditionURL'] = $termsAndConditionURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $ageGatedContent && $self['ageGatedContent'] = $ageGatedContent;
+        null !== $businessAddr2 && $self['businessAddr2'] = $businessAddr2;
+        null !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
+        null !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
+        null !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
+        null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
+        null !== $entityType && $self['entityType'] = $entityType;
+        null !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;
+        null !== $optInConfirmationResponse && $self['optInConfirmationResponse'] = $optInConfirmationResponse;
+        null !== $optInKeywords && $self['optInKeywords'] = $optInKeywords;
+        null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
+        null !== $termsAndConditionURL && $self['termsAndConditionURL'] = $termsAndConditionURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,10 +406,10 @@ final class RequestUpdateParams implements BaseModel
     public function withAdditionalInformation(
         string $additionalInformation
     ): self {
-        $obj = clone $this;
-        $obj['additionalInformation'] = $additionalInformation;
+        $self = clone $this;
+        $self['additionalInformation'] = $additionalInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -417,10 +417,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessAddr1(string $businessAddr1): self
     {
-        $obj = clone $this;
-        $obj['businessAddr1'] = $businessAddr1;
+        $self = clone $this;
+        $self['businessAddr1'] = $businessAddr1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -428,10 +428,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessCity(string $businessCity): self
     {
-        $obj = clone $this;
-        $obj['businessCity'] = $businessCity;
+        $self = clone $this;
+        $self['businessCity'] = $businessCity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,10 +439,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessContactEmail(string $businessContactEmail): self
     {
-        $obj = clone $this;
-        $obj['businessContactEmail'] = $businessContactEmail;
+        $self = clone $this;
+        $self['businessContactEmail'] = $businessContactEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -451,10 +451,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessContactFirstName(
         string $businessContactFirstName
     ): self {
-        $obj = clone $this;
-        $obj['businessContactFirstName'] = $businessContactFirstName;
+        $self = clone $this;
+        $self['businessContactFirstName'] = $businessContactFirstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -463,10 +463,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessContactLastName(
         string $businessContactLastName
     ): self {
-        $obj = clone $this;
-        $obj['businessContactLastName'] = $businessContactLastName;
+        $self = clone $this;
+        $self['businessContactLastName'] = $businessContactLastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -474,10 +474,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessContactPhone(string $businessContactPhone): self
     {
-        $obj = clone $this;
-        $obj['businessContactPhone'] = $businessContactPhone;
+        $self = clone $this;
+        $self['businessContactPhone'] = $businessContactPhone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -485,10 +485,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessName(string $businessName): self
     {
-        $obj = clone $this;
-        $obj['businessName'] = $businessName;
+        $self = clone $this;
+        $self['businessName'] = $businessName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -496,10 +496,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessState(string $businessState): self
     {
-        $obj = clone $this;
-        $obj['businessState'] = $businessState;
+        $self = clone $this;
+        $self['businessState'] = $businessState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -507,10 +507,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessZip(string $businessZip): self
     {
-        $obj = clone $this;
-        $obj['businessZip'] = $businessZip;
+        $self = clone $this;
+        $self['businessZip'] = $businessZip;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -518,10 +518,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withCorporateWebsite(string $corporateWebsite): self
     {
-        $obj = clone $this;
-        $obj['corporateWebsite'] = $corporateWebsite;
+        $self = clone $this;
+        $self['corporateWebsite'] = $corporateWebsite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -529,10 +529,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withIsvReseller(string $isvReseller): self
     {
-        $obj = clone $this;
-        $obj['isvReseller'] = $isvReseller;
+        $self = clone $this;
+        $self['isvReseller'] = $isvReseller;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -542,10 +542,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withMessageVolume(Volume|string $messageVolume): self
     {
-        $obj = clone $this;
-        $obj['messageVolume'] = $messageVolume;
+        $self = clone $this;
+        $self['messageVolume'] = $messageVolume;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -553,10 +553,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withOptInWorkflow(string $optInWorkflow): self
     {
-        $obj = clone $this;
-        $obj['optInWorkflow'] = $optInWorkflow;
+        $self = clone $this;
+        $self['optInWorkflow'] = $optInWorkflow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -567,10 +567,10 @@ final class RequestUpdateParams implements BaseModel
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
     ): self {
-        $obj = clone $this;
-        $obj['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
+        $self = clone $this;
+        $self['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -580,10 +580,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -592,10 +592,10 @@ final class RequestUpdateParams implements BaseModel
     public function withProductionMessageContent(
         string $productionMessageContent
     ): self {
-        $obj = clone $this;
-        $obj['productionMessageContent'] = $productionMessageContent;
+        $self = clone $this;
+        $self['productionMessageContent'] = $productionMessageContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -605,10 +605,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withUseCase(UseCaseCategories|string $useCase): self
     {
-        $obj = clone $this;
-        $obj['useCase'] = $useCase;
+        $self = clone $this;
+        $self['useCase'] = $useCase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -616,10 +616,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withUseCaseSummary(string $useCaseSummary): self
     {
-        $obj = clone $this;
-        $obj['useCaseSummary'] = $useCaseSummary;
+        $self = clone $this;
+        $self['useCaseSummary'] = $useCaseSummary;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -627,10 +627,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withAgeGatedContent(bool $ageGatedContent): self
     {
-        $obj = clone $this;
-        $obj['ageGatedContent'] = $ageGatedContent;
+        $self = clone $this;
+        $self['ageGatedContent'] = $ageGatedContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -638,10 +638,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessAddr2(string $businessAddr2): self
     {
-        $obj = clone $this;
-        $obj['businessAddr2'] = $businessAddr2;
+        $self = clone $this;
+        $self['businessAddr2'] = $businessAddr2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -650,10 +650,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessRegistrationCountry(
         ?string $businessRegistrationCountry
     ): self {
-        $obj = clone $this;
-        $obj['businessRegistrationCountry'] = $businessRegistrationCountry;
+        $self = clone $this;
+        $self['businessRegistrationCountry'] = $businessRegistrationCountry;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -662,10 +662,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessRegistrationNumber(
         ?string $businessRegistrationNumber
     ): self {
-        $obj = clone $this;
-        $obj['businessRegistrationNumber'] = $businessRegistrationNumber;
+        $self = clone $this;
+        $self['businessRegistrationNumber'] = $businessRegistrationNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -674,10 +674,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessRegistrationType(
         ?string $businessRegistrationType
     ): self {
-        $obj = clone $this;
-        $obj['businessRegistrationType'] = $businessRegistrationType;
+        $self = clone $this;
+        $self['businessRegistrationType'] = $businessRegistrationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -685,10 +685,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withDoingBusinessAs(?string $doingBusinessAs): self
     {
-        $obj = clone $this;
-        $obj['doingBusinessAs'] = $doingBusinessAs;
+        $self = clone $this;
+        $self['doingBusinessAs'] = $doingBusinessAs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -699,10 +699,10 @@ final class RequestUpdateParams implements BaseModel
     public function withEntityType(
         TollFreeVerificationEntityType|string|null $entityType
     ): self {
-        $obj = clone $this;
-        $obj['entityType'] = $entityType;
+        $self = clone $this;
+        $self['entityType'] = $entityType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -710,10 +710,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withHelpMessageResponse(?string $helpMessageResponse): self
     {
-        $obj = clone $this;
-        $obj['helpMessageResponse'] = $helpMessageResponse;
+        $self = clone $this;
+        $self['helpMessageResponse'] = $helpMessageResponse;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -722,10 +722,10 @@ final class RequestUpdateParams implements BaseModel
     public function withOptInConfirmationResponse(
         ?string $optInConfirmationResponse
     ): self {
-        $obj = clone $this;
-        $obj['optInConfirmationResponse'] = $optInConfirmationResponse;
+        $self = clone $this;
+        $self['optInConfirmationResponse'] = $optInConfirmationResponse;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -733,10 +733,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withOptInKeywords(?string $optInKeywords): self
     {
-        $obj = clone $this;
-        $obj['optInKeywords'] = $optInKeywords;
+        $self = clone $this;
+        $self['optInKeywords'] = $optInKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -744,10 +744,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withPrivacyPolicyURL(?string $privacyPolicyURL): self
     {
-        $obj = clone $this;
-        $obj['privacyPolicyURL'] = $privacyPolicyURL;
+        $self = clone $this;
+        $self['privacyPolicyURL'] = $privacyPolicyURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -756,10 +756,10 @@ final class RequestUpdateParams implements BaseModel
     public function withTermsAndConditionURL(
         ?string $termsAndConditionURL
     ): self {
-        $obj = clone $this;
-        $obj['termsAndConditionURL'] = $termsAndConditionURL;
+        $self = clone $this;
+        $self['termsAndConditionURL'] = $termsAndConditionURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -767,9 +767,9 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

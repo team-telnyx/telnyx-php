@@ -40,11 +40,11 @@ final class Filter implements BaseModel
      */
     public static function with(?array $country = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $country && $obj['country'] = $country;
+        null !== $country && $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class Filter implements BaseModel
      */
     public function withCountry(array $country): self
     {
-        $obj = clone $this;
-        $obj['country'] = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 }

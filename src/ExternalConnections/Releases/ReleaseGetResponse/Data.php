@@ -81,16 +81,16 @@ final class Data implements BaseModel
         ?string $tenantID = null,
         ?string $ticketID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $errorMessage && $obj['errorMessage'] = $errorMessage;
-        null !== $status && $obj['status'] = $status;
-        null !== $telephoneNumbers && $obj['telephoneNumbers'] = $telephoneNumbers;
-        null !== $tenantID && $obj['tenantID'] = $tenantID;
-        null !== $ticketID && $obj['ticketID'] = $ticketID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        null !== $status && $self['status'] = $status;
+        null !== $telephoneNumbers && $self['telephoneNumbers'] = $telephoneNumbers;
+        null !== $tenantID && $self['tenantID'] = $tenantID;
+        null !== $ticketID && $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Data implements BaseModel
      */
     public function withErrorMessage(string $errorMessage): self
     {
-        $obj = clone $this;
-        $obj['errorMessage'] = $errorMessage;
+        $self = clone $this;
+        $self['errorMessage'] = $errorMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,18 +135,18 @@ final class Data implements BaseModel
      */
     public function withTelephoneNumbers(array $telephoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['telephoneNumbers'] = $telephoneNumbers;
+        $self = clone $this;
+        $self['telephoneNumbers'] = $telephoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withTenantID(string $tenantID): self
     {
-        $obj = clone $this;
-        $obj['tenantID'] = $tenantID;
+        $self = clone $this;
+        $self['tenantID'] = $tenantID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,9 +154,9 @@ final class Data implements BaseModel
      */
     public function withTicketID(string $ticketID): self
     {
-        $obj = clone $this;
-        $obj['ticketID'] = $ticketID;
+        $self = clone $this;
+        $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 }

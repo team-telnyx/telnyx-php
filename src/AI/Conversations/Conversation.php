@@ -86,24 +86,24 @@ final class Conversation implements BaseModel
         array $metadata,
         ?string $name = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['lastMessageAt'] = $lastMessageAt;
-        $obj['metadata'] = $metadata;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['lastMessageAt'] = $lastMessageAt;
+        $self['metadata'] = $metadata;
 
-        null !== $name && $obj['name'] = $name;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class Conversation implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class Conversation implements BaseModel
      */
     public function withLastMessageAt(\DateTimeInterface $lastMessageAt): self
     {
-        $obj = clone $this;
-        $obj['lastMessageAt'] = $lastMessageAt;
+        $self = clone $this;
+        $self['lastMessageAt'] = $lastMessageAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,17 +135,17 @@ final class Conversation implements BaseModel
      */
     public function withMetadata(array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

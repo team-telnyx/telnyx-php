@@ -69,12 +69,12 @@ final class AssistantImportParams implements BaseModel
         string $apiKeyRef,
         Provider|string $provider
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['apiKeyRef'] = $apiKeyRef;
-        $obj['provider'] = $provider;
+        $self['apiKeyRef'] = $apiKeyRef;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class AssistantImportParams implements BaseModel
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +95,9 @@ final class AssistantImportParams implements BaseModel
      */
     public function withProvider(Provider|string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 }

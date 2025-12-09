@@ -39,12 +39,12 @@ final class Data implements BaseModel
         ?string $recordingID = null,
         ?string $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $recordingID && $obj['recordingID'] = $recordingID;
-        null !== $result && $obj['result'] = $result;
+        null !== $recordingID && $self['recordingID'] = $recordingID;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,17 +52,17 @@ final class Data implements BaseModel
      */
     public function withRecordingID(string $recordingID): self
     {
-        $obj = clone $this;
-        $obj['recordingID'] = $recordingID;
+        $self = clone $this;
+        $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

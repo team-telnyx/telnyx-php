@@ -114,19 +114,19 @@ final class Job implements BaseModel
         Type|string|null $type = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $etc && $obj['etc'] = $etc;
-        null !== $failedOperations && $obj['failedOperations'] = $failedOperations;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $successfulOperations && $obj['successfulOperations'] = $successfulOperations;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $etc && $self['etc'] = $etc;
+        null !== $failedOperations && $self['failedOperations'] = $failedOperations;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $successfulOperations && $self['successfulOperations'] = $successfulOperations;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class Job implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class Job implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class Job implements BaseModel
      */
     public function withEtc(\DateTimeInterface $etc): self
     {
-        $obj = clone $this;
-        $obj['etc'] = $etc;
+        $self = clone $this;
+        $self['etc'] = $etc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class Job implements BaseModel
      */
     public function withFailedOperations(array $failedOperations): self
     {
-        $obj = clone $this;
-        $obj['failedOperations'] = $failedOperations;
+        $self = clone $this;
+        $self['failedOperations'] = $failedOperations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class Job implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -193,10 +193,10 @@ final class Job implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class Job implements BaseModel
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {
-        $obj = clone $this;
-        $obj['successfulOperations'] = $successfulOperations;
+        $self = clone $this;
+        $self['successfulOperations'] = $successfulOperations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class Job implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,9 +230,9 @@ final class Job implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -126,21 +126,21 @@ final class Data implements BaseModel
         Type|string|null $type = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $features && $obj['features'] = $features;
-        null !== $messagingProduct && $obj['messagingProduct'] = $messagingProduct;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $trafficType && $obj['trafficType'] = $trafficType;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $features && $self['features'] = $features;
+        null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $trafficType && $self['trafficType'] = $trafficType;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Data implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class Data implements BaseModel
      */
     public function withFeatures(Features|array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class Data implements BaseModel
      */
     public function withMessagingProduct(string $messagingProduct): self
     {
-        $obj = clone $this;
-        $obj['messagingProduct'] = $messagingProduct;
+        $self = clone $this;
+        $self['messagingProduct'] = $messagingProduct;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +203,10 @@ final class Data implements BaseModel
      */
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +214,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -227,10 +227,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +238,10 @@ final class Data implements BaseModel
      */
     public function withTrafficType(string $trafficType): self
     {
-        $obj = clone $this;
-        $obj['trafficType'] = $trafficType;
+        $self = clone $this;
+        $self['trafficType'] = $trafficType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class Data implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,9 +262,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

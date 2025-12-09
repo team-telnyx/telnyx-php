@@ -62,13 +62,13 @@ final class RunListParams implements BaseModel
         ?string $status = null,
         ?string $testSuiteRunID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj['page'] = $page;
-        null !== $status && $obj['status'] = $status;
-        null !== $testSuiteRunID && $obj['testSuiteRunID'] = $testSuiteRunID;
+        null !== $page && $self['page'] = $page;
+        null !== $status && $self['status'] = $status;
+        null !== $testSuiteRunID && $self['testSuiteRunID'] = $testSuiteRunID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class RunListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class RunListParams implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,9 +100,9 @@ final class RunListParams implements BaseModel
      */
     public function withTestSuiteRunID(string $testSuiteRunID): self
     {
-        $obj = clone $this;
-        $obj['testSuiteRunID'] = $testSuiteRunID;
+        $self = clone $this;
+        $self['testSuiteRunID'] = $testSuiteRunID;
 
-        return $obj;
+        return $self;
     }
 }

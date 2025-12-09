@@ -108,18 +108,18 @@ final class PortingOrdersActivationJob implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $activateAt && $obj['activateAt'] = $activateAt;
-        null !== $activationType && $obj['activationType'] = $activationType;
-        null !== $activationWindows && $obj['activationWindows'] = $activationWindows;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $activateAt && $self['activateAt'] = $activateAt;
+        null !== $activationType && $self['activationType'] = $activationType;
+        null !== $activationWindows && $self['activationWindows'] = $activationWindows;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withActivateAt(\DateTimeInterface $activateAt): self
     {
-        $obj = clone $this;
-        $obj['activateAt'] = $activateAt;
+        $self = clone $this;
+        $self['activateAt'] = $activateAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class PortingOrdersActivationJob implements BaseModel
     public function withActivationType(
         ActivationType|string $activationType
     ): self {
-        $obj = clone $this;
-        $obj['activationType'] = $activationType;
+        $self = clone $this;
+        $self['activationType'] = $activationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withActivationWindows(array $activationWindows): self
     {
-        $obj = clone $this;
-        $obj['activationWindows'] = $activationWindows;
+        $self = clone $this;
+        $self['activationWindows'] = $activationWindows;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,10 +202,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,9 +213,9 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

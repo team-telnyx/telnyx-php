@@ -91,14 +91,14 @@ final class Refer implements BaseModel
         ?array $customHeaders = null,
         ?array $sipHeaders = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['targets'] = $targets;
+        $self['targets'] = $targets;
 
-        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
-        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class Refer implements BaseModel
      */
     public function withTargets(array $targets): self
     {
-        $obj = clone $this;
-        $obj['targets'] = $targets;
+        $self = clone $this;
+        $self['targets'] = $targets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Refer implements BaseModel
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj['customHeaders'] = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,9 +143,9 @@ final class Refer implements BaseModel
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj['sipHeaders'] = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 }

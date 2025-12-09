@@ -48,11 +48,11 @@ final class Data implements BaseModel
      */
     public static function with(array $buckets): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['buckets'] = $buckets;
+        $self['buckets'] = $buckets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class Data implements BaseModel
      */
     public function withBuckets(array $buckets): self
     {
-        $obj = clone $this;
-        $obj['buckets'] = $buckets;
+        $self = clone $this;
+        $self['buckets'] = $buckets;
 
-        return $obj;
+        return $self;
     }
 }

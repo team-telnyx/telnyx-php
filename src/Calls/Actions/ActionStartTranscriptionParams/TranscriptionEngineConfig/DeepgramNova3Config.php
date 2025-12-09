@@ -81,14 +81,14 @@ final class DeepgramNova3Config implements BaseModel
         ?array $keywordsBoosting = null,
         Language|string|null $language = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['transcriptionModel'] = $transcriptionModel;
+        $self['transcriptionModel'] = $transcriptionModel;
 
-        null !== $keywordsBoosting && $obj['keywordsBoosting'] = $keywordsBoosting;
-        null !== $language && $obj['language'] = $language;
+        null !== $keywordsBoosting && $self['keywordsBoosting'] = $keywordsBoosting;
+        null !== $language && $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class DeepgramNova3Config implements BaseModel
     public function withTranscriptionModel(
         TranscriptionModel|string $transcriptionModel
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionModel'] = $transcriptionModel;
+        $self = clone $this;
+        $self['transcriptionModel'] = $transcriptionModel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class DeepgramNova3Config implements BaseModel
      */
     public function withKeywordsBoosting(array $keywordsBoosting): self
     {
-        $obj = clone $this;
-        $obj['keywordsBoosting'] = $keywordsBoosting;
+        $self = clone $this;
+        $self['keywordsBoosting'] = $keywordsBoosting;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class DeepgramNova3Config implements BaseModel
      */
     public function withLanguage(Language|string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 }

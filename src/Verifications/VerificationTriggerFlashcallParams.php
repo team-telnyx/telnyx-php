@@ -74,14 +74,14 @@ final class VerificationTriggerFlashcallParams implements BaseModel
         string $verifyProfileID,
         ?int $timeoutSecs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        null !== $timeoutSecs && $obj['timeoutSecs'] = $timeoutSecs;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class VerificationTriggerFlashcallParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class VerificationTriggerFlashcallParams implements BaseModel
      */
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class VerificationTriggerFlashcallParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['timeoutSecs'] = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

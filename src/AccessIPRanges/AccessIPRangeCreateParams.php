@@ -59,28 +59,28 @@ final class AccessIPRangeCreateParams implements BaseModel
         string $cidrBlock,
         ?string $description = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['cidrBlock'] = $cidrBlock;
+        $self['cidrBlock'] = $cidrBlock;
 
-        null !== $description && $obj['description'] = $description;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withCidrBlock(string $cidrBlock): self
     {
-        $obj = clone $this;
-        $obj['cidrBlock'] = $cidrBlock;
+        $self = clone $this;
+        $self['cidrBlock'] = $cidrBlock;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

@@ -43,11 +43,11 @@ final class ManagedAccountUpdateParams implements BaseModel
     public static function with(
         ?bool $managedAccountAllowCustomPricing = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $managedAccountAllowCustomPricing && $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        null !== $managedAccountAllowCustomPricing && $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -56,9 +56,9 @@ final class ManagedAccountUpdateParams implements BaseModel
     public function withManagedAccountAllowCustomPricing(
         bool $managedAccountAllowCustomPricing
     ): self {
-        $obj = clone $this;
-        $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        $self = clone $this;
+        $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 }

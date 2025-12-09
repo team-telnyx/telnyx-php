@@ -51,18 +51,18 @@ final class RunRetrieveParams implements BaseModel
      */
     public static function with(string $testID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['testID'] = $testID;
+        $self['testID'] = $testID;
 
-        return $obj;
+        return $self;
     }
 
     public function withTestID(string $testID): self
     {
-        $obj = clone $this;
-        $obj['testID'] = $testID;
+        $self = clone $this;
+        $self['testID'] = $testID;
 
-        return $obj;
+        return $self;
     }
 }

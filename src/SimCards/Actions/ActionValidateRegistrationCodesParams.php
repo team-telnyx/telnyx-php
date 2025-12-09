@@ -42,11 +42,11 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
      */
     public static function with(?array $registrationCodes = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $registrationCodes && $obj['registrationCodes'] = $registrationCodes;
+        null !== $registrationCodes && $self['registrationCodes'] = $registrationCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
      */
     public function withRegistrationCodes(array $registrationCodes): self
     {
-        $obj = clone $this;
-        $obj['registrationCodes'] = $registrationCodes;
+        $self = clone $this;
+        $self['registrationCodes'] = $registrationCodes;
 
-        return $obj;
+        return $self;
     }
 }

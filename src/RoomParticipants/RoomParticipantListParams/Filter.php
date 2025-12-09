@@ -81,15 +81,15 @@ final class Filter implements BaseModel
         DateUpdatedAt|array|null $dateUpdatedAt = null,
         ?string $sessionID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $context && $obj['context'] = $context;
-        null !== $dateJoinedAt && $obj['dateJoinedAt'] = $dateJoinedAt;
-        null !== $dateLeftAt && $obj['dateLeftAt'] = $dateLeftAt;
-        null !== $dateUpdatedAt && $obj['dateUpdatedAt'] = $dateUpdatedAt;
-        null !== $sessionID && $obj['sessionID'] = $sessionID;
+        null !== $context && $self['context'] = $context;
+        null !== $dateJoinedAt && $self['dateJoinedAt'] = $dateJoinedAt;
+        null !== $dateLeftAt && $self['dateLeftAt'] = $dateLeftAt;
+        null !== $dateUpdatedAt && $self['dateUpdatedAt'] = $dateUpdatedAt;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class Filter implements BaseModel
      */
     public function withContext(string $context): self
     {
-        $obj = clone $this;
-        $obj['context'] = $context;
+        $self = clone $this;
+        $self['context'] = $context;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Filter implements BaseModel
      */
     public function withDateJoinedAt(DateJoinedAt|array $dateJoinedAt): self
     {
-        $obj = clone $this;
-        $obj['dateJoinedAt'] = $dateJoinedAt;
+        $self = clone $this;
+        $self['dateJoinedAt'] = $dateJoinedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class Filter implements BaseModel
      */
     public function withDateLeftAt(DateLeftAt|array $dateLeftAt): self
     {
-        $obj = clone $this;
-        $obj['dateLeftAt'] = $dateLeftAt;
+        $self = clone $this;
+        $self['dateLeftAt'] = $dateLeftAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class Filter implements BaseModel
      */
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
-        $obj = clone $this;
-        $obj['dateUpdatedAt'] = $dateUpdatedAt;
+        $self = clone $this;
+        $self['dateUpdatedAt'] = $dateUpdatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,9 +153,9 @@ final class Filter implements BaseModel
      */
     public function withSessionID(string $sessionID): self
     {
-        $obj = clone $this;
-        $obj['sessionID'] = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 }

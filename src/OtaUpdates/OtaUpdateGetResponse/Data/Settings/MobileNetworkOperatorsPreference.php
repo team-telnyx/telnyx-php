@@ -53,13 +53,13 @@ final class MobileNetworkOperatorsPreference implements BaseModel
         ?string $mobileNetworkOperatorName = null,
         ?int $priority = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mobileNetworkOperatorID && $obj['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
-        null !== $mobileNetworkOperatorName && $obj['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
-        null !== $priority && $obj['priority'] = $priority;
+        null !== $mobileNetworkOperatorID && $self['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
+        null !== $mobileNetworkOperatorName && $self['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
+        null !== $priority && $self['priority'] = $priority;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     public function withMobileNetworkOperatorID(
         string $mobileNetworkOperatorID
     ): self {
-        $obj = clone $this;
-        $obj['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
+        $self = clone $this;
+        $self['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     public function withMobileNetworkOperatorName(
         string $mobileNetworkOperatorName
     ): self {
-        $obj = clone $this;
-        $obj['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
+        $self = clone $this;
+        $self['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +91,9 @@ final class MobileNetworkOperatorsPreference implements BaseModel
      */
     public function withPriority(int $priority): self
     {
-        $obj = clone $this;
-        $obj['priority'] = $priority;
+        $self = clone $this;
+        $self['priority'] = $priority;
 
-        return $obj;
+        return $self;
     }
 }

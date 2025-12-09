@@ -97,15 +97,15 @@ final class Data implements BaseModel
         ?array $errors = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['result'] = $result;
-        $obj['suggested'] = $suggested;
+        $self['result'] = $result;
+        $self['suggested'] = $suggested;
 
-        null !== $errors && $obj['errors'] = $errors;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class Data implements BaseModel
      */
     public function withResult(Result|string $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class Data implements BaseModel
      */
     public function withSuggested(Suggested|array $suggested): self
     {
-        $obj = clone $this;
-        $obj['suggested'] = $suggested;
+        $self = clone $this;
+        $self['suggested'] = $suggested;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class Data implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj['errors'] = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +163,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

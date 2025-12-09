@@ -59,28 +59,28 @@ final class AccessIPAddressCreateParams implements BaseModel
         string $ipAddress,
         ?string $description = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['ipAddress'] = $ipAddress;
+        $self['ipAddress'] = $ipAddress;
 
-        null !== $description && $obj['description'] = $description;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

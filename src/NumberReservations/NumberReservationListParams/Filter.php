@@ -66,14 +66,14 @@ final class Filter implements BaseModel
         ?string $phoneNumbersPhoneNumber = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $phoneNumbersPhoneNumber && $obj['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $phoneNumbersPhoneNumber && $self['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class Filter implements BaseModel
     public function withPhoneNumbersPhoneNumber(
         string $phoneNumbersPhoneNumber
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
+        $self = clone $this;
+        $self['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

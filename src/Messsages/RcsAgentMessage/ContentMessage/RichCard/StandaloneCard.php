@@ -89,13 +89,13 @@ final class StandaloneCard implements BaseModel
         CardOrientation|string $cardOrientation,
         ThumbnailImageAlignment|string $thumbnailImageAlignment,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['cardContent'] = $cardContent;
-        $obj['cardOrientation'] = $cardOrientation;
-        $obj['thumbnailImageAlignment'] = $thumbnailImageAlignment;
+        $self['cardContent'] = $cardContent;
+        $self['cardOrientation'] = $cardOrientation;
+        $self['thumbnailImageAlignment'] = $thumbnailImageAlignment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class StandaloneCard implements BaseModel
      */
     public function withCardContent(RcsCardContent|array $cardContent): self
     {
-        $obj = clone $this;
-        $obj['cardContent'] = $cardContent;
+        $self = clone $this;
+        $self['cardContent'] = $cardContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class StandaloneCard implements BaseModel
     public function withCardOrientation(
         CardOrientation|string $cardOrientation
     ): self {
-        $obj = clone $this;
-        $obj['cardOrientation'] = $cardOrientation;
+        $self = clone $this;
+        $self['cardOrientation'] = $cardOrientation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,9 +136,9 @@ final class StandaloneCard implements BaseModel
     public function withThumbnailImageAlignment(
         ThumbnailImageAlignment|string $thumbnailImageAlignment
     ): self {
-        $obj = clone $this;
-        $obj['thumbnailImageAlignment'] = $thumbnailImageAlignment;
+        $self = clone $this;
+        $self['thumbnailImageAlignment'] = $thumbnailImageAlignment;
 
-        return $obj;
+        return $self;
     }
 }

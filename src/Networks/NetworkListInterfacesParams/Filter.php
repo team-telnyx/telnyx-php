@@ -60,13 +60,13 @@ final class Filter implements BaseModel
         InterfaceStatus|string|null $status = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj['name'] = $name;
-        null !== $status && $obj['status'] = $status;
-        null !== $type && $obj['type'] = $type;
+        null !== $name && $self['name'] = $name;
+        null !== $status && $self['status'] = $status;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class Filter implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(InterfaceStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,9 +98,9 @@ final class Filter implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

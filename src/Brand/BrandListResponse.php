@@ -61,21 +61,21 @@ final class BrandListResponse implements BaseModel
         ?array $records = null,
         ?int $totalRecords = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj['page'] = $page;
-        null !== $records && $obj['records'] = $records;
-        null !== $totalRecords && $obj['totalRecords'] = $totalRecords;
+        null !== $page && $self['page'] = $page;
+        null !== $records && $self['records'] = $records;
+        null !== $totalRecords && $self['totalRecords'] = $totalRecords;
 
-        return $obj;
+        return $self;
     }
 
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,17 +97,17 @@ final class BrandListResponse implements BaseModel
      */
     public function withRecords(array $records): self
     {
-        $obj = clone $this;
-        $obj['records'] = $records;
+        $self = clone $this;
+        $self['records'] = $records;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalRecords(int $totalRecords): self
     {
-        $obj = clone $this;
-        $obj['totalRecords'] = $totalRecords;
+        $self = clone $this;
+        $self['totalRecords'] = $totalRecords;
 
-        return $obj;
+        return $self;
     }
 }

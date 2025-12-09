@@ -54,11 +54,11 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
      */
     public static function with(array $records): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['records'] = $records;
+        $self['records'] = $records;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
      */
     public function withRecords(array $records): self
     {
-        $obj = clone $this;
-        $obj['records'] = $records;
+        $self = clone $this;
+        $self['records'] = $records;
 
-        return $obj;
+        return $self;
     }
 }

@@ -54,12 +54,12 @@ final class SimCardGroupUpdateParams implements BaseModel
         DataLimit|array|null $dataLimit = null,
         ?string $name = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dataLimit && $obj['dataLimit'] = $dataLimit;
-        null !== $name && $obj['name'] = $name;
+        null !== $dataLimit && $self['dataLimit'] = $dataLimit;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class SimCardGroupUpdateParams implements BaseModel
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
-        $obj = clone $this;
-        $obj['dataLimit'] = $dataLimit;
+        $self = clone $this;
+        $self['dataLimit'] = $dataLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class SimCardGroupUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

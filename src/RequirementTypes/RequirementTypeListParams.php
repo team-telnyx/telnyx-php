@@ -58,12 +58,12 @@ final class RequirementTypeListParams implements BaseModel
         Filter|array|null $filter = null,
         ?array $sort = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class RequirementTypeListParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class RequirementTypeListParams implements BaseModel
      */
     public function withSort(array $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

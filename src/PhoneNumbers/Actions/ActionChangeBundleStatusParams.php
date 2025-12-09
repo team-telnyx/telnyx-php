@@ -54,11 +54,11 @@ final class ActionChangeBundleStatusParams implements BaseModel
      */
     public static function with(string $bundleID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bundleID'] = $bundleID;
+        $self['bundleID'] = $bundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class ActionChangeBundleStatusParams implements BaseModel
      */
     public function withBundleID(string $bundleID): self
     {
-        $obj = clone $this;
-        $obj['bundleID'] = $bundleID;
+        $self = clone $this;
+        $self['bundleID'] = $bundleID;
 
-        return $obj;
+        return $self;
     }
 }

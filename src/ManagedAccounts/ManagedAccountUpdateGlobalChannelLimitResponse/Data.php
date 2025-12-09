@@ -69,15 +69,15 @@ final class Data implements BaseModel
         ?string $managerAccountID = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
-        null !== $email && $obj['email'] = $email;
-        null !== $managerAccountID && $obj['managerAccountID'] = $managerAccountID;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        null !== $email && $self['email'] = $email;
+        null !== $managerAccountID && $self['managerAccountID'] = $managerAccountID;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj['channelLimit'] = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Data implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Data implements BaseModel
      */
     public function withManagerAccountID(string $managerAccountID): self
     {
-        $obj = clone $this;
-        $obj['managerAccountID'] = $managerAccountID;
+        $self = clone $this;
+        $self['managerAccountID'] = $managerAccountID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

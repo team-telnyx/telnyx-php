@@ -49,12 +49,12 @@ final class Flashcall implements BaseModel
         ?int $defaultVerificationTimeoutSecs = null,
         ?array $whitelistedDestinations = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $defaultVerificationTimeoutSecs && $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
-        null !== $whitelistedDestinations && $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class Flashcall implements BaseModel
     public function withDefaultVerificationTimeoutSecs(
         int $defaultVerificationTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        $self = clone $this;
+        $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class Flashcall implements BaseModel
     public function withWhitelistedDestinations(
         array $whitelistedDestinations
     ): self {
-        $obj = clone $this;
-        $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 }

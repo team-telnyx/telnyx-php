@@ -55,13 +55,13 @@ final class MediaFeatures implements BaseModel
         ?bool $rtpAutoAdjustEnabled = null,
         ?bool $t38FaxGatewayEnabled = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $acceptAnyRtpPacketsEnabled && $obj['acceptAnyRtpPacketsEnabled'] = $acceptAnyRtpPacketsEnabled;
-        null !== $rtpAutoAdjustEnabled && $obj['rtpAutoAdjustEnabled'] = $rtpAutoAdjustEnabled;
-        null !== $t38FaxGatewayEnabled && $obj['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+        null !== $acceptAnyRtpPacketsEnabled && $self['acceptAnyRtpPacketsEnabled'] = $acceptAnyRtpPacketsEnabled;
+        null !== $rtpAutoAdjustEnabled && $self['rtpAutoAdjustEnabled'] = $rtpAutoAdjustEnabled;
+        null !== $t38FaxGatewayEnabled && $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,10 +70,10 @@ final class MediaFeatures implements BaseModel
     public function withAcceptAnyRtpPacketsEnabled(
         bool $acceptAnyRtpPacketsEnabled
     ): self {
-        $obj = clone $this;
-        $obj['acceptAnyRtpPacketsEnabled'] = $acceptAnyRtpPacketsEnabled;
+        $self = clone $this;
+        $self['acceptAnyRtpPacketsEnabled'] = $acceptAnyRtpPacketsEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class MediaFeatures implements BaseModel
      */
     public function withRtpAutoAdjustEnabled(bool $rtpAutoAdjustEnabled): self
     {
-        $obj = clone $this;
-        $obj['rtpAutoAdjustEnabled'] = $rtpAutoAdjustEnabled;
+        $self = clone $this;
+        $self['rtpAutoAdjustEnabled'] = $rtpAutoAdjustEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,9 +92,9 @@ final class MediaFeatures implements BaseModel
      */
     public function withT38FaxGatewayEnabled(bool $t38FaxGatewayEnabled): self
     {
-        $obj = clone $this;
-        $obj['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+        $self = clone $this;
+        $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
 
-        return $obj;
+        return $self;
     }
 }

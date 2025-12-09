@@ -45,11 +45,11 @@ final class LogMessageGetResponse implements BaseModel
      */
     public static function with(?array $logMessages = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $logMessages && $obj['logMessages'] = $logMessages;
+        null !== $logMessages && $self['logMessages'] = $logMessages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +63,9 @@ final class LogMessageGetResponse implements BaseModel
      */
     public function withLogMessages(array $logMessages): self
     {
-        $obj = clone $this;
-        $obj['logMessages'] = $logMessages;
+        $self = clone $this;
+        $self['logMessages'] = $logMessages;
 
-        return $obj;
+        return $self;
     }
 }

@@ -36,11 +36,11 @@ final class From implements BaseModel
      */
     public static function with(?string $id = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
+        null !== $id && $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class From implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

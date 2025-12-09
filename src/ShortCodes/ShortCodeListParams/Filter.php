@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $messagingProfileID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 }

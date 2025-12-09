@@ -199,29 +199,29 @@ final class RoomComposition implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $completedAt && $obj['completedAt'] = $completedAt;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $downloadURL && $obj['downloadURL'] = $downloadURL;
-        null !== $durationSecs && $obj['durationSecs'] = $durationSecs;
-        null !== $endedAt && $obj['endedAt'] = $endedAt;
-        null !== $format && $obj['format'] = $format;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $roomID && $obj['roomID'] = $roomID;
-        null !== $sessionID && $obj['sessionID'] = $sessionID;
-        null !== $sizeMB && $obj['sizeMB'] = $sizeMB;
-        null !== $startedAt && $obj['startedAt'] = $startedAt;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $userID && $obj['userID'] = $userID;
-        null !== $videoLayout && $obj['videoLayout'] = $videoLayout;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        null !== $id && $self['id'] = $id;
+        null !== $completedAt && $self['completedAt'] = $completedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $downloadURL && $self['downloadURL'] = $downloadURL;
+        null !== $durationSecs && $self['durationSecs'] = $durationSecs;
+        null !== $endedAt && $self['endedAt'] = $endedAt;
+        null !== $format && $self['format'] = $format;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $roomID && $self['roomID'] = $roomID;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
+        null !== $sizeMB && $self['sizeMB'] = $sizeMB;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $videoLayout && $self['videoLayout'] = $videoLayout;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class RoomComposition implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class RoomComposition implements BaseModel
      */
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
-        $obj = clone $this;
-        $obj['completedAt'] = $completedAt;
+        $self = clone $this;
+        $self['completedAt'] = $completedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class RoomComposition implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class RoomComposition implements BaseModel
      */
     public function withDownloadURL(string $downloadURL): self
     {
-        $obj = clone $this;
-        $obj['downloadURL'] = $downloadURL;
+        $self = clone $this;
+        $self['downloadURL'] = $downloadURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,10 +273,10 @@ final class RoomComposition implements BaseModel
      */
     public function withDurationSecs(int $durationSecs): self
     {
-        $obj = clone $this;
-        $obj['durationSecs'] = $durationSecs;
+        $self = clone $this;
+        $self['durationSecs'] = $durationSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +284,10 @@ final class RoomComposition implements BaseModel
      */
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
-        $obj = clone $this;
-        $obj['endedAt'] = $endedAt;
+        $self = clone $this;
+        $self['endedAt'] = $endedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,18 +297,18 @@ final class RoomComposition implements BaseModel
      */
     public function withFormat(Format|string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +316,10 @@ final class RoomComposition implements BaseModel
      */
     public function withRoomID(string $roomID): self
     {
-        $obj = clone $this;
-        $obj['roomID'] = $roomID;
+        $self = clone $this;
+        $self['roomID'] = $roomID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +327,10 @@ final class RoomComposition implements BaseModel
      */
     public function withSessionID(string $sessionID): self
     {
-        $obj = clone $this;
-        $obj['sessionID'] = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +338,10 @@ final class RoomComposition implements BaseModel
      */
     public function withSizeMB(float $sizeMB): self
     {
-        $obj = clone $this;
-        $obj['sizeMB'] = $sizeMB;
+        $self = clone $this;
+        $self['sizeMB'] = $sizeMB;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -349,10 +349,10 @@ final class RoomComposition implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj['startedAt'] = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -362,10 +362,10 @@ final class RoomComposition implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -373,10 +373,10 @@ final class RoomComposition implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -384,10 +384,10 @@ final class RoomComposition implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,10 +406,10 @@ final class RoomComposition implements BaseModel
      */
     public function withVideoLayout(array $videoLayout): self
     {
-        $obj = clone $this;
-        $obj['videoLayout'] = $videoLayout;
+        $self = clone $this;
+        $self['videoLayout'] = $videoLayout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -418,10 +418,10 @@ final class RoomComposition implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -429,10 +429,10 @@ final class RoomComposition implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -440,9 +440,9 @@ final class RoomComposition implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

@@ -103,16 +103,16 @@ final class AudioTranscribeParams implements BaseModel
         ResponseFormat|string|null $responseFormat = null,
         TimestampGranularities|string|null $timestampGranularities = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['model'] = $model;
+        $self['model'] = $model;
 
-        null !== $file && $obj['file'] = $file;
-        null !== $fileURL && $obj['fileURL'] = $fileURL;
-        null !== $responseFormat && $obj['responseFormat'] = $responseFormat;
-        null !== $timestampGranularities && $obj['timestampGranularities'] = $timestampGranularities;
+        null !== $file && $self['file'] = $file;
+        null !== $fileURL && $self['fileURL'] = $fileURL;
+        null !== $responseFormat && $self['responseFormat'] = $responseFormat;
+        null !== $timestampGranularities && $self['timestampGranularities'] = $timestampGranularities;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class AudioTranscribeParams implements BaseModel
      */
     public function withModel(Model|string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class AudioTranscribeParams implements BaseModel
      */
     public function withFile(string $file): self
     {
-        $obj = clone $this;
-        $obj['file'] = $file;
+        $self = clone $this;
+        $self['file'] = $file;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class AudioTranscribeParams implements BaseModel
      */
     public function withFileURL(string $fileURL): self
     {
-        $obj = clone $this;
-        $obj['fileURL'] = $fileURL;
+        $self = clone $this;
+        $self['fileURL'] = $fileURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class AudioTranscribeParams implements BaseModel
     public function withResponseFormat(
         ResponseFormat|string $responseFormat
     ): self {
-        $obj = clone $this;
-        $obj['responseFormat'] = $responseFormat;
+        $self = clone $this;
+        $self['responseFormat'] = $responseFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,9 +172,9 @@ final class AudioTranscribeParams implements BaseModel
     public function withTimestampGranularities(
         TimestampGranularities|string $timestampGranularities
     ): self {
-        $obj = clone $this;
-        $obj['timestampGranularities'] = $timestampGranularities;
+        $self = clone $this;
+        $self['timestampGranularities'] = $timestampGranularities;
 
-        return $obj;
+        return $self;
     }
 }

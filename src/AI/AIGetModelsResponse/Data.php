@@ -61,46 +61,46 @@ final class Data implements BaseModel
         string $ownedBy,
         ?string $object = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['created'] = $created;
-        $obj['ownedBy'] = $ownedBy;
+        $self['id'] = $id;
+        $self['created'] = $created;
+        $self['ownedBy'] = $ownedBy;
 
-        null !== $object && $obj['object'] = $object;
+        null !== $object && $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreated(int $created): self
     {
-        $obj = clone $this;
-        $obj['created'] = $created;
+        $self = clone $this;
+        $self['created'] = $created;
 
-        return $obj;
+        return $self;
     }
 
     public function withOwnedBy(string $ownedBy): self
     {
-        $obj = clone $this;
-        $obj['ownedBy'] = $ownedBy;
+        $self = clone $this;
+        $self['ownedBy'] = $ownedBy;
 
-        return $obj;
+        return $self;
     }
 
     public function withObject(string $object): self
     {
-        $obj = clone $this;
-        $obj['object'] = $object;
+        $self = clone $this;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 }

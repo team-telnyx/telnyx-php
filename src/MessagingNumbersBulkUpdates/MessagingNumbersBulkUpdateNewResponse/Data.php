@@ -83,15 +83,15 @@ final class Data implements BaseModel
         RecordType|string|null $recordType = null,
         ?array $success = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $failed && $obj['failed'] = $failed;
-        null !== $orderID && $obj['orderID'] = $orderID;
-        null !== $pending && $obj['pending'] = $pending;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $success && $obj['success'] = $success;
+        null !== $failed && $self['failed'] = $failed;
+        null !== $orderID && $self['orderID'] = $orderID;
+        null !== $pending && $self['pending'] = $pending;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $success && $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class Data implements BaseModel
      */
     public function withFailed(array $failed): self
     {
-        $obj = clone $this;
-        $obj['failed'] = $failed;
+        $self = clone $this;
+        $self['failed'] = $failed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Data implements BaseModel
      */
     public function withOrderID(string $orderID): self
     {
-        $obj = clone $this;
-        $obj['orderID'] = $orderID;
+        $self = clone $this;
+        $self['orderID'] = $orderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Data implements BaseModel
      */
     public function withPending(array $pending): self
     {
-        $obj = clone $this;
-        $obj['pending'] = $pending;
+        $self = clone $this;
+        $self['pending'] = $pending;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,9 +151,9 @@ final class Data implements BaseModel
      */
     public function withSuccess(array $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

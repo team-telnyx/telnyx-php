@@ -158,23 +158,23 @@ final class Filter implements BaseModel
         ?string $to = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $applicationName && $obj['applicationName'] = $applicationName;
-        null !== $applicationSessionID && $obj['applicationSessionID'] = $applicationSessionID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $failed && $obj['failed'] = $failed;
-        null !== $from && $obj['from'] = $from;
-        null !== $legID && $obj['legID'] = $legID;
-        null !== $name && $obj['name'] = $name;
-        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
-        null !== $outboundOutboundVoiceProfileID && $obj['outboundOutboundVoiceProfileID'] = $outboundOutboundVoiceProfileID;
-        null !== $product && $obj['product'] = $product;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj['to'] = $to;
-        null !== $type && $obj['type'] = $type;
+        null !== $applicationName && $self['applicationName'] = $applicationName;
+        null !== $applicationSessionID && $self['applicationSessionID'] = $applicationSessionID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $failed && $self['failed'] = $failed;
+        null !== $from && $self['from'] = $from;
+        null !== $legID && $self['legID'] = $legID;
+        null !== $name && $self['name'] = $name;
+        null !== $occurredAt && $self['occurredAt'] = $occurredAt;
+        null !== $outboundOutboundVoiceProfileID && $self['outboundOutboundVoiceProfileID'] = $outboundOutboundVoiceProfileID;
+        null !== $product && $self['product'] = $product;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Filter implements BaseModel
     public function withApplicationName(
         ApplicationName|array $applicationName
     ): self {
-        $obj = clone $this;
-        $obj['applicationName'] = $applicationName;
+        $self = clone $this;
+        $self['applicationName'] = $applicationName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class Filter implements BaseModel
      */
     public function withApplicationSessionID(string $applicationSessionID): self
     {
-        $obj = clone $this;
-        $obj['applicationSessionID'] = $applicationSessionID;
+        $self = clone $this;
+        $self['applicationSessionID'] = $applicationSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class Filter implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class Filter implements BaseModel
      */
     public function withFailed(bool $failed): self
     {
-        $obj = clone $this;
-        $obj['failed'] = $failed;
+        $self = clone $this;
+        $self['failed'] = $failed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class Filter implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class Filter implements BaseModel
      */
     public function withLegID(string $legID): self
     {
-        $obj = clone $this;
-        $obj['legID'] = $legID;
+        $self = clone $this;
+        $self['legID'] = $legID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class Filter implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +270,10 @@ final class Filter implements BaseModel
      */
     public function withOccurredAt(OccurredAt|array $occurredAt): self
     {
-        $obj = clone $this;
-        $obj['occurredAt'] = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class Filter implements BaseModel
     public function withOutboundOutboundVoiceProfileID(
         string $outboundOutboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj['outboundOutboundVoiceProfileID'] = $outboundOutboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundOutboundVoiceProfileID'] = $outboundOutboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +295,10 @@ final class Filter implements BaseModel
      */
     public function withProduct(Product|string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -319,10 +319,10 @@ final class Filter implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,9 +332,9 @@ final class Filter implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

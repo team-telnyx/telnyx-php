@@ -71,37 +71,37 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
         string $query,
         ?int $numOfDocs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucketName'] = $bucketName;
-        $obj['query'] = $query;
+        $self['bucketName'] = $bucketName;
+        $self['query'] = $query;
 
-        null !== $numOfDocs && $obj['numOfDocs'] = $numOfDocs;
+        null !== $numOfDocs && $self['numOfDocs'] = $numOfDocs;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj['bucketName'] = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     public function withQuery(string $query): self
     {
-        $obj = clone $this;
-        $obj['query'] = $query;
+        $self = clone $this;
+        $self['query'] = $query;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumOfDocs(int $numOfDocs): self
     {
-        $obj = clone $this;
-        $obj['numOfDocs'] = $numOfDocs;
+        $self = clone $this;
+        $self['numOfDocs'] = $numOfDocs;
 
-        return $obj;
+        return $self;
     }
 }

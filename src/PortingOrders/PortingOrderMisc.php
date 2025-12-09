@@ -65,13 +65,13 @@ final class PortingOrderMisc implements BaseModel
         RemainingNumbersAction|string|null $remainingNumbersAction = null,
         PortingOrderType|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $newBillingPhoneNumber && $obj['newBillingPhoneNumber'] = $newBillingPhoneNumber;
-        null !== $remainingNumbersAction && $obj['remainingNumbersAction'] = $remainingNumbersAction;
-        null !== $type && $obj['type'] = $type;
+        null !== $newBillingPhoneNumber && $self['newBillingPhoneNumber'] = $newBillingPhoneNumber;
+        null !== $remainingNumbersAction && $self['remainingNumbersAction'] = $remainingNumbersAction;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class PortingOrderMisc implements BaseModel
     public function withNewBillingPhoneNumber(
         ?string $newBillingPhoneNumber
     ): self {
-        $obj = clone $this;
-        $obj['newBillingPhoneNumber'] = $newBillingPhoneNumber;
+        $self = clone $this;
+        $self['newBillingPhoneNumber'] = $newBillingPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class PortingOrderMisc implements BaseModel
     public function withRemainingNumbersAction(
         RemainingNumbersAction|string|null $remainingNumbersAction
     ): self {
-        $obj = clone $this;
-        $obj['remainingNumbersAction'] = $remainingNumbersAction;
+        $self = clone $this;
+        $self['remainingNumbersAction'] = $remainingNumbersAction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class PortingOrderMisc implements BaseModel
      */
     public function withType(PortingOrderType|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

@@ -137,41 +137,41 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
         Track|string|null $track = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj['accountSid'] = $accountSid;
-        null !== $callSid && $obj['callSid'] = $callSid;
-        null !== $channels && $obj['channels'] = $channels;
-        null !== $conferenceSid && $obj['conferenceSid'] = $conferenceSid;
-        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
-        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $errorCode && $obj['errorCode'] = $errorCode;
-        null !== $price && $obj['price'] = $price;
-        null !== $priceUnit && $obj['priceUnit'] = $priceUnit;
-        null !== $sid && $obj['sid'] = $sid;
-        null !== $source && $obj['source'] = $source;
-        null !== $startTime && $obj['startTime'] = $startTime;
-        null !== $track && $obj['track'] = $track;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $callSid && $self['callSid'] = $callSid;
+        null !== $channels && $self['channels'] = $channels;
+        null !== $conferenceSid && $self['conferenceSid'] = $conferenceSid;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $price && $self['price'] = $price;
+        null !== $priceUnit && $self['priceUnit'] = $priceUnit;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $source && $self['source'] = $source;
+        null !== $startTime && $self['startTime'] = $startTime;
+        null !== $track && $self['track'] = $track;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallSid(string $callSid): self
     {
-        $obj = clone $this;
-        $obj['callSid'] = $callSid;
+        $self = clone $this;
+        $self['callSid'] = $callSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,34 +179,34 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withChannels(int $channels): self
     {
-        $obj = clone $this;
-        $obj['channels'] = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     public function withConferenceSid(?string $conferenceSid): self
     {
-        $obj = clone $this;
-        $obj['conferenceSid'] = $conferenceSid;
+        $self = clone $this;
+        $self['conferenceSid'] = $conferenceSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
-        $obj = clone $this;
-        $obj['dateCreated'] = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj['dateUpdated'] = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,18 +214,18 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withDuration(?string $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     public function withErrorCode(?string $errorCode): self
     {
-        $obj = clone $this;
-        $obj['errorCode'] = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withPrice(?string $price): self
     {
-        $obj = clone $this;
-        $obj['price'] = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withPriceUnit(?string $priceUnit): self
     {
-        $obj = clone $this;
-        $obj['priceUnit'] = $priceUnit;
+        $self = clone $this;
+        $self['priceUnit'] = $priceUnit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj['sid'] = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,18 +268,18 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withSource(Source|string $source): self
     {
-        $obj = clone $this;
-        $obj['source'] = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +289,10 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withTrack(Track|string $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -300,9 +300,9 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

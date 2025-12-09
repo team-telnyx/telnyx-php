@@ -56,13 +56,13 @@ final class PhoneNumbers implements BaseModel
         ?string $countryCode = null,
         PhoneNumber|array|null $phoneNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierName && $obj['carrierName'] = $carrierName;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $carrierName && $self['carrierName'] = $carrierName;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,10 +70,10 @@ final class PhoneNumbers implements BaseModel
      */
     public function withCarrierName(string $carrierName): self
     {
-        $obj = clone $this;
-        $obj['carrierName'] = $carrierName;
+        $self = clone $this;
+        $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class PhoneNumbers implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +94,9 @@ final class PhoneNumbers implements BaseModel
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

@@ -65,13 +65,13 @@ final class WireguardPeerCreateParams implements BaseModel
         string $wireguardInterfaceID,
         ?string $publicKey = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['wireguardInterfaceID'] = $wireguardInterfaceID;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
-        null !== $publicKey && $obj['publicKey'] = $publicKey;
+        null !== $publicKey && $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class WireguardPeerCreateParams implements BaseModel
      */
     public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
-        $obj = clone $this;
-        $obj['wireguardInterfaceID'] = $wireguardInterfaceID;
+        $self = clone $this;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,9 +90,9 @@ final class WireguardPeerCreateParams implements BaseModel
      */
     public function withPublicKey(string $publicKey): self
     {
-        $obj = clone $this;
-        $obj['publicKey'] = $publicKey;
+        $self = clone $this;
+        $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 }

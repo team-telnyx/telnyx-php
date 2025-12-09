@@ -57,12 +57,12 @@ final class MessagingUpdateParams implements BaseModel
         ?string $messagingProduct = null,
         ?string $messagingProfileID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $messagingProduct && $obj['messagingProduct'] = $messagingProduct;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class MessagingUpdateParams implements BaseModel
      */
     public function withMessagingProduct(string $messagingProduct): self
     {
-        $obj = clone $this;
-        $obj['messagingProduct'] = $messagingProduct;
+        $self = clone $this;
+        $self['messagingProduct'] = $messagingProduct;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,9 +88,9 @@ final class MessagingUpdateParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 }

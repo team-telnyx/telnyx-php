@@ -83,16 +83,16 @@ final class RequirementType implements BaseModel
         ?string $name = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $acceptanceCriteria && $obj['acceptanceCriteria'] = $acceptanceCriteria;
-        null !== $description && $obj['description'] = $description;
-        null !== $example && $obj['example'] = $example;
-        null !== $name && $obj['name'] = $name;
-        null !== $type && $obj['type'] = $type;
+        null !== $id && $self['id'] = $id;
+        null !== $acceptanceCriteria && $self['acceptanceCriteria'] = $acceptanceCriteria;
+        null !== $description && $self['description'] = $description;
+        null !== $example && $self['example'] = $example;
+        null !== $name && $self['name'] = $name;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class RequirementType implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class RequirementType implements BaseModel
      */
     public function withAcceptanceCriteria(array $acceptanceCriteria): self
     {
-        $obj = clone $this;
-        $obj['acceptanceCriteria'] = $acceptanceCriteria;
+        $self = clone $this;
+        $self['acceptanceCriteria'] = $acceptanceCriteria;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class RequirementType implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class RequirementType implements BaseModel
      */
     public function withExample(string $example): self
     {
-        $obj = clone $this;
-        $obj['example'] = $example;
+        $self = clone $this;
+        $self['example'] = $example;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class RequirementType implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,9 +157,9 @@ final class RequirementType implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

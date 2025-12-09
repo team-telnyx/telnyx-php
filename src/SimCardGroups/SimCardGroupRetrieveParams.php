@@ -40,11 +40,11 @@ final class SimCardGroupRetrieveParams implements BaseModel
      */
     public static function with(?bool $includeIccids = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includeIccids && $obj['includeIccids'] = $includeIccids;
+        null !== $includeIccids && $self['includeIccids'] = $includeIccids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class SimCardGroupRetrieveParams implements BaseModel
      */
     public function withIncludeIccids(bool $includeIccids): self
     {
-        $obj = clone $this;
-        $obj['includeIccids'] = $includeIccids;
+        $self = clone $this;
+        $self['includeIccids'] = $includeIccids;
 
-        return $obj;
+        return $self;
     }
 }

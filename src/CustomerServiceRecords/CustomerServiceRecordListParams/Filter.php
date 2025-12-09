@@ -59,13 +59,13 @@ final class Filter implements BaseModel
         PhoneNumber|array|null $phoneNumber = null,
         Status|array|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +99,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

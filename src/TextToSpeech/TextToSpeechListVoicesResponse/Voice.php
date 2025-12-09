@@ -69,81 +69,81 @@ final class Voice implements BaseModel
         ?string $name = null,
         ?string $provider = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $accent && $obj['accent'] = $accent;
-        null !== $age && $obj['age'] = $age;
-        null !== $gender && $obj['gender'] = $gender;
-        null !== $label && $obj['label'] = $label;
-        null !== $language && $obj['language'] = $language;
-        null !== $name && $obj['name'] = $name;
-        null !== $provider && $obj['provider'] = $provider;
+        null !== $id && $self['id'] = $id;
+        null !== $accent && $self['accent'] = $accent;
+        null !== $age && $self['age'] = $age;
+        null !== $gender && $self['gender'] = $gender;
+        null !== $label && $self['label'] = $label;
+        null !== $language && $self['language'] = $language;
+        null !== $name && $self['name'] = $name;
+        null !== $provider && $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccent(string $accent): self
     {
-        $obj = clone $this;
-        $obj['accent'] = $accent;
+        $self = clone $this;
+        $self['accent'] = $accent;
 
-        return $obj;
+        return $self;
     }
 
     public function withAge(string $age): self
     {
-        $obj = clone $this;
-        $obj['age'] = $age;
+        $self = clone $this;
+        $self['age'] = $age;
 
-        return $obj;
+        return $self;
     }
 
     public function withGender(string $gender): self
     {
-        $obj = clone $this;
-        $obj['gender'] = $gender;
+        $self = clone $this;
+        $self['gender'] = $gender;
 
-        return $obj;
+        return $self;
     }
 
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj['label'] = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withProvider(string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 }

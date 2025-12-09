@@ -71,15 +71,15 @@ final class Inbound implements BaseModel
         ?string $packetCount = null,
         ?string $skipPacketCount = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $jitterMaxVariance && $obj['jitterMaxVariance'] = $jitterMaxVariance;
-        null !== $jitterPacketCount && $obj['jitterPacketCount'] = $jitterPacketCount;
-        null !== $mos && $obj['mos'] = $mos;
-        null !== $packetCount && $obj['packetCount'] = $packetCount;
-        null !== $skipPacketCount && $obj['skipPacketCount'] = $skipPacketCount;
+        null !== $jitterMaxVariance && $self['jitterMaxVariance'] = $jitterMaxVariance;
+        null !== $jitterPacketCount && $self['jitterPacketCount'] = $jitterPacketCount;
+        null !== $mos && $self['mos'] = $mos;
+        null !== $packetCount && $self['packetCount'] = $packetCount;
+        null !== $skipPacketCount && $self['skipPacketCount'] = $skipPacketCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Inbound implements BaseModel
      */
     public function withJitterMaxVariance(string $jitterMaxVariance): self
     {
-        $obj = clone $this;
-        $obj['jitterMaxVariance'] = $jitterMaxVariance;
+        $self = clone $this;
+        $self['jitterMaxVariance'] = $jitterMaxVariance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Inbound implements BaseModel
      */
     public function withJitterPacketCount(string $jitterPacketCount): self
     {
-        $obj = clone $this;
-        $obj['jitterPacketCount'] = $jitterPacketCount;
+        $self = clone $this;
+        $self['jitterPacketCount'] = $jitterPacketCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Inbound implements BaseModel
      */
     public function withMos(string $mos): self
     {
-        $obj = clone $this;
-        $obj['mos'] = $mos;
+        $self = clone $this;
+        $self['mos'] = $mos;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Inbound implements BaseModel
      */
     public function withPacketCount(string $packetCount): self
     {
-        $obj = clone $this;
-        $obj['packetCount'] = $packetCount;
+        $self = clone $this;
+        $self['packetCount'] = $packetCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class Inbound implements BaseModel
      */
     public function withSkipPacketCount(string $skipPacketCount): self
     {
-        $obj = clone $this;
-        $obj['skipPacketCount'] = $skipPacketCount;
+        $self = clone $this;
+        $self['skipPacketCount'] = $skipPacketCount;
 
-        return $obj;
+        return $self;
     }
 }

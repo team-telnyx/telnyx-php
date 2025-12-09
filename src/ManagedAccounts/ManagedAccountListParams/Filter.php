@@ -47,12 +47,12 @@ final class Filter implements BaseModel
         Email|array|null $email = null,
         OrganizationName|array|null $organizationName = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $email && $obj['email'] = $email;
-        null !== $organizationName && $obj['organizationName'] = $organizationName;
+        null !== $email && $self['email'] = $email;
+        null !== $organizationName && $self['organizationName'] = $organizationName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,10 +60,10 @@ final class Filter implements BaseModel
      */
     public function withEmail(Email|array $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class Filter implements BaseModel
     public function withOrganizationName(
         OrganizationName|array $organizationName
     ): self {
-        $obj = clone $this;
-        $obj['organizationName'] = $organizationName;
+        $self = clone $this;
+        $self['organizationName'] = $organizationName;
 
-        return $obj;
+        return $self;
     }
 }

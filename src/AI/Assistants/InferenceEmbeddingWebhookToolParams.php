@@ -139,19 +139,19 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
         PathParameters|array|null $pathParameters = null,
         QueryParameters|array|null $queryParameters = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['description'] = $description;
-        $obj['name'] = $name;
-        $obj['url'] = $url;
+        $self['description'] = $description;
+        $self['name'] = $name;
+        $self['url'] = $url;
 
-        null !== $bodyParameters && $obj['bodyParameters'] = $bodyParameters;
-        null !== $headers && $obj['headers'] = $headers;
-        null !== $method && $obj['method'] = $method;
-        null !== $pathParameters && $obj['pathParameters'] = $pathParameters;
-        null !== $queryParameters && $obj['queryParameters'] = $queryParameters;
+        null !== $bodyParameters && $self['bodyParameters'] = $bodyParameters;
+        null !== $headers && $self['headers'] = $headers;
+        null !== $method && $self['method'] = $method;
+        null !== $pathParameters && $self['pathParameters'] = $pathParameters;
+        null !== $queryParameters && $self['queryParameters'] = $queryParameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public function withBodyParameters(
         BodyParameters|array $bodyParameters
     ): self {
-        $obj = clone $this;
-        $obj['bodyParameters'] = $bodyParameters;
+        $self = clone $this;
+        $self['bodyParameters'] = $bodyParameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     public function withHeaders(array $headers): self
     {
-        $obj = clone $this;
-        $obj['headers'] = $headers;
+        $self = clone $this;
+        $self['headers'] = $headers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     public function withMethod(Method|string $method): self
     {
-        $obj = clone $this;
-        $obj['method'] = $method;
+        $self = clone $this;
+        $self['method'] = $method;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public function withPathParameters(
         PathParameters|array $pathParameters
     ): self {
-        $obj = clone $this;
-        $obj['pathParameters'] = $pathParameters;
+        $self = clone $this;
+        $self['pathParameters'] = $pathParameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,9 +261,9 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public function withQueryParameters(
         QueryParameters|array $queryParameters
     ): self {
-        $obj = clone $this;
-        $obj['queryParameters'] = $queryParameters;
+        $self = clone $this;
+        $self['queryParameters'] = $queryParameters;
 
-        return $obj;
+        return $self;
     }
 }

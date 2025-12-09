@@ -134,22 +134,22 @@ final class Payload implements BaseModel
         ?string $to = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callDurationSecs && $obj['callDurationSecs'] = $callDurationSecs;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $faxID && $obj['faxID'] = $faxID;
-        null !== $from && $obj['from'] = $from;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $originalMediaURL && $obj['originalMediaURL'] = $originalMediaURL;
-        null !== $pageCount && $obj['pageCount'] = $pageCount;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj['to'] = $to;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $callDurationSecs && $self['callDurationSecs'] = $callDurationSecs;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $faxID && $self['faxID'] = $faxID;
+        null !== $from && $self['from'] = $from;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $originalMediaURL && $self['originalMediaURL'] = $originalMediaURL;
+        null !== $pageCount && $self['pageCount'] = $pageCount;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class Payload implements BaseModel
      */
     public function withCallDurationSecs(int $callDurationSecs): self
     {
-        $obj = clone $this;
-        $obj['callDurationSecs'] = $callDurationSecs;
+        $self = clone $this;
+        $self['callDurationSecs'] = $callDurationSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +179,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class Payload implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +203,10 @@ final class Payload implements BaseModel
      */
     public function withFaxID(string $faxID): self
     {
-        $obj = clone $this;
-        $obj['faxID'] = $faxID;
+        $self = clone $this;
+        $self['faxID'] = $faxID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +214,10 @@ final class Payload implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class Payload implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +236,10 @@ final class Payload implements BaseModel
      */
     public function withOriginalMediaURL(string $originalMediaURL): self
     {
-        $obj = clone $this;
-        $obj['originalMediaURL'] = $originalMediaURL;
+        $self = clone $this;
+        $self['originalMediaURL'] = $originalMediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -247,10 +247,10 @@ final class Payload implements BaseModel
      */
     public function withPageCount(int $pageCount): self
     {
-        $obj = clone $this;
-        $obj['pageCount'] = $pageCount;
+        $self = clone $this;
+        $self['pageCount'] = $pageCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +260,10 @@ final class Payload implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class Payload implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,9 +282,9 @@ final class Payload implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

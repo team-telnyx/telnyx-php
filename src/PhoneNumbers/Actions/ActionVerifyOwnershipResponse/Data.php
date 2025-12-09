@@ -61,13 +61,13 @@ final class Data implements BaseModel
         ?array $notFound = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $found && $obj['found'] = $found;
-        null !== $notFound && $obj['notFound'] = $notFound;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $found && $self['found'] = $found;
+        null !== $notFound && $self['notFound'] = $notFound;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Data implements BaseModel
      */
     public function withFound(array $found): self
     {
-        $obj = clone $this;
-        $obj['found'] = $found;
+        $self = clone $this;
+        $self['found'] = $found;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class Data implements BaseModel
      */
     public function withNotFound(array $notFound): self
     {
-        $obj = clone $this;
-        $obj['notFound'] = $notFound;
+        $self = clone $this;
+        $self['notFound'] = $notFound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

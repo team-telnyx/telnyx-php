@@ -193,24 +193,24 @@ final class VoiceCreateParams implements BaseModel
         ?string $source = null,
         ?string $timezone = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['endTime'] = $endTime;
-        $obj['startTime'] = $startTime;
+        $self['endTime'] = $endTime;
+        $self['startTime'] = $startTime;
 
-        null !== $callTypes && $obj['callTypes'] = $callTypes;
-        null !== $connections && $obj['connections'] = $connections;
-        null !== $fields && $obj['fields'] = $fields;
-        null !== $filters && $obj['filters'] = $filters;
-        null !== $includeAllMetadata && $obj['includeAllMetadata'] = $includeAllMetadata;
-        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
-        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
-        null !== $reportName && $obj['reportName'] = $reportName;
-        null !== $selectAllManagedAccounts && $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
-        null !== $source && $obj['source'] = $source;
-        null !== $timezone && $obj['timezone'] = $timezone;
+        null !== $callTypes && $self['callTypes'] = $callTypes;
+        null !== $connections && $self['connections'] = $connections;
+        null !== $fields && $self['fields'] = $fields;
+        null !== $filters && $self['filters'] = $filters;
+        null !== $includeAllMetadata && $self['includeAllMetadata'] = $includeAllMetadata;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $recordTypes && $self['recordTypes'] = $recordTypes;
+        null !== $reportName && $self['reportName'] = $reportName;
+        null !== $selectAllManagedAccounts && $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        null !== $source && $self['source'] = $source;
+        null !== $timezone && $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withEndTime(\DateTimeInterface $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,10 +242,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withCallTypes(array $callTypes): self
     {
-        $obj = clone $this;
-        $obj['callTypes'] = $callTypes;
+        $self = clone $this;
+        $self['callTypes'] = $callTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withConnections(array $connections): self
     {
-        $obj = clone $this;
-        $obj['connections'] = $connections;
+        $self = clone $this;
+        $self['connections'] = $connections;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +268,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withFields(array $fields): self
     {
-        $obj = clone $this;
-        $obj['fields'] = $fields;
+        $self = clone $this;
+        $self['fields'] = $fields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +289,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withFilters(array $filters): self
     {
-        $obj = clone $this;
-        $obj['filters'] = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -300,10 +300,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withIncludeAllMetadata(bool $includeAllMetadata): self
     {
-        $obj = clone $this;
-        $obj['includeAllMetadata'] = $includeAllMetadata;
+        $self = clone $this;
+        $self['includeAllMetadata'] = $includeAllMetadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,10 +313,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withManagedAccounts(array $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj['managedAccounts'] = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -326,10 +326,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withRecordTypes(array $recordTypes): self
     {
-        $obj = clone $this;
-        $obj['recordTypes'] = $recordTypes;
+        $self = clone $this;
+        $self['recordTypes'] = $recordTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -337,10 +337,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withReportName(string $reportName): self
     {
-        $obj = clone $this;
-        $obj['reportName'] = $reportName;
+        $self = clone $this;
+        $self['reportName'] = $reportName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -349,10 +349,10 @@ final class VoiceCreateParams implements BaseModel
     public function withSelectAllManagedAccounts(
         bool $selectAllManagedAccounts
     ): self {
-        $obj = clone $this;
-        $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        $self = clone $this;
+        $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -360,10 +360,10 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withSource(string $source): self
     {
-        $obj = clone $this;
-        $obj['source'] = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -371,9 +371,9 @@ final class VoiceCreateParams implements BaseModel
      */
     public function withTimezone(string $timezone): self
     {
-        $obj = clone $this;
-        $obj['timezone'] = $timezone;
+        $self = clone $this;
+        $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 }

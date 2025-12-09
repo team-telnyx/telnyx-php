@@ -110,18 +110,18 @@ final class TestUpdateParams implements BaseModel
         TelnyxConversationChannel|string|null $telnyxConversationChannel = null,
         ?string $testSuite = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $destination && $obj['destination'] = $destination;
-        null !== $instructions && $obj['instructions'] = $instructions;
-        null !== $maxDurationSeconds && $obj['maxDurationSeconds'] = $maxDurationSeconds;
-        null !== $name && $obj['name'] = $name;
-        null !== $rubric && $obj['rubric'] = $rubric;
-        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        null !== $testSuite && $obj['testSuite'] = $testSuite;
+        null !== $description && $self['description'] = $description;
+        null !== $destination && $self['destination'] = $destination;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $maxDurationSeconds && $self['maxDurationSeconds'] = $maxDurationSeconds;
+        null !== $name && $self['name'] = $name;
+        null !== $rubric && $self['rubric'] = $rubric;
+        null !== $telnyxConversationChannel && $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        null !== $testSuite && $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withDestination(string $destination): self
     {
-        $obj = clone $this;
-        $obj['destination'] = $destination;
+        $self = clone $this;
+        $self['destination'] = $destination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj['instructions'] = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +162,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
-        $obj = clone $this;
-        $obj['maxDurationSeconds'] = $maxDurationSeconds;
+        $self = clone $this;
+        $self['maxDurationSeconds'] = $maxDurationSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +173,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withRubric(array $rubric): self
     {
-        $obj = clone $this;
-        $obj['rubric'] = $rubric;
+        $self = clone $this;
+        $self['rubric'] = $rubric;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class TestUpdateParams implements BaseModel
     public function withTelnyxConversationChannel(
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,9 +211,9 @@ final class TestUpdateParams implements BaseModel
      */
     public function withTestSuite(string $testSuite): self
     {
-        $obj = clone $this;
-        $obj['testSuite'] = $testSuite;
+        $self = clone $this;
+        $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 }

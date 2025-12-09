@@ -36,27 +36,27 @@ final class VerifyProfileMessageTemplateResponse implements BaseModel
      */
     public static function with(?string $id = null, ?string $text = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $text && $obj['text'] = $text;
+        null !== $id && $self['id'] = $id;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

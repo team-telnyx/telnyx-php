@@ -73,14 +73,14 @@ final class AudioTranscribeResponse implements BaseModel
         ?float $duration = null,
         ?array $segments = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['text'] = $text;
+        $self['text'] = $text;
 
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $segments && $obj['segments'] = $segments;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $segments && $self['segments'] = $segments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class AudioTranscribeResponse implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class AudioTranscribeResponse implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,9 +114,9 @@ final class AudioTranscribeResponse implements BaseModel
      */
     public function withSegments(array $segments): self
     {
-        $obj = clone $this;
-        $obj['segments'] = $segments;
+        $self = clone $this;
+        $self['segments'] = $segments;
 
-        return $obj;
+        return $self;
     }
 }

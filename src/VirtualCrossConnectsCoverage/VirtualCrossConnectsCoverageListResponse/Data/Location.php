@@ -69,15 +69,15 @@ final class Location implements BaseModel
         ?string $region = null,
         ?string $site = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $name && $obj['name'] = $name;
-        null !== $pop && $obj['pop'] = $pop;
-        null !== $region && $obj['region'] = $region;
-        null !== $site && $obj['site'] = $site;
+        null !== $code && $self['code'] = $code;
+        null !== $name && $self['name'] = $name;
+        null !== $pop && $self['pop'] = $pop;
+        null !== $region && $self['region'] = $region;
+        null !== $site && $self['site'] = $site;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Location implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Location implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Location implements BaseModel
      */
     public function withPop(string $pop): self
     {
-        $obj = clone $this;
-        $obj['pop'] = $pop;
+        $self = clone $this;
+        $self['pop'] = $pop;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Location implements BaseModel
      */
     public function withRegion(string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Location implements BaseModel
      */
     public function withSite(string $site): self
     {
-        $obj = clone $this;
-        $obj['site'] = $site;
+        $self = clone $this;
+        $self['site'] = $site;
 
-        return $obj;
+        return $self;
     }
 }

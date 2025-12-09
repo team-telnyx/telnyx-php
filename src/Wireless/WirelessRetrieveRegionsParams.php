@@ -54,11 +54,11 @@ final class WirelessRetrieveRegionsParams implements BaseModel
      */
     public static function with(string $product): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['product'] = $product;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class WirelessRetrieveRegionsParams implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 }

@@ -48,11 +48,11 @@ final class Filters implements BaseModel
     public static function with(
         AvailableService|Contains|array|string|null $availableServices = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableServices && $obj['availableServices'] = $availableServices;
+        null !== $availableServices && $self['availableServices'] = $availableServices;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,9 +65,9 @@ final class Filters implements BaseModel
     public function withAvailableServices(
         AvailableService|Contains|array|string $availableServices
     ): self {
-        $obj = clone $this;
-        $obj['availableServices'] = $availableServices;
+        $self = clone $this;
+        $self['availableServices'] = $availableServices;
 
-        return $obj;
+        return $self;
     }
 }

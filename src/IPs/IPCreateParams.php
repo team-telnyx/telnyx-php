@@ -72,14 +72,14 @@ final class IPCreateParams implements BaseModel
         ?string $connectionID = null,
         ?int $port = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['ipAddress'] = $ipAddress;
+        $self['ipAddress'] = $ipAddress;
 
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $port && $obj['port'] = $port;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $port && $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class IPCreateParams implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class IPCreateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class IPCreateParams implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj['port'] = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 }

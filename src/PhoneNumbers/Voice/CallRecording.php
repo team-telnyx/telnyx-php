@@ -70,13 +70,13 @@ final class CallRecording implements BaseModel
         ?bool $inboundCallRecordingEnabled = null,
         InboundCallRecordingFormat|string|null $inboundCallRecordingFormat = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $inboundCallRecordingChannels && $obj['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
-        null !== $inboundCallRecordingEnabled && $obj['inboundCallRecordingEnabled'] = $inboundCallRecordingEnabled;
-        null !== $inboundCallRecordingFormat && $obj['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
+        null !== $inboundCallRecordingChannels && $self['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
+        null !== $inboundCallRecordingEnabled && $self['inboundCallRecordingEnabled'] = $inboundCallRecordingEnabled;
+        null !== $inboundCallRecordingFormat && $self['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class CallRecording implements BaseModel
     public function withInboundCallRecordingChannels(
         InboundCallRecordingChannels|string $inboundCallRecordingChannels
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
+        $self = clone $this;
+        $self['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class CallRecording implements BaseModel
     public function withInboundCallRecordingEnabled(
         bool $inboundCallRecordingEnabled
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallRecordingEnabled'] = $inboundCallRecordingEnabled;
+        $self = clone $this;
+        $self['inboundCallRecordingEnabled'] = $inboundCallRecordingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,9 +113,9 @@ final class CallRecording implements BaseModel
     public function withInboundCallRecordingFormat(
         InboundCallRecordingFormat|string $inboundCallRecordingFormat
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
+        $self = clone $this;
+        $self['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
 
-        return $obj;
+        return $self;
     }
 }

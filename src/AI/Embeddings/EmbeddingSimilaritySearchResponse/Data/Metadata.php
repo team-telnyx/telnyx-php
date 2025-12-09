@@ -81,57 +81,57 @@ final class Metadata implements BaseModel
         ?float $certainty = null,
         ?array $loaderMetadata = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['checksum'] = $checksum;
-        $obj['embedding'] = $embedding;
-        $obj['filename'] = $filename;
-        $obj['source'] = $source;
+        $self['checksum'] = $checksum;
+        $self['embedding'] = $embedding;
+        $self['filename'] = $filename;
+        $self['source'] = $source;
 
-        null !== $certainty && $obj['certainty'] = $certainty;
-        null !== $loaderMetadata && $obj['loaderMetadata'] = $loaderMetadata;
+        null !== $certainty && $self['certainty'] = $certainty;
+        null !== $loaderMetadata && $self['loaderMetadata'] = $loaderMetadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withChecksum(string $checksum): self
     {
-        $obj = clone $this;
-        $obj['checksum'] = $checksum;
+        $self = clone $this;
+        $self['checksum'] = $checksum;
 
-        return $obj;
+        return $self;
     }
 
     public function withEmbedding(string $embedding): self
     {
-        $obj = clone $this;
-        $obj['embedding'] = $embedding;
+        $self = clone $this;
+        $self['embedding'] = $embedding;
 
-        return $obj;
+        return $self;
     }
 
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj['filename'] = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     public function withSource(string $source): self
     {
-        $obj = clone $this;
-        $obj['source'] = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     public function withCertainty(float $certainty): self
     {
-        $obj = clone $this;
-        $obj['certainty'] = $certainty;
+        $self = clone $this;
+        $self['certainty'] = $certainty;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,9 +139,9 @@ final class Metadata implements BaseModel
      */
     public function withLoaderMetadata(array $loaderMetadata): self
     {
-        $obj = clone $this;
-        $obj['loaderMetadata'] = $loaderMetadata;
+        $self = clone $this;
+        $self['loaderMetadata'] = $loaderMetadata;
 
-        return $obj;
+        return $self;
     }
 }

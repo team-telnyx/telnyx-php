@@ -62,13 +62,13 @@ final class Filter implements BaseModel
         ?array $portingPhoneNumber = null,
         ?array $userBundleID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $portingOrder && $obj['portingOrder'] = $portingOrder;
-        null !== $portingPhoneNumber && $obj['portingPhoneNumber'] = $portingPhoneNumber;
-        null !== $userBundleID && $obj['userBundleID'] = $userBundleID;
+        null !== $portingOrder && $self['portingOrder'] = $portingOrder;
+        null !== $portingPhoneNumber && $self['portingPhoneNumber'] = $portingPhoneNumber;
+        null !== $userBundleID && $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Filter implements BaseModel
      */
     public function withPortingOrder(PortingOrder|array $portingOrder): self
     {
-        $obj = clone $this;
-        $obj['portingOrder'] = $portingOrder;
+        $self = clone $this;
+        $self['portingOrder'] = $portingOrder;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Filter implements BaseModel
      */
     public function withPortingPhoneNumber(array $portingPhoneNumber): self
     {
-        $obj = clone $this;
-        $obj['portingPhoneNumber'] = $portingPhoneNumber;
+        $self = clone $this;
+        $self['portingPhoneNumber'] = $portingPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class Filter implements BaseModel
      */
     public function withUserBundleID(array $userBundleID): self
     {
-        $obj = clone $this;
-        $obj['userBundleID'] = $userBundleID;
+        $self = clone $this;
+        $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 }

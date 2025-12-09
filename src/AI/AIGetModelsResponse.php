@@ -57,13 +57,13 @@ final class AIGetModelsResponse implements BaseModel
      */
     public static function with(array $data, ?string $object = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['data'] = $data;
+        $self['data'] = $data;
 
-        null !== $object && $obj['object'] = $object;
+        null !== $object && $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,17 +73,17 @@ final class AIGetModelsResponse implements BaseModel
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     public function withObject(string $object): self
     {
-        $obj = clone $this;
-        $obj['object'] = $object;
+        $self = clone $this;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 }

@@ -182,24 +182,24 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
         ?string $translatedNumber = null,
         UsagePaymentMethod|string|null $usagePaymentMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $callForwarding && $obj['callForwarding'] = $callForwarding;
-        null !== $callRecording && $obj['callRecording'] = $callRecording;
-        null !== $cnamListing && $obj['cnamListing'] = $cnamListing;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $emergency && $obj['emergency'] = $emergency;
-        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
-        null !== $mediaFeatures && $obj['mediaFeatures'] = $mediaFeatures;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $techPrefixEnabled && $obj['techPrefixEnabled'] = $techPrefixEnabled;
-        null !== $translatedNumber && $obj['translatedNumber'] = $translatedNumber;
-        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
+        null !== $id && $self['id'] = $id;
+        null !== $callForwarding && $self['callForwarding'] = $callForwarding;
+        null !== $callRecording && $self['callRecording'] = $callRecording;
+        null !== $cnamListing && $self['cnamListing'] = $cnamListing;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $emergency && $self['emergency'] = $emergency;
+        null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
+        null !== $mediaFeatures && $self['mediaFeatures'] = $mediaFeatures;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $techPrefixEnabled && $self['techPrefixEnabled'] = $techPrefixEnabled;
+        null !== $translatedNumber && $self['translatedNumber'] = $translatedNumber;
+        null !== $usagePaymentMethod && $self['usagePaymentMethod'] = $usagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withCallForwarding(
         CallForwarding|array $callForwarding
     ): self {
-        $obj = clone $this;
-        $obj['callForwarding'] = $callForwarding;
+        $self = clone $this;
+        $self['callForwarding'] = $callForwarding;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,10 +242,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
-        $obj = clone $this;
-        $obj['callRecording'] = $callRecording;
+        $self = clone $this;
+        $self['callRecording'] = $callRecording;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -257,10 +257,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
-        $obj = clone $this;
-        $obj['cnamListing'] = $cnamListing;
+        $self = clone $this;
+        $self['cnamListing'] = $cnamListing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +268,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +279,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -296,10 +296,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withEmergency(Emergency|array $emergency): self
     {
-        $obj = clone $this;
-        $obj['emergency'] = $emergency;
+        $self = clone $this;
+        $self['emergency'] = $emergency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,10 +310,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withInboundCallScreening(
         InboundCallScreening|string $inboundCallScreening
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallScreening'] = $inboundCallScreening;
+        $self = clone $this;
+        $self['inboundCallScreening'] = $inboundCallScreening;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +327,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withMediaFeatures(MediaFeatures|array $mediaFeatures): self
     {
-        $obj = clone $this;
-        $obj['mediaFeatures'] = $mediaFeatures;
+        $self = clone $this;
+        $self['mediaFeatures'] = $mediaFeatures;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +338,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -349,10 +349,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -360,10 +360,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withTechPrefixEnabled(bool $techPrefixEnabled): self
     {
-        $obj = clone $this;
-        $obj['techPrefixEnabled'] = $techPrefixEnabled;
+        $self = clone $this;
+        $self['techPrefixEnabled'] = $techPrefixEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -371,10 +371,10 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      */
     public function withTranslatedNumber(string $translatedNumber): self
     {
-        $obj = clone $this;
-        $obj['translatedNumber'] = $translatedNumber;
+        $self = clone $this;
+        $self['translatedNumber'] = $translatedNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -385,9 +385,9 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withUsagePaymentMethod(
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['usagePaymentMethod'] = $usagePaymentMethod;
+        $self = clone $this;
+        $self['usagePaymentMethod'] = $usagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 }

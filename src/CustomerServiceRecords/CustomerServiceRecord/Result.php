@@ -82,14 +82,14 @@ final class Result implements BaseModel
         ?array $associatedPhoneNumbers = null,
         ?string $carrierName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $address && $obj['address'] = $address;
-        null !== $admin && $obj['admin'] = $admin;
-        null !== $associatedPhoneNumbers && $obj['associatedPhoneNumbers'] = $associatedPhoneNumbers;
-        null !== $carrierName && $obj['carrierName'] = $carrierName;
+        null !== $address && $self['address'] = $address;
+        null !== $admin && $self['admin'] = $admin;
+        null !== $associatedPhoneNumbers && $self['associatedPhoneNumbers'] = $associatedPhoneNumbers;
+        null !== $carrierName && $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Result implements BaseModel
      */
     public function withAddress(Address|array $address): self
     {
-        $obj = clone $this;
-        $obj['address'] = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Result implements BaseModel
      */
     public function withAdmin(Admin|array $admin): self
     {
-        $obj = clone $this;
-        $obj['admin'] = $admin;
+        $self = clone $this;
+        $self['admin'] = $admin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Result implements BaseModel
     public function withAssociatedPhoneNumbers(
         array $associatedPhoneNumbers
     ): self {
-        $obj = clone $this;
-        $obj['associatedPhoneNumbers'] = $associatedPhoneNumbers;
+        $self = clone $this;
+        $self['associatedPhoneNumbers'] = $associatedPhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,9 +148,9 @@ final class Result implements BaseModel
      */
     public function withCarrierName(string $carrierName): self
     {
-        $obj = clone $this;
-        $obj['carrierName'] = $carrierName;
+        $self = clone $this;
+        $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 }

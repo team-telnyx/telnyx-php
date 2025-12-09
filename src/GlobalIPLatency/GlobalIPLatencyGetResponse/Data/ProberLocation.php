@@ -58,14 +58,14 @@ final class ProberLocation implements BaseModel
         ?float $lon = null,
         ?string $name = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $lat && $obj['lat'] = $lat;
-        null !== $lon && $obj['lon'] = $lon;
-        null !== $name && $obj['name'] = $name;
+        null !== $id && $self['id'] = $id;
+        null !== $lat && $self['lat'] = $lat;
+        null !== $lon && $self['lon'] = $lon;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class ProberLocation implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class ProberLocation implements BaseModel
      */
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj['lat'] = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class ProberLocation implements BaseModel
      */
     public function withLon(float $lon): self
     {
-        $obj = clone $this;
-        $obj['lon'] = $lon;
+        $self = clone $this;
+        $self['lon'] = $lon;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class ProberLocation implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

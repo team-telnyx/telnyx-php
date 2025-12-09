@@ -51,12 +51,12 @@ final class Status implements BaseModel
      */
     public static function with(Eq|string|null $eq = null, ?array $in = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj['eq'] = $eq;
-        null !== $in && $obj['in'] = $in;
+        null !== $eq && $self['eq'] = $eq;
+        null !== $in && $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +66,10 @@ final class Status implements BaseModel
      */
     public function withEq(Eq|string $eq): self
     {
-        $obj = clone $this;
-        $obj['eq'] = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,9 +79,9 @@ final class Status implements BaseModel
      */
     public function withIn(array $in): self
     {
-        $obj = clone $this;
-        $obj['in'] = $in;
+        $self = clone $this;
+        $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 }

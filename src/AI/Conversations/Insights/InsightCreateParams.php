@@ -78,31 +78,31 @@ final class InsightCreateParams implements BaseModel
         mixed $jsonSchema = null,
         ?string $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['instructions'] = $instructions;
-        $obj['name'] = $name;
+        $self['instructions'] = $instructions;
+        $self['name'] = $name;
 
-        null !== $jsonSchema && $obj['jsonSchema'] = $jsonSchema;
-        null !== $webhook && $obj['webhook'] = $webhook;
+        null !== $jsonSchema && $self['jsonSchema'] = $jsonSchema;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj['instructions'] = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,17 +112,17 @@ final class InsightCreateParams implements BaseModel
      */
     public function withJsonSchema(mixed $jsonSchema): self
     {
-        $obj = clone $this;
-        $obj['jsonSchema'] = $jsonSchema;
+        $self = clone $this;
+        $self['jsonSchema'] = $jsonSchema;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhook(string $webhook): self
     {
-        $obj = clone $this;
-        $obj['webhook'] = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

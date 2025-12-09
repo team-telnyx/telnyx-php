@@ -57,12 +57,12 @@ final class PortingOrderStatus implements BaseModel
         ?array $details = null,
         Value|string|null $value = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $details && $obj['details'] = $details;
-        null !== $value && $obj['value'] = $value;
+        null !== $details && $self['details'] = $details;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class PortingOrderStatus implements BaseModel
      */
     public function withDetails(array $details): self
     {
-        $obj = clone $this;
-        $obj['details'] = $details;
+        $self = clone $this;
+        $self['details'] = $details;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class PortingOrderStatus implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

@@ -80,15 +80,15 @@ final class Filter implements BaseModel
         PhoneNumberType|string|null $phoneNumberType = null,
         ?string $requirementGroupID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $action && $obj['action'] = $action;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $requirementGroupID && $obj['requirementGroupID'] = $requirementGroupID;
+        null !== $action && $self['action'] = $action;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $requirementGroupID && $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Filter implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,9 +145,9 @@ final class Filter implements BaseModel
      */
     public function withRequirementGroupID(string $requirementGroupID): self
     {
-        $obj = clone $this;
-        $obj['requirementGroupID'] = $requirementGroupID;
+        $self = clone $this;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 }

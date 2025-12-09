@@ -95,17 +95,17 @@ final class Settings implements BaseModel
         ?string $nameIdentifierFormat = null,
         ?string $serviceProviderEntityID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $assertionConsumerServiceURL && $obj['assertionConsumerServiceURL'] = $assertionConsumerServiceURL;
-        null !== $idpCertFingerprint && $obj['idpCertFingerprint'] = $idpCertFingerprint;
-        null !== $idpCertFingerprintAlgorithm && $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
-        null !== $idpEntityID && $obj['idpEntityID'] = $idpEntityID;
-        null !== $idpSSOTargetURL && $obj['idpSSOTargetURL'] = $idpSSOTargetURL;
-        null !== $nameIdentifierFormat && $obj['nameIdentifierFormat'] = $nameIdentifierFormat;
-        null !== $serviceProviderEntityID && $obj['serviceProviderEntityID'] = $serviceProviderEntityID;
+        null !== $assertionConsumerServiceURL && $self['assertionConsumerServiceURL'] = $assertionConsumerServiceURL;
+        null !== $idpCertFingerprint && $self['idpCertFingerprint'] = $idpCertFingerprint;
+        null !== $idpCertFingerprintAlgorithm && $self['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
+        null !== $idpEntityID && $self['idpEntityID'] = $idpEntityID;
+        null !== $idpSSOTargetURL && $self['idpSSOTargetURL'] = $idpSSOTargetURL;
+        null !== $nameIdentifierFormat && $self['nameIdentifierFormat'] = $nameIdentifierFormat;
+        null !== $serviceProviderEntityID && $self['serviceProviderEntityID'] = $serviceProviderEntityID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Settings implements BaseModel
     public function withAssertionConsumerServiceURL(
         string $assertionConsumerServiceURL
     ): self {
-        $obj = clone $this;
-        $obj['assertionConsumerServiceURL'] = $assertionConsumerServiceURL;
+        $self = clone $this;
+        $self['assertionConsumerServiceURL'] = $assertionConsumerServiceURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Settings implements BaseModel
      */
     public function withIdpCertFingerprint(string $idpCertFingerprint): self
     {
-        $obj = clone $this;
-        $obj['idpCertFingerprint'] = $idpCertFingerprint;
+        $self = clone $this;
+        $self['idpCertFingerprint'] = $idpCertFingerprint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Settings implements BaseModel
     public function withIdpCertFingerprintAlgorithm(
         IdpCertFingerprintAlgorithm|string $idpCertFingerprintAlgorithm
     ): self {
-        $obj = clone $this;
-        $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
+        $self = clone $this;
+        $self['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Settings implements BaseModel
      */
     public function withIdpEntityID(string $idpEntityID): self
     {
-        $obj = clone $this;
-        $obj['idpEntityID'] = $idpEntityID;
+        $self = clone $this;
+        $self['idpEntityID'] = $idpEntityID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Settings implements BaseModel
      */
     public function withIdpSSOTargetURL(string $idpSSOTargetURL): self
     {
-        $obj = clone $this;
-        $obj['idpSSOTargetURL'] = $idpSSOTargetURL;
+        $self = clone $this;
+        $self['idpSSOTargetURL'] = $idpSSOTargetURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class Settings implements BaseModel
      */
     public function withNameIdentifierFormat(string $nameIdentifierFormat): self
     {
-        $obj = clone $this;
-        $obj['nameIdentifierFormat'] = $nameIdentifierFormat;
+        $self = clone $this;
+        $self['nameIdentifierFormat'] = $nameIdentifierFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,9 +184,9 @@ final class Settings implements BaseModel
     public function withServiceProviderEntityID(
         string $serviceProviderEntityID
     ): self {
-        $obj = clone $this;
-        $obj['serviceProviderEntityID'] = $serviceProviderEntityID;
+        $self = clone $this;
+        $self['serviceProviderEntityID'] = $serviceProviderEntityID;
 
-        return $obj;
+        return $self;
     }
 }

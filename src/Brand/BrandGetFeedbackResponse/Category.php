@@ -80,14 +80,14 @@ final class Category implements BaseModel
         string $displayName,
         array $fields
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['description'] = $description;
-        $obj['displayName'] = $displayName;
-        $obj['fields'] = $fields;
+        $self['id'] = $id;
+        $self['description'] = $description;
+        $self['displayName'] = $displayName;
+        $self['fields'] = $fields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Category implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class Category implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Category implements BaseModel
      */
     public function withDisplayName(string $displayName): self
     {
-        $obj = clone $this;
-        $obj['displayName'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,9 +130,9 @@ final class Category implements BaseModel
      */
     public function withFields(array $fields): self
     {
-        $obj = clone $this;
-        $obj['fields'] = $fields;
+        $self = clone $this;
+        $self['fields'] = $fields;
 
-        return $obj;
+        return $self;
     }
 }

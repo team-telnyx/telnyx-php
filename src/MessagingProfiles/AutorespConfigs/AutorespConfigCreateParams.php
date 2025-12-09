@@ -79,23 +79,23 @@ final class AutorespConfigCreateParams implements BaseModel
         Op|string $op,
         ?string $respText = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['countryCode'] = $countryCode;
-        $obj['keywords'] = $keywords;
-        $obj['op'] = $op;
+        $self['countryCode'] = $countryCode;
+        $self['keywords'] = $keywords;
+        $self['op'] = $op;
 
-        null !== $respText && $obj['respText'] = $respText;
+        null !== $respText && $self['respText'] = $respText;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class AutorespConfigCreateParams implements BaseModel
      */
     public function withKeywords(array $keywords): self
     {
-        $obj = clone $this;
-        $obj['keywords'] = $keywords;
+        $self = clone $this;
+        $self['keywords'] = $keywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,17 +114,17 @@ final class AutorespConfigCreateParams implements BaseModel
      */
     public function withOp(Op|string $op): self
     {
-        $obj = clone $this;
-        $obj['op'] = $op;
+        $self = clone $this;
+        $self['op'] = $op;
 
-        return $obj;
+        return $self;
     }
 
     public function withRespText(string $respText): self
     {
-        $obj = clone $this;
-        $obj['respText'] = $respText;
+        $self = clone $this;
+        $self['respText'] = $respText;
 
-        return $obj;
+        return $self;
     }
 }

@@ -58,13 +58,13 @@ final class ConnectionRtcpSettings implements BaseModel
         Port|string|null $port = null,
         ?int $reportFrequencySecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $captureEnabled && $obj['captureEnabled'] = $captureEnabled;
-        null !== $port && $obj['port'] = $port;
-        null !== $reportFrequencySecs && $obj['reportFrequencySecs'] = $reportFrequencySecs;
+        null !== $captureEnabled && $self['captureEnabled'] = $captureEnabled;
+        null !== $port && $self['port'] = $port;
+        null !== $reportFrequencySecs && $self['reportFrequencySecs'] = $reportFrequencySecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +72,10 @@ final class ConnectionRtcpSettings implements BaseModel
      */
     public function withCaptureEnabled(bool $captureEnabled): self
     {
-        $obj = clone $this;
-        $obj['captureEnabled'] = $captureEnabled;
+        $self = clone $this;
+        $self['captureEnabled'] = $captureEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class ConnectionRtcpSettings implements BaseModel
      */
     public function withPort(Port|string $port): self
     {
-        $obj = clone $this;
-        $obj['port'] = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +96,9 @@ final class ConnectionRtcpSettings implements BaseModel
      */
     public function withReportFrequencySecs(int $reportFrequencySecs): self
     {
-        $obj = clone $this;
-        $obj['reportFrequencySecs'] = $reportFrequencySecs;
+        $self = clone $this;
+        $self['reportFrequencySecs'] = $reportFrequencySecs;
 
-        return $obj;
+        return $self;
     }
 }

@@ -61,11 +61,11 @@ final class WirelessBlocklistValueListParams implements BaseModel
      */
     public static function with(Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class WirelessBlocklistValueListParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

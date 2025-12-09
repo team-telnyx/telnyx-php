@@ -122,19 +122,19 @@ final class Data implements BaseModel
         RequirementsStatus|string|null $requirementsStatus = null,
         ?string $supportKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $portabilityStatus && $obj['portabilityStatus'] = $portabilityStatus;
-        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
-        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirementsStatus && $obj['requirementsStatus'] = $requirementsStatus;
-        null !== $supportKey && $obj['supportKey'] = $supportKey;
+        null !== $activationStatus && $self['activationStatus'] = $activationStatus;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $portabilityStatus && $self['portabilityStatus'] = $portabilityStatus;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $portingOrderStatus && $self['portingOrderStatus'] = $portingOrderStatus;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementsStatus && $self['requirementsStatus'] = $requirementsStatus;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class Data implements BaseModel
     public function withActivationStatus(
         ActivationStatus|string $activationStatus
     ): self {
-        $obj = clone $this;
-        $obj['activationStatus'] = $activationStatus;
+        $self = clone $this;
+        $self['activationStatus'] = $activationStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Data implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +184,10 @@ final class Data implements BaseModel
     public function withPortabilityStatus(
         PortabilityStatus|string $portabilityStatus
     ): self {
-        $obj = clone $this;
-        $obj['portabilityStatus'] = $portabilityStatus;
+        $self = clone $this;
+        $self['portabilityStatus'] = $portabilityStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class Data implements BaseModel
      */
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj['portingOrderID'] = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class Data implements BaseModel
     public function withPortingOrderStatus(
         PortingOrderStatus|string $portingOrderStatus
     ): self {
-        $obj = clone $this;
-        $obj['portingOrderStatus'] = $portingOrderStatus;
+        $self = clone $this;
+        $self['portingOrderStatus'] = $portingOrderStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class Data implements BaseModel
     public function withRequirementsStatus(
         RequirementsStatus|string $requirementsStatus
     ): self {
-        $obj = clone $this;
-        $obj['requirementsStatus'] = $requirementsStatus;
+        $self = clone $this;
+        $self['requirementsStatus'] = $requirementsStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,9 +245,9 @@ final class Data implements BaseModel
      */
     public function withSupportKey(string $supportKey): self
     {
-        $obj = clone $this;
-        $obj['supportKey'] = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 }

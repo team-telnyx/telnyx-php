@@ -54,12 +54,12 @@ final class Function1 implements BaseModel
      */
     public static function with(string $arguments, string $name): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['arguments'] = $arguments;
-        $obj['name'] = $name;
+        $self['arguments'] = $arguments;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Function1 implements BaseModel
      */
     public function withArguments(string $arguments): self
     {
-        $obj = clone $this;
-        $obj['arguments'] = $arguments;
+        $self = clone $this;
+        $self['arguments'] = $arguments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Function1 implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

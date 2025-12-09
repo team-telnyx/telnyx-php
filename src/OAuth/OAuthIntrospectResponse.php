@@ -100,18 +100,18 @@ final class OAuthIntrospectResponse implements BaseModel
         ?string $iss = null,
         ?string $scope = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['active'] = $active;
+        $self['active'] = $active;
 
-        null !== $aud && $obj['aud'] = $aud;
-        null !== $clientID && $obj['clientID'] = $clientID;
-        null !== $exp && $obj['exp'] = $exp;
-        null !== $iat && $obj['iat'] = $iat;
-        null !== $iss && $obj['iss'] = $iss;
-        null !== $scope && $obj['scope'] = $scope;
+        null !== $aud && $self['aud'] = $aud;
+        null !== $clientID && $self['clientID'] = $clientID;
+        null !== $exp && $self['exp'] = $exp;
+        null !== $iat && $self['iat'] = $iat;
+        null !== $iss && $self['iss'] = $iss;
+        null !== $scope && $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class OAuthIntrospectResponse implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class OAuthIntrospectResponse implements BaseModel
      */
     public function withAud(string $aud): self
     {
-        $obj = clone $this;
-        $obj['aud'] = $aud;
+        $self = clone $this;
+        $self['aud'] = $aud;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class OAuthIntrospectResponse implements BaseModel
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj['clientID'] = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class OAuthIntrospectResponse implements BaseModel
      */
     public function withExp(int $exp): self
     {
-        $obj = clone $this;
-        $obj['exp'] = $exp;
+        $self = clone $this;
+        $self['exp'] = $exp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class OAuthIntrospectResponse implements BaseModel
      */
     public function withIat(int $iat): self
     {
-        $obj = clone $this;
-        $obj['iat'] = $iat;
+        $self = clone $this;
+        $self['iat'] = $iat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class OAuthIntrospectResponse implements BaseModel
      */
     public function withIss(string $iss): self
     {
-        $obj = clone $this;
-        $obj['iss'] = $iss;
+        $self = clone $this;
+        $self['iss'] = $iss;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,9 +185,9 @@ final class OAuthIntrospectResponse implements BaseModel
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj['scope'] = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 }

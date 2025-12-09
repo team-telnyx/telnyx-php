@@ -98,18 +98,18 @@ final class RecordingTranscription implements BaseModel
         ?string $transcriptionText = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $durationMillis && $obj['durationMillis'] = $durationMillis;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $recordingID && $obj['recordingID'] = $recordingID;
-        null !== $status && $obj['status'] = $status;
-        null !== $transcriptionText && $obj['transcriptionText'] = $transcriptionText;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $durationMillis && $self['durationMillis'] = $durationMillis;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $recordingID && $self['recordingID'] = $recordingID;
+        null !== $status && $self['status'] = $status;
+        null !== $transcriptionText && $self['transcriptionText'] = $transcriptionText;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class RecordingTranscription implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class RecordingTranscription implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class RecordingTranscription implements BaseModel
      */
     public function withDurationMillis(int $durationMillis): self
     {
-        $obj = clone $this;
-        $obj['durationMillis'] = $durationMillis;
+        $self = clone $this;
+        $self['durationMillis'] = $durationMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class RecordingTranscription implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class RecordingTranscription implements BaseModel
      */
     public function withRecordingID(string $recordingID): self
     {
-        $obj = clone $this;
-        $obj['recordingID'] = $recordingID;
+        $self = clone $this;
+        $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class RecordingTranscription implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class RecordingTranscription implements BaseModel
      */
     public function withTranscriptionText(string $transcriptionText): self
     {
-        $obj = clone $this;
-        $obj['transcriptionText'] = $transcriptionText;
+        $self = clone $this;
+        $self['transcriptionText'] = $transcriptionText;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class RecordingTranscription implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

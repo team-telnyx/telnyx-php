@@ -85,50 +85,50 @@ final class AdvancedOrderUpdateRequirementGroupParams implements BaseModel
         ?int $quantity = null,
         ?string $requirementGroupID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $areaCode && $obj['areaCode'] = $areaCode;
-        null !== $comments && $obj['comments'] = $comments;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $features && $obj['features'] = $features;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $quantity && $obj['quantity'] = $quantity;
-        null !== $requirementGroupID && $obj['requirementGroupID'] = $requirementGroupID;
+        null !== $areaCode && $self['areaCode'] = $areaCode;
+        null !== $comments && $self['comments'] = $comments;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $features && $self['features'] = $features;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $quantity && $self['quantity'] = $quantity;
+        null !== $requirementGroupID && $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAreaCode(string $areaCode): self
     {
-        $obj = clone $this;
-        $obj['areaCode'] = $areaCode;
+        $self = clone $this;
+        $self['areaCode'] = $areaCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withComments(string $comments): self
     {
-        $obj = clone $this;
-        $obj['comments'] = $comments;
+        $self = clone $this;
+        $self['comments'] = $comments;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class AdvancedOrderUpdateRequirementGroupParams implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,18 +148,18 @@ final class AdvancedOrderUpdateRequirementGroupParams implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,9 +167,9 @@ final class AdvancedOrderUpdateRequirementGroupParams implements BaseModel
      */
     public function withRequirementGroupID(string $requirementGroupID): self
     {
-        $obj = clone $this;
-        $obj['requirementGroupID'] = $requirementGroupID;
+        $self = clone $this;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 }

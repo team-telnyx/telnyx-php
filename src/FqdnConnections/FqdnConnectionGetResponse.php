@@ -74,11 +74,11 @@ final class FqdnConnectionGetResponse implements BaseModel
      */
     public static function with(FqdnConnection|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj['data'] = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class FqdnConnectionGetResponse implements BaseModel
      */
     public function withData(FqdnConnection|array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

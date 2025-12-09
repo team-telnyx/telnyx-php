@@ -63,11 +63,11 @@ final class CanaryDeployCreateParams implements BaseModel
      */
     public static function with(array $versions): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['versions'] = $versions;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class CanaryDeployCreateParams implements BaseModel
      */
     public function withVersions(array $versions): self
     {
-        $obj = clone $this;
-        $obj['versions'] = $versions;
+        $self = clone $this;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 }

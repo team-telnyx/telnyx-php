@@ -40,11 +40,11 @@ final class SessionRetrieveParams implements BaseModel
      */
     public static function with(?bool $includeParticipants = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includeParticipants && $obj['includeParticipants'] = $includeParticipants;
+        null !== $includeParticipants && $self['includeParticipants'] = $includeParticipants;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class SessionRetrieveParams implements BaseModel
      */
     public function withIncludeParticipants(bool $includeParticipants): self
     {
-        $obj = clone $this;
-        $obj['includeParticipants'] = $includeParticipants;
+        $self = clone $this;
+        $self['includeParticipants'] = $includeParticipants;
 
-        return $obj;
+        return $self;
     }
 }

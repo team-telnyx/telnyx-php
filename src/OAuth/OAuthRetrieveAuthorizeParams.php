@@ -120,18 +120,18 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
         ?string $scope = null,
         ?string $state = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['clientID'] = $clientID;
-        $obj['redirectUri'] = $redirectUri;
-        $obj['responseType'] = $responseType;
+        $self['clientID'] = $clientID;
+        $self['redirectUri'] = $redirectUri;
+        $self['responseType'] = $responseType;
 
-        null !== $codeChallenge && $obj['codeChallenge'] = $codeChallenge;
-        null !== $codeChallengeMethod && $obj['codeChallengeMethod'] = $codeChallengeMethod;
-        null !== $scope && $obj['scope'] = $scope;
-        null !== $state && $obj['state'] = $state;
+        null !== $codeChallenge && $self['codeChallenge'] = $codeChallenge;
+        null !== $codeChallengeMethod && $self['codeChallengeMethod'] = $codeChallengeMethod;
+        null !== $scope && $self['scope'] = $scope;
+        null !== $state && $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj['clientID'] = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      */
     public function withRedirectUri(string $redirectUri): self
     {
-        $obj = clone $this;
-        $obj['redirectUri'] = $redirectUri;
+        $self = clone $this;
+        $self['redirectUri'] = $redirectUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      */
     public function withResponseType(ResponseType|string $responseType): self
     {
-        $obj = clone $this;
-        $obj['responseType'] = $responseType;
+        $self = clone $this;
+        $self['responseType'] = $responseType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      */
     public function withCodeChallenge(string $codeChallenge): self
     {
-        $obj = clone $this;
-        $obj['codeChallenge'] = $codeChallenge;
+        $self = clone $this;
+        $self['codeChallenge'] = $codeChallenge;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withCodeChallengeMethod(
         CodeChallengeMethod|string $codeChallengeMethod
     ): self {
-        $obj = clone $this;
-        $obj['codeChallengeMethod'] = $codeChallengeMethod;
+        $self = clone $this;
+        $self['codeChallengeMethod'] = $codeChallengeMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj['scope'] = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,9 +210,9 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj['state'] = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 }

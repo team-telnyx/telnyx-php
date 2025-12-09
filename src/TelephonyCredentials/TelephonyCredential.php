@@ -106,20 +106,20 @@ final class TelephonyCredential implements BaseModel
         ?string $sipUsername = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $expired && $obj['expired'] = $expired;
-        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
-        null !== $name && $obj['name'] = $name;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $resourceID && $obj['resourceID'] = $resourceID;
-        null !== $sipPassword && $obj['sipPassword'] = $sipPassword;
-        null !== $sipUsername && $obj['sipUsername'] = $sipUsername;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $expired && $self['expired'] = $expired;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $name && $self['name'] = $name;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $resourceID && $self['resourceID'] = $resourceID;
+        null !== $sipPassword && $self['sipPassword'] = $sipPassword;
+        null !== $sipUsername && $self['sipUsername'] = $sipUsername;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class TelephonyCredential implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class TelephonyCredential implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class TelephonyCredential implements BaseModel
      */
     public function withExpired(bool $expired): self
     {
-        $obj = clone $this;
-        $obj['expired'] = $expired;
+        $self = clone $this;
+        $self['expired'] = $expired;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,18 +160,18 @@ final class TelephonyCredential implements BaseModel
      */
     public function withExpiresAt(string $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +179,10 @@ final class TelephonyCredential implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class TelephonyCredential implements BaseModel
      */
     public function withResourceID(string $resourceID): self
     {
-        $obj = clone $this;
-        $obj['resourceID'] = $resourceID;
+        $self = clone $this;
+        $self['resourceID'] = $resourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class TelephonyCredential implements BaseModel
      */
     public function withSipPassword(string $sipPassword): self
     {
-        $obj = clone $this;
-        $obj['sipPassword'] = $sipPassword;
+        $self = clone $this;
+        $self['sipPassword'] = $sipPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class TelephonyCredential implements BaseModel
      */
     public function withSipUsername(string $sipUsername): self
     {
-        $obj = clone $this;
-        $obj['sipUsername'] = $sipUsername;
+        $self = clone $this;
+        $self['sipUsername'] = $sipUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,9 +223,9 @@ final class TelephonyCredential implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -54,11 +54,11 @@ final class ActionUpdateClientStateParams implements BaseModel
      */
     public static function with(string $clientState): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['clientState'] = $clientState;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class ActionUpdateClientStateParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 }

@@ -38,27 +38,27 @@ final class RegionInformation implements BaseModel
         ?string $regionName = null,
         ?string $regionType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $regionName && $obj['regionName'] = $regionName;
-        null !== $regionType && $obj['regionType'] = $regionType;
+        null !== $regionName && $self['regionName'] = $regionName;
+        null !== $regionType && $self['regionType'] = $regionType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionName(string $regionName): self
     {
-        $obj = clone $this;
-        $obj['regionName'] = $regionName;
+        $self = clone $this;
+        $self['regionName'] = $regionName;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionType(string $regionType): self
     {
-        $obj = clone $this;
-        $obj['regionType'] = $regionType;
+        $self = clone $this;
+        $self['regionType'] = $regionType;
 
-        return $obj;
+        return $self;
     }
 }
