@@ -54,12 +54,12 @@ final class Rubric implements BaseModel
      */
     public static function with(string $criteria, string $name): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['criteria'] = $criteria;
-        $obj['name'] = $name;
+        $self['criteria'] = $criteria;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Rubric implements BaseModel
      */
     public function withCriteria(string $criteria): self
     {
-        $obj = clone $this;
-        $obj['criteria'] = $criteria;
+        $self = clone $this;
+        $self['criteria'] = $criteria;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Rubric implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

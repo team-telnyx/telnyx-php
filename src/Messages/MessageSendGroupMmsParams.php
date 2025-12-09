@@ -121,19 +121,19 @@ final class MessageSendGroupMmsParams implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['from'] = $from;
-        $obj['to'] = $to;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        null !== $mediaURLs && $obj['mediaURLs'] = $mediaURLs;
-        null !== $subject && $obj['subject'] = $subject;
-        null !== $text && $obj['text'] = $text;
-        null !== $useProfileWebhooks && $obj['useProfileWebhooks'] = $useProfileWebhooks;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $mediaURLs && $self['mediaURLs'] = $mediaURLs;
+        null !== $subject && $self['subject'] = $subject;
+        null !== $text && $self['text'] = $text;
+        null !== $useProfileWebhooks && $self['useProfileWebhooks'] = $useProfileWebhooks;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withTo(array $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withMediaURLs(array $mediaURLs): self
     {
-        $obj = clone $this;
-        $obj['mediaURLs'] = $mediaURLs;
+        $self = clone $this;
+        $self['mediaURLs'] = $mediaURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withSubject(string $subject): self
     {
-        $obj = clone $this;
-        $obj['subject'] = $subject;
+        $self = clone $this;
+        $self['subject'] = $subject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withUseProfileWebhooks(bool $useProfileWebhooks): self
     {
-        $obj = clone $this;
-        $obj['useProfileWebhooks'] = $useProfileWebhooks;
+        $self = clone $this;
+        $self['useProfileWebhooks'] = $useProfileWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,9 +222,9 @@ final class MessageSendGroupMmsParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

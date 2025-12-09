@@ -111,19 +111,19 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
         ?string $subscriberName = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $attemptedPin && $obj['attemptedPin'] = $attemptedPin;
-        null !== $carrierName && $obj['carrierName'] = $carrierName;
-        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
-        null !== $rejectionReason && $obj['rejectionReason'] = $rejectionReason;
-        null !== $spid && $obj['spid'] = $spid;
-        null !== $status && $obj['status'] = $status;
-        null !== $subscriberName && $obj['subscriberName'] = $subscriberName;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $id && $self['id'] = $id;
+        null !== $attemptedPin && $self['attemptedPin'] = $attemptedPin;
+        null !== $carrierName && $self['carrierName'] = $carrierName;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
+        null !== $rejectionReason && $self['rejectionReason'] = $rejectionReason;
+        null !== $spid && $self['spid'] = $spid;
+        null !== $status && $self['status'] = $status;
+        null !== $subscriberName && $self['subscriberName'] = $subscriberName;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withAttemptedPin(string $attemptedPin): self
     {
-        $obj = clone $this;
-        $obj['attemptedPin'] = $attemptedPin;
+        $self = clone $this;
+        $self['attemptedPin'] = $attemptedPin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withCarrierName(string $carrierName): self
     {
-        $obj = clone $this;
-        $obj['carrierName'] = $carrierName;
+        $self = clone $this;
+        $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withRejectionReason(?string $rejectionReason): self
     {
-        $obj = clone $this;
-        $obj['rejectionReason'] = $rejectionReason;
+        $self = clone $this;
+        $self['rejectionReason'] = $rejectionReason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withSpid(string $spid): self
     {
-        $obj = clone $this;
-        $obj['spid'] = $spid;
+        $self = clone $this;
+        $self['spid'] = $spid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withSubscriberName(string $subscriberName): self
     {
-        $obj = clone $this;
-        $obj['subscriberName'] = $subscriberName;
+        $self = clone $this;
+        $self['subscriberName'] = $subscriberName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,9 +223,9 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

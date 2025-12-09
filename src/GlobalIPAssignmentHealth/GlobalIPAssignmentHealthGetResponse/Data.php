@@ -64,14 +64,14 @@ final class Data implements BaseModel
         Health|array|null $health = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIP && $obj['globalIP'] = $globalIP;
-        null !== $globalIPAssignment && $obj['globalIPAssignment'] = $globalIPAssignment;
-        null !== $health && $obj['health'] = $health;
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $globalIP && $self['globalIP'] = $globalIP;
+        null !== $globalIPAssignment && $self['globalIPAssignment'] = $globalIPAssignment;
+        null !== $health && $self['health'] = $health;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class Data implements BaseModel
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
-        $obj = clone $this;
-        $obj['globalIP'] = $globalIP;
+        $self = clone $this;
+        $self['globalIP'] = $globalIP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Data implements BaseModel
     public function withGlobalIPAssignment(
         GlobalIPAssignment|array $globalIPAssignment
     ): self {
-        $obj = clone $this;
-        $obj['globalIPAssignment'] = $globalIPAssignment;
+        $self = clone $this;
+        $self['globalIPAssignment'] = $globalIPAssignment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class Data implements BaseModel
      */
     public function withHealth(Health|array $health): self
     {
-        $obj = clone $this;
-        $obj['health'] = $health;
+        $self = clone $this;
+        $self['health'] = $health;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

@@ -179,25 +179,25 @@ final class FaxCreateParams implements BaseModel
         ?bool $t38Enabled = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['connectionID'] = $connectionID;
-        $obj['from'] = $from;
-        $obj['to'] = $to;
+        $self['connectionID'] = $connectionID;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $fromDisplayName && $obj['fromDisplayName'] = $fromDisplayName;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $mediaURL && $obj['mediaURL'] = $mediaURL;
-        null !== $monochrome && $obj['monochrome'] = $monochrome;
-        null !== $previewFormat && $obj['previewFormat'] = $previewFormat;
-        null !== $quality && $obj['quality'] = $quality;
-        null !== $storeMedia && $obj['storeMedia'] = $storeMedia;
-        null !== $storePreview && $obj['storePreview'] = $storePreview;
-        null !== $t38Enabled && $obj['t38Enabled'] = $t38Enabled;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $mediaURL && $self['mediaURL'] = $mediaURL;
+        null !== $monochrome && $self['monochrome'] = $monochrome;
+        null !== $previewFormat && $self['previewFormat'] = $previewFormat;
+        null !== $quality && $self['quality'] = $quality;
+        null !== $storeMedia && $self['storeMedia'] = $storeMedia;
+        null !== $storePreview && $self['storePreview'] = $storePreview;
+        null !== $t38Enabled && $self['t38Enabled'] = $t38Enabled;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,10 +216,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -227,10 +227,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +238,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -249,10 +249,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withFromDisplayName(string $fromDisplayName): self
     {
-        $obj = clone $this;
-        $obj['fromDisplayName'] = $fromDisplayName;
+        $self = clone $this;
+        $self['fromDisplayName'] = $fromDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +260,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withMediaURL(string $mediaURL): self
     {
-        $obj = clone $this;
-        $obj['mediaURL'] = $mediaURL;
+        $self = clone $this;
+        $self['mediaURL'] = $mediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withMonochrome(bool $monochrome): self
     {
-        $obj = clone $this;
-        $obj['monochrome'] = $monochrome;
+        $self = clone $this;
+        $self['monochrome'] = $monochrome;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +295,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withPreviewFormat(PreviewFormat|string $previewFormat): self
     {
-        $obj = clone $this;
-        $obj['previewFormat'] = $previewFormat;
+        $self = clone $this;
+        $self['previewFormat'] = $previewFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withQuality(Quality|string $quality): self
     {
-        $obj = clone $this;
-        $obj['quality'] = $quality;
+        $self = clone $this;
+        $self['quality'] = $quality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -319,10 +319,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withStoreMedia(bool $storeMedia): self
     {
-        $obj = clone $this;
-        $obj['storeMedia'] = $storeMedia;
+        $self = clone $this;
+        $self['storeMedia'] = $storeMedia;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -330,10 +330,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withStorePreview(bool $storePreview): self
     {
-        $obj = clone $this;
-        $obj['storePreview'] = $storePreview;
+        $self = clone $this;
+        $self['storePreview'] = $storePreview;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -341,10 +341,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withT38Enabled(bool $t38Enabled): self
     {
-        $obj = clone $this;
-        $obj['t38Enabled'] = $t38Enabled;
+        $self = clone $this;
+        $self['t38Enabled'] = $t38Enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -352,9 +352,9 @@ final class FaxCreateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

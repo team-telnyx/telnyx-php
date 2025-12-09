@@ -77,16 +77,16 @@ final class Data implements BaseModel
         ?\DateTimeInterface $updatedAt = null,
         ?string $userBundleID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $portingPhoneNumberID && $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $userBundleID && $obj['userBundleID'] = $userBundleID;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $portingPhoneNumberID && $self['portingPhoneNumberID'] = $portingPhoneNumberID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userBundleID && $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Data implements BaseModel
      */
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
-        $obj = clone $this;
-        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
+        $self = clone $this;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,9 +149,9 @@ final class Data implements BaseModel
      */
     public function withUserBundleID(string $userBundleID): self
     {
-        $obj = clone $this;
-        $obj['userBundleID'] = $userBundleID;
+        $self = clone $this;
+        $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 }

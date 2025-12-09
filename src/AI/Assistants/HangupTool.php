@@ -57,12 +57,12 @@ final class HangupTool implements BaseModel
         HangupToolParams|array $hangup,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['hangup'] = $hangup;
-        $obj['type'] = $type;
+        $self['hangup'] = $hangup;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,10 +70,10 @@ final class HangupTool implements BaseModel
      */
     public function withHangup(HangupToolParams|array $hangup): self
     {
-        $obj = clone $this;
-        $obj['hangup'] = $hangup;
+        $self = clone $this;
+        $self['hangup'] = $hangup;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class HangupTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

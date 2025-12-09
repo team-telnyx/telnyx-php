@@ -40,11 +40,11 @@ final class Filter implements BaseModel
      */
     public static function with(?array $contentType = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentType && $obj['contentType'] = $contentType;
+        null !== $contentType && $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class Filter implements BaseModel
      */
     public function withContentType(array $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 }

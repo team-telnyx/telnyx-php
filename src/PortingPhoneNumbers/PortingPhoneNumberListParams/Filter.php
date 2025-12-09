@@ -44,11 +44,11 @@ final class Filter implements BaseModel
     public static function with(
         PortingOrderStatus|string|null $portingOrderStatus = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
+        null !== $portingOrderStatus && $self['portingOrderStatus'] = $portingOrderStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,9 +59,9 @@ final class Filter implements BaseModel
     public function withPortingOrderStatus(
         PortingOrderStatus|string $portingOrderStatus
     ): self {
-        $obj = clone $this;
-        $obj['portingOrderStatus'] = $portingOrderStatus;
+        $self = clone $this;
+        $self['portingOrderStatus'] = $portingOrderStatus;
 
-        return $obj;
+        return $self;
     }
 }

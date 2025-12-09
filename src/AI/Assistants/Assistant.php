@@ -88,14 +88,14 @@ final class Assistant implements BaseModel
         ?string $openaiAPIKeyRef = null,
         ?array $tools = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $instructions && $obj['instructions'] = $instructions;
-        null !== $model && $obj['model'] = $model;
-        null !== $openaiAPIKeyRef && $obj['openaiAPIKeyRef'] = $openaiAPIKeyRef;
-        null !== $tools && $obj['tools'] = $tools;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $model && $self['model'] = $model;
+        null !== $openaiAPIKeyRef && $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
+        null !== $tools && $self['tools'] = $tools;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Assistant implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj['instructions'] = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Assistant implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Assistant implements BaseModel
      */
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
-        $obj = clone $this;
-        $obj['openaiAPIKeyRef'] = $openaiAPIKeyRef;
+        $self = clone $this;
+        $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class Assistant implements BaseModel
      */
     public function withTools(array $tools): self
     {
-        $obj = clone $this;
-        $obj['tools'] = $tools;
+        $self = clone $this;
+        $self['tools'] = $tools;
 
-        return $obj;
+        return $self;
     }
 }

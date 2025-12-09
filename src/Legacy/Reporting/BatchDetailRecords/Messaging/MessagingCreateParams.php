@@ -185,23 +185,23 @@ final class MessagingCreateParams implements BaseModel
         ?bool $selectAllManagedAccounts = null,
         ?string $timezone = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['endTime'] = $endTime;
-        $obj['startTime'] = $startTime;
+        $self['endTime'] = $endTime;
+        $self['startTime'] = $startTime;
 
-        null !== $connections && $obj['connections'] = $connections;
-        null !== $directions && $obj['directions'] = $directions;
-        null !== $filters && $obj['filters'] = $filters;
-        null !== $includeMessageBody && $obj['includeMessageBody'] = $includeMessageBody;
-        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
-        null !== $profiles && $obj['profiles'] = $profiles;
-        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
-        null !== $reportName && $obj['reportName'] = $reportName;
-        null !== $selectAllManagedAccounts && $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
-        null !== $timezone && $obj['timezone'] = $timezone;
+        null !== $connections && $self['connections'] = $connections;
+        null !== $directions && $self['directions'] = $directions;
+        null !== $filters && $self['filters'] = $filters;
+        null !== $includeMessageBody && $self['includeMessageBody'] = $includeMessageBody;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $profiles && $self['profiles'] = $profiles;
+        null !== $recordTypes && $self['recordTypes'] = $recordTypes;
+        null !== $reportName && $self['reportName'] = $reportName;
+        null !== $selectAllManagedAccounts && $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        null !== $timezone && $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withEndTime(\DateTimeInterface $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withConnections(array $connections): self
     {
-        $obj = clone $this;
-        $obj['connections'] = $connections;
+        $self = clone $this;
+        $self['connections'] = $connections;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +246,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withDirections(array $directions): self
     {
-        $obj = clone $this;
-        $obj['directions'] = $directions;
+        $self = clone $this;
+        $self['directions'] = $directions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +267,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withFilters(array $filters): self
     {
-        $obj = clone $this;
-        $obj['filters'] = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +278,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withIncludeMessageBody(bool $includeMessageBody): self
     {
-        $obj = clone $this;
-        $obj['includeMessageBody'] = $includeMessageBody;
+        $self = clone $this;
+        $self['includeMessageBody'] = $includeMessageBody;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,10 +291,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withManagedAccounts(array $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj['managedAccounts'] = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -304,10 +304,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withProfiles(array $profiles): self
     {
-        $obj = clone $this;
-        $obj['profiles'] = $profiles;
+        $self = clone $this;
+        $self['profiles'] = $profiles;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -317,10 +317,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withRecordTypes(array $recordTypes): self
     {
-        $obj = clone $this;
-        $obj['recordTypes'] = $recordTypes;
+        $self = clone $this;
+        $self['recordTypes'] = $recordTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -328,10 +328,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withReportName(string $reportName): self
     {
-        $obj = clone $this;
-        $obj['reportName'] = $reportName;
+        $self = clone $this;
+        $self['reportName'] = $reportName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +340,10 @@ final class MessagingCreateParams implements BaseModel
     public function withSelectAllManagedAccounts(
         bool $selectAllManagedAccounts
     ): self {
-        $obj = clone $this;
-        $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        $self = clone $this;
+        $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,9 +351,9 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withTimezone(string $timezone): self
     {
-        $obj = clone $this;
-        $obj['timezone'] = $timezone;
+        $self = clone $this;
+        $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 }

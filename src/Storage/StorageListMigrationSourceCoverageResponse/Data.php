@@ -49,12 +49,12 @@ final class Data implements BaseModel
         Provider|string|null $provider = null,
         ?string $sourceRegion = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $provider && $obj['provider'] = $provider;
-        null !== $sourceRegion && $obj['sourceRegion'] = $sourceRegion;
+        null !== $provider && $self['provider'] = $provider;
+        null !== $sourceRegion && $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class Data implements BaseModel
      */
     public function withProvider(Provider|string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class Data implements BaseModel
      */
     public function withSourceRegion(string $sourceRegion): self
     {
-        $obj = clone $this;
-        $obj['sourceRegion'] = $sourceRegion;
+        $self = clone $this;
+        $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 }

@@ -84,15 +84,15 @@ final class URLShortenerSettings implements BaseModel
         ?bool $replaceBlacklistOnly = null,
         ?bool $sendWebhooks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['domain'] = $domain;
+        $self['domain'] = $domain;
 
-        null !== $prefix && $obj['prefix'] = $prefix;
-        null !== $replaceBlacklistOnly && $obj['replaceBlacklistOnly'] = $replaceBlacklistOnly;
-        null !== $sendWebhooks && $obj['sendWebhooks'] = $sendWebhooks;
+        null !== $prefix && $self['prefix'] = $prefix;
+        null !== $replaceBlacklistOnly && $self['replaceBlacklistOnly'] = $replaceBlacklistOnly;
+        null !== $sendWebhooks && $self['sendWebhooks'] = $sendWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withDomain(string $domain): self
     {
-        $obj = clone $this;
-        $obj['domain'] = $domain;
+        $self = clone $this;
+        $self['domain'] = $domain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withPrefix(string $prefix): self
     {
-        $obj = clone $this;
-        $obj['prefix'] = $prefix;
+        $self = clone $this;
+        $self['prefix'] = $prefix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withReplaceBlacklistOnly(bool $replaceBlacklistOnly): self
     {
-        $obj = clone $this;
-        $obj['replaceBlacklistOnly'] = $replaceBlacklistOnly;
+        $self = clone $this;
+        $self['replaceBlacklistOnly'] = $replaceBlacklistOnly;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,9 +133,9 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withSendWebhooks(bool $sendWebhooks): self
     {
-        $obj = clone $this;
-        $obj['sendWebhooks'] = $sendWebhooks;
+        $self = clone $this;
+        $self['sendWebhooks'] = $sendWebhooks;
 
-        return $obj;
+        return $self;
     }
 }

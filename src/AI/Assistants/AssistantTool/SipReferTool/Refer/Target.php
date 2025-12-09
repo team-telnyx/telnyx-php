@@ -76,15 +76,15 @@ final class Target implements BaseModel
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj['sipAddress'] = $sipAddress;
+        $self['name'] = $name;
+        $self['sipAddress'] = $sipAddress;
 
-        null !== $sipAuthPassword && $obj['sipAuthPassword'] = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Target implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Target implements BaseModel
      */
     public function withSipAddress(string $sipAddress): self
     {
-        $obj = clone $this;
-        $obj['sipAddress'] = $sipAddress;
+        $self = clone $this;
+        $self['sipAddress'] = $sipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Target implements BaseModel
      */
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
-        $obj = clone $this;
-        $obj['sipAuthPassword'] = $sipAuthPassword;
+        $self = clone $this;
+        $self['sipAuthPassword'] = $sipAuthPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,9 +125,9 @@ final class Target implements BaseModel
      */
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
-        $obj = clone $this;
-        $obj['sipAuthUsername'] = $sipAuthUsername;
+        $self = clone $this;
+        $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
     }
 }

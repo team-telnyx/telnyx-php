@@ -67,14 +67,14 @@ final class MobileVoiceConnectionListParams implements BaseModel
         ?int $pageSize = null,
         ?string $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterConnectionNameContains && $obj['filterConnectionNameContains'] = $filterConnectionNameContains;
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filterConnectionNameContains && $self['filterConnectionNameContains'] = $filterConnectionNameContains;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class MobileVoiceConnectionListParams implements BaseModel
     public function withFilterConnectionNameContains(
         string $filterConnectionNameContains
     ): self {
-        $obj = clone $this;
-        $obj['filterConnectionNameContains'] = $filterConnectionNameContains;
+        $self = clone $this;
+        $self['filterConnectionNameContains'] = $filterConnectionNameContains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class MobileVoiceConnectionListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class MobileVoiceConnectionListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class MobileVoiceConnectionListParams implements BaseModel
      */
     public function withSort(string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

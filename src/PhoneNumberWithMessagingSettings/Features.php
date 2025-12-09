@@ -56,12 +56,12 @@ final class Features implements BaseModel
         MessagingFeatureSet|array|null $mms = null,
         MessagingFeatureSet|array|null $sms = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mms && $obj['mms'] = $mms;
-        null !== $sms && $obj['sms'] = $sms;
+        null !== $mms && $self['mms'] = $mms;
+        null !== $sms && $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class Features implements BaseModel
      */
     public function withMms(MessagingFeatureSet|array|null $mms): self
     {
-        $obj = clone $this;
-        $obj['mms'] = $mms;
+        $self = clone $this;
+        $self['mms'] = $mms;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,9 +92,9 @@ final class Features implements BaseModel
      */
     public function withSMS(MessagingFeatureSet|array|null $sms): self
     {
-        $obj = clone $this;
-        $obj['sms'] = $sms;
+        $self = clone $this;
+        $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 }

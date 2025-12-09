@@ -50,12 +50,12 @@ final class SimCardRetrieveParams implements BaseModel
         ?bool $includePinPukCodes = null,
         ?bool $includeSimCardGroup = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includePinPukCodes && $obj['includePinPukCodes'] = $includePinPukCodes;
-        null !== $includeSimCardGroup && $obj['includeSimCardGroup'] = $includeSimCardGroup;
+        null !== $includePinPukCodes && $self['includePinPukCodes'] = $includePinPukCodes;
+        null !== $includeSimCardGroup && $self['includeSimCardGroup'] = $includeSimCardGroup;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class SimCardRetrieveParams implements BaseModel
      */
     public function withIncludePinPukCodes(bool $includePinPukCodes): self
     {
-        $obj = clone $this;
-        $obj['includePinPukCodes'] = $includePinPukCodes;
+        $self = clone $this;
+        $self['includePinPukCodes'] = $includePinPukCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class SimCardRetrieveParams implements BaseModel
      */
     public function withIncludeSimCardGroup(bool $includeSimCardGroup): self
     {
-        $obj = clone $this;
-        $obj['includeSimCardGroup'] = $includeSimCardGroup;
+        $self = clone $this;
+        $self['includeSimCardGroup'] = $includeSimCardGroup;
 
-        return $obj;
+        return $self;
     }
 }

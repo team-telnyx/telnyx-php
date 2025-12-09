@@ -61,14 +61,14 @@ final class TextAndImageArray implements BaseModel
         ?string $imageURL = null,
         ?string $text = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
+        $self['type'] = $type;
 
-        null !== $imageURL && $obj['imageURL'] = $imageURL;
-        null !== $text && $obj['text'] = $text;
+        null !== $imageURL && $self['imageURL'] = $imageURL;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,25 +76,25 @@ final class TextAndImageArray implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     public function withImageURL(string $imageURL): self
     {
-        $obj = clone $this;
-        $obj['imageURL'] = $imageURL;
+        $self = clone $this;
+        $self['imageURL'] = $imageURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

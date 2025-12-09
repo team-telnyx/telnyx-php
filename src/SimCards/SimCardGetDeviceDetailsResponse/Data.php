@@ -74,16 +74,16 @@ final class Data implements BaseModel
         ?string $operatingSystem = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $brandName && $obj['brandName'] = $brandName;
-        null !== $deviceType && $obj['deviceType'] = $deviceType;
-        null !== $imei && $obj['imei'] = $imei;
-        null !== $modelName && $obj['modelName'] = $modelName;
-        null !== $operatingSystem && $obj['operatingSystem'] = $operatingSystem;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $brandName && $self['brandName'] = $brandName;
+        null !== $deviceType && $self['deviceType'] = $deviceType;
+        null !== $imei && $self['imei'] = $imei;
+        null !== $modelName && $self['modelName'] = $modelName;
+        null !== $operatingSystem && $self['operatingSystem'] = $operatingSystem;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class Data implements BaseModel
      */
     public function withBrandName(string $brandName): self
     {
-        $obj = clone $this;
-        $obj['brandName'] = $brandName;
+        $self = clone $this;
+        $self['brandName'] = $brandName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +102,10 @@ final class Data implements BaseModel
      */
     public function withDeviceType(string $deviceType): self
     {
-        $obj = clone $this;
-        $obj['deviceType'] = $deviceType;
+        $self = clone $this;
+        $self['deviceType'] = $deviceType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class Data implements BaseModel
      */
     public function withImei(string $imei): self
     {
-        $obj = clone $this;
-        $obj['imei'] = $imei;
+        $self = clone $this;
+        $self['imei'] = $imei;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Data implements BaseModel
      */
     public function withModelName(string $modelName): self
     {
-        $obj = clone $this;
-        $obj['modelName'] = $modelName;
+        $self = clone $this;
+        $self['modelName'] = $modelName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,17 +135,17 @@ final class Data implements BaseModel
      */
     public function withOperatingSystem(string $operatingSystem): self
     {
-        $obj = clone $this;
-        $obj['operatingSystem'] = $operatingSystem;
+        $self = clone $this;
+        $self['operatingSystem'] = $operatingSystem;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

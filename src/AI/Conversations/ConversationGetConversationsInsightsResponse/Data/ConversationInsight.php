@@ -56,12 +56,12 @@ final class ConversationInsight implements BaseModel
      */
     public static function with(string $insightID, string $result): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['insightID'] = $insightID;
-        $obj['result'] = $result;
+        $self['insightID'] = $insightID;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class ConversationInsight implements BaseModel
      */
     public function withInsightID(string $insightID): self
     {
-        $obj = clone $this;
-        $obj['insightID'] = $insightID;
+        $self = clone $this;
+        $self['insightID'] = $insightID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class ConversationInsight implements BaseModel
      */
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

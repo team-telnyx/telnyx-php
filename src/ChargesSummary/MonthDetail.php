@@ -66,14 +66,14 @@ final class MonthDetail implements BaseModel
         int $quantity,
         ?string $otc = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['mrc'] = $mrc;
-        $obj['quantity'] = $quantity;
+        $self['mrc'] = $mrc;
+        $self['quantity'] = $quantity;
 
-        null !== $otc && $obj['otc'] = $otc;
+        null !== $otc && $self['otc'] = $otc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class MonthDetail implements BaseModel
      */
     public function withMrc(string $mrc): self
     {
-        $obj = clone $this;
-        $obj['mrc'] = $mrc;
+        $self = clone $this;
+        $self['mrc'] = $mrc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class MonthDetail implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class MonthDetail implements BaseModel
      */
     public function withOtc(?string $otc): self
     {
-        $obj = clone $this;
-        $obj['otc'] = $otc;
+        $self = clone $this;
+        $self['otc'] = $otc;
 
-        return $obj;
+        return $self;
     }
 }

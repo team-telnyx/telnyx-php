@@ -50,12 +50,12 @@ final class ActionGenerateJoinClientTokenParams implements BaseModel
         ?int $refreshTokenTtlSecs = null,
         ?int $tokenTtlSecs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $refreshTokenTtlSecs && $obj['refreshTokenTtlSecs'] = $refreshTokenTtlSecs;
-        null !== $tokenTtlSecs && $obj['tokenTtlSecs'] = $tokenTtlSecs;
+        null !== $refreshTokenTtlSecs && $self['refreshTokenTtlSecs'] = $refreshTokenTtlSecs;
+        null !== $tokenTtlSecs && $self['tokenTtlSecs'] = $tokenTtlSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class ActionGenerateJoinClientTokenParams implements BaseModel
      */
     public function withRefreshTokenTtlSecs(int $refreshTokenTtlSecs): self
     {
-        $obj = clone $this;
-        $obj['refreshTokenTtlSecs'] = $refreshTokenTtlSecs;
+        $self = clone $this;
+        $self['refreshTokenTtlSecs'] = $refreshTokenTtlSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class ActionGenerateJoinClientTokenParams implements BaseModel
      */
     public function withTokenTtlSecs(int $tokenTtlSecs): self
     {
-        $obj = clone $this;
-        $obj['tokenTtlSecs'] = $tokenTtlSecs;
+        $self = clone $this;
+        $self['tokenTtlSecs'] = $tokenTtlSecs;
 
-        return $obj;
+        return $self;
     }
 }

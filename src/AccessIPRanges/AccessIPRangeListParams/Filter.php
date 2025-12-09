@@ -59,12 +59,12 @@ final class Filter implements BaseModel
         string|CidrBlockPatternFilter|array|null $cidrBlock = null,
         \DateTimeInterface|DateRangeFilter|array|null $createdAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cidrBlock && $obj['cidrBlock'] = $cidrBlock;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $cidrBlock && $self['cidrBlock'] = $cidrBlock;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Filter implements BaseModel
     public function withCidrBlock(
         string|CidrBlockPatternFilter|array $cidrBlock
     ): self {
-        $obj = clone $this;
-        $obj['cidrBlock'] = $cidrBlock;
+        $self = clone $this;
+        $self['cidrBlock'] = $cidrBlock;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +96,9 @@ final class Filter implements BaseModel
     public function withCreatedAt(
         \DateTimeInterface|DateRangeFilter|array $createdAt
     ): self {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 }

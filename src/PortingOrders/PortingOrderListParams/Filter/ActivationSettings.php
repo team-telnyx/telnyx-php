@@ -49,12 +49,12 @@ final class ActivationSettings implements BaseModel
         ?bool $fastPortEligible = null,
         FocDatetimeRequested|array|null $focDatetimeRequested = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fastPortEligible && $obj['fastPortEligible'] = $fastPortEligible;
-        null !== $focDatetimeRequested && $obj['focDatetimeRequested'] = $focDatetimeRequested;
+        null !== $fastPortEligible && $self['fastPortEligible'] = $fastPortEligible;
+        null !== $focDatetimeRequested && $self['focDatetimeRequested'] = $focDatetimeRequested;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +62,10 @@ final class ActivationSettings implements BaseModel
      */
     public function withFastPortEligible(bool $fastPortEligible): self
     {
-        $obj = clone $this;
-        $obj['fastPortEligible'] = $fastPortEligible;
+        $self = clone $this;
+        $self['fastPortEligible'] = $fastPortEligible;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class ActivationSettings implements BaseModel
     public function withFocDatetimeRequested(
         FocDatetimeRequested|array $focDatetimeRequested
     ): self {
-        $obj = clone $this;
-        $obj['focDatetimeRequested'] = $focDatetimeRequested;
+        $self = clone $this;
+        $self['focDatetimeRequested'] = $focDatetimeRequested;
 
-        return $obj;
+        return $self;
     }
 }

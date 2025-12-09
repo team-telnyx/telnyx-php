@@ -80,29 +80,29 @@ final class Data implements BaseModel
         string $documentChunk,
         Metadata|array $metadata
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['distance'] = $distance;
-        $obj['documentChunk'] = $documentChunk;
-        $obj['metadata'] = $metadata;
+        $self['distance'] = $distance;
+        $self['documentChunk'] = $documentChunk;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withDistance(float $distance): self
     {
-        $obj = clone $this;
-        $obj['distance'] = $distance;
+        $self = clone $this;
+        $self['distance'] = $distance;
 
-        return $obj;
+        return $self;
     }
 
     public function withDocumentChunk(string $documentChunk): self
     {
-        $obj = clone $this;
-        $obj['documentChunk'] = $documentChunk;
+        $self = clone $this;
+        $self['documentChunk'] = $documentChunk;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class Data implements BaseModel
      */
     public function withMetadata(Metadata|array $metadata): self
     {
-        $obj = clone $this;
-        $obj['metadata'] = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 }

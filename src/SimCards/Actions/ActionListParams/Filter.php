@@ -72,14 +72,14 @@ final class Filter implements BaseModel
         ?string $simCardID = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $bulkSimCardActionID && $obj['bulkSimCardActionID'] = $bulkSimCardActionID;
-        null !== $simCardID && $obj['simCardID'] = $simCardID;
-        null !== $status && $obj['status'] = $status;
+        null !== $actionType && $self['actionType'] = $actionType;
+        null !== $bulkSimCardActionID && $self['bulkSimCardActionID'] = $bulkSimCardActionID;
+        null !== $simCardID && $self['simCardID'] = $simCardID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Filter implements BaseModel
      */
     public function withActionType(ActionType|string $actionType): self
     {
-        $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $self = clone $this;
+        $self['actionType'] = $actionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Filter implements BaseModel
      */
     public function withBulkSimCardActionID(string $bulkSimCardActionID): self
     {
-        $obj = clone $this;
-        $obj['bulkSimCardActionID'] = $bulkSimCardActionID;
+        $self = clone $this;
+        $self['bulkSimCardActionID'] = $bulkSimCardActionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class Filter implements BaseModel
      */
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj['simCardID'] = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +124,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -114,20 +114,20 @@ final class Body implements BaseModel
         InterfaceStatus|string|null $status = null,
         ?string $wireguardPeerID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
-        null !== $isAnnounced && $obj['isAnnounced'] = $isAnnounced;
-        null !== $isConnected && $obj['isConnected'] = $isConnected;
-        null !== $isInMaintenance && $obj['isInMaintenance'] = $isInMaintenance;
-        null !== $status && $obj['status'] = $status;
-        null !== $wireguardPeerID && $obj['wireguardPeerID'] = $wireguardPeerID;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
+        null !== $isAnnounced && $self['isAnnounced'] = $isAnnounced;
+        null !== $isConnected && $self['isConnected'] = $isConnected;
+        null !== $isInMaintenance && $self['isInMaintenance'] = $isInMaintenance;
+        null !== $status && $self['status'] = $status;
+        null !== $wireguardPeerID && $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class Body implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class Body implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class Body implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class Body implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +179,10 @@ final class Body implements BaseModel
      */
     public function withGlobalIpid(string $globalIPID): self
     {
-        $obj = clone $this;
-        $obj['globalIPID'] = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class Body implements BaseModel
      */
     public function withIsAnnounced(bool $isAnnounced): self
     {
-        $obj = clone $this;
-        $obj['isAnnounced'] = $isAnnounced;
+        $self = clone $this;
+        $self['isAnnounced'] = $isAnnounced;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class Body implements BaseModel
      */
     public function withIsConnected(bool $isConnected): self
     {
-        $obj = clone $this;
-        $obj['isConnected'] = $isConnected;
+        $self = clone $this;
+        $self['isConnected'] = $isConnected;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class Body implements BaseModel
      */
     public function withIsInMaintenance(bool $isInMaintenance): self
     {
-        $obj = clone $this;
-        $obj['isInMaintenance'] = $isInMaintenance;
+        $self = clone $this;
+        $self['isInMaintenance'] = $isInMaintenance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class Body implements BaseModel
      */
     public function withStatus(InterfaceStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,9 +236,9 @@ final class Body implements BaseModel
      */
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
-        $obj = clone $this;
-        $obj['wireguardPeerID'] = $wireguardPeerID;
+        $self = clone $this;
+        $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -47,11 +47,11 @@ final class VerificationCodeVerifyParams implements BaseModel
      */
     public static function with(?array $verificationCodes = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $verificationCodes && $obj['verificationCodes'] = $verificationCodes;
+        null !== $verificationCodes && $self['verificationCodes'] = $verificationCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,9 +61,9 @@ final class VerificationCodeVerifyParams implements BaseModel
      */
     public function withVerificationCodes(array $verificationCodes): self
     {
-        $obj = clone $this;
-        $obj['verificationCodes'] = $verificationCodes;
+        $self = clone $this;
+        $self['verificationCodes'] = $verificationCodes;
 
-        return $obj;
+        return $self;
     }
 }

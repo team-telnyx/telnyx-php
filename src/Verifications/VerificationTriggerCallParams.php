@@ -92,16 +92,16 @@ final class VerificationTriggerCallParams implements BaseModel
         ?string $extension = null,
         ?int $timeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        null !== $customCode && $obj['customCode'] = $customCode;
-        null !== $extension && $obj['extension'] = $extension;
-        null !== $timeoutSecs && $obj['timeoutSecs'] = $timeoutSecs;
+        null !== $customCode && $self['customCode'] = $customCode;
+        null !== $extension && $self['extension'] = $extension;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class VerificationTriggerCallParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class VerificationTriggerCallParams implements BaseModel
      */
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class VerificationTriggerCallParams implements BaseModel
      */
     public function withCustomCode(?string $customCode): self
     {
-        $obj = clone $this;
-        $obj['customCode'] = $customCode;
+        $self = clone $this;
+        $self['customCode'] = $customCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class VerificationTriggerCallParams implements BaseModel
      */
     public function withExtension(?string $extension): self
     {
-        $obj = clone $this;
-        $obj['extension'] = $extension;
+        $self = clone $this;
+        $self['extension'] = $extension;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,9 +153,9 @@ final class VerificationTriggerCallParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['timeoutSecs'] = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

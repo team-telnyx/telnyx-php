@@ -51,13 +51,13 @@ final class Meta implements BaseModel
         ?string $next = null,
         ?string $previous = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cursors && $obj['cursors'] = $cursors;
-        null !== $next && $obj['next'] = $next;
-        null !== $previous && $obj['previous'] = $previous;
+        null !== $cursors && $self['cursors'] = $cursors;
+        null !== $next && $self['next'] = $next;
+        null !== $previous && $self['previous'] = $previous;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class Meta implements BaseModel
      */
     public function withCursors(Cursors|array $cursors): self
     {
-        $obj = clone $this;
-        $obj['cursors'] = $cursors;
+        $self = clone $this;
+        $self['cursors'] = $cursors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Meta implements BaseModel
      */
     public function withNext(string $next): self
     {
-        $obj = clone $this;
-        $obj['next'] = $next;
+        $self = clone $this;
+        $self['next'] = $next;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class Meta implements BaseModel
      */
     public function withPrevious(string $previous): self
     {
-        $obj = clone $this;
-        $obj['previous'] = $previous;
+        $self = clone $this;
+        $self['previous'] = $previous;
 
-        return $obj;
+        return $self;
     }
 }

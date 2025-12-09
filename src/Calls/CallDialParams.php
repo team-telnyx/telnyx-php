@@ -657,63 +657,63 @@ final class CallDialParams implements BaseModel
         ?string $webhookURL = null,
         WebhookURLMethod|string|null $webhookURLMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['connectionID'] = $connectionID;
-        $obj['from'] = $from;
-        $obj['to'] = $to;
+        $self['connectionID'] = $connectionID;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        null !== $answeringMachineDetection && $obj['answeringMachineDetection'] = $answeringMachineDetection;
-        null !== $answeringMachineDetectionConfig && $obj['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
-        null !== $audioURL && $obj['audioURL'] = $audioURL;
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $bridgeIntent && $obj['bridgeIntent'] = $bridgeIntent;
-        null !== $bridgeOnAnswer && $obj['bridgeOnAnswer'] = $bridgeOnAnswer;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $conferenceConfig && $obj['conferenceConfig'] = $conferenceConfig;
-        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
-        null !== $dialogflowConfig && $obj['dialogflowConfig'] = $dialogflowConfig;
-        null !== $enableDialogflow && $obj['enableDialogflow'] = $enableDialogflow;
-        null !== $fromDisplayName && $obj['fromDisplayName'] = $fromDisplayName;
-        null !== $linkTo && $obj['linkTo'] = $linkTo;
-        null !== $mediaEncryption && $obj['mediaEncryption'] = $mediaEncryption;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $parkAfterUnbridge && $obj['parkAfterUnbridge'] = $parkAfterUnbridge;
-        null !== $preferredCodecs && $obj['preferredCodecs'] = $preferredCodecs;
-        null !== $record && $obj['record'] = $record;
-        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
-        null !== $recordCustomFileName && $obj['recordCustomFileName'] = $recordCustomFileName;
-        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
-        null !== $recordMaxLength && $obj['recordMaxLength'] = $recordMaxLength;
-        null !== $recordTimeoutSecs && $obj['recordTimeoutSecs'] = $recordTimeoutSecs;
-        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
-        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
-        null !== $sendSilenceWhenIdle && $obj['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
-        null !== $sipAuthPassword && $obj['sipAuthPassword'] = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj['sipAuthUsername'] = $sipAuthUsername;
-        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
-        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
-        null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
-        null !== $soundModifications && $obj['soundModifications'] = $soundModifications;
-        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
-        null !== $streamBidirectionalSamplingRate && $obj['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
-        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
-        null !== $streamEstablishBeforeCallOriginate && $obj['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
-        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
-        null !== $streamURL && $obj['streamURL'] = $streamURL;
-        null !== $superviseCallControlID && $obj['superviseCallControlID'] = $superviseCallControlID;
-        null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
-        null !== $timeLimitSecs && $obj['timeLimitSecs'] = $timeLimitSecs;
-        null !== $timeoutSecs && $obj['timeoutSecs'] = $timeoutSecs;
-        null !== $transcription && $obj['transcription'] = $transcription;
-        null !== $transcriptionConfig && $obj['transcriptionConfig'] = $transcriptionConfig;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
-        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
+        null !== $answeringMachineDetection && $self['answeringMachineDetection'] = $answeringMachineDetection;
+        null !== $answeringMachineDetectionConfig && $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $bridgeIntent && $self['bridgeIntent'] = $bridgeIntent;
+        null !== $bridgeOnAnswer && $self['bridgeOnAnswer'] = $bridgeOnAnswer;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $conferenceConfig && $self['conferenceConfig'] = $conferenceConfig;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $dialogflowConfig && $self['dialogflowConfig'] = $dialogflowConfig;
+        null !== $enableDialogflow && $self['enableDialogflow'] = $enableDialogflow;
+        null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
+        null !== $linkTo && $self['linkTo'] = $linkTo;
+        null !== $mediaEncryption && $self['mediaEncryption'] = $mediaEncryption;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
+        null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
+        null !== $record && $self['record'] = $record;
+        null !== $recordChannels && $self['recordChannels'] = $recordChannels;
+        null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
+        null !== $recordFormat && $self['recordFormat'] = $recordFormat;
+        null !== $recordMaxLength && $self['recordMaxLength'] = $recordMaxLength;
+        null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
+        null !== $recordTrack && $self['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $sendSilenceWhenIdle && $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
+        null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
+        null !== $sipRegion && $self['sipRegion'] = $sipRegion;
+        null !== $sipTransportProtocol && $self['sipTransportProtocol'] = $sipTransportProtocol;
+        null !== $soundModifications && $self['soundModifications'] = $soundModifications;
+        null !== $streamBidirectionalCodec && $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $self['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalSamplingRate && $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
+        null !== $streamBidirectionalTargetLegs && $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        null !== $streamCodec && $self['streamCodec'] = $streamCodec;
+        null !== $streamEstablishBeforeCallOriginate && $self['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
+        null !== $streamTrack && $self['streamTrack'] = $streamTrack;
+        null !== $streamURL && $self['streamURL'] = $streamURL;
+        null !== $superviseCallControlID && $self['superviseCallControlID'] = $superviseCallControlID;
+        null !== $supervisorRole && $self['supervisorRole'] = $supervisorRole;
+        null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $transcriptionConfig && $self['transcriptionConfig'] = $transcriptionConfig;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $webhookURLMethod && $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -721,10 +721,10 @@ final class CallDialParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -732,10 +732,10 @@ final class CallDialParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -745,10 +745,10 @@ final class CallDialParams implements BaseModel
      */
     public function withTo(string|array $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -759,10 +759,10 @@ final class CallDialParams implements BaseModel
     public function withAnsweringMachineDetection(
         AnsweringMachineDetection|string $answeringMachineDetection
     ): self {
-        $obj = clone $this;
-        $obj['answeringMachineDetection'] = $answeringMachineDetection;
+        $self = clone $this;
+        $self['answeringMachineDetection'] = $answeringMachineDetection;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -784,10 +784,10 @@ final class CallDialParams implements BaseModel
     public function withAnsweringMachineDetectionConfig(
         AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
     ): self {
-        $obj = clone $this;
-        $obj['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
+        $self = clone $this;
+        $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -795,10 +795,10 @@ final class CallDialParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj['audioURL'] = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -806,10 +806,10 @@ final class CallDialParams implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -817,10 +817,10 @@ final class CallDialParams implements BaseModel
      */
     public function withBridgeIntent(bool $bridgeIntent): self
     {
-        $obj = clone $this;
-        $obj['bridgeIntent'] = $bridgeIntent;
+        $self = clone $this;
+        $self['bridgeIntent'] = $bridgeIntent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -828,10 +828,10 @@ final class CallDialParams implements BaseModel
      */
     public function withBridgeOnAnswer(bool $bridgeOnAnswer): self
     {
-        $obj = clone $this;
-        $obj['bridgeOnAnswer'] = $bridgeOnAnswer;
+        $self = clone $this;
+        $self['bridgeOnAnswer'] = $bridgeOnAnswer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -839,10 +839,10 @@ final class CallDialParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -850,10 +850,10 @@ final class CallDialParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -879,10 +879,10 @@ final class CallDialParams implements BaseModel
     public function withConferenceConfig(
         ConferenceConfig|array $conferenceConfig
     ): self {
-        $obj = clone $this;
-        $obj['conferenceConfig'] = $conferenceConfig;
+        $self = clone $this;
+        $self['conferenceConfig'] = $conferenceConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -892,10 +892,10 @@ final class CallDialParams implements BaseModel
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj['customHeaders'] = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -906,10 +906,10 @@ final class CallDialParams implements BaseModel
     public function withDialogflowConfig(
         DialogflowConfig|array $dialogflowConfig
     ): self {
-        $obj = clone $this;
-        $obj['dialogflowConfig'] = $dialogflowConfig;
+        $self = clone $this;
+        $self['dialogflowConfig'] = $dialogflowConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -917,10 +917,10 @@ final class CallDialParams implements BaseModel
      */
     public function withEnableDialogflow(bool $enableDialogflow): self
     {
-        $obj = clone $this;
-        $obj['enableDialogflow'] = $enableDialogflow;
+        $self = clone $this;
+        $self['enableDialogflow'] = $enableDialogflow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -928,10 +928,10 @@ final class CallDialParams implements BaseModel
      */
     public function withFromDisplayName(string $fromDisplayName): self
     {
-        $obj = clone $this;
-        $obj['fromDisplayName'] = $fromDisplayName;
+        $self = clone $this;
+        $self['fromDisplayName'] = $fromDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -939,10 +939,10 @@ final class CallDialParams implements BaseModel
      */
     public function withLinkTo(string $linkTo): self
     {
-        $obj = clone $this;
-        $obj['linkTo'] = $linkTo;
+        $self = clone $this;
+        $self['linkTo'] = $linkTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -953,10 +953,10 @@ final class CallDialParams implements BaseModel
     public function withMediaEncryption(
         MediaEncryption|string $mediaEncryption
     ): self {
-        $obj = clone $this;
-        $obj['mediaEncryption'] = $mediaEncryption;
+        $self = clone $this;
+        $self['mediaEncryption'] = $mediaEncryption;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -964,10 +964,10 @@ final class CallDialParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -975,10 +975,10 @@ final class CallDialParams implements BaseModel
      */
     public function withParkAfterUnbridge(string $parkAfterUnbridge): self
     {
-        $obj = clone $this;
-        $obj['parkAfterUnbridge'] = $parkAfterUnbridge;
+        $self = clone $this;
+        $self['parkAfterUnbridge'] = $parkAfterUnbridge;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -986,10 +986,10 @@ final class CallDialParams implements BaseModel
      */
     public function withPreferredCodecs(string $preferredCodecs): self
     {
-        $obj = clone $this;
-        $obj['preferredCodecs'] = $preferredCodecs;
+        $self = clone $this;
+        $self['preferredCodecs'] = $preferredCodecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -999,10 +999,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecord(Record|string $record): self
     {
-        $obj = clone $this;
-        $obj['record'] = $record;
+        $self = clone $this;
+        $self['record'] = $record;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1013,10 +1013,10 @@ final class CallDialParams implements BaseModel
     public function withRecordChannels(
         RecordChannels|string $recordChannels
     ): self {
-        $obj = clone $this;
-        $obj['recordChannels'] = $recordChannels;
+        $self = clone $this;
+        $self['recordChannels'] = $recordChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1024,10 +1024,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
-        $obj = clone $this;
-        $obj['recordCustomFileName'] = $recordCustomFileName;
+        $self = clone $this;
+        $self['recordCustomFileName'] = $recordCustomFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1037,10 +1037,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
-        $obj = clone $this;
-        $obj['recordFormat'] = $recordFormat;
+        $self = clone $this;
+        $self['recordFormat'] = $recordFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1048,10 +1048,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordMaxLength(int $recordMaxLength): self
     {
-        $obj = clone $this;
-        $obj['recordMaxLength'] = $recordMaxLength;
+        $self = clone $this;
+        $self['recordMaxLength'] = $recordMaxLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1059,10 +1059,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['recordTimeoutSecs'] = $recordTimeoutSecs;
+        $self = clone $this;
+        $self['recordTimeoutSecs'] = $recordTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1072,10 +1072,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
-        $obj = clone $this;
-        $obj['recordTrack'] = $recordTrack;
+        $self = clone $this;
+        $self['recordTrack'] = $recordTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1085,10 +1085,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
-        $obj = clone $this;
-        $obj['recordTrim'] = $recordTrim;
+        $self = clone $this;
+        $self['recordTrim'] = $recordTrim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1096,10 +1096,10 @@ final class CallDialParams implements BaseModel
      */
     public function withSendSilenceWhenIdle(bool $sendSilenceWhenIdle): self
     {
-        $obj = clone $this;
-        $obj['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
+        $self = clone $this;
+        $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1107,10 +1107,10 @@ final class CallDialParams implements BaseModel
      */
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
-        $obj = clone $this;
-        $obj['sipAuthPassword'] = $sipAuthPassword;
+        $self = clone $this;
+        $self['sipAuthPassword'] = $sipAuthPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1118,10 +1118,10 @@ final class CallDialParams implements BaseModel
      */
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
-        $obj = clone $this;
-        $obj['sipAuthUsername'] = $sipAuthUsername;
+        $self = clone $this;
+        $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1131,10 +1131,10 @@ final class CallDialParams implements BaseModel
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj['sipHeaders'] = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1144,10 +1144,10 @@ final class CallDialParams implements BaseModel
      */
     public function withSipRegion(SipRegion|string $sipRegion): self
     {
-        $obj = clone $this;
-        $obj['sipRegion'] = $sipRegion;
+        $self = clone $this;
+        $self['sipRegion'] = $sipRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1158,10 +1158,10 @@ final class CallDialParams implements BaseModel
     public function withSipTransportProtocol(
         SipTransportProtocol|string $sipTransportProtocol
     ): self {
-        $obj = clone $this;
-        $obj['sipTransportProtocol'] = $sipTransportProtocol;
+        $self = clone $this;
+        $self['sipTransportProtocol'] = $sipTransportProtocol;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1177,10 +1177,10 @@ final class CallDialParams implements BaseModel
     public function withSoundModifications(
         SoundModifications|array $soundModifications
     ): self {
-        $obj = clone $this;
-        $obj['soundModifications'] = $soundModifications;
+        $self = clone $this;
+        $self['soundModifications'] = $soundModifications;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1191,10 +1191,10 @@ final class CallDialParams implements BaseModel
     public function withStreamBidirectionalCodec(
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        $self = clone $this;
+        $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1205,10 +1205,10 @@ final class CallDialParams implements BaseModel
     public function withStreamBidirectionalMode(
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        $self = clone $this;
+        $self['streamBidirectionalMode'] = $streamBidirectionalMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1219,10 +1219,10 @@ final class CallDialParams implements BaseModel
     public function withStreamBidirectionalSamplingRate(
         int $streamBidirectionalSamplingRate
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
+        $self = clone $this;
+        $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1233,10 +1233,10 @@ final class CallDialParams implements BaseModel
     public function withStreamBidirectionalTargetLegs(
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        $self = clone $this;
+        $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1246,10 +1246,10 @@ final class CallDialParams implements BaseModel
      */
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
-        $obj = clone $this;
-        $obj['streamCodec'] = $streamCodec;
+        $self = clone $this;
+        $self['streamCodec'] = $streamCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1258,10 +1258,10 @@ final class CallDialParams implements BaseModel
     public function withStreamEstablishBeforeCallOriginate(
         bool $streamEstablishBeforeCallOriginate
     ): self {
-        $obj = clone $this;
-        $obj['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
+        $self = clone $this;
+        $self['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1271,10 +1271,10 @@ final class CallDialParams implements BaseModel
      */
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
-        $obj = clone $this;
-        $obj['streamTrack'] = $streamTrack;
+        $self = clone $this;
+        $self['streamTrack'] = $streamTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1282,10 +1282,10 @@ final class CallDialParams implements BaseModel
      */
     public function withStreamURL(string $streamURL): self
     {
-        $obj = clone $this;
-        $obj['streamURL'] = $streamURL;
+        $self = clone $this;
+        $self['streamURL'] = $streamURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1294,10 +1294,10 @@ final class CallDialParams implements BaseModel
     public function withSuperviseCallControlID(
         string $superviseCallControlID
     ): self {
-        $obj = clone $this;
-        $obj['superviseCallControlID'] = $superviseCallControlID;
+        $self = clone $this;
+        $self['superviseCallControlID'] = $superviseCallControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1308,10 +1308,10 @@ final class CallDialParams implements BaseModel
     public function withSupervisorRole(
         CallDialParams\SupervisorRole|string $supervisorRole
     ): self {
-        $obj = clone $this;
-        $obj['supervisorRole'] = $supervisorRole;
+        $self = clone $this;
+        $self['supervisorRole'] = $supervisorRole;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1319,10 +1319,10 @@ final class CallDialParams implements BaseModel
      */
     public function withTimeLimitSecs(int $timeLimitSecs): self
     {
-        $obj = clone $this;
-        $obj['timeLimitSecs'] = $timeLimitSecs;
+        $self = clone $this;
+        $self['timeLimitSecs'] = $timeLimitSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1330,10 +1330,10 @@ final class CallDialParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['timeoutSecs'] = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1341,10 +1341,10 @@ final class CallDialParams implements BaseModel
      */
     public function withTranscription(bool $transcription): self
     {
-        $obj = clone $this;
-        $obj['transcription'] = $transcription;
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1359,10 +1359,10 @@ final class CallDialParams implements BaseModel
     public function withTranscriptionConfig(
         TranscriptionStartRequest|array $transcriptionConfig
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionConfig'] = $transcriptionConfig;
+        $self = clone $this;
+        $self['transcriptionConfig'] = $transcriptionConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1370,10 +1370,10 @@ final class CallDialParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1384,9 +1384,9 @@ final class CallDialParams implements BaseModel
     public function withWebhookURLMethod(
         WebhookURLMethod|string $webhookURLMethod
     ): self {
-        $obj = clone $this;
-        $obj['webhookURLMethod'] = $webhookURLMethod;
+        $self = clone $this;
+        $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 }

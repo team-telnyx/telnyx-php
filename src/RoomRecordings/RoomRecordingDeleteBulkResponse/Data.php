@@ -34,11 +34,11 @@ final class Data implements BaseModel
      */
     public static function with(?int $roomRecordings = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $roomRecordings && $obj['roomRecordings'] = $roomRecordings;
+        null !== $roomRecordings && $self['roomRecordings'] = $roomRecordings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Data implements BaseModel
      */
     public function withRoomRecordings(int $roomRecordings): self
     {
-        $obj = clone $this;
-        $obj['roomRecordings'] = $roomRecordings;
+        $self = clone $this;
+        $self['roomRecordings'] = $roomRecordings;
 
-        return $obj;
+        return $self;
     }
 }

@@ -122,16 +122,16 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
         ?string $customerReference = null,
         ?string $messagingProfileID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['orderingGroups'] = $orderingGroups;
+        $self['orderingGroups'] = $orderingGroups;
 
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      */
     public function withOrderingGroups(array $orderingGroups): self
     {
-        $obj = clone $this;
-        $obj['orderingGroups'] = $orderingGroups;
+        $self = clone $this;
+        $self['orderingGroups'] = $orderingGroups;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,9 +197,9 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 }

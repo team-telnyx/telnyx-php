@@ -34,11 +34,11 @@ final class Meta implements BaseModel
      */
     public static function with(?string $phoneNumbersURL = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumbersURL && $obj['phoneNumbersURL'] = $phoneNumbersURL;
+        null !== $phoneNumbersURL && $self['phoneNumbersURL'] = $phoneNumbersURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Meta implements BaseModel
      */
     public function withPhoneNumbersURL(string $phoneNumbersURL): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbersURL'] = $phoneNumbersURL;
+        $self = clone $this;
+        $self['phoneNumbersURL'] = $phoneNumbersURL;
 
-        return $obj;
+        return $self;
     }
 }

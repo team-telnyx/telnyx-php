@@ -114,17 +114,17 @@ final class ScheduledEventCreateParams implements BaseModel
         ?array $conversationMetadata = null,
         ?string $text = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
-        $obj['telnyxAgentTarget'] = $telnyxAgentTarget;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj['telnyxEndUserTarget'] = $telnyxEndUserTarget;
+        $self['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
+        $self['telnyxAgentTarget'] = $telnyxAgentTarget;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self['telnyxEndUserTarget'] = $telnyxEndUserTarget;
 
-        null !== $conversationMetadata && $obj['conversationMetadata'] = $conversationMetadata;
-        null !== $text && $obj['text'] = $text;
+        null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withScheduledAtFixedDatetime(
         \DateTimeInterface $scheduledAtFixedDatetime
     ): self {
-        $obj = clone $this;
-        $obj['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
+        $self = clone $this;
+        $self['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class ScheduledEventCreateParams implements BaseModel
      */
     public function withTelnyxAgentTarget(string $telnyxAgentTarget): self
     {
-        $obj = clone $this;
-        $obj['telnyxAgentTarget'] = $telnyxAgentTarget;
+        $self = clone $this;
+        $self['telnyxAgentTarget'] = $telnyxAgentTarget;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withTelnyxConversationChannel(
         ConversationChannelType|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class ScheduledEventCreateParams implements BaseModel
      */
     public function withTelnyxEndUserTarget(string $telnyxEndUserTarget): self
     {
-        $obj = clone $this;
-        $obj['telnyxEndUserTarget'] = $telnyxEndUserTarget;
+        $self = clone $this;
+        $self['telnyxEndUserTarget'] = $telnyxEndUserTarget;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class ScheduledEventCreateParams implements BaseModel
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {
-        $obj = clone $this;
-        $obj['conversationMetadata'] = $conversationMetadata;
+        $self = clone $this;
+        $self['conversationMetadata'] = $conversationMetadata;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,9 +191,9 @@ final class ScheduledEventCreateParams implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

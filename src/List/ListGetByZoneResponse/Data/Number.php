@@ -36,27 +36,27 @@ final class Number implements BaseModel
         ?string $country = null,
         ?string $number = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $country && $obj['country'] = $country;
-        null !== $number && $obj['number'] = $number;
+        null !== $country && $self['country'] = $country;
+        null !== $number && $self['number'] = $number;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountry(string $country): self
     {
-        $obj = clone $this;
-        $obj['country'] = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumber(string $number): self
     {
-        $obj = clone $this;
-        $obj['number'] = $number;
+        $self = clone $this;
+        $self['number'] = $number;
 
-        return $obj;
+        return $self;
     }
 }

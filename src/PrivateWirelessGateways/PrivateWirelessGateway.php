@@ -118,20 +118,20 @@ final class PrivateWirelessGateway implements BaseModel
         PrivateWirelessGatewayStatus|array|null $status = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $assignedResources && $obj['assignedResources'] = $assignedResources;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $ipRange && $obj['ipRange'] = $ipRange;
-        null !== $name && $obj['name'] = $name;
-        null !== $networkID && $obj['networkID'] = $networkID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regionCode && $obj['regionCode'] = $regionCode;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $assignedResources && $self['assignedResources'] = $assignedResources;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $ipRange && $self['ipRange'] = $ipRange;
+        null !== $name && $self['name'] = $name;
+        null !== $networkID && $self['networkID'] = $networkID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withAssignedResources(array $assignedResources): self
     {
-        $obj = clone $this;
-        $obj['assignedResources'] = $assignedResources;
+        $self = clone $this;
+        $self['assignedResources'] = $assignedResources;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withIPRange(string $ipRange): self
     {
-        $obj = clone $this;
-        $obj['ipRange'] = $ipRange;
+        $self = clone $this;
+        $self['ipRange'] = $ipRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,18 +198,18 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj['networkID'] = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withStatus(PrivateWirelessGatewayStatus|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,9 +245,9 @@ final class PrivateWirelessGateway implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $networkID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $networkID && $obj['networkID'] = $networkID;
+        null !== $networkID && $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj['networkID'] = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 }

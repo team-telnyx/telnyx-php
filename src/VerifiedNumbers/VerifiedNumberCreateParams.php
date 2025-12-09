@@ -78,22 +78,22 @@ final class VerifiedNumberCreateParams implements BaseModel
         VerificationMethod|string $verificationMethod,
         ?string $extension = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['verificationMethod'] = $verificationMethod;
 
-        null !== $extension && $obj['extension'] = $extension;
+        null !== $extension && $self['extension'] = $extension;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class VerifiedNumberCreateParams implements BaseModel
     public function withVerificationMethod(
         VerificationMethod|string $verificationMethod
     ): self {
-        $obj = clone $this;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self = clone $this;
+        $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,9 +115,9 @@ final class VerifiedNumberCreateParams implements BaseModel
      */
     public function withExtension(?string $extension): self
     {
-        $obj = clone $this;
-        $obj['extension'] = $extension;
+        $self = clone $this;
+        $self['extension'] = $extension;
 
-        return $obj;
+        return $self;
     }
 }

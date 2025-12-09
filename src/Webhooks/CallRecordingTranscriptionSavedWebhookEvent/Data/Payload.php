@@ -118,20 +118,20 @@ final class Payload implements BaseModel
         Status|string|null $status = null,
         ?string $transcriptionText = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $callingPartyType && $obj['callingPartyType'] = $callingPartyType;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $recordingID && $obj['recordingID'] = $recordingID;
-        null !== $recordingTranscriptionID && $obj['recordingTranscriptionID'] = $recordingTranscriptionID;
-        null !== $status && $obj['status'] = $status;
-        null !== $transcriptionText && $obj['transcriptionText'] = $transcriptionText;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $callingPartyType && $self['callingPartyType'] = $callingPartyType;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $recordingID && $self['recordingID'] = $recordingID;
+        null !== $recordingTranscriptionID && $self['recordingTranscriptionID'] = $recordingTranscriptionID;
+        null !== $status && $self['status'] = $status;
+        null !== $transcriptionText && $self['transcriptionText'] = $transcriptionText;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Payload implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class Payload implements BaseModel
     public function withCallingPartyType(
         CallingPartyType|string $callingPartyType
     ): self {
-        $obj = clone $this;
-        $obj['callingPartyType'] = $callingPartyType;
+        $self = clone $this;
+        $self['callingPartyType'] = $callingPartyType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,10 +197,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class Payload implements BaseModel
      */
     public function withRecordingID(string $recordingID): self
     {
-        $obj = clone $this;
-        $obj['recordingID'] = $recordingID;
+        $self = clone $this;
+        $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class Payload implements BaseModel
     public function withRecordingTranscriptionID(
         string $recordingTranscriptionID
     ): self {
-        $obj = clone $this;
-        $obj['recordingTranscriptionID'] = $recordingTranscriptionID;
+        $self = clone $this;
+        $self['recordingTranscriptionID'] = $recordingTranscriptionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class Payload implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,9 +244,9 @@ final class Payload implements BaseModel
      */
     public function withTranscriptionText(string $transcriptionText): self
     {
-        $obj = clone $this;
-        $obj['transcriptionText'] = $transcriptionText;
+        $self = clone $this;
+        $self['transcriptionText'] = $transcriptionText;
 
-        return $obj;
+        return $self;
     }
 }

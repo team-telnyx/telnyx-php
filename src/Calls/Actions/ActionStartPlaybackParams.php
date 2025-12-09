@@ -139,21 +139,21 @@ final class ActionStartPlaybackParams implements BaseModel
         ?string $stop = null,
         ?string $targetLegs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $audioType && $obj['audioType'] = $audioType;
-        null !== $audioURL && $obj['audioURL'] = $audioURL;
-        null !== $cacheAudio && $obj['cacheAudio'] = $cacheAudio;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $loop && $obj['loop'] = $loop;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $overlay && $obj['overlay'] = $overlay;
-        null !== $playbackContent && $obj['playbackContent'] = $playbackContent;
-        null !== $stop && $obj['stop'] = $stop;
-        null !== $targetLegs && $obj['targetLegs'] = $targetLegs;
+        null !== $audioType && $self['audioType'] = $audioType;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $cacheAudio && $self['cacheAudio'] = $cacheAudio;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $loop && $self['loop'] = $loop;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $overlay && $self['overlay'] = $overlay;
+        null !== $playbackContent && $self['playbackContent'] = $playbackContent;
+        null !== $stop && $self['stop'] = $stop;
+        null !== $targetLegs && $self['targetLegs'] = $targetLegs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withAudioType(AudioType|string $audioType): self
     {
-        $obj = clone $this;
-        $obj['audioType'] = $audioType;
+        $self = clone $this;
+        $self['audioType'] = $audioType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj['audioURL'] = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withCacheAudio(bool $cacheAudio): self
     {
-        $obj = clone $this;
-        $obj['cacheAudio'] = $cacheAudio;
+        $self = clone $this;
+        $self['cacheAudio'] = $cacheAudio;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withLoop(string|int $loop): self
     {
-        $obj = clone $this;
-        $obj['loop'] = $loop;
+        $self = clone $this;
+        $self['loop'] = $loop;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withOverlay(bool $overlay): self
     {
-        $obj = clone $this;
-        $obj['overlay'] = $overlay;
+        $self = clone $this;
+        $self['overlay'] = $overlay;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withPlaybackContent(string $playbackContent): self
     {
-        $obj = clone $this;
-        $obj['playbackContent'] = $playbackContent;
+        $self = clone $this;
+        $self['playbackContent'] = $playbackContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withStop(string $stop): self
     {
-        $obj = clone $this;
-        $obj['stop'] = $stop;
+        $self = clone $this;
+        $self['stop'] = $stop;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,9 +273,9 @@ final class ActionStartPlaybackParams implements BaseModel
      */
     public function withTargetLegs(string $targetLegs): self
     {
-        $obj = clone $this;
-        $obj['targetLegs'] = $targetLegs;
+        $self = clone $this;
+        $self['targetLegs'] = $targetLegs;
 
-        return $obj;
+        return $self;
     }
 }

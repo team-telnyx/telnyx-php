@@ -53,12 +53,12 @@ final class Filter implements BaseModel
         CustomerReference|array|null $customerReference = null,
         StreetAddress|array|null $streetAddress = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $streetAddress && $obj['streetAddress'] = $streetAddress;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $streetAddress && $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +71,10 @@ final class Filter implements BaseModel
     public function withCustomerReference(
         CustomerReference|array $customerReference
     ): self {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class Filter implements BaseModel
      */
     public function withStreetAddress(StreetAddress|array $streetAddress): self
     {
-        $obj = clone $this;
-        $obj['streetAddress'] = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 }

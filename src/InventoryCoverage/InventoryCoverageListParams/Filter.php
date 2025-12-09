@@ -112,18 +112,18 @@ final class Filter implements BaseModel
         ?int $nxx = null,
         PhoneNumberType|string|null $phoneNumberType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
-        null !== $count && $obj['count'] = $count;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $features && $obj['features'] = $features;
-        null !== $groupBy && $obj['groupBy'] = $groupBy;
-        null !== $npa && $obj['npa'] = $npa;
-        null !== $nxx && $obj['nxx'] = $nxx;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $count && $self['count'] = $count;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $features && $self['features'] = $features;
+        null !== $groupBy && $self['groupBy'] = $groupBy;
+        null !== $npa && $self['npa'] = $npa;
+        null !== $nxx && $self['nxx'] = $nxx;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Filter implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class Filter implements BaseModel
      */
     public function withCount(bool $count): self
     {
-        $obj = clone $this;
-        $obj['count'] = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(CountryCode|string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class Filter implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class Filter implements BaseModel
      */
     public function withGroupBy(GroupBy|string $groupBy): self
     {
-        $obj = clone $this;
-        $obj['groupBy'] = $groupBy;
+        $self = clone $this;
+        $self['groupBy'] = $groupBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class Filter implements BaseModel
      */
     public function withNpa(int $npa): self
     {
-        $obj = clone $this;
-        $obj['npa'] = $npa;
+        $self = clone $this;
+        $self['npa'] = $npa;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +203,10 @@ final class Filter implements BaseModel
      */
     public function withNxx(int $nxx): self
     {
-        $obj = clone $this;
-        $obj['nxx'] = $nxx;
+        $self = clone $this;
+        $self['nxx'] = $nxx;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,9 +217,9 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 }

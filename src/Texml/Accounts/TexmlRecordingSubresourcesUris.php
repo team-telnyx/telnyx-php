@@ -35,18 +35,18 @@ final class TexmlRecordingSubresourcesUris implements BaseModel
      */
     public static function with(?string $transcriptions = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $transcriptions && $obj['transcriptions'] = $transcriptions;
+        null !== $transcriptions && $self['transcriptions'] = $transcriptions;
 
-        return $obj;
+        return $self;
     }
 
     public function withTranscriptions(?string $transcriptions): self
     {
-        $obj = clone $this;
-        $obj['transcriptions'] = $transcriptions;
+        $self = clone $this;
+        $self['transcriptions'] = $transcriptions;
 
-        return $obj;
+        return $self;
     }
 }

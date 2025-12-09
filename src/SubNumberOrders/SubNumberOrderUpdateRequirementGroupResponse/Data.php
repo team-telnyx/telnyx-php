@@ -119,80 +119,80 @@ final class Data implements BaseModel
         ?string $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $isBlockSubNumberOrder && $obj['isBlockSubNumberOrder'] = $isBlockSubNumberOrder;
-        null !== $orderRequestID && $obj['orderRequestID'] = $orderRequestID;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
-        null !== $phoneNumbersCount && $obj['phoneNumbersCount'] = $phoneNumbersCount;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
-        null !== $requirementsMet && $obj['requirementsMet'] = $requirementsMet;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $isBlockSubNumberOrder && $self['isBlockSubNumberOrder'] = $isBlockSubNumberOrder;
+        null !== $orderRequestID && $self['orderRequestID'] = $orderRequestID;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
+        null !== $phoneNumbersCount && $self['phoneNumbersCount'] = $phoneNumbersCount;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     public function withIsBlockSubNumberOrder(bool $isBlockSubNumberOrder): self
     {
-        $obj = clone $this;
-        $obj['isBlockSubNumberOrder'] = $isBlockSubNumberOrder;
+        $self = clone $this;
+        $self['isBlockSubNumberOrder'] = $isBlockSubNumberOrder;
 
-        return $obj;
+        return $self;
     }
 
     public function withOrderRequestID(string $orderRequestID): self
     {
-        $obj = clone $this;
-        $obj['orderRequestID'] = $orderRequestID;
+        $self = clone $this;
+        $self['orderRequestID'] = $orderRequestID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,26 +211,26 @@ final class Data implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbersCount'] = $phoneNumbersCount;
+        $self = clone $this;
+        $self['phoneNumbersCount'] = $phoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,33 +241,33 @@ final class Data implements BaseModel
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj['regulatoryRequirements'] = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj['requirementsMet'] = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

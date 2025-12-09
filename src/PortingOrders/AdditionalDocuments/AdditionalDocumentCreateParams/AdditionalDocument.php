@@ -49,12 +49,12 @@ final class AdditionalDocument implements BaseModel
         ?string $documentID = null,
         DocumentType|string|null $documentType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $documentID && $obj['documentID'] = $documentID;
-        null !== $documentType && $obj['documentType'] = $documentType;
+        null !== $documentID && $self['documentID'] = $documentID;
+        null !== $documentType && $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +62,10 @@ final class AdditionalDocument implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj['documentID'] = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class AdditionalDocument implements BaseModel
      */
     public function withDocumentType(DocumentType|string $documentType): self
     {
-        $obj = clone $this;
-        $obj['documentType'] = $documentType;
+        $self = clone $this;
+        $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 }

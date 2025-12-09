@@ -64,12 +64,12 @@ final class MessageListResponse implements BaseModel
      */
     public static function with(array $data, Meta|array $meta): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['data'] = $data;
-        $obj['meta'] = $meta;
+        $self['data'] = $data;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class MessageListResponse implements BaseModel
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +96,9 @@ final class MessageListResponse implements BaseModel
      */
     public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj['meta'] = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

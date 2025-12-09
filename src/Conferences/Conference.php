@@ -152,22 +152,22 @@ final class Conference implements BaseModel
         Status|string|null $status = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['expiresAt'] = $expiresAt;
-        $obj['name'] = $name;
-        $obj['recordType'] = $recordType;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['expiresAt'] = $expiresAt;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
 
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $endReason && $obj['endReason'] = $endReason;
-        null !== $endedBy && $obj['endedBy'] = $endedBy;
-        null !== $region && $obj['region'] = $region;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $endReason && $self['endReason'] = $endReason;
+        null !== $endedBy && $self['endedBy'] = $endedBy;
+        null !== $region && $self['region'] = $region;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class Conference implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class Conference implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,10 +197,10 @@ final class Conference implements BaseModel
      */
     public function withExpiresAt(string $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class Conference implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class Conference implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class Conference implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class Conference implements BaseModel
      */
     public function withEndReason(EndReason|string $endReason): self
     {
-        $obj = clone $this;
-        $obj['endReason'] = $endReason;
+        $self = clone $this;
+        $self['endReason'] = $endReason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,10 +258,10 @@ final class Conference implements BaseModel
      */
     public function withEndedBy(EndedBy|array $endedBy): self
     {
-        $obj = clone $this;
-        $obj['endedBy'] = $endedBy;
+        $self = clone $this;
+        $self['endedBy'] = $endedBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -269,10 +269,10 @@ final class Conference implements BaseModel
      */
     public function withRegion(string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class Conference implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -293,9 +293,9 @@ final class Conference implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

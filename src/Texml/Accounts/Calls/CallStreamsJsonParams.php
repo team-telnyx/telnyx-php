@@ -128,27 +128,27 @@ final class CallStreamsJsonParams implements BaseModel
         Track|string|null $track = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['accountSid'] = $accountSid;
+        $self['accountSid'] = $accountSid;
 
-        null !== $bidirectionalCodec && $obj['bidirectionalCodec'] = $bidirectionalCodec;
-        null !== $bidirectionalMode && $obj['bidirectionalMode'] = $bidirectionalMode;
-        null !== $name && $obj['name'] = $name;
-        null !== $statusCallback && $obj['statusCallback'] = $statusCallback;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $track && $obj['track'] = $track;
-        null !== $url && $obj['url'] = $url;
+        null !== $bidirectionalCodec && $self['bidirectionalCodec'] = $bidirectionalCodec;
+        null !== $bidirectionalMode && $self['bidirectionalMode'] = $bidirectionalMode;
+        null !== $name && $self['name'] = $name;
+        null !== $statusCallback && $self['statusCallback'] = $statusCallback;
+        null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $track && $self['track'] = $track;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class CallStreamsJsonParams implements BaseModel
     public function withBidirectionalCodec(
         BidirectionalCodec|string $bidirectionalCodec
     ): self {
-        $obj = clone $this;
-        $obj['bidirectionalCodec'] = $bidirectionalCodec;
+        $self = clone $this;
+        $self['bidirectionalCodec'] = $bidirectionalCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +173,10 @@ final class CallStreamsJsonParams implements BaseModel
     public function withBidirectionalMode(
         BidirectionalMode|string $bidirectionalMode
     ): self {
-        $obj = clone $this;
-        $obj['bidirectionalMode'] = $bidirectionalMode;
+        $self = clone $this;
+        $self['bidirectionalMode'] = $bidirectionalMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +184,10 @@ final class CallStreamsJsonParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class CallStreamsJsonParams implements BaseModel
      */
     public function withStatusCallback(string $statusCallback): self
     {
-        $obj = clone $this;
-        $obj['statusCallback'] = $statusCallback;
+        $self = clone $this;
+        $self['statusCallback'] = $statusCallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class CallStreamsJsonParams implements BaseModel
     public function withStatusCallbackMethod(
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $self = clone $this;
+        $self['statusCallbackMethod'] = $statusCallbackMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class CallStreamsJsonParams implements BaseModel
      */
     public function withTrack(Track|string $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,9 +233,9 @@ final class CallStreamsJsonParams implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

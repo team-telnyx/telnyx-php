@@ -101,19 +101,19 @@ final class RcsAgent implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $agentID && $obj['agentID'] = $agentID;
-        null !== $agentName && $obj['agentName'] = $agentName;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $enabled && $obj['enabled'] = $enabled;
-        null !== $profileID && $obj['profileID'] = $profileID;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $userID && $obj['userID'] = $userID;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $agentID && $self['agentID'] = $agentID;
+        null !== $agentName && $self['agentName'] = $agentName;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $profileID && $self['profileID'] = $profileID;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class RcsAgent implements BaseModel
      */
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj['agentID'] = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class RcsAgent implements BaseModel
      */
     public function withAgentName(string $agentName): self
     {
-        $obj = clone $this;
-        $obj['agentName'] = $agentName;
+        $self = clone $this;
+        $self['agentName'] = $agentName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class RcsAgent implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class RcsAgent implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj['enabled'] = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class RcsAgent implements BaseModel
      */
     public function withProfileID(?string $profileID): self
     {
-        $obj = clone $this;
-        $obj['profileID'] = $profileID;
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class RcsAgent implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class RcsAgent implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class RcsAgent implements BaseModel
      */
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,9 +209,9 @@ final class RcsAgent implements BaseModel
      */
     public function withWebhookURL(?string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

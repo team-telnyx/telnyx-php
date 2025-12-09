@@ -65,13 +65,13 @@ final class Data implements BaseModel
         ?\DateTimeInterface $timestamp = null,
         Total|array|null $total = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $categories && $obj['categories'] = $categories;
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
-        null !== $total && $obj['total'] = $total;
+        null !== $categories && $self['categories'] = $categories;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
+        null !== $total && $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withCategories(array $categories): self
     {
-        $obj = clone $this;
-        $obj['categories'] = $categories;
+        $self = clone $this;
+        $self['categories'] = $categories;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,9 +112,9 @@ final class Data implements BaseModel
      */
     public function withTotal(Total|array $total): self
     {
-        $obj = clone $this;
-        $obj['total'] = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 }

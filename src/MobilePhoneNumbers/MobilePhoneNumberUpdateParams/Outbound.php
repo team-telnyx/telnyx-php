@@ -34,11 +34,11 @@ final class Outbound implements BaseModel
      */
     public static function with(?string $interceptionAppID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $interceptionAppID && $obj['interceptionAppID'] = $interceptionAppID;
+        null !== $interceptionAppID && $self['interceptionAppID'] = $interceptionAppID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Outbound implements BaseModel
      */
     public function withInterceptionAppID(?string $interceptionAppID): self
     {
-        $obj = clone $this;
-        $obj['interceptionAppID'] = $interceptionAppID;
+        $self = clone $this;
+        $self['interceptionAppID'] = $interceptionAppID;
 
-        return $obj;
+        return $self;
     }
 }

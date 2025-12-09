@@ -34,11 +34,11 @@ final class Source implements BaseModel
      */
     public static function with(?string $pointer = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pointer && $obj['pointer'] = $pointer;
+        null !== $pointer && $self['pointer'] = $pointer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Source implements BaseModel
      */
     public function withPointer(string $pointer): self
     {
-        $obj = clone $this;
-        $obj['pointer'] = $pointer;
+        $self = clone $this;
+        $self['pointer'] = $pointer;
 
-        return $obj;
+        return $self;
     }
 }

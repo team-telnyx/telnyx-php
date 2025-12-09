@@ -66,14 +66,14 @@ final class PortingOrderRequirement implements BaseModel
         ?string $recordType = null,
         ?string $requirementTypeID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirementTypeID && $obj['requirementTypeID'] = $requirementTypeID;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementTypeID && $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class PortingOrderRequirement implements BaseModel
      */
     public function withFieldType(FieldType|string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class PortingOrderRequirement implements BaseModel
      */
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj['fieldValue'] = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class PortingOrderRequirement implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class PortingOrderRequirement implements BaseModel
      */
     public function withRequirementTypeID(string $requirementTypeID): self
     {
-        $obj = clone $this;
-        $obj['requirementTypeID'] = $requirementTypeID;
+        $self = clone $this;
+        $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -71,14 +71,14 @@ final class GcsConfigurationData implements BaseModel
         ?string $bucket = null,
         ?string $credentials = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['backend'] = $backend;
+        $self['backend'] = $backend;
 
-        null !== $bucket && $obj['bucket'] = $bucket;
-        null !== $credentials && $obj['credentials'] = $credentials;
+        null !== $bucket && $self['bucket'] = $bucket;
+        null !== $credentials && $self['credentials'] = $credentials;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class GcsConfigurationData implements BaseModel
      */
     public function withBackend(Backend|string $backend): self
     {
-        $obj = clone $this;
-        $obj['backend'] = $backend;
+        $self = clone $this;
+        $self['backend'] = $backend;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class GcsConfigurationData implements BaseModel
      */
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj['bucket'] = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class GcsConfigurationData implements BaseModel
      */
     public function withCredentials(string $credentials): self
     {
-        $obj = clone $this;
-        $obj['credentials'] = $credentials;
+        $self = clone $this;
+        $self['credentials'] = $credentials;
 
-        return $obj;
+        return $self;
     }
 }

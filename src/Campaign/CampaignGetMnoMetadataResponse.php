@@ -47,11 +47,11 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
      */
     public static function with(mno_10999|array|null $_10999 = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $_10999 && $obj['_10999'] = $_10999;
+        null !== $_10999 && $self['_10999'] = $_10999;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
      */
     public function with10999(mno_10999|array $_10999): self
     {
-        $obj = clone $this;
-        $obj['_10999'] = $_10999;
+        $self = clone $this;
+        $self['_10999'] = $_10999;
 
-        return $obj;
+        return $self;
     }
 }

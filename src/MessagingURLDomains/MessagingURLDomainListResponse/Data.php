@@ -49,45 +49,45 @@ final class Data implements BaseModel
         ?string $urlDomain = null,
         ?string $useCase = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $urlDomain && $obj['urlDomain'] = $urlDomain;
-        null !== $useCase && $obj['useCase'] = $useCase;
+        null !== $id && $self['id'] = $id;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $urlDomain && $self['urlDomain'] = $urlDomain;
+        null !== $useCase && $self['useCase'] = $useCase;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withURLDomain(string $urlDomain): self
     {
-        $obj = clone $this;
-        $obj['urlDomain'] = $urlDomain;
+        $self = clone $this;
+        $self['urlDomain'] = $urlDomain;
 
-        return $obj;
+        return $self;
     }
 
     public function withUseCase(string $useCase): self
     {
-        $obj = clone $this;
-        $obj['useCase'] = $useCase;
+        $self = clone $this;
+        $self['useCase'] = $useCase;
 
-        return $obj;
+        return $self;
     }
 }

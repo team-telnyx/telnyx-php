@@ -50,11 +50,11 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
      */
     public static function with(?array $phoneNumberConfigurations = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumberConfigurations && $obj['phoneNumberConfigurations'] = $phoneNumberConfigurations;
+        null !== $phoneNumberConfigurations && $self['phoneNumberConfigurations'] = $phoneNumberConfigurations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,9 +65,9 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
     public function withPhoneNumberConfigurations(
         array $phoneNumberConfigurations
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberConfigurations'] = $phoneNumberConfigurations;
+        $self = clone $this;
+        $self['phoneNumberConfigurations'] = $phoneNumberConfigurations;
 
-        return $obj;
+        return $self;
     }
 }

@@ -113,105 +113,105 @@ final class Data implements BaseModel
         ?string $status = null,
         ?string $subNumberOrderID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $bundleID && $obj['bundleID'] = $bundleID;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $deadline && $obj['deadline'] = $deadline;
-        null !== $isBlockNumber && $obj['isBlockNumber'] = $isBlockNumber;
-        null !== $locality && $obj['locality'] = $locality;
-        null !== $orderRequestID && $obj['orderRequestID'] = $orderRequestID;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
-        null !== $requirementsMet && $obj['requirementsMet'] = $requirementsMet;
-        null !== $requirementsStatus && $obj['requirementsStatus'] = $requirementsStatus;
-        null !== $status && $obj['status'] = $status;
-        null !== $subNumberOrderID && $obj['subNumberOrderID'] = $subNumberOrderID;
+        null !== $id && $self['id'] = $id;
+        null !== $bundleID && $self['bundleID'] = $bundleID;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $deadline && $self['deadline'] = $deadline;
+        null !== $isBlockNumber && $self['isBlockNumber'] = $isBlockNumber;
+        null !== $locality && $self['locality'] = $locality;
+        null !== $orderRequestID && $self['orderRequestID'] = $orderRequestID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $requirementsStatus && $self['requirementsStatus'] = $requirementsStatus;
+        null !== $status && $self['status'] = $status;
+        null !== $subNumberOrderID && $self['subNumberOrderID'] = $subNumberOrderID;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withBundleID(?string $bundleID): self
     {
-        $obj = clone $this;
-        $obj['bundleID'] = $bundleID;
+        $self = clone $this;
+        $self['bundleID'] = $bundleID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withDeadline(\DateTimeInterface $deadline): self
     {
-        $obj = clone $this;
-        $obj['deadline'] = $deadline;
+        $self = clone $this;
+        $self['deadline'] = $deadline;
 
-        return $obj;
+        return $self;
     }
 
     public function withIsBlockNumber(bool $isBlockNumber): self
     {
-        $obj = clone $this;
-        $obj['isBlockNumber'] = $isBlockNumber;
+        $self = clone $this;
+        $self['isBlockNumber'] = $isBlockNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj['locality'] = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     public function withOrderRequestID(string $orderRequestID): self
     {
-        $obj = clone $this;
-        $obj['orderRequestID'] = $orderRequestID;
+        $self = clone $this;
+        $self['orderRequestID'] = $orderRequestID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,41 +225,41 @@ final class Data implements BaseModel
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj['regulatoryRequirements'] = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj['requirementsMet'] = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementsStatus(string $requirementsStatus): self
     {
-        $obj = clone $this;
-        $obj['requirementsStatus'] = $requirementsStatus;
+        $self = clone $this;
+        $self['requirementsStatus'] = $requirementsStatus;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubNumberOrderID(string $subNumberOrderID): self
     {
-        $obj = clone $this;
-        $obj['subNumberOrderID'] = $subNumberOrderID;
+        $self = clone $this;
+        $self['subNumberOrderID'] = $subNumberOrderID;
 
-        return $obj;
+        return $self;
     }
 }

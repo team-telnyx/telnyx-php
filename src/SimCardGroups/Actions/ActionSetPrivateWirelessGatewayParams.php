@@ -56,11 +56,11 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
      */
     public static function with(string $privateWirelessGatewayID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
     public function withPrivateWirelessGatewayID(
         string $privateWirelessGatewayID
     ): self {
-        $obj = clone $this;
-        $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        $self = clone $this;
+        $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 }

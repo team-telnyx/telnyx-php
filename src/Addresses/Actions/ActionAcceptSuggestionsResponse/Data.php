@@ -52,13 +52,13 @@ final class Data implements BaseModel
         ?bool $accepted = null,
         RecordType|string|null $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $accepted && $obj['accepted'] = $accepted;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $accepted && $self['accepted'] = $accepted;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +66,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Data implements BaseModel
      */
     public function withAccepted(bool $accepted): self
     {
-        $obj = clone $this;
-        $obj['accepted'] = $accepted;
+        $self = clone $this;
+        $self['accepted'] = $accepted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,9 +88,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

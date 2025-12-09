@@ -102,18 +102,18 @@ final class Filter implements BaseModel
         ?string $status = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dateEndedAt && $obj['dateEndedAt'] = $dateEndedAt;
-        null !== $dateStartedAt && $obj['dateStartedAt'] = $dateStartedAt;
-        null !== $durationSecs && $obj['durationSecs'] = $durationSecs;
-        null !== $participantID && $obj['participantID'] = $participantID;
-        null !== $roomID && $obj['roomID'] = $roomID;
-        null !== $sessionID && $obj['sessionID'] = $sessionID;
-        null !== $status && $obj['status'] = $status;
-        null !== $type && $obj['type'] = $type;
+        null !== $dateEndedAt && $self['dateEndedAt'] = $dateEndedAt;
+        null !== $dateStartedAt && $self['dateStartedAt'] = $dateStartedAt;
+        null !== $durationSecs && $self['durationSecs'] = $durationSecs;
+        null !== $participantID && $self['participantID'] = $participantID;
+        null !== $roomID && $self['roomID'] = $roomID;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
+        null !== $status && $self['status'] = $status;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Filter implements BaseModel
      */
     public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
     {
-        $obj = clone $this;
-        $obj['dateEndedAt'] = $dateEndedAt;
+        $self = clone $this;
+        $self['dateEndedAt'] = $dateEndedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class Filter implements BaseModel
      */
     public function withDateStartedAt(DateStartedAt|array $dateStartedAt): self
     {
-        $obj = clone $this;
-        $obj['dateStartedAt'] = $dateStartedAt;
+        $self = clone $this;
+        $self['dateStartedAt'] = $dateStartedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class Filter implements BaseModel
      */
     public function withDurationSecs(int $durationSecs): self
     {
-        $obj = clone $this;
-        $obj['durationSecs'] = $durationSecs;
+        $self = clone $this;
+        $self['durationSecs'] = $durationSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +162,10 @@ final class Filter implements BaseModel
      */
     public function withParticipantID(string $participantID): self
     {
-        $obj = clone $this;
-        $obj['participantID'] = $participantID;
+        $self = clone $this;
+        $self['participantID'] = $participantID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +173,10 @@ final class Filter implements BaseModel
      */
     public function withRoomID(string $roomID): self
     {
-        $obj = clone $this;
-        $obj['roomID'] = $roomID;
+        $self = clone $this;
+        $self['roomID'] = $roomID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +184,10 @@ final class Filter implements BaseModel
      */
     public function withSessionID(string $sessionID): self
     {
-        $obj = clone $this;
-        $obj['sessionID'] = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,9 +206,9 @@ final class Filter implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

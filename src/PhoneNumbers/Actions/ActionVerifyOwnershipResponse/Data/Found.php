@@ -42,12 +42,12 @@ final class Found implements BaseModel
         ?string $id = null,
         ?string $numberValE164 = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $numberValE164 && $obj['numberValE164'] = $numberValE164;
+        null !== $id && $self['id'] = $id;
+        null !== $numberValE164 && $self['numberValE164'] = $numberValE164;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Found implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Found implements BaseModel
      */
     public function withNumberValE164(string $numberValE164): self
     {
-        $obj = clone $this;
-        $obj['numberValE164'] = $numberValE164;
+        $self = clone $this;
+        $self['numberValE164'] = $numberValE164;
 
-        return $obj;
+        return $self;
     }
 }

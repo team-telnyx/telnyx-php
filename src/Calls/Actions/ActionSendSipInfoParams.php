@@ -83,15 +83,15 @@ final class ActionSendSipInfoParams implements BaseModel
         ?string $clientState = null,
         ?string $commandID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['body'] = $body;
-        $obj['contentType'] = $contentType;
+        $self['body'] = $body;
+        $self['contentType'] = $contentType;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class ActionSendSipInfoParams implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class ActionSendSipInfoParams implements BaseModel
      */
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class ActionSendSipInfoParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +132,9 @@ final class ActionSendSipInfoParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 }

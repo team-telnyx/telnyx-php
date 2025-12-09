@@ -272,35 +272,35 @@ final class PortingOrder implements BaseModel
         ?string $userID = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $activationSettings && $obj['activationSettings'] = $activationSettings;
-        null !== $additionalSteps && $obj['additionalSteps'] = $additionalSteps;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerGroupReference && $obj['customerGroupReference'] = $customerGroupReference;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $description && $obj['description'] = $description;
-        null !== $documents && $obj['documents'] = $documents;
-        null !== $endUser && $obj['endUser'] = $endUser;
-        null !== $messaging && $obj['messaging'] = $messaging;
-        null !== $misc && $obj['misc'] = $misc;
-        null !== $oldServiceProviderOcn && $obj['oldServiceProviderOcn'] = $oldServiceProviderOcn;
-        null !== $parentSupportKey && $obj['parentSupportKey'] = $parentSupportKey;
-        null !== $phoneNumberConfiguration && $obj['phoneNumberConfiguration'] = $phoneNumberConfiguration;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $portingPhoneNumbersCount && $obj['portingPhoneNumbersCount'] = $portingPhoneNumbersCount;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirements && $obj['requirements'] = $requirements;
-        null !== $requirementsMet && $obj['requirementsMet'] = $requirementsMet;
-        null !== $status && $obj['status'] = $status;
-        null !== $supportKey && $obj['supportKey'] = $supportKey;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $userFeedback && $obj['userFeedback'] = $userFeedback;
-        null !== $userID && $obj['userID'] = $userID;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $id && $self['id'] = $id;
+        null !== $activationSettings && $self['activationSettings'] = $activationSettings;
+        null !== $additionalSteps && $self['additionalSteps'] = $additionalSteps;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $description && $self['description'] = $description;
+        null !== $documents && $self['documents'] = $documents;
+        null !== $endUser && $self['endUser'] = $endUser;
+        null !== $messaging && $self['messaging'] = $messaging;
+        null !== $misc && $self['misc'] = $misc;
+        null !== $oldServiceProviderOcn && $self['oldServiceProviderOcn'] = $oldServiceProviderOcn;
+        null !== $parentSupportKey && $self['parentSupportKey'] = $parentSupportKey;
+        null !== $phoneNumberConfiguration && $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $portingPhoneNumbersCount && $self['portingPhoneNumbersCount'] = $portingPhoneNumbersCount;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirements && $self['requirements'] = $requirements;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $status && $self['status'] = $status;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userFeedback && $self['userFeedback'] = $userFeedback;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class PortingOrder implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -325,10 +325,10 @@ final class PortingOrder implements BaseModel
     public function withActivationSettings(
         PortingOrderActivationSettings|array $activationSettings
     ): self {
-        $obj = clone $this;
-        $obj['activationSettings'] = $activationSettings;
+        $self = clone $this;
+        $self['activationSettings'] = $activationSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +338,10 @@ final class PortingOrder implements BaseModel
      */
     public function withAdditionalSteps(array $additionalSteps): self
     {
-        $obj = clone $this;
-        $obj['additionalSteps'] = $additionalSteps;
+        $self = clone $this;
+        $self['additionalSteps'] = $additionalSteps;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -349,10 +349,10 @@ final class PortingOrder implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -361,10 +361,10 @@ final class PortingOrder implements BaseModel
     public function withCustomerGroupReference(
         ?string $customerGroupReference
     ): self {
-        $obj = clone $this;
-        $obj['customerGroupReference'] = $customerGroupReference;
+        $self = clone $this;
+        $self['customerGroupReference'] = $customerGroupReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -372,10 +372,10 @@ final class PortingOrder implements BaseModel
      */
     public function withCustomerReference(?string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -383,10 +383,10 @@ final class PortingOrder implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -398,10 +398,10 @@ final class PortingOrder implements BaseModel
      */
     public function withDocuments(PortingOrderDocuments|array $documents): self
     {
-        $obj = clone $this;
-        $obj['documents'] = $documents;
+        $self = clone $this;
+        $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -412,10 +412,10 @@ final class PortingOrder implements BaseModel
      */
     public function withEndUser(PortingOrderEndUser|array $endUser): self
     {
-        $obj = clone $this;
-        $obj['endUser'] = $endUser;
+        $self = clone $this;
+        $self['endUser'] = $endUser;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -430,10 +430,10 @@ final class PortingOrder implements BaseModel
      */
     public function withMessaging(PortingOrderMessaging|array $messaging): self
     {
-        $obj = clone $this;
-        $obj['messaging'] = $messaging;
+        $self = clone $this;
+        $self['messaging'] = $messaging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -445,10 +445,10 @@ final class PortingOrder implements BaseModel
      */
     public function withMisc(PortingOrderMisc|array|null $misc): self
     {
-        $obj = clone $this;
-        $obj['misc'] = $misc;
+        $self = clone $this;
+        $self['misc'] = $misc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -457,10 +457,10 @@ final class PortingOrder implements BaseModel
     public function withOldServiceProviderOcn(
         string $oldServiceProviderOcn
     ): self {
-        $obj = clone $this;
-        $obj['oldServiceProviderOcn'] = $oldServiceProviderOcn;
+        $self = clone $this;
+        $self['oldServiceProviderOcn'] = $oldServiceProviderOcn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -468,10 +468,10 @@ final class PortingOrder implements BaseModel
      */
     public function withParentSupportKey(?string $parentSupportKey): self
     {
-        $obj = clone $this;
-        $obj['parentSupportKey'] = $parentSupportKey;
+        $self = clone $this;
+        $self['parentSupportKey'] = $parentSupportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -486,10 +486,10 @@ final class PortingOrder implements BaseModel
     public function withPhoneNumberConfiguration(
         PortingOrderPhoneNumberConfiguration|array $phoneNumberConfiguration
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberConfiguration'] = $phoneNumberConfiguration;
+        $self = clone $this;
+        $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -500,10 +500,10 @@ final class PortingOrder implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -512,10 +512,10 @@ final class PortingOrder implements BaseModel
     public function withPortingPhoneNumbersCount(
         int $portingPhoneNumbersCount
     ): self {
-        $obj = clone $this;
-        $obj['portingPhoneNumbersCount'] = $portingPhoneNumbersCount;
+        $self = clone $this;
+        $self['portingPhoneNumbersCount'] = $portingPhoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -523,10 +523,10 @@ final class PortingOrder implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -541,10 +541,10 @@ final class PortingOrder implements BaseModel
      */
     public function withRequirements(array $requirements): self
     {
-        $obj = clone $this;
-        $obj['requirements'] = $requirements;
+        $self = clone $this;
+        $self['requirements'] = $requirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -552,10 +552,10 @@ final class PortingOrder implements BaseModel
      */
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj['requirementsMet'] = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -567,10 +567,10 @@ final class PortingOrder implements BaseModel
      */
     public function withStatus(PortingOrderStatus|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -578,10 +578,10 @@ final class PortingOrder implements BaseModel
      */
     public function withSupportKey(?string $supportKey): self
     {
-        $obj = clone $this;
-        $obj['supportKey'] = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -589,10 +589,10 @@ final class PortingOrder implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -603,10 +603,10 @@ final class PortingOrder implements BaseModel
     public function withUserFeedback(
         PortingOrderUserFeedback|array $userFeedback
     ): self {
-        $obj = clone $this;
-        $obj['userFeedback'] = $userFeedback;
+        $self = clone $this;
+        $self['userFeedback'] = $userFeedback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -614,17 +614,17 @@ final class PortingOrder implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookURL(?string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

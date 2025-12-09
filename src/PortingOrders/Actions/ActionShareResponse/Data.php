@@ -98,18 +98,18 @@ final class Data implements BaseModel
         ?string $portingOrderID = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $token && $obj['token'] = $token;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
-        null !== $expiresInSeconds && $obj['expiresInSeconds'] = $expiresInSeconds;
-        null !== $permissions && $obj['permissions'] = $permissions;
-        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $token && $self['token'] = $token;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $expiresInSeconds && $self['expiresInSeconds'] = $expiresInSeconds;
+        null !== $permissions && $self['permissions'] = $permissions;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Data implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj['token'] = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Data implements BaseModel
      */
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Data implements BaseModel
      */
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
-        $obj = clone $this;
-        $obj['expiresInSeconds'] = $expiresInSeconds;
+        $self = clone $this;
+        $self['expiresInSeconds'] = $expiresInSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class Data implements BaseModel
      */
     public function withPermissions(array $permissions): self
     {
-        $obj = clone $this;
-        $obj['permissions'] = $permissions;
+        $self = clone $this;
+        $self['permissions'] = $permissions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Data implements BaseModel
      */
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj['portingOrderID'] = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

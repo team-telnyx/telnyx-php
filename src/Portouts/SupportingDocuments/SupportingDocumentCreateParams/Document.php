@@ -59,12 +59,12 @@ final class Document implements BaseModel
      */
     public static function with(string $documentID, Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['documentID'] = $documentID;
-        $obj['type'] = $type;
+        $self['documentID'] = $documentID;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +72,10 @@ final class Document implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj['documentID'] = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class Document implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

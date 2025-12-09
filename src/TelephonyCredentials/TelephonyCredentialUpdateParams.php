@@ -61,14 +61,14 @@ final class TelephonyCredentialUpdateParams implements BaseModel
         ?string $name = null,
         ?string $tag = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
-        null !== $name && $obj['name'] = $name;
-        null !== $tag && $obj['tag'] = $tag;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $name && $self['name'] = $name;
+        null !== $tag && $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class TelephonyCredentialUpdateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,18 +87,18 @@ final class TelephonyCredentialUpdateParams implements BaseModel
      */
     public function withExpiresAt(string $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class TelephonyCredentialUpdateParams implements BaseModel
      */
     public function withTag(string $tag): self
     {
-        $obj = clone $this;
-        $obj['tag'] = $tag;
+        $self = clone $this;
+        $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 }

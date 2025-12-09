@@ -100,19 +100,19 @@ final class Data implements BaseModel
         ?bool $reservable = null,
         ?string $vanityFormat = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bestEffort && $obj['bestEffort'] = $bestEffort;
-        null !== $costInformation && $obj['costInformation'] = $costInformation;
-        null !== $features && $obj['features'] = $features;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regionInformation && $obj['regionInformation'] = $regionInformation;
-        null !== $reservable && $obj['reservable'] = $reservable;
-        null !== $vanityFormat && $obj['vanityFormat'] = $vanityFormat;
+        null !== $bestEffort && $self['bestEffort'] = $bestEffort;
+        null !== $costInformation && $self['costInformation'] = $costInformation;
+        null !== $features && $self['features'] = $features;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionInformation && $self['regionInformation'] = $regionInformation;
+        null !== $reservable && $self['reservable'] = $reservable;
+        null !== $vanityFormat && $self['vanityFormat'] = $vanityFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Data implements BaseModel
      */
     public function withBestEffort(bool $bestEffort): self
     {
-        $obj = clone $this;
-        $obj['bestEffort'] = $bestEffort;
+        $self = clone $this;
+        $self['bestEffort'] = $bestEffort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class Data implements BaseModel
     public function withCostInformation(
         CostInformation|array $costInformation
     ): self {
-        $obj = clone $this;
-        $obj['costInformation'] = $costInformation;
+        $self = clone $this;
+        $self['costInformation'] = $costInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,18 +145,18 @@ final class Data implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class Data implements BaseModel
      */
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj['quickship'] = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Data implements BaseModel
      */
     public function withRegionInformation(array $regionInformation): self
     {
-        $obj = clone $this;
-        $obj['regionInformation'] = $regionInformation;
+        $self = clone $this;
+        $self['regionInformation'] = $regionInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,17 +199,17 @@ final class Data implements BaseModel
      */
     public function withReservable(bool $reservable): self
     {
-        $obj = clone $this;
-        $obj['reservable'] = $reservable;
+        $self = clone $this;
+        $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 
     public function withVanityFormat(string $vanityFormat): self
     {
-        $obj = clone $this;
-        $obj['vanityFormat'] = $vanityFormat;
+        $self = clone $this;
+        $self['vanityFormat'] = $vanityFormat;
 
-        return $obj;
+        return $self;
     }
 }

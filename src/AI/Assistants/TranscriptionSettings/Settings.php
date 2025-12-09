@@ -55,14 +55,14 @@ final class Settings implements BaseModel
         ?bool $numerals = null,
         ?bool $smartFormat = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eotThreshold && $obj['eotThreshold'] = $eotThreshold;
-        null !== $eotTimeoutMs && $obj['eotTimeoutMs'] = $eotTimeoutMs;
-        null !== $numerals && $obj['numerals'] = $numerals;
-        null !== $smartFormat && $obj['smartFormat'] = $smartFormat;
+        null !== $eotThreshold && $self['eotThreshold'] = $eotThreshold;
+        null !== $eotTimeoutMs && $self['eotTimeoutMs'] = $eotTimeoutMs;
+        null !== $numerals && $self['numerals'] = $numerals;
+        null !== $smartFormat && $self['smartFormat'] = $smartFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,10 +70,10 @@ final class Settings implements BaseModel
      */
     public function withEotThreshold(float $eotThreshold): self
     {
-        $obj = clone $this;
-        $obj['eotThreshold'] = $eotThreshold;
+        $self = clone $this;
+        $self['eotThreshold'] = $eotThreshold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,25 +81,25 @@ final class Settings implements BaseModel
      */
     public function withEotTimeoutMs(int $eotTimeoutMs): self
     {
-        $obj = clone $this;
-        $obj['eotTimeoutMs'] = $eotTimeoutMs;
+        $self = clone $this;
+        $self['eotTimeoutMs'] = $eotTimeoutMs;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumerals(bool $numerals): self
     {
-        $obj = clone $this;
-        $obj['numerals'] = $numerals;
+        $self = clone $this;
+        $self['numerals'] = $numerals;
 
-        return $obj;
+        return $self;
     }
 
     public function withSmartFormat(bool $smartFormat): self
     {
-        $obj = clone $this;
-        $obj['smartFormat'] = $smartFormat;
+        $self = clone $this;
+        $self['smartFormat'] = $smartFormat;
 
-        return $obj;
+        return $self;
     }
 }

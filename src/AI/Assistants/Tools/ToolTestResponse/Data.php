@@ -80,23 +80,23 @@ final class Data implements BaseModel
         int $statusCode,
         bool $success,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['contentType'] = $contentType;
-        $obj['request'] = $request;
-        $obj['response'] = $response;
-        $obj['statusCode'] = $statusCode;
-        $obj['success'] = $success;
+        $self['contentType'] = $contentType;
+        $self['request'] = $request;
+        $self['response'] = $response;
+        $self['statusCode'] = $statusCode;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,33 +104,33 @@ final class Data implements BaseModel
      */
     public function withRequest(array $request): self
     {
-        $obj = clone $this;
-        $obj['request'] = $request;
+        $self = clone $this;
+        $self['request'] = $request;
 
-        return $obj;
+        return $self;
     }
 
     public function withResponse(string $response): self
     {
-        $obj = clone $this;
-        $obj['response'] = $response;
+        $self = clone $this;
+        $self['response'] = $response;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatusCode(int $statusCode): self
     {
-        $obj = clone $this;
-        $obj['statusCode'] = $statusCode;
+        $self = clone $this;
+        $self['statusCode'] = $statusCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

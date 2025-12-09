@@ -143,19 +143,19 @@ final class MesssageRcsParams implements BaseModel
         Type|string|null $type = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['agentID'] = $agentID;
-        $obj['agentMessage'] = $agentMessage;
-        $obj['messagingProfileID'] = $messagingProfileID;
-        $obj['to'] = $to;
+        $self['agentID'] = $agentID;
+        $self['agentMessage'] = $agentMessage;
+        $self['messagingProfileID'] = $messagingProfileID;
+        $self['to'] = $to;
 
-        null !== $mmsFallback && $obj['mmsFallback'] = $mmsFallback;
-        null !== $smsFallback && $obj['smsFallback'] = $smsFallback;
-        null !== $type && $obj['type'] = $type;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $mmsFallback && $self['mmsFallback'] = $mmsFallback;
+        null !== $smsFallback && $self['smsFallback'] = $smsFallback;
+        null !== $type && $self['type'] = $type;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj['agentID'] = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +179,10 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withAgentMessage(RcsAgentMessage|array $agentMessage): self
     {
-        $obj = clone $this;
-        $obj['agentMessage'] = $agentMessage;
+        $self = clone $this;
+        $self['agentMessage'] = $agentMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withMmsFallback(MmsFallback|array $mmsFallback): self
     {
-        $obj = clone $this;
-        $obj['mmsFallback'] = $mmsFallback;
+        $self = clone $this;
+        $self['mmsFallback'] = $mmsFallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withSMSFallback(SMSFallback|array $smsFallback): self
     {
-        $obj = clone $this;
-        $obj['smsFallback'] = $smsFallback;
+        $self = clone $this;
+        $self['smsFallback'] = $smsFallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,10 +241,10 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,9 +252,9 @@ final class MesssageRcsParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

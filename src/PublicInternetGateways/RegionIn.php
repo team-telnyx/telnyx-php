@@ -34,11 +34,11 @@ final class RegionIn implements BaseModel
      */
     public static function with(?string $regionCode = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $regionCode && $obj['regionCode'] = $regionCode;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class RegionIn implements BaseModel
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 }

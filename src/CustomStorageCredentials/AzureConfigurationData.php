@@ -81,15 +81,15 @@ final class AzureConfigurationData implements BaseModel
         ?string $accountName = null,
         ?string $bucket = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['backend'] = $backend;
+        $self['backend'] = $backend;
 
-        null !== $accountKey && $obj['accountKey'] = $accountKey;
-        null !== $accountName && $obj['accountName'] = $accountName;
-        null !== $bucket && $obj['bucket'] = $bucket;
+        null !== $accountKey && $self['accountKey'] = $accountKey;
+        null !== $accountName && $self['accountName'] = $accountName;
+        null !== $bucket && $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class AzureConfigurationData implements BaseModel
      */
     public function withBackend(Backend|string $backend): self
     {
-        $obj = clone $this;
-        $obj['backend'] = $backend;
+        $self = clone $this;
+        $self['backend'] = $backend;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class AzureConfigurationData implements BaseModel
      */
     public function withAccountKey(string $accountKey): self
     {
-        $obj = clone $this;
-        $obj['accountKey'] = $accountKey;
+        $self = clone $this;
+        $self['accountKey'] = $accountKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class AzureConfigurationData implements BaseModel
      */
     public function withAccountName(string $accountName): self
     {
-        $obj = clone $this;
-        $obj['accountName'] = $accountName;
+        $self = clone $this;
+        $self['accountName'] = $accountName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +132,9 @@ final class AzureConfigurationData implements BaseModel
      */
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj['bucket'] = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 }

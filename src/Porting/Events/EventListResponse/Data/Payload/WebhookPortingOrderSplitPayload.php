@@ -64,13 +64,13 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
         ?array $portingPhoneNumbers = null,
         To|array|null $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $from && $obj['from'] = $from;
-        null !== $portingPhoneNumbers && $obj['portingPhoneNumbers'] = $portingPhoneNumbers;
-        null !== $to && $obj['to'] = $to;
+        null !== $from && $self['from'] = $from;
+        null !== $portingPhoneNumbers && $self['portingPhoneNumbers'] = $portingPhoneNumbers;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
      */
     public function withFrom(From|array $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
      */
     public function withPortingPhoneNumbers(array $portingPhoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['portingPhoneNumbers'] = $portingPhoneNumbers;
+        $self = clone $this;
+        $self['portingPhoneNumbers'] = $portingPhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
      */
     public function withTo(To|array $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

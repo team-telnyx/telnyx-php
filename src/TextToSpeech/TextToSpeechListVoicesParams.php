@@ -55,12 +55,12 @@ final class TextToSpeechListVoicesParams implements BaseModel
         ?string $elevenlabsAPIKeyRef = null,
         Provider|string|null $provider = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $elevenlabsAPIKeyRef && $obj['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
-        null !== $provider && $obj['provider'] = $provider;
+        null !== $elevenlabsAPIKeyRef && $self['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
+        null !== $provider && $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class TextToSpeechListVoicesParams implements BaseModel
      */
     public function withElevenlabsAPIKeyRef(string $elevenlabsAPIKeyRef): self
     {
-        $obj = clone $this;
-        $obj['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
+        $self = clone $this;
+        $self['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class TextToSpeechListVoicesParams implements BaseModel
      */
     public function withProvider(Provider|string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 }

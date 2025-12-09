@@ -74,14 +74,14 @@ final class ContentMessage implements BaseModel
         ?array $suggestions = null,
         ?string $text = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentInfo && $obj['contentInfo'] = $contentInfo;
-        null !== $richCard && $obj['richCard'] = $richCard;
-        null !== $suggestions && $obj['suggestions'] = $suggestions;
-        null !== $text && $obj['text'] = $text;
+        null !== $contentInfo && $self['contentInfo'] = $contentInfo;
+        null !== $richCard && $self['richCard'] = $richCard;
+        null !== $suggestions && $self['suggestions'] = $suggestions;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class ContentMessage implements BaseModel
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {
-        $obj = clone $this;
-        $obj['contentInfo'] = $contentInfo;
+        $self = clone $this;
+        $self['contentInfo'] = $contentInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class ContentMessage implements BaseModel
      */
     public function withRichCard(RichCard|array $richCard): self
     {
-        $obj = clone $this;
-        $obj['richCard'] = $richCard;
+        $self = clone $this;
+        $self['richCard'] = $richCard;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class ContentMessage implements BaseModel
      */
     public function withSuggestions(array $suggestions): self
     {
-        $obj = clone $this;
-        $obj['suggestions'] = $suggestions;
+        $self = clone $this;
+        $self['suggestions'] = $suggestions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,9 +130,9 @@ final class ContentMessage implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

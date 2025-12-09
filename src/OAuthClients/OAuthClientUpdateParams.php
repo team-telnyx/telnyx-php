@@ -110,18 +110,18 @@ final class OAuthClientUpdateParams implements BaseModel
         ?bool $requirePkce = null,
         ?string $tosUri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $allowedGrantTypes && $obj['allowedGrantTypes'] = $allowedGrantTypes;
-        null !== $allowedScopes && $obj['allowedScopes'] = $allowedScopes;
-        null !== $logoUri && $obj['logoUri'] = $logoUri;
-        null !== $name && $obj['name'] = $name;
-        null !== $policyUri && $obj['policyUri'] = $policyUri;
-        null !== $redirectUris && $obj['redirectUris'] = $redirectUris;
-        null !== $requirePkce && $obj['requirePkce'] = $requirePkce;
-        null !== $tosUri && $obj['tosUri'] = $tosUri;
+        null !== $allowedGrantTypes && $self['allowedGrantTypes'] = $allowedGrantTypes;
+        null !== $allowedScopes && $self['allowedScopes'] = $allowedScopes;
+        null !== $logoUri && $self['logoUri'] = $logoUri;
+        null !== $name && $self['name'] = $name;
+        null !== $policyUri && $self['policyUri'] = $policyUri;
+        null !== $redirectUris && $self['redirectUris'] = $redirectUris;
+        null !== $requirePkce && $self['requirePkce'] = $requirePkce;
+        null !== $tosUri && $self['tosUri'] = $tosUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
-        $obj = clone $this;
-        $obj['allowedGrantTypes'] = $allowedGrantTypes;
+        $self = clone $this;
+        $self['allowedGrantTypes'] = $allowedGrantTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withAllowedScopes(array $allowedScopes): self
     {
-        $obj = clone $this;
-        $obj['allowedScopes'] = $allowedScopes;
+        $self = clone $this;
+        $self['allowedScopes'] = $allowedScopes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withLogoUri(string $logoUri): self
     {
-        $obj = clone $this;
-        $obj['logoUri'] = $logoUri;
+        $self = clone $this;
+        $self['logoUri'] = $logoUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withPolicyUri(string $policyUri): self
     {
-        $obj = clone $this;
-        $obj['policyUri'] = $policyUri;
+        $self = clone $this;
+        $self['policyUri'] = $policyUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withRedirectUris(array $redirectUris): self
     {
-        $obj = clone $this;
-        $obj['redirectUris'] = $redirectUris;
+        $self = clone $this;
+        $self['redirectUris'] = $redirectUris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withRequirePkce(bool $requirePkce): self
     {
-        $obj = clone $this;
-        $obj['requirePkce'] = $requirePkce;
+        $self = clone $this;
+        $self['requirePkce'] = $requirePkce;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,9 +212,9 @@ final class OAuthClientUpdateParams implements BaseModel
      */
     public function withTosUri(string $tosUri): self
     {
-        $obj = clone $this;
-        $obj['tosUri'] = $tosUri;
+        $self = clone $this;
+        $self['tosUri'] = $tosUri;
 
-        return $obj;
+        return $self;
     }
 }

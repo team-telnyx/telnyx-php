@@ -66,12 +66,12 @@ final class RcListBulkCapabilitiesParams implements BaseModel
      */
     public static function with(string $agentID, array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['agentID'] = $agentID;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self['agentID'] = $agentID;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class RcListBulkCapabilitiesParams implements BaseModel
      */
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj['agentID'] = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,9 +92,9 @@ final class RcListBulkCapabilitiesParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

@@ -82,16 +82,16 @@ final class Carrier implements BaseModel
         ?string $normalizedCarrier = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $errorCode && $obj['errorCode'] = $errorCode;
-        null !== $mobileCountryCode && $obj['mobileCountryCode'] = $mobileCountryCode;
-        null !== $mobileNetworkCode && $obj['mobileNetworkCode'] = $mobileNetworkCode;
-        null !== $name && $obj['name'] = $name;
-        null !== $normalizedCarrier && $obj['normalizedCarrier'] = $normalizedCarrier;
-        null !== $type && $obj['type'] = $type;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $mobileCountryCode && $self['mobileCountryCode'] = $mobileCountryCode;
+        null !== $mobileNetworkCode && $self['mobileNetworkCode'] = $mobileNetworkCode;
+        null !== $name && $self['name'] = $name;
+        null !== $normalizedCarrier && $self['normalizedCarrier'] = $normalizedCarrier;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Carrier implements BaseModel
      */
     public function withErrorCode(?string $errorCode): self
     {
-        $obj = clone $this;
-        $obj['errorCode'] = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class Carrier implements BaseModel
      */
     public function withMobileCountryCode(string $mobileCountryCode): self
     {
-        $obj = clone $this;
-        $obj['mobileCountryCode'] = $mobileCountryCode;
+        $self = clone $this;
+        $self['mobileCountryCode'] = $mobileCountryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class Carrier implements BaseModel
      */
     public function withMobileNetworkCode(string $mobileNetworkCode): self
     {
-        $obj = clone $this;
-        $obj['mobileNetworkCode'] = $mobileNetworkCode;
+        $self = clone $this;
+        $self['mobileNetworkCode'] = $mobileNetworkCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class Carrier implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class Carrier implements BaseModel
      */
     public function withNormalizedCarrier(string $normalizedCarrier): self
     {
-        $obj = clone $this;
-        $obj['normalizedCarrier'] = $normalizedCarrier;
+        $self = clone $this;
+        $self['normalizedCarrier'] = $normalizedCarrier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +156,9 @@ final class Carrier implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

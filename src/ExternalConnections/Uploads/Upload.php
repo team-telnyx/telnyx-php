@@ -102,18 +102,18 @@ final class Upload implements BaseModel
         ?string $ticketID = null,
         ?array $tnUploadEntries = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableUsages && $obj['availableUsages'] = $availableUsages;
-        null !== $errorCode && $obj['errorCode'] = $errorCode;
-        null !== $errorMessage && $obj['errorMessage'] = $errorMessage;
-        null !== $locationID && $obj['locationID'] = $locationID;
-        null !== $status && $obj['status'] = $status;
-        null !== $tenantID && $obj['tenantID'] = $tenantID;
-        null !== $ticketID && $obj['ticketID'] = $ticketID;
-        null !== $tnUploadEntries && $obj['tnUploadEntries'] = $tnUploadEntries;
+        null !== $availableUsages && $self['availableUsages'] = $availableUsages;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $status && $self['status'] = $status;
+        null !== $tenantID && $self['tenantID'] = $tenantID;
+        null !== $ticketID && $self['ticketID'] = $ticketID;
+        null !== $tnUploadEntries && $self['tnUploadEntries'] = $tnUploadEntries;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class Upload implements BaseModel
      */
     public function withAvailableUsages(array $availableUsages): self
     {
-        $obj = clone $this;
-        $obj['availableUsages'] = $availableUsages;
+        $self = clone $this;
+        $self['availableUsages'] = $availableUsages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class Upload implements BaseModel
      */
     public function withErrorCode(string $errorCode): self
     {
-        $obj = clone $this;
-        $obj['errorCode'] = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,18 +143,18 @@ final class Upload implements BaseModel
      */
     public function withErrorMessage(string $errorMessage): self
     {
-        $obj = clone $this;
-        $obj['errorMessage'] = $errorMessage;
+        $self = clone $this;
+        $self['errorMessage'] = $errorMessage;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocationID(string $locationID): self
     {
-        $obj = clone $this;
-        $obj['locationID'] = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,18 +164,18 @@ final class Upload implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTenantID(string $tenantID): self
     {
-        $obj = clone $this;
-        $obj['tenantID'] = $tenantID;
+        $self = clone $this;
+        $self['tenantID'] = $tenantID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Upload implements BaseModel
      */
     public function withTicketID(string $ticketID): self
     {
-        $obj = clone $this;
-        $obj['ticketID'] = $ticketID;
+        $self = clone $this;
+        $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,9 +203,9 @@ final class Upload implements BaseModel
      */
     public function withTnUploadEntries(array $tnUploadEntries): self
     {
-        $obj = clone $this;
-        $obj['tnUploadEntries'] = $tnUploadEntries;
+        $self = clone $this;
+        $self['tnUploadEntries'] = $tnUploadEntries;
 
-        return $obj;
+        return $self;
     }
 }

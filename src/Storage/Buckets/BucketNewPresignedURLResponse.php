@@ -38,11 +38,11 @@ final class BucketNewPresignedURLResponse implements BaseModel
      */
     public static function with(Content|array|null $content = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $content && $obj['content'] = $content;
+        null !== $content && $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class BucketNewPresignedURLResponse implements BaseModel
      */
     public function withContent(Content|array $content): self
     {
-        $obj = clone $this;
-        $obj['content'] = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 }

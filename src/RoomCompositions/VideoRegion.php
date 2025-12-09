@@ -97,18 +97,18 @@ final class VideoRegion implements BaseModel
         ?int $yPos = null,
         ?int $zPos = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $height && $obj['height'] = $height;
-        null !== $maxColumns && $obj['maxColumns'] = $maxColumns;
-        null !== $maxRows && $obj['maxRows'] = $maxRows;
-        null !== $videoSources && $obj['videoSources'] = $videoSources;
-        null !== $width && $obj['width'] = $width;
-        null !== $xPos && $obj['xPos'] = $xPos;
-        null !== $yPos && $obj['yPos'] = $yPos;
-        null !== $zPos && $obj['zPos'] = $zPos;
+        null !== $height && $self['height'] = $height;
+        null !== $maxColumns && $self['maxColumns'] = $maxColumns;
+        null !== $maxRows && $self['maxRows'] = $maxRows;
+        null !== $videoSources && $self['videoSources'] = $videoSources;
+        null !== $width && $self['width'] = $width;
+        null !== $xPos && $self['xPos'] = $xPos;
+        null !== $yPos && $self['yPos'] = $yPos;
+        null !== $zPos && $self['zPos'] = $zPos;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class VideoRegion implements BaseModel
      */
     public function withHeight(?int $height): self
     {
-        $obj = clone $this;
-        $obj['height'] = $height;
+        $self = clone $this;
+        $self['height'] = $height;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class VideoRegion implements BaseModel
      */
     public function withMaxColumns(?int $maxColumns): self
     {
-        $obj = clone $this;
-        $obj['maxColumns'] = $maxColumns;
+        $self = clone $this;
+        $self['maxColumns'] = $maxColumns;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class VideoRegion implements BaseModel
      */
     public function withMaxRows(?int $maxRows): self
     {
-        $obj = clone $this;
-        $obj['maxRows'] = $maxRows;
+        $self = clone $this;
+        $self['maxRows'] = $maxRows;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class VideoRegion implements BaseModel
      */
     public function withVideoSources(array $videoSources): self
     {
-        $obj = clone $this;
-        $obj['videoSources'] = $videoSources;
+        $self = clone $this;
+        $self['videoSources'] = $videoSources;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +162,10 @@ final class VideoRegion implements BaseModel
      */
     public function withWidth(?int $width): self
     {
-        $obj = clone $this;
-        $obj['width'] = $width;
+        $self = clone $this;
+        $self['width'] = $width;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +173,10 @@ final class VideoRegion implements BaseModel
      */
     public function withXPos(?int $xPos): self
     {
-        $obj = clone $this;
-        $obj['xPos'] = $xPos;
+        $self = clone $this;
+        $self['xPos'] = $xPos;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +184,10 @@ final class VideoRegion implements BaseModel
      */
     public function withYPos(?int $yPos): self
     {
-        $obj = clone $this;
-        $obj['yPos'] = $yPos;
+        $self = clone $this;
+        $self['yPos'] = $yPos;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,9 +195,9 @@ final class VideoRegion implements BaseModel
      */
     public function withZPos(?int $zPos): self
     {
-        $obj = clone $this;
-        $obj['zPos'] = $zPos;
+        $self = clone $this;
+        $self['zPos'] = $zPos;
 
-        return $obj;
+        return $self;
     }
 }

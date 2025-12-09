@@ -51,18 +51,18 @@ final class ConferenceRetrieveParams implements BaseModel
      */
     public static function with(string $accountSid): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['accountSid'] = $accountSid;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 }

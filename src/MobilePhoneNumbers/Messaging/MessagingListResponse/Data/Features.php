@@ -42,11 +42,11 @@ final class Features implements BaseModel
     public static function with(
         MessagingFeatureSet|array|null $sms = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $sms && $obj['sms'] = $sms;
+        null !== $sms && $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class Features implements BaseModel
      */
     public function withSMS(MessagingFeatureSet|array|null $sms): self
     {
-        $obj = clone $this;
-        $obj['sms'] = $sms;
+        $self = clone $this;
+        $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 }

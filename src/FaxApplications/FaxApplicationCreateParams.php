@@ -143,20 +143,20 @@ final class FaxApplicationCreateParams implements BaseModel
         ?string $webhookEventFailoverURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['applicationName'] = $applicationName;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self['applicationName'] = $applicationName;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        null !== $active && $obj['active'] = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        null !== $active && $self['active'] = $active;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class FaxApplicationCreateParams implements BaseModel
      */
     public function withApplicationName(string $applicationName): self
     {
-        $obj = clone $this;
-        $obj['applicationName'] = $applicationName;
+        $self = clone $this;
+        $self['applicationName'] = $applicationName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class FaxApplicationCreateParams implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class FaxApplicationCreateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class FaxApplicationCreateParams implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +215,10 @@ final class FaxApplicationCreateParams implements BaseModel
      */
     public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class FaxApplicationCreateParams implements BaseModel
      */
     public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,10 +241,10 @@ final class FaxApplicationCreateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +253,10 @@ final class FaxApplicationCreateParams implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -264,9 +264,9 @@ final class FaxApplicationCreateParams implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

@@ -66,14 +66,14 @@ final class PhoneNumber implements BaseModel
         ?string $bundleID = null,
         ?string $requirementGroupID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
+        $self['phoneNumber'] = $phoneNumber;
 
-        null !== $bundleID && $obj['bundleID'] = $bundleID;
-        null !== $requirementGroupID && $obj['requirementGroupID'] = $requirementGroupID;
+        null !== $bundleID && $self['bundleID'] = $bundleID;
+        null !== $requirementGroupID && $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withBundleID(string $bundleID): self
     {
-        $obj = clone $this;
-        $obj['bundleID'] = $bundleID;
+        $self = clone $this;
+        $self['bundleID'] = $bundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class PhoneNumber implements BaseModel
      */
     public function withRequirementGroupID(string $requirementGroupID): self
     {
-        $obj = clone $this;
-        $obj['requirementGroupID'] = $requirementGroupID;
+        $self = clone $this;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 }

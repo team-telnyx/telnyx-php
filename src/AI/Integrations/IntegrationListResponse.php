@@ -58,11 +58,11 @@ final class IntegrationListResponse implements BaseModel
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['data'] = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class IntegrationListResponse implements BaseModel
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

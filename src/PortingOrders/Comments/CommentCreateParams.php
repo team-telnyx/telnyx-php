@@ -37,18 +37,18 @@ final class CommentCreateParams implements BaseModel
      */
     public static function with(?string $body = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $body && $obj['body'] = $body;
+        null !== $body && $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj['body'] = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 }

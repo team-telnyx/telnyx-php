@@ -61,14 +61,14 @@ final class Media implements BaseModel
         ?int $size = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentType && $obj['contentType'] = $contentType;
-        null !== $hashSha256 && $obj['hashSha256'] = $hashSha256;
-        null !== $size && $obj['size'] = $size;
-        null !== $url && $obj['url'] = $url;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $hashSha256 && $self['hashSha256'] = $hashSha256;
+        null !== $size && $self['size'] = $size;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Media implements BaseModel
      */
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Media implements BaseModel
      */
     public function withHashSha256(string $hashSha256): self
     {
-        $obj = clone $this;
-        $obj['hashSha256'] = $hashSha256;
+        $self = clone $this;
+        $self['hashSha256'] = $hashSha256;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Media implements BaseModel
      */
     public function withSize(int $size): self
     {
-        $obj = clone $this;
-        $obj['size'] = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class Media implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

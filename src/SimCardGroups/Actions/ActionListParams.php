@@ -84,15 +84,15 @@ final class ActionListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterSimCardGroupID && $obj['filterSimCardGroupID'] = $filterSimCardGroupID;
-        null !== $filterStatus && $obj['filterStatus'] = $filterStatus;
-        null !== $filterType && $obj['filterType'] = $filterType;
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
+        null !== $filterSimCardGroupID && $self['filterSimCardGroupID'] = $filterSimCardGroupID;
+        null !== $filterStatus && $self['filterStatus'] = $filterStatus;
+        null !== $filterType && $self['filterType'] = $filterType;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class ActionListParams implements BaseModel
      */
     public function withFilterSimCardGroupID(string $filterSimCardGroupID): self
     {
-        $obj = clone $this;
-        $obj['filterSimCardGroupID'] = $filterSimCardGroupID;
+        $self = clone $this;
+        $self['filterSimCardGroupID'] = $filterSimCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class ActionListParams implements BaseModel
      */
     public function withFilterStatus(FilterStatus|string $filterStatus): self
     {
-        $obj = clone $this;
-        $obj['filterStatus'] = $filterStatus;
+        $self = clone $this;
+        $self['filterStatus'] = $filterStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class ActionListParams implements BaseModel
      */
     public function withFilterType(FilterType|string $filterType): self
     {
-        $obj = clone $this;
-        $obj['filterType'] = $filterType;
+        $self = clone $this;
+        $self['filterType'] = $filterType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class ActionListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,9 +148,9 @@ final class ActionListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

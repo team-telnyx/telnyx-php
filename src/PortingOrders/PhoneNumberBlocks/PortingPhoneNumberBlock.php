@@ -108,18 +108,18 @@ final class PortingPhoneNumberBlock implements BaseModel
         ?string $recordType = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $activationRanges && $obj['activationRanges'] = $activationRanges;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $phoneNumberRange && $obj['phoneNumberRange'] = $phoneNumberRange;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $activationRanges && $self['activationRanges'] = $activationRanges;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $phoneNumberRange && $self['phoneNumberRange'] = $phoneNumberRange;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class PortingPhoneNumberBlock implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class PortingPhoneNumberBlock implements BaseModel
      */
     public function withActivationRanges(array $activationRanges): self
     {
-        $obj = clone $this;
-        $obj['activationRanges'] = $activationRanges;
+        $self = clone $this;
+        $self['activationRanges'] = $activationRanges;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class PortingPhoneNumberBlock implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class PortingPhoneNumberBlock implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class PortingPhoneNumberBlock implements BaseModel
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberRange'] = $phoneNumberRange;
+        $self = clone $this;
+        $self['phoneNumberRange'] = $phoneNumberRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class PortingPhoneNumberBlock implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class PortingPhoneNumberBlock implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,9 +216,9 @@ final class PortingPhoneNumberBlock implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

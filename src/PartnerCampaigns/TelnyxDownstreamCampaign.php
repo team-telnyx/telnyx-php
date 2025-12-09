@@ -350,48 +350,48 @@ final class TelnyxDownstreamCampaign implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['tcrBrandID'] = $tcrBrandID;
-        $obj['tcrCampaignID'] = $tcrCampaignID;
+        $self['tcrBrandID'] = $tcrBrandID;
+        $self['tcrCampaignID'] = $tcrCampaignID;
 
-        null !== $ageGated && $obj['ageGated'] = $ageGated;
-        null !== $assignedPhoneNumbersCount && $obj['assignedPhoneNumbersCount'] = $assignedPhoneNumbersCount;
-        null !== $brandDisplayName && $obj['brandDisplayName'] = $brandDisplayName;
-        null !== $campaignStatus && $obj['campaignStatus'] = $campaignStatus;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $description && $obj['description'] = $description;
-        null !== $directLending && $obj['directLending'] = $directLending;
-        null !== $embeddedLink && $obj['embeddedLink'] = $embeddedLink;
-        null !== $embeddedLinkSample && $obj['embeddedLinkSample'] = $embeddedLinkSample;
-        null !== $embeddedPhone && $obj['embeddedPhone'] = $embeddedPhone;
-        null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
-        null !== $helpKeywords && $obj['helpKeywords'] = $helpKeywords;
-        null !== $helpMessage && $obj['helpMessage'] = $helpMessage;
-        null !== $isNumberPoolingEnabled && $obj['isNumberPoolingEnabled'] = $isNumberPoolingEnabled;
-        null !== $messageFlow && $obj['messageFlow'] = $messageFlow;
-        null !== $numberPool && $obj['numberPool'] = $numberPool;
-        null !== $optinKeywords && $obj['optinKeywords'] = $optinKeywords;
-        null !== $optinMessage && $obj['optinMessage'] = $optinMessage;
-        null !== $optoutKeywords && $obj['optoutKeywords'] = $optoutKeywords;
-        null !== $optoutMessage && $obj['optoutMessage'] = $optoutMessage;
-        null !== $privacyPolicyLink && $obj['privacyPolicyLink'] = $privacyPolicyLink;
-        null !== $sample1 && $obj['sample1'] = $sample1;
-        null !== $sample2 && $obj['sample2'] = $sample2;
-        null !== $sample3 && $obj['sample3'] = $sample3;
-        null !== $sample4 && $obj['sample4'] = $sample4;
-        null !== $sample5 && $obj['sample5'] = $sample5;
-        null !== $subscriberOptin && $obj['subscriberOptin'] = $subscriberOptin;
-        null !== $subscriberOptout && $obj['subscriberOptout'] = $subscriberOptout;
-        null !== $subUsecases && $obj['subUsecases'] = $subUsecases;
-        null !== $termsAndConditions && $obj['termsAndConditions'] = $termsAndConditions;
-        null !== $termsAndConditionsLink && $obj['termsAndConditionsLink'] = $termsAndConditionsLink;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $usecase && $obj['usecase'] = $usecase;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $ageGated && $self['ageGated'] = $ageGated;
+        null !== $assignedPhoneNumbersCount && $self['assignedPhoneNumbersCount'] = $assignedPhoneNumbersCount;
+        null !== $brandDisplayName && $self['brandDisplayName'] = $brandDisplayName;
+        null !== $campaignStatus && $self['campaignStatus'] = $campaignStatus;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $description && $self['description'] = $description;
+        null !== $directLending && $self['directLending'] = $directLending;
+        null !== $embeddedLink && $self['embeddedLink'] = $embeddedLink;
+        null !== $embeddedLinkSample && $self['embeddedLinkSample'] = $embeddedLinkSample;
+        null !== $embeddedPhone && $self['embeddedPhone'] = $embeddedPhone;
+        null !== $failureReasons && $self['failureReasons'] = $failureReasons;
+        null !== $helpKeywords && $self['helpKeywords'] = $helpKeywords;
+        null !== $helpMessage && $self['helpMessage'] = $helpMessage;
+        null !== $isNumberPoolingEnabled && $self['isNumberPoolingEnabled'] = $isNumberPoolingEnabled;
+        null !== $messageFlow && $self['messageFlow'] = $messageFlow;
+        null !== $numberPool && $self['numberPool'] = $numberPool;
+        null !== $optinKeywords && $self['optinKeywords'] = $optinKeywords;
+        null !== $optinMessage && $self['optinMessage'] = $optinMessage;
+        null !== $optoutKeywords && $self['optoutKeywords'] = $optoutKeywords;
+        null !== $optoutMessage && $self['optoutMessage'] = $optoutMessage;
+        null !== $privacyPolicyLink && $self['privacyPolicyLink'] = $privacyPolicyLink;
+        null !== $sample1 && $self['sample1'] = $sample1;
+        null !== $sample2 && $self['sample2'] = $sample2;
+        null !== $sample3 && $self['sample3'] = $sample3;
+        null !== $sample4 && $self['sample4'] = $sample4;
+        null !== $sample5 && $self['sample5'] = $sample5;
+        null !== $subscriberOptin && $self['subscriberOptin'] = $subscriberOptin;
+        null !== $subscriberOptout && $self['subscriberOptout'] = $subscriberOptout;
+        null !== $subUsecases && $self['subUsecases'] = $subUsecases;
+        null !== $termsAndConditions && $self['termsAndConditions'] = $termsAndConditions;
+        null !== $termsAndConditionsLink && $self['termsAndConditionsLink'] = $termsAndConditionsLink;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $usecase && $self['usecase'] = $usecase;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -399,10 +399,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withTcrBrandID(string $tcrBrandID): self
     {
-        $obj = clone $this;
-        $obj['tcrBrandID'] = $tcrBrandID;
+        $self = clone $this;
+        $self['tcrBrandID'] = $tcrBrandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -410,10 +410,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
-        $obj = clone $this;
-        $obj['tcrCampaignID'] = $tcrCampaignID;
+        $self = clone $this;
+        $self['tcrCampaignID'] = $tcrCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -421,10 +421,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withAgeGated(bool $ageGated): self
     {
-        $obj = clone $this;
-        $obj['ageGated'] = $ageGated;
+        $self = clone $this;
+        $self['ageGated'] = $ageGated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -433,10 +433,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
     public function withAssignedPhoneNumbersCount(
         float $assignedPhoneNumbersCount
     ): self {
-        $obj = clone $this;
-        $obj['assignedPhoneNumbersCount'] = $assignedPhoneNumbersCount;
+        $self = clone $this;
+        $self['assignedPhoneNumbersCount'] = $assignedPhoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -444,10 +444,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withBrandDisplayName(string $brandDisplayName): self
     {
-        $obj = clone $this;
-        $obj['brandDisplayName'] = $brandDisplayName;
+        $self = clone $this;
+        $self['brandDisplayName'] = $brandDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -458,10 +458,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
     public function withCampaignStatus(
         CampaignStatus|string $campaignStatus
     ): self {
-        $obj = clone $this;
-        $obj['campaignStatus'] = $campaignStatus;
+        $self = clone $this;
+        $self['campaignStatus'] = $campaignStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -469,10 +469,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -480,10 +480,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -491,10 +491,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withDirectLending(bool $directLending): self
     {
-        $obj = clone $this;
-        $obj['directLending'] = $directLending;
+        $self = clone $this;
+        $self['directLending'] = $directLending;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -502,10 +502,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withEmbeddedLink(bool $embeddedLink): self
     {
-        $obj = clone $this;
-        $obj['embeddedLink'] = $embeddedLink;
+        $self = clone $this;
+        $self['embeddedLink'] = $embeddedLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -513,10 +513,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withEmbeddedLinkSample(string $embeddedLinkSample): self
     {
-        $obj = clone $this;
-        $obj['embeddedLinkSample'] = $embeddedLinkSample;
+        $self = clone $this;
+        $self['embeddedLinkSample'] = $embeddedLinkSample;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -524,10 +524,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withEmbeddedPhone(bool $embeddedPhone): self
     {
-        $obj = clone $this;
-        $obj['embeddedPhone'] = $embeddedPhone;
+        $self = clone $this;
+        $self['embeddedPhone'] = $embeddedPhone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -535,10 +535,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withFailureReasons(string $failureReasons): self
     {
-        $obj = clone $this;
-        $obj['failureReasons'] = $failureReasons;
+        $self = clone $this;
+        $self['failureReasons'] = $failureReasons;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -546,10 +546,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withHelpKeywords(string $helpKeywords): self
     {
-        $obj = clone $this;
-        $obj['helpKeywords'] = $helpKeywords;
+        $self = clone $this;
+        $self['helpKeywords'] = $helpKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -557,10 +557,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withHelpMessage(string $helpMessage): self
     {
-        $obj = clone $this;
-        $obj['helpMessage'] = $helpMessage;
+        $self = clone $this;
+        $self['helpMessage'] = $helpMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -569,10 +569,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
     public function withIsNumberPoolingEnabled(
         bool $isNumberPoolingEnabled
     ): self {
-        $obj = clone $this;
-        $obj['isNumberPoolingEnabled'] = $isNumberPoolingEnabled;
+        $self = clone $this;
+        $self['isNumberPoolingEnabled'] = $isNumberPoolingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -580,10 +580,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withMessageFlow(string $messageFlow): self
     {
-        $obj = clone $this;
-        $obj['messageFlow'] = $messageFlow;
+        $self = clone $this;
+        $self['messageFlow'] = $messageFlow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -591,10 +591,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withNumberPool(bool $numberPool): self
     {
-        $obj = clone $this;
-        $obj['numberPool'] = $numberPool;
+        $self = clone $this;
+        $self['numberPool'] = $numberPool;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -602,10 +602,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withOptinKeywords(string $optinKeywords): self
     {
-        $obj = clone $this;
-        $obj['optinKeywords'] = $optinKeywords;
+        $self = clone $this;
+        $self['optinKeywords'] = $optinKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -613,10 +613,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withOptinMessage(string $optinMessage): self
     {
-        $obj = clone $this;
-        $obj['optinMessage'] = $optinMessage;
+        $self = clone $this;
+        $self['optinMessage'] = $optinMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -624,10 +624,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withOptoutKeywords(string $optoutKeywords): self
     {
-        $obj = clone $this;
-        $obj['optoutKeywords'] = $optoutKeywords;
+        $self = clone $this;
+        $self['optoutKeywords'] = $optoutKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -635,10 +635,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withOptoutMessage(string $optoutMessage): self
     {
-        $obj = clone $this;
-        $obj['optoutMessage'] = $optoutMessage;
+        $self = clone $this;
+        $self['optoutMessage'] = $optoutMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -646,10 +646,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withPrivacyPolicyLink(string $privacyPolicyLink): self
     {
-        $obj = clone $this;
-        $obj['privacyPolicyLink'] = $privacyPolicyLink;
+        $self = clone $this;
+        $self['privacyPolicyLink'] = $privacyPolicyLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -657,10 +657,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSample1(string $sample1): self
     {
-        $obj = clone $this;
-        $obj['sample1'] = $sample1;
+        $self = clone $this;
+        $self['sample1'] = $sample1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -668,10 +668,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSample2(string $sample2): self
     {
-        $obj = clone $this;
-        $obj['sample2'] = $sample2;
+        $self = clone $this;
+        $self['sample2'] = $sample2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -679,10 +679,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSample3(string $sample3): self
     {
-        $obj = clone $this;
-        $obj['sample3'] = $sample3;
+        $self = clone $this;
+        $self['sample3'] = $sample3;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -690,10 +690,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSample4(string $sample4): self
     {
-        $obj = clone $this;
-        $obj['sample4'] = $sample4;
+        $self = clone $this;
+        $self['sample4'] = $sample4;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -701,10 +701,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSample5(string $sample5): self
     {
-        $obj = clone $this;
-        $obj['sample5'] = $sample5;
+        $self = clone $this;
+        $self['sample5'] = $sample5;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -712,10 +712,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSubscriberOptin(bool $subscriberOptin): self
     {
-        $obj = clone $this;
-        $obj['subscriberOptin'] = $subscriberOptin;
+        $self = clone $this;
+        $self['subscriberOptin'] = $subscriberOptin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -723,10 +723,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSubscriberOptout(bool $subscriberOptout): self
     {
-        $obj = clone $this;
-        $obj['subscriberOptout'] = $subscriberOptout;
+        $self = clone $this;
+        $self['subscriberOptout'] = $subscriberOptout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -736,10 +736,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withSubUsecases(array $subUsecases): self
     {
-        $obj = clone $this;
-        $obj['subUsecases'] = $subUsecases;
+        $self = clone $this;
+        $self['subUsecases'] = $subUsecases;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -747,10 +747,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withTermsAndConditions(bool $termsAndConditions): self
     {
-        $obj = clone $this;
-        $obj['termsAndConditions'] = $termsAndConditions;
+        $self = clone $this;
+        $self['termsAndConditions'] = $termsAndConditions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -759,10 +759,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
     public function withTermsAndConditionsLink(
         string $termsAndConditionsLink
     ): self {
-        $obj = clone $this;
-        $obj['termsAndConditionsLink'] = $termsAndConditionsLink;
+        $self = clone $this;
+        $self['termsAndConditionsLink'] = $termsAndConditionsLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -770,10 +770,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -781,10 +781,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withUsecase(string $usecase): self
     {
-        $obj = clone $this;
-        $obj['usecase'] = $usecase;
+        $self = clone $this;
+        $self['usecase'] = $usecase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -792,10 +792,10 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -803,9 +803,9 @@ final class TelnyxDownstreamCampaign implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

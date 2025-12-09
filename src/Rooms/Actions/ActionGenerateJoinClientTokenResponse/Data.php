@@ -55,30 +55,30 @@ final class Data implements BaseModel
         ?\DateTimeInterface $refreshTokenExpiresAt = null,
         ?\DateTimeInterface $tokenExpiresAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $token && $obj['token'] = $token;
-        null !== $refreshToken && $obj['refreshToken'] = $refreshToken;
-        null !== $refreshTokenExpiresAt && $obj['refreshTokenExpiresAt'] = $refreshTokenExpiresAt;
-        null !== $tokenExpiresAt && $obj['tokenExpiresAt'] = $tokenExpiresAt;
+        null !== $token && $self['token'] = $token;
+        null !== $refreshToken && $self['refreshToken'] = $refreshToken;
+        null !== $refreshTokenExpiresAt && $self['refreshTokenExpiresAt'] = $refreshTokenExpiresAt;
+        null !== $tokenExpiresAt && $self['tokenExpiresAt'] = $tokenExpiresAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj['token'] = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     public function withRefreshToken(string $refreshToken): self
     {
-        $obj = clone $this;
-        $obj['refreshToken'] = $refreshToken;
+        $self = clone $this;
+        $self['refreshToken'] = $refreshToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Data implements BaseModel
     public function withRefreshTokenExpiresAt(
         \DateTimeInterface $refreshTokenExpiresAt
     ): self {
-        $obj = clone $this;
-        $obj['refreshTokenExpiresAt'] = $refreshTokenExpiresAt;
+        $self = clone $this;
+        $self['refreshTokenExpiresAt'] = $refreshTokenExpiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,9 +98,9 @@ final class Data implements BaseModel
      */
     public function withTokenExpiresAt(\DateTimeInterface $tokenExpiresAt): self
     {
-        $obj = clone $this;
-        $obj['tokenExpiresAt'] = $tokenExpiresAt;
+        $self = clone $this;
+        $self['tokenExpiresAt'] = $tokenExpiresAt;
 
-        return $obj;
+        return $self;
     }
 }

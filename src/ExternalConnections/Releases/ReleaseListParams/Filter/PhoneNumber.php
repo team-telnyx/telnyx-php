@@ -44,12 +44,12 @@ final class PhoneNumber implements BaseModel
         ?string $contains = null,
         ?string $eq = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj['contains'] = $contains;
-        null !== $eq && $obj['eq'] = $eq;
+        null !== $contains && $self['contains'] = $contains;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj['contains'] = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class PhoneNumber implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj['eq'] = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

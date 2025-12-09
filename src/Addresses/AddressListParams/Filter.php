@@ -66,14 +66,14 @@ final class Filter implements BaseModel
         StreetAddress|array|null $streetAddress = null,
         ?string $usedAsEmergency = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addressBook && $obj['addressBook'] = $addressBook;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $streetAddress && $obj['streetAddress'] = $streetAddress;
-        null !== $usedAsEmergency && $obj['usedAsEmergency'] = $usedAsEmergency;
+        null !== $addressBook && $self['addressBook'] = $addressBook;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $streetAddress && $self['streetAddress'] = $streetAddress;
+        null !== $usedAsEmergency && $self['usedAsEmergency'] = $usedAsEmergency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class Filter implements BaseModel
      */
     public function withAddressBook(AddressBook|array $addressBook): self
     {
-        $obj = clone $this;
-        $obj['addressBook'] = $addressBook;
+        $self = clone $this;
+        $self['addressBook'] = $addressBook;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class Filter implements BaseModel
     public function withCustomerReference(
         string|UnionMember1|array $customerReference
     ): self {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class Filter implements BaseModel
      */
     public function withStreetAddress(StreetAddress|array $streetAddress): self
     {
-        $obj = clone $this;
-        $obj['streetAddress'] = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,9 +119,9 @@ final class Filter implements BaseModel
      */
     public function withUsedAsEmergency(string $usedAsEmergency): self
     {
-        $obj = clone $this;
-        $obj['usedAsEmergency'] = $usedAsEmergency;
+        $self = clone $this;
+        $self['usedAsEmergency'] = $usedAsEmergency;
 
-        return $obj;
+        return $self;
     }
 }

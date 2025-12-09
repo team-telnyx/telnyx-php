@@ -108,16 +108,16 @@ final class AuthenticationProviderCreateParams implements BaseModel
         ?bool $active = null,
         ?string $settingsURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj['settings'] = $settings;
-        $obj['shortName'] = $shortName;
+        $self['name'] = $name;
+        $self['settings'] = $settings;
+        $self['shortName'] = $shortName;
 
-        null !== $active && $obj['active'] = $active;
-        null !== $settingsURL && $obj['settingsURL'] = $settingsURL;
+        null !== $active && $self['active'] = $active;
+        null !== $settingsURL && $self['settingsURL'] = $settingsURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class AuthenticationProviderCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class AuthenticationProviderCreateParams implements BaseModel
      */
     public function withSettings(Settings|array $settings): self
     {
-        $obj = clone $this;
-        $obj['settings'] = $settings;
+        $self = clone $this;
+        $self['settings'] = $settings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class AuthenticationProviderCreateParams implements BaseModel
      */
     public function withShortName(string $shortName): self
     {
-        $obj = clone $this;
-        $obj['shortName'] = $shortName;
+        $self = clone $this;
+        $self['shortName'] = $shortName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class AuthenticationProviderCreateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,9 +176,9 @@ final class AuthenticationProviderCreateParams implements BaseModel
      */
     public function withSettingsURL(string $settingsURL): self
     {
-        $obj = clone $this;
-        $obj['settingsURL'] = $settingsURL;
+        $self = clone $this;
+        $self['settingsURL'] = $settingsURL;
 
-        return $obj;
+        return $self;
     }
 }

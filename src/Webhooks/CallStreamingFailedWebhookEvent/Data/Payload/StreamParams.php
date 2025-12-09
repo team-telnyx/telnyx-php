@@ -51,12 +51,12 @@ final class StreamParams implements BaseModel
         ?string $streamURL = null,
         Track|string|null $track = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $streamURL && $obj['streamURL'] = $streamURL;
-        null !== $track && $obj['track'] = $track;
+        null !== $streamURL && $self['streamURL'] = $streamURL;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class StreamParams implements BaseModel
      */
     public function withStreamURL(string $streamURL): self
     {
-        $obj = clone $this;
-        $obj['streamURL'] = $streamURL;
+        $self = clone $this;
+        $self['streamURL'] = $streamURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class StreamParams implements BaseModel
      */
     public function withTrack(Track|string $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }

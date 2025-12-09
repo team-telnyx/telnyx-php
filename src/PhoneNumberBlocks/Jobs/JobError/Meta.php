@@ -34,11 +34,11 @@ final class Meta implements BaseModel
      */
     public static function with(?string $url = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $url && $obj['url'] = $url;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Meta implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

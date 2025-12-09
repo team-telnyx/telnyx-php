@@ -138,21 +138,21 @@ final class TranscriptionEngineAConfig implements BaseModel
         TranscriptionEngine|string|null $transcriptionEngine = null,
         ?bool $useEnhanced = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enableSpeakerDiarization && $obj['enableSpeakerDiarization'] = $enableSpeakerDiarization;
-        null !== $hints && $obj['hints'] = $hints;
-        null !== $interimResults && $obj['interimResults'] = $interimResults;
-        null !== $language && $obj['language'] = $language;
-        null !== $maxSpeakerCount && $obj['maxSpeakerCount'] = $maxSpeakerCount;
-        null !== $minSpeakerCount && $obj['minSpeakerCount'] = $minSpeakerCount;
-        null !== $model && $obj['model'] = $model;
-        null !== $profanityFilter && $obj['profanityFilter'] = $profanityFilter;
-        null !== $speechContext && $obj['speechContext'] = $speechContext;
-        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
-        null !== $useEnhanced && $obj['useEnhanced'] = $useEnhanced;
+        null !== $enableSpeakerDiarization && $self['enableSpeakerDiarization'] = $enableSpeakerDiarization;
+        null !== $hints && $self['hints'] = $hints;
+        null !== $interimResults && $self['interimResults'] = $interimResults;
+        null !== $language && $self['language'] = $language;
+        null !== $maxSpeakerCount && $self['maxSpeakerCount'] = $maxSpeakerCount;
+        null !== $minSpeakerCount && $self['minSpeakerCount'] = $minSpeakerCount;
+        null !== $model && $self['model'] = $model;
+        null !== $profanityFilter && $self['profanityFilter'] = $profanityFilter;
+        null !== $speechContext && $self['speechContext'] = $speechContext;
+        null !== $transcriptionEngine && $self['transcriptionEngine'] = $transcriptionEngine;
+        null !== $useEnhanced && $self['useEnhanced'] = $useEnhanced;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class TranscriptionEngineAConfig implements BaseModel
     public function withEnableSpeakerDiarization(
         bool $enableSpeakerDiarization
     ): self {
-        $obj = clone $this;
-        $obj['enableSpeakerDiarization'] = $enableSpeakerDiarization;
+        $self = clone $this;
+        $self['enableSpeakerDiarization'] = $enableSpeakerDiarization;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withHints(array $hints): self
     {
-        $obj = clone $this;
-        $obj['hints'] = $hints;
+        $self = clone $this;
+        $self['hints'] = $hints;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withInterimResults(bool $interimResults): self
     {
-        $obj = clone $this;
-        $obj['interimResults'] = $interimResults;
+        $self = clone $this;
+        $self['interimResults'] = $interimResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class TranscriptionEngineAConfig implements BaseModel
     public function withLanguage(
         GoogleTranscriptionLanguage|string $language
     ): self {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withMaxSpeakerCount(int $maxSpeakerCount): self
     {
-        $obj = clone $this;
-        $obj['maxSpeakerCount'] = $maxSpeakerCount;
+        $self = clone $this;
+        $self['maxSpeakerCount'] = $maxSpeakerCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withMinSpeakerCount(int $minSpeakerCount): self
     {
-        $obj = clone $this;
-        $obj['minSpeakerCount'] = $minSpeakerCount;
+        $self = clone $this;
+        $self['minSpeakerCount'] = $minSpeakerCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withModel(Model|string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +245,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withProfanityFilter(bool $profanityFilter): self
     {
-        $obj = clone $this;
-        $obj['profanityFilter'] = $profanityFilter;
+        $self = clone $this;
+        $self['profanityFilter'] = $profanityFilter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +260,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withSpeechContext(array $speechContext): self
     {
-        $obj = clone $this;
-        $obj['speechContext'] = $speechContext;
+        $self = clone $this;
+        $self['speechContext'] = $speechContext;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class TranscriptionEngineAConfig implements BaseModel
     public function withTranscriptionEngine(
         TranscriptionEngine|string $transcriptionEngine
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionEngine'] = $transcriptionEngine;
+        $self = clone $this;
+        $self['transcriptionEngine'] = $transcriptionEngine;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,9 +285,9 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withUseEnhanced(bool $useEnhanced): self
     {
-        $obj = clone $this;
-        $obj['useEnhanced'] = $useEnhanced;
+        $self = clone $this;
+        $self['useEnhanced'] = $useEnhanced;
 
-        return $obj;
+        return $self;
     }
 }

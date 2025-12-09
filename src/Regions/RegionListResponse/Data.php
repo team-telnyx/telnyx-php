@@ -81,16 +81,16 @@ final class Data implements BaseModel
         ?array $supportedInterfaces = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $name && $obj['name'] = $name;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $supportedInterfaces && $obj['supportedInterfaces'] = $supportedInterfaces;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $code && $self['code'] = $code;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $name && $self['name'] = $name;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $supportedInterfaces && $self['supportedInterfaces'] = $supportedInterfaces;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Data implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data implements BaseModel
      */
     public function withSupportedInterfaces(array $supportedInterfaces): self
     {
-        $obj = clone $this;
-        $obj['supportedInterfaces'] = $supportedInterfaces;
+        $self = clone $this;
+        $self['supportedInterfaces'] = $supportedInterfaces;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

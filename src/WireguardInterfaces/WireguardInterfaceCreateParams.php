@@ -79,15 +79,15 @@ final class WireguardInterfaceCreateParams implements BaseModel
         ?bool $enableSipTrunking = null,
         ?string $name = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['networkID'] = $networkID;
-        $obj['regionCode'] = $regionCode;
+        $self['networkID'] = $networkID;
+        $self['regionCode'] = $regionCode;
 
-        null !== $enableSipTrunking && $obj['enableSipTrunking'] = $enableSipTrunking;
-        null !== $name && $obj['name'] = $name;
+        null !== $enableSipTrunking && $self['enableSipTrunking'] = $enableSipTrunking;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class WireguardInterfaceCreateParams implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj['networkID'] = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class WireguardInterfaceCreateParams implements BaseModel
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class WireguardInterfaceCreateParams implements BaseModel
      */
     public function withEnableSipTrunking(bool $enableSipTrunking): self
     {
-        $obj = clone $this;
-        $obj['enableSipTrunking'] = $enableSipTrunking;
+        $self = clone $this;
+        $self['enableSipTrunking'] = $enableSipTrunking;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,9 +128,9 @@ final class WireguardInterfaceCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

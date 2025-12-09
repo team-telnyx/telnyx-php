@@ -76,15 +76,15 @@ final class Data implements BaseModel
         ?\DateTimeInterface $insertedAt = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['code'] = $code;
-        $obj['name'] = $name;
+        $self['code'] = $code;
+        $self['name'] = $name;
 
-        null !== $insertedAt && $obj['insertedAt'] = $insertedAt;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $insertedAt && $self['insertedAt'] = $insertedAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Data implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Data implements BaseModel
      */
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
-        $obj = clone $this;
-        $obj['insertedAt'] = $insertedAt;
+        $self = clone $this;
+        $self['insertedAt'] = $insertedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,9 +125,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

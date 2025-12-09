@@ -123,21 +123,21 @@ final class CampaignUpdateParams implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $autoRenewal && $obj['autoRenewal'] = $autoRenewal;
-        null !== $helpMessage && $obj['helpMessage'] = $helpMessage;
-        null !== $messageFlow && $obj['messageFlow'] = $messageFlow;
-        null !== $resellerID && $obj['resellerID'] = $resellerID;
-        null !== $sample1 && $obj['sample1'] = $sample1;
-        null !== $sample2 && $obj['sample2'] = $sample2;
-        null !== $sample3 && $obj['sample3'] = $sample3;
-        null !== $sample4 && $obj['sample4'] = $sample4;
-        null !== $sample5 && $obj['sample5'] = $sample5;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $autoRenewal && $self['autoRenewal'] = $autoRenewal;
+        null !== $helpMessage && $self['helpMessage'] = $helpMessage;
+        null !== $messageFlow && $self['messageFlow'] = $messageFlow;
+        null !== $resellerID && $self['resellerID'] = $resellerID;
+        null !== $sample1 && $self['sample1'] = $sample1;
+        null !== $sample2 && $self['sample2'] = $sample2;
+        null !== $sample3 && $self['sample3'] = $sample3;
+        null !== $sample4 && $self['sample4'] = $sample4;
+        null !== $sample5 && $self['sample5'] = $sample5;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withAutoRenewal(bool $autoRenewal): self
     {
-        $obj = clone $this;
-        $obj['autoRenewal'] = $autoRenewal;
+        $self = clone $this;
+        $self['autoRenewal'] = $autoRenewal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withHelpMessage(string $helpMessage): self
     {
-        $obj = clone $this;
-        $obj['helpMessage'] = $helpMessage;
+        $self = clone $this;
+        $self['helpMessage'] = $helpMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withMessageFlow(string $messageFlow): self
     {
-        $obj = clone $this;
-        $obj['messageFlow'] = $messageFlow;
+        $self = clone $this;
+        $self['messageFlow'] = $messageFlow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withResellerID(string $resellerID): self
     {
-        $obj = clone $this;
-        $obj['resellerID'] = $resellerID;
+        $self = clone $this;
+        $self['resellerID'] = $resellerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withSample1(string $sample1): self
     {
-        $obj = clone $this;
-        $obj['sample1'] = $sample1;
+        $self = clone $this;
+        $self['sample1'] = $sample1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withSample2(string $sample2): self
     {
-        $obj = clone $this;
-        $obj['sample2'] = $sample2;
+        $self = clone $this;
+        $self['sample2'] = $sample2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withSample3(string $sample3): self
     {
-        $obj = clone $this;
-        $obj['sample3'] = $sample3;
+        $self = clone $this;
+        $self['sample3'] = $sample3;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withSample4(string $sample4): self
     {
-        $obj = clone $this;
-        $obj['sample4'] = $sample4;
+        $self = clone $this;
+        $self['sample4'] = $sample4;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withSample5(string $sample5): self
     {
-        $obj = clone $this;
-        $obj['sample5'] = $sample5;
+        $self = clone $this;
+        $self['sample5'] = $sample5;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,9 +255,9 @@ final class CampaignUpdateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

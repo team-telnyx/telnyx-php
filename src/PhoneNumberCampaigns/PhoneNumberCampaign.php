@@ -126,21 +126,21 @@ final class PhoneNumberCampaign implements BaseModel
         ?string $tcrCampaignID = null,
         ?string $telnyxCampaignID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['campaignID'] = $campaignID;
-        $obj['createdAt'] = $createdAt;
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['updatedAt'] = $updatedAt;
+        $self['campaignID'] = $campaignID;
+        $self['createdAt'] = $createdAt;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['updatedAt'] = $updatedAt;
 
-        null !== $assignmentStatus && $obj['assignmentStatus'] = $assignmentStatus;
-        null !== $brandID && $obj['brandID'] = $brandID;
-        null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
-        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
-        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
-        null !== $telnyxCampaignID && $obj['telnyxCampaignID'] = $telnyxCampaignID;
+        null !== $assignmentStatus && $self['assignmentStatus'] = $assignmentStatus;
+        null !== $brandID && $self['brandID'] = $brandID;
+        null !== $failureReasons && $self['failureReasons'] = $failureReasons;
+        null !== $tcrBrandID && $self['tcrBrandID'] = $tcrBrandID;
+        null !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
+        null !== $telnyxCampaignID && $self['telnyxCampaignID'] = $telnyxCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,34 +148,34 @@ final class PhoneNumberCampaign implements BaseModel
      */
     public function withCampaignID(string $campaignID): self
     {
-        $obj = clone $this;
-        $obj['campaignID'] = $campaignID;
+        $self = clone $this;
+        $self['campaignID'] = $campaignID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class PhoneNumberCampaign implements BaseModel
     public function withAssignmentStatus(
         AssignmentStatus|string $assignmentStatus
     ): self {
-        $obj = clone $this;
-        $obj['assignmentStatus'] = $assignmentStatus;
+        $self = clone $this;
+        $self['assignmentStatus'] = $assignmentStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,10 +197,10 @@ final class PhoneNumberCampaign implements BaseModel
      */
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class PhoneNumberCampaign implements BaseModel
      */
     public function withFailureReasons(string $failureReasons): self
     {
-        $obj = clone $this;
-        $obj['failureReasons'] = $failureReasons;
+        $self = clone $this;
+        $self['failureReasons'] = $failureReasons;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class PhoneNumberCampaign implements BaseModel
      */
     public function withTcrBrandID(string $tcrBrandID): self
     {
-        $obj = clone $this;
-        $obj['tcrBrandID'] = $tcrBrandID;
+        $self = clone $this;
+        $self['tcrBrandID'] = $tcrBrandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class PhoneNumberCampaign implements BaseModel
      */
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
-        $obj = clone $this;
-        $obj['tcrCampaignID'] = $tcrCampaignID;
+        $self = clone $this;
+        $self['tcrCampaignID'] = $tcrCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,9 +241,9 @@ final class PhoneNumberCampaign implements BaseModel
      */
     public function withTelnyxCampaignID(string $telnyxCampaignID): self
     {
-        $obj = clone $this;
-        $obj['telnyxCampaignID'] = $telnyxCampaignID;
+        $self = clone $this;
+        $self['telnyxCampaignID'] = $telnyxCampaignID;
 
-        return $obj;
+        return $self;
     }
 }

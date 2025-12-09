@@ -343,46 +343,46 @@ final class CampaignBuilderCreateParams implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['brandID'] = $brandID;
-        $obj['description'] = $description;
-        $obj['usecase'] = $usecase;
+        $self['brandID'] = $brandID;
+        $self['description'] = $description;
+        $self['usecase'] = $usecase;
 
-        null !== $ageGated && $obj['ageGated'] = $ageGated;
-        null !== $autoRenewal && $obj['autoRenewal'] = $autoRenewal;
-        null !== $directLending && $obj['directLending'] = $directLending;
-        null !== $embeddedLink && $obj['embeddedLink'] = $embeddedLink;
-        null !== $embeddedLinkSample && $obj['embeddedLinkSample'] = $embeddedLinkSample;
-        null !== $embeddedPhone && $obj['embeddedPhone'] = $embeddedPhone;
-        null !== $helpKeywords && $obj['helpKeywords'] = $helpKeywords;
-        null !== $helpMessage && $obj['helpMessage'] = $helpMessage;
-        null !== $messageFlow && $obj['messageFlow'] = $messageFlow;
-        null !== $mnoIDs && $obj['mnoIDs'] = $mnoIDs;
-        null !== $numberPool && $obj['numberPool'] = $numberPool;
-        null !== $optinKeywords && $obj['optinKeywords'] = $optinKeywords;
-        null !== $optinMessage && $obj['optinMessage'] = $optinMessage;
-        null !== $optoutKeywords && $obj['optoutKeywords'] = $optoutKeywords;
-        null !== $optoutMessage && $obj['optoutMessage'] = $optoutMessage;
-        null !== $privacyPolicyLink && $obj['privacyPolicyLink'] = $privacyPolicyLink;
-        null !== $referenceID && $obj['referenceID'] = $referenceID;
-        null !== $resellerID && $obj['resellerID'] = $resellerID;
-        null !== $sample1 && $obj['sample1'] = $sample1;
-        null !== $sample2 && $obj['sample2'] = $sample2;
-        null !== $sample3 && $obj['sample3'] = $sample3;
-        null !== $sample4 && $obj['sample4'] = $sample4;
-        null !== $sample5 && $obj['sample5'] = $sample5;
-        null !== $subscriberHelp && $obj['subscriberHelp'] = $subscriberHelp;
-        null !== $subscriberOptin && $obj['subscriberOptin'] = $subscriberOptin;
-        null !== $subscriberOptout && $obj['subscriberOptout'] = $subscriberOptout;
-        null !== $subUsecases && $obj['subUsecases'] = $subUsecases;
-        null !== $tag && $obj['tag'] = $tag;
-        null !== $termsAndConditions && $obj['termsAndConditions'] = $termsAndConditions;
-        null !== $termsAndConditionsLink && $obj['termsAndConditionsLink'] = $termsAndConditionsLink;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $ageGated && $self['ageGated'] = $ageGated;
+        null !== $autoRenewal && $self['autoRenewal'] = $autoRenewal;
+        null !== $directLending && $self['directLending'] = $directLending;
+        null !== $embeddedLink && $self['embeddedLink'] = $embeddedLink;
+        null !== $embeddedLinkSample && $self['embeddedLinkSample'] = $embeddedLinkSample;
+        null !== $embeddedPhone && $self['embeddedPhone'] = $embeddedPhone;
+        null !== $helpKeywords && $self['helpKeywords'] = $helpKeywords;
+        null !== $helpMessage && $self['helpMessage'] = $helpMessage;
+        null !== $messageFlow && $self['messageFlow'] = $messageFlow;
+        null !== $mnoIDs && $self['mnoIDs'] = $mnoIDs;
+        null !== $numberPool && $self['numberPool'] = $numberPool;
+        null !== $optinKeywords && $self['optinKeywords'] = $optinKeywords;
+        null !== $optinMessage && $self['optinMessage'] = $optinMessage;
+        null !== $optoutKeywords && $self['optoutKeywords'] = $optoutKeywords;
+        null !== $optoutMessage && $self['optoutMessage'] = $optoutMessage;
+        null !== $privacyPolicyLink && $self['privacyPolicyLink'] = $privacyPolicyLink;
+        null !== $referenceID && $self['referenceID'] = $referenceID;
+        null !== $resellerID && $self['resellerID'] = $resellerID;
+        null !== $sample1 && $self['sample1'] = $sample1;
+        null !== $sample2 && $self['sample2'] = $sample2;
+        null !== $sample3 && $self['sample3'] = $sample3;
+        null !== $sample4 && $self['sample4'] = $sample4;
+        null !== $sample5 && $self['sample5'] = $sample5;
+        null !== $subscriberHelp && $self['subscriberHelp'] = $subscriberHelp;
+        null !== $subscriberOptin && $self['subscriberOptin'] = $subscriberOptin;
+        null !== $subscriberOptout && $self['subscriberOptout'] = $subscriberOptout;
+        null !== $subUsecases && $self['subUsecases'] = $subUsecases;
+        null !== $tag && $self['tag'] = $tag;
+        null !== $termsAndConditions && $self['termsAndConditions'] = $termsAndConditions;
+        null !== $termsAndConditionsLink && $self['termsAndConditionsLink'] = $termsAndConditionsLink;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -390,10 +390,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -401,10 +401,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -412,10 +412,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withUsecase(string $usecase): self
     {
-        $obj = clone $this;
-        $obj['usecase'] = $usecase;
+        $self = clone $this;
+        $self['usecase'] = $usecase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -423,10 +423,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withAgeGated(bool $ageGated): self
     {
-        $obj = clone $this;
-        $obj['ageGated'] = $ageGated;
+        $self = clone $this;
+        $self['ageGated'] = $ageGated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -434,10 +434,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withAutoRenewal(bool $autoRenewal): self
     {
-        $obj = clone $this;
-        $obj['autoRenewal'] = $autoRenewal;
+        $self = clone $this;
+        $self['autoRenewal'] = $autoRenewal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -445,10 +445,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withDirectLending(bool $directLending): self
     {
-        $obj = clone $this;
-        $obj['directLending'] = $directLending;
+        $self = clone $this;
+        $self['directLending'] = $directLending;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -456,10 +456,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withEmbeddedLink(bool $embeddedLink): self
     {
-        $obj = clone $this;
-        $obj['embeddedLink'] = $embeddedLink;
+        $self = clone $this;
+        $self['embeddedLink'] = $embeddedLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -467,10 +467,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withEmbeddedLinkSample(string $embeddedLinkSample): self
     {
-        $obj = clone $this;
-        $obj['embeddedLinkSample'] = $embeddedLinkSample;
+        $self = clone $this;
+        $self['embeddedLinkSample'] = $embeddedLinkSample;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -478,10 +478,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withEmbeddedPhone(bool $embeddedPhone): self
     {
-        $obj = clone $this;
-        $obj['embeddedPhone'] = $embeddedPhone;
+        $self = clone $this;
+        $self['embeddedPhone'] = $embeddedPhone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -489,10 +489,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withHelpKeywords(string $helpKeywords): self
     {
-        $obj = clone $this;
-        $obj['helpKeywords'] = $helpKeywords;
+        $self = clone $this;
+        $self['helpKeywords'] = $helpKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -500,10 +500,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withHelpMessage(string $helpMessage): self
     {
-        $obj = clone $this;
-        $obj['helpMessage'] = $helpMessage;
+        $self = clone $this;
+        $self['helpMessage'] = $helpMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -511,10 +511,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withMessageFlow(string $messageFlow): self
     {
-        $obj = clone $this;
-        $obj['messageFlow'] = $messageFlow;
+        $self = clone $this;
+        $self['messageFlow'] = $messageFlow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -524,10 +524,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withMnoIDs(array $mnoIDs): self
     {
-        $obj = clone $this;
-        $obj['mnoIDs'] = $mnoIDs;
+        $self = clone $this;
+        $self['mnoIDs'] = $mnoIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -535,10 +535,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withNumberPool(bool $numberPool): self
     {
-        $obj = clone $this;
-        $obj['numberPool'] = $numberPool;
+        $self = clone $this;
+        $self['numberPool'] = $numberPool;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -546,10 +546,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withOptinKeywords(string $optinKeywords): self
     {
-        $obj = clone $this;
-        $obj['optinKeywords'] = $optinKeywords;
+        $self = clone $this;
+        $self['optinKeywords'] = $optinKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -557,10 +557,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withOptinMessage(string $optinMessage): self
     {
-        $obj = clone $this;
-        $obj['optinMessage'] = $optinMessage;
+        $self = clone $this;
+        $self['optinMessage'] = $optinMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -568,10 +568,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withOptoutKeywords(string $optoutKeywords): self
     {
-        $obj = clone $this;
-        $obj['optoutKeywords'] = $optoutKeywords;
+        $self = clone $this;
+        $self['optoutKeywords'] = $optoutKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -579,10 +579,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withOptoutMessage(string $optoutMessage): self
     {
-        $obj = clone $this;
-        $obj['optoutMessage'] = $optoutMessage;
+        $self = clone $this;
+        $self['optoutMessage'] = $optoutMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -590,10 +590,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withPrivacyPolicyLink(string $privacyPolicyLink): self
     {
-        $obj = clone $this;
-        $obj['privacyPolicyLink'] = $privacyPolicyLink;
+        $self = clone $this;
+        $self['privacyPolicyLink'] = $privacyPolicyLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -601,10 +601,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withReferenceID(string $referenceID): self
     {
-        $obj = clone $this;
-        $obj['referenceID'] = $referenceID;
+        $self = clone $this;
+        $self['referenceID'] = $referenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -612,10 +612,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withResellerID(string $resellerID): self
     {
-        $obj = clone $this;
-        $obj['resellerID'] = $resellerID;
+        $self = clone $this;
+        $self['resellerID'] = $resellerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -623,10 +623,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSample1(string $sample1): self
     {
-        $obj = clone $this;
-        $obj['sample1'] = $sample1;
+        $self = clone $this;
+        $self['sample1'] = $sample1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -634,10 +634,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSample2(string $sample2): self
     {
-        $obj = clone $this;
-        $obj['sample2'] = $sample2;
+        $self = clone $this;
+        $self['sample2'] = $sample2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -645,10 +645,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSample3(string $sample3): self
     {
-        $obj = clone $this;
-        $obj['sample3'] = $sample3;
+        $self = clone $this;
+        $self['sample3'] = $sample3;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -656,10 +656,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSample4(string $sample4): self
     {
-        $obj = clone $this;
-        $obj['sample4'] = $sample4;
+        $self = clone $this;
+        $self['sample4'] = $sample4;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -667,10 +667,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSample5(string $sample5): self
     {
-        $obj = clone $this;
-        $obj['sample5'] = $sample5;
+        $self = clone $this;
+        $self['sample5'] = $sample5;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -678,10 +678,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSubscriberHelp(bool $subscriberHelp): self
     {
-        $obj = clone $this;
-        $obj['subscriberHelp'] = $subscriberHelp;
+        $self = clone $this;
+        $self['subscriberHelp'] = $subscriberHelp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -689,10 +689,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSubscriberOptin(bool $subscriberOptin): self
     {
-        $obj = clone $this;
-        $obj['subscriberOptin'] = $subscriberOptin;
+        $self = clone $this;
+        $self['subscriberOptin'] = $subscriberOptin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -700,10 +700,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSubscriberOptout(bool $subscriberOptout): self
     {
-        $obj = clone $this;
-        $obj['subscriberOptout'] = $subscriberOptout;
+        $self = clone $this;
+        $self['subscriberOptout'] = $subscriberOptout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -713,10 +713,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withSubUsecases(array $subUsecases): self
     {
-        $obj = clone $this;
-        $obj['subUsecases'] = $subUsecases;
+        $self = clone $this;
+        $self['subUsecases'] = $subUsecases;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -726,10 +726,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withTag(array $tag): self
     {
-        $obj = clone $this;
-        $obj['tag'] = $tag;
+        $self = clone $this;
+        $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -737,10 +737,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withTermsAndConditions(bool $termsAndConditions): self
     {
-        $obj = clone $this;
-        $obj['termsAndConditions'] = $termsAndConditions;
+        $self = clone $this;
+        $self['termsAndConditions'] = $termsAndConditions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -749,10 +749,10 @@ final class CampaignBuilderCreateParams implements BaseModel
     public function withTermsAndConditionsLink(
         string $termsAndConditionsLink
     ): self {
-        $obj = clone $this;
-        $obj['termsAndConditionsLink'] = $termsAndConditionsLink;
+        $self = clone $this;
+        $self['termsAndConditionsLink'] = $termsAndConditionsLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -760,10 +760,10 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -771,9 +771,9 @@ final class CampaignBuilderCreateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

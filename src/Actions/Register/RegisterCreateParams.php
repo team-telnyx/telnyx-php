@@ -90,15 +90,15 @@ final class RegisterCreateParams implements BaseModel
         Status|string|null $status = null,
         ?array $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['registrationCodes'] = $registrationCodes;
+        $self['registrationCodes'] = $registrationCodes;
 
-        null !== $simCardGroupID && $obj['simCardGroupID'] = $simCardGroupID;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj['tags'] = $tags;
+        null !== $simCardGroupID && $self['simCardGroupID'] = $simCardGroupID;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class RegisterCreateParams implements BaseModel
      */
     public function withRegistrationCodes(array $registrationCodes): self
     {
-        $obj = clone $this;
-        $obj['registrationCodes'] = $registrationCodes;
+        $self = clone $this;
+        $self['registrationCodes'] = $registrationCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class RegisterCreateParams implements BaseModel
      */
     public function withSimCardGroupID(string $simCardGroupID): self
     {
-        $obj = clone $this;
-        $obj['simCardGroupID'] = $simCardGroupID;
+        $self = clone $this;
+        $self['simCardGroupID'] = $simCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class RegisterCreateParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,9 +143,9 @@ final class RegisterCreateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

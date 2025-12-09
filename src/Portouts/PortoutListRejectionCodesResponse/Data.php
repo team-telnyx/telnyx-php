@@ -42,36 +42,36 @@ final class Data implements BaseModel
         ?string $description = null,
         ?bool $reasonRequired = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $description && $obj['description'] = $description;
-        null !== $reasonRequired && $obj['reasonRequired'] = $reasonRequired;
+        null !== $code && $self['code'] = $code;
+        null !== $description && $self['description'] = $description;
+        null !== $reasonRequired && $self['reasonRequired'] = $reasonRequired;
 
-        return $obj;
+        return $self;
     }
 
     public function withCode(int $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withReasonRequired(bool $reasonRequired): self
     {
-        $obj = clone $this;
-        $obj['reasonRequired'] = $reasonRequired;
+        $self = clone $this;
+        $self['reasonRequired'] = $reasonRequired;
 
-        return $obj;
+        return $self;
     }
 }

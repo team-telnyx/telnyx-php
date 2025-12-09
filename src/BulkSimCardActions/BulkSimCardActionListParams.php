@@ -64,13 +64,13 @@ final class BulkSimCardActionListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterActionType && $obj['filterActionType'] = $filterActionType;
-        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
+        null !== $filterActionType && $self['filterActionType'] = $filterActionType;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class BulkSimCardActionListParams implements BaseModel
     public function withFilterActionType(
         FilterActionType|string $filterActionType
     ): self {
-        $obj = clone $this;
-        $obj['filterActionType'] = $filterActionType;
+        $self = clone $this;
+        $self['filterActionType'] = $filterActionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class BulkSimCardActionListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj['pageNumber'] = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class BulkSimCardActionListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

@@ -71,15 +71,15 @@ final class Filter implements BaseModel
         ?string $status = null,
         ?string $tag = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj['name'] = $name;
-        null !== $resourceID && $obj['resourceID'] = $resourceID;
-        null !== $sipUsername && $obj['sipUsername'] = $sipUsername;
-        null !== $status && $obj['status'] = $status;
-        null !== $tag && $obj['tag'] = $tag;
+        null !== $name && $self['name'] = $name;
+        null !== $resourceID && $self['resourceID'] = $resourceID;
+        null !== $sipUsername && $self['sipUsername'] = $sipUsername;
+        null !== $status && $self['status'] = $status;
+        null !== $tag && $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Filter implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Filter implements BaseModel
      */
     public function withResourceID(string $resourceID): self
     {
-        $obj = clone $this;
-        $obj['resourceID'] = $resourceID;
+        $self = clone $this;
+        $self['resourceID'] = $resourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Filter implements BaseModel
      */
     public function withSipUsername(string $sipUsername): self
     {
-        $obj = clone $this;
-        $obj['sipUsername'] = $sipUsername;
+        $self = clone $this;
+        $self['sipUsername'] = $sipUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class Filter implements BaseModel
      */
     public function withTag(string $tag): self
     {
-        $obj = clone $this;
-        $obj['tag'] = $tag;
+        $self = clone $this;
+        $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 }

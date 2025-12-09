@@ -122,30 +122,30 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
         ?string $streetPreDirectional = null,
         ?string $streetSuffix = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['administrativeArea'] = $administrativeArea;
-        $obj['countryCode'] = $countryCode;
-        $obj['houseNumber'] = $houseNumber;
-        $obj['locality'] = $locality;
-        $obj['postalCode'] = $postalCode;
-        $obj['streetName'] = $streetName;
+        $self['administrativeArea'] = $administrativeArea;
+        $self['countryCode'] = $countryCode;
+        $self['houseNumber'] = $houseNumber;
+        $self['locality'] = $locality;
+        $self['postalCode'] = $postalCode;
+        $self['streetName'] = $streetName;
 
-        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
-        null !== $houseSuffix && $obj['houseSuffix'] = $houseSuffix;
-        null !== $streetPostDirectional && $obj['streetPostDirectional'] = $streetPostDirectional;
-        null !== $streetPreDirectional && $obj['streetPreDirectional'] = $streetPreDirectional;
-        null !== $streetSuffix && $obj['streetSuffix'] = $streetSuffix;
+        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        null !== $houseSuffix && $self['houseSuffix'] = $houseSuffix;
+        null !== $streetPostDirectional && $self['streetPostDirectional'] = $streetPostDirectional;
+        null !== $streetPreDirectional && $self['streetPreDirectional'] = $streetPreDirectional;
+        null !== $streetSuffix && $self['streetSuffix'] = $streetSuffix;
 
-        return $obj;
+        return $self;
     }
 
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,82 +153,82 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
      */
     public function withCountryCode(CountryCode|string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withHouseNumber(string $houseNumber): self
     {
-        $obj = clone $this;
-        $obj['houseNumber'] = $houseNumber;
+        $self = clone $this;
+        $self['houseNumber'] = $houseNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj['locality'] = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     public function withPostalCode(string $postalCode): self
     {
-        $obj = clone $this;
-        $obj['postalCode'] = $postalCode;
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetName(string $streetName): self
     {
-        $obj = clone $this;
-        $obj['streetName'] = $streetName;
+        $self = clone $this;
+        $self['streetName'] = $streetName;
 
-        return $obj;
+        return $self;
     }
 
     public function withExtendedAddress(string $extendedAddress): self
     {
-        $obj = clone $this;
-        $obj['extendedAddress'] = $extendedAddress;
+        $self = clone $this;
+        $self['extendedAddress'] = $extendedAddress;
 
-        return $obj;
+        return $self;
     }
 
     public function withHouseSuffix(string $houseSuffix): self
     {
-        $obj = clone $this;
-        $obj['houseSuffix'] = $houseSuffix;
+        $self = clone $this;
+        $self['houseSuffix'] = $houseSuffix;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetPostDirectional(
         string $streetPostDirectional
     ): self {
-        $obj = clone $this;
-        $obj['streetPostDirectional'] = $streetPostDirectional;
+        $self = clone $this;
+        $self['streetPostDirectional'] = $streetPostDirectional;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetPreDirectional(string $streetPreDirectional): self
     {
-        $obj = clone $this;
-        $obj['streetPreDirectional'] = $streetPreDirectional;
+        $self = clone $this;
+        $self['streetPreDirectional'] = $streetPreDirectional;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetSuffix(string $streetSuffix): self
     {
-        $obj = clone $this;
-        $obj['streetSuffix'] = $streetSuffix;
+        $self = clone $this;
+        $self['streetSuffix'] = $streetSuffix;
 
-        return $obj;
+        return $self;
     }
 }

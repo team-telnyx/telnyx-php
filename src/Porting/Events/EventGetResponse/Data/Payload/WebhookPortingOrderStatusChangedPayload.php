@@ -86,16 +86,16 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
         ?\DateTimeInterface $updatedAt = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $status && $obj['status'] = $status;
-        null !== $supportKey && $obj['supportKey'] = $supportKey;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $id && $self['id'] = $id;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $status && $self['status'] = $status;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      */
     public function withStatus(PortingOrderStatus|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      */
     public function withSupportKey(string $supportKey): self
     {
-        $obj = clone $this;
-        $obj['supportKey'] = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,9 +162,9 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

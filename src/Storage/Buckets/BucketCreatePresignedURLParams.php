@@ -62,21 +62,21 @@ final class BucketCreatePresignedURLParams implements BaseModel
      */
     public static function with(string $bucketName, ?int $ttl = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucketName'] = $bucketName;
+        $self['bucketName'] = $bucketName;
 
-        null !== $ttl && $obj['ttl'] = $ttl;
+        null !== $ttl && $self['ttl'] = $ttl;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj['bucketName'] = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class BucketCreatePresignedURLParams implements BaseModel
      */
     public function withTtl(int $ttl): self
     {
-        $obj = clone $this;
-        $obj['ttl'] = $ttl;
+        $self = clone $this;
+        $self['ttl'] = $ttl;
 
-        return $obj;
+        return $self;
     }
 }

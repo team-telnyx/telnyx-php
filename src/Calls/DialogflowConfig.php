@@ -44,12 +44,12 @@ final class DialogflowConfig implements BaseModel
         ?bool $analyzeSentiment = null,
         ?bool $partialAutomatedAgentReply = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $analyzeSentiment && $obj['analyzeSentiment'] = $analyzeSentiment;
-        null !== $partialAutomatedAgentReply && $obj['partialAutomatedAgentReply'] = $partialAutomatedAgentReply;
+        null !== $analyzeSentiment && $self['analyzeSentiment'] = $analyzeSentiment;
+        null !== $partialAutomatedAgentReply && $self['partialAutomatedAgentReply'] = $partialAutomatedAgentReply;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class DialogflowConfig implements BaseModel
      */
     public function withAnalyzeSentiment(bool $analyzeSentiment): self
     {
-        $obj = clone $this;
-        $obj['analyzeSentiment'] = $analyzeSentiment;
+        $self = clone $this;
+        $self['analyzeSentiment'] = $analyzeSentiment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class DialogflowConfig implements BaseModel
     public function withPartialAutomatedAgentReply(
         bool $partialAutomatedAgentReply
     ): self {
-        $obj = clone $this;
-        $obj['partialAutomatedAgentReply'] = $partialAutomatedAgentReply;
+        $self = clone $this;
+        $self['partialAutomatedAgentReply'] = $partialAutomatedAgentReply;
 
-        return $obj;
+        return $self;
     }
 }

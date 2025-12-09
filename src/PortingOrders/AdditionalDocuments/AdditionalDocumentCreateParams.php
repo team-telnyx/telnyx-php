@@ -48,11 +48,11 @@ final class AdditionalDocumentCreateParams implements BaseModel
      */
     public static function with(?array $additionalDocuments = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additionalDocuments && $obj['additionalDocuments'] = $additionalDocuments;
+        null !== $additionalDocuments && $self['additionalDocuments'] = $additionalDocuments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,9 +62,9 @@ final class AdditionalDocumentCreateParams implements BaseModel
      */
     public function withAdditionalDocuments(array $additionalDocuments): self
     {
-        $obj = clone $this;
-        $obj['additionalDocuments'] = $additionalDocuments;
+        $self = clone $this;
+        $self['additionalDocuments'] = $additionalDocuments;
 
-        return $obj;
+        return $self;
     }
 }

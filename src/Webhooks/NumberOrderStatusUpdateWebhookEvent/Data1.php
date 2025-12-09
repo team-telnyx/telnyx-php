@@ -106,15 +106,15 @@ final class Data1 implements BaseModel
         NumberOrderWithPhoneNumbers|array $payload,
         string $recordType,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['eventType'] = $eventType;
-        $obj['occurredAt'] = $occurredAt;
-        $obj['payload'] = $payload;
-        $obj['recordType'] = $recordType;
+        $self['id'] = $id;
+        $self['eventType'] = $eventType;
+        $self['occurredAt'] = $occurredAt;
+        $self['payload'] = $payload;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class Data1 implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class Data1 implements BaseModel
      */
     public function withEventType(string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data1 implements BaseModel
      */
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
-        $obj = clone $this;
-        $obj['occurredAt'] = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Data1 implements BaseModel
     public function withPayload(
         NumberOrderWithPhoneNumbers|array $payload
     ): self {
-        $obj = clone $this;
-        $obj['payload'] = $payload;
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,9 +181,9 @@ final class Data1 implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

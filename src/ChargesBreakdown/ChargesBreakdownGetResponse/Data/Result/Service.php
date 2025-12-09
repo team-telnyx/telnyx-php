@@ -63,13 +63,13 @@ final class Service implements BaseModel
         string $costType,
         string $name
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['cost'] = $cost;
-        $obj['costType'] = $costType;
-        $obj['name'] = $name;
+        $self['cost'] = $cost;
+        $self['costType'] = $costType;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Service implements BaseModel
      */
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class Service implements BaseModel
      */
     public function withCostType(string $costType): self
     {
-        $obj = clone $this;
-        $obj['costType'] = $costType;
+        $self = clone $this;
+        $self['costType'] = $costType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +99,9 @@ final class Service implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

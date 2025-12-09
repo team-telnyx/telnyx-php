@@ -75,14 +75,14 @@ final class NumberLookupCreateParams implements BaseModel
         ?array $managedAccounts = null,
         ?\DateTimeInterface $startDate = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
-        null !== $endDate && $obj['endDate'] = $endDate;
-        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
-        null !== $startDate && $obj['startDate'] = $startDate;
+        null !== $aggregationType && $self['aggregationType'] = $aggregationType;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $startDate && $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class NumberLookupCreateParams implements BaseModel
     public function withAggregationType(
         AggregationType|string $aggregationType
     ): self {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class NumberLookupCreateParams implements BaseModel
      */
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj['endDate'] = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class NumberLookupCreateParams implements BaseModel
      */
     public function withManagedAccounts(array $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj['managedAccounts'] = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,9 +128,9 @@ final class NumberLookupCreateParams implements BaseModel
      */
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj['startDate'] = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 }

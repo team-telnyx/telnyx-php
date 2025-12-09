@@ -117,15 +117,15 @@ final class LoaConfigurationUpdateParams implements BaseModel
         Logo|array $logo,
         string $name,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['address'] = $address;
-        $obj['companyName'] = $companyName;
-        $obj['contact'] = $contact;
-        $obj['logo'] = $logo;
-        $obj['name'] = $name;
+        $self['address'] = $address;
+        $self['companyName'] = $companyName;
+        $self['contact'] = $contact;
+        $self['logo'] = $logo;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class LoaConfigurationUpdateParams implements BaseModel
      */
     public function withAddress(Address|array $address): self
     {
-        $obj = clone $this;
-        $obj['address'] = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class LoaConfigurationUpdateParams implements BaseModel
      */
     public function withCompanyName(string $companyName): self
     {
-        $obj = clone $this;
-        $obj['companyName'] = $companyName;
+        $self = clone $this;
+        $self['companyName'] = $companyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class LoaConfigurationUpdateParams implements BaseModel
      */
     public function withContact(Contact|array $contact): self
     {
-        $obj = clone $this;
-        $obj['contact'] = $contact;
+        $self = clone $this;
+        $self['contact'] = $contact;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +179,10 @@ final class LoaConfigurationUpdateParams implements BaseModel
      */
     public function withLogo(Logo|array $logo): self
     {
-        $obj = clone $this;
-        $obj['logo'] = $logo;
+        $self = clone $this;
+        $self['logo'] = $logo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,9 +190,9 @@ final class LoaConfigurationUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

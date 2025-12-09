@@ -47,11 +47,11 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      */
     public static function with(?array $phoneNumbers = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

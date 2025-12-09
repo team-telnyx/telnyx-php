@@ -50,12 +50,12 @@ final class DetailRecordsReportCreateParams implements BaseModel
         ?string $endTime = null,
         ?string $startTime = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endTime && $obj['endTime'] = $endTime;
-        null !== $startTime && $obj['startTime'] = $startTime;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $startTime && $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class DetailRecordsReportCreateParams implements BaseModel
      */
     public function withEndTime(string $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class DetailRecordsReportCreateParams implements BaseModel
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 }

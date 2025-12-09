@@ -79,17 +79,17 @@ final class PercentileLatency implements BaseModel
         _90|array|null $p90 = null,
         _99|array|null $p99 = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $p0 && $obj['p0'] = $p0;
-        null !== $p100 && $obj['p100'] = $p100;
-        null !== $p25 && $obj['p25'] = $p25;
-        null !== $p50 && $obj['p50'] = $p50;
-        null !== $p75 && $obj['p75'] = $p75;
-        null !== $p90 && $obj['p90'] = $p90;
-        null !== $p99 && $obj['p99'] = $p99;
+        null !== $p0 && $self['p0'] = $p0;
+        null !== $p100 && $self['p100'] = $p100;
+        null !== $p25 && $self['p25'] = $p25;
+        null !== $p50 && $self['p50'] = $p50;
+        null !== $p75 && $self['p75'] = $p75;
+        null !== $p90 && $self['p90'] = $p90;
+        null !== $p99 && $self['p99'] = $p99;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class PercentileLatency implements BaseModel
      */
     public function withP0(_0|array $p0): self
     {
-        $obj = clone $this;
-        $obj['p0'] = $p0;
+        $self = clone $this;
+        $self['p0'] = $p0;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class PercentileLatency implements BaseModel
      */
     public function withP100(_100|array $p100): self
     {
-        $obj = clone $this;
-        $obj['p100'] = $p100;
+        $self = clone $this;
+        $self['p100'] = $p100;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class PercentileLatency implements BaseModel
      */
     public function withP25(_25|array $p25): self
     {
-        $obj = clone $this;
-        $obj['p25'] = $p25;
+        $self = clone $this;
+        $self['p25'] = $p25;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class PercentileLatency implements BaseModel
      */
     public function withP50(_50|array $p50): self
     {
-        $obj = clone $this;
-        $obj['p50'] = $p50;
+        $self = clone $this;
+        $self['p50'] = $p50;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class PercentileLatency implements BaseModel
      */
     public function withP75(_75|array $p75): self
     {
-        $obj = clone $this;
-        $obj['p75'] = $p75;
+        $self = clone $this;
+        $self['p75'] = $p75;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class PercentileLatency implements BaseModel
      */
     public function withP90(_90|array $p90): self
     {
-        $obj = clone $this;
-        $obj['p90'] = $p90;
+        $self = clone $this;
+        $self['p90'] = $p90;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +163,9 @@ final class PercentileLatency implements BaseModel
      */
     public function withP99(_99|array $p99): self
     {
-        $obj = clone $this;
-        $obj['p99'] = $p99;
+        $self = clone $this;
+        $self['p99'] = $p99;
 
-        return $obj;
+        return $self;
     }
 }

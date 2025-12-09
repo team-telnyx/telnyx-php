@@ -31,18 +31,18 @@ final class Feature implements BaseModel
      */
     public static function with(?string $name = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj['name'] = $name;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

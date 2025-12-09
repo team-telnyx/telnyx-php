@@ -90,16 +90,16 @@ final class NumberBlockOrderCreateParams implements BaseModel
         ?string $customerReference = null,
         ?string $messagingProfileID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['range'] = $range;
-        $obj['startingNumber'] = $startingNumber;
+        $self['range'] = $range;
+        $self['startingNumber'] = $startingNumber;
 
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class NumberBlockOrderCreateParams implements BaseModel
      */
     public function withRange(int $range): self
     {
-        $obj = clone $this;
-        $obj['range'] = $range;
+        $self = clone $this;
+        $self['range'] = $range;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class NumberBlockOrderCreateParams implements BaseModel
      */
     public function withStartingNumber(string $startingNumber): self
     {
-        $obj = clone $this;
-        $obj['startingNumber'] = $startingNumber;
+        $self = clone $this;
+        $self['startingNumber'] = $startingNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class NumberBlockOrderCreateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class NumberBlockOrderCreateParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,9 +151,9 @@ final class NumberBlockOrderCreateParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 }

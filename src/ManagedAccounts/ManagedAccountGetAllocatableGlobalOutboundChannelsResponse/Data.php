@@ -61,14 +61,14 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?int $totalGlobalChannelsAllocated = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $allocatableGlobalOutboundChannels && $obj['allocatableGlobalOutboundChannels'] = $allocatableGlobalOutboundChannels;
-        null !== $managedAccountAllowCustomPricing && $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $totalGlobalChannelsAllocated && $obj['totalGlobalChannelsAllocated'] = $totalGlobalChannelsAllocated;
+        null !== $allocatableGlobalOutboundChannels && $self['allocatableGlobalOutboundChannels'] = $allocatableGlobalOutboundChannels;
+        null !== $managedAccountAllowCustomPricing && $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $totalGlobalChannelsAllocated && $self['totalGlobalChannelsAllocated'] = $totalGlobalChannelsAllocated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Data implements BaseModel
     public function withAllocatableGlobalOutboundChannels(
         int $allocatableGlobalOutboundChannels
     ): self {
-        $obj = clone $this;
-        $obj['allocatableGlobalOutboundChannels'] = $allocatableGlobalOutboundChannels;
+        $self = clone $this;
+        $self['allocatableGlobalOutboundChannels'] = $allocatableGlobalOutboundChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Data implements BaseModel
     public function withManagedAccountAllowCustomPricing(
         bool $managedAccountAllowCustomPricing
     ): self {
-        $obj = clone $this;
-        $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        $self = clone $this;
+        $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,9 +112,9 @@ final class Data implements BaseModel
     public function withTotalGlobalChannelsAllocated(
         int $totalGlobalChannelsAllocated
     ): self {
-        $obj = clone $this;
-        $obj['totalGlobalChannelsAllocated'] = $totalGlobalChannelsAllocated;
+        $self = clone $this;
+        $self['totalGlobalChannelsAllocated'] = $totalGlobalChannelsAllocated;
 
-        return $obj;
+        return $self;
     }
 }

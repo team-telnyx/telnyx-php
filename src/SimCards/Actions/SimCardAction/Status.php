@@ -49,12 +49,12 @@ final class Status implements BaseModel
         ?string $reason = null,
         Value|string|null $value = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reason && $obj['reason'] = $reason;
-        null !== $value && $obj['value'] = $value;
+        null !== $reason && $self['reason'] = $reason;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +62,10 @@ final class Status implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj['reason'] = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class Status implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

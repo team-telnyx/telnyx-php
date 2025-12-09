@@ -69,45 +69,45 @@ final class UsecaseGetCostResponse implements BaseModel
         string $monthlyCost,
         string $upFrontCost,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['campaignUsecase'] = $campaignUsecase;
-        $obj['description'] = $description;
-        $obj['monthlyCost'] = $monthlyCost;
-        $obj['upFrontCost'] = $upFrontCost;
+        $self['campaignUsecase'] = $campaignUsecase;
+        $self['description'] = $description;
+        $self['monthlyCost'] = $monthlyCost;
+        $self['upFrontCost'] = $upFrontCost;
 
-        return $obj;
+        return $self;
     }
 
     public function withCampaignUsecase(string $campaignUsecase): self
     {
-        $obj = clone $this;
-        $obj['campaignUsecase'] = $campaignUsecase;
+        $self = clone $this;
+        $self['campaignUsecase'] = $campaignUsecase;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withMonthlyCost(string $monthlyCost): self
     {
-        $obj = clone $this;
-        $obj['monthlyCost'] = $monthlyCost;
+        $self = clone $this;
+        $self['monthlyCost'] = $monthlyCost;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpFrontCost(string $upFrontCost): self
     {
-        $obj = clone $this;
-        $obj['upFrontCost'] = $upFrontCost;
+        $self = clone $this;
+        $self['upFrontCost'] = $upFrontCost;
 
-        return $obj;
+        return $self;
     }
 }

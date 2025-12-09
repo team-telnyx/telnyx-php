@@ -53,13 +53,13 @@ final class ViewLocationAction implements BaseModel
         LatLong|array|null $latLong = null,
         ?string $query = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $label && $obj['label'] = $label;
-        null !== $latLong && $obj['latLong'] = $latLong;
-        null !== $query && $obj['query'] = $query;
+        null !== $label && $self['label'] = $label;
+        null !== $latLong && $self['latLong'] = $latLong;
+        null !== $query && $self['query'] = $query;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class ViewLocationAction implements BaseModel
      */
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj['label'] = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class ViewLocationAction implements BaseModel
      */
     public function withLatLong(LatLong|array $latLong): self
     {
-        $obj = clone $this;
-        $obj['latLong'] = $latLong;
+        $self = clone $this;
+        $self['latLong'] = $latLong;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class ViewLocationAction implements BaseModel
      */
     public function withQuery(string $query): self
     {
-        $obj = clone $this;
-        $obj['query'] = $query;
+        $self = clone $this;
+        $self['query'] = $query;
 
-        return $obj;
+        return $self;
     }
 }

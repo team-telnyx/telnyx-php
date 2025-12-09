@@ -50,11 +50,11 @@ final class Hyperparameters implements BaseModel
      */
     public static function with(int $nEpochs = 3): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['nEpochs'] = $nEpochs;
+        $self['nEpochs'] = $nEpochs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,9 +62,9 @@ final class Hyperparameters implements BaseModel
      */
     public function withNEpochs(int $nEpochs): self
     {
-        $obj = clone $this;
-        $obj['nEpochs'] = $nEpochs;
+        $self = clone $this;
+        $self['nEpochs'] = $nEpochs;
 
-        return $obj;
+        return $self;
     }
 }

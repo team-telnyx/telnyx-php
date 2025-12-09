@@ -92,16 +92,16 @@ final class OAuthTokenResponse implements BaseModel
         ?string $refreshToken = null,
         ?string $scope = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['accessToken'] = $accessToken;
-        $obj['expiresIn'] = $expiresIn;
-        $obj['tokenType'] = $tokenType;
+        $self['accessToken'] = $accessToken;
+        $self['expiresIn'] = $expiresIn;
+        $self['tokenType'] = $tokenType;
 
-        null !== $refreshToken && $obj['refreshToken'] = $refreshToken;
-        null !== $scope && $obj['scope'] = $scope;
+        null !== $refreshToken && $self['refreshToken'] = $refreshToken;
+        null !== $scope && $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class OAuthTokenResponse implements BaseModel
      */
     public function withAccessToken(string $accessToken): self
     {
-        $obj = clone $this;
-        $obj['accessToken'] = $accessToken;
+        $self = clone $this;
+        $self['accessToken'] = $accessToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class OAuthTokenResponse implements BaseModel
      */
     public function withExpiresIn(int $expiresIn): self
     {
-        $obj = clone $this;
-        $obj['expiresIn'] = $expiresIn;
+        $self = clone $this;
+        $self['expiresIn'] = $expiresIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class OAuthTokenResponse implements BaseModel
      */
     public function withTokenType(TokenType|string $tokenType): self
     {
-        $obj = clone $this;
-        $obj['tokenType'] = $tokenType;
+        $self = clone $this;
+        $self['tokenType'] = $tokenType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class OAuthTokenResponse implements BaseModel
      */
     public function withRefreshToken(string $refreshToken): self
     {
-        $obj = clone $this;
-        $obj['refreshToken'] = $refreshToken;
+        $self = clone $this;
+        $self['refreshToken'] = $refreshToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class OAuthTokenResponse implements BaseModel
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj['scope'] = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 }

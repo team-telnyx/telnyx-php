@@ -55,13 +55,13 @@ final class GlobalIPAssignment implements BaseModel
         WireguardPeer|array|null $wireguardPeer = null,
         ?string $wireguardPeerID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $wireguardPeer && $obj['wireguardPeer'] = $wireguardPeer;
-        null !== $wireguardPeerID && $obj['wireguardPeerID'] = $wireguardPeerID;
+        null !== $id && $self['id'] = $id;
+        null !== $wireguardPeer && $self['wireguardPeer'] = $wireguardPeer;
+        null !== $wireguardPeerID && $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class GlobalIPAssignment implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class GlobalIPAssignment implements BaseModel
      */
     public function withWireguardPeer(WireguardPeer|array $wireguardPeer): self
     {
-        $obj = clone $this;
-        $obj['wireguardPeer'] = $wireguardPeer;
+        $self = clone $this;
+        $self['wireguardPeer'] = $wireguardPeer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +93,9 @@ final class GlobalIPAssignment implements BaseModel
      */
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
-        $obj = clone $this;
-        $obj['wireguardPeerID'] = $wireguardPeerID;
+        $self = clone $this;
+        $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 }

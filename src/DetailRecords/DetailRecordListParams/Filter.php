@@ -70,13 +70,13 @@ final class Filter implements BaseModel
         RecordType|string $recordType,
         DateRange|string|null $dateRange = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $dateRange && $obj['dateRange'] = $dateRange;
+        null !== $dateRange && $self['dateRange'] = $dateRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class Filter implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +99,9 @@ final class Filter implements BaseModel
      */
     public function withDateRange(DateRange|string $dateRange): self
     {
-        $obj = clone $this;
-        $obj['dateRange'] = $dateRange;
+        $self = clone $this;
+        $self['dateRange'] = $dateRange;
 
-        return $obj;
+        return $self;
     }
 }

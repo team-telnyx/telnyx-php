@@ -116,18 +116,18 @@ final class Data implements BaseModel
         Portability|array|null $portability = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callerName && $obj['callerName'] = $callerName;
-        null !== $carrier && $obj['carrier'] = $carrier;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $fraud && $obj['fraud'] = $fraud;
-        null !== $nationalFormat && $obj['nationalFormat'] = $nationalFormat;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $portability && $obj['portability'] = $portability;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $callerName && $self['callerName'] = $callerName;
+        null !== $carrier && $self['carrier'] = $carrier;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $fraud && $self['fraud'] = $fraud;
+        null !== $nationalFormat && $self['nationalFormat'] = $nationalFormat;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $portability && $self['portability'] = $portability;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Data implements BaseModel
      */
     public function withCallerName(CallerName|array $callerName): self
     {
-        $obj = clone $this;
-        $obj['callerName'] = $callerName;
+        $self = clone $this;
+        $self['callerName'] = $callerName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class Data implements BaseModel
      */
     public function withCarrier(Carrier|array $carrier): self
     {
-        $obj = clone $this;
-        $obj['carrier'] = $carrier;
+        $self = clone $this;
+        $self['carrier'] = $carrier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class Data implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class Data implements BaseModel
      */
     public function withFraud(?string $fraud): self
     {
-        $obj = clone $this;
-        $obj['fraud'] = $fraud;
+        $self = clone $this;
+        $self['fraud'] = $fraud;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Data implements BaseModel
      */
     public function withNationalFormat(string $nationalFormat): self
     {
-        $obj = clone $this;
-        $obj['nationalFormat'] = $nationalFormat;
+        $self = clone $this;
+        $self['nationalFormat'] = $nationalFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class Data implements BaseModel
      */
     public function withPortability(Portability|array $portability): self
     {
-        $obj = clone $this;
-        $obj['portability'] = $portability;
+        $self = clone $this;
+        $self['portability'] = $portability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,9 +235,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

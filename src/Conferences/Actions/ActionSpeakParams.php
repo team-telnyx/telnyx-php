@@ -160,19 +160,19 @@ final class ActionSpeakParams implements BaseModel
         Region|string|null $region = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['payload'] = $payload;
-        $obj['voice'] = $voice;
+        $self['payload'] = $payload;
+        $self['voice'] = $voice;
 
-        null !== $callControlIDs && $obj['callControlIDs'] = $callControlIDs;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $language && $obj['language'] = $language;
-        null !== $payloadType && $obj['payloadType'] = $payloadType;
-        null !== $region && $obj['region'] = $region;
-        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
+        null !== $callControlIDs && $self['callControlIDs'] = $callControlIDs;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $language && $self['language'] = $language;
+        null !== $payloadType && $self['payloadType'] = $payloadType;
+        null !== $region && $self['region'] = $region;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class ActionSpeakParams implements BaseModel
      */
     public function withPayload(string $payload): self
     {
-        $obj = clone $this;
-        $obj['payload'] = $payload;
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class ActionSpeakParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj['voice'] = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +214,10 @@ final class ActionSpeakParams implements BaseModel
      */
     public function withCallControlIDs(array $callControlIDs): self
     {
-        $obj = clone $this;
-        $obj['callControlIDs'] = $callControlIDs;
+        $self = clone $this;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class ActionSpeakParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +238,10 @@ final class ActionSpeakParams implements BaseModel
      */
     public function withLanguage(Language|string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class ActionSpeakParams implements BaseModel
      */
     public function withPayloadType(PayloadType|string $payloadType): self
     {
-        $obj = clone $this;
-        $obj['payloadType'] = $payloadType;
+        $self = clone $this;
+        $self['payloadType'] = $payloadType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -264,10 +264,10 @@ final class ActionSpeakParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,9 +285,9 @@ final class ActionSpeakParams implements BaseModel
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
-        $obj = clone $this;
-        $obj['voiceSettings'] = $voiceSettings;
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

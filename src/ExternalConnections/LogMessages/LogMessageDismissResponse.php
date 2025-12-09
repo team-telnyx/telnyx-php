@@ -34,11 +34,11 @@ final class LogMessageDismissResponse implements BaseModel
      */
     public static function with(?bool $success = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $success && $obj['success'] = $success;
+        null !== $success && $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class LogMessageDismissResponse implements BaseModel
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

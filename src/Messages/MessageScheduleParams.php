@@ -166,23 +166,23 @@ final class MessageScheduleParams implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['to'] = $to;
+        $self['to'] = $to;
 
-        null !== $autoDetect && $obj['autoDetect'] = $autoDetect;
-        null !== $from && $obj['from'] = $from;
-        null !== $mediaURLs && $obj['mediaURLs'] = $mediaURLs;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $sendAt && $obj['sendAt'] = $sendAt;
-        null !== $subject && $obj['subject'] = $subject;
-        null !== $text && $obj['text'] = $text;
-        null !== $type && $obj['type'] = $type;
-        null !== $useProfileWebhooks && $obj['useProfileWebhooks'] = $useProfileWebhooks;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $autoDetect && $self['autoDetect'] = $autoDetect;
+        null !== $from && $self['from'] = $from;
+        null !== $mediaURLs && $self['mediaURLs'] = $mediaURLs;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $sendAt && $self['sendAt'] = $sendAt;
+        null !== $subject && $self['subject'] = $subject;
+        null !== $text && $self['text'] = $text;
+        null !== $type && $self['type'] = $type;
+        null !== $useProfileWebhooks && $self['useProfileWebhooks'] = $useProfileWebhooks;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withAutoDetect(bool $autoDetect): self
     {
-        $obj = clone $this;
-        $obj['autoDetect'] = $autoDetect;
+        $self = clone $this;
+        $self['autoDetect'] = $autoDetect;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +214,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withMediaURLs(array $mediaURLs): self
     {
-        $obj = clone $this;
-        $obj['mediaURLs'] = $mediaURLs;
+        $self = clone $this;
+        $self['mediaURLs'] = $mediaURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,10 +242,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +253,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withSendAt(\DateTimeInterface $sendAt): self
     {
-        $obj = clone $this;
-        $obj['sendAt'] = $sendAt;
+        $self = clone $this;
+        $self['sendAt'] = $sendAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -264,10 +264,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withSubject(string $subject): self
     {
-        $obj = clone $this;
-        $obj['subject'] = $subject;
+        $self = clone $this;
+        $self['subject'] = $subject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -277,10 +277,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -290,10 +290,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -301,10 +301,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withUseProfileWebhooks(bool $useProfileWebhooks): self
     {
-        $obj = clone $this;
-        $obj['useProfileWebhooks'] = $useProfileWebhooks;
+        $self = clone $this;
+        $self['useProfileWebhooks'] = $useProfileWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -312,10 +312,10 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -323,9 +323,9 @@ final class MessageScheduleParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

@@ -113,19 +113,19 @@ final class AuthenticationProvider implements BaseModel
         ?string $shortName = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $active && $obj['active'] = $active;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $name && $obj['name'] = $name;
-        null !== $organizationID && $obj['organizationID'] = $organizationID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $settings && $obj['settings'] = $settings;
-        null !== $shortName && $obj['shortName'] = $shortName;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $active && $self['active'] = $active;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $name && $self['name'] = $name;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $settings && $self['settings'] = $settings;
+        null !== $shortName && $self['shortName'] = $shortName;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationID'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class AuthenticationProvider implements BaseModel
     public function withSettings(
         Settings|array $settings,
     ): self {
-        $obj = clone $this;
-        $obj['settings'] = $settings;
+        $self = clone $this;
+        $self['settings'] = $settings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withShortName(string $shortName): self
     {
-        $obj = clone $this;
-        $obj['shortName'] = $shortName;
+        $self = clone $this;
+        $self['shortName'] = $shortName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,9 +232,9 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

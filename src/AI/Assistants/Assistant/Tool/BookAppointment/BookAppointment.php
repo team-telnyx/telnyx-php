@@ -76,15 +76,15 @@ final class BookAppointment implements BaseModel
         ?string $attendeeName = null,
         ?string $attendeeTimezone = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['apiKeyRef'] = $apiKeyRef;
-        $obj['eventTypeID'] = $eventTypeID;
+        $self['apiKeyRef'] = $apiKeyRef;
+        $self['eventTypeID'] = $eventTypeID;
 
-        null !== $attendeeName && $obj['attendeeName'] = $attendeeName;
-        null !== $attendeeTimezone && $obj['attendeeTimezone'] = $attendeeTimezone;
+        null !== $attendeeName && $self['attendeeName'] = $attendeeName;
+        null !== $attendeeTimezone && $self['attendeeTimezone'] = $attendeeTimezone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class BookAppointment implements BaseModel
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class BookAppointment implements BaseModel
      */
     public function withEventTypeID(int $eventTypeID): self
     {
-        $obj = clone $this;
-        $obj['eventTypeID'] = $eventTypeID;
+        $self = clone $this;
+        $self['eventTypeID'] = $eventTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class BookAppointment implements BaseModel
      */
     public function withAttendeeName(string $attendeeName): self
     {
-        $obj = clone $this;
-        $obj['attendeeName'] = $attendeeName;
+        $self = clone $this;
+        $self['attendeeName'] = $attendeeName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,9 +125,9 @@ final class BookAppointment implements BaseModel
      */
     public function withAttendeeTimezone(string $attendeeTimezone): self
     {
-        $obj = clone $this;
-        $obj['attendeeTimezone'] = $attendeeTimezone;
+        $self = clone $this;
+        $self['attendeeTimezone'] = $attendeeTimezone;
 
-        return $obj;
+        return $self;
     }
 }

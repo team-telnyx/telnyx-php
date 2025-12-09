@@ -62,13 +62,13 @@ final class Filter implements BaseModel
         DateUpdatedAt|array|null $dateUpdatedAt = null,
         ?string $uniqueName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dateCreatedAt && $obj['dateCreatedAt'] = $dateCreatedAt;
-        null !== $dateUpdatedAt && $obj['dateUpdatedAt'] = $dateUpdatedAt;
-        null !== $uniqueName && $obj['uniqueName'] = $uniqueName;
+        null !== $dateCreatedAt && $self['dateCreatedAt'] = $dateCreatedAt;
+        null !== $dateUpdatedAt && $self['dateUpdatedAt'] = $dateUpdatedAt;
+        null !== $uniqueName && $self['uniqueName'] = $uniqueName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class Filter implements BaseModel
      */
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
-        $obj = clone $this;
-        $obj['dateCreatedAt'] = $dateCreatedAt;
+        $self = clone $this;
+        $self['dateCreatedAt'] = $dateCreatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Filter implements BaseModel
      */
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
-        $obj = clone $this;
-        $obj['dateUpdatedAt'] = $dateUpdatedAt;
+        $self = clone $this;
+        $self['dateUpdatedAt'] = $dateUpdatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class Filter implements BaseModel
      */
     public function withUniqueName(string $uniqueName): self
     {
-        $obj = clone $this;
-        $obj['uniqueName'] = $uniqueName;
+        $self = clone $this;
+        $self['uniqueName'] = $uniqueName;
 
-        return $obj;
+        return $self;
     }
 }

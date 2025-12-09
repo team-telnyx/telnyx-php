@@ -60,13 +60,13 @@ final class UserBundleCreateParams implements BaseModel
         ?array $items = null,
         ?string $authorizationBearer = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $idempotencyKey && $obj['idempotencyKey'] = $idempotencyKey;
-        null !== $items && $obj['items'] = $items;
-        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
+        null !== $items && $self['items'] = $items;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class UserBundleCreateParams implements BaseModel
      */
     public function withIdempotencyKey(string $idempotencyKey): self
     {
-        $obj = clone $this;
-        $obj['idempotencyKey'] = $idempotencyKey;
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class UserBundleCreateParams implements BaseModel
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj['items'] = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +96,9 @@ final class UserBundleCreateParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj['authorizationBearer'] = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

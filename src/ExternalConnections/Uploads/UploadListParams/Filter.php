@@ -61,14 +61,14 @@ final class Filter implements BaseModel
         PhoneNumber|array|null $phoneNumber = null,
         Status|array|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $civicAddressID && $obj['civicAddressID'] = $civicAddressID;
-        null !== $locationID && $obj['locationID'] = $locationID;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $civicAddressID && $self['civicAddressID'] = $civicAddressID;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Filter implements BaseModel
     public function withCivicAddressID(
         CivicAddressID|array $civicAddressID
     ): self {
-        $obj = clone $this;
-        $obj['civicAddressID'] = $civicAddressID;
+        $self = clone $this;
+        $self['civicAddressID'] = $civicAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class Filter implements BaseModel
      */
     public function withLocationID(LocationID|array $locationID): self
     {
-        $obj = clone $this;
-        $obj['locationID'] = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

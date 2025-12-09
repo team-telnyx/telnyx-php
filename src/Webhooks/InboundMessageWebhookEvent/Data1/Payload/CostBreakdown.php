@@ -47,12 +47,12 @@ final class CostBreakdown implements BaseModel
         CarrierFee|array|null $carrierFee = null,
         Rate|array|null $rate = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierFee && $obj['carrierFee'] = $carrierFee;
-        null !== $rate && $obj['rate'] = $rate;
+        null !== $carrierFee && $self['carrierFee'] = $carrierFee;
+        null !== $rate && $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +62,10 @@ final class CostBreakdown implements BaseModel
      */
     public function withCarrierFee(CarrierFee|array $carrierFee): self
     {
-        $obj = clone $this;
-        $obj['carrierFee'] = $carrierFee;
+        $self = clone $this;
+        $self['carrierFee'] = $carrierFee;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,9 +73,9 @@ final class CostBreakdown implements BaseModel
      */
     public function withRate(Rate|array $rate): self
     {
-        $obj = clone $this;
-        $obj['rate'] = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 }

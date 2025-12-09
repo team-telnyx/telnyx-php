@@ -53,12 +53,12 @@ final class Filter implements BaseModel
         string|In|array|null $globalIPAssignmentID = null,
         string|Filter\GlobalIPID\In|array|null $globalIPID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIPAssignmentID && $obj['globalIPAssignmentID'] = $globalIPAssignmentID;
-        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
+        null !== $globalIPAssignmentID && $self['globalIPAssignmentID'] = $globalIPAssignmentID;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Filter implements BaseModel
     public function withGlobalIPAssignmentID(
         string|In|array $globalIPAssignmentID
     ): self {
-        $obj = clone $this;
-        $obj['globalIPAssignmentID'] = $globalIPAssignmentID;
+        $self = clone $this;
+        $self['globalIPAssignmentID'] = $globalIPAssignmentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class Filter implements BaseModel
     public function withGlobalIpid(
         string|Filter\GlobalIPID\In|array $globalIPID,
     ): self {
-        $obj = clone $this;
-        $obj['globalIPID'] = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 }

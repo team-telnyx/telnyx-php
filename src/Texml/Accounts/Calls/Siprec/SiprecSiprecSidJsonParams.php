@@ -71,30 +71,30 @@ final class SiprecSiprecSidJsonParams implements BaseModel
         string $callSid,
         Status|string|null $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['accountSid'] = $accountSid;
-        $obj['callSid'] = $callSid;
+        $self['accountSid'] = $accountSid;
+        $self['callSid'] = $callSid;
 
-        null !== $status && $obj['status'] = $status;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallSid(string $callSid): self
     {
-        $obj = clone $this;
-        $obj['callSid'] = $callSid;
+        $self = clone $this;
+        $self['callSid'] = $callSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,9 +104,9 @@ final class SiprecSiprecSidJsonParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

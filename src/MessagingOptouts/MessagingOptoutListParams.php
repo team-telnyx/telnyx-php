@@ -80,14 +80,14 @@ final class MessagingOptoutListParams implements BaseModel
         Page|array|null $page = null,
         ?string $redactionEnabled = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $page && $obj['page'] = $page;
-        null !== $redactionEnabled && $obj['redactionEnabled'] = $redactionEnabled;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $redactionEnabled && $self['redactionEnabled'] = $redactionEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class MessagingOptoutListParams implements BaseModel
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class MessagingOptoutListParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class MessagingOptoutListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,9 +138,9 @@ final class MessagingOptoutListParams implements BaseModel
      */
     public function withRedactionEnabled(string $redactionEnabled): self
     {
-        $obj = clone $this;
-        $obj['redactionEnabled'] = $redactionEnabled;
+        $self = clone $this;
+        $self['redactionEnabled'] = $redactionEnabled;
 
-        return $obj;
+        return $self;
     }
 }

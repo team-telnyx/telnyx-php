@@ -63,13 +63,13 @@ final class Filter implements BaseModel
         ?string $sessionID = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dateCreatedAt && $obj['dateCreatedAt'] = $dateCreatedAt;
-        null !== $sessionID && $obj['sessionID'] = $sessionID;
-        null !== $status && $obj['status'] = $status;
+        null !== $dateCreatedAt && $self['dateCreatedAt'] = $dateCreatedAt;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class Filter implements BaseModel
      */
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
-        $obj = clone $this;
-        $obj['dateCreatedAt'] = $dateCreatedAt;
+        $self = clone $this;
+        $self['dateCreatedAt'] = $dateCreatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Filter implements BaseModel
      */
     public function withSessionID(string $sessionID): self
     {
-        $obj = clone $this;
-        $obj['sessionID'] = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,9 +105,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

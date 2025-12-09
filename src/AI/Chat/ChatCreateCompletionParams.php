@@ -274,34 +274,34 @@ final class ChatCreateCompletionParams implements BaseModel
         ?float $topP = null,
         ?bool $useBeamSearch = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['messages'] = $messages;
+        $self['messages'] = $messages;
 
-        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
-        null !== $bestOf && $obj['bestOf'] = $bestOf;
-        null !== $earlyStopping && $obj['earlyStopping'] = $earlyStopping;
-        null !== $frequencyPenalty && $obj['frequencyPenalty'] = $frequencyPenalty;
-        null !== $guidedChoice && $obj['guidedChoice'] = $guidedChoice;
-        null !== $guidedJson && $obj['guidedJson'] = $guidedJson;
-        null !== $guidedRegex && $obj['guidedRegex'] = $guidedRegex;
-        null !== $lengthPenalty && $obj['lengthPenalty'] = $lengthPenalty;
-        null !== $logprobs && $obj['logprobs'] = $logprobs;
-        null !== $maxTokens && $obj['maxTokens'] = $maxTokens;
-        null !== $minP && $obj['minP'] = $minP;
-        null !== $model && $obj['model'] = $model;
-        null !== $n && $obj['n'] = $n;
-        null !== $presencePenalty && $obj['presencePenalty'] = $presencePenalty;
-        null !== $responseFormat && $obj['responseFormat'] = $responseFormat;
-        null !== $stream && $obj['stream'] = $stream;
-        null !== $temperature && $obj['temperature'] = $temperature;
-        null !== $toolChoice && $obj['toolChoice'] = $toolChoice;
-        null !== $tools && $obj['tools'] = $tools;
-        null !== $topLogprobs && $obj['topLogprobs'] = $topLogprobs;
-        null !== $topP && $obj['topP'] = $topP;
-        null !== $useBeamSearch && $obj['useBeamSearch'] = $useBeamSearch;
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        null !== $bestOf && $self['bestOf'] = $bestOf;
+        null !== $earlyStopping && $self['earlyStopping'] = $earlyStopping;
+        null !== $frequencyPenalty && $self['frequencyPenalty'] = $frequencyPenalty;
+        null !== $guidedChoice && $self['guidedChoice'] = $guidedChoice;
+        null !== $guidedJson && $self['guidedJson'] = $guidedJson;
+        null !== $guidedRegex && $self['guidedRegex'] = $guidedRegex;
+        null !== $lengthPenalty && $self['lengthPenalty'] = $lengthPenalty;
+        null !== $logprobs && $self['logprobs'] = $logprobs;
+        null !== $maxTokens && $self['maxTokens'] = $maxTokens;
+        null !== $minP && $self['minP'] = $minP;
+        null !== $model && $self['model'] = $model;
+        null !== $n && $self['n'] = $n;
+        null !== $presencePenalty && $self['presencePenalty'] = $presencePenalty;
+        null !== $responseFormat && $self['responseFormat'] = $responseFormat;
+        null !== $stream && $self['stream'] = $stream;
+        null !== $temperature && $self['temperature'] = $temperature;
+        null !== $toolChoice && $self['toolChoice'] = $toolChoice;
+        null !== $tools && $self['tools'] = $tools;
+        null !== $topLogprobs && $self['topLogprobs'] = $topLogprobs;
+        null !== $topP && $self['topP'] = $topP;
+        null !== $useBeamSearch && $self['useBeamSearch'] = $useBeamSearch;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,10 +313,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withMessages(array $messages): self
     {
-        $obj = clone $this;
-        $obj['messages'] = $messages;
+        $self = clone $this;
+        $self['messages'] = $messages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -324,10 +324,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -335,10 +335,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withBestOf(int $bestOf): self
     {
-        $obj = clone $this;
-        $obj['bestOf'] = $bestOf;
+        $self = clone $this;
+        $self['bestOf'] = $bestOf;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -346,10 +346,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withEarlyStopping(bool $earlyStopping): self
     {
-        $obj = clone $this;
-        $obj['earlyStopping'] = $earlyStopping;
+        $self = clone $this;
+        $self['earlyStopping'] = $earlyStopping;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -357,10 +357,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withFrequencyPenalty(float $frequencyPenalty): self
     {
-        $obj = clone $this;
-        $obj['frequencyPenalty'] = $frequencyPenalty;
+        $self = clone $this;
+        $self['frequencyPenalty'] = $frequencyPenalty;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -370,10 +370,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withGuidedChoice(array $guidedChoice): self
     {
-        $obj = clone $this;
-        $obj['guidedChoice'] = $guidedChoice;
+        $self = clone $this;
+        $self['guidedChoice'] = $guidedChoice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -383,10 +383,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withGuidedJson(array $guidedJson): self
     {
-        $obj = clone $this;
-        $obj['guidedJson'] = $guidedJson;
+        $self = clone $this;
+        $self['guidedJson'] = $guidedJson;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -394,10 +394,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withGuidedRegex(string $guidedRegex): self
     {
-        $obj = clone $this;
-        $obj['guidedRegex'] = $guidedRegex;
+        $self = clone $this;
+        $self['guidedRegex'] = $guidedRegex;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -405,10 +405,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withLengthPenalty(float $lengthPenalty): self
     {
-        $obj = clone $this;
-        $obj['lengthPenalty'] = $lengthPenalty;
+        $self = clone $this;
+        $self['lengthPenalty'] = $lengthPenalty;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -416,10 +416,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withLogprobs(bool $logprobs): self
     {
-        $obj = clone $this;
-        $obj['logprobs'] = $logprobs;
+        $self = clone $this;
+        $self['logprobs'] = $logprobs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -427,10 +427,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withMaxTokens(int $maxTokens): self
     {
-        $obj = clone $this;
-        $obj['maxTokens'] = $maxTokens;
+        $self = clone $this;
+        $self['maxTokens'] = $maxTokens;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -438,10 +438,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withMinP(float $minP): self
     {
-        $obj = clone $this;
-        $obj['minP'] = $minP;
+        $self = clone $this;
+        $self['minP'] = $minP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -449,10 +449,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -460,10 +460,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withN(float $n): self
     {
-        $obj = clone $this;
-        $obj['n'] = $n;
+        $self = clone $this;
+        $self['n'] = $n;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -471,10 +471,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withPresencePenalty(float $presencePenalty): self
     {
-        $obj = clone $this;
-        $obj['presencePenalty'] = $presencePenalty;
+        $self = clone $this;
+        $self['presencePenalty'] = $presencePenalty;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -485,10 +485,10 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withResponseFormat(
         ResponseFormat|array $responseFormat
     ): self {
-        $obj = clone $this;
-        $obj['responseFormat'] = $responseFormat;
+        $self = clone $this;
+        $self['responseFormat'] = $responseFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -496,10 +496,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withStream(bool $stream): self
     {
-        $obj = clone $this;
-        $obj['stream'] = $stream;
+        $self = clone $this;
+        $self['stream'] = $stream;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -507,10 +507,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withTemperature(float $temperature): self
     {
-        $obj = clone $this;
-        $obj['temperature'] = $temperature;
+        $self = clone $this;
+        $self['temperature'] = $temperature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -518,10 +518,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withToolChoice(ToolChoice|string $toolChoice): self
     {
-        $obj = clone $this;
-        $obj['toolChoice'] = $toolChoice;
+        $self = clone $this;
+        $self['toolChoice'] = $toolChoice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -537,10 +537,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withTools(array $tools): self
     {
-        $obj = clone $this;
-        $obj['tools'] = $tools;
+        $self = clone $this;
+        $self['tools'] = $tools;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -548,10 +548,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withTopLogprobs(int $topLogprobs): self
     {
-        $obj = clone $this;
-        $obj['topLogprobs'] = $topLogprobs;
+        $self = clone $this;
+        $self['topLogprobs'] = $topLogprobs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -559,10 +559,10 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withTopP(float $topP): self
     {
-        $obj = clone $this;
-        $obj['topP'] = $topP;
+        $self = clone $this;
+        $self['topP'] = $topP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -570,9 +570,9 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public function withUseBeamSearch(bool $useBeamSearch): self
     {
-        $obj = clone $this;
-        $obj['useBeamSearch'] = $useBeamSearch;
+        $self = clone $this;
+        $self['useBeamSearch'] = $useBeamSearch;
 
-        return $obj;
+        return $self;
     }
 }

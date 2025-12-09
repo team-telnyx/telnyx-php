@@ -53,13 +53,13 @@ final class IssuedTo implements BaseModel
         ?string $organization = null,
         ?string $organizationUnit = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $commonName && $obj['commonName'] = $commonName;
-        null !== $organization && $obj['organization'] = $organization;
-        null !== $organizationUnit && $obj['organizationUnit'] = $organizationUnit;
+        null !== $commonName && $self['commonName'] = $commonName;
+        null !== $organization && $self['organization'] = $organization;
+        null !== $organizationUnit && $self['organizationUnit'] = $organizationUnit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class IssuedTo implements BaseModel
      */
     public function withCommonName(string $commonName): self
     {
-        $obj = clone $this;
-        $obj['commonName'] = $commonName;
+        $self = clone $this;
+        $self['commonName'] = $commonName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class IssuedTo implements BaseModel
      */
     public function withOrganization(string $organization): self
     {
-        $obj = clone $this;
-        $obj['organization'] = $organization;
+        $self = clone $this;
+        $self['organization'] = $organization;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class IssuedTo implements BaseModel
      */
     public function withOrganizationUnit(string $organizationUnit): self
     {
-        $obj = clone $this;
-        $obj['organizationUnit'] = $organizationUnit;
+        $self = clone $this;
+        $self['organizationUnit'] = $organizationUnit;
 
-        return $obj;
+        return $self;
     }
 }

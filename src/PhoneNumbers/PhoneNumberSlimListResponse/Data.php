@@ -215,31 +215,31 @@ final class Data implements BaseModel
         Status|string|null $status = null,
         ?bool $t38FaxGatewayEnabled = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $callForwardingEnabled && $obj['callForwardingEnabled'] = $callForwardingEnabled;
-        null !== $callRecordingEnabled && $obj['callRecordingEnabled'] = $callRecordingEnabled;
-        null !== $callerIDNameEnabled && $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
-        null !== $cnamListingEnabled && $obj['cnamListingEnabled'] = $cnamListingEnabled;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $countryISOAlpha2 && $obj['countryISOAlpha2'] = $countryISOAlpha2;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $emergencyAddressID && $obj['emergencyAddressID'] = $emergencyAddressID;
-        null !== $emergencyEnabled && $obj['emergencyEnabled'] = $emergencyEnabled;
-        null !== $emergencyStatus && $obj['emergencyStatus'] = $emergencyStatus;
-        null !== $externalPin && $obj['externalPin'] = $externalPin;
-        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $purchasedAt && $obj['purchasedAt'] = $purchasedAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $t38FaxGatewayEnabled && $obj['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+        null !== $id && $self['id'] = $id;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
+        null !== $callRecordingEnabled && $self['callRecordingEnabled'] = $callRecordingEnabled;
+        null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
+        null !== $cnamListingEnabled && $self['cnamListingEnabled'] = $cnamListingEnabled;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $countryISOAlpha2 && $self['countryISOAlpha2'] = $countryISOAlpha2;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
+        null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
+        null !== $externalPin && $self['externalPin'] = $externalPin;
+        null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $purchasedAt && $self['purchasedAt'] = $purchasedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $t38FaxGatewayEnabled && $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -247,10 +247,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,10 +258,10 @@ final class Data implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -269,10 +269,10 @@ final class Data implements BaseModel
      */
     public function withCallForwardingEnabled(bool $callForwardingEnabled): self
     {
-        $obj = clone $this;
-        $obj['callForwardingEnabled'] = $callForwardingEnabled;
+        $self = clone $this;
+        $self['callForwardingEnabled'] = $callForwardingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -280,10 +280,10 @@ final class Data implements BaseModel
      */
     public function withCallRecordingEnabled(bool $callRecordingEnabled): self
     {
-        $obj = clone $this;
-        $obj['callRecordingEnabled'] = $callRecordingEnabled;
+        $self = clone $this;
+        $self['callRecordingEnabled'] = $callRecordingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,10 +291,10 @@ final class Data implements BaseModel
      */
     public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
     {
-        $obj = clone $this;
-        $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
+        $self = clone $this;
+        $self['callerIDNameEnabled'] = $callerIDNameEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,10 +302,10 @@ final class Data implements BaseModel
      */
     public function withCnamListingEnabled(bool $cnamListingEnabled): self
     {
-        $obj = clone $this;
-        $obj['cnamListingEnabled'] = $cnamListingEnabled;
+        $self = clone $this;
+        $self['cnamListingEnabled'] = $cnamListingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,10 +313,10 @@ final class Data implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -324,10 +324,10 @@ final class Data implements BaseModel
      */
     public function withCountryISOAlpha2(string $countryISOAlpha2): self
     {
-        $obj = clone $this;
-        $obj['countryISOAlpha2'] = $countryISOAlpha2;
+        $self = clone $this;
+        $self['countryISOAlpha2'] = $countryISOAlpha2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -335,10 +335,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -346,10 +346,10 @@ final class Data implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -357,10 +357,10 @@ final class Data implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj['emergencyAddressID'] = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -368,10 +368,10 @@ final class Data implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj['emergencyEnabled'] = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -382,10 +382,10 @@ final class Data implements BaseModel
     public function withEmergencyStatus(
         EmergencyStatus|string $emergencyStatus
     ): self {
-        $obj = clone $this;
-        $obj['emergencyStatus'] = $emergencyStatus;
+        $self = clone $this;
+        $self['emergencyStatus'] = $emergencyStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -393,10 +393,10 @@ final class Data implements BaseModel
      */
     public function withExternalPin(string $externalPin): self
     {
-        $obj = clone $this;
-        $obj['externalPin'] = $externalPin;
+        $self = clone $this;
+        $self['externalPin'] = $externalPin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -407,10 +407,10 @@ final class Data implements BaseModel
     public function withInboundCallScreening(
         InboundCallScreening|string $inboundCallScreening
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallScreening'] = $inboundCallScreening;
+        $self = clone $this;
+        $self['inboundCallScreening'] = $inboundCallScreening;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -418,10 +418,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -433,10 +433,10 @@ final class Data implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -444,10 +444,10 @@ final class Data implements BaseModel
      */
     public function withPurchasedAt(string $purchasedAt): self
     {
-        $obj = clone $this;
-        $obj['purchasedAt'] = $purchasedAt;
+        $self = clone $this;
+        $self['purchasedAt'] = $purchasedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -455,10 +455,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -468,10 +468,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -479,9 +479,9 @@ final class Data implements BaseModel
      */
     public function withT38FaxGatewayEnabled(bool $t38FaxGatewayEnabled): self
     {
-        $obj = clone $this;
-        $obj['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+        $self = clone $this;
+        $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
 
-        return $obj;
+        return $self;
     }
 }

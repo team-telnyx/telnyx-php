@@ -86,17 +86,17 @@ final class ExternalConnectionPhoneNumber implements BaseModel
         ?string $telephoneNumber = null,
         ?string $ticketID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $acquiredCapabilities && $obj['acquiredCapabilities'] = $acquiredCapabilities;
-        null !== $civicAddressID && $obj['civicAddressID'] = $civicAddressID;
-        null !== $displayedCountryCode && $obj['displayedCountryCode'] = $displayedCountryCode;
-        null !== $locationID && $obj['locationID'] = $locationID;
-        null !== $numberID && $obj['numberID'] = $numberID;
-        null !== $telephoneNumber && $obj['telephoneNumber'] = $telephoneNumber;
-        null !== $ticketID && $obj['ticketID'] = $ticketID;
+        null !== $acquiredCapabilities && $self['acquiredCapabilities'] = $acquiredCapabilities;
+        null !== $civicAddressID && $self['civicAddressID'] = $civicAddressID;
+        null !== $displayedCountryCode && $self['displayedCountryCode'] = $displayedCountryCode;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $numberID && $self['numberID'] = $numberID;
+        null !== $telephoneNumber && $self['telephoneNumber'] = $telephoneNumber;
+        null !== $ticketID && $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      */
     public function withAcquiredCapabilities(array $acquiredCapabilities): self
     {
-        $obj = clone $this;
-        $obj['acquiredCapabilities'] = $acquiredCapabilities;
+        $self = clone $this;
+        $self['acquiredCapabilities'] = $acquiredCapabilities;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      */
     public function withCivicAddressID(string $civicAddressID): self
     {
-        $obj = clone $this;
-        $obj['civicAddressID'] = $civicAddressID;
+        $self = clone $this;
+        $self['civicAddressID'] = $civicAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      */
     public function withDisplayedCountryCode(string $displayedCountryCode): self
     {
-        $obj = clone $this;
-        $obj['displayedCountryCode'] = $displayedCountryCode;
+        $self = clone $this;
+        $self['displayedCountryCode'] = $displayedCountryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      */
     public function withLocationID(string $locationID): self
     {
-        $obj = clone $this;
-        $obj['locationID'] = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      */
     public function withNumberID(string $numberID): self
     {
-        $obj = clone $this;
-        $obj['numberID'] = $numberID;
+        $self = clone $this;
+        $self['numberID'] = $numberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      */
     public function withTelephoneNumber(string $telephoneNumber): self
     {
-        $obj = clone $this;
-        $obj['telephoneNumber'] = $telephoneNumber;
+        $self = clone $this;
+        $self['telephoneNumber'] = $telephoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,9 +170,9 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      */
     public function withTicketID(string $ticketID): self
     {
-        $obj = clone $this;
-        $obj['ticketID'] = $ticketID;
+        $self = clone $this;
+        $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 }

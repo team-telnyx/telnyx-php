@@ -44,12 +44,12 @@ final class PublicRecordingURLs implements BaseModel
      */
     public static function with(?string $mp3 = null, ?string $wav = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mp3 && $obj['mp3'] = $mp3;
-        null !== $wav && $obj['wav'] = $wav;
+        null !== $mp3 && $self['mp3'] = $mp3;
+        null !== $wav && $self['wav'] = $wav;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class PublicRecordingURLs implements BaseModel
      */
     public function withMP3(?string $mp3): self
     {
-        $obj = clone $this;
-        $obj['mp3'] = $mp3;
+        $self = clone $this;
+        $self['mp3'] = $mp3;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class PublicRecordingURLs implements BaseModel
      */
     public function withWav(?string $wav): self
     {
-        $obj = clone $this;
-        $obj['wav'] = $wav;
+        $self = clone $this;
+        $self['wav'] = $wav;
 
-        return $obj;
+        return $self;
     }
 }

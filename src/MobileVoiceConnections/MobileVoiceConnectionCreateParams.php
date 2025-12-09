@@ -94,35 +94,35 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $active && $obj['active'] = $active;
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        null !== $active && $self['active'] = $active;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     public function withConnectionName(string $connectionName): self
     {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
      */
     public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
      */
     public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,34 +166,34 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     public function withWebhookAPIVersion(
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
-        $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $self = clone $this;
+        $self['webhookAPIVersion'] = $webhookAPIVersion;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookEventURL(?string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

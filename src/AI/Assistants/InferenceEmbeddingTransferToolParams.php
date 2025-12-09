@@ -87,15 +87,15 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
         ?array $customHeaders = null,
         ?string $warmTransferInstructions = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['from'] = $from;
-        $obj['targets'] = $targets;
+        $self['from'] = $from;
+        $self['targets'] = $targets;
 
-        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
-        null !== $warmTransferInstructions && $obj['warmTransferInstructions'] = $warmTransferInstructions;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $warmTransferInstructions && $self['warmTransferInstructions'] = $warmTransferInstructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      */
     public function withTargets(array $targets): self
     {
-        $obj = clone $this;
-        $obj['targets'] = $targets;
+        $self = clone $this;
+        $self['targets'] = $targets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj['customHeaders'] = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,9 +143,9 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     public function withWarmTransferInstructions(
         string $warmTransferInstructions
     ): self {
-        $obj = clone $this;
-        $obj['warmTransferInstructions'] = $warmTransferInstructions;
+        $self = clone $this;
+        $self['warmTransferInstructions'] = $warmTransferInstructions;
 
-        return $obj;
+        return $self;
     }
 }

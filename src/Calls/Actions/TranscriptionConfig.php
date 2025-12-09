@@ -40,11 +40,11 @@ final class TranscriptionConfig implements BaseModel
      */
     public static function with(?string $model = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $model && $obj['model'] = $model;
+        null !== $model && $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -56,9 +56,9 @@ final class TranscriptionConfig implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 }

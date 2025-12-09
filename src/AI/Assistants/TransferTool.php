@@ -64,12 +64,12 @@ final class TransferTool implements BaseModel
         InferenceEmbeddingTransferToolParams|array $transfer,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['transfer'] = $transfer;
-        $obj['type'] = $type;
+        $self['transfer'] = $transfer;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class TransferTool implements BaseModel
     public function withTransfer(
         InferenceEmbeddingTransferToolParams|array $transfer
     ): self {
-        $obj = clone $this;
-        $obj['transfer'] = $transfer;
+        $self = clone $this;
+        $self['transfer'] = $transfer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +94,9 @@ final class TransferTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

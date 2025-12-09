@@ -78,40 +78,40 @@ final class McpServerCreateParams implements BaseModel
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj['type'] = $type;
-        $obj['url'] = $url;
+        $self['name'] = $name;
+        $self['type'] = $type;
+        $self['url'] = $url;
 
-        null !== $allowedTools && $obj['allowedTools'] = $allowedTools;
-        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
+        null !== $allowedTools && $self['allowedTools'] = $allowedTools;
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,17 +119,17 @@ final class McpServerCreateParams implements BaseModel
      */
     public function withAllowedTools(?array $allowedTools): self
     {
-        $obj = clone $this;
-        $obj['allowedTools'] = $allowedTools;
+        $self = clone $this;
+        $self['allowedTools'] = $allowedTools;
 
-        return $obj;
+        return $self;
     }
 
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 }

@@ -121,19 +121,19 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
         ?int $start = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $end && $obj['end'] = $end;
-        null !== $firstPageUri && $obj['firstPageUri'] = $firstPageUri;
-        null !== $nextPageUri && $obj['nextPageUri'] = $nextPageUri;
-        null !== $page && $obj['page'] = $page;
-        null !== $pageSize && $obj['pageSize'] = $pageSize;
-        null !== $previousPageUri && $obj['previousPageUri'] = $previousPageUri;
-        null !== $recordings && $obj['recordings'] = $recordings;
-        null !== $start && $obj['start'] = $start;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $end && $self['end'] = $end;
+        null !== $firstPageUri && $self['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $self['nextPageUri'] = $nextPageUri;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $previousPageUri && $self['previousPageUri'] = $previousPageUri;
+        null !== $recordings && $self['recordings'] = $recordings;
+        null !== $start && $self['start'] = $start;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withEnd(int $end): self
     {
-        $obj = clone $this;
-        $obj['end'] = $end;
+        $self = clone $this;
+        $self['end'] = $end;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withFirstPageUri(string $firstPageUri): self
     {
-        $obj = clone $this;
-        $obj['firstPageUri'] = $firstPageUri;
+        $self = clone $this;
+        $self['firstPageUri'] = $firstPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withNextPageUri(string $nextPageUri): self
     {
-        $obj = clone $this;
-        $obj['nextPageUri'] = $nextPageUri;
+        $self = clone $this;
+        $self['nextPageUri'] = $nextPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withPreviousPageUri(string $previousPageUri): self
     {
-        $obj = clone $this;
-        $obj['previousPageUri'] = $previousPageUri;
+        $self = clone $this;
+        $self['previousPageUri'] = $previousPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +223,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withRecordings(array $recordings): self
     {
-        $obj = clone $this;
-        $obj['recordings'] = $recordings;
+        $self = clone $this;
+        $self['recordings'] = $recordings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withStart(int $start): self
     {
-        $obj = clone $this;
-        $obj['start'] = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,9 +245,9 @@ final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

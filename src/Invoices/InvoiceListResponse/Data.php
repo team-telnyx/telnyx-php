@@ -59,63 +59,63 @@ final class Data implements BaseModel
         ?\DateTimeInterface $periodStart = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fileID && $obj['fileID'] = $fileID;
-        null !== $invoiceID && $obj['invoiceID'] = $invoiceID;
-        null !== $paid && $obj['paid'] = $paid;
-        null !== $periodEnd && $obj['periodEnd'] = $periodEnd;
-        null !== $periodStart && $obj['periodStart'] = $periodStart;
-        null !== $url && $obj['url'] = $url;
+        null !== $fileID && $self['fileID'] = $fileID;
+        null !== $invoiceID && $self['invoiceID'] = $invoiceID;
+        null !== $paid && $self['paid'] = $paid;
+        null !== $periodEnd && $self['periodEnd'] = $periodEnd;
+        null !== $periodStart && $self['periodStart'] = $periodStart;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     public function withFileID(string $fileID): self
     {
-        $obj = clone $this;
-        $obj['fileID'] = $fileID;
+        $self = clone $this;
+        $self['fileID'] = $fileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withInvoiceID(string $invoiceID): self
     {
-        $obj = clone $this;
-        $obj['invoiceID'] = $invoiceID;
+        $self = clone $this;
+        $self['invoiceID'] = $invoiceID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPaid(bool $paid): self
     {
-        $obj = clone $this;
-        $obj['paid'] = $paid;
+        $self = clone $this;
+        $self['paid'] = $paid;
 
-        return $obj;
+        return $self;
     }
 
     public function withPeriodEnd(\DateTimeInterface $periodEnd): self
     {
-        $obj = clone $this;
-        $obj['periodEnd'] = $periodEnd;
+        $self = clone $this;
+        $self['periodEnd'] = $periodEnd;
 
-        return $obj;
+        return $self;
     }
 
     public function withPeriodStart(\DateTimeInterface $periodStart): self
     {
-        $obj = clone $this;
-        $obj['periodStart'] = $periodStart;
+        $self = clone $this;
+        $self['periodStart'] = $periodStart;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

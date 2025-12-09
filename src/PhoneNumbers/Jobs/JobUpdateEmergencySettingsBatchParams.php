@@ -78,14 +78,14 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
         array $phoneNumbers,
         ?string $emergencyAddressID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['emergencyEnabled'] = $emergencyEnabled;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self['emergencyEnabled'] = $emergencyEnabled;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        null !== $emergencyAddressID && $obj['emergencyAddressID'] = $emergencyAddressID;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj['emergencyEnabled'] = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,9 +115,9 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
      */
     public function withEmergencyAddressID(?string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj['emergencyAddressID'] = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 }

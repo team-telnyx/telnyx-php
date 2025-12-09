@@ -64,13 +64,13 @@ final class NotificationChannelUpdateParams implements BaseModel
         ChannelTypeID|string|null $channelTypeID = null,
         ?string $notificationProfileID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $channelDestination && $obj['channelDestination'] = $channelDestination;
-        null !== $channelTypeID && $obj['channelTypeID'] = $channelTypeID;
-        null !== $notificationProfileID && $obj['notificationProfileID'] = $notificationProfileID;
+        null !== $channelDestination && $self['channelDestination'] = $channelDestination;
+        null !== $channelTypeID && $self['channelTypeID'] = $channelTypeID;
+        null !== $notificationProfileID && $self['notificationProfileID'] = $notificationProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class NotificationChannelUpdateParams implements BaseModel
      */
     public function withChannelDestination(string $channelDestination): self
     {
-        $obj = clone $this;
-        $obj['channelDestination'] = $channelDestination;
+        $self = clone $this;
+        $self['channelDestination'] = $channelDestination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class NotificationChannelUpdateParams implements BaseModel
      */
     public function withChannelTypeID(ChannelTypeID|string $channelTypeID): self
     {
-        $obj = clone $this;
-        $obj['channelTypeID'] = $channelTypeID;
+        $self = clone $this;
+        $self['channelTypeID'] = $channelTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class NotificationChannelUpdateParams implements BaseModel
     public function withNotificationProfileID(
         string $notificationProfileID
     ): self {
-        $obj = clone $this;
-        $obj['notificationProfileID'] = $notificationProfileID;
+        $self = clone $this;
+        $self['notificationProfileID'] = $notificationProfileID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -95,18 +95,18 @@ final class Filter implements BaseModel
         ?string $sipCallID = null,
         ?string $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $conferenceID && $obj['conferenceID'] = $conferenceID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $from && $obj['from'] = $from;
-        null !== $sipCallID && $obj['sipCallID'] = $sipCallID;
-        null !== $to && $obj['to'] = $to;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $conferenceID && $self['conferenceID'] = $conferenceID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $from && $self['from'] = $from;
+        null !== $sipCallID && $self['sipCallID'] = $sipCallID;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Filter implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Filter implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class Filter implements BaseModel
      */
     public function withConferenceID(string $conferenceID): self
     {
-        $obj = clone $this;
-        $obj['conferenceID'] = $conferenceID;
+        $self = clone $this;
+        $self['conferenceID'] = $conferenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class Filter implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class Filter implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +180,10 @@ final class Filter implements BaseModel
      */
     public function withSipCallID(string $sipCallID): self
     {
-        $obj = clone $this;
-        $obj['sipCallID'] = $sipCallID;
+        $self = clone $this;
+        $self['sipCallID'] = $sipCallID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,9 +191,9 @@ final class Filter implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

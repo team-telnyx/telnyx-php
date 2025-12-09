@@ -90,14 +90,14 @@ final class Data implements BaseModel
         \DateTimeInterface $createdAt,
         Status|string $status,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['conversationInsights'] = $conversationInsights;
-        $obj['createdAt'] = $createdAt;
-        $obj['status'] = $status;
+        $self['id'] = $id;
+        $self['conversationInsights'] = $conversationInsights;
+        $self['createdAt'] = $createdAt;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Data implements BaseModel
      */
     public function withConversationInsights(array $conversationInsights): self
     {
-        $obj = clone $this;
-        $obj['conversationInsights'] = $conversationInsights;
+        $self = clone $this;
+        $self['conversationInsights'] = $conversationInsights;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,9 +144,9 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

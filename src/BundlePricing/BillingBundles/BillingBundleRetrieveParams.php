@@ -42,11 +42,11 @@ final class BillingBundleRetrieveParams implements BaseModel
      */
     public static function with(?string $authorizationBearer = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class BillingBundleRetrieveParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj['authorizationBearer'] = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

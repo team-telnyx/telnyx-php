@@ -98,18 +98,18 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
         Status|string|null $status = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $brandID && $obj['brandID'] = $brandID;
-        null !== $campaignID && $obj['campaignID'] = $campaignID;
-        null !== $createDate && $obj['createDate'] = $createDate;
-        null !== $cspID && $obj['cspID'] = $cspID;
-        null !== $description && $obj['description'] = $description;
-        null !== $isTMobileRegistered && $obj['isTMobileRegistered'] = $isTMobileRegistered;
-        null !== $status && $obj['status'] = $status;
-        null !== $type && $obj['type'] = $type;
+        null !== $brandID && $self['brandID'] = $brandID;
+        null !== $campaignID && $self['campaignID'] = $campaignID;
+        null !== $createDate && $self['createDate'] = $createDate;
+        null !== $cspID && $self['cspID'] = $cspID;
+        null !== $description && $self['description'] = $description;
+        null !== $isTMobileRegistered && $self['isTMobileRegistered'] = $isTMobileRegistered;
+        null !== $status && $self['status'] = $status;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withCampaignID(string $campaignID): self
     {
-        $obj = clone $this;
-        $obj['campaignID'] = $campaignID;
+        $self = clone $this;
+        $self['campaignID'] = $campaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withCreateDate(string $createDate): self
     {
-        $obj = clone $this;
-        $obj['createDate'] = $createDate;
+        $self = clone $this;
+        $self['createDate'] = $createDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withCspID(string $cspID): self
     {
-        $obj = clone $this;
-        $obj['cspID'] = $cspID;
+        $self = clone $this;
+        $self['cspID'] = $cspID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withIsTMobileRegistered(bool $isTMobileRegistered): self
     {
-        $obj = clone $this;
-        $obj['isTMobileRegistered'] = $isTMobileRegistered;
+        $self = clone $this;
+        $self['isTMobileRegistered'] = $isTMobileRegistered;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

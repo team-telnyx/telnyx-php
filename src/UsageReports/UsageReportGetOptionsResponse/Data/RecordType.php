@@ -62,13 +62,13 @@ final class RecordType implements BaseModel
         ?array $productMetrics = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $productDimensions && $obj['productDimensions'] = $productDimensions;
-        null !== $productMetrics && $obj['productMetrics'] = $productMetrics;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $productDimensions && $self['productDimensions'] = $productDimensions;
+        null !== $productMetrics && $self['productMetrics'] = $productMetrics;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class RecordType implements BaseModel
      */
     public function withProductDimensions(array $productDimensions): self
     {
-        $obj = clone $this;
-        $obj['productDimensions'] = $productDimensions;
+        $self = clone $this;
+        $self['productDimensions'] = $productDimensions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class RecordType implements BaseModel
      */
     public function withProductMetrics(array $productMetrics): self
     {
-        $obj = clone $this;
-        $obj['productMetrics'] = $productMetrics;
+        $self = clone $this;
+        $self['productMetrics'] = $productMetrics;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class RecordType implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

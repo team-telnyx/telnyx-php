@@ -96,14 +96,14 @@ final class CustomerServiceRecordCreateParams implements BaseModel
         AdditionalData|array|null $additionalData = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
+        $self['phoneNumber'] = $phoneNumber;
 
-        null !== $additionalData && $obj['additionalData'] = $additionalData;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
+        null !== $additionalData && $self['additionalData'] = $additionalData;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class CustomerServiceRecordCreateParams implements BaseModel
     public function withAdditionalData(
         AdditionalData|array $additionalData
     ): self {
-        $obj = clone $this;
-        $obj['additionalData'] = $additionalData;
+        $self = clone $this;
+        $self['additionalData'] = $additionalData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,9 +145,9 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

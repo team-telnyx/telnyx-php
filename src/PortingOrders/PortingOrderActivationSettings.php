@@ -70,14 +70,14 @@ final class PortingOrderActivationSettings implements BaseModel
         ?\DateTimeInterface $focDatetimeActual = null,
         ?\DateTimeInterface $focDatetimeRequested = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
-        null !== $fastPortEligible && $obj['fastPortEligible'] = $fastPortEligible;
-        null !== $focDatetimeActual && $obj['focDatetimeActual'] = $focDatetimeActual;
-        null !== $focDatetimeRequested && $obj['focDatetimeRequested'] = $focDatetimeRequested;
+        null !== $activationStatus && $self['activationStatus'] = $activationStatus;
+        null !== $fastPortEligible && $self['fastPortEligible'] = $fastPortEligible;
+        null !== $focDatetimeActual && $self['focDatetimeActual'] = $focDatetimeActual;
+        null !== $focDatetimeRequested && $self['focDatetimeRequested'] = $focDatetimeRequested;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class PortingOrderActivationSettings implements BaseModel
     public function withActivationStatus(
         ActivationStatus|string|null $activationStatus
     ): self {
-        $obj = clone $this;
-        $obj['activationStatus'] = $activationStatus;
+        $self = clone $this;
+        $self['activationStatus'] = $activationStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class PortingOrderActivationSettings implements BaseModel
      */
     public function withFastPortEligible(bool $fastPortEligible): self
     {
-        $obj = clone $this;
-        $obj['fastPortEligible'] = $fastPortEligible;
+        $self = clone $this;
+        $self['fastPortEligible'] = $fastPortEligible;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class PortingOrderActivationSettings implements BaseModel
     public function withFocDatetimeActual(
         ?\DateTimeInterface $focDatetimeActual
     ): self {
-        $obj = clone $this;
-        $obj['focDatetimeActual'] = $focDatetimeActual;
+        $self = clone $this;
+        $self['focDatetimeActual'] = $focDatetimeActual;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class PortingOrderActivationSettings implements BaseModel
     public function withFocDatetimeRequested(
         ?\DateTimeInterface $focDatetimeRequested
     ): self {
-        $obj = clone $this;
-        $obj['focDatetimeRequested'] = $focDatetimeRequested;
+        $self = clone $this;
+        $self['focDatetimeRequested'] = $focDatetimeRequested;
 
-        return $obj;
+        return $self;
     }
 }

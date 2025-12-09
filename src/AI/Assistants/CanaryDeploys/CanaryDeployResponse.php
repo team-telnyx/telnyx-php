@@ -74,38 +74,38 @@ final class CanaryDeployResponse implements BaseModel
         \DateTimeInterface $updatedAt,
         array $versions,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['assistantID'] = $assistantID;
-        $obj['createdAt'] = $createdAt;
-        $obj['updatedAt'] = $updatedAt;
-        $obj['versions'] = $versions;
+        $self['assistantID'] = $assistantID;
+        $self['createdAt'] = $createdAt;
+        $self['updatedAt'] = $updatedAt;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj['assistantID'] = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,9 +113,9 @@ final class CanaryDeployResponse implements BaseModel
      */
     public function withVersions(array $versions): self
     {
-        $obj = clone $this;
-        $obj['versions'] = $versions;
+        $self = clone $this;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 }

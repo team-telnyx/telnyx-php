@@ -109,22 +109,22 @@ final class MdrUsageReportResponseLegacy implements BaseModel
         ?int $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
-        null !== $connections && $obj['connections'] = $connections;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $endTime && $obj['endTime'] = $endTime;
-        null !== $profiles && $obj['profiles'] = $profiles;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $reportURL && $obj['reportURL'] = $reportURL;
-        null !== $result && $obj['result'] = $result;
-        null !== $startTime && $obj['startTime'] = $startTime;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $aggregationType && $self['aggregationType'] = $aggregationType;
+        null !== $connections && $self['connections'] = $connections;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $profiles && $self['profiles'] = $profiles;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $reportURL && $self['reportURL'] = $reportURL;
+        null !== $result && $self['result'] = $result;
+        null !== $startTime && $self['startTime'] = $startTime;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      */
     public function withAggregationType(int $aggregationType): self
     {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,26 +154,26 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      */
     public function withConnections(array $connections): self
     {
-        $obj = clone $this;
-        $obj['connections'] = $connections;
+        $self = clone $this;
+        $self['connections'] = $connections;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withEndTime(\DateTimeInterface $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,42 +183,42 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      */
     public function withProfiles(array $profiles): self
     {
-        $obj = clone $this;
-        $obj['profiles'] = $profiles;
+        $self = clone $this;
+        $self['profiles'] = $profiles;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withReportURL(string $reportURL): self
     {
-        $obj = clone $this;
-        $obj['reportURL'] = $reportURL;
+        $self = clone $this;
+        $self['reportURL'] = $reportURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(mixed $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,17 +226,17 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      */
     public function withStatus(int $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

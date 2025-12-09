@@ -145,31 +145,31 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
         ?array $subNumberOrdersIDs = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
-        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
-        null !== $phoneNumbersCount && $obj['phoneNumbersCount'] = $phoneNumbersCount;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirementsMet && $obj['requirementsMet'] = $requirementsMet;
-        null !== $status && $obj['status'] = $status;
-        null !== $subNumberOrdersIDs && $obj['subNumberOrdersIDs'] = $subNumberOrdersIDs;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
+        null !== $phoneNumbersCount && $self['phoneNumbersCount'] = $phoneNumbersCount;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $status && $self['status'] = $status;
+        null !== $subNumberOrdersIDs && $self['subNumberOrdersIDs'] = $subNumberOrdersIDs;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj['messagingProfileID'] = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,18 +255,18 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbersCount'] = $phoneNumbersCount;
+        $self = clone $this;
+        $self['phoneNumbersCount'] = $phoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj['requirementsMet'] = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,10 +298,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withSubNumberOrdersIDs(array $subNumberOrdersIDs): self
     {
-        $obj = clone $this;
-        $obj['subNumberOrdersIDs'] = $subNumberOrdersIDs;
+        $self = clone $this;
+        $self['subNumberOrdersIDs'] = $subNumberOrdersIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -309,9 +309,9 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

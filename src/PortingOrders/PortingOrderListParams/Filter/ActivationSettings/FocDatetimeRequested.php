@@ -44,12 +44,12 @@ final class FocDatetimeRequested implements BaseModel
      */
     public static function with(?string $gt = null, ?string $lt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gt && $obj['gt'] = $gt;
-        null !== $lt && $obj['lt'] = $lt;
+        null !== $gt && $self['gt'] = $gt;
+        null !== $lt && $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class FocDatetimeRequested implements BaseModel
      */
     public function withGt(string $gt): self
     {
-        $obj = clone $this;
-        $obj['gt'] = $gt;
+        $self = clone $this;
+        $self['gt'] = $gt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class FocDatetimeRequested implements BaseModel
      */
     public function withLt(string $lt): self
     {
-        $obj = clone $this;
-        $obj['lt'] = $lt;
+        $self = clone $this;
+        $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 }

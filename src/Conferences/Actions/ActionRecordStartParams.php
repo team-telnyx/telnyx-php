@@ -115,17 +115,17 @@ final class ActionRecordStartParams implements BaseModel
         Region|string|null $region = null,
         Trim|string|null $trim = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['format'] = $format;
+        $self['format'] = $format;
 
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $customFileName && $obj['customFileName'] = $customFileName;
-        null !== $playBeep && $obj['playBeep'] = $playBeep;
-        null !== $region && $obj['region'] = $region;
-        null !== $trim && $obj['trim'] = $trim;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customFileName && $self['customFileName'] = $customFileName;
+        null !== $playBeep && $self['playBeep'] = $playBeep;
+        null !== $region && $self['region'] = $region;
+        null !== $trim && $self['trim'] = $trim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withFormat(Format|string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withCustomFileName(string $customFileName): self
     {
-        $obj = clone $this;
-        $obj['customFileName'] = $customFileName;
+        $self = clone $this;
+        $self['customFileName'] = $customFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withPlayBeep(bool $playBeep): self
     {
-        $obj = clone $this;
-        $obj['playBeep'] = $playBeep;
+        $self = clone $this;
+        $self['playBeep'] = $playBeep;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,9 +194,9 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withTrim(Trim|string $trim): self
     {
-        $obj = clone $this;
-        $obj['trim'] = $trim;
+        $self = clone $this;
+        $self['trim'] = $trim;
 
-        return $obj;
+        return $self;
     }
 }

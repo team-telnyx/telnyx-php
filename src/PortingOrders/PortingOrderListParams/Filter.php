@@ -94,17 +94,17 @@ final class Filter implements BaseModel
         ?string $parentSupportKey = null,
         PhoneNumbers|array|null $phoneNumbers = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationSettings && $obj['activationSettings'] = $activationSettings;
-        null !== $customerGroupReference && $obj['customerGroupReference'] = $customerGroupReference;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $endUser && $obj['endUser'] = $endUser;
-        null !== $misc && $obj['misc'] = $misc;
-        null !== $parentSupportKey && $obj['parentSupportKey'] = $parentSupportKey;
-        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
+        null !== $activationSettings && $self['activationSettings'] = $activationSettings;
+        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $endUser && $self['endUser'] = $endUser;
+        null !== $misc && $self['misc'] = $misc;
+        null !== $parentSupportKey && $self['parentSupportKey'] = $parentSupportKey;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class Filter implements BaseModel
     public function withActivationSettings(
         ActivationSettings|array $activationSettings
     ): self {
-        $obj = clone $this;
-        $obj['activationSettings'] = $activationSettings;
+        $self = clone $this;
+        $self['activationSettings'] = $activationSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class Filter implements BaseModel
     public function withCustomerGroupReference(
         string $customerGroupReference
     ): self {
-        $obj = clone $this;
-        $obj['customerGroupReference'] = $customerGroupReference;
+        $self = clone $this;
+        $self['customerGroupReference'] = $customerGroupReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class Filter implements BaseModel
      */
     public function withEndUser(EndUser|array $endUser): self
     {
-        $obj = clone $this;
-        $obj['endUser'] = $endUser;
+        $self = clone $this;
+        $self['endUser'] = $endUser;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class Filter implements BaseModel
      */
     public function withMisc(Misc|array $misc): self
     {
-        $obj = clone $this;
-        $obj['misc'] = $misc;
+        $self = clone $this;
+        $self['misc'] = $misc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +171,10 @@ final class Filter implements BaseModel
      */
     public function withParentSupportKey(string $parentSupportKey): self
     {
-        $obj = clone $this;
-        $obj['parentSupportKey'] = $parentSupportKey;
+        $self = clone $this;
+        $self['parentSupportKey'] = $parentSupportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,9 +186,9 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumbers(PhoneNumbers|array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

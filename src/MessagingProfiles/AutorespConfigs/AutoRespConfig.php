@@ -98,42 +98,42 @@ final class AutoRespConfig implements BaseModel
         \DateTimeInterface $updatedAt,
         ?string $respText = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['countryCode'] = $countryCode;
-        $obj['createdAt'] = $createdAt;
-        $obj['keywords'] = $keywords;
-        $obj['op'] = $op;
-        $obj['updatedAt'] = $updatedAt;
+        $self['id'] = $id;
+        $self['countryCode'] = $countryCode;
+        $self['createdAt'] = $createdAt;
+        $self['keywords'] = $keywords;
+        $self['op'] = $op;
+        $self['updatedAt'] = $updatedAt;
 
-        null !== $respText && $obj['respText'] = $respText;
+        null !== $respText && $self['respText'] = $respText;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class AutoRespConfig implements BaseModel
      */
     public function withKeywords(array $keywords): self
     {
-        $obj = clone $this;
-        $obj['keywords'] = $keywords;
+        $self = clone $this;
+        $self['keywords'] = $keywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,25 +152,25 @@ final class AutoRespConfig implements BaseModel
      */
     public function withOp(Op|string $op): self
     {
-        $obj = clone $this;
-        $obj['op'] = $op;
+        $self = clone $this;
+        $self['op'] = $op;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withRespText(string $respText): self
     {
-        $obj = clone $this;
-        $obj['respText'] = $respText;
+        $self = clone $this;
+        $self['respText'] = $respText;
 
-        return $obj;
+        return $self;
     }
 }

@@ -86,14 +86,14 @@ final class Azure implements BaseModel
         ?string $apiKeyRef = null,
         Language|string|null $language = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['region'] = $region;
+        $self['region'] = $region;
 
-        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
-        null !== $language && $obj['language'] = $language;
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        null !== $language && $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Azure implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Azure implements BaseModel
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,9 +127,9 @@ final class Azure implements BaseModel
      */
     public function withLanguage(Language|string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 }

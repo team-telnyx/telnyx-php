@@ -122,20 +122,20 @@ final class ActionGatherParams implements BaseModel
         ?int $timeoutMillis = null,
         ?string $validDigits = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $gatherID && $obj['gatherID'] = $gatherID;
-        null !== $initialTimeoutMillis && $obj['initialTimeoutMillis'] = $initialTimeoutMillis;
-        null !== $interDigitTimeoutMillis && $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
-        null !== $maximumDigits && $obj['maximumDigits'] = $maximumDigits;
-        null !== $minimumDigits && $obj['minimumDigits'] = $minimumDigits;
-        null !== $terminatingDigit && $obj['terminatingDigit'] = $terminatingDigit;
-        null !== $timeoutMillis && $obj['timeoutMillis'] = $timeoutMillis;
-        null !== $validDigits && $obj['validDigits'] = $validDigits;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $gatherID && $self['gatherID'] = $gatherID;
+        null !== $initialTimeoutMillis && $self['initialTimeoutMillis'] = $initialTimeoutMillis;
+        null !== $interDigitTimeoutMillis && $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        null !== $maximumDigits && $self['maximumDigits'] = $maximumDigits;
+        null !== $minimumDigits && $self['minimumDigits'] = $minimumDigits;
+        null !== $terminatingDigit && $self['terminatingDigit'] = $terminatingDigit;
+        null !== $timeoutMillis && $self['timeoutMillis'] = $timeoutMillis;
+        null !== $validDigits && $self['validDigits'] = $validDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withGatherID(string $gatherID): self
     {
-        $obj = clone $this;
-        $obj['gatherID'] = $gatherID;
+        $self = clone $this;
+        $self['gatherID'] = $gatherID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withInitialTimeoutMillis(int $initialTimeoutMillis): self
     {
-        $obj = clone $this;
-        $obj['initialTimeoutMillis'] = $initialTimeoutMillis;
+        $self = clone $this;
+        $self['initialTimeoutMillis'] = $initialTimeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class ActionGatherParams implements BaseModel
     public function withInterDigitTimeoutMillis(
         int $interDigitTimeoutMillis
     ): self {
-        $obj = clone $this;
-        $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        $self = clone $this;
+        $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withMaximumDigits(int $maximumDigits): self
     {
-        $obj = clone $this;
-        $obj['maximumDigits'] = $maximumDigits;
+        $self = clone $this;
+        $self['maximumDigits'] = $maximumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withMinimumDigits(int $minimumDigits): self
     {
-        $obj = clone $this;
-        $obj['minimumDigits'] = $minimumDigits;
+        $self = clone $this;
+        $self['minimumDigits'] = $minimumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withTerminatingDigit(string $terminatingDigit): self
     {
-        $obj = clone $this;
-        $obj['terminatingDigit'] = $terminatingDigit;
+        $self = clone $this;
+        $self['terminatingDigit'] = $terminatingDigit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class ActionGatherParams implements BaseModel
      */
     public function withTimeoutMillis(int $timeoutMillis): self
     {
-        $obj = clone $this;
-        $obj['timeoutMillis'] = $timeoutMillis;
+        $self = clone $this;
+        $self['timeoutMillis'] = $timeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,9 +243,9 @@ final class ActionGatherParams implements BaseModel
      */
     public function withValidDigits(string $validDigits): self
     {
-        $obj = clone $this;
-        $obj['validDigits'] = $validDigits;
+        $self = clone $this;
+        $self['validDigits'] = $validDigits;
 
-        return $obj;
+        return $self;
     }
 }

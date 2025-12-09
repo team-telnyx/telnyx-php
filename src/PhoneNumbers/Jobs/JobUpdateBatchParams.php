@@ -189,21 +189,21 @@ final class JobUpdateBatchParams implements BaseModel
         ?array $tags = null,
         UpdateVoiceSettings|array|null $voice = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $deletionLockEnabled && $obj['deletionLockEnabled'] = $deletionLockEnabled;
-        null !== $externalPin && $obj['externalPin'] = $externalPin;
-        null !== $hdVoiceEnabled && $obj['hdVoiceEnabled'] = $hdVoiceEnabled;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $voice && $obj['voice'] = $voice;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $deletionLockEnabled && $self['deletionLockEnabled'] = $deletionLockEnabled;
+        null !== $externalPin && $self['externalPin'] = $externalPin;
+        null !== $hdVoiceEnabled && $self['hdVoiceEnabled'] = $hdVoiceEnabled;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $voice && $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,10 +213,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +237,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj['billingGroupID'] = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +259,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +270,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +281,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withDeletionLockEnabled(bool $deletionLockEnabled): self
     {
-        $obj = clone $this;
-        $obj['deletionLockEnabled'] = $deletionLockEnabled;
+        $self = clone $this;
+        $self['deletionLockEnabled'] = $deletionLockEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withExternalPin(string $externalPin): self
     {
-        $obj = clone $this;
-        $obj['externalPin'] = $externalPin;
+        $self = clone $this;
+        $self['externalPin'] = $externalPin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -303,10 +303,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
     {
-        $obj = clone $this;
-        $obj['hdVoiceEnabled'] = $hdVoiceEnabled;
+        $self = clone $this;
+        $self['hdVoiceEnabled'] = $hdVoiceEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +316,10 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -337,9 +337,9 @@ final class JobUpdateBatchParams implements BaseModel
      */
     public function withVoice(UpdateVoiceSettings|array $voice): self
     {
-        $obj = clone $this;
-        $obj['voice'] = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 }

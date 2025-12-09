@@ -61,13 +61,13 @@ final class Inbound implements BaseModel
         ?string $sipSubdomain = null,
         SipSubdomainReceiveSettings|string|null $sipSubdomainReceiveSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
-        null !== $sipSubdomain && $obj['sipSubdomain'] = $sipSubdomain;
-        null !== $sipSubdomainReceiveSettings && $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        null !== $sipSubdomain && $self['sipSubdomain'] = $sipSubdomain;
+        null !== $sipSubdomainReceiveSettings && $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class Inbound implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj['channelLimit'] = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class Inbound implements BaseModel
      */
     public function withSipSubdomain(string $sipSubdomain): self
     {
-        $obj = clone $this;
-        $obj['sipSubdomain'] = $sipSubdomain;
+        $self = clone $this;
+        $self['sipSubdomain'] = $sipSubdomain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,9 +100,9 @@ final class Inbound implements BaseModel
     public function withSipSubdomainReceiveSettings(
         SipSubdomainReceiveSettings|string $sipSubdomainReceiveSettings
     ): self {
-        $obj = clone $this;
-        $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
+        $self = clone $this;
+        $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
-        return $obj;
+        return $self;
     }
 }

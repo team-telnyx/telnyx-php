@@ -33,18 +33,18 @@ final class AssistantSendSMSResponse implements BaseModel
      */
     public static function with(?string $conversationID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $conversationID && $obj['conversationID'] = $conversationID;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj['conversationID'] = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 }

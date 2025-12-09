@@ -106,19 +106,19 @@ final class ParticipantParticipantsResponse implements BaseModel
         Status|string|null $status = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj['accountSid'] = $accountSid;
-        null !== $callSid && $obj['callSid'] = $callSid;
-        null !== $coaching && $obj['coaching'] = $coaching;
-        null !== $coachingCallSid && $obj['coachingCallSid'] = $coachingCallSid;
-        null !== $endConferenceOnExit && $obj['endConferenceOnExit'] = $endConferenceOnExit;
-        null !== $hold && $obj['hold'] = $hold;
-        null !== $muted && $obj['muted'] = $muted;
-        null !== $status && $obj['status'] = $status;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $callSid && $self['callSid'] = $callSid;
+        null !== $coaching && $self['coaching'] = $coaching;
+        null !== $coachingCallSid && $self['coachingCallSid'] = $coachingCallSid;
+        null !== $endConferenceOnExit && $self['endConferenceOnExit'] = $endConferenceOnExit;
+        null !== $hold && $self['hold'] = $hold;
+        null !== $muted && $self['muted'] = $muted;
+        null !== $status && $self['status'] = $status;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withCallSid(string $callSid): self
     {
-        $obj = clone $this;
-        $obj['callSid'] = $callSid;
+        $self = clone $this;
+        $self['callSid'] = $callSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withCoaching(bool $coaching): self
     {
-        $obj = clone $this;
-        $obj['coaching'] = $coaching;
+        $self = clone $this;
+        $self['coaching'] = $coaching;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withCoachingCallSid(string $coachingCallSid): self
     {
-        $obj = clone $this;
-        $obj['coachingCallSid'] = $coachingCallSid;
+        $self = clone $this;
+        $self['coachingCallSid'] = $coachingCallSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
-        $obj = clone $this;
-        $obj['endConferenceOnExit'] = $endConferenceOnExit;
+        $self = clone $this;
+        $self['endConferenceOnExit'] = $endConferenceOnExit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withHold(bool $hold): self
     {
-        $obj = clone $this;
-        $obj['hold'] = $hold;
+        $self = clone $this;
+        $self['hold'] = $hold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withMuted(bool $muted): self
     {
-        $obj = clone $this;
-        $obj['muted'] = $muted;
+        $self = clone $this;
+        $self['muted'] = $muted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,9 +216,9 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

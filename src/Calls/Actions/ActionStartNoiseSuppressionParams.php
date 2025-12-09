@@ -93,15 +93,15 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
         NoiseSuppressionEngine|string|null $noiseSuppressionEngine = null,
         NoiseSuppressionEngineConfig|array|null $noiseSuppressionEngineConfig = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $noiseSuppressionEngine && $obj['noiseSuppressionEngine'] = $noiseSuppressionEngine;
-        null !== $noiseSuppressionEngineConfig && $obj['noiseSuppressionEngineConfig'] = $noiseSuppressionEngineConfig;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $noiseSuppressionEngine && $self['noiseSuppressionEngine'] = $noiseSuppressionEngine;
+        null !== $noiseSuppressionEngineConfig && $self['noiseSuppressionEngineConfig'] = $noiseSuppressionEngineConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     public function withNoiseSuppressionEngine(
         NoiseSuppressionEngine|string $noiseSuppressionEngine
     ): self {
-        $obj = clone $this;
-        $obj['noiseSuppressionEngine'] = $noiseSuppressionEngine;
+        $self = clone $this;
+        $self['noiseSuppressionEngine'] = $noiseSuppressionEngine;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,9 +166,9 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     public function withNoiseSuppressionEngineConfig(
         NoiseSuppressionEngineConfig|array $noiseSuppressionEngineConfig
     ): self {
-        $obj = clone $this;
-        $obj['noiseSuppressionEngineConfig'] = $noiseSuppressionEngineConfig;
+        $self = clone $this;
+        $self['noiseSuppressionEngineConfig'] = $noiseSuppressionEngineConfig;
 
-        return $obj;
+        return $self;
     }
 }

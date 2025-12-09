@@ -81,16 +81,16 @@ final class Filter implements BaseModel
         NotificationProfileID|array|null $notificationProfileID = null,
         Status|array|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $associatedRecordType && $obj['associatedRecordType'] = $associatedRecordType;
-        null !== $channelTypeID && $obj['channelTypeID'] = $channelTypeID;
-        null !== $notificationChannel && $obj['notificationChannel'] = $notificationChannel;
-        null !== $notificationEventConditionID && $obj['notificationEventConditionID'] = $notificationEventConditionID;
-        null !== $notificationProfileID && $obj['notificationProfileID'] = $notificationProfileID;
-        null !== $status && $obj['status'] = $status;
+        null !== $associatedRecordType && $self['associatedRecordType'] = $associatedRecordType;
+        null !== $channelTypeID && $self['channelTypeID'] = $channelTypeID;
+        null !== $notificationChannel && $self['notificationChannel'] = $notificationChannel;
+        null !== $notificationEventConditionID && $self['notificationEventConditionID'] = $notificationEventConditionID;
+        null !== $notificationProfileID && $self['notificationProfileID'] = $notificationProfileID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Filter implements BaseModel
     public function withAssociatedRecordType(
         AssociatedRecordType|array $associatedRecordType
     ): self {
-        $obj = clone $this;
-        $obj['associatedRecordType'] = $associatedRecordType;
+        $self = clone $this;
+        $self['associatedRecordType'] = $associatedRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Filter implements BaseModel
      */
     public function withChannelTypeID(ChannelTypeID|array $channelTypeID): self
     {
-        $obj = clone $this;
-        $obj['channelTypeID'] = $channelTypeID;
+        $self = clone $this;
+        $self['channelTypeID'] = $channelTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Filter implements BaseModel
     public function withNotificationChannel(
         NotificationChannel|array $notificationChannel
     ): self {
-        $obj = clone $this;
-        $obj['notificationChannel'] = $notificationChannel;
+        $self = clone $this;
+        $self['notificationChannel'] = $notificationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Filter implements BaseModel
     public function withNotificationEventConditionID(
         NotificationEventConditionID|array $notificationEventConditionID
     ): self {
-        $obj = clone $this;
-        $obj['notificationEventConditionID'] = $notificationEventConditionID;
+        $self = clone $this;
+        $self['notificationEventConditionID'] = $notificationEventConditionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Filter implements BaseModel
     public function withNotificationProfileID(
         NotificationProfileID|array $notificationProfileID
     ): self {
-        $obj = clone $this;
-        $obj['notificationProfileID'] = $notificationProfileID;
+        $self = clone $this;
+        $self['notificationProfileID'] = $notificationProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +163,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

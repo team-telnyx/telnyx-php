@@ -54,12 +54,12 @@ final class ActionsParticipantsRequest implements BaseModel
         ?array $exclude = null,
         UnionMember0|array|string|null $participants = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $exclude && $obj['exclude'] = $exclude;
-        null !== $participants && $obj['participants'] = $participants;
+        null !== $exclude && $self['exclude'] = $exclude;
+        null !== $participants && $self['participants'] = $participants;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class ActionsParticipantsRequest implements BaseModel
      */
     public function withExclude(array $exclude): self
     {
-        $obj = clone $this;
-        $obj['exclude'] = $exclude;
+        $self = clone $this;
+        $self['exclude'] = $exclude;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,9 +83,9 @@ final class ActionsParticipantsRequest implements BaseModel
     public function withParticipants(
         UnionMember0|array|string $participants
     ): self {
-        $obj = clone $this;
-        $obj['participants'] = $participants;
+        $self = clone $this;
+        $self['participants'] = $participants;
 
-        return $obj;
+        return $self;
     }
 }

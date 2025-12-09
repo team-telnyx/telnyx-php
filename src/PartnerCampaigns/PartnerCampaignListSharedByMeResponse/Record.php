@@ -86,16 +86,16 @@ final class Record implements BaseModel
         ?string $createDate = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['brandID'] = $brandID;
-        $obj['campaignID'] = $campaignID;
-        $obj['usecase'] = $usecase;
+        $self['brandID'] = $brandID;
+        $self['campaignID'] = $campaignID;
+        $self['usecase'] = $usecase;
 
-        null !== $createDate && $obj['createDate'] = $createDate;
-        null !== $status && $obj['status'] = $status;
+        null !== $createDate && $self['createDate'] = $createDate;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Record implements BaseModel
      */
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Record implements BaseModel
      */
     public function withCampaignID(string $campaignID): self
     {
-        $obj = clone $this;
-        $obj['campaignID'] = $campaignID;
+        $self = clone $this;
+        $self['campaignID'] = $campaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Record implements BaseModel
      */
     public function withUsecase(string $usecase): self
     {
-        $obj = clone $this;
-        $obj['usecase'] = $usecase;
+        $self = clone $this;
+        $self['usecase'] = $usecase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class Record implements BaseModel
      */
     public function withCreateDate(string $createDate): self
     {
-        $obj = clone $this;
-        $obj['createDate'] = $createDate;
+        $self = clone $this;
+        $self['createDate'] = $createDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,9 +147,9 @@ final class Record implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

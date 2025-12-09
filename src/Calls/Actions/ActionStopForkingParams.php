@@ -68,13 +68,13 @@ final class ActionStopForkingParams implements BaseModel
         ?string $commandID = null,
         StreamType|string|null $streamType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $streamType && $obj['streamType'] = $streamType;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $streamType && $self['streamType'] = $streamType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class ActionStopForkingParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class ActionStopForkingParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class ActionStopForkingParams implements BaseModel
      */
     public function withStreamType(StreamType|string $streamType): self
     {
-        $obj = clone $this;
-        $obj['streamType'] = $streamType;
+        $self = clone $this;
+        $self['streamType'] = $streamType;
 
-        return $obj;
+        return $self;
     }
 }

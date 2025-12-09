@@ -131,72 +131,72 @@ final class BundleLimit implements BaseModel
         ?string $rate = null,
         ?array $types = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['metric'] = $metric;
-        $obj['service'] = $service;
-        $obj['updatedAt'] = $updatedAt;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['metric'] = $metric;
+        $self['service'] = $service;
+        $self['updatedAt'] = $updatedAt;
 
-        null !== $billingService && $obj['billingService'] = $billingService;
-        null !== $country && $obj['country'] = $country;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $countryISO && $obj['countryISO'] = $countryISO;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $rate && $obj['rate'] = $rate;
-        null !== $types && $obj['types'] = $types;
+        null !== $billingService && $self['billingService'] = $billingService;
+        null !== $country && $self['country'] = $country;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $countryISO && $self['countryISO'] = $countryISO;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $rate && $self['rate'] = $rate;
+        null !== $types && $self['types'] = $types;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withMetric(string $metric): self
     {
-        $obj = clone $this;
-        $obj['metric'] = $metric;
+        $self = clone $this;
+        $self['metric'] = $metric;
 
-        return $obj;
+        return $self;
     }
 
     public function withService(string $service): self
     {
-        $obj = clone $this;
-        $obj['service'] = $service;
+        $self = clone $this;
+        $self['service'] = $service;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withBillingService(string $billingService): self
     {
-        $obj = clone $this;
-        $obj['billingService'] = $billingService;
+        $self = clone $this;
+        $self['billingService'] = $billingService;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,26 +204,26 @@ final class BundleLimit implements BaseModel
      */
     public function withCountry(string $country): self
     {
-        $obj = clone $this;
-        $obj['country'] = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(int $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryISO(string $countryISO): self
     {
-        $obj = clone $this;
-        $obj['countryISO'] = $countryISO;
+        $self = clone $this;
+        $self['countryISO'] = $countryISO;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,26 +233,26 @@ final class BundleLimit implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     public function withRate(string $rate): self
     {
-        $obj = clone $this;
-        $obj['rate'] = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,9 +260,9 @@ final class BundleLimit implements BaseModel
      */
     public function withTypes(array $types): self
     {
-        $obj = clone $this;
-        $obj['types'] = $types;
+        $self = clone $this;
+        $self['types'] = $types;
 
-        return $obj;
+        return $self;
     }
 }

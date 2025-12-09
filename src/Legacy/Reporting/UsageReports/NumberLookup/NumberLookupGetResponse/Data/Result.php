@@ -63,13 +63,13 @@ final class Result implements BaseModel
         ?string $recordType = null,
         ?string $userID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $aggregations && $obj['aggregations'] = $aggregations;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $aggregations && $self['aggregations'] = $aggregations;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class Result implements BaseModel
      */
     public function withAggregations(array $aggregations): self
     {
-        $obj = clone $this;
-        $obj['aggregations'] = $aggregations;
+        $self = clone $this;
+        $self['aggregations'] = $aggregations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Result implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class Result implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -54,11 +54,11 @@ final class OAuthIntrospectParams implements BaseModel
      */
     public static function with(string $token): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['token'] = $token;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class OAuthIntrospectParams implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj['token'] = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 }

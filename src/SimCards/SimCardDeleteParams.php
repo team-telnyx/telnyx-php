@@ -42,11 +42,11 @@ final class SimCardDeleteParams implements BaseModel
      */
     public static function with(?bool $reportLost = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reportLost && $obj['reportLost'] = $reportLost;
+        null !== $reportLost && $self['reportLost'] = $reportLost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class SimCardDeleteParams implements BaseModel
      */
     public function withReportLost(bool $reportLost): self
     {
-        $obj = clone $this;
-        $obj['reportLost'] = $reportLost;
+        $self = clone $this;
+        $self['reportLost'] = $reportLost;
 
-        return $obj;
+        return $self;
     }
 }

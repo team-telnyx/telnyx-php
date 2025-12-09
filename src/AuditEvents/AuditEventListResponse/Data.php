@@ -122,20 +122,20 @@ final class Data implements BaseModel
         ?string $resourceID = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $alternateResourceID && $obj['alternateResourceID'] = $alternateResourceID;
-        null !== $changeMadeBy && $obj['changeMadeBy'] = $changeMadeBy;
-        null !== $changeType && $obj['changeType'] = $changeType;
-        null !== $changes && $obj['changes'] = $changes;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $organizationID && $obj['organizationID'] = $organizationID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $resourceID && $obj['resourceID'] = $resourceID;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $id && $self['id'] = $id;
+        null !== $alternateResourceID && $self['alternateResourceID'] = $alternateResourceID;
+        null !== $changeMadeBy && $self['changeMadeBy'] = $changeMadeBy;
+        null !== $changeType && $self['changeType'] = $changeType;
+        null !== $changes && $self['changes'] = $changes;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $resourceID && $self['resourceID'] = $resourceID;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Data implements BaseModel
      */
     public function withAlternateResourceID(?string $alternateResourceID): self
     {
-        $obj = clone $this;
-        $obj['alternateResourceID'] = $alternateResourceID;
+        $self = clone $this;
+        $self['alternateResourceID'] = $alternateResourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class Data implements BaseModel
      */
     public function withChangeMadeBy(ChangeMadeBy|string $changeMadeBy): self
     {
-        $obj = clone $this;
-        $obj['changeMadeBy'] = $changeMadeBy;
+        $self = clone $this;
+        $self['changeMadeBy'] = $changeMadeBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class Data implements BaseModel
      */
     public function withChangeType(string $changeType): self
     {
-        $obj = clone $this;
-        $obj['changeType'] = $changeType;
+        $self = clone $this;
+        $self['changeType'] = $changeType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class Data implements BaseModel
      */
     public function withChanges(?array $changes): self
     {
-        $obj = clone $this;
-        $obj['changes'] = $changes;
+        $self = clone $this;
+        $self['changes'] = $changes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class Data implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationID'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class Data implements BaseModel
      */
     public function withResourceID(string $resourceID): self
     {
-        $obj = clone $this;
-        $obj['resourceID'] = $resourceID;
+        $self = clone $this;
+        $self['resourceID'] = $resourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,9 +250,9 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

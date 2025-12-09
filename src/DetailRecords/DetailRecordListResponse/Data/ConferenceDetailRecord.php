@@ -161,34 +161,34 @@ final class ConferenceDetailRecord implements BaseModel
         ?\DateTimeInterface $startedAt = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSec && $obj['callSec'] = $callSec;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $endedAt && $obj['endedAt'] = $endedAt;
-        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
-        null !== $isTelnyxBillable && $obj['isTelnyxBillable'] = $isTelnyxBillable;
-        null !== $name && $obj['name'] = $name;
-        null !== $participantCallSec && $obj['participantCallSec'] = $participantCallSec;
-        null !== $participantCount && $obj['participantCount'] = $participantCount;
-        null !== $region && $obj['region'] = $region;
-        null !== $startedAt && $obj['startedAt'] = $startedAt;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $id && $self['id'] = $id;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSec && $self['callSec'] = $callSec;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $endedAt && $self['endedAt'] = $endedAt;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $isTelnyxBillable && $self['isTelnyxBillable'] = $isTelnyxBillable;
+        null !== $name && $self['name'] = $name;
+        null !== $participantCallSec && $self['participantCallSec'] = $participantCallSec;
+        null !== $participantCount && $self['participantCount'] = $participantCount;
+        null !== $region && $self['region'] = $region;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withCallSec(int $callSec): self
     {
-        $obj = clone $this;
-        $obj['callSec'] = $callSec;
+        $self = clone $this;
+        $self['callSec'] = $callSec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
-        $obj = clone $this;
-        $obj['endedAt'] = $endedAt;
+        $self = clone $this;
+        $self['endedAt'] = $endedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,10 +273,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withIsTelnyxBillable(bool $isTelnyxBillable): self
     {
-        $obj = clone $this;
-        $obj['isTelnyxBillable'] = $isTelnyxBillable;
+        $self = clone $this;
+        $self['isTelnyxBillable'] = $isTelnyxBillable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +284,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +295,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withParticipantCallSec(int $participantCallSec): self
     {
-        $obj = clone $this;
-        $obj['participantCallSec'] = $participantCallSec;
+        $self = clone $this;
+        $self['participantCallSec'] = $participantCallSec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,10 +306,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withParticipantCount(int $participantCount): self
     {
-        $obj = clone $this;
-        $obj['participantCount'] = $participantCount;
+        $self = clone $this;
+        $self['participantCount'] = $participantCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -317,10 +317,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withRegion(string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -328,10 +328,10 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj['startedAt'] = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -339,9 +339,9 @@ final class ConferenceDetailRecord implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -131,22 +131,22 @@ final class Data implements BaseModel
         Region|array|null $region = null,
         ?string $regionCode = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $name && $obj['name'] = $name;
-        null !== $networkID && $obj['networkID'] = $networkID;
-        null !== $status && $obj['status'] = $status;
-        null !== $enableSipTrunking && $obj['enableSipTrunking'] = $enableSipTrunking;
-        null !== $endpoint && $obj['endpoint'] = $endpoint;
-        null !== $publicKey && $obj['publicKey'] = $publicKey;
-        null !== $region && $obj['region'] = $region;
-        null !== $regionCode && $obj['regionCode'] = $regionCode;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $name && $self['name'] = $name;
+        null !== $networkID && $self['networkID'] = $networkID;
+        null !== $status && $self['status'] = $status;
+        null !== $enableSipTrunking && $self['enableSipTrunking'] = $enableSipTrunking;
+        null !== $endpoint && $self['endpoint'] = $endpoint;
+        null !== $publicKey && $self['publicKey'] = $publicKey;
+        null !== $region && $self['region'] = $region;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class Data implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj['networkID'] = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class Data implements BaseModel
      */
     public function withStatus(InterfaceStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class Data implements BaseModel
      */
     public function withEnableSipTrunking(bool $enableSipTrunking): self
     {
-        $obj = clone $this;
-        $obj['enableSipTrunking'] = $enableSipTrunking;
+        $self = clone $this;
+        $self['enableSipTrunking'] = $enableSipTrunking;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class Data implements BaseModel
      */
     public function withEndpoint(string $endpoint): self
     {
-        $obj = clone $this;
-        $obj['endpoint'] = $endpoint;
+        $self = clone $this;
+        $self['endpoint'] = $endpoint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class Data implements BaseModel
      */
     public function withPublicKey(string $publicKey): self
     {
-        $obj = clone $this;
-        $obj['publicKey'] = $publicKey;
+        $self = clone $this;
+        $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +268,10 @@ final class Data implements BaseModel
      */
     public function withRegion(Region|array $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,9 +279,9 @@ final class Data implements BaseModel
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 }

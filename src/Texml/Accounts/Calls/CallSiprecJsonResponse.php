@@ -118,20 +118,20 @@ final class CallSiprecJsonResponse implements BaseModel
         Track|string|null $track = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj['accountSid'] = $accountSid;
-        null !== $callSid && $obj['callSid'] = $callSid;
-        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
-        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
-        null !== $errorCode && $obj['errorCode'] = $errorCode;
-        null !== $sid && $obj['sid'] = $sid;
-        null !== $startTime && $obj['startTime'] = $startTime;
-        null !== $status && $obj['status'] = $status;
-        null !== $track && $obj['track'] = $track;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $callSid && $self['callSid'] = $callSid;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $startTime && $self['startTime'] = $startTime;
+        null !== $status && $self['status'] = $status;
+        null !== $track && $self['track'] = $track;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withCallSid(string $callSid): self
     {
-        $obj = clone $this;
-        $obj['callSid'] = $callSid;
+        $self = clone $this;
+        $self['callSid'] = $callSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withDateCreated(string $dateCreated): self
     {
-        $obj = clone $this;
-        $obj['dateCreated'] = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withDateUpdated(string $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj['dateUpdated'] = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withErrorCode(string $errorCode): self
     {
-        $obj = clone $this;
-        $obj['errorCode'] = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +194,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj['sid'] = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +205,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,10 +231,10 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withTrack(Track|string $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,9 +242,9 @@ final class CallSiprecJsonResponse implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

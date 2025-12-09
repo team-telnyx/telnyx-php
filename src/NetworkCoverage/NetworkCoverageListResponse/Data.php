@@ -63,13 +63,13 @@ final class Data implements BaseModel
         Location|array|null $location = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableServices && $obj['availableServices'] = $availableServices;
-        null !== $location && $obj['location'] = $location;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $availableServices && $self['availableServices'] = $availableServices;
+        null !== $location && $self['location'] = $location;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class Data implements BaseModel
      */
     public function withAvailableServices(array $availableServices): self
     {
-        $obj = clone $this;
-        $obj['availableServices'] = $availableServices;
+        $self = clone $this;
+        $self['availableServices'] = $availableServices;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withLocation(Location|array $location): self
     {
-        $obj = clone $this;
-        $obj['location'] = $location;
+        $self = clone $this;
+        $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

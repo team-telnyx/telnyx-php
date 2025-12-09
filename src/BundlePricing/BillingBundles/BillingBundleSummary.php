@@ -123,20 +123,20 @@ final class BillingBundleSummary implements BaseModel
         ?string $slug = null,
         ?array $specs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['costCode'] = $costCode;
-        $obj['createdAt'] = $createdAt;
-        $obj['isPublic'] = $isPublic;
-        $obj['name'] = $name;
+        $self['id'] = $id;
+        $self['costCode'] = $costCode;
+        $self['createdAt'] = $createdAt;
+        $self['isPublic'] = $isPublic;
+        $self['name'] = $name;
 
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $mrcPrice && $obj['mrcPrice'] = $mrcPrice;
-        null !== $slug && $obj['slug'] = $slug;
-        null !== $specs && $obj['specs'] = $specs;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $mrcPrice && $self['mrcPrice'] = $mrcPrice;
+        null !== $slug && $self['slug'] = $slug;
+        null !== $specs && $self['specs'] = $specs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withCostCode(string $costCode): self
     {
-        $obj = clone $this;
-        $obj['costCode'] = $costCode;
+        $self = clone $this;
+        $self['costCode'] = $costCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withIsPublic(bool $isPublic): self
     {
-        $obj = clone $this;
-        $obj['isPublic'] = $isPublic;
+        $self = clone $this;
+        $self['isPublic'] = $isPublic;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withMrcPrice(float $mrcPrice): self
     {
-        $obj = clone $this;
-        $obj['mrcPrice'] = $mrcPrice;
+        $self = clone $this;
+        $self['mrcPrice'] = $mrcPrice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withSlug(string $slug): self
     {
-        $obj = clone $this;
-        $obj['slug'] = $slug;
+        $self = clone $this;
+        $self['slug'] = $slug;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,9 +232,9 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withSpecs(array $specs): self
     {
-        $obj = clone $this;
-        $obj['specs'] = $specs;
+        $self = clone $this;
+        $self['specs'] = $specs;
 
-        return $obj;
+        return $self;
     }
 }

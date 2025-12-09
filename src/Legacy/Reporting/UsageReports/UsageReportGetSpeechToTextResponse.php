@@ -31,18 +31,18 @@ final class UsageReportGetSpeechToTextResponse implements BaseModel
      */
     public static function with(mixed $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj['data'] = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     public function withData(mixed $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

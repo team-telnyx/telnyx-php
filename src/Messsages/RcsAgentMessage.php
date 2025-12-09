@@ -70,14 +70,14 @@ final class RcsAgentMessage implements BaseModel
         ?\DateTimeInterface $expireTime = null,
         ?string $ttl = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentMessage && $obj['contentMessage'] = $contentMessage;
-        null !== $event && $obj['event'] = $event;
-        null !== $expireTime && $obj['expireTime'] = $expireTime;
-        null !== $ttl && $obj['ttl'] = $ttl;
+        null !== $contentMessage && $self['contentMessage'] = $contentMessage;
+        null !== $event && $self['event'] = $event;
+        null !== $expireTime && $self['expireTime'] = $expireTime;
+        null !== $ttl && $self['ttl'] = $ttl;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class RcsAgentMessage implements BaseModel
     public function withContentMessage(
         ContentMessage|array $contentMessage
     ): self {
-        $obj = clone $this;
-        $obj['contentMessage'] = $contentMessage;
+        $self = clone $this;
+        $self['contentMessage'] = $contentMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class RcsAgentMessage implements BaseModel
      */
     public function withEvent(Event|array $event): self
     {
-        $obj = clone $this;
-        $obj['event'] = $event;
+        $self = clone $this;
+        $self['event'] = $event;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class RcsAgentMessage implements BaseModel
      */
     public function withExpireTime(\DateTimeInterface $expireTime): self
     {
-        $obj = clone $this;
-        $obj['expireTime'] = $expireTime;
+        $self = clone $this;
+        $self['expireTime'] = $expireTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,9 +126,9 @@ final class RcsAgentMessage implements BaseModel
      */
     public function withTtl(string $ttl): self
     {
-        $obj = clone $this;
-        $obj['ttl'] = $ttl;
+        $self = clone $this;
+        $self['ttl'] = $ttl;
 
-        return $obj;
+        return $self;
     }
 }

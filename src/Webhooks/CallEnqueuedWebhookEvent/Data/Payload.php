@@ -93,18 +93,18 @@ final class Payload implements BaseModel
         ?string $queue = null,
         ?int $queueAvgWaitTimeSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $currentPosition && $obj['currentPosition'] = $currentPosition;
-        null !== $queue && $obj['queue'] = $queue;
-        null !== $queueAvgWaitTimeSecs && $obj['queueAvgWaitTimeSecs'] = $queueAvgWaitTimeSecs;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $currentPosition && $self['currentPosition'] = $currentPosition;
+        null !== $queue && $self['queue'] = $queue;
+        null !== $queueAvgWaitTimeSecs && $self['queueAvgWaitTimeSecs'] = $queueAvgWaitTimeSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Payload implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class Payload implements BaseModel
      */
     public function withCurrentPosition(int $currentPosition): self
     {
-        $obj = clone $this;
-        $obj['currentPosition'] = $currentPosition;
+        $self = clone $this;
+        $self['currentPosition'] = $currentPosition;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class Payload implements BaseModel
      */
     public function withQueue(string $queue): self
     {
-        $obj = clone $this;
-        $obj['queue'] = $queue;
+        $self = clone $this;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,9 +189,9 @@ final class Payload implements BaseModel
      */
     public function withQueueAvgWaitTimeSecs(int $queueAvgWaitTimeSecs): self
     {
-        $obj = clone $this;
-        $obj['queueAvgWaitTimeSecs'] = $queueAvgWaitTimeSecs;
+        $self = clone $this;
+        $self['queueAvgWaitTimeSecs'] = $queueAvgWaitTimeSecs;
 
-        return $obj;
+        return $self;
     }
 }

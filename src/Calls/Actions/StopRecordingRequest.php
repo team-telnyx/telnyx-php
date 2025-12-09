@@ -51,13 +51,13 @@ final class StopRecordingRequest implements BaseModel
         ?string $commandID = null,
         ?string $recordingID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $recordingID && $obj['recordingID'] = $recordingID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $recordingID && $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class StopRecordingRequest implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class StopRecordingRequest implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class StopRecordingRequest implements BaseModel
      */
     public function withRecordingID(string $recordingID): self
     {
-        $obj = clone $this;
-        $obj['recordingID'] = $recordingID;
+        $self = clone $this;
+        $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 }

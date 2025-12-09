@@ -95,18 +95,18 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?string $tadig = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $mcc && $obj['mcc'] = $mcc;
-        null !== $mnc && $obj['mnc'] = $mnc;
-        null !== $name && $obj['name'] = $name;
-        null !== $networkPreferencesEnabled && $obj['networkPreferencesEnabled'] = $networkPreferencesEnabled;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $tadig && $obj['tadig'] = $tadig;
+        null !== $id && $self['id'] = $id;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $mcc && $self['mcc'] = $mcc;
+        null !== $mnc && $self['mnc'] = $mnc;
+        null !== $name && $self['name'] = $name;
+        null !== $networkPreferencesEnabled && $self['networkPreferencesEnabled'] = $networkPreferencesEnabled;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $tadig && $self['tadig'] = $tadig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Data implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Data implements BaseModel
      */
     public function withMcc(string $mcc): self
     {
-        $obj = clone $this;
-        $obj['mcc'] = $mcc;
+        $self = clone $this;
+        $self['mcc'] = $mcc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class Data implements BaseModel
      */
     public function withMnc(string $mnc): self
     {
-        $obj = clone $this;
-        $obj['mnc'] = $mnc;
+        $self = clone $this;
+        $self['mnc'] = $mnc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class Data implements BaseModel
     public function withNetworkPreferencesEnabled(
         bool $networkPreferencesEnabled
     ): self {
-        $obj = clone $this;
-        $obj['networkPreferencesEnabled'] = $networkPreferencesEnabled;
+        $self = clone $this;
+        $self['networkPreferencesEnabled'] = $networkPreferencesEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +183,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,9 +194,9 @@ final class Data implements BaseModel
      */
     public function withTadig(string $tadig): self
     {
-        $obj = clone $this;
-        $obj['tadig'] = $tadig;
+        $self = clone $this;
+        $self['tadig'] = $tadig;
 
-        return $obj;
+        return $self;
     }
 }

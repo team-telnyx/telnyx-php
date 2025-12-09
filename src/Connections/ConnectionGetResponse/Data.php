@@ -134,22 +134,22 @@ final class Data implements BaseModel
         ?string $webhookEventFailoverURL = null,
         ?string $webhookEventURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $active && $obj['active'] = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $id && $self['id'] = $id;
+        null !== $active && $self['active'] = $active;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $outboundVoiceProfileID && $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class Data implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,18 +182,18 @@ final class Data implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
     }
 
     public function withConnectionName(string $connectionName): self
     {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,10 +213,10 @@ final class Data implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +237,10 @@ final class Data implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class Data implements BaseModel
     public function withWebhookAPIVersion(
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
-        $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $self = clone $this;
+        $self['webhookAPIVersion'] = $webhookAPIVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class Data implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,9 +285,9 @@ final class Data implements BaseModel
      */
     public function withWebhookEventURL(?string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 }

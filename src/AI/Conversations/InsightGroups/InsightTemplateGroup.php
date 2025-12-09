@@ -87,49 +87,49 @@ final class InsightTemplateGroup implements BaseModel
         ?array $insights = null,
         ?string $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['name'] = $name;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['name'] = $name;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $insights && $obj['insights'] = $insights;
-        null !== $webhook && $obj['webhook'] = $webhook;
+        null !== $description && $self['description'] = $description;
+        null !== $insights && $self['insights'] = $insights;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,17 +145,17 @@ final class InsightTemplateGroup implements BaseModel
      */
     public function withInsights(array $insights): self
     {
-        $obj = clone $this;
-        $obj['insights'] = $insights;
+        $self = clone $this;
+        $self['insights'] = $insights;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhook(string $webhook): self
     {
-        $obj = clone $this;
-        $obj['webhook'] = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

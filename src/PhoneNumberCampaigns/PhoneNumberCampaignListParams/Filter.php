@@ -63,14 +63,14 @@ final class Filter implements BaseModel
         ?string $telnyxBrandID = null,
         ?string $telnyxCampaignID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
-        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
-        null !== $telnyxBrandID && $obj['telnyxBrandID'] = $telnyxBrandID;
-        null !== $telnyxCampaignID && $obj['telnyxCampaignID'] = $telnyxCampaignID;
+        null !== $tcrBrandID && $self['tcrBrandID'] = $tcrBrandID;
+        null !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
+        null !== $telnyxBrandID && $self['telnyxBrandID'] = $telnyxBrandID;
+        null !== $telnyxCampaignID && $self['telnyxCampaignID'] = $telnyxCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Filter implements BaseModel
      */
     public function withTcrBrandID(string $tcrBrandID): self
     {
-        $obj = clone $this;
-        $obj['tcrBrandID'] = $tcrBrandID;
+        $self = clone $this;
+        $self['tcrBrandID'] = $tcrBrandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Filter implements BaseModel
      */
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
-        $obj = clone $this;
-        $obj['tcrCampaignID'] = $tcrCampaignID;
+        $self = clone $this;
+        $self['tcrCampaignID'] = $tcrCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Filter implements BaseModel
      */
     public function withTelnyxBrandID(string $telnyxBrandID): self
     {
-        $obj = clone $this;
-        $obj['telnyxBrandID'] = $telnyxBrandID;
+        $self = clone $this;
+        $self['telnyxBrandID'] = $telnyxBrandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class Filter implements BaseModel
      */
     public function withTelnyxCampaignID(string $telnyxCampaignID): self
     {
-        $obj = clone $this;
-        $obj['telnyxCampaignID'] = $telnyxCampaignID;
+        $self = clone $this;
+        $self['telnyxCampaignID'] = $telnyxCampaignID;
 
-        return $obj;
+        return $self;
     }
 }

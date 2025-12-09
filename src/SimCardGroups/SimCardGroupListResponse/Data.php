@@ -124,21 +124,21 @@ final class Data implements BaseModel
         ?string $updatedAt = null,
         ?string $wirelessBlocklistID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $consumedData && $obj['consumedData'] = $consumedData;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $dataLimit && $obj['dataLimit'] = $dataLimit;
-        null !== $default && $obj['default'] = $default;
-        null !== $name && $obj['name'] = $name;
-        null !== $privateWirelessGatewayID && $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $simCardCount && $obj['simCardCount'] = $simCardCount;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $wirelessBlocklistID && $obj['wirelessBlocklistID'] = $wirelessBlocklistID;
+        null !== $id && $self['id'] = $id;
+        null !== $consumedData && $self['consumedData'] = $consumedData;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $dataLimit && $self['dataLimit'] = $dataLimit;
+        null !== $default && $self['default'] = $default;
+        null !== $name && $self['name'] = $name;
+        null !== $privateWirelessGatewayID && $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $simCardCount && $self['simCardCount'] = $simCardCount;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $wirelessBlocklistID && $self['wirelessBlocklistID'] = $wirelessBlocklistID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Data implements BaseModel
      */
     public function withConsumedData(ConsumedData|array $consumedData): self
     {
-        $obj = clone $this;
-        $obj['consumedData'] = $consumedData;
+        $self = clone $this;
+        $self['consumedData'] = $consumedData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Data implements BaseModel
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
-        $obj = clone $this;
-        $obj['dataLimit'] = $dataLimit;
+        $self = clone $this;
+        $self['dataLimit'] = $dataLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class Data implements BaseModel
      */
     public function withDefault(bool $default): self
     {
-        $obj = clone $this;
-        $obj['default'] = $default;
+        $self = clone $this;
+        $self['default'] = $default;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class Data implements BaseModel
     public function withPrivateWirelessGatewayID(
         string $privateWirelessGatewayID
     ): self {
-        $obj = clone $this;
-        $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        $self = clone $this;
+        $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,10 +241,10 @@ final class Data implements BaseModel
      */
     public function withSimCardCount(int $simCardCount): self
     {
-        $obj = clone $this;
-        $obj['simCardCount'] = $simCardCount;
+        $self = clone $this;
+        $self['simCardCount'] = $simCardCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,10 +252,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,9 +263,9 @@ final class Data implements BaseModel
      */
     public function withWirelessBlocklistID(string $wirelessBlocklistID): self
     {
-        $obj = clone $this;
-        $obj['wirelessBlocklistID'] = $wirelessBlocklistID;
+        $self = clone $this;
+        $self['wirelessBlocklistID'] = $wirelessBlocklistID;
 
-        return $obj;
+        return $self;
     }
 }

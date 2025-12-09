@@ -68,13 +68,13 @@ final class UserBundleListParams implements BaseModel
         Page|array|null $page = null,
         ?string $authorizationBearer = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj['filter'] = $filter;
-        null !== $page && $obj['page'] = $page;
-        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class UserBundleListParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class UserBundleListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class UserBundleListParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj['authorizationBearer'] = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

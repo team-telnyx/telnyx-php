@@ -48,12 +48,12 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
         ?array $authorizationServers = null,
         ?string $resource = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorizationServers && $obj['authorizationServers'] = $authorizationServers;
-        null !== $resource && $obj['resource'] = $resource;
+        null !== $authorizationServers && $self['authorizationServers'] = $authorizationServers;
+        null !== $resource && $self['resource'] = $resource;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
      */
     public function withAuthorizationServers(array $authorizationServers): self
     {
-        $obj = clone $this;
-        $obj['authorizationServers'] = $authorizationServers;
+        $self = clone $this;
+        $self['authorizationServers'] = $authorizationServers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
      */
     public function withResource(string $resource): self
     {
-        $obj = clone $this;
-        $obj['resource'] = $resource;
+        $self = clone $this;
+        $self['resource'] = $resource;
 
-        return $obj;
+        return $self;
     }
 }

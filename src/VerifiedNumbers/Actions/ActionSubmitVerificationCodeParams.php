@@ -53,18 +53,18 @@ final class ActionSubmitVerificationCodeParams implements BaseModel
      */
     public static function with(string $verificationCode): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['verificationCode'] = $verificationCode;
+        $self['verificationCode'] = $verificationCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerificationCode(string $verificationCode): self
     {
-        $obj = clone $this;
-        $obj['verificationCode'] = $verificationCode;
+        $self = clone $this;
+        $self['verificationCode'] = $verificationCode;
 
-        return $obj;
+        return $self;
     }
 }

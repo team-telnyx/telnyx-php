@@ -91,15 +91,15 @@ final class SimCardUpdateParams implements BaseModel
         SimCardStatus|array|null $status = null,
         ?array $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorizedImeis && $obj['authorizedImeis'] = $authorizedImeis;
-        null !== $dataLimit && $obj['dataLimit'] = $dataLimit;
-        null !== $simCardGroupID && $obj['simCardGroupID'] = $simCardGroupID;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj['tags'] = $tags;
+        null !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
+        null !== $dataLimit && $self['dataLimit'] = $dataLimit;
+        null !== $simCardGroupID && $self['simCardGroupID'] = $simCardGroupID;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withAuthorizedImeis(?array $authorizedImeis): self
     {
-        $obj = clone $this;
-        $obj['authorizedImeis'] = $authorizedImeis;
+        $self = clone $this;
+        $self['authorizedImeis'] = $authorizedImeis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
-        $obj = clone $this;
-        $obj['dataLimit'] = $dataLimit;
+        $self = clone $this;
+        $self['dataLimit'] = $dataLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withSimCardGroupID(string $simCardGroupID): self
     {
-        $obj = clone $this;
-        $obj['simCardGroupID'] = $simCardGroupID;
+        $self = clone $this;
+        $self['simCardGroupID'] = $simCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withStatus(SimCardStatus|array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,9 +161,9 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

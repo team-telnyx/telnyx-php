@@ -88,14 +88,14 @@ final class Comparative implements BaseModel
         string $name,
         MonthDetail|array $newThisMonth,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['alias'] = $alias;
-        $obj['existingThisMonth'] = $existingThisMonth;
-        $obj['name'] = $name;
-        $obj['newThisMonth'] = $newThisMonth;
+        $self['alias'] = $alias;
+        $self['existingThisMonth'] = $existingThisMonth;
+        $self['name'] = $name;
+        $self['newThisMonth'] = $newThisMonth;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Comparative implements BaseModel
      */
     public function withAlias(string $alias): self
     {
-        $obj = clone $this;
-        $obj['alias'] = $alias;
+        $self = clone $this;
+        $self['alias'] = $alias;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Comparative implements BaseModel
     public function withExistingThisMonth(
         MonthDetail|array $existingThisMonth
     ): self {
-        $obj = clone $this;
-        $obj['existingThisMonth'] = $existingThisMonth;
+        $self = clone $this;
+        $self['existingThisMonth'] = $existingThisMonth;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Comparative implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +141,9 @@ final class Comparative implements BaseModel
      */
     public function withNewThisMonth(MonthDetail|array $newThisMonth): self
     {
-        $obj = clone $this;
-        $obj['newThisMonth'] = $newThisMonth;
+        $self = clone $this;
+        $self['newThisMonth'] = $newThisMonth;
 
-        return $obj;
+        return $self;
     }
 }

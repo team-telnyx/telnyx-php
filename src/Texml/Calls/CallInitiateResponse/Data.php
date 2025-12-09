@@ -42,36 +42,36 @@ final class Data implements BaseModel
         ?string $status = null,
         ?string $to = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $from && $obj['from'] = $from;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj['to'] = $to;
+        null !== $from && $self['from'] = $from;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

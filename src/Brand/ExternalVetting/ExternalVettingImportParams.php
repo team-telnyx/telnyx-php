@@ -74,14 +74,14 @@ final class ExternalVettingImportParams implements BaseModel
         string $vettingID,
         ?string $vettingToken = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['evpID'] = $evpID;
-        $obj['vettingID'] = $vettingID;
+        $self['evpID'] = $evpID;
+        $self['vettingID'] = $vettingID;
 
-        null !== $vettingToken && $obj['vettingToken'] = $vettingToken;
+        null !== $vettingToken && $self['vettingToken'] = $vettingToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class ExternalVettingImportParams implements BaseModel
      */
     public function withEvpID(string $evpID): self
     {
-        $obj = clone $this;
-        $obj['evpID'] = $evpID;
+        $self = clone $this;
+        $self['evpID'] = $evpID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class ExternalVettingImportParams implements BaseModel
      */
     public function withVettingID(string $vettingID): self
     {
-        $obj = clone $this;
-        $obj['vettingID'] = $vettingID;
+        $self = clone $this;
+        $self['vettingID'] = $vettingID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class ExternalVettingImportParams implements BaseModel
      */
     public function withVettingToken(string $vettingToken): self
     {
-        $obj = clone $this;
-        $obj['vettingToken'] = $vettingToken;
+        $self = clone $this;
+        $self['vettingToken'] = $vettingToken;
 
-        return $obj;
+        return $self;
     }
 }

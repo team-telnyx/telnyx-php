@@ -97,16 +97,16 @@ final class Data implements BaseModel
         ?\DateTimeInterface $sentAt = null,
         ?array $toolCalls = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['role'] = $role;
-        $obj['text'] = $text;
+        $self['role'] = $role;
+        $self['text'] = $text;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $sentAt && $obj['sentAt'] = $sentAt;
-        null !== $toolCalls && $obj['toolCalls'] = $toolCalls;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $toolCalls && $self['toolCalls'] = $toolCalls;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Data implements BaseModel
      */
     public function withRole(Role|string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class Data implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class Data implements BaseModel
      */
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
-        $obj = clone $this;
-        $obj['sentAt'] = $sentAt;
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,9 +164,9 @@ final class Data implements BaseModel
      */
     public function withToolCalls(array $toolCalls): self
     {
-        $obj = clone $this;
-        $obj['toolCalls'] = $toolCalls;
+        $self = clone $this;
+        $self['toolCalls'] = $toolCalls;
 
-        return $obj;
+        return $self;
     }
 }

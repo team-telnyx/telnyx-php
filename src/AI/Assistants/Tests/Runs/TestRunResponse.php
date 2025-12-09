@@ -168,23 +168,23 @@ final class TestRunResponse implements BaseModel
         ?string $testSuiteRunID = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['createdAt'] = $createdAt;
-        $obj['runID'] = $runID;
-        $obj['status'] = $status;
-        $obj['testID'] = $testID;
-        $obj['triggeredBy'] = $triggeredBy;
+        $self['createdAt'] = $createdAt;
+        $self['runID'] = $runID;
+        $self['status'] = $status;
+        $self['testID'] = $testID;
+        $self['triggeredBy'] = $triggeredBy;
 
-        null !== $completedAt && $obj['completedAt'] = $completedAt;
-        null !== $conversationID && $obj['conversationID'] = $conversationID;
-        null !== $conversationInsightsID && $obj['conversationInsightsID'] = $conversationInsightsID;
-        null !== $detailStatus && $obj['detailStatus'] = $detailStatus;
-        null !== $logs && $obj['logs'] = $logs;
-        null !== $testSuiteRunID && $obj['testSuiteRunID'] = $testSuiteRunID;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $completedAt && $self['completedAt'] = $completedAt;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $conversationInsightsID && $self['conversationInsightsID'] = $conversationInsightsID;
+        null !== $detailStatus && $self['detailStatus'] = $detailStatus;
+        null !== $logs && $self['logs'] = $logs;
+        null !== $testSuiteRunID && $self['testSuiteRunID'] = $testSuiteRunID;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +203,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withRunID(string $runID): self
     {
-        $obj = clone $this;
-        $obj['runID'] = $runID;
+        $self = clone $this;
+        $self['runID'] = $runID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withStatus(TestStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withTestID(string $testID): self
     {
-        $obj = clone $this;
-        $obj['testID'] = $testID;
+        $self = clone $this;
+        $self['testID'] = $testID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withTriggeredBy(string $triggeredBy): self
     {
-        $obj = clone $this;
-        $obj['triggeredBy'] = $triggeredBy;
+        $self = clone $this;
+        $self['triggeredBy'] = $triggeredBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
-        $obj = clone $this;
-        $obj['completedAt'] = $completedAt;
+        $self = clone $this;
+        $self['completedAt'] = $completedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,10 +266,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj['conversationID'] = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +278,10 @@ final class TestRunResponse implements BaseModel
     public function withConversationInsightsID(
         string $conversationInsightsID
     ): self {
-        $obj = clone $this;
-        $obj['conversationInsightsID'] = $conversationInsightsID;
+        $self = clone $this;
+        $self['conversationInsightsID'] = $conversationInsightsID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -293,10 +293,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withDetailStatus(array $detailStatus): self
     {
-        $obj = clone $this;
-        $obj['detailStatus'] = $detailStatus;
+        $self = clone $this;
+        $self['detailStatus'] = $detailStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -304,10 +304,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withLogs(string $logs): self
     {
-        $obj = clone $this;
-        $obj['logs'] = $logs;
+        $self = clone $this;
+        $self['logs'] = $logs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -315,10 +315,10 @@ final class TestRunResponse implements BaseModel
      */
     public function withTestSuiteRunID(string $testSuiteRunID): self
     {
-        $obj = clone $this;
-        $obj['testSuiteRunID'] = $testSuiteRunID;
+        $self = clone $this;
+        $self['testSuiteRunID'] = $testSuiteRunID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -326,9 +326,9 @@ final class TestRunResponse implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

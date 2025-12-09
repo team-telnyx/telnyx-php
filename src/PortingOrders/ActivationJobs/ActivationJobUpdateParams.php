@@ -62,21 +62,21 @@ final class ActivationJobUpdateParams implements BaseModel
         string $id,
         ?\DateTimeInterface $activateAt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
+        $self['id'] = $id;
 
-        null !== $activateAt && $obj['activateAt'] = $activateAt;
+        null !== $activateAt && $self['activateAt'] = $activateAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class ActivationJobUpdateParams implements BaseModel
      */
     public function withActivateAt(\DateTimeInterface $activateAt): self
     {
-        $obj = clone $this;
-        $obj['activateAt'] = $activateAt;
+        $self = clone $this;
+        $self['activateAt'] = $activateAt;
 
-        return $obj;
+        return $self;
     }
 }

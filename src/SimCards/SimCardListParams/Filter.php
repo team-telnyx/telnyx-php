@@ -70,13 +70,13 @@ final class Filter implements BaseModel
         ?array $status = null,
         ?array $tags = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $iccid && $obj['iccid'] = $iccid;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj['tags'] = $tags;
+        null !== $iccid && $self['iccid'] = $iccid;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class Filter implements BaseModel
      */
     public function withIccid(string $iccid): self
     {
-        $obj = clone $this;
-        $obj['iccid'] = $iccid;
+        $self = clone $this;
+        $self['iccid'] = $iccid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class Filter implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

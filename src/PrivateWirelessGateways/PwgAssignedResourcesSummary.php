@@ -46,12 +46,12 @@ final class PwgAssignedResourcesSummary implements BaseModel
         ?int $count = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $count && $obj['count'] = $count;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $count && $self['count'] = $count;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class PwgAssignedResourcesSummary implements BaseModel
      */
     public function withCount(int $count): self
     {
-        $obj = clone $this;
-        $obj['count'] = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class PwgAssignedResourcesSummary implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -34,11 +34,11 @@ final class Messaging implements BaseModel
      */
     public static function with(?bool $enableMessaging = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enableMessaging && $obj['enableMessaging'] = $enableMessaging;
+        null !== $enableMessaging && $self['enableMessaging'] = $enableMessaging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Messaging implements BaseModel
      */
     public function withEnableMessaging(bool $enableMessaging): self
     {
-        $obj = clone $this;
-        $obj['enableMessaging'] = $enableMessaging;
+        $self = clone $this;
+        $self['enableMessaging'] = $enableMessaging;
 
-        return $obj;
+        return $self;
     }
 }

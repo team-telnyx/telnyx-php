@@ -34,11 +34,11 @@ final class OptionalAttributes implements BaseModel
      */
     public static function with(?string $taxExemptStatus = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $taxExemptStatus && $obj['taxExemptStatus'] = $taxExemptStatus;
+        null !== $taxExemptStatus && $self['taxExemptStatus'] = $taxExemptStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class OptionalAttributes implements BaseModel
      */
     public function withTaxExemptStatus(string $taxExemptStatus): self
     {
-        $obj = clone $this;
-        $obj['taxExemptStatus'] = $taxExemptStatus;
+        $self = clone $this;
+        $self['taxExemptStatus'] = $taxExemptStatus;
 
-        return $obj;
+        return $self;
     }
 }

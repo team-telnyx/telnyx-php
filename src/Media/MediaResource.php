@@ -69,15 +69,15 @@ final class MediaResource implements BaseModel
         ?string $mediaName = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentType && $obj['contentType'] = $contentType;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
-        null !== $mediaName && $obj['mediaName'] = $mediaName;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class MediaResource implements BaseModel
      */
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class MediaResource implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class MediaResource implements BaseModel
      */
     public function withExpiresAt(string $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class MediaResource implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj['mediaName'] = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class MediaResource implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

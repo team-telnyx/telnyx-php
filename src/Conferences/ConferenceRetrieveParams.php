@@ -47,11 +47,11 @@ final class ConferenceRetrieveParams implements BaseModel
      */
     public static function with(Region|string|null $region = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $region && $obj['region'] = $region;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,9 +61,9 @@ final class ConferenceRetrieveParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 }

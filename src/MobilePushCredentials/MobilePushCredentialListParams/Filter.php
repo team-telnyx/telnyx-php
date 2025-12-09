@@ -51,12 +51,12 @@ final class Filter implements BaseModel
         ?string $alias = null,
         Type|string|null $type = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $alias && $obj['alias'] = $alias;
-        null !== $type && $obj['type'] = $type;
+        null !== $alias && $self['alias'] = $alias;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class Filter implements BaseModel
      */
     public function withAlias(string $alias): self
     {
-        $obj = clone $this;
-        $obj['alias'] = $alias;
+        $self = clone $this;
+        $self['alias'] = $alias;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class Filter implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

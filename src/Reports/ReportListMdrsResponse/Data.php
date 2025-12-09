@@ -143,23 +143,23 @@ final class Data implements BaseModel
         ?string $recordType = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $cld && $obj['cld'] = $cld;
-        null !== $cli && $obj['cli'] = $cli;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $messageType && $obj['messageType'] = $messageType;
-        null !== $parts && $obj['parts'] = $parts;
-        null !== $profileName && $obj['profileName'] = $profileName;
-        null !== $rate && $obj['rate'] = $rate;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $cld && $self['cld'] = $cld;
+        null !== $cli && $self['cli'] = $cli;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $messageType && $self['messageType'] = $messageType;
+        null !== $parts && $self['parts'] = $parts;
+        null !== $profileName && $self['profileName'] = $profileName;
+        null !== $rate && $self['rate'] = $rate;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class Data implements BaseModel
      */
     public function withCld(string $cld): self
     {
-        $obj = clone $this;
-        $obj['cld'] = $cld;
+        $self = clone $this;
+        $self['cld'] = $cld;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class Data implements BaseModel
      */
     public function withCli(string $cli): self
     {
-        $obj = clone $this;
-        $obj['cli'] = $cli;
+        $self = clone $this;
+        $self['cli'] = $cli;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class Data implements BaseModel
      */
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class Data implements BaseModel
      */
     public function withCurrency(Currency|string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +235,10 @@ final class Data implements BaseModel
      */
     public function withDirection(string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class Data implements BaseModel
      */
     public function withMessageType(MessageType|string $messageType): self
     {
-        $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $self = clone $this;
+        $self['messageType'] = $messageType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +259,10 @@ final class Data implements BaseModel
      */
     public function withParts(float $parts): self
     {
-        $obj = clone $this;
-        $obj['parts'] = $parts;
+        $self = clone $this;
+        $self['parts'] = $parts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +270,10 @@ final class Data implements BaseModel
      */
     public function withProfileName(string $profileName): self
     {
-        $obj = clone $this;
-        $obj['profileName'] = $profileName;
+        $self = clone $this;
+        $self['profileName'] = $profileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,18 +281,18 @@ final class Data implements BaseModel
      */
     public function withRate(string $rate): self
     {
-        $obj = clone $this;
-        $obj['rate'] = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,9 +302,9 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

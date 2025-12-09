@@ -103,17 +103,17 @@ final class ActionValidateParams implements BaseModel
         ?string $extendedAddress = null,
         ?string $locality = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['countryCode'] = $countryCode;
-        $obj['postalCode'] = $postalCode;
-        $obj['streetAddress'] = $streetAddress;
+        $self['countryCode'] = $countryCode;
+        $self['postalCode'] = $postalCode;
+        $self['streetAddress'] = $streetAddress;
 
-        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
-        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
-        null !== $locality && $obj['locality'] = $locality;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        null !== $locality && $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class ActionValidateParams implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class ActionValidateParams implements BaseModel
      */
     public function withPostalCode(string $postalCode): self
     {
-        $obj = clone $this;
-        $obj['postalCode'] = $postalCode;
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class ActionValidateParams implements BaseModel
      */
     public function withStreetAddress(string $streetAddress): self
     {
-        $obj = clone $this;
-        $obj['streetAddress'] = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class ActionValidateParams implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class ActionValidateParams implements BaseModel
      */
     public function withExtendedAddress(string $extendedAddress): self
     {
-        $obj = clone $this;
-        $obj['extendedAddress'] = $extendedAddress;
+        $self = clone $this;
+        $self['extendedAddress'] = $extendedAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,9 +176,9 @@ final class ActionValidateParams implements BaseModel
      */
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj['locality'] = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 }

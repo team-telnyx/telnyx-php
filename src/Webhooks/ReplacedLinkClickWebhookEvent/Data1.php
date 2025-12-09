@@ -69,15 +69,15 @@ final class Data1 implements BaseModel
         ?string $to = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $messageID && $obj['messageID'] = $messageID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $timeClicked && $obj['timeClicked'] = $timeClicked;
-        null !== $to && $obj['to'] = $to;
-        null !== $url && $obj['url'] = $url;
+        null !== $messageID && $self['messageID'] = $messageID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $timeClicked && $self['timeClicked'] = $timeClicked;
+        null !== $to && $self['to'] = $to;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data1 implements BaseModel
      */
     public function withMessageID(string $messageID): self
     {
-        $obj = clone $this;
-        $obj['messageID'] = $messageID;
+        $self = clone $this;
+        $self['messageID'] = $messageID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data1 implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Data1 implements BaseModel
      */
     public function withTimeClicked(\DateTimeInterface $timeClicked): self
     {
-        $obj = clone $this;
-        $obj['timeClicked'] = $timeClicked;
+        $self = clone $this;
+        $self['timeClicked'] = $timeClicked;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Data1 implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Data1 implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

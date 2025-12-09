@@ -159,25 +159,25 @@ final class OutboundFqdn implements BaseModel
         ?int $timeout1xxSecs = null,
         ?int $timeout2xxSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $aniOverride && $obj['aniOverride'] = $aniOverride;
-        null !== $aniOverrideType && $obj['aniOverrideType'] = $aniOverrideType;
-        null !== $callParkingEnabled && $obj['callParkingEnabled'] = $callParkingEnabled;
-        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
-        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
-        null !== $generateRingbackTone && $obj['generateRingbackTone'] = $generateRingbackTone;
-        null !== $instantRingbackEnabled && $obj['instantRingbackEnabled'] = $instantRingbackEnabled;
-        null !== $ipAuthenticationMethod && $obj['ipAuthenticationMethod'] = $ipAuthenticationMethod;
-        null !== $ipAuthenticationToken && $obj['ipAuthenticationToken'] = $ipAuthenticationToken;
-        null !== $localization && $obj['localization'] = $localization;
-        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
-        null !== $t38ReinviteSource && $obj['t38ReinviteSource'] = $t38ReinviteSource;
-        null !== $techPrefix && $obj['techPrefix'] = $techPrefix;
-        null !== $timeout1xxSecs && $obj['timeout1xxSecs'] = $timeout1xxSecs;
-        null !== $timeout2xxSecs && $obj['timeout2xxSecs'] = $timeout2xxSecs;
+        null !== $aniOverride && $self['aniOverride'] = $aniOverride;
+        null !== $aniOverrideType && $self['aniOverrideType'] = $aniOverrideType;
+        null !== $callParkingEnabled && $self['callParkingEnabled'] = $callParkingEnabled;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
+        null !== $generateRingbackTone && $self['generateRingbackTone'] = $generateRingbackTone;
+        null !== $instantRingbackEnabled && $self['instantRingbackEnabled'] = $instantRingbackEnabled;
+        null !== $ipAuthenticationMethod && $self['ipAuthenticationMethod'] = $ipAuthenticationMethod;
+        null !== $ipAuthenticationToken && $self['ipAuthenticationToken'] = $ipAuthenticationToken;
+        null !== $localization && $self['localization'] = $localization;
+        null !== $outboundVoiceProfileID && $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        null !== $t38ReinviteSource && $self['t38ReinviteSource'] = $t38ReinviteSource;
+        null !== $techPrefix && $self['techPrefix'] = $techPrefix;
+        null !== $timeout1xxSecs && $self['timeout1xxSecs'] = $timeout1xxSecs;
+        null !== $timeout2xxSecs && $self['timeout2xxSecs'] = $timeout2xxSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class OutboundFqdn implements BaseModel
      */
     public function withAniOverride(string $aniOverride): self
     {
-        $obj = clone $this;
-        $obj['aniOverride'] = $aniOverride;
+        $self = clone $this;
+        $self['aniOverride'] = $aniOverride;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class OutboundFqdn implements BaseModel
     public function withAniOverrideType(
         AniOverrideType|string $aniOverrideType
     ): self {
-        $obj = clone $this;
-        $obj['aniOverrideType'] = $aniOverrideType;
+        $self = clone $this;
+        $self['aniOverrideType'] = $aniOverrideType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class OutboundFqdn implements BaseModel
      */
     public function withCallParkingEnabled(?bool $callParkingEnabled): self
     {
-        $obj = clone $this;
-        $obj['callParkingEnabled'] = $callParkingEnabled;
+        $self = clone $this;
+        $self['callParkingEnabled'] = $callParkingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class OutboundFqdn implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj['channelLimit'] = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +235,10 @@ final class OutboundFqdn implements BaseModel
     public function withEncryptedMedia(
         EncryptedMedia|string|null $encryptedMedia
     ): self {
-        $obj = clone $this;
-        $obj['encryptedMedia'] = $encryptedMedia;
+        $self = clone $this;
+        $self['encryptedMedia'] = $encryptedMedia;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +246,10 @@ final class OutboundFqdn implements BaseModel
      */
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
-        $obj = clone $this;
-        $obj['generateRingbackTone'] = $generateRingbackTone;
+        $self = clone $this;
+        $self['generateRingbackTone'] = $generateRingbackTone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,10 +258,10 @@ final class OutboundFqdn implements BaseModel
     public function withInstantRingbackEnabled(
         bool $instantRingbackEnabled
     ): self {
-        $obj = clone $this;
-        $obj['instantRingbackEnabled'] = $instantRingbackEnabled;
+        $self = clone $this;
+        $self['instantRingbackEnabled'] = $instantRingbackEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,19 +270,19 @@ final class OutboundFqdn implements BaseModel
     public function withIPAuthenticationMethod(
         IPAuthenticationMethod|string $ipAuthenticationMethod
     ): self {
-        $obj = clone $this;
-        $obj['ipAuthenticationMethod'] = $ipAuthenticationMethod;
+        $self = clone $this;
+        $self['ipAuthenticationMethod'] = $ipAuthenticationMethod;
 
-        return $obj;
+        return $self;
     }
 
     public function withIPAuthenticationToken(
         string $ipAuthenticationToken
     ): self {
-        $obj = clone $this;
-        $obj['ipAuthenticationToken'] = $ipAuthenticationToken;
+        $self = clone $this;
+        $self['ipAuthenticationToken'] = $ipAuthenticationToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -290,10 +290,10 @@ final class OutboundFqdn implements BaseModel
      */
     public function withLocalization(string $localization): self
     {
-        $obj = clone $this;
-        $obj['localization'] = $localization;
+        $self = clone $this;
+        $self['localization'] = $localization;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,10 +302,10 @@ final class OutboundFqdn implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +316,10 @@ final class OutboundFqdn implements BaseModel
     public function withT38ReinviteSource(
         T38ReinviteSource|string $t38ReinviteSource
     ): self {
-        $obj = clone $this;
-        $obj['t38ReinviteSource'] = $t38ReinviteSource;
+        $self = clone $this;
+        $self['t38ReinviteSource'] = $t38ReinviteSource;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +327,10 @@ final class OutboundFqdn implements BaseModel
      */
     public function withTechPrefix(string $techPrefix): self
     {
-        $obj = clone $this;
-        $obj['techPrefix'] = $techPrefix;
+        $self = clone $this;
+        $self['techPrefix'] = $techPrefix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +338,10 @@ final class OutboundFqdn implements BaseModel
      */
     public function withTimeout1xxSecs(int $timeout1xxSecs): self
     {
-        $obj = clone $this;
-        $obj['timeout1xxSecs'] = $timeout1xxSecs;
+        $self = clone $this;
+        $self['timeout1xxSecs'] = $timeout1xxSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -349,9 +349,9 @@ final class OutboundFqdn implements BaseModel
      */
     public function withTimeout2xxSecs(int $timeout2xxSecs): self
     {
-        $obj = clone $this;
-        $obj['timeout2xxSecs'] = $timeout2xxSecs;
+        $self = clone $this;
+        $self['timeout2xxSecs'] = $timeout2xxSecs;
 
-        return $obj;
+        return $self;
     }
 }

@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $phoneNumber = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

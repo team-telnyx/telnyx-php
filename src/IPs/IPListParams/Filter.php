@@ -53,13 +53,13 @@ final class Filter implements BaseModel
         ?string $ipAddress = null,
         ?int $port = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
-        null !== $port && $obj['port'] = $port;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $port && $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Filter implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Filter implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Filter implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj['port'] = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 }

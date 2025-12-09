@@ -61,14 +61,14 @@ final class Data implements BaseModel
         ?int $sizeKB = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $numObjects && $obj['numObjects'] = $numObjects;
-        null !== $size && $obj['size'] = $size;
-        null !== $sizeKB && $obj['sizeKB'] = $sizeKB;
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $numObjects && $self['numObjects'] = $numObjects;
+        null !== $size && $self['size'] = $size;
+        null !== $sizeKB && $self['sizeKB'] = $sizeKB;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Data implements BaseModel
      */
     public function withNumObjects(int $numObjects): self
     {
-        $obj = clone $this;
-        $obj['numObjects'] = $numObjects;
+        $self = clone $this;
+        $self['numObjects'] = $numObjects;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Data implements BaseModel
      */
     public function withSize(int $size): self
     {
-        $obj = clone $this;
-        $obj['size'] = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Data implements BaseModel
      */
     public function withSizeKB(int $sizeKB): self
     {
-        $obj = clone $this;
-        $obj['sizeKB'] = $sizeKB;
+        $self = clone $this;
+        $self['sizeKB'] = $sizeKB;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

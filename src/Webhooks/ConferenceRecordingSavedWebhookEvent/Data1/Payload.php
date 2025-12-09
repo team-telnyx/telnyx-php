@@ -140,22 +140,22 @@ final class Payload implements BaseModel
         ?\DateTimeInterface $recordingStartedAt = null,
         RecordingURLs|array|null $recordingURLs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $channels && $obj['channels'] = $channels;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $conferenceID && $obj['conferenceID'] = $conferenceID;
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $format && $obj['format'] = $format;
-        null !== $publicRecordingURLs && $obj['publicRecordingURLs'] = $publicRecordingURLs;
-        null !== $recordingEndedAt && $obj['recordingEndedAt'] = $recordingEndedAt;
-        null !== $recordingID && $obj['recordingID'] = $recordingID;
-        null !== $recordingStartedAt && $obj['recordingStartedAt'] = $recordingStartedAt;
-        null !== $recordingURLs && $obj['recordingURLs'] = $recordingURLs;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $channels && $self['channels'] = $channels;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $conferenceID && $self['conferenceID'] = $conferenceID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $format && $self['format'] = $format;
+        null !== $publicRecordingURLs && $self['publicRecordingURLs'] = $publicRecordingURLs;
+        null !== $recordingEndedAt && $self['recordingEndedAt'] = $recordingEndedAt;
+        null !== $recordingID && $self['recordingID'] = $recordingID;
+        null !== $recordingStartedAt && $self['recordingStartedAt'] = $recordingStartedAt;
+        null !== $recordingURLs && $self['recordingURLs'] = $recordingURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class Payload implements BaseModel
      */
     public function withChannels(Channels|string $channels): self
     {
-        $obj = clone $this;
-        $obj['channels'] = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class Payload implements BaseModel
      */
     public function withConferenceID(string $conferenceID): self
     {
-        $obj = clone $this;
-        $obj['conferenceID'] = $conferenceID;
+        $self = clone $this;
+        $self['conferenceID'] = $conferenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class Payload implements BaseModel
      */
     public function withFormat(Format|string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -249,10 +249,10 @@ final class Payload implements BaseModel
     public function withPublicRecordingURLs(
         PublicRecordingURLs|array $publicRecordingURLs
     ): self {
-        $obj = clone $this;
-        $obj['publicRecordingURLs'] = $publicRecordingURLs;
+        $self = clone $this;
+        $self['publicRecordingURLs'] = $publicRecordingURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class Payload implements BaseModel
     public function withRecordingEndedAt(
         \DateTimeInterface $recordingEndedAt
     ): self {
-        $obj = clone $this;
-        $obj['recordingEndedAt'] = $recordingEndedAt;
+        $self = clone $this;
+        $self['recordingEndedAt'] = $recordingEndedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -272,10 +272,10 @@ final class Payload implements BaseModel
      */
     public function withRecordingID(string $recordingID): self
     {
-        $obj = clone $this;
-        $obj['recordingID'] = $recordingID;
+        $self = clone $this;
+        $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +284,10 @@ final class Payload implements BaseModel
     public function withRecordingStartedAt(
         \DateTimeInterface $recordingStartedAt
     ): self {
-        $obj = clone $this;
-        $obj['recordingStartedAt'] = $recordingStartedAt;
+        $self = clone $this;
+        $self['recordingStartedAt'] = $recordingStartedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,9 +297,9 @@ final class Payload implements BaseModel
      */
     public function withRecordingURLs(RecordingURLs|array $recordingURLs): self
     {
-        $obj = clone $this;
-        $obj['recordingURLs'] = $recordingURLs;
+        $self = clone $this;
+        $self['recordingURLs'] = $recordingURLs;
 
-        return $obj;
+        return $self;
     }
 }

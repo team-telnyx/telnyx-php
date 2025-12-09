@@ -108,15 +108,15 @@ final class MobilePushCredentialCreateParams implements BaseModel
         Type|string $type,
         array $projectAccountJsonFile,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['alias'] = $alias;
-        $obj['certificate'] = $certificate;
-        $obj['privateKey'] = $privateKey;
-        $obj['type'] = $type;
-        $obj['projectAccountJsonFile'] = $projectAccountJsonFile;
+        $self['alias'] = $alias;
+        $self['certificate'] = $certificate;
+        $self['privateKey'] = $privateKey;
+        $self['type'] = $type;
+        $self['projectAccountJsonFile'] = $projectAccountJsonFile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class MobilePushCredentialCreateParams implements BaseModel
      */
     public function withAlias(string $alias): self
     {
-        $obj = clone $this;
-        $obj['alias'] = $alias;
+        $self = clone $this;
+        $self['alias'] = $alias;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class MobilePushCredentialCreateParams implements BaseModel
      */
     public function withCertificate(string $certificate): self
     {
-        $obj = clone $this;
-        $obj['certificate'] = $certificate;
+        $self = clone $this;
+        $self['certificate'] = $certificate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class MobilePushCredentialCreateParams implements BaseModel
      */
     public function withPrivateKey(string $privateKey): self
     {
-        $obj = clone $this;
-        $obj['privateKey'] = $privateKey;
+        $self = clone $this;
+        $self['privateKey'] = $privateKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class MobilePushCredentialCreateParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,9 +173,9 @@ final class MobilePushCredentialCreateParams implements BaseModel
     public function withProjectAccountJsonFile(
         array $projectAccountJsonFile
     ): self {
-        $obj = clone $this;
-        $obj['projectAccountJsonFile'] = $projectAccountJsonFile;
+        $self = clone $this;
+        $self['projectAccountJsonFile'] = $projectAccountJsonFile;
 
-        return $obj;
+        return $self;
     }
 }

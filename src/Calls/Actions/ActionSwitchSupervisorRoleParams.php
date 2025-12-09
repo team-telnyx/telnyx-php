@@ -61,11 +61,11 @@ final class ActionSwitchSupervisorRoleParams implements BaseModel
      */
     public static function with(Role|string $role): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['role'] = $role;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class ActionSwitchSupervisorRoleParams implements BaseModel
      */
     public function withRole(Role|string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 }

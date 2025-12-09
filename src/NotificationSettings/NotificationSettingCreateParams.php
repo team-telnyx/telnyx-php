@@ -70,14 +70,14 @@ final class NotificationSettingCreateParams implements BaseModel
         ?string $notificationProfileID = null,
         ?array $parameters = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $notificationChannelID && $obj['notificationChannelID'] = $notificationChannelID;
-        null !== $notificationEventConditionID && $obj['notificationEventConditionID'] = $notificationEventConditionID;
-        null !== $notificationProfileID && $obj['notificationProfileID'] = $notificationProfileID;
-        null !== $parameters && $obj['parameters'] = $parameters;
+        null !== $notificationChannelID && $self['notificationChannelID'] = $notificationChannelID;
+        null !== $notificationEventConditionID && $self['notificationEventConditionID'] = $notificationEventConditionID;
+        null !== $notificationProfileID && $self['notificationProfileID'] = $notificationProfileID;
+        null !== $parameters && $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class NotificationSettingCreateParams implements BaseModel
     public function withNotificationChannelID(
         string $notificationChannelID
     ): self {
-        $obj = clone $this;
-        $obj['notificationChannelID'] = $notificationChannelID;
+        $self = clone $this;
+        $self['notificationChannelID'] = $notificationChannelID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class NotificationSettingCreateParams implements BaseModel
     public function withNotificationEventConditionID(
         string $notificationEventConditionID
     ): self {
-        $obj = clone $this;
-        $obj['notificationEventConditionID'] = $notificationEventConditionID;
+        $self = clone $this;
+        $self['notificationEventConditionID'] = $notificationEventConditionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class NotificationSettingCreateParams implements BaseModel
     public function withNotificationProfileID(
         string $notificationProfileID
     ): self {
-        $obj = clone $this;
-        $obj['notificationProfileID'] = $notificationProfileID;
+        $self = clone $this;
+        $self['notificationProfileID'] = $notificationProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class NotificationSettingCreateParams implements BaseModel
      */
     public function withParameters(array $parameters): self
     {
-        $obj = clone $this;
-        $obj['parameters'] = $parameters;
+        $self = clone $this;
+        $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 }

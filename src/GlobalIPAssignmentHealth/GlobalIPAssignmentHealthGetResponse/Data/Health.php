@@ -40,12 +40,12 @@ final class Health implements BaseModel
      */
     public static function with(?float $fail = null, ?float $pass = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fail && $obj['fail'] = $fail;
-        null !== $pass && $obj['pass'] = $pass;
+        null !== $fail && $self['fail'] = $fail;
+        null !== $pass && $self['pass'] = $pass;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class Health implements BaseModel
      */
     public function withFail(float $fail): self
     {
-        $obj = clone $this;
-        $obj['fail'] = $fail;
+        $self = clone $this;
+        $self['fail'] = $fail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class Health implements BaseModel
      */
     public function withPass(float $pass): self
     {
-        $obj = clone $this;
-        $obj['pass'] = $pass;
+        $self = clone $this;
+        $self['pass'] = $pass;
 
-        return $obj;
+        return $self;
     }
 }

@@ -227,25 +227,25 @@ final class ActionGatherUsingAIParams implements BaseModel
         ?string $voice = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['parameters'] = $parameters;
+        $self['parameters'] = $parameters;
 
-        null !== $assistant && $obj['assistant'] = $assistant;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $greeting && $obj['greeting'] = $greeting;
-        null !== $interruptionSettings && $obj['interruptionSettings'] = $interruptionSettings;
-        null !== $language && $obj['language'] = $language;
-        null !== $messageHistory && $obj['messageHistory'] = $messageHistory;
-        null !== $sendMessageHistoryUpdates && $obj['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
-        null !== $sendPartialResults && $obj['sendPartialResults'] = $sendPartialResults;
-        null !== $transcription && $obj['transcription'] = $transcription;
-        null !== $userResponseTimeoutMs && $obj['userResponseTimeoutMs'] = $userResponseTimeoutMs;
-        null !== $voice && $obj['voice'] = $voice;
-        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
+        null !== $assistant && $self['assistant'] = $assistant;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $greeting && $self['greeting'] = $greeting;
+        null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
+        null !== $language && $self['language'] = $language;
+        null !== $messageHistory && $self['messageHistory'] = $messageHistory;
+        null !== $sendMessageHistoryUpdates && $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
+        null !== $sendPartialResults && $self['sendPartialResults'] = $sendPartialResults;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $userResponseTimeoutMs && $self['userResponseTimeoutMs'] = $userResponseTimeoutMs;
+        null !== $voice && $self['voice'] = $voice;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +253,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withParameters(mixed $parameters): self
     {
-        $obj = clone $this;
-        $obj['parameters'] = $parameters;
+        $self = clone $this;
+        $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withAssistant(Assistant|array $assistant): self
     {
-        $obj = clone $this;
-        $obj['assistant'] = $assistant;
+        $self = clone $this;
+        $self['assistant'] = $assistant;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -293,10 +293,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -304,10 +304,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withGreeting(string $greeting): self
     {
-        $obj = clone $this;
-        $obj['greeting'] = $greeting;
+        $self = clone $this;
+        $self['greeting'] = $greeting;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +318,10 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withInterruptionSettings(
         InterruptionSettings|array $interruptionSettings
     ): self {
-        $obj = clone $this;
-        $obj['interruptionSettings'] = $interruptionSettings;
+        $self = clone $this;
+        $self['interruptionSettings'] = $interruptionSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +332,10 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withLanguage(
         GoogleTranscriptionLanguage|string $language
     ): self {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -347,10 +347,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withMessageHistory(array $messageHistory): self
     {
-        $obj = clone $this;
-        $obj['messageHistory'] = $messageHistory;
+        $self = clone $this;
+        $self['messageHistory'] = $messageHistory;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -359,10 +359,10 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withSendMessageHistoryUpdates(
         bool $sendMessageHistoryUpdates
     ): self {
-        $obj = clone $this;
-        $obj['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
+        $self = clone $this;
+        $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -370,10 +370,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withSendPartialResults(bool $sendPartialResults): self
     {
-        $obj = clone $this;
-        $obj['sendPartialResults'] = $sendPartialResults;
+        $self = clone $this;
+        $self['sendPartialResults'] = $sendPartialResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -384,10 +384,10 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withTranscription(
         TranscriptionConfig|array $transcription
     ): self {
-        $obj = clone $this;
-        $obj['transcription'] = $transcription;
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -395,10 +395,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withUserResponseTimeoutMs(int $userResponseTimeoutMs): self
     {
-        $obj = clone $this;
-        $obj['userResponseTimeoutMs'] = $userResponseTimeoutMs;
+        $self = clone $this;
+        $self['userResponseTimeoutMs'] = $userResponseTimeoutMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -412,10 +412,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj['voice'] = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -433,9 +433,9 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
-        $obj = clone $this;
-        $obj['voiceSettings'] = $voiceSettings;
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

@@ -96,16 +96,16 @@ final class UpdateConference implements BaseModel
         Region|string|null $region = null,
         ?array $whisperCallControlIDs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['callControlID'] = $callControlID;
-        $obj['supervisorRole'] = $supervisorRole;
+        $self['callControlID'] = $callControlID;
+        $self['supervisorRole'] = $supervisorRole;
 
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $region && $obj['region'] = $region;
-        null !== $whisperCallControlIDs && $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $region && $self['region'] = $region;
+        null !== $whisperCallControlIDs && $self['whisperCallControlIDs'] = $whisperCallControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class UpdateConference implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class UpdateConference implements BaseModel
     public function withSupervisorRole(
         SupervisorRole|string $supervisorRole
     ): self {
-        $obj = clone $this;
-        $obj['supervisorRole'] = $supervisorRole;
+        $self = clone $this;
+        $self['supervisorRole'] = $supervisorRole;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class UpdateConference implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class UpdateConference implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,9 +165,9 @@ final class UpdateConference implements BaseModel
     public function withWhisperCallControlIDs(
         array $whisperCallControlIDs
     ): self {
-        $obj = clone $this;
-        $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
+        $self = clone $this;
+        $self['whisperCallControlIDs'] = $whisperCallControlIDs;
 
-        return $obj;
+        return $self;
     }
 }

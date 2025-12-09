@@ -36,11 +36,11 @@ final class Direction implements BaseModel
      */
     public static function with(?string $eq = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj['eq'] = $eq;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Direction implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj['eq'] = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

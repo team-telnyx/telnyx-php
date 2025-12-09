@@ -49,45 +49,45 @@ final class To implements BaseModel
         ?string $phoneNumber = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrier && $obj['carrier'] = $carrier;
-        null !== $lineType && $obj['lineType'] = $lineType;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $carrier && $self['carrier'] = $carrier;
+        null !== $lineType && $self['lineType'] = $lineType;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withCarrier(string $carrier): self
     {
-        $obj = clone $this;
-        $obj['carrier'] = $carrier;
+        $self = clone $this;
+        $self['carrier'] = $carrier;
 
-        return $obj;
+        return $self;
     }
 
     public function withLineType(string $lineType): self
     {
-        $obj = clone $this;
-        $obj['lineType'] = $lineType;
+        $self = clone $this;
+        $self['lineType'] = $lineType;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

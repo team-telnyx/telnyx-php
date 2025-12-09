@@ -51,18 +51,18 @@ final class CallRemoveParams implements BaseModel
      */
     public static function with(string $queueName): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['queueName'] = $queueName;
+        $self['queueName'] = $queueName;
 
-        return $obj;
+        return $self;
     }
 
     public function withQueueName(string $queueName): self
     {
-        $obj = clone $this;
-        $obj['queueName'] = $queueName;
+        $self = clone $this;
+        $self['queueName'] = $queueName;
 
-        return $obj;
+        return $self;
     }
 }

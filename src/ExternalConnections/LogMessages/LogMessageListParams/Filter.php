@@ -51,12 +51,12 @@ final class Filter implements BaseModel
         ?string $externalConnectionID = null,
         TelephoneNumber|array|null $telephoneNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $externalConnectionID && $obj['externalConnectionID'] = $externalConnectionID;
-        null !== $telephoneNumber && $obj['telephoneNumber'] = $telephoneNumber;
+        null !== $externalConnectionID && $self['externalConnectionID'] = $externalConnectionID;
+        null !== $telephoneNumber && $self['telephoneNumber'] = $telephoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class Filter implements BaseModel
      */
     public function withExternalConnectionID(string $externalConnectionID): self
     {
-        $obj = clone $this;
-        $obj['externalConnectionID'] = $externalConnectionID;
+        $self = clone $this;
+        $self['externalConnectionID'] = $externalConnectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Filter implements BaseModel
     public function withTelephoneNumber(
         TelephoneNumber|array $telephoneNumber
     ): self {
-        $obj = clone $this;
-        $obj['telephoneNumber'] = $telephoneNumber;
+        $self = clone $this;
+        $self['telephoneNumber'] = $telephoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

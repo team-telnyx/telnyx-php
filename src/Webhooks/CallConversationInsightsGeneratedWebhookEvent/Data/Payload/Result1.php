@@ -49,12 +49,12 @@ final class Result1 implements BaseModel
         ?string $insightID = null,
         mixed $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $insightID && $obj['insightID'] = $insightID;
-        null !== $result && $obj['result'] = $result;
+        null !== $insightID && $self['insightID'] = $insightID;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +62,10 @@ final class Result1 implements BaseModel
      */
     public function withInsightID(string $insightID): self
     {
-        $obj = clone $this;
-        $obj['insightID'] = $insightID;
+        $self = clone $this;
+        $self['insightID'] = $insightID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class Result1 implements BaseModel
      */
     public function withResult(mixed $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

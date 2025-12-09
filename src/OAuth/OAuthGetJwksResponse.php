@@ -37,11 +37,11 @@ final class OAuthGetJwksResponse implements BaseModel
      */
     public static function with(?array $keys = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $keys && $obj['keys'] = $keys;
+        null !== $keys && $self['keys'] = $keys;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -51,9 +51,9 @@ final class OAuthGetJwksResponse implements BaseModel
      */
     public function withKeys(array $keys): self
     {
-        $obj = clone $this;
-        $obj['keys'] = $keys;
+        $self = clone $this;
+        $self['keys'] = $keys;
 
-        return $obj;
+        return $self;
     }
 }

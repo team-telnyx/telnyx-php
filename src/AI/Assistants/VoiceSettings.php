@@ -92,15 +92,15 @@ final class VoiceSettings implements BaseModel
         UnionMember0|array|UnionMember1|UnionMember2|null $backgroundAudio = null,
         ?float $voiceSpeed = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['voice'] = $voice;
+        $self['voice'] = $voice;
 
-        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
-        null !== $backgroundAudio && $obj['backgroundAudio'] = $backgroundAudio;
-        null !== $voiceSpeed && $obj['voiceSpeed'] = $voiceSpeed;
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        null !== $backgroundAudio && $self['backgroundAudio'] = $backgroundAudio;
+        null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class VoiceSettings implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj['voice'] = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class VoiceSettings implements BaseModel
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj['apiKeyRef'] = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class VoiceSettings implements BaseModel
     public function withBackgroundAudio(
         UnionMember0|array|UnionMember1|UnionMember2 $backgroundAudio
     ): self {
-        $obj = clone $this;
-        $obj['backgroundAudio'] = $backgroundAudio;
+        $self = clone $this;
+        $self['backgroundAudio'] = $backgroundAudio;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,9 +153,9 @@ final class VoiceSettings implements BaseModel
      */
     public function withVoiceSpeed(float $voiceSpeed): self
     {
-        $obj = clone $this;
-        $obj['voiceSpeed'] = $voiceSpeed;
+        $self = clone $this;
+        $self['voiceSpeed'] = $voiceSpeed;
 
-        return $obj;
+        return $self;
     }
 }

@@ -71,15 +71,15 @@ final class Data implements BaseModel
         SimCardsCost|array|null $simCardsCost = null,
         TotalCost|array|null $totalCost = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $quantity && $obj['quantity'] = $quantity;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $shippingCost && $obj['shippingCost'] = $shippingCost;
-        null !== $simCardsCost && $obj['simCardsCost'] = $simCardsCost;
-        null !== $totalCost && $obj['totalCost'] = $totalCost;
+        null !== $quantity && $self['quantity'] = $quantity;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $shippingCost && $self['shippingCost'] = $shippingCost;
+        null !== $simCardsCost && $self['simCardsCost'] = $simCardsCost;
+        null !== $totalCost && $self['totalCost'] = $totalCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Data implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class Data implements BaseModel
      */
     public function withShippingCost(ShippingCost|array $shippingCost): self
     {
-        $obj = clone $this;
-        $obj['shippingCost'] = $shippingCost;
+        $self = clone $this;
+        $self['shippingCost'] = $shippingCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Data implements BaseModel
      */
     public function withSimCardsCost(SimCardsCost|array $simCardsCost): self
     {
-        $obj = clone $this;
-        $obj['simCardsCost'] = $simCardsCost;
+        $self = clone $this;
+        $self['simCardsCost'] = $simCardsCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,9 +135,9 @@ final class Data implements BaseModel
      */
     public function withTotalCost(TotalCost|array $totalCost): self
     {
-        $obj = clone $this;
-        $obj['totalCost'] = $totalCost;
+        $self = clone $this;
+        $self['totalCost'] = $totalCost;
 
-        return $obj;
+        return $self;
     }
 }

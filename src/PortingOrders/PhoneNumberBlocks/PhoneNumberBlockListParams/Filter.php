@@ -104,16 +104,16 @@ final class Filter implements BaseModel
         UnionMember0|array|string|null $status = null,
         string|array|null $supportKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $portabilityStatus && $obj['portabilityStatus'] = $portabilityStatus;
-        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
-        null !== $status && $obj['status'] = $status;
-        null !== $supportKey && $obj['supportKey'] = $supportKey;
+        null !== $activationStatus && $self['activationStatus'] = $activationStatus;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $portabilityStatus && $self['portabilityStatus'] = $portabilityStatus;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $status && $self['status'] = $status;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Filter implements BaseModel
     public function withActivationStatus(
         ActivationStatus|string $activationStatus
     ): self {
-        $obj = clone $this;
-        $obj['activationStatus'] = $activationStatus;
+        $self = clone $this;
+        $self['activationStatus'] = $activationStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class Filter implements BaseModel
     public function withPortabilityStatus(
         PortabilityStatus|string $portabilityStatus
     ): self {
-        $obj = clone $this;
-        $obj['portabilityStatus'] = $portabilityStatus;
+        $self = clone $this;
+        $self['portabilityStatus'] = $portabilityStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class Filter implements BaseModel
      */
     public function withPortingOrderID(array $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj['portingOrderID'] = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(UnionMember0|array|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,9 +190,9 @@ final class Filter implements BaseModel
      */
     public function withSupportKey(string|array $supportKey): self
     {
-        $obj = clone $this;
-        $obj['supportKey'] = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 }

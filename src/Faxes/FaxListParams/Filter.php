@@ -77,14 +77,14 @@ final class Filter implements BaseModel
         From|array|null $from = null,
         To|array|null $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $from && $obj['from'] = $from;
-        null !== $to && $obj['to'] = $to;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $from && $self['from'] = $from;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Filter implements BaseModel
      */
     public function withDirection(Direction|array $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Filter implements BaseModel
      */
     public function withFrom(From|array $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,9 +138,9 @@ final class Filter implements BaseModel
      */
     public function withTo(To|array $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

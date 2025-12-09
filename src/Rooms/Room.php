@@ -132,22 +132,22 @@ final class Room implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $activeSessionID && $obj['activeSessionID'] = $activeSessionID;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $enableRecording && $obj['enableRecording'] = $enableRecording;
-        null !== $maxParticipants && $obj['maxParticipants'] = $maxParticipants;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $sessions && $obj['sessions'] = $sessions;
-        null !== $uniqueName && $obj['uniqueName'] = $uniqueName;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        null !== $id && $self['id'] = $id;
+        null !== $activeSessionID && $self['activeSessionID'] = $activeSessionID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $enableRecording && $self['enableRecording'] = $enableRecording;
+        null !== $maxParticipants && $self['maxParticipants'] = $maxParticipants;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sessions && $self['sessions'] = $sessions;
+        null !== $uniqueName && $self['uniqueName'] = $uniqueName;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class Room implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class Room implements BaseModel
      */
     public function withActiveSessionID(string $activeSessionID): self
     {
-        $obj = clone $this;
-        $obj['activeSessionID'] = $activeSessionID;
+        $self = clone $this;
+        $self['activeSessionID'] = $activeSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class Room implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Room implements BaseModel
      */
     public function withEnableRecording(bool $enableRecording): self
     {
-        $obj = clone $this;
-        $obj['enableRecording'] = $enableRecording;
+        $self = clone $this;
+        $self['enableRecording'] = $enableRecording;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,18 +199,18 @@ final class Room implements BaseModel
      */
     public function withMaxParticipants(int $maxParticipants): self
     {
-        $obj = clone $this;
-        $obj['maxParticipants'] = $maxParticipants;
+        $self = clone $this;
+        $self['maxParticipants'] = $maxParticipants;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -227,10 +227,10 @@ final class Room implements BaseModel
      */
     public function withSessions(array $sessions): self
     {
-        $obj = clone $this;
-        $obj['sessions'] = $sessions;
+        $self = clone $this;
+        $self['sessions'] = $sessions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +238,10 @@ final class Room implements BaseModel
      */
     public function withUniqueName(string $uniqueName): self
     {
-        $obj = clone $this;
-        $obj['uniqueName'] = $uniqueName;
+        $self = clone $this;
+        $self['uniqueName'] = $uniqueName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -249,10 +249,10 @@ final class Room implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class Room implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -272,10 +272,10 @@ final class Room implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -283,9 +283,9 @@ final class Room implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

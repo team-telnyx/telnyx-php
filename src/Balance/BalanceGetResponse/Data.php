@@ -82,16 +82,16 @@ final class Data implements BaseModel
         ?string $pending = null,
         RecordType|string|null $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableCredit && $obj['availableCredit'] = $availableCredit;
-        null !== $balance && $obj['balance'] = $balance;
-        null !== $creditLimit && $obj['creditLimit'] = $creditLimit;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $pending && $obj['pending'] = $pending;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $availableCredit && $self['availableCredit'] = $availableCredit;
+        null !== $balance && $self['balance'] = $balance;
+        null !== $creditLimit && $self['creditLimit'] = $creditLimit;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $pending && $self['pending'] = $pending;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Data implements BaseModel
      */
     public function withAvailableCredit(string $availableCredit): self
     {
-        $obj = clone $this;
-        $obj['availableCredit'] = $availableCredit;
+        $self = clone $this;
+        $self['availableCredit'] = $availableCredit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class Data implements BaseModel
      */
     public function withBalance(string $balance): self
     {
-        $obj = clone $this;
-        $obj['balance'] = $balance;
+        $self = clone $this;
+        $self['balance'] = $balance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class Data implements BaseModel
      */
     public function withCreditLimit(string $creditLimit): self
     {
-        $obj = clone $this;
-        $obj['creditLimit'] = $creditLimit;
+        $self = clone $this;
+        $self['creditLimit'] = $creditLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class Data implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class Data implements BaseModel
      */
     public function withPending(string $pending): self
     {
-        $obj = clone $this;
-        $obj['pending'] = $pending;
+        $self = clone $this;
+        $self['pending'] = $pending;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +156,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

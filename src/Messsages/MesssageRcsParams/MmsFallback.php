@@ -65,14 +65,14 @@ final class MmsFallback implements BaseModel
         ?string $subject = null,
         ?string $text = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $from && $obj['from'] = $from;
-        null !== $mediaURLs && $obj['mediaURLs'] = $mediaURLs;
-        null !== $subject && $obj['subject'] = $subject;
-        null !== $text && $obj['text'] = $text;
+        null !== $from && $self['from'] = $from;
+        null !== $mediaURLs && $self['mediaURLs'] = $mediaURLs;
+        null !== $subject && $self['subject'] = $subject;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class MmsFallback implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class MmsFallback implements BaseModel
      */
     public function withMediaURLs(array $mediaURLs): self
     {
-        $obj = clone $this;
-        $obj['mediaURLs'] = $mediaURLs;
+        $self = clone $this;
+        $self['mediaURLs'] = $mediaURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class MmsFallback implements BaseModel
      */
     public function withSubject(string $subject): self
     {
-        $obj = clone $this;
-        $obj['subject'] = $subject;
+        $self = clone $this;
+        $self['subject'] = $subject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,9 +115,9 @@ final class MmsFallback implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

@@ -53,13 +53,13 @@ final class Data implements BaseModel
         ?string $product = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $blackBoxTests && $obj['blackBoxTests'] = $blackBoxTests;
-        null !== $product && $obj['product'] = $product;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $blackBoxTests && $self['blackBoxTests'] = $blackBoxTests;
+        null !== $product && $self['product'] = $product;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Data implements BaseModel
      */
     public function withBlackBoxTests(array $blackBoxTests): self
     {
-        $obj = clone $this;
-        $obj['blackBoxTests'] = $blackBoxTests;
+        $self = clone $this;
+        $self['blackBoxTests'] = $blackBoxTests;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,17 +80,17 @@ final class Data implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

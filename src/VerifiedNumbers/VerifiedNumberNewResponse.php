@@ -38,27 +38,27 @@ final class VerifiedNumberNewResponse implements BaseModel
         ?string $phoneNumber = null,
         ?string $verificationMethod = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $verificationMethod && $obj['verificationMethod'] = $verificationMethod;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $verificationMethod && $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerificationMethod(string $verificationMethod): self
     {
-        $obj = clone $this;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self = clone $this;
+        $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 }

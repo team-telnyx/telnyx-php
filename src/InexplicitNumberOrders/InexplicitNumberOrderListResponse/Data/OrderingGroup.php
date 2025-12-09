@@ -180,27 +180,27 @@ final class OrderingGroup implements BaseModel
         Strategy|string|null $strategy = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
-        null !== $countAllocated && $obj['countAllocated'] = $countAllocated;
-        null !== $countRequested && $obj['countRequested'] = $countRequested;
-        null !== $countryISO && $obj['countryISO'] = $countryISO;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $errorReason && $obj['errorReason'] = $errorReason;
-        null !== $excludeHeldNumbers && $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
-        null !== $nationalDestinationCode && $obj['nationalDestinationCode'] = $nationalDestinationCode;
-        null !== $orders && $obj['orders'] = $orders;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $phoneNumberContains && $obj['phoneNumberContains'] = $phoneNumberContains;
-        null !== $phoneNumberEndsWith && $obj['phoneNumberEndsWith'] = $phoneNumberEndsWith;
-        null !== $phoneNumberStartsWith && $obj['phoneNumberStartsWith'] = $phoneNumberStartsWith;
-        null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $status && $obj['status'] = $status;
-        null !== $strategy && $obj['strategy'] = $strategy;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $countAllocated && $self['countAllocated'] = $countAllocated;
+        null !== $countRequested && $self['countRequested'] = $countRequested;
+        null !== $countryISO && $self['countryISO'] = $countryISO;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errorReason && $self['errorReason'] = $errorReason;
+        null !== $excludeHeldNumbers && $self['excludeHeldNumbers'] = $excludeHeldNumbers;
+        null !== $nationalDestinationCode && $self['nationalDestinationCode'] = $nationalDestinationCode;
+        null !== $orders && $self['orders'] = $orders;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $phoneNumberContains && $self['phoneNumberContains'] = $phoneNumberContains;
+        null !== $phoneNumberEndsWith && $self['phoneNumberEndsWith'] = $phoneNumberEndsWith;
+        null !== $phoneNumberStartsWith && $self['phoneNumberStartsWith'] = $phoneNumberStartsWith;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $status && $self['status'] = $status;
+        null !== $strategy && $self['strategy'] = $strategy;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj['administrativeArea'] = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withCountAllocated(int $countAllocated): self
     {
-        $obj = clone $this;
-        $obj['countAllocated'] = $countAllocated;
+        $self = clone $this;
+        $self['countAllocated'] = $countAllocated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withCountRequested(int $countRequested): self
     {
-        $obj = clone $this;
-        $obj['countRequested'] = $countRequested;
+        $self = clone $this;
+        $self['countRequested'] = $countRequested;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,10 +241,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withCountryISO(string $countryISO): self
     {
-        $obj = clone $this;
-        $obj['countryISO'] = $countryISO;
+        $self = clone $this;
+        $self['countryISO'] = $countryISO;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,10 +252,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,10 +263,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withErrorReason(string $errorReason): self
     {
-        $obj = clone $this;
-        $obj['errorReason'] = $errorReason;
+        $self = clone $this;
+        $self['errorReason'] = $errorReason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
     {
-        $obj = clone $this;
-        $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
+        $self = clone $this;
+        $self['excludeHeldNumbers'] = $excludeHeldNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -286,10 +286,10 @@ final class OrderingGroup implements BaseModel
     public function withNationalDestinationCode(
         string $nationalDestinationCode
     ): self {
-        $obj = clone $this;
-        $obj['nationalDestinationCode'] = $nationalDestinationCode;
+        $self = clone $this;
+        $self['nationalDestinationCode'] = $nationalDestinationCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -301,10 +301,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withOrders(array $orders): self
     {
-        $obj = clone $this;
-        $obj['orders'] = $orders;
+        $self = clone $this;
+        $self['orders'] = $orders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -312,10 +312,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -323,10 +323,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withPhoneNumberContains(string $phoneNumberContains): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberContains'] = $phoneNumberContains;
+        $self = clone $this;
+        $self['phoneNumberContains'] = $phoneNumberContains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -334,10 +334,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withPhoneNumberEndsWith(string $phoneNumberEndsWith): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberEndsWith'] = $phoneNumberEndsWith;
+        $self = clone $this;
+        $self['phoneNumberEndsWith'] = $phoneNumberEndsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -346,10 +346,10 @@ final class OrderingGroup implements BaseModel
     public function withPhoneNumberStartsWith(
         string $phoneNumberStartsWith
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberStartsWith'] = $phoneNumberStartsWith;
+        $self = clone $this;
+        $self['phoneNumberStartsWith'] = $phoneNumberStartsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -357,10 +357,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj['quickship'] = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -370,10 +370,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -383,10 +383,10 @@ final class OrderingGroup implements BaseModel
      */
     public function withStrategy(Strategy|string $strategy): self
     {
-        $obj = clone $this;
-        $obj['strategy'] = $strategy;
+        $self = clone $this;
+        $self['strategy'] = $strategy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -394,9 +394,9 @@ final class OrderingGroup implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

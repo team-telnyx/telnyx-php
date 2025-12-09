@@ -53,13 +53,13 @@ final class Content implements BaseModel
         ?\DateTimeInterface $expiresAt = null,
         ?string $presignedURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $token && $obj['token'] = $token;
-        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
-        null !== $presignedURL && $obj['presignedURL'] = $presignedURL;
+        null !== $token && $self['token'] = $token;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $presignedURL && $self['presignedURL'] = $presignedURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Content implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj['token'] = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Content implements BaseModel
      */
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
-        $obj = clone $this;
-        $obj['expiresAt'] = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Content implements BaseModel
      */
     public function withPresignedURL(string $presignedURL): self
     {
-        $obj = clone $this;
-        $obj['presignedURL'] = $presignedURL;
+        $self = clone $this;
+        $self['presignedURL'] = $presignedURL;
 
-        return $obj;
+        return $self;
     }
 }

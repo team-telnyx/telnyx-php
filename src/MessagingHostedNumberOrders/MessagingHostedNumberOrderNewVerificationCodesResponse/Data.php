@@ -83,15 +83,15 @@ final class Data implements BaseModel
         Type|string|null $type = null,
         ?string $verificationCodeID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumber'] = $phoneNumber;
+        $self['phoneNumber'] = $phoneNumber;
 
-        null !== $error && $obj['error'] = $error;
-        null !== $type && $obj['type'] = $type;
-        null !== $verificationCodeID && $obj['verificationCodeID'] = $verificationCodeID;
+        null !== $error && $self['error'] = $error;
+        null !== $type && $self['type'] = $type;
+        null !== $verificationCodeID && $self['verificationCodeID'] = $verificationCodeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class Data implements BaseModel
      */
     public function withError(string $error): self
     {
-        $obj = clone $this;
-        $obj['error'] = $error;
+        $self = clone $this;
+        $self['error'] = $error;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Data implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,9 +134,9 @@ final class Data implements BaseModel
      */
     public function withVerificationCodeID(string $verificationCodeID): self
     {
-        $obj = clone $this;
-        $obj['verificationCodeID'] = $verificationCodeID;
+        $self = clone $this;
+        $self['verificationCodeID'] = $verificationCodeID;
 
-        return $obj;
+        return $self;
     }
 }

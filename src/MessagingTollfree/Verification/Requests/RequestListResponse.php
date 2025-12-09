@@ -102,12 +102,12 @@ final class RequestListResponse implements BaseModel
         array $records = [],
         int $totalRecords = 0
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['records'] = $records;
-        $obj['totalRecords'] = $totalRecords;
+        $self['records'] = $records;
+        $self['totalRecords'] = $totalRecords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class RequestListResponse implements BaseModel
      */
     public function withRecords(array $records): self
     {
-        $obj = clone $this;
-        $obj['records'] = $records;
+        $self = clone $this;
+        $self['records'] = $records;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,9 +166,9 @@ final class RequestListResponse implements BaseModel
      */
     public function withTotalRecords(int $totalRecords): self
     {
-        $obj = clone $this;
-        $obj['totalRecords'] = $totalRecords;
+        $self = clone $this;
+        $self['totalRecords'] = $totalRecords;
 
-        return $obj;
+        return $self;
     }
 }

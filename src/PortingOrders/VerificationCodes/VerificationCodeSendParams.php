@@ -51,12 +51,12 @@ final class VerificationCodeSendParams implements BaseModel
         ?array $phoneNumbers = null,
         VerificationMethod|string|null $verificationMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
-        null !== $verificationMethod && $obj['verificationMethod'] = $verificationMethod;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
+        null !== $verificationMethod && $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class VerificationCodeSendParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,9 +76,9 @@ final class VerificationCodeSendParams implements BaseModel
     public function withVerificationMethod(
         VerificationMethod|string $verificationMethod
     ): self {
-        $obj = clone $this;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self = clone $this;
+        $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 }

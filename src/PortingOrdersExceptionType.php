@@ -49,12 +49,12 @@ final class PortingOrdersExceptionType implements BaseModel
         Code|string|null $code = null,
         ?string $description = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $description && $obj['description'] = $description;
+        null !== $code && $self['code'] = $code;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class PortingOrdersExceptionType implements BaseModel
      */
     public function withCode(Code|string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class PortingOrdersExceptionType implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

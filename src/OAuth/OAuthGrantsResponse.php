@@ -48,11 +48,11 @@ final class OAuthGrantsResponse implements BaseModel
      */
     public static function with(string $redirectUri): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['redirectUri'] = $redirectUri;
+        $self['redirectUri'] = $redirectUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class OAuthGrantsResponse implements BaseModel
      */
     public function withRedirectUri(string $redirectUri): self
     {
-        $obj = clone $this;
-        $obj['redirectUri'] = $redirectUri;
+        $self = clone $this;
+        $self['redirectUri'] = $redirectUri;
 
-        return $obj;
+        return $self;
     }
 }

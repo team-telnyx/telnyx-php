@@ -49,45 +49,45 @@ final class RegulatoryRequirement implements BaseModel
         ?string $requirementID = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
-        null !== $requirementID && $obj['requirementID'] = $requirementID;
-        null !== $status && $obj['status'] = $status;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $requirementID && $self['requirementID'] = $requirementID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldType(string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj['fieldValue'] = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementID(string $requirementID): self
     {
-        $obj = clone $this;
-        $obj['requirementID'] = $requirementID;
+        $self = clone $this;
+        $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

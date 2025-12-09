@@ -74,14 +74,14 @@ final class RcsCardContent implements BaseModel
         ?array $suggestions = null,
         ?string $title = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $media && $obj['media'] = $media;
-        null !== $suggestions && $obj['suggestions'] = $suggestions;
-        null !== $title && $obj['title'] = $title;
+        null !== $description && $self['description'] = $description;
+        null !== $media && $self['media'] = $media;
+        null !== $suggestions && $self['suggestions'] = $suggestions;
+        null !== $title && $self['title'] = $title;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class RcsCardContent implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class RcsCardContent implements BaseModel
      */
     public function withMedia(Media|array $media): self
     {
-        $obj = clone $this;
-        $obj['media'] = $media;
+        $self = clone $this;
+        $self['media'] = $media;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class RcsCardContent implements BaseModel
      */
     public function withSuggestions(array $suggestions): self
     {
-        $obj = clone $this;
-        $obj['suggestions'] = $suggestions;
+        $self = clone $this;
+        $self['suggestions'] = $suggestions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,9 +130,9 @@ final class RcsCardContent implements BaseModel
      */
     public function withTitle(string $title): self
     {
-        $obj = clone $this;
-        $obj['title'] = $title;
+        $self = clone $this;
+        $self['title'] = $title;
 
-        return $obj;
+        return $self;
     }
 }

@@ -31,18 +31,18 @@ final class Data implements BaseModel
      */
     public static function with(?string $result = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $result && $obj['result'] = $result;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

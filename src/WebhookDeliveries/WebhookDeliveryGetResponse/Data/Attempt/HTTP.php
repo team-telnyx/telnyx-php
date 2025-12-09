@@ -55,12 +55,12 @@ final class HTTP implements BaseModel
         Request|array|null $request = null,
         Response|array|null $response = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $request && $obj['request'] = $request;
-        null !== $response && $obj['response'] = $response;
+        null !== $request && $self['request'] = $request;
+        null !== $response && $self['response'] = $response;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +72,10 @@ final class HTTP implements BaseModel
      */
     public function withRequest(Request|array $request): self
     {
-        $obj = clone $this;
-        $obj['request'] = $request;
+        $self = clone $this;
+        $self['request'] = $request;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class HTTP implements BaseModel
      */
     public function withResponse(Response|array|null $response): self
     {
-        $obj = clone $this;
-        $obj['response'] = $response;
+        $self = clone $this;
+        $self['response'] = $response;
 
-        return $obj;
+        return $self;
     }
 }

@@ -119,19 +119,19 @@ final class OAuthTokenParams implements BaseModel
         ?string $refreshToken = null,
         ?string $scope = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['grantType'] = $grantType;
+        $self['grantType'] = $grantType;
 
-        null !== $clientID && $obj['clientID'] = $clientID;
-        null !== $clientSecret && $obj['clientSecret'] = $clientSecret;
-        null !== $code && $obj['code'] = $code;
-        null !== $codeVerifier && $obj['codeVerifier'] = $codeVerifier;
-        null !== $redirectUri && $obj['redirectUri'] = $redirectUri;
-        null !== $refreshToken && $obj['refreshToken'] = $refreshToken;
-        null !== $scope && $obj['scope'] = $scope;
+        null !== $clientID && $self['clientID'] = $clientID;
+        null !== $clientSecret && $self['clientSecret'] = $clientSecret;
+        null !== $code && $self['code'] = $code;
+        null !== $codeVerifier && $self['codeVerifier'] = $codeVerifier;
+        null !== $redirectUri && $self['redirectUri'] = $redirectUri;
+        null !== $refreshToken && $self['refreshToken'] = $refreshToken;
+        null !== $scope && $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withGrantType(GrantType|string $grantType): self
     {
-        $obj = clone $this;
-        $obj['grantType'] = $grantType;
+        $self = clone $this;
+        $self['grantType'] = $grantType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj['clientID'] = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withClientSecret(string $clientSecret): self
     {
-        $obj = clone $this;
-        $obj['clientSecret'] = $clientSecret;
+        $self = clone $this;
+        $self['clientSecret'] = $clientSecret;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withCodeVerifier(string $codeVerifier): self
     {
-        $obj = clone $this;
-        $obj['codeVerifier'] = $codeVerifier;
+        $self = clone $this;
+        $self['codeVerifier'] = $codeVerifier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withRedirectUri(string $redirectUri): self
     {
-        $obj = clone $this;
-        $obj['redirectUri'] = $redirectUri;
+        $self = clone $this;
+        $self['redirectUri'] = $redirectUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withRefreshToken(string $refreshToken): self
     {
-        $obj = clone $this;
-        $obj['refreshToken'] = $refreshToken;
+        $self = clone $this;
+        $self['refreshToken'] = $refreshToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,9 +218,9 @@ final class OAuthTokenParams implements BaseModel
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj['scope'] = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 }

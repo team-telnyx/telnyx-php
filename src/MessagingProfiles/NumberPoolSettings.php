@@ -108,16 +108,16 @@ final class NumberPoolSettings implements BaseModel
         ?bool $geomatch = null,
         ?bool $stickySender = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['longCodeWeight'] = $longCodeWeight;
-        $obj['skipUnhealthy'] = $skipUnhealthy;
-        $obj['tollFreeWeight'] = $tollFreeWeight;
+        $self['longCodeWeight'] = $longCodeWeight;
+        $self['skipUnhealthy'] = $skipUnhealthy;
+        $self['tollFreeWeight'] = $tollFreeWeight;
 
-        null !== $geomatch && $obj['geomatch'] = $geomatch;
-        null !== $stickySender && $obj['stickySender'] = $stickySender;
+        null !== $geomatch && $self['geomatch'] = $geomatch;
+        null !== $stickySender && $self['stickySender'] = $stickySender;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withLongCodeWeight(float $longCodeWeight): self
     {
-        $obj = clone $this;
-        $obj['longCodeWeight'] = $longCodeWeight;
+        $self = clone $this;
+        $self['longCodeWeight'] = $longCodeWeight;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withSkipUnhealthy(bool $skipUnhealthy): self
     {
-        $obj = clone $this;
-        $obj['skipUnhealthy'] = $skipUnhealthy;
+        $self = clone $this;
+        $self['skipUnhealthy'] = $skipUnhealthy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withTollFreeWeight(float $tollFreeWeight): self
     {
-        $obj = clone $this;
-        $obj['tollFreeWeight'] = $tollFreeWeight;
+        $self = clone $this;
+        $self['tollFreeWeight'] = $tollFreeWeight;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withGeomatch(bool $geomatch): self
     {
-        $obj = clone $this;
-        $obj['geomatch'] = $geomatch;
+        $self = clone $this;
+        $self['geomatch'] = $geomatch;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,9 +182,9 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withStickySender(bool $stickySender): self
     {
-        $obj = clone $this;
-        $obj['stickySender'] = $stickySender;
+        $self = clone $this;
+        $self['stickySender'] = $stickySender;
 
-        return $obj;
+        return $self;
     }
 }

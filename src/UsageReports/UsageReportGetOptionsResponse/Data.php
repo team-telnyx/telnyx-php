@@ -78,14 +78,14 @@ final class Data implements BaseModel
         ?array $productMetrics = null,
         ?array $recordTypes = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $product && $obj['product'] = $product;
-        null !== $productDimensions && $obj['productDimensions'] = $productDimensions;
-        null !== $productMetrics && $obj['productMetrics'] = $productMetrics;
-        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
+        null !== $product && $self['product'] = $product;
+        null !== $productDimensions && $self['productDimensions'] = $productDimensions;
+        null !== $productMetrics && $self['productMetrics'] = $productMetrics;
+        null !== $recordTypes && $self['recordTypes'] = $recordTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class Data implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class Data implements BaseModel
      */
     public function withProductDimensions(array $productDimensions): self
     {
-        $obj = clone $this;
-        $obj['productDimensions'] = $productDimensions;
+        $self = clone $this;
+        $self['productDimensions'] = $productDimensions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class Data implements BaseModel
      */
     public function withProductMetrics(array $productMetrics): self
     {
-        $obj = clone $this;
-        $obj['productMetrics'] = $productMetrics;
+        $self = clone $this;
+        $self['productMetrics'] = $productMetrics;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,9 +136,9 @@ final class Data implements BaseModel
      */
     public function withRecordTypes(array $recordTypes): self
     {
-        $obj = clone $this;
-        $obj['recordTypes'] = $recordTypes;
+        $self = clone $this;
+        $self['recordTypes'] = $recordTypes;
 
-        return $obj;
+        return $self;
     }
 }

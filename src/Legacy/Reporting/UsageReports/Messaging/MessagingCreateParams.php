@@ -96,17 +96,17 @@ final class MessagingCreateParams implements BaseModel
         ?bool $selectAllManagedAccounts = null,
         ?\DateTimeInterface $startTime = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['aggregationType'] = $aggregationType;
+        $self['aggregationType'] = $aggregationType;
 
-        null !== $endTime && $obj['endTime'] = $endTime;
-        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
-        null !== $profiles && $obj['profiles'] = $profiles;
-        null !== $selectAllManagedAccounts && $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
-        null !== $startTime && $obj['startTime'] = $startTime;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $profiles && $self['profiles'] = $profiles;
+        null !== $selectAllManagedAccounts && $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        null !== $startTime && $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,18 +114,18 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withAggregationType(int $aggregationType): self
     {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     public function withEndTime(\DateTimeInterface $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withManagedAccounts(array $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj['managedAccounts'] = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,26 +148,26 @@ final class MessagingCreateParams implements BaseModel
      */
     public function withProfiles(array $profiles): self
     {
-        $obj = clone $this;
-        $obj['profiles'] = $profiles;
+        $self = clone $this;
+        $self['profiles'] = $profiles;
 
-        return $obj;
+        return $self;
     }
 
     public function withSelectAllManagedAccounts(
         bool $selectAllManagedAccounts
     ): self {
-        $obj = clone $this;
-        $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        $self = clone $this;
+        $self['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 }

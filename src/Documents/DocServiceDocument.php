@@ -128,21 +128,21 @@ final class DocServiceDocument implements BaseModel
         Status|string|null $status = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $avScanStatus && $obj['avScanStatus'] = $avScanStatus;
-        null !== $contentType && $obj['contentType'] = $contentType;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $filename && $obj['filename'] = $filename;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $sha256 && $obj['sha256'] = $sha256;
-        null !== $size && $obj['size'] = $size;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $avScanStatus && $self['avScanStatus'] = $avScanStatus;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $filename && $self['filename'] = $filename;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sha256 && $self['sha256'] = $sha256;
+        null !== $size && $self['size'] = $size;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withAvScanStatus(AvScanStatus|string $avScanStatus): self
     {
-        $obj = clone $this;
-        $obj['avScanStatus'] = $avScanStatus;
+        $self = clone $this;
+        $self['avScanStatus'] = $avScanStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj['contentType'] = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj['filename'] = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withSha256(string $sha256): self
     {
-        $obj = clone $this;
-        $obj['sha256'] = $sha256;
+        $self = clone $this;
+        $self['sha256'] = $sha256;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,10 +242,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withSize(Size|array $size): self
     {
-        $obj = clone $this;
-        $obj['size'] = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,9 +266,9 @@ final class DocServiceDocument implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

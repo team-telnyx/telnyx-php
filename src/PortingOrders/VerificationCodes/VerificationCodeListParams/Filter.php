@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?bool $verified = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $verified && $obj['verified'] = $verified;
+        null !== $verified && $self['verified'] = $verified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withVerified(bool $verified): self
     {
-        $obj = clone $this;
-        $obj['verified'] = $verified;
+        $self = clone $this;
+        $self['verified'] = $verified;
 
-        return $obj;
+        return $self;
     }
 }

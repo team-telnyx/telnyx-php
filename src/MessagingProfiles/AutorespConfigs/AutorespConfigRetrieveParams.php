@@ -51,18 +51,18 @@ final class AutorespConfigRetrieveParams implements BaseModel
      */
     public static function with(string $profileID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['profileID'] = $profileID;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withProfileID(string $profileID): self
     {
-        $obj = clone $this;
-        $obj['profileID'] = $profileID;
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 }

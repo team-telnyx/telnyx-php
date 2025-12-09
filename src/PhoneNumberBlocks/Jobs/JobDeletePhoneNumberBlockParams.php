@@ -53,18 +53,18 @@ final class JobDeletePhoneNumberBlockParams implements BaseModel
      */
     public static function with(string $phoneNumberBlockID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumberBlockID'] = $phoneNumberBlockID;
+        $self['phoneNumberBlockID'] = $phoneNumberBlockID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberBlockID(string $phoneNumberBlockID): self
     {
-        $obj = clone $this;
-        $obj['phoneNumberBlockID'] = $phoneNumberBlockID;
+        $self = clone $this;
+        $self['phoneNumberBlockID'] = $phoneNumberBlockID;
 
-        return $obj;
+        return $self;
     }
 }

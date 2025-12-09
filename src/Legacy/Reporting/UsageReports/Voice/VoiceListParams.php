@@ -46,12 +46,12 @@ final class VoiceListParams implements BaseModel
      */
     public static function with(?int $page = null, ?int $perPage = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj['page'] = $page;
-        null !== $perPage && $obj['perPage'] = $perPage;
+        null !== $page && $self['page'] = $page;
+        null !== $perPage && $self['perPage'] = $perPage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class VoiceListParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class VoiceListParams implements BaseModel
      */
     public function withPerPage(int $perPage): self
     {
-        $obj = clone $this;
-        $obj['perPage'] = $perPage;
+        $self = clone $this;
+        $self['perPage'] = $perPage;
 
-        return $obj;
+        return $self;
     }
 }

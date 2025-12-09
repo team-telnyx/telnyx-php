@@ -79,13 +79,13 @@ final class CustomStorageCredentialNewResponse implements BaseModel
         CustomStorageConfiguration|array $data,
         RecordType|string $recordType,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['connectionID'] = $connectionID;
-        $obj['data'] = $data;
-        $obj['recordType'] = $recordType;
+        $self['connectionID'] = $connectionID;
+        $self['data'] = $data;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class CustomStorageCredentialNewResponse implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class CustomStorageCredentialNewResponse implements BaseModel
      */
     public function withData(CustomStorageConfiguration|array $data): self
     {
-        $obj = clone $this;
-        $obj['data'] = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,9 +120,9 @@ final class CustomStorageCredentialNewResponse implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

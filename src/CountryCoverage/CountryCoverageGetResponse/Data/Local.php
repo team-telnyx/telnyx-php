@@ -62,16 +62,16 @@ final class Local implements BaseModel
         ?bool $quickship = null,
         ?bool $reservable = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $features && $obj['features'] = $features;
-        null !== $fullPstnReplacement && $obj['fullPstnReplacement'] = $fullPstnReplacement;
-        null !== $internationalSMS && $obj['internationalSMS'] = $internationalSMS;
-        null !== $p2p && $obj['p2p'] = $p2p;
-        null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $reservable && $obj['reservable'] = $reservable;
+        null !== $features && $self['features'] = $features;
+        null !== $fullPstnReplacement && $self['fullPstnReplacement'] = $fullPstnReplacement;
+        null !== $internationalSMS && $self['internationalSMS'] = $internationalSMS;
+        null !== $p2p && $self['p2p'] = $p2p;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $reservable && $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,49 +79,49 @@ final class Local implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withFullPstnReplacement(bool $fullPstnReplacement): self
     {
-        $obj = clone $this;
-        $obj['fullPstnReplacement'] = $fullPstnReplacement;
+        $self = clone $this;
+        $self['fullPstnReplacement'] = $fullPstnReplacement;
 
-        return $obj;
+        return $self;
     }
 
     public function withInternationalSMS(bool $internationalSMS): self
     {
-        $obj = clone $this;
-        $obj['internationalSMS'] = $internationalSMS;
+        $self = clone $this;
+        $self['internationalSMS'] = $internationalSMS;
 
-        return $obj;
+        return $self;
     }
 
     public function withP2p(bool $p2p): self
     {
-        $obj = clone $this;
-        $obj['p2p'] = $p2p;
+        $self = clone $this;
+        $self['p2p'] = $p2p;
 
-        return $obj;
+        return $self;
     }
 
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj['quickship'] = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     public function withReservable(bool $reservable): self
     {
-        $obj = clone $this;
-        $obj['reservable'] = $reservable;
+        $self = clone $this;
+        $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 }

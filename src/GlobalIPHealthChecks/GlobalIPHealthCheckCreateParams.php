@@ -63,13 +63,13 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
         ?array $healthCheckParams = null,
         ?string $healthCheckType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
-        null !== $healthCheckParams && $obj['healthCheckParams'] = $healthCheckParams;
-        null !== $healthCheckType && $obj['healthCheckType'] = $healthCheckType;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
+        null !== $healthCheckParams && $self['healthCheckParams'] = $healthCheckParams;
+        null !== $healthCheckType && $self['healthCheckType'] = $healthCheckType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
      */
     public function withGlobalIpid(string $globalIPID): self
     {
-        $obj = clone $this;
-        $obj['globalIPID'] = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
      */
     public function withHealthCheckParams(array $healthCheckParams): self
     {
-        $obj = clone $this;
-        $obj['healthCheckParams'] = $healthCheckParams;
+        $self = clone $this;
+        $self['healthCheckParams'] = $healthCheckParams;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
      */
     public function withHealthCheckType(string $healthCheckType): self
     {
-        $obj = clone $this;
-        $obj['healthCheckType'] = $healthCheckType;
+        $self = clone $this;
+        $self['healthCheckType'] = $healthCheckType;
 
-        return $obj;
+        return $self;
     }
 }

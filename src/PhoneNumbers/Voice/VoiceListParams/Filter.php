@@ -74,14 +74,14 @@ final class Filter implements BaseModel
         ?string $phoneNumber = null,
         VoiceUsagePaymentMethod|string|null $voiceUsagePaymentMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionName && $obj['connectionName'] = $connectionName;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $voiceUsagePaymentMethod && $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Filter implements BaseModel
     public function withConnectionName(
         ConnectionName|array $connectionName
     ): self {
-        $obj = clone $this;
-        $obj['connectionName'] = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Filter implements BaseModel
     public function withVoiceUsagePaymentMethod(
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        $self = clone $this;
+        $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 }

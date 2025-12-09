@@ -45,13 +45,13 @@ final class CostInformation implements BaseModel
         ?string $monthlyCost = null,
         ?string $upfrontCost = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $monthlyCost && $obj['monthlyCost'] = $monthlyCost;
-        null !== $upfrontCost && $obj['upfrontCost'] = $upfrontCost;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $monthlyCost && $self['monthlyCost'] = $monthlyCost;
+        null !== $upfrontCost && $self['upfrontCost'] = $upfrontCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,25 +59,25 @@ final class CostInformation implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     public function withMonthlyCost(string $monthlyCost): self
     {
-        $obj = clone $this;
-        $obj['monthlyCost'] = $monthlyCost;
+        $self = clone $this;
+        $self['monthlyCost'] = $monthlyCost;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpfrontCost(string $upfrontCost): self
     {
-        $obj = clone $this;
-        $obj['upfrontCost'] = $upfrontCost;
+        $self = clone $this;
+        $self['upfrontCost'] = $upfrontCost;
 
-        return $obj;
+        return $self;
     }
 }

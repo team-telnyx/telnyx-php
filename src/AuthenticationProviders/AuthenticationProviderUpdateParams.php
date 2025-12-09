@@ -88,15 +88,15 @@ final class AuthenticationProviderUpdateParams implements BaseModel
         ?string $settingsURL = null,
         ?string $shortName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $active && $obj['active'] = $active;
-        null !== $name && $obj['name'] = $name;
-        null !== $settings && $obj['settings'] = $settings;
-        null !== $settingsURL && $obj['settingsURL'] = $settingsURL;
-        null !== $shortName && $obj['shortName'] = $shortName;
+        null !== $active && $self['active'] = $active;
+        null !== $name && $self['name'] = $name;
+        null !== $settings && $self['settings'] = $settings;
+        null !== $settingsURL && $self['settingsURL'] = $settingsURL;
+        null !== $shortName && $self['shortName'] = $shortName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      */
     public function withSettings(Settings|array $settings): self
     {
-        $obj = clone $this;
-        $obj['settings'] = $settings;
+        $self = clone $this;
+        $self['settings'] = $settings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      */
     public function withSettingsURL(string $settingsURL): self
     {
-        $obj = clone $this;
-        $obj['settingsURL'] = $settingsURL;
+        $self = clone $this;
+        $self['settingsURL'] = $settingsURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      */
     public function withShortName(string $shortName): self
     {
-        $obj = clone $this;
-        $obj['shortName'] = $shortName;
+        $self = clone $this;
+        $self['shortName'] = $shortName;
 
-        return $obj;
+        return $self;
     }
 }

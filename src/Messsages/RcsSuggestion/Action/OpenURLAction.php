@@ -83,15 +83,15 @@ final class OpenURLAction implements BaseModel
         WebviewViewMode|string $webviewViewMode,
         ?string $description = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['application'] = $application;
-        $obj['url'] = $url;
-        $obj['webviewViewMode'] = $webviewViewMode;
+        $self['application'] = $application;
+        $self['url'] = $url;
+        $self['webviewViewMode'] = $webviewViewMode;
 
-        null !== $description && $obj['description'] = $description;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,18 +101,18 @@ final class OpenURLAction implements BaseModel
      */
     public function withApplication(Application|string $application): self
     {
-        $obj = clone $this;
-        $obj['application'] = $application;
+        $self = clone $this;
+        $self['application'] = $application;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class OpenURLAction implements BaseModel
     public function withWebviewViewMode(
         WebviewViewMode|string $webviewViewMode
     ): self {
-        $obj = clone $this;
-        $obj['webviewViewMode'] = $webviewViewMode;
+        $self = clone $this;
+        $self['webviewViewMode'] = $webviewViewMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +132,9 @@ final class OpenURLAction implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

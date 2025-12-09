@@ -46,12 +46,12 @@ final class Filter implements BaseModel
         ?string $linkedRecordType = null,
         ?string $linkedResourceID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $linkedRecordType && $obj['linkedRecordType'] = $linkedRecordType;
-        null !== $linkedResourceID && $obj['linkedResourceID'] = $linkedResourceID;
+        null !== $linkedRecordType && $self['linkedRecordType'] = $linkedRecordType;
+        null !== $linkedResourceID && $self['linkedResourceID'] = $linkedResourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class Filter implements BaseModel
      */
     public function withLinkedRecordType(string $linkedRecordType): self
     {
-        $obj = clone $this;
-        $obj['linkedRecordType'] = $linkedRecordType;
+        $self = clone $this;
+        $self['linkedRecordType'] = $linkedRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class Filter implements BaseModel
      */
     public function withLinkedResourceID(string $linkedResourceID): self
     {
-        $obj = clone $this;
-        $obj['linkedResourceID'] = $linkedResourceID;
+        $self = clone $this;
+        $self['linkedResourceID'] = $linkedResourceID;
 
-        return $obj;
+        return $self;
     }
 }

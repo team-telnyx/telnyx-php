@@ -52,21 +52,21 @@ final class VerifiedNumber implements BaseModel
         RecordType|string|null $recordType = null,
         ?string $verifiedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $verifiedAt && $obj['verifiedAt'] = $verifiedAt;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,17 +76,17 @@ final class VerifiedNumber implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerifiedAt(string $verifiedAt): self
     {
-        $obj = clone $this;
-        $obj['verifiedAt'] = $verifiedAt;
+        $self = clone $this;
+        $self['verifiedAt'] = $verifiedAt;
 
-        return $obj;
+        return $self;
     }
 }

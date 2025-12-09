@@ -44,12 +44,12 @@ final class ActionRefreshResponse implements BaseModel
         ?string $message = null,
         ?bool $success = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $message && $obj['message'] = $message;
-        null !== $success && $obj['success'] = $success;
+        null !== $message && $self['message'] = $message;
+        null !== $success && $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class ActionRefreshResponse implements BaseModel
      */
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj['message'] = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class ActionRefreshResponse implements BaseModel
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

@@ -34,11 +34,11 @@ final class WireguardPeerPatch implements BaseModel
      */
     public static function with(?string $publicKey = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $publicKey && $obj['publicKey'] = $publicKey;
+        null !== $publicKey && $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class WireguardPeerPatch implements BaseModel
      */
     public function withPublicKey(string $publicKey): self
     {
-        $obj = clone $this;
-        $obj['publicKey'] = $publicKey;
+        $self = clone $this;
+        $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 }

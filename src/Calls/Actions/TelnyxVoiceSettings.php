@@ -64,13 +64,13 @@ final class TelnyxVoiceSettings implements BaseModel
         Type|string $type,
         ?float $voiceSpeed = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
+        $self['type'] = $type;
 
-        null !== $voiceSpeed && $obj['voiceSpeed'] = $voiceSpeed;
+        null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class TelnyxVoiceSettings implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +91,9 @@ final class TelnyxVoiceSettings implements BaseModel
      */
     public function withVoiceSpeed(float $voiceSpeed): self
     {
-        $obj = clone $this;
-        $obj['voiceSpeed'] = $voiceSpeed;
+        $self = clone $this;
+        $self['voiceSpeed'] = $voiceSpeed;
 
-        return $obj;
+        return $self;
     }
 }

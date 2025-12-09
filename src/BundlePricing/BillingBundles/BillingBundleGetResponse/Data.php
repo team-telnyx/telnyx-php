@@ -139,19 +139,19 @@ final class Data implements BaseModel
         string $name,
         ?string $slug = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['active'] = $active;
-        $obj['bundleLimits'] = $bundleLimits;
-        $obj['costCode'] = $costCode;
-        $obj['createdAt'] = $createdAt;
-        $obj['isPublic'] = $isPublic;
-        $obj['name'] = $name;
+        $self['id'] = $id;
+        $self['active'] = $active;
+        $self['bundleLimits'] = $bundleLimits;
+        $self['costCode'] = $costCode;
+        $self['createdAt'] = $createdAt;
+        $self['isPublic'] = $isPublic;
+        $self['name'] = $name;
 
-        null !== $slug && $obj['slug'] = $slug;
+        null !== $slug && $self['slug'] = $slug;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Data implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class Data implements BaseModel
      */
     public function withBundleLimits(array $bundleLimits): self
     {
-        $obj = clone $this;
-        $obj['bundleLimits'] = $bundleLimits;
+        $self = clone $this;
+        $self['bundleLimits'] = $bundleLimits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class Data implements BaseModel
      */
     public function withCostCode(string $costCode): self
     {
-        $obj = clone $this;
-        $obj['costCode'] = $costCode;
+        $self = clone $this;
+        $self['costCode'] = $costCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class Data implements BaseModel
      */
     public function withIsPublic(bool $isPublic): self
     {
-        $obj = clone $this;
-        $obj['isPublic'] = $isPublic;
+        $self = clone $this;
+        $self['isPublic'] = $isPublic;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,9 +250,9 @@ final class Data implements BaseModel
      */
     public function withSlug(string $slug): self
     {
-        $obj = clone $this;
-        $obj['slug'] = $slug;
+        $self = clone $this;
+        $self['slug'] = $slug;
 
-        return $obj;
+        return $self;
     }
 }

@@ -395,50 +395,50 @@ final class BrandGetResponse implements BaseModel
         ?string $website = null,
         ?float $assignedCampaignsCount = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['brandRelationship'] = $brandRelationship;
-        $obj['country'] = $country;
-        $obj['displayName'] = $displayName;
-        $obj['email'] = $email;
-        $obj['entityType'] = $entityType;
-        $obj['vertical'] = $vertical;
+        $self['brandRelationship'] = $brandRelationship;
+        $self['country'] = $country;
+        $self['displayName'] = $displayName;
+        $self['email'] = $email;
+        $self['entityType'] = $entityType;
+        $self['vertical'] = $vertical;
 
-        null !== $altBusinessID && $obj['altBusinessID'] = $altBusinessID;
-        null !== $altBusinessIDType && $obj['altBusinessIDType'] = $altBusinessIDType;
-        null !== $brandID && $obj['brandID'] = $brandID;
-        null !== $businessContactEmail && $obj['businessContactEmail'] = $businessContactEmail;
-        null !== $city && $obj['city'] = $city;
-        null !== $companyName && $obj['companyName'] = $companyName;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $cspID && $obj['cspID'] = $cspID;
-        null !== $ein && $obj['ein'] = $ein;
-        null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
-        null !== $firstName && $obj['firstName'] = $firstName;
-        null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
-        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
-        null !== $isReseller && $obj['isReseller'] = $isReseller;
-        null !== $lastName && $obj['lastName'] = $lastName;
-        null !== $mobilePhone && $obj['mobilePhone'] = $mobilePhone;
-        null !== $mock && $obj['mock'] = $mock;
-        null !== $optionalAttributes && $obj['optionalAttributes'] = $optionalAttributes;
-        null !== $phone && $obj['phone'] = $phone;
-        null !== $postalCode && $obj['postalCode'] = $postalCode;
-        null !== $referenceID && $obj['referenceID'] = $referenceID;
-        null !== $state && $obj['state'] = $state;
-        null !== $status && $obj['status'] = $status;
-        null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
-        null !== $stockSymbol && $obj['stockSymbol'] = $stockSymbol;
-        null !== $street && $obj['street'] = $street;
-        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
-        null !== $universalEin && $obj['universalEin'] = $universalEin;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
-        null !== $website && $obj['website'] = $website;
-        null !== $assignedCampaignsCount && $obj['assignedCampaignsCount'] = $assignedCampaignsCount;
+        null !== $altBusinessID && $self['altBusinessID'] = $altBusinessID;
+        null !== $altBusinessIDType && $self['altBusinessIDType'] = $altBusinessIDType;
+        null !== $brandID && $self['brandID'] = $brandID;
+        null !== $businessContactEmail && $self['businessContactEmail'] = $businessContactEmail;
+        null !== $city && $self['city'] = $city;
+        null !== $companyName && $self['companyName'] = $companyName;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $cspID && $self['cspID'] = $cspID;
+        null !== $ein && $self['ein'] = $ein;
+        null !== $failureReasons && $self['failureReasons'] = $failureReasons;
+        null !== $firstName && $self['firstName'] = $firstName;
+        null !== $identityStatus && $self['identityStatus'] = $identityStatus;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $isReseller && $self['isReseller'] = $isReseller;
+        null !== $lastName && $self['lastName'] = $lastName;
+        null !== $mobilePhone && $self['mobilePhone'] = $mobilePhone;
+        null !== $mock && $self['mock'] = $mock;
+        null !== $optionalAttributes && $self['optionalAttributes'] = $optionalAttributes;
+        null !== $phone && $self['phone'] = $phone;
+        null !== $postalCode && $self['postalCode'] = $postalCode;
+        null !== $referenceID && $self['referenceID'] = $referenceID;
+        null !== $state && $self['state'] = $state;
+        null !== $status && $self['status'] = $status;
+        null !== $stockExchange && $self['stockExchange'] = $stockExchange;
+        null !== $stockSymbol && $self['stockSymbol'] = $stockSymbol;
+        null !== $street && $self['street'] = $street;
+        null !== $tcrBrandID && $self['tcrBrandID'] = $tcrBrandID;
+        null !== $universalEin && $self['universalEin'] = $universalEin;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $website && $self['website'] = $website;
+        null !== $assignedCampaignsCount && $self['assignedCampaignsCount'] = $assignedCampaignsCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -449,10 +449,10 @@ final class BrandGetResponse implements BaseModel
     public function withBrandRelationship(
         BrandRelationship|string $brandRelationship
     ): self {
-        $obj = clone $this;
-        $obj['brandRelationship'] = $brandRelationship;
+        $self = clone $this;
+        $self['brandRelationship'] = $brandRelationship;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -460,10 +460,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withCountry(string $country): self
     {
-        $obj = clone $this;
-        $obj['country'] = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -471,10 +471,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withDisplayName(string $displayName): self
     {
-        $obj = clone $this;
-        $obj['displayName'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -482,10 +482,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -495,10 +495,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withEntityType(EntityType|string $entityType): self
     {
-        $obj = clone $this;
-        $obj['entityType'] = $entityType;
+        $self = clone $this;
+        $self['entityType'] = $entityType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -506,10 +506,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withVertical(string $vertical): self
     {
-        $obj = clone $this;
-        $obj['vertical'] = $vertical;
+        $self = clone $this;
+        $self['vertical'] = $vertical;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -517,10 +517,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withAltBusinessID(string $altBusinessID): self
     {
-        $obj = clone $this;
-        $obj['altBusinessID'] = $altBusinessID;
+        $self = clone $this;
+        $self['altBusinessID'] = $altBusinessID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -531,10 +531,10 @@ final class BrandGetResponse implements BaseModel
     public function withAltBusinessIDType(
         AltBusinessIDType|string $altBusinessIDType
     ): self {
-        $obj = clone $this;
-        $obj['altBusinessIDType'] = $altBusinessIDType;
+        $self = clone $this;
+        $self['altBusinessIDType'] = $altBusinessIDType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -542,10 +542,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withBrandID(string $brandID): self
     {
-        $obj = clone $this;
-        $obj['brandID'] = $brandID;
+        $self = clone $this;
+        $self['brandID'] = $brandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -555,10 +555,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withBusinessContactEmail(string $businessContactEmail): self
     {
-        $obj = clone $this;
-        $obj['businessContactEmail'] = $businessContactEmail;
+        $self = clone $this;
+        $self['businessContactEmail'] = $businessContactEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -566,10 +566,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withCity(string $city): self
     {
-        $obj = clone $this;
-        $obj['city'] = $city;
+        $self = clone $this;
+        $self['city'] = $city;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -577,10 +577,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withCompanyName(string $companyName): self
     {
-        $obj = clone $this;
-        $obj['companyName'] = $companyName;
+        $self = clone $this;
+        $self['companyName'] = $companyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -588,10 +588,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -599,10 +599,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withCspID(string $cspID): self
     {
-        $obj = clone $this;
-        $obj['cspID'] = $cspID;
+        $self = clone $this;
+        $self['cspID'] = $cspID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -610,10 +610,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withEin(string $ein): self
     {
-        $obj = clone $this;
-        $obj['ein'] = $ein;
+        $self = clone $this;
+        $self['ein'] = $ein;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -621,10 +621,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withFailureReasons(string $failureReasons): self
     {
-        $obj = clone $this;
-        $obj['failureReasons'] = $failureReasons;
+        $self = clone $this;
+        $self['failureReasons'] = $failureReasons;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -632,10 +632,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj['firstName'] = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -646,10 +646,10 @@ final class BrandGetResponse implements BaseModel
     public function withIdentityStatus(
         BrandIdentityStatus|string $identityStatus
     ): self {
-        $obj = clone $this;
-        $obj['identityStatus'] = $identityStatus;
+        $self = clone $this;
+        $self['identityStatus'] = $identityStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -657,10 +657,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -668,10 +668,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withIsReseller(bool $isReseller): self
     {
-        $obj = clone $this;
-        $obj['isReseller'] = $isReseller;
+        $self = clone $this;
+        $self['isReseller'] = $isReseller;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -679,10 +679,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj['lastName'] = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -690,10 +690,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withMobilePhone(string $mobilePhone): self
     {
-        $obj = clone $this;
-        $obj['mobilePhone'] = $mobilePhone;
+        $self = clone $this;
+        $self['mobilePhone'] = $mobilePhone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -701,10 +701,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withMock(bool $mock): self
     {
-        $obj = clone $this;
-        $obj['mock'] = $mock;
+        $self = clone $this;
+        $self['mock'] = $mock;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -715,10 +715,10 @@ final class BrandGetResponse implements BaseModel
     public function withOptionalAttributes(
         OptionalAttributes|array $optionalAttributes
     ): self {
-        $obj = clone $this;
-        $obj['optionalAttributes'] = $optionalAttributes;
+        $self = clone $this;
+        $self['optionalAttributes'] = $optionalAttributes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -726,10 +726,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withPhone(string $phone): self
     {
-        $obj = clone $this;
-        $obj['phone'] = $phone;
+        $self = clone $this;
+        $self['phone'] = $phone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -737,10 +737,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withPostalCode(string $postalCode): self
     {
-        $obj = clone $this;
-        $obj['postalCode'] = $postalCode;
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -748,10 +748,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withReferenceID(string $referenceID): self
     {
-        $obj = clone $this;
-        $obj['referenceID'] = $referenceID;
+        $self = clone $this;
+        $self['referenceID'] = $referenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -759,10 +759,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj['state'] = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -772,10 +772,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -785,10 +785,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withStockExchange(StockExchange|string $stockExchange): self
     {
-        $obj = clone $this;
-        $obj['stockExchange'] = $stockExchange;
+        $self = clone $this;
+        $self['stockExchange'] = $stockExchange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -796,10 +796,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withStockSymbol(string $stockSymbol): self
     {
-        $obj = clone $this;
-        $obj['stockSymbol'] = $stockSymbol;
+        $self = clone $this;
+        $self['stockSymbol'] = $stockSymbol;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -807,10 +807,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withStreet(string $street): self
     {
-        $obj = clone $this;
-        $obj['street'] = $street;
+        $self = clone $this;
+        $self['street'] = $street;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -818,10 +818,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withTcrBrandID(string $tcrBrandID): self
     {
-        $obj = clone $this;
-        $obj['tcrBrandID'] = $tcrBrandID;
+        $self = clone $this;
+        $self['tcrBrandID'] = $tcrBrandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -829,10 +829,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withUniversalEin(string $universalEin): self
     {
-        $obj = clone $this;
-        $obj['universalEin'] = $universalEin;
+        $self = clone $this;
+        $self['universalEin'] = $universalEin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -840,10 +840,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -851,10 +851,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -862,10 +862,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj['webhookURL'] = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -873,10 +873,10 @@ final class BrandGetResponse implements BaseModel
      */
     public function withWebsite(string $website): self
     {
-        $obj = clone $this;
-        $obj['website'] = $website;
+        $self = clone $this;
+        $self['website'] = $website;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -885,9 +885,9 @@ final class BrandGetResponse implements BaseModel
     public function withAssignedCampaignsCount(
         float $assignedCampaignsCount
     ): self {
-        $obj = clone $this;
-        $obj['assignedCampaignsCount'] = $assignedCampaignsCount;
+        $self = clone $this;
+        $self['assignedCampaignsCount'] = $assignedCampaignsCount;
 
-        return $obj;
+        return $self;
     }
 }

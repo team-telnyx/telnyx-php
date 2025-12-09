@@ -73,15 +73,15 @@ final class Call implements BaseModel
         ?string $messagingTemplateID = null,
         ?array $whitelistedDestinations = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $appName && $obj['appName'] = $appName;
-        null !== $codeLength && $obj['codeLength'] = $codeLength;
-        null !== $defaultVerificationTimeoutSecs && $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
-        null !== $messagingTemplateID && $obj['messagingTemplateID'] = $messagingTemplateID;
-        null !== $whitelistedDestinations && $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        null !== $appName && $self['appName'] = $appName;
+        null !== $codeLength && $self['codeLength'] = $codeLength;
+        null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        null !== $messagingTemplateID && $self['messagingTemplateID'] = $messagingTemplateID;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Call implements BaseModel
      */
     public function withAppName(string $appName): self
     {
-        $obj = clone $this;
-        $obj['appName'] = $appName;
+        $self = clone $this;
+        $self['appName'] = $appName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Call implements BaseModel
      */
     public function withCodeLength(int $codeLength): self
     {
-        $obj = clone $this;
-        $obj['codeLength'] = $codeLength;
+        $self = clone $this;
+        $self['codeLength'] = $codeLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Call implements BaseModel
     public function withDefaultVerificationTimeoutSecs(
         int $defaultVerificationTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        $self = clone $this;
+        $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Call implements BaseModel
      */
     public function withMessagingTemplateID(string $messagingTemplateID): self
     {
-        $obj = clone $this;
-        $obj['messagingTemplateID'] = $messagingTemplateID;
+        $self = clone $this;
+        $self['messagingTemplateID'] = $messagingTemplateID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class Call implements BaseModel
     public function withWhitelistedDestinations(
         array $whitelistedDestinations
     ): self {
-        $obj = clone $this;
-        $obj['whitelistedDestinations'] = $whitelistedDestinations;
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 }

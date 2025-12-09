@@ -84,16 +84,16 @@ final class SslCertificate implements BaseModel
         ?\DateTimeInterface $validFrom = null,
         ?\DateTimeInterface $validTo = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $issuedBy && $obj['issuedBy'] = $issuedBy;
-        null !== $issuedTo && $obj['issuedTo'] = $issuedTo;
-        null !== $validFrom && $obj['validFrom'] = $validFrom;
-        null !== $validTo && $obj['validTo'] = $validTo;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $issuedBy && $self['issuedBy'] = $issuedBy;
+        null !== $issuedTo && $self['issuedTo'] = $issuedTo;
+        null !== $validFrom && $self['validFrom'] = $validFrom;
+        null !== $validTo && $self['validTo'] = $validTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class SslCertificate implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class SslCertificate implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class SslCertificate implements BaseModel
      */
     public function withIssuedBy(IssuedBy|array $issuedBy): self
     {
-        $obj = clone $this;
-        $obj['issuedBy'] = $issuedBy;
+        $self = clone $this;
+        $self['issuedBy'] = $issuedBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class SslCertificate implements BaseModel
      */
     public function withIssuedTo(IssuedTo|array $issuedTo): self
     {
-        $obj = clone $this;
-        $obj['issuedTo'] = $issuedTo;
+        $self = clone $this;
+        $self['issuedTo'] = $issuedTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class SslCertificate implements BaseModel
      */
     public function withValidFrom(\DateTimeInterface $validFrom): self
     {
-        $obj = clone $this;
-        $obj['validFrom'] = $validFrom;
+        $self = clone $this;
+        $self['validFrom'] = $validFrom;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,9 +164,9 @@ final class SslCertificate implements BaseModel
      */
     public function withValidTo(\DateTimeInterface $validTo): self
     {
-        $obj = clone $this;
-        $obj['validTo'] = $validTo;
+        $self = clone $this;
+        $self['validTo'] = $validTo;
 
-        return $obj;
+        return $self;
     }
 }

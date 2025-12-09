@@ -34,11 +34,11 @@ final class InsightSettings implements BaseModel
      */
     public static function with(?string $insightGroupID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $insightGroupID && $obj['insightGroupID'] = $insightGroupID;
+        null !== $insightGroupID && $self['insightGroupID'] = $insightGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class InsightSettings implements BaseModel
      */
     public function withInsightGroupID(string $insightGroupID): self
     {
-        $obj = clone $this;
-        $obj['insightGroupID'] = $insightGroupID;
+        $self = clone $this;
+        $self['insightGroupID'] = $insightGroupID;
 
-        return $obj;
+        return $self;
     }
 }

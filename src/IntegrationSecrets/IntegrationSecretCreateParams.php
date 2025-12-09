@@ -95,16 +95,16 @@ final class IntegrationSecretCreateParams implements BaseModel
         ?string $password = null,
         ?string $username = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['identifier'] = $identifier;
-        $obj['type'] = $type;
+        $self['identifier'] = $identifier;
+        $self['type'] = $type;
 
-        null !== $token && $obj['token'] = $token;
-        null !== $password && $obj['password'] = $password;
-        null !== $username && $obj['username'] = $username;
+        null !== $token && $self['token'] = $token;
+        null !== $password && $self['password'] = $password;
+        null !== $username && $self['username'] = $username;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withIdentifier(string $identifier): self
     {
-        $obj = clone $this;
-        $obj['identifier'] = $identifier;
+        $self = clone $this;
+        $self['identifier'] = $identifier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj['token'] = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withPassword(string $password): self
     {
-        $obj = clone $this;
-        $obj['password'] = $password;
+        $self = clone $this;
+        $self['password'] = $password;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,9 +158,9 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withUsername(string $username): self
     {
-        $obj = clone $this;
-        $obj['username'] = $username;
+        $self = clone $this;
+        $self['username'] = $username;
 
-        return $obj;
+        return $self;
     }
 }

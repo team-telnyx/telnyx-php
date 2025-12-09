@@ -66,15 +66,15 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?string $serviceAccount = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionID && $obj['connectionID'] = $connectionID;
-        null !== $conversationProfileID && $obj['conversationProfileID'] = $conversationProfileID;
-        null !== $environment && $obj['environment'] = $environment;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $serviceAccount && $obj['serviceAccount'] = $serviceAccount;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $conversationProfileID && $self['conversationProfileID'] = $conversationProfileID;
+        null !== $environment && $self['environment'] = $environment;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $serviceAccount && $self['serviceAccount'] = $serviceAccount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class Data implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj['connectionID'] = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class Data implements BaseModel
     public function withConversationProfileID(
         string $conversationProfileID
     ): self {
-        $obj = clone $this;
-        $obj['conversationProfileID'] = $conversationProfileID;
+        $self = clone $this;
+        $self['conversationProfileID'] = $conversationProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,18 +105,18 @@ final class Data implements BaseModel
      */
     public function withEnvironment(string $environment): self
     {
-        $obj = clone $this;
-        $obj['environment'] = $environment;
+        $self = clone $this;
+        $self['environment'] = $environment;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +124,9 @@ final class Data implements BaseModel
      */
     public function withServiceAccount(string $serviceAccount): self
     {
-        $obj = clone $this;
-        $obj['serviceAccount'] = $serviceAccount;
+        $self = clone $this;
+        $self['serviceAccount'] = $serviceAccount;
 
-        return $obj;
+        return $self;
     }
 }

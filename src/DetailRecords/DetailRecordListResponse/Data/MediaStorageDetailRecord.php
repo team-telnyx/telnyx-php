@@ -161,34 +161,34 @@ final class MediaStorageDetailRecord implements BaseModel
         ?string $userID = null,
         ?string $webhookID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $assetID && $obj['assetID'] = $assetID;
-        null !== $cost && $obj['cost'] = $cost;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $linkChannelID && $obj['linkChannelID'] = $linkChannelID;
-        null !== $linkChannelType && $obj['linkChannelType'] = $linkChannelType;
-        null !== $orgID && $obj['orgID'] = $orgID;
-        null !== $rate && $obj['rate'] = $rate;
-        null !== $rateMeasuredIn && $obj['rateMeasuredIn'] = $rateMeasuredIn;
-        null !== $status && $obj['status'] = $status;
-        null !== $userID && $obj['userID'] = $userID;
-        null !== $webhookID && $obj['webhookID'] = $webhookID;
+        null !== $id && $self['id'] = $id;
+        null !== $actionType && $self['actionType'] = $actionType;
+        null !== $assetID && $self['assetID'] = $assetID;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $linkChannelID && $self['linkChannelID'] = $linkChannelID;
+        null !== $linkChannelType && $self['linkChannelType'] = $linkChannelType;
+        null !== $orgID && $self['orgID'] = $orgID;
+        null !== $rate && $self['rate'] = $rate;
+        null !== $rateMeasuredIn && $self['rateMeasuredIn'] = $rateMeasuredIn;
+        null !== $status && $self['status'] = $status;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $webhookID && $self['webhookID'] = $webhookID;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withActionType(string $actionType): self
     {
-        $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $self = clone $this;
+        $self['actionType'] = $actionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withAssetID(string $assetID): self
     {
-        $obj = clone $this;
-        $obj['assetID'] = $assetID;
+        $self = clone $this;
+        $self['assetID'] = $assetID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj['cost'] = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withLinkChannelID(string $linkChannelID): self
     {
-        $obj = clone $this;
-        $obj['linkChannelID'] = $linkChannelID;
+        $self = clone $this;
+        $self['linkChannelID'] = $linkChannelID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,10 +273,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withLinkChannelType(string $linkChannelType): self
     {
-        $obj = clone $this;
-        $obj['linkChannelType'] = $linkChannelType;
+        $self = clone $this;
+        $self['linkChannelType'] = $linkChannelType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +284,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withOrgID(string $orgID): self
     {
-        $obj = clone $this;
-        $obj['orgID'] = $orgID;
+        $self = clone $this;
+        $self['orgID'] = $orgID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +295,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withRate(string $rate): self
     {
-        $obj = clone $this;
-        $obj['rate'] = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,10 +306,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
-        $obj = clone $this;
-        $obj['rateMeasuredIn'] = $rateMeasuredIn;
+        $self = clone $this;
+        $self['rateMeasuredIn'] = $rateMeasuredIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -317,10 +317,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -328,10 +328,10 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -339,9 +339,9 @@ final class MediaStorageDetailRecord implements BaseModel
      */
     public function withWebhookID(string $webhookID): self
     {
-        $obj = clone $this;
-        $obj['webhookID'] = $webhookID;
+        $self = clone $this;
+        $self['webhookID'] = $webhookID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -42,36 +42,36 @@ final class Parameter implements BaseModel
         ?string $name = null,
         ?bool $optional = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dataType && $obj['dataType'] = $dataType;
-        null !== $name && $obj['name'] = $name;
-        null !== $optional && $obj['optional'] = $optional;
+        null !== $dataType && $self['dataType'] = $dataType;
+        null !== $name && $self['name'] = $name;
+        null !== $optional && $self['optional'] = $optional;
 
-        return $obj;
+        return $self;
     }
 
     public function withDataType(string $dataType): self
     {
-        $obj = clone $this;
-        $obj['dataType'] = $dataType;
+        $self = clone $this;
+        $self['dataType'] = $dataType;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withOptional(bool $optional): self
     {
-        $obj = clone $this;
-        $obj['optional'] = $optional;
+        $self = clone $this;
+        $self['optional'] = $optional;
 
-        return $obj;
+        return $self;
     }
 }

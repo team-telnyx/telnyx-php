@@ -73,12 +73,12 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
         string $simCardID,
         Threshold|array $threshold
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['simCardID'] = $simCardID;
-        $obj['threshold'] = $threshold;
+        $self['simCardID'] = $simCardID;
+        $self['threshold'] = $threshold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
      */
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj['simCardID'] = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
      */
     public function withThreshold(Threshold|array $threshold): self
     {
-        $obj = clone $this;
-        $obj['threshold'] = $threshold;
+        $self = clone $this;
+        $self['threshold'] = $threshold;
 
-        return $obj;
+        return $self;
     }
 }

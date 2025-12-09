@@ -63,21 +63,21 @@ final class Data implements BaseModel
         array $clusters,
         TaskStatus|string $status
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucket'] = $bucket;
-        $obj['clusters'] = $clusters;
-        $obj['status'] = $status;
+        $self['bucket'] = $bucket;
+        $self['clusters'] = $clusters;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj['bucket'] = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withClusters(array $clusters): self
     {
-        $obj = clone $this;
-        $obj['clusters'] = $clusters;
+        $self = clone $this;
+        $self['clusters'] = $clusters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +96,9 @@ final class Data implements BaseModel
      */
     public function withStatus(TaskStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -34,27 +34,27 @@ final class Parameter implements BaseModel
      */
     public static function with(?string $name = null, ?string $value = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj['name'] = $name;
-        null !== $value && $obj['value'] = $value;
+        null !== $name && $self['name'] = $name;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

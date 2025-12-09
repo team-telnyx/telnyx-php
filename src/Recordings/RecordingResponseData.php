@@ -164,25 +164,25 @@ final class RecordingResponseData implements BaseModel
         Status|string|null $status = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $callControlID && $obj['callControlID'] = $callControlID;
-        null !== $callLegID && $obj['callLegID'] = $callLegID;
-        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
-        null !== $channels && $obj['channels'] = $channels;
-        null !== $conferenceID && $obj['conferenceID'] = $conferenceID;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $downloadURLs && $obj['downloadURLs'] = $downloadURLs;
-        null !== $durationMillis && $obj['durationMillis'] = $durationMillis;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $recordingEndedAt && $obj['recordingEndedAt'] = $recordingEndedAt;
-        null !== $recordingStartedAt && $obj['recordingStartedAt'] = $recordingStartedAt;
-        null !== $source && $obj['source'] = $source;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $channels && $self['channels'] = $channels;
+        null !== $conferenceID && $self['conferenceID'] = $conferenceID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $downloadURLs && $self['downloadURLs'] = $downloadURLs;
+        null !== $durationMillis && $self['durationMillis'] = $durationMillis;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $recordingEndedAt && $self['recordingEndedAt'] = $recordingEndedAt;
+        null !== $recordingStartedAt && $self['recordingStartedAt'] = $recordingStartedAt;
+        null !== $source && $self['source'] = $source;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +223,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj['callSessionID'] = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +236,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withChannels(Channels|string $channels): self
     {
-        $obj = clone $this;
-        $obj['channels'] = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -247,10 +247,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withConferenceID(string $conferenceID): self
     {
-        $obj = clone $this;
-        $obj['conferenceID'] = $conferenceID;
+        $self = clone $this;
+        $self['conferenceID'] = $conferenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,10 +258,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withDownloadURLs(DownloadURLs|array $downloadURLs): self
     {
-        $obj = clone $this;
-        $obj['downloadURLs'] = $downloadURLs;
+        $self = clone $this;
+        $self['downloadURLs'] = $downloadURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +282,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withDurationMillis(int $durationMillis): self
     {
-        $obj = clone $this;
-        $obj['durationMillis'] = $durationMillis;
+        $self = clone $this;
+        $self['durationMillis'] = $durationMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -293,10 +293,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -304,10 +304,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withRecordingEndedAt(string $recordingEndedAt): self
     {
-        $obj = clone $this;
-        $obj['recordingEndedAt'] = $recordingEndedAt;
+        $self = clone $this;
+        $self['recordingEndedAt'] = $recordingEndedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -315,10 +315,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withRecordingStartedAt(string $recordingStartedAt): self
     {
-        $obj = clone $this;
-        $obj['recordingStartedAt'] = $recordingStartedAt;
+        $self = clone $this;
+        $self['recordingStartedAt'] = $recordingStartedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -328,10 +328,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withSource(Source|string $source): self
     {
-        $obj = clone $this;
-        $obj['source'] = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -341,10 +341,10 @@ final class RecordingResponseData implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -352,9 +352,9 @@ final class RecordingResponseData implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

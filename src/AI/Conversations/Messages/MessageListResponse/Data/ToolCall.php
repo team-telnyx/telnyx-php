@@ -69,13 +69,13 @@ final class ToolCall implements BaseModel
         Function1|array $function,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['function'] = $function;
-        $obj['type'] = $type;
+        $self['id'] = $id;
+        $self['function'] = $function;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class ToolCall implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class ToolCall implements BaseModel
      */
     public function withFunction(Function1|array $function): self
     {
-        $obj = clone $this;
-        $obj['function'] = $function;
+        $self = clone $this;
+        $self['function'] = $function;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class ToolCall implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

@@ -44,12 +44,12 @@ final class Data implements BaseModel
         ?string $portRequestID = null,
         ?string $subRequestID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $portRequestID && $obj['portRequestID'] = $portRequestID;
-        null !== $subRequestID && $obj['subRequestID'] = $subRequestID;
+        null !== $portRequestID && $self['portRequestID'] = $portRequestID;
+        null !== $subRequestID && $self['subRequestID'] = $subRequestID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class Data implements BaseModel
      */
     public function withPortRequestID(string $portRequestID): self
     {
-        $obj = clone $this;
-        $obj['portRequestID'] = $portRequestID;
+        $self = clone $this;
+        $self['portRequestID'] = $portRequestID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class Data implements BaseModel
      */
     public function withSubRequestID(string $subRequestID): self
     {
-        $obj = clone $this;
-        $obj['subRequestID'] = $subRequestID;
+        $self = clone $this;
+        $self['subRequestID'] = $subRequestID;
 
-        return $obj;
+        return $self;
     }
 }

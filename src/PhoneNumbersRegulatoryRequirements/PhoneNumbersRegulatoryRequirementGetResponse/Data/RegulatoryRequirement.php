@@ -69,25 +69,25 @@ final class RegulatoryRequirement implements BaseModel
         ?string $label = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $acceptanceCriteria && $obj['acceptanceCriteria'] = $acceptanceCriteria;
-        null !== $description && $obj['description'] = $description;
-        null !== $example && $obj['example'] = $example;
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $label && $obj['label'] = $label;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $acceptanceCriteria && $self['acceptanceCriteria'] = $acceptanceCriteria;
+        null !== $description && $self['description'] = $description;
+        null !== $example && $self['example'] = $example;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $label && $self['label'] = $label;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,49 +98,49 @@ final class RegulatoryRequirement implements BaseModel
     public function withAcceptanceCriteria(
         AcceptanceCriteria|array $acceptanceCriteria
     ): self {
-        $obj = clone $this;
-        $obj['acceptanceCriteria'] = $acceptanceCriteria;
+        $self = clone $this;
+        $self['acceptanceCriteria'] = $acceptanceCriteria;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withExample(string $example): self
     {
-        $obj = clone $this;
-        $obj['example'] = $example;
+        $self = clone $this;
+        $self['example'] = $example;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldType(string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj['label'] = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

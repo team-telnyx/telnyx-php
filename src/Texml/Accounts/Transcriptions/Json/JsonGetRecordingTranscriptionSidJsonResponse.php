@@ -110,29 +110,29 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
         ?string $transcriptionText = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj['accountSid'] = $accountSid;
-        null !== $apiVersion && $obj['apiVersion'] = $apiVersion;
-        null !== $callSid && $obj['callSid'] = $callSid;
-        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
-        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $recordingSid && $obj['recordingSid'] = $recordingSid;
-        null !== $sid && $obj['sid'] = $sid;
-        null !== $status && $obj['status'] = $status;
-        null !== $transcriptionText && $obj['transcriptionText'] = $transcriptionText;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $apiVersion && $self['apiVersion'] = $apiVersion;
+        null !== $callSid && $self['callSid'] = $callSid;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $recordingSid && $self['recordingSid'] = $recordingSid;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $status && $self['status'] = $status;
+        null !== $transcriptionText && $self['transcriptionText'] = $transcriptionText;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,34 +140,34 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
      */
     public function withAPIVersion(string $apiVersion): self
     {
-        $obj = clone $this;
-        $obj['apiVersion'] = $apiVersion;
+        $self = clone $this;
+        $self['apiVersion'] = $apiVersion;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallSid(string $callSid): self
     {
-        $obj = clone $this;
-        $obj['callSid'] = $callSid;
+        $self = clone $this;
+        $self['callSid'] = $callSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
-        $obj = clone $this;
-        $obj['dateCreated'] = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj['dateUpdated'] = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
      */
     public function withDuration(?string $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
      */
     public function withRecordingSid(string $recordingSid): self
     {
-        $obj = clone $this;
-        $obj['recordingSid'] = $recordingSid;
+        $self = clone $this;
+        $self['recordingSid'] = $recordingSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,10 +197,10 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj['sid'] = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
      */
     public function withTranscriptionText(string $transcriptionText): self
     {
-        $obj = clone $this;
-        $obj['transcriptionText'] = $transcriptionText;
+        $self = clone $this;
+        $self['transcriptionText'] = $transcriptionText;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,9 +232,9 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

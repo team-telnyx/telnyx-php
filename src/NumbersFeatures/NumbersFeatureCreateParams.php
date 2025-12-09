@@ -56,11 +56,11 @@ final class NumbersFeatureCreateParams implements BaseModel
      */
     public static function with(array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class NumbersFeatureCreateParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj['phoneNumbers'] = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

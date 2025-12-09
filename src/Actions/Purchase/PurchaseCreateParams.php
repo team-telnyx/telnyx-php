@@ -107,17 +107,17 @@ final class PurchaseCreateParams implements BaseModel
         ?array $tags = null,
         ?string $whitelabelName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
+        $self['amount'] = $amount;
 
-        null !== $product && $obj['product'] = $product;
-        null !== $simCardGroupID && $obj['simCardGroupID'] = $simCardGroupID;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj['tags'] = $tags;
-        null !== $whitelabelName && $obj['whitelabelName'] = $whitelabelName;
+        null !== $product && $self['product'] = $product;
+        null !== $simCardGroupID && $self['simCardGroupID'] = $simCardGroupID;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $whitelabelName && $self['whitelabelName'] = $whitelabelName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withAmount(int $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withSimCardGroupID(string $simCardGroupID): self
     {
-        $obj = clone $this;
-        $obj['simCardGroupID'] = $simCardGroupID;
+        $self = clone $this;
+        $self['simCardGroupID'] = $simCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +173,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,9 +184,9 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withWhitelabelName(string $whitelabelName): self
     {
-        $obj = clone $this;
-        $obj['whitelabelName'] = $whitelabelName;
+        $self = clone $this;
+        $self['whitelabelName'] = $whitelabelName;
 
-        return $obj;
+        return $self;
     }
 }

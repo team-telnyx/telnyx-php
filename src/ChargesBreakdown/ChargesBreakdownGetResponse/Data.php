@@ -116,16 +116,16 @@ final class Data implements BaseModel
         string $userEmail,
         string $userID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['currency'] = $currency;
-        $obj['endDate'] = $endDate;
-        $obj['results'] = $results;
-        $obj['startDate'] = $startDate;
-        $obj['userEmail'] = $userEmail;
-        $obj['userID'] = $userID;
+        $self['currency'] = $currency;
+        $self['endDate'] = $endDate;
+        $self['results'] = $results;
+        $self['startDate'] = $startDate;
+        $self['userEmail'] = $userEmail;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +133,10 @@ final class Data implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data implements BaseModel
      */
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj['endDate'] = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class Data implements BaseModel
      */
     public function withResults(array $results): self
     {
-        $obj = clone $this;
-        $obj['results'] = $results;
+        $self = clone $this;
+        $self['results'] = $results;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class Data implements BaseModel
      */
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj['startDate'] = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Data implements BaseModel
      */
     public function withUserEmail(string $userEmail): self
     {
-        $obj = clone $this;
-        $obj['userEmail'] = $userEmail;
+        $self = clone $this;
+        $self['userEmail'] = $userEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -62,12 +62,12 @@ final class ActionVerifyParams implements BaseModel
      */
     public static function with(string $code, string $verifyProfileID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['code'] = $code;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self['code'] = $code;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 }

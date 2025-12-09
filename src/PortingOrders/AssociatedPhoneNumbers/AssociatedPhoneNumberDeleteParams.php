@@ -53,18 +53,18 @@ final class AssociatedPhoneNumberDeleteParams implements BaseModel
      */
     public static function with(string $portingOrderID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['portingOrderID'] = $portingOrderID;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj['portingOrderID'] = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 }

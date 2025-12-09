@@ -44,12 +44,12 @@ final class Data implements BaseModel
         ?int $pendingNumbersCount = null,
         ?int $pendingOrdersCount = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pendingNumbersCount && $obj['pendingNumbersCount'] = $pendingNumbersCount;
-        null !== $pendingOrdersCount && $obj['pendingOrdersCount'] = $pendingOrdersCount;
+        null !== $pendingNumbersCount && $self['pendingNumbersCount'] = $pendingNumbersCount;
+        null !== $pendingOrdersCount && $self['pendingOrdersCount'] = $pendingOrdersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class Data implements BaseModel
      */
     public function withPendingNumbersCount(int $pendingNumbersCount): self
     {
-        $obj = clone $this;
-        $obj['pendingNumbersCount'] = $pendingNumbersCount;
+        $self = clone $this;
+        $self['pendingNumbersCount'] = $pendingNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class Data implements BaseModel
      */
     public function withPendingOrdersCount(int $pendingOrdersCount): self
     {
-        $obj = clone $this;
-        $obj['pendingOrdersCount'] = $pendingOrdersCount;
+        $self = clone $this;
+        $self['pendingOrdersCount'] = $pendingOrdersCount;
 
-        return $obj;
+        return $self;
     }
 }

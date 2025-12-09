@@ -68,12 +68,12 @@ final class ActionEnableEmergencyParams implements BaseModel
         string $emergencyAddressID,
         bool $emergencyEnabled
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['emergencyAddressID'] = $emergencyAddressID;
-        $obj['emergencyEnabled'] = $emergencyEnabled;
+        $self['emergencyAddressID'] = $emergencyAddressID;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class ActionEnableEmergencyParams implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj['emergencyAddressID'] = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,9 +92,9 @@ final class ActionEnableEmergencyParams implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj['emergencyEnabled'] = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 }

@@ -86,14 +86,14 @@ final class NumberHealthMetrics implements BaseModel
         float $spamRatio,
         float $successRatio,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['inboundOutboundRatio'] = $inboundOutboundRatio;
-        $obj['messageCount'] = $messageCount;
-        $obj['spamRatio'] = $spamRatio;
-        $obj['successRatio'] = $successRatio;
+        $self['inboundOutboundRatio'] = $inboundOutboundRatio;
+        $self['messageCount'] = $messageCount;
+        $self['spamRatio'] = $spamRatio;
+        $self['successRatio'] = $successRatio;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class NumberHealthMetrics implements BaseModel
      */
     public function withInboundOutboundRatio(float $inboundOutboundRatio): self
     {
-        $obj = clone $this;
-        $obj['inboundOutboundRatio'] = $inboundOutboundRatio;
+        $self = clone $this;
+        $self['inboundOutboundRatio'] = $inboundOutboundRatio;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class NumberHealthMetrics implements BaseModel
      */
     public function withMessageCount(int $messageCount): self
     {
-        $obj = clone $this;
-        $obj['messageCount'] = $messageCount;
+        $self = clone $this;
+        $self['messageCount'] = $messageCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class NumberHealthMetrics implements BaseModel
      */
     public function withSpamRatio(float $spamRatio): self
     {
-        $obj = clone $this;
-        $obj['spamRatio'] = $spamRatio;
+        $self = clone $this;
+        $self['spamRatio'] = $spamRatio;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,9 +134,9 @@ final class NumberHealthMetrics implements BaseModel
      */
     public function withSuccessRatio(float $successRatio): self
     {
-        $obj = clone $this;
-        $obj['successRatio'] = $successRatio;
+        $self = clone $this;
+        $self['successRatio'] = $successRatio;
 
-        return $obj;
+        return $self;
     }
 }

@@ -89,17 +89,17 @@ final class Data implements BaseModel
         ?array $healthCheckParams = null,
         ?string $healthCheckType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
-        null !== $healthCheckParams && $obj['healthCheckParams'] = $healthCheckParams;
-        null !== $healthCheckType && $obj['healthCheckType'] = $healthCheckType;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
+        null !== $healthCheckParams && $self['healthCheckParams'] = $healthCheckParams;
+        null !== $healthCheckType && $self['healthCheckType'] = $healthCheckType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class Data implements BaseModel
      */
     public function withGlobalIpid(string $globalIPID): self
     {
-        $obj = clone $this;
-        $obj['globalIPID'] = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class Data implements BaseModel
      */
     public function withHealthCheckParams(array $healthCheckParams): self
     {
-        $obj = clone $this;
-        $obj['healthCheckParams'] = $healthCheckParams;
+        $self = clone $this;
+        $self['healthCheckParams'] = $healthCheckParams;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,9 +175,9 @@ final class Data implements BaseModel
      */
     public function withHealthCheckType(string $healthCheckType): self
     {
-        $obj = clone $this;
-        $obj['healthCheckType'] = $healthCheckType;
+        $self = clone $this;
+        $self['healthCheckType'] = $healthCheckType;
 
-        return $obj;
+        return $self;
     }
 }

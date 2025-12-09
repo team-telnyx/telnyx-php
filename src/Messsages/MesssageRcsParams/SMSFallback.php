@@ -40,12 +40,12 @@ final class SMSFallback implements BaseModel
      */
     public static function with(?string $from = null, ?string $text = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $from && $obj['from'] = $from;
-        null !== $text && $obj['text'] = $text;
+        null !== $from && $self['from'] = $from;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class SMSFallback implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class SMSFallback implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

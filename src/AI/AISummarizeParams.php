@@ -79,14 +79,14 @@ final class AISummarizeParams implements BaseModel
         string $filename,
         ?string $systemPrompt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['bucket'] = $bucket;
-        $obj['filename'] = $filename;
+        $self['bucket'] = $bucket;
+        $self['filename'] = $filename;
 
-        null !== $systemPrompt && $obj['systemPrompt'] = $systemPrompt;
+        null !== $systemPrompt && $self['systemPrompt'] = $systemPrompt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class AISummarizeParams implements BaseModel
      */
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj['bucket'] = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class AISummarizeParams implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj['filename'] = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class AISummarizeParams implements BaseModel
      */
     public function withSystemPrompt(string $systemPrompt): self
     {
-        $obj = clone $this;
-        $obj['systemPrompt'] = $systemPrompt;
+        $self = clone $this;
+        $self['systemPrompt'] = $systemPrompt;
 
-        return $obj;
+        return $self;
     }
 }

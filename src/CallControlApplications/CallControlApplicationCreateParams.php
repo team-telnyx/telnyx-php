@@ -190,25 +190,25 @@ final class CallControlApplicationCreateParams implements BaseModel
         ?string $webhookEventFailoverURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['applicationName'] = $applicationName;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self['applicationName'] = $applicationName;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        null !== $active && $obj['active'] = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $callCostInWebhooks && $obj['callCostInWebhooks'] = $callCostInWebhooks;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $firstCommandTimeout && $obj['firstCommandTimeout'] = $firstCommandTimeout;
-        null !== $firstCommandTimeoutSecs && $obj['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
-        null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $redactDtmfDebugLogging && $obj['redactDtmfDebugLogging'] = $redactDtmfDebugLogging;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        null !== $active && $self['active'] = $active;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $dtmfType && $self['dtmfType'] = $dtmfType;
+        null !== $firstCommandTimeout && $self['firstCommandTimeout'] = $firstCommandTimeout;
+        null !== $firstCommandTimeoutSecs && $self['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $redactDtmfDebugLogging && $self['redactDtmfDebugLogging'] = $redactDtmfDebugLogging;
+        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,10 +216,10 @@ final class CallControlApplicationCreateParams implements BaseModel
      */
     public function withApplicationName(string $applicationName): self
     {
-        $obj = clone $this;
-        $obj['applicationName'] = $applicationName;
+        $self = clone $this;
+        $self['applicationName'] = $applicationName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -227,10 +227,10 @@ final class CallControlApplicationCreateParams implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj['webhookEventURL'] = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +238,10 @@ final class CallControlApplicationCreateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,10 +252,10 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,10 +263,10 @@ final class CallControlApplicationCreateParams implements BaseModel
      */
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
-        $obj = clone $this;
-        $obj['callCostInWebhooks'] = $callCostInWebhooks;
+        $self = clone $this;
+        $self['callCostInWebhooks'] = $callCostInWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class CallControlApplicationCreateParams implements BaseModel
      */
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
-        $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $self = clone $this;
+        $self['dtmfType'] = $dtmfType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class CallControlApplicationCreateParams implements BaseModel
      */
     public function withFirstCommandTimeout(bool $firstCommandTimeout): self
     {
-        $obj = clone $this;
-        $obj['firstCommandTimeout'] = $firstCommandTimeout;
+        $self = clone $this;
+        $self['firstCommandTimeout'] = $firstCommandTimeout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -299,10 +299,10 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withFirstCommandTimeoutSecs(
         int $firstCommandTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
+        $self = clone $this;
+        $self['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +316,10 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withInbound(
         CallControlApplicationInbound|array $inbound
     ): self {
-        $obj = clone $this;
-        $obj['inbound'] = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -330,10 +330,10 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withOutbound(
         CallControlApplicationOutbound|array $outbound
     ): self {
-        $obj = clone $this;
-        $obj['outbound'] = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -342,10 +342,10 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withRedactDtmfDebugLogging(
         bool $redactDtmfDebugLogging
     ): self {
-        $obj = clone $this;
-        $obj['redactDtmfDebugLogging'] = $redactDtmfDebugLogging;
+        $self = clone $this;
+        $self['redactDtmfDebugLogging'] = $redactDtmfDebugLogging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -356,10 +356,10 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withWebhookAPIVersion(
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
-        $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $self = clone $this;
+        $self['webhookAPIVersion'] = $webhookAPIVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -368,10 +368,10 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -379,9 +379,9 @@ final class CallControlApplicationCreateParams implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

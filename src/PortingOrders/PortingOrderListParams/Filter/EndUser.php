@@ -36,11 +36,11 @@ final class EndUser implements BaseModel
      */
     public static function with(Admin|array|null $admin = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $admin && $obj['admin'] = $admin;
+        null !== $admin && $self['admin'] = $admin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -50,9 +50,9 @@ final class EndUser implements BaseModel
      */
     public function withAdmin(Admin|array $admin): self
     {
-        $obj = clone $this;
-        $obj['admin'] = $admin;
+        $self = clone $this;
+        $self['admin'] = $admin;
 
-        return $obj;
+        return $self;
     }
 }

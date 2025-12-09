@@ -38,11 +38,11 @@ final class NoiseSuppressionEngineConfig implements BaseModel
      */
     public static function with(?int $attenuationLimit = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $attenuationLimit && $obj['attenuationLimit'] = $attenuationLimit;
+        null !== $attenuationLimit && $self['attenuationLimit'] = $attenuationLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -50,9 +50,9 @@ final class NoiseSuppressionEngineConfig implements BaseModel
      */
     public function withAttenuationLimit(int $attenuationLimit): self
     {
-        $obj = clone $this;
-        $obj['attenuationLimit'] = $attenuationLimit;
+        $self = clone $this;
+        $self['attenuationLimit'] = $attenuationLimit;
 
-        return $obj;
+        return $self;
     }
 }

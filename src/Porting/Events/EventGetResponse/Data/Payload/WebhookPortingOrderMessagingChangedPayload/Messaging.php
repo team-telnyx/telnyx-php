@@ -68,14 +68,14 @@ final class Messaging implements BaseModel
         ?bool $messagingPortCompleted = null,
         MessagingPortStatus|string|null $messagingPortStatus = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enableMessaging && $obj['enableMessaging'] = $enableMessaging;
-        null !== $messagingCapable && $obj['messagingCapable'] = $messagingCapable;
-        null !== $messagingPortCompleted && $obj['messagingPortCompleted'] = $messagingPortCompleted;
-        null !== $messagingPortStatus && $obj['messagingPortStatus'] = $messagingPortStatus;
+        null !== $enableMessaging && $self['enableMessaging'] = $enableMessaging;
+        null !== $messagingCapable && $self['messagingCapable'] = $messagingCapable;
+        null !== $messagingPortCompleted && $self['messagingPortCompleted'] = $messagingPortCompleted;
+        null !== $messagingPortStatus && $self['messagingPortStatus'] = $messagingPortStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class Messaging implements BaseModel
      */
     public function withEnableMessaging(bool $enableMessaging): self
     {
-        $obj = clone $this;
-        $obj['enableMessaging'] = $enableMessaging;
+        $self = clone $this;
+        $self['enableMessaging'] = $enableMessaging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class Messaging implements BaseModel
      */
     public function withMessagingCapable(bool $messagingCapable): self
     {
-        $obj = clone $this;
-        $obj['messagingCapable'] = $messagingCapable;
+        $self = clone $this;
+        $self['messagingCapable'] = $messagingCapable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class Messaging implements BaseModel
     public function withMessagingPortCompleted(
         bool $messagingPortCompleted
     ): self {
-        $obj = clone $this;
-        $obj['messagingPortCompleted'] = $messagingPortCompleted;
+        $self = clone $this;
+        $self['messagingPortCompleted'] = $messagingPortCompleted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,9 +120,9 @@ final class Messaging implements BaseModel
     public function withMessagingPortStatus(
         MessagingPortStatus|string $messagingPortStatus
     ): self {
-        $obj = clone $this;
-        $obj['messagingPortStatus'] = $messagingPortStatus;
+        $self = clone $this;
+        $self['messagingPortStatus'] = $messagingPortStatus;
 
-        return $obj;
+        return $self;
     }
 }

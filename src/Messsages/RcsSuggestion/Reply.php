@@ -42,12 +42,12 @@ final class Reply implements BaseModel
         ?string $postbackData = null,
         ?string $text = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $postbackData && $obj['postbackData'] = $postbackData;
-        null !== $text && $obj['text'] = $text;
+        null !== $postbackData && $self['postbackData'] = $postbackData;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Reply implements BaseModel
      */
     public function withPostbackData(string $postbackData): self
     {
-        $obj = clone $this;
-        $obj['postbackData'] = $postbackData;
+        $self = clone $this;
+        $self['postbackData'] = $postbackData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Reply implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

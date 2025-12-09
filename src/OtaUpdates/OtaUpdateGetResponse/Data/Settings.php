@@ -51,11 +51,11 @@ final class Settings implements BaseModel
     public static function with(
         ?array $mobileNetworkOperatorsPreferences = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mobileNetworkOperatorsPreferences && $obj['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
+        null !== $mobileNetworkOperatorsPreferences && $self['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class Settings implements BaseModel
     public function withMobileNetworkOperatorsPreferences(
         array $mobileNetworkOperatorsPreferences
     ): self {
-        $obj = clone $this;
-        $obj['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
+        $self = clone $this;
+        $self['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
 
-        return $obj;
+        return $self;
     }
 }

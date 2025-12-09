@@ -46,11 +46,11 @@ final class TextToSpeechListVoicesResponse implements BaseModel
      */
     public static function with(?array $voices = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $voices && $obj['voices'] = $voices;
+        null !== $voices && $self['voices'] = $voices;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,9 +67,9 @@ final class TextToSpeechListVoicesResponse implements BaseModel
      */
     public function withVoices(array $voices): self
     {
-        $obj = clone $this;
-        $obj['voices'] = $voices;
+        $self = clone $this;
+        $self['voices'] = $voices;
 
-        return $obj;
+        return $self;
     }
 }

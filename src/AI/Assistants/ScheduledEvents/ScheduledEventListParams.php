@@ -63,14 +63,14 @@ final class ScheduledEventListParams implements BaseModel
         Page|array|null $page = null,
         ?\DateTimeInterface $toDate = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $conversationChannel && $obj['conversationChannel'] = $conversationChannel;
-        null !== $fromDate && $obj['fromDate'] = $fromDate;
-        null !== $page && $obj['page'] = $page;
-        null !== $toDate && $obj['toDate'] = $toDate;
+        null !== $conversationChannel && $self['conversationChannel'] = $conversationChannel;
+        null !== $fromDate && $self['fromDate'] = $fromDate;
+        null !== $page && $self['page'] = $page;
+        null !== $toDate && $self['toDate'] = $toDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,18 +79,18 @@ final class ScheduledEventListParams implements BaseModel
     public function withConversationChannel(
         ConversationChannelType|string $conversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['conversationChannel'] = $conversationChannel;
+        $self = clone $this;
+        $self['conversationChannel'] = $conversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     public function withFromDate(\DateTimeInterface $fromDate): self
     {
-        $obj = clone $this;
-        $obj['fromDate'] = $fromDate;
+        $self = clone $this;
+        $self['fromDate'] = $fromDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,17 +100,17 @@ final class ScheduledEventListParams implements BaseModel
      */
     public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     public function withToDate(\DateTimeInterface $toDate): self
     {
-        $obj = clone $this;
-        $obj['toDate'] = $toDate;
+        $self = clone $this;
+        $self['toDate'] = $toDate;
 
-        return $obj;
+        return $self;
     }
 }

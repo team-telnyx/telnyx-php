@@ -41,20 +41,20 @@ final class Data implements BaseModel
         ?string $token = null,
         ?\DateTimeInterface $tokenExpiresAt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $token && $obj['token'] = $token;
-        null !== $tokenExpiresAt && $obj['tokenExpiresAt'] = $tokenExpiresAt;
+        null !== $token && $self['token'] = $token;
+        null !== $tokenExpiresAt && $self['tokenExpiresAt'] = $tokenExpiresAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj['token'] = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,9 +62,9 @@ final class Data implements BaseModel
      */
     public function withTokenExpiresAt(\DateTimeInterface $tokenExpiresAt): self
     {
-        $obj = clone $this;
-        $obj['tokenExpiresAt'] = $tokenExpiresAt;
+        $self = clone $this;
+        $self['tokenExpiresAt'] = $tokenExpiresAt;
 
-        return $obj;
+        return $self;
     }
 }

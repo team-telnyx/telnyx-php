@@ -106,18 +106,18 @@ final class UpdateCall implements BaseModel
         ?string $texml = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fallbackMethod && $obj['fallbackMethod'] = $fallbackMethod;
-        null !== $fallbackURL && $obj['fallbackURL'] = $fallbackURL;
-        null !== $method && $obj['method'] = $method;
-        null !== $status && $obj['status'] = $status;
-        null !== $statusCallback && $obj['statusCallback'] = $statusCallback;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $texml && $obj['texml'] = $texml;
-        null !== $url && $obj['url'] = $url;
+        null !== $fallbackMethod && $self['fallbackMethod'] = $fallbackMethod;
+        null !== $fallbackURL && $self['fallbackURL'] = $fallbackURL;
+        null !== $method && $self['method'] = $method;
+        null !== $status && $self['status'] = $status;
+        null !== $statusCallback && $self['statusCallback'] = $statusCallback;
+        null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $texml && $self['texml'] = $texml;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class UpdateCall implements BaseModel
     public function withFallbackMethod(
         FallbackMethod|string $fallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['fallbackMethod'] = $fallbackMethod;
+        $self = clone $this;
+        $self['fallbackMethod'] = $fallbackMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class UpdateCall implements BaseModel
      */
     public function withFallbackURL(string $fallbackURL): self
     {
-        $obj = clone $this;
-        $obj['fallbackURL'] = $fallbackURL;
+        $self = clone $this;
+        $self['fallbackURL'] = $fallbackURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class UpdateCall implements BaseModel
      */
     public function withMethod(Method|string $method): self
     {
-        $obj = clone $this;
-        $obj['method'] = $method;
+        $self = clone $this;
+        $self['method'] = $method;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class UpdateCall implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class UpdateCall implements BaseModel
      */
     public function withStatusCallback(string $statusCallback): self
     {
-        $obj = clone $this;
-        $obj['statusCallback'] = $statusCallback;
+        $self = clone $this;
+        $self['statusCallback'] = $statusCallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class UpdateCall implements BaseModel
     public function withStatusCallbackMethod(
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $self = clone $this;
+        $self['statusCallbackMethod'] = $statusCallbackMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class UpdateCall implements BaseModel
      */
     public function withTexml(string $texml): self
     {
-        $obj = clone $this;
-        $obj['texml'] = $texml;
+        $self = clone $this;
+        $self['texml'] = $texml;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,9 +210,9 @@ final class UpdateCall implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

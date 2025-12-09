@@ -147,33 +147,33 @@ final class VerifyDetailRecord implements BaseModel
         ?string $verifyProfileID = null,
         ?string $verifyUsageFee = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $deliveryStatus && $obj['deliveryStatus'] = $deliveryStatus;
-        null !== $destinationPhoneNumber && $obj['destinationPhoneNumber'] = $destinationPhoneNumber;
-        null !== $rate && $obj['rate'] = $rate;
-        null !== $rateMeasuredIn && $obj['rateMeasuredIn'] = $rateMeasuredIn;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $verificationStatus && $obj['verificationStatus'] = $verificationStatus;
-        null !== $verifyChannelID && $obj['verifyChannelID'] = $verifyChannelID;
-        null !== $verifyChannelType && $obj['verifyChannelType'] = $verifyChannelType;
-        null !== $verifyProfileID && $obj['verifyProfileID'] = $verifyProfileID;
-        null !== $verifyUsageFee && $obj['verifyUsageFee'] = $verifyUsageFee;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $deliveryStatus && $self['deliveryStatus'] = $deliveryStatus;
+        null !== $destinationPhoneNumber && $self['destinationPhoneNumber'] = $destinationPhoneNumber;
+        null !== $rate && $self['rate'] = $rate;
+        null !== $rateMeasuredIn && $self['rateMeasuredIn'] = $rateMeasuredIn;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $verificationStatus && $self['verificationStatus'] = $verificationStatus;
+        null !== $verifyChannelID && $self['verifyChannelID'] = $verifyChannelID;
+        null !== $verifyChannelType && $self['verifyChannelType'] = $verifyChannelType;
+        null !== $verifyProfileID && $self['verifyProfileID'] = $verifyProfileID;
+        null !== $verifyUsageFee && $self['verifyUsageFee'] = $verifyUsageFee;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,18 +181,18 @@ final class VerifyDetailRecord implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,18 +200,18 @@ final class VerifyDetailRecord implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     public function withDeliveryStatus(string $deliveryStatus): self
     {
-        $obj = clone $this;
-        $obj['deliveryStatus'] = $deliveryStatus;
+        $self = clone $this;
+        $self['deliveryStatus'] = $deliveryStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class VerifyDetailRecord implements BaseModel
     public function withDestinationPhoneNumber(
         string $destinationPhoneNumber
     ): self {
-        $obj = clone $this;
-        $obj['destinationPhoneNumber'] = $destinationPhoneNumber;
+        $self = clone $this;
+        $self['destinationPhoneNumber'] = $destinationPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,10 +231,10 @@ final class VerifyDetailRecord implements BaseModel
      */
     public function withRate(string $rate): self
     {
-        $obj = clone $this;
-        $obj['rate'] = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,34 +242,34 @@ final class VerifyDetailRecord implements BaseModel
      */
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
-        $obj = clone $this;
-        $obj['rateMeasuredIn'] = $rateMeasuredIn;
+        $self = clone $this;
+        $self['rateMeasuredIn'] = $rateMeasuredIn;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerificationStatus(string $verificationStatus): self
     {
-        $obj = clone $this;
-        $obj['verificationStatus'] = $verificationStatus;
+        $self = clone $this;
+        $self['verificationStatus'] = $verificationStatus;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerifyChannelID(string $verifyChannelID): self
     {
-        $obj = clone $this;
-        $obj['verifyChannelID'] = $verifyChannelID;
+        $self = clone $this;
+        $self['verifyChannelID'] = $verifyChannelID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,18 +287,18 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerifyChannelType(
         VerifyChannelType|string $verifyChannelType
     ): self {
-        $obj = clone $this;
-        $obj['verifyChannelType'] = $verifyChannelType;
+        $self = clone $this;
+        $self['verifyChannelType'] = $verifyChannelType;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj['verifyProfileID'] = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,9 +306,9 @@ final class VerifyDetailRecord implements BaseModel
      */
     public function withVerifyUsageFee(string $verifyUsageFee): self
     {
-        $obj = clone $this;
-        $obj['verifyUsageFee'] = $verifyUsageFee;
+        $self = clone $this;
+        $self['verifyUsageFee'] = $verifyUsageFee;
 
-        return $obj;
+        return $self;
     }
 }

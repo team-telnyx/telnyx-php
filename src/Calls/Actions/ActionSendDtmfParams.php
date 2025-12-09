@@ -83,15 +83,15 @@ final class ActionSendDtmfParams implements BaseModel
         ?string $commandID = null,
         ?int $durationMillis = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['digits'] = $digits;
+        $self['digits'] = $digits;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $durationMillis && $obj['durationMillis'] = $durationMillis;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $durationMillis && $self['durationMillis'] = $durationMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withDigits(string $digits): self
     {
-        $obj = clone $this;
-        $obj['digits'] = $digits;
+        $self = clone $this;
+        $self['digits'] = $digits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +132,9 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withDurationMillis(int $durationMillis): self
     {
-        $obj = clone $this;
-        $obj['durationMillis'] = $durationMillis;
+        $self = clone $this;
+        $self['durationMillis'] = $durationMillis;
 
-        return $obj;
+        return $self;
     }
 }

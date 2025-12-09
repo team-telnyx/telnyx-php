@@ -62,12 +62,12 @@ final class ExternalVettingOrderParams implements BaseModel
      */
     public static function with(string $evpID, string $vettingClass): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['evpID'] = $evpID;
-        $obj['vettingClass'] = $vettingClass;
+        $self['evpID'] = $evpID;
+        $self['vettingClass'] = $vettingClass;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class ExternalVettingOrderParams implements BaseModel
      */
     public function withEvpID(string $evpID): self
     {
-        $obj = clone $this;
-        $obj['evpID'] = $evpID;
+        $self = clone $this;
+        $self['evpID'] = $evpID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class ExternalVettingOrderParams implements BaseModel
      */
     public function withVettingClass(string $vettingClass): self
     {
-        $obj = clone $this;
-        $obj['vettingClass'] = $vettingClass;
+        $self = clone $this;
+        $self['vettingClass'] = $vettingClass;
 
-        return $obj;
+        return $self;
     }
 }

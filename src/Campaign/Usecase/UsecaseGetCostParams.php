@@ -51,18 +51,18 @@ final class UsecaseGetCostParams implements BaseModel
      */
     public static function with(string $usecase): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['usecase'] = $usecase;
+        $self['usecase'] = $usecase;
 
-        return $obj;
+        return $self;
     }
 
     public function withUsecase(string $usecase): self
     {
-        $obj = clone $this;
-        $obj['usecase'] = $usecase;
+        $self = clone $this;
+        $self['usecase'] = $usecase;
 
-        return $obj;
+        return $self;
     }
 }

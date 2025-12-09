@@ -55,13 +55,13 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
         ?string $customerReference = null,
         ?\DateTimeInterface $deletedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $deletedAt && $obj['deletedAt'] = $deletedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $deletedAt && $self['deletedAt'] = $deletedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +91,9 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
      */
     public function withDeletedAt(\DateTimeInterface $deletedAt): self
     {
-        $obj = clone $this;
-        $obj['deletedAt'] = $deletedAt;
+        $self = clone $this;
+        $self['deletedAt'] = $deletedAt;
 
-        return $obj;
+        return $self;
     }
 }

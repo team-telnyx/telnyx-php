@@ -184,23 +184,23 @@ final class Data implements BaseModel
         string $updatedAt,
         array $whisperCallControlIDs,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['callControlID'] = $callControlID;
-        $obj['callLegID'] = $callLegID;
-        $obj['conference'] = $conference;
-        $obj['createdAt'] = $createdAt;
-        $obj['endConferenceOnExit'] = $endConferenceOnExit;
-        $obj['muted'] = $muted;
-        $obj['onHold'] = $onHold;
-        $obj['recordType'] = $recordType;
-        $obj['softEndConferenceOnExit'] = $softEndConferenceOnExit;
-        $obj['status'] = $status;
-        $obj['updatedAt'] = $updatedAt;
-        $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
+        $self['id'] = $id;
+        $self['callControlID'] = $callControlID;
+        $self['callLegID'] = $callLegID;
+        $self['conference'] = $conference;
+        $self['createdAt'] = $createdAt;
+        $self['endConferenceOnExit'] = $endConferenceOnExit;
+        $self['muted'] = $muted;
+        $self['onHold'] = $onHold;
+        $self['recordType'] = $recordType;
+        $self['softEndConferenceOnExit'] = $softEndConferenceOnExit;
+        $self['status'] = $status;
+        $self['updatedAt'] = $updatedAt;
+        $self['whisperCallControlIDs'] = $whisperCallControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class Data implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class Data implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj['callLegID'] = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class Data implements BaseModel
      */
     public function withConference(Conference|array $conference): self
     {
-        $obj = clone $this;
-        $obj['conference'] = $conference;
+        $self = clone $this;
+        $self['conference'] = $conference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +254,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class Data implements BaseModel
      */
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
-        $obj = clone $this;
-        $obj['endConferenceOnExit'] = $endConferenceOnExit;
+        $self = clone $this;
+        $self['endConferenceOnExit'] = $endConferenceOnExit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class Data implements BaseModel
      */
     public function withMuted(bool $muted): self
     {
-        $obj = clone $this;
-        $obj['muted'] = $muted;
+        $self = clone $this;
+        $self['muted'] = $muted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class Data implements BaseModel
      */
     public function withOnHold(bool $onHold): self
     {
-        $obj = clone $this;
-        $obj['onHold'] = $onHold;
+        $self = clone $this;
+        $self['onHold'] = $onHold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,10 +298,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,10 +310,10 @@ final class Data implements BaseModel
     public function withSoftEndConferenceOnExit(
         bool $softEndConferenceOnExit
     ): self {
-        $obj = clone $this;
-        $obj['softEndConferenceOnExit'] = $softEndConferenceOnExit;
+        $self = clone $this;
+        $self['softEndConferenceOnExit'] = $softEndConferenceOnExit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -323,10 +323,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -334,10 +334,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -348,9 +348,9 @@ final class Data implements BaseModel
     public function withWhisperCallControlIDs(
         array $whisperCallControlIDs
     ): self {
-        $obj = clone $this;
-        $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
+        $self = clone $this;
+        $self['whisperCallControlIDs'] = $whisperCallControlIDs;
 
-        return $obj;
+        return $self;
     }
 }

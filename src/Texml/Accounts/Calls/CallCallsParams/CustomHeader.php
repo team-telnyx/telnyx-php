@@ -54,12 +54,12 @@ final class CustomHeader implements BaseModel
      */
     public static function with(string $name, string $value): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj['value'] = $value;
+        $self['name'] = $name;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class CustomHeader implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class CustomHeader implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

@@ -66,14 +66,14 @@ final class PhoneNumber implements BaseModel
         EligibleStatus|string|null $eligibleStatus = null,
         ?string $phoneNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $detail && $obj['detail'] = $detail;
-        null !== $eligible && $obj['eligible'] = $eligible;
-        null !== $eligibleStatus && $obj['eligibleStatus'] = $eligibleStatus;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $eligible && $self['eligible'] = $eligible;
+        null !== $eligibleStatus && $self['eligibleStatus'] = $eligibleStatus;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withDetail(string $detail): self
     {
-        $obj = clone $this;
-        $obj['detail'] = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withEligible(bool $eligible): self
     {
-        $obj = clone $this;
-        $obj['eligible'] = $eligible;
+        $self = clone $this;
+        $self['eligible'] = $eligible;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class PhoneNumber implements BaseModel
     public function withEligibleStatus(
         EligibleStatus|string $eligibleStatus
     ): self {
-        $obj = clone $this;
-        $obj['eligibleStatus'] = $eligibleStatus;
+        $self = clone $this;
+        $self['eligibleStatus'] = $eligibleStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class PhoneNumber implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

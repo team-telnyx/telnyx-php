@@ -193,38 +193,38 @@ final class SimCardUsageDetailRecord implements BaseModel
         ?string $simGroupName = null,
         ?float $uplinkData = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $closedAt && $obj['closedAt'] = $closedAt;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $dataCost && $obj['dataCost'] = $dataCost;
-        null !== $dataRate && $obj['dataRate'] = $dataRate;
-        null !== $dataUnit && $obj['dataUnit'] = $dataUnit;
-        null !== $downlinkData && $obj['downlinkData'] = $downlinkData;
-        null !== $imsi && $obj['imsi'] = $imsi;
-        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
-        null !== $mcc && $obj['mcc'] = $mcc;
-        null !== $mnc && $obj['mnc'] = $mnc;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $simCardID && $obj['simCardID'] = $simCardID;
-        null !== $simCardTags && $obj['simCardTags'] = $simCardTags;
-        null !== $simGroupID && $obj['simGroupID'] = $simGroupID;
-        null !== $simGroupName && $obj['simGroupName'] = $simGroupName;
-        null !== $uplinkData && $obj['uplinkData'] = $uplinkData;
+        null !== $id && $self['id'] = $id;
+        null !== $closedAt && $self['closedAt'] = $closedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $dataCost && $self['dataCost'] = $dataCost;
+        null !== $dataRate && $self['dataRate'] = $dataRate;
+        null !== $dataUnit && $self['dataUnit'] = $dataUnit;
+        null !== $downlinkData && $self['downlinkData'] = $downlinkData;
+        null !== $imsi && $self['imsi'] = $imsi;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $mcc && $self['mcc'] = $mcc;
+        null !== $mnc && $self['mnc'] = $mnc;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $simCardID && $self['simCardID'] = $simCardID;
+        null !== $simCardTags && $self['simCardTags'] = $simCardTags;
+        null !== $simGroupID && $self['simGroupID'] = $simGroupID;
+        null !== $simGroupName && $self['simGroupName'] = $simGroupName;
+        null !== $uplinkData && $self['uplinkData'] = $uplinkData;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withClosedAt(\DateTimeInterface $closedAt): self
     {
-        $obj = clone $this;
-        $obj['closedAt'] = $closedAt;
+        $self = clone $this;
+        $self['closedAt'] = $closedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +254,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withDataCost(float $dataCost): self
     {
-        $obj = clone $this;
-        $obj['dataCost'] = $dataCost;
+        $self = clone $this;
+        $self['dataCost'] = $dataCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withDataRate(string $dataRate): self
     {
-        $obj = clone $this;
-        $obj['dataRate'] = $dataRate;
+        $self = clone $this;
+        $self['dataRate'] = $dataRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,10 +298,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withDataUnit(string $dataUnit): self
     {
-        $obj = clone $this;
-        $obj['dataUnit'] = $dataUnit;
+        $self = clone $this;
+        $self['dataUnit'] = $dataUnit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -309,10 +309,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withDownlinkData(float $downlinkData): self
     {
-        $obj = clone $this;
-        $obj['downlinkData'] = $downlinkData;
+        $self = clone $this;
+        $self['downlinkData'] = $downlinkData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -320,10 +320,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withImsi(string $imsi): self
     {
-        $obj = clone $this;
-        $obj['imsi'] = $imsi;
+        $self = clone $this;
+        $self['imsi'] = $imsi;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -331,10 +331,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -342,10 +342,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withMcc(string $mcc): self
     {
-        $obj = clone $this;
-        $obj['mcc'] = $mcc;
+        $self = clone $this;
+        $self['mcc'] = $mcc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -353,10 +353,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withMnc(string $mnc): self
     {
-        $obj = clone $this;
-        $obj['mnc'] = $mnc;
+        $self = clone $this;
+        $self['mnc'] = $mnc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -364,10 +364,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -375,10 +375,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj['simCardID'] = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -386,10 +386,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withSimCardTags(string $simCardTags): self
     {
-        $obj = clone $this;
-        $obj['simCardTags'] = $simCardTags;
+        $self = clone $this;
+        $self['simCardTags'] = $simCardTags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -397,10 +397,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withSimGroupID(string $simGroupID): self
     {
-        $obj = clone $this;
-        $obj['simGroupID'] = $simGroupID;
+        $self = clone $this;
+        $self['simGroupID'] = $simGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -408,10 +408,10 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withSimGroupName(string $simGroupName): self
     {
-        $obj = clone $this;
-        $obj['simGroupName'] = $simGroupName;
+        $self = clone $this;
+        $self['simGroupName'] = $simGroupName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -419,9 +419,9 @@ final class SimCardUsageDetailRecord implements BaseModel
      */
     public function withUplinkData(float $uplinkData): self
     {
-        $obj = clone $this;
-        $obj['uplinkData'] = $uplinkData;
+        $self = clone $this;
+        $self['uplinkData'] = $uplinkData;
 
-        return $obj;
+        return $self;
     }
 }

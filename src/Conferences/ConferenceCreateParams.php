@@ -164,23 +164,23 @@ final class ConferenceCreateParams implements BaseModel
         Region|string|null $region = null,
         ?bool $startConferenceOnCreate = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['callControlID'] = $callControlID;
-        $obj['name'] = $name;
+        $self['callControlID'] = $callControlID;
+        $self['name'] = $name;
 
-        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $comfortNoise && $obj['comfortNoise'] = $comfortNoise;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $durationMinutes && $obj['durationMinutes'] = $durationMinutes;
-        null !== $holdAudioURL && $obj['holdAudioURL'] = $holdAudioURL;
-        null !== $holdMediaName && $obj['holdMediaName'] = $holdMediaName;
-        null !== $maxParticipants && $obj['maxParticipants'] = $maxParticipants;
-        null !== $region && $obj['region'] = $region;
-        null !== $startConferenceOnCreate && $obj['startConferenceOnCreate'] = $startConferenceOnCreate;
+        null !== $beepEnabled && $self['beepEnabled'] = $beepEnabled;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $comfortNoise && $self['comfortNoise'] = $comfortNoise;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $durationMinutes && $self['durationMinutes'] = $durationMinutes;
+        null !== $holdAudioURL && $self['holdAudioURL'] = $holdAudioURL;
+        null !== $holdMediaName && $self['holdMediaName'] = $holdMediaName;
+        null !== $maxParticipants && $self['maxParticipants'] = $maxParticipants;
+        null !== $region && $self['region'] = $region;
+        null !== $startConferenceOnCreate && $self['startConferenceOnCreate'] = $startConferenceOnCreate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
-        $obj = clone $this;
-        $obj['beepEnabled'] = $beepEnabled;
+        $self = clone $this;
+        $self['beepEnabled'] = $beepEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +223,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withComfortNoise(bool $comfortNoise): self
     {
-        $obj = clone $this;
-        $obj['comfortNoise'] = $comfortNoise;
+        $self = clone $this;
+        $self['comfortNoise'] = $comfortNoise;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +245,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +256,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withDurationMinutes(int $durationMinutes): self
     {
-        $obj = clone $this;
-        $obj['durationMinutes'] = $durationMinutes;
+        $self = clone $this;
+        $self['durationMinutes'] = $durationMinutes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +267,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withHoldAudioURL(string $holdAudioURL): self
     {
-        $obj = clone $this;
-        $obj['holdAudioURL'] = $holdAudioURL;
+        $self = clone $this;
+        $self['holdAudioURL'] = $holdAudioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +278,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withHoldMediaName(string $holdMediaName): self
     {
-        $obj = clone $this;
-        $obj['holdMediaName'] = $holdMediaName;
+        $self = clone $this;
+        $self['holdMediaName'] = $holdMediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +289,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withMaxParticipants(int $maxParticipants): self
     {
-        $obj = clone $this;
-        $obj['maxParticipants'] = $maxParticipants;
+        $self = clone $this;
+        $self['maxParticipants'] = $maxParticipants;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,10 +302,10 @@ final class ConferenceCreateParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -314,9 +314,9 @@ final class ConferenceCreateParams implements BaseModel
     public function withStartConferenceOnCreate(
         bool $startConferenceOnCreate
     ): self {
-        $obj = clone $this;
-        $obj['startConferenceOnCreate'] = $startConferenceOnCreate;
+        $self = clone $this;
+        $self['startConferenceOnCreate'] = $startConferenceOnCreate;
 
-        return $obj;
+        return $self;
     }
 }

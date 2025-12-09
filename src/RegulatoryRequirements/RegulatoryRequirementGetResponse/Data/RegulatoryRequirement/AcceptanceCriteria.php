@@ -72,26 +72,26 @@ final class AcceptanceCriteria implements BaseModel
         ?string $regex = null,
         ?string $timeLimit = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $acceptableCharacters && $obj['acceptableCharacters'] = $acceptableCharacters;
-        null !== $acceptableValues && $obj['acceptableValues'] = $acceptableValues;
-        null !== $caseSensitive && $obj['caseSensitive'] = $caseSensitive;
-        null !== $localityLimit && $obj['localityLimit'] = $localityLimit;
-        null !== $maxLength && $obj['maxLength'] = $maxLength;
-        null !== $minLength && $obj['minLength'] = $minLength;
-        null !== $regex && $obj['regex'] = $regex;
-        null !== $timeLimit && $obj['timeLimit'] = $timeLimit;
+        null !== $acceptableCharacters && $self['acceptableCharacters'] = $acceptableCharacters;
+        null !== $acceptableValues && $self['acceptableValues'] = $acceptableValues;
+        null !== $caseSensitive && $self['caseSensitive'] = $caseSensitive;
+        null !== $localityLimit && $self['localityLimit'] = $localityLimit;
+        null !== $maxLength && $self['maxLength'] = $maxLength;
+        null !== $minLength && $self['minLength'] = $minLength;
+        null !== $regex && $self['regex'] = $regex;
+        null !== $timeLimit && $self['timeLimit'] = $timeLimit;
 
-        return $obj;
+        return $self;
     }
 
     public function withAcceptableCharacters(string $acceptableCharacters): self
     {
-        $obj = clone $this;
-        $obj['acceptableCharacters'] = $acceptableCharacters;
+        $self = clone $this;
+        $self['acceptableCharacters'] = $acceptableCharacters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,57 +99,57 @@ final class AcceptanceCriteria implements BaseModel
      */
     public function withAcceptableValues(array $acceptableValues): self
     {
-        $obj = clone $this;
-        $obj['acceptableValues'] = $acceptableValues;
+        $self = clone $this;
+        $self['acceptableValues'] = $acceptableValues;
 
-        return $obj;
+        return $self;
     }
 
     public function withCaseSensitive(string $caseSensitive): self
     {
-        $obj = clone $this;
-        $obj['caseSensitive'] = $caseSensitive;
+        $self = clone $this;
+        $self['caseSensitive'] = $caseSensitive;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocalityLimit(string $localityLimit): self
     {
-        $obj = clone $this;
-        $obj['localityLimit'] = $localityLimit;
+        $self = clone $this;
+        $self['localityLimit'] = $localityLimit;
 
-        return $obj;
+        return $self;
     }
 
     public function withMaxLength(string $maxLength): self
     {
-        $obj = clone $this;
-        $obj['maxLength'] = $maxLength;
+        $self = clone $this;
+        $self['maxLength'] = $maxLength;
 
-        return $obj;
+        return $self;
     }
 
     public function withMinLength(string $minLength): self
     {
-        $obj = clone $this;
-        $obj['minLength'] = $minLength;
+        $self = clone $this;
+        $self['minLength'] = $minLength;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegex(string $regex): self
     {
-        $obj = clone $this;
-        $obj['regex'] = $regex;
+        $self = clone $this;
+        $self['regex'] = $regex;
 
-        return $obj;
+        return $self;
     }
 
     public function withTimeLimit(string $timeLimit): self
     {
-        $obj = clone $this;
-        $obj['timeLimit'] = $timeLimit;
+        $self = clone $this;
+        $self['timeLimit'] = $timeLimit;
 
-        return $obj;
+        return $self;
     }
 }

@@ -59,12 +59,12 @@ final class RichCard implements BaseModel
         CarouselCard|array|null $carouselCard = null,
         StandaloneCard|array|null $standaloneCard = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carouselCard && $obj['carouselCard'] = $carouselCard;
-        null !== $standaloneCard && $obj['standaloneCard'] = $standaloneCard;
+        null !== $carouselCard && $self['carouselCard'] = $carouselCard;
+        null !== $standaloneCard && $self['standaloneCard'] = $standaloneCard;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class RichCard implements BaseModel
      */
     public function withCarouselCard(CarouselCard|array $carouselCard): self
     {
-        $obj = clone $this;
-        $obj['carouselCard'] = $carouselCard;
+        $self = clone $this;
+        $self['carouselCard'] = $carouselCard;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +94,9 @@ final class RichCard implements BaseModel
     public function withStandaloneCard(
         StandaloneCard|array $standaloneCard
     ): self {
-        $obj = clone $this;
-        $obj['standaloneCard'] = $standaloneCard;
+        $self = clone $this;
+        $self['standaloneCard'] = $standaloneCard;
 
-        return $obj;
+        return $self;
     }
 }

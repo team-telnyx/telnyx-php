@@ -186,28 +186,28 @@ final class Call implements BaseModel
         ?string $toFormatted = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj['accountSid'] = $accountSid;
-        null !== $answeredBy && $obj['answeredBy'] = $answeredBy;
-        null !== $callerName && $obj['callerName'] = $callerName;
-        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
-        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $endTime && $obj['endTime'] = $endTime;
-        null !== $from && $obj['from'] = $from;
-        null !== $fromFormatted && $obj['fromFormatted'] = $fromFormatted;
-        null !== $price && $obj['price'] = $price;
-        null !== $priceUnit && $obj['priceUnit'] = $priceUnit;
-        null !== $sid && $obj['sid'] = $sid;
-        null !== $startTime && $obj['startTime'] = $startTime;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj['to'] = $to;
-        null !== $toFormatted && $obj['toFormatted'] = $toFormatted;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $answeredBy && $self['answeredBy'] = $answeredBy;
+        null !== $callerName && $self['callerName'] = $callerName;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $from && $self['from'] = $from;
+        null !== $fromFormatted && $self['fromFormatted'] = $fromFormatted;
+        null !== $price && $self['price'] = $price;
+        null !== $priceUnit && $self['priceUnit'] = $priceUnit;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $startTime && $self['startTime'] = $startTime;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
+        null !== $toFormatted && $self['toFormatted'] = $toFormatted;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +215,10 @@ final class Call implements BaseModel
      */
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj['accountSid'] = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class Call implements BaseModel
      */
     public function withAnsweredBy(AnsweredBy|string $answeredBy): self
     {
-        $obj = clone $this;
-        $obj['answeredBy'] = $answeredBy;
+        $self = clone $this;
+        $self['answeredBy'] = $answeredBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class Call implements BaseModel
      */
     public function withCallerName(string $callerName): self
     {
-        $obj = clone $this;
-        $obj['callerName'] = $callerName;
+        $self = clone $this;
+        $self['callerName'] = $callerName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class Call implements BaseModel
      */
     public function withDateCreated(string $dateCreated): self
     {
-        $obj = clone $this;
-        $obj['dateCreated'] = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class Call implements BaseModel
      */
     public function withDateUpdated(string $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj['dateUpdated'] = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class Call implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,10 +285,10 @@ final class Call implements BaseModel
      */
     public function withDuration(string $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -296,10 +296,10 @@ final class Call implements BaseModel
      */
     public function withEndTime(string $endTime): self
     {
-        $obj = clone $this;
-        $obj['endTime'] = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +307,10 @@ final class Call implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +318,10 @@ final class Call implements BaseModel
      */
     public function withFromFormatted(string $fromFormatted): self
     {
-        $obj = clone $this;
-        $obj['fromFormatted'] = $fromFormatted;
+        $self = clone $this;
+        $self['fromFormatted'] = $fromFormatted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,10 +329,10 @@ final class Call implements BaseModel
      */
     public function withPrice(string $price): self
     {
-        $obj = clone $this;
-        $obj['price'] = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +340,10 @@ final class Call implements BaseModel
      */
     public function withPriceUnit(string $priceUnit): self
     {
-        $obj = clone $this;
-        $obj['priceUnit'] = $priceUnit;
+        $self = clone $this;
+        $self['priceUnit'] = $priceUnit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,10 +351,10 @@ final class Call implements BaseModel
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj['sid'] = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -362,10 +362,10 @@ final class Call implements BaseModel
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj['startTime'] = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -375,10 +375,10 @@ final class Call implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -386,10 +386,10 @@ final class Call implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -397,10 +397,10 @@ final class Call implements BaseModel
      */
     public function withToFormatted(string $toFormatted): self
     {
-        $obj = clone $this;
-        $obj['toFormatted'] = $toFormatted;
+        $self = clone $this;
+        $self['toFormatted'] = $toFormatted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -408,9 +408,9 @@ final class Call implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

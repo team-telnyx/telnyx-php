@@ -39,11 +39,11 @@ final class Filter implements BaseModel
      */
     public static function with(string|In|array|null $globalIPID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,9 +53,9 @@ final class Filter implements BaseModel
      */
     public function withGlobalIpid(string|In|array $globalIPID): self
     {
-        $obj = clone $this;
-        $obj['globalIPID'] = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -50,12 +50,12 @@ final class DocumentUpdateParams implements BaseModel
         ?string $customerReference = null,
         ?string $filename = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $customerReference && $obj['customerReference'] = $customerReference;
-        null !== $filename && $obj['filename'] = $filename;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $filename && $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class DocumentUpdateParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj['customerReference'] = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class DocumentUpdateParams implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj['filename'] = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 }

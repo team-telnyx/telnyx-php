@@ -190,15 +190,15 @@ final class ActionStartTranscriptionParams implements BaseModel
         Google|array|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig = null,
         ?string $transcriptionTracks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj['clientState'] = $clientState;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
-        null !== $transcriptionEngineConfig && $obj['transcriptionEngineConfig'] = $transcriptionEngineConfig;
-        null !== $transcriptionTracks && $obj['transcriptionTracks'] = $transcriptionTracks;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $transcriptionEngine && $self['transcriptionEngine'] = $transcriptionEngine;
+        null !== $transcriptionEngineConfig && $self['transcriptionEngineConfig'] = $transcriptionEngineConfig;
+        null !== $transcriptionTracks && $self['transcriptionTracks'] = $transcriptionTracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class ActionStartTranscriptionParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj['clientState'] = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class ActionStartTranscriptionParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,10 +231,10 @@ final class ActionStartTranscriptionParams implements BaseModel
     public function withTranscriptionEngine(
         TranscriptionEngine|string $transcriptionEngine
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionEngine'] = $transcriptionEngine;
+        $self = clone $this;
+        $self['transcriptionEngine'] = $transcriptionEngine;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -290,10 +290,10 @@ final class ActionStartTranscriptionParams implements BaseModel
     public function withTranscriptionEngineConfig(
         Google|array|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionEngineConfig'] = $transcriptionEngineConfig;
+        $self = clone $this;
+        $self['transcriptionEngineConfig'] = $transcriptionEngineConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -301,9 +301,9 @@ final class ActionStartTranscriptionParams implements BaseModel
      */
     public function withTranscriptionTracks(string $transcriptionTracks): self
     {
-        $obj = clone $this;
-        $obj['transcriptionTracks'] = $transcriptionTracks;
+        $self = clone $this;
+        $self['transcriptionTracks'] = $transcriptionTracks;
 
-        return $obj;
+        return $self;
     }
 }

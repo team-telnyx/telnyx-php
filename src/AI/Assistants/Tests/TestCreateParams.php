@@ -131,19 +131,19 @@ final class TestCreateParams implements BaseModel
         TelnyxConversationChannel|string|null $telnyxConversationChannel = null,
         ?string $testSuite = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['destination'] = $destination;
-        $obj['instructions'] = $instructions;
-        $obj['name'] = $name;
-        $obj['rubric'] = $rubric;
+        $self['destination'] = $destination;
+        $self['instructions'] = $instructions;
+        $self['name'] = $name;
+        $self['rubric'] = $rubric;
 
-        null !== $description && $obj['description'] = $description;
-        null !== $maxDurationSeconds && $obj['maxDurationSeconds'] = $maxDurationSeconds;
-        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        null !== $testSuite && $obj['testSuite'] = $testSuite;
+        null !== $description && $self['description'] = $description;
+        null !== $maxDurationSeconds && $self['maxDurationSeconds'] = $maxDurationSeconds;
+        null !== $telnyxConversationChannel && $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        null !== $testSuite && $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class TestCreateParams implements BaseModel
      */
     public function withDestination(string $destination): self
     {
-        $obj = clone $this;
-        $obj['destination'] = $destination;
+        $self = clone $this;
+        $self['destination'] = $destination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +162,10 @@ final class TestCreateParams implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj['instructions'] = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +173,10 @@ final class TestCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class TestCreateParams implements BaseModel
      */
     public function withRubric(array $rubric): self
     {
-        $obj = clone $this;
-        $obj['rubric'] = $rubric;
+        $self = clone $this;
+        $self['rubric'] = $rubric;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,10 +197,10 @@ final class TestCreateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class TestCreateParams implements BaseModel
      */
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
-        $obj = clone $this;
-        $obj['maxDurationSeconds'] = $maxDurationSeconds;
+        $self = clone $this;
+        $self['maxDurationSeconds'] = $maxDurationSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class TestCreateParams implements BaseModel
     public function withTelnyxConversationChannel(
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,9 +233,9 @@ final class TestCreateParams implements BaseModel
      */
     public function withTestSuite(string $testSuite): self
     {
-        $obj = clone $this;
-        $obj['testSuite'] = $testSuite;
+        $self = clone $this;
+        $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 }

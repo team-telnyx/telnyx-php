@@ -95,15 +95,15 @@ final class ActionLeaveParams implements BaseModel
         ?string $commandID = null,
         Region|string|null $region = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['callControlID'] = $callControlID;
+        $self['callControlID'] = $callControlID;
 
-        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
-        null !== $commandID && $obj['commandID'] = $commandID;
-        null !== $region && $obj['region'] = $region;
+        null !== $beepEnabled && $self['beepEnabled'] = $beepEnabled;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class ActionLeaveParams implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj['callControlID'] = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class ActionLeaveParams implements BaseModel
      */
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
-        $obj = clone $this;
-        $obj['beepEnabled'] = $beepEnabled;
+        $self = clone $this;
+        $self['beepEnabled'] = $beepEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class ActionLeaveParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj['commandID'] = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,9 +148,9 @@ final class ActionLeaveParams implements BaseModel
      */
     public function withRegion(Region|string $region): self
     {
-        $obj = clone $this;
-        $obj['region'] = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 }

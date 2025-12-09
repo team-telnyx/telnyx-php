@@ -66,14 +66,14 @@ final class RcsContentInfo implements BaseModel
         ?bool $forceRefresh = null,
         ?string $thumbnailURL = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['fileURL'] = $fileURL;
+        $self['fileURL'] = $fileURL;
 
-        null !== $forceRefresh && $obj['forceRefresh'] = $forceRefresh;
-        null !== $thumbnailURL && $obj['thumbnailURL'] = $thumbnailURL;
+        null !== $forceRefresh && $self['forceRefresh'] = $forceRefresh;
+        null !== $thumbnailURL && $self['thumbnailURL'] = $thumbnailURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class RcsContentInfo implements BaseModel
      */
     public function withFileURL(string $fileURL): self
     {
-        $obj = clone $this;
-        $obj['fileURL'] = $fileURL;
+        $self = clone $this;
+        $self['fileURL'] = $fileURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class RcsContentInfo implements BaseModel
      */
     public function withForceRefresh(bool $forceRefresh): self
     {
-        $obj = clone $this;
-        $obj['forceRefresh'] = $forceRefresh;
+        $self = clone $this;
+        $self['forceRefresh'] = $forceRefresh;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class RcsContentInfo implements BaseModel
      */
     public function withThumbnailURL(string $thumbnailURL): self
     {
-        $obj = clone $this;
-        $obj['thumbnailURL'] = $thumbnailURL;
+        $self = clone $this;
+        $self['thumbnailURL'] = $thumbnailURL;
 
-        return $obj;
+        return $self;
     }
 }

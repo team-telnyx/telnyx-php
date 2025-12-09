@@ -126,20 +126,20 @@ final class PortingLoaConfiguration implements BaseModel
         ?string $recordType = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $address && $obj['address'] = $address;
-        null !== $companyName && $obj['companyName'] = $companyName;
-        null !== $contact && $obj['contact'] = $contact;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $logo && $obj['logo'] = $logo;
-        null !== $name && $obj['name'] = $name;
-        null !== $organizationID && $obj['organizationID'] = $organizationID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $address && $self['address'] = $address;
+        null !== $companyName && $self['companyName'] = $companyName;
+        null !== $contact && $self['contact'] = $contact;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $logo && $self['logo'] = $logo;
+        null !== $name && $self['name'] = $name;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withAddress(Address|array $address): self
     {
-        $obj = clone $this;
-        $obj['address'] = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withCompanyName(string $companyName): self
     {
-        $obj = clone $this;
-        $obj['companyName'] = $companyName;
+        $self = clone $this;
+        $self['companyName'] = $companyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +191,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withContact(Contact|array $contact): self
     {
-        $obj = clone $this;
-        $obj['contact'] = $contact;
+        $self = clone $this;
+        $self['contact'] = $contact;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,10 +202,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withLogo(Logo|array $logo): self
     {
-        $obj = clone $this;
-        $obj['logo'] = $logo;
+        $self = clone $this;
+        $self['logo'] = $logo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,10 +228,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj['organizationID'] = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,9 +261,9 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

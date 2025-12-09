@@ -60,12 +60,12 @@ final class ChatCompletionToolParam implements BaseModel
         Function1|array $function,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['function'] = $function;
-        $obj['type'] = $type;
+        $self['function'] = $function;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class ChatCompletionToolParam implements BaseModel
      */
     public function withFunction(Function1|array $function): self
     {
-        $obj = clone $this;
-        $obj['function'] = $function;
+        $self = clone $this;
+        $self['function'] = $function;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class ChatCompletionToolParam implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

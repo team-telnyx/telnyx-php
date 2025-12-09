@@ -44,12 +44,12 @@ final class WireguardPeer implements BaseModel
         ?string $ipAddress = null,
         ?string $name = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
-        null !== $name && $obj['name'] = $name;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class WireguardPeer implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj['ipAddress'] = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class WireguardPeer implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

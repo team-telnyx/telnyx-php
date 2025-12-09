@@ -67,11 +67,11 @@ final class InventoryCoverageListParams implements BaseModel
      */
     public static function with(Filter|array|null $filter = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj['filter'] = $filter;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,9 +90,9 @@ final class InventoryCoverageListParams implements BaseModel
      */
     public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj['filter'] = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

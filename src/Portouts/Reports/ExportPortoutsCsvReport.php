@@ -61,11 +61,11 @@ final class ExportPortoutsCsvReport implements BaseModel
      */
     public static function with(Filters|array $filters): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['filters'] = $filters;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +82,9 @@ final class ExportPortoutsCsvReport implements BaseModel
      */
     public function withFilters(Filters|array $filters): self
     {
-        $obj = clone $this;
-        $obj['filters'] = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 }

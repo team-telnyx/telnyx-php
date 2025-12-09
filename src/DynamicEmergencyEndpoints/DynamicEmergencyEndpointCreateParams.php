@@ -70,29 +70,29 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
         string $callerName,
         string $dynamicEmergencyAddressID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['callbackNumber'] = $callbackNumber;
-        $obj['callerName'] = $callerName;
-        $obj['dynamicEmergencyAddressID'] = $dynamicEmergencyAddressID;
+        $self['callbackNumber'] = $callbackNumber;
+        $self['callerName'] = $callerName;
+        $self['dynamicEmergencyAddressID'] = $dynamicEmergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallbackNumber(string $callbackNumber): self
     {
-        $obj = clone $this;
-        $obj['callbackNumber'] = $callbackNumber;
+        $self = clone $this;
+        $self['callbackNumber'] = $callbackNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallerName(string $callerName): self
     {
-        $obj = clone $this;
-        $obj['callerName'] = $callerName;
+        $self = clone $this;
+        $self['callerName'] = $callerName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
     public function withDynamicEmergencyAddressID(
         string $dynamicEmergencyAddressID
     ): self {
-        $obj = clone $this;
-        $obj['dynamicEmergencyAddressID'] = $dynamicEmergencyAddressID;
+        $self = clone $this;
+        $self['dynamicEmergencyAddressID'] = $dynamicEmergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 }
