@@ -4,21 +4,4 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Campaign;
 
-use Telnyx\Core\Contracts\BaseResponse;
-use Telnyx\Core\Exceptions\APIException;
-use Telnyx\RequestOptions;
-
-interface OsrRawContract
-{
-    /**
-     * @api
-     *
-     * @return BaseResponse<array<string,mixed>>
-     *
-     * @throws APIException
-     */
-    public function getAttributes(
-        string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): BaseResponse;
-}
+interface OsrRawContract {}
