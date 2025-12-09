@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Verifications\ByPhoneNumber;
+namespace Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type VerifyMetaShape = array{
+ * @phpstan-type MetaShape = array{
  *   page_number: int, page_size: int, total_pages: int, total_results: int
  * }
  */
-final class VerifyMeta implements BaseModel
+final class Meta implements BaseModel
 {
-    /** @use SdkModel<VerifyMetaShape> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     #[Required]
@@ -31,11 +31,11 @@ final class VerifyMeta implements BaseModel
     public int $total_results;
 
     /**
-     * `new VerifyMeta()` is missing required properties by the API.
+     * `new Meta()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VerifyMeta::with(
+     * Meta::with(
      *   page_number: ..., page_size: ..., total_pages: ..., total_results: ...
      * )
      * ```
@@ -43,7 +43,7 @@ final class VerifyMeta implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new VerifyMeta)
+     * (new Meta)
      *   ->withPageNumber(...)
      *   ->withPageSize(...)
      *   ->withTotalPages(...)

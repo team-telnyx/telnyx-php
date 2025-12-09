@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
 use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
+use Telnyx\MessagingProfiles\MessagingProfileListResponse\Meta;
 
 /**
  * @phpstan-type MessagingProfileListResponseShape = array{
- *   data?: list<MessagingProfile>|null, meta?: PaginationMeta|null
+ *   data?: list<MessagingProfile>|null, meta?: Meta|null
  * }
  */
 final class MessagingProfileListResponse implements BaseModel
@@ -26,7 +26,7 @@ final class MessagingProfileListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?PaginationMeta $meta;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -62,16 +62,13 @@ final class MessagingProfileListResponse implements BaseModel
      *   webhook_url?: string|null,
      *   whitelisted_destinations?: list<string>|null,
      * }> $data
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
     public static function with(
         ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        Meta|array|null $meta = null
     ): self {
         $obj = new self;
 
@@ -116,14 +113,11 @@ final class MessagingProfileListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
         $obj['meta'] = $meta;

@@ -70,10 +70,7 @@ final class VerifyProfileListResponse implements BaseModel
      *   webhook_url?: string|null,
      * }> $data
      * @param VerifyMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
     public static function with(array $data, VerifyMeta|array $meta): self
@@ -111,10 +108,7 @@ final class VerifyProfileListResponse implements BaseModel
 
     /**
      * @param VerifyMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
     public function withMeta(VerifyMeta|array $meta): self

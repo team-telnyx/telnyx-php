@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse\Meta;
 
 /**
  * List of Auto-Response Settings.
  *
  * @phpstan-type AutorespConfigListResponseShape = array{
- *   data: list<AutoRespConfig>, meta: PaginationMeta
+ *   data: list<AutoRespConfig>, meta: Meta
  * }
  */
 final class AutorespConfigListResponse implements BaseModel
@@ -27,7 +27,7 @@ final class AutorespConfigListResponse implements BaseModel
     public array $data;
 
     #[Required]
-    public PaginationMeta $meta;
+    public Meta $meta;
 
     /**
      * `new AutorespConfigListResponse()` is missing required properties by the API.
@@ -62,14 +62,11 @@ final class AutorespConfigListResponse implements BaseModel
      *   updated_at: \DateTimeInterface,
      *   resp_text?: string|null,
      * }> $data
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
-    public static function with(array $data, PaginationMeta|array $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
         $obj = new self;
 
@@ -99,14 +96,11 @@ final class AutorespConfigListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
         $obj['meta'] = $meta;

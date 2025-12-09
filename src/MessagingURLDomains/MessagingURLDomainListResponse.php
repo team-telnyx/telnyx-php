@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingURLDomains;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse\Data;
+use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse\Meta;
 
 /**
  * @phpstan-type MessagingURLDomainListResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class MessagingURLDomainListResponse implements BaseModel
@@ -25,7 +25,7 @@ final class MessagingURLDomainListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?PaginationMeta $meta;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -43,16 +43,13 @@ final class MessagingURLDomainListResponse implements BaseModel
      *   url_domain?: string|null,
      *   use_case?: string|null,
      * }> $data
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
     public static function with(
         ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        Meta|array|null $meta = null
     ): self {
         $obj = new self;
 
@@ -79,14 +76,11 @@ final class MessagingURLDomainListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
         $obj['meta'] = $meta;
