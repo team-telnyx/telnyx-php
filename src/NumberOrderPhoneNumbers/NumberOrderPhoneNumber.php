@@ -40,7 +40,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     #[Optional]
     public ?string $id;
 
-    #[Optional('bundle_id')]
+    #[Optional('bundle_id', nullable: true)]
     public ?string $bundleID;
 
     #[Optional('country_code')]
@@ -168,7 +168,7 @@ final class NumberOrderPhoneNumber implements BaseModel
         return $self;
     }
 
-    public function withBundleID(string $bundleID): self
+    public function withBundleID(?string $bundleID): self
     {
         $self = clone $this;
         $self['bundleID'] = $bundleID;

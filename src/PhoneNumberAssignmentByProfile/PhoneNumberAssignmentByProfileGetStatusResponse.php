@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PhoneNumberAssignmentByProfile;
+namespace Telnyx\PhoneNumberAssignmentByProfile;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetTaskStatusResponse\Status;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse\Status;
 
 /**
- * @phpstan-type PhoneNumberAssignmentByProfileGetTaskStatusResponseShape = array{
+ * @phpstan-type PhoneNumberAssignmentByProfileGetStatusResponseShape = array{
  *   status: value-of<Status>,
  *   taskID: string,
  *   createdAt?: \DateTimeInterface|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class PhoneNumberAssignmentByProfileGetTaskStatusResponse implements BaseModel
+final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
 {
-    /** @use SdkModel<PhoneNumberAssignmentByProfileGetTaskStatusResponseShape> */
+    /** @use SdkModel<PhoneNumberAssignmentByProfileGetStatusResponseShape> */
     use SdkModel;
 
     /**
@@ -41,19 +41,17 @@ final class PhoneNumberAssignmentByProfileGetTaskStatusResponse implements BaseM
     public ?\DateTimeInterface $updatedAt;
 
     /**
-     * `new PhoneNumberAssignmentByProfileGetTaskStatusResponse()` is missing required properties by the API.
+     * `new PhoneNumberAssignmentByProfileGetStatusResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberAssignmentByProfileGetTaskStatusResponse::with(
-     *   status: ..., taskID: ...
-     * )
+     * PhoneNumberAssignmentByProfileGetStatusResponse::with(status: ..., taskID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new PhoneNumberAssignmentByProfileGetTaskStatusResponse)
+     * (new PhoneNumberAssignmentByProfileGetStatusResponse)
      *   ->withStatus(...)
      *   ->withTaskID(...)
      * ```

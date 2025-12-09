@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PartnerCampaign;
+namespace Telnyx\PartnerCampaigns;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Number10dlc\PartnerCampaign\PartnerCampaignGetSharedByMeResponse\Record;
+use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse\Record;
 
 /**
- * @phpstan-type PartnerCampaignGetSharedByMeResponseShape = array{
+ * @phpstan-type PartnerCampaignListSharedByMeResponseShape = array{
  *   page?: int|null, records?: list<Record>|null, totalRecords?: int|null
  * }
  */
-final class PartnerCampaignGetSharedByMeResponse implements BaseModel
+final class PartnerCampaignListSharedByMeResponse implements BaseModel
 {
-    /** @use SdkModel<PartnerCampaignGetSharedByMeResponseShape> */
+    /** @use SdkModel<PartnerCampaignListSharedByMeResponseShape> */
     use SdkModel;
 
     #[Optional]

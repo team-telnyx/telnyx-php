@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Number10dlc\PartnerCampaigns;
+namespace Telnyx\PartnerCampaigns;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
 
 /**
