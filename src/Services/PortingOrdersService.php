@@ -6,6 +6,8 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
 use Telnyx\PortingOrders\PortingOrderEndUserAdmin;
@@ -16,7 +18,6 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort\Value;
-use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderMisc;
 use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
@@ -294,6 +295,8 @@ final class PortingOrdersService implements PortingOrdersContract
      *   value?: 'created_at'|'-created_at'|'activation_settings.foc_datetime_requested'|'-activation_settings.foc_datetime_requested'|Value,
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
+     * @return DefaultPagination<PortingOrder>
+     *
      * @throws APIException
      */
     public function list(
@@ -302,7 +305,7 @@ final class PortingOrdersService implements PortingOrdersContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): PortingOrderListResponse {
+    ): DefaultPagination {
         $params = [
             'filter' => $filter,
             'includePhoneNumbers' => $includePhoneNumbers,
@@ -407,13 +410,15 @@ final class PortingOrdersService implements PortingOrdersContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<PortingOrderGetRequirementsResponse>
+     *
      * @throws APIException
      */
     public function retrieveRequirements(
         string $id,
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): PortingOrderGetRequirementsResponse {
+    ): DefaultPagination {
         $params = ['page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

@@ -6,10 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams;
-use Telnyx\ShortCodes\ShortCodeListResponse;
 use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
@@ -50,7 +51,7 @@ interface ShortCodesRawContract
      *
      * @param array<mixed>|ShortCodeListParams $params
      *
-     * @return BaseResponse<ShortCodeListResponse>
+     * @return BaseResponse<DefaultPagination<ShortCode>>
      *
      * @throws APIException
      */

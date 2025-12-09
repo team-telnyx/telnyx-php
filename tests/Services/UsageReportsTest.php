@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
-use Telnyx\UsageReports\UsageReportListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +42,7 @@ final class UsageReportsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(UsageReportListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 
     #[Test]
@@ -61,14 +61,15 @@ final class UsageReportsTest extends TestCase
             filter: 'filter',
             format: 'csv',
             managedAccounts: true,
-            page: ['number' => 1, 'size' => 5000],
+            pageNumber: 0,
+            pageSize: 0,
             sort: ['string'],
             startDate: 'start_date',
             authorizationBearer: 'authorization_bearer',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(UsageReportListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 
     #[Test]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\NetworkCoverage\AvailableService;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
 use Telnyx\RequestOptions;
@@ -29,6 +30,8 @@ interface NetworkCoverageContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<NetworkCoverageListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -36,5 +39,5 @@ interface NetworkCoverageContract
         ?array $filters = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): NetworkCoverageListResponse;
+    ): DefaultPagination;
 }

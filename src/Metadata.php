@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetadataShape = array{
- *   pageNumber?: float|null,
+ *   pageNumber: float,
+ *   totalPages: float,
  *   pageSize?: float|null,
- *   totalPages?: float|null,
  *   totalResults?: float|null,
  * }
  */
@@ -24,8 +25,14 @@ final class Metadata implements BaseModel
     /**
      * Current Page based on pagination settings (included when defaults are used.).
      */
-    #[Optional('page_number')]
-    public ?float $pageNumber;
+    #[Required('page_number')]
+    public float $pageNumber;
+
+    /**
+     * Total number of pages based on pagination settings.
+     */
+    #[Required('total_pages')]
+    public float $totalPages;
 
     /**
      * Number of results to return per page based on pagination settings (included when defaults are used.).
@@ -34,17 +41,25 @@ final class Metadata implements BaseModel
     public ?float $pageSize;
 
     /**
-     * Total number of pages based on pagination settings.
-     */
-    #[Optional('total_pages')]
-    public ?float $totalPages;
-
-    /**
      * Total number of results.
      */
     #[Optional('total_results')]
     public ?float $totalResults;
 
+    /**
+     * `new Metadata()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * Metadata::with(pageNumber: ..., totalPages: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Metadata)->withPageNumber(...)->withTotalPages(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -56,16 +71,17 @@ final class Metadata implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?float $pageNumber = null,
+        float $pageNumber,
+        float $totalPages,
         ?float $pageSize = null,
-        ?float $totalPages = null,
         ?float $totalResults = null,
     ): self {
         $self = new self;
 
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        $self['pageNumber'] = $pageNumber;
+        $self['totalPages'] = $totalPages;
+
         null !== $pageSize && $self['pageSize'] = $pageSize;
-        null !== $totalPages && $self['totalPages'] = $totalPages;
         null !== $totalResults && $self['totalResults'] = $totalResults;
 
         return $self;
@@ -83,23 +99,23 @@ final class Metadata implements BaseModel
     }
 
     /**
-     * Number of results to return per page based on pagination settings (included when defaults are used.).
-     */
-    public function withPageSize(float $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
-
-        return $self;
-    }
-
-    /**
      * Total number of pages based on pagination settings.
      */
     public function withTotalPages(float $totalPages): self
     {
         $self = clone $this;
         $self['totalPages'] = $totalPages;
+
+        return $self;
+    }
+
+    /**
+     * Number of results to return per page based on pagination settings (included when defaults are used.).
+     */
+    public function withPageSize(float $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -98,10 +98,7 @@ final class DynamicEmergencyEndpointsTest extends TestCase
         $result = $this->client->dynamicEmergencyEndpoints->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            DynamicEmergencyEndpointListResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

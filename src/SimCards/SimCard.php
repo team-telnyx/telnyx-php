@@ -7,6 +7,7 @@ namespace Telnyx\SimCards;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimCards\SimCard\CurrentDeviceLocation;
 use Telnyx\SimCards\SimCard\DataLimit;
@@ -40,7 +41,7 @@ use Telnyx\SimCardStatus\Value;
  *   msisdn?: string|null,
  *   pinPukCodes?: PinPukCodes|null,
  *   recordType?: string|null,
- *   resourcesWithInProgressActions?: list<mixed>|null,
+ *   resourcesWithInProgressActions?: list<array<string,mixed>>|null,
  *   simCardGroupID?: string|null,
  *   status?: SimCardStatus|null,
  *   tags?: list<string>|null,
@@ -188,9 +189,9 @@ final class SimCard implements BaseModel
     /**
      * List of resources with actions in progress.
      *
-     * @var list<mixed>|null $resourcesWithInProgressActions
+     * @var list<array<string,mixed>>|null $resourcesWithInProgressActions
      */
-    #[Optional('resources_with_in_progress_actions', list: 'mixed')]
+    #[Optional('resources_with_in_progress_actions', list: new MapOf('mixed'))]
     public ?array $resourcesWithInProgressActions;
 
     /**
@@ -258,7 +259,7 @@ final class SimCard implements BaseModel
      * @param PinPukCodes|array{
      *   pin1?: string|null, pin2?: string|null, puk1?: string|null, puk2?: string|null
      * } $pinPukCodes
-     * @param list<mixed> $resourcesWithInProgressActions
+     * @param list<array<string,mixed>> $resourcesWithInProgressActions
      * @param SimCardStatus|array{
      *   reason?: string|null, value?: value-of<Value>|null
      * } $status
@@ -580,7 +581,7 @@ final class SimCard implements BaseModel
     /**
      * List of resources with actions in progress.
      *
-     * @param list<mixed> $resourcesWithInProgressActions
+     * @param list<array<string,mixed>> $resourcesWithInProgressActions
      */
     public function withResourcesWithInProgressActions(
         array $resourcesWithInProgressActions

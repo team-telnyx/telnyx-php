@@ -10,6 +10,8 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignPa
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusParams;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams;
 use Telnyx\RequestOptions;
 
@@ -26,6 +28,21 @@ interface PhoneNumberAssignmentByProfileRawContract
      */
     public function assign(
         array|PhoneNumberAssignmentByProfileAssignParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<mixed>|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
+     *
+     * @return BaseResponse<PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse,>
+     *
+     * @throws APIException
+     */
+    public function listPhoneNumberStatus(
+        string $taskID,
+        array|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 

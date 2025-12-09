@@ -8,7 +8,9 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\Android;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\Ios;
 
 /**
  * Creates a new mobile push credential.
@@ -16,11 +18,11 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
  * @see Telnyx\Services\MobilePushCredentialsService::create()
  *
  * @phpstan-type MobilePushCredentialCreateParamsShape = array{
- *   alias: string,
- *   certificate: string,
- *   privateKey: string,
- *   type: Type|value-of<Type>,
- *   projectAccountJsonFile: array<string,mixed>,
+ *   createMobilePushCredentialRequest: Ios|array{
+ *     alias: string, certificate: string, privateKey: string, type?: 'ios'
+ *   }|Android|array{
+ *     alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
+ *   },
  * }
  */
 final class MobilePushCredentialCreateParams implements BaseModel
@@ -29,63 +31,22 @@ final class MobilePushCredentialCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Alias to uniquely identify the credential.
-     */
-    #[Required]
-    public string $alias;
-
-    /**
-     * Certificate as received from APNs.
-     */
-    #[Required]
-    public string $certificate;
-
-    /**
-     * Corresponding private key to the certificate as received from APNs.
-     */
-    #[Required('private_key')]
-    public string $privateKey;
-
-    /**
-     * Type of mobile push credential. Should be <code>android</code> here.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Required(enum: Type::class)]
-    public string $type;
-
-    /**
-     * Private key file in JSON format.
-     *
-     * @var array<string,mixed> $projectAccountJsonFile
-     */
-    #[Required('project_account_json_file', map: 'mixed')]
-    public array $projectAccountJsonFile;
+    #[Required(union: CreateMobilePushCredentialRequest::class)]
+    public Ios|Android $createMobilePushCredentialRequest;
 
     /**
      * `new MobilePushCredentialCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MobilePushCredentialCreateParams::with(
-     *   alias: ...,
-     *   certificate: ...,
-     *   privateKey: ...,
-     *   type: ...,
-     *   projectAccountJsonFile: ...,
-     * )
+     * MobilePushCredentialCreateParams::with(createMobilePushCredentialRequest: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
      * (new MobilePushCredentialCreateParams)
-     *   ->withAlias(...)
-     *   ->withCertificate(...)
-     *   ->withPrivateKey(...)
-     *   ->withType(...)
-     *   ->withProjectAccountJsonFile(...)
+     *   ->withCreateMobilePushCredentialRequest(...)
      * ```
      */
     public function __construct()
@@ -98,83 +59,34 @@ final class MobilePushCredentialCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
-     * @param array<string,mixed> $projectAccountJsonFile
+     * @param Ios|array{
+     *   alias: string, certificate: string, privateKey: string, type?: 'ios'
+     * }|Android|array{
+     *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
+     * } $createMobilePushCredentialRequest
      */
     public static function with(
-        string $alias,
-        string $certificate,
-        string $privateKey,
-        Type|string $type,
-        array $projectAccountJsonFile,
+        Ios|array|Android $createMobilePushCredentialRequest
     ): self {
         $self = new self;
 
-        $self['alias'] = $alias;
-        $self['certificate'] = $certificate;
-        $self['privateKey'] = $privateKey;
-        $self['type'] = $type;
-        $self['projectAccountJsonFile'] = $projectAccountJsonFile;
+        $self['createMobilePushCredentialRequest'] = $createMobilePushCredentialRequest;
 
         return $self;
     }
 
     /**
-     * Alias to uniquely identify the credential.
+     * @param Ios|array{
+     *   alias: string, certificate: string, privateKey: string, type?: 'ios'
+     * }|Android|array{
+     *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
+     * } $createMobilePushCredentialRequest
      */
-    public function withAlias(string $alias): self
-    {
-        $self = clone $this;
-        $self['alias'] = $alias;
-
-        return $self;
-    }
-
-    /**
-     * Certificate as received from APNs.
-     */
-    public function withCertificate(string $certificate): self
-    {
-        $self = clone $this;
-        $self['certificate'] = $certificate;
-
-        return $self;
-    }
-
-    /**
-     * Corresponding private key to the certificate as received from APNs.
-     */
-    public function withPrivateKey(string $privateKey): self
-    {
-        $self = clone $this;
-        $self['privateKey'] = $privateKey;
-
-        return $self;
-    }
-
-    /**
-     * Type of mobile push credential. Should be <code>android</code> here.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $self = clone $this;
-        $self['type'] = $type;
-
-        return $self;
-    }
-
-    /**
-     * Private key file in JSON format.
-     *
-     * @param array<string,mixed> $projectAccountJsonFile
-     */
-    public function withProjectAccountJsonFile(
-        array $projectAccountJsonFile
+    public function withCreateMobilePushCredentialRequest(
+        Ios|array|Android $createMobilePushCredentialRequest
     ): self {
         $self = clone $this;
-        $self['projectAccountJsonFile'] = $projectAccountJsonFile;
+        $self['createMobilePushCredentialRequest'] = $createMobilePushCredentialRequest;
 
         return $self;
     }

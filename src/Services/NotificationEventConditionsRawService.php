@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\AssociatedRecordType\Eq;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
@@ -42,7 +43,7 @@ final class NotificationEventConditionsRawService implements NotificationEventCo
      *   page?: array{number?: int, size?: int},
      * }|NotificationEventConditionListParams $params
      *
-     * @return BaseResponse<NotificationEventConditionListResponse>
+     * @return BaseResponse<DefaultPagination<NotificationEventConditionListResponse>>
      *
      * @throws APIException
      */
@@ -62,6 +63,7 @@ final class NotificationEventConditionsRawService implements NotificationEventCo
             query: $parsed,
             options: $options,
             convert: NotificationEventConditionListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

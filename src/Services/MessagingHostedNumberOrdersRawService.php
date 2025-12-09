@@ -7,6 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\MessagingHostedNumberOrder;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateParams;
@@ -15,7 +17,6 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams;
@@ -96,7 +97,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      *   page?: array{number?: int, size?: int}
      * }|MessagingHostedNumberOrderListParams $params
      *
-     * @return BaseResponse<MessagingHostedNumberOrderListResponse>
+     * @return BaseResponse<DefaultPagination<MessagingHostedNumberOrder>>
      *
      * @throws APIException
      */
@@ -115,7 +116,8 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
             path: 'messaging_hosted_number_orders',
             query: $parsed,
             options: $options,
-            convert: MessagingHostedNumberOrderListResponse::class,
+            convert: MessagingHostedNumberOrder::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -77,7 +77,7 @@ final class Data implements BaseModel
      *   connectionID?: string|null,
      *   from?: string|null,
      *   messageHistory?: list<MessageHistory>|null,
-     *   result?: mixed,
+     *   result?: array<string,mixed>|null,
      *   status?: value-of<Status>|null,
      *   to?: string|null,
      * } $payload
@@ -145,7 +145,7 @@ final class Data implements BaseModel
      *   connectionID?: string|null,
      *   from?: string|null,
      *   messageHistory?: list<MessageHistory>|null,
-     *   result?: mixed,
+     *   result?: array<string,mixed>|null,
      *   status?: value-of<Status>|null,
      *   to?: string|null,
      * } $payload

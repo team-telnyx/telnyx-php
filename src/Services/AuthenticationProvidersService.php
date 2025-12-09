@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\AuthenticationProviders\AuthenticationProvider;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
 
@@ -141,9 +142,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Returns a list of your SSO authentication providers.
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param 'name'|'-name'|'short_name'|'-short_name'|'active'|'-active'|'created_at'|'-created_at'|'updated_at'|'-updated_at'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -156,14 +154,19 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *   </li>
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultFlatPagination<AuthenticationProvider>
+     *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         string|Sort $sort = '-created_at',
         ?RequestOptions $requestOptions = null,
-    ): AuthenticationProviderListResponse {
-        $params = ['page' => $page, 'sort' => $sort];
+    ): DefaultFlatPagination {
+        $params = [
+            'pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort,
+        ];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 

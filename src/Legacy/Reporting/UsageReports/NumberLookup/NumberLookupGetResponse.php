@@ -7,11 +7,11 @@ namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse\Data;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse\Data\Result;
 
 /**
- * @phpstan-type NumberLookupGetResponseShape = array{data?: Data|null}
+ * @phpstan-type NumberLookupGetResponseShape = array{
+ *   data?: TelcoDataUsageReportResponse|null
+ * }
  */
 final class NumberLookupGetResponse implements BaseModel
 {
@@ -22,7 +22,7 @@ final class NumberLookupGetResponse implements BaseModel
      * Telco data usage report response.
      */
     #[Optional]
-    public ?Data $data;
+    public ?TelcoDataUsageReportResponse $data;
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ final class NumberLookupGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
+     * @param TelcoDataUsageReportResponse|array{
      *   id?: string|null,
      *   aggregationType?: string|null,
      *   createdAt?: \DateTimeInterface|null,
@@ -42,14 +42,15 @@ final class NumberLookupGetResponse implements BaseModel
      *   managedAccounts?: list<string>|null,
      *   recordType?: string|null,
      *   reportURL?: string|null,
-     *   result?: list<Result>|null,
+     *   result?: list<TelcoDataUsageRecord>|null,
      *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
      *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        TelcoDataUsageReportResponse|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -60,7 +61,7 @@ final class NumberLookupGetResponse implements BaseModel
     /**
      * Telco data usage report response.
      *
-     * @param Data|array{
+     * @param TelcoDataUsageReportResponse|array{
      *   id?: string|null,
      *   aggregationType?: string|null,
      *   createdAt?: \DateTimeInterface|null,
@@ -68,13 +69,13 @@ final class NumberLookupGetResponse implements BaseModel
      *   managedAccounts?: list<string>|null,
      *   recordType?: string|null,
      *   reportURL?: string|null,
-     *   result?: list<Result>|null,
+     *   result?: list<TelcoDataUsageRecord>|null,
      *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
      *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
-    public function withData(Data|array $data): self
+    public function withData(TelcoDataUsageReportResponse|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

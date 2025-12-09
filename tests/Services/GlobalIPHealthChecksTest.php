@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -68,7 +68,7 @@ final class GlobalIPHealthChecksTest extends TestCase
         $result = $this->client->globalIPHealthChecks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(GlobalIPHealthCheckListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

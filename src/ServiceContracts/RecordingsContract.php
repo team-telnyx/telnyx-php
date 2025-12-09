@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
-use Telnyx\Recordings\RecordingListResponse;
+use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 
 interface RecordingsContract
@@ -41,13 +42,15 @@ interface RecordingsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<RecordingResponseData>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): RecordingListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

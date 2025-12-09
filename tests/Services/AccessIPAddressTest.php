@@ -5,9 +5,9 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -80,7 +80,7 @@ final class AccessIPAddressTest extends TestCase
         $result = $this->client->accessIPAddress->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AccessIPAddressListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 
     #[Test]

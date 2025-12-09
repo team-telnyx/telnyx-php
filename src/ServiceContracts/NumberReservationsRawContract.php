@@ -6,10 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
-use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\RequestOptions;
 
@@ -48,7 +49,7 @@ interface NumberReservationsRawContract
      *
      * @param array<mixed>|NumberReservationListParams $params
      *
-     * @return BaseResponse<NumberReservationListResponse>
+     * @return BaseResponse<DefaultPagination<NumberReservation>>
      *
      * @throws APIException
      */

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams\Sort;
 use Telnyx\Invoices\InvoiceListResponse;
@@ -30,16 +31,16 @@ interface InvoicesContract
     /**
      * @api
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param 'period_start'|'-period_start'|Sort $sort specifies the sort order for results
+     *
+     * @return DefaultFlatPagination<InvoiceListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): InvoiceListResponse;
+    ): DefaultFlatPagination;
 }

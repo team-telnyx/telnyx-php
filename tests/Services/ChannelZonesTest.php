@@ -5,9 +5,9 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -70,6 +70,6 @@ final class ChannelZonesTest extends TestCase
         $result = $this->client->channelZones->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ChannelZoneListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 }

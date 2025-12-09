@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\PortingOrders\Comments\CommentListResponse;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -55,6 +55,6 @@ final class CommentsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CommentListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 }

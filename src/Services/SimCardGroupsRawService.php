@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsRawContract;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams;
@@ -142,7 +143,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      *   pageSize?: int,
      * }|SimCardGroupListParams $params
      *
-     * @return BaseResponse<SimCardGroupListResponse>
+     * @return BaseResponse<DefaultFlatPagination<SimCardGroupListResponse>>
      *
      * @throws APIException
      */
@@ -171,6 +172,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
             ),
             options: $options,
             convert: SimCardGroupListResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

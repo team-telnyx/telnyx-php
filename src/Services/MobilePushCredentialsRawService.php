@@ -7,10 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
+use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsRawContract;
@@ -29,11 +30,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      * Creates a new mobile push credential
      *
      * @param array{
-     *   alias: string,
-     *   certificate: string,
-     *   privateKey: string,
-     *   type: 'android'|Type,
-     *   projectAccountJsonFile: array<string,mixed>,
+     *   createMobilePushCredentialRequest: array<string,mixed>
      * }|MobilePushCredentialCreateParams $params
      *
      * @return BaseResponse<PushCredentialResponse>
@@ -53,7 +50,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
         return $this->client->request(
             method: 'post',
             path: 'mobile_push_credentials',
-            body: (object) $parsed,
+            body: (object) $parsed['createMobilePushCredentialRequest'],
             options: $options,
             convert: PushCredentialResponse::class,
         );
@@ -89,14 +86,11 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      * List mobile push credentials
      *
      * @param array{
-     *   filter?: array{
-     *     alias?: string,
-     *     type?: 'ios'|'android'|MobilePushCredentialListParams\Filter\Type,
-     *   },
+     *   filter?: array{alias?: string, type?: 'ios'|'android'|Type},
      *   page?: array{number?: int, size?: int},
      * }|MobilePushCredentialListParams $params
      *
-     * @return BaseResponse<MobilePushCredentialListResponse>
+     * @return BaseResponse<DefaultPagination<PushCredential>>
      *
      * @throws APIException
      */
@@ -115,7 +109,8 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
             path: 'mobile_push_credentials',
             query: $parsed,
             options: $options,
-            convert: MobilePushCredentialListResponse::class,
+            convert: PushCredential::class,
+            page: DefaultPagination::class,
         );
     }
 

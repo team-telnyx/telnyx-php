@@ -8,12 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListParams;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\MessagingRawContract;
 
@@ -92,7 +93,7 @@ final class MessagingRawService implements MessagingRawContract
      *
      * @param array{page?: int, perPage?: int}|MessagingListParams $params
      *
-     * @return BaseResponse<MessagingListResponse>
+     * @return BaseResponse<PerPagePagination<MdrUsageReportResponseLegacy>>
      *
      * @throws APIException
      */
@@ -111,7 +112,8 @@ final class MessagingRawService implements MessagingRawContract
             path: 'legacy/reporting/usage_reports/messaging',
             query: Util::array_transform_keys($parsed, ['perPage' => 'per_page']),
             options: $options,
-            convert: MessagingListResponse::class,
+            convert: MdrUsageReportResponseLegacy::class,
+            page: PerPagePagination::class,
         );
     }
 

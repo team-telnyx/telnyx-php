@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface RunsContract
@@ -25,19 +25,19 @@ interface RunsContract
     /**
      * @api
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
+     *
+     * @return DefaultFlatPagination<TestRunResponse>
      *
      * @throws APIException
      */
     public function list(
         string $testID,
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $status = null,
         ?RequestOptions $requestOptions = null,
-    ): PaginatedTestRunList;
+    ): DefaultFlatPagination;
 
     /**
      * @api

@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
 use Telnyx\SimCardGroups\SimCardGroupGetResponse;
-use Telnyx\SimCardGroups\SimCardGroupListResponse;
 use Telnyx\SimCardGroups\SimCardGroupNewResponse;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -100,7 +100,7 @@ final class SimCardGroupsTest extends TestCase
         $result = $this->client->simCardGroups->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SimCardGroupListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 
     #[Test]

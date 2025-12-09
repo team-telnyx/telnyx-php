@@ -8,12 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse\Data;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse\Data\Result;
 
 /**
  * @phpstan-type NumberLookupListResponseShape = array{
- *   data?: list<Data>|null, meta?: StandardPaginationMeta|null
+ *   data?: list<TelcoDataUsageReportResponse>|null,
+ *   meta?: StandardPaginationMeta|null,
  * }
  */
 final class NumberLookupListResponse implements BaseModel
@@ -21,8 +20,8 @@ final class NumberLookupListResponse implements BaseModel
     /** @use SdkModel<NumberLookupListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
+    /** @var list<TelcoDataUsageReportResponse>|null $data */
+    #[Optional(list: TelcoDataUsageReportResponse::class)]
     public ?array $data;
 
     #[Optional]
@@ -38,7 +37,7 @@ final class NumberLookupListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
+     * @param list<TelcoDataUsageReportResponse|array{
      *   id?: string|null,
      *   aggregationType?: string|null,
      *   createdAt?: \DateTimeInterface|null,
@@ -46,16 +45,13 @@ final class NumberLookupListResponse implements BaseModel
      *   managedAccounts?: list<string>|null,
      *   recordType?: string|null,
      *   reportURL?: string|null,
-     *   result?: list<Result>|null,
+     *   result?: list<TelcoDataUsageRecord>|null,
      *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
      *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param StandardPaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
      * } $meta
      */
     public static function with(
@@ -71,7 +67,7 @@ final class NumberLookupListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
+     * @param list<TelcoDataUsageReportResponse|array{
      *   id?: string|null,
      *   aggregationType?: string|null,
      *   createdAt?: \DateTimeInterface|null,
@@ -79,7 +75,7 @@ final class NumberLookupListResponse implements BaseModel
      *   managedAccounts?: list<string>|null,
      *   recordType?: string|null,
      *   reportURL?: string|null,
-     *   result?: list<Result>|null,
+     *   result?: list<TelcoDataUsageRecord>|null,
      *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
      *   updatedAt?: \DateTimeInterface|null,
@@ -95,10 +91,7 @@ final class NumberLookupListResponse implements BaseModel
 
     /**
      * @param StandardPaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
      * } $meta
      */
     public function withMeta(StandardPaginationMeta|array $meta): self

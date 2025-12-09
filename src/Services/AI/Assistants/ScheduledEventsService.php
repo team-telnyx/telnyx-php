@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ConversationChannelType;
-use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
 
@@ -95,9 +95,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * Get scheduled events for an assistant with pagination and filtering
      *
      * @param 'phone_call'|'sms_chat'|ConversationChannelType $conversationChannel
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>
      *
      * @throws APIException
      */
@@ -105,14 +104,16 @@ final class ScheduledEventsService implements ScheduledEventsContract
         string $assistantID,
         string|ConversationChannelType|null $conversationChannel = null,
         string|\DateTimeInterface|null $fromDate = null,
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         string|\DateTimeInterface|null $toDate = null,
         ?RequestOptions $requestOptions = null,
-    ): ScheduledEventListResponse {
+    ): DefaultFlatPagination {
         $params = [
             'conversationChannel' => $conversationChannel,
             'fromDate' => $fromDate,
-            'page' => $page,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
             'toDate' => $toDate,
         ];
         // @phpstan-ignore-next-line function.impossibleType

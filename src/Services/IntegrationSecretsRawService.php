@@ -7,10 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
-use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IntegrationSecretsRawContract;
@@ -68,10 +70,11 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
      *   filter?: array{
      *     type?: 'bearer'|'basic'|IntegrationSecretListParams\Filter\Type,
      *   },
-     *   page?: array{number?: int, size?: int},
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|IntegrationSecretListParams $params
      *
-     * @return BaseResponse<IntegrationSecretListResponse>
+     * @return BaseResponse<DefaultFlatPagination<IntegrationSecret>>
      *
      * @throws APIException
      */
@@ -88,9 +91,13 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
         return $this->client->request(
             method: 'get',
             path: 'integration_secrets',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
-            convert: IntegrationSecretListResponse::class,
+            convert: IntegrationSecret::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

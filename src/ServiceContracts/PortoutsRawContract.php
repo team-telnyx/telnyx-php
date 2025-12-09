@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
-use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
 use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
@@ -37,7 +38,7 @@ interface PortoutsRawContract
      *
      * @param array<mixed>|PortoutListParams $params
      *
-     * @return BaseResponse<PortoutListResponse>
+     * @return BaseResponse<DefaultPagination<PortoutDetails>>
      *
      * @throws APIException
      */

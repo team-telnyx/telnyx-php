@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
-use Telnyx\Fqdns\FqdnListResponse;
 use Telnyx\Fqdns\FqdnNewResponse;
 use Telnyx\Fqdns\FqdnUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -102,7 +102,7 @@ final class FqdnsTest extends TestCase
         $result = $this->client->fqdns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(FqdnListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

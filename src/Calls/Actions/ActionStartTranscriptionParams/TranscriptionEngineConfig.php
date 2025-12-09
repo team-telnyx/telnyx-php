@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Azure;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Google;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -32,9 +32,9 @@ final class TranscriptionEngineConfig implements ConverterSource
         return [
             DeepgramNova2Config::class,
             DeepgramNova3Config::class,
-            'Google' => Google::class,
-            'Telnyx' => Telnyx::class,
-            'Azure' => Azure::class,
+            'Google' => TranscriptionEngineGoogleConfig::class,
+            'Telnyx' => TranscriptionEngineTelnyxConfig::class,
+            'Azure' => TranscriptionEngineAzureConfig::class,
             'A' => TranscriptionEngineAConfig::class,
             'B' => TranscriptionEngineBConfig::class,
         ];

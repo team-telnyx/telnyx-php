@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
@@ -19,6 +18,8 @@ use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealParams;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Number10dlc\Campaign\CampaignUpdateParams;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignRawContract;
 
@@ -104,7 +105,7 @@ final class CampaignRawService implements CampaignRawContract
      *   brandID: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|CampaignListParams $params
      *
-     * @return BaseResponse<CampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
      * @throws APIException
      */
@@ -124,6 +125,7 @@ final class CampaignRawService implements CampaignRawContract
             query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
             options: $options,
             convert: CampaignListResponse::class,
+            page: PerPagePaginationV2::class,
         );
     }
 

@@ -6,10 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\VerifyProfiles\MessageTemplate;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
-use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -120,7 +120,7 @@ final class VerifyProfilesTest extends TestCase
         $result = $this->client->verifyProfiles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerifyProfileListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 
     #[Test]

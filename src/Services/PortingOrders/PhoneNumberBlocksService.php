@@ -6,14 +6,15 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember0;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberBlocksContract;
 
@@ -73,7 +74,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *   phoneNumber?: list<string>,
      *   portabilityStatus?: 'pending'|'confirmed'|'provisional'|PortabilityStatus,
      *   portingOrderID?: list<string>,
-     *   status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember0|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
+     *   status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderSingleStatus|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
      *   supportKey?: string|list<string>,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status]
      * @param array{
@@ -83,6 +84,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *   value?: '-created_at'|'created_at'|Value
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
+     * @return DefaultPagination<PortingPhoneNumberBlock>
+     *
      * @throws APIException
      */
     public function list(
@@ -91,7 +94,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberBlockListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

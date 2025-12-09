@@ -11,7 +11,6 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter\DateRange;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter\RecordType;
-use Telnyx\DetailRecords\DetailRecordListParams\Page;
 
 /**
  * Search for any detail record across the Telnyx Platform.
@@ -22,7 +21,8 @@ use Telnyx\DetailRecords\DetailRecordListParams\Page;
  *   filter?: Filter|array{
  *     recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
  *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   pageNumber?: int,
+ *   pageSize?: int,
  *   sort?: list<string>,
  * }
  */
@@ -38,11 +38,11 @@ final class DetailRecordListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results. <br/>Example: sort=-created_at.
@@ -65,18 +65,19 @@ final class DetailRecordListParams implements BaseModel
      * @param Filter|array{
      *   recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
      * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param list<string> $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
-        ?array $sort = null
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?array $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -97,15 +98,18 @@ final class DetailRecordListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

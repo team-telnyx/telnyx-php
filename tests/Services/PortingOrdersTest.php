@@ -6,12 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
-use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
-use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -106,7 +105,7 @@ final class PortingOrdersTest extends TestCase
         $result = $this->client->portingOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PortingOrderListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]
@@ -185,10 +184,7 @@ final class PortingOrdersTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            PortingOrderGetRequirementsResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

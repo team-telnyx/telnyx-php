@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
@@ -147,6 +148,8 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultPagination<ManagedAccountListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -155,7 +158,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): ManagedAccountListResponse {
+    ): DefaultPagination {
         $params = [
             'filter' => $filter,
             'includeCancelledAccounts' => $includeCancelledAccounts,

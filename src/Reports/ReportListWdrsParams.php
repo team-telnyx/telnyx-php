@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Reports\ReportListWdrsParams\Page;
 
 /**
  * Fetch all Wdr records.
@@ -21,7 +20,8 @@ use Telnyx\Reports\ReportListWdrsParams\Page;
  *   imsi?: string,
  *   mcc?: string,
  *   mnc?: string,
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   pageNumber?: int,
+ *   pageSize?: int,
  *   phoneNumber?: string,
  *   simCardID?: string,
  *   simGroupID?: string,
@@ -66,11 +66,11 @@ final class ReportListWdrsParams implements BaseModel
     #[Optional]
     public ?string $mnc;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Phone number.
@@ -120,7 +120,6 @@ final class ReportListWdrsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param list<string> $sort
      */
     public static function with(
@@ -129,7 +128,8 @@ final class ReportListWdrsParams implements BaseModel
         ?string $imsi = null,
         ?string $mcc = null,
         ?string $mnc = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $phoneNumber = null,
         ?string $simCardID = null,
         ?string $simGroupID = null,
@@ -144,7 +144,8 @@ final class ReportListWdrsParams implements BaseModel
         null !== $imsi && $self['imsi'] = $imsi;
         null !== $mcc && $self['mcc'] = $mcc;
         null !== $mnc && $self['mnc'] = $mnc;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $simCardID && $self['simCardID'] = $simCardID;
         null !== $simGroupID && $self['simGroupID'] = $simGroupID;
@@ -210,15 +211,18 @@ final class ReportListWdrsParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

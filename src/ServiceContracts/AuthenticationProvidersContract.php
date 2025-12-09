@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\AuthenticationProviders\AuthenticationProvider;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface AuthenticationProvidersContract
@@ -83,9 +84,6 @@ interface AuthenticationProvidersContract
     /**
      * @api
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param 'name'|'-name'|'short_name'|'-short_name'|'active'|'-active'|'created_at'|'-created_at'|'updated_at'|'-updated_at'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -98,13 +96,16 @@ interface AuthenticationProvidersContract
      *   </li>
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultFlatPagination<AuthenticationProvider>
+     *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         string|Sort $sort = '-created_at',
         ?RequestOptions $requestOptions = null,
-    ): AuthenticationProviderListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

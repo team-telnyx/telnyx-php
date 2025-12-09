@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\OAuthGrants\OAuthGrant;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
-use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 
 interface OAuthGrantsContract
@@ -30,13 +31,15 @@ interface OAuthGrantsContract
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
      *
+     * @return DefaultFlatPagination<OAuthGrant>
+     *
      * @throws APIException
      */
     public function list(
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): OAuthGrantListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

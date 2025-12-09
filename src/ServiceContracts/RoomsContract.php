@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomGetResponse;
-use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomUpdateResponse;
 
@@ -94,6 +95,8 @@ interface RoomsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<Room>
+     *
      * @throws APIException
      */
     public function list(
@@ -101,7 +104,7 @@ interface RoomsContract
         ?bool $includeSessions = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): RoomListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

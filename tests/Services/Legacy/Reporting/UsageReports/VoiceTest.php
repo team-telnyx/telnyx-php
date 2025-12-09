@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -95,7 +95,7 @@ final class VoiceTest extends TestCase
         $result = $this->client->legacy->reporting->usageReports->voice->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePagination::class, $result);
     }
 
     #[Test]

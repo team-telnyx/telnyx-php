@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
-use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -86,6 +86,6 @@ final class SimCardOrdersTest extends TestCase
         $result = $this->client->simCardOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SimCardOrderListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 }

@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
-use Telnyx\Queues\Calls\CallListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -103,7 +103,7 @@ final class CallsTest extends TestCase
         $result = $this->client->queues->calls->list('queue_name');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

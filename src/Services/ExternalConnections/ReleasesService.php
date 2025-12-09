@@ -6,6 +6,7 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status\Eq;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
@@ -68,6 +69,8 @@ final class ReleasesService implements ReleasesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<ReleaseListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -75,7 +78,7 @@ final class ReleasesService implements ReleasesContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): ReleaseListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

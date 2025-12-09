@@ -6,8 +6,9 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
-use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\NumberReservations\ReservedPhoneNumber;
 use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
@@ -105,13 +106,15 @@ final class NumberReservationsService implements NumberReservationsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<NumberReservation>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): NumberReservationListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

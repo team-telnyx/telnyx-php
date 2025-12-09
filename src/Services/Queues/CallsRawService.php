@@ -7,6 +7,7 @@ namespace Telnyx\Services\Queues;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListResponse;
@@ -103,7 +104,7 @@ final class CallsRawService implements CallsRawContract
      *   },
      * }|CallListParams $params
      *
-     * @return BaseResponse<CallListResponse>
+     * @return BaseResponse<DefaultPagination<CallListResponse>>
      *
      * @throws APIException
      */
@@ -124,6 +125,7 @@ final class CallsRawService implements CallsRawContract
             query: $parsed,
             options: $options,
             convert: CallListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

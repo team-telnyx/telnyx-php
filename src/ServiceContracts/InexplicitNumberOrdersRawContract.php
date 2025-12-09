@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListParams;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 
 interface InexplicitNumberOrdersRawContract
@@ -48,7 +49,7 @@ interface InexplicitNumberOrdersRawContract
      *
      * @param array<mixed>|InexplicitNumberOrderListParams $params
      *
-     * @return BaseResponse<InexplicitNumberOrderListResponse>
+     * @return BaseResponse<DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>,>
      *
      * @throws APIException
      */

@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Brand\AltBusinessIDType;
-use Telnyx\Brand\BrandIdentityStatus;
-use Telnyx\Brand\EntityType;
-use Telnyx\Brand\StockExchange;
-use Telnyx\Brand\TelnyxBrand;
-use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\Number10dlc\Brand\AltBusinessIDType;
 use Telnyx\Number10dlc\Brand\BrandCreateParams;
 use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
+use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListParams;
 use Telnyx\Number10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
 use Telnyx\Number10dlc\Brand\BrandUpdateParams;
+use Telnyx\Number10dlc\Brand\EntityType;
+use Telnyx\Number10dlc\Brand\StockExchange;
+use Telnyx\Number10dlc\Brand\TelnyxBrand;
+use Telnyx\Number10dlc\Brand\Vertical;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\BrandRawContract;
 
@@ -183,7 +184,7 @@ final class BrandRawService implements BrandRawContract
      *   tcrBrandID?: string,
      * }|BrandListParams $params
      *
-     * @return BaseResponse<BrandListResponse>
+     * @return BaseResponse<PerPagePaginationV2<BrandListResponse>>
      *
      * @throws APIException
      */
@@ -206,6 +207,7 @@ final class BrandRawService implements BrandRawContract
             ),
             options: $options,
             convert: BrandListResponse::class,
+            page: PerPagePaginationV2::class,
         );
     }
 

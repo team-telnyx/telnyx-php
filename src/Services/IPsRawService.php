@@ -7,11 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\IPs\IP;
 use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams;
-use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
@@ -126,7 +127,7 @@ final class IPsRawService implements IPsRawContract
      *   page?: array{number?: int, size?: int},
      * }|IPListParams $params
      *
-     * @return BaseResponse<IPListResponse>
+     * @return BaseResponse<DefaultPagination<IP>>
      *
      * @throws APIException
      */
@@ -145,7 +146,8 @@ final class IPsRawService implements IPsRawContract
             path: 'ips',
             query: $parsed,
             options: $options,
-            convert: IPListResponse::class,
+            convert: IP::class,
+            page: DefaultPagination::class,
         );
     }
 

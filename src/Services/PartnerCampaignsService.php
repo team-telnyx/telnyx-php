@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\Campaign\CampaignSharingStatus;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
-use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PartnerCampaignsContract;
 
@@ -85,6 +85,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'brandDisplayName'|'-brandDisplayName'|'tcrBrandId'|'-tcrBranId'|'tcrCampaignId'|'-tcrCampaignId'|'createdAt'|'-createdAt'|'campaignStatus'|'-campaignStatus'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
+     * @return PerPagePaginationV2<TelnyxDownstreamCampaign>
+     *
      * @throws APIException
      */
     public function list(
@@ -92,7 +94,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         int $recordsPerPage = 10,
         string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
-    ): PartnerCampaignListResponse {
+    ): PerPagePaginationV2 {
         $params = [
             'page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort,
         ];
@@ -117,13 +119,15 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      *
+     * @return PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>
+     *
      * @throws APIException
      */
     public function listSharedByMe(
         int $page = 1,
         int $recordsPerPage = 10,
         ?RequestOptions $requestOptions = null,
-    ): PartnerCampaignListSharedByMeResponse {
+    ): PerPagePaginationV2 {
         $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

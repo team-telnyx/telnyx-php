@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -64,6 +65,26 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
         $this->assertInstanceOf(
             PhoneNumberAssignmentByProfileAssignResponse::class,
             $result
+        );
+    }
+
+    #[Test]
+    public function testListPhoneNumberStatus(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this
+            ->client
+            ->phoneNumberAssignmentByProfile
+            ->listPhoneNumberStatus('taskId')
+        ;
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse::class,
+            $result,
         );
     }
 

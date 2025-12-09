@@ -6,11 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType\Eq;
-use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Telnyx\RequestOptions;
@@ -86,7 +87,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * Update a notification channel.
      *
-     * @param string $id the id of the resource
+     * @param string $notificationChannelID the id of the resource
      * @param string $channelDestination the destination associated with the channel type
      * @param 'sms'|'voice'|'email'|'webhook'|\Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID $channelTypeID A Channel Type ID
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
@@ -94,7 +95,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $notificationChannelID,
         ?string $channelDestination = null,
         string|\Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID|null $channelTypeID = null,
         ?string $notificationProfileID = null,
@@ -109,7 +110,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($notificationChannelID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -135,13 +136,15 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<NotificationChannel>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): NotificationChannelListResponse {
+    ): DefaultPagination {
         $params = ['filter' => $filter, 'page' => $page];
         // @phpstan-ignore-next-line function.impossibleType
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));

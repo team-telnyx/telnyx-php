@@ -7,6 +7,7 @@ namespace Telnyx\Services\Porting;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
 use Telnyx\Porting\Events\EventListParams\Filter\Type;
@@ -62,7 +63,7 @@ final class EventsRawService implements EventsRawContract
      *   page?: array{number?: int, size?: int},
      * }|EventListParams $params
      *
-     * @return BaseResponse<EventListResponse>
+     * @return BaseResponse<DefaultPagination<EventListResponse>>
      *
      * @throws APIException
      */
@@ -82,6 +83,7 @@ final class EventsRawService implements EventsRawContract
             query: $parsed,
             options: $options,
             convert: EventListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 
