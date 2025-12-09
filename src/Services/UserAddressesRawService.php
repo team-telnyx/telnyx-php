@@ -44,7 +44,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      *   neighborhood?: string,
      *   phoneNumber?: string,
      *   postalCode?: string,
-     *   skipAddressVerification?: string,
+     *   skipAddressVerification?: bool,
      * }|UserAddressCreateParams $params
      *
      * @return BaseResponse<UserAddressNewResponse>
