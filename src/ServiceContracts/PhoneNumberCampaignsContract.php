@@ -6,10 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\RequestOptions;
 
 interface PhoneNumberCampaignsContract
@@ -17,12 +15,14 @@ interface PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberCampaignCreateParams $params
+     * @param string $campaignID the ID of the campaign you want to link to the specified phone number
+     * @param string $phoneNumber the phone number you want to link to a specified campaign
      *
      * @throws APIException
      */
     public function create(
-        array|PhoneNumberCampaignCreateParams $params,
+        string $campaignID,
+        string $phoneNumber,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign;
 
@@ -39,25 +39,36 @@ interface PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberCampaignUpdateParams $params
+     * @param string $campaignID the ID of the campaign you want to link to the specified phone number
+     * @param string $phoneNumber1 the phone number you want to link to a specified campaign
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumber,
-        array|PhoneNumberCampaignUpdateParams $params,
+        string $campaignID,
+        string $phoneNumber1,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign;
 
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberCampaignListParams $params
+     * @param array{
+     *   tcrBrandID?: string,
+     *   tcrCampaignID?: string,
+     *   telnyxBrandID?: string,
+     *   telnyxCampaignID?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id]
+     * @param 'assignmentStatus'|'-assignmentStatus'|'createdAt'|'-createdAt'|'phoneNumber'|'-phoneNumber'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|PhoneNumberCampaignListParams $params,
+        ?array $filter = null,
+        int $page = 1,
+        int $recordsPerPage = 20,
+        string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaignListResponse;
 

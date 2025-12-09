@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants\Tests;
 
-use Telnyx\AI\Assistants\Tests\Runs\RunListParams;
-use Telnyx\AI\Assistants\Tests\Runs\RunRetrieveParams;
-use Telnyx\AI\Assistants\Tests\Runs\RunTriggerParams;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsContract;
@@ -18,38 +14,34 @@ use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsContract;
 final class RunsService implements RunsContract
 {
     /**
+     * @api
+     */
+    public RunsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RunsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieves detailed information about a specific test run execution
      *
-     * @param array{testID: string}|RunRetrieveParams $params
-     *
      * @throws APIException
      */
     public function retrieve(
         string $runID,
-        array|RunRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $testID,
+        ?RequestOptions $requestOptions = null
     ): TestRunResponse {
-        [$parsed, $options] = RunRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $testID = $parsed['testID'];
-        unset($parsed['testID']);
+        $params = ['testID' => $testID];
 
-        /** @var BaseResponse<TestRunResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/tests/%1$s/runs/%2$s', $testID, $runID],
-            options: $options,
-            convert: TestRunResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($runID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,29 +52,24 @@ final class RunsService implements RunsContract
      * Retrieves paginated execution history for a specific assistant test with filtering options
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}, status?: string
-     * }|RunListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      *
      * @throws APIException
      */
     public function list(
         string $testID,
-        array|RunListParams $params,
+        ?array $page = null,
+        ?string $status = null,
         ?RequestOptions $requestOptions = null,
     ): PaginatedTestRunList {
-        [$parsed, $options] = RunListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page, 'status' => $status];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PaginatedTestRunList> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/tests/%1$s/runs', $testID],
-            query: $parsed,
-            options: $options,
-            convert: PaginatedTestRunList::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($testID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -92,28 +79,21 @@ final class RunsService implements RunsContract
      *
      * Initiates immediate execution of a specific assistant test
      *
-     * @param array{destinationVersionID?: string}|RunTriggerParams $params
+     * @param string $destinationVersionID Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      *
      * @throws APIException
      */
     public function trigger(
         string $testID,
-        array|RunTriggerParams $params,
+        ?string $destinationVersionID = null,
         ?RequestOptions $requestOptions = null,
     ): TestRunResponse {
-        [$parsed, $options] = RunTriggerParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['destinationVersionID' => $destinationVersionID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<TestRunResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/tests/%1$s/runs', $testID],
-            body: (object) $parsed,
-            options: $options,
-            convert: TestRunResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->trigger($testID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

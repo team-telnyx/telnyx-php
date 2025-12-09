@@ -36,9 +36,11 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->create([
-            'name' => 'name', 'type' => 'type', 'url' => 'url',
-        ]);
+        $result = $this->client->ai->mcpServers->create(
+            name: 'name',
+            type: 'type',
+            url: 'url'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(McpServerNewResponse::class, $result);
@@ -51,13 +53,13 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->create([
-            'name' => 'name',
-            'type' => 'type',
-            'url' => 'url',
-            'allowedTools' => ['string'],
-            'apiKeyRef' => 'api_key_ref',
-        ]);
+        $result = $this->client->ai->mcpServers->create(
+            name: 'name',
+            type: 'type',
+            url: 'url',
+            allowedTools: ['string'],
+            apiKeyRef: 'api_key_ref',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(McpServerNewResponse::class, $result);
@@ -83,7 +85,7 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->update('mcp_server_id', []);
+        $result = $this->client->ai->mcpServers->update('mcp_server_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(McpServerUpdateResponse::class, $result);
@@ -96,7 +98,7 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->list([]);
+        $result = $this->client->ai->mcpServers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

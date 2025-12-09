@@ -49,7 +49,7 @@ final class LogMessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->logMessages->list([]);
+        $result = $this->client->externalConnections->logMessages->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(LogMessageListResponse::class, $result);

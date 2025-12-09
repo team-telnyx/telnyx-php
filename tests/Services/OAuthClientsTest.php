@@ -37,12 +37,12 @@ final class OAuthClientsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthClients->create([
-            'allowedGrantTypes' => ['client_credentials'],
-            'allowedScopes' => ['admin'],
-            'clientType' => 'public',
-            'name' => 'My OAuth client',
-        ]);
+        $result = $this->client->oauthClients->create(
+            allowedGrantTypes: ['client_credentials'],
+            allowedScopes: ['admin'],
+            clientType: 'public',
+            name: 'My OAuth client',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthClientNewResponse::class, $result);
@@ -55,17 +55,17 @@ final class OAuthClientsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthClients->create([
-            'allowedGrantTypes' => ['client_credentials'],
-            'allowedScopes' => ['admin'],
-            'clientType' => 'public',
-            'name' => 'My OAuth client',
-            'logoUri' => 'https://example.com',
-            'policyUri' => 'https://example.com',
-            'redirectUris' => ['https://example.com'],
-            'requirePkce' => true,
-            'tosUri' => 'https://example.com',
-        ]);
+        $result = $this->client->oauthClients->create(
+            allowedGrantTypes: ['client_credentials'],
+            allowedScopes: ['admin'],
+            clientType: 'public',
+            name: 'My OAuth client',
+            logoUri: 'https://example.com',
+            policyUri: 'https://example.com',
+            redirectUris: ['https://example.com'],
+            requirePkce: true,
+            tosUri: 'https://example.com',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthClientNewResponse::class, $result);
@@ -94,8 +94,7 @@ final class OAuthClientsTest extends TestCase
         }
 
         $result = $this->client->oauthClients->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -109,7 +108,7 @@ final class OAuthClientsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthClients->list([]);
+        $result = $this->client->oauthClients->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthClientListResponse::class, $result);

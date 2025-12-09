@@ -5,52 +5,54 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
-use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
-use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
 final class TextToSpeechService implements TextToSpeechContract
 {
     /**
+     * @api
+     */
+    public TextToSpeechRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new TextToSpeechRawService($client);
+    }
 
     /**
      * @api
      *
      * Converts the provided text to speech using the specified voice and returns audio data
      *
-     * @param array{
-     *   text: string, voice: string
-     * }|TextToSpeechGenerateSpeechParams $params
+     * @param string $text The text to convert to speech
+     * @param string $voice The voice ID in the format Provider.ModelId.VoiceId.
+     *
+     * Examples:
+     * - AWS.Polly.Joanna-Neural
+     * - Azure.en-US-AvaMultilingualNeural
+     * - ElevenLabs.eleven_multilingual_v2.Rachel
+     * - Telnyx.KokoroTTS.af
+     *
+     * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
      *
      * @throws APIException
      */
     public function generateSpeech(
-        array|TextToSpeechGenerateSpeechParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $text,
+        string $voice,
+        ?RequestOptions $requestOptions = null
     ): string {
-        [$parsed, $options] = TextToSpeechGenerateSpeechParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['text' => $text, 'voice' => $voice];
 
-        /** @var BaseResponse<string> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'text-to-speech/speech',
-            headers: ['Accept' => 'audio/mpeg'],
-            body: (object) $parsed,
-            options: $options,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->generateSpeech(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,33 +62,24 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Returns a list of voices that can be used with the text to speech commands.
      *
-     * @param array{
-     *   elevenlabsAPIKeyRef?: string,
-     *   provider?: 'aws'|'azure'|'elevenlabs'|'telnyx'|Provider,
-     * }|TextToSpeechListVoicesParams $params
+     * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
+     * @param 'aws'|'azure'|'elevenlabs'|'telnyx'|Provider $provider Filter voices by provider
      *
      * @throws APIException
      */
     public function listVoices(
-        array|TextToSpeechListVoicesParams $params,
+        ?string $elevenlabsAPIKeyRef = null,
+        string|Provider|null $provider = null,
         ?RequestOptions $requestOptions = null,
     ): TextToSpeechListVoicesResponse {
-        [$parsed, $options] = TextToSpeechListVoicesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<TextToSpeechListVoicesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'text-to-speech/voices',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['elevenlabsAPIKeyRef' => 'elevenlabs_api_key_ref']
-            ),
-            options: $options,
-            convert: TextToSpeechListVoicesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listVoices(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

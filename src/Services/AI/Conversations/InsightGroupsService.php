@@ -5,12 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Conversations;
 
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupInsightGroupsParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
@@ -21,6 +17,11 @@ final class InsightGroupsService implements InsightGroupsContract
     /**
      * @api
      */
+    public InsightGroupsRawService $raw;
+
+    /**
+     * @api
+     */
     public InsightsService $insights;
 
     /**
@@ -28,6 +29,7 @@ final class InsightGroupsService implements InsightGroupsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new InsightGroupsRawService($client);
         $this->insights = new InsightsService($client);
     }
 
@@ -36,19 +38,16 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Get insight group by ID
      *
+     * @param string $groupID The ID of the insight group
+     *
      * @throws APIException
      */
     public function retrieve(
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateGroupDetail {
-        /** @var BaseResponse<InsightTemplateGroupDetail> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/conversations/insight-groups/%1$s', $groupID],
-            options: $requestOptions,
-            convert: InsightTemplateGroupDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($groupID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -58,30 +57,25 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Update an insight template group
      *
-     * @param array{
-     *   description?: string, name?: string, webhook?: string
-     * }|InsightGroupUpdateParams $params
+     * @param string $groupID The ID of the insight group
      *
      * @throws APIException
      */
     public function update(
         string $groupID,
-        array|InsightGroupUpdateParams $params,
+        ?string $description = null,
+        ?string $name = null,
+        ?string $webhook = null,
         ?RequestOptions $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        [$parsed, $options] = InsightGroupUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'description' => $description, 'name' => $name, 'webhook' => $webhook,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<InsightTemplateGroupDetail> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['ai/conversations/insight-groups/%1$s', $groupID],
-            body: (object) $parsed,
-            options: $options,
-            convert: InsightTemplateGroupDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($groupID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -91,19 +85,16 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Delete insight group by ID
      *
+     * @param string $groupID The ID of the insight group
+     *
      * @throws APIException
      */
     public function delete(
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['ai/conversations/insight-groups/%1$s', $groupID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($groupID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -113,29 +104,22 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Create a new insight group
      *
-     * @param array{
-     *   name: string, description?: string, webhook?: string
-     * }|InsightGroupInsightGroupsParams $params
-     *
      * @throws APIException
      */
     public function insightGroups(
-        array|InsightGroupInsightGroupsParams $params,
+        string $name,
+        ?string $description = null,
+        string $webhook = '',
         ?RequestOptions $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        [$parsed, $options] = InsightGroupInsightGroupsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'name' => $name, 'description' => $description, 'webhook' => $webhook,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<InsightTemplateGroupDetail> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/conversations/insight-groups',
-            body: (object) $parsed,
-            options: $options,
-            convert: InsightTemplateGroupDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->insightGroups(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -146,28 +130,21 @@ final class InsightGroupsService implements InsightGroupsContract
      * Get all insight groups
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|InsightGroupRetrieveInsightGroupsParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function retrieveInsightGroups(
-        array|InsightGroupRetrieveInsightGroupsParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): InsightGroupGetInsightGroupsResponse {
-        [$parsed, $options] = InsightGroupRetrieveInsightGroupsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<InsightGroupGetInsightGroupsResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/conversations/insight-groups',
-            query: $parsed,
-            options: $options,
-            convert: InsightGroupGetInsightGroupsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveInsightGroups(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

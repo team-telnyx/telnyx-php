@@ -49,10 +49,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->update(
             'id',
-            [
-                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'supervisorRole' => 'whisper',
-            ],
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            supervisorRole: 'whisper',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -68,15 +66,13 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->update(
             'id',
-            [
-                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'supervisorRole' => 'whisper',
-                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'region' => 'US',
-                'whisperCallControlIDs' => [
-                    'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
-                    'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
-                ],
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            supervisorRole: 'whisper',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            region: 'US',
+            whisperCallControlIDs: [
+                'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
+                'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
             ],
         );
 
@@ -91,7 +87,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->hold('id', []);
+        $result = $this->client->conferences->actions->hold('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionHoldResponse::class, $result);
@@ -106,9 +102,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->join(
             'id',
-            [
-                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-            ],
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -124,24 +118,22 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->join(
             'id',
-            [
-                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'beepEnabled' => 'always',
-                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'endConferenceOnExit' => true,
-                'hold' => true,
-                'holdAudioURL' => 'http://www.example.com/audio.wav',
-                'holdMediaName' => 'my_media_uploaded_to_media_storage_api',
-                'mute' => true,
-                'region' => 'US',
-                'softEndConferenceOnExit' => true,
-                'startConferenceOnEnter' => true,
-                'supervisorRole' => 'whisper',
-                'whisperCallControlIDs' => [
-                    'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
-                    'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
-                ],
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            beepEnabled: 'always',
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            endConferenceOnExit: true,
+            hold: true,
+            holdAudioURL: 'http://www.example.com/audio.wav',
+            holdMediaName: 'my_media_uploaded_to_media_storage_api',
+            mute: true,
+            region: 'US',
+            softEndConferenceOnExit: true,
+            startConferenceOnEnter: true,
+            supervisorRole: 'whisper',
+            whisperCallControlIDs: [
+                'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
+                'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
             ],
         );
 
@@ -158,7 +150,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->leave(
             'id',
-            ['callControlID' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff']
+            callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -174,12 +166,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->leave(
             'id',
-            [
-                'callControlID' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff',
-                'beepEnabled' => 'never',
-                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'region' => 'US',
-            ],
+            callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff',
+            beepEnabled: 'never',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            region: 'US',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -193,7 +183,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->mute('id', []);
+        $result = $this->client->conferences->actions->mute('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionMuteResponse::class, $result);
@@ -206,7 +196,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->play('id', []);
+        $result = $this->client->conferences->actions->play('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionPlayResponse::class, $result);
@@ -219,7 +209,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->recordPause('id', []);
+        $result = $this->client->conferences->actions->recordPause('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionRecordPauseResponse::class, $result);
@@ -232,7 +222,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->recordResume('id', []);
+        $result = $this->client->conferences->actions->recordResume('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionRecordResumeResponse::class, $result);
@@ -247,7 +237,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordStart(
             'id',
-            ['format' => 'wav']
+            format: 'wav'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -263,14 +253,12 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordStart(
             'id',
-            [
-                'format' => 'wav',
-                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'customFileName' => 'my_recording_file_name',
-                'playBeep' => true,
-                'region' => 'US',
-                'trim' => 'trim-silence',
-            ],
+            format: 'wav',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            customFileName: 'my_recording_file_name',
+            playBeep: true,
+            region: 'US',
+            trim: 'trim-silence',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -284,7 +272,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->recordStop('id', []);
+        $result = $this->client->conferences->actions->recordStop('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionRecordStopResponse::class, $result);
@@ -299,7 +287,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->speak(
             'id',
-            ['payload' => 'Say this to participants', 'voice' => 'female']
+            payload: 'Say this to participants',
+            voice: 'female'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -315,19 +304,17 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->speak(
             'id',
-            [
-                'payload' => 'Say this to participants',
-                'voice' => 'female',
-                'callControlIDs' => [
-                    'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                ],
-                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'language' => 'en-US',
-                'payloadType' => 'text',
-                'region' => 'US',
-                'voiceSettings' => [
-                    'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
-                ],
+            payload: 'Say this to participants',
+            voice: 'female',
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            language: 'en-US',
+            payloadType: 'text',
+            region: 'US',
+            voiceSettings: [
+                'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
             ],
         );
 
@@ -342,7 +329,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->stop('id', []);
+        $result = $this->client->conferences->actions->stop('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionStopResponse::class, $result);
@@ -357,10 +344,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            [
-                'callControlIDs' => [
-                    'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                ],
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             ],
         );
 
@@ -377,12 +362,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            [
-                'callControlIDs' => [
-                    'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                ],
-                'region' => 'US',
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             ],
+            region: 'US',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -396,7 +379,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->unmute('id', []);
+        $result = $this->client->conferences->actions->unmute('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionUnmuteResponse::class, $result);

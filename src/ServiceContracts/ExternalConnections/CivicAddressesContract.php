@@ -6,9 +6,7 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
-use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
-use Telnyx\ExternalConnections\CivicAddresses\CivicAddressRetrieveParams;
 use Telnyx\RequestOptions;
 
 interface CivicAddressesContract
@@ -16,26 +14,30 @@ interface CivicAddressesContract
     /**
      * @api
      *
-     * @param array<mixed>|CivicAddressRetrieveParams $params
+     * @param string $addressID identifies a civic address or a location
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
     public function retrieve(
         string $addressID,
-        array|CivicAddressRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): CivicAddressGetResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|CivicAddressListParams $params
+     * @param string $id identifies the resource
+     * @param array{
+     *   country?: list<string>
+     * } $filter Filter parameter for civic addresses (deepObject style). Supports filtering by country.
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|CivicAddressListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): CivicAddressListResponse;
 }

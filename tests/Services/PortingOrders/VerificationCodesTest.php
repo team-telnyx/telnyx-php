@@ -36,8 +36,7 @@ final class VerificationCodesTest extends TestCase
         }
 
         $result = $this->client->portingOrders->verificationCodes->list(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,8 +51,7 @@ final class VerificationCodesTest extends TestCase
         }
 
         $result = $this->client->portingOrders->verificationCodes->send(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -68,8 +66,7 @@ final class VerificationCodesTest extends TestCase
         }
 
         $result = $this->client->portingOrders->verificationCodes->verify(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

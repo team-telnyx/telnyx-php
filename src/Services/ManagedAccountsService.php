@@ -5,19 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
-use Telnyx\ManagedAccounts\ManagedAccountListParams;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
-use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitParams;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse;
-use Telnyx\ManagedAccounts\ManagedAccountUpdateParams;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccountsContract;
@@ -28,6 +22,11 @@ final class ManagedAccountsService implements ManagedAccountsContract
     /**
      * @api
      */
+    public ManagedAccountsRawService $raw;
+
+    /**
+     * @api
+     */
     public ActionsService $actions;
 
     /**
@@ -35,6 +34,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ManagedAccountsRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -43,33 +43,34 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Create a new managed account owned by the authenticated user. You need to be explictly approved by Telnyx in order to become a manager account.
      *
-     * @param array{
-     *   businessName: string,
-     *   email?: string,
-     *   managedAccountAllowCustomPricing?: bool,
-     *   password?: string,
-     *   rollupBilling?: bool,
-     * }|ManagedAccountCreateParams $params
+     * @param string $businessName the name of the business for which the new managed account is being created, that will be used as the managed accounts's organization's name
+     * @param string $email The email address for the managed account. If not provided, the email address will be generated based on the email address of the manager account.
+     * @param bool $managedAccountAllowCustomPricing Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed after creation, but there may be time lag between when the value is changed and pricing changes take effect.
+     * @param string $password Password for the managed account. If a password is not supplied, the account will not be able to be signed into directly. (A password reset may still be performed later to enable sign-in via password.)
+     * @param bool $rollupBilling Boolean value that indicates if the billing information and charges to the managed account "roll up" to the manager account. If true, the managed account will not have its own balance and will use the shared balance with the manager account. This value cannot be changed after account creation without going through Telnyx support as changes require manual updates to the account ledger. Defaults to false.
      *
      * @throws APIException
      */
     public function create(
-        array|ManagedAccountCreateParams $params,
+        string $businessName,
+        ?string $email = null,
+        ?bool $managedAccountAllowCustomPricing = null,
+        ?string $password = null,
+        ?bool $rollupBilling = null,
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountNewResponse {
-        [$parsed, $options] = ManagedAccountCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'businessName' => $businessName,
+            'email' => $email,
+            'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
+            'password' => $password,
+            'rollupBilling' => $rollupBilling,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ManagedAccountNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'managed_accounts',
-            body: (object) $parsed,
-            options: $options,
-            convert: ManagedAccountNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -79,19 +80,16 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Retrieves the details of a single managed account.
      *
+     * @param string $id Managed Account User ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetResponse {
-        /** @var BaseResponse<ManagedAccountGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['managed_accounts/%1$s', $id],
-            options: $requestOptions,
-            convert: ManagedAccountGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -101,30 +99,24 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Update a single managed account.
      *
-     * @param array{
-     *   managedAccountAllowCustomPricing?: bool
-     * }|ManagedAccountUpdateParams $params
+     * @param string $id Managed Account User ID
+     * @param bool $managedAccountAllowCustomPricing Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|ManagedAccountUpdateParams $params,
+        ?bool $managedAccountAllowCustomPricing = null,
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountUpdateResponse {
-        [$parsed, $options] = ManagedAccountUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ManagedAccountUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['managed_accounts/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ManagedAccountUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -135,37 +127,46 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * Lists the accounts managed by the current user. Users need to be explictly approved by Telnyx in order to become manager accounts.
      *
      * @param array{
-     *   filter?: array{
-     *     email?: array{contains?: string, eq?: string},
-     *     organizationName?: array{contains?: string, eq?: string},
-     *   },
-     *   includeCancelledAccounts?: bool,
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'email'|Sort,
-     * }|ManagedAccountListParams $params
+     *   email?: array{contains?: string, eq?: string},
+     *   organizationName?: array{contains?: string, eq?: string},
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq]
+     * @param bool $includeCancelledAccounts specifies if cancelled accounts should be included in the results
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param 'created_at'|'email'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+     * That is: <ul>
+     *   <li>
+     *     <code>email</code>: sorts the result by the
+     *     <code>email</code> field in ascending order.
+     *   </li>
+     *
+     *   <li>
+     *     <code>-email</code>: sorts the result by the
+     *     <code>email</code> field in descending order.
+     *   </li>
+     * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @throws APIException
      */
     public function list(
-        array|ManagedAccountListParams $params,
+        ?array $filter = null,
+        bool $includeCancelledAccounts = false,
+        ?array $page = null,
+        string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountListResponse {
-        [$parsed, $options] = ManagedAccountListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'filter' => $filter,
+            'includeCancelledAccounts' => $includeCancelledAccounts,
+            'page' => $page,
+            'sort' => $sort,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ManagedAccountListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'managed_accounts',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['includeCancelledAccounts' => 'include_cancelled_accounts']
-            ),
-            options: $options,
-            convert: ManagedAccountListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -180,13 +181,8 @@ final class ManagedAccountsService implements ManagedAccountsContract
     public function getAllocatableGlobalOutboundChannels(
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
-        /** @var BaseResponse<ManagedAccountGetAllocatableGlobalOutboundChannelsResponse,> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'managed_accounts/allocatable_global_outbound_channels',
-            options: $requestOptions,
-            convert: ManagedAccountGetAllocatableGlobalOutboundChannelsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getAllocatableGlobalOutboundChannels(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -196,30 +192,22 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Update the amount of allocatable global outbound channels allocated to a specific managed account.
      *
-     * @param array{
-     *   channelLimit?: int
-     * }|ManagedAccountUpdateGlobalChannelLimitParams $params
+     * @param string $id Managed Account User ID
+     * @param int $channelLimit Integer value that indicates the number of allocatable global outbound channels that should be allocated to the managed account. Must be 0 or more. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
      *
      * @throws APIException
      */
     public function updateGlobalChannelLimit(
         string $id,
-        array|ManagedAccountUpdateGlobalChannelLimitParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?int $channelLimit = null,
+        ?RequestOptions $requestOptions = null
     ): ManagedAccountUpdateGlobalChannelLimitResponse {
-        [$parsed, $options] = ManagedAccountUpdateGlobalChannelLimitParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['channelLimit' => $channelLimit];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ManagedAccountUpdateGlobalChannelLimitResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['managed_accounts/%1$s/update_global_channel_limit', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ManagedAccountUpdateGlobalChannelLimitResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateGlobalChannelLimit($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

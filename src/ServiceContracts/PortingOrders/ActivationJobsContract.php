@@ -6,10 +6,7 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -18,39 +15,46 @@ interface ActivationJobsContract
     /**
      * @api
      *
-     * @param array<mixed>|ActivationJobRetrieveParams $params
+     * @param string $activationJobID Activation Job Identifier
+     * @param string $id Porting Order id
      *
      * @throws APIException
      */
     public function retrieve(
         string $activationJobID,
-        array|ActivationJobRetrieveParams $params,
+        string $id,
         ?RequestOptions $requestOptions = null,
     ): ActivationJobGetResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|ActivationJobUpdateParams $params
+     * @param string $activationJobID Path param: Activation Job Identifier
+     * @param string $id Path param: Porting Order id
+     * @param string|\DateTimeInterface $activateAt Body param: The desired activation time. The activation time should be between any of the activation windows.
      *
      * @throws APIException
      */
     public function update(
         string $activationJobID,
-        array|ActivationJobUpdateParams $params,
+        string $id,
+        string|\DateTimeInterface|null $activateAt = null,
         ?RequestOptions $requestOptions = null,
     ): ActivationJobUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|ActivationJobListParams $params
+     * @param string $id Porting Order id
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|ActivationJobListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): ActivationJobListResponse;
 }

@@ -56,8 +56,7 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->update(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            []
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -71,7 +70,7 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->list([]);
+        $result = $this->client->documents->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentListResponse::class, $result);
@@ -132,10 +131,10 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->upload([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
-        ]);
+        $result = $this->client->documents->upload(
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentUploadResponse::class, $result);
@@ -148,12 +147,12 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->upload([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'customerReference' => 'MY REF 001',
-            'filename' => 'test-document.pdf',
-            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
-        ]);
+        $result = $this->client->documents->upload(
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            customerReference: 'MY REF 001',
+            filename: 'test-document.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentUploadResponse::class, $result);
@@ -166,10 +165,10 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->uploadJson([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
-        ]);
+        $result = $this->client->documents->uploadJson(
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentUploadJsonResponse::class, $result);
@@ -182,12 +181,12 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->uploadJson([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'customerReference' => 'MY REF 001',
-            'filename' => 'test-document.pdf',
-            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
-        ]);
+        $result = $this->client->documents->uploadJson(
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            customerReference: 'MY REF 001',
+            filename: 'test-document.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentUploadJsonResponse::class, $result);

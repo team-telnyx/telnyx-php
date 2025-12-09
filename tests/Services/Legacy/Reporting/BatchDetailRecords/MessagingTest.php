@@ -43,10 +43,10 @@ final class MessagingTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->messaging
-            ->create([
-                'endTime' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            ])
+            ->create(
+                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -66,12 +66,12 @@ final class MessagingTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->messaging
-            ->create([
-                'endTime' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-                'connections' => [123, 456],
-                'directions' => [1, 2],
-                'filters' => [
+            ->create(
+                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+                connections: [123, 456],
+                directions: [1, 2],
+                filters: [
                     [
                         'billingGroup' => 'adfaa016-f921-4b6c-97bb-e4c1dad231c5',
                         'cld' => '+13129457420',
@@ -82,20 +82,20 @@ final class MessagingTest extends TestCase
                         'tagsList' => 'tag1',
                     ],
                 ],
-                'includeMessageBody' => true,
-                'managedAccounts' => [
+                includeMessageBody: true,
+                managedAccounts: [
                     'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                     '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
                 ],
-                'profiles' => [
+                profiles: [
                     '3fa85f64-5717-4562-b3fc-2c963f66afa6',
                     '7d4e3f8a-9b2c-4e1d-8f5a-1a2b3c4d5e6f',
                 ],
-                'recordTypes' => [1, 2],
-                'reportName' => 'My MDR Report',
-                'selectAllManagedAccounts' => false,
-                'timezone' => 'UTC',
-            ])
+                recordTypes: [1, 2],
+                reportName: 'My MDR Report',
+                selectAllManagedAccounts: false,
+                timezone: 'UTC',
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

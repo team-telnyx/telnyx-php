@@ -71,7 +71,7 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->schedule(['to' => '+18445550001']);
+        $result = $this->client->messages->schedule(to: '+18445550001');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageScheduleResponse::class, $result);
@@ -84,20 +84,20 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->schedule([
-            'to' => '+18445550001',
-            'autoDetect' => true,
-            'from' => '+18445550001',
-            'mediaURLs' => ['string'],
-            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'sendAt' => new \DateTimeImmutable('2019-01-23T18:30:00Z'),
-            'subject' => 'From Telnyx!',
-            'text' => 'Hello, World!',
-            'type' => 'SMS',
-            'useProfileWebhooks' => true,
-            'webhookFailoverURL' => 'https://backup.example.com/hooks',
-            'webhookURL' => 'http://example.com/webhooks',
-        ]);
+        $result = $this->client->messages->schedule(
+            to: '+18445550001',
+            autoDetect: true,
+            from: '+18445550001',
+            mediaURLs: ['string'],
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
+            sendAt: new \DateTimeImmutable('2019-01-23T18:30:00Z'),
+            subject: 'From Telnyx!',
+            text: 'Hello, World!',
+            type: 'SMS',
+            useProfileWebhooks: true,
+            webhookFailoverURL: 'https://backup.example.com/hooks',
+            webhookURL: 'http://example.com/webhooks',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageScheduleResponse::class, $result);
@@ -110,7 +110,7 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->send(['to' => '+18445550001']);
+        $result = $this->client->messages->send(to: '+18445550001');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendResponse::class, $result);
@@ -123,20 +123,20 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->send([
-            'to' => '+18445550001',
-            'autoDetect' => true,
-            'from' => '+18445550001',
-            'mediaURLs' => ['http://example.com'],
-            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'sendAt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            'subject' => 'From Telnyx!',
-            'text' => 'Hello, World!',
-            'type' => 'MMS',
-            'useProfileWebhooks' => true,
-            'webhookFailoverURL' => 'https://backup.example.com/hooks',
-            'webhookURL' => 'http://example.com/webhooks',
-        ]);
+        $result = $this->client->messages->send(
+            to: '+18445550001',
+            autoDetect: true,
+            from: '+18445550001',
+            mediaURLs: ['http://example.com'],
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
+            sendAt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            subject: 'From Telnyx!',
+            text: 'Hello, World!',
+            type: 'MMS',
+            useProfileWebhooks: true,
+            webhookFailoverURL: 'https://backup.example.com/hooks',
+            webhookURL: 'http://example.com/webhooks',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendResponse::class, $result);
@@ -149,9 +149,10 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendGroupMms([
-            'from' => '+13125551234', 'to' => ['+18655551234', '+14155551234'],
-        ]);
+        $result = $this->client->messages->sendGroupMms(
+            from: '+13125551234',
+            to: ['+18655551234', '+14155551234']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendGroupMmsResponse::class, $result);
@@ -164,16 +165,16 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendGroupMms([
-            'from' => '+13125551234',
-            'to' => ['+18655551234', '+14155551234'],
-            'mediaURLs' => ['http://example.com'],
-            'subject' => 'From Telnyx!',
-            'text' => 'Hello, World!',
-            'useProfileWebhooks' => true,
-            'webhookFailoverURL' => 'https://backup.example.com/hooks',
-            'webhookURL' => 'http://example.com/webhooks',
-        ]);
+        $result = $this->client->messages->sendGroupMms(
+            from: '+13125551234',
+            to: ['+18655551234', '+14155551234'],
+            mediaURLs: ['http://example.com'],
+            subject: 'From Telnyx!',
+            text: 'Hello, World!',
+            useProfileWebhooks: true,
+            webhookFailoverURL: 'https://backup.example.com/hooks',
+            webhookURL: 'http://example.com/webhooks',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendGroupMmsResponse::class, $result);
@@ -186,9 +187,10 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendLongCode([
-            'from' => '+18445550001', 'to' => '+13125550002',
-        ]);
+        $result = $this->client->messages->sendLongCode(
+            from: '+18445550001',
+            to: '+13125550002'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendLongCodeResponse::class, $result);
@@ -201,18 +203,18 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendLongCode([
-            'from' => '+18445550001',
-            'to' => '+13125550002',
-            'autoDetect' => true,
-            'mediaURLs' => ['http://example.com'],
-            'subject' => 'From Telnyx!',
-            'text' => 'Hello, World!',
-            'type' => 'MMS',
-            'useProfileWebhooks' => true,
-            'webhookFailoverURL' => 'https://backup.example.com/hooks',
-            'webhookURL' => 'http://example.com/webhooks',
-        ]);
+        $result = $this->client->messages->sendLongCode(
+            from: '+18445550001',
+            to: '+13125550002',
+            autoDetect: true,
+            mediaURLs: ['http://example.com'],
+            subject: 'From Telnyx!',
+            text: 'Hello, World!',
+            type: 'MMS',
+            useProfileWebhooks: true,
+            webhookFailoverURL: 'https://backup.example.com/hooks',
+            webhookURL: 'http://example.com/webhooks',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendLongCodeResponse::class, $result);
@@ -225,10 +227,10 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendNumberPool([
-            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'to' => '+13125550002',
-        ]);
+        $result = $this->client->messages->sendNumberPool(
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
+            to: '+13125550002',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendNumberPoolResponse::class, $result);
@@ -241,18 +243,18 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendNumberPool([
-            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'to' => '+13125550002',
-            'autoDetect' => true,
-            'mediaURLs' => ['http://example.com'],
-            'subject' => 'From Telnyx!',
-            'text' => 'Hello, World!',
-            'type' => 'MMS',
-            'useProfileWebhooks' => true,
-            'webhookFailoverURL' => 'https://backup.example.com/hooks',
-            'webhookURL' => 'http://example.com/webhooks',
-        ]);
+        $result = $this->client->messages->sendNumberPool(
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
+            to: '+13125550002',
+            autoDetect: true,
+            mediaURLs: ['http://example.com'],
+            subject: 'From Telnyx!',
+            text: 'Hello, World!',
+            type: 'MMS',
+            useProfileWebhooks: true,
+            webhookFailoverURL: 'https://backup.example.com/hooks',
+            webhookURL: 'http://example.com/webhooks',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendNumberPoolResponse::class, $result);
@@ -265,9 +267,10 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendShortCode([
-            'from' => '+18445550001', 'to' => '+18445550001',
-        ]);
+        $result = $this->client->messages->sendShortCode(
+            from: '+18445550001',
+            to: '+18445550001'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendShortCodeResponse::class, $result);
@@ -280,18 +283,18 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendShortCode([
-            'from' => '+18445550001',
-            'to' => '+18445550001',
-            'autoDetect' => true,
-            'mediaURLs' => ['http://example.com'],
-            'subject' => 'From Telnyx!',
-            'text' => 'Hello, World!',
-            'type' => 'MMS',
-            'useProfileWebhooks' => true,
-            'webhookFailoverURL' => 'https://backup.example.com/hooks',
-            'webhookURL' => 'http://example.com/webhooks',
-        ]);
+        $result = $this->client->messages->sendShortCode(
+            from: '+18445550001',
+            to: '+18445550001',
+            autoDetect: true,
+            mediaURLs: ['http://example.com'],
+            subject: 'From Telnyx!',
+            text: 'Hello, World!',
+            type: 'MMS',
+            useProfileWebhooks: true,
+            webhookFailoverURL: 'https://backup.example.com/hooks',
+            webhookURL: 'http://example.com/webhooks',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendShortCodeResponse::class, $result);

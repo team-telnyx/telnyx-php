@@ -7,7 +7,6 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
-use Telnyx\Recordings\RecordingListParams;
 use Telnyx\Recordings\RecordingListResponse;
 use Telnyx\RequestOptions;
 
@@ -15,6 +14,8 @@ interface RecordingsContract
 {
     /**
      * @api
+     *
+     * @param string $recordingID uniquely identifies the recording by id
      *
      * @throws APIException
      */
@@ -26,17 +27,32 @@ interface RecordingsContract
     /**
      * @api
      *
-     * @param array<mixed>|RecordingListParams $params
+     * @param array{
+     *   callLegID?: string,
+     *   callSessionID?: string,
+     *   conferenceID?: string,
+     *   connectionID?: string,
+     *   createdAt?: array{gte?: string, lte?: string},
+     *   from?: string,
+     *   sipCallID?: string,
+     *   to?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|RecordingListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): RecordingListResponse;
 
     /**
      * @api
+     *
+     * @param string $recordingID uniquely identifies the recording by id
      *
      * @throws APIException
      */

@@ -36,10 +36,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifications->byPhoneNumber->actions->verify(
             '+13035551234',
-            [
-                'code' => '17686',
-                'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            ],
+            code: '17686',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,10 +53,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifications->byPhoneNumber->actions->verify(
             '+13035551234',
-            [
-                'code' => '17686',
-                'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            ],
+            code: '17686',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

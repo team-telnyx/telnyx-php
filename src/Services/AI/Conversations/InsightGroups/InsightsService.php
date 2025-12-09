@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Conversations\InsightGroups;
 
-use Telnyx\AI\Conversations\InsightGroups\Insights\InsightAssignParams;
-use Telnyx\AI\Conversations\InsightGroups\Insights\InsightDeleteUnassignParams;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroups\InsightsContract;
@@ -15,42 +12,37 @@ use Telnyx\ServiceContracts\AI\Conversations\InsightGroups\InsightsContract;
 final class InsightsService implements InsightsContract
 {
     /**
+     * @api
+     */
+    public InsightsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new InsightsRawService($client);
+    }
 
     /**
      * @api
      *
      * Assign an insight to a group
      *
-     * @param array{groupID: string}|InsightAssignParams $params
+     * @param string $insightID The ID of the insight
+     * @param string $groupID The ID of the insight group
      *
      * @throws APIException
      */
     public function assign(
         string $insightID,
-        array|InsightAssignParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $groupID,
+        ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = InsightAssignParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $groupID = $parsed['groupID'];
-        unset($parsed['groupID']);
+        $params = ['groupID' => $groupID];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: [
-                'ai/conversations/insight-groups/%1$s/insights/%2$s/assign',
-                $groupID,
-                $insightID,
-            ],
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->assign($insightID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,33 +52,20 @@ final class InsightsService implements InsightsContract
      *
      * Remove an insight from a group
      *
-     * @param array{groupID: string}|InsightDeleteUnassignParams $params
+     * @param string $insightID The ID of the insight
+     * @param string $groupID The ID of the insight group
      *
      * @throws APIException
      */
     public function deleteUnassign(
         string $insightID,
-        array|InsightDeleteUnassignParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $groupID,
+        ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = InsightDeleteUnassignParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $groupID = $parsed['groupID'];
-        unset($parsed['groupID']);
+        $params = ['groupID' => $groupID];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: [
-                'ai/conversations/insight-groups/%1$s/insights/%2$s/unassign',
-                $groupID,
-                $insightID,
-            ],
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deleteUnassign($insightID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

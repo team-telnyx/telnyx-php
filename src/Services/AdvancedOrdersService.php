@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AdvancedOrdersContract;
@@ -21,45 +18,55 @@ use Telnyx\ServiceContracts\AdvancedOrdersContract;
 final class AdvancedOrdersService implements AdvancedOrdersContract
 {
     /**
+     * @api
+     */
+    public AdvancedOrdersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AdvancedOrdersRawService($client);
+    }
 
     /**
      * @api
      *
      * Create Advanced Order
      *
-     * @param array{
-     *   areaCode?: string,
-     *   comments?: string,
-     *   countryCode?: string,
-     *   customerReference?: string,
-     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature>,
-     *   phoneNumberType?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType,
-     *   quantity?: int,
-     *   requirementGroupID?: string,
-     * }|AdvancedOrderCreateParams $params
+     * @param list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature> $features
+     * @param 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType $phoneNumberType
+     * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
      *
      * @throws APIException
      */
     public function create(
-        array|AdvancedOrderCreateParams $params,
+        string $areaCode = '',
+        string $comments = '',
+        string $countryCode = 'US',
+        string $customerReference = '',
+        ?array $features = null,
+        string|PhoneNumberType $phoneNumberType = 'local',
+        int $quantity = 1,
+        ?string $requirementGroupID = null,
         ?RequestOptions $requestOptions = null,
     ): AdvancedOrderNewResponse {
-        [$parsed, $options] = AdvancedOrderCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'areaCode' => $areaCode,
+            'comments' => $comments,
+            'countryCode' => $countryCode,
+            'customerReference' => $customerReference,
+            'features' => $features,
+            'phoneNumberType' => $phoneNumberType,
+            'quantity' => $quantity,
+            'requirementGroupID' => $requirementGroupID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AdvancedOrderNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'advanced_orders',
-            body: (object) $parsed,
-            options: $options,
-            convert: AdvancedOrderNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -75,13 +82,8 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         string $orderID,
         ?RequestOptions $requestOptions = null
     ): AdvancedOrderGetResponse {
-        /** @var BaseResponse<AdvancedOrderGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['advanced_orders/%1$s', $orderID],
-            options: $requestOptions,
-            convert: AdvancedOrderGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($orderID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -96,13 +98,8 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): AdvancedOrderListResponse {
-        /** @var BaseResponse<AdvancedOrderListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'advanced_orders',
-            options: $requestOptions,
-            convert: AdvancedOrderListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -112,37 +109,39 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *
      * Update Advanced Order
      *
-     * @param array{
-     *   areaCode?: string,
-     *   comments?: string,
-     *   countryCode?: string,
-     *   customerReference?: string,
-     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|AdvancedOrderUpdateRequirementGroupParams\Feature>,
-     *   phoneNumberType?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType,
-     *   quantity?: int,
-     *   requirementGroupID?: string,
-     * }|AdvancedOrderUpdateRequirementGroupParams $params
+     * @param list<'sms'|'mms'|'voice'|'fax'|'emergency'|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature> $features
+     * @param 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType $phoneNumberType
+     * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $advancedOrderID,
-        array|AdvancedOrderUpdateRequirementGroupParams $params,
+        string $areaCode = '',
+        string $comments = '',
+        string $countryCode = 'US',
+        string $customerReference = '',
+        ?array $features = null,
+        string|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType $phoneNumberType = 'local',
+        int $quantity = 1,
+        ?string $requirementGroupID = null,
         ?RequestOptions $requestOptions = null,
     ): AdvancedOrderUpdateRequirementGroupResponse {
-        [$parsed, $options] = AdvancedOrderUpdateRequirementGroupParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'areaCode' => $areaCode,
+            'comments' => $comments,
+            'countryCode' => $countryCode,
+            'customerReference' => $customerReference,
+            'features' => $features,
+            'phoneNumberType' => $phoneNumberType,
+            'quantity' => $quantity,
+            'requirementGroupID' => $requirementGroupID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AdvancedOrderUpdateRequirementGroupResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['advanced_orders/%1$s/requirement_group', $advancedOrderID],
-            body: (object) $parsed,
-            options: $options,
-            convert: AdvancedOrderUpdateRequirementGroupResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateRequirementGroup($advancedOrderID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,20 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateParams;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrdersContract;
@@ -29,6 +23,11 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
     /**
      * @api
      */
+    public MessagingHostedNumberOrdersRawService $raw;
+
+    /**
+     * @api
+     */
     public ActionsService $actions;
 
     /**
@@ -36,6 +35,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MessagingHostedNumberOrdersRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -44,29 +44,25 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Create a messaging hosted number order
      *
-     * @param array{
-     *   messagingProfileID?: string, phoneNumbers?: list<string>
-     * }|MessagingHostedNumberOrderCreateParams $params
+     * @param string $messagingProfileID automatically associate the number with this messaging profile ID when the order is complete
+     * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
      *
      * @throws APIException
      */
     public function create(
-        array|MessagingHostedNumberOrderCreateParams $params,
+        ?string $messagingProfileID = null,
+        ?array $phoneNumbers = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewResponse {
-        [$parsed, $options] = MessagingHostedNumberOrderCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'messagingProfileID' => $messagingProfileID,
+            'phoneNumbers' => $phoneNumbers,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingHostedNumberOrderNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messaging_hosted_number_orders',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingHostedNumberOrderNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -76,19 +72,16 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Retrieve a messaging hosted number order
      *
+     * @param string $id identifies the type of resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderGetResponse {
-        /** @var BaseResponse<MessagingHostedNumberOrderGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['messaging_hosted_number_orders/%1$s', $id],
-            options: $requestOptions,
-            convert: MessagingHostedNumberOrderGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -99,28 +92,21 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * List messaging hosted number orders
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|MessagingHostedNumberOrderListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingHostedNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderListResponse {
-        [$parsed, $options] = MessagingHostedNumberOrderListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingHostedNumberOrderListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'messaging_hosted_number_orders',
-            query: $parsed,
-            options: $options,
-            convert: MessagingHostedNumberOrderListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -130,19 +116,16 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Delete a messaging hosted number order and all associated phone numbers.
      *
+     * @param string $id identifies the messaging hosted number order to delete
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderDeleteResponse {
-        /** @var BaseResponse<MessagingHostedNumberOrderDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['messaging_hosted_number_orders/%1$s', $id],
-            options: $requestOptions,
-            convert: MessagingHostedNumberOrderDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -152,29 +135,18 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Check eligibility of phone numbers for hosted messaging
      *
-     * @param array{
-     *   phoneNumbers: list<string>
-     * }|MessagingHostedNumberOrderCheckEligibilityParams $params
+     * @param list<string> $phoneNumbers List of phone numbers to check eligibility
      *
      * @throws APIException
      */
     public function checkEligibility(
-        array|MessagingHostedNumberOrderCheckEligibilityParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $phoneNumbers,
+        ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderCheckEligibilityResponse {
-        [$parsed, $options] = MessagingHostedNumberOrderCheckEligibilityParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['phoneNumbers' => $phoneNumbers];
 
-        /** @var BaseResponse<MessagingHostedNumberOrderCheckEligibilityResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messaging_hosted_number_orders/eligibility_numbers_check',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingHostedNumberOrderCheckEligibilityResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->checkEligibility(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -184,31 +156,25 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Create verification codes to validate numbers of the hosted order. The verification codes will be sent to the numbers of the hosted order.
      *
-     * @param array{
-     *   phoneNumbers: list<string>,
-     *   verificationMethod: 'sms'|'call'|'flashcall'|VerificationMethod,
-     * }|MessagingHostedNumberOrderCreateVerificationCodesParams $params
+     * @param string $id order ID to have a verification code created
+     * @param list<string> $phoneNumbers
+     * @param 'sms'|'call'|'flashcall'|VerificationMethod $verificationMethod
      *
      * @throws APIException
      */
     public function createVerificationCodes(
         string $id,
-        array|MessagingHostedNumberOrderCreateVerificationCodesParams $params,
+        array $phoneNumbers,
+        string|VerificationMethod $verificationMethod,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewVerificationCodesResponse {
-        [$parsed, $options] = MessagingHostedNumberOrderCreateVerificationCodesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'phoneNumbers' => $phoneNumbers,
+            'verificationMethod' => $verificationMethod,
+        ];
 
-        /** @var BaseResponse<MessagingHostedNumberOrderNewVerificationCodesResponse,> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['messaging_hosted_number_orders/%1$s/verification_codes', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingHostedNumberOrderNewVerificationCodesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createVerificationCodes($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -218,30 +184,20 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Validate the verification codes sent to the numbers of the hosted order. The verification codes must be created in the verification codes endpoint.
      *
-     * @param array{
-     *   verificationCodes: list<array{code: string, phoneNumber: string}>
-     * }|MessagingHostedNumberOrderValidateCodesParams $params
+     * @param string $id order ID related to the validation codes
+     * @param list<array{code: string, phoneNumber: string}> $verificationCodes
      *
      * @throws APIException
      */
     public function validateCodes(
         string $id,
-        array|MessagingHostedNumberOrderValidateCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $verificationCodes,
+        ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderValidateCodesResponse {
-        [$parsed, $options] = MessagingHostedNumberOrderValidateCodesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['verificationCodes' => $verificationCodes];
 
-        /** @var BaseResponse<MessagingHostedNumberOrderValidateCodesResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['messaging_hosted_number_orders/%1$s/validation_codes', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingHostedNumberOrderValidateCodesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->validateCodes($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

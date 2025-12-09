@@ -36,9 +36,10 @@ final class VerifiedNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifiedNumbers->create([
-            'phoneNumber' => '+15551234567', 'verificationMethod' => 'sms',
-        ]);
+        $result = $this->client->verifiedNumbers->create(
+            phoneNumber: '+15551234567',
+            verificationMethod: 'sms'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VerifiedNumberNewResponse::class, $result);
@@ -51,11 +52,11 @@ final class VerifiedNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifiedNumbers->create([
-            'phoneNumber' => '+15551234567',
-            'verificationMethod' => 'sms',
-            'extension' => 'ww243w1',
-        ]);
+        $result = $this->client->verifiedNumbers->create(
+            phoneNumber: '+15551234567',
+            verificationMethod: 'sms',
+            extension: 'ww243w1',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VerifiedNumberNewResponse::class, $result);
@@ -81,7 +82,7 @@ final class VerifiedNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifiedNumbers->list([]);
+        $result = $this->client->verifiedNumbers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VerifiedNumberListResponse::class, $result);

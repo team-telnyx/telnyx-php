@@ -38,11 +38,11 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->create([
-            'connectionID' => '1516447646313612565',
-            'dnsRecordType' => 'a',
-            'fqdn' => 'example.com',
-        ]);
+        $result = $this->client->fqdns->create(
+            connectionID: '1516447646313612565',
+            dnsRecordType: 'a',
+            fqdn: 'example.com',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnNewResponse::class, $result);
@@ -55,12 +55,12 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->create([
-            'connectionID' => '1516447646313612565',
-            'dnsRecordType' => 'a',
-            'fqdn' => 'example.com',
-            'port' => 8080,
-        ]);
+        $result = $this->client->fqdns->create(
+            connectionID: '1516447646313612565',
+            dnsRecordType: 'a',
+            fqdn: 'example.com',
+            port: 8080,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnNewResponse::class, $result);
@@ -86,7 +86,7 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->update('id', []);
+        $result = $this->client->fqdns->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnUpdateResponse::class, $result);
@@ -99,7 +99,7 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->list([]);
+        $result = $this->client->fqdns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnListResponse::class, $result);

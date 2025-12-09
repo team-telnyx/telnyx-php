@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\BillingGroups\BillingGroupCreateParams;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
-use Telnyx\BillingGroups\BillingGroupListParams;
 use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
-use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
@@ -21,36 +17,37 @@ use Telnyx\ServiceContracts\BillingGroupsContract;
 final class BillingGroupsService implements BillingGroupsContract
 {
     /**
+     * @api
+     */
+    public BillingGroupsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new BillingGroupsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a billing group
      *
-     * @param array{name?: string}|BillingGroupCreateParams $params
+     * @param string $name A name for the billing group
      *
      * @throws APIException
      */
     public function create(
-        array|BillingGroupCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $name = null,
+        ?RequestOptions $requestOptions = null
     ): BillingGroupNewResponse {
-        [$parsed, $options] = BillingGroupCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<BillingGroupNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'billing_groups',
-            body: (object) $parsed,
-            options: $options,
-            convert: BillingGroupNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,19 +57,16 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * Get a billing group
      *
+     * @param string $id The id of the billing group
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): BillingGroupGetResponse {
-        /** @var BaseResponse<BillingGroupGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['billing_groups/%1$s', $id],
-            options: $requestOptions,
-            convert: BillingGroupGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -82,28 +76,22 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * Update a billing group
      *
-     * @param array{name?: string}|BillingGroupUpdateParams $params
+     * @param string $id The id of the billing group
+     * @param string $name A name for the billing group
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|BillingGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $name = null,
+        ?RequestOptions $requestOptions = null
     ): BillingGroupUpdateResponse {
-        [$parsed, $options] = BillingGroupUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<BillingGroupUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['billing_groups/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: BillingGroupUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -114,28 +102,21 @@ final class BillingGroupsService implements BillingGroupsContract
      * List all billing groups
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|BillingGroupListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|BillingGroupListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): BillingGroupListResponse {
-        [$parsed, $options] = BillingGroupListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<BillingGroupListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'billing_groups',
-            query: $parsed,
-            options: $options,
-            convert: BillingGroupListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -145,19 +126,16 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * Delete a billing group
      *
+     * @param string $id The id of the billing group
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): BillingGroupDeleteResponse {
-        /** @var BaseResponse<BillingGroupDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['billing_groups/%1$s', $id],
-            options: $requestOptions,
-            convert: BillingGroupDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

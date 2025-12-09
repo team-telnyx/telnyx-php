@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
-use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -17,18 +15,23 @@ interface VoicemailContract
     /**
      * @api
      *
-     * @param array<mixed>|VoicemailCreateParams $params
+     * @param string $phoneNumberID the ID of the phone number
+     * @param bool $enabled whether voicemail is enabled
+     * @param string $pin The pin used for voicemail
      *
      * @throws APIException
      */
     public function create(
         string $phoneNumberID,
-        array|VoicemailCreateParams $params,
+        ?bool $enabled = null,
+        ?string $pin = null,
         ?RequestOptions $requestOptions = null,
     ): VoicemailNewResponse;
 
     /**
      * @api
+     *
+     * @param string $phoneNumberID the ID of the phone number
      *
      * @throws APIException
      */
@@ -40,13 +43,16 @@ interface VoicemailContract
     /**
      * @api
      *
-     * @param array<mixed>|VoicemailUpdateParams $params
+     * @param string $phoneNumberID the ID of the phone number
+     * @param bool $enabled whether voicemail is enabled
+     * @param string $pin The pin used for voicemail
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        array|VoicemailUpdateParams $params,
+        ?bool $enabled = null,
+        ?string $pin = null,
         ?RequestOptions $requestOptions = null,
     ): VoicemailUpdateResponse;
 }

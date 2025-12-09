@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
 use Telnyx\RequestOptions;
@@ -18,13 +16,25 @@ interface VoiceContract
     /**
      * @api
      *
-     * @param array<mixed>|VoiceCreateParams $params
+     * @param string|\DateTimeInterface $endTime End time in ISO format
+     * @param string|\DateTimeInterface $startTime Start time in ISO format
+     * @param int $aggregationType Aggregation type: All = 0, By Connections = 1, By Tags = 2, By Billing Group = 3
+     * @param list<int> $connections List of connections to filter by
+     * @param list<string> $managedAccounts List of managed accounts to include
+     * @param int $productBreakdown Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3
+     * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      *
      * @throws APIException
      */
     public function create(
-        array|VoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string|\DateTimeInterface $endTime,
+        string|\DateTimeInterface $startTime,
+        ?int $aggregationType = null,
+        ?array $connections = null,
+        ?array $managedAccounts = null,
+        ?int $productBreakdown = null,
+        ?bool $selectAllManagedAccounts = null,
+        ?RequestOptions $requestOptions = null,
     ): VoiceNewResponse;
 
     /**
@@ -40,12 +50,14 @@ interface VoiceContract
     /**
      * @api
      *
-     * @param array<mixed>|VoiceListParams $params
+     * @param int $page Page number
+     * @param int $perPage Size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|VoiceListParams $params,
+        int $page = 1,
+        int $perPage = 20,
         ?RequestOptions $requestOptions = null
     ): VoiceListResponse;
 

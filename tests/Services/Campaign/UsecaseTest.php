@@ -34,9 +34,7 @@ final class UsecaseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaign->usecase->getCost([
-            'usecase' => 'usecase',
-        ]);
+        $result = $this->client->campaign->usecase->getCost(usecase: 'usecase');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UsecaseGetCostResponse::class, $result);
@@ -49,9 +47,7 @@ final class UsecaseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaign->usecase->getCost([
-            'usecase' => 'usecase',
-        ]);
+        $result = $this->client->campaign->usecase->getCost(usecase: 'usecase');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UsecaseGetCostResponse::class, $result);

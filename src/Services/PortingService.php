@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\PortingListUkCarriersResponse;
 use Telnyx\RequestOptions;
@@ -16,6 +15,11 @@ use Telnyx\Services\Porting\ReportsService;
 
 final class PortingService implements PortingContract
 {
+    /**
+     * @api
+     */
+    public PortingRawService $raw;
+
     /**
      * @api
      */
@@ -36,6 +40,7 @@ final class PortingService implements PortingContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new PortingRawService($client);
         $this->events = new EventsService($client);
         $this->reports = new ReportsService($client);
         $this->loaConfigurations = new LoaConfigurationsService($client);
@@ -51,13 +56,8 @@ final class PortingService implements PortingContract
     public function listUkCarriers(
         ?RequestOptions $requestOptions = null
     ): PortingListUkCarriersResponse {
-        /** @var BaseResponse<PortingListUkCarriersResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'porting/uk_carriers',
-            options: $requestOptions,
-            convert: PortingListUkCarriersResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listUkCarriers(requestOptions: $requestOptions);
 
         return $response->parse();
     }

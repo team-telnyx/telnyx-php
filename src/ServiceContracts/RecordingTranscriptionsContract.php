@@ -15,6 +15,8 @@ interface RecordingTranscriptionsContract
     /**
      * @api
      *
+     * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
+     *
      * @throws APIException
      */
     public function retrieve(
@@ -33,6 +35,8 @@ interface RecordingTranscriptionsContract
 
     /**
      * @api
+     *
+     * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
      *
      * @throws APIException
      */

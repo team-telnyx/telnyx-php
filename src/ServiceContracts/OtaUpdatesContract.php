@@ -6,7 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
-use Telnyx\OtaUpdates\OtaUpdateListParams;
+use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Status;
+use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Type;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
 use Telnyx\RequestOptions;
 
@@ -14,6 +15,8 @@ interface OtaUpdatesContract
 {
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -25,12 +28,20 @@ interface OtaUpdatesContract
     /**
      * @api
      *
-     * @param array<mixed>|OtaUpdateListParams $params
+     * @param array{
+     *   simCardID?: string,
+     *   status?: 'in-progress'|'completed'|'failed'|Status,
+     *   type?: 'sim_card_network_preferences'|Type,
+     * } $filter Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|OtaUpdateListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): OtaUpdateListResponse;
 }

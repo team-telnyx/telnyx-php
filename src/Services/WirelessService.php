@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessContract;
 use Telnyx\Services\Wireless\DetailRecordsReportsService;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
-use Telnyx\Wireless\WirelessRetrieveRegionsParams;
 
 final class WirelessService implements WirelessContract
 {
+    /**
+     * @api
+     */
+    public WirelessRawService $raw;
+
     /**
      * @api
      */
@@ -25,6 +28,7 @@ final class WirelessService implements WirelessContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new WirelessRawService($client);
         $this->detailRecordsReports = new DetailRecordsReportsService($client);
     }
 
@@ -33,27 +37,18 @@ final class WirelessService implements WirelessContract
      *
      * Retrieve all wireless regions for the given product.
      *
-     * @param array{product: string}|WirelessRetrieveRegionsParams $params
+     * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
      *
      * @throws APIException
      */
     public function retrieveRegions(
-        array|WirelessRetrieveRegionsParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $product,
+        ?RequestOptions $requestOptions = null
     ): WirelessGetRegionsResponse {
-        [$parsed, $options] = WirelessRetrieveRegionsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['product' => $product];
 
-        /** @var BaseResponse<WirelessGetRegionsResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'wireless/regions',
-            query: $parsed,
-            options: $options,
-            convert: WirelessGetRegionsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveRegions(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

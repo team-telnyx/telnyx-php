@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
-use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams;
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
-use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams;
 use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
@@ -17,9 +14,17 @@ use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
 final class CanaryDeploysService implements CanaryDeploysContract
 {
     /**
+     * @api
+     */
+    public CanaryDeploysRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CanaryDeploysRawService($client);
+    }
 
     /**
      * @api
@@ -29,30 +34,21 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Creates a new canary deploy configuration with multiple version IDs and their traffic
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
-     * @param array{
-     *   versions: list<array{percentage: float, versionID: string}|VersionConfig>
-     * }|CanaryDeployCreateParams $params
+     * @param list<array{
+     *   percentage: float, versionID: string
+     * }|VersionConfig> $versions List of version configurations
      *
      * @throws APIException
      */
     public function create(
         string $assistantID,
-        array|CanaryDeployCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $versions,
+        ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
-        [$parsed, $options] = CanaryDeployCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['versions' => $versions];
 
-        /** @var BaseResponse<CanaryDeployResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
-            body: (object) $parsed,
-            options: $options,
-            convert: CanaryDeployResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($assistantID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -71,13 +67,8 @@ final class CanaryDeploysService implements CanaryDeploysContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
-        /** @var BaseResponse<CanaryDeployResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
-            options: $requestOptions,
-            convert: CanaryDeployResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($assistantID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -90,30 +81,21 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Updates the existing canary deploy configuration with new version IDs and percentages.
      *   All old versions and percentages are replaces by new ones from this request.
      *
-     * @param array{
-     *   versions: list<array{percentage: float, versionID: string}|VersionConfig>
-     * }|CanaryDeployUpdateParams $params
+     * @param list<array{
+     *   percentage: float, versionID: string
+     * }|VersionConfig> $versions List of version configurations
      *
      * @throws APIException
      */
     public function update(
         string $assistantID,
-        array|CanaryDeployUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $versions,
+        ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
-        [$parsed, $options] = CanaryDeployUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['versions' => $versions];
 
-        /** @var BaseResponse<CanaryDeployResponse> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
-            body: (object) $parsed,
-            options: $options,
-            convert: CanaryDeployResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($assistantID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -131,13 +113,8 @@ final class CanaryDeploysService implements CanaryDeploysContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($assistantID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

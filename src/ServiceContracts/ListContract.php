@@ -23,6 +23,8 @@ interface ListContract
     /**
      * @api
      *
+     * @param string $channelZoneID Channel zone identifier
+     *
      * @throws APIException
      */
     public function retrieveByZone(

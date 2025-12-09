@@ -37,14 +37,14 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->create([
-            'administrativeArea' => 'TX',
-            'countryCode' => 'US',
-            'houseNumber' => '600',
-            'locality' => 'Austin',
-            'postalCode' => '78701',
-            'streetName' => 'Congress',
-        ]);
+        $result = $this->client->dynamicEmergencyAddresses->create(
+            administrativeArea: 'TX',
+            countryCode: 'US',
+            houseNumber: '600',
+            locality: 'Austin',
+            postalCode: '78701',
+            streetName: 'Congress',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DynamicEmergencyAddressNewResponse::class, $result);
@@ -57,19 +57,19 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->create([
-            'administrativeArea' => 'TX',
-            'countryCode' => 'US',
-            'houseNumber' => '600',
-            'locality' => 'Austin',
-            'postalCode' => '78701',
-            'streetName' => 'Congress',
-            'extendedAddress' => 'extended_address',
-            'houseSuffix' => 'house_suffix',
-            'streetPostDirectional' => 'street_post_directional',
-            'streetPreDirectional' => 'street_pre_directional',
-            'streetSuffix' => 'St',
-        ]);
+        $result = $this->client->dynamicEmergencyAddresses->create(
+            administrativeArea: 'TX',
+            countryCode: 'US',
+            houseNumber: '600',
+            locality: 'Austin',
+            postalCode: '78701',
+            streetName: 'Congress',
+            extendedAddress: 'extended_address',
+            houseSuffix: 'house_suffix',
+            streetPostDirectional: 'street_post_directional',
+            streetPreDirectional: 'street_pre_directional',
+            streetSuffix: 'St',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DynamicEmergencyAddressNewResponse::class, $result);
@@ -97,7 +97,7 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->list([]);
+        $result = $this->client->dynamicEmergencyAddresses->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

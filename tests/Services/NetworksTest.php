@@ -39,7 +39,7 @@ final class NetworksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->networks->create(['name' => 'test network']);
+        $result = $this->client->networks->create(name: 'test network');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NetworkNewResponse::class, $result);
@@ -52,7 +52,7 @@ final class NetworksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->networks->create(['name' => 'test network']);
+        $result = $this->client->networks->create(name: 'test network');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NetworkNewResponse::class, $result);
@@ -82,7 +82,7 @@ final class NetworksTest extends TestCase
 
         $result = $this->client->networks->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['name' => 'test network']
+            name: 'test network'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -98,7 +98,7 @@ final class NetworksTest extends TestCase
 
         $result = $this->client->networks->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['name' => 'test network']
+            name: 'test network'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -112,7 +112,7 @@ final class NetworksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->networks->list([]);
+        $result = $this->client->networks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NetworkListResponse::class, $result);
@@ -141,8 +141,7 @@ final class NetworksTest extends TestCase
         }
 
         $result = $this->client->networks->listInterfaces(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            []
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

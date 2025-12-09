@@ -6,35 +6,35 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Transcriptions;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Transcriptions\Json\JsonDeleteRecordingTranscriptionSidJsonParams;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
-use Telnyx\Texml\Accounts\Transcriptions\Json\JsonRetrieveRecordingTranscriptionSidJsonParams;
 
 interface JsonContract
 {
     /**
      * @api
      *
-     * @param array<mixed>|JsonDeleteRecordingTranscriptionSidJsonParams $params
+     * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
+     * @param string $accountSid the id of the account the resource belongs to
      *
      * @throws APIException
      */
     public function deleteRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
-        array|JsonDeleteRecordingTranscriptionSidJsonParams $params,
+        string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|JsonRetrieveRecordingTranscriptionSidJsonParams $params
+     * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
+     * @param string $accountSid the id of the account the resource belongs to
      *
      * @throws APIException
      */
     public function retrieveRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
-        array|JsonRetrieveRecordingTranscriptionSidJsonParams $params,
+        string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): JsonGetRecordingTranscriptionSidJsonResponse;
 }

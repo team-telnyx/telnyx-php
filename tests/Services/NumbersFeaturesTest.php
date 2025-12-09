@@ -34,9 +34,7 @@ final class NumbersFeaturesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numbersFeatures->create([
-            'phoneNumbers' => ['string'],
-        ]);
+        $result = $this->client->numbersFeatures->create(phoneNumbers: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumbersFeatureNewResponse::class, $result);
@@ -49,9 +47,7 @@ final class NumbersFeaturesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numbersFeatures->create([
-            'phoneNumbers' => ['string'],
-        ]);
+        $result = $this->client->numbersFeatures->create(phoneNumbers: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumbersFeatureNewResponse::class, $result);

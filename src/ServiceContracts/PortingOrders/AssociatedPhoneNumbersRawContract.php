@@ -1,0 +1,66 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts\PortingOrders;
+
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListResponse;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
+use Telnyx\RequestOptions;
+
+interface AssociatedPhoneNumbersRawContract
+{
+    /**
+     * @api
+     *
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone number
+     * @param array<mixed>|AssociatedPhoneNumberCreateParams $params
+     *
+     * @return BaseResponse<AssociatedPhoneNumberNewResponse>
+     *
+     * @throws APIException
+     */
+    public function create(
+        string $portingOrderID,
+        array|AssociatedPhoneNumberCreateParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $portingOrderID Identifies the Porting Order associated with the phone numbers
+     * @param array<mixed>|AssociatedPhoneNumberListParams $params
+     *
+     * @return BaseResponse<AssociatedPhoneNumberListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        string $portingOrderID,
+        array|AssociatedPhoneNumberListParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id Identifies the associated phone number to be deleted
+     * @param array<mixed>|AssociatedPhoneNumberDeleteParams $params
+     *
+     * @return BaseResponse<AssociatedPhoneNumberDeleteResponse>
+     *
+     * @throws APIException
+     */
+    public function delete(
+        string $id,
+        array|AssociatedPhoneNumberDeleteParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+}

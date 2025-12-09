@@ -6,11 +6,8 @@ namespace Telnyx\ServiceContracts\Messaging;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
-use Telnyx\Messaging\Rcs\RcInviteTestNumberParams;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
-use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesParams;
 use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesResponse;
-use Telnyx\Messaging\Rcs\RcRetrieveCapabilitiesParams;
 use Telnyx\RequestOptions;
 
 interface RcsContract
@@ -18,38 +15,42 @@ interface RcsContract
     /**
      * @api
      *
-     * @param array<mixed>|RcInviteTestNumberParams $params
+     * @param string $phoneNumber Phone number in E164 format to invite for testing
+     * @param string $id RCS agent ID
      *
      * @throws APIException
      */
     public function inviteTestNumber(
         string $phoneNumber,
-        array|RcInviteTestNumberParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): RcInviteTestNumberResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|RcListBulkCapabilitiesParams $params
+     * @param string $agentID RCS Agent ID
+     * @param list<string> $phoneNumbers List of phone numbers to check
      *
      * @throws APIException
      */
     public function listBulkCapabilities(
-        array|RcListBulkCapabilitiesParams $params,
+        string $agentID,
+        array $phoneNumbers,
         ?RequestOptions $requestOptions = null,
     ): RcListBulkCapabilitiesResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|RcRetrieveCapabilitiesParams $params
+     * @param string $phoneNumber Phone number in E164 format
+     * @param string $agentID RCS agent ID
      *
      * @throws APIException
      */
     public function retrieveCapabilities(
         string $phoneNumber,
-        array|RcRetrieveCapabilitiesParams $params,
+        string $agentID,
         ?RequestOptions $requestOptions = null,
     ): RcGetCapabilitiesResponse;
 }

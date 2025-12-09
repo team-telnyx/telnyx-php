@@ -51,7 +51,7 @@ final class RoomRecordingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roomRecordings->list([]);
+        $result = $this->client->roomRecordings->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RoomRecordingListResponse::class, $result);
@@ -79,7 +79,7 @@ final class RoomRecordingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roomRecordings->deleteBulk([]);
+        $result = $this->client->roomRecordings->deleteBulk();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RoomRecordingDeleteBulkResponse::class, $result);

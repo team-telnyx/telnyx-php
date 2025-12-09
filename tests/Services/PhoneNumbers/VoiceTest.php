@@ -51,10 +51,7 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voice->update(
-            '1293384261075731499',
-            []
-        );
+        $result = $this->client->phoneNumbers->voice->update('1293384261075731499');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VoiceUpdateResponse::class, $result);
@@ -67,7 +64,7 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voice->list([]);
+        $result = $this->client->phoneNumbers->voice->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VoiceListResponse::class, $result);

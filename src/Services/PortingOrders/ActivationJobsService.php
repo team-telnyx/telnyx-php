@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
@@ -19,38 +15,37 @@ use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
 final class ActivationJobsService implements ActivationJobsContract
 {
     /**
+     * @api
+     */
+    public ActivationJobsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActivationJobsRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns a porting activation job.
      *
-     * @param array{id: string}|ActivationJobRetrieveParams $params
+     * @param string $activationJobID Activation Job Identifier
+     * @param string $id Porting Order id
      *
      * @throws APIException
      */
     public function retrieve(
         string $activationJobID,
-        array|ActivationJobRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): ActivationJobGetResponse {
-        [$parsed, $options] = ActivationJobRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id];
 
-        /** @var BaseResponse<ActivationJobGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
-            options: $options,
-            convert: ActivationJobGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($activationJobID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,32 +55,24 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * Updates the activation time of a porting activation job.
      *
-     * @param array{
-     *   id: string, activateAt?: string|\DateTimeInterface
-     * }|ActivationJobUpdateParams $params
+     * @param string $activationJobID Path param: Activation Job Identifier
+     * @param string $id Path param: Porting Order id
+     * @param string|\DateTimeInterface $activateAt Body param: The desired activation time. The activation time should be between any of the activation windows.
      *
      * @throws APIException
      */
     public function update(
         string $activationJobID,
-        array|ActivationJobUpdateParams $params,
+        string $id,
+        string|\DateTimeInterface|null $activateAt = null,
         ?RequestOptions $requestOptions = null,
     ): ActivationJobUpdateResponse {
-        [$parsed, $options] = ActivationJobUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id, 'activateAt' => $activateAt];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ActivationJobUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
-            body: (object) array_diff_key($parsed, ['id']),
-            options: $options,
-            convert: ActivationJobUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($activationJobID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -95,30 +82,24 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * Returns a list of your porting activation jobs.
      *
+     * @param string $id Porting Order id
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|ActivationJobListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|ActivationJobListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): ActivationJobListResponse {
-        [$parsed, $options] = ActivationJobListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ActivationJobListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/activation_jobs', $id],
-            query: $parsed,
-            options: $options,
-            convert: ActivationJobListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
-use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
@@ -18,42 +15,51 @@ use Telnyx\ServiceContracts\NumberBlockOrdersContract;
 final class NumberBlockOrdersService implements NumberBlockOrdersContract
 {
     /**
+     * @api
+     */
+    public NumberBlockOrdersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumberBlockOrdersRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a phone number block order.
      *
-     * @param array{
-     *   range: int,
-     *   startingNumber: string,
-     *   connectionID?: string,
-     *   customerReference?: string,
-     *   messagingProfileID?: string,
-     * }|NumberBlockOrderCreateParams $params
+     * @param int $range the phone number range included in the block
+     * @param string $startingNumber Starting phone number block
+     * @param string $connectionID identifies the connection associated with this phone number
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $messagingProfileID identifies the messaging profile associated with the phone number
      *
      * @throws APIException
      */
     public function create(
-        array|NumberBlockOrderCreateParams $params,
+        int $range,
+        string $startingNumber,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
         ?RequestOptions $requestOptions = null,
     ): NumberBlockOrderNewResponse {
-        [$parsed, $options] = NumberBlockOrderCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'range' => $range,
+            'startingNumber' => $startingNumber,
+            'connectionID' => $connectionID,
+            'customerReference' => $customerReference,
+            'messagingProfileID' => $messagingProfileID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberBlockOrderNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'number_block_orders',
-            body: (object) $parsed,
-            options: $options,
-            convert: NumberBlockOrderNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -63,19 +69,16 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      *
      * Get an existing phone number block order.
      *
+     * @param string $numberBlockOrderID the number block order ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $numberBlockOrderID,
         ?RequestOptions $requestOptions = null
     ): NumberBlockOrderGetResponse {
-        /** @var BaseResponse<NumberBlockOrderGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['number_block_orders/%1$s', $numberBlockOrderID],
-            options: $requestOptions,
-            convert: NumberBlockOrderGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($numberBlockOrderID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -86,33 +89,27 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      * Get a paginated list of number block orders.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{gt?: string, lt?: string},
-     *     phoneNumbersStartingNumber?: string,
-     *     status?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|NumberBlockOrderListParams $params
+     *   createdAt?: array{gt?: string, lt?: string},
+     *   phoneNumbersStartingNumber?: string,
+     *   status?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|NumberBlockOrderListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): NumberBlockOrderListResponse {
-        [$parsed, $options] = NumberBlockOrderListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberBlockOrderListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'number_block_orders',
-            query: $parsed,
-            options: $options,
-            convert: NumberBlockOrderListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

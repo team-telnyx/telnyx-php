@@ -5,18 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Networks\InterfaceStatus;
-use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
-use Telnyx\Networks\NetworkListInterfacesParams;
 use Telnyx\Networks\NetworkListInterfacesResponse;
-use Telnyx\Networks\NetworkListParams;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
-use Telnyx\Networks\NetworkUpdateParams;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NetworksContract;
@@ -27,6 +22,11 @@ final class NetworksService implements NetworksContract
     /**
      * @api
      */
+    public NetworksRawService $raw;
+
+    /**
+     * @api
+     */
     public DefaultGatewayService $defaultGateway;
 
     /**
@@ -34,6 +34,7 @@ final class NetworksService implements NetworksContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new NetworksRawService($client);
         $this->defaultGateway = new DefaultGatewayService($client);
     }
 
@@ -42,27 +43,18 @@ final class NetworksService implements NetworksContract
      *
      * Create a new Network.
      *
-     * @param array{name: string}|NetworkCreateParams $params
+     * @param string $name a user specified name for the network
      *
      * @throws APIException
      */
     public function create(
-        array|NetworkCreateParams $params,
+        string $name,
         ?RequestOptions $requestOptions = null
     ): NetworkNewResponse {
-        [$parsed, $options] = NetworkCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name];
 
-        /** @var BaseResponse<NetworkNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'networks',
-            body: (object) $parsed,
-            options: $options,
-            convert: NetworkNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -72,19 +64,16 @@ final class NetworksService implements NetworksContract
      *
      * Retrieve a Network.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): NetworkGetResponse {
-        /** @var BaseResponse<NetworkGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['networks/%1$s', $id],
-            options: $requestOptions,
-            convert: NetworkGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -94,28 +83,20 @@ final class NetworksService implements NetworksContract
      *
      * Update a Network.
      *
-     * @param array{name: string}|NetworkUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $name a user specified name for the network
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|NetworkUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $name,
+        ?RequestOptions $requestOptions = null
     ): NetworkUpdateResponse {
-        [$parsed, $options] = NetworkUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name];
 
-        /** @var BaseResponse<NetworkUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['networks/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: NetworkUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -126,28 +107,25 @@ final class NetworksService implements NetworksContract
      * List all Networks.
      *
      * @param array{
-     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
-     * }|NetworkListParams $params
+     *   name?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|NetworkListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): NetworkListResponse {
-        [$parsed, $options] = NetworkListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NetworkListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'networks',
-            query: $parsed,
-            options: $options,
-            convert: NetworkListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -157,19 +135,16 @@ final class NetworksService implements NetworksContract
      *
      * Delete a Network.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): NetworkDeleteResponse {
-        /** @var BaseResponse<NetworkDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['networks/%1$s', $id],
-            options: $requestOptions,
-            convert: NetworkDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -179,35 +154,30 @@ final class NetworksService implements NetworksContract
      *
      * List all Interfaces for a Network.
      *
+     * @param string $id identifies the resource
      * @param array{
-     *   filter?: array{
-     *     name?: string,
-     *     status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
-     *     type?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|NetworkListInterfacesParams $params
+     *   name?: string,
+     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
+     *   type?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
-        array|NetworkListInterfacesParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): NetworkListInterfacesResponse {
-        [$parsed, $options] = NetworkListInterfacesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NetworkListInterfacesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['networks/%1$s/network_interfaces', $id],
-            query: $parsed,
-            options: $options,
-            convert: NetworkListInterfacesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listInterfaces($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\Status;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort\Value;
@@ -20,48 +17,52 @@ use Telnyx\ServiceContracts\PortingOrders\ActionRequirementsContract;
 final class ActionRequirementsService implements ActionRequirementsContract
 {
     /**
+     * @api
+     */
+    public ActionRequirementsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionRequirementsRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns a list of action requirements for a specific porting order.
      *
+     * @param string $portingOrderID The ID of the porting order
      * @param array{
-     *   filter?: array{
-     *     id?: list<string>,
-     *     actionType?: 'au_id_verification'|ActionType,
-     *     requirementTypeID?: string,
-     *     status?: 'created'|'pending'|'completed'|'cancelled'|'failed'|Status,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{
-     *     value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'|Value
-     *   },
-     * }|ActionRequirementListParams $params
+     *   id?: list<string>,
+     *   actionType?: 'au_id_verification'|ActionType,
+     *   requirementTypeID?: string,
+     *   status?: 'created'|'pending'|'completed'|'cancelled'|'failed'|Status,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[id][in][], filter[requirement_type_id], filter[action_type], filter[status]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'|Value
+     * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
-        array|ActionRequirementListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
+        ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): ActionRequirementListResponse {
-        [$parsed, $options] = ActionRequirementListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ActionRequirementListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/action_requirements', $portingOrderID],
-            query: $parsed,
-            options: $options,
-            convert: ActionRequirementListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($portingOrderID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -71,36 +72,24 @@ final class ActionRequirementsService implements ActionRequirementsContract
      *
      * Initiates a specific action requirement for a porting order.
      *
+     * @param string $id Path param: The ID of the action requirement
+     * @param string $portingOrderID Path param: The ID of the porting order
      * @param array{
-     *   portingOrderID: string, params: array{firstName: string, lastName: string}
-     * }|ActionRequirementInitiateParams $params
+     *   firstName: string, lastName: string
+     * } $params Body param: Required information for initiating the action requirement for AU ID verification
      *
      * @throws APIException
      */
     public function initiate(
         string $id,
-        array|ActionRequirementInitiateParams $params,
+        string $portingOrderID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ActionRequirementInitiateResponse {
-        [$parsed, $options] = ActionRequirementInitiateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $portingOrderID = $parsed['portingOrderID'];
-        unset($parsed['portingOrderID']);
+        $params1 = ['portingOrderID' => $portingOrderID, 'params' => $params];
 
-        /** @var BaseResponse<ActionRequirementInitiateResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: [
-                'porting_orders/%1$s/action_requirements/%2$s/initiate',
-                $portingOrderID,
-                $id,
-            ],
-            body: (object) array_diff_key($parsed, ['portingOrderID']),
-            options: $options,
-            convert: ActionRequirementInitiateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->initiate($id, params: $params1, requestOptions: $requestOptions);
 
         return $response->parse();
     }

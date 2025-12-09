@@ -38,9 +38,10 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardDataUsageNotifications->create([
-            'simCardID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58', 'threshold' => [],
-        ]);
+        $result = $this->client->simCardDataUsageNotifications->create(
+            simCardID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            threshold: []
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -56,10 +57,10 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardDataUsageNotifications->create([
-            'simCardID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'threshold' => ['amount' => '2048.1', 'unit' => 'MB'],
-        ]);
+        $result = $this->client->simCardDataUsageNotifications->create(
+            simCardID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            threshold: ['amount' => '2048.1', 'unit' => 'MB'],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -94,8 +95,7 @@ final class SimCardDataUsageNotificationsTest extends TestCase
         }
 
         $result = $this->client->simCardDataUsageNotifications->update(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            []
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -112,7 +112,7 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardDataUsageNotifications->list([]);
+        $result = $this->client->simCardDataUsageNotifications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

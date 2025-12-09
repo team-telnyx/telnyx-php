@@ -43,9 +43,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->create([
-            'connectionName' => 'string',
-        ]);
+        $result = $this->client->fqdnConnections->create(connectionName: 'string');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnConnectionNewResponse::class, $result);
@@ -58,17 +56,17 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->create([
-            'connectionName' => 'string',
-            'active' => true,
-            'anchorsiteOverride' => AnchorsiteOverride::LATENCY,
-            'androidPushCredentialID' => '06b09dfd-7154-4980-8b75-cebf7a9d4f8e',
-            'callCostInWebhooks' => false,
-            'defaultOnHoldComfortNoiseEnabled' => true,
-            'dtmfType' => DtmfType::RFC_2833,
-            'encodeContactHeaderEnabled' => true,
-            'encryptedMedia' => EncryptedMedia::SRTP,
-            'inbound' => [
+        $result = $this->client->fqdnConnections->create(
+            connectionName: 'string',
+            active: true,
+            anchorsiteOverride: AnchorsiteOverride::LATENCY,
+            androidPushCredentialID: '06b09dfd-7154-4980-8b75-cebf7a9d4f8e',
+            callCostInWebhooks: false,
+            defaultOnHoldComfortNoiseEnabled: true,
+            dtmfType: DtmfType::RFC_2833,
+            encodeContactHeaderEnabled: true,
+            encryptedMedia: EncryptedMedia::SRTP,
+            inbound: [
                 'aniNumberFormat' => '+E.164',
                 'channelLimit' => 10,
                 'codecs' => ['G722'],
@@ -88,10 +86,10 @@ final class FqdnConnectionsTest extends TestCase
                 'timeout1xxSecs' => 10,
                 'timeout2xxSecs' => 10,
             ],
-            'iosPushCredentialID' => 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
-            'microsoftTeamsSbc' => true,
-            'onnetT38PassthroughEnabled' => true,
-            'outbound' => [
+            iosPushCredentialID: 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
+            microsoftTeamsSbc: true,
+            onnetT38PassthroughEnabled: true,
+            outbound: [
                 'aniOverride' => '+1234567890',
                 'aniOverrideType' => 'always',
                 'callParkingEnabled' => true,
@@ -108,18 +106,18 @@ final class FqdnConnectionsTest extends TestCase
                 'timeout1xxSecs' => 10,
                 'timeout2xxSecs' => 10,
             ],
-            'rtcpSettings' => [
+            rtcpSettings: [
                 'captureEnabled' => true,
                 'port' => 'rtcp-mux',
                 'reportFrequencySecs' => 10,
             ],
-            'tags' => ['tag1', 'tag2'],
-            'transportProtocol' => TransportProtocol::UDP,
-            'webhookAPIVersion' => WebhookAPIVersion::_1,
-            'webhookEventFailoverURL' => 'https://failover.example.com',
-            'webhookEventURL' => 'https://example.com',
-            'webhookTimeoutSecs' => 25,
-        ]);
+            tags: ['tag1', 'tag2'],
+            transportProtocol: TransportProtocol::UDP,
+            webhookAPIVersion: WebhookAPIVersion::_1,
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookEventURL: 'https://example.com',
+            webhookTimeoutSecs: 25,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnConnectionNewResponse::class, $result);
@@ -145,7 +143,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->update('id', []);
+        $result = $this->client->fqdnConnections->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnConnectionUpdateResponse::class, $result);
@@ -158,7 +156,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->list([]);
+        $result = $this->client->fqdnConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnConnectionListResponse::class, $result);

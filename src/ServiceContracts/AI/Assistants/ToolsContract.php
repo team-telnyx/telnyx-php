@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Assistants;
 
-use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -14,13 +13,18 @@ interface ToolsContract
     /**
      * @api
      *
-     * @param array<mixed>|ToolTestParams $params
+     * @param string $toolID Path param:
+     * @param string $assistantID Path param:
+     * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test
+     * @param array<string,mixed> $dynamicVariables Body param: Key-value dynamic variables to use for the webhook test
      *
      * @throws APIException
      */
     public function test(
         string $toolID,
-        array|ToolTestParams $params,
+        string $assistantID,
+        ?array $arguments = null,
+        ?array $dynamicVariables = null,
         ?RequestOptions $requestOptions = null,
     ): ToolTestResponse;
 }

@@ -39,10 +39,10 @@ final class FaxApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxApplications->create([
-            'applicationName' => 'fax-router',
-            'webhookEventURL' => 'https://example.com',
-        ]);
+        $result = $this->client->faxApplications->create(
+            applicationName: 'fax-router',
+            webhookEventURL: 'https://example.com'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FaxApplicationNewResponse::class, $result);
@@ -55,23 +55,23 @@ final class FaxApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxApplications->create([
-            'applicationName' => 'fax-router',
-            'webhookEventURL' => 'https://example.com',
-            'active' => false,
-            'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
-            'inbound' => [
+        $result = $this->client->faxApplications->create(
+            applicationName: 'fax-router',
+            webhookEventURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            inbound: [
                 'channelLimit' => 10,
                 'sipSubdomain' => 'example',
                 'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
-            'outbound' => [
+            outbound: [
                 'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
             ],
-            'tags' => ['tag1', 'tag2'],
-            'webhookEventFailoverURL' => 'https://failover.example.com',
-            'webhookTimeoutSecs' => 25,
-        ]);
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookTimeoutSecs: 25,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FaxApplicationNewResponse::class, $result);
@@ -99,10 +99,8 @@ final class FaxApplicationsTest extends TestCase
 
         $result = $this->client->faxApplications->update(
             '1293384261075731499',
-            [
-                'applicationName' => 'fax-router',
-                'webhookEventURL' => 'https://example.com',
-            ],
+            applicationName: 'fax-router',
+            webhookEventURL: 'https://example.com',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -118,25 +116,22 @@ final class FaxApplicationsTest extends TestCase
 
         $result = $this->client->faxApplications->update(
             '1293384261075731499',
-            [
-                'applicationName' => 'fax-router',
-                'webhookEventURL' => 'https://example.com',
-                'active' => false,
-                'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
-                'faxEmailRecipient' => 'user@example.com',
-                'inbound' => [
-                    'channelLimit' => 10,
-                    'sipSubdomain' => 'example',
-                    'sipSubdomainReceiveSettings' => 'only_my_connections',
-                ],
-                'outbound' => [
-                    'channelLimit' => 10,
-                    'outboundVoiceProfileID' => '1293384261075731499',
-                ],
-                'tags' => ['tag1', 'tag2'],
-                'webhookEventFailoverURL' => 'https://failover.example.com',
-                'webhookTimeoutSecs' => 25,
+            applicationName: 'fax-router',
+            webhookEventURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            faxEmailRecipient: 'user@example.com',
+            inbound: [
+                'channelLimit' => 10,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
+            outbound: [
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+            ],
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookTimeoutSecs: 25,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -150,7 +145,7 @@ final class FaxApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxApplications->list([]);
+        $result = $this->client->faxApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FaxApplicationListResponse::class, $result);

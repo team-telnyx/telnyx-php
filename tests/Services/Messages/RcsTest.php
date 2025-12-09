@@ -34,7 +34,7 @@ final class RcsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->rcs->generateDeeplink('agent_id', []);
+        $result = $this->client->messages->rcs->generateDeeplink('agent_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RcGenerateDeeplinkResponse::class, $result);

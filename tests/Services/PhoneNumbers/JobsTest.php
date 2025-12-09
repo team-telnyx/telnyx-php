@@ -51,7 +51,7 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->list([]);
+        $result = $this->client->phoneNumbers->jobs->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobListResponse::class, $result);
@@ -64,9 +64,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->deleteBatch([
-            'phoneNumbers' => ['+19705555098', '+19715555098', '32873127836'],
-        ]);
+        $result = $this->client->phoneNumbers->jobs->deleteBatch(
+            phoneNumbers: ['+19705555098', '+19715555098', '32873127836']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobDeleteBatchResponse::class, $result);
@@ -79,9 +79,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->deleteBatch([
-            'phoneNumbers' => ['+19705555098', '+19715555098', '32873127836'],
-        ]);
+        $result = $this->client->phoneNumbers->jobs->deleteBatch(
+            phoneNumbers: ['+19705555098', '+19715555098', '32873127836']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobDeleteBatchResponse::class, $result);
@@ -94,9 +94,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateBatch([
-            'phoneNumbers' => ['1583466971586889004', '+13127367254'],
-        ]);
+        $result = $this->client->phoneNumbers->jobs->updateBatch(
+            phoneNumbers: ['1583466971586889004', '+13127367254']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobUpdateBatchResponse::class, $result);
@@ -109,9 +109,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateBatch([
-            'phoneNumbers' => ['1583466971586889004', '+13127367254'],
-            'filter' => [
+        $result = $this->client->phoneNumbers->jobs->updateBatch(
+            phoneNumbers: ['1583466971586889004', '+13127367254'],
+            filter: [
                 'billingGroupID' => '62e4bf2e-c278-4282-b524-488d9c9c43b2',
                 'connectionID' => '1521916448077776306',
                 'customerReference' => 'customer_reference',
@@ -128,14 +128,14 @@ final class JobsTest extends TestCase
                 ],
                 'voiceUsagePaymentMethod' => 'channel',
             ],
-            'billingGroupID' => 'dc8e4d67-33a0-4cbb-af74-7b58f05bd494',
-            'connectionID' => 'dc8e4d67-33a0-4cbb-af74-7b58f05bd494',
-            'customerReference' => 'customer-reference',
-            'deletionLockEnabled' => true,
-            'externalPin' => '123456',
-            'hdVoiceEnabled' => true,
-            'tags' => ['tag'],
-            'voice' => [
+            billingGroupID: 'dc8e4d67-33a0-4cbb-af74-7b58f05bd494',
+            connectionID: 'dc8e4d67-33a0-4cbb-af74-7b58f05bd494',
+            customerReference: 'customer-reference',
+            deletionLockEnabled: true,
+            externalPin: '123456',
+            hdVoiceEnabled: true,
+            tags: ['tag'],
+            voice: [
                 'callForwarding' => [
                     'callForwardingEnabled' => true,
                     'forwardingType' => 'always',
@@ -160,7 +160,7 @@ final class JobsTest extends TestCase
                 'translatedNumber' => '+13035559999',
                 'usagePaymentMethod' => 'pay-per-minute',
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(JobUpdateBatchResponse::class, $result);
@@ -173,10 +173,10 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch([
-            'emergencyEnabled' => true,
-            'phoneNumbers' => ['+19705555098', '+19715555098', '32873127836'],
-        ]);
+        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
+            emergencyEnabled: true,
+            phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -192,11 +192,11 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch([
-            'emergencyEnabled' => true,
-            'phoneNumbers' => ['+19705555098', '+19715555098', '32873127836'],
-            'emergencyAddressID' => '53829456729313',
-        ]);
+        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
+            emergencyEnabled: true,
+            phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
+            emergencyAddressID: '53829456729313',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

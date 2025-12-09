@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messaging\Rcs;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Messaging\Rcs\Agents\AgentListParams;
 use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
-use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsContract;
@@ -17,14 +14,24 @@ use Telnyx\ServiceContracts\Messaging\Rcs\AgentsContract;
 final class AgentsService implements AgentsContract
 {
     /**
+     * @api
+     */
+    public AgentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AgentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve an RCS agent
+     *
+     * @param string $id RCS agent ID
      *
      * @throws APIException
      */
@@ -32,13 +39,8 @@ final class AgentsService implements AgentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RcsAgentResponse {
-        /** @var BaseResponse<RcsAgentResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['messaging/rcs/agents/%1$s', $id],
-            options: $requestOptions,
-            convert: RcsAgentResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -48,32 +50,30 @@ final class AgentsService implements AgentsContract
      *
      * Modify an RCS agent
      *
-     * @param array{
-     *   profileID?: string|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * }|AgentUpdateParams $params
+     * @param string $id RCS agent ID
+     * @param string|null $profileID Messaging profile ID associated with the RCS Agent
+     * @param string|null $webhookFailoverURL Failover URL to receive RCS events
+     * @param string|null $webhookURL URL to receive RCS events
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|AgentUpdateParams $params,
+        ?string $profileID = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): RcsAgentResponse {
-        [$parsed, $options] = AgentUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'profileID' => $profileID,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RcsAgentResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['messaging/rcs/agents/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: RcsAgentResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -83,27 +83,22 @@ final class AgentsService implements AgentsContract
      *
      * List all RCS agents
      *
-     * @param array{page?: array{number?: int, size?: int}}|AgentListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|AgentListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): AgentListResponse {
-        [$parsed, $options] = AgentListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AgentListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'messaging/rcs/agents',
-            query: $parsed,
-            options: $options,
-            convert: AgentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

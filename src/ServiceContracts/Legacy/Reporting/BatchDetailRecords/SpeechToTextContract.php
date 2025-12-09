@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextGetResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextListResponse;
@@ -17,12 +16,14 @@ interface SpeechToTextContract
     /**
      * @api
      *
-     * @param array<mixed>|SpeechToTextCreateParams $params
+     * @param string|\DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
+     * @param string|\DateTimeInterface $startDate Start date in ISO format with timezone
      *
      * @throws APIException
      */
     public function create(
-        array|SpeechToTextCreateParams $params,
+        string|\DateTimeInterface $endDate,
+        string|\DateTimeInterface $startDate,
         ?RequestOptions $requestOptions = null,
     ): SpeechToTextNewResponse;
 

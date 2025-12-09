@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
@@ -16,14 +15,24 @@ use Telnyx\ServiceContracts\RecordingTranscriptionsContract;
 final class RecordingTranscriptionsService implements RecordingTranscriptionsContract
 {
     /**
+     * @api
+     */
+    public RecordingTranscriptionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RecordingTranscriptionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieves the details of an existing recording transcription.
+     *
+     * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
      *
      * @throws APIException
      */
@@ -31,13 +40,8 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
         string $recordingTranscriptionID,
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionGetResponse {
-        /** @var BaseResponse<RecordingTranscriptionGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['recording_transcriptions/%1$s', $recordingTranscriptionID],
-            options: $requestOptions,
-            convert: RecordingTranscriptionGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($recordingTranscriptionID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -52,13 +56,8 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
     public function list(
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionListResponse {
-        /** @var BaseResponse<RecordingTranscriptionListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'recording_transcriptions',
-            options: $requestOptions,
-            convert: RecordingTranscriptionListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -68,19 +67,16 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
      *
      * Permanently deletes a recording transcription.
      *
+     * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
+     *
      * @throws APIException
      */
     public function delete(
         string $recordingTranscriptionID,
         ?RequestOptions $requestOptions = null
     ): RecordingTranscriptionDeleteResponse {
-        /** @var BaseResponse<RecordingTranscriptionDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['recording_transcriptions/%1$s', $recordingTranscriptionID],
-            options: $requestOptions,
-            convert: RecordingTranscriptionDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($recordingTranscriptionID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

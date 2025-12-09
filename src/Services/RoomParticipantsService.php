@@ -5,25 +5,33 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
-use Telnyx\RoomParticipants\RoomParticipantListParams;
 use Telnyx\RoomParticipants\RoomParticipantListResponse;
 use Telnyx\ServiceContracts\RoomParticipantsContract;
 
 final class RoomParticipantsService implements RoomParticipantsContract
 {
     /**
+     * @api
+     */
+    public RoomParticipantsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RoomParticipantsRawService($client);
+    }
 
     /**
      * @api
      *
      * View a room participant.
+     *
+     * @param string $roomParticipantID the unique identifier of a room participant
      *
      * @throws APIException
      */
@@ -31,13 +39,8 @@ final class RoomParticipantsService implements RoomParticipantsContract
         string $roomParticipantID,
         ?RequestOptions $requestOptions = null
     ): RoomParticipantGetResponse {
-        /** @var BaseResponse<RoomParticipantGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['room_participants/%1$s', $roomParticipantID],
-            options: $requestOptions,
-            convert: RoomParticipantGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($roomParticipantID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -48,47 +51,41 @@ final class RoomParticipantsService implements RoomParticipantsContract
      * View a list of room participants.
      *
      * @param array{
-     *   filter?: array{
-     *     context?: string,
-     *     dateJoinedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateLeftAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateUpdatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     sessionID?: string,
+     *   context?: string,
+     *   dateJoinedAt?: array{
+     *     eq?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
      *   },
-     *   page?: array{number?: int, size?: int},
-     * }|RoomParticipantListParams $params
+     *   dateLeftAt?: array{
+     *     eq?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
+     *   },
+     *   dateUpdatedAt?: array{
+     *     eq?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
+     *   },
+     *   sessionID?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context], filter[session_id]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|RoomParticipantListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): RoomParticipantListResponse {
-        [$parsed, $options] = RoomParticipantListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RoomParticipantListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'room_participants',
-            query: $parsed,
-            options: $options,
-            convert: RoomParticipantListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

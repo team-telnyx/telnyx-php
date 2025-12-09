@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextGetResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextListResponse;
@@ -18,38 +16,37 @@ use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\SpeechToTextCont
 final class SpeechToTextService implements SpeechToTextContract
 {
     /**
+     * @api
+     */
+    public SpeechToTextRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SpeechToTextRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a new Speech to Text batch report request with the specified filters
      *
-     * @param array{
-     *   endDate: string|\DateTimeInterface, startDate: string|\DateTimeInterface
-     * }|SpeechToTextCreateParams $params
+     * @param string|\DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
+     * @param string|\DateTimeInterface $startDate Start date in ISO format with timezone
      *
      * @throws APIException
      */
     public function create(
-        array|SpeechToTextCreateParams $params,
+        string|\DateTimeInterface $endDate,
+        string|\DateTimeInterface $startDate,
         ?RequestOptions $requestOptions = null,
     ): SpeechToTextNewResponse {
-        [$parsed, $options] = SpeechToTextCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['endDate' => $endDate, 'startDate' => $startDate];
 
-        /** @var BaseResponse<SpeechToTextNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'legacy/reporting/batch_detail_records/speech_to_text',
-            body: (object) $parsed,
-            options: $options,
-            convert: SpeechToTextNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -65,13 +62,8 @@ final class SpeechToTextService implements SpeechToTextContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextGetResponse {
-        /** @var BaseResponse<SpeechToTextGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['legacy/reporting/batch_detail_records/speech_to_text/%1$s', $id],
-            options: $requestOptions,
-            convert: SpeechToTextGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -86,13 +78,8 @@ final class SpeechToTextService implements SpeechToTextContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): SpeechToTextListResponse {
-        /** @var BaseResponse<SpeechToTextListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/batch_detail_records/speech_to_text',
-            options: $requestOptions,
-            convert: SpeechToTextListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -108,13 +95,8 @@ final class SpeechToTextService implements SpeechToTextContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextDeleteResponse {
-        /** @var BaseResponse<SpeechToTextDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['legacy/reporting/batch_detail_records/speech_to_text/%1$s', $id],
-            options: $requestOptions,
-            convert: SpeechToTextDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

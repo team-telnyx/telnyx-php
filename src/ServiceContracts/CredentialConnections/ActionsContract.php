@@ -13,6 +13,8 @@ interface ActionsContract
     /**
      * @api
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function checkRegistrationStatus(

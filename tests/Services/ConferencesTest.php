@@ -37,10 +37,10 @@ final class ConferencesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->create([
-            'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-            'name' => 'Business',
-        ]);
+        $result = $this->client->conferences->create(
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            name: 'Business',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ConferenceNewResponse::class, $result);
@@ -53,20 +53,20 @@ final class ConferencesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->create([
-            'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-            'name' => 'Business',
-            'beepEnabled' => 'always',
-            'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-            'comfortNoise' => false,
-            'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-            'durationMinutes' => 5,
-            'holdAudioURL' => 'http://www.example.com/audio.wav',
-            'holdMediaName' => 'my_media_uploaded_to_media_storage_api',
-            'maxParticipants' => 250,
-            'region' => 'US',
-            'startConferenceOnCreate' => false,
-        ]);
+        $result = $this->client->conferences->create(
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            name: 'Business',
+            beepEnabled: 'always',
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            comfortNoise: false,
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            durationMinutes: 5,
+            holdAudioURL: 'http://www.example.com/audio.wav',
+            holdMediaName: 'my_media_uploaded_to_media_storage_api',
+            maxParticipants: 250,
+            region: 'US',
+            startConferenceOnCreate: false,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ConferenceNewResponse::class, $result);
@@ -79,7 +79,7 @@ final class ConferencesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->retrieve('id', []);
+        $result = $this->client->conferences->retrieve('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ConferenceGetResponse::class, $result);
@@ -92,7 +92,7 @@ final class ConferencesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->list([]);
+        $result = $this->client->conferences->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ConferenceListResponse::class, $result);
@@ -105,7 +105,7 @@ final class ConferencesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->listParticipants('conference_id', []);
+        $result = $this->client->conferences->listParticipants('conference_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ConferenceListParticipantsResponse::class, $result);

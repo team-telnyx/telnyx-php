@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
 use Telnyx\Services\Texml\AccountsService;
 use Telnyx\Services\Texml\CallsService;
-use Telnyx\Texml\TexmlSecretsParams;
 use Telnyx\Texml\TexmlSecretsResponse;
 
 final class TexmlService implements TexmlContract
 {
+    /**
+     * @api
+     */
+    public TexmlRawService $raw;
+
     /**
      * @api
      */
@@ -31,6 +34,7 @@ final class TexmlService implements TexmlContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new TexmlRawService($client);
         $this->accounts = new AccountsService($client);
         $this->calls = new CallsService($client);
     }
@@ -40,27 +44,20 @@ final class TexmlService implements TexmlContract
      *
      * Create a TeXML secret which can be later used as a Dynamic Parameter for TeXML when using Mustache Templates in your TeXML. In your TeXML you will be able to use your secret name, and this name will be replaced by the actual secret value when processing the TeXML on Telnyx side.  The secrets are not visible in any logs.
      *
-     * @param array{name: string, value: string}|TexmlSecretsParams $params
+     * @param string $name Name used as a reference for the secret, if the name already exists within the account its value will be replaced
+     * @param string $value Secret value which will be used when rendering the TeXML template
      *
      * @throws APIException
      */
     public function secrets(
-        array|TexmlSecretsParams $params,
+        string $name,
+        string $value,
         ?RequestOptions $requestOptions = null
     ): TexmlSecretsResponse {
-        [$parsed, $options] = TexmlSecretsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name, 'value' => $value];
 
-        /** @var BaseResponse<TexmlSecretsResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'texml/secrets',
-            body: (object) $parsed,
-            options: $options,
-            convert: TexmlSecretsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->secrets(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

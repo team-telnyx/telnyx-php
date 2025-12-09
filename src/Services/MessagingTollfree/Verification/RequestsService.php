@@ -5,13 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingTollfree\Verification;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
-use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
-use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
@@ -26,69 +21,136 @@ use Telnyx\ServiceContracts\MessagingTollfree\Verification\RequestsContract;
 final class RequestsService implements RequestsContract
 {
     /**
+     * @api
+     */
+    public RequestsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RequestsRawService($client);
+    }
 
     /**
      * @api
      *
      * Submit a new tollfree verification request
      *
-     * @param array{
-     *   additionalInformation: string,
-     *   businessAddr1: string,
-     *   businessCity: string,
-     *   businessContactEmail: string,
-     *   businessContactFirstName: string,
-     *   businessContactLastName: string,
-     *   businessContactPhone: string,
-     *   businessName: string,
-     *   businessState: string,
-     *   businessZip: string,
-     *   corporateWebsite: string,
-     *   isvReseller: string,
-     *   messageVolume: value-of<Volume>,
-     *   optInWorkflow: string,
-     *   optInWorkflowImageURLs: list<array{url: string}|URL>,
-     *   phoneNumbers: list<array{phoneNumber: string}|TfPhoneNumber>,
-     *   productionMessageContent: string,
-     *   useCase: value-of<UseCaseCategories>,
-     *   useCaseSummary: string,
-     *   ageGatedContent?: bool,
-     *   businessAddr2?: string,
-     *   businessRegistrationCountry?: string|null,
-     *   businessRegistrationNumber?: string|null,
-     *   businessRegistrationType?: string|null,
-     *   doingBusinessAs?: string|null,
-     *   entityType?: 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null,
-     *   helpMessageResponse?: string|null,
-     *   optInConfirmationResponse?: string|null,
-     *   optInKeywords?: string|null,
-     *   privacyPolicyURL?: string|null,
-     *   termsAndConditionURL?: string|null,
-     *   webhookURL?: string,
-     * }|RequestCreateParams $params
+     * @param string $additionalInformation Any additional information
+     * @param string $businessAddr1 Line 1 of the business address
+     * @param string $businessCity The city of the business address; the first letter should be capitalized
+     * @param string $businessContactEmail The email address of the business contact
+     * @param string $businessContactFirstName First name of the business contact; there are no specific requirements on formatting
+     * @param string $businessContactLastName Last name of the business contact; there are no specific requirements on formatting
+     * @param string $businessContactPhone The phone number of the business contact in E.164 format
+     * @param string $businessName Name of the business; there are no specific formatting requirements
+     * @param string $businessState The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized
+     * @param string $businessZip The ZIP code of the business address
+     * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
+     * @param string $isvReseller ISV name
+     * @param '10'|'100'|'1,000'|'10,000'|'100,000'|'250,000'|'500,000'|'750,000'|'1,000,000'|'5,000,000'|'10,000,000+'|Volume $messageVolume Message Volume Enums
+     * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
+     * @param list<array{
+     *   url: string
+     * }|URL> $optInWorkflowImageURLs Images showing the opt-in workflow
+     * @param list<array{
+     *   phoneNumber: string
+     * }|TfPhoneNumber> $phoneNumbers The phone numbers to request the verification of
+     * @param string $productionMessageContent An example of a message that will be sent from the given phone numbers
+     * @param '2FA'|'App Notifications'|'Appointments'|'Auctions'|'Auto Repair Services'|'Bank Transfers'|'Billing'|'Booking Confirmations'|'Business Updates'|'COVID-19 Alerts'|'Career Training'|'Chatbot'|'Conversational / Alerts'|'Courier Services & Deliveries'|'Emergency Alerts'|'Events & Planning'|'Financial Services'|'Fraud Alerts'|'Fundraising'|'General Marketing'|'General School Updates'|'HR / Staffing'|'Healthcare Alerts'|'Housing Community Updates'|'Insurance Services'|'Job Dispatch'|'Legal Services'|'Mixed'|'Motivational Reminders'|'Notary Notifications'|'Order Notifications'|'Political'|'Public Works'|'Real Estate Services'|'Religious Services'|'Repair and Diagnostics Alerts'|'Rewards Program'|'Surveys'|'System Alerts'|'Voting Reminders'|'Waitlist Alerts'|'Webinar Reminders'|'Workshop Alerts'|UseCaseCategories $useCase Tollfree usecase categories
+     * @param string $useCaseSummary Human-readable summary of the desired use-case
+     * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
+     * @param string $businessAddr2 Line 2 of the business address
+     * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
+     * @param 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null $entityType Business entity classification
+     * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
+     * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
+     * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
+     * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @throws APIException
      */
     public function create(
-        array|RequestCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $additionalInformation,
+        string $businessAddr1,
+        string $businessCity,
+        string $businessContactEmail,
+        string $businessContactFirstName,
+        string $businessContactLastName,
+        string $businessContactPhone,
+        string $businessName,
+        string $businessState,
+        string $businessZip,
+        string $corporateWebsite,
+        string $isvReseller,
+        string|Volume $messageVolume,
+        string $optInWorkflow,
+        array $optInWorkflowImageURLs,
+        array $phoneNumbers,
+        string $productionMessageContent,
+        string|UseCaseCategories $useCase,
+        string $useCaseSummary,
+        bool $ageGatedContent = false,
+        ?string $businessAddr2 = null,
+        ?string $businessRegistrationCountry = null,
+        ?string $businessRegistrationNumber = null,
+        ?string $businessRegistrationType = null,
+        ?string $doingBusinessAs = null,
+        string|TollFreeVerificationEntityType|null $entityType = null,
+        ?string $helpMessageResponse = null,
+        ?string $optInConfirmationResponse = null,
+        ?string $optInKeywords = null,
+        ?string $privacyPolicyURL = null,
+        ?string $termsAndConditionURL = null,
+        ?string $webhookURL = null,
+        ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
-        [$parsed, $options] = RequestCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'additionalInformation' => $additionalInformation,
+            'businessAddr1' => $businessAddr1,
+            'businessCity' => $businessCity,
+            'businessContactEmail' => $businessContactEmail,
+            'businessContactFirstName' => $businessContactFirstName,
+            'businessContactLastName' => $businessContactLastName,
+            'businessContactPhone' => $businessContactPhone,
+            'businessName' => $businessName,
+            'businessState' => $businessState,
+            'businessZip' => $businessZip,
+            'corporateWebsite' => $corporateWebsite,
+            'isvReseller' => $isvReseller,
+            'messageVolume' => $messageVolume,
+            'optInWorkflow' => $optInWorkflow,
+            'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
+            'phoneNumbers' => $phoneNumbers,
+            'productionMessageContent' => $productionMessageContent,
+            'useCase' => $useCase,
+            'useCaseSummary' => $useCaseSummary,
+            'ageGatedContent' => $ageGatedContent,
+            'businessAddr2' => $businessAddr2,
+            'businessRegistrationCountry' => $businessRegistrationCountry,
+            'businessRegistrationNumber' => $businessRegistrationNumber,
+            'businessRegistrationType' => $businessRegistrationType,
+            'doingBusinessAs' => $doingBusinessAs,
+            'entityType' => $entityType,
+            'helpMessageResponse' => $helpMessageResponse,
+            'optInConfirmationResponse' => $optInConfirmationResponse,
+            'optInKeywords' => $optInKeywords,
+            'privacyPolicyURL' => $privacyPolicyURL,
+            'termsAndConditionURL' => $termsAndConditionURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerificationRequestEgress> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messaging_tollfree/verification/requests',
-            body: (object) $parsed,
-            options: $options,
-            convert: VerificationRequestEgress::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -104,13 +166,8 @@ final class RequestsService implements RequestsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VerificationRequestStatus {
-        /** @var BaseResponse<VerificationRequestStatus> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['messaging_tollfree/verification/requests/%1$s', $id],
-            options: $requestOptions,
-            convert: VerificationRequestStatus::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -120,61 +177,120 @@ final class RequestsService implements RequestsContract
      *
      * Update an existing tollfree verification request. This is particularly useful when there are pending customer actions to be taken.
      *
-     * @param array{
-     *   additionalInformation: string,
-     *   businessAddr1: string,
-     *   businessCity: string,
-     *   businessContactEmail: string,
-     *   businessContactFirstName: string,
-     *   businessContactLastName: string,
-     *   businessContactPhone: string,
-     *   businessName: string,
-     *   businessState: string,
-     *   businessZip: string,
-     *   corporateWebsite: string,
-     *   isvReseller: string,
-     *   messageVolume: value-of<Volume>,
-     *   optInWorkflow: string,
-     *   optInWorkflowImageURLs: list<array{url: string}|URL>,
-     *   phoneNumbers: list<array{phoneNumber: string}|TfPhoneNumber>,
-     *   productionMessageContent: string,
-     *   useCase: value-of<UseCaseCategories>,
-     *   useCaseSummary: string,
-     *   ageGatedContent?: bool,
-     *   businessAddr2?: string,
-     *   businessRegistrationCountry?: string|null,
-     *   businessRegistrationNumber?: string|null,
-     *   businessRegistrationType?: string|null,
-     *   doingBusinessAs?: string|null,
-     *   entityType?: 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null,
-     *   helpMessageResponse?: string|null,
-     *   optInConfirmationResponse?: string|null,
-     *   optInKeywords?: string|null,
-     *   privacyPolicyURL?: string|null,
-     *   termsAndConditionURL?: string|null,
-     *   webhookURL?: string,
-     * }|RequestUpdateParams $params
+     * @param string $additionalInformation Any additional information
+     * @param string $businessAddr1 Line 1 of the business address
+     * @param string $businessCity The city of the business address; the first letter should be capitalized
+     * @param string $businessContactEmail The email address of the business contact
+     * @param string $businessContactFirstName First name of the business contact; there are no specific requirements on formatting
+     * @param string $businessContactLastName Last name of the business contact; there are no specific requirements on formatting
+     * @param string $businessContactPhone The phone number of the business contact in E.164 format
+     * @param string $businessName Name of the business; there are no specific formatting requirements
+     * @param string $businessState The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized
+     * @param string $businessZip The ZIP code of the business address
+     * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
+     * @param string $isvReseller ISV name
+     * @param '10'|'100'|'1,000'|'10,000'|'100,000'|'250,000'|'500,000'|'750,000'|'1,000,000'|'5,000,000'|'10,000,000+'|Volume $messageVolume Message Volume Enums
+     * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
+     * @param list<array{
+     *   url: string
+     * }|URL> $optInWorkflowImageURLs Images showing the opt-in workflow
+     * @param list<array{
+     *   phoneNumber: string
+     * }|TfPhoneNumber> $phoneNumbers The phone numbers to request the verification of
+     * @param string $productionMessageContent An example of a message that will be sent from the given phone numbers
+     * @param '2FA'|'App Notifications'|'Appointments'|'Auctions'|'Auto Repair Services'|'Bank Transfers'|'Billing'|'Booking Confirmations'|'Business Updates'|'COVID-19 Alerts'|'Career Training'|'Chatbot'|'Conversational / Alerts'|'Courier Services & Deliveries'|'Emergency Alerts'|'Events & Planning'|'Financial Services'|'Fraud Alerts'|'Fundraising'|'General Marketing'|'General School Updates'|'HR / Staffing'|'Healthcare Alerts'|'Housing Community Updates'|'Insurance Services'|'Job Dispatch'|'Legal Services'|'Mixed'|'Motivational Reminders'|'Notary Notifications'|'Order Notifications'|'Political'|'Public Works'|'Real Estate Services'|'Religious Services'|'Repair and Diagnostics Alerts'|'Rewards Program'|'Surveys'|'System Alerts'|'Voting Reminders'|'Waitlist Alerts'|'Webinar Reminders'|'Workshop Alerts'|UseCaseCategories $useCase Tollfree usecase categories
+     * @param string $useCaseSummary Human-readable summary of the desired use-case
+     * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
+     * @param string $businessAddr2 Line 2 of the business address
+     * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
+     * @param 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null $entityType Business entity classification
+     * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
+     * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
+     * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
+     * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|RequestUpdateParams $params,
+        string $additionalInformation,
+        string $businessAddr1,
+        string $businessCity,
+        string $businessContactEmail,
+        string $businessContactFirstName,
+        string $businessContactLastName,
+        string $businessContactPhone,
+        string $businessName,
+        string $businessState,
+        string $businessZip,
+        string $corporateWebsite,
+        string $isvReseller,
+        string|Volume $messageVolume,
+        string $optInWorkflow,
+        array $optInWorkflowImageURLs,
+        array $phoneNumbers,
+        string $productionMessageContent,
+        string|UseCaseCategories $useCase,
+        string $useCaseSummary,
+        bool $ageGatedContent = false,
+        ?string $businessAddr2 = null,
+        ?string $businessRegistrationCountry = null,
+        ?string $businessRegistrationNumber = null,
+        ?string $businessRegistrationType = null,
+        ?string $doingBusinessAs = null,
+        string|TollFreeVerificationEntityType|null $entityType = null,
+        ?string $helpMessageResponse = null,
+        ?string $optInConfirmationResponse = null,
+        ?string $optInKeywords = null,
+        ?string $privacyPolicyURL = null,
+        ?string $termsAndConditionURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
-        [$parsed, $options] = RequestUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'additionalInformation' => $additionalInformation,
+            'businessAddr1' => $businessAddr1,
+            'businessCity' => $businessCity,
+            'businessContactEmail' => $businessContactEmail,
+            'businessContactFirstName' => $businessContactFirstName,
+            'businessContactLastName' => $businessContactLastName,
+            'businessContactPhone' => $businessContactPhone,
+            'businessName' => $businessName,
+            'businessState' => $businessState,
+            'businessZip' => $businessZip,
+            'corporateWebsite' => $corporateWebsite,
+            'isvReseller' => $isvReseller,
+            'messageVolume' => $messageVolume,
+            'optInWorkflow' => $optInWorkflow,
+            'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
+            'phoneNumbers' => $phoneNumbers,
+            'productionMessageContent' => $productionMessageContent,
+            'useCase' => $useCase,
+            'useCaseSummary' => $useCaseSummary,
+            'ageGatedContent' => $ageGatedContent,
+            'businessAddr2' => $businessAddr2,
+            'businessRegistrationCountry' => $businessRegistrationCountry,
+            'businessRegistrationNumber' => $businessRegistrationNumber,
+            'businessRegistrationType' => $businessRegistrationType,
+            'doingBusinessAs' => $doingBusinessAs,
+            'entityType' => $entityType,
+            'helpMessageResponse' => $helpMessageResponse,
+            'optInConfirmationResponse' => $optInConfirmationResponse,
+            'optInKeywords' => $optInKeywords,
+            'privacyPolicyURL' => $privacyPolicyURL,
+            'termsAndConditionURL' => $termsAndConditionURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerificationRequestEgress> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['messaging_tollfree/verification/requests/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: VerificationRequestEgress::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -184,42 +300,36 @@ final class RequestsService implements RequestsContract
      *
      * Get a list of previously-submitted tollfree verification requests
      *
-     * @param array{
-     *   page: int,
-     *   pageSize: int,
-     *   dateEnd?: string|\DateTimeInterface,
-     *   dateStart?: string|\DateTimeInterface,
-     *   phoneNumber?: string,
-     *   status?: value-of<TfVerificationStatus>,
-     * }|RequestListParams $params
+     * @param int $pageSize
+     *         Request this many records per page
+     *
+     *         This value is automatically clamped if the provided value is too large
+     * @param 'Verified'|'Rejected'|'Waiting For Vendor'|'Waiting For Customer'|'Waiting For Telnyx'|'In Progress'|TfVerificationStatus $status Tollfree verification status
      *
      * @throws APIException
      */
     public function list(
-        array|RequestListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $page,
+        int $pageSize,
+        string|\DateTimeInterface|null $dateEnd = null,
+        string|\DateTimeInterface|null $dateStart = null,
+        ?string $phoneNumber = null,
+        string|TfVerificationStatus|null $status = null,
+        ?RequestOptions $requestOptions = null,
     ): RequestListResponse {
-        [$parsed, $options] = RequestListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'dateEnd' => $dateEnd,
+            'dateStart' => $dateStart,
+            'phoneNumber' => $phoneNumber,
+            'status' => $status,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RequestListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'messaging_tollfree/verification/requests',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'pageSize' => 'page_size',
-                    'dateEnd' => 'date_end',
-                    'dateStart' => 'date_start',
-                    'phoneNumber' => 'phone_number',
-                ],
-            ),
-            options: $options,
-            convert: RequestListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -241,13 +351,8 @@ final class RequestsService implements RequestsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['messaging_tollfree/verification/requests/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

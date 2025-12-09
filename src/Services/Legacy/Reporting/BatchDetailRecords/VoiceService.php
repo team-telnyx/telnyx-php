@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetFieldsResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetResponse;
@@ -23,58 +21,83 @@ use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\VoiceContract;
 final class VoiceService implements VoiceContract
 {
     /**
+     * @api
+     */
+    public VoiceRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new VoiceRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a new CDR report request with the specified filters
      *
-     * @param array{
-     *   endTime: string|\DateTimeInterface,
-     *   startTime: string|\DateTimeInterface,
-     *   callTypes?: list<int>,
-     *   connections?: list<int>,
-     *   fields?: list<string>,
-     *   filters?: list<array{
-     *     billingGroup?: string,
-     *     cld?: string,
-     *     cldFilter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
-     *     cli?: string,
-     *     cliFilter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
-     *     filterType?: 'and'|'or'|FilterType,
-     *     tagsList?: string,
-     *   }|Filter>,
-     *   includeAllMetadata?: bool,
-     *   managedAccounts?: list<string>,
-     *   recordTypes?: list<int>,
-     *   reportName?: string,
-     *   selectAllManagedAccounts?: bool,
-     *   source?: string,
-     *   timezone?: string,
-     * }|VoiceCreateParams $params
+     * @param string|\DateTimeInterface $endTime End time in ISO format
+     * @param string|\DateTimeInterface $startTime Start time in ISO format
+     * @param list<int> $callTypes List of call types to filter by (Inbound = 1, Outbound = 2)
+     * @param list<int> $connections List of connections to filter by
+     * @param list<string> $fields Set of fields to include in the report
+     * @param list<array{
+     *   billingGroup?: string,
+     *   cld?: string,
+     *   cldFilter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
+     *   cli?: string,
+     *   cliFilter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
+     *   filterType?: 'and'|'or'|FilterType,
+     *   tagsList?: string,
+     * }|Filter> $filters List of filters to apply
+     * @param bool $includeAllMetadata Whether to include all metadata
+     * @param list<string> $managedAccounts List of managed accounts to include
+     * @param list<int> $recordTypes List of record types to filter by (Complete = 1, Incomplete = 2, Errors = 3)
+     * @param string $reportName Name of the report
+     * @param bool $selectAllManagedAccounts Whether to select all managed accounts
+     * @param string $source Source of the report. Valid values: calls (default), call-control, fax-api, webrtc
+     * @param string $timezone Timezone for the report
      *
      * @throws APIException
      */
     public function create(
-        array|VoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string|\DateTimeInterface $endTime,
+        string|\DateTimeInterface $startTime,
+        ?array $callTypes = null,
+        ?array $connections = null,
+        ?array $fields = null,
+        ?array $filters = null,
+        ?bool $includeAllMetadata = null,
+        ?array $managedAccounts = null,
+        ?array $recordTypes = null,
+        ?string $reportName = null,
+        ?bool $selectAllManagedAccounts = null,
+        ?string $source = null,
+        ?string $timezone = null,
+        ?RequestOptions $requestOptions = null,
     ): VoiceNewResponse {
-        [$parsed, $options] = VoiceCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'endTime' => $endTime,
+            'startTime' => $startTime,
+            'callTypes' => $callTypes,
+            'connections' => $connections,
+            'fields' => $fields,
+            'filters' => $filters,
+            'includeAllMetadata' => $includeAllMetadata,
+            'managedAccounts' => $managedAccounts,
+            'recordTypes' => $recordTypes,
+            'reportName' => $reportName,
+            'selectAllManagedAccounts' => $selectAllManagedAccounts,
+            'source' => $source,
+            'timezone' => $timezone,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VoiceNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'legacy/reporting/batch_detail_records/voice',
-            body: (object) $parsed,
-            options: $options,
-            convert: VoiceNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -90,13 +113,8 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
-        /** @var BaseResponse<VoiceGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['legacy/reporting/batch_detail_records/voice/%1$s', $id],
-            options: $requestOptions,
-            convert: VoiceGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -111,13 +129,8 @@ final class VoiceService implements VoiceContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): VoiceListResponse {
-        /** @var BaseResponse<VoiceListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/batch_detail_records/voice',
-            options: $requestOptions,
-            convert: VoiceListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -133,13 +146,8 @@ final class VoiceService implements VoiceContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse {
-        /** @var BaseResponse<VoiceDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['legacy/reporting/batch_detail_records/voice/%1$s', $id],
-            options: $requestOptions,
-            convert: VoiceDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -154,13 +162,8 @@ final class VoiceService implements VoiceContract
     public function retrieveFields(
         ?RequestOptions $requestOptions = null
     ): VoiceGetFieldsResponse {
-        /** @var BaseResponse<VoiceGetFieldsResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/batch_detail_records/voice/fields',
-            options: $requestOptions,
-            convert: VoiceGetFieldsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveFields(requestOptions: $requestOptions);
 
         return $response->parse();
     }

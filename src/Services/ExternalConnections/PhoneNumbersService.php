@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\PhoneNumbersContract;
@@ -19,40 +15,37 @@ use Telnyx\ServiceContracts\ExternalConnections\PhoneNumbersContract;
 final class PhoneNumbersService implements PhoneNumbersContract
 {
     /**
+     * @api
+     */
+    public PhoneNumbersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PhoneNumbersRawService($client);
+    }
 
     /**
      * @api
      *
      * Return the details of a phone number associated with the given external connection.
      *
-     * @param array{id: string}|PhoneNumberRetrieveParams $params
+     * @param string $phoneNumberID A phone number's ID via the Telnyx API
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        array|PhoneNumberRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumberGetResponse {
-        [$parsed, $options] = PhoneNumberRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id];
 
-        /** @var BaseResponse<PhoneNumberGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: [
-                'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
-            ],
-            options: $options,
-            convert: PhoneNumberGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($phoneNumberID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -62,32 +55,24 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Asynchronously update settings of the phone number associated with the given external connection.
      *
-     * @param array{id: string, locationID?: string}|PhoneNumberUpdateParams $params
+     * @param string $phoneNumberID Path param: A phone number's ID via the Telnyx API
+     * @param string $id path param: Identifies the resource
+     * @param string $locationID body param: Identifies the location to assign the phone number to
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        array|PhoneNumberUpdateParams $params,
+        string $id,
+        ?string $locationID = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberUpdateResponse {
-        [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = ['id' => $id, 'locationID' => $locationID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumberUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: [
-                'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
-            ],
-            body: (object) array_diff_key($parsed, ['id']),
-            options: $options,
-            convert: PhoneNumberUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($phoneNumberID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -97,35 +82,30 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Returns a list of all active phone numbers associated with the given external connection.
      *
+     * @param string $id identifies the resource
      * @param array{
-     *   filter?: array{
-     *     civicAddressID?: array{eq?: string},
-     *     locationID?: array{eq?: string},
-     *     phoneNumber?: array{contains?: string, eq?: string},
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|PhoneNumberListParams $params
+     *   civicAddressID?: array{eq?: string},
+     *   locationID?: array{eq?: string},
+     *   phoneNumber?: array{contains?: string, eq?: string},
+     * } $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|PhoneNumberListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberListResponse {
-        [$parsed, $options] = PhoneNumberListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumberListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['external_connections/%1$s/phone_numbers', $id],
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

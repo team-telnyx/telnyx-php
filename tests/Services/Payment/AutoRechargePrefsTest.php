@@ -35,7 +35,7 @@ final class AutoRechargePrefsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->payment->autoRechargePrefs->update([]);
+        $result = $this->client->payment->autoRechargePrefs->update();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AutoRechargePrefUpdateResponse::class, $result);

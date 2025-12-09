@@ -14,6 +14,8 @@ interface ActionsContract
     /**
      * @api
      *
+     * @param string $id the unique identifier of a fax
+     *
      * @throws APIException
      */
     public function cancel(
@@ -23,6 +25,8 @@ interface ActionsContract
 
     /**
      * @api
+     *
+     * @param string $id the unique identifier of a fax
      *
      * @throws APIException
      */

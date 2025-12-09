@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InboundChannels\InboundChannelListResponse;
-use Telnyx\InboundChannels\InboundChannelUpdateParams;
 use Telnyx\InboundChannels\InboundChannelUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -15,13 +14,13 @@ interface InboundChannelsContract
     /**
      * @api
      *
-     * @param array<mixed>|InboundChannelUpdateParams $params
+     * @param int $channels The new number of concurrent channels for the account
      *
      * @throws APIException
      */
     public function update(
-        array|InboundChannelUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $channels,
+        ?RequestOptions $requestOptions = null
     ): InboundChannelUpdateResponse;
 
     /**

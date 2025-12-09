@@ -23,6 +23,8 @@ interface CountryCoverageContract
     /**
      * @api
      *
+     * @param string $countryCode country ISO code
+     *
      * @throws APIException
      */
     public function retrieveCountry(

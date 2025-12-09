@@ -5,19 +5,25 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPLatencyContract;
 
 final class GlobalIPLatencyService implements GlobalIPLatencyContract
 {
     /**
+     * @api
+     */
+    public GlobalIPLatencyRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPLatencyRawService($client);
+    }
 
     /**
      * @api
@@ -25,28 +31,21 @@ final class GlobalIPLatencyService implements GlobalIPLatencyContract
      * Global IP Latency Metrics
      *
      * @param array{
-     *   filter?: array{globalIPID?: string|array{in?: string}}
-     * }|GlobalIPLatencyRetrieveParams $params
+     *   globalIPID?: string|array{in?: string}
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|GlobalIPLatencyRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPLatencyGetResponse {
-        [$parsed, $options] = GlobalIPLatencyRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPLatencyGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'global_ip_latency',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPLatencyGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

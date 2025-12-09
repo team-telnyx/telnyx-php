@@ -5,45 +5,42 @@ declare(strict_types=1);
 namespace Telnyx\Services\Recordings;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Recordings\Actions\ActionDeleteParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Recordings\ActionsContract;
 
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Permanently deletes a list of call recordings.
      *
-     * @param array{ids: list<string>}|ActionDeleteParams $params
+     * @param list<string> $ids list of call recording IDs to delete
      *
      * @throws APIException
      */
     public function delete(
-        array|ActionDeleteParams $params,
+        array $ids,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = ActionDeleteParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['ids' => $ids];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'recordings/actions/delete',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

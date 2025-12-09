@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
-use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
-use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
+use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
@@ -18,42 +15,51 @@ use Telnyx\ServiceContracts\IntegrationSecretsContract;
 final class IntegrationSecretsService implements IntegrationSecretsContract
 {
     /**
+     * @api
+     */
+    public IntegrationSecretsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new IntegrationSecretsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new secret with an associated identifier that can be used to securely integrate with other services.
      *
-     * @param array{
-     *   identifier: string,
-     *   type: 'bearer'|'basic'|Type,
-     *   token?: string,
-     *   password?: string,
-     *   username?: string,
-     * }|IntegrationSecretCreateParams $params
+     * @param string $identifier the unique identifier of the secret
+     * @param 'bearer'|'basic'|\Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type $type the type of secret
+     * @param string $token The token for the secret. Required for bearer type secrets, ignored otherwise.
+     * @param string $password The password for the secret. Required for basic type secrets, ignored otherwise.
+     * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
      *
      * @throws APIException
      */
     public function create(
-        array|IntegrationSecretCreateParams $params,
+        string $identifier,
+        string|\Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type $type,
+        ?string $token = null,
+        ?string $password = null,
+        ?string $username = null,
         ?RequestOptions $requestOptions = null,
     ): IntegrationSecretNewResponse {
-        [$parsed, $options] = IntegrationSecretCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'identifier' => $identifier,
+            'type' => $type,
+            'token' => $token,
+            'password' => $password,
+            'username' => $username,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<IntegrationSecretNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'integration_secrets',
-            body: (object) $parsed,
-            options: $options,
-            convert: IntegrationSecretNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -64,31 +70,25 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * Retrieve a list of all integration secrets configured by the user.
      *
      * @param array{
-     *   filter?: array{
-     *     type?: 'bearer'|'basic'|IntegrationSecretListParams\Filter\Type,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|IntegrationSecretListParams $params
+     *   type?: 'bearer'|'basic'|Type
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|IntegrationSecretListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): IntegrationSecretListResponse {
-        [$parsed, $options] = IntegrationSecretListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<IntegrationSecretListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'integration_secrets',
-            query: $parsed,
-            options: $options,
-            convert: IntegrationSecretListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -104,13 +104,8 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['integration_secrets/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

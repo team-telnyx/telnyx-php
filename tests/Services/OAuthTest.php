@@ -52,9 +52,10 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->grants([
-            'allowed' => true, 'consentToken' => 'consent_token',
-        ]);
+        $result = $this->client->oauth->grants(
+            allowed: true,
+            consentToken: 'consent_token'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthGrantsResponse::class, $result);
@@ -67,9 +68,10 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->grants([
-            'allowed' => true, 'consentToken' => 'consent_token',
-        ]);
+        $result = $this->client->oauth->grants(
+            allowed: true,
+            consentToken: 'consent_token'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthGrantsResponse::class, $result);
@@ -82,7 +84,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect(['token' => 'token']);
+        $result = $this->client->oauth->introspect(token: 'token');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);
@@ -95,7 +97,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect(['token' => 'token']);
+        $result = $this->client->oauth->introspect(token: 'token');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);
@@ -108,7 +110,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->register([]);
+        $result = $this->client->oauth->register();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthRegisterResponse::class, $result);
@@ -121,11 +123,11 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->retrieveAuthorize([
-            'clientID' => 'client_id',
-            'redirectUri' => 'https://example.com',
-            'responseType' => 'code',
-        ]);
+        $result = $this->client->oauth->retrieveAuthorize(
+            clientID: 'client_id',
+            redirectUri: 'https://example.com',
+            responseType: 'code',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -138,15 +140,15 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->retrieveAuthorize([
-            'clientID' => 'client_id',
-            'redirectUri' => 'https://example.com',
-            'responseType' => 'code',
-            'codeChallenge' => 'code_challenge',
-            'codeChallengeMethod' => 'plain',
-            'scope' => 'scope',
-            'state' => 'state',
-        ]);
+        $result = $this->client->oauth->retrieveAuthorize(
+            clientID: 'client_id',
+            redirectUri: 'https://example.com',
+            responseType: 'code',
+            codeChallenge: 'code_challenge',
+            codeChallengeMethod: 'plain',
+            scope: 'scope',
+            state: 'state',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -172,9 +174,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->token([
-            'grantType' => 'client_credentials',
-        ]);
+        $result = $this->client->oauth->token(grantType: 'client_credentials');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthTokenResponse::class, $result);
@@ -187,16 +187,16 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->token([
-            'grantType' => 'client_credentials',
-            'clientID' => 'client_id',
-            'clientSecret' => 'client_secret',
-            'code' => 'code',
-            'codeVerifier' => 'code_verifier',
-            'redirectUri' => 'https://example.com',
-            'refreshToken' => 'refresh_token',
-            'scope' => 'admin',
-        ]);
+        $result = $this->client->oauth->token(
+            grantType: 'client_credentials',
+            clientID: 'client_id',
+            clientSecret: 'client_secret',
+            code: 'code',
+            codeVerifier: 'code_verifier',
+            redirectUri: 'https://example.com',
+            refreshToken: 'refresh_token',
+            scope: 'admin',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthTokenResponse::class, $result);

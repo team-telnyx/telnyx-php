@@ -34,7 +34,7 @@ final class DetailRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->detailRecords->list([]);
+        $result = $this->client->detailRecords->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DetailRecordListResponse::class, $result);

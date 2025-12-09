@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
@@ -18,12 +16,19 @@ interface MessagingContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingCreateParams $params
+     * @param int $aggregationType Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2
+     * @param list<string> $managedAccounts List of managed accounts to include
+     * @param list<string> $profiles List of messaging profile IDs to filter by
      *
      * @throws APIException
      */
     public function create(
-        array|MessagingCreateParams $params,
+        int $aggregationType,
+        string|\DateTimeInterface|null $endTime = null,
+        ?array $managedAccounts = null,
+        ?array $profiles = null,
+        ?bool $selectAllManagedAccounts = null,
+        string|\DateTimeInterface|null $startTime = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingNewResponse;
 
@@ -40,12 +45,14 @@ interface MessagingContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingListParams $params
+     * @param int $page Page number
+     * @param int $perPage Size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingListParams $params,
+        int $page = 1,
+        int $perPage = 20,
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse;
 

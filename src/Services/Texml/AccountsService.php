@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
 use Telnyx\Services\Texml\Accounts\CallsService;
@@ -16,11 +14,14 @@ use Telnyx\Services\Texml\Accounts\RecordingsService;
 use Telnyx\Services\Texml\Accounts\TranscriptionsService;
 use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
-use Telnyx\Texml\Accounts\AccountRetrieveRecordingsJsonParams;
-use Telnyx\Texml\Accounts\AccountRetrieveTranscriptionsJsonParams;
 
 final class AccountsService implements AccountsContract
 {
+    /**
+     * @api
+     */
+    public AccountsRawService $raw;
+
     /**
      * @api
      */
@@ -46,6 +47,7 @@ final class AccountsService implements AccountsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new AccountsRawService($client);
         $this->calls = new CallsService($client);
         $this->conferences = new ConferencesService($client);
         $this->recordings = new RecordingsService($client);
@@ -57,37 +59,28 @@ final class AccountsService implements AccountsContract
      *
      * Returns multiple recording resources for an account.
      *
-     * @param array{
-     *   dateCreated?: string|\DateTimeInterface, page?: int, pageSize?: int
-     * }|AccountRetrieveRecordingsJsonParams $params
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param string|\DateTimeInterface $dateCreated Filters recording by the creation date. Expected format is ISO8601 date or date-time, ie. {YYYY}-{MM}-{DD} or {YYYY}-{MM}-{DD}T{hh}:{mm}:{ss}Z. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
+     * @param int $page the number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken
+     * @param int $pageSize The number of records to be displayed on a page
      *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $accountSid,
-        array|AccountRetrieveRecordingsJsonParams $params,
+        string|\DateTimeInterface|null $dateCreated = null,
+        ?int $page = null,
+        ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): AccountGetRecordingsJsonResponse {
-        [$parsed, $options] = AccountRetrieveRecordingsJsonParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AccountGetRecordingsJsonResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['texml/Accounts/%1$s/Recordings.json', $accountSid],
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'dateCreated' => 'DateCreated',
-                    'page' => 'Page',
-                    'pageSize' => 'PageSize',
-                ],
-            ),
-            options: $options,
-            convert: AccountGetRecordingsJsonResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveRecordingsJson($accountSid, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -97,33 +90,24 @@ final class AccountsService implements AccountsContract
      *
      * Returns multiple recording transcription resources for an account.
      *
-     * @param array{
-     *   pageSize?: int, pageToken?: string
-     * }|AccountRetrieveTranscriptionsJsonParams $params
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param int $pageSize The number of records to be displayed on a page
+     * @param string $pageToken used to request the next page of results
      *
      * @throws APIException
      */
     public function retrieveTranscriptionsJson(
         string $accountSid,
-        array|AccountRetrieveTranscriptionsJsonParams $params,
+        ?int $pageSize = null,
+        ?string $pageToken = null,
         ?RequestOptions $requestOptions = null,
     ): AccountGetTranscriptionsJsonResponse {
-        [$parsed, $options] = AccountRetrieveTranscriptionsJsonParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['pageSize' => $pageSize, 'pageToken' => $pageToken];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AccountGetTranscriptionsJsonResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['texml/Accounts/%1$s/Transcriptions.json', $accountSid],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageSize' => 'PageSize', 'pageToken' => 'PageToken']
-            ),
-            options: $options,
-            convert: AccountGetTranscriptionsJsonResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveTranscriptionsJson($accountSid, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

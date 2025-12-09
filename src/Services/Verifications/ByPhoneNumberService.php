@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumberContract;
@@ -17,6 +16,11 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
     /**
      * @api
      */
+    public ByPhoneNumberRawService $raw;
+
+    /**
+     * @api
+     */
     public ActionsService $actions;
 
     /**
@@ -24,6 +28,7 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ByPhoneNumberRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -32,19 +37,16 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
      *
      * List verifications by phone number
      *
+     * @param string $phoneNumber +E164 formatted phone number
+     *
      * @throws APIException
      */
     public function list(
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): ByPhoneNumberListResponse {
-        /** @var BaseResponse<ByPhoneNumberListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['verifications/by_phone_number/%1$s', $phoneNumber],
-            options: $requestOptions,
-            convert: ByPhoneNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($phoneNumber, requestOptions: $requestOptions);
 
         return $response->parse();
     }

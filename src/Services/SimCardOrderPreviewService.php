@@ -5,48 +5,45 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrderPreviewContract;
-use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewParams;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
 final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
 {
     /**
+     * @api
+     */
+    public SimCardOrderPreviewRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SimCardOrderPreviewRawService($client);
+    }
 
     /**
      * @api
      *
      * Preview SIM card order purchases.
      *
-     * @param array{
-     *   addressID: string, quantity: int
-     * }|SimCardOrderPreviewPreviewParams $params
+     * @param string $addressID uniquely identifies the address for the order
+     * @param int $quantity the amount of SIM cards that the user would like to purchase in the SIM card order
      *
      * @throws APIException
      */
     public function preview(
-        array|SimCardOrderPreviewPreviewParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $addressID,
+        int $quantity,
+        ?RequestOptions $requestOptions = null
     ): SimCardOrderPreviewPreviewResponse {
-        [$parsed, $options] = SimCardOrderPreviewPreviewParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['addressID' => $addressID, 'quantity' => $quantity];
 
-        /** @var BaseResponse<SimCardOrderPreviewPreviewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'sim_card_order_preview',
-            body: (object) $parsed,
-            options: $options,
-            convert: SimCardOrderPreviewPreviewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->preview(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

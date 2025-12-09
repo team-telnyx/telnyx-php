@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InboundChannels\InboundChannelListResponse;
-use Telnyx\InboundChannels\InboundChannelUpdateParams;
 use Telnyx\InboundChannels\InboundChannelUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InboundChannelsContract;
@@ -16,36 +14,35 @@ use Telnyx\ServiceContracts\InboundChannelsContract;
 final class InboundChannelsService implements InboundChannelsContract
 {
     /**
+     * @api
+     */
+    public InboundChannelsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new InboundChannelsRawService($client);
+    }
 
     /**
      * @api
      *
      * Update the number of Voice Channels for the US Zone. This allows your account to handle multiple simultaneous inbound calls to US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
      *
-     * @param array{channels: int}|InboundChannelUpdateParams $params
+     * @param int $channels The new number of concurrent channels for the account
      *
      * @throws APIException
      */
     public function update(
-        array|InboundChannelUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $channels,
+        ?RequestOptions $requestOptions = null
     ): InboundChannelUpdateResponse {
-        [$parsed, $options] = InboundChannelUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['channels' => $channels];
 
-        /** @var BaseResponse<InboundChannelUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: 'inbound_channels',
-            body: (object) $parsed,
-            options: $options,
-            convert: InboundChannelUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -60,13 +57,8 @@ final class InboundChannelsService implements InboundChannelsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): InboundChannelListResponse {
-        /** @var BaseResponse<InboundChannelListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'inbound_channels',
-            options: $requestOptions,
-            convert: InboundChannelListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -33,12 +33,12 @@ final class ChatTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->chat->createCompletion([
-            'messages' => [
+        $result = $this->client->ai->chat->createCompletion(
+            messages: [
                 ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
                 ['content' => 'Hello, world!', 'role' => 'user'],
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsArray($result);
@@ -51,30 +51,30 @@ final class ChatTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->chat->createCompletion([
-            'messages' => [
+        $result = $this->client->ai->chat->createCompletion(
+            messages: [
                 ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
                 ['content' => 'Hello, world!', 'role' => 'user'],
             ],
-            'apiKeyRef' => 'api_key_ref',
-            'bestOf' => 0,
-            'earlyStopping' => true,
-            'frequencyPenalty' => 0,
-            'guidedChoice' => ['string'],
-            'guidedJson' => ['foo' => 'bar'],
-            'guidedRegex' => 'guided_regex',
-            'lengthPenalty' => 0,
-            'logprobs' => true,
-            'maxTokens' => 0,
-            'minP' => 0,
-            'model' => 'model',
-            'n' => 0,
-            'presencePenalty' => 0,
-            'responseFormat' => ['type' => 'text'],
-            'stream' => true,
-            'temperature' => 0,
-            'toolChoice' => 'none',
-            'tools' => [
+            apiKeyRef: 'api_key_ref',
+            bestOf: 0,
+            earlyStopping: true,
+            frequencyPenalty: 0,
+            guidedChoice: ['string'],
+            guidedJson: ['foo' => 'bar'],
+            guidedRegex: 'guided_regex',
+            lengthPenalty: 0,
+            logprobs: true,
+            maxTokens: 0,
+            minP: 0,
+            model: 'model',
+            n: 0,
+            presencePenalty: 0,
+            responseFormat: ['type' => 'text'],
+            stream: true,
+            temperature: 0,
+            toolChoice: 'none',
+            tools: [
                 [
                     'function' => [
                         'name' => 'name',
@@ -84,10 +84,10 @@ final class ChatTest extends TestCase
                     'type' => 'function',
                 ],
             ],
-            'topLogprobs' => 0,
-            'topP' => 0,
-            'useBeamSearch' => true,
-        ]);
+            topLogprobs: 0,
+            topP: 0,
+            useBeamSearch: true,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsArray($result);

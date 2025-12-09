@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NotificationEvents\NotificationEventListParams;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventsContract;
@@ -15,9 +13,17 @@ use Telnyx\ServiceContracts\NotificationEventsContract;
 final class NotificationEventsService implements NotificationEventsContract
 {
     /**
+     * @api
+     */
+    public NotificationEventsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NotificationEventsRawService($client);
+    }
 
     /**
      * @api
@@ -25,28 +31,21 @@ final class NotificationEventsService implements NotificationEventsContract
      * Returns a list of your notifications events.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|NotificationEventListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|NotificationEventListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): NotificationEventListResponse {
-        [$parsed, $options] = NotificationEventListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NotificationEventListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'notification_events',
-            query: $parsed,
-            options: $options,
-            convert: NotificationEventListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -15,6 +15,11 @@ final class BatchDetailRecordsService implements BatchDetailRecordsContract
     /**
      * @api
      */
+    public BatchDetailRecordsRawService $raw;
+
+    /**
+     * @api
+     */
     public MessagingService $messaging;
 
     /**
@@ -32,6 +37,7 @@ final class BatchDetailRecordsService implements BatchDetailRecordsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new BatchDetailRecordsRawService($client);
         $this->messaging = new MessagingService($client);
         $this->speechToText = new SpeechToTextService($client);
         $this->voice = new VoiceService($client);

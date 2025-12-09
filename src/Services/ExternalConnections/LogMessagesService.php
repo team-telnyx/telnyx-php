@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\LogMessagesContract;
@@ -17,14 +15,24 @@ use Telnyx\ServiceContracts\ExternalConnections\LogMessagesContract;
 final class LogMessagesService implements LogMessagesContract
 {
     /**
+     * @api
+     */
+    public LogMessagesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new LogMessagesRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a log message for an external connection associated with your account.
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -32,13 +40,8 @@ final class LogMessagesService implements LogMessagesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): LogMessageGetResponse {
-        /** @var BaseResponse<LogMessageGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['external_connections/log_messages/%1$s', $id],
-            options: $requestOptions,
-            convert: LogMessageGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -49,32 +52,26 @@ final class LogMessagesService implements LogMessagesContract
      * Retrieve a list of log messages for all external connections associated with your account.
      *
      * @param array{
-     *   filter?: array{
-     *     externalConnectionID?: string,
-     *     telephoneNumber?: array{contains?: string, eq?: string},
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|LogMessageListParams $params
+     *   externalConnectionID?: string,
+     *   telephoneNumber?: array{contains?: string, eq?: string},
+     * } $filter Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|LogMessageListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): LogMessageListResponse {
-        [$parsed, $options] = LogMessageListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<LogMessageListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'external_connections/log_messages',
-            query: $parsed,
-            options: $options,
-            convert: LogMessageListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -84,19 +81,16 @@ final class LogMessagesService implements LogMessagesContract
      *
      * Dismiss a log message for an external connection associated with your account.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function dismiss(
         string $id,
         ?RequestOptions $requestOptions = null
     ): LogMessageDismissResponse {
-        /** @var BaseResponse<LogMessageDismissResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['external_connections/log_messages/%1$s', $id],
-            options: $requestOptions,
-            convert: LogMessageDismissResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->dismiss($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

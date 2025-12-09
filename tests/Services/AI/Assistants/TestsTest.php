@@ -36,11 +36,11 @@ final class TestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tests->create([
-            'destination' => '+15551234567',
-            'instructions' => 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
-            'name' => 'Customer Support Bot Test',
-            'rubric' => [
+        $result = $this->client->ai->assistants->tests->create(
+            destination: '+15551234567',
+            instructions: 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
+            name: 'Customer Support Bot Test',
+            rubric: [
                 [
                     'criteria' => 'Assistant responds within 30 seconds',
                     'name' => 'Response Time',
@@ -50,7 +50,7 @@ final class TestsTest extends TestCase
                     'name' => 'Accuracy',
                 ],
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AssistantTest::class, $result);
@@ -63,11 +63,11 @@ final class TestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tests->create([
-            'destination' => '+15551234567',
-            'instructions' => 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
-            'name' => 'Customer Support Bot Test',
-            'rubric' => [
+        $result = $this->client->ai->assistants->tests->create(
+            destination: '+15551234567',
+            instructions: 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
+            name: 'Customer Support Bot Test',
+            rubric: [
                 [
                     'criteria' => 'Assistant responds within 30 seconds',
                     'name' => 'Response Time',
@@ -77,11 +77,11 @@ final class TestsTest extends TestCase
                     'name' => 'Accuracy',
                 ],
             ],
-            'description' => 'description',
-            'maxDurationSeconds' => 1,
-            'telnyxConversationChannel' => TelnyxConversationChannel::WEB_CHAT,
-            'testSuite' => 'test_suite',
-        ]);
+            description: 'description',
+            maxDurationSeconds: 1,
+            telnyxConversationChannel: TelnyxConversationChannel::WEB_CHAT,
+            testSuite: 'test_suite',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AssistantTest::class, $result);
@@ -107,7 +107,7 @@ final class TestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tests->update('test_id', []);
+        $result = $this->client->ai->assistants->tests->update('test_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AssistantTest::class, $result);
@@ -120,7 +120,7 @@ final class TestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tests->list([]);
+        $result = $this->client->ai->assistants->tests->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TestListResponse::class, $result);

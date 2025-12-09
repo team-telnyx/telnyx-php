@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Fqdns\FqdnCreateParams;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
-use Telnyx\Fqdns\FqdnListParams;
 use Telnyx\Fqdns\FqdnListResponse;
 use Telnyx\Fqdns\FqdnNewResponse;
-use Telnyx\Fqdns\FqdnUpdateParams;
 use Telnyx\Fqdns\FqdnUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnsContract;
@@ -21,38 +17,48 @@ use Telnyx\ServiceContracts\FqdnsContract;
 final class FqdnsService implements FqdnsContract
 {
     /**
+     * @api
+     */
+    public FqdnsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new FqdnsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new FQDN object.
      *
-     * @param array{
-     *   connectionID: string, dnsRecordType: string, fqdn: string, port?: int|null
-     * }|FqdnCreateParams $params
+     * @param string $connectionID ID of the FQDN connection to which this IP should be attached
+     * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
+     * @param string $fqdn FQDN represented by this resource
+     * @param int|null $port port to use when connecting to this FQDN
      *
      * @throws APIException
      */
     public function create(
-        array|FqdnCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $connectionID,
+        string $dnsRecordType,
+        string $fqdn,
+        ?int $port = 5060,
+        ?RequestOptions $requestOptions = null,
     ): FqdnNewResponse {
-        [$parsed, $options] = FqdnCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'connectionID' => $connectionID,
+            'dnsRecordType' => $dnsRecordType,
+            'fqdn' => $fqdn,
+            'port' => $port,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<FqdnNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'fqdns',
-            body: (object) $parsed,
-            options: $options,
-            convert: FqdnNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -62,19 +68,16 @@ final class FqdnsService implements FqdnsContract
      *
      * Return the details regarding a specific FQDN.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnGetResponse {
-        /** @var BaseResponse<FqdnGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['fqdns/%1$s', $id],
-            options: $requestOptions,
-            convert: FqdnGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -84,30 +87,33 @@ final class FqdnsService implements FqdnsContract
      *
      * Update the details of a specific FQDN.
      *
-     * @param array{
-     *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int|null
-     * }|FqdnUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $connectionID ID of the FQDN connection to which this IP should be attached
+     * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
+     * @param string $fqdn FQDN represented by this resource
+     * @param int|null $port port to use when connecting to this FQDN
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|FqdnUpdateParams $params,
+        ?string $connectionID = null,
+        ?string $dnsRecordType = null,
+        ?string $fqdn = null,
+        ?int $port = 5060,
         ?RequestOptions $requestOptions = null,
     ): FqdnUpdateResponse {
-        [$parsed, $options] = FqdnUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'connectionID' => $connectionID,
+            'dnsRecordType' => $dnsRecordType,
+            'fqdn' => $fqdn,
+            'port' => $port,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<FqdnUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['fqdns/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: FqdnUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -118,31 +124,25 @@ final class FqdnsService implements FqdnsContract
      * Get all FQDNs belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: array{
-     *     connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|FqdnListParams $params
+     *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|FqdnListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): FqdnListResponse {
-        [$parsed, $options] = FqdnListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<FqdnListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'fqdns',
-            query: $parsed,
-            options: $options,
-            convert: FqdnListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -152,19 +152,16 @@ final class FqdnsService implements FqdnsContract
      *
      * Delete an FQDN.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): FqdnDeleteResponse {
-        /** @var BaseResponse<FqdnDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['fqdns/%1$s', $id],
-            options: $requestOptions,
-            convert: FqdnDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Queues\QueueGetResponse;
 use Telnyx\RequestOptions;
@@ -17,6 +16,11 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      */
+    public QueuesRawService $raw;
+
+    /**
+     * @api
+     */
     public CallsService $calls;
 
     /**
@@ -24,6 +28,7 @@ final class QueuesService implements QueuesContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new QueuesRawService($client);
         $this->calls = new CallsService($client);
     }
 
@@ -32,19 +37,16 @@ final class QueuesService implements QueuesContract
      *
      * Retrieve an existing call queue
      *
+     * @param string $queueName Uniquely identifies the queue by name
+     *
      * @throws APIException
      */
     public function retrieve(
         string $queueName,
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
-        /** @var BaseResponse<QueueGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['queues/%1$s', $queueName],
-            options: $requestOptions,
-            convert: QueueGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($queueName, requestOptions: $requestOptions);
 
         return $response->parse();
     }

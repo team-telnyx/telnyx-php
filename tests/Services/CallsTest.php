@@ -41,11 +41,11 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->calls->dial([
-            'connectionID' => '7267xxxxxxxxxxxxxx',
-            'from' => '+18005550101',
-            'to' => '+18005550100 or sip:username@sip.telnyx.com',
-        ]);
+        $result = $this->client->calls->dial(
+            connectionID: '7267xxxxxxxxxxxxxx',
+            from: '+18005550101',
+            to: '+18005550100 or sip:username@sip.telnyx.com',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallDialResponse::class, $result);
@@ -58,12 +58,12 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->calls->dial([
-            'connectionID' => '7267xxxxxxxxxxxxxx',
-            'from' => '+18005550101',
-            'to' => '+18005550100 or sip:username@sip.telnyx.com',
-            'answeringMachineDetection' => 'detect',
-            'answeringMachineDetectionConfig' => [
+        $result = $this->client->calls->dial(
+            connectionID: '7267xxxxxxxxxxxxxx',
+            from: '+18005550101',
+            to: '+18005550100 or sip:username@sip.telnyx.com',
+            answeringMachineDetection: 'detect',
+            answeringMachineDetectionConfig: [
                 'afterGreetingSilenceMillis' => 1000,
                 'betweenWordsSilenceMillis' => 1000,
                 'greetingDurationMillis' => 1000,
@@ -75,13 +75,13 @@ final class CallsTest extends TestCase
                 'silenceThreshold' => 512,
                 'totalAnalysisTimeMillis' => 5000,
             ],
-            'audioURL' => 'http://www.example.com/sounds/greeting.wav',
-            'billingGroupID' => 'f5586561-8ff0-4291-a0ac-84fe544797bd',
-            'bridgeIntent' => true,
-            'bridgeOnAnswer' => true,
-            'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-            'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-            'conferenceConfig' => [
+            audioURL: 'http://www.example.com/sounds/greeting.wav',
+            billingGroupID: 'f5586561-8ff0-4291-a0ac-84fe544797bd',
+            bridgeIntent: true,
+            bridgeOnAnswer: true,
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            conferenceConfig: [
                 'id' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
                 'beepEnabled' => 'on_exit',
                 'conferenceName' => 'telnyx-conference',
@@ -100,51 +100,51 @@ final class CallsTest extends TestCase
                     'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
                 ],
             ],
-            'customHeaders' => [
+            customHeaders: [
                 ['name' => 'head_1', 'value' => 'val_1'],
                 ['name' => 'head_2', 'value' => 'val_2'],
             ],
-            'dialogflowConfig' => [
+            dialogflowConfig: [
                 'analyzeSentiment' => false, 'partialAutomatedAgentReply' => false,
             ],
-            'enableDialogflow' => false,
-            'fromDisplayName' => 'Company Name',
-            'linkTo' => 'ilditnZK_eVysupV21KzmzN_sM29ygfauQojpm4BgFtfX5hXAcjotg==',
-            'mediaEncryption' => 'SRTP',
-            'mediaName' => 'my_media_uploaded_to_media_storage_api',
-            'parkAfterUnbridge' => 'self',
-            'preferredCodecs' => 'G722,PCMU,PCMA,G729,OPUS,VP8,H264',
-            'record' => 'record-from-answer',
-            'recordChannels' => 'single',
-            'recordCustomFileName' => 'my_recording_file_name',
-            'recordFormat' => 'wav',
-            'recordMaxLength' => 1000,
-            'recordTimeoutSecs' => 100,
-            'recordTrack' => 'outbound',
-            'recordTrim' => 'trim-silence',
-            'sendSilenceWhenIdle' => true,
-            'sipAuthPassword' => 'password',
-            'sipAuthUsername' => 'username',
-            'sipHeaders' => [['name' => 'User-to-User', 'value' => '12345']],
-            'sipRegion' => 'Canada',
-            'sipTransportProtocol' => 'TLS',
-            'soundModifications' => [
+            enableDialogflow: false,
+            fromDisplayName: 'Company Name',
+            linkTo: 'ilditnZK_eVysupV21KzmzN_sM29ygfauQojpm4BgFtfX5hXAcjotg==',
+            mediaEncryption: 'SRTP',
+            mediaName: 'my_media_uploaded_to_media_storage_api',
+            parkAfterUnbridge: 'self',
+            preferredCodecs: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264',
+            record: 'record-from-answer',
+            recordChannels: 'single',
+            recordCustomFileName: 'my_recording_file_name',
+            recordFormat: 'wav',
+            recordMaxLength: 1000,
+            recordTimeoutSecs: 100,
+            recordTrack: 'outbound',
+            recordTrim: 'trim-silence',
+            sendSilenceWhenIdle: true,
+            sipAuthPassword: 'password',
+            sipAuthUsername: 'username',
+            sipHeaders: [['name' => 'User-to-User', 'value' => '12345']],
+            sipRegion: 'Canada',
+            sipTransportProtocol: 'TLS',
+            soundModifications: [
                 'octaves' => 0.1, 'pitch' => 0.8, 'semitone' => -2, 'track' => 'both',
             ],
-            'streamBidirectionalCodec' => StreamBidirectionalCodec::G722,
-            'streamBidirectionalMode' => StreamBidirectionalMode::RTP,
-            'streamBidirectionalSamplingRate' => StreamBidirectionalSamplingRate::_16000,
-            'streamBidirectionalTargetLegs' => StreamBidirectionalTargetLegs::BOTH,
-            'streamCodec' => StreamCodec::PCMA,
-            'streamEstablishBeforeCallOriginate' => true,
-            'streamTrack' => 'both_tracks',
-            'streamURL' => 'wss://www.example.com/websocket',
-            'superviseCallControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-            'supervisorRole' => 'barge',
-            'timeLimitSecs' => 600,
-            'timeoutSecs' => 60,
-            'transcription' => true,
-            'transcriptionConfig' => [
+            streamBidirectionalCodec: StreamBidirectionalCodec::G722,
+            streamBidirectionalMode: StreamBidirectionalMode::RTP,
+            streamBidirectionalSamplingRate: StreamBidirectionalSamplingRate::_16000,
+            streamBidirectionalTargetLegs: StreamBidirectionalTargetLegs::BOTH,
+            streamCodec: StreamCodec::PCMA,
+            streamEstablishBeforeCallOriginate: true,
+            streamTrack: 'both_tracks',
+            streamURL: 'wss://www.example.com/websocket',
+            superviseCallControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            supervisorRole: 'barge',
+            timeLimitSecs: 600,
+            timeoutSecs: 60,
+            transcription: true,
+            transcriptionConfig: [
                 'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
                 'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'transcriptionEngine' => 'Google',
@@ -163,9 +163,9 @@ final class CallsTest extends TestCase
                 ],
                 'transcriptionTracks' => 'both',
             ],
-            'webhookURL' => 'https://www.example.com/server-b/',
-            'webhookURLMethod' => 'POST',
-        ]);
+            webhookURL: 'https://www.example.com/server-b/',
+            webhookURLMethod: 'POST',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallDialResponse::class, $result);

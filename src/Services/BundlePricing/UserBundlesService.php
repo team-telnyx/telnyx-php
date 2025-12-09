@@ -4,67 +4,59 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\BundlePricing;
 
-use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
-use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
-use Telnyx\BundlePricing\UserBundles\UserBundleListParams;
-use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
-use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
-use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
 
 final class UserBundlesService implements UserBundlesContract
 {
     /**
+     * @api
+     */
+    public UserBundlesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new UserBundlesRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates multiple user bundles for the user.
      *
-     * @param array{
-     *   idempotencyKey?: string,
-     *   items?: list<array{billingBundleID: string, quantity: int}>,
-     *   authorizationBearer?: string,
-     * }|UserBundleCreateParams $params
+     * @param string $idempotencyKey Body param: Idempotency key for the request. Can be any UUID, but should always be unique for each request.
+     * @param list<array{billingBundleID: string, quantity: int}> $items Body param:
+     * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function create(
-        array|UserBundleCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $idempotencyKey = null,
+        ?array $items = null,
+        ?string $authorizationBearer = null,
+        ?RequestOptions $requestOptions = null,
     ): UserBundleNewResponse {
-        [$parsed, $options] = UserBundleCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $header_params = ['authorization_bearer' => 'authorization_bearer'];
+        $params = [
+            'idempotencyKey' => $idempotencyKey,
+            'items' => $items,
+            'authorizationBearer' => $authorizationBearer,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<UserBundleNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'bundle_pricing/user_bundles/bulk',
-            headers: Util::array_transform_keys(
-                array_intersect_key($parsed, array_keys($header_params)),
-                $header_params
-            ),
-            body: (object) array_diff_key($parsed, array_keys($header_params)),
-            options: $options,
-            convert: UserBundleNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -74,31 +66,22 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Retrieves a user bundle by its ID.
      *
-     * @param array{authorizationBearer?: string}|UserBundleRetrieveParams $params
+     * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
+     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function retrieve(
         string $userBundleID,
-        array|UserBundleRetrieveParams $params,
+        ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleGetResponse {
-        [$parsed, $options] = UserBundleRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['authorizationBearer' => $authorizationBearer];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<UserBundleGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
-            headers: Util::array_transform_keys(
-                $parsed,
-                ['authorizationBearer' => 'authorization_bearer']
-            ),
-            options: $options,
-            convert: UserBundleGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($userBundleID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -109,38 +92,31 @@ final class UserBundlesService implements UserBundlesContract
      * Get a paginated list of user bundles.
      *
      * @param array{
-     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
-     *   page?: array{number?: int, size?: int},
-     *   authorizationBearer?: string,
-     * }|UserBundleListParams $params
+     *   countryISO?: list<string>, resource?: list<string>
+     * } $filter Query param: Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Query param: Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function list(
-        array|UserBundleListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?string $authorizationBearer = null,
+        ?RequestOptions $requestOptions = null,
     ): UserBundleListResponse {
-        [$parsed, $options] = UserBundleListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $query_params = array_flip(['filter', 'page']);
+        $params = [
+            'filter' => $filter,
+            'page' => $page,
+            'authorizationBearer' => $authorizationBearer,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var array<string,string> */
-        $header_params = array_diff_key($parsed, $query_params);
-
-        /** @var BaseResponse<UserBundleListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'bundle_pricing/user_bundles',
-            query: array_intersect_key($parsed, $query_params),
-            headers: Util::array_transform_keys(
-                $header_params,
-                ['authorizationBearer' => 'authorization_bearer']
-            ),
-            options: $options,
-            convert: UserBundleListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -150,31 +126,22 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Deactivates a user bundle by its ID.
      *
-     * @param array{authorizationBearer?: string}|UserBundleDeactivateParams $params
+     * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
+     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function deactivate(
         string $userBundleID,
-        array|UserBundleDeactivateParams $params,
+        ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleDeactivateResponse {
-        [$parsed, $options] = UserBundleDeactivateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['authorizationBearer' => $authorizationBearer];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<UserBundleDeactivateResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
-            headers: Util::array_transform_keys(
-                $parsed,
-                ['authorizationBearer' => 'authorization_bearer']
-            ),
-            options: $options,
-            convert: UserBundleDeactivateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deactivate($userBundleID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -184,31 +151,22 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Retrieves the resources of a user bundle by its ID.
      *
-     * @param array{authorizationBearer?: string}|UserBundleListResourcesParams $params
+     * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
+     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function listResources(
         string $userBundleID,
-        array|UserBundleListResourcesParams $params,
+        ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleListResourcesResponse {
-        [$parsed, $options] = UserBundleListResourcesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['authorizationBearer' => $authorizationBearer];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<UserBundleListResourcesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['bundle_pricing/user_bundles/%1$s/resources', $userBundleID],
-            headers: Util::array_transform_keys(
-                $parsed,
-                ['authorizationBearer' => 'authorization_bearer']
-            ),
-            options: $options,
-            convert: UserBundleListResourcesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listResources($userBundleID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -219,37 +177,25 @@ final class UserBundlesService implements UserBundlesContract
      * Returns all user bundles that aren't in use.
      *
      * @param array{
-     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
-     *   authorizationBearer?: string,
-     * }|UserBundleListUnusedParams $params
+     *   countryISO?: list<string>, resource?: list<string>
+     * } $filter Query param: Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
+     * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException
      */
     public function listUnused(
-        array|UserBundleListUnusedParams $params,
+        ?array $filter = null,
+        ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleListUnusedResponse {
-        [$parsed, $options] = UserBundleListUnusedParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $query_params = ['filter'];
+        $params = [
+            'filter' => $filter, 'authorizationBearer' => $authorizationBearer,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var array<string,string> */
-        $header_params = array_diff_key($parsed, $query_params);
-
-        /** @var BaseResponse<UserBundleListUnusedResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'bundle_pricing/user_bundles/unused',
-            query: array_intersect_key($parsed, $query_params),
-            headers: Util::array_transform_keys(
-                $header_params,
-                ['authorizationBearer' => 'authorization_bearer']
-            ),
-            options: $options,
-            convert: UserBundleListUnusedResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listUnused(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

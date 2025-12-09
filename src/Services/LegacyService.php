@@ -13,6 +13,11 @@ final class LegacyService implements LegacyContract
     /**
      * @api
      */
+    public LegacyRawService $raw;
+
+    /**
+     * @api
+     */
     public ReportingService $reporting;
 
     /**
@@ -20,6 +25,7 @@ final class LegacyService implements LegacyContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new LegacyRawService($client);
         $this->reporting = new ReportingService($client);
     }
 }

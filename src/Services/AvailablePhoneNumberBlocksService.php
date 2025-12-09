@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter\PhoneNumberType;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumberBlocksContract;
@@ -16,9 +14,17 @@ use Telnyx\ServiceContracts\AvailablePhoneNumberBlocksContract;
 final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlocksContract
 {
     /**
+     * @api
+     */
+    public AvailablePhoneNumberBlocksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AvailablePhoneNumberBlocksRawService($client);
+    }
 
     /**
      * @api
@@ -26,33 +32,24 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
      * List available phone number blocks
      *
      * @param array{
-     *   filter?: array{
-     *     countryCode?: string,
-     *     locality?: string,
-     *     nationalDestinationCode?: string,
-     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     *   },
-     * }|AvailablePhoneNumberBlockListParams $params
+     *   countryCode?: string,
+     *   locality?: string,
+     *   nationalDestinationCode?: string,
+     *   phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type]
      *
      * @throws APIException
      */
     public function list(
-        array|AvailablePhoneNumberBlockListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): AvailablePhoneNumberBlockListResponse {
-        [$parsed, $options] = AvailablePhoneNumberBlockListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AvailablePhoneNumberBlockListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'available_phone_number_blocks',
-            query: $parsed,
-            options: $options,
-            convert: AvailablePhoneNumberBlockListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

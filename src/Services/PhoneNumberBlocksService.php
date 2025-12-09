@@ -13,6 +13,11 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
     /**
      * @api
      */
+    public PhoneNumberBlocksRawService $raw;
+
+    /**
+     * @api
+     */
     public JobsService $jobs;
 
     /**
@@ -20,6 +25,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new PhoneNumberBlocksRawService($client);
         $this->jobs = new JobsService($client);
     }
 }

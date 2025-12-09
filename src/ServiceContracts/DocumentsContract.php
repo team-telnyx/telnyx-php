@@ -8,13 +8,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
-use Telnyx\Documents\DocumentListParams;
+use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentListResponse;
-use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
-use Telnyx\Documents\DocumentUploadJsonParams;
 use Telnyx\Documents\DocumentUploadJsonResponse;
-use Telnyx\Documents\DocumentUploadParams;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 
@@ -22,6 +19,8 @@ interface DocumentsContract
 {
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -33,30 +32,47 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @param array<mixed>|DocumentUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $customerReference optional reference string for customer tracking
+     * @param string $filename the filename of the document
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|DocumentUpdateParams $params,
+        ?string $customerReference = null,
+        ?string $filename = null,
         ?RequestOptions $requestOptions = null,
     ): DocumentUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|DocumentListParams $params
+     * @param array{
+     *   createdAt?: array{
+     *     gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
+     *   },
+     *   customerReference?: array{eq?: string, in?: list<string>},
+     *   filename?: array{contains?: string},
+     * } $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'|Sort> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      *
      * @throws APIException
      */
     public function list(
-        array|DocumentListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?array $sort = null,
+        ?RequestOptions $requestOptions = null,
     ): DocumentListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -68,6 +84,8 @@ interface DocumentsContract
     /**
      * @api
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function download(
@@ -77,6 +95,8 @@ interface DocumentsContract
 
     /**
      * @api
+     *
+     * @param string $id Uniquely identifies the document
      *
      * @throws APIException
      */
@@ -88,24 +108,36 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @param array<mixed>|DocumentUploadParams $params
+     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $filename the filename of the document
      *
      * @throws APIException
      */
     public function upload(
-        array|DocumentUploadParams $params,
-        ?RequestOptions $requestOptions = null
+        string $url,
+        string $file,
+        ?string $customerReference = null,
+        ?string $filename = null,
+        ?RequestOptions $requestOptions = null,
     ): DocumentUploadResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|DocumentUploadJsonParams $params
+     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $filename the filename of the document
      *
      * @throws APIException
      */
     public function uploadJson(
-        array|DocumentUploadJsonParams $params,
+        string $url,
+        string $file,
+        ?string $customerReference = null,
+        ?string $filename = null,
         ?RequestOptions $requestOptions = null,
     ): DocumentUploadJsonResponse;
 }

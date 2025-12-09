@@ -35,15 +35,13 @@ final class MobilePushCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobilePushCredentials->create([
-            'alias' => 'LucyAndroidCredential',
-            'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-            'privateKey' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-            'type' => 'android',
-            'projectAccountJsonFile' => [
-                'private_key' => 'bar', 'client_email' => 'bar',
-            ],
-        ]);
+        $result = $this->client->mobilePushCredentials->create(
+            alias: 'LucyAndroidCredential',
+            certificate: '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
+            privateKey: '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            type: 'android',
+            projectAccountJsonFile: ['private_key' => 'bar', 'client_email' => 'bar'],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PushCredentialResponse::class, $result);
@@ -56,15 +54,13 @@ final class MobilePushCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobilePushCredentials->create([
-            'alias' => 'LucyAndroidCredential',
-            'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-            'privateKey' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-            'type' => 'android',
-            'projectAccountJsonFile' => [
-                'private_key' => 'bar', 'client_email' => 'bar',
-            ],
-        ]);
+        $result = $this->client->mobilePushCredentials->create(
+            alias: 'LucyAndroidCredential',
+            certificate: '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
+            privateKey: '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            type: 'android',
+            projectAccountJsonFile: ['private_key' => 'bar', 'client_email' => 'bar'],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PushCredentialResponse::class, $result);
@@ -92,7 +88,7 @@ final class MobilePushCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobilePushCredentials->list([]);
+        $result = $this->client->mobilePushCredentials->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MobilePushCredentialListResponse::class, $result);

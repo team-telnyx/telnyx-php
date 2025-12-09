@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingURLDomainsContract;
@@ -15,9 +13,17 @@ use Telnyx\ServiceContracts\MessagingURLDomainsContract;
 final class MessagingURLDomainsService implements MessagingURLDomainsContract
 {
     /**
+     * @api
+     */
+    public MessagingURLDomainsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MessagingURLDomainsRawService($client);
+    }
 
     /**
      * @api
@@ -25,28 +31,21 @@ final class MessagingURLDomainsService implements MessagingURLDomainsContract
      * List messaging URL domains
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|MessagingURLDomainListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingURLDomainListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): MessagingURLDomainListResponse {
-        [$parsed, $options] = MessagingURLDomainListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingURLDomainListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'messaging_url_domains',
-            query: $parsed,
-            options: $options,
-            convert: MessagingURLDomainListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

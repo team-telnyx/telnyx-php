@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
-use Telnyx\Legacy\Reporting\UsageReports\UsageReportRetrieveSpeechToTextParams;
 use Telnyx\RequestOptions;
 
 interface UsageReportsContract
@@ -14,12 +13,11 @@ interface UsageReportsContract
     /**
      * @api
      *
-     * @param array<mixed>|UsageReportRetrieveSpeechToTextParams $params
-     *
      * @throws APIException
      */
     public function retrieveSpeechToText(
-        array|UsageReportRetrieveSpeechToTextParams $params,
+        string|\DateTimeInterface|null $endDate = null,
+        string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): UsageReportGetSpeechToTextResponse;
 }

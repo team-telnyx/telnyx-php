@@ -34,7 +34,7 @@ final class PortabilityChecksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portabilityChecks->run([]);
+        $result = $this->client->portabilityChecks->run();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PortabilityCheckRunResponse::class, $result);

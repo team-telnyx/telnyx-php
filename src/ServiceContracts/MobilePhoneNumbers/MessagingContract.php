@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\MobilePhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingGetResponse;
-use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\RequestOptions;
 
@@ -14,6 +13,8 @@ interface MessagingContract
 {
     /**
      * @api
+     *
+     * @param string $id identifies the type of resource
      *
      * @throws APIException
      */
@@ -25,12 +26,14 @@ interface MessagingContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse;
 }

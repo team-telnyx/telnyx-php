@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort\Value;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
@@ -19,40 +16,39 @@ use Telnyx\ServiceContracts\PortingOrders\PhoneNumberConfigurationsContract;
 final class PhoneNumberConfigurationsService implements PhoneNumberConfigurationsContract
 {
     /**
+     * @api
+     */
+    public PhoneNumberConfigurationsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PhoneNumberConfigurationsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a list of phone number configurations.
      *
-     * @param array{
-     *   phoneNumberConfigurations?: list<array{
-     *     portingPhoneNumberID: string, userBundleID: string
-     *   }>,
-     * }|PhoneNumberConfigurationCreateParams $params
+     * @param list<array{
+     *   portingPhoneNumberID: string, userBundleID: string
+     * }> $phoneNumberConfigurations
      *
      * @throws APIException
      */
     public function create(
-        array|PhoneNumberConfigurationCreateParams $params,
+        ?array $phoneNumberConfigurations = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberConfigurationNewResponse {
-        [$parsed, $options] = PhoneNumberConfigurationCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['phoneNumberConfigurations' => $phoneNumberConfigurations];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumberConfigurationNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'porting_orders/phone_number_configurations',
-            body: (object) $parsed,
-            options: $options,
-            convert: PhoneNumberConfigurationNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -63,36 +59,33 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      * Returns a list of phone number configurations paginated.
      *
      * @param array{
-     *   filter?: array{
-     *     portingOrder?: array{
-     *       status?: list<'activation-in-progress'|'cancel-pending'|'cancelled'|'draft'|'exception'|'foc-date-confirmed'|'in-process'|'ported'|'submitted'|Status>,
-     *     },
-     *     portingPhoneNumber?: list<string>,
-     *     userBundleID?: list<string>,
+     *   portingOrder?: array{
+     *     status?: list<'activation-in-progress'|'cancel-pending'|'cancelled'|'draft'|'exception'|'foc-date-confirmed'|'in-process'|'ported'|'submitted'|Status>,
      *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'|Value},
-     * }|PhoneNumberConfigurationListParams $params
+     *   portingPhoneNumber?: list<string>,
+     *   userBundleID?: list<string>,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   value?: 'created_at'|'-created_at'|Value
+     * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @throws APIException
      */
     public function list(
-        array|PhoneNumberConfigurationListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
+        ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberConfigurationListResponse {
-        [$parsed, $options] = PhoneNumberConfigurationListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PhoneNumberConfigurationListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'porting_orders/phone_number_configurations',
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberConfigurationListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

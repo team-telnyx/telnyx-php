@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsContract;
 use Telnyx\Services\Storage\Buckets\SslCertificateService;
 use Telnyx\Services\Storage\Buckets\UsageService;
-use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
 final class BucketsService implements BucketsContract
 {
+    /**
+     * @api
+     */
+    public BucketsRawService $raw;
+
     /**
      * @api
      */
@@ -31,6 +34,7 @@ final class BucketsService implements BucketsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new BucketsRawService($client);
         $this->sslCertificate = new SslCertificateService($client);
         $this->usage = new UsageService($client);
     }
@@ -42,34 +46,24 @@ final class BucketsService implements BucketsContract
      *
      * Refer to: https://developers.telnyx.com/docs/cloud-storage/presigned-urls
      *
-     * @param array{
-     *   bucketName: string, ttl?: int
-     * }|BucketCreatePresignedURLParams $params
+     * @param string $objectName Path param: The name of the object
+     * @param string $bucketName Path param: The name of the bucket
+     * @param int $ttl Body param: The time to live of the token in seconds
      *
      * @throws APIException
      */
     public function createPresignedURL(
         string $objectName,
-        array|BucketCreatePresignedURLParams $params,
+        string $bucketName,
+        ?int $ttl = null,
         ?RequestOptions $requestOptions = null,
     ): BucketNewPresignedURLResponse {
-        [$parsed, $options] = BucketCreatePresignedURLParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $bucketName = $parsed['bucketName'];
-        unset($parsed['bucketName']);
+        $params = ['bucketName' => $bucketName, 'ttl' => $ttl];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<BucketNewPresignedURLResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: [
-                'storage/buckets/%1$s/%2$s/presigned_url', $bucketName, $objectName,
-            ],
-            body: (object) array_diff_key($parsed, ['bucketName']),
-            options: $options,
-            convert: BucketNewPresignedURLResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createPresignedURL($objectName, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

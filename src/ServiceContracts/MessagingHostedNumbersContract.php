@@ -13,6 +13,8 @@ interface MessagingHostedNumbersContract
     /**
      * @api
      *
+     * @param string $id identifies the type of resource
+     *
      * @throws APIException
      */
     public function delete(

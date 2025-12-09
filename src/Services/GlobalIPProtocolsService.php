@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse;
 use Telnyx\RequestOptions;
@@ -14,9 +13,17 @@ use Telnyx\ServiceContracts\GlobalIPProtocolsContract;
 final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
 {
     /**
+     * @api
+     */
+    public GlobalIPProtocolsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPProtocolsRawService($client);
+    }
 
     /**
      * @api
@@ -28,13 +35,8 @@ final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): GlobalIPProtocolListResponse {
-        /** @var BaseResponse<GlobalIPProtocolListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'global_ip_protocols',
-            options: $requestOptions,
-            convert: GlobalIPProtocolListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }

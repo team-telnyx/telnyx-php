@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
-use Telnyx\IPs\IPListParams;
 use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
-use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -20,17 +17,23 @@ interface IPsContract
     /**
      * @api
      *
-     * @param array<mixed>|IPCreateParams $params
+     * @param string $ipAddress IP adddress represented by this resource
+     * @param string $connectionID ID of the IP Connection to which this IP should be attached
+     * @param int $port port to use when connecting to this IP
      *
      * @throws APIException
      */
     public function create(
-        array|IPCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $ipAddress,
+        ?string $connectionID = null,
+        int $port = 5060,
+        ?RequestOptions $requestOptions = null,
     ): IPNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the type of resource
      *
      * @throws APIException
      */
@@ -42,30 +45,43 @@ interface IPsContract
     /**
      * @api
      *
-     * @param array<mixed>|IPUpdateParams $params
+     * @param string $id identifies the type of resource
+     * @param string $ipAddress IP adddress represented by this resource
+     * @param string $connectionID ID of the IP Connection to which this IP should be attached
+     * @param int $port port to use when connecting to this IP
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|IPUpdateParams $params,
+        string $ipAddress,
+        ?string $connectionID = null,
+        int $port = 5060,
         ?RequestOptions $requestOptions = null,
     ): IPUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|IPListParams $params
+     * @param array{
+     *   connectionID?: string, ipAddress?: string, port?: int
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|IPListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): IPListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the type of resource
      *
      * @throws APIException
      */

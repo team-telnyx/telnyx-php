@@ -1,0 +1,92 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts;
+
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\NotificationChannels\NotificationChannelCreateParams;
+use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
+use Telnyx\NotificationChannels\NotificationChannelGetResponse;
+use Telnyx\NotificationChannels\NotificationChannelListParams;
+use Telnyx\NotificationChannels\NotificationChannelListResponse;
+use Telnyx\NotificationChannels\NotificationChannelNewResponse;
+use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
+use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
+use Telnyx\RequestOptions;
+
+interface NotificationChannelsRawContract
+{
+    /**
+     * @api
+     *
+     * @param array<mixed>|NotificationChannelCreateParams $params
+     *
+     * @return BaseResponse<NotificationChannelNewResponse>
+     *
+     * @throws APIException
+     */
+    public function create(
+        array|NotificationChannelCreateParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id the id of the resource
+     *
+     * @return BaseResponse<NotificationChannelGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $id,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id the id of the resource
+     * @param array<mixed>|NotificationChannelUpdateParams $params
+     *
+     * @return BaseResponse<NotificationChannelUpdateResponse>
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $id,
+        array|NotificationChannelUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<mixed>|NotificationChannelListParams $params
+     *
+     * @return BaseResponse<NotificationChannelListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|NotificationChannelListParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id the id of the resource
+     *
+     * @return BaseResponse<NotificationChannelDeleteResponse>
+     *
+     * @throws APIException
+     */
+    public function delete(
+        string $id,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse;
+}

@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\ManagedAccounts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
-use Telnyx\ManagedAccounts\Actions\ActionEnableParams;
 use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Telnyx\RequestOptions;
 
@@ -14,6 +13,8 @@ interface ActionsContract
 {
     /**
      * @api
+     *
+     * @param string $id Managed Account User ID
      *
      * @throws APIException
      */
@@ -25,13 +26,14 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionEnableParams $params
+     * @param string $id Managed Account User ID
+     * @param bool $reenableAllConnections When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
      *
      * @throws APIException
      */
     public function enable(
         string $id,
-        array|ActionEnableParams $params,
+        bool $reenableAllConnections = false,
         ?RequestOptions $requestOptions = null,
     ): ActionEnableResponse;
 }

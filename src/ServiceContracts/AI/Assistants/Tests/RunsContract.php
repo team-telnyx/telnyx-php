@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Assistants\Tests;
 
-use Telnyx\AI\Assistants\Tests\Runs\RunListParams;
-use Telnyx\AI\Assistants\Tests\Runs\RunRetrieveParams;
-use Telnyx\AI\Assistants\Tests\Runs\RunTriggerParams;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Core\Exceptions\APIException;
@@ -17,39 +14,41 @@ interface RunsContract
     /**
      * @api
      *
-     * @param array<mixed>|RunRetrieveParams $params
-     *
      * @throws APIException
      */
     public function retrieve(
         string $runID,
-        array|RunRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $testID,
+        ?RequestOptions $requestOptions = null
     ): TestRunResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|RunListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      *
      * @throws APIException
      */
     public function list(
         string $testID,
-        array|RunListParams $params,
+        ?array $page = null,
+        ?string $status = null,
         ?RequestOptions $requestOptions = null,
     ): PaginatedTestRunList;
 
     /**
      * @api
      *
-     * @param array<mixed>|RunTriggerParams $params
+     * @param string $destinationVersionID Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      *
      * @throws APIException
      */
     public function trigger(
         string $testID,
-        array|RunTriggerParams $params,
+        ?string $destinationVersionID = null,
         ?RequestOptions $requestOptions = null,
     ): TestRunResponse;
 }

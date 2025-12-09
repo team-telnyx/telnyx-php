@@ -41,11 +41,11 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->create([
-            'connectionName' => 'my name',
-            'password' => 'my123secure456password789',
-            'userName' => 'myusername123',
-        ]);
+        $result = $this->client->credentialConnections->create(
+            connectionName: 'my name',
+            password: 'my123secure456password789',
+            userName: 'myusername123',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CredentialConnectionNewResponse::class, $result);
@@ -58,19 +58,19 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->create([
-            'connectionName' => 'my name',
-            'password' => 'my123secure456password789',
-            'userName' => 'myusername123',
-            'active' => true,
-            'anchorsiteOverride' => AnchorsiteOverride::LATENCY,
-            'androidPushCredentialID' => '06b09dfd-7154-4980-8b75-cebf7a9d4f8e',
-            'callCostInWebhooks' => false,
-            'defaultOnHoldComfortNoiseEnabled' => false,
-            'dtmfType' => DtmfType::RFC_2833,
-            'encodeContactHeaderEnabled' => true,
-            'encryptedMedia' => EncryptedMedia::SRTP,
-            'inbound' => [
+        $result = $this->client->credentialConnections->create(
+            connectionName: 'my name',
+            password: 'my123secure456password789',
+            userName: 'myusername123',
+            active: true,
+            anchorsiteOverride: AnchorsiteOverride::LATENCY,
+            androidPushCredentialID: '06b09dfd-7154-4980-8b75-cebf7a9d4f8e',
+            callCostInWebhooks: false,
+            defaultOnHoldComfortNoiseEnabled: false,
+            dtmfType: DtmfType::RFC_2833,
+            encodeContactHeaderEnabled: true,
+            encryptedMedia: EncryptedMedia::SRTP,
+            inbound: [
                 'aniNumberFormat' => '+E.164',
                 'channelLimit' => 10,
                 'codecs' => ['G722'],
@@ -83,9 +83,9 @@ final class CredentialConnectionsTest extends TestCase
                 'timeout1xxSecs' => 10,
                 'timeout2xxSecs' => 20,
             ],
-            'iosPushCredentialID' => 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
-            'onnetT38PassthroughEnabled' => true,
-            'outbound' => [
+            iosPushCredentialID: 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
+            onnetT38PassthroughEnabled: true,
+            outbound: [
                 'aniOverride' => 'always',
                 'aniOverrideType' => 'always',
                 'callParkingEnabled' => true,
@@ -96,18 +96,18 @@ final class CredentialConnectionsTest extends TestCase
                 'outboundVoiceProfileID' => 'outbound_voice_profile_id',
                 't38ReinviteSource' => 'customer',
             ],
-            'rtcpSettings' => [
+            rtcpSettings: [
                 'captureEnabled' => true,
                 'port' => 'rtcp-mux',
                 'reportFrequencySecs' => 10,
             ],
-            'sipUriCallingPreference' => 'disabled',
-            'tags' => ['tag1', 'tag2'],
-            'webhookAPIVersion' => '1',
-            'webhookEventFailoverURL' => 'https://failover.example.com',
-            'webhookEventURL' => 'https://example.com',
-            'webhookTimeoutSecs' => 25,
-        ]);
+            sipUriCallingPreference: 'disabled',
+            tags: ['tag1', 'tag2'],
+            webhookAPIVersion: '1',
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookEventURL: 'https://example.com',
+            webhookTimeoutSecs: 25,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CredentialConnectionNewResponse::class, $result);
@@ -133,7 +133,7 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->update('id', []);
+        $result = $this->client->credentialConnections->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CredentialConnectionUpdateResponse::class, $result);
@@ -146,7 +146,7 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->list([]);
+        $result = $this->client->credentialConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CredentialConnectionListResponse::class, $result);

@@ -37,9 +37,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->create([
-            'phoneNumber' => '+13035553000',
-        ]);
+        $result = $this->client->customerServiceRecords->create(
+            phoneNumber: '+13035553000'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CustomerServiceRecordNewResponse::class, $result);
@@ -52,9 +52,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->create([
-            'phoneNumber' => '+13035553000',
-            'additionalData' => [
+        $result = $this->client->customerServiceRecords->create(
+            phoneNumber: '+13035553000',
+            additionalData: [
                 'accountNumber' => '123456789',
                 'addressLine1' => '123 Main St',
                 'authorizedPersonName' => 'John Doe',
@@ -66,8 +66,8 @@ final class CustomerServiceRecordsTest extends TestCase
                 'state' => 'NY',
                 'zipCode' => '10001',
             ],
-            'webhookURL' => 'https://example.com/webhook',
-        ]);
+            webhookURL: 'https://example.com/webhook',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CustomerServiceRecordNewResponse::class, $result);
@@ -95,7 +95,7 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->list([]);
+        $result = $this->client->customerServiceRecords->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CustomerServiceRecordListResponse::class, $result);
@@ -108,9 +108,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
-            'phoneNumbers' => ['+13035553000'],
-        ]);
+        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
+            phoneNumbers: ['+13035553000']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -126,9 +126,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
-            'phoneNumbers' => ['+13035553000'],
-        ]);
+        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
+            phoneNumbers: ['+13035553000']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

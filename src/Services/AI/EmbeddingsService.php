@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Embeddings\EmbeddingCreateParams;
 use Telnyx\AI\Embeddings\EmbeddingCreateParams\EmbeddingModel;
 use Telnyx\AI\Embeddings\EmbeddingCreateParams\Loader;
 use Telnyx\AI\Embeddings\EmbeddingGetResponse;
-use Telnyx\AI\Embeddings\EmbeddingListParams;
 use Telnyx\AI\Embeddings\EmbeddingListResponse;
 use Telnyx\AI\Embeddings\EmbeddingResponse;
-use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchParams;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
-use Telnyx\AI\Embeddings\EmbeddingURLParams;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
@@ -26,6 +21,11 @@ final class EmbeddingsService implements EmbeddingsContract
     /**
      * @api
      */
+    public EmbeddingsRawService $raw;
+
+    /**
+     * @api
+     */
     public BucketsService $buckets;
 
     /**
@@ -33,6 +33,7 @@ final class EmbeddingsService implements EmbeddingsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new EmbeddingsRawService($client);
         $this->buckets = new BucketsService($client);
     }
 
@@ -60,33 +61,31 @@ final class EmbeddingsService implements EmbeddingsContract
      * This loader will split each article into paragraphs and save additional parameters relevant to Intercom docs, such as
      * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
      *
-     * @param array{
-     *   bucketName: string,
-     *   documentChunkOverlapSize?: int,
-     *   documentChunkSize?: int,
-     *   embeddingModel?: 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel,
-     *   loader?: 'default'|'intercom'|Loader,
-     * }|EmbeddingCreateParams $params
+     * @param 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel $embeddingModel supported models to vectorize and embed documents
+     * @param 'default'|'intercom'|Loader $loader supported types of custom document loaders for embeddings
      *
      * @throws APIException
      */
     public function create(
-        array|EmbeddingCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $bucketName,
+        int $documentChunkOverlapSize = 512,
+        int $documentChunkSize = 1024,
+        string|EmbeddingModel $embeddingModel = 'thenlper/gte-large',
+        string|Loader $loader = 'default',
+        ?RequestOptions $requestOptions = null,
     ): EmbeddingResponse {
-        [$parsed, $options] = EmbeddingCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'bucketName' => $bucketName,
+            'documentChunkOverlapSize' => $documentChunkOverlapSize,
+            'documentChunkSize' => $documentChunkSize,
+            'embeddingModel' => $embeddingModel,
+            'loader' => $loader,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<EmbeddingResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/embeddings',
-            body: (object) $parsed,
-            options: $options,
-            convert: EmbeddingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -107,13 +106,8 @@ final class EmbeddingsService implements EmbeddingsContract
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): EmbeddingGetResponse {
-        /** @var BaseResponse<EmbeddingGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/embeddings/%1$s', $taskID],
-            options: $requestOptions,
-            convert: EmbeddingGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($taskID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -123,27 +117,20 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * Retrieve tasks for the user that are either `queued`, `processing`, `failed`, `success` or `partial_success` based on the query string. Defaults to `queued` and `processing`.
      *
-     * @param array{status?: list<string>}|EmbeddingListParams $params
+     * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
      *
      * @throws APIException
      */
     public function list(
-        array|EmbeddingListParams $params,
-        ?RequestOptions $requestOptions = null
+        array $status = ['processing', 'queued'],
+        ?RequestOptions $requestOptions = null,
     ): EmbeddingListResponse {
-        [$parsed, $options] = EmbeddingListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['status' => $status];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<EmbeddingListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/embeddings',
-            query: $parsed,
-            options: $options,
-            convert: EmbeddingListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -161,29 +148,22 @@ final class EmbeddingsService implements EmbeddingsContract
      * If a bucket was embedded using a custom loader, such as `intercom`, the additional metadata will be returned in the
      * `loader_metadata` field.
      *
-     * @param array{
-     *   bucketName: string, query: string, numOfDocs?: int
-     * }|EmbeddingSimilaritySearchParams $params
-     *
      * @throws APIException
      */
     public function similaritySearch(
-        array|EmbeddingSimilaritySearchParams $params,
+        string $bucketName,
+        string $query,
+        int $numOfDocs = 3,
         ?RequestOptions $requestOptions = null,
     ): EmbeddingSimilaritySearchResponse {
-        [$parsed, $options] = EmbeddingSimilaritySearchParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'bucketName' => $bucketName, 'query' => $query, 'numOfDocs' => $numOfDocs,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<EmbeddingSimilaritySearchResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/embeddings/similarity-search',
-            body: (object) $parsed,
-            options: $options,
-            convert: EmbeddingSimilaritySearchResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->similaritySearch(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -193,27 +173,20 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * Embed website content from a specified URL, including child pages up to 5 levels deep within the same domain. The process crawls and loads content from the main URL and its linked pages into a Telnyx Cloud Storage bucket. As soon as each webpage is added to the bucket, its content is immediately processed for embeddings, that can be used for [similarity search](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding-similarity-search) and [clustering](https://developers.telnyx.com/docs/inference/clusters).
      *
-     * @param array{bucketName: string, url: string}|EmbeddingURLParams $params
+     * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
+     * @param string $url The URL of the webpage to embed
      *
      * @throws APIException
      */
     public function url(
-        array|EmbeddingURLParams $params,
+        string $bucketName,
+        string $url,
         ?RequestOptions $requestOptions = null
     ): EmbeddingResponse {
-        [$parsed, $options] = EmbeddingURLParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['bucketName' => $bucketName, 'url' => $url];
 
-        /** @var BaseResponse<EmbeddingResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/embeddings/url',
-            body: (object) $parsed,
-            options: $options,
-            convert: EmbeddingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->url(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

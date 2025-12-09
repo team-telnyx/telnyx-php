@@ -38,7 +38,8 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
-            ['backend' => 'gcs', 'configuration' => ['backend' => 'gcs']],
+            backend: 'gcs',
+            configuration: ['backend' => 'gcs']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,13 +55,11 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
-            [
+            backend: 'gcs',
+            configuration: [
                 'backend' => 'gcs',
-                'configuration' => [
-                    'backend' => 'gcs',
-                    'bucket' => 'example-bucket',
-                    'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
-                ],
+                'bucket' => 'example-bucket',
+                'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
             ],
         );
 
@@ -92,7 +91,8 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
-            ['backend' => 'gcs', 'configuration' => ['backend' => 'gcs']],
+            backend: 'gcs',
+            configuration: ['backend' => 'gcs']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -111,13 +111,11 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
-            [
+            backend: 'gcs',
+            configuration: [
                 'backend' => 'gcs',
-                'configuration' => [
-                    'backend' => 'gcs',
-                    'bucket' => 'example-bucket',
-                    'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
-                ],
+                'bucket' => 'example-bucket',
+                'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
             ],
         );
 

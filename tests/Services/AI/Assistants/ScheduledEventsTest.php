@@ -37,14 +37,12 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->create(
             'assistant_id',
-            [
-                'scheduledAtFixedDatetime' => new \DateTimeImmutable(
-                    '2025-04-15T13:07:28.764Z'
-                ),
-                'telnyxAgentTarget' => 'telnyx_agent_target',
-                'telnyxConversationChannel' => ConversationChannelType::PHONE_CALL,
-                'telnyxEndUserTarget' => 'telnyx_end_user_target',
-            ],
+            scheduledAtFixedDatetime: new \DateTimeImmutable(
+                '2025-04-15T13:07:28.764Z'
+            ),
+            telnyxAgentTarget: 'telnyx_agent_target',
+            telnyxConversationChannel: ConversationChannelType::PHONE_CALL,
+            telnyxEndUserTarget: 'telnyx_end_user_target',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -60,16 +58,14 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->create(
             'assistant_id',
-            [
-                'scheduledAtFixedDatetime' => new \DateTimeImmutable(
-                    '2025-04-15T13:07:28.764Z'
-                ),
-                'telnyxAgentTarget' => 'telnyx_agent_target',
-                'telnyxConversationChannel' => ConversationChannelType::PHONE_CALL,
-                'telnyxEndUserTarget' => 'telnyx_end_user_target',
-                'conversationMetadata' => ['foo' => 'string'],
-                'text' => 'text',
-            ],
+            scheduledAtFixedDatetime: new \DateTimeImmutable(
+                '2025-04-15T13:07:28.764Z'
+            ),
+            telnyxAgentTarget: 'telnyx_agent_target',
+            telnyxConversationChannel: ConversationChannelType::PHONE_CALL,
+            telnyxEndUserTarget: 'telnyx_end_user_target',
+            conversationMetadata: ['foo' => 'string'],
+            text: 'text',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -85,7 +81,7 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->retrieve(
             'event_id',
-            ['assistantID' => 'assistant_id']
+            assistantID: 'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -101,7 +97,7 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->retrieve(
             'event_id',
-            ['assistantID' => 'assistant_id']
+            assistantID: 'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -116,8 +112,7 @@ final class ScheduledEventsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->scheduledEvents->list(
-            'assistant_id',
-            []
+            'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -133,7 +128,7 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->delete(
             'event_id',
-            ['assistantID' => 'assistant_id']
+            assistantID: 'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -149,7 +144,7 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->delete(
             'event_id',
-            ['assistantID' => 'assistant_id']
+            assistantID: 'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

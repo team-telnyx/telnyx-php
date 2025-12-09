@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
-use Telnyx\NumberReservations\NumberReservationListParams;
 use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
+use Telnyx\NumberReservations\ReservedPhoneNumber;
+use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 use Telnyx\RequestOptions;
 
 interface NumberReservationsContract
@@ -17,17 +17,29 @@ interface NumberReservationsContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberReservationCreateParams $params
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param list<array{
+     *   id?: string,
+     *   createdAt?: string|\DateTimeInterface,
+     *   expiredAt?: string|\DateTimeInterface,
+     *   phoneNumber?: string,
+     *   recordType?: string,
+     *   status?: 'pending'|'success'|'failure'|Status,
+     *   updatedAt?: string|\DateTimeInterface,
+     * }|ReservedPhoneNumber> $phoneNumbers
      *
      * @throws APIException
      */
     public function create(
-        array|NumberReservationCreateParams $params,
+        ?string $customerReference = null,
+        ?array $phoneNumbers = null,
         ?RequestOptions $requestOptions = null,
     ): NumberReservationNewResponse;
 
     /**
      * @api
+     *
+     * @param string $numberReservationID the number reservation ID
      *
      * @throws APIException
      */
@@ -39,12 +51,21 @@ interface NumberReservationsContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberReservationListParams $params
+     * @param array{
+     *   createdAt?: array{gt?: string, lt?: string},
+     *   customerReference?: string,
+     *   phoneNumbersPhoneNumber?: string,
+     *   status?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|NumberReservationListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): NumberReservationListResponse;
 }

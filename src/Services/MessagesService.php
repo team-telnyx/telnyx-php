@@ -5,22 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
-use Telnyx\Messages\MessageScheduleParams;
 use Telnyx\Messages\MessageScheduleParams\Type;
 use Telnyx\Messages\MessageScheduleResponse;
-use Telnyx\Messages\MessageSendGroupMmsParams;
 use Telnyx\Messages\MessageSendGroupMmsResponse;
-use Telnyx\Messages\MessageSendLongCodeParams;
 use Telnyx\Messages\MessageSendLongCodeResponse;
-use Telnyx\Messages\MessageSendNumberPoolParams;
 use Telnyx\Messages\MessageSendNumberPoolResponse;
-use Telnyx\Messages\MessageSendParams;
 use Telnyx\Messages\MessageSendResponse;
-use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesContract;
@@ -31,6 +24,11 @@ final class MessagesService implements MessagesContract
     /**
      * @api
      */
+    public MessagesRawService $raw;
+
+    /**
+     * @api
+     */
     public RcsService $rcs;
 
     /**
@@ -38,6 +36,7 @@ final class MessagesService implements MessagesContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MessagesRawService($client);
         $this->rcs = new RcsService($client);
     }
 
@@ -46,19 +45,16 @@ final class MessagesService implements MessagesContract
      *
      * Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/api/v1/mission-control/add-mdr-request)
      *
+     * @param string $id The id of the message
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessageGetResponse {
-        /** @var BaseResponse<MessageGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['messages/%1$s', $id],
-            options: $requestOptions,
-            convert: MessageGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -68,19 +64,16 @@ final class MessagesService implements MessagesContract
      *
      * Cancel a scheduled message that has not yet been sent. Only messages with `status=scheduled` and `send_at` more than a minute from now can be cancelled.
      *
+     * @param string $id The id of the message to cancel
+     *
      * @throws APIException
      */
     public function cancelScheduled(
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessageCancelScheduledResponse {
-        /** @var BaseResponse<MessageCancelScheduledResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['messages/%1$s', $id],
-            options: $requestOptions,
-            convert: MessageCancelScheduledResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->cancelScheduled($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -94,40 +87,63 @@ final class MessagesService implements MessagesContract
      * Current messaging resources include: long-code, short-code, number-pool, and
      * alphanumeric-sender-id.
      *
-     * @param array{
-     *   to: string,
-     *   autoDetect?: bool,
-     *   from?: string,
-     *   mediaURLs?: list<string>,
-     *   messagingProfileID?: string,
-     *   sendAt?: string|\DateTimeInterface,
-     *   subject?: string,
-     *   text?: string,
-     *   type?: 'SMS'|'MMS'|Type,
-     *   useProfileWebhooks?: bool,
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|MessageScheduleParams $params
+     * @param string $to Receiving address (+E.164 formatted phone number or short code).
+     * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param string $from Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
+     *
+     * **Required if sending with a phone number, short code, or alphanumeric sender ID.**
+     * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
+     *
+     * **Required for MMS**
+     * @param string $messagingProfileID Unique identifier for a messaging profile.
+     *
+     * **Required if sending via number pool or with an alphanumeric sender ID.**
+     * @param string|\DateTimeInterface $sendAt ISO 8601 formatted date indicating when to send the message - accurate up till a minute
+     * @param string $subject Subject of multimedia message
+     * @param string $text Message body (i.e., content) as a non-empty string.
+     *
+     * **Required for SMS**
+     * @param 'SMS'|'MMS'|Type $type the protocol for sending the message, either SMS or MMS
+     * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
+     * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @throws APIException
      */
     public function schedule(
-        array|MessageScheduleParams $params,
-        ?RequestOptions $requestOptions = null
+        string $to,
+        bool $autoDetect = false,
+        ?string $from = null,
+        ?array $mediaURLs = null,
+        ?string $messagingProfileID = null,
+        string|\DateTimeInterface|null $sendAt = null,
+        ?string $subject = null,
+        ?string $text = null,
+        string|Type|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        ?RequestOptions $requestOptions = null,
     ): MessageScheduleResponse {
-        [$parsed, $options] = MessageScheduleParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'from' => $from,
+            'mediaURLs' => $mediaURLs,
+            'messagingProfileID' => $messagingProfileID,
+            'sendAt' => $sendAt,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessageScheduleResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messages/schedule',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageScheduleResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->schedule(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -141,40 +157,63 @@ final class MessagesService implements MessagesContract
      * Current messaging resources include: long-code, short-code, number-pool, and
      * alphanumeric-sender-id.
      *
-     * @param array{
-     *   to: string,
-     *   autoDetect?: bool,
-     *   from?: string,
-     *   mediaURLs?: list<string>,
-     *   messagingProfileID?: string,
-     *   sendAt?: string|\DateTimeInterface|null,
-     *   subject?: string,
-     *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendParams\Type,
-     *   useProfileWebhooks?: bool,
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|MessageSendParams $params
+     * @param string $to Receiving address (+E.164 formatted phone number or short code).
+     * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param string $from Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
+     *
+     * **Required if sending with a phone number, short code, or alphanumeric sender ID.**
+     * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
+     *
+     * **Required for MMS**
+     * @param string $messagingProfileID Unique identifier for a messaging profile.
+     *
+     * **Required if sending via number pool or with an alphanumeric sender ID.**
+     * @param string|\DateTimeInterface|null $sendAt ISO 8601 formatted date indicating when to send the message - accurate up till a minute
+     * @param string $subject Subject of multimedia message
+     * @param string $text Message body (i.e., content) as a non-empty string.
+     *
+     * **Required for SMS**
+     * @param 'SMS'|'MMS'|\Telnyx\Messages\MessageSendParams\Type $type the protocol for sending the message, either SMS or MMS
+     * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
+     * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @throws APIException
      */
     public function send(
-        array|MessageSendParams $params,
-        ?RequestOptions $requestOptions = null
+        string $to,
+        bool $autoDetect = false,
+        ?string $from = null,
+        ?array $mediaURLs = null,
+        ?string $messagingProfileID = null,
+        string|\DateTimeInterface|null $sendAt = null,
+        ?string $subject = null,
+        ?string $text = null,
+        string|\Telnyx\Messages\MessageSendParams\Type|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        ?RequestOptions $requestOptions = null,
     ): MessageSendResponse {
-        [$parsed, $options] = MessageSendParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'from' => $from,
+            'mediaURLs' => $mediaURLs,
+            'messagingProfileID' => $messagingProfileID,
+            'sendAt' => $sendAt,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessageSendResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messages',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageSendResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->send(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -184,36 +223,43 @@ final class MessagesService implements MessagesContract
      *
      * Send a group MMS message
      *
-     * @param array{
-     *   from: string,
-     *   to: list<string>,
-     *   mediaURLs?: list<string>,
-     *   subject?: string,
-     *   text?: string,
-     *   useProfileWebhooks?: bool,
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|MessageSendGroupMmsParams $params
+     * @param string $from Phone number, in +E.164 format, used to send the message.
+     * @param list<string> $to A list of destinations. No more than 8 destinations are allowed.
+     * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
+     * @param string $subject Subject of multimedia message
+     * @param string $text Message body (i.e., content) as a non-empty string.
+     * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
+     * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @throws APIException
      */
     public function sendGroupMms(
-        array|MessageSendGroupMmsParams $params,
+        string $from,
+        array $to,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendGroupMmsResponse {
-        [$parsed, $options] = MessageSendGroupMmsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'from' => $from,
+            'to' => $to,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessageSendGroupMmsResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messages/group_mms',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageSendGroupMmsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendGroupMms(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -223,38 +269,53 @@ final class MessagesService implements MessagesContract
      *
      * Send a long code message
      *
-     * @param array{
-     *   from: string,
-     *   to: string,
-     *   autoDetect?: bool,
-     *   mediaURLs?: list<string>,
-     *   subject?: string,
-     *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendLongCodeParams\Type,
-     *   useProfileWebhooks?: bool,
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|MessageSendLongCodeParams $params
+     * @param string $from Phone number, in +E.164 format, used to send the message.
+     * @param string $to Receiving address (+E.164 formatted phone number or short code).
+     * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
+     *
+     * **Required for MMS**
+     * @param string $subject Subject of multimedia message
+     * @param string $text Message body (i.e., content) as a non-empty string.
+     *
+     * **Required for SMS**
+     * @param 'SMS'|'MMS'|\Telnyx\Messages\MessageSendLongCodeParams\Type $type the protocol for sending the message, either SMS or MMS
+     * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
+     * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @throws APIException
      */
     public function sendLongCode(
-        array|MessageSendLongCodeParams $params,
+        string $from,
+        string $to,
+        bool $autoDetect = false,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        string|\Telnyx\Messages\MessageSendLongCodeParams\Type|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendLongCodeResponse {
-        [$parsed, $options] = MessageSendLongCodeParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'from' => $from,
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessageSendLongCodeResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messages/long_code',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageSendLongCodeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendLongCode(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -264,38 +325,53 @@ final class MessagesService implements MessagesContract
      *
      * Send a message using number pool
      *
-     * @param array{
-     *   messagingProfileID: string,
-     *   to: string,
-     *   autoDetect?: bool,
-     *   mediaURLs?: list<string>,
-     *   subject?: string,
-     *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendNumberPoolParams\Type,
-     *   useProfileWebhooks?: bool,
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|MessageSendNumberPoolParams $params
+     * @param string $messagingProfileID unique identifier for a messaging profile
+     * @param string $to Receiving address (+E.164 formatted phone number or short code).
+     * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
+     *
+     * **Required for MMS**
+     * @param string $subject Subject of multimedia message
+     * @param string $text Message body (i.e., content) as a non-empty string.
+     *
+     * **Required for SMS**
+     * @param 'SMS'|'MMS'|\Telnyx\Messages\MessageSendNumberPoolParams\Type $type the protocol for sending the message, either SMS or MMS
+     * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
+     * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @throws APIException
      */
     public function sendNumberPool(
-        array|MessageSendNumberPoolParams $params,
+        string $messagingProfileID,
+        string $to,
+        bool $autoDetect = false,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        string|\Telnyx\Messages\MessageSendNumberPoolParams\Type|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendNumberPoolResponse {
-        [$parsed, $options] = MessageSendNumberPoolParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'messagingProfileID' => $messagingProfileID,
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessageSendNumberPoolResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messages/number_pool',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageSendNumberPoolResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendNumberPool(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -305,38 +381,53 @@ final class MessagesService implements MessagesContract
      *
      * Send a short code message
      *
-     * @param array{
-     *   from: string,
-     *   to: string,
-     *   autoDetect?: bool,
-     *   mediaURLs?: list<string>,
-     *   subject?: string,
-     *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendShortCodeParams\Type,
-     *   useProfileWebhooks?: bool,
-     *   webhookFailoverURL?: string,
-     *   webhookURL?: string,
-     * }|MessageSendShortCodeParams $params
+     * @param string $from Phone number, in +E.164 format, used to send the message.
+     * @param string $to Receiving address (+E.164 formatted phone number or short code).
+     * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
+     *
+     * **Required for MMS**
+     * @param string $subject Subject of multimedia message
+     * @param string $text Message body (i.e., content) as a non-empty string.
+     *
+     * **Required for SMS**
+     * @param 'SMS'|'MMS'|\Telnyx\Messages\MessageSendShortCodeParams\Type $type the protocol for sending the message, either SMS or MMS
+     * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
+     * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @throws APIException
      */
     public function sendShortCode(
-        array|MessageSendShortCodeParams $params,
+        string $from,
+        string $to,
+        bool $autoDetect = false,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        string|\Telnyx\Messages\MessageSendShortCodeParams\Type|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendShortCodeResponse {
-        [$parsed, $options] = MessageSendShortCodeParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'from' => $from,
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessageSendShortCodeResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messages/short_code',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageSendShortCodeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendShortCode(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

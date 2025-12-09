@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
-use Telnyx\GlobalIPs\GlobalIPListParams;
 use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
@@ -18,17 +16,23 @@ interface GlobalIPsContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPCreateParams $params
+     * @param string $description a user specified description for the address
+     * @param string $name a user specified name for the address
+     * @param array<string,mixed> $ports a Global IP ports grouped by protocol code
      *
      * @throws APIException
      */
     public function create(
-        array|GlobalIPCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $description = null,
+        ?string $name = null,
+        ?array $ports = null,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -40,17 +44,21 @@ interface GlobalIPsContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|GlobalIPListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): GlobalIPListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */

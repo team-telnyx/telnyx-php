@@ -36,9 +36,10 @@ final class SimCardOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardOrders->create([
-            'addressID' => '1293384261075731499', 'quantity' => 23,
-        ]);
+        $result = $this->client->simCardOrders->create(
+            addressID: '1293384261075731499',
+            quantity: 23
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SimCardOrderNewResponse::class, $result);
@@ -51,9 +52,10 @@ final class SimCardOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardOrders->create([
-            'addressID' => '1293384261075731499', 'quantity' => 23,
-        ]);
+        $result = $this->client->simCardOrders->create(
+            addressID: '1293384261075731499',
+            quantity: 23
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SimCardOrderNewResponse::class, $result);
@@ -81,7 +83,7 @@ final class SimCardOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardOrders->list([]);
+        $result = $this->client->simCardOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SimCardOrderListResponse::class, $result);

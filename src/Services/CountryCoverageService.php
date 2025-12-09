@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse;
@@ -15,9 +14,17 @@ use Telnyx\ServiceContracts\CountryCoverageContract;
 final class CountryCoverageService implements CountryCoverageContract
 {
     /**
+     * @api
+     */
+    public CountryCoverageRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CountryCoverageRawService($client);
+    }
 
     /**
      * @api
@@ -29,13 +36,8 @@ final class CountryCoverageService implements CountryCoverageContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): CountryCoverageGetResponse {
-        /** @var BaseResponse<CountryCoverageGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'country_coverage',
-            options: $requestOptions,
-            convert: CountryCoverageGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -45,19 +47,16 @@ final class CountryCoverageService implements CountryCoverageContract
      *
      * Get coverage for a specific country
      *
+     * @param string $countryCode country ISO code
+     *
      * @throws APIException
      */
     public function retrieveCountry(
         string $countryCode,
         ?RequestOptions $requestOptions = null
     ): CountryCoverageGetCountryResponse {
-        /** @var BaseResponse<CountryCoverageGetCountryResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['country_coverage/countries/%1$s', $countryCode],
-            options: $requestOptions,
-            convert: CountryCoverageGetCountryResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveCountry($countryCode, requestOptions: $requestOptions);
 
         return $response->parse();
     }

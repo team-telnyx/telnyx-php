@@ -35,10 +35,10 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingNumbersBulkUpdates->create([
-            'messagingProfileID' => '00000000-0000-0000-0000-000000000000',
-            'numbers' => ['+18880000000', '+18880000001', '+18880000002'],
-        ]);
+        $result = $this->client->messagingNumbersBulkUpdates->create(
+            messagingProfileID: '00000000-0000-0000-0000-000000000000',
+            numbers: ['+18880000000', '+18880000001', '+18880000002'],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
@@ -54,10 +54,10 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingNumbersBulkUpdates->create([
-            'messagingProfileID' => '00000000-0000-0000-0000-000000000000',
-            'numbers' => ['+18880000000', '+18880000001', '+18880000002'],
-        ]);
+        $result = $this->client->messagingNumbersBulkUpdates->create(
+            messagingProfileID: '00000000-0000-0000-0000-000000000000',
+            numbers: ['+18880000000', '+18880000001', '+18880000002'],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

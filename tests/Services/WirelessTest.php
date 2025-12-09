@@ -34,9 +34,7 @@ final class WirelessTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireless->retrieveRegions([
-            'product' => 'public_ips',
-        ]);
+        $result = $this->client->wireless->retrieveRegions(product: 'public_ips');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WirelessGetRegionsResponse::class, $result);
@@ -49,9 +47,7 @@ final class WirelessTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireless->retrieveRegions([
-            'product' => 'public_ips',
-        ]);
+        $result = $this->client->wireless->retrieveRegions(product: 'public_ips');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WirelessGetRegionsResponse::class, $result);

@@ -53,8 +53,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->rooms->sessions->actions->kick(
-            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
-            []
+            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -69,8 +68,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->rooms->sessions->actions->mute(
-            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
-            []
+            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -85,8 +83,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->rooms->sessions->actions->unmute(
-            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
-            []
+            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

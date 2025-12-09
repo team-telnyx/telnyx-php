@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingChannels;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingFormat;
@@ -26,6 +22,11 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
     /**
      * @api
      */
+    public MobilePhoneNumbersRawService $raw;
+
+    /**
+     * @api
+     */
     public MessagingService $messaging;
 
     /**
@@ -33,6 +34,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MobilePhoneNumbersRawService($client);
         $this->messaging = new MessagingService($client);
     }
 
@@ -41,19 +43,16 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      *
      * Retrieve a Mobile Phone Number
      *
+     * @param string $id The ID of the mobile phone number
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): MobilePhoneNumberGetResponse {
-        /** @var BaseResponse<MobilePhoneNumberGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['v2/mobile_phone_numbers/%1$s', $id],
-            options: $requestOptions,
-            convert: MobilePhoneNumberGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -63,50 +62,60 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      *
      * Update a Mobile Phone Number
      *
+     * @param string $id The ID of the mobile phone number
      * @param array{
-     *   callForwarding?: array{
-     *     callForwardingEnabled?: bool,
-     *     forwardingType?: 'always'|'on-failure'|ForwardingType|null,
-     *     forwardsTo?: string|null,
-     *   },
-     *   callRecording?: array{
-     *     inboundCallRecordingChannels?: 'single'|'dual'|InboundCallRecordingChannels,
-     *     inboundCallRecordingEnabled?: bool,
-     *     inboundCallRecordingFormat?: 'wav'|'mp3'|InboundCallRecordingFormat,
-     *   },
-     *   callerIDNameEnabled?: bool,
-     *   cnamListing?: array{
-     *     cnamListingDetails?: string|null, cnamListingEnabled?: bool
-     *   },
-     *   connectionID?: string|null,
-     *   customerReference?: string|null,
-     *   inbound?: array{interceptionAppID?: string|null},
-     *   inboundCallScreening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
-     *   noiseSuppression?: bool,
-     *   outbound?: array{interceptionAppID?: string|null},
-     *   tags?: list<string>,
-     * }|MobilePhoneNumberUpdateParams $params
+     *   callForwardingEnabled?: bool,
+     *   forwardingType?: 'always'|'on-failure'|ForwardingType|null,
+     *   forwardsTo?: string|null,
+     * } $callForwarding
+     * @param array{
+     *   inboundCallRecordingChannels?: 'single'|'dual'|InboundCallRecordingChannels,
+     *   inboundCallRecordingEnabled?: bool,
+     *   inboundCallRecordingFormat?: 'wav'|'mp3'|InboundCallRecordingFormat,
+     * } $callRecording
+     * @param array{
+     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool
+     * } $cnamListing
+     * @param array{interceptionAppID?: string|null} $inbound
+     * @param 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening $inboundCallScreening
+     * @param array{interceptionAppID?: string|null} $outbound
+     * @param list<string> $tags
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|MobilePhoneNumberUpdateParams $params,
+        ?array $callForwarding = null,
+        ?array $callRecording = null,
+        ?bool $callerIDNameEnabled = null,
+        ?array $cnamListing = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?array $inbound = null,
+        string|InboundCallScreening|null $inboundCallScreening = null,
+        ?bool $noiseSuppression = null,
+        ?array $outbound = null,
+        ?array $tags = null,
         ?RequestOptions $requestOptions = null,
     ): MobilePhoneNumberUpdateResponse {
-        [$parsed, $options] = MobilePhoneNumberUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'callForwarding' => $callForwarding,
+            'callRecording' => $callRecording,
+            'callerIDNameEnabled' => $callerIDNameEnabled,
+            'cnamListing' => $cnamListing,
+            'connectionID' => $connectionID,
+            'customerReference' => $customerReference,
+            'inbound' => $inbound,
+            'inboundCallScreening' => $inboundCallScreening,
+            'noiseSuppression' => $noiseSuppression,
+            'outbound' => $outbound,
+            'tags' => $tags,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MobilePhoneNumberUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['v2/mobile_phone_numbers/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: MobilePhoneNumberUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -116,32 +125,22 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      *
      * List Mobile Phone Numbers
      *
-     * @param array{
-     *   pageNumber?: int, pageSize?: int
-     * }|MobilePhoneNumberListParams $params
+     * @param int $pageNumber The page number to load
+     * @param int $pageSize The size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|MobilePhoneNumberListParams $params,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): MobilePhoneNumberListResponse {
-        [$parsed, $options] = MobilePhoneNumberListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MobilePhoneNumberListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'v2/mobile_phone_numbers',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
-            options: $options,
-            convert: MobilePhoneNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

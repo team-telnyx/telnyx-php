@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
@@ -19,40 +16,45 @@ use Telnyx\ServiceContracts\GlobalIPHealthChecksContract;
 final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
 {
     /**
+     * @api
+     */
+    public GlobalIPHealthChecksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPHealthChecksRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a Global IP health check.
      *
-     * @param array{
-     *   globalIPID?: string,
-     *   healthCheckParams?: array<string,mixed>,
-     *   healthCheckType?: string,
-     * }|GlobalIPHealthCheckCreateParams $params
+     * @param string $globalIPID global IP ID
+     * @param array<string,mixed> $healthCheckParams a Global IP health check params
+     * @param string $healthCheckType the Global IP health check type
      *
      * @throws APIException
      */
     public function create(
-        array|GlobalIPHealthCheckCreateParams $params,
+        ?string $globalIPID = null,
+        ?array $healthCheckParams = null,
+        ?string $healthCheckType = null,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPHealthCheckNewResponse {
-        [$parsed, $options] = GlobalIPHealthCheckCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'globalIPID' => $globalIPID,
+            'healthCheckParams' => $healthCheckParams,
+            'healthCheckType' => $healthCheckType,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPHealthCheckNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'global_ip_health_checks',
-            body: (object) $parsed,
-            options: $options,
-            convert: GlobalIPHealthCheckNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -62,19 +64,16 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * Retrieve a Global IP health check.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckGetResponse {
-        /** @var BaseResponse<GlobalIPHealthCheckGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['global_ip_health_checks/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPHealthCheckGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -85,28 +84,21 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * List all Global IP health checks.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|GlobalIPHealthCheckListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|GlobalIPHealthCheckListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckListResponse {
-        [$parsed, $options] = GlobalIPHealthCheckListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPHealthCheckListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'global_ip_health_checks',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPHealthCheckListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -116,19 +108,16 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * Delete a Global IP health check.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckDeleteResponse {
-        /** @var BaseResponse<GlobalIPHealthCheckDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['global_ip_health_checks/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPHealthCheckDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

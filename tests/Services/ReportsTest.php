@@ -35,7 +35,7 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->listMdrs([]);
+        $result = $this->client->reports->listMdrs();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ReportListMdrsResponse::class, $result);
@@ -48,7 +48,7 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->listWdrs([]);
+        $result = $this->client->reports->listWdrs();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ReportListWdrsResponse::class, $result);

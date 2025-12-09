@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingOptoutsContract;
@@ -16,9 +13,17 @@ use Telnyx\ServiceContracts\MessagingOptoutsContract;
 final class MessagingOptoutsService implements MessagingOptoutsContract
 {
     /**
+     * @api
+     */
+    public MessagingOptoutsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MessagingOptoutsRawService($client);
+    }
 
     /**
      * @api
@@ -26,38 +31,36 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
      * Retrieve a list of opt-out blocks.
      *
      * @param array{
-     *   createdAt?: array{
-     *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *   },
-     *   filter?: array{from?: string, messagingProfileID?: string},
-     *   page?: array{number?: int, size?: int},
-     *   redactionEnabled?: string,
-     * }|MessagingOptoutListParams $params
+     *   gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
+     * } $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
+     * @param array{
+     *   from?: string, messagingProfileID?: string
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param string $redactionEnabled If receiving address (+E.164 formatted phone number) should be redacted
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingOptoutListParams $params,
+        ?array $createdAt = null,
+        ?array $filter = null,
+        ?array $page = null,
+        ?string $redactionEnabled = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingOptoutListResponse {
-        [$parsed, $options] = MessagingOptoutListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'createdAt' => $createdAt,
+            'filter' => $filter,
+            'page' => $page,
+            'redactionEnabled' => $redactionEnabled,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingOptoutListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'messaging_optouts',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'createdAt' => 'created_at', 'redactionEnabled' => 'redaction_enabled',
-                ],
-            ),
-            options: $options,
-            convert: MessagingOptoutListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

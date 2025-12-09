@@ -6,13 +6,9 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
-use Telnyx\Rooms\RoomListParams;
 use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
-use Telnyx\Rooms\RoomRetrieveParams;
-use Telnyx\Rooms\RoomUpdateParams;
 use Telnyx\Rooms\RoomUpdateResponse;
 
 interface RoomsContract
@@ -20,55 +16,97 @@ interface RoomsContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomCreateParams $params
+     * @param bool $enableRecording enable or disable recording for that room
+     * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
+     * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
+     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
+     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
     public function create(
-        array|RoomCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        bool $enableRecording = false,
+        int $maxParticipants = 10,
+        ?string $uniqueName = null,
+        ?string $webhookEventFailoverURL = '',
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
+        ?RequestOptions $requestOptions = null,
     ): RoomNewResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|RoomRetrieveParams $params
+     * @param string $roomID the unique identifier of a room
+     * @param bool $includeSessions to decide if room sessions should be included in the response
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomID,
-        array|RoomRetrieveParams $params,
+        ?bool $includeSessions = null,
         ?RequestOptions $requestOptions = null,
     ): RoomGetResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|RoomUpdateParams $params
+     * @param string $roomID the unique identifier of a room
+     * @param bool $enableRecording enable or disable recording for that room
+     * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
+     * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
+     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
+     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
     public function update(
         string $roomID,
-        array|RoomUpdateParams $params,
+        bool $enableRecording = false,
+        int $maxParticipants = 10,
+        ?string $uniqueName = null,
+        ?string $webhookEventFailoverURL = '',
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): RoomUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|RoomListParams $params
+     * @param array{
+     *   dateCreatedAt?: array{
+     *     eq?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
+     *   },
+     *   dateUpdatedAt?: array{
+     *     eq?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
+     *   },
+     *   uniqueName?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
+     * @param bool $includeSessions to decide if room sessions should be included in the response
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|RoomListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?bool $includeSessions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): RoomListResponse;
 
     /**
      * @api
+     *
+     * @param string $roomID the unique identifier of a room
      *
      * @throws APIException
      */

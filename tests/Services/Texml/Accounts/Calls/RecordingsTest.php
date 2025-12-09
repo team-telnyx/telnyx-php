@@ -42,7 +42,8 @@ final class RecordingsTest extends TestCase
             ->recordings
             ->recordingSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                ['accountSid' => 'account_sid', 'callSid' => 'call_sid'],
+                accountSid: 'account_sid',
+                callSid: 'call_sid',
             )
         ;
 
@@ -65,11 +66,9 @@ final class RecordingsTest extends TestCase
             ->recordings
             ->recordingSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                [
-                    'accountSid' => 'account_sid',
-                    'callSid' => 'call_sid',
-                    'status' => 'paused',
-                ],
+                accountSid: 'account_sid',
+                callSid: 'call_sid',
+                status: 'paused',
             )
         ;
 

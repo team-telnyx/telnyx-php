@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
+use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
+use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
-use Telnyx\ExternalConnections\Uploads\UploadListParams;
+use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
 use Telnyx\ExternalConnections\Uploads\UploadListResponse;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
-use Telnyx\ExternalConnections\Uploads\UploadRetrieveParams;
-use Telnyx\ExternalConnections\Uploads\UploadRetryParams;
 use Telnyx\ExternalConnections\Uploads\UploadRetryResponse;
 use Telnyx\RequestOptions;
 
@@ -22,44 +21,68 @@ interface UploadsContract
     /**
      * @api
      *
-     * @param array<mixed>|UploadCreateParams $params
+     * @param string $id identifies the resource
+     * @param list<string> $numberIDs
+     * @param list<'calling_user_assignment'|'first_party_app_assignment'|AdditionalUsage> $additionalUsages
+     * @param string $civicAddressID identifies the civic address to assign all phone numbers to
+     * @param string $locationID identifies the location to assign all phone numbers to
+     * @param 'calling_user_assignment'|'first_party_app_assignment'|Usage $usage The use case of the upload request. NOTE: `calling_user_assignment` is not supported for toll free numbers.
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        array|UploadCreateParams $params,
+        array $numberIDs,
+        ?array $additionalUsages = null,
+        ?string $civicAddressID = null,
+        ?string $locationID = null,
+        string|Usage|null $usage = null,
         ?RequestOptions $requestOptions = null,
     ): UploadNewResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|UploadRetrieveParams $params
+     * @param string $ticketID Identifies an Upload request
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
     public function retrieve(
         string $ticketID,
-        array|UploadRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): UploadGetResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|UploadListParams $params
+     * @param string $id identifies the resource
+     * @param array{
+     *   civicAddressID?: array{eq?: string},
+     *   locationID?: array{eq?: string},
+     *   phoneNumber?: array{contains?: string, eq?: string},
+     *   status?: array{
+     *     eq?: list<'pending_upload'|'pending'|'in_progress'|'success'|'error'|Eq>
+     *   },
+     * } $filter Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        array|UploadListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): UploadListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -71,6 +94,8 @@ interface UploadsContract
     /**
      * @api
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function refreshStatus(
@@ -81,13 +106,14 @@ interface UploadsContract
     /**
      * @api
      *
-     * @param array<mixed>|UploadRetryParams $params
+     * @param string $ticketID Identifies an Upload request
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
     public function retry(
         string $ticketID,
-        array|UploadRetryParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?RequestOptions $requestOptions = null
     ): UploadRetryResponse;
 }

@@ -35,11 +35,11 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->list([
-            'dimensions' => ['string'],
-            'metrics' => ['string'],
-            'product' => 'product',
-        ]);
+        $result = $this->client->usageReports->list(
+            dimensions: ['string'],
+            metrics: ['string'],
+            product: 'product'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UsageReportListResponse::class, $result);
@@ -52,20 +52,20 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->list([
-            'dimensions' => ['string'],
-            'metrics' => ['string'],
-            'product' => 'product',
-            'dateRange' => 'date_range',
-            'endDate' => 'end_date',
-            'filter' => 'filter',
-            'format' => 'csv',
-            'managedAccounts' => true,
-            'page' => ['number' => 1, 'size' => 5000],
-            'sort' => ['string'],
-            'startDate' => 'start_date',
-            'authorizationBearer' => 'authorization_bearer',
-        ]);
+        $result = $this->client->usageReports->list(
+            dimensions: ['string'],
+            metrics: ['string'],
+            product: 'product',
+            dateRange: 'date_range',
+            endDate: 'end_date',
+            filter: 'filter',
+            format: 'csv',
+            managedAccounts: true,
+            page: ['number' => 1, 'size' => 5000],
+            sort: ['string'],
+            startDate: 'start_date',
+            authorizationBearer: 'authorization_bearer',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UsageReportListResponse::class, $result);
@@ -78,7 +78,7 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->getOptions([]);
+        $result = $this->client->usageReports->getOptions();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UsageReportGetOptionsResponse::class, $result);

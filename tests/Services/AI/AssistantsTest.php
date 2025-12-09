@@ -39,9 +39,11 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->create([
-            'instructions' => 'instructions', 'model' => 'model', 'name' => 'name',
-        ]);
+        $result = $this->client->ai->assistants->create(
+            instructions: 'instructions',
+            model: 'model',
+            name: 'name'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InferenceEmbedding::class, $result);
@@ -54,27 +56,27 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->create([
-            'instructions' => 'instructions',
-            'model' => 'model',
-            'name' => 'name',
-            'description' => 'description',
-            'dynamicVariables' => ['foo' => 'bar'],
-            'dynamicVariablesWebhookURL' => 'dynamic_variables_webhook_url',
-            'enabledFeatures' => [EnabledFeatures::TELEPHONY],
-            'greeting' => 'greeting',
-            'insightSettings' => ['insightGroupID' => 'insight_group_id'],
-            'llmAPIKeyRef' => 'llm_api_key_ref',
-            'messagingSettings' => [
+        $result = $this->client->ai->assistants->create(
+            instructions: 'instructions',
+            model: 'model',
+            name: 'name',
+            description: 'description',
+            dynamicVariables: ['foo' => 'bar'],
+            dynamicVariablesWebhookURL: 'dynamic_variables_webhook_url',
+            enabledFeatures: [EnabledFeatures::TELEPHONY],
+            greeting: 'greeting',
+            insightSettings: ['insightGroupID' => 'insight_group_id'],
+            llmAPIKeyRef: 'llm_api_key_ref',
+            messagingSettings: [
                 'defaultMessagingProfileID' => 'default_messaging_profile_id',
                 'deliveryStatusWebhookURL' => 'delivery_status_webhook_url',
             ],
-            'privacySettings' => ['dataRetention' => true],
-            'telephonySettings' => [
+            privacySettings: ['dataRetention' => true],
+            telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
                 'supportsUnauthenticatedWebCalls' => true,
             ],
-            'tools' => [
+            tools: [
                 [
                     'type' => 'webhook',
                     'webhook' => [
@@ -101,7 +103,7 @@ final class AssistantsTest extends TestCase
                     ],
                 ],
             ],
-            'transcription' => [
+            transcription: [
                 'language' => 'language',
                 'model' => 'deepgram/flux',
                 'region' => 'region',
@@ -112,7 +114,7 @@ final class AssistantsTest extends TestCase
                     'smartFormat' => true,
                 ],
             ],
-            'voiceSettings' => [
+            voiceSettings: [
                 'voice' => 'voice',
                 'apiKeyRef' => 'api_key_ref',
                 'backgroundAudio' => [
@@ -120,7 +122,7 @@ final class AssistantsTest extends TestCase
                 ],
                 'voiceSpeed' => 0,
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InferenceEmbedding::class, $result);
@@ -133,7 +135,7 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->retrieve('assistant_id', []);
+        $result = $this->client->ai->assistants->retrieve('assistant_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InferenceEmbedding::class, $result);
@@ -146,7 +148,7 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->update('assistant_id', []);
+        $result = $this->client->ai->assistants->update('assistant_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InferenceEmbedding::class, $result);
@@ -187,10 +189,8 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->chat(
             'assistant_id',
-            [
-                'content' => 'Tell me a joke about cats',
-                'conversationID' => '42b20469-1215-4a9a-8964-c36f66b406f4',
-            ],
+            content: 'Tell me a joke about cats',
+            conversationID: '42b20469-1215-4a9a-8964-c36f66b406f4',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -206,11 +206,9 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->chat(
             'assistant_id',
-            [
-                'content' => 'Tell me a joke about cats',
-                'conversationID' => '42b20469-1215-4a9a-8964-c36f66b406f4',
-                'name' => 'Charlie',
-            ],
+            content: 'Tell me a joke about cats',
+            conversationID: '42b20469-1215-4a9a-8964-c36f66b406f4',
+            name: 'Charlie',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -250,9 +248,10 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->import([
-            'apiKeyRef' => 'api_key_ref', 'provider' => 'elevenlabs',
-        ]);
+        $result = $this->client->ai->assistants->import(
+            apiKeyRef: 'api_key_ref',
+            provider: 'elevenlabs'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AssistantsList::class, $result);
@@ -265,9 +264,10 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->import([
-            'apiKeyRef' => 'api_key_ref', 'provider' => 'elevenlabs',
-        ]);
+        $result = $this->client->ai->assistants->import(
+            apiKeyRef: 'api_key_ref',
+            provider: 'elevenlabs'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AssistantsList::class, $result);
@@ -282,7 +282,9 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->sendSMS(
             'assistant_id',
-            ['from' => 'from', 'text' => 'text', 'to' => 'to']
+            from: 'from',
+            text: 'text',
+            to: 'to'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -298,13 +300,11 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->sendSMS(
             'assistant_id',
-            [
-                'from' => 'from',
-                'text' => 'text',
-                'to' => 'to',
-                'conversationMetadata' => ['foo' => 'string'],
-                'shouldCreateConversation' => true,
-            ],
+            from: 'from',
+            text: 'text',
+            to: 'to',
+            conversationMetadata: ['foo' => 'string'],
+            shouldCreateConversation: true,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

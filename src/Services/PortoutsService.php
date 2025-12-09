@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\PortoutGetResponse;
-use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListParams\Filter\Status;
 use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
-use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
 use Telnyx\Portouts\PortoutListResponse;
-use Telnyx\Portouts\PortoutUpdateStatusParams;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortoutsContract;
@@ -25,6 +21,11 @@ use Telnyx\Services\Portouts\SupportingDocumentsService;
 
 final class PortoutsService implements PortoutsContract
 {
+    /**
+     * @api
+     */
+    public PortoutsRawService $raw;
+
     /**
      * @api
      */
@@ -50,6 +51,7 @@ final class PortoutsService implements PortoutsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new PortoutsRawService($client);
         $this->events = new EventsService($client);
         $this->reports = new ReportsService($client);
         $this->comments = new CommentsService($client);
@@ -61,19 +63,16 @@ final class PortoutsService implements PortoutsContract
      *
      * Returns the portout request based on the ID provided
      *
+     * @param string $id Portout id
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): PortoutGetResponse {
-        /** @var BaseResponse<PortoutGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['portouts/%1$s', $id],
-            options: $requestOptions,
-            convert: PortoutGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -84,46 +83,40 @@ final class PortoutsService implements PortoutsContract
      * Returns the portout requests according to filters
      *
      * @param array{
-     *   filter?: array{
-     *     carrierName?: string,
-     *     countryCode?: string,
-     *     countryCodeIn?: list<string>,
-     *     focDate?: string|\DateTimeInterface,
-     *     insertedAt?: array{
-     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *     },
-     *     phoneNumber?: string,
-     *     pon?: string,
-     *     portedOutAt?: array{
-     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *     },
-     *     spid?: string,
-     *     status?: 'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|Status,
-     *     statusIn?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|StatusIn>,
-     *     supportKey?: string,
+     *   carrierName?: string,
+     *   countryCode?: string,
+     *   countryCodeIn?: list<string>,
+     *   focDate?: string|\DateTimeInterface,
+     *   insertedAt?: array{
+     *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *   },
-     *   page?: array{number?: int, size?: int},
-     * }|PortoutListParams $params
+     *   phoneNumber?: string,
+     *   pon?: string,
+     *   portedOutAt?: array{
+     *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
+     *   },
+     *   spid?: string,
+     *   status?: 'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|Status,
+     *   statusIn?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|StatusIn>,
+     *   supportKey?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|PortoutListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null,
     ): PortoutListResponse {
-        [$parsed, $options] = PortoutListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PortoutListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'portouts',
-            query: $parsed,
-            options: $options,
-            convert: PortoutListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -133,30 +126,24 @@ final class PortoutsService implements PortoutsContract
      *
      * Given a port-out ID, list rejection codes that are eligible for that port-out
      *
+     * @param string $portoutID identifies a port out order
      * @param array{
-     *   filter?: array{code?: int|list<int>}
-     * }|PortoutListRejectionCodesParams $params
+     *   code?: int|list<int>
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
      *
      * @throws APIException
      */
     public function listRejectionCodes(
         string $portoutID,
-        array|PortoutListRejectionCodesParams $params,
+        ?array $filter = null,
         ?RequestOptions $requestOptions = null,
     ): PortoutListRejectionCodesResponse {
-        [$parsed, $options] = PortoutListRejectionCodesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PortoutListRejectionCodesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['portouts/rejections/%1$s', $portoutID],
-            query: $parsed,
-            options: $options,
-            convert: PortoutListRejectionCodesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listRejectionCodes($portoutID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -166,33 +153,28 @@ final class PortoutsService implements PortoutsContract
      *
      * Authorize or reject portout request
      *
-     * @param PortoutUpdateStatusParams\Status|value-of<PortoutUpdateStatusParams\Status> $status
-     * @param array{
-     *   id: string, reason: string, hostMessaging?: bool
-     * }|PortoutUpdateStatusParams $params
+     * @param \Telnyx\Portouts\PortoutUpdateStatusParams\Status|value-of<\Telnyx\Portouts\PortoutUpdateStatusParams\Status> $status Path param: Updated portout status
+     * @param string $id Path param: Portout id
+     * @param string $reason Body param: Provide a reason if rejecting the port out request
+     * @param bool $hostMessaging Body param: Indicates whether messaging services should be maintained with Telnyx after the port out completes
      *
      * @throws APIException
      */
     public function updateStatus(
-        PortoutUpdateStatusParams\Status|string $status,
-        array|PortoutUpdateStatusParams $params,
+        \Telnyx\Portouts\PortoutUpdateStatusParams\Status|string $status,
+        string $id,
+        string $reason,
+        bool $hostMessaging = false,
         ?RequestOptions $requestOptions = null,
     ): PortoutUpdateStatusResponse {
-        [$parsed, $options] = PortoutUpdateStatusParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
+        $params = [
+            'id' => $id, 'reason' => $reason, 'hostMessaging' => $hostMessaging,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PortoutUpdateStatusResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['portouts/%1$s/%2$s', $id, $status],
-            body: (object) array_diff_key($parsed, ['id']),
-            options: $options,
-            convert: PortoutUpdateStatusResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateStatus($status, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

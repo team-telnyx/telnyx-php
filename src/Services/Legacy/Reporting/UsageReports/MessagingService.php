@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
@@ -20,44 +16,51 @@ use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\MessagingContract;
 final class MessagingService implements MessagingContract
 {
     /**
+     * @api
+     */
+    public MessagingRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MessagingRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a new legacy usage V2 MDR report request with the specified filters
      *
-     * @param array{
-     *   aggregationType: int,
-     *   endTime?: string|\DateTimeInterface,
-     *   managedAccounts?: list<string>,
-     *   profiles?: list<string>,
-     *   selectAllManagedAccounts?: bool,
-     *   startTime?: string|\DateTimeInterface,
-     * }|MessagingCreateParams $params
+     * @param int $aggregationType Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2
+     * @param list<string> $managedAccounts List of managed accounts to include
+     * @param list<string> $profiles List of messaging profile IDs to filter by
      *
      * @throws APIException
      */
     public function create(
-        array|MessagingCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        int $aggregationType,
+        string|\DateTimeInterface|null $endTime = null,
+        ?array $managedAccounts = null,
+        ?array $profiles = null,
+        ?bool $selectAllManagedAccounts = null,
+        string|\DateTimeInterface|null $startTime = null,
+        ?RequestOptions $requestOptions = null,
     ): MessagingNewResponse {
-        [$parsed, $options] = MessagingCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'aggregationType' => $aggregationType,
+            'endTime' => $endTime,
+            'managedAccounts' => $managedAccounts,
+            'profiles' => $profiles,
+            'selectAllManagedAccounts' => $selectAllManagedAccounts,
+            'startTime' => $startTime,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'legacy/reporting/usage_reports/messaging',
-            headers: ['Content-Type' => '*/*'],
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -73,13 +76,8 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
-        /** @var BaseResponse<MessagingGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['legacy/reporting/usage_reports/messaging/%1$s', $id],
-            options: $requestOptions,
-            convert: MessagingGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -89,27 +87,22 @@ final class MessagingService implements MessagingContract
      *
      * Fetch all previous requests for MDR usage reports.
      *
-     * @param array{page?: int, perPage?: int}|MessagingListParams $params
+     * @param int $page Page number
+     * @param int $perPage Size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingListParams $params,
+        int $page = 1,
+        int $perPage = 20,
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse {
-        [$parsed, $options] = MessagingListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page, 'perPage' => $perPage];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/usage_reports/messaging',
-            query: Util::array_transform_keys($parsed, ['perPage' => 'per_page']),
-            options: $options,
-            convert: MessagingListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -125,13 +118,8 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingDeleteResponse {
-        /** @var BaseResponse<MessagingDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['legacy/reporting/usage_reports/messaging/%1$s', $id],
-            options: $requestOptions,
-            convert: MessagingDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

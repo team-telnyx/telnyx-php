@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\Status;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
@@ -22,52 +18,52 @@ use Telnyx\ServiceContracts\PhoneNumbers\CsvDownloadsContract;
 final class CsvDownloadsService implements CsvDownloadsContract
 {
     /**
+     * @api
+     */
+    public CsvDownloadsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CsvDownloadsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a CSV download
      *
+     * @param 'V1'|'V2'|CsvFormat $csvFormat Which format to use when generating the CSV file. The default for backwards compatibility is 'V1'
      * @param array{
-     *   csvFormat?: 'V1'|'V2'|CsvFormat,
-     *   filter?: array{
-     *     billingGroupID?: string,
-     *     connectionID?: string,
-     *     customerReference?: string,
-     *     emergencyAddressID?: string,
-     *     hasBundle?: string,
-     *     phoneNumber?: string,
-     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
-     *     tag?: string,
-     *     voiceConnectionName?: array{
-     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
-     *     },
-     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
+     *   billingGroupID?: string,
+     *   connectionID?: string,
+     *   customerReference?: string,
+     *   emergencyAddressID?: string,
+     *   hasBundle?: string,
+     *   phoneNumber?: string,
+     *   status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
+     *   tag?: string,
+     *   voiceConnectionName?: array{
+     *     contains?: string, endsWith?: string, eq?: string, startsWith?: string
      *   },
-     * }|CsvDownloadCreateParams $params
+     *   voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
      *
      * @throws APIException
      */
     public function create(
-        array|CsvDownloadCreateParams $params,
+        string|CsvFormat $csvFormat = 'V1',
+        ?array $filter = null,
         ?RequestOptions $requestOptions = null,
     ): CsvDownloadNewResponse {
-        [$parsed, $options] = CsvDownloadCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['csvFormat' => $csvFormat, 'filter' => $filter];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CsvDownloadNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'phone_numbers/csv_downloads',
-            query: Util::array_transform_keys($parsed, ['csvFormat' => 'csv_format']),
-            options: $options,
-            convert: CsvDownloadNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -77,19 +73,16 @@ final class CsvDownloadsService implements CsvDownloadsContract
      *
      * Retrieve a CSV download
      *
+     * @param string $id identifies the CSV download
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadGetResponse {
-        /** @var BaseResponse<CsvDownloadGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['phone_numbers/csv_downloads/%1$s', $id],
-            options: $requestOptions,
-            convert: CsvDownloadGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -100,28 +93,21 @@ final class CsvDownloadsService implements CsvDownloadsContract
      * List CSV downloads
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|CsvDownloadListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|CsvDownloadListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadListResponse {
-        [$parsed, $options] = CsvDownloadListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CsvDownloadListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'phone_numbers/csv_downloads',
-            query: $parsed,
-            options: $options,
-            convert: CsvDownloadListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

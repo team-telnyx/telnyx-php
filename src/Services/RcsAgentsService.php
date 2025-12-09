@@ -9,9 +9,17 @@ use Telnyx\ServiceContracts\RcsAgentsContract;
 
 final class RcsAgentsService implements RcsAgentsContract
 {
+    /**
+     * @api
+     */
+    public RcsAgentsRawService $raw;
+
     // @phpstan-ignore-next-line
     /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RcsAgentsRawService($client);
+    }
 }

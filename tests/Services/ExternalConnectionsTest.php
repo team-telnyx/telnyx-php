@@ -39,9 +39,10 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->create([
-            'externalSipConnection' => 'zoom', 'outbound' => [],
-        ]);
+        $result = $this->client->externalConnections->create(
+            externalSipConnection: 'zoom',
+            outbound: []
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExternalConnectionNewResponse::class, $result);
@@ -54,22 +55,22 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->create([
-            'externalSipConnection' => 'zoom',
-            'outbound' => [
+        $result = $this->client->externalConnections->create(
+            externalSipConnection: 'zoom',
+            outbound: [
                 'channelLimit' => 10,
                 'outboundVoiceProfileID' => 'outbound_voice_profile_id',
             ],
-            'active' => false,
-            'inbound' => [
+            active: false,
+            inbound: [
                 'outboundVoiceProfileID' => '12345678-1234-1234-1234-123456789012',
                 'channelLimit' => 10,
             ],
-            'tags' => ['tag1', 'tag2'],
-            'webhookEventFailoverURL' => 'https://failover.example.com',
-            'webhookEventURL' => 'https://example.com',
-            'webhookTimeoutSecs' => 25,
-        ]);
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookEventURL: 'https://example.com',
+            webhookTimeoutSecs: 25,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExternalConnectionNewResponse::class, $result);
@@ -97,7 +98,7 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            ['outbound' => ['outboundVoiceProfileID' => 'outbound_voice_profile_id']],
+            outbound: ['outboundVoiceProfileID' => 'outbound_voice_profile_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -113,18 +114,16 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            [
-                'outbound' => [
-                    'outboundVoiceProfileID' => 'outbound_voice_profile_id',
-                    'channelLimit' => 10,
-                ],
-                'active' => false,
-                'inbound' => ['channelLimit' => 10],
-                'tags' => ['tag1', 'tag2'],
-                'webhookEventFailoverURL' => 'https://failover.example.com',
-                'webhookEventURL' => 'https://example.com',
-                'webhookTimeoutSecs' => 25,
+            outbound: [
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                'channelLimit' => 10,
             ],
+            active: false,
+            inbound: ['channelLimit' => 10],
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookEventURL: 'https://example.com',
+            webhookTimeoutSecs: 25,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -138,7 +137,7 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->list([]);
+        $result = $this->client->externalConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExternalConnectionListResponse::class, $result);
@@ -166,10 +165,8 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            [
-                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                'staticEmergencyAddressID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ],
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -188,10 +185,8 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            [
-                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                'staticEmergencyAddressID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ],
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

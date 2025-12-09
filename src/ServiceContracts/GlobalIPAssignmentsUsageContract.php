@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
 use Telnyx\RequestOptions;
 
 interface GlobalIPAssignmentsUsageContract
@@ -14,12 +13,15 @@ interface GlobalIPAssignmentsUsageContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentsUsageRetrieveParams $params
+     * @param array{
+     *   globalIPAssignmentID?: string|array{in?: string},
+     *   globalIPID?: string|array{in?: string},
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in]
      *
      * @throws APIException
      */
     public function retrieve(
-        array|GlobalIPAssignmentsUsageRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $filter = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentsUsageGetResponse;
 }

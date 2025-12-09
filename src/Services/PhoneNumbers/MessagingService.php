@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
-use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
-use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingContract;
@@ -18,14 +15,24 @@ use Telnyx\ServiceContracts\PhoneNumbers\MessagingContract;
 final class MessagingService implements MessagingContract
 {
     /**
+     * @api
+     */
+    public MessagingRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MessagingRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a phone number with messaging settings
+     *
+     * @param string $id identifies the type of resource
      *
      * @throws APIException
      */
@@ -33,13 +40,8 @@ final class MessagingService implements MessagingContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
-        /** @var BaseResponse<MessagingGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['phone_numbers/%1$s/messaging', $id],
-            options: $requestOptions,
-            convert: MessagingGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -49,30 +51,34 @@ final class MessagingService implements MessagingContract
      *
      * Update the messaging profile and/or messaging product of a phone number
      *
-     * @param array{
-     *   messagingProduct?: string, messagingProfileID?: string
-     * }|MessagingUpdateParams $params
+     * @param string $id the phone number to update
+     * @param string $messagingProduct Configure the messaging product for this number:
+     *
+     * * Omit this field or set its value to `null` to keep the current value.
+     * * Set this field to a quoted product ID to set this phone number to that product
+     * @param string $messagingProfileID Configure the messaging profile this phone number is assigned to:
+     *
+     * * Omit this field or set its value to `null` to keep the current value.
+     * * Set this field to `""` to unassign the number from its messaging profile
+     * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|MessagingUpdateParams $params,
+        ?string $messagingProduct = null,
+        ?string $messagingProfileID = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingUpdateResponse {
-        [$parsed, $options] = MessagingUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'messagingProduct' => $messagingProduct,
+            'messagingProfileID' => $messagingProfileID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['phone_numbers/%1$s/messaging', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -82,27 +88,22 @@ final class MessagingService implements MessagingContract
      *
      * List phone numbers with messaging settings
      *
-     * @param array{page?: array{number?: int, size?: int}}|MessagingListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|MessagingListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse {
-        [$parsed, $options] = MessagingListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<MessagingListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'phone_numbers/messaging',
-            query: $parsed,
-            options: $options,
-            convert: MessagingListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

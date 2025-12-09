@@ -5,24 +5,23 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsContract;
 use Telnyx\Services\SimCardGroups\ActionsService;
-use Telnyx\SimCardGroups\SimCardGroupCreateParams;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
 use Telnyx\SimCardGroups\SimCardGroupGetResponse;
-use Telnyx\SimCardGroups\SimCardGroupListParams;
 use Telnyx\SimCardGroups\SimCardGroupListResponse;
 use Telnyx\SimCardGroups\SimCardGroupNewResponse;
-use Telnyx\SimCardGroups\SimCardGroupRetrieveParams;
-use Telnyx\SimCardGroups\SimCardGroupUpdateParams;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 
 final class SimCardGroupsService implements SimCardGroupsContract
 {
+    /**
+     * @api
+     */
+    public SimCardGroupsRawService $raw;
+
     /**
      * @api
      */
@@ -33,6 +32,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new SimCardGroupsRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -41,29 +41,24 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Creates a new SIM card group object
      *
+     * @param string $name a user friendly name for the SIM card group
      * @param array{
-     *   name: string, dataLimit?: array{amount?: string, unit?: string}
-     * }|SimCardGroupCreateParams $params
+     *   amount?: string, unit?: string
+     * } $dataLimit Upper limit on the amount of data the SIM cards, within the group, can use
      *
      * @throws APIException
      */
     public function create(
-        array|SimCardGroupCreateParams $params,
+        string $name,
+        ?array $dataLimit = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardGroupNewResponse {
-        [$parsed, $options] = SimCardGroupCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['name' => $name, 'dataLimit' => $dataLimit];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<SimCardGroupNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'sim_card_groups',
-            body: (object) $parsed,
-            options: $options,
-            convert: SimCardGroupNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -73,31 +68,22 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Returns the details regarding a specific SIM card group
      *
-     * @param array{includeIccids?: bool}|SimCardGroupRetrieveParams $params
+     * @param string $id identifies the SIM group
+     * @param bool $includeIccids it includes a list of associated ICCIDs
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        array|SimCardGroupRetrieveParams $params,
+        bool $includeIccids = false,
         ?RequestOptions $requestOptions = null,
     ): SimCardGroupGetResponse {
-        [$parsed, $options] = SimCardGroupRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['includeIccids' => $includeIccids];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<SimCardGroupGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['sim_card_groups/%1$s', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['includeIccids' => 'include_iccids']
-            ),
-            options: $options,
-            convert: SimCardGroupGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -107,30 +93,26 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Updates a SIM card group
      *
+     * @param string $id identifies the SIM group
      * @param array{
-     *   dataLimit?: array{amount?: string, unit?: string}, name?: string
-     * }|SimCardGroupUpdateParams $params
+     *   amount?: string, unit?: string
+     * } $dataLimit Upper limit on the amount of data the SIM cards, within the group, can use
+     * @param string $name a user friendly name for the SIM card group
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|SimCardGroupUpdateParams $params,
+        ?array $dataLimit = null,
+        ?string $name = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardGroupUpdateResponse {
-        [$parsed, $options] = SimCardGroupUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['dataLimit' => $dataLimit, 'name' => $name];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<SimCardGroupUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['sim_card_groups/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: SimCardGroupUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -140,42 +122,34 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Get all SIM card groups belonging to the user that match the given filters.
      *
-     * @param array{
-     *   filterName?: string,
-     *   filterPrivateWirelessGatewayID?: string,
-     *   filterWirelessBlocklistID?: string,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     * }|SimCardGroupListParams $params
+     * @param string $filterName a valid SIM card group name
+     * @param string $filterPrivateWirelessGatewayID a Private Wireless Gateway ID associated with the group
+     * @param string $filterWirelessBlocklistID a Wireless Blocklist ID associated with the group
+     * @param int $pageNumber the page number to load
+     * @param int $pageSize the size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|SimCardGroupListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $filterName = null,
+        ?string $filterPrivateWirelessGatewayID = null,
+        ?string $filterWirelessBlocklistID = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        ?RequestOptions $requestOptions = null,
     ): SimCardGroupListResponse {
-        [$parsed, $options] = SimCardGroupListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'filterName' => $filterName,
+            'filterPrivateWirelessGatewayID' => $filterPrivateWirelessGatewayID,
+            'filterWirelessBlocklistID' => $filterWirelessBlocklistID,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<SimCardGroupListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'sim_card_groups',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'filterName' => 'filter[name]',
-                    'filterPrivateWirelessGatewayID' => 'filter[private_wireless_gateway_id]',
-                    'filterWirelessBlocklistID' => 'filter[wireless_blocklist_id]',
-                    'pageNumber' => 'page[number]',
-                    'pageSize' => 'page[size]',
-                ],
-            ),
-            options: $options,
-            convert: SimCardGroupListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -185,19 +159,16 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Permanently deletes a SIM card group
      *
+     * @param string $id identifies the SIM group
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): SimCardGroupDeleteResponse {
-        /** @var BaseResponse<SimCardGroupDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['sim_card_groups/%1$s', $id],
-            options: $requestOptions,
-            convert: SimCardGroupDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

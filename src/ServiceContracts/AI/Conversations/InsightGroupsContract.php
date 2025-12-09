@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Conversations;
 
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupInsightGroupsParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -16,6 +13,8 @@ interface InsightGroupsContract
 {
     /**
      * @api
+     *
+     * @param string $groupID The ID of the insight group
      *
      * @throws APIException
      */
@@ -27,18 +26,22 @@ interface InsightGroupsContract
     /**
      * @api
      *
-     * @param array<mixed>|InsightGroupUpdateParams $params
+     * @param string $groupID The ID of the insight group
      *
      * @throws APIException
      */
     public function update(
         string $groupID,
-        array|InsightGroupUpdateParams $params,
+        ?string $description = null,
+        ?string $name = null,
+        ?string $webhook = null,
         ?RequestOptions $requestOptions = null,
     ): InsightTemplateGroupDetail;
 
     /**
      * @api
+     *
+     * @param string $groupID The ID of the insight group
      *
      * @throws APIException
      */
@@ -50,24 +53,26 @@ interface InsightGroupsContract
     /**
      * @api
      *
-     * @param array<mixed>|InsightGroupInsightGroupsParams $params
-     *
      * @throws APIException
      */
     public function insightGroups(
-        array|InsightGroupInsightGroupsParams $params,
+        string $name,
+        ?string $description = null,
+        string $webhook = '',
         ?RequestOptions $requestOptions = null,
     ): InsightTemplateGroupDetail;
 
     /**
      * @api
      *
-     * @param array<mixed>|InsightGroupRetrieveInsightGroupsParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function retrieveInsightGroups(
-        array|InsightGroupRetrieveInsightGroupsParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): InsightGroupGetInsightGroupsResponse;
 }

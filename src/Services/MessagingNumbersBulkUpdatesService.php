@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateCreateParams;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
 use Telnyx\RequestOptions;
@@ -16,38 +14,42 @@ use Telnyx\ServiceContracts\MessagingNumbersBulkUpdatesContract;
 final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUpdatesContract
 {
     /**
+     * @api
+     */
+    public MessagingNumbersBulkUpdatesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MessagingNumbersBulkUpdatesRawService($client);
+    }
 
     /**
      * @api
      *
      * Update the messaging profile of multiple phone numbers
      *
-     * @param array{
-     *   messagingProfileID: string, numbers: list<string>
-     * }|MessagingNumbersBulkUpdateCreateParams $params
+     * @param string $messagingProfileID Configure the messaging profile these phone numbers are assigned to:
+     *
+     * * Set this field to `""` to unassign each number from their respective messaging profile
+     * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
+     * @param list<string> $numbers the list of phone numbers to update
      *
      * @throws APIException
      */
     public function create(
-        array|MessagingNumbersBulkUpdateCreateParams $params,
+        string $messagingProfileID,
+        array $numbers,
         ?RequestOptions $requestOptions = null,
     ): MessagingNumbersBulkUpdateNewResponse {
-        [$parsed, $options] = MessagingNumbersBulkUpdateCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'messagingProfileID' => $messagingProfileID, 'numbers' => $numbers,
+        ];
 
-        /** @var BaseResponse<MessagingNumbersBulkUpdateNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'messaging_numbers_bulk_updates',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingNumbersBulkUpdateNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -57,19 +59,16 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      *
      * Retrieve bulk update status
      *
+     * @param string $orderID order ID to verify bulk update status
+     *
      * @throws APIException
      */
     public function retrieve(
         string $orderID,
         ?RequestOptions $requestOptions = null
     ): MessagingNumbersBulkUpdateGetResponse {
-        /** @var BaseResponse<MessagingNumbersBulkUpdateGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['messaging_numbers_bulk_updates/%1$s', $orderID],
-            options: $requestOptions,
-            convert: MessagingNumbersBulkUpdateGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($orderID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

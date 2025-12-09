@@ -5,55 +5,45 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Transcriptions;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
-use Telnyx\Texml\Accounts\Transcriptions\Json\JsonDeleteRecordingTranscriptionSidJsonParams;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
-use Telnyx\Texml\Accounts\Transcriptions\Json\JsonRetrieveRecordingTranscriptionSidJsonParams;
 
 final class JsonService implements JsonContract
 {
     /**
+     * @api
+     */
+    public JsonRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new JsonRawService($client);
+    }
 
     /**
      * @api
      *
      * Permanently deletes a recording transcription.
      *
-     * @param array{
-     *   accountSid: string
-     * }|JsonDeleteRecordingTranscriptionSidJsonParams $params
+     * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
+     * @param string $accountSid the id of the account the resource belongs to
      *
      * @throws APIException
      */
     public function deleteRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
-        array|JsonDeleteRecordingTranscriptionSidJsonParams $params,
+        string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = JsonDeleteRecordingTranscriptionSidJsonParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
+        $params = ['accountSid' => $accountSid];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: [
-                'texml/Accounts/%1$s/Transcriptions/%2$s.json',
-                $accountSid,
-                $recordingTranscriptionSid,
-            ],
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deleteRecordingTranscriptionSidJson($recordingTranscriptionSid, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -63,35 +53,20 @@ final class JsonService implements JsonContract
      *
      * Returns the recording transcription resource identified by its ID.
      *
-     * @param array{
-     *   accountSid: string
-     * }|JsonRetrieveRecordingTranscriptionSidJsonParams $params
+     * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
+     * @param string $accountSid the id of the account the resource belongs to
      *
      * @throws APIException
      */
     public function retrieveRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
-        array|JsonRetrieveRecordingTranscriptionSidJsonParams $params,
+        string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): JsonGetRecordingTranscriptionSidJsonResponse {
-        [$parsed, $options] = JsonRetrieveRecordingTranscriptionSidJsonParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
+        $params = ['accountSid' => $accountSid];
 
-        /** @var BaseResponse<JsonGetRecordingTranscriptionSidJsonResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: [
-                'texml/Accounts/%1$s/Transcriptions/%2$s.json',
-                $accountSid,
-                $recordingTranscriptionSid,
-            ],
-            options: $options,
-            convert: JsonGetRecordingTranscriptionSidJsonResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveRecordingTranscriptionSidJson($recordingTranscriptionSid, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

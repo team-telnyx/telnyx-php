@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Campaign;
 
-use Telnyx\Campaign\Usecase\UsecaseGetCostParams;
 use Telnyx\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Campaign\UsecaseContract;
@@ -15,36 +13,33 @@ use Telnyx\ServiceContracts\Campaign\UsecaseContract;
 final class UsecaseService implements UsecaseContract
 {
     /**
+     * @api
+     */
+    public UsecaseRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new UsecaseRawService($client);
+    }
 
     /**
      * @api
      *
      * Get Campaign Cost
      *
-     * @param array{usecase: string}|UsecaseGetCostParams $params
-     *
      * @throws APIException
      */
     public function getCost(
-        array|UsecaseGetCostParams $params,
+        string $usecase,
         ?RequestOptions $requestOptions = null
     ): UsecaseGetCostResponse {
-        [$parsed, $options] = UsecaseGetCostParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['usecase' => $usecase];
 
-        /** @var BaseResponse<UsecaseGetCostResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: '10dlc/campaign/usecase/cost',
-            query: $parsed,
-            options: $options,
-            convert: UsecaseGetCostResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getCost(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

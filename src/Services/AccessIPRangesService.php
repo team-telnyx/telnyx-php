@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AccessIPRanges\AccessIPRange;
-use Telnyx\AccessIPRanges\AccessIPRangeCreateParams;
-use Telnyx\AccessIPRanges\AccessIPRangeListParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
@@ -17,38 +14,36 @@ use Telnyx\ServiceContracts\AccessIPRangesContract;
 final class AccessIPRangesService implements AccessIPRangesContract
 {
     /**
+     * @api
+     */
+    public AccessIPRangesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AccessIPRangesRawService($client);
+    }
 
     /**
      * @api
      *
      * Create new Access IP Range
      *
-     * @param array{
-     *   cidrBlock: string, description?: string
-     * }|AccessIPRangeCreateParams $params
-     *
      * @throws APIException
      */
     public function create(
-        array|AccessIPRangeCreateParams $params,
+        string $cidrBlock,
+        ?string $description = null,
         ?RequestOptions $requestOptions = null,
     ): AccessIPRange {
-        [$parsed, $options] = AccessIPRangeCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['cidrBlock' => $cidrBlock, 'description' => $description];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AccessIPRange> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'access_ip_ranges',
-            body: (object) $parsed,
-            options: $options,
-            convert: AccessIPRange::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -59,39 +54,33 @@ final class AccessIPRangesService implements AccessIPRangesContract
      * List all Access IP Ranges
      *
      * @param array{
-     *   filter?: array{
-     *     cidrBlock?: string|array{
-     *       contains?: string, endswith?: string, startswith?: string
-     *     },
-     *     createdAt?: string|\DateTimeInterface|array{
-     *       gt?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lt?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
+     *   cidrBlock?: string|array{
+     *     contains?: string, endswith?: string, startswith?: string
      *   },
-     *   page?: array{number?: int, size?: int},
-     * }|AccessIPRangeListParams $params
+     *   createdAt?: string|\DateTimeInterface|array{
+     *     gt?: string|\DateTimeInterface,
+     *     gte?: string|\DateTimeInterface,
+     *     lt?: string|\DateTimeInterface,
+     *     lte?: string|\DateTimeInterface,
+     *   },
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|AccessIPRangeListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): AccessIPRangeListResponse {
-        [$parsed, $options] = AccessIPRangeListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AccessIPRangeListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'access_ip_ranges',
-            query: $parsed,
-            options: $options,
-            convert: AccessIPRangeListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -107,13 +96,8 @@ final class AccessIPRangesService implements AccessIPRangesContract
         string $accessIPRangeID,
         ?RequestOptions $requestOptions = null
     ): AccessIPRange {
-        /** @var BaseResponse<AccessIPRange> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['access_ip_ranges/%1$s', $accessIPRangeID],
-            options: $requestOptions,
-            convert: AccessIPRange::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($accessIPRangeID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

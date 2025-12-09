@@ -35,9 +35,10 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->create([
-            'identifier' => 'my_secret', 'type' => 'bearer',
-        ]);
+        $result = $this->client->integrationSecrets->create(
+            identifier: 'my_secret',
+            type: 'bearer'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(IntegrationSecretNewResponse::class, $result);
@@ -50,13 +51,13 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->create([
-            'identifier' => 'my_secret',
-            'type' => 'bearer',
-            'token' => 'my_secret_value',
-            'password' => 'password',
-            'username' => 'username',
-        ]);
+        $result = $this->client->integrationSecrets->create(
+            identifier: 'my_secret',
+            type: 'bearer',
+            token: 'my_secret_value',
+            password: 'password',
+            username: 'username',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(IntegrationSecretNewResponse::class, $result);
@@ -69,7 +70,7 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->list([]);
+        $result = $this->client->integrationSecrets->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(IntegrationSecretListResponse::class, $result);

@@ -40,9 +40,10 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->create([
-            'friendlyName' => 'call-router', 'voiceURL' => 'https://example.com',
-        ]);
+        $result = $this->client->texmlApplications->create(
+            friendlyName: 'call-router',
+            voiceURL: 'https://example.com'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TexmlApplicationNewResponse::class, $result);
@@ -55,30 +56,30 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->create([
-            'friendlyName' => 'call-router',
-            'voiceURL' => 'https://example.com',
-            'active' => false,
-            'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
-            'callCostInWebhooks' => false,
-            'dtmfType' => DtmfType::INBAND,
-            'firstCommandTimeout' => true,
-            'firstCommandTimeoutSecs' => 10,
-            'inbound' => [
+        $result = $this->client->texmlApplications->create(
+            friendlyName: 'call-router',
+            voiceURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            callCostInWebhooks: false,
+            dtmfType: DtmfType::INBAND,
+            firstCommandTimeout: true,
+            firstCommandTimeoutSecs: 10,
+            inbound: [
                 'channelLimit' => 10,
                 'shakenStirEnabled' => true,
                 'sipSubdomain' => 'example',
                 'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
-            'outbound' => [
+            outbound: [
                 'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
             ],
-            'statusCallback' => 'https://example.com',
-            'statusCallbackMethod' => 'get',
-            'tags' => ['tag1', 'tag2'],
-            'voiceFallbackURL' => 'https://fallback.example.com',
-            'voiceMethod' => 'get',
-        ]);
+            statusCallback: 'https://example.com',
+            statusCallbackMethod: 'get',
+            tags: ['tag1', 'tag2'],
+            voiceFallbackURL: 'https://fallback.example.com',
+            voiceMethod: 'get',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TexmlApplicationNewResponse::class, $result);
@@ -106,7 +107,8 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->update(
             '1293384261075731499',
-            ['friendlyName' => 'call-router', 'voiceURL' => 'https://example.com'],
+            friendlyName: 'call-router',
+            voiceURL: 'https://example.com',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -122,31 +124,28 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->update(
             '1293384261075731499',
-            [
-                'friendlyName' => 'call-router',
-                'voiceURL' => 'https://example.com',
-                'active' => false,
-                'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
-                'callCostInWebhooks' => false,
-                'dtmfType' => DtmfType::INBAND,
-                'firstCommandTimeout' => true,
-                'firstCommandTimeoutSecs' => 10,
-                'inbound' => [
-                    'channelLimit' => 10,
-                    'shakenStirEnabled' => true,
-                    'sipSubdomain' => 'example',
-                    'sipSubdomainReceiveSettings' => 'only_my_connections',
-                ],
-                'outbound' => [
-                    'channelLimit' => 10,
-                    'outboundVoiceProfileID' => '1293384261075731499',
-                ],
-                'statusCallback' => 'https://example.com',
-                'statusCallbackMethod' => 'get',
-                'tags' => ['tag1', 'tag2'],
-                'voiceFallbackURL' => 'https://fallback.example.com',
-                'voiceMethod' => 'get',
+            friendlyName: 'call-router',
+            voiceURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            callCostInWebhooks: false,
+            dtmfType: DtmfType::INBAND,
+            firstCommandTimeout: true,
+            firstCommandTimeoutSecs: 10,
+            inbound: [
+                'channelLimit' => 10,
+                'shakenStirEnabled' => true,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
+            outbound: [
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+            ],
+            statusCallback: 'https://example.com',
+            statusCallbackMethod: 'get',
+            tags: ['tag1', 'tag2'],
+            voiceFallbackURL: 'https://fallback.example.com',
+            voiceMethod: 'get',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -160,7 +159,7 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->list([]);
+        $result = $this->client->texmlApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TexmlApplicationListResponse::class, $result);

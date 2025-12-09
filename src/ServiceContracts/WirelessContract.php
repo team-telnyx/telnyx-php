@@ -7,19 +7,18 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
-use Telnyx\Wireless\WirelessRetrieveRegionsParams;
 
 interface WirelessContract
 {
     /**
      * @api
      *
-     * @param array<mixed>|WirelessRetrieveRegionsParams $params
+     * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
      *
      * @throws APIException
      */
     public function retrieveRegions(
-        array|WirelessRetrieveRegionsParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $product,
+        ?RequestOptions $requestOptions = null
     ): WirelessGetRegionsResponse;
 }

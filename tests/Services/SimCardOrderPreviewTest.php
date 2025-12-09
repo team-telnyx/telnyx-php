@@ -34,9 +34,10 @@ final class SimCardOrderPreviewTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardOrderPreview->preview([
-            'addressID' => '1293384261075731499', 'quantity' => 21,
-        ]);
+        $result = $this->client->simCardOrderPreview->preview(
+            addressID: '1293384261075731499',
+            quantity: 21
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SimCardOrderPreviewPreviewResponse::class, $result);
@@ -49,9 +50,10 @@ final class SimCardOrderPreviewTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardOrderPreview->preview([
-            'addressID' => '1293384261075731499', 'quantity' => 21,
-        ]);
+        $result = $this->client->simCardOrderPreview->preview(
+            addressID: '1293384261075731499',
+            quantity: 21
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SimCardOrderPreviewPreviewResponse::class, $result);

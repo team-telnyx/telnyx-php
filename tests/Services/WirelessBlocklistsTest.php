@@ -38,11 +38,11 @@ final class WirelessBlocklistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklists->create([
-            'name' => 'My Wireless Blocklist',
-            'type' => 'country',
-            'values' => ['CA', 'US'],
-        ]);
+        $result = $this->client->wirelessBlocklists->create(
+            name: 'My Wireless Blocklist',
+            type: 'country',
+            values: ['CA', 'US']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WirelessBlocklistNewResponse::class, $result);
@@ -55,11 +55,11 @@ final class WirelessBlocklistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklists->create([
-            'name' => 'My Wireless Blocklist',
-            'type' => 'country',
-            'values' => ['CA', 'US'],
-        ]);
+        $result = $this->client->wirelessBlocklists->create(
+            name: 'My Wireless Blocklist',
+            type: 'country',
+            values: ['CA', 'US']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WirelessBlocklistNewResponse::class, $result);
@@ -87,7 +87,7 @@ final class WirelessBlocklistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklists->update([]);
+        $result = $this->client->wirelessBlocklists->update();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WirelessBlocklistUpdateResponse::class, $result);
@@ -100,7 +100,7 @@ final class WirelessBlocklistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklists->list([]);
+        $result = $this->client->wirelessBlocklists->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WirelessBlocklistListResponse::class, $result);

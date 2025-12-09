@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AuditEvents\AuditEventListParams;
 use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsContract;
@@ -16,9 +14,17 @@ use Telnyx\ServiceContracts\AuditEventsContract;
 final class AuditEventsService implements AuditEventsContract
 {
     /**
+     * @api
+     */
+    public AuditEventsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AuditEventsRawService($client);
+    }
 
     /**
      * @api
@@ -26,33 +32,28 @@ final class AuditEventsService implements AuditEventsContract
      * Retrieve a list of audit log entries. Audit logs are a best-effort, eventually consistent record of significant account-related changes.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAfter?: string|\DateTimeInterface,
-     *     createdBefore?: string|\DateTimeInterface,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'asc'|'desc'|Sort,
-     * }|AuditEventListParams $params
+     *   createdAfter?: string|\DateTimeInterface,
+     *   createdBefore?: string|\DateTimeInterface,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param 'asc'|'desc'|Sort $sort set the order of the results by the creation date
      *
      * @throws APIException
      */
     public function list(
-        array|AuditEventListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $filter = null,
+        ?array $page = null,
+        string|Sort|null $sort = null,
+        ?RequestOptions $requestOptions = null,
     ): AuditEventListResponse {
-        [$parsed, $options] = AuditEventListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<AuditEventListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'audit_events',
-            query: $parsed,
-            options: $options,
-            convert: AuditEventListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

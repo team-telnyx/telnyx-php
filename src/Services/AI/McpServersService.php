@@ -4,60 +4,59 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\McpServers\McpServerCreateParams;
 use Telnyx\AI\McpServers\McpServerGetResponse;
-use Telnyx\AI\McpServers\McpServerListParams;
 use Telnyx\AI\McpServers\McpServerListResponseItem;
 use Telnyx\AI\McpServers\McpServerNewResponse;
-use Telnyx\AI\McpServers\McpServerUpdateParams;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
-use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersContract;
 
 final class McpServersService implements McpServersContract
 {
     /**
+     * @api
+     */
+    public McpServersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new McpServersRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new MCP server.
      *
-     * @param array{
-     *   name: string,
-     *   type: string,
-     *   url: string,
-     *   allowedTools?: list<string>|null,
-     *   apiKeyRef?: string|null,
-     * }|McpServerCreateParams $params
+     * @param list<string>|null $allowedTools
      *
      * @throws APIException
      */
     public function create(
-        array|McpServerCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $name,
+        string $type,
+        string $url,
+        ?array $allowedTools = null,
+        ?string $apiKeyRef = null,
+        ?RequestOptions $requestOptions = null,
     ): McpServerNewResponse {
-        [$parsed, $options] = McpServerCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'name' => $name,
+            'type' => $type,
+            'url' => $url,
+            'allowedTools' => $allowedTools,
+            'apiKeyRef' => $apiKeyRef,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<McpServerNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/mcp_servers',
-            body: (object) $parsed,
-            options: $options,
-            convert: McpServerNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -73,13 +72,8 @@ final class McpServersService implements McpServersContract
         string $mcpServerID,
         ?RequestOptions $requestOptions = null
     ): McpServerGetResponse {
-        /** @var BaseResponse<McpServerGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/mcp_servers/%1$s', $mcpServerID],
-            options: $requestOptions,
-            convert: McpServerGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($mcpServerID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -89,36 +83,35 @@ final class McpServersService implements McpServersContract
      *
      * Update an existing MCP server.
      *
-     * @param array{
-     *   id?: string,
-     *   allowedTools?: list<string>|null,
-     *   apiKeyRef?: string|null,
-     *   createdAt?: string|\DateTimeInterface,
-     *   name?: string,
-     *   type?: string,
-     *   url?: string,
-     * }|McpServerUpdateParams $params
+     * @param list<string>|null $allowedTools
      *
      * @throws APIException
      */
     public function update(
         string $mcpServerID,
-        array|McpServerUpdateParams $params,
+        ?string $id = null,
+        ?array $allowedTools = null,
+        ?string $apiKeyRef = null,
+        string|\DateTimeInterface|null $createdAt = null,
+        ?string $name = null,
+        ?string $type = null,
+        ?string $url = null,
         ?RequestOptions $requestOptions = null,
     ): McpServerUpdateResponse {
-        [$parsed, $options] = McpServerUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'id' => $id,
+            'allowedTools' => $allowedTools,
+            'apiKeyRef' => $apiKeyRef,
+            'createdAt' => $createdAt,
+            'name' => $name,
+            'type' => $type,
+            'url' => $url,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<McpServerUpdateResponse> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['ai/mcp_servers/%1$s', $mcpServerID],
-            body: (object) $parsed,
-            options: $options,
-            convert: McpServerUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($mcpServerID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -128,34 +121,28 @@ final class McpServersService implements McpServersContract
      *
      * Retrieve a list of MCP servers.
      *
-     * @param array{
-     *   pageNumber?: int, pageSize?: int, type?: string, url?: string
-     * }|McpServerListParams $params
-     *
      * @return list<McpServerListResponseItem>
      *
      * @throws APIException
      */
     public function list(
-        array|McpServerListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        ?string $type = null,
+        ?string $url = null,
+        ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = McpServerListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+            'type' => $type,
+            'url' => $url,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<McpServerListResponseItem>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/mcp_servers',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
-            options: $options,
-            convert: new ListOf(McpServerListResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -171,13 +158,8 @@ final class McpServersService implements McpServersContract
         string $mcpServerID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['ai/mcp_servers/%1$s', $mcpServerID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($mcpServerID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -6,11 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Media\MediaGetResponse;
-use Telnyx\Media\MediaListParams;
 use Telnyx\Media\MediaListResponse;
-use Telnyx\Media\MediaUpdateParams;
 use Telnyx\Media\MediaUpdateResponse;
-use Telnyx\Media\MediaUploadParams;
 use Telnyx\Media\MediaUploadResponse;
 use Telnyx\RequestOptions;
 
@@ -18,6 +15,8 @@ interface MediaContract
 {
     /**
      * @api
+     *
+     * @param string $mediaName uniquely identifies a media resource
      *
      * @throws APIException
      */
@@ -29,30 +28,37 @@ interface MediaContract
     /**
      * @api
      *
-     * @param array<mixed>|MediaUpdateParams $params
+     * @param string $mediaName uniquely identifies a media resource
+     * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
+     * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
      * @throws APIException
      */
     public function update(
         string $mediaName,
-        array|MediaUpdateParams $params,
+        ?string $mediaURL = null,
+        ?int $ttlSecs = null,
         ?RequestOptions $requestOptions = null,
     ): MediaUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|MediaListParams $params
+     * @param array{
+     *   contentType?: list<string>
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
      *
      * @throws APIException
      */
     public function list(
-        array|MediaListParams $params,
+        ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): MediaListResponse;
 
     /**
      * @api
+     *
+     * @param string $mediaName uniquely identifies a media resource
      *
      * @throws APIException
      */
@@ -64,6 +70,8 @@ interface MediaContract
     /**
      * @api
      *
+     * @param string $mediaName uniquely identifies a media resource
+     *
      * @throws APIException
      */
     public function download(
@@ -74,12 +82,16 @@ interface MediaContract
     /**
      * @api
      *
-     * @param array<mixed>|MediaUploadParams $params
+     * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
+     * @param string $mediaName the unique identifier of a file
+     * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
      * @throws APIException
      */
     public function upload(
-        array|MediaUploadParams $params,
-        ?RequestOptions $requestOptions = null
+        string $mediaURL,
+        ?string $mediaName = null,
+        ?int $ttlSecs = null,
+        ?RequestOptions $requestOptions = null,
     ): MediaUploadResponse;
 }

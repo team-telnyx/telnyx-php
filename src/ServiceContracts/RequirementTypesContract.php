@@ -7,13 +7,15 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
-use Telnyx\RequirementTypes\RequirementTypeListParams;
+use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 use Telnyx\RequirementTypes\RequirementTypeListResponse;
 
 interface RequirementTypesContract
 {
     /**
      * @api
+     *
+     * @param string $id Uniquely identifies the requirement_type record
      *
      * @throws APIException
      */
@@ -25,12 +27,16 @@ interface RequirementTypesContract
     /**
      * @api
      *
-     * @param array<mixed>|RequirementTypeListParams $params
+     * @param array{
+     *   name?: array{contains?: string}
+     * } $filter Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name]
+     * @param list<'name'|'created_at'|'updated_at'|'-name'|'-created_at'|'-updated_at'|Sort> $sort Consolidated sort parameter for requirement types (deepObject style). Originally: sort[]
      *
      * @throws APIException
      */
     public function list(
-        array|RequirementTypeListParams $params,
+        ?array $filter = null,
+        ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): RequirementTypeListResponse;
 }

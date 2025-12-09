@@ -48,7 +48,7 @@ final class AgentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->agents->update('id', []);
+        $result = $this->client->messaging->rcs->agents->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RcsAgentResponse::class, $result);
@@ -61,7 +61,7 @@ final class AgentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->agents->list([]);
+        $result = $this->client->messaging->rcs->agents->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AgentListResponse::class, $result);

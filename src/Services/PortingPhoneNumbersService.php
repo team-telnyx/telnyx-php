@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderStatus;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
@@ -16,9 +14,17 @@ use Telnyx\ServiceContracts\PortingPhoneNumbersContract;
 final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
 {
     /**
+     * @api
+     */
+    public PortingPhoneNumbersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PortingPhoneNumbersRawService($client);
+    }
 
     /**
      * @api
@@ -26,31 +32,25 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      * Returns a list of your porting phone numbers.
      *
      * @param array{
-     *   filter?: array{
-     *     portingOrderStatus?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderStatus,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|PortingPhoneNumberListParams $params
+     *   portingOrderStatus?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderStatus,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|PortingPhoneNumberListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): PortingPhoneNumberListResponse {
-        [$parsed, $options] = PortingPhoneNumberListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PortingPhoneNumberListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'porting_phone_numbers',
-            query: $parsed,
-            options: $options,
-            convert: PortingPhoneNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

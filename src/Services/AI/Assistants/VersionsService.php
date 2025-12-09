@@ -14,59 +14,52 @@ use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
-use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
-use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
 final class VersionsService implements VersionsContract
 {
     /**
+     * @api
+     */
+    public VersionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new VersionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieves a specific version of an assistant by assistant_id and version_id
      *
-     * @param array{
-     *   assistantID: string, includeMcpServers?: bool
-     * }|VersionRetrieveParams $params
+     * @param string $versionID Path param:
+     * @param string $assistantID Path param:
+     * @param bool $includeMcpServers Query param:
      *
      * @throws APIException
      */
     public function retrieve(
         string $versionID,
-        array|VersionRetrieveParams $params,
+        string $assistantID,
+        ?bool $includeMcpServers = null,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        [$parsed, $options] = VersionRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $assistantID = $parsed['assistantID'];
-        unset($parsed['assistantID']);
+        $params = [
+            'assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<InferenceEmbedding> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['includeMcpServers' => 'include_mcp_servers']
-            ),
-            options: $options,
-            convert: InferenceEmbedding::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($versionID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -76,67 +69,93 @@ final class VersionsService implements VersionsContract
      *
      * Updates the configuration of a specific assistant version. Can not update main version
      *
+     * @param string $versionID Path param:
+     * @param string $assistantID Path param:
+     * @param string $description Body param:
+     * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
+     * @param string $dynamicVariablesWebhookURL Body param: If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
+     * @param list<'telephony'|'messaging'|EnabledFeatures> $enabledFeatures Body param:
+     * @param string $greeting Body param: Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param array{
-     *   assistantID: string,
-     *   description?: string,
-     *   dynamicVariables?: array<string,mixed>,
-     *   dynamicVariablesWebhookURL?: string,
-     *   enabledFeatures?: list<'telephony'|'messaging'|EnabledFeatures>,
-     *   greeting?: string,
-     *   insightSettings?: array{insightGroupID?: string}|InsightSettings,
-     *   instructions?: string,
-     *   llmAPIKeyRef?: string,
-     *   messagingSettings?: array{
-     *     defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
-     *   }|MessagingSettings,
-     *   model?: string,
-     *   name?: string,
-     *   privacySettings?: array{dataRetention?: bool}|PrivacySettings,
-     *   telephonySettings?: array{
-     *     defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
-     *   }|TelephonySettings,
-     *   tools?: list<AssistantTool|array<string,mixed>>,
-     *   transcription?: array{
-     *     language?: string,
-     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
-     *     region?: string,
-     *     settings?: array{
-     *       eotThreshold?: float,
-     *       eotTimeoutMs?: int,
-     *       numerals?: bool,
-     *       smartFormat?: bool,
-     *     },
-     *   }|TranscriptionSettings,
-     *   voiceSettings?: array{
-     *     voice: string,
-     *     apiKeyRef?: string,
-     *     backgroundAudio?: array<string,mixed>,
-     *     voiceSpeed?: float,
-     *   }|VoiceSettings,
-     * }|VersionUpdateParams $params
+     *   insightGroupID?: string
+     * }|InsightSettings $insightSettings Body param:
+     * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
+     * @param string $llmAPIKeyRef Body param: This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * @param array{
+     *   defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
+     * }|MessagingSettings $messagingSettings Body param:
+     * @param string $model Body param: ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,
+     * @param string $name Body param:
+     * @param array{dataRetention?: bool}|PrivacySettings $privacySettings Body param:
+     * @param array{
+     *   defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
+     * }|TelephonySettings $telephonySettings Body param:
+     * @param list<AssistantTool|array<string,mixed>> $tools Body param: The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
+     * @param array{
+     *   language?: string,
+     *   model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
+     *   region?: string,
+     *   settings?: array{
+     *     eotThreshold?: float,
+     *     eotTimeoutMs?: int,
+     *     numerals?: bool,
+     *     smartFormat?: bool,
+     *   },
+     * }|TranscriptionSettings $transcription Body param:
+     * @param array{
+     *   voice: string,
+     *   apiKeyRef?: string,
+     *   backgroundAudio?: array<string,mixed>,
+     *   voiceSpeed?: float,
+     * }|VoiceSettings $voiceSettings Body param:
      *
      * @throws APIException
      */
     public function update(
         string $versionID,
-        array|VersionUpdateParams $params,
+        string $assistantID,
+        ?string $description = null,
+        ?array $dynamicVariables = null,
+        ?string $dynamicVariablesWebhookURL = null,
+        ?array $enabledFeatures = null,
+        ?string $greeting = null,
+        array|InsightSettings|null $insightSettings = null,
+        ?string $instructions = null,
+        ?string $llmAPIKeyRef = null,
+        array|MessagingSettings|null $messagingSettings = null,
+        ?string $model = null,
+        ?string $name = null,
+        array|PrivacySettings|null $privacySettings = null,
+        array|TelephonySettings|null $telephonySettings = null,
+        ?array $tools = null,
+        array|TranscriptionSettings|null $transcription = null,
+        array|VoiceSettings|null $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        [$parsed, $options] = VersionUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $assistantID = $parsed['assistantID'];
-        unset($parsed['assistantID']);
+        $params = [
+            'assistantID' => $assistantID,
+            'description' => $description,
+            'dynamicVariables' => $dynamicVariables,
+            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+            'enabledFeatures' => $enabledFeatures,
+            'greeting' => $greeting,
+            'insightSettings' => $insightSettings,
+            'instructions' => $instructions,
+            'llmAPIKeyRef' => $llmAPIKeyRef,
+            'messagingSettings' => $messagingSettings,
+            'model' => $model,
+            'name' => $name,
+            'privacySettings' => $privacySettings,
+            'telephonySettings' => $telephonySettings,
+            'tools' => $tools,
+            'transcription' => $transcription,
+            'voiceSettings' => $voiceSettings,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<InferenceEmbedding> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
-            body: (object) array_diff_key($parsed, ['assistantID']),
-            options: $options,
-            convert: InferenceEmbedding::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($versionID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -152,13 +171,8 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): AssistantsList {
-        /** @var BaseResponse<AssistantsList> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/%1$s/versions', $assistantID],
-            options: $requestOptions,
-            convert: AssistantsList::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($assistantID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -168,29 +182,17 @@ final class VersionsService implements VersionsContract
      *
      * Permanently removes a specific version of an assistant. Can not delete main version
      *
-     * @param array{assistantID: string}|VersionDeleteParams $params
-     *
      * @throws APIException
      */
     public function delete(
         string $versionID,
-        array|VersionDeleteParams $params,
+        string $assistantID,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = VersionDeleteParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $assistantID = $parsed['assistantID'];
-        unset($parsed['assistantID']);
+        $params = ['assistantID' => $assistantID];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($versionID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -200,31 +202,17 @@ final class VersionsService implements VersionsContract
      *
      * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
      *
-     * @param array{assistantID: string}|VersionPromoteParams $params
-     *
      * @throws APIException
      */
     public function promote(
         string $versionID,
-        array|VersionPromoteParams $params,
+        string $assistantID,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        [$parsed, $options] = VersionPromoteParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $assistantID = $parsed['assistantID'];
-        unset($parsed['assistantID']);
+        $params = ['assistantID' => $assistantID];
 
-        /** @var BaseResponse<InferenceEmbedding> */
-        $response = $this->client->request(
-            method: 'post',
-            path: [
-                'ai/assistants/%1$s/versions/%2$s/promote', $assistantID, $versionID,
-            ],
-            options: $options,
-            convert: InferenceEmbedding::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->promote($versionID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

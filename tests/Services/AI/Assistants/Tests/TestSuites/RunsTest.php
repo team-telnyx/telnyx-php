@@ -35,8 +35,7 @@ final class RunsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->testSuites->runs->list(
-            'suite_name',
-            []
+            'suite_name'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -51,8 +50,7 @@ final class RunsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->testSuites->runs->trigger(
-            'suite_name',
-            []
+            'suite_name'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

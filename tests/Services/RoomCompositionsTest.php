@@ -36,7 +36,7 @@ final class RoomCompositionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roomCompositions->create([]);
+        $result = $this->client->roomCompositions->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RoomCompositionNewResponse::class, $result);
@@ -64,7 +64,7 @@ final class RoomCompositionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roomCompositions->list([]);
+        $result = $this->client->roomCompositions->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(RoomCompositionListResponse::class, $result);

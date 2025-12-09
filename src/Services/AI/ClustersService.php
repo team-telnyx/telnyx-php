@@ -4,59 +4,53 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Clusters\ClusterComputeParams;
 use Telnyx\AI\Clusters\ClusterComputeResponse;
-use Telnyx\AI\Clusters\ClusterFetchGraphParams;
 use Telnyx\AI\Clusters\ClusterGetResponse;
-use Telnyx\AI\Clusters\ClusterListParams;
 use Telnyx\AI\Clusters\ClusterListResponse;
-use Telnyx\AI\Clusters\ClusterRetrieveParams;
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
 
 final class ClustersService implements ClustersContract
 {
     /**
+     * @api
+     */
+    public ClustersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ClustersRawService($client);
+    }
 
     /**
      * @api
      *
      * Fetch a cluster
      *
-     * @param array{
-     *   showSubclusters?: bool, topNNodes?: int
-     * }|ClusterRetrieveParams $params
+     * @param bool $showSubclusters whether or not to include subclusters and their nodes in the response
+     * @param int $topNNodes The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      *
      * @throws APIException
      */
     public function retrieve(
         string $taskID,
-        array|ClusterRetrieveParams $params,
+        bool $showSubclusters = false,
+        int $topNNodes = 0,
         ?RequestOptions $requestOptions = null,
     ): ClusterGetResponse {
-        [$parsed, $options] = ClusterRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'showSubclusters' => $showSubclusters, 'topNNodes' => $topNNodes,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ClusterGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/clusters/%1$s', $taskID],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['showSubclusters' => 'show_subclusters', 'topNNodes' => 'top_n_nodes'],
-            ),
-            options: $options,
-            convert: ClusterGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($taskID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -66,27 +60,22 @@ final class ClustersService implements ClustersContract
      *
      * List all clusters
      *
-     * @param array{page?: array{number?: int, size?: int}}|ClusterListParams $params
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|ClusterListParams $params,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): ClusterListResponse {
-        [$parsed, $options] = ClusterListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ClusterListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ai/clusters',
-            query: $parsed,
-            options: $options,
-            convert: ClusterListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -102,13 +91,8 @@ final class ClustersService implements ClustersContract
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['ai/clusters/%1$s', $taskID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($taskID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -118,33 +102,34 @@ final class ClustersService implements ClustersContract
      *
      * Starts a background task to compute how the data in an [embedded storage bucket](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) is clustered. This helps identify common themes and patterns in the data.
      *
-     * @param array{
-     *   bucket: string,
-     *   files?: list<string>,
-     *   minClusterSize?: int,
-     *   minSubclusterSize?: int,
-     *   prefix?: string,
-     * }|ClusterComputeParams $params
+     * @param string $bucket The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding).
+     * @param list<string> $files array of files to filter which are included
+     * @param int $minClusterSize Smallest number of related text chunks to qualify as a cluster. Top-level clusters should be thought of as identifying broad themes in your data.
+     * @param int $minSubclusterSize Smallest number of related text chunks to qualify as a sub-cluster. Sub-clusters should be thought of as identifying more specific topics within a broader theme.
+     * @param string $prefix prefix to filter whcih files in the buckets are included
      *
      * @throws APIException
      */
     public function compute(
-        array|ClusterComputeParams $params,
-        ?RequestOptions $requestOptions = null
+        string $bucket,
+        ?array $files = null,
+        int $minClusterSize = 25,
+        int $minSubclusterSize = 5,
+        ?string $prefix = null,
+        ?RequestOptions $requestOptions = null,
     ): ClusterComputeResponse {
-        [$parsed, $options] = ClusterComputeParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'bucket' => $bucket,
+            'files' => $files,
+            'minClusterSize' => $minClusterSize,
+            'minSubclusterSize' => $minSubclusterSize,
+            'prefix' => $prefix,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ClusterComputeResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'ai/clusters',
-            body: (object) $parsed,
-            options: $options,
-            convert: ClusterComputeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->compute(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -154,29 +139,19 @@ final class ClustersService implements ClustersContract
      *
      * Fetch a cluster visualization
      *
-     * @param array{clusterID?: int}|ClusterFetchGraphParams $params
-     *
      * @throws APIException
      */
     public function fetchGraph(
         string $taskID,
-        array|ClusterFetchGraphParams $params,
+        ?int $clusterID = null,
         ?RequestOptions $requestOptions = null,
     ): string {
-        [$parsed, $options] = ClusterFetchGraphParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['clusterID' => $clusterID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<string> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['ai/clusters/%1$s/graph', $taskID],
-            query: Util::array_transform_keys($parsed, ['clusterID' => 'cluster_id']),
-            headers: ['Accept' => 'image/png'],
-            options: $options,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->fetchGraph($taskID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

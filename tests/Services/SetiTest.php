@@ -34,7 +34,7 @@ final class SetiTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->seti->retrieveBlackBoxTestResults([]);
+        $result = $this->client->seti->retrieveBlackBoxTestResults();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SetiGetBlackBoxTestResultsResponse::class, $result);

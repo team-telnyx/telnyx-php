@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts;
+
+use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\RequestOptions;
+
+interface BulkSimCardActionsRawContract
+{
+    /**
+     * @api
+     *
+     * @param string $id identifies the resource
+     *
+     * @return BaseResponse<BulkSimCardActionGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $id,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<mixed>|BulkSimCardActionListParams $params
+     *
+     * @return BaseResponse<BulkSimCardActionListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|BulkSimCardActionListParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+}

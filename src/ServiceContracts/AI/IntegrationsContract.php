@@ -14,6 +14,8 @@ interface IntegrationsContract
     /**
      * @api
      *
+     * @param string $integrationID The integration id
+     *
      * @throws APIException
      */
     public function retrieve(

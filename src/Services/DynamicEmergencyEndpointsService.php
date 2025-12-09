@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\Status;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
@@ -20,38 +17,41 @@ use Telnyx\ServiceContracts\DynamicEmergencyEndpointsContract;
 final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpointsContract
 {
     /**
+     * @api
+     */
+    public DynamicEmergencyEndpointsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new DynamicEmergencyEndpointsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a dynamic emergency endpoints.
      *
-     * @param array{
-     *   callbackNumber: string, callerName: string, dynamicEmergencyAddressID: string
-     * }|DynamicEmergencyEndpointCreateParams $params
+     * @param string $dynamicEmergencyAddressID an id of a currently active dynamic emergency location
      *
      * @throws APIException
      */
     public function create(
-        array|DynamicEmergencyEndpointCreateParams $params,
+        string $callbackNumber,
+        string $callerName,
+        string $dynamicEmergencyAddressID,
         ?RequestOptions $requestOptions = null,
     ): DynamicEmergencyEndpointNewResponse {
-        [$parsed, $options] = DynamicEmergencyEndpointCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'callbackNumber' => $callbackNumber,
+            'callerName' => $callerName,
+            'dynamicEmergencyAddressID' => $dynamicEmergencyAddressID,
+        ];
 
-        /** @var BaseResponse<DynamicEmergencyEndpointNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'dynamic_emergency_endpoints',
-            body: (object) $parsed,
-            options: $options,
-            convert: DynamicEmergencyEndpointNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -61,19 +61,16 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * Returns the dynamic emergency endpoint based on the ID provided
      *
+     * @param string $id Dynamic Emergency Endpoint id
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointGetResponse {
-        /** @var BaseResponse<DynamicEmergencyEndpointGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['dynamic_emergency_endpoints/%1$s', $id],
-            options: $requestOptions,
-            convert: DynamicEmergencyEndpointGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -84,31 +81,25 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * Returns the dynamic emergency endpoints according to filters
      *
      * @param array{
-     *   filter?: array{
-     *     countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
-     *   },
-     *   page?: array{number?: int, size?: int},
-     * }|DynamicEmergencyEndpointListParams $params
+     *   countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|DynamicEmergencyEndpointListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DynamicEmergencyEndpointListResponse {
-        [$parsed, $options] = DynamicEmergencyEndpointListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<DynamicEmergencyEndpointListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'dynamic_emergency_endpoints',
-            query: $parsed,
-            options: $options,
-            convert: DynamicEmergencyEndpointListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -118,19 +109,16 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * Deletes the dynamic emergency endpoint based on the ID provided
      *
+     * @param string $id Dynamic Emergency Endpoint id
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointDeleteResponse {
-        /** @var BaseResponse<DynamicEmergencyEndpointDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['dynamic_emergency_endpoints/%1$s', $id],
-            options: $requestOptions,
-            convert: DynamicEmergencyEndpointDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

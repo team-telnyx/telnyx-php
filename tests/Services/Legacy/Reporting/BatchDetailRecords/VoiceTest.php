@@ -44,10 +44,10 @@ final class VoiceTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->voice
-            ->create([
-                'endTime' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            ])
+            ->create(
+                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -67,13 +67,13 @@ final class VoiceTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->voice
-            ->create([
-                'endTime' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-                'callTypes' => [1, 2],
-                'connections' => [123, 456],
-                'fields' => ['call_leg_id', 'start_time', 'end_time'],
-                'filters' => [
+            ->create(
+                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+                callTypes: [1, 2],
+                connections: [123, 456],
+                fields: ['call_leg_id', 'start_time', 'end_time'],
+                filters: [
                     [
                         'billingGroup' => 'adfaa016-f921-4b6c-97bb-e4c1dad231c5',
                         'cld' => '+13129457420',
@@ -84,17 +84,17 @@ final class VoiceTest extends TestCase
                         'tagsList' => 'tag1',
                     ],
                 ],
-                'includeAllMetadata' => true,
-                'managedAccounts' => [
+                includeAllMetadata: true,
+                managedAccounts: [
                     'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                     '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
                 ],
-                'recordTypes' => [1, 2],
-                'reportName' => 'My CDR Report',
-                'selectAllManagedAccounts' => false,
-                'source' => 'calls',
-                'timezone' => 'UTC',
-            ])
+                recordTypes: [1, 2],
+                reportName: 'My CDR Report',
+                selectAllManagedAccounts: false,
+                source: 'calls',
+                timezone: 'UTC',
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -128,14 +128,8 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->legacy
-            ->reporting
-            ->batchDetailRecords
-            ->voice
-            ->list()
-        ;
+        $result = $this->client->legacy->reporting->batchDetailRecords->voice->list(
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VoiceListResponse::class, $result);

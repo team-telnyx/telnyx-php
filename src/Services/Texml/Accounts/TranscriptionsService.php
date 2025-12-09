@@ -13,6 +13,11 @@ final class TranscriptionsService implements TranscriptionsContract
     /**
      * @api
      */
+    public TranscriptionsRawService $raw;
+
+    /**
+     * @api
+     */
     public JsonService $json;
 
     /**
@@ -20,6 +25,7 @@ final class TranscriptionsService implements TranscriptionsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new TranscriptionsRawService($client);
         $this->json = new JsonService($client);
     }
 }

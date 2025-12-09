@@ -6,13 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold\Unit;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 
 interface SimCardDataUsageNotificationsContract
@@ -20,17 +18,23 @@ interface SimCardDataUsageNotificationsContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardDataUsageNotificationCreateParams $params
+     * @param string $simCardID the identification UUID of the related SIM card resource
+     * @param array{
+     *   amount?: string, unit?: 'MB'|'GB'|Unit
+     * } $threshold Data usage threshold that will trigger the notification
      *
      * @throws APIException
      */
     public function create(
-        array|SimCardDataUsageNotificationCreateParams $params,
+        string $simCardID,
+        array $threshold,
         ?RequestOptions $requestOptions = null,
     ): SimCardDataUsageNotificationNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -42,30 +46,42 @@ interface SimCardDataUsageNotificationsContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardDataUsageNotificationUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $simCardID the identification UUID of the related SIM card resource
+     * @param array{
+     *   amount?: string,
+     *   unit?: 'MB'|'GB'|\Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold\Unit,
+     * } $threshold Data usage threshold that will trigger the notification
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|SimCardDataUsageNotificationUpdateParams $params,
+        ?string $simCardID = null,
+        ?array $threshold = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardDataUsageNotificationUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|SimCardDataUsageNotificationListParams $params
+     * @param string $filterSimCardID a valid SIM card ID
+     * @param int $pageNumber the page number to load
+     * @param int $pageSize the size of the page
      *
      * @throws APIException
      */
     public function list(
-        array|SimCardDataUsageNotificationListParams $params,
+        ?string $filterSimCardID = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): SimCardDataUsageNotificationListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */

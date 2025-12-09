@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
-use Telnyx\NumberLookup\NumberLookupRetrieveParams;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberLookupContract;
@@ -16,39 +14,39 @@ use Telnyx\ServiceContracts\NumberLookupContract;
 final class NumberLookupService implements NumberLookupContract
 {
     /**
+     * @api
+     */
+    public NumberLookupRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumberLookupRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns information about the provided phone number.
      *
-     * @param array{
-     *   type?: 'carrier'|'caller-name'|Type
-     * }|NumberLookupRetrieveParams $params
+     * @param string $phoneNumber The phone number to be looked up
+     * @param 'carrier'|'caller-name'|Type $type Specifies the type of number lookup to be performed
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
-        array|NumberLookupRetrieveParams $params,
+        string|Type|null $type = null,
         ?RequestOptions $requestOptions = null,
     ): NumberLookupGetResponse {
-        [$parsed, $options] = NumberLookupRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['type' => $type];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<NumberLookupGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['number_lookup/%1$s', $phoneNumber],
-            query: $parsed,
-            options: $options,
-            convert: NumberLookupGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($phoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

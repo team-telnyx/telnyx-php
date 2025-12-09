@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignParams;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
-use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams;
 use Telnyx\RequestOptions;
 
 interface PhoneNumberAssignmentByProfileContract
@@ -17,25 +15,28 @@ interface PhoneNumberAssignmentByProfileContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberAssignmentByProfileAssignParams $params
+     * @param string $messagingProfileID the ID of the messaging profile that you want to link to the specified campaign
+     * @param string $campaignID The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
+     * @param string $tcrCampaignID The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
      *
      * @throws APIException
      */
     public function assign(
-        array|PhoneNumberAssignmentByProfileAssignParams $params,
+        string $messagingProfileID,
+        ?string $campaignID = null,
+        ?string $tcrCampaignID = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberAssignmentByProfileAssignResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
-     *
      * @throws APIException
      */
     public function retrievePhoneNumberStatus(
         string $taskID,
-        array|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params,
+        int $page = 1,
+        int $recordsPerPage = 20,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 

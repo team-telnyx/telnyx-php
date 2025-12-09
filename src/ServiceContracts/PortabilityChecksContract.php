@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortabilityChecks\PortabilityCheckRunParams;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 use Telnyx\RequestOptions;
 
@@ -14,12 +13,12 @@ interface PortabilityChecksContract
     /**
      * @api
      *
-     * @param array<mixed>|PortabilityCheckRunParams $params
+     * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers to check for portability
      *
      * @throws APIException
      */
     public function run(
-        array|PortabilityCheckRunParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $phoneNumbers = null,
+        ?RequestOptions $requestOptions = null
     ): PortabilityCheckRunResponse;
 }

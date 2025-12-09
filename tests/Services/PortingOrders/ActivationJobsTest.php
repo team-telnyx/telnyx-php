@@ -38,7 +38,7 @@ final class ActivationJobsTest extends TestCase
 
         $result = $this->client->portingOrders->activationJobs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,7 +54,7 @@ final class ActivationJobsTest extends TestCase
 
         $result = $this->client->portingOrders->activationJobs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -70,7 +70,7 @@ final class ActivationJobsTest extends TestCase
 
         $result = $this->client->portingOrders->activationJobs->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -86,10 +86,8 @@ final class ActivationJobsTest extends TestCase
 
         $result = $this->client->portingOrders->activationJobs->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            [
-                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                'activateAt' => new \DateTimeImmutable('2019-01-01T00:00:00Z'),
-            ],
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            activateAt: new \DateTimeImmutable('2019-01-01T00:00:00Z'),
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -104,8 +102,7 @@ final class ActivationJobsTest extends TestCase
         }
 
         $result = $this->client->portingOrders->activationJobs->list(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

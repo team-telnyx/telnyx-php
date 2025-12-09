@@ -6,13 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TelephonyCredentials\TelephonyCredentialCreateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
-use Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
-use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
 
 interface TelephonyCredentialsContract
@@ -20,17 +17,24 @@ interface TelephonyCredentialsContract
     /**
      * @api
      *
-     * @param array<mixed>|TelephonyCredentialCreateParams $params
+     * @param string $connectionID identifies the Credential Connection this credential is associated with
+     * @param string $expiresAt ISO-8601 formatted date indicating when the credential will expire
+     * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
      *
      * @throws APIException
      */
     public function create(
-        array|TelephonyCredentialCreateParams $params,
+        string $connectionID,
+        ?string $expiresAt = null,
+        ?string $name = null,
+        ?string $tag = null,
         ?RequestOptions $requestOptions = null,
     ): TelephonyCredentialNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -42,30 +46,48 @@ interface TelephonyCredentialsContract
     /**
      * @api
      *
-     * @param array<mixed>|TelephonyCredentialUpdateParams $params
+     * @param string $id identifies the resource
+     * @param string $connectionID identifies the Credential Connection this credential is associated with
+     * @param string $expiresAt ISO-8601 formatted date indicating when the credential will expire
+     * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|TelephonyCredentialUpdateParams $params,
+        ?string $connectionID = null,
+        ?string $expiresAt = null,
+        ?string $name = null,
+        ?string $tag = null,
         ?RequestOptions $requestOptions = null,
     ): TelephonyCredentialUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|TelephonyCredentialListParams $params
+     * @param array{
+     *   name?: string,
+     *   resourceID?: string,
+     *   sipUsername?: string,
+     *   status?: string,
+     *   tag?: string,
+     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|TelephonyCredentialListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): TelephonyCredentialListResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -76,6 +98,8 @@ interface TelephonyCredentialsContract
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */

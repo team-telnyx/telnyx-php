@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\RequestOptions;
@@ -22,38 +18,45 @@ use Telnyx\ServiceContracts\GlobalIPAssignmentsContract;
 final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
 {
     /**
+     * @api
+     */
+    public GlobalIPAssignmentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPAssignmentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a Global IP assignment.
      *
-     * @param array{
-     *   globalIPID?: string, isInMaintenance?: bool, wireguardPeerID?: string
-     * }|GlobalIPAssignmentCreateParams $params
+     * @param string $globalIPID global IP ID
+     * @param bool $isInMaintenance enable/disable BGP announcement
+     * @param string $wireguardPeerID wireguard peer ID
      *
      * @throws APIException
      */
     public function create(
-        array|GlobalIPAssignmentCreateParams $params,
+        ?string $globalIPID = null,
+        ?bool $isInMaintenance = null,
+        ?string $wireguardPeerID = null,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentNewResponse {
-        [$parsed, $options] = GlobalIPAssignmentCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'globalIPID' => $globalIPID,
+            'isInMaintenance' => $isInMaintenance,
+            'wireguardPeerID' => $wireguardPeerID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPAssignmentNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'global_ip_assignments',
-            body: (object) $parsed,
-            options: $options,
-            convert: GlobalIPAssignmentNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -63,19 +66,16 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Retrieve a Global IP assignment.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentGetResponse {
-        /** @var BaseResponse<GlobalIPAssignmentGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['global_ip_assignments/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPAssignmentGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -85,41 +85,31 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Update a Global IP assignment.
      *
+     * @param string $id identifies the resource
      * @param array{
-     *   body: array{
-     *     id?: string,
-     *     createdAt?: string,
-     *     recordType?: string,
-     *     updatedAt?: string,
-     *     globalIPID?: string,
-     *     isAnnounced?: bool,
-     *     isConnected?: bool,
-     *     isInMaintenance?: bool,
-     *     status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
-     *     wireguardPeerID?: string,
-     *   },
-     * }|GlobalIPAssignmentUpdateParams $params
+     *   id?: string,
+     *   createdAt?: string,
+     *   recordType?: string,
+     *   updatedAt?: string,
+     *   globalIPID?: string,
+     *   isAnnounced?: bool,
+     *   isConnected?: bool,
+     *   isInMaintenance?: bool,
+     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
+     *   wireguardPeerID?: string,
+     * } $body
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|GlobalIPAssignmentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $body,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentUpdateResponse {
-        [$parsed, $options] = GlobalIPAssignmentUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['body' => $body];
 
-        /** @var BaseResponse<GlobalIPAssignmentUpdateResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['global_ip_assignments/%1$s', $id],
-            body: (object) $parsed['body'],
-            options: $options,
-            convert: GlobalIPAssignmentUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -130,28 +120,21 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * List all Global IP assignments.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|GlobalIPAssignmentListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|GlobalIPAssignmentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentListResponse {
-        [$parsed, $options] = GlobalIPAssignmentListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<GlobalIPAssignmentListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'global_ip_assignments',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPAssignmentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -161,19 +144,16 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Delete a Global IP assignment.
      *
+     * @param string $id identifies the resource
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentDeleteResponse {
-        /** @var BaseResponse<GlobalIPAssignmentDeleteResponse> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['global_ip_assignments/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPAssignmentDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

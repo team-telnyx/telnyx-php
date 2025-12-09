@@ -5,20 +5,22 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
 use Telnyx\Services\VerifiedNumbers\ActionsService;
-use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
-use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 final class VerifiedNumbersService implements VerifiedNumbersContract
 {
+    /**
+     * @api
+     */
+    public VerifiedNumbersRawService $raw;
+
     /**
      * @api
      */
@@ -29,6 +31,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new VerifiedNumbersRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -37,31 +40,27 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * Initiates phone number verification procedure. Supports DTMF extension dialing for voice calls to numbers behind IVR systems.
      *
-     * @param array{
-     *   phoneNumber: string,
-     *   verificationMethod: 'sms'|'call'|VerificationMethod,
-     *   extension?: string|null,
-     * }|VerifiedNumberCreateParams $params
+     * @param 'sms'|'call'|VerificationMethod $verificationMethod verification method
+     * @param string|null $extension Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
      *
      * @throws APIException
      */
     public function create(
-        array|VerifiedNumberCreateParams $params,
+        string $phoneNumber,
+        string|VerificationMethod $verificationMethod,
+        ?string $extension = null,
         ?RequestOptions $requestOptions = null,
     ): VerifiedNumberNewResponse {
-        [$parsed, $options] = VerifiedNumberCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'phoneNumber' => $phoneNumber,
+            'verificationMethod' => $verificationMethod,
+            'extension' => $extension,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerifiedNumberNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'verified_numbers',
-            body: (object) $parsed,
-            options: $options,
-            convert: VerifiedNumberNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -71,19 +70,16 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * Retrieve a verified number
      *
+     * @param string $phoneNumber +E164 formatted phone number
+     *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
-        /** @var BaseResponse<VerifiedNumberDataWrapper> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['verified_numbers/%1$s', $phoneNumber],
-            options: $requestOptions,
-            convert: VerifiedNumberDataWrapper::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($phoneNumber, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -94,28 +90,21 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Gets a paginated list of Verified Numbers.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|VerifiedNumberListParams $params
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        array|VerifiedNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
     ): VerifiedNumberListResponse {
-        [$parsed, $options] = VerifiedNumberListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['page' => $page];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<VerifiedNumberListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'verified_numbers',
-            query: $parsed,
-            options: $options,
-            convert: VerifiedNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -125,19 +114,16 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * Delete a verified number
      *
+     * @param string $phoneNumber +E164 formatted phone number
+     *
      * @throws APIException
      */
     public function delete(
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
-        /** @var BaseResponse<VerifiedNumberDataWrapper> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['verified_numbers/%1$s', $phoneNumber],
-            options: $requestOptions,
-            convert: VerifiedNumberDataWrapper::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($phoneNumber, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -34,7 +34,7 @@ final class NumberLookupTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberLookup->retrieve('+18665552368', []);
+        $result = $this->client->numberLookup->retrieve('+18665552368');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberLookupGetResponse::class, $result);

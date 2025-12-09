@@ -6,9 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\SimCardOrders\SimCardOrderCreateParams;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
-use Telnyx\SimCardOrders\SimCardOrderListParams;
 use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
@@ -17,17 +15,21 @@ interface SimCardOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardOrderCreateParams $params
+     * @param string $addressID uniquely identifies the address for the order
+     * @param int $quantity the amount of SIM cards to order
      *
      * @throws APIException
      */
     public function create(
-        array|SimCardOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $addressID,
+        int $quantity,
+        ?RequestOptions $requestOptions = null
     ): SimCardOrderNewResponse;
 
     /**
      * @api
+     *
+     * @param string $id identifies the resource
      *
      * @throws APIException
      */
@@ -39,12 +41,30 @@ interface SimCardOrdersContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardOrderListParams $params
+     * @param array{
+     *   address?: array{
+     *     id?: string,
+     *     administrativeArea?: string,
+     *     countryCode?: string,
+     *     extendedAddress?: string,
+     *     locality?: string,
+     *     postalCode?: string,
+     *     streetAddress?: string,
+     *   },
+     *   cost?: array{amount?: string, currency?: string},
+     *   createdAt?: string|\DateTimeInterface,
+     *   quantity?: int,
+     *   updatedAt?: string|\DateTimeInterface,
+     * } $filter Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code]
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        array|SimCardOrderListParams $params,
+        ?array $filter = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardOrderListResponse;
 }

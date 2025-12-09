@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
-use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusParams;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
-use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyParams;
 use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyResponse;
-use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipParams;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\ActionsContract;
@@ -19,37 +15,37 @@ use Telnyx\ServiceContracts\PhoneNumbers\ActionsContract;
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle)
      *
-     * @param array{bundleID: string}|ActionChangeBundleStatusParams $params
+     * @param string $id identifies the resource
+     * @param string $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
      *
      * @throws APIException
      */
     public function changeBundleStatus(
         string $id,
-        array|ActionChangeBundleStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $bundleID,
+        ?RequestOptions $requestOptions = null
     ): ActionChangeBundleStatusResponse {
-        [$parsed, $options] = ActionChangeBundleStatusParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['bundleID' => $bundleID];
 
-        /** @var BaseResponse<ActionChangeBundleStatusResponse> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['phone_numbers/%1$s/actions/bundle_status_change', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionChangeBundleStatusResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->changeBundleStatus($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -59,30 +55,25 @@ final class ActionsService implements ActionsContract
      *
      * Enable emergency for a phone number
      *
-     * @param array{
-     *   emergencyAddressID: string, emergencyEnabled: bool
-     * }|ActionEnableEmergencyParams $params
+     * @param string $id identifies the resource
+     * @param string $emergencyAddressID identifies the address to be used with emergency services
+     * @param bool $emergencyEnabled indicates whether to enable emergency services on this number
      *
      * @throws APIException
      */
     public function enableEmergency(
         string $id,
-        array|ActionEnableEmergencyParams $params,
+        string $emergencyAddressID,
+        bool $emergencyEnabled,
         ?RequestOptions $requestOptions = null,
     ): ActionEnableEmergencyResponse {
-        [$parsed, $options] = ActionEnableEmergencyParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'emergencyAddressID' => $emergencyAddressID,
+            'emergencyEnabled' => $emergencyEnabled,
+        ];
 
-        /** @var BaseResponse<ActionEnableEmergencyResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['phone_numbers/%1$s/actions/enable_emergency', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionEnableEmergencyResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->enableEmergency($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -92,27 +83,18 @@ final class ActionsService implements ActionsContract
      *
      * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
      *
-     * @param array{phoneNumbers: list<string>}|ActionVerifyOwnershipParams $params
+     * @param list<string> $phoneNumbers Array of phone numbers to verify ownership for
      *
      * @throws APIException
      */
     public function verifyOwnership(
-        array|ActionVerifyOwnershipParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $phoneNumbers,
+        ?RequestOptions $requestOptions = null
     ): ActionVerifyOwnershipResponse {
-        [$parsed, $options] = ActionVerifyOwnershipParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['phoneNumbers' => $phoneNumbers];
 
-        /** @var BaseResponse<ActionVerifyOwnershipResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'phone_numbers/actions/verify_ownership',
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionVerifyOwnershipResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->verifyOwnership(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
