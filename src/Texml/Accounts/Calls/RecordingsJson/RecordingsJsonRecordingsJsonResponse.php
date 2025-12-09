@@ -7,6 +7,7 @@ namespace Telnyx\Texml\Accounts\Calls\RecordingsJson;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse\Channels;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse\Source;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse\Track;
 
@@ -41,7 +42,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public ?string $call_sid;
 
     /** @var 1|2|null $channels */
-    #[Optional]
+    #[Optional(enum: Channels::class)]
     public ?int $channels;
 
     #[Optional(nullable: true)]

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
+use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
+use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
@@ -33,8 +35,8 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *   comments?: string,
      *   country_code?: string,
      *   customer_reference?: string,
-     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'>,
-     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline',
+     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature>,
+     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType,
      *   quantity?: int,
      *   requirement_group_id?: string,
      * }|AdvancedOrderCreateParams $params
@@ -115,8 +117,8 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *   comments?: string,
      *   country_code?: string,
      *   customer_reference?: string,
-     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'>,
-     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline',
+     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|AdvancedOrderUpdateRequirementGroupParams\Feature>,
+     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType,
      *   quantity?: int,
      *   requirement_group_id?: string,
      * }|AdvancedOrderUpdateRequirementGroupParams $params

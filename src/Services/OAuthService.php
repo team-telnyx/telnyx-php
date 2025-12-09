@@ -14,9 +14,13 @@ use Telnyx\OAuth\OAuthGrantsResponse;
 use Telnyx\OAuth\OAuthIntrospectParams;
 use Telnyx\OAuth\OAuthIntrospectResponse;
 use Telnyx\OAuth\OAuthRegisterParams;
+use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
 use Telnyx\OAuth\OAuthRegisterResponse;
 use Telnyx\OAuth\OAuthRetrieveAuthorizeParams;
+use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\CodeChallengeMethod;
+use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
 use Telnyx\OAuth\OAuthTokenParams;
+use Telnyx\OAuth\OAuthTokenParams\GrantType;
 use Telnyx\OAuth\OAuthTokenResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthContract;
@@ -118,13 +122,13 @@ final class OAuthService implements OAuthContract
      *
      * @param array{
      *   client_name?: string,
-     *   grant_types?: list<'authorization_code'|'client_credentials'|'refresh_token'>,
+     *   grant_types?: list<'authorization_code'|'client_credentials'|'refresh_token'|OAuthRegisterParams\GrantType>,
      *   logo_uri?: string,
      *   policy_uri?: string,
      *   redirect_uris?: list<string>,
      *   response_types?: list<string>,
      *   scope?: string,
-     *   token_endpoint_auth_method?: 'none'|'client_secret_basic'|'client_secret_post',
+     *   token_endpoint_auth_method?: 'none'|'client_secret_basic'|'client_secret_post'|TokenEndpointAuthMethod,
      *   tos_uri?: string,
      * }|OAuthRegisterParams $params
      *
@@ -159,9 +163,9 @@ final class OAuthService implements OAuthContract
      * @param array{
      *   client_id: string,
      *   redirect_uri: string,
-     *   response_type: 'code',
+     *   response_type: 'code'|ResponseType,
      *   code_challenge?: string,
-     *   code_challenge_method?: 'plain'|'S256',
+     *   code_challenge_method?: 'plain'|'S256'|CodeChallengeMethod,
      *   scope?: string,
      *   state?: string,
      * }|OAuthRetrieveAuthorizeParams $params
@@ -216,7 +220,7 @@ final class OAuthService implements OAuthContract
      * Exchange authorization code, client credentials, or refresh token for access token
      *
      * @param array{
-     *   grant_type: 'client_credentials'|'authorization_code'|'refresh_token',
+     *   grant_type: 'client_credentials'|'authorization_code'|'refresh_token'|GrantType,
      *   client_id?: string,
      *   client_secret?: string,
      *   code?: string,

@@ -11,6 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
 use Telnyx\Services\VerifiedNumbers\ActionsService;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams;
+use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
@@ -38,7 +39,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * @param array{
      *   phone_number: string,
-     *   verification_method: 'sms'|'call',
+     *   verification_method: 'sms'|'call'|VerificationMethod,
      *   extension?: string|null,
      * }|VerifiedNumberCreateParams $params
      *

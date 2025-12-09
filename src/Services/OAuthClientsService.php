@@ -8,8 +8,12 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
+use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
+use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
 use Telnyx\OAuthClients\OAuthClientListParams;
+use Telnyx\OAuthClients\OAuthClientListParams\FilterAllowedGrantTypesContains;
+use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
 use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
 use Telnyx\OAuthClients\OAuthClientUpdateParams;
@@ -30,9 +34,9 @@ final class OAuthClientsService implements OAuthClientsContract
      * Create a new OAuth client
      *
      * @param array{
-     *   allowed_grant_types: list<'client_credentials'|'authorization_code'|'refresh_token'>,
+     *   allowed_grant_types: list<'client_credentials'|'authorization_code'|'refresh_token'|AllowedGrantType>,
      *   allowed_scopes: list<string>,
-     *   client_type: 'public'|'confidential',
+     *   client_type: 'public'|'confidential'|ClientType,
      *   name: string,
      *   logo_uri?: string,
      *   policy_uri?: string,
@@ -92,7 +96,7 @@ final class OAuthClientsService implements OAuthClientsContract
      * Update an existing OAuth client
      *
      * @param array{
-     *   allowed_grant_types?: list<'client_credentials'|'authorization_code'|'refresh_token'>,
+     *   allowed_grant_types?: list<'client_credentials'|'authorization_code'|'refresh_token'|OAuthClientUpdateParams\AllowedGrantType>,
      *   allowed_scopes?: list<string>,
      *   logo_uri?: string,
      *   name?: string,
@@ -132,9 +136,9 @@ final class OAuthClientsService implements OAuthClientsContract
      * Retrieve a paginated list of OAuth clients for the authenticated user
      *
      * @param array{
-     *   filter_allowed_grant_types__contains_?: 'client_credentials'|'authorization_code'|'refresh_token',
+     *   filter_allowed_grant_types__contains_?: 'client_credentials'|'authorization_code'|'refresh_token'|FilterAllowedGrantTypesContains,
      *   filter_client_id_?: string,
-     *   filter_client_type_?: 'confidential'|'public',
+     *   filter_client_type_?: 'confidential'|'public'|FilterClientType,
      *   filter_name_?: string,
      *   filter_name__contains_?: string,
      *   filter_verified_?: bool,

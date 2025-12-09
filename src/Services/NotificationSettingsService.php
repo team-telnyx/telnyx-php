@@ -11,6 +11,7 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
 use Telnyx\NotificationSettings\NotificationSettingListParams;
+use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\AssociatedRecordType\Eq;
 use Telnyx\NotificationSettings\NotificationSettingListResponse;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Telnyx\RequestOptions;
@@ -87,13 +88,15 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * @param array{
      *   filter?: array{
-     *     associated_record_type?: array{eq?: 'account'|'phone_number'},
-     *     channel_type_id?: array{eq?: 'webhook'|'sms'|'email'|'voice'},
+     *     associated_record_type?: array{eq?: 'account'|'phone_number'|Eq},
+     *     channel_type_id?: array{
+     *       eq?: 'webhook'|'sms'|'email'|'voice'|NotificationSettingListParams\Filter\ChannelTypeID\Eq,
+     *     },
      *     notification_channel?: array{eq?: string},
      *     notification_event_condition_id?: array{eq?: string},
      *     notification_profile_id?: array{eq?: string},
      *     status?: array{
-     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted',
+     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted'|NotificationSettingListParams\Filter\Status\Eq,
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

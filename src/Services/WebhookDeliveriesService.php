@@ -11,6 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesContract;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status\Eq;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
 final class WebhookDeliveriesService implements WebhookDeliveriesContract
@@ -53,7 +54,7 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      *     event_type?: string,
      *     finished_at?: array{gte?: string, lte?: string},
      *     started_at?: array{gte?: string, lte?: string},
-     *     status?: array{eq?: 'delivered'|'failed'},
+     *     status?: array{eq?: 'delivered'|'failed'|Eq},
      *     webhook?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},

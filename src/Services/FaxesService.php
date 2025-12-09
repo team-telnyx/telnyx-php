@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Faxes\FaxCreateParams;
+use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
+use Telnyx\Faxes\FaxCreateParams\Quality;
 use Telnyx\Faxes\FaxGetResponse;
 use Telnyx\Faxes\FaxListParams;
 use Telnyx\Faxes\FaxListResponse;
@@ -53,8 +55,8 @@ final class FaxesService implements FaxesContract
      *   media_name?: string,
      *   media_url?: string,
      *   monochrome?: bool,
-     *   preview_format?: 'pdf'|'tiff',
-     *   quality?: 'normal'|'high'|'very_high'|'ultra_light'|'ultra_dark',
+     *   preview_format?: 'pdf'|'tiff'|PreviewFormat,
+     *   quality?: 'normal'|'high'|'very_high'|'ultra_light'|'ultra_dark'|Quality,
      *   store_media?: bool,
      *   store_preview?: bool,
      *   t38_enabled?: bool,

@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
+use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status\Eq;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseRetrieveParams;
 use Telnyx\RequestOptions;
@@ -64,7 +65,7 @@ final class ReleasesService implements ReleasesContract
      *     location_id?: array{eq?: string},
      *     phone_number?: array{contains?: string, eq?: string},
      *     status?: array{
-     *       eq?: list<'pending_upload'|'pending'|'in_progress'|'complete'|'failed'|'expired'|'unknown'>,
+     *       eq?: list<'pending_upload'|'pending'|'in_progress'|'complete'|'failed'|'expired'|'unknown'|Eq>,
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

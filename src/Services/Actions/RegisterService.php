@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Actions;
 
 use Telnyx\Actions\Register\RegisterCreateParams;
+use Telnyx\Actions\Register\RegisterCreateParams\Status;
 use Telnyx\Actions\Register\RegisterNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -28,7 +29,7 @@ final class RegisterService implements RegisterContract
      * @param array{
      *   registration_codes: list<string>,
      *   sim_card_group_id?: string,
-     *   status?: 'enabled'|'disabled'|'standby',
+     *   status?: 'enabled'|'disabled'|'standby'|Status,
      *   tags?: list<string>,
      * }|RegisterCreateParams $params
      *

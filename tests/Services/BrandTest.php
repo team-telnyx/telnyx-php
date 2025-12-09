@@ -5,10 +5,15 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Brand\AltBusinessIDType;
 use Telnyx\Brand\BrandGetFeedbackResponse;
 use Telnyx\Brand\BrandGetResponse;
+use Telnyx\Brand\BrandIdentityStatus;
 use Telnyx\Brand\BrandListResponse;
+use Telnyx\Brand\EntityType;
+use Telnyx\Brand\StockExchange;
 use Telnyx\Brand\TelnyxBrand;
+use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -41,8 +46,8 @@ final class BrandTest extends TestCase
             'country' => 'US',
             'displayName' => 'ABC Mobile',
             'email' => 'email',
-            'entityType' => 'PRIVATE_PROFIT',
-            'vertical' => 'TECHNOLOGY',
+            'entityType' => EntityType::PRIVATE_PROFIT,
+            'vertical' => Vertical::TECHNOLOGY,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -60,8 +65,8 @@ final class BrandTest extends TestCase
             'country' => 'US',
             'displayName' => 'ABC Mobile',
             'email' => 'email',
-            'entityType' => 'PRIVATE_PROFIT',
-            'vertical' => 'TECHNOLOGY',
+            'entityType' => EntityType::PRIVATE_PROFIT,
+            'vertical' => Vertical::TECHNOLOGY,
             'businessContactEmail' => 'name@example.com',
             'city' => 'New York',
             'companyName' => 'ABC Inc.',
@@ -75,7 +80,7 @@ final class BrandTest extends TestCase
             'phone' => '+12024567890',
             'postalCode' => '10001',
             'state' => 'NY',
-            'stockExchange' => 'NASDAQ',
+            'stockExchange' => StockExchange::NASDAQ,
             'stockSymbol' => 'ABC',
             'street' => '123',
             'webhookFailoverURL' => 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',
@@ -113,8 +118,8 @@ final class BrandTest extends TestCase
                 'country' => 'US',
                 'displayName' => 'ABC Mobile',
                 'email' => 'email',
-                'entityType' => 'PRIVATE_PROFIT',
-                'vertical' => 'TECHNOLOGY',
+                'entityType' => EntityType::PRIVATE_PROFIT,
+                'vertical' => Vertical::TECHNOLOGY,
             ],
         );
 
@@ -135,23 +140,23 @@ final class BrandTest extends TestCase
                 'country' => 'US',
                 'displayName' => 'ABC Mobile',
                 'email' => 'email',
-                'entityType' => 'PRIVATE_PROFIT',
-                'vertical' => 'TECHNOLOGY',
+                'entityType' => EntityType::PRIVATE_PROFIT,
+                'vertical' => Vertical::TECHNOLOGY,
                 'altBusiness_id' => 'altBusiness_id',
-                'altBusinessIdType' => 'NONE',
+                'altBusinessIdType' => AltBusinessIDType::NONE,
                 'businessContactEmail' => 'name@example.com',
                 'city' => 'New York',
                 'companyName' => 'ABC Inc.',
                 'ein' => '111111111',
                 'firstName' => 'John',
-                'identityStatus' => 'VERIFIED',
+                'identityStatus' => BrandIdentityStatus::VERIFIED,
                 'ipAddress' => 'ipAddress',
                 'isReseller' => true,
                 'lastName' => 'Smith',
                 'phone' => '+12024567890',
                 'postalCode' => '10001',
                 'state' => 'NY',
-                'stockExchange' => 'NASDAQ',
+                'stockExchange' => StockExchange::NASDAQ,
                 'stockSymbol' => 'ABC',
                 'street' => '123',
                 'webhookFailoverURL' => 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',

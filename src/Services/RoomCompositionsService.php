@@ -11,6 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams;
+use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
 use Telnyx\RoomCompositions\RoomCompositionListResponse;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 use Telnyx\RoomCompositions\VideoRegion;
@@ -105,7 +106,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
      *       lte?: string|\DateTimeInterface,
      *     },
      *     session_id?: string,
-     *     status?: 'completed'|'processing'|'enqueued',
+     *     status?: 'completed'|'processing'|'enqueued'|Status,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|RoomCompositionListParams $params

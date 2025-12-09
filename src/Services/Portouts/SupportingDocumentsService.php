@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
+use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 use Telnyx\RequestOptions;
@@ -26,7 +27,7 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * Creates a list of supporting documents on a portout request.
      *
      * @param array{
-     *   documents?: list<array{document_id: string, type: 'loa'|'invoice'}>
+     *   documents?: list<array{document_id: string, type: 'loa'|'invoice'|Type}>
      * }|SupportingDocumentCreateParams $params
      *
      * @throws APIException

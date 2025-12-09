@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Embeddings\EmbeddingCreateParams;
+use Telnyx\AI\Embeddings\EmbeddingCreateParams\EmbeddingModel;
+use Telnyx\AI\Embeddings\EmbeddingCreateParams\Loader;
 use Telnyx\AI\Embeddings\EmbeddingGetResponse;
 use Telnyx\AI\Embeddings\EmbeddingListParams;
 use Telnyx\AI\Embeddings\EmbeddingListResponse;
@@ -62,8 +64,8 @@ final class EmbeddingsService implements EmbeddingsContract
      *   bucket_name: string,
      *   document_chunk_overlap_size?: int,
      *   document_chunk_size?: int,
-     *   embedding_model?: 'thenlper/gte-large'|'intfloat/multilingual-e5-large',
-     *   loader?: 'default'|'intercom',
+     *   embedding_model?: 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel,
+     *   loader?: 'default'|'intercom'|Loader,
      * }|EmbeddingCreateParams $params
      *
      * @throws APIException

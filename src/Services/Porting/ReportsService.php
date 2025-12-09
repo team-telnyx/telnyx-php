@@ -9,8 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\ReportCreateParams;
+use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams;
+use Telnyx\Porting\Reports\ReportListParams\Filter\Status;
 use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
@@ -37,7 +39,7 @@ final class ReportsService implements ReportsContract
      *       status__in?: list<mixed>,
      *     },
      *   }|ExportPortingOrdersCsvReport,
-     *   report_type: 'export_porting_orders_csv',
+     *   report_type: 'export_porting_orders_csv'|ReportType,
      * }|ReportCreateParams $params
      *
      * @throws APIException
@@ -92,7 +94,8 @@ final class ReportsService implements ReportsContract
      *
      * @param array{
      *   filter?: array{
-     *     report_type?: 'export_porting_orders_csv', status?: 'pending'|'completed'
+     *     report_type?: 'export_porting_orders_csv'|ReportListParams\Filter\ReportType,
+     *     status?: 'pending'|'completed'|Status,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|ReportListParams $params

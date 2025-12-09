@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationSourcesContract;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams;
+use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceDeleteResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceGetResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceListResponse;
@@ -29,7 +30,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
      *
      * @param array{
      *   bucket_name: string,
-     *   provider: 'aws'|'telnyx',
+     *   provider: 'aws'|'telnyx'|Provider,
      *   provider_auth: array{access_key?: string, secret_access_key?: string},
      *   source_region?: string,
      * }|MigrationSourceCreateParams $params

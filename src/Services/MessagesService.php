@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams;
+use Telnyx\Messages\MessageScheduleParams\Type;
 use Telnyx\Messages\MessageScheduleResponse;
 use Telnyx\Messages\MessageSendGroupMmsParams;
 use Telnyx\Messages\MessageSendGroupMmsResponse;
@@ -102,7 +103,7 @@ final class MessagesService implements MessagesContract
      *   send_at?: string|\DateTimeInterface,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS',
+     *   type?: 'SMS'|'MMS'|Type,
      *   use_profile_webhooks?: bool,
      *   webhook_failover_url?: string,
      *   webhook_url?: string,
@@ -149,7 +150,7 @@ final class MessagesService implements MessagesContract
      *   send_at?: string|\DateTimeInterface|null,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS',
+     *   type?: 'SMS'|'MMS'|MessageSendParams\Type,
      *   use_profile_webhooks?: bool,
      *   webhook_failover_url?: string,
      *   webhook_url?: string,
@@ -229,7 +230,7 @@ final class MessagesService implements MessagesContract
      *   media_urls?: list<string>,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS',
+     *   type?: 'SMS'|'MMS'|MessageSendLongCodeParams\Type,
      *   use_profile_webhooks?: bool,
      *   webhook_failover_url?: string,
      *   webhook_url?: string,
@@ -270,7 +271,7 @@ final class MessagesService implements MessagesContract
      *   media_urls?: list<string>,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS',
+     *   type?: 'SMS'|'MMS'|MessageSendNumberPoolParams\Type,
      *   use_profile_webhooks?: bool,
      *   webhook_failover_url?: string,
      *   webhook_url?: string,
@@ -311,7 +312,7 @@ final class MessagesService implements MessagesContract
      *   media_urls?: list<string>,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS',
+     *   type?: 'SMS'|'MMS'|MessageSendShortCodeParams\Type,
      *   use_profile_webhooks?: bool,
      *   webhook_failover_url?: string,
      *   webhook_url?: string,

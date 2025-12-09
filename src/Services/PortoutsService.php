@@ -9,11 +9,12 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
+use Telnyx\Portouts\PortoutListParams\Filter\Status;
+use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
 use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
-use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortoutsContract;
@@ -97,8 +98,8 @@ final class PortoutsService implements PortoutsContract
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
      *     spid?: string,
-     *     status?: 'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled',
-     *     status_in?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'>,
+     *     status?: 'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|Status,
+     *     status_in?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|StatusIn>,
      *     support_key?: string,
      *   },
      *   page?: array{number?: int, size?: int},
@@ -165,7 +166,7 @@ final class PortoutsService implements PortoutsContract
      *
      * Authorize or reject portout request
      *
-     * @param Status|value-of<Status> $status
+     * @param PortoutUpdateStatusParams\Status|value-of<PortoutUpdateStatusParams\Status> $status
      * @param array{
      *   id: string, reason: string, host_messaging?: bool
      * }|PortoutUpdateStatusParams $params
@@ -173,7 +174,7 @@ final class PortoutsService implements PortoutsContract
      * @throws APIException
      */
     public function updateStatus(
-        Status|string $status,
+        PortoutUpdateStatusParams\Status|string $status,
         array|PortoutUpdateStatusParams $params,
         ?RequestOptions $requestOptions = null,
     ): PortoutUpdateStatusResponse {

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Audio\AudioTranscribeParams;
+use Telnyx\AI\Audio\AudioTranscribeParams\Model;
+use Telnyx\AI\Audio\AudioTranscribeParams\ResponseFormat;
+use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -25,11 +28,11 @@ final class AudioService implements AudioContract
      * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
      *
      * @param array{
-     *   model?: 'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
+     *   model: 'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *   file?: string,
      *   file_url?: string,
-     *   response_format?: 'json'|'verbose_json',
-     *   timestamp_granularities__?: 'segment',
+     *   response_format?: 'json'|'verbose_json'|ResponseFormat,
+     *   timestamp_granularities__?: 'segment'|TimestampGranularities,
      * }|AudioTranscribeParams $params
      *
      * @throws APIException

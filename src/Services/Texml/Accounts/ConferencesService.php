@@ -15,10 +15,12 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams;
+use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams;
+use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
 final class ConferencesService implements ConferencesContract
@@ -77,7 +79,7 @@ final class ConferencesService implements ConferencesContract
      *
      * @param array{
      *   account_sid: string,
-     *   AnnounceMethod?: 'GET'|'POST',
+     *   AnnounceMethod?: 'GET'|'POST'|AnnounceMethod,
      *   AnnounceUrl?: string,
      *   Status?: string,
      * }|ConferenceUpdateParams $params
@@ -123,7 +125,7 @@ final class ConferencesService implements ConferencesContract
      *   Page?: int,
      *   PageSize?: int,
      *   PageToken?: string,
-     *   Status?: 'init'|'in-progress'|'completed',
+     *   Status?: 'init'|'in-progress'|'completed'|Status,
      * }|ConferenceRetrieveConferencesParams $params
      *
      * @throws APIException

@@ -8,6 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams;
+use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\CountryCode;
+use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\Feature;
+use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\GroupBy;
+use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\PhoneNumberType;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InventoryCoverageContract;
@@ -28,12 +32,12 @@ final class InventoryCoverageService implements InventoryCoverageContract
      *   filter?: array{
      *     administrative_area?: string,
      *     count?: bool,
-     *     country_code?: 'AT'|'AU'|'BE'|'BG'|'CA'|'CH'|'CN'|'CY'|'CZ'|'DE'|'DK'|'EE'|'ES'|'FI'|'FR'|'GB'|'GR'|'HU'|'HR'|'IE'|'IT'|'LT'|'LU'|'LV'|'NL'|'NZ'|'MX'|'NO'|'PL'|'PT'|'RO'|'SE'|'SG'|'SI'|'SK'|'US',
-     *     features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'>,
-     *     groupBy?: 'locality'|'npa'|'national_destination_code',
+     *     country_code?: 'AT'|'AU'|'BE'|'BG'|'CA'|'CH'|'CN'|'CY'|'CZ'|'DE'|'DK'|'EE'|'ES'|'FI'|'FR'|'GB'|'GR'|'HU'|'HR'|'IE'|'IT'|'LT'|'LU'|'LV'|'NL'|'NZ'|'MX'|'NO'|'PL'|'PT'|'RO'|'SE'|'SG'|'SI'|'SK'|'US'|CountryCode,
+     *     features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature>,
+     *     groupBy?: 'locality'|'npa'|'national_destination_code'|GroupBy,
      *     npa?: int,
      *     nxx?: int,
-     *     phone_number_type?: 'local'|'toll_free'|'national'|'mobile'|'landline'|'shared_cost',
+     *     phone_number_type?: 'local'|'toll_free'|'national'|'mobile'|'landline'|'shared_cost'|PhoneNumberType,
      *   },
      * }|InventoryCoverageListParams $params
      *

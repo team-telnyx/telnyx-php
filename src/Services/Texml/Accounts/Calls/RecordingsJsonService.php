@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonContract;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRetrieveRecordingsJsonParams;
 
@@ -29,11 +32,11 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * @param array{
      *   account_sid: string,
      *   PlayBeep?: bool,
-     *   RecordingChannels?: 'single'|'dual',
+     *   RecordingChannels?: 'single'|'dual'|RecordingChannels,
      *   RecordingStatusCallback?: string,
      *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: 'GET'|'POST',
-     *   RecordingTrack?: 'inbound'|'outbound'|'both',
+     *   RecordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
+     *   RecordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
      *   SendRecordingUrl?: bool,
      * }|RecordingsJsonRecordingsJsonParams $params
      *

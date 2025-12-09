@@ -9,6 +9,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
+use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Status;
+use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Type;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OtaUpdatesContract;
@@ -50,8 +52,8 @@ final class OtaUpdatesService implements OtaUpdatesContract
      * @param array{
      *   filter?: array{
      *     sim_card_id?: string,
-     *     status?: 'in-progress'|'completed'|'failed',
-     *     type?: 'sim_card_network_preferences',
+     *     status?: 'in-progress'|'completed'|'failed'|Status,
+     *     type?: 'sim_card_network_preferences'|Type,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|OtaUpdateListParams $params

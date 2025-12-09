@@ -13,6 +13,7 @@ use Telnyx\NumberReservations\NumberReservationListParams;
 use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\NumberReservations\ReservedPhoneNumber;
+use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberReservationsContract;
 use Telnyx\Services\NumberReservations\ActionsService;
@@ -45,7 +46,7 @@ final class NumberReservationsService implements NumberReservationsContract
      *     expired_at?: string|\DateTimeInterface,
      *     phone_number?: string,
      *     record_type?: string,
-     *     status?: 'pending'|'success'|'failure',
+     *     status?: 'pending'|'success'|'failure'|Status,
      *     updated_at?: string|\DateTimeInterface,
      *   }|ReservedPhoneNumber>,
      * }|NumberReservationCreateParams $params

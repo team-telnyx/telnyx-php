@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams;
+use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Payment\AutoRechargePrefsContract;
@@ -28,7 +29,7 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * @param array{
      *   enabled?: bool,
      *   invoice_enabled?: bool,
-     *   preference?: 'credit_paypal'|'ach',
+     *   preference?: 'credit_paypal'|'ach'|Preference,
      *   recharge_amount?: string,
      *   threshold_amount?: string,
      * }|AutoRechargePrefUpdateParams $params

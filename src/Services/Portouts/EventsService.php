@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
+use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
 use Telnyx\Portouts\Events\EventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\EventsContract;
@@ -52,7 +53,7 @@ final class EventsService implements EventsContract
      *     created_at?: array{
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
-     *     event_type?: 'portout.status_changed'|'portout.new_comment'|'portout.foc_date_changed',
+     *     event_type?: 'portout.status_changed'|'portout.new_comment'|'portout.foc_date_changed'|EventType,
      *     portout_id?: string,
      *   },
      *   page?: array{number?: int, size?: int},

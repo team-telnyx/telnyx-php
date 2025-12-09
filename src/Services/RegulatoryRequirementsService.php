@@ -9,6 +9,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams;
+use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Action;
+use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\PhoneNumberType;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RegulatoryRequirementsContract;
 
@@ -26,10 +28,10 @@ final class RegulatoryRequirementsService implements RegulatoryRequirementsContr
      *
      * @param array{
      *   filter?: array{
-     *     action?: 'ordering'|'porting'|'action',
+     *     action?: 'ordering'|'porting'|'action'|Action,
      *     country_code?: string,
      *     phone_number?: string,
-     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
+     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
      *     requirement_group_id?: string,
      *   },
      * }|RegulatoryRequirementRetrieveParams $params

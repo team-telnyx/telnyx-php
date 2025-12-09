@@ -10,6 +10,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\Status;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort\Value;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActionRequirementsContract;
@@ -29,12 +32,14 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @param array{
      *   filter?: array{
      *     id?: list<string>,
-     *     action_type?: 'au_id_verification',
+     *     action_type?: 'au_id_verification'|ActionType,
      *     requirement_type_id?: string,
-     *     status?: 'created'|'pending'|'completed'|'cancelled'|'failed',
+     *     status?: 'created'|'pending'|'completed'|'cancelled'|'failed'|Status,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'},
+     *   sort?: array{
+     *     value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'|Value
+     *   },
      * }|ActionRequirementListParams $params
      *
      * @throws APIException

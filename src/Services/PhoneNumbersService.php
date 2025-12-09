@@ -10,6 +10,12 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\NumberType\Eq;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Source;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
@@ -142,20 +148,20 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *     customer_reference?: string,
      *     emergency_address_id?: string,
      *     number_type?: array{
-     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'
+     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'|Eq
      *     },
      *     phone_number?: string,
-     *     source?: 'ported'|'purchased',
-     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
+     *     source?: 'ported'|'purchased'|Source,
+     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
-     *     without_tags?: 'true'|'false',
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
+     *     without_tags?: 'true'|'false'|WithoutTags,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
+     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort,
      * }|PhoneNumberListParams $params
      *
      * @throws APIException
@@ -216,21 +222,21 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *     customer_reference?: string,
      *     emergency_address_id?: string,
      *     number_type?: array{
-     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'
+     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'|PhoneNumberSlimListParams\Filter\NumberType\Eq,
      *     },
      *     phone_number?: string,
-     *     source?: 'ported'|'purchased',
-     *     status?: 'purchase-pending'|'purchase-failed'|'port_pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
+     *     source?: 'ported'|'purchased'|PhoneNumberSlimListParams\Filter\Source,
+     *     status?: 'purchase-pending'|'purchase-failed'|'port_pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|PhoneNumberSlimListParams\Filter\Status,
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod,
      *   },
      *   include_connection?: bool,
      *   include_tags?: bool,
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
+     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|PhoneNumberSlimListParams\Sort,
      * }|PhoneNumberSlimListParams $params
      *
      * @throws APIException

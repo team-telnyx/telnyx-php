@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -48,7 +49,7 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
      * @param array{
-     *   filter_action_type_?: 'bulk_set_public_ips',
+     *   filter_action_type_?: 'bulk_set_public_ips'|FilterActionType,
      *   page_number_?: int,
      *   page_size_?: int,
      * }|BulkSimCardActionListParams $params

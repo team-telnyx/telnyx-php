@@ -17,13 +17,17 @@ use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams;
+use Telnyx\SimCards\SimCardListParams\Filter\Status;
+use Telnyx\SimCards\SimCardListParams\Sort;
 use Telnyx\SimCards\SimCardListResponse;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsParams;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardRetrieveParams;
 use Telnyx\SimCards\SimCardUpdateParams;
+use Telnyx\SimCards\SimCardUpdateParams\DataLimit\Unit;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Telnyx\SimCardStatus;
+use Telnyx\SimCardStatus\Value;
 
 final class SimCardsService implements SimCardsContract
 {
@@ -80,11 +84,11 @@ final class SimCardsService implements SimCardsContract
      *
      * @param array{
      *   authorized_imeis?: list<string>|null,
-     *   data_limit?: array{amount?: string, unit?: 'MB'|'GB'},
+     *   data_limit?: array{amount?: string, unit?: 'MB'|'GB'|Unit},
      *   sim_card_group_id?: string,
      *   status?: array{
      *     reason?: string,
-     *     value?: 'registering'|'enabling'|'enabled'|'disabling'|'disabled'|'data_limit_exceeded'|'setting_standby'|'standby',
+     *     value?: 'registering'|'enabling'|'enabled'|'disabling'|'disabled'|'data_limit_exceeded'|'setting_standby'|'standby'|Value,
      *   }|SimCardStatus,
      *   tags?: list<string>,
      * }|SimCardUpdateParams $params
@@ -121,13 +125,13 @@ final class SimCardsService implements SimCardsContract
      * @param array{
      *   filter?: array{
      *     iccid?: string,
-     *     status?: list<'enabled'|'disabled'|'standby'|'data_limit_exceeded'|'unauthorized_imei'>,
+     *     status?: list<'enabled'|'disabled'|'standby'|'data_limit_exceeded'|'unauthorized_imei'|Status>,
      *     tags?: list<string>,
      *   },
      *   filter_sim_card_group_id_?: string,
      *   include_sim_card_group?: bool,
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'current_billing_period_consumed_data.amount',
+     *   sort?: 'current_billing_period_consumed_data.amount'|Sort,
      * }|SimCardListParams $params
      *
      * @throws APIException

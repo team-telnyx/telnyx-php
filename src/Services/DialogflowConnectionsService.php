@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams;
+use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams;
@@ -30,7 +31,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param array{
      *   service_account: array<string,mixed>,
      *   conversation_profile_id?: string,
-     *   dialogflow_api?: 'cx'|'es',
+     *   dialogflow_api?: 'cx'|'es'|DialogflowAPI,
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionCreateParams $params
@@ -89,7 +90,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param array{
      *   service_account: array<string,mixed>,
      *   conversation_profile_id?: string,
-     *   dialogflow_api?: 'cx'|'es',
+     *   dialogflow_api?: 'cx'|'es'|DialogflowConnectionUpdateParams\DialogflowAPI,
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionUpdateParams $params

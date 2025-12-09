@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AuditEvents\AuditEventListParams;
+use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -30,7 +31,7 @@ final class AuditEventsService implements AuditEventsContract
      *     created_before?: string|\DateTimeInterface,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'asc'|'desc',
+     *   sort?: 'asc'|'desc'|Sort,
      * }|AuditEventListParams $params
      *
      * @throws APIException

@@ -91,18 +91,18 @@ final class TranscriptionStartRequest implements BaseModel
      *   transcription_engine?: value-of<Telnyx\TranscriptionEngine>|null,
      *   transcription_model?: value-of<TranscriptionModel>|null,
      * }|DeepgramNova2Config|array{
-     *   transcription_engine: 'Deepgram',
+     *   transcription_engine?: 'Deepgram',
      *   transcription_model: value-of<DeepgramNova2Config\TranscriptionModel>,
      *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<Language>|null,
      * }|DeepgramNova3Config|array{
-     *   transcription_engine: 'Deepgram',
+     *   transcription_engine?: 'Deepgram',
      *   transcription_model: value-of<DeepgramNova3Config\TranscriptionModel>,
      *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<DeepgramNova3Config\Language>|null,
      * }|Azure|array{
      *   region: value-of<Region>,
-     *   transcription_engine: 'Azure',
+     *   transcription_engine?: 'Azure',
      *   api_key_ref?: string|null,
      *   language?: value-of<Azure\Language>|null,
      * }|TranscriptionEngineAConfig|array{
@@ -195,18 +195,18 @@ final class TranscriptionStartRequest implements BaseModel
      *   transcription_engine?: value-of<Telnyx\TranscriptionEngine>|null,
      *   transcription_model?: value-of<TranscriptionModel>|null,
      * }|DeepgramNova2Config|array{
-     *   transcription_engine: 'Deepgram',
+     *   transcription_engine?: 'Deepgram',
      *   transcription_model: value-of<DeepgramNova2Config\TranscriptionModel>,
      *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<Language>|null,
      * }|DeepgramNova3Config|array{
-     *   transcription_engine: 'Deepgram',
+     *   transcription_engine?: 'Deepgram',
      *   transcription_model: value-of<DeepgramNova3Config\TranscriptionModel>,
      *   keywords_boosting?: array<string,float>|null,
      *   language?: value-of<DeepgramNova3Config\Language>|null,
      * }|Azure|array{
      *   region: value-of<Region>,
-     *   transcription_engine: 'Azure',
+     *   transcription_engine?: 'Azure',
      *   api_key_ref?: string|null,
      *   language?: value-of<Azure\Language>|null,
      * }|TranscriptionEngineAConfig|array{

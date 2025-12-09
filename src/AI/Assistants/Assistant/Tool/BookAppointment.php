@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type BookAppointmentShape = array{
  *   book_appointment: \Telnyx\AI\Assistants\Assistant\Tool\BookAppointment\BookAppointment,
- *   type: 'book_appointment',
+ *   type?: 'book_appointment',
  * }
  */
 final class BookAppointment implements BaseModel

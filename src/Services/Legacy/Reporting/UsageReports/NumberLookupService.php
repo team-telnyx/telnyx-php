@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
@@ -27,7 +28,7 @@ final class NumberLookupService implements NumberLookupContract
      * Submit a new telco data usage report
      *
      * @param array{
-     *   aggregationType?: 'ALL'|'BY_ORGANIZATION_MEMBER',
+     *   aggregationType?: 'ALL'|'BY_ORGANIZATION_MEMBER'|AggregationType,
      *   endDate?: string|\DateTimeInterface,
      *   managedAccounts?: list<string>,
      *   startDate?: string|\DateTimeInterface,

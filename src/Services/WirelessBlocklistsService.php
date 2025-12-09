@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
+use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistListParams;
@@ -31,7 +32,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * Create a Wireless Blocklist to prevent SIMs from connecting to certain networks.
      *
      * @param array{
-     *   name: string, type: 'country'|'mcc'|'plmn', values: list<string>
+     *   name: string, type: 'country'|'mcc'|'plmn'|Type, values: list<string>
      * }|WirelessBlocklistCreateParams $params
      *
      * @throws APIException
@@ -85,7 +86,9 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * Update a Wireless Blocklist.
      *
      * @param array{
-     *   name?: string, type?: 'country'|'mcc'|'plmn', values?: list<string>
+     *   name?: string,
+     *   type?: 'country'|'mcc'|'plmn'|WirelessBlocklistUpdateParams\Type,
+     *   values?: list<string>,
      * }|WirelessBlocklistUpdateParams $params
      *
      * @throws APIException

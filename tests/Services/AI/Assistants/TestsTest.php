@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Assistants\Tests\AssistantTest;
+use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
@@ -78,7 +79,7 @@ final class TestsTest extends TestCase
             ],
             'description' => 'description',
             'max_duration_seconds' => 1,
-            'telnyx_conversation_channel' => 'web_chat',
+            'telnyx_conversation_channel' => TelnyxConversationChannel::WEB_CHAT,
             'test_suite' => 'test_suite',
         ]);
 

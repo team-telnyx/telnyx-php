@@ -5,6 +5,7 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Assistants\ScheduledEvents\ConversationChannelType;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
@@ -37,9 +38,11 @@ final class ScheduledEventsTest extends TestCase
         $result = $this->client->ai->assistants->scheduledEvents->create(
             'assistant_id',
             [
-                'scheduled_at_fixed_datetime' => '2025-04-15T13:07:28.764Z',
+                'scheduled_at_fixed_datetime' => new \DateTimeImmutable(
+                    '2025-04-15T13:07:28.764Z'
+                ),
                 'telnyx_agent_target' => 'telnyx_agent_target',
-                'telnyx_conversation_channel' => 'phone_call',
+                'telnyx_conversation_channel' => ConversationChannelType::PHONE_CALL,
                 'telnyx_end_user_target' => 'telnyx_end_user_target',
             ],
         );
@@ -58,9 +61,11 @@ final class ScheduledEventsTest extends TestCase
         $result = $this->client->ai->assistants->scheduledEvents->create(
             'assistant_id',
             [
-                'scheduled_at_fixed_datetime' => '2025-04-15T13:07:28.764Z',
+                'scheduled_at_fixed_datetime' => new \DateTimeImmutable(
+                    '2025-04-15T13:07:28.764Z'
+                ),
                 'telnyx_agent_target' => 'telnyx_agent_target',
-                'telnyx_conversation_channel' => 'phone_call',
+                'telnyx_conversation_channel' => ConversationChannelType::PHONE_CALL,
                 'telnyx_end_user_target' => 'telnyx_end_user_target',
                 'conversation_metadata' => ['foo' => 'string'],
                 'text' => 'text',

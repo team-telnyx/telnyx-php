@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportParams;
+use Telnyx\AI\Assistants\AssistantImportParams\Provider;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
 use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -22,6 +23,7 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\TranscriptionSettings\Model;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -99,7 +101,7 @@ final class AssistantsService implements AssistantsContract
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
      *     language?: string,
-     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
+     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
      *     settings?: array{
      *       eot_threshold?: float,
@@ -202,7 +204,7 @@ final class AssistantsService implements AssistantsContract
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
      *     language?: string,
-     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
+     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
      *     settings?: array{
      *       eot_threshold?: float,
@@ -368,7 +370,7 @@ final class AssistantsService implements AssistantsContract
      * Import assistants from external providers. Any assistant that has already been imported will be overwritten with its latest version from the importing provider.
      *
      * @param array{
-     *   api_key_ref: string, provider: 'elevenlabs'|'vapi'|'retell'
+     *   api_key_ref: string, provider: 'elevenlabs'|'vapi'|'retell'|Provider
      * }|AssistantImportParams $params
      *
      * @throws APIException

@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DetailRecords\DetailRecordListParams;
+use Telnyx\DetailRecords\DetailRecordListParams\Filter\DateRange;
+use Telnyx\DetailRecords\DetailRecordListParams\Filter\RecordType;
 use Telnyx\DetailRecords\DetailRecordListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DetailRecordsContract;
@@ -26,8 +28,8 @@ final class DetailRecordsService implements DetailRecordsContract
      *
      * @param array{
      *   filter?: array{
-     *     record_type: 'ai-voice-assistant'|'amd'|'call-control'|'conference'|'conference-participant'|'embedding'|'fax'|'inference'|'inference-speech-to-text'|'media_storage'|'media-streaming'|'messaging'|'noise-suppression'|'recording'|'sip-trunking'|'siprec-client'|'stt'|'tts'|'verify'|'webrtc'|'wireless',
-     *     date_range?: 'yesterday'|'today'|'tomorrow'|'last_week'|'this_week'|'next_week'|'last_month'|'this_month'|'next_month',
+     *     record_type: 'ai-voice-assistant'|'amd'|'call-control'|'conference'|'conference-participant'|'embedding'|'fax'|'inference'|'inference-speech-to-text'|'media_storage'|'media-streaming'|'messaging'|'noise-suppression'|'recording'|'sip-trunking'|'siprec-client'|'stt'|'tts'|'verify'|'webrtc'|'wireless'|RecordType,
+     *     date_range?: 'yesterday'|'today'|'tomorrow'|'last_week'|'this_week'|'next_week'|'last_month'|'this_month'|'next_month'|DateRange,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: list<string>,

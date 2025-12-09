@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams;
+use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -27,7 +28,7 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      * @param array{
      *   start_date: string|\DateTimeInterface,
      *   end_date?: string|\DateTimeInterface,
-     *   format?: 'json'|'csv',
+     *   format?: 'json'|'csv'|Format,
      * }|ChargesBreakdownRetrieveParams $params
      *
      * @throws APIException

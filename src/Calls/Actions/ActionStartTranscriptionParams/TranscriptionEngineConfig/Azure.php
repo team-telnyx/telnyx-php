@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AzureShape = array{
  *   region: value-of<Region>,
- *   transcription_engine: 'Azure',
+ *   transcription_engine?: 'Azure',
  *   api_key_ref?: string|null,
  *   language?: value-of<Language>|null,
  * }

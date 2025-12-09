@@ -11,6 +11,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort\Value;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionNewResponse;
 use Telnyx\RequestOptions;
@@ -66,7 +67,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      * @param array{
      *   filter?: array{porting_phone_number_id?: string},
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: '-created_at'|'created_at'},
+     *   sort?: array{value?: '-created_at'|'created_at'|Value},
      * }|PhoneNumberExtensionListParams $params
      *
      * @throws APIException

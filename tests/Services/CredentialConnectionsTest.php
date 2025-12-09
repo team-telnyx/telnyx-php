@@ -6,11 +6,14 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListResponse;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
+use Telnyx\CredentialConnections\DtmfType;
+use Telnyx\CredentialConnections\EncryptedMedia;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -60,13 +63,13 @@ final class CredentialConnectionsTest extends TestCase
             'password' => 'my123secure456password789',
             'user_name' => 'myusername123',
             'active' => true,
-            'anchorsite_override' => 'Latency',
+            'anchorsite_override' => AnchorsiteOverride::LATENCY,
             'android_push_credential_id' => '06b09dfd-7154-4980-8b75-cebf7a9d4f8e',
             'call_cost_in_webhooks' => false,
             'default_on_hold_comfort_noise_enabled' => false,
-            'dtmf_type' => 'RFC 2833',
+            'dtmf_type' => DtmfType::RFC_2833,
             'encode_contact_header_enabled' => true,
-            'encrypted_media' => 'SRTP',
+            'encrypted_media' => EncryptedMedia::SRTP,
             'inbound' => [
                 'ani_number_format' => '+E.164',
                 'channel_limit' => 10,

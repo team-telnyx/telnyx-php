@@ -6,10 +6,17 @@ namespace Telnyx\Services;
 
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\AnchorsiteOverride;
+use Telnyx\CallControlApplications\CallControlApplicationCreateParams\DtmfType;
+use Telnyx\CallControlApplications\CallControlApplicationCreateParams\WebhookAPIVersion;
 use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
 use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationInbound;
+use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
 use Telnyx\CallControlApplications\CallControlApplicationListParams;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Product;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Status;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Type;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
 use Telnyx\CallControlApplications\CallControlApplicationListResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
@@ -39,20 +46,20 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   active?: bool,
      *   anchorsite_override?: value-of<AnchorsiteOverride>,
      *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO',
+     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
      *   first_command_timeout?: bool,
      *   first_command_timeout_secs?: int,
      *   inbound?: array{
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   }|CallControlApplicationInbound,
      *   outbound?: array{
      *     channel_limit?: int, outbound_voice_profile_id?: string
      *   }|CallControlApplicationOutbound,
      *   redact_dtmf_debug_logging?: bool,
-     *   webhook_api_version?: '1'|'2',
+     *   webhook_api_version?: '1'|'2'|WebhookAPIVersion,
      *   webhook_event_failover_url?: string|null,
      *   webhook_timeout_secs?: int|null,
      * }|CallControlApplicationCreateParams $params
@@ -113,21 +120,21 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   active?: bool,
      *   anchorsite_override?: value-of<CallControlApplicationUpdateParams\AnchorsiteOverride>,
      *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO',
+     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|CallControlApplicationUpdateParams\DtmfType,
      *   first_command_timeout?: bool,
      *   first_command_timeout_secs?: int,
      *   inbound?: array{
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   }|CallControlApplicationInbound,
      *   outbound?: array{
      *     channel_limit?: int, outbound_voice_profile_id?: string
      *   }|CallControlApplicationOutbound,
      *   redact_dtmf_debug_logging?: bool,
      *   tags?: list<string>,
-     *   webhook_api_version?: '1'|'2',
+     *   webhook_api_version?: '1'|'2'|CallControlApplicationUpdateParams\WebhookAPIVersion,
      *   webhook_event_failover_url?: string|null,
      *   webhook_timeout_secs?: int|null,
      * }|CallControlApplicationUpdateParams $params
@@ -174,15 +181,15 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *     },
      *     'outbound.outbound_voice_profile_id'?: string,
-     *     product?: 'call_control'|'fax'|'texml',
-     *     status?: 'init'|'in_progress'|'completed',
+     *     product?: 'call_control'|'fax'|'texml'|Product,
+     *     status?: 'init'|'in_progress'|'completed'|Status,
      *     to?: string,
-     *     type?: 'command'|'webhook',
+     *     type?: 'command'|'webhook'|Type,
      *   },
      *   page?: array{
      *     after?: string, before?: string, limit?: int, number?: int, size?: int
      *   },
-     *   sort?: 'created_at'|'connection_name'|'active',
+     *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|CallControlApplicationListParams $params
      *
      * @throws APIException

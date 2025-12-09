@@ -11,6 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
 use Telnyx\SimCardGroups\Actions\ActionGetResponse;
 use Telnyx\SimCardGroups\Actions\ActionListParams;
+use Telnyx\SimCardGroups\Actions\ActionListParams\FilterStatus;
 use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
 use Telnyx\SimCardGroups\Actions\ActionListResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemovePrivateWirelessGatewayResponse;
@@ -56,7 +57,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   filter_sim_card_group_id_?: string,
-     *   filter_status_?: 'in-progress'|'completed'|'failed',
+     *   filter_status_?: 'in-progress'|'completed'|'failed'|FilterStatus,
      *   filter_type_?: value-of<FilterType>,
      *   page_number_?: int,
      *   page_size_?: int,

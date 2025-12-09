@@ -13,6 +13,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
+use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -37,7 +38,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *     idp_cert_fingerprint: string,
      *     idp_entity_id: string,
      *     idp_sso_target_url: string,
-     *     idp_cert_fingerprint_algorithm?: 'sha1'|'sha256'|'sha384'|'sha512',
+     *     idp_cert_fingerprint_algorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
      *   },
      *   short_name: string,
      *   active?: bool,
@@ -101,7 +102,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *     idp_cert_fingerprint: string,
      *     idp_entity_id: string,
      *     idp_sso_target_url: string,
-     *     idp_cert_fingerprint_algorithm?: 'sha1'|'sha256'|'sha384'|'sha512',
+     *     idp_cert_fingerprint_algorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
      *   },
      *   settings_url?: string,
      *   short_name?: string,

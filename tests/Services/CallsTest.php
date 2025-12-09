@@ -5,8 +5,14 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Calls\CallDialResponse;
 use Telnyx\Calls\CallGetStatusResponse;
+use Telnyx\Calls\StreamBidirectionalCodec;
+use Telnyx\Calls\StreamBidirectionalMode;
+use Telnyx\Calls\StreamBidirectionalSamplingRate;
+use Telnyx\Calls\StreamBidirectionalTargetLegs;
+use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -125,11 +131,11 @@ final class CallsTest extends TestCase
             'sound_modifications' => [
                 'octaves' => 0.1, 'pitch' => 0.8, 'semitone' => -2, 'track' => 'both',
             ],
-            'stream_bidirectional_codec' => 'G722',
-            'stream_bidirectional_mode' => 'rtp',
-            'stream_bidirectional_sampling_rate' => 16000,
-            'stream_bidirectional_target_legs' => 'both',
-            'stream_codec' => 'PCMA',
+            'stream_bidirectional_codec' => StreamBidirectionalCodec::G722,
+            'stream_bidirectional_mode' => StreamBidirectionalMode::RTP,
+            'stream_bidirectional_sampling_rate' => StreamBidirectionalSamplingRate::_16000,
+            'stream_bidirectional_target_legs' => StreamBidirectionalTargetLegs::BOTH,
+            'stream_codec' => StreamCodec::PCMA,
             'stream_establish_before_call_originate' => true,
             'stream_track' => 'both_tracks',
             'stream_url' => 'wss://www.example.com/websocket',
@@ -146,7 +152,7 @@ final class CallsTest extends TestCase
                     'enable_speaker_diarization' => true,
                     'hints' => ['string'],
                     'interim_results' => true,
-                    'language' => 'en',
+                    'language' => GoogleTranscriptionLanguage::EN,
                     'max_speaker_count' => 4,
                     'min_speaker_count' => 4,
                     'model' => 'latest_long',

@@ -8,6 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetFieldsResponse;
@@ -38,10 +41,10 @@ final class VoiceService implements VoiceContract
      *   filters?: list<array{
      *     billing_group?: string,
      *     cld?: string,
-     *     cld_filter?: 'contains'|'starts_with'|'ends_with',
+     *     cld_filter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
      *     cli?: string,
-     *     cli_filter?: 'contains'|'starts_with'|'ends_with',
-     *     filter_type?: 'and'|'or',
+     *     cli_filter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
+     *     filter_type?: 'and'|'or'|FilterType,
      *     tags_list?: string,
      *   }|Filter>,
      *   include_all_metadata?: bool,

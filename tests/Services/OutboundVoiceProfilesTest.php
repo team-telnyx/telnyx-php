@@ -11,6 +11,9 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
+use Telnyx\OutboundVoiceProfiles\ServicePlan;
+use Telnyx\OutboundVoiceProfiles\TrafficType;
+use Telnyx\OutboundVoiceProfiles\UsagePaymentMethod;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -72,10 +75,10 @@ final class OutboundVoiceProfilesTest extends TestCase
             'daily_spend_limit_enabled' => true,
             'enabled' => true,
             'max_destination_rate' => 10,
-            'service_plan' => 'global',
+            'service_plan' => ServicePlan::GLOBAL,
             'tags' => ['office-profile'],
-            'traffic_type' => 'conversational',
-            'usage_payment_method' => 'rate-deck',
+            'traffic_type' => TrafficType::CONVERSATIONAL,
+            'usage_payment_method' => UsagePaymentMethod::RATE_DECK,
             'whitelisted_destinations' => ['US', 'BR', 'AU'],
         ]);
 
@@ -142,10 +145,10 @@ final class OutboundVoiceProfilesTest extends TestCase
                 'daily_spend_limit_enabled' => true,
                 'enabled' => true,
                 'max_destination_rate' => 10,
-                'service_plan' => 'global',
+                'service_plan' => ServicePlan::GLOBAL,
                 'tags' => ['office-profile'],
-                'traffic_type' => 'conversational',
-                'usage_payment_method' => 'rate-deck',
+                'traffic_type' => TrafficType::CONVERSATIONAL,
+                'usage_payment_method' => UsagePaymentMethod::RATE_DECK,
                 'whitelisted_destinations' => ['US', 'BR', 'AU'],
             ],
         );

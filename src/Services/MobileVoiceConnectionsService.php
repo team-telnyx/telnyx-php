@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListParams;
@@ -36,7 +37,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *   inbound?: array{channel_limit?: int},
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   tags?: list<string>,
-     *   webhook_api_version?: '1'|'2',
+     *   webhook_api_version?: '1'|'2'|WebhookAPIVersion,
      *   webhook_event_failover_url?: string|null,
      *   webhook_event_url?: string|null,
      *   webhook_timeout_secs?: int|null,
@@ -98,7 +99,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *   inbound?: array{channel_limit?: int},
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   tags?: list<string>,
-     *   webhook_api_version?: '1'|'2',
+     *   webhook_api_version?: '1'|'2'|MobileVoiceConnectionUpdateParams\WebhookAPIVersion,
      *   webhook_event_failover_url?: string|null,
      *   webhook_event_url?: string|null,
      *   webhook_timeout_secs?: int,

@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListResponse;
@@ -57,9 +59,9 @@ final class TexmlApplicationsTest extends TestCase
             'friendly_name' => 'call-router',
             'voice_url' => 'https://example.com',
             'active' => false,
-            'anchorsite_override' => 'Amsterdam, Netherlands',
+            'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
             'call_cost_in_webhooks' => false,
-            'dtmf_type' => 'Inband',
+            'dtmf_type' => DtmfType::INBAND,
             'first_command_timeout' => true,
             'first_command_timeout_secs' => 10,
             'inbound' => [
@@ -125,9 +127,9 @@ final class TexmlApplicationsTest extends TestCase
                 'friendly_name' => 'call-router',
                 'voice_url' => 'https://example.com',
                 'active' => false,
-                'anchorsite_override' => 'Amsterdam, Netherlands',
+                'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
                 'call_cost_in_webhooks' => false,
-                'dtmf_type' => 'Inband',
+                'dtmf_type' => DtmfType::INBAND,
                 'first_command_timeout' => true,
                 'first_command_timeout_secs' => 10,
                 'inbound' => [

@@ -9,6 +9,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort\Value;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
 use Telnyx\RequestOptions;
@@ -63,13 +65,13 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      * @param array{
      *   filter?: array{
      *     porting_order?: array{
-     *       status?: list<'activation-in-progress'|'cancel-pending'|'cancelled'|'draft'|'exception'|'foc-date-confirmed'|'in-process'|'ported'|'submitted'>,
+     *       status?: list<'activation-in-progress'|'cancel-pending'|'cancelled'|'draft'|'exception'|'foc-date-confirmed'|'in-process'|'ported'|'submitted'|Status>,
      *     },
      *     porting_phone_number?: list<string>,
      *     user_bundle_id?: list<string>,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'},
+     *   sort?: array{value?: 'created_at'|'-created_at'|Value},
      * }|PhoneNumberConfigurationListParams $params
      *
      * @throws APIException

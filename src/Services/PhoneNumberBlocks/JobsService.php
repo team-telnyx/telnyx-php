@@ -11,6 +11,9 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Status;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Type;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Sort;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberBlocks\JobsContract;
@@ -51,11 +54,11 @@ final class JobsService implements JobsContract
      *
      * @param array{
      *   filter?: array{
-     *     status?: 'pending'|'in_progress'|'completed'|'failed',
-     *     type?: 'delete_phone_number_block',
+     *     status?: 'pending'|'in_progress'|'completed'|'failed'|Status,
+     *     type?: 'delete_phone_number_block'|Type,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at',
+     *   sort?: 'created_at'|Sort,
      * }|JobListParams $params
      *
      * @throws APIException

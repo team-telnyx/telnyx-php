@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
+use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
 final class RecordingsService implements RecordingsContract
@@ -27,7 +28,7 @@ final class RecordingsService implements RecordingsContract
      * @param array{
      *   account_sid: string,
      *   call_sid: string,
-     *   Status?: 'in-progress'|'paused'|'stopped',
+     *   Status?: 'in-progress'|'paused'|'stopped'|Status,
      * }|RecordingRecordingSidJsonParams $params
      *
      * @throws APIException

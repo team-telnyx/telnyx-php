@@ -13,10 +13,24 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantDeleteParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\AmdStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Beep;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecord;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecordingStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingTrack;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\StatusCallbackMethod;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantRetrieveParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantRetrieveParticipantsParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\AnnounceMethod;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
 final class ParticipantsService implements ParticipantsContract
@@ -75,14 +89,14 @@ final class ParticipantsService implements ParticipantsContract
      * @param array{
      *   account_sid: string,
      *   conference_sid: string,
-     *   AnnounceMethod?: 'GET'|'POST',
+     *   AnnounceMethod?: 'GET'|'POST'|AnnounceMethod,
      *   AnnounceUrl?: string,
      *   BeepOnExit?: bool,
      *   CallSidToCoach?: string,
      *   Coaching?: bool,
      *   EndConferenceOnExit?: bool,
      *   Hold?: bool,
-     *   HoldMethod?: 'GET'|'POST',
+     *   HoldMethod?: 'GET'|'POST'|HoldMethod,
      *   HoldUrl?: string,
      *   Muted?: bool,
      *   WaitUrl?: string,
@@ -174,27 +188,27 @@ final class ParticipantsService implements ParticipantsContract
      * @param array{
      *   account_sid: string,
      *   AmdStatusCallback?: string,
-     *   AmdStatusCallbackMethod?: 'GET'|'POST',
-     *   Beep?: 'true'|'false'|'onEnter'|'onExit',
+     *   AmdStatusCallbackMethod?: 'GET'|'POST'|AmdStatusCallbackMethod,
+     *   Beep?: 'true'|'false'|'onEnter'|'onExit'|Beep,
      *   CallerId?: string,
      *   CallSidToCoach?: string,
      *   CancelPlaybackOnDetectMessageEnd?: bool,
      *   CancelPlaybackOnMachineDetection?: bool,
      *   Coaching?: bool,
-     *   ConferenceRecord?: 'true'|'false'|'record-from-start'|'do-not-record',
+     *   ConferenceRecord?: 'true'|'false'|'record-from-start'|'do-not-record'|ConferenceRecord,
      *   ConferenceRecordingStatusCallback?: string,
      *   ConferenceRecordingStatusCallbackEvent?: string,
-     *   ConferenceRecordingStatusCallbackMethod?: 'GET'|'POST',
+     *   ConferenceRecordingStatusCallbackMethod?: 'GET'|'POST'|ConferenceRecordingStatusCallbackMethod,
      *   ConferenceRecordingTimeout?: int,
      *   ConferenceStatusCallback?: string,
      *   ConferenceStatusCallbackEvent?: string,
-     *   ConferenceStatusCallbackMethod?: 'GET'|'POST',
-     *   ConferenceTrim?: 'trim-silence'|'do-not-trim',
+     *   ConferenceStatusCallbackMethod?: 'GET'|'POST'|ConferenceStatusCallbackMethod,
+     *   ConferenceTrim?: 'trim-silence'|'do-not-trim'|ConferenceTrim,
      *   CustomHeaders?: list<array{name: string, value: string}>,
      *   EarlyMedia?: bool,
      *   EndConferenceOnExit?: bool,
      *   From?: string,
-     *   MachineDetection?: 'Enable'|'DetectMessageEnd',
+     *   MachineDetection?: 'Enable'|'DetectMessageEnd'|MachineDetection,
      *   MachineDetectionSilenceTimeout?: int,
      *   MachineDetectionSpeechEndThreshold?: int,
      *   MachineDetectionSpeechThreshold?: int,
@@ -203,21 +217,21 @@ final class ParticipantsService implements ParticipantsContract
      *   Muted?: bool,
      *   PreferredCodecs?: string,
      *   Record?: bool,
-     *   RecordingChannels?: 'mono'|'dual',
+     *   RecordingChannels?: 'mono'|'dual'|RecordingChannels,
      *   RecordingStatusCallback?: string,
      *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: 'GET'|'POST',
-     *   RecordingTrack?: 'inbound'|'outbound'|'both',
+     *   RecordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
+     *   RecordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
      *   SipAuthPassword?: string,
      *   SipAuthUsername?: string,
      *   StartConferenceOnEnter?: bool,
      *   StatusCallback?: string,
      *   StatusCallbackEvent?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST',
+     *   StatusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
      *   TimeLimit?: int,
      *   timeout_seconds?: int,
      *   To?: string,
-     *   Trim?: 'trim-silence'|'do-not-trim',
+     *   Trim?: 'trim-silence'|'do-not-trim'|Trim,
      *   WaitUrl?: string,
      * }|ParticipantParticipantsParams $params
      *

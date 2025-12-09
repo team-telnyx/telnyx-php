@@ -39,8 +39,8 @@ final class UsageTest extends TestCase
             '',
             [
                 'filter' => [
-                    'end_time' => '2019-12-27T18:11:19.117Z',
-                    'start_time' => '2019-12-27T18:11:19.117Z',
+                    'end_time' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'start_time' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
                 ],
             ],
         );
@@ -60,8 +60,8 @@ final class UsageTest extends TestCase
             '',
             [
                 'filter' => [
-                    'end_time' => '2019-12-27T18:11:19.117Z',
-                    'start_time' => '2019-12-27T18:11:19.117Z',
+                    'end_time' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'start_time' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
                 ],
             ],
         );

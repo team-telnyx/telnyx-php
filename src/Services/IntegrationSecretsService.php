@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
+use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
@@ -28,7 +29,7 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      *
      * @param array{
      *   identifier: string,
-     *   type: 'bearer'|'basic',
+     *   type: 'bearer'|'basic'|Type,
      *   token?: string,
      *   password?: string,
      *   username?: string,
@@ -63,7 +64,9 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * Retrieve a list of all integration secrets configured by the user.
      *
      * @param array{
-     *   filter?: array{type?: 'bearer'|'basic'},
+     *   filter?: array{
+     *     type?: 'bearer'|'basic'|IntegrationSecretListParams\Filter\Type,
+     *   },
      *   page?: array{number?: int, size?: int},
      * }|IntegrationSecretListParams $params
      *

@@ -44,8 +44,8 @@ final class SpeechToTextTest extends TestCase
             ->batchDetailRecords
             ->speechToText
             ->create([
-                'end_date' => '2020-07-01T00:00:00-06:00',
-                'start_date' => '2020-07-01T00:00:00-06:00',
+                'end_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+                'start_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
             ])
         ;
 
@@ -67,8 +67,8 @@ final class SpeechToTextTest extends TestCase
             ->batchDetailRecords
             ->speechToText
             ->create([
-                'end_date' => '2020-07-01T00:00:00-06:00',
-                'start_date' => '2020-07-01T00:00:00-06:00',
+                'end_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+                'start_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
             ])
         ;
 

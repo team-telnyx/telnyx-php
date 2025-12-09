@@ -11,6 +11,7 @@ use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
 use Telnyx\ManagedAccounts\ManagedAccountListParams;
+use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitParams;
@@ -139,7 +140,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *   },
      *   include_cancelled_accounts?: bool,
      *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'email',
+     *   sort?: 'created_at'|'email'|Sort,
      * }|ManagedAccountListParams $params
      *
      * @throws APIException

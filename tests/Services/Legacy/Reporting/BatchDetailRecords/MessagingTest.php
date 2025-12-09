@@ -44,8 +44,8 @@ final class MessagingTest extends TestCase
             ->batchDetailRecords
             ->messaging
             ->create([
-                'end_time' => '2024-02-12T23:59:59Z',
-                'start_time' => '2024-02-01T00:00:00Z',
+                'end_time' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                'start_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
             ])
         ;
 
@@ -67,8 +67,8 @@ final class MessagingTest extends TestCase
             ->batchDetailRecords
             ->messaging
             ->create([
-                'end_time' => '2024-02-12T23:59:59Z',
-                'start_time' => '2024-02-01T00:00:00Z',
+                'end_time' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                'start_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
                 'connections' => [123, 456],
                 'directions' => [1, 2],
                 'filters' => [
