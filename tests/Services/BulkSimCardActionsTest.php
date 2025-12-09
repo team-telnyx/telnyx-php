@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
 use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
@@ -50,9 +51,14 @@ final class BulkSimCardActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bulkSimCardActions->list();
+        $page = $this->client->bulkSimCardActions->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(BulkSimCardActionListResponse::class, $item);
+        }
     }
 }

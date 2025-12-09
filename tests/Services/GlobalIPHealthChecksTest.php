@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -65,10 +66,15 @@ final class GlobalIPHealthChecksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPHealthChecks->list();
+        $page = $this->client->globalIPHealthChecks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(GlobalIPHealthCheckListResponse::class, $item);
+        }
     }
 
     #[Test]

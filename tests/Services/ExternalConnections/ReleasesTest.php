@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -67,9 +68,14 @@ final class ReleasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->releases->list('id');
+        $page = $this->client->externalConnections->releases->list('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ReleaseListResponse::class, $item);
+        }
     }
 }

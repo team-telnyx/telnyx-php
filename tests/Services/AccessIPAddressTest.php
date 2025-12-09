@@ -77,10 +77,15 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPAddress->list();
+        $page = $this->client->accessIPAddress->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AccessIPAddressResponse::class, $item);
+        }
     }
 
     #[Test]

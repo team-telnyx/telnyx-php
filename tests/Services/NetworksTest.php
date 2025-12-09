@@ -9,6 +9,8 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
+use Telnyx\Networks\NetworkListInterfacesResponse;
+use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -111,10 +113,15 @@ final class NetworksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->networks->list();
+        $page = $this->client->networks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NetworkListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -139,11 +146,16 @@ final class NetworksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->networks->listInterfaces(
+        $page = $this->client->networks->listInterfaces(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NetworkListInterfacesResponse::class, $item);
+        }
     }
 }

@@ -239,7 +239,7 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingTollfree->verification->requests->list(
+        $page = $this->client->messagingTollfree->verification->requests->list(
             page: 1,
             pageSize: 1
         );
@@ -247,8 +247,13 @@ final class RequestsTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
             DefaultPaginationForMessagingTollfree::class,
-            $result
+            $page
         );
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(VerificationRequestStatus::class, $item);
+        }
     }
 
     #[Test]
@@ -258,7 +263,7 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingTollfree->verification->requests->list(
+        $page = $this->client->messagingTollfree->verification->requests->list(
             page: 1,
             pageSize: 1,
             dateEnd: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
@@ -270,8 +275,13 @@ final class RequestsTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
             DefaultPaginationForMessagingTollfree::class,
-            $result
+            $page
         );
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(VerificationRequestStatus::class, $item);
+        }
     }
 
     #[Test]

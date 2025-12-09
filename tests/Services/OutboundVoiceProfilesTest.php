@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
@@ -160,10 +161,15 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->list();
+        $page = $this->client->outboundVoiceProfiles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(OutboundVoiceProfile::class, $item);
+        }
     }
 
     #[Test]

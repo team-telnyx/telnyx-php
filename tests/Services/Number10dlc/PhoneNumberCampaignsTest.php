@@ -116,10 +116,15 @@ final class PhoneNumberCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->phoneNumberCampaigns->list();
+        $page = $this->client->number10dlc->phoneNumberCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumberCampaign::class, $item);
+        }
     }
 
     #[Test]

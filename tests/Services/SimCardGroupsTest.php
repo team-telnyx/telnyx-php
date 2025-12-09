@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
 use Telnyx\SimCardGroups\SimCardGroupGetResponse;
+use Telnyx\SimCardGroups\SimCardGroupListResponse;
 use Telnyx\SimCardGroups\SimCardGroupNewResponse;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -97,10 +98,15 @@ final class SimCardGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardGroups->list();
+        $page = $this->client->simCardGroups->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimCardGroupListResponse::class, $item);
+        }
     }
 
     #[Test]

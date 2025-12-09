@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionNewResponse;
@@ -80,10 +81,15 @@ final class MobileVoiceConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobileVoiceConnections->list();
+        $page = $this->client->mobileVoiceConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MobileVoiceConnection::class, $item);
+        }
     }
 
     #[Test]

@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -84,9 +85,14 @@ final class ShortCodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shortCodes->list();
+        $page = $this->client->shortCodes->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ShortCode::class, $item);
+        }
     }
 }

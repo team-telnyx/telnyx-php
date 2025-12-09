@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -65,10 +66,15 @@ final class PublicInternetGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->publicInternetGateways->list();
+        $page = $this->client->publicInternetGateways->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PublicInternetGatewayListResponse::class, $item);
+        }
     }
 
     #[Test]

@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
+use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\PerPagePaginationV2;
@@ -65,10 +66,15 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->list(brandID: 'brandId');
+        $page = $this->client->number10dlc->campaign->list(brandID: 'brandId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CampaignListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -78,7 +84,7 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->list(
+        $page = $this->client->number10dlc->campaign->list(
             brandID: 'brandId',
             page: 0,
             recordsPerPage: 0,
@@ -86,7 +92,12 @@ final class CampaignTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CampaignListResponse::class, $item);
+        }
     }
 
     #[Test]

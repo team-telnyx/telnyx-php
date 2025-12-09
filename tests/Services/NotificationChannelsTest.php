@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
@@ -81,10 +82,15 @@ final class NotificationChannelsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->notificationChannels->list();
+        $page = $this->client->notificationChannels->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NotificationChannel::class, $item);
+        }
     }
 
     #[Test]

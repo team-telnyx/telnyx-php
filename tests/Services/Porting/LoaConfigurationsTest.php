@@ -10,6 +10,7 @@ use Telnyx\DefaultPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
+use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -164,10 +165,15 @@ final class LoaConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->loaConfigurations->list();
+        $page = $this->client->porting->loaConfigurations->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortingLoaConfiguration::class, $item);
+        }
     }
 
     #[Test]

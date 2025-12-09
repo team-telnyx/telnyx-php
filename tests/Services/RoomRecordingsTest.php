@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
+use Telnyx\RoomRecordings\RoomRecordingListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -51,10 +52,15 @@ final class RoomRecordingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roomRecordings->list();
+        $page = $this->client->roomRecordings->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(RoomRecordingListResponse::class, $item);
+        }
     }
 
     #[Test]

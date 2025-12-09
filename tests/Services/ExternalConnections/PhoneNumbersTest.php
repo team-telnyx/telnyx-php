@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -101,9 +102,14 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->phoneNumbers->list('id');
+        $page = $this->client->externalConnections->phoneNumbers->list('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ExternalConnectionPhoneNumber::class, $item);
+        }
     }
 }

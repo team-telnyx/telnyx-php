@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
@@ -34,9 +35,14 @@ final class CallEventsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callEvents->list();
+        $page = $this->client->callEvents->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CallEventListResponse::class, $item);
+        }
     }
 }

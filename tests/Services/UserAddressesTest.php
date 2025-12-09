@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 use Tests\UnsupportedMockTests;
@@ -97,9 +98,14 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->list();
+        $page = $this->client->userAddresses->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(UserAddress::class, $item);
+        }
     }
 }
