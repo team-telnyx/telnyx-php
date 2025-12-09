@@ -14,14 +14,14 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param string $id the UUID of the address that should be accepted
-     * @param string $id1 the ID of the address
+     * @param string $id_ the UUID of the address that should be accepted
+     * @param string $id the ID of the address
      *
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $id,
-        ?string $id1 = null,
+        string $id_,
+        ?string $id = null,
         ?RequestOptions $requestOptions = null
     ): ActionAcceptSuggestionsResponse;
 

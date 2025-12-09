@@ -40,14 +40,14 @@ interface PhoneNumberCampaignsContract
      * @api
      *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
-     * @param string $phoneNumber1 the phone number you want to link to a specified campaign
+     * @param string $phoneNumber the phone number you want to link to a specified campaign
      *
      * @throws APIException
      */
     public function update(
-        string $phoneNumber,
+        string $phoneNumber_,
         string $campaignID,
-        string $phoneNumber1,
+        string $phoneNumber,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign;
 

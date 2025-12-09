@@ -73,20 +73,20 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * Create New Phone Number Campaign
      *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
-     * @param string $phoneNumber1 the phone number you want to link to a specified campaign
+     * @param string $phoneNumber the phone number you want to link to a specified campaign
      *
      * @throws APIException
      */
     public function update(
-        string $phoneNumber,
+        string $phoneNumber_,
         string $campaignID,
-        string $phoneNumber1,
+        string $phoneNumber,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
-        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber1];
+        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($phoneNumber, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($phoneNumber_, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
